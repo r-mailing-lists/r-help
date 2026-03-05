@@ -1,0 +1,236 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2014-12",
+  "messages": [
+    {
+      "id": "msg-3350ab0bbc4f",
+      "message_id": "<alpine.DEB.2.00.1412311708430.14665@taxa.psych.umn.edu>",
+      "from_name": "Mike Miller",
+      "from_email_hash": "532c4f8ef2744d50cb704c07f28c7bc7d3aac7a96c5964fbdaaf0070a5991ea4",
+      "date": "2014-12-31T17:24:57-06:00",
+      "subject": "[R] rounding down with as.integer",
+      "subject_clean": "rounding down with as.integer",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This is probably a FAQ, and I don't really have a question about it, but I \njust ran across this in something I was working on:\n\n> as.integer(1000*1.003)\n[1] 1002\n\nI didn't expect it, but maybe I should have.  I guess it's about the \nmachine precision added to the fact that as.integer always rounds down:\n\n\n> as.integer(1000*1.003 + 255 * .Machine$double.eps)\n[1] 1002\n\n> as.integer(1000*1.003 + 256 * .Machine$double.eps)\n[1] 1003\n\n\nThis does it right...\n\n> as.integer( round( 1000*1.003 ) )\n[1] 1003\n\n...but this seems to always give the same answer and it is a little faster \nin my application:\n\n> as.integer( 1000*1.003 + .1 )\n[1] 1003\n\n\nFYI - I'm reading in a long vector of numbers from a text file with no \nmore than three digits to the right of the decimal.  I'm converting them \nto integers and saving them in binary format.\n\nBest,\nMike",
+      "body_snippet": "This is probably a FAQ, and I don't really have a question about it, but I \njust ran across this in something I was working on:\n\n> as.integer(1000*1.003)\n[1] 1002\n\nI didn't expect it, but maybe I shou",
+      "thread_id": "thread-3350ab0bbc4f",
+      "thread_depth": 0,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-0dd477d7ce4f",
+      "message_id": "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "0500673ed0acb5558cfe5ca2e7778513e1bf91c88253e71101d6228aae781864",
+      "date": "2014-12-31T18:29:05-05:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "When I try to save a file, I get \"Permission denied\". \nCan someone let me know why this happens?\n\n\nI am running under Windows 7, Rstudio\n\n\n> save(TheResults,file=\"c:\\\\data\")\nError in gzfile(file, \"wb\") : cannot open the connection\nIn addition: Warning message:\nIn gzfile(file, \"wb\") :\n  cannot open compressed file 'c:\\data', probable reason 'Permission\ndenied'\n\n\n> save(TheResults,file=\"c:/data\")\nError in gzfile(file, \"wb\") : cannot open the connection\nIn addition: Warning message:\nIn gzfile(file, \"wb\") :\n  cannot open compressed file 'c:/data', probable reason 'Permission\ndenied'\n\n\n> sessionInfo()\nR version 3.1.0 (2014-04-10)\nPlatform: i386-w64-mingw32/i386 (32-bit)\n\n> library(rstudio)\n> versionInfo()\n$version\n[1] ?0.98.953?\n\n$mode\n[1] \"desktop\"\n\n\nThank you\nJohn\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and\nGeriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and\nGeriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n\n\nConfidentiality Statement:\nThis email message, including any attachments, is for the sole use of\nthe intended recipient(s) and may contain confidential and privileged\ninformation. Any unauthorized use, disclosure or distribution is\nprohibited. If you are not the intended recipient, please contact the\nsender by reply email and destroy all copies of the original message.",
+      "body_snippet": "When I try to save a file, I get \"Permission denied\". \nCan someone let me know why this happens?\n\n\nI am running under Windows 7, Rstudio\n\n\n> save(TheResults,file=\"c:\\\\data\")\nError in gzfile(file, \"wb\"",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 0,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-a53b595af3ec",
+      "message_id": "<54A49293.3060406@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2014-12-31T19:19:31-05:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+      "references": [
+        "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>"
+      ],
+      "body_plain": "On 31/12/2014 6:29 PM, John Sorkin wrote:\n> When I try to save a file, I get \"Permission denied\". \n> Can someone let me know why this happens?\n> \n> \n> I am running under Windows 7, Rstudio\n> \n> \n>> save(TheResults,file=\"c:\\\\data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>   cannot open compressed file 'c:\\data', probable reason 'Permission\n> denied'\n> \n> \n>> save(TheResults,file=\"c:/data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>   cannot open compressed file 'c:/data', probable reason 'Permission\n> denied'\n\nCan you save to the file \"c:\\data\" from within Notepad?  (You may need\nthe quotes to stop it from adding .txt on the end.)\n\nDuncan Murdoch",
+      "body_snippet": "On 31/12/2014 6:29 PM, John Sorkin wrote:\n> When I try to save a file, I get \"Permission denied\". \n> Can someone let me know why this happens?\n> \n> \n> I am running under Windows 7, Rstudio\n> \n> \n>> sa",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 1,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-358b2204bd99",
+      "message_id": "<E63B7FD2-9BE1-4B2A-948B-AD8CE5329DCD@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2014-12-31T17:44:16-08:00",
+      "subject": "[R] rounding down with as.integer",
+      "subject_clean": "rounding down with as.integer",
+      "in_reply_to": "<alpine.DEB.2.00.1412311708430.14665@taxa.psych.umn.edu>",
+      "references": [
+        "<alpine.DEB.2.00.1412311708430.14665@taxa.psych.umn.edu>"
+      ],
+      "body_plain": "On Dec 31, 2014, at 3:24 PM, Mike Miller wrote:\n\n> This is probably a FAQ, and I don't really have a question about it, but I just ran across this in something I was working on:\n> \n>> as.integer(1000*1.003)\n> [1] 1002\n> \n> I didn't expect it, but maybe I should have.  I guess it's about the machine precision added to the fact that as.integer always rounds down:\n> \n> \n>> as.integer(1000*1.003 + 255 * .Machine$double.eps)\n> [1] 1002\n> \n>> as.integer(1000*1.003 + 256 * .Machine$double.eps)\n> [1] 1003\n> \n> \n> This does it right...\n> \n>> as.integer( round( 1000*1.003 ) )\n> [1] 1003\n> \n> ...but this seems to always give the same answer and it is a little faster in my application:\n> \n>> as.integer( 1000*1.003 + .1 )\n> [1] 1003\n> \n> \n> FYI - I'm reading in a long vector of numbers from a text file with no more than three digits to the right of the decimal.  I'm converting them to integers and saving them in binary format.\n> \n\nSo just add 0.0001 or even .0000001 to all of them and coerce to integer.\n\n\n> Best,\n> Mike\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Dec 31, 2014, at 3:24 PM, Mike Miller wrote:\n\n> This is probably a FAQ, and I don't really have a question about it, but I just ran across this in something I was working on:\n> \n>> as.integer(1000*",
+      "thread_id": "thread-3350ab0bbc4f",
+      "thread_depth": 1,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-3e60df584319",
+      "message_id": "<6F75CB9D-F95E-4E4C-BE05-EABBE807DD10@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2014-12-31T17:52:26-08:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+      "references": [
+        "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>"
+      ],
+      "body_plain": "On Dec 31, 2014, at 3:29 PM, John Sorkin wrote:\n\n> When I try to save a file, I get \"Permission denied\". \n\nBecause your OS does not allow you to save things there. Since you are specifying an absolute path, R is not using your working directory. You may want to read the help pages for:\n\n?normalizePath\n?getwd\n\n> Can someone let me know why this happens?\n> \n> \n> I am running under Windows 7, Rstudio\n> \n> \n>> save(TheResults,file=\"c:\\\\data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:\\data', probable reason 'Permission\n> denied'\n> \n\nPermissions are not available on your machine at the Windows equivalent of the \"root\". You should educate yourself about your operating system.\n\n\n> \n>> save(TheResults,file=\"c:/data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:/data', probable reason 'Permission\n> denied'\n> \n> \n>> sessionInfo()\n> R version 3.1.0 (2014-04-10)\n> Platform: i386-w64-mingw32/i386 (32-bit)\n> \n>> library(rstudio)\n>> versionInfo()\n> $version\n> [1] ?0.98.953?\n> \n> $mode\n> [1] \"desktop\"\n> \n> \n> Thank you\n> John\n> \n> \n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine\n> Chief, Biostatistics and Informatics\n> University of Maryland School of Medicine Division of Gerontology and\n> snipped\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Dec 31, 2014, at 3:29 PM, John Sorkin wrote:\n\n> When I try to save a file, I get \"Permission denied\". \n\nBecause your OS does not allow you to save things there. Since you are specifying an absolute",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 1,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-2f2053343bd9",
+      "message_id": "<F35AB9FE-E05B-46F1-9D97-F4967F416A8E@dcn.davis.CA.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2014-12-31T17:56:28-08:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+      "references": [
+        "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>"
+      ],
+      "body_plain": "Because the root directory is not a place for saving your files in. Put your files in your Documents directory.\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn December 31, 2014 3:29:05 PM PST, John Sorkin <JSorkin at grecc.umaryland.edu> wrote:\n>When I try to save a file, I get \"Permission denied\". \n>Can someone let me know why this happens?\n>\n>\n>I am running under Windows 7, Rstudio\n>\n>\n>> save(TheResults,file=\"c:\\\\data\")\n>Error in gzfile(file, \"wb\") : cannot open the connection\n>In addition: Warning message:\n>In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:\\data', probable reason 'Permission\n>denied'\n>\n>\n>> save(TheResults,file=\"c:/data\")\n>Error in gzfile(file, \"wb\") : cannot open the connection\n>In addition: Warning message:\n>In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:/data', probable reason 'Permission\n>denied'\n>\n>\n>> sessionInfo()\n>R version 3.1.0 (2014-04-10)\n>Platform: i386-w64-mingw32/i386 (32-bit)\n>\n>> library(rstudio)\n>> versionInfo()\n>$version\n>[1] ?0.98.953?\n>\n>$mode\n>[1] \"desktop\"\n>\n>\n>Thank you\n>John\n>\n>\n>John David Sorkin M.D., Ph.D.\n>Professor of Medicine\n>Chief, Biostatistics and Informatics\n>University of Maryland School of Medicine Division of Gerontology and\n>Geriatric Medicine\n>Baltimore VA Medical Center\n>10 North Greene Street\n>GRECC (BT/18/GR)\n>Baltimore, MD 21201-1524\n>(Phone) 410-605-7119\n>(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n>\n>\n>\n>\n>\n>John David Sorkin M.D., Ph.D.\n>Professor of Medicine\n>Chief, Biostatistics and Informatics\n>University of Maryland School of Medicine Division of Gerontology and\n>Geriatric Medicine\n>Baltimore VA Medical Center\n>10 North Greene Street\n>GRECC (BT/18/GR)\n>Baltimore, MD 21201-1524\n>(Phone) 410-605-7119\n>(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n>\n>\n>Confidentiality Statement:\n>This email message, including any attachments, is for t...{{dropped:12}}",
+      "body_snippet": "Because the root directory is not a place for saving your files in. Put your files in your Documents directory.\n---------------------------------------------------------------------------\nJeff Newmill",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 1,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-7f8cc4ea935d",
+      "message_id": "<00CB3E98-ED11-4B1E-B25F-0EAFEE6E8BEB@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2014-12-31T20:13:07-08:00",
+      "subject": "[R] rounding down with as.integer",
+      "subject_clean": "rounding down with as.integer",
+      "in_reply_to": "<k7ahpp9e73ebvwqawaqwy113.1420085274945@email.android.com>",
+      "references": [
+        "<alpine.DEB.2.00.1412311708430.14665@taxa.psych.umn.edu>",
+        "<E63B7FD2-9BE1-4B2A-948B-AD8CE5329DCD@comcast.net>",
+        "<k7ahpp9e73ebvwqawaqwy113.1420085274945@email.android.com>"
+      ],
+      "body_plain": "Read the message at the bottom of every message from rhelp.\n\n-- \nDavid.\n\nOn Dec 31, 2014, at 8:09 PM, Zaid Bhatti wrote:\n\n> How can I unsubscribe to not receive loop e mails?\n> \n> Sent from my Huawei Mobile\n> \n> David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> \n> On Dec 31, 2014, at 3:24 PM, Mike Miller wrote:\n> \n>> This is probably a FAQ, and I don't really have a question about it, but I just ran across this in something I was working on:\n>> \n>>> as.integer(1000*1.003)\n>> [1] 1002\n>> \n>> I didn't expect it, but maybe I should have.  I guess it's about the machine precision added to the fact that as.integer always rounds down:\n>> \n>> \n>>> as.integer(1000*1.003 + 255 * .Machine$double.eps)\n>> [1] 1002\n>> \n>>> as.integer(1000*1.003 + 256 * .Machine$double.eps)\n>> [1] 1003\n>> \n>> \n>> This does it right...\n>> \n>>> as.integer( round( 1000*1.003 ) )\n>> [1] 1003\n>> \n>> ...but this seems to always give the same answer and it is a little faster in my application:\n>> \n>>> as.integer( 1000*1.003 + .1 )\n>> [1] 1003\n>> \n>> \n>> FYI - I'm reading in a long vector of numbers from a text file with no more than three digits to the right of the decimal.  I'm converting them to integers and saving them in binary format.\n>> \n> \n> So just add 0.0001 or even .0000001 to all of them and coerce to integer.\n> \n> \n>> Best,\n>> Mike\n>> \n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> David Winsemius\n> Alameda, CA, USA\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> ________________________________\n> \n> This e-mail may contain information that is privileged or confidential. If you are not the intended recipient, please delete the e-mail and any attachments and notify us immediately.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "Read the message at the bottom of every message from rhelp.\n\n-- \nDavid.\n\nOn Dec 31, 2014, at 8:09 PM, Zaid Bhatti wrote:\n\n> How can I unsubscribe to not receive loop e mails?\n> \n> Sent from my Huawei ",
+      "thread_id": "thread-7f8cc4ea935d",
+      "thread_depth": 0,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-90ea5efbe41f",
+      "message_id": "<54A48543020000CB0011E92B@smtp.medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "0500673ed0acb5558cfe5ca2e7778513e1bf91c88253e71101d6228aae781864",
+      "date": "2014-12-31T23:22:43-05:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": "<6F75CB9D-F95E-4E4C-BE05-EABBE807DD10@comcast.net>",
+      "references": [
+        "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+        "<6F75CB9D-F95E-4E4C-BE05-EABBE807DD10@comcast.net>"
+      ],
+      "body_plain": "David,\nI checked getwd()\nand tried to save to the directory. It did not work:\n\n\n> getwd()\n[1] \"C:/Users/John/Documents\"\n> save(TheResults,file=\"c:\\\\users\\\\john\\\\documents\")\nError in gzfile(file, \"wb\") : cannot open the connection\nIn addition: Warning message:\nIn gzfile(file, \"wb\") :\n  cannot open compressed file 'c:\\users\\john\\documents', probable reason\n'Permission denied'\n> \n\n\nAny thoughts?\n\n\nThanks,\nJohn\n\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and\nGeriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n\n>>> David Winsemius <dwinsemius at comcast.net> 12/31/14 8:52 PM >>>\n\nOn Dec 31, 2014, at 3:29 PM, John Sorkin wrote:\n\n> When I try to save a file, I get \"Permission denied\". \n\nBecause your OS does not allow you to save things there. Since you are\nspecifying an absolute path, R is not using your working directory. You\nmay want to read the help pages for:\n\n?normalizePath\n?getwd\n\n> Can someone let me know why this happens?\n> \n> \n> I am running under Windows 7, Rstudio\n> \n> \n>> save(TheResults,file=\"c:\\\\data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:\\data', probable reason 'Permission\n> denied'\n> \n\nPermissions are not available on your machine at the Windows equivalent\nof the \"root\". You should educate yourself about your operating system.\n\n\n> \n>> save(TheResults,file=\"c:/data\")\n> Error in gzfile(file, \"wb\") : cannot open the connection\n> In addition: Warning message:\n> In gzfile(file, \"wb\") :\n>  cannot open compressed file 'c:/data', probable reason 'Permission\n> denied'\n> \n> \n>> sessionInfo()\n> R version 3.1.0 (2014-04-10)\n> Platform: i386-w64-mingw32/i386 (32-bit)\n> \n>> library(rstudio)\n>> versionInfo()\n> $version\n> [1] ?0.98.953?\n> \n> $mode\n> [1] \"desktop\"\n> \n> \n> Thank you\n> John\n> \n> \n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine\n> Chief, Biostatistics and Informatics\n> University of Maryland School of Medicine Division of Gerontology and\n> snipped\n\nDavid Winsemius\nAlameda, CA, USA\n\n\n\n\nConfidentiality Statement:\nThis email message, including any attachments, is for the sole use of\nthe intended recipient(s) and may contain confidential and privileged\ninformation. Any unauthorized use, disclosure or distribution is\nprohibited. If you are not the intended recipient, please contact the\nsender by reply email and destroy all copies of the original message.",
+      "body_snippet": "David,\nI checked getwd()\nand tried to save to the directory. It did not work:\n\n\n> getwd()\n[1] \"C:/Users/John/Documents\"\n> save(TheResults,file=\"c:\\\\users\\\\john\\\\documents\")\nError in gzfile(file, \"wb\")",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 2,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-48be399213bc",
+      "message_id": "<54A48C35020000CB0011E941@smtp.medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "0500673ed0acb5558cfe5ca2e7778513e1bf91c88253e71101d6228aae781864",
+      "date": "2014-12-31T23:52:21-05:00",
+      "subject": "[R] normalmixEM does not produce the same results when run twice using the same data.",
+      "subject_clean": "normalmixEM does not produce the same results when run twice using the same data.",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Windows 7\n\n\nI am running normalmixEM to fit two normal curves to my data. For some reason, that I don't understand, the results of running the function twice, on the same data, results in two different (although similar) sets of values. I would expect the function run twice on the same data would give exactly the same results!\n\n\nI ran the program below and got the following results:\n\n\n    lambda1         mu1     lambda1     lambda2     lambda2         mu2 \n  0.5030387  31.5172824   0.5030387   0.4969613   0.4969613 104.9249404 \n> run2\n    lambda1         mu1     lambda1     lambda2     lambda2         mu2 \n  0.5030406  31.5174149   0.5030406   0.4969594   0.4969594 104.9251556 \n\n\n\n\n\n#Define data\nJohn<-c(9.181 ,9.464 ,9.464 ,10.265 ,11.477 ,11.477 ,11.477 ,12.361,\n        12.361 ,12.361 ,12.361 ,12.985 ,12.985 ,13.384 ,13.384 ,13.962,\n        14.517 ,14.698 ,14.698 ,14.698 ,14.698 ,15.398 ,15.398 ,16.231,\n        16.231 ,16.552 ,16.552 ,16.711 ,16.711 ,17.481 ,17.481 ,17.481,\n        17.927 ,18.506 ,18.506 ,18.928 ,18.928 ,18.928 ,19.612 ,19.612,\n        19.745 ,19.745 ,20.530 ,20.530 ,21.162 ,21.162 ,21.162 ,21.162,\n        21.162 ,21.776 ,21.776 ,22.607 ,22.607 ,22.723 ,22.954 ,23.408,\n        23.632 ,25.353 ,25.353 ,25.663 ,25.663 ,25.663 ,25.969 ,26.171,\n        26.171 ,26.171 ,26.768 ,27.544 ,27.640 ,27.640 ,27.735 ,28.761,\n        29.215 ,29.840 ,30.190 ,30.881 ,30.881 ,31.220 ,31.220 ,31.220,\n        31.888 ,31.888 ,32.135 ,32.461 ,32.461 ,32.623 ,33.104 ,34.123,\n        35.855 ,35.928 ,35.928 ,36.293 ,36.293 ,37.012 ,37.366 ,37.366,\n        37.366 ,37.647 ,37.850 ,37.856 ,37.856 ,38.202 ,38.202 ,38.954,\n        39.021 ,39.089 ,39.089 ,39.223 ,39.491 ,39.624 ,40.153 ,40.609,\n        40.868 ,41.380 ,41.380 ,42.200 ,42.324 ,42.324 ,42.324 ,43.126,\n        43.853 ,43.853 ,44.152 ,44.568 ,45.213 ,45.446 ,45.562 ,46.193,\n        46.193 ,46.421 ,47.320 ,48.203 ,48.257 ,49.284 ,49.656 ,50.550,\n        50.550 ,51.938 ,52.342 ,52.342 ,52.342 ,52.393 ,53.586 ,53.733,\n        54.560 ,55.184 ,55.280 ,56.691 ,57.384 ,57.384 ,57.522 ,59.856,\n        59.856 ,60.599 ,61.975 ,65.004 ,68.861 ,69.052 ,69.811 ,70.897,\n        71.267 ,71.489 ,73.056 ,74.485 ,74.732 ,75.189 ,76.439 ,77.126,\n        77.670 ,77.975 ,78.514 ,80.338 ,80.600 ,83.173 ,83.205 ,83.553,\n        84.181 ,84.960 ,86.160 ,86.405 ,86.618 ,87.646 ,89.284 ,89.401,\n        89.989 ,90.456 ,90.892 ,90.892 ,90.950 ,91.412 ,91.729 ,92.072,\n        92.273 ,92.330 ,92.529 ,92.870 ,93.661 ,94.194 ,94.640 ,94.807,\n        95.029 ,95.112 ,95.885 ,96.132 ,96.869 ,97.438 ,97.600 ,98.567,\n        99.020 ,99.020 ,99.127 ,100.683 ,100.683 ,101.231 ,102.266 ,102.498,\n        102.883 ,103.113 ,103.291 ,103.800 ,103.927 ,104.332 ,104.685 ,104.685,\n        104.710 ,105.911 ,106.333 ,107.073 ,107.123 ,107.172 ,107.172 ,107.907,\n        107.907 ,108.272 ,108.272 ,108.345 ,108.564 ,108.758 ,109.338 ,110.201,\n        110.201 ,110.559 ,111.130 ,111.438 ,111.556 ,112.004 ,112.004 ,112.004,\n        112.684 ,112.940 ,112.940 ,113.034 ,113.661 ,113.661 ,113.962 ,113.985,\n        114.031 ,114.607 ,114.607 ,114.768 ,115.249 ,115.797 ,116.069 ,116.160,\n        117.041 ,117.154 ,117.983 ,118.473 ,118.473 ,118.495 ,118.495 ,118.762,\n        119.027 ,120.501 ,120.959 ,122.000 ,122.022 ,123.396 ,123.609 ,123.737,\n        124.035 ,124.416 ,124.818 ,124.881 ,124.881 ,125.071 ,125.387 ,125.576,\n        127.636 ,128.089 ,128.233 ,132.675 ,133.566 ,134.509 ,134.666 ,135.037,\n        135.504 ,136.589 ,138.675 ,141.961 ,144.608 ,155.222 ,158.646 ,168.502)\n\n\n# First run of normalmixEM\nmixmdl = normalmixEM(John)\nrun1<-c(lambda1=mixmdl$lambda[1],mu1=mixmdl$mu[1],lambda=mixmdl$lambda,lambda2=mixmdl$lambda[2],mu2=mixmdl$mu[2])\n#Second run of normalmixEM\nmixmdl = normalmixEM(John)\n\n\n# Results are not the same!\nrun2<-c(lambda1=mixmdl$lambda[1],mu1=mixmdl$mu[1],lambda=mixmdl$lambda,lambda2=mixmdl$lambda[2],mu2=mixmdl$mu[2])\nrun1\nrun2\n\n\n\n\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and Geriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n\n\nConfidentiality Statement:\nThis email message, including any attachments, is for the sole use of the intended recipient(s) and may contain confidential and privileged information. Any unauthorized use, disclosure or distribution is prohibited. If you are not the intended recipient, please contact the sender by reply email and destroy all copies of the original message.",
+      "body_snippet": "Windows 7\n\n\nI am running normalmixEM to fit two normal curves to my data. For some reason, that I don't understand, the results of running the function twice, on the same data, results in two differen",
+      "thread_id": "thread-48be399213bc",
+      "thread_depth": 0,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-ffde7c4523ee",
+      "message_id": "<5352E005-046C-403E-B86E-29D67035C661@dcn.davis.CA.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2014-12-31T22:53:52-08:00",
+      "subject": "[R] Can not save files",
+      "subject_clean": "Can not save files",
+      "in_reply_to": "<54A48543020000CB0011E92B@smtp.medicine.umaryland.edu>",
+      "references": [
+        "<54A44071020000CB0011E8F9@smtp.medicine.umaryland.edu>",
+        "<6F75CB9D-F95E-4E4C-BE05-EABBE807DD10@comcast.net>",
+        "<54A48543020000CB0011E92B@smtp.medicine.umaryland.edu>"
+      ],
+      "body_plain": "You are attempting to save a file on top of a directory, which is  fortunately protected from your mistake. Try adding a filename to the path you are saving to.\n\nsave(TheResults,file=\"c:\\\\users\\\\john\\\\documents\\\\test.rda\")\n\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn December 31, 2014 8:22:43 PM PST, John Sorkin <JSorkin at grecc.umaryland.edu> wrote:\n>David,\n>I checked getwd()\n>and tried to save to the directory. It did not work:\n>\n>\n>> getwd()\n>[1] \"C:/Users/John/Documents\"\n>> save(TheResults,file=\"c:\\\\users\\\\john\\\\documents\")\n>Error in gzfile(file, \"wb\") : cannot open the connection\n>In addition: Warning message:\n>In gzfile(file, \"wb\") :\n> cannot open compressed file 'c:\\users\\john\\documents', probable reason\n>'Permission denied'\n>> \n>\n>\n>Any thoughts?\n>\n>\n>Thanks,\n>John\n>\n>\n>\n>\n>\n>John David Sorkin M.D., Ph.D.\n>Professor of Medicine\n>Chief, Biostatistics and Informatics\n>University of Maryland School of Medicine Division of Gerontology and\n>Geriatric Medicine\n>Baltimore VA Medical Center\n>10 North Greene Street\n>GRECC (BT/18/GR)\n>Baltimore, MD 21201-1524\n>(Phone) 410-605-7119\n>(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n>\n>>>> David Winsemius <dwinsemius at comcast.net> 12/31/14 8:52 PM >>>\n>\n>On Dec 31, 2014, at 3:29 PM, John Sorkin wrote:\n>\n>> When I try to save a file, I get \"Permission denied\". \n>\n>Because your OS does not allow you to save things there. Since you are\n>specifying an absolute path, R is not using your working directory. You\n>may want to read the help pages for:\n>\n>?normalizePath\n>?getwd\n>\n>> Can someone let me know why this happens?\n>> \n>> \n>> I am running under Windows 7, Rstudio\n>> \n>> \n>>> save(TheResults,file=\"c:\\\\data\")\n>> Error in gzfile(file, \"wb\") : cannot open the connection\n>> In addition: Warning message:\n>> In gzfile(file, \"wb\") :\n>>  cannot open compressed file 'c:\\data', probable reason 'Permission\n>> denied'\n>> \n>\n>Permissions are not available on your machine at the Windows equivalent\n>of the \"root\". You should educate yourself about your operating system.\n>\n>\n>> \n>>> save(TheResults,file=\"c:/data\")\n>> Error in gzfile(file, \"wb\") : cannot open the connection\n>> In addition: Warning message:\n>> In gzfile(file, \"wb\") :\n>>  cannot open compressed file 'c:/data', probable reason 'Permission\n>> denied'\n>> \n>> \n>>> sessionInfo()\n>> R version 3.1.0 (2014-04-10)\n>> Platform: i386-w64-mingw32/i386 (32-bit)\n>> \n>>> library(rstudio)\n>>> versionInfo()\n>> $version\n>> [1] ?0.98.953?\n>> \n>> $mode\n>> [1] \"desktop\"\n>> \n>> \n>> Thank you\n>> John\n>> \n>> \n>> John David Sorkin M.D., Ph.D.\n>> Professor of Medicine\n>> Chief, Biostatistics and Informatics\n>> University of Maryland School of Medicine Division of Gerontology and\n>> snipped\n>\n>David Winsemius\n>Alameda, CA, USA\n>\n>\n>\n>\n>Confidentiality Statement:\n>This email message, including any attachments, is for t...{{dropped:12}}",
+      "body_snippet": "You are attempting to save a file on top of a directory, which is  fortunately protected from your mistake. Try adding a filename to the path you are saving to.\n\nsave(TheResults,file=\"c:\\\\users\\\\john\\",
+      "thread_id": "thread-0dd477d7ce4f",
+      "thread_depth": 3,
+      "month": "2014-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-3350ab0bbc4f",
+      "subject": "rounding down with as.integer",
+      "message_count": 2,
+      "participants": [
+        "David Winsemius",
+        "Mike Miller"
+      ],
+      "started": "2014-12-31T17:24:57-06:00",
+      "last_reply": "2014-12-31T17:44:16-08:00",
+      "root_message_id": "msg-3350ab0bbc4f"
+    },
+    {
+      "id": "thread-0dd477d7ce4f",
+      "subject": "Can not save files",
+      "message_count": 6,
+      "participants": [
+        "David Winsemius",
+        "Duncan Murdoch",
+        "Jeff Newmiller",
+        "John Sorkin"
+      ],
+      "started": "2014-12-31T18:29:05-05:00",
+      "last_reply": "2014-12-31T22:53:52-08:00",
+      "root_message_id": "msg-0dd477d7ce4f"
+    },
+    {
+      "id": "thread-7f8cc4ea935d",
+      "subject": "rounding down with as.integer",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2014-12-31T20:13:07-08:00",
+      "last_reply": "2014-12-31T20:13:07-08:00",
+      "root_message_id": "msg-7f8cc4ea935d"
+    },
+    {
+      "id": "thread-48be399213bc",
+      "subject": "normalmixEM does not produce the same results when run twice using the same data.",
+      "message_count": 1,
+      "participants": [
+        "John Sorkin"
+      ],
+      "started": "2014-12-31T23:52:21-05:00",
+      "last_reply": "2014-12-31T23:52:21-05:00",
+      "root_message_id": "msg-48be399213bc"
+    }
+  ]
+}

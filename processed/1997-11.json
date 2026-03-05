@@ -1,0 +1,1412 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "1997-11",
+  "messages": [
+    {
+      "id": "msg-b8475e110b29",
+      "message_id": "<Pine.SUN.3.91.971101130233.27510A-100000@axiom.maths.uq.edu.au>",
+      "from_name": "Murray Keir",
+      "from_email_hash": "64a9d381051bfd2c06c7e7abd37f4c1800881875fd5c91b111359eb0cd14ae25",
+      "date": "1997-11-01T13:07:47+10:00",
+      "subject": "R-beta: Help accessing variable from a formula",
+      "subject_clean": "R-beta: Help accessing variable from a formula",
+      "in_reply_to": "<m0xQF50-000hruC@franz.stat.wisc.edu>",
+      "references": [],
+      "body_plain": "[this message automatically bounced to me as list-owner,\n\t since it had \"Help\" in the subject ..  -- Martin M]\n\n\nI have a program which is being feed a formula.  One of the terms in \nthe formula is going to be r(variablename).  r just returns the \noriginal variable.\n\nr <- function(x) x\n\nThe formula is something like \n\nrglm(y ~ x + r(Subject))\n\nWhat I want to do is get access to the variable Subject directly.  Can \nanyone give me any suggestions for doing this?\n\nThanks\nMurray Keir\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "[this message automatically bounced to me as list-owner,\n\t since it had \"Help\" in the subject ..  -- Martin M]\n\n\nI have a program which is being feed a formula.  One of the terms in \nthe formula is go",
+      "thread_id": "thread-b8475e110b29",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-7b444b116aab",
+      "message_id": "<199711021430.OAA128446@out2.ibm.net>",
+      "from_name": "Brent Hutto",
+      "from_email_hash": "9699cffec1379b272e981bdea011b424dcd29ab72c920d055939cf1a6b4bda5c",
+      "date": "1997-11-02T09:30:40Z",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "subject_clean": "R-beta: A vector of lists == Data Frame?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I hope a very basic R/S programming question is appropriate for this \nlist...\n\nI have a function which returns a list of several (named) numeric \nvalues characterising an event history for a person. I want to invoke \nthe function many (1000) times and create a vector of these lists to \nrepresent the histories of a population.\n\nAt first, I thought that a data frame would be the appropriate way to \nstore the whole population record. But upon some reading in \"Modern \nApplied Statistics with S-plus\" (Venables and Ripley, 1994) it seems \nthat a data frame is more like a list of vectors (all of the same \nlength) than a vector of lists.\n\nWhat is the most common R/S idiom for creating a vector of lists and \nthen adding new lists to it? To be more specific, if \"CreatePerson\" \nis a function that returns a list characterising that person, how do \nI implement the following pseudo-code in R\n\nPerson[ i ] <- CreatePerson( param1, param2 )\n\nWhere Person[ 1000 ] is a vector of lists of the type returned by the \n\"CreatePerson\" function? When I'm done, I want to do things like the \nfollowing pseudo-code\n\nPerson[ j ]$Age <- Person[ j ]$Age + 1\n\nor similar (actually, that particular piece of logic isn't \nnecessarily one I'm likely to do).\n\nAny guidance is appreciated as are suggestions for a text to \nsupplement Venables and Ripley in learning this language from \nscratch.\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I hope a very basic R/S programming question is appropriate for this \nlist...\n\nI have a function which returns a list of several (named) numeric \nvalues characterising an event history for a person. I",
+      "thread_id": "thread-7b444b116aab",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-66c16dcc70c5",
+      "message_id": "<199711022030.JAA01736@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-11-03T09:30:00+13:00",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "subject_clean": "R-beta: A vector of lists == Data Frame?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> What is the most common R/S idiom for creating a vector of lists and \n> then adding new lists to it? To be more specific, if \"CreatePerson\" \n> is a function that returns a list characterising that person, how do \n> I implement the following pseudo-code in R\n>\n> Person[ i ] <- CreatePerson( param1, param2 )\n\nAs you observe, the focus in this kind of language is on \"variables\"\nrather than on \"cases\".  I think that this is because statistics tends\nto be about building models with collections of observations, rather\nthan answering queries about individual observations.  Many computations\nin R/S take advantage of this variable/vector structure.\n\nTrying to work using record-like ideas is at best awkward in S/R, and\nit will probably be very inefficient.  When records are of fixed size,\nyou can get the same effect by using data frames, but you have to think\nvariable-wise rather than case-wise.\n\nI think the reason that S has caught on among statisticians is that we\nhave been trained to think in terms on \"modeling with variables\".  It\nseems like the most natural thing in world to us.  Similarly, MATLAB\nusers probably like MATLAB because they have been trained to see\neverything as a matrix problem and this is the framework that MATLAB\npresents.  It is always interesting to encounter someone from a different\nbackground who doesn't see things the same way.\n\nIf you are really interested in casewise processing I would suggest\nthat XLispStat or some other Lisp/Scheme may be a better choice.\n\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> What is the most common R/S idiom for creating a vector of lists and \n> then adding new lists to it? To be more specific, if \"CreatePerson\" \n> is a function that returns a list characterising that p",
+      "thread_id": "thread-66c16dcc70c5",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-468aeb17fe25",
+      "message_id": "<9711030745.AA26261@alpha.luc.ac.be>",
+      "from_name": "Jim Lindsey",
+      "from_email_hash": "a24138a0840979234b066b332130f2f20f4f659487d37814fc36a960e6b62b5f",
+      "date": "1997-11-03T08:45:52+01:00",
+      "subject": "R-beta: alias in glm",
+      "subject_clean": "R-beta: alias in glm",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 995 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/aecef95e/attachment.pl",
+      "body_snippet": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 995 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/aecef95e/attachment.pl",
+      "thread_id": "thread-468aeb17fe25",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-fbb3fd553198",
+      "message_id": "<9711030750.AA20512@alpha.luc.ac.be>",
+      "from_name": "Jim Lindsey",
+      "from_email_hash": "a24138a0840979234b066b332130f2f20f4f659487d37814fc36a960e6b62b5f",
+      "date": "1997-11-03T08:50:13+01:00",
+      "subject": "R-beta: vector of lists",
+      "subject_clean": "R-beta: vector of lists",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 749 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/8f7ac7c3/attachment.pl",
+      "body_snippet": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 749 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/8f7ac7c3/attachment.pl",
+      "thread_id": "thread-fbb3fd553198",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-453ee526720a",
+      "message_id": "<9711030959.AA30854@alpha.luc.ac.be>",
+      "from_name": "Jim Lindsey",
+      "from_email_hash": "a24138a0840979234b066b332130f2f20f4f659487d37814fc36a960e6b62b5f",
+      "date": "1997-11-03T10:59:20+01:00",
+      "subject": "R-beta: math in legends",
+      "subject_clean": "R-beta: math in legends",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 478 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/ae2f1119/attachment.pl",
+      "body_snippet": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 478 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971103/ae2f1119/attachment.pl",
+      "thread_id": "thread-453ee526720a",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-97035a28a28f",
+      "message_id": "<199711031041.KAA24437@scmp.scm.liverpool.ac.uk>",
+      "from_name": "Simon Fear",
+      "from_email_hash": "fbfe7f1d1bddd4a3f3b4c6395d2f29831677b983a1d566641d2d9a09f8b18826",
+      "date": "1997-11-03T10:41:41Z",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "subject_clean": "R-beta: A vector of lists == Data Frame?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> What is the most common R/S idiom for creating a vector of lists and \n> then adding new lists to it?\n\nI would suggest you use a list of lists instead of a vector of lists. If as you \nsay you are a real beginner in R/S (but obviously not to programming), are you \naware of use of double brackets to get list elements? ie mylist[i] returns the \nelement as a list of length one, almost always not what you want, which is \nmylist[[i]]. Given this, lists are pretty easy to use; in fact, you can do \nwithout vectors. As Ross Ihaka says, this would probably be more natural in \nXlispstat or straight Lisp.\n\nBTW To find out about R's object-oriented methods, you need help(class); \nhelp(object) draws a blank.\n\nI'm sending this to the list because I'm interested in views re Ross' comment:\n\n> Trying to work using record-like ideas is at best awkward in S/R and\n> it will probably be very inefficient.\n\nAnd yet StatSci do so love to peddle S-PLUS as object-oriented. An object \nPerson, a constructor Person() and a holder for them, PersonList, is totally \nnatural and efficient in a real object-oriented environment such as C++. Such \nobjects would have to be implemented using the fundamental list construct within \nS/R. Is this really so inefficient? If so why?\n\nPersonally I think selling S-PLUS as object-oriented might be a prosecutable \noffence. It is object-added. (R is free: I don't care what it claims to be :-)\n\nSimon Fear\nscf at liv.ac.uk\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> What is the most common R/S idiom for creating a vector of lists and \n> then adding new lists to it?\n\nI would suggest you use a list of lists instead of a vector of lists. If as you \nsay you are a r",
+      "thread_id": "thread-97035a28a28f",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-96c6083b9666",
+      "message_id": "<199711031502.QAA01300@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-11-03T16:02:33+01:00",
+      "subject": "R-beta: math in legends: strwidth() will have to be enhanced",
+      "subject_clean": "R-beta: math in legends: strwidth() will have to be enhanced",
+      "in_reply_to": "<9711030959.AA30854@alpha.luc.ac.be> (message from Jim Lindsey on Mon, 3 Nov 1997 10:59:20 +0100 (MET))",
+      "references": [],
+      "body_plain": ">>>>> \"Jim\" == Jim Lindsey <jlindsey at luc.ac.be> writes:\n\n    Jim> Expression is great for math on the axes of plots. However, it\n    Jim> does not appear to work in legend. Any chance of including this?\n\nThe only thing which must be enhanced is the\n\tstrwidth(..)\nfunction.\n\nHere is a **very** cheap workaround for  `strwidth'\nwhich makes legend \"work\" with expressions:\n\nstrwidth <- function(s, units=\"user\", cex=NULL) {\n fudge <- 1\n if(!is.character(s)) {\n\t if(is.expression(s)) {\n\t   ##-- Internal 'strwidth' should be enhanced for expressions !!!\n\t   ##-- The following is a CHEAP workaround !\n\t   ns <- length(se <- s); s <- character(ns)\n\t   for(i in 1:ns) s[i] <- paste(deparse(se[i]),collapse=\"\")\n\t } else stop(\"`s' must be `character' or `expression'\")\n\t fudge <- 0.6\n }\n fudge*.Internal(strwidth(s, pmatch(units, c(\"user\", \"figure\", \"inches\")), cex))\n}\n\n\nE.g., the following example now works for me:\n\n    ex12 <- expression(bar(x) == sum(over(x[i], n), i==1, n),\n\t\t       hat(x) == median(x[i], i==1,n))\n\n    plot(1:10,1:10)\n    legend(7,4, ex12, y.intersp = 2)\n\n\nMartin Maechler <maechler at stat.math.ethz.ch>\t\t <><\nSeminar fuer Statistik, SOL G1\nETH (Federal Inst. Technology)\t8092 Zurich\t SWITZERLAND\nphone: x-41-1-632-3408\t\tfax: ...-1086\nhttp://www.stat.math.ethz.ch/~maechler/\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> \"Jim\" == Jim Lindsey <jlindsey at luc.ac.be> writes:\n\n    Jim> Expression is great for math on the axes of plots. However, it\n    Jim> does not appear to work in legend. Any chance of including ",
+      "thread_id": "thread-96c6083b9666",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-4daf2630b497",
+      "message_id": "<Pine.SUN.3.95.971103090544.2023B-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-11-03T09:21:16-08:00",
+      "subject": "R-beta: Help accessing variable from a formula",
+      "subject_clean": "R-beta: Help accessing variable from a formula",
+      "in_reply_to": "<Pine.SUN.3.91.971101130233.27510A-100000@axiom.maths.uq.edu.au>",
+      "references": [],
+      "body_plain": "On Sat, 1 Nov 1997, Murray Keir wrote:\n> \n> I have a program which is being feed a formula.  One of the terms in \n> the formula is going to be r(variablename).  r just returns the \n> original variable.\n> \n> r <- function(x) x\n> \n> The formula is something like \n> \n> rglm(y ~ x + r(Subject))\n> \n> What I want to do is get access to the variable Subject directly.  Can \n> anyone give me any suggestions for doing this?\n\nThe terms() command contains some magic for doing this \nIf you type\n\tR> Terms<-terms(y ~ x + r(Subject),specials=\"r\")\nthe resulting terms object has an attribute \"specials\" \n\tR> attr(Terms,\"specials\")$r\n\t[1] 3\nwhich says that the third column of the model frame will contain the r()\nterm. Multiple terms are possible\n        R> Terms<-terms(y ~ x + r(Subject)+r(Object),specials=\"r\")\n        R> attr(Terms,\"specials\")$r\n\t[1] 3 4\n\nYou may then want to remove the r() from the formula before calling\nmodel.matrix().  This is a bit harder, but there is code in the survival4\npackage to do it.  The function untangle.specials() gives the position of\nthe r() in the right-hand side of the formula object, and the survival4\npackage contains a \"[.terms\" method that allows terms to be removed\n\tR> untangle.specials(Terms,\"r\")\n\t$vars\n\t[1] \"r(Subject)\" \"r(Object)\" \n\n\t$terms\n\t[1] 2 3\n\tR> Terms<-Terms[-c(2,3)]\n\tR> Terms\n\ty ~ x\n\tattr(,\"variables\")\n\tlist(y, x)\n\tattr(,\"factors\")\n\t  x\n\ty 0\n\tx 1\n  and so on...\n\nIf you want to include the code for untangle.specials() in your own\npackage you should probably ask Terry Therneau for permission -- the\nsurvival4 code is not GPL -- but I imagine he would be happy for it to be\nused with acknowledgement. I wrote the \"[.terms\" method, so there's no\nproblem there. \n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "On Sat, 1 Nov 1997, Murray Keir wrote:\n> \n> I have a program which is being feed a formula.  One of the terms in \n> the formula is going to be r(variablename).  r just returns the \n> original variable",
+      "thread_id": "thread-b8475e110b29",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-3b43610f6b41",
+      "message_id": "<199711041550.QAA07560@pc25.none>",
+      "from_name": "Kurt Hornik",
+      "from_email_hash": "6e49e5789d24862255bc60d8e4c5d8665b01105c5c098a9e7289a025e4708eb8",
+      "date": "1997-11-04T16:50:54+01:00",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "subject_clean": "R-beta: A vector of lists == Data Frame?",
+      "in_reply_to": "<199711031041.KAA24437@scmp.scm.liverpool.ac.uk>",
+      "references": [
+        "<199711031041.KAA24437@scmp.scm.liverpool.ac.uk>"
+      ],
+      "body_plain": ">>>>> Simon Fear writes:\n\n>> What is the most common R/S idiom for creating a vector of lists and \n>> then adding new lists to it?\n\n> I would suggest you use a list of lists instead of a vector of\n> lists. If as you say you are a real beginner in R/S (but obviously not\n> to programming), are you aware of use of double brackets to get list\n> elements? ie mylist[i] returns the element as a list of length one,\n> almost always not what you want, which is mylist[[i]]. Given this,\n> lists are pretty easy to use; in fact, you can do without vectors. As\n> Ross Ihaka says, this would probably be more natural in Xlispstat or\n> straight Lisp.\n\n> BTW To find out about R's object-oriented methods, you need help(class); \n> help(object) draws a blank.\n\nI agree that all low-level tools to work with record-like strucures (in\nparticular lapply() are there).  But, suppose for example that you have\na variable number of measurements of a variable V for a number of\npatients.  (Typical biostat problem.)  What you'd like to say is,\n\n\t``do something with V (e.g., plot it as a time series) for each\n\t  patient''\n\nHow can this be done in a simple and straightforward manner?  Also, how\ncan you e.g. get a vector with the average V for each patient (from a\nlist of lists)?\n\nBtw, how do you store such data?\n\n-k\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> Simon Fear writes:\n\n>> What is the most common R/S idiom for creating a vector of lists and \n>> then adding new lists to it?\n\n> I would suggest you use a list of lists instead of a vector of\n> l",
+      "thread_id": "thread-97035a28a28f",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-532ed3ffcc03",
+      "message_id": "<199711051453.PAA08657@galadriel.ci.tuwien.ac.at>",
+      "from_name": "Friedrich Leisch",
+      "from_email_hash": "5a5fdfa4351343af049914cd2641c9feb963f07285041256e0164002823b1114",
+      "date": "1997-11-05T15:53:36+01:00",
+      "subject": "R-beta: Latex and R",
+      "subject_clean": "R-beta: Latex and R",
+      "in_reply_to": "<346091C6.6E20@rulfsw.fsw.leidenuniv.nl>",
+      "references": [
+        "<346091C6.6E20@rulfsw.fsw.leidenuniv.nl>"
+      ],
+      "body_plain": ">>>>> On Wed, 05 Nov 1997 15:33:25 +0000,\n>>>>> bensmail  (b) wrote:\n\nb> Hello R users,\nb> This question might be already discussed before, I apologize\nb> if it is the case.\nb> Simple... how can I do to include a figure in a latex document.\nb> As I have already done in Splus, I tried this:\n\nb> \\begin{figure}\nb> \\special{psfile=gauss.ps .......}\nb> \\end{figure}\n\nb> but it didn't work. Any help?\n\nI always use the epsfig packages, if it is not installed on your\nsystem you can get it from CTAN.\n\nI.e.,\n\n\\usepackage{epsfig}\n\nin the preamble and then\n\n\\begin{figure}\n\\epsfig{file=gauss.ps,width=.......}\n\\end{figure}\n\nHope this helps,\nFritz\n\n-- \n-------------------------------------------------------------------\n                        Friedrich  Leisch                             \nInstitut f?r Statistik                      Tel: (+43 1) 58801 4541\nTechnische Universit?t Wien                 Fax: (+43 1)  504 14 98\nWiedner Hauptstra?e 8-10/1071      Friedrich.Leisch at ci.tuwien.ac.at\nA-1040 Wien, Austria             http://www.ci.tuwien.ac.at/~leisch\n     PGP public key http://www.ci.tuwien.ac.at/~leisch/pgp.key\n-------------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
+      "body_snippet": ">>>>> On Wed, 05 Nov 1997 15:33:25 +0000,\n>>>>> bensmail  (b) wrote:\n\nb> Hello R users,\nb> This question might be already discussed before, I apologize\nb> if it is the case.\nb> Simple... how can I do ",
+      "thread_id": "thread-95e093d49810",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-bb9ad4146b17",
+      "message_id": "<x2pvofpev5.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-11-05T15:58:06+01:00",
+      "subject": "R-beta: Latex and R",
+      "subject_clean": "R-beta: Latex and R",
+      "in_reply_to": "bensmail's message of Wed, 05 Nov 1997 15:33:25 +0000",
+      "references": [
+        "<346091C6.6E20@rulfsw.fsw.leidenuniv.nl>"
+      ],
+      "body_plain": "bensmail <bensmail at rulfsw.fsw.LeidenUniv.nl> writes:\n\n> This question might be already discussed before, I apologize\n> if it is the case.\n> Simple... how can I do to include a figure in a latex document.\n> As I have already done in Splus, I tried this:\n> \n> \\begin{figure}\n> \\special{psfile=gauss.ps .......}\n> \\end{figure}\n> \n> but it didn't work. Any help?\n\nI've been using (Latex2e)\n\ndocumentclass[12pt,a4paper]{article}\n\\usepackage[T1]{fontenc}\n\\usepackage[latin1]{inputenc}\n\\usepackage[danish]{babel}\n\\usepackage{epsf}\n\\newcommand{\\Rfig}[1]{\\epsfxsize8cm\\epsffile{#1}}\n\\begin{document}\n...\n\\begin{figure}[htbp]\n  \\begin{center}\n    \\leavevmode\n    \\Rfig{h-w.ps}\n    \\caption{Et standardplot}\n    \\label{fig:h-w}\n  \\end{center}\n\\end{figure}\n\nwith h-w.ps created by save.plot() Remember to start with\nx11(orientation='portrait'), or you get (some of?) the plots rotated.\n\n(I don't know what the  \\leavevmode is good for, AUCTeX inserts it\nwhen I do 'C-c C-e figure')\n\n> PS: I let down the Mac and the MS Window platforms and I am back\n> to my beloved Sun machine to run R, what a relief! ;-)\n\nWait till you try it on Linux...\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "bensmail <bensmail at rulfsw.fsw.LeidenUniv.nl> writes:\n\n> This question might be already discussed before, I apologize\n> if it is the case.\n> Simple... how can I do to include a figure in a latex doc",
+      "thread_id": "thread-95e093d49810",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-95e093d49810",
+      "message_id": "<346091C6.6E20@rulfsw.fsw.leidenuniv.nl>",
+      "from_name": "bensmail",
+      "from_email_hash": "a62de423b44f0db2acc6338d7d519b58a520959f6cedead10478a726b4045e03",
+      "date": "1997-11-05T15:33:25Z",
+      "subject": "R-beta: Latex and R",
+      "subject_clean": "R-beta: Latex and R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello R users,\n\n\nThis question might be already discussed before, I apologize\nif it is the case.\nSimple... how can I do to include a figure in a latex document.\nAs I have already done in Splus, I tried this:\n\n\\begin{figure}\n\\special{psfile=gauss.ps .......}\n\\end{figure}\n\nbut it didn't work. Any help?\nThank you in advance.\n\nPS: I let down the Mac and the MS Window platforms and I am back\nto my beloved Sun machine to run R, what a relief! ;-)\n\nHalima from Leiden.\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hello R users,\n\n\nThis question might be already discussed before, I apologize\nif it is the case.\nSimple... how can I do to include a figure in a latex document.\nAs I have already done in Splus, I trie",
+      "thread_id": "thread-95e093d49810",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-6c561b1a1563",
+      "message_id": "<3.0.1.32.19971106103044.0073210c@romulus.sci.usq.edu.au>",
+      "from_name": "Ross Darnell",
+      "from_email_hash": "ad8ce13616534f0dfea6f022ee67a6dd1f4cc66ff3b6200b2ac410075ba13518",
+      "date": "1997-11-06T10:30:44+10:00",
+      "subject": "R-beta: Latex and R",
+      "subject_clean": "R-beta: Latex and R",
+      "in_reply_to": "<346091C6.6E20@rulfsw.fsw.leidenuniv.nl>",
+      "references": [],
+      "body_plain": "At 15:33 5/11/97 +0000, bensmail wrote:\n>Hello R users,\n>\n>\n>This question might be already discussed before, I apologize\n>if it is the case.\n>Simple... how can I do to include a figure in a latex document.\n>As I have already done in Splus, I tried this:\n>\n>\\begin{figure}\n>\\special{psfile=gauss.ps .......}\n>\\end{figure}\n>\n>but it didn't work. Any help?\n>Thank you in advance.\n>\nTry viewing the eps file using Ghostview. Check that the ps file has\nbounding boxes. Also if there is too much white space around the graphic\nask Ghostview to convert you R file into an eps file . It will trim much of\nthe white space by redefining the bounding box.\nThen use the includegraphicx package in latex. It supersedes espf etc\nThis new package seems to work like a charm.\n\nGood luck\nRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "At 15:33 5/11/97 +0000, bensmail wrote:\n>Hello R users,\n>\n>\n>This question might be already discussed before, I apologize\n>if it is the case.\n>Simple... how can I do to include a figure in a latex doc",
+      "thread_id": "thread-95e093d49810",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-c06e9e04caeb",
+      "message_id": "<199711061908.UAA05479@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-11-06T20:08:01+01:00",
+      "subject": "R-beta: graphics: ``gamma correction'' -- state / feedback ?",
+      "subject_clean": "R-beta: graphics: ``gamma correction'' -- state / feedback ?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "In 'CHANGES' of 0.49, you find among \"NEW FEATURES\"\n\n o  There is a new graphical parameter \"gamma\" which is designed to\n    let users apply a ``gamma'' correction for their graphics\n    displays.  Most monitors produce a color intensity which is\n    related to voltage by the equation\n\t\t\tintensity = voltage ^ gamma\n    with gamma about 2.5 for most PC monitors.  A typical symptom\n    of this non-linearity is that a colorwheel produced by\n\t\t\tpiechart(rep(1,48), col=48)\n    shows a marked over representation of the red, green and blue\n    and blue primaries.  If this is the case try\n\t\t\tpar(gamma=1/2.5)\n    and redraw the color wheel.  Vary gamma till you have a \"nice\"\n    spectrum.  This is experimental and feedback would be welcome.\n\t       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    (If this is useful we will do the same for postscript).\n     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n\t\t(underlines \"~~\" by me).\n\n- What is the state of this?  \n- Is it still experimental?  \n- Does it also work in postscript?\n- Who of you R users has used it?  successfully?\n- if yes, can you dig out a nice example of its use?\n\nThe main reason for my questions is that I am updating the online\ndocumentation,  and I'd like to write something in (at least)\n\t?hsv   and   ?par\n\nThank you for your feedback!\n{{If you are not one of R&R, \n  you also may e-mail to me alone, and I'll summarize to the list ..}}\n\n----\n\nMartin Maechler <maechler at stat.math.ethz.ch>\t\t <><\nSeminar fuer Statistik, SOL G1\nETH (Federal Inst. Technology)\t8092 Zurich\t SWITZERLAND\nphone: x-41-1-632-3408\t\tfax: ...-1086\nhttp://www.stat.math.ethz.ch/~maechler/\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "In 'CHANGES' of 0.49, you find among \"NEW FEATURES\"\n\n o  There is a new graphical parameter \"gamma\" which is designed to\n    let users apply a ``gamma'' correction for their graphics\n    displays.  Mo",
+      "thread_id": "thread-c06e9e04caeb",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-4920f4a6c1c6",
+      "message_id": "<9711100849.AA27555@alpha.luc.ac.be>",
+      "from_name": "Jim Lindsey",
+      "from_email_hash": "a24138a0840979234b066b332130f2f20f4f659487d37814fc36a960e6b62b5f",
+      "date": "1997-11-10T09:49:50+01:00",
+      "subject": "R-beta: proportional oddds",
+      "subject_clean": "R-beta: proportional oddds",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 464 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971110/d982810f/attachment.pl",
+      "body_snippet": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 464 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19971110/d982810f/attachment.pl",
+      "thread_id": "thread-4920f4a6c1c6",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-4766368c5840",
+      "message_id": "<199711141052.KAA00842@genin.mrc-bsu.cam.ac.uk>",
+      "from_name": "Jonathan Myles",
+      "from_email_hash": "f790e511ef25ed9d9358379a5d237aca387447a8ea4e59bcf932c0913f65728e",
+      "date": "1997-11-14T10:52:38Z",
+      "subject": "R-beta: R in ESS with different -n and -v arguments",
+      "subject_clean": "R-beta: R in ESS with different -n and -v arguments",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Is there any way of running R in ESS using -n and -v \narguments other than the default?\n\nThanks\n\nJonathan \n\n-- \nDr. Jonathan Myles         e-mail:jonathan.myles at mrc-bsu.cam.ac.uk\nMRC Biostatistics Unit     Tel. 01223 330371\nInstitute of Public Health FAX  01223 330388\nUniversity Forvie Site\nRobinson Way\nCAMBRIDGE\nCB2 2SR                   \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Is there any way of running R in ESS using -n and -v \narguments other than the default?\n\nThanks\n\nJonathan \n\n-- \nDr. Jonathan Myles         e-mail:jonathan.myles at mrc-bsu.cam.ac.uk\nMRC Biostatistics ",
+      "thread_id": "thread-4766368c5840",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-78666e9dec6d",
+      "message_id": "<199711141113.MAA13933@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-11-14T12:13:46+01:00",
+      "subject": "R-beta: Re: R in ESS with different -n and -v arguments",
+      "subject_clean": "R-beta: Re: R in ESS with different -n and -v arguments",
+      "in_reply_to": "<199711141052.KAA00842@genin.mrc-bsu.cam.ac.uk> (message from Jonathan Myles on Fri, 14 Nov 1997 10:52:38 GMT)",
+      "references": [],
+      "body_plain": ">>>>> \"Jonathan\" == Jonathan Myles <jonathan.myles at mrc-bsu.cam.ac.uk> writes:\n\n    Jonathan> Is there any way of running R in ESS using -n and -v\n    Jonathan> arguments other than the default?\n\n(For 'R-help' readers:\n\tESS := Emacs Speaks Statistics is the successor of \"S-mode for Emacs\"\n and its new version 5.0  will most probably be released (as NON-beta)\n after this weekend.)\n\n\nYes, with the very latest prerelease of last night (what a timely question!),\nyou can do\n\tC-u M-x R\nand then speficy the command line arguments.\n\nget  ESS-..-pre5.tar.gz  from:\n\n\tftp://franz.stat.wisc.edu/pub/ESS\n\thttp://franz.stat.wisc.edu/pub/ESS\n\n\nMartin Maechler <maechler at stat.math.ethz.ch>\t\t <><\nSeminar fuer Statistik, SOL G1\nETH (Federal Inst. Technology)\t8092 Zurich\t SWITZERLAND\nphone: x-41-1-632-3408\t\tfax: ...-1086\nhttp://www.stat.math.ethz.ch/~maechler/\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> \"Jonathan\" == Jonathan Myles <jonathan.myles at mrc-bsu.cam.ac.uk> writes:\n\n    Jonathan> Is there any way of running R in ESS using -n and -v\n    Jonathan> arguments other than the default?\n\n(F",
+      "thread_id": "thread-78666e9dec6d",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-47fb02c61d01",
+      "message_id": "<3.0.1.32.19971115000304.006abb7c@stat.unipg.it>",
+      "from_name": "Andrea Rossetti",
+      "from_email_hash": "11678a991c161935029b8b6e1a9b9c3efe2279235f81cb69148893cb9ba754cb",
+      "date": "1997-11-15T00:03:04+01:00",
+      "subject": "R-beta: new executable",
+      "subject_clean": "R-beta: new executable",
+      "in_reply_to": "<199710290308.QAA12299@stat1.stat.auckland.ac.nz>",
+      "references": [],
+      "body_plain": "At 16.08 29/10/97 +1300, you wrote:\n>I have just put up a new executable as a replacement for the one in \n>  rseptbeta.zip\n> there have only been a few changes; mostly to the menu's. I am about\n> to start on a major overhaul including getting survival to work and\n> grabbing the 0.60 version once it's stable.\n> \n> Please let me know about other enhancements you want....\n> \n> robert\n> \n>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n>r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n>Send \"info\", \"help\", or \"[un]subscribe\"\n>(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n>\n\nHallo,\nI have downloaded the new executable named exe.zip for windows 95 and I\nreplaced it with the old wersion.\nI tried it and it worked wery well, but unintentionally i have changed the\nsize of the vector heap (to the memory setting) with the value 1000, and\nnow the application doesn't work!\nI tried to delete all and reinstall but the resul is the same,\ndouble-clicking on rsept.exe compare an error:\na window with an \"X\"\nwith a title \"Application error: c:\\stat\\rsept\\rsept.exe\"\nthe message is \"The instruction at 004b624c referenced memory at ffffffff.\nThe memory could not be read from. Click on OK to terminate the application.\"\nI click to OK and compare a new window with an \"X\" with the message:\n\"This program executed an invalid operation and it will be terminated. If\nthe problem persists, must contact the program's supplier\"\nthen I click on \"details>>\" button and the following compare:\nRSEPT ha provoked an invalid page error in the\nmodule RSEPT.EXE in 0137:004b624c.\nRegisters:\nEAX=00000008 CS=0137 EIP=004b624c EFLGS=00010202\nEBX=0000000a SS=013f ESP=0062f9d8 EBP=0062f9dc\nECX=c106acf0 DS=013f ESI=8159d39c FS=0cf7\nEDX=00000000 ES=013f EDI=8159d724 GS=0000\nByte all'indirizzo CS:EIP:\n8b 40 2c 64 3b 05 00 00 00 00 75 02 eb 0d 6a 00 \nStack's image:\n00000008 00000008 00000000 0062fa04 8159d724 8159d39c 00660030 c106acf0\n0000000a 00451828 00000008 0062fa30 8159d724 8159d39c 00660030 c106acf0 \n\nPLEASE HOW CAN I SOLVE THIS PROBLEM?\n\nAndrea Rossetti!\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "At 16.08 29/10/97 +1300, you wrote:\n>I have just put up a new executable as a replacement for the one in \n>  rseptbeta.zip\n> there have only been a few changes; mostly to the menu's. I am about\n> to s",
+      "thread_id": "thread-47fb02c61d01",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-c869e66d51e7",
+      "message_id": "<x2soszknij.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-15T01:29:40+01:00",
+      "subject": "R-beta: new executable",
+      "subject_clean": "R-beta: new executable",
+      "in_reply_to": "Andrea Rossetti's message of Sat, 15 Nov 1997 00:03:04 +0100",
+      "references": [
+        "<3.0.1.32.19971115000304.006abb7c@stat.unipg.it>"
+      ],
+      "body_plain": "Andrea Rossetti <rossetti at stat.unipg.it> writes:\n\n> I tried it and it worked wery well, but unintentionally i have changed the\n> size of the vector heap (to the memory setting) with the value 1000, and\n> now the application doesn't work!\n> I tried to delete all and reinstall but the resul is the same,\n> double-clicking on rsept.exe compare an error:\n> a window with an \"X\"\n\nWhat an excellent example of why configuring a program from inside a\nprogram may not be such a good idea...\n\nI *think* the way to proceed is \n\na) start regedit (from the command box via the Start button)\nb) save the registry to a file (*never* edit it directly, you'll risk\nhurting yourself badly if you do)\nc) make a backup of the registry file and edit it with your favourite\neditor. Look for something that could be R's memory setting and set it\nright (or delete that entry).\nd) reload it from regedit. \n\n-- or just ensure that the machine has >1GB of virtual memory (evil\ngrin). \n\nRobert: There must be a way of detecting this situation at startup?\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Andrea Rossetti <rossetti at stat.unipg.it> writes:\n\n> I tried it and it worked wery well, but unintentionally i have changed the\n> size of the vector heap (to the memory setting) with the value 1000,",
+      "thread_id": "thread-47fb02c61d01",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-653182d8711e",
+      "message_id": "<3.0.1.32.19971116011122.0069e9d0@stat.unipg.it>",
+      "from_name": "Andrea Rossetti",
+      "from_email_hash": "11678a991c161935029b8b6e1a9b9c3efe2279235f81cb69148893cb9ba754cb",
+      "date": "1997-11-16T01:11:22+01:00",
+      "subject": "R-beta: documentation?",
+      "subject_clean": "R-beta: documentation?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi I'm an R for windows 95 user,\nwhere can I find documentation for \"splines\", \"survival4\", \"eda\" and \"mva\"\npackages?\n\nAndrea Rossetti.\n\n_______________________________________________________\nStatistica & Informatica per la Gestione delle Imprese |\nUniversit? degli Studi di Perugia (Italia)             |\niiasc home page: http://www.stat.unipg.it              |\n_______________________________________________________|\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
+      "body_snippet": "Hi I'm an R for windows 95 user,\nwhere can I find documentation for \"splines\", \"survival4\", \"eda\" and \"mva\"\npackages?\n\nAndrea Rossetti.\n\n_______________________________________________________\nStatist",
+      "thread_id": "thread-653182d8711e",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-b05d8aa51562",
+      "message_id": "<199711161939.IAA21233@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-11-17T08:39:21+13:00",
+      "subject": "R-beta: new executable",
+      "subject_clean": "R-beta: new executable",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> \n> Hallo,\n> I have downloaded the new executable named exe.zip for windows 95 and I\n> replaced it with the old wersion.\n> I tried it and it worked wery well, but unintentionally i have changed the\n> size of the vector heap (to the memory setting) with the value 1000, and\n> now the application doesn't work!\n> I tried to delete all and reinstall but the resul is the same,\n> double-clicking on rsept.exe compare an error:\n> a window with an \"X\"\n> with a title \"Application error: c:\\stat\\rsept\\rsept.exe\"\n> the message is \"The instruction at 004b624c referenced memory at ffffffff.\n> The memory could not be read from. Click on OK to terminate the application.\"\n\n\n  R sets two variables in the registry. They are under HKEY_USERS/Software/\n  NSize and VSize. You can delete these and then it should be fine.\n  \n  I agree with Peter's comments about software modifying itself to the\n  point where it won't run. I am working on the memory issue right now\n  and hope to come up with a solution that will allow R to restart with\n  a smaller footprint if there isn't enough memory available. Probably\n  I should also check to see if there is enough memory available to satisfy\n  a user request. That said, these things seem to be very non-portable.\n  \n  \n  \n  robert\n  \n  \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> \n> Hallo,\n> I have downloaded the new executable named exe.zip for windows 95 and I\n> replaced it with the old wersion.\n> I tried it and it worked wery well, but unintentionally i have changed the\n>",
+      "thread_id": "thread-b05d8aa51562",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-c6756ccc9426",
+      "message_id": "<19971116140804.56668@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-11-16T14:08:04-08:00",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "subject_clean": "R-beta: installing new packages in window95 version of R",
+      "in_reply_to": null,
+      "references": [
+        "<199711161939.IAA21233@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "I have tried to install the leaps package in the  window95 version of R.\nI used Microsoft Fortran powerstation to generate \nthe .dll file of the fortran programs in the src dorectory\nof the leaps package and put it under the lib directory of RSept. Then\nI stored the leaps.R under the library directory of RSept, with two\nadditional commands in leaps.R (the .R extension was dropped):\nlibrary.dynam(\"leaps.dll\")^M\nprovide(leaps)^M\n\nWhen I invoked the leaps library, the R functions in the file\ncan be printed out. However, when I ran the function, say, leaps(...),\nI got the error message something like the fortran function \"makeqr\" is not\nin the load table.\n\nAny suggestions on how to fix the problem?\n\nKung-Sik \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have tried to install the leaps package in the  window95 version of R.\nI used Microsoft Fortran powerstation to generate \nthe .dll file of the fortran programs in the src dorectory\nof the leaps pack",
+      "thread_id": "thread-b05d8aa51562",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-882052664514",
+      "message_id": "<199711162238.LAA26319@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-11-17T11:38:39+13:00",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "subject_clean": "R-beta: installing new packages in window95 version of R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> From r-help-owner at stat.math.ethz.ch Mon Nov 17 11:20 NZD 1997\n> Date: Sun, 16 Nov 1997 14:08:04 -0800\n> From: Kung-Sik Chan <kchan at stat.uiowa.edu>\n> To: r-help at stat.math.ethz.ch\n> Subject: R-beta: installing new packages in window95 version of R\n> Mime-Version: 1.0\n> \n> I have tried to install the leaps package in the  window95 version of R.\n> I used Microsoft Fortran powerstation to generate \n> the .dll file of the fortran programs in the src dorectory\n> of the leaps package and put it under the lib directory of RSept. Then\n> I stored the leaps.R under the library directory of RSept, with two\n> additional commands in leaps.R (the .R extension was dropped):\n> library.dynam(\"leaps.dll\")^M\n> provide(leaps)^M\n> \n> When I invoked the leaps library, the R functions in the file\n> can be printed out. However, when I ran the function, say, leaps(...),\n> I got the error message something like the fortran function \"makeqr\" is not\n> in the load table.\n> \n> Any suggestions on how to fix the problem?\n> \n> Kung-Sik \n> =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n> r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n> Send \"info\", \"help\", or \"[un]subscribe\"\n> (in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n> =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n  I am not familiar with the leaps library so I don't know what functions it\n  uses. If it relies on internal R functions (I hope that you got the R version)\n  then you need to get your fortran compiler to export those functions from\n  the dll with the correct collection of underscores (in the correct places),\n  for Watcom C to figure out how to link to them.\n  \n  I have only had luck using Watcom C linked to C so far (and even that\n  has not been entirely successful as demonstrated by the state of survival4).\n  Luke Tierney has been providing some very helpful info on this as he\n  is currently working on dynamic loading for Xlisp-Stat.\n\nHe wrote:\n  \n>I think I've worked out what the sort of official way of doing things\n>in windows is. You mark the functions in the executable for export,\n>either with a __declspec(dllexport) or in a .def file. Create the\n>executable, say r.exe, and from it create a r.lib file (in VC you use\n>LIB, in BCC you use IMPLIB -- I haven't checked watcom yet but I'm\n>sure there is something analogous). Then link r.lib with your dll.\n>\n>The only problem with this is you have to explicitly export all\n>symbols in R you want to make available. I have not found any way of\n>making all externals exported in BCC or in VC. It looks like BCC lets\n>you do that in 16bit apps but not 32, unless I've just missed\n>something.  My notes on AIX also indicate that AIX requires an\n>explicit export file, so this can happen on Unix too (again assuming I\n>haven't missed some way of exporting all externals).\n>\n>Another point that may not affect you but does me: If you want to\n>acces a global variable in R from a dll you need to declare it\n>__declspec(dllimport) in the dll (doing this for functions is optional\n>and improves calling speed, at least in VC or so they claim, but it is\n>mandatory for data -- whithout it everythign links happily and blows\n>up at runtime).\n>\n>luke\n\nBut I haven't had time to do any of that.\n\nrobert\n  \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> From r-help-owner at stat.math.ethz.ch Mon Nov 17 11:20 NZD 1997\n> Date: Sun, 16 Nov 1997 14:08:04 -0800\n> From: Kung-Sik Chan <kchan at stat.uiowa.edu>\n> To: r-help at stat.math.ethz.ch\n> Subject: ",
+      "thread_id": "thread-882052664514",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-80359819614b",
+      "message_id": "<Pine.LNX.3.96.971117011450.9537A-100000@alpha.fuzzy.at>",
+      "from_name": "Albrecht Gebhardt",
+      "from_email_hash": "6e47226ee9eec611350ea06c0cbb5d1fc818cb737e901f79cde9821391202aa9",
+      "date": "1997-11-17T01:28:46+01:00",
+      "subject": "R-beta: autoloading a required library",
+      "subject_clean": "R-beta: autoloading a required library",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I wanted to use the dist() function from the mva library in my own\nlibrary, so I put require(mva) in my files. When my library loads, a\nmessage about \"Autoloading ... mva\" appears. But when I call dist() now\nwithin my functions the message\n\nError in .C(\"dist\", as.double(x), nrow(x), ncol(x), double(len),\nas.integer(method)) : C/Fortran function not in load table \n\nappears.\n\nAfter dyn.load(\"..._path_to_/mva.so\") it works.\n\nIs there something wrong with the autoloading process or should \nstatements like `if (!is.loaded(\"dist\")) {dynload(\"mva.so\")}` be added to \nthe functions of the mva library? Or is this problem due to a wrong setup\nin my R (0.50a4)? \n\n\nAlbrecht\n\n------------------------------------------------------------------\nAlbrecht Gebhardt           email: albrecht.gebhardt at uni-klu.ac.at\nInstitut fuer Mathematik    Tel. : (++43 463) 2700/837\nUniversitaet Klagenfurt     Fax  : (++43 463) 2700/834\nVillacher Str. 161\nA-9020 Klagenfurt, Austria\n------------------------------------------------------------------\n\n\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I wanted to use the dist() function from the mva library in my own\nlibrary, so I put require(mva) in my files. When my library loads, a\nmessage about \"Autoloading ... mva\" appears. But when I call dis",
+      "thread_id": "thread-80359819614b",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-adb6f87b51f0",
+      "message_id": "<m3u3dbu1u8.fsf@sade.uio.no>",
+      "from_name": "Fredrik Glockner",
+      "from_email_hash": "728b705d390e1778de1fcad8f1ab597c701676e5ff2b141d5f980898c5b18b92",
+      "date": "1997-11-17T13:44:31+01:00",
+      "subject": "R-beta: Shared libraries on AIX",
+      "subject_clean": "R-beta: Shared libraries on AIX",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've installed R on AIX.  For starters, this did not work out of the\nbox.  I got the following error message:\n\n        cd graphics; make\n        gcc -g -I../include -c gdevice.c\nIn file included from /usr/include/sys/lockf.h:41,\n                 from /local/gnu/lib/gcc-lib/rs6000-ibm-aix4.1.3.0/2.7.2.1/include/unistd.h:354,\n                 from /usr/include/fcntl.h:156,\n                 from ../include/Defn.h:54,\n                 from gdevice.c:20:\n/usr/include/sys/stat.h:92: parse error before `blkcnt_t'\n/usr/include/sys/stat.h:92: warning: no semicolon at end of struct or union\n/usr/include/sys/stat.h:107: parse error before `}'\nmake: 1254-004 The error code from the last command is 1.\n\nNow, I commented out the line `#include <fcntl.h>' in `Defn.h', and\nthe compiling went fairly smooth.  That is, I got the following error\nmessage:\n\n        gcc -g -fpic -I/usit/spfs/math-u1/fredrigl/R-0.50-a4/include -c hclust.c\nld: 0711-327 WARNING: Entry point not found: __start\nld: 0711-244 ERROR: No csects or exported symbols have been saved.\nmake: 1254-004 The error code from the last command is 8.\n\n\nNext, I want to dynamically load some shared libraries.  This is what\nI do:\n\nsp09 69>gcc -c -shared -o ar1sim.so ar1sim.c\nsp09 70>R\n\nR : Copyright 1997, Robert Gentleman and Ross Ihaka\nVersion 0.50 Alpha-4 (September 10, 1997)\n\n> dyn.load(\"ar1sim.so\")\nError in dyn.load(x) : unable to load shared library \"/usit/spfs/math-u1/fredrigl/R/ar1sim.so\"\n\n\nDo anybody know what is wrong?  I would be very happy to find out.\n\nFredrik\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "I've installed R on AIX.  For starters, this did not work out of the\nbox.  I got the following error message:\n\n        cd graphics; make\n        gcc -g -I../include -c gdevice.c\nIn file included from ",
+      "thread_id": "thread-adb6f87b51f0",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-29939cb80c41",
+      "message_id": "<Pine.SUN.3.95.971117082433.1397A-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-11-17T08:34:10-08:00",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "subject_clean": "R-beta: installing new packages in window95 version of R",
+      "in_reply_to": "<19971116140804.56668@stat.uiowa.edu>",
+      "references": [],
+      "body_plain": "On Sun, 16 Nov 1997, Kung-Sik Chan wrote:\n> I have tried to install the leaps package in the  window95 version of R.\n> I used Microsoft Fortran powerstation to generate \n> the .dll file of the fortran programs in the src dorectory\n> of the leaps package and put it under the lib directory of RSept. Then\n> I stored the leaps.R under the library directory of RSept, with two\n> additional commands in leaps.R (the .R extension was dropped):\n> library.dynam(\"leaps.dll\")^M\n> provide(leaps)^M\n\n> When I invoked the leaps library, the R functions in the file\n> can be printed out. However, when I ran the function, say, leaps(...),\n> I got the error message something like the fortran function \"makeqr\" is not\n> in the load table.\n\nAs Robert said, the most likely problem is with marking functions for\nexport. The FORTRAN version of leaps does not use any internal R functions\n(the C function may use pow_ii -- I can't remember), so that won't be a\nproblem.  You can use is.loaded() to see if a C/Fortran function is in the\nload table, which is simpler than trying to call the function.\n\nIf you find out how to mark functions for export from a DLL and it still\ndoesn't work then another possibility is that Powerstation uses different\nname mangling from what R expects (eg an underscore before or after the\nfunction name). The symbol.F() function will tell you what R thinks the\nname should be, and if you build a small, simple DLL and look at it with a\ntext editor you will find what the DLL thinks the function name is. \nProbably there's a better solution than using a text editor but I'm not up\non Windows programming. \n\n\nThomas Lumley\n------------------------------------------------------+-----\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n\t\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Sun, 16 Nov 1997, Kung-Sik Chan wrote:\n> I have tried to install the leaps package in the  window95 version of R.\n> I used Microsoft Fortran powerstation to generate \n> the .dll file of the fortran",
+      "thread_id": "thread-b05d8aa51562",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-cb001efa7800",
+      "message_id": "<9711171700.AA04611@nokomis.stat.umn.edu>",
+      "from_name": "Luke Tierney",
+      "from_email_hash": "ec92312862d528b9d19b265369796c7158d0cbfb50e13e996d8fe6ff7f0105a7",
+      "date": "1997-11-17T11:00:36-06:00",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "subject_clean": "R-beta: installing new packages in window95 version of R",
+      "in_reply_to": "<Pine.SUN.3.95.971117082433.1397A-100000@troi> from \"Thomas Lumley\" at Nov 17, 97 08:34:10 am",
+      "references": [],
+      "body_plain": "Thomas Lumley wrote:\n> \n> If you find out how to mark functions for export from a DLL and it still\n> doesn't work then another possibility is that Powerstation uses different\n> name mangling from what R expects (eg an underscore before or after the\n> function name). The symbol.F() function will tell you what R thinks the\n> name should be, and if you build a small, simple DLL and look at it with a\n> text editor you will find what the DLL thinks the function name is. \n> Probably there's a better solution than using a text editor but I'm not up\n> on Windows programming. \n> \n\nVC++ includes a utility called DUMPBIN -- it may be in their fortran\ndistribution as well.\n\nOne potential problem is with the calling conventions. Watcom uses a\nregister based method that appears to be different from the optional\nresgister-based one under MS. The default under MS is I think a stack\nbased convention. If the R .exe is compiled with default calling\nconventions then it *may* work to have MS Fortran generate code for\nregieter-based calls (there may be a flag you can set for that) but\nI'm worried there may be more differences than argument passing, that\nthe conventions on who saves and restores other registers may be\ndifferent. If that is indeed the case then calls may appear to work in\nsome contexts but not in others.\n\nluke\n\n-- \nLuke Tierney\nUniversity of Minnesota                      Phone:           612-625-7843\nSchool of Statistics                         Fax:             612-624-8868\n206 Church Street                            email:      luke at stat.umn.edu\nMinneapolis, MN 55455 USA                    WWW:  http://www.stat.umn.edu\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Thomas Lumley wrote:\n> \n> If you find out how to mark functions for export from a DLL and it still\n> doesn't work then another possibility is that Powerstation uses different\n> name mangling from what",
+      "thread_id": "thread-cb001efa7800",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-180c20fb919c",
+      "message_id": "<Pine.SUN.3.95.971117110403.1916B-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-11-17T11:09:25-08:00",
+      "subject": "R-beta: autoloading a required library",
+      "subject_clean": "R-beta: autoloading a required library",
+      "in_reply_to": "<Pine.LNX.3.96.971117011450.9537A-100000@alpha.fuzzy.at>",
+      "references": [],
+      "body_plain": "On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n\n> \n> I wanted to use the dist() function from the mva library in my own\n> library, so I put require(mva) in my files. When my library loads, a\n> message about \"Autoloading ... mva\" appears. But when I call dist() now\n> within my functions the message\n> \n> Error in .C(\"dist\", as.double(x), nrow(x), ncol(x), double(len),\n> as.integer(method)) : C/Fortran function not in load table \n> \n> appears.\n> \n> After dyn.load(\"..._path_to_/mva.so\") it works.\n\nIt's probably something wrong with the setup, but I don't know what. It\nseems to work in my installation of R which is roughly 0.50a4.\n\nDoes it work if you use library(mva) instead?  This should be identical\nexcept that it gives an error if \"mva\" doesn't exist, rather than a\nwarning.\n\ngorn% R\n\nR : Copyright 1997, Robert Gentleman and Ross Ihaka\nVersion 0.50 Alpha-4 (September 10, 1997)\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType \"license()\" for details.\n\n[Previously saved workspace restored]\n\n> is.loaded(\"dist\")\n[1] FALSE\n> require(mva)\nAutoloading required library: mva \n[1] TRUE\n> is.loaded(\"dist\")\n[1] TRUE\n> \nand even if the require() is inside a function\n> ff<-function(x) require(mva)\n> is.loaded(\"dist\")\n[1] FALSE\n> ff(1)\nAutoloading required library: mva \n[1] TRUE\n> is.loaded(\"dist\")\n[1] TRUE\n> \n\n\n\t-thomas\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n\n> \n> I wanted to use the dist() function from the mva library in my own\n> library, so I put require(mva) in my files. When my library loads, a\n> message ",
+      "thread_id": "thread-80359819614b",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-72b189c60e56",
+      "message_id": "<Pine.LNX.3.96.971117230138.5753C-100000@alpha.fuzzy.at>",
+      "from_name": "Albrecht Gebhardt",
+      "from_email_hash": "6e47226ee9eec611350ea06c0cbb5d1fc818cb737e901f79cde9821391202aa9",
+      "date": "1997-11-17T23:10:21+01:00",
+      "subject": "R-beta: autoloading a required library",
+      "subject_clean": "R-beta: autoloading a required library",
+      "in_reply_to": "<Pine.SUN.3.95.971117110403.1916B-100000@troi>",
+      "references": [],
+      "body_plain": "On Mon, 17 Nov 1997, Thomas Lumley wrote:\n\n> On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n> \n> > \n> > I wanted to use the dist() function from the mva library in my own\n> > library, so I put require(mva) in my files. When my library loads, a\n> > message about \"Autoloading ... mva\" appears. But when I call dist() now\n> > within my functions the message\n> > \n> > Error in .C(\"dist\", as.double(x), nrow(x), ncol(x), double(len),\n> > as.integer(method)) : C/Fortran function not in load table \n> > \n> > appears.\n> > \n> > After dyn.load(\"..._path_to_/mva.so\") it works.\n> \n> It's probably something wrong with the setup, but I don't know what. It\n> seems to work in my installation of R which is roughly 0.50a4.\n> \n> Does it work if you use library(mva) instead?  This should be identical\n> except that it gives an error if \"mva\" doesn't exist, rather than a\n> warning.\n> \n> gorn% R\n> \n> R : Copyright 1997, Robert Gentleman and Ross Ihaka\n> Version 0.50 Alpha-4 (September 10, 1997)\n> \n> R is free software and comes with ABSOLUTELY NO WARRANTY.\n> You are welcome to redistribute it under certain conditions.\n> Type \"license()\" for details.\n> \n> [Previously saved workspace restored]\n> \n> > is.loaded(\"dist\")\n> [1] FALSE\n> > require(mva)\n> Autoloading required library: mva \n> [1] TRUE\n> > is.loaded(\"dist\")\n> [1] TRUE\n> > \n\nThis works (but not within the workspace, where my problem occured).\n\n> and even if the require() is inside a function\n> > ff<-function(x) require(mva)\n> > is.loaded(\"dist\")\n> [1] FALSE\n> > ff(1)\n> Autoloading required library: mva \n> [1] TRUE\n> > is.loaded(\"dist\")\n> [1] TRUE\n> > \n\nthe same behavior.\n\n\nNow I tried loading my library within a new .RData workspace and\neverything worked, but only the first time I use this workspace. \nThe second time i get:\n\nR : Copyright 1997, Robert Gentleman and Ross Ihaka\nVersion 0.50 Alpha-4 (September 10, 1997)\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType \"license()\" for details.\n\n[Previously saved workspace restored]\n\n> is.loaded(\"dist\")\n[1] FALSE\n> library(sgeostat)\nAutoloading required library: mva \nAutoloading required library: scompat \n> is.loaded(\"dist\")\n[1] FALSE\n> ls(all=T)\n[1] \".Dyn.libs\" \".Provided\"\n\n.Dyn.libs was created the first time I used this workspace and contains\n(immediatly after the second start of R):\n\n> .Dyn.libs\n[1] \"mva.so\"\n\nMaybe this is the reason why \"mva.so\" did not get loaded. Does R forget to\nclear \".Dyn.libs\" on shutdown?\n\nAlbrecht\n\n------------------------------------------------------------------\nAlbrecht Gebhardt           email: albrecht.gebhardt at uni-klu.ac.at\nInstitut fuer Mathematik    Tel. : (++43 463) 2700/837\nUniversitaet Klagenfurt     Fax  : (++43 463) 2700/834\nVillacher Str. 161\nA-9020 Klagenfurt, Austria\n------------------------------------------------------------------\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Mon, 17 Nov 1997, Thomas Lumley wrote:\n\n> On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n> \n> > \n> > I wanted to use the dist() function from the mva library in my own\n> > library, so I put require(",
+      "thread_id": "thread-80359819614b",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-290061e88b4b",
+      "message_id": "<Pine.SUN.3.95.971117173238.3010A-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-11-17T17:36:37-08:00",
+      "subject": "R-beta: autoloading a required library",
+      "subject_clean": "R-beta: autoloading a required library",
+      "in_reply_to": "<Pine.LNX.3.96.971117230138.5753C-100000@alpha.fuzzy.at>",
+      "references": [],
+      "body_plain": "On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n\n> Maybe this is the reason why \"mva.so\" did not get loaded. Does R forget to\n> clear \".Dyn.libs\" on shutdown?\n\nUmm, yes. I'd forgotten that particular bug.  The quick fix is to add\n\nif (exists(\".Dyn.libs\")) .Dyn.libs<-NULL\n\nto the startup file\n\nThe solution was to put .Dyn.libs in the System environment instead of the\nGlobal environment so it doesn't get saved.  I believe this is fixed in\nthe next version of R, due out roughly now.\n\n\t-thomas\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Mon, 17 Nov 1997, Albrecht Gebhardt wrote:\n\n> Maybe this is the reason why \"mva.so\" did not get loaded. Does R forget to\n> clear \".Dyn.libs\" on shutdown?\n\nUmm, yes. I'd forgotten that particular bu",
+      "thread_id": "thread-80359819614b",
+      "thread_depth": 3,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-ee033f801d29",
+      "message_id": "<199711210216.UAA116484@saluki-mail.siu.edu>",
+      "from_name": "Francisco Cribari",
+      "from_email_hash": "b1de1b328c870e859d615b572d2c548c4f093d37b86624b34f234c95f279b272",
+      "date": "1997-11-20T20:15:05Z",
+      "subject": "R-beta: questions from a beginner",
+      "subject_clean": "R-beta: questions from a beginner",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am new to R and I was wondering if I could ask a few questions. \n(I am running R on a Windows NT box.) \n\n1. Is the random number generator in R the same as the one in S \n\"Super-Duper\")? \n2. Is it possible to use dyn.load in the Windows version? \n3. When is the next release of R coming out? \n\nThanks a lot. Best,\n\n                                                          Francisco\n\n--\nFrancisco Cribari-Neto             voice: +618-4535062\nAssistant Professor                fax:   +618-4532717\nDepartment of Economics            Internet: cribari at siu.edu\nSouthern Illinois University       http://www.siu.edu/~econ/cribari.html\n\n         IBM: It is slow, but at least it's expensive.\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "I am new to R and I was wondering if I could ask a few questions. \n(I am running R on a Windows NT box.) \n\n1. Is the random number generator in R the same as the one in S \n\"Super-Duper\")? \n2. Is it po",
+      "thread_id": "thread-ee033f801d29",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-08a509c1c258",
+      "message_id": "<Pine.OSF.3.95.971120154228.23860B-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-11-20T15:46:40-06:00",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Question for R users under unix:\nDo you ever edit figs created by R using xfig or some other program?  I\ntried to edit a figure with xfig (a program which I find quite horrible by\nthe way) and it said it couldn't read it in.  I guess xfig has no\ncapability of reading postscript files?\n\nCan anyone tell me how to do it, or perhaps suggest another freeware\nstructured drawing program for use in touching up postscript figs output\nby R?\n\nThanks very much for any help.\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Question for R users under unix:\nDo you ever edit figs created by R using xfig or some other program?  I\ntried to edit a figure with xfig (a program which I find quite horrible by\nthe way) and it said",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-2dee8627ff3c",
+      "message_id": "<Pine.3.87.9711201744.I24994-0100000@superh.hg.med.umich.edu>",
+      "from_name": "Matthew R. Nelson",
+      "from_email_hash": "ead0c12c397d41b7a178bb7452ada6688fdc62db9a0ca8d66aae812af7cfd677",
+      "date": "1997-11-20T17:18:44-05:00",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "<Pine.OSF.3.95.971120154228.23860B-100000@io.uwinnipeg.ca>",
+      "references": [],
+      "body_plain": "On Thu, 20 Nov 1997, Bill Simpson wrote:\n\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program which I find quite horrible by\n> the way) and it said it couldn't read it in.  I guess xfig has no\n> capability of reading postscript files?\n> \n> Can anyone tell me how to do it, or perhaps suggest another freeware\n> structured drawing program for use in touching up postscript figs output\n> by R?\n\nMy experience with xfig and R/Splus has been very good.  I do not know of \nany other freely available drawing programs that handle postscript/eps \nfiles as well as xfig, and export drawings in such a usefull variety of \nformats.\n\nIf you want to include a postscript file into an xfig drawing, first open \na blank canvas to work on, then select the button on the left titled \n`picture object', which will bring a file-selector dialog from which you \ncan select the ps/eps file you wish to import (after indicating the size \nfor the imported file by use of the mouse).  It is usually that easy.\n\nI recommend converting the ps image to an eps (encapsulated post script) \nwith a tool such as ps2epsi (included with ghostscript, I believe), which \nremoves much of the white space around the plot that is usually left when \nthe plot is written to a ps file.\n\nGood luck.  (The man page, though a little disorganized, is a good resource)\n\nMatt Nelson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Thu, 20 Nov 1997, Bill Simpson wrote:\n\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program whi",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-5f3e9beca374",
+      "message_id": "<XFMail.971120225353.Ted.Harding@nessie.mcc.ac.uk>",
+      "from_name": "Ted Harding",
+      "from_email_hash": "3d4318ff6a959f5c775739481bc6cf1ab6840374b5d56f1960afc84e49e8e02f",
+      "date": "1997-11-20T22:53:53Z",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "<Pine.OSF.3.95.971120154228.23860B-100000@io.uwinnipeg.ca>",
+      "references": [],
+      "body_plain": "On 20-Nov-97 Bill Simpson wrote:\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program which I find quite horrible\n> by\n> the way) and it said it couldn't read it in.  I guess xfig has no\n> capability of reading postscript files?\n> \n> Can anyone tell me how to do it, or perhaps suggest another freeware\n> structured drawing program for use in touching up postscript figs output\n> by R?\n> \n> Thanks very much for any help.\n> \n> Bill Simpson\n\nBill: I know of no general way whatever of editing a PostScript file except\nby opening it in a text editor and using your grey matter (no more than you\ncan expect to modify any program by sending its output to some\nviewer/editor).\n\nOnly if R's PS graphics output has a very well defined and rigid structure\ncould you expect that to be possible, I think, and I never heard of a\nprogram which could do such a thing.\n\nYou could always convert the PS to one of the bitmap formats (using e.g.\nghostscript) and try editing the bitmap with one of a number of suitable\nprograms, but that doesn'r sound like a happy way to spend the day.\n\nA better option, if it is possible, would be to output an R graphic as a\n\"pic\" file (preprocessor to [g]troff, which can then be used to generate PS\noutput). \"Pic\" files are easy to edit once you've got the hang of it;\nbut you can lose a number of PostScript's capabilities if you're\nrestricted to \"pic\" (e.g. shading arbitrary closed areas). To implement\nthis, I suppose \"pic\" would have to be one of R's graphics device drivers.\n\n(Tony Dusoir's \"SC\" program uses pic as the primary graphics output format,\nmediated through the \"grap\" language; the resulting \"pic\" file is displayed\nusing \"troff | ghostscript\" on screen, and can be converted to a PS file. It\nseems to work quite well. \"Pic\" is also one of the device options in\ngnuplot, so the gnuplot code could be used as a model if needed).\n\nHope this helps,\nTed.\n\n--------------------------------------------------------------------\nE-Mail: Ted Harding <Ted.Harding at nessie.mcc.ac.uk>\nDate: 20-Nov-97                                       Time: 22:53:53\n--------------------------------------------------------------------\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On 20-Nov-97 Bill Simpson wrote:\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program which I find",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-22b612d61543",
+      "message_id": "<199711202337.KAA07942@sputnik.shlrc.mq.edu.au>",
+      "from_name": "Steve Cassidy",
+      "from_email_hash": "24a3c0c5124d18266390624fcad46cf88aff31e7bab61f8cb9bda49db8ad79aa",
+      "date": "1997-11-21T10:37:54+11:00",
+      "subject": "R-beta: edit figs with xfig? ",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "Your message of \"Thu, 20 Nov 1997 22:53:53 -0000.\" <XFMail.971120225353.Ted.Harding@nessie.mcc.ac.uk> ",
+      "references": [],
+      "body_plain": "We have had a lot of success editing figures from Splus (and R should be no \ndifferent here) with xfig using the pstoedit program which is able to convert \npostscript to a range of editable formats, including fig but also I think \nvarious things which might be usable in the commercial drawing packages.  \nYou'll have to search the 'net for a source of this program as I can't find a \nlocation in the source packet I have here but I seem to remember that it \nwasn't hard to find.\n\npstoedit proved invaluable in fixing up Splus's plotting bugs (leaving out \nlines or tickmarks) and augmenting figures for a recent textbook project. We \ncan't imagine life without it now!\n\n\n-- \nSteve Cassidy\n------------------------------------------------------------\n                Speech, Hearing and Language Research Center\n                     School of English Linguistics and Media\nTel: +61 2 9850 8729\t\t\tMacquarie University\nFax: +61 2 9850 9199         \t\tNorth Ryde,NSW, 2109\nsteve at srsuna.shlrc.mq.edu.au\t\t           Australia\nhttp://srsuna.shlrc.mq.edu.au/~steve\n------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "We have had a lot of success editing figures from Splus (and R should be no \ndifferent here) with xfig using the pstoedit program which is able to convert \npostscript to a range of editable formats, i",
+      "thread_id": "thread-22b612d61543",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-ebaad5f8eb6b",
+      "message_id": "<XFMail.971120234428.Ted.Harding@nessie.mcc.ac.uk>",
+      "from_name": "Ted Harding",
+      "from_email_hash": "3d4318ff6a959f5c775739481bc6cf1ab6840374b5d56f1960afc84e49e8e02f",
+      "date": "1997-11-20T23:44:28Z",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "<Pine.3.87.9711201744.I24994-0100000@superh.hg.med.umich.edu>",
+      "references": [],
+      "body_plain": "On 20-Nov-97 Matthew R. Nelson wrote:\n> On Thu, 20 Nov 1997, Bill Simpson wrote:\n> \n> If you want to include a postscript file into an xfig drawing, first open\n> a blank canvas to work on, then select the button on the left titled \n> `picture object', which will bring a file-selector dialog from which you \n> can select the ps/eps file you wish to import (after indicating the size \n> for the imported file by use of the mouse).  It is usually that easy.\n> \n> I recommend converting the ps image to an eps (encapsulated post script) \n> with a tool such as ps2epsi (included with ghostscript, I believe), which\n> removes much of the white space around the plot that is usually left when\n> the plot is written to a ps file.\n> \n> Good luck.  (The man page, though a little disorganized, is a good\n> resource)\n> \n> Matt Nelson\n\nThe abovei, of course, is *one* of the ways to convert PostScript into a\nbitmap prior to editing the bitmap with Xfig (Xfig calls on ghostscript for\nthe conversion, and for this ghostscript must be compiled to include the\n\"gif8\" (for mono) and/or \"pbmraw\" (for colour) drivers; otherwise it won't\nwork at all; mine doesn't with B+W graphs, presumably because it doesn't\nhave gif8, even though it does have pbmraw.) Then, of course, if it works\nyou could make changes using Xfig and re-export as PS (using Xfig to\nconvert the bitmap to PS -- which, since it's PS representing bitmap, leads\nto big files).\n\nI still think that a more direct approach (e.g via \"pic\") would be better.\n\nBest wishes to all,\nTed.\n\n--------------------------------------------------------------------\nE-Mail: Ted Harding <Ted.Harding at nessie.mcc.ac.uk>\nDate: 20-Nov-97                                       Time: 23:44:28\n--------------------------------------------------------------------\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On 20-Nov-97 Matthew R. Nelson wrote:\n> On Thu, 20 Nov 1997, Bill Simpson wrote:\n> \n> If you want to include a postscript file into an xfig drawing, first open\n> a blank canvas to work on, then select",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-19773a0ecd43",
+      "message_id": "<x2hg979kqw.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-21T01:03:03+01:00",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "Bill Simpson's message of Thu, 20 Nov 1997 15:46:40 -0600 (CST)",
+      "references": [
+        "<Pine.OSF.3.95.971120154228.23860B-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program which I find quite horrible by\n> the way) and it said it couldn't read it in.  I guess xfig has no\n> capability of reading postscript files?\n\nEr - horrible compared to what? (Just curious. Personally, I've found\nit a bit tedious, but it's hard to think up how to achieve similar\nfunctionality with a better user interface. It's not a paint program,\nbut that is part of the design: that identifiable elements can be\nselected and moved about.)\n\n> Can anyone tell me how to do it, or perhaps suggest another freeware\n> structured drawing program for use in touching up postscript figs output\n> by R?\n\nAs others have pointed out, once the postscript is generated, it is\nnot easy to fix. \n\nFor that other language which is not entirely unlike R, there has for\nquite a while existed a graphics device which outputs in xfig's native\nformat, which you can then modify and convert to PostScript. Written\nby me some 6 years ago and revised (and substantially improved) by\nGary Houston a year or two back. \n\nOnce the structure of a generic graphics driver for R has\nmaterialized, it should be fairly easy to cook up an R driver for the\nxfig format (in particular since it won't necessarily have to deal\nwith the same idiosyncracies in the underlying graphics code). Perhaps\nit's easy to do it already - I haven't been looking too closely at\nthe current graphics drivers.\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a prog",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-551efece565c",
+      "message_id": "<m3d8jupobg.fsf@sade.uio.no>",
+      "from_name": "Fredrik Glockner",
+      "from_email_hash": "728b705d390e1778de1fcad8f1ab597c701676e5ff2b141d5f980898c5b18b92",
+      "date": "1997-11-21T10:51:31+01:00",
+      "subject": "R-beta: R on IBM RS6000/AIX",
+      "subject_clean": "R-beta: R on IBM RS6000/AIX",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Are there anybody at all that use R on IBM RS 6000 machines running\nAIX?  I would be happy to talk to you in that case.  I have\nsuccessfully (I think) managed to install R, however I cannot figure\nout how to `dyn.load' external C functions.  Any help will be\nappreciated.\n\nFredrik\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Are there anybody at all that use R on IBM RS 6000 machines running\nAIX?  I would be happy to talk to you in that case.  I have\nsuccessfully (I think) managed to install R, however I cannot figure\nout",
+      "thread_id": "thread-551efece565c",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-5b6155c61152",
+      "message_id": "<Pine.OSF.3.95.971121091155.26530B-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-11-21T09:26:24-06:00",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "<Pine.3.87.9711201744.I24994-0100000@superh.hg.med.umich.edu>",
+      "references": [],
+      "body_plain": "Thanks very much everyone for the helpful replies!\n\nIn answer to some questions.\nHere is the background I am coming from.  On the Mac I routinely create\nstructured (vector) drawings (totally different from bitmaps!) with\nsomething like a graphing program (e.g. Kaleidagraph) or R, then edit with\na structured drawing program (e.g. MacDraw, or Canvas [which does both\nvector and bitmap reps]).  The file format used on Mac is pict.\n\nSo when I say xfig is horrible, I mean compared to ancient Mac structured\ndrawing software like MacDraw (circa 1988).  The xfig user interface\nsucks. It is not at all like the structured drawing software people in the\nMac and Windows worlds use, and in this case the Mac and Windows worlds\nare better.\n\nIf you don't make structured drawings, I guess that is because you're a\nstatistician rather than a scientist.  Scientists often have to make\ndiagrams of apparatus, etc.  A structured drawing program is also useful\nfor touching up graphs, etc.\n\nGimp is a bitmap oriented program.  xfig is for structured drawings.\nBitmaps look jaggy when printed.  Structured drawings use the maximum\nprinter resolution.  There other distinctions.  You can erase a bit of a\nbitmap line.  In a structured drawing, the line is an object and you have\nto erase the whole thing.  You can't align or group parts of a bitmap.\nYou can with objects in a structured drawing.\n\nI will try the suggestions about changing the .ps file into something xfig\ncan read.  I will also look at the alternative suggested programs.  Thanks\nagain!\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Thanks very much everyone for the helpful replies!\n\nIn answer to some questions.\nHere is the background I am coming from.  On the Mac I routinely create\nstructured (vector) drawings (totally different",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-44922a4268cb",
+      "message_id": "<wnc4t56grwr.fsf@neuromancer.stat.sc.edu>",
+      "from_name": "Anthony Rossini",
+      "from_email_hash": "322374f518e15c55dbf5604417cdf3b8e01e04f0999f4c13524ce24837f3ed83",
+      "date": "1997-11-21T10:58:44-05:00",
+      "subject": "R-beta: [WIN95] Running R from the shell",
+      "subject_clean": "R-beta: [WIN95] Running R from the shell",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Is it possible to run R soley from the shell?  \n\nI'm evaluating necessary fixes to R and XLispStat (and eventually SAS\nand S-PLUS 4) for running as subprocesses to Emacs (NTEmacs) for ESS.\n\nCurrently, I lose control of R when running via Emacs; is it possible\nto \"remove\" the windows?  (all, or all but the graphics window)?\n\nbest,\n\n-- \n-tony (Anthony Rossini)\t           Statistics Dept., U South Carolina\nrossini at stat.sc.edu\t           Columbia, SC 29208\nhttp://www.stat.sc.edu/~rossini/   803-777-3578(O) 803-777-4048 (fax)  \n        \"'Bother,' said Pooh, as Cthulhu rose up and ate him.\"\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Is it possible to run R soley from the shell?  \n\nI'm evaluating necessary fixes to R and XLispStat (and eventually SAS\nand S-PLUS 4) for running as subprocesses to Emacs (NTEmacs) for ESS.\n\nCurrently,",
+      "thread_id": "thread-44922a4268cb",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-676bf1278085",
+      "message_id": "<x24t56xliu.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-21T17:24:41+01:00",
+      "subject": "R-beta: [WIN95] Running R from the shell",
+      "subject_clean": "R-beta: [WIN95] Running R from the shell",
+      "in_reply_to": "Anthony Rossini's message of 21 Nov 1997 10:58:44 -0500",
+      "references": [
+        "<wnc4t56grwr.fsf@neuromancer.stat.sc.edu>"
+      ],
+      "body_plain": "Anthony Rossini <rossini at math.sc.edu> writes:\n\n> Is it possible to run R soley from the shell?  \n> \n> I'm evaluating necessary fixes to R and XLispStat (and eventually SAS\n> and S-PLUS 4) for running as subprocesses to Emacs (NTEmacs) for ESS.\n> \n> Currently, I lose control of R when running via Emacs; is it possible\n> to \"remove\" the windows?  (all, or all but the graphics window)?\n\nIt's fairly easy to do a straight \"DOS\" compile of R, if you drop\n*all* the Windows stuff. Tried that stunt with a cross-compile from\nLinux/gcc (in which case, even the makefiles work). Starting from Unix\nsources, there were (essentially) only a few pieces of \"X-orcism\" needed\nand one or two difficulties with nonexisting math functions and\naddresses of functions defined as macros. How to get the graphics\nwindow back is an exercise for the reader....\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Anthony Rossini <rossini at math.sc.edu> writes:\n\n> Is it possible to run R soley from the shell?  \n> \n> I'm evaluating necessary fixes to R and XLispStat (and eventually SAS\n> and S-PLUS 4) for runni",
+      "thread_id": "thread-44922a4268cb",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-0c4f5a6e7e5f",
+      "message_id": "<3476E1AE.44BEE218@post1.tele.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "f58c59b5b48780c9c9704a77094159d48b9bfdbb2d119d50cd8894c2e8ee26ae",
+      "date": "1997-11-22T14:44:15+01:00",
+      "subject": "R-beta: coplot win95",
+      "subject_clean": "R-beta: coplot win95",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I use the most recent software for win95 and tried the beautiful coplot\nfrom cleveland by simply copying in the examples. I was disappointed to\nsee the many points all over everywhere in the console. I tried\ndifferent settings of the memory and ran into the same problems as did\nRossetti and solved them as suggested by Gentleman, but I can't make it\nrun. Why does that happen ?\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "I use the most recent software for win95 and tried the beautiful coplot\nfrom cleveland by simply copying in the examples. I was disappointed to\nsee the many points all over everywhere in the console. ",
+      "thread_id": "thread-0c4f5a6e7e5f",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-f6e2e7d3fef9",
+      "message_id": "<34775313.117F8A68@post1.tele.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "f58c59b5b48780c9c9704a77094159d48b9bfdbb2d119d50cd8894c2e8ee26ae",
+      "date": "1997-11-22T22:48:03+01:00",
+      "subject": "R-beta: help ((message first bounced because of subject -- your admin.))",
+      "subject_clean": "R-beta: help ((message first bounced because of subject -- your admin.))",
+      "in_reply_to": "<199711222152.WAA13900@hypatia.math.ethz.ch> (owner-r-help@stat.math.ethz.ch)",
+      "references": [],
+      "body_plain": "The help file provided within the rsept.zip is somewhat outdated\ncompared to the one available on http://www.stat.math.ethz.ch/R/manual/;\nwould it be possible to update the file for a more easy download instead\nof having either to download individually or going online ?\nTroels\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "The help file provided within the rsept.zip is somewhat outdated\ncompared to the one available on http://www.stat.math.ethz.ch/R/manual/;\nwould it be possible to update the file for a more easy downlo",
+      "thread_id": "thread-f6e2e7d3fef9",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-441b8fb1bd90",
+      "message_id": "<34780A1F.52F8@rrz.Uni-Koeln.de>",
+      "from_name": "Peter Herkenrath",
+      "from_email_hash": "4e57161e50399e34a2b66227b9169bf6988ef0fc4a85758e7b7bbe6f617f4baa",
+      "date": "1997-11-23T10:49:03Z",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": null,
+      "references": [
+        "<Pine.3.87.9711201744.I24994-0100000@superh.hg.med.umich.edu>"
+      ],
+      "body_plain": "On Thu, 20 Nov 1997, Bill Simpson wrote:\n \n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program which I find quite horrible by\n> the way) and it said it couldn't read it in.  I guess xfig has no\n> capability of reading postscript files?\n>\n> Can anyone tell me how to do it, or perhaps suggest another freeware\n> structured drawing program for use in touching up postscript figs output\n> by R?\n\nAs an Linux and TeX-user Ipe-5.0 (http://www.cs.ust.hk/~otfried or\nftp://ftp.cs.ruu.nl/pub/mirror/ipe) serves me very well. It can reimport\npostscript files via an ghostscript script and allows to use all\nthe LaTeX formatting capabilities. \n\nPeter Herkenrath <P.Herkenrath at rrz.uni-koeln.de>\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "On Thu, 20 Nov 1997, Bill Simpson wrote:\n \n> Question for R users under unix:\n> Do you ever edit figs created by R using xfig or some other program?  I\n> tried to edit a figure with xfig (a program wh",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-e0b3c4a52a06",
+      "message_id": "<199711241029.LAA24004@galadriel.ci.tuwien.ac.at>",
+      "from_name": "Friedrich Leisch",
+      "from_email_hash": "5a5fdfa4351343af049914cd2641c9feb963f07285041256e0164002823b1114",
+      "date": "1997-11-24T11:29:43+01:00",
+      "subject": "R-beta: help ((message first bounced because of subject -- your admin.))",
+      "subject_clean": "R-beta: help ((message first bounced because of subject -- your admin.))",
+      "in_reply_to": "<34775313.117F8A68@post1.tele.dk>",
+      "references": [
+        "<199711222152.WAA13900@hypatia.math.ethz.ch>",
+        "<34775313.117F8A68@post1.tele.dk>"
+      ],
+      "body_plain": ">>>>> On Sat, 22 Nov 1997 22:48:03 +0100,\n>>>>> Troels Ring (TR) wrote:\n\nTR> The help file provided within the rsept.zip is somewhat outdated\nTR> compared to the one available on http://www.stat.math.ethz.ch/R/manual/;\nTR> would it be possible to update the file for a more easy download instead\nTR> of having either to download individually or going online ?\nTR> Troels\n\nYou can download the newest help files from any CRAN mirror, see\n\n\thttp://www.ci.tuwien.ac.at/R\n\nBest,\nFritz\n\n-- \n-------------------------------------------------------------------\n                        Friedrich  Leisch                             \nInstitut f?r Statistik                      Tel: (+43 1) 58801 4541\nTechnische Universit?t Wien                 Fax: (+43 1)  504 14 98\nWiedner Hauptstra?e 8-10/1071      Friedrich.Leisch at ci.tuwien.ac.at\nA-1040 Wien, Austria             http://www.ci.tuwien.ac.at/~leisch\n     PGP public key http://www.ci.tuwien.ac.at/~leisch/pgp.key\n-------------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": ">>>>> On Sat, 22 Nov 1997 22:48:03 +0100,\n>>>>> Troels Ring (TR) wrote:\n\nTR> The help file provided within the rsept.zip is somewhat outdated\nTR> compared to the one available on http://www.stat.math.",
+      "thread_id": "thread-f6e2e7d3fef9",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-229c86480a15",
+      "message_id": "<199711241034.LAA00862@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-11-24T11:34:02+01:00",
+      "subject": "R-beta: HTML help from here...",
+      "subject_clean": "R-beta: HTML help from here...",
+      "in_reply_to": "<34775313.117F8A68@post1.tele.dk> (message from Troels Ring on Sat, 22 Nov 1997 22:48:03 +0100)",
+      "references": [],
+      "body_plain": ">>>>> \"Troels\" == Troels Ring <ring at post1.tele.dk> writes:\n\n    Troels> The help file provided within the rsept.zip is somewhat\n    Troels> outdated compared to the one available on\n    Troels> http://www.stat.math.ethz.ch/R/manual/ ;\n\nI am the provider of this link.\nThe reason that it look so up-to-date is that it __IS__ more recent\nthan almost anything: It is based on a daily mirror of the inofficial\nsource code in Auckland.\nIt used to be the HTML version of help for the latest __released__\nversion of R.  However, since that is so old currently, I switched to provide\nthe above...\n\nOne of my own priorities as member of the R-core team actually _is_ the\naccuracy and usefulness of (online) documentation...\n\n[[ ---> Hint, hint:  \n\t\tIf you find inaccuracies,\n\t\tif you have nice examples exhibiting features of R\n\t\tfunctions,....\n you could also e-mail them to me if you don't want to send it to  \n R-devel at ...  which would otherwise be the appropriate place.\n]]\n\t\t\n\n    Troels> would it be possible to\n    Troels> update the file for a more easy download instead of having\n    Troels> either to download individually or going online ?  Troels\n\nI don't think that this really makes sense.\nThe current documentation documents features which are not in the currently\nreleased code...\n\n\nMartin Maechler <maechler at stat.math.ethz.ch>\t\t <><\nSeminar fuer Statistik, SOL G1\nETH (Federal Inst. Technology)\t8092 Zurich\t SWITZERLAND\nphone: x-41-1-632-3408\t\tfax: ...-1086\nhttp://www.stat.math.ethz.ch/~maechler/\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": ">>>>> \"Troels\" == Troels Ring <ring at post1.tele.dk> writes:\n\n    Troels> The help file provided within the rsept.zip is somewhat\n    Troels> outdated compared to the one available on\n    Troels> htt",
+      "thread_id": "thread-229c86480a15",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-7d4ea6b15fc8",
+      "message_id": "<x267piv9n8.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-24T12:00:59+01:00",
+      "subject": "R-beta: HTML help from here...",
+      "subject_clean": "R-beta: HTML help from here...",
+      "in_reply_to": "Martin Maechler's message of Mon, 24 Nov 1997 11:34:02 +0100",
+      "references": [
+        "<199711241034.LAA00862@sophie.ethz.ch>"
+      ],
+      "body_plain": "Martin Maechler <maechler at stat.math.ethz.ch> writes:\n\n>     Troels> would it be possible to\n>     Troels> update the file for a more easy download instead of having\n>     Troels> either to download individually or going online ?  Troels\n> \n> I don't think that this really makes sense.\n> The current documentation documents features which are not in the currently\n> released code...\n\nSo does the old documentation....\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Martin Maechler <maechler at stat.math.ethz.ch> writes:\n\n>     Troels> would it be possible to\n>     Troels> update the file for a more easy download instead of having\n>     Troels> either to download",
+      "thread_id": "thread-229c86480a15",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-117ee0ba7305",
+      "message_id": "<Pine.SOL.3.94.971125173043.24045A-100000@portti.edita.fi>",
+      "from_name": "Juha Tikkanen",
+      "from_email_hash": "a7ff4eb243ac8a6bb58d13dc55795ff5792843727049bcf79abea7888fc6f9f9",
+      "date": "1997-11-25T17:38:56+02:00",
+      "subject": "R-beta: Latin-1 characters in R and X",
+      "subject_clean": "R-beta: Latin-1 characters in R and X",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi!\n\nI have tried to print text with Latin-1 characters (????) from R to\npostscript and X11 window but when I'm using the interactive R-shell, I\ncan't get them printed even from keyboard. Is there some configuration\nflags to use 7-bit or 8-bit character sets?\n\nTIA\n\nJuha\n\n--\n: Juha Tikkanen       -- juha.tikkanen at edita.fi -- http://www.edita.fi/ :\n: tel +358-9-566 0532 -- mob +358-40-557 8420   -- fax +358-9-566 0374  :\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Hi!\n\nI have tried to print text with Latin-1 characters (????) from R to\npostscript and X11 window but when I'm using the interactive R-shell, I\ncan't get them printed even from keyboard. Is there som",
+      "thread_id": "thread-117ee0ba7305",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-00df18c12594",
+      "message_id": "<199711251629.RAA02862@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-11-25T17:29:56+01:00",
+      "subject": "R-beta: Latin-1 characters in R and X --> in next version ",
+      "subject_clean": "R-beta: Latin-1 characters in R and X --> in next version",
+      "in_reply_to": "<Pine.SOL.3.94.971125173043.24045A-100000@portti.edita.fi> (message from Juha Tikkanen on Tue, 25 Nov 1997 17:38:56 +0200 (EET))",
+      "references": [],
+      "body_plain": "You didn't say which version of R you are using;\n\nIt is true that  0.50-a4 still doesn't properly work with these.\nHowever, I though Windows \"Rsept\" was somewhat newer...\n\nAnyway, in current source (unreleased) version, it's all nice :\n\n> M?chler <- 1:3\n> ls(pat=\"^M\")\n[1] \"M?chler\"\n> M?chler\n[1] 1 2 3\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "You didn't say which version of R you are using;\n\nIt is true that  0.50-a4 still doesn't properly work with these.\nHowever, I though Windows \"Rsept\" was somewhat newer...\n\nAnyway, in current source (u",
+      "thread_id": "thread-00df18c12594",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-e7564c9af7e3",
+      "message_id": "<Pine.NXT.3.92.971125121715.358A-100000@bodnext.bio.dfo.ca>",
+      "from_name": "George White",
+      "from_email_hash": "797baceef34a1c5b3082d275fdd0f9b1620aabe1b41b128b3153b5a9b1610fc7",
+      "date": "1997-11-25T13:11:23-04:00",
+      "subject": "R-beta: Latin-1 characters in R and X",
+      "subject_clean": "R-beta: Latin-1 characters in R and X",
+      "in_reply_to": "<Pine.SOL.3.94.971125173043.24045A-100000@portti.edita.fi>",
+      "references": [],
+      "body_plain": "Does anyone else's mailer refuse to process messages from r-help in\n\"quoted-printable\" encoding?  Pine 3.92 barfs on the\nr-help banner added to the end of the message, because the\nbanner uses 'minus' and 'equals' in a repeating pattern.\nSince 'equals' is the 'escape' character for quoted-printable\nencoding, it should only appear as the lead-in to an encoded octet\nor a <CR><LF> pair.  The 'equal' 'minus' pair _can_ be used\nin a multipart delimiter, so perhaps that was the intention\nand the 'multipart' header is getting trashed somewhere.\n\n--\nGeorge White <aa056 at chebucto.ns.ca> <WhiteG at mar.dfo-mpo.gc.ca>\n  Bedford Inst. of Oceanography, Nova Scotia, Canada.  tel: 902.426.8509\n\nOn Tue, 25 Nov 1997, Juha Tikkanen wrote:\n\n> Hi!\n>\n> I have tried to print text with Latin-1 characters ([...]) from R to\n> postscript and X11 window but when I'm using the interactive R-shell, I\n> can't get them printed even from keyboard. Is there some configuration\n> flags to use 7-bit or 8-bit character sets?\n>\n> TIA\n>\n> Juha\n>\n> --\n> : Juha Tikkanen       -- juha.tikkanen at edita.fi -- http://www.edita.fi/ :\n> : tel +358-9-566 0532 -- mob +358-40-557 8420   -- fax +358-9-566 0374  :\n>\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Does anyone else's mailer refuse to process messages from r-help in\n\"quoted-printable\" encoding?  Pine 3.92 barfs on the\nr-help banner added to the end of the message, because the\nbanner uses 'minus' ",
+      "thread_id": "thread-117ee0ba7305",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-6d3d9f60af22",
+      "message_id": "<x2g1oklqxg.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-25T20:22:19+01:00",
+      "subject": "R-beta: Latin-1 characters in R and X --> in next version",
+      "subject_clean": "R-beta: Latin-1 characters in R and X --> in next version",
+      "in_reply_to": "Martin Maechler's message of Tue, 25 Nov 1997 17:29:56 +0100",
+      "references": [
+        "<199711251629.RAA02862@sophie.ethz.ch>"
+      ],
+      "body_plain": "Martin Maechler <maechler at stat.math.ethz.ch> writes:\n\n> \n> You didn't say which version of R you are using;\n> \n> It is true that  0.50-a4 still doesn't properly work with these.\n> However, I though Windows \"Rsept\" was somewhat newer...\n> \n> Anyway, in current source (unreleased) version, it's all nice :\n> \n> > M?chler <- 1:3\n> > ls(pat=\"^M\")\n> [1] \"M?chler\"\n> > M?chler\n> [1] 1 2 3\n\nThis seems to be wandering in and out of the sources. The snapshot\nI've been using does\n\n> ?\n\nSave workspace image? [y/n/c]:\n\n- but I'm pretty sure an *earlier* one (0.49?) did do Latin1. How\nabout adding this to your set of regression tests, so that it becomes\npossible to detect whenever the source tree gets modified?\n\nAnd BTW, yes, your message became \"malformed quoted printable\" because\nof the =-=- pattern in the footer. May I suggest we quietly change \"=\"\nto \"+\" or \"~\" (while equally quietly cursing the MIME standard mess...)\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=---",
+      "body_snippet": "Martin Maechler <maechler at stat.math.ethz.ch> writes:\n\n> \n> You didn't say which version of R you are using;\n> \n> It is true that  0.50-a4 still doesn't properly work with these.\n> However, I though",
+      "thread_id": "thread-00df18c12594",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-29f9e69a5326",
+      "message_id": "<Pine.OSF.3.93.971126104055.22998A-100000@alpha2-stat.sci.uni-klu.ac.at>",
+      "from_name": "Albrecht Gebhardt",
+      "from_email_hash": "6e47226ee9eec611350ea06c0cbb5d1fc818cb737e901f79cde9821391202aa9",
+      "date": "1997-11-26T10:59:54+01:00",
+      "subject": "R-beta: library format for R-0.60",
+      "subject_clean": "R-beta: library format for R-0.60",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Currently I'm porting the spatial library from \n\n\"Venables W.N., Ripley, B.D.  (1995): Modern applied statistics with S-PLUS,\nSpringer\" \n\nto R. Now it seems to work with R-0.50-a4, but I guess it has to be adjusted\nwhen R 0.60 comes out. \n\nSo my questions are:\n\nWhat changes will appear in library sources (directories, Makefile, help\npage format)?\n\nCan I get an unofficial pre-version of R 0.60 (where)? When will it\nreplace version 0.50? \n\nThanks\n\tA. Gebhardt\n\n\n-------------------------------------------------------------------------------\nAlbrecht Gebhardt                   email   : albrecht.gebhardt at uni-klu.ac.at\nInstitut fuer Mathematik            Tel.    : (++43 463) 2700/837\nUniversitaet Klagenfurt             Fax     : (++43 463) 2700/834\nVillacher Str. 161\nA-9020 Klagenfurt, Austria\n-------------------------------------------------------------------------------\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Currently I'm porting the spatial library from \n\n\"Venables W.N., Ripley, B.D.  (1995): Modern applied statistics with S-PLUS,\nSpringer\" \n\nto R. Now it seems to work with R-0.50-a4, but I guess it has ",
+      "thread_id": "thread-29f9e69a5326",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-51956d266957",
+      "message_id": "<199711270426.WAA48652@saluki-mail.siu.edu>",
+      "from_name": "Francisco Cribari",
+      "from_email_hash": "b1de1b328c870e859d615b572d2c548c4f093d37b86624b34f234c95f279b272",
+      "date": "1997-11-26T22:23:57Z",
+      "subject": "R-beta: [?] two questions on R for Windows",
+      "subject_clean": "R-beta: [?] two questions on R for Windows",
+      "in_reply_to": "<199711241029.LAA24004@galadriel.ci.tuwien.ac.at>",
+      "references": [
+        "<34775313.117F8A68@post1.tele.dk>"
+      ],
+      "body_plain": "Two question on R for Windows (september release):\n\n1. Is there a problem w/ the function abline? It does not seem to work for \n   me.\n2. How do I time the execution time of a fcn? Is there/Will there be a \n   dos.time() function?\n\nThanks. Best, Francisco.\n\n--\nFrancisco Cribari-Neto             voice: +618-4535062\nAssistant Professor                fax:   +618-4532717\nDepartment of Economics            Internet: cribari at siu.edu\nSouthern Illinois University       http://www.siu.edu/~econ/cribari.html\n\n         IBM: It is slow, but at least it's expensive.\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Two question on R for Windows (september release):\n\n1. Is there a problem w/ the function abline? It does not seem to work for \n   me.\n2. How do I time the execution time of a fcn? Is there/Will there",
+      "thread_id": "thread-f6e2e7d3fef9",
+      "thread_depth": 2,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-d85bbb5b1454",
+      "message_id": "<347D530F.C9D9AAD@stams.strath.ac.uk>",
+      "from_name": "Ian Thurlbeck",
+      "from_email_hash": "7d12175a11a82dd81be4861c1315a49b78968b11be2be31fde3c96f5b67f8a48",
+      "date": "1997-11-27T11:01:35Z",
+      "subject": "R-beta: Memory Management in R-0.50-a4",
+      "subject_clean": "R-beta: Memory Management in R-0.50-a4",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R users\n\nwe're having a problem reading a largish data file using\nread.table().  The file consists of 175000 lines of 4\nfloating pt numbers. Here's what happens:\n\n> dat_read.table('sst.dat')\nError: memory exhausted\n\n(This is line 358 of src/main/memory.c).\n\nCutting down the file to around 15000 lines allows\nread.table() to work OK.\n\nI edited the memory limits in Platform.h and re-compiled\nand now read.table() can manage up to around 125000 lines.\n\n#define R_VSIZE 30000000L       /* 15 times original figure (Defn.h) */\n#define R_NSIZE  1000000L       /* 5 times original figure (Defn.h) */\n#define R_PPSSIZE 100000L       /* 10 times original figure (Defn.h) */\n\nClearly I can keep upping these values until it works, but has\nthe side-effect of making the running R binary pretty big.\n\nWhat can I do? Is the answer a better memory management\nsystem ?\n\nAny help appreciated.\n\nYours\n\nIan\n\n-- \nIan Thurlbeck                http://www.stams.strath.ac.uk/\nStatistics and Modelling Science, University of Strathclyde\nLivingstone Tower, 26 Richmond Street, Glasgow, UK,  G1 1XH\nTel: +44 (0)141 548 3667           Fax: +44 (0)141 552 2079\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Dear R users\n\nwe're having a problem reading a largish data file using\nread.table().  The file consists of 175000 lines of 4\nfloating pt numbers. Here's what happens:\n\n> dat_read.table('sst.dat')\nErro",
+      "thread_id": "thread-d85bbb5b1454",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-e77dbe5e29b0",
+      "message_id": "<x267pewm34.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-27T13:35:59+01:00",
+      "subject": "R-beta: Memory Management in R-0.50-a4",
+      "subject_clean": "R-beta: Memory Management in R-0.50-a4",
+      "in_reply_to": "Ian Thurlbeck's message of Thu, 27 Nov 1997 11:01:35 +0000",
+      "references": [
+        "<347D530F.C9D9AAD@stams.strath.ac.uk>"
+      ],
+      "body_plain": "Ian Thurlbeck <ian at stams.strath.ac.uk> writes:\n\n> \n> Dear R users\n> \n> we're having a problem reading a largish data file using\n> read.table().  The file consists of 175000 lines of 4\n> floating pt numbers. Here's what happens:\n...\n> I edited the memory limits in Platform.h and re-compiled\n> and now read.table() can manage up to around 125000 lines.\n> \n> #define R_VSIZE 30000000L       /* 15 times original figure (Defn.h) */\n> #define R_NSIZE  1000000L       /* 5 times original figure (Defn.h) */\n> #define R_PPSSIZE 100000L       /* 10 times original figure (Defn.h) */\n\nThe first two of those are settable via command line options, e.g.\n\nR -v 50 \n\nshould get you a 50M memory heap.\n\n> Clearly I can keep upping these values until it works, but has\n> the side-effect of making the running R binary pretty big.\n> \n> What can I do? Is the answer a better memory management\n> system ?\n\nThat wouldn't hurt, but... The actual numbers require only about 6M of\nstorage, so the real trouble is only there during the read.table. What\nyou could do is to read the data (in a Large process), save it to a\nbinary file and read that into a smaller process.\n\nAnother thing you could do is to switch to reading the values with\nscan(). Read.table() is trying to be intelligent about data types and\nsoforth, which tends to make it inefficient on large data sets.\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Ian Thurlbeck <ian at stams.strath.ac.uk> writes:\n\n> \n> Dear R users\n> \n> we're having a problem reading a largish data file using\n> read.table().  The file consists of 175000 lines of 4\n> floating pt",
+      "thread_id": "thread-d85bbb5b1454",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-1bb1b2d385d8",
+      "message_id": "<Pine.OSF.3.95.971127093056.17649G-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-11-27T09:34:10-06:00",
+      "subject": "R-beta: edit figs with xfig?",
+      "subject_clean": "R-beta: edit figs with xfig?",
+      "in_reply_to": "<XFMail.971120234428.Ted.Harding@nessie.mcc.ac.uk>",
+      "references": [],
+      "body_plain": "I just wanted to thank everyone again.\n\nI got idraw and pstoedit installed.\n\nidraw is a lot like MacDraw so I am happy now.\n\nThe combination works just as I wanted:\ncreate fig with R\npstoedit -f idraw fig.ps fig.idraw\nedit fig with idraw\n\nNote the fig is not just rendered as a bitmap, but you can select objects\nand edit (e.g. select text and change font size).\n\nBill Simpson\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "I just wanted to thank everyone again.\n\nI got idraw and pstoedit installed.\n\nidraw is a lot like MacDraw so I am happy now.\n\nThe combination works just as I wanted:\ncreate fig with R\npstoedit -f idraw",
+      "thread_id": "thread-08a509c1c258",
+      "thread_depth": 3,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-f6cef1ec321a",
+      "message_id": "<199711272029.JAA26425@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-11-28T09:29:28+13:00",
+      "subject": "R-beta: [?] two questions on R for Windows",
+      "subject_clean": "R-beta: [?] two questions on R for Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> From r-help-owner at stat.math.ethz.ch Thu Nov 27 17:29 NZD 1997\n> From: \"Francisco Cribari\" <cribari at siu.edu>\n> To: r-help <r-help at stat.math.ethz.ch>\n> Date: Wed, 26 Nov 1997 22:23:57 +0000\n> MIME-Version: 1.0\n> Content-transfer-encoding: 7BIT\n> Subject: R-beta: [?] two questions on R for Windows\n> \n> \n> Two question on R for Windows (september release):\n> \n> 1. Is there a problem w/ the function abline? It does not seem to work for \n>    me.\n> 2. How do I time the execution time of a fcn? Is there/Will there be a \n>    dos.time() function?\n> \n> Thanks. Best, Francisco.\n> \n\n  I'm afraid I need a bit more info than this to be able to help. What \n  version of Windows are you using? Can you provide the exact details of\n  an example where abline fails? (nb. when posting bugs it's important to\n  be as specific as possible about the situation).\n  \n  There will be a function that is similar to Unix time but it will be limited\n  to the timing functions available in Ansi C. This should be in my hoped for\n  release of RDec (we've just been going over the completed changes to the \n  parser and the graphics, my new machine is here and setup so things look \n  hopeful for a Dec. release of the equivalent of 0.60; of course its summer and \n  the surfs up so I can't really promise)\n  \n  robert\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "> From r-help-owner at stat.math.ethz.ch Thu Nov 27 17:29 NZD 1997\n> From: \"Francisco Cribari\" <cribari at siu.edu>\n> To: r-help <r-help at stat.math.ethz.ch>\n> Date: Wed, 26 Nov 1997 22:23:57 +0000\n>",
+      "thread_id": "thread-f6cef1ec321a",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-5a63a7b590a6",
+      "message_id": "<199711280119.OAA02438@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-11-28T14:19:28+13:00",
+      "subject": "R-beta: Memory Management in R-0.50-a4",
+      "subject_clean": "R-beta: Memory Management in R-0.50-a4",
+      "in_reply_to": "<347D530F.C9D9AAD@stams.strath.ac.uk>",
+      "references": [
+        "<347D530F.C9D9AAD@stams.strath.ac.uk>"
+      ],
+      "body_plain": "Ian Thurlbeck writes:\n > Dear R users\n > \n > we're having a problem reading a largish data file using\n > read.table().  The file consists of 175000 lines of 4\n > floating pt numbers. Here's what happens:\n\n\"read.table\" uses vast amounts of memory.  First it reads everything\nas as string and then converts to numbers.  By using \"scan\" instead\nyou can cut down your memory demands.  If you know you have exactly\n175000 observations using something like\n\n\tx <- scan(what=list(0,0,0,0), nmax=175000)\n\nyou will cut you memory demands to near the minimum.\n\n > What can I do? Is the answer a better memory management\n > system ?\n\nThe memory management definitely needs some work (well actually it\nneeds a quick bullet between the eyes).  When we got started on R we\ndidn't anticipate that it would be see much use outside of teaching\nhere at Auckland.\n\nI certainly have plans to revisit the memory management at some point\nand to look at some of the scalability problems too.  But don't hold\nyour breath ...\n\n\tRoss\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Ian Thurlbeck writes:\n > Dear R users\n > \n > we're having a problem reading a largish data file using\n > read.table().  The file consists of 175000 lines of 4\n > floating pt numbers. Here's what happe",
+      "thread_id": "thread-d85bbb5b1454",
+      "thread_depth": 1,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-0341347e6b10",
+      "message_id": "<Pine.LNX.3.96.971128093013.90C-100000@prof.pmmf.hu>",
+      "from_name": "Dr. Imre Bartfai",
+      "from_email_hash": "4202d5ed6d6bbdcd73c562695914ae4ca18e8d04d51d7eb8f64a270f03da1783",
+      "date": "1997-11-28T09:31:20+01:00",
+      "subject": "R-beta: Please help (fwd)",
+      "subject_clean": "R-beta: Please help (fwd)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "---------- Forwarded message ----------\nDate: Thu, 27 Nov 1997 08:39:37 +0100 (MET)\nFrom: \"Dr. Imre Bartfai\" <root at prof.pmmf.hu>\nTo: R at stat.auckland.ac.nz\nSubject: Please help\n\nTo whom it may concern,\n\t\t\n\tI have tried to compile the package R-0.50-4 on a Linux platform.\nHowever, while making 'dataentry.c' I got an error message according to\n'dataentry.h' saying diverse \"X11/ \" header files are missing (e. g.\nX11.). I would be very grateful if you informed me where and in which\ndistribution one can find that header files. Another question: can I use R\nwithout X terminal? If yes how can I configure this? I found a variable\nX_DISPLAY_MISSING in the 'configure' file. If it is set to 1, will be X\ndisabled?\n\nThank you in advance\n\nDr. Imre Bartfai\nUniversity of Pecs, Technical Faculty\nHungary\n\nP.S.: Kann ich evtl. auch Deutsch sprechen? Das waere fuer mich lieber...\nVielen Dank im voraus!\nMfG.\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "---------- Forwarded message ----------\nDate: Thu, 27 Nov 1997 08:39:37 +0100 (MET)\nFrom: \"Dr. Imre Bartfai\" <root at prof.pmmf.hu>\nTo: R at stat.auckland.ac.nz\nSubject: Please help\n\nTo whom it may co",
+      "thread_id": "thread-0341347e6b10",
+      "thread_depth": 0,
+      "month": "1997-11"
+    },
+    {
+      "id": "msg-90fe5e04ac14",
+      "message_id": "<x22001ia5j.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-11-28T11:29:44+01:00",
+      "subject": "R-beta: Please help (fwd)",
+      "subject_clean": "R-beta: Please help (fwd)",
+      "in_reply_to": "\"Dr. Imre Bartfai\"'s message of Fri, 28 Nov 1997 09:31:20 +0100 (MET)",
+      "references": [
+        "<Pine.LNX.3.96.971128093013.90C-100000@prof.pmmf.hu>"
+      ],
+      "body_plain": "\"Dr. Imre Bartfai\" <root at prof.pmmf.hu> writes:\n\n> \tI have tried to compile the package R-0.50-4 on a Linux platform.\n> However, while making 'dataentry.c' I got an error message according to\n> 'dataentry.h' saying diverse \"X11/ \" header files are missing (e. g.\n> X11.). I would be very grateful if you informed me where and in which\n> distribution one can find that header files. Another question: can I use R\n> without X terminal? If yes how can I configure this? I found a variable\n> X_DISPLAY_MISSING in the 'configure' file. If it is set to 1, will be X\n> disabled?\n\nCurrently, no. It used to work (almost), but the conditionalization in\nthe source got removed at some point. It's not too hard to strip out\nthe offending bits by hand, but it may be easier simply to install the\nrelevant X headers and libraries. It will *run* OK without the\nX-display (minus the graphics windows, of course)\n\nIn the longer run, we should get that put back in, since it is also\nneeded for cross-platform development if we are to maintain a unified\nsource tree.\n\n> P.S.: Kann ich evtl. auch Deutsch sprechen? Das waere fuer mich lieber...\n> Vielen Dank im voraus!\n> MfG.\n\nAm R-help, bitte nicht. \n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "\"Dr. Imre Bartfai\" <root at prof.pmmf.hu> writes:\n\n> \tI have tried to compile the package R-0.50-4 on a Linux platform.\n> However, while making 'dataentry.c' I got an error message according to\n> 'dat",
+      "thread_id": "thread-0341347e6b10",
+      "thread_depth": 1,
+      "month": "1997-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-b8475e110b29",
+      "subject": "R-beta: Help accessing variable from a formula",
+      "message_count": 2,
+      "participants": [
+        "Murray Keir",
+        "Thomas Lumley"
+      ],
+      "started": "1997-11-01T13:07:47+10:00",
+      "last_reply": "1997-11-03T09:21:16-08:00",
+      "root_message_id": "msg-b8475e110b29"
+    },
+    {
+      "id": "thread-7b444b116aab",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "message_count": 1,
+      "participants": [
+        "Brent Hutto"
+      ],
+      "started": "1997-11-02T09:30:40+00:00",
+      "last_reply": "1997-11-02T09:30:40+00:00",
+      "root_message_id": "msg-7b444b116aab"
+    },
+    {
+      "id": "thread-468aeb17fe25",
+      "subject": "R-beta: alias in glm",
+      "message_count": 1,
+      "participants": [
+        "Jim Lindsey"
+      ],
+      "started": "1997-11-03T08:45:52+01:00",
+      "last_reply": "1997-11-03T08:45:52+01:00",
+      "root_message_id": "msg-468aeb17fe25"
+    },
+    {
+      "id": "thread-fbb3fd553198",
+      "subject": "R-beta: vector of lists",
+      "message_count": 1,
+      "participants": [
+        "Jim Lindsey"
+      ],
+      "started": "1997-11-03T08:50:13+01:00",
+      "last_reply": "1997-11-03T08:50:13+01:00",
+      "root_message_id": "msg-fbb3fd553198"
+    },
+    {
+      "id": "thread-66c16dcc70c5",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "message_count": 1,
+      "participants": [
+        "Ross Ihaka"
+      ],
+      "started": "1997-11-03T09:30:00+13:00",
+      "last_reply": "1997-11-03T09:30:00+13:00",
+      "root_message_id": "msg-66c16dcc70c5"
+    },
+    {
+      "id": "thread-97035a28a28f",
+      "subject": "R-beta: A vector of lists == Data Frame?",
+      "message_count": 2,
+      "participants": [
+        "Kurt Hornik",
+        "Simon Fear"
+      ],
+      "started": "1997-11-03T10:41:41+00:00",
+      "last_reply": "1997-11-04T16:50:54+01:00",
+      "root_message_id": "msg-97035a28a28f"
+    },
+    {
+      "id": "thread-453ee526720a",
+      "subject": "R-beta: math in legends",
+      "message_count": 1,
+      "participants": [
+        "Jim Lindsey"
+      ],
+      "started": "1997-11-03T10:59:20+01:00",
+      "last_reply": "1997-11-03T10:59:20+01:00",
+      "root_message_id": "msg-453ee526720a"
+    },
+    {
+      "id": "thread-96c6083b9666",
+      "subject": "R-beta: math in legends: strwidth() will have to be enhanced",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-11-03T16:02:33+01:00",
+      "last_reply": "1997-11-03T16:02:33+01:00",
+      "root_message_id": "msg-96c6083b9666"
+    },
+    {
+      "id": "thread-95e093d49810",
+      "subject": "R-beta: Latex and R",
+      "message_count": 4,
+      "participants": [
+        "Friedrich Leisch",
+        "Peter Dalgaard BSA",
+        "Ross Darnell",
+        "bensmail"
+      ],
+      "started": "1997-11-05T15:33:25+00:00",
+      "last_reply": "1997-11-06T10:30:44+10:00",
+      "root_message_id": "msg-95e093d49810"
+    },
+    {
+      "id": "thread-c06e9e04caeb",
+      "subject": "R-beta: graphics: ``gamma correction'' -- state / feedback ?",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-11-06T20:08:01+01:00",
+      "last_reply": "1997-11-06T20:08:01+01:00",
+      "root_message_id": "msg-c06e9e04caeb"
+    },
+    {
+      "id": "thread-4920f4a6c1c6",
+      "subject": "R-beta: proportional oddds",
+      "message_count": 1,
+      "participants": [
+        "Jim Lindsey"
+      ],
+      "started": "1997-11-10T09:49:50+01:00",
+      "last_reply": "1997-11-10T09:49:50+01:00",
+      "root_message_id": "msg-4920f4a6c1c6"
+    },
+    {
+      "id": "thread-4766368c5840",
+      "subject": "R-beta: R in ESS with different -n and -v arguments",
+      "message_count": 1,
+      "participants": [
+        "Jonathan Myles"
+      ],
+      "started": "1997-11-14T10:52:38+00:00",
+      "last_reply": "1997-11-14T10:52:38+00:00",
+      "root_message_id": "msg-4766368c5840"
+    },
+    {
+      "id": "thread-78666e9dec6d",
+      "subject": "R-beta: Re: R in ESS with different -n and -v arguments",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-11-14T12:13:46+01:00",
+      "last_reply": "1997-11-14T12:13:46+01:00",
+      "root_message_id": "msg-78666e9dec6d"
+    },
+    {
+      "id": "thread-47fb02c61d01",
+      "subject": "R-beta: new executable",
+      "message_count": 2,
+      "participants": [
+        "Andrea Rossetti",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-11-15T00:03:04+01:00",
+      "last_reply": "1997-11-15T01:29:40+01:00",
+      "root_message_id": "msg-47fb02c61d01"
+    },
+    {
+      "id": "thread-653182d8711e",
+      "subject": "R-beta: documentation?",
+      "message_count": 1,
+      "participants": [
+        "Andrea Rossetti"
+      ],
+      "started": "1997-11-16T01:11:22+01:00",
+      "last_reply": "1997-11-16T01:11:22+01:00",
+      "root_message_id": "msg-653182d8711e"
+    },
+    {
+      "id": "thread-80359819614b",
+      "subject": "R-beta: autoloading a required library",
+      "message_count": 4,
+      "participants": [
+        "Albrecht Gebhardt",
+        "Thomas Lumley"
+      ],
+      "started": "1997-11-17T01:28:46+01:00",
+      "last_reply": "1997-11-17T17:36:37-08:00",
+      "root_message_id": "msg-80359819614b"
+    },
+    {
+      "id": "thread-b05d8aa51562",
+      "subject": "R-beta: new executable",
+      "message_count": 3,
+      "participants": [
+        "Kung-Sik Chan",
+        "Robert Gentleman",
+        "Thomas Lumley"
+      ],
+      "started": "1997-11-17T08:39:21+13:00",
+      "last_reply": "1997-11-17T08:34:10-08:00",
+      "root_message_id": "msg-b05d8aa51562"
+    },
+    {
+      "id": "thread-cb001efa7800",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "message_count": 1,
+      "participants": [
+        "Luke Tierney"
+      ],
+      "started": "1997-11-17T11:00:36-06:00",
+      "last_reply": "1997-11-17T11:00:36-06:00",
+      "root_message_id": "msg-cb001efa7800"
+    },
+    {
+      "id": "thread-882052664514",
+      "subject": "R-beta: installing new packages in window95 version of R",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-11-17T11:38:39+13:00",
+      "last_reply": "1997-11-17T11:38:39+13:00",
+      "root_message_id": "msg-882052664514"
+    },
+    {
+      "id": "thread-adb6f87b51f0",
+      "subject": "R-beta: Shared libraries on AIX",
+      "message_count": 1,
+      "participants": [
+        "Fredrik Glockner"
+      ],
+      "started": "1997-11-17T13:44:31+01:00",
+      "last_reply": "1997-11-17T13:44:31+01:00",
+      "root_message_id": "msg-adb6f87b51f0"
+    },
+    {
+      "id": "thread-08a509c1c258",
+      "subject": "R-beta: edit figs with xfig?",
+      "message_count": 8,
+      "participants": [
+        "Bill Simpson",
+        "Matthew R. Nelson",
+        "Peter Dalgaard BSA",
+        "Peter Herkenrath",
+        "Ted Harding"
+      ],
+      "started": "1997-11-20T15:46:40-06:00",
+      "last_reply": "1997-11-27T09:34:10-06:00",
+      "root_message_id": "msg-08a509c1c258"
+    },
+    {
+      "id": "thread-ee033f801d29",
+      "subject": "R-beta: questions from a beginner",
+      "message_count": 1,
+      "participants": [
+        "Francisco Cribari"
+      ],
+      "started": "1997-11-20T20:15:05+00:00",
+      "last_reply": "1997-11-20T20:15:05+00:00",
+      "root_message_id": "msg-ee033f801d29"
+    },
+    {
+      "id": "thread-22b612d61543",
+      "subject": "R-beta: edit figs with xfig?",
+      "message_count": 1,
+      "participants": [
+        "Steve Cassidy"
+      ],
+      "started": "1997-11-21T10:37:54+11:00",
+      "last_reply": "1997-11-21T10:37:54+11:00",
+      "root_message_id": "msg-22b612d61543"
+    },
+    {
+      "id": "thread-551efece565c",
+      "subject": "R-beta: R on IBM RS6000/AIX",
+      "message_count": 1,
+      "participants": [
+        "Fredrik Glockner"
+      ],
+      "started": "1997-11-21T10:51:31+01:00",
+      "last_reply": "1997-11-21T10:51:31+01:00",
+      "root_message_id": "msg-551efece565c"
+    },
+    {
+      "id": "thread-44922a4268cb",
+      "subject": "R-beta: [WIN95] Running R from the shell",
+      "message_count": 2,
+      "participants": [
+        "Anthony Rossini",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-11-21T10:58:44-05:00",
+      "last_reply": "1997-11-21T17:24:41+01:00",
+      "root_message_id": "msg-44922a4268cb"
+    },
+    {
+      "id": "thread-0c4f5a6e7e5f",
+      "subject": "R-beta: coplot win95",
+      "message_count": 1,
+      "participants": [
+        "Troels Ring"
+      ],
+      "started": "1997-11-22T14:44:15+01:00",
+      "last_reply": "1997-11-22T14:44:15+01:00",
+      "root_message_id": "msg-0c4f5a6e7e5f"
+    },
+    {
+      "id": "thread-f6e2e7d3fef9",
+      "subject": "R-beta: help ((message first bounced because of subject -- your admin.))",
+      "message_count": 3,
+      "participants": [
+        "Francisco Cribari",
+        "Friedrich Leisch",
+        "Troels Ring"
+      ],
+      "started": "1997-11-22T22:48:03+01:00",
+      "last_reply": "1997-11-26T22:23:57+00:00",
+      "root_message_id": "msg-f6e2e7d3fef9"
+    },
+    {
+      "id": "thread-229c86480a15",
+      "subject": "R-beta: HTML help from here...",
+      "message_count": 2,
+      "participants": [
+        "Martin Maechler",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-11-24T11:34:02+01:00",
+      "last_reply": "1997-11-24T12:00:59+01:00",
+      "root_message_id": "msg-229c86480a15"
+    },
+    {
+      "id": "thread-00df18c12594",
+      "subject": "R-beta: Latin-1 characters in R and X --> in next version",
+      "message_count": 2,
+      "participants": [
+        "Martin Maechler",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-11-25T17:29:56+01:00",
+      "last_reply": "1997-11-25T20:22:19+01:00",
+      "root_message_id": "msg-00df18c12594"
+    },
+    {
+      "id": "thread-117ee0ba7305",
+      "subject": "R-beta: Latin-1 characters in R and X",
+      "message_count": 2,
+      "participants": [
+        "George White",
+        "Juha Tikkanen"
+      ],
+      "started": "1997-11-25T17:38:56+02:00",
+      "last_reply": "1997-11-25T13:11:23-04:00",
+      "root_message_id": "msg-117ee0ba7305"
+    },
+    {
+      "id": "thread-29f9e69a5326",
+      "subject": "R-beta: library format for R-0.60",
+      "message_count": 1,
+      "participants": [
+        "Albrecht Gebhardt"
+      ],
+      "started": "1997-11-26T10:59:54+01:00",
+      "last_reply": "1997-11-26T10:59:54+01:00",
+      "root_message_id": "msg-29f9e69a5326"
+    },
+    {
+      "id": "thread-d85bbb5b1454",
+      "subject": "R-beta: Memory Management in R-0.50-a4",
+      "message_count": 3,
+      "participants": [
+        "Ian Thurlbeck",
+        "Peter Dalgaard BSA",
+        "Ross Ihaka"
+      ],
+      "started": "1997-11-27T11:01:35+00:00",
+      "last_reply": "1997-11-28T14:19:28+13:00",
+      "root_message_id": "msg-d85bbb5b1454"
+    },
+    {
+      "id": "thread-f6cef1ec321a",
+      "subject": "R-beta: [?] two questions on R for Windows",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-11-28T09:29:28+13:00",
+      "last_reply": "1997-11-28T09:29:28+13:00",
+      "root_message_id": "msg-f6cef1ec321a"
+    },
+    {
+      "id": "thread-0341347e6b10",
+      "subject": "R-beta: Please help (fwd)",
+      "message_count": 2,
+      "participants": [
+        "Dr. Imre Bartfai",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-11-28T09:31:20+01:00",
+      "last_reply": "1997-11-28T11:29:44+01:00",
+      "root_message_id": "msg-0341347e6b10"
+    }
+  ]
+}

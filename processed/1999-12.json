@@ -1,0 +1,38 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "1999-12",
+  "messages": [
+    {
+      "id": "msg-2f7d31ddf9ec",
+      "message_id": "<3.0.1.32.19991201095213.006cf714@anugpo.anu.edu.au>",
+      "from_name": "John Maindonald",
+      "from_email_hash": "2de8ee602ec487e8ae8c715c88cb2320b0ddc4a3428764e445cf26eb69ef92c5",
+      "date": "1999-12-01T09:52:13+11:00",
+      "subject": "[R] model.tables",
+      "subject_clean": "model.tables",
+      "in_reply_to": "<Pine.GSO.4.05.9911300758540.25436-100000@auk.stats>",
+      "references": [
+        "<199911300136.MAA10382@hilbert.maths.utas.edu.au>"
+      ],
+      "body_plain": "At 08:02 30/11/99 +0000, Prof Brian D Ripley wrote:\n>On Tue, 30 Nov 1999, spoon <spoon at hilbert.maths.utas.edu.au> wrote:\n>\n>> Hi,\n>> \tIs this a bug or do I just not understand model.tables?\n>> \n>> The problem is this: in the following, shouldn't the difference in\n>> means computed by model.tables be equal to the difference in the\n>> corresponding coefficients from coef(fit)?  That is, comparing diets\n>> d and e shouldn't\n>> \n>> 34.71 - 41.53 = -6.82\t\t\t# diff from model.tables\n>> \n>> be equal to\n>> \n>> -5.22500000  - 3.30000000 = -8.525\t# diff from coef(fit)\n>> \n>> Or am I just completely misinterpreting something basic?\n>\n>Basically, yes. This is an incompletely replicated design, and d and e\n>occur on different litters.\n>\n>The results are identical to the S-PLUS original. I think you are\n>probably looking for what dummy.coef gives you.\n>\n>-- \n>Brian D. Ripley,                  ripley at stats.ox.ac.uk\n>Professor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\n>University of Oxford,             Tel:  +44 1865 272861 (self)\n>1 South Parks Road,                     +44 1865 272860 (secr)\n>Oxford OX1 3TG, UK                Fax:  +44 1865 272595\n\nSo what is it that model.tables() gives?  S-PLUS says they are\nestimates.  Of what?   These are not the marginal means of the\nfitted values, ignoring other factors.  Do they mean anything\nat all?  The issue of unbalance does not arise here.\n\nHere is about the simplest example I could dream up.\n\n> bdes_data.frame(blk=rep(1:3,rep(2,3)),\n+   trt=c(1,2,2,3,3,1), y=c(.4,.6,1,1.4,2,1.2))\n> bdes$blk_factor(bdes$blk,labels=LETTERS[1:3])\n> bdes$trt_factor(bdes$trt,labels=letters[1:3])\n> bdes.aov_aov(y~blk+trt,data=bdes,projections=T)\n> \n> coef(bdes.aov)\n(Intercept)        blkB        blkC        trtb        trtc \n    0.36667     0.33333     0.86667     0.26667     0.73333 \n> model.tables(bdes.aov)\nTables of effects\n\n blk \n   A    B    C \n-0.6  0.1  0.5 \n\n trt \n    a     b     c \n-0.25 -0.05  0.30 \n> hat_fitted(bdes.aov)\n> tapply(hat,bdes$trt,mean)\n  a   b   c \n0.8 0.8 1.7 \n> \n\n\nJohn Maindonald               email : john.maindonald at anu.edu.au        \nStatistical Consulting Unit,  phone : (6249)3998        \nc/o CMA, SMS,                 fax   : (6249)5549  \nJohn Dedman Mathematical Sciences Building\nAustralian National University\nCanberra ACT 0200\nAustralia\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "At 08:02 30/11/99 +0000, Prof Brian D Ripley wrote:\n>On Tue, 30 Nov 1999, spoon <spoon at hilbert.maths.utas.edu.au> wrote:\n>\n>> Hi,\n>> \tIs this a bug or do I just not understand model.tables?\n>> \n>> ",
+      "thread_id": "thread-2f7d31ddf9ec",
+      "thread_depth": 0,
+      "month": "1999-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-2f7d31ddf9ec",
+      "subject": "model.tables",
+      "message_count": 1,
+      "participants": [
+        "John Maindonald"
+      ],
+      "started": "1999-12-01T09:52:13+11:00",
+      "last_reply": "1999-12-01T09:52:13+11:00",
+      "root_message_id": "msg-2f7d31ddf9ec"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2014-07",
+  "messages": [
+    {
+      "id": "msg-608877b02816",
+      "message_id": "<000c01cf946d$cbae7d30$630b7790$@bigpond.com>",
+      "from_name": "Duncan Mackay",
+      "from_email_hash": "600edc7ceed1415bcb57972edb00bf3ec54a4177a1d6c67899b70f2acdbd8d48",
+      "date": "2014-07-01T00:15:49+10:00",
+      "subject": "[R] yet another regular expression",
+      "subject_clean": "yet another regular expression",
+      "in_reply_to": "<2310760.RmipCVWQby@localhost.localdomain>",
+      "references": [
+        "<2310760.RmipCVWQby@localhost.localdomain>"
+      ],
+      "body_plain": "Hi Jim\n\nWhat about trying to use what you want to keep\n\nm=gregexpr('\\\\\":value[12]+[}]?,', initString)\nregmatches(initString, m)\n[[1]]\n[1] \"\\\":value1,\"  \"\\\":value2},\"\n\nDuncan\n\nDuncan Mackay\nDepartment of Agronomy and Soil Science\nUniversity of New England\nArmidale NSW 2351\nEmail: home: mackay at northnet.com.au\n\n-----Original Message-----\nFrom: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On\nBehalf Of Jim Lemon\nSent: Monday, 30 June 2014 23:13\nTo: r-help at r-project.org\nSubject: [R] yet another regular expression\n\nHi all,\nI have managed, with the help of glob2rx() to get two parts of a text \nmanipulation working. I have successfully gotten rid of the first and \nsecond bits, but I have hit the wall trying to get rid of the last bit.\nHere's \nan example:\n\ninitString<-\n \"\\\"Delete this\\\":value1,\\\"Delete this too\\\":value2},Delete last bit\"\nsub(\"\\\"Delete this too\\\":\",\"\",\n sub(glob2rx(\"*this\\\":*\"),\"\",initString),fixed=TRUE)\n\nThis gives me:\n\n[1] \"value1,value2},Delete last bit\"\n\nand glob2rx(\"},*\") just won't get rid of the last bit. I throw myself upon \nthe mercy of the regular expression gurus.\n\nJim\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi Jim\n\nWhat about trying to use what you want to keep\n\nm=gregexpr('\\\\\":value[12]+[}]?,', initString)\nregmatches(initString, m)\n[[1]]\n[1] \"\\\":value1,\"  \"\\\":value2},\"\n\nDuncan\n\nDuncan Mackay\nDepartment ",
+      "thread_id": "thread-608877b02816",
+      "thread_depth": 0,
+      "month": "2014-07"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-608877b02816",
+      "subject": "yet another regular expression",
+      "message_count": 1,
+      "participants": [
+        "Duncan Mackay"
+      ],
+      "started": "2014-07-01T00:15:49+10:00",
+      "last_reply": "2014-07-01T00:15:49+10:00",
+      "root_message_id": "msg-608877b02816"
+    }
+  ]
+}

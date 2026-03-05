@@ -1,0 +1,62 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2024-02",
+  "messages": [
+    {
+      "id": "msg-948c32b0b5ad",
+      "message_id": "<B07BE572-BFAA-4EC3-8D69-28AE94330FB5@temple.edu>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "f2902bb7bf4e430670d9aab08348d4228400c239dd91133544c0c61925c5c4ef",
+      "date": "2024-02-29T23:12:14Z",
+      "subject": "[R] [External]  converting MATLAB -> R | element-wise operation",
+      "subject_clean": "[External]  converting MATLAB -> R | element-wise operation",
+      "in_reply_to": "<297DC7D4-CD0A-4EE9-A733-BDF59B86A8E4@gmail.com>",
+      "references": [
+        "<8ec0980a-1988-484d-bd30-6837f5467e1a@gmail.com>",
+        "<393E5DD9-BFA1-44E2-A0B3-F3FD1BB29729@dcn.davis.ca.us>",
+        "<297DC7D4-CD0A-4EE9-A733-BDF59B86A8E4@gmail.com>"
+      ],
+      "body_plain": "I decided to do a direct comparison of transpose and sweep.\n\n\nlibrary(microbenchmark)\n\nNN <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)  # Example matrix\nlambda <- c(2, 3, 4)  # Example vector\ncolNN <- t(NN)\n\nmicrobenchmark(\n  sweep     = sweep(NN, 2, lambda, \"/\"),\n  transpose = t(t(NN)/lambda),\n  colNN     = colNN/lambda\n)\n\n\nUnit: nanoseconds\n      expr   min    lq     mean median      uq   max neval cld\n     sweep 13817 14145 15115.06  14350 14657.5 75932   100 a  \n transpose  1845  1927  2151.68   2132  2214.0  7093   100  b \n     colNN    82   123   141.86    123   164.0   492   100   c\n\nNote that transpose is much faster than sweep because it is doing less work,\nI believe essentially just changing the order of indexing.\n\nUsing the natural sequencing for column-ordered matrices is much much faster.\n\n> On Feb 28, 2024, at 18:43, peter dalgaard <pdalgd at gmail.com> wrote:\n> \n>> rbind(1:3,4:6)/t(matrix(c(2,3,4), 3,2))",
+      "body_snippet": "I decided to do a direct comparison of transpose and sweep.\n\n\nlibrary(microbenchmark)\n\nNN <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)  # Example matrix\nlambda <- c(2, 3, 4)  # Example vecto",
+      "thread_id": "thread-948c32b0b5ad",
+      "thread_depth": 0,
+      "month": "2024-02"
+    },
+    {
+      "id": "msg-0c4bd29f1257",
+      "message_id": "<cd30267e-a990-46b7-a158-8bc9a3e34232@gmail.com>",
+      "from_name": "Evan Cooch",
+      "from_email_hash": "eec25cc79fe30751882ab20b9bd1a0890b378047b85fd734ad75cd46c3e89c21",
+      "date": "2024-02-29T20:40:00-05:00",
+      "subject": "[R] [External]  converting MATLAB -> R | element-wise operation",
+      "subject_clean": "[External]  converting MATLAB -> R | element-wise operation",
+      "in_reply_to": "<B07BE572-BFAA-4EC3-8D69-28AE94330FB5@temple.edu>",
+      "references": [
+        "<8ec0980a-1988-484d-bd30-6837f5467e1a@gmail.com>",
+        "<393E5DD9-BFA1-44E2-A0B3-F3FD1BB29729@dcn.davis.ca.us>",
+        "<297DC7D4-CD0A-4EE9-A733-BDF59B86A8E4@gmail.com>",
+        "<B07BE572-BFAA-4EC3-8D69-28AE94330FB5@temple.edu>"
+      ],
+      "body_plain": "Very interesting - thanks! Most of my problems are not limited by \ncompute speed, but its clear that for some sorts of compute-intensive \nproblems, sweep might be a limiting approach.\n\nOn 2/29/2024 6:12 PM, Richard M. Heiberger wrote:\n> I decided to do a direct comparison of transpose and sweep.\n>\n>\n> library(microbenchmark)\n>\n> NN <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)  # Example matrix\n> lambda <- c(2, 3, 4)  # Example vector\n> colNN <- t(NN)\n>\n> microbenchmark(\n>    sweep     = sweep(NN, 2, lambda, \"/\"),\n>    transpose = t(t(NN)/lambda),\n>    colNN     = colNN/lambda\n> )\n>\n>\n> Unit: nanoseconds\n>        expr   min    lq     mean median      uq   max neval cld\n>       sweep 13817 14145 15115.06  14350 14657.5 75932   100 a\n>   transpose  1845  1927  2151.68   2132  2214.0  7093   100  b\n>       colNN    82   123   141.86    123   164.0   492   100   c\n>\n> Note that transpose is much faster than sweep because it is doing less work,\n> I believe essentially just changing the order of indexing.\n>\n> Using the natural sequencing for column-ordered matrices is much much faster.\n>\n>> On Feb 28, 2024, at 18:43, peter dalgaard<pdalgd at gmail.com>  wrote:\n>>\n>>> rbind(1:3,4:6)/t(matrix(c(2,3,4), 3,2))\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Very interesting - thanks! Most of my problems are not limited by \ncompute speed, but its clear that for some sorts of compute-intensive \nproblems, sweep might be a limiting approach.\n\nOn 2/29/2024 6:",
+      "thread_id": "thread-948c32b0b5ad",
+      "thread_depth": 1,
+      "month": "2024-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-948c32b0b5ad",
+      "subject": "[External]  converting MATLAB -> R | element-wise operation",
+      "message_count": 2,
+      "participants": [
+        "Evan Cooch",
+        "Richard M. Heiberger"
+      ],
+      "started": "2024-02-29T23:12:14+00:00",
+      "last_reply": "2024-02-29T20:40:00-05:00",
+      "root_message_id": "msg-948c32b0b5ad"
+    }
+  ]
+}

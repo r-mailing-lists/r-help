@@ -1,0 +1,67 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2017-02",
+  "messages": [
+    {
+      "id": "msg-d5fd95f7366d",
+      "message_id": "<CAGxFJbQVGuwEO6TZQd_JPWDjfmarz+UPxakrFNrv_RzFB5K=iw@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2017-02-28T16:58:47-08:00",
+      "subject": "[R] Von Mises mixtures: mu and kappa?",
+      "subject_clean": "Von Mises mixtures: mu and kappa?",
+      "in_reply_to": "<614DB8CF3AC0E3418AE4E12A0C79FD6A5D86F421@EX2010-MBX2.ds.strath.ac.uk>",
+      "references": [
+        "<614DB8CF3AC0E3418AE4E12A0C79FD6A5D86CCD8@EX2010-MBX2.ds.strath.ac.uk>",
+        "<CAGxFJbQn74BYsGe3sx_FCh-jJu783OW7syf9gf7uCOHg3_JEYA@mail.gmail.com>",
+        "<614DB8CF3AC0E3418AE4E12A0C79FD6A5D86F421@EX2010-MBX2.ds.strath.ac.uk>"
+      ],
+      "body_plain": "If you believe that a fit to simulated data should give you parameter\nestimates identical to those used for the simulation, then I suggest\nthat you stop posting and consult a local statistical expert: you\ndon't know what you're doing.\n\nIf I have misunderstood your post, then just ignore the above and\nhopefully someone with greater understanding than I will be able to\nhelp you.\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Tue, Feb 28, 2017 at 7:39 AM, Peter Mills <peter.mills at strath.ac.uk> wrote:\n> Thank you Bert for the references. I have found mix.vmf as a possible alternative to movMF but am stuck with applying either to my application.\n>\n> Does anyone know why mix.vmf requires to 2 columns for x?\n>\n> For example when I use:\n> gWD <- c(0.1, 1, 0.9, 0.7,0.3)\n>> mix.vmf(gWD, 2)\n>\n> I get the error:\n> ?Error in matrix(nrow = n, ncol = g) : non-numeric matrix extent?\n>\n> The following code works but I'm not sure how to adapt this to the application I require. What I need is to calculate the mixture parameters for a vector of directional data not a matrix. Could anyone suggest how I can do this?\n>\n> k <- c(1, 2)\n> prob <- c(0.3, 0.4, 0.3)\n> mu <- matrix(rnorm(4), ncol = 2)\n> mu <- mu / sqrt( rowSums(mu^2) )\n> x <- rmixvmf(10, prob, mu, k)$x\n> mix.vmf(x, 3)\n>\n> With regards to my original post and using movMF I'm stuck with this also. I found the following from [1], I thought this was the answer however it seems to need some adjustment as it is not giving me the theta and kappa values I started with:\n> kappa2 <- row_norms(y2$theta)\n> mu2<-y2$theta/row_norms(y2$theta)\n>\n> [1] On lines 94 and 107 of ?v58i10.R: R example code from the paper ? available from https://www.jstatsoft.org/article/view/v058i10\n>\n> Any suggestion would be greatly appreciated as after a further week of researching this and trying code I still don't seem to have working code.\n>\n>\n> Here is some code I am using as a testing example:\n> ################################################\n> ## Generate and fit a \"small-mix\" data set a la Banerjee et al.\n> mu1 <- rbind(c(-0.251, -0.968),\n>             c(0.399, 0.917))\n> kappa1 <- c(4, 4)\n> theta <- kappa1 * mu1\n> alpha <- c(0.48, 0.52)\n> ## Generate a sample of size n = 50 from the von Mises-Fisher mixture ## with the above parameters.\n> set.seed(123)\n> x <- rmovMF(50, theta, alpha)\n> ## Fit a von Mises-Fisher mixture with the \"right\" number of components, ## using 10 EM runs.\n> y2 <- movMF(x, 2, nruns = 10)\n>\n> kappa2 <- row_norms(y2$theta)\n> mu2<-y2$theta/row_norms(y2$theta)\n>\n>\n> mu3c <- lapply(y2, function(x) y2$theta / row_norms(y2$theta)) ################################################\n>\n> I don't understand why this doesn't give me the values of mu and kappa I started with. I have tried to adapted this code to have the same number of mu and kappa values but it doesn't work then as mu is know longer a matrix.\n>\n> I don't understand why both movMF and mix.vmf give both mu1 and mu2 values per kappa value. In other words for a Von Mises mixture with 3 mixtures (clusters) the code gives 6 mu values and 3 kappa values. I was expecting to get 3 preferred directions (mu).\n>\n> For example:\n> mix.vmf(x, 3) gives\n>\n> $param\n>                 mu1             mu2             kappa     probs\n> Cluster 1 0.4985047 -0.8668870 12.281773 0.3571429\n> Cluster 2 0.9490725  0.3150578 34.028465 0.2857143\n> Cluster 3 0.1017800  0.9948069  4.182367 0.3571429\n>\n> Many thanks\n> Peter\n>\n> -----Original Message-----\n> From: Bert Gunter [mailto:bgunter.4567 at gmail.com]\n> Sent: 14 February 2017 17:49\n> To: Peter Mills\n> Cc: r-help at r-project.org\n> Subject: Re: [R] Von Mises mixtures: mu and kappa?\n>\n> Please search before posting!\n>\n> Searching \"von mises mixture distributions\" on rseek.org brought up what appeared to be several relevant hits. If none of these meet your needs, you should probably explain why not in a follow up post.\n>\n> Cheers,\n> Bert\n>\n>\n> Bert Gunter\n>\n> \"The trouble with having an open mind is that people keep coming along and sticking things into it.\"\n> -- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n>\n>\n> On Tue, Feb 14, 2017 at 8:55 AM, Peter Mills <peter.mills at strath.ac.uk> wrote:\n>> Hello\n>>\n>> I am trying to calculate the values of the concentration parameters (kappa) and preferred direction (mu) for a Von Mises mixture model. I currently have some R code that gives me optimised values for the product of kappa and mu, but I'm not sure how to calculate them when both are unknown? How could I calculate mu and kappa from y2 if I didn't know either in the 1st place? I what to use movMF to give me values of kappa from some directional data where I don't know either kappa or mu.\n>>\n>>\n>> ## Generate and fit a \"small-mix\" data set a la Banerjee et al.\n>> mu <- rbind(c(-0.251, -0.968),\n>>             c(0.399, 0.917))\n>> kappa <- c(4, 4)\n>>\n>> theta <- kappa * mu\n>> theta\n>> alpha <- c(0.48, 0.52)\n>>\n>> ## Generate a sample of size n = 50 from the von Mises-Fisher mixture\n>> ## with the above parameters.\n>> set.seed(123)\n>> x <- rmovMF(50, theta, alpha)\n>> ## Fit a von Mises-Fisher mixture with the \"right\" number of\n>> components, ## using 10 EM runs.\n>> y2 <- movMF(x, 2, nruns = 10)\n>>\n>> Y2 gives\n>>> y2\n>> theta:\n>>        [,1]      [,2]\n>> 1  2.443225  5.259337\n>> 2 -1.851384 -4.291278\n>> alpha:\n>> [1] 0.4823648 0.5176352\n>> L:\n>> [1] 24.98124\n>>\n>> How could I calculate kappa and mu if I didn't know either in the 1st place?\n>>\n>> Thanks\n>> Peter\n>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "If you believe that a fit to simulated data should give you parameter\nestimates identical to those used for the simulation, then I suggest\nthat you stop posting and consult a local statistical expert:",
+      "thread_id": "thread-d5fd95f7366d",
+      "thread_depth": 0,
+      "month": "2017-02"
+    },
+    {
+      "id": "msg-c31ecc0caddc",
+      "message_id": "<CAKZWb7duK5FERhbSK4KAMfA=3KdAyeZrqUgpS2ash2R7mdpmEA@mail.gmail.com>",
+      "from_name": "Evan Kransdorf",
+      "from_email_hash": "923d2e8ae407ef0263c922cceb5c1fd330bb4cc4c27264698d677493c460de05",
+      "date": "2017-02-28T23:27:42-08:00",
+      "subject": "[R] Help with data.table",
+      "subject_clean": "Help with data.table",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI need some help with data.table. I am trying to use data.table to do a\nbinary search of a large table using 2 keys.\n\n         KEY1 KEY2 PARAM1\nrow1 1         2        -0.031\nrow2  2       8         -0.456\nrow3 3       24        -7.86\nrow4 5       2          2.89\n\nI set the keys:\n#DT<-setkey(DT,KEY1,KEY2)\n\nThen I want to obtain do a binary search using 2 vectors E1 and E2.\n#temp<-DT[list(E1,E2),]\n\nWhen I do this, temp is only for the first-first, second-second,\nthird-third values of E1 and E2. However, I want the result of a table\nsearch from every combination of values in E1 and E2 (1-1, 1-2, 1-3, 2-1,\n2-2, 2-3, 3-1, 3-2, 3-3).\n\nAnyone with any ideas? Thanks very much,\n\nEvan\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI need some help with data.table. I am trying to use data.table to do a\nbinary search of a large table using 2 keys.\n\n         KEY1 KEY2 PARAM1\nrow1 1         2        -0.031\nrow2  2       8  ",
+      "thread_id": "thread-c31ecc0caddc",
+      "thread_depth": 0,
+      "month": "2017-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-d5fd95f7366d",
+      "subject": "Von Mises mixtures: mu and kappa?",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2017-02-28T16:58:47-08:00",
+      "last_reply": "2017-02-28T16:58:47-08:00",
+      "root_message_id": "msg-d5fd95f7366d"
+    },
+    {
+      "id": "thread-c31ecc0caddc",
+      "subject": "Help with data.table",
+      "message_count": 1,
+      "participants": [
+        "Evan Kransdorf"
+      ],
+      "started": "2017-02-28T23:27:42-08:00",
+      "last_reply": "2017-02-28T23:27:42-08:00",
+      "root_message_id": "msg-c31ecc0caddc"
+    }
+  ]
+}

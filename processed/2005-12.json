@@ -1,0 +1,63 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2005-12",
+  "messages": [
+    {
+      "id": "msg-62bd98b326af",
+      "message_id": "<200511301414.jAUEEa8D025206@hypatia.math.ethz.ch>",
+      "from_name": "Hong Ooi",
+      "from_email_hash": "65d52f698b967b068db99d9201c0512667240411c2f12d0544f6ca7b8f393f5e",
+      "date": "2005-12-01T01:15:10+11:00",
+      "subject": "[R] Looking for constrained optimisation code",
+      "subject_clean": "Looking for constrained optimisation code",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "_______________________________________________________________________________________\n\n\nAh! I didn't notice this until now.\n\nYes, following Nocedal & Wright (excellent book, that) I've defined a\nquadratic penalty function to enforce an equality constraint, and added\nit to the objective. (Originally I had an inequality constraint in mind,\nbut the equality one doesn't run into problems when you're on the\nboundary -- as is likely to happen in this case -- and gets the job\ndone.) Getting the gradient right was a bit tedious, but it seems to be\nworking now.\n\nI did find an interesting thing in working with both Splus and R,\nthough. In Splus, both optim and nlminb run fairly slowly with a pure-S\nobjective function supplied, even when it was as vectorized as I could\nmake it. So I thought to compile the objective function in C, and this\nsped it up by a factor of 2-4x. On the other hand, the pure-S version\nactually ran quite fast in R, and the compiled version actually _slowed_\nit down by a small but noticeable amount.\n\nIs this a common experience? Is the R interpreter so efficient that\nusing compiled code is unlikely to improve speed further? (I'm using R\n2.2 and Splus 7.04, on a Windows XP workstation with 3GB of memory.)\n\n\n-- \nHong Ooi\nSenior Research Analyst, IAG Limited\n388 George St, Sydney NSW 2000\n+61 (2) 9292 1566\n-----Original Message-----\nFrom: Spencer Graves [mailto:spencer.graves at pdf.com] \nSent: Tuesday, 29 November 2005 12:58 PM\nTo: Hong Ooi\nCc: Thomas Lumley; r-help at stat.math.ethz.ch\nSubject: Re: [R] Looking for constrained optimisation code\n\n\t  Have you considered migrating the constraints into the\nobjective \nfunction, then cranking up the penalty for constraint violation once you\n\nhave a more or less feasible solution?\n\n\t  spencer graves\n\nHong Ooi wrote:\n\n>\n________________________________________________________________________\n_______________\n> \n> \n> You know, this is the first time I've heard of constrOptim.\n>  \n> I actually have a rather complicated, nonlinear boundary expression in\n> mind, so this function by itself isn't quite what I'm after. Still, I\n> should be able to hack up a barrier function in my own code and feed\n> that into optim/nlminb/constrOptim.\n> \n> Thanks!\n> \n> \n\n-- \nSpencer Graves, PhD\nSenior Development Engineer\nPDF Solutions, Inc.\n333 West San Carlos Street Suite 700\nSan Jose, CA 95110, USA\n\nspencer.graves at pdf.com\nwww.pdf.com <http://www.pdf.com>\nTel:  408-938-4420\nFax: 408-280-7915\n\n\n\n_______________________________________________________________________________________\n\nThe information transmitted in this message and its attachme...{{dropped}}",
+      "body_snippet": "_______________________________________________________________________________________\n\n\nAh! I didn't notice this until now.\n\nYes, following Nocedal & Wright (excellent book, that) I've defined a\nqua",
+      "thread_id": "thread-62bd98b326af",
+      "thread_depth": 0,
+      "month": "2005-12"
+    },
+    {
+      "id": "msg-250d965a4d48",
+      "message_id": "<438E108F.7020003@metrak.com>",
+      "from_name": "paul sorenson",
+      "from_email_hash": "ec863ddce612e14ac983523e941132c2887b83a602719a73f0130b804ae0d935",
+      "date": "2005-12-01T07:50:23+11:00",
+      "subject": "[R] calculating IRR (accounting) in R",
+      "subject_clean": "calculating IRR (accounting) in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to replace a spreadsheet model of a project justification \nwith an R script.\n\nI can't seem to track down R functions to calculate Internal Rate of \nReturn and NPV?  Am I missing something?  NPV doesn't seem so difficult \nto calculate (at least for a regular series) but I am struggling to \nidentify how to solve for IRR in R.\n\nIt would be sufficient if it worked for a regular series but really \nuseful if there was something that worked with irregular time series.\n\ncheers",
+      "body_snippet": "I am trying to replace a spreadsheet model of a project justification \nwith an R script.\n\nI can't seem to track down R functions to calculate Internal Rate of \nReturn and NPV?  Am I missing something?",
+      "thread_id": "thread-250d965a4d48",
+      "thread_depth": 0,
+      "month": "2005-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-62bd98b326af",
+      "subject": "Looking for constrained optimisation code",
+      "message_count": 1,
+      "participants": [
+        "Hong Ooi"
+      ],
+      "started": "2005-12-01T01:15:10+11:00",
+      "last_reply": "2005-12-01T01:15:10+11:00",
+      "root_message_id": "msg-62bd98b326af"
+    },
+    {
+      "id": "thread-250d965a4d48",
+      "subject": "calculating IRR (accounting) in R",
+      "message_count": 1,
+      "participants": [
+        "paul sorenson"
+      ],
+      "started": "2005-12-01T07:50:23+11:00",
+      "last_reply": "2005-12-01T07:50:23+11:00",
+      "root_message_id": "msg-250d965a4d48"
+    }
+  ]
+}

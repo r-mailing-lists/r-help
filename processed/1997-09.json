@@ -1,0 +1,905 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "1997-09",
+  "messages": [
+    {
+      "id": "msg-eaf19008ebd4",
+      "message_id": "<Pine.OSF.3.95.970905154515.11507A-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-05T15:47:46-05:00",
+      "subject": "R-beta: help with R simulation",
+      "subject_clean": "R-beta: help with R simulation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "[[this bounced first, because it has 'help' in the Subject line ...\n  -- Martin Maechler\n]]\n\n\nI am a complete novice R programmer. (Though I know C quite well)\n\nI am trying to write some R code to do the following simulation.\n\nThere is a 2-frame \"movie\" of noise and signal dots.  the noise\ndots have random positions in each frame.  The signal dots are\nplaced randomly in frame 1, but in frame 2 each signal dot's y\ncoordinate is increment by jump (the dots jump upwards).\nI want to find the x and y distance from each dot in frame 1 to its\nnearest neighbour in frame 2.  In the simulation I will find the mean\nx and mean y distance for a given pair of frames.  Many pairs of\nframes will be generated, and the distribution of the mean nearest\nneighbour distances (x and y) will be computed.\n\nThe code below is my feeble attempt to do the simulation.\nSo far as I know, it doesn't work.  Any help appreciated!\n(I am using Mac version of R)\n\nBill Simpson\n\n# nearest neighbour distance simulation\n# for dynamic noise dots\n\ndo.sim<-function(nnoise, nsignal, jump)\n{\nntotal<-nsignal+nnoise\nx<<-NULL\ny<<-NULL\nx.temp<-0\ny.temp<-0\n\n#generate noise dots\nnx1<-runif(nnoise,0,4095)\nnx2<-runif(nnoise,0,4095)\nny1<-runif(nnoise,0,4095)\nny2<-runif(nnoise,0,4095)\n\n#generate signal dots\nsx1<-runif(nsignal,0,4095)\nsx2<-sx1\nsy1<-runif(nsignal,0,4095)\nsy2<-sy1+jump\nsy2<-ifelse(sy2>4095, sy2-4096,sy2) #wrap around\n\n#put noise and signal dots together\ntx1<-c(nx1,sx1)\ntx2<-c(nx2,sx2)\nty1<-c(ny1,sy1)\nty2<-c(ny2,sy2)\n\n#compute distance to nearest neighbour (x and y) in frame 2 \n#for each dot in frame 1\nfor(i in 1:ntotal)\n\t{\n\trbest<-2*(4096^2)\n\tfor(j in 1:ntotal)\n\t\t{\n\t\txd<-tx2[i]-tx1[j]\n\t\tyd<-ty2[i]-ty1[j]\n\t\trr<-xd^2 + yd^2\n\t\tif(rr<rbest)\n\t\t\t{\n\t\t\trbest<-rr\n\t\t\tx.temp<-xd\n\t\t\ty.temp<-yd\n\t\t\t}\n\t\t}\n\tx<<-c(x,x.temp)\n\ty<<-c(y,y.temp)\n\t}\n}\n\t\t\n\t\t\nsim<-function(nnoise, nsignal, jump)\n{\nxm<<-NULL\nym<<-NULL\n\nfor(i in 1:10)\n\t{\n\tdo.sim(nnoise, nsignal, jump)\n\txm<<-c(xm,mean(x))\n\tym<<-c(ym,mean(y))\n\t}\n}\n\n\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "[[this bounced first, because it has 'help' in the Subject line ...\n  -- Martin Maechler\n]]\n\n\nI am a complete novice R programmer. (Though I know C quite well)\n\nI am trying to write some R code to do ",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-e3696fcd8416",
+      "message_id": "<34134615.7FFF@wara.bolnet.bo>",
+      "from_name": "kjetil halvorsen",
+      "from_email_hash": "87e992fea8b0b6b379897ae2772b94db25c299b9e704bfe4d03d950fae0daa7a",
+      "date": "1997-09-07T20:25:58-04:00",
+      "subject": "R-beta: help with R simulation",
+      "subject_clean": "R-beta: help with R simulation",
+      "in_reply_to": null,
+      "references": [
+        "<Pine.OSF.3.95.970905154515.11507A-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "I were running this under rapril.exe (windows 95), without any\nchanges, and it runs without problems:\n\n> sim(10,10,2)\n> objects()\n[1] \"do.sim\" \"sim\"    \"x\"      \"xm\"     \"y\"      \"ym\"    \n> xm\n [1]  129.02992309   63.87708251   37.27706587    0.05316485 \n100.24870778\n [6]  -92.92987217  104.51354394  -12.88036980   65.85988750\n-154.17145926\n> ym\n [1]   10.939346 -115.379259  -46.486649   -3.739839   -8.394732  \n11.185299\n [7]  -91.186218   66.468282   -4.766670  -29.084236\n\n\nBill Simpson wrote:\n> \n> [[this bounced first, because it has 'help' in the Subject line ...\n>   -- Martin Maechler\n> ]]\n> \n> I am a complete novice R programmer. (Though I know C quite well)\n> \n> I am trying to write some R code to do the following simulation.\n> \n> There is a 2-frame \"movie\" of noise and signal dots.  the noise\n> dots have random positions in each frame.  The signal dots are\n> placed randomly in frame 1, but in frame 2 each signal dot's y\n> coordinate is increment by jump (the dots jump upwards).\n> I want to find the x and y distance from each dot in frame 1 to its\n> nearest neighbour in frame 2.  In the simulation I will find the mean\n> x and mean y distance for a given pair of frames.  Many pairs of\n> frames will be generated, and the distribution of the mean nearest\n> neighbour distances (x and y) will be computed.\n> \n> The code below is my feeble attempt to do the simulation.\n> So far as I know, it doesn't work.  Any help appreciated!\n> (I am using Mac version of R)\n> \n> Bill Simpson\n> \n> # nearest neighbour distance simulation\n> # for dynamic noise dots\n> \n> do.sim<-function(nnoise, nsignal, jump)\n> {\n> ntotal<-nsignal+nnoise\n> x<<-NULL\n> y<<-NULL\n> x.temp<-0\n> y.temp<-0\n> \n> #generate noise dots\n> nx1<-runif(nnoise,0,4095)\n> nx2<-runif(nnoise,0,4095)\n> ny1<-runif(nnoise,0,4095)\n> ny2<-runif(nnoise,0,4095)\n> \n> #generate signal dots\n> sx1<-runif(nsignal,0,4095)\n> sx2<-sx1\n> sy1<-runif(nsignal,0,4095)\n> sy2<-sy1+jump\n> sy2<-ifelse(sy2>4095, sy2-4096,sy2) #wrap around\n> \n> #put noise and signal dots together\n> tx1<-c(nx1,sx1)\n> tx2<-c(nx2,sx2)\n> ty1<-c(ny1,sy1)\n> ty2<-c(ny2,sy2)\n> \n> #compute distance to nearest neighbour (x and y) in frame 2\n> #for each dot in frame 1\n> for(i in 1:ntotal)\n>         {\n>         rbest<-2*(4096^2)\n>         for(j in 1:ntotal)\n>                 {\n>                 xd<-tx2[i]-tx1[j]\n>                 yd<-ty2[i]-ty1[j]\n>                 rr<-xd^2 + yd^2\n>                 if(rr<rbest)\n>                         {\n>                         rbest<-rr\n>                         x.temp<-xd\n>                         y.temp<-yd\n>                         }\n>                 }\n>         x<<-c(x,x.temp)\n>         y<<-c(y,y.temp)\n>         }\n> }\n> \n> \n> sim<-function(nnoise, nsignal, jump)\n> {\n> xm<<-NULL\n> ym<<-NULL\n> \n> for(i in 1:10)\n>         {\n>         do.sim(nnoise, nsignal, jump)\n>         xm<<-c(xm,mean(x))\n>         ym<<-c(ym,mean(y))\n>         }\n> }\n> \n> =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n> r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n> Send \"info\", \"help\", or \"[un]subscribe\"\n> (in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n> =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I were running this under rapril.exe (windows 95), without any\nchanges, and it runs without problems:\n\n> sim(10,10,2)\n> objects()\n[1] \"do.sim\" \"sim\"    \"x\"      \"xm\"     \"y\"      \"ym\"    \n> xm\n [1]  1",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-5781d5dc335d",
+      "message_id": "<199709091454.KAA18737@c0230.ae.ge.com>",
+      "from_name": "U-E59264-Osman Buyukisik",
+      "from_email_hash": "44cb4e9037ca940e744e82344ea467af4bc5dd4e8a0f2ca9fe59a04ae014a1c1",
+      "date": "1997-09-09T10:54:38-04:00",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "subject_clean": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n I have just seen Stefan Steinhaus' web page : \nhttp://www.uni-franfurt.de/~stst/ncrunch.html\n\nI think it would be nice to include \"R\" as well. \n\nI have taken Forrest Young's email on stat-lisp list and changed the\nstuff for \"R\" :) Here it is: (someone please check this so we can\nalso send it to Stefan Steinhaus.\n\n----------------------------------------------------------------------\nThe features are the rows of the table.\n\nI have included my (initial) rating of  R  using the testreport's\nrating categories of \"+\", \"-\", or \"m\".\n \"+\" means the feature is supported\n \"-\" means not supported\n \"m\" means it is available in an additional module (i.e., in code not\nincluded in the original distribution of R, but available from the\nnet).\n\nI've added \"?\" in places I'm not sure about my rating.\n\nI've added a few random comments.\n\nI'd appreciate anyone else's additions/corrections, especially about\nwhether \"-\"s should be \"m\"s. Then I'll send it to Stefan Steinhaus.\n\n\n\n=-=-=-=-=-=-=\n\n2.1 Standard Mathematical Functions\nTrig functions +\nGamma function +\nPoly Gamma -(?)\nLog-Gamma functions +\nBeta function +\n\n2.2 Linear Algebra\nEigenvalues +\nEigenvectors +\nCholesky Decomposition +\nCrout Decomposition -\nLU Decomposition +\nSingular Value Decomposition +\nUpper Hessenberg form -\nToeplitz matrix -\nSchur form of quadratic matrix -\nOptimization (Unconstr. / Constr.) +/- (?)\nLinear equation solver + \nNon-linear equation solver -(?)\nOrdinary Differential Equation solver -\nPartial Differential Equation solver -\nSparse matrices handling -\nMoore-Penrose pseudo-inverse -\n\n2.3 Analysis\nNumerical integration (m)\nDouble integration (m)\nTriple integration (m)\nNumerical differentiation -\nFourier transf. (1D / 2D /multidim.) +/+/-\nInverse Fourier transformation (1D / 2D / multidim.) +/+/-\n\n2.4 Numerical Mathematics -\nClassical Interpolation +\nk-Spline Interpolation ?\nB-Spline Interpolation ?\nNewton method for finding roots +\nBisection -\nRunge Kutta method for solving ODE -\n\n2.5 Stochastic\nMarkov models -\nMean +\nMedian +\nMode -\nVariance +\nBeta Distribution + + +\nChi-Squared Distribution + + +\nGamma Distribution + + +\nLog-Normal\nNormal Distribution + + +\nPoisson Distribution + + +\nUniform Distribution + + +\nMore Distribution\n\n2.6 Statistics\nLinear regression +\nPolynomial regression m\nNonlinear regression +\nLoess regression -\nLOGIT regression ?\nPROBIT regression ?\nPSN regression -\nEvent count models +\nDuration models -\nGoodness of fit test +\nT-Test +\nF-Test +\nQ-Test -\nZ-Test -\nMaximum Likelihood m\nARIMA m\nTime series analysis m\nGARCH models -\nWavelets m\nCluster analysis m\nSurvival analysis m\n\n2.7 Other Mathematics - Does anyone know of functions/methods that have\nbeen written for any of these?\nCointegration models\nBlack Scholes model\nDynamic rational expectation models\nLinear rational expectation models\nNon-linear rational expectation models\nSocial network models\nKalman filter\nNeuronal networks\nRegressive-autoregressive models\nPortfolio analysis\nState-space models\n\n3.0 Graphics - It seems to me this is a woefully inadequate classification\n\n2D Graphics\nBar charts   +\nOther charts +\nError charts +\nHigh-Low-Average plot +\nHistograms +\nLog Plot +\nLog-Log Plot +\nPolar Plot ?\nXY Plot +\n\n3D Graphics\nCharts -\nContour Plot +\nError bars   -?\nHeight Colors  ?\nSurface Plot -\nXYZ plot -\n\nSpecial Graphics\nAnimations -\nBollinger bands -\nBox & Whisker Plots +\nCandlestick charts  -\nCluster graphs  m\nDendograms -\nPeriodograms m\nQQ Plot +\n\n\n4.0 Functionality of the Programming Environment\n\nEditing Features\nBuilt-in Editor -\nExternal Editor Configurable +\nSource code formatting ? (depends on the external editor)\nSyntax highlighting ? (depending on the editor used)\n\nDebugging\nBreakpoints +\nFunction Tracer + ?\nLine Tracing\nProfiler\nStack inspection\nVariable inspection +\n\nLanguage Features\nAPI interface -\nDDE support  -\nGUI programming -\nN-dimensional arrays +\nObject Oriented programming +\nOLE support ?\nP code compiling - (If this means Byte-Code compiling)\n\nLanguage Interfaces\nAssembler -\nC/C++ +\nFORTRAN +\nGAUSS -\nLISP + ?\nMacsyma -\nMaple -\nMathematica -\nMatlab -\nMuPAD -\nQ-Matrix -\nOx -\nS-Plus -\nDLL-Calls -\n\n5.0 Data Import-Export\n\nnone except ASCII\n\n\n6.0 Available Operating Systems\n\nConvex +  (if this means unix)\nCray + (if this means unix)\nDEC + + -\nHP 9000 + -\nIBM RISC +\nIntel Dos +\nIntel OS/2 +\nIntel Win 3.1x/95,NT + +\nIntel Linux +\nMotorola (Mac OS/Nextstep) + -\nSGI-Irix +\nSUN (solaris) +\n\nCOST        Free\nCopyright   GPL\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi,\n I have just seen Stefan Steinhaus' web page : \nhttp://www.uni-franfurt.de/~stst/ncrunch.html\n\nI think it would be nice to include \"R\" as well. \n\nI have taken Forrest Young's email on stat-lisp li",
+      "thread_id": "thread-5781d5dc335d",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-3010bf6e5180",
+      "message_id": "<97Sep9.141048edt.26506@mailgate.bank-banque-canada.ca>",
+      "from_name": "Paul Gilbert",
+      "from_email_hash": "51f348dc0febec9b32e9d9dcb86f6de731958e1295e818209b4c127bffef5569",
+      "date": "1997-09-09T14:09:23-04:00",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "subject_clean": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "in_reply_to": null,
+      "references": [
+        "<199709091454.KAA18737@c0230.ae.ge.com>"
+      ],
+      "body_plain": "Some corrections to Stefan Steinhaus'  \"Comparison of Mathematical\nPrograms for Analysis\" for R. These also apply for S and Splus.\n\nThe following are handled by my DSE library available on statlib and at\nhttp://www.bank-banque-canada.ca/pgilbert. I will try to make the\nversion for R available shortly after R 0.50 is release as beta.\n\nState-space models (m)\nKalman filter (m)\nautoregressive models (m)\n(and also autoregressive moving-average models and VAR models)\nNumerical differentiation (m)\nCointegration models (m - models yes, but not yet cointegration tests )\n\nThe following can be done with an interface from my DSE library which\nruns Troll (a commercially available product) from S or R and returns\nthe results.\n\nDynamic rational expectation models (m)\nLinear rational expectation models (m)\nNon-linear rational expectation models (m)\n\n5.0 Data Import-Export\nThere is also an interface (used by my DSE library) which allows access\nto Fame databases and potentially any other database supporting the PADI\nprotocol explained at the above mentioned web site.\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Some corrections to Stefan Steinhaus'  \"Comparison of Mathematical\nPrograms for Analysis\" for R. These also apply for S and Splus.\n\nThe following are handled by my DSE library available on statlib and",
+      "thread_id": "thread-5781d5dc335d",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-4f0c5722d6f1",
+      "message_id": "<9709092148.AA27114@attunga.stats.adelaide.edu.au>",
+      "from_name": "Bill Venables",
+      "from_email_hash": "ca1c88963fb5cd5f4cd9053b781854479dba812db3b38705b8ccc9a407159d5b",
+      "date": "1997-09-10T07:18:34+09:30",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "subject_clean": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "in_reply_to": "<199709091454.KAA18737@c0230.ae.ge.com>",
+      "references": [
+        "<199709091454.KAA18737@c0230.ae.ge.com>"
+      ],
+      "body_plain": "U-E59264-Osman Buyukisik writes:\n > Hi, I have just seen Stefan Steinhaus' web page :\n > http://www.uni-franfurt.de/~stst/ncrunch.html\n > \n > I think it would be nice to include \"R\" as well. \n > \n > ....\n >\n > The features are the rows of the table.\n\nNot having seen the web-page (and unable to do so right now) I am\nnot about to pan it outright, but I must say I am largely\nunimpressed by these comparisons of software on the basis of what\nfeatures they do or do not have, simply because they usually\nignore (or at least downgrade the value of) extensibility.\n\nFor example R and S+ do lack built-in polygamma functions, but it\nis trivial to write very effective polygamma functions and\nsuddenly they are available.  (See, for example, the digamma and\ntrigamma functions in the MASS library.)  For other software\nsystems doing the same thing is a major undertaking or even\nactually impossible unless the vendors do it for you.  That's a\nmajor difference that these comparisons usually hide completely.\n\nBill Venables.\n-- \nBill Venables, Head, Dept of Statistics,    Tel.: +61 8 8303 5418\nUniversity of Adelaide,                     Fax.: +61 8 8303 3696\nSouth AUSTRALIA.     5005.   Email: Bill.Venables at adelaide.edu.au\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "U-E59264-Osman Buyukisik writes:\n > Hi, I have just seen Stefan Steinhaus' web page :\n > http://www.uni-franfurt.de/~stst/ncrunch.html\n > \n > I think it would be nice to include \"R\" as well. \n > \n > .",
+      "thread_id": "thread-5781d5dc335d",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-0c564fabfcc2",
+      "message_id": "<Pine.SUN.3.95.970909145541.4050B-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-09-09T15:10:58-07:00",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "subject_clean": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "in_reply_to": "<9709092148.AA27114@attunga.stats.adelaide.edu.au>",
+      "references": [],
+      "body_plain": "On Wed, 10 Sep 1997, Bill Venables wrote:\n\n> Not having seen the web-page (and unable to do so right now) I am\n> not about to pan it outright, but I must say I am largely\n> unimpressed by these comparisons of software on the basis of what\n> features they do or do not have, simply because they usually\n> ignore (or at least downgrade the value of) extensibility.\n\nHaving seen the web page, I have no such reservations about criticising\nit. I have serious reservations about a rating scheme that gives points\nfor each feature on a list that ranges from 3-d error bars to nonlinear\nequation solvers. In any of these programs, which are all extensible to\nsome extent, it would be trivial to add some of the features, but others\nrequire genuine hard work and expert knowledge to program. \n\nThe other problem with this list is that it addresses different problems\nfrom the ones R tries to solve.  If you want Matlab you know where to find\nit.\n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "On Wed, 10 Sep 1997, Bill Venables wrote:\n\n> Not having seen the web-page (and unable to do so right now) I am\n> not about to pan it outright, but I must say I am largely\n> unimpressed by these compar",
+      "thread_id": "thread-5781d5dc335d",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-4001fb5dd596",
+      "message_id": "<199709092357.LAA04426@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-09-10T11:57:03+12:00",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "subject_clean": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "in_reply_to": "<9709092148.AA27114@attunga.stats.adelaide.edu.au>",
+      "references": [
+        "<199709091454.KAA18737@c0230.ae.ge.com>",
+        "<9709092148.AA27114@attunga.stats.adelaide.edu.au>"
+      ],
+      "body_plain": "Bill Venables writes:\n > For example R and S+ do lack built-in polygamma functions, but it\n > is trivial to write very effective polygamma functions and\n > suddenly they are available.  (See, for example, the digamma and\n > trigamma functions in the MASS library.)  For other software\n > systems doing the same thing is a major undertaking or even\n > actually impossible unless the vendors do it for you.  That's a\n > major difference that these comparisons usually hide completely.\n\nJust a minor correction - we actually have\n\tdigamma\n\ttrigamma\n\ttetragamm\n\tpentagamma\nbuilt in to R (someone wanted some of these for fitting glms).  I\nthink I got bored at the \"penta\" stage.  We could have a general\n\"poly\" if anyone *really* wants it.  The underlying code is in place.\n\nI have to agree in general that these kinds of comparisons are at best\nmisleading.  Usually it is only direct experience which tells you\nwhether a particular bit of software is right for your particular\nproblem.\n\nOne thing the page didn't seem to address was scalability.  Many bits\nof software (ours included) work just fine on small problems, but are\npretty useless when a truly large problem comes along.\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Venables writes:\n > For example R and S+ do lack built-in polygamma functions, but it\n > is trivial to write very effective polygamma functions and\n > suddenly they are available.  (See, for exam",
+      "thread_id": "thread-5781d5dc335d",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-c373c398f51b",
+      "message_id": "<19970914170129.44612@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-09-14T17:01:29-07:00",
+      "subject": "R-beta: linking c++ functions",
+      "subject_clean": "R-beta: linking c++ functions",
+      "in_reply_to": null,
+      "references": [
+        "<19970817195120.15070@stat.uiowa.edu>",
+        "<x24t8ndfbx.fsf@bush.kubism.ku.dk>"
+      ],
+      "body_plain": "I have written some C++ functions and want to port the functions into\nan R library, but got the following error message when I invoked the\nlibrary called chaos:\n\n> library(chaos)\n/usr/local/lib/R/bin/R.binary: can't resolve symbol 'cout'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol 'cout'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol 'cout'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol 'cout'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\n/usr/local/lib/R/bin/R.binary: can't resolve symbol '__ls__7ostreamPCc'\nError in dyn.load(system.file(\"lib\", name)) : unable to load shared library \"/us\nr/local/lib/R/lib/chaos.so\"  \n\nIn fact, I used in my C++ functions the newmat library which is a library\nof matrix classes. The following is the makefile in my sub-dirctory\nRHOME/src/library/chaos/src, which seems to compile ok resulting in \nthe  chaos.so file.\n\n\n.cc.o:\n        g++ -c $(CFLAGS) -I/usr/include/newmat -I/usr/include/nric -lnewmat -lm $<\nLIBNAME=chaos\nLD=ld\n\nOBJS=   lyapunov.o\n\nchaos.so:       $(OBJS)\n        $(LD) $(SHLIBLDFLAGS) -o $(LIBNAME).so $(OBJS)  \\\n        -lnewmat -lm\n\nclean:\n        @rm -f *.o *.so\n\nrealclean:\n        @rm -f Makefile *.o *.so  \n\nI'll appreciate suggestions on how to fix the problem. Thanks.\n\nKung-Sik Chan\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have written some C++ functions and want to port the functions into\nan R library, but got the following error message when I invoked the\nlibrary called chaos:\n\n> library(chaos)\n/usr/local/lib/R/bin/",
+      "thread_id": "thread-c373c398f51b",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-5935bce2f085",
+      "message_id": "<19970914181400.06828@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-09-14T18:14:00-07:00",
+      "subject": "R-beta: linking c++ functions",
+      "subject_clean": "R-beta: linking c++ functions",
+      "in_reply_to": null,
+      "references": [
+        "<19970817195120.15070@stat.uiowa.edu>",
+        "<x24t8ndfbx.fsf@bush.kubism.ku.dk>",
+        "<19970914170129.44612@stat.uiowa.edu>",
+        "<199709150034.MAA25541@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "Ross,\n\nMany thanks for your suggestions. I have tried the trick, but got another\nerror message:\n\n>  dyn.load('/usr/lib/libg++.so')\n> library(chaos)\n/usr/local/lib/R/bin/R.binary: '/usr/local/lib/R/bin/' is not an ELF file\nError in dyn.load(system.file(\"lib\", name)) : unable to load shared library \"/us\nr/local/lib/R/bin/\"\n> traceback()\n[1] \"library.dynam(\\\"chaos.so\\\")\"   \"eval(i, env)\"\n[3] \"lib.source(file, env)\"         \".library(name, lib = lib.loc)\"\n[5] \"library(chaos)\"  \n\nI run R in the directory /usr/local/lib/R/bin, but the same error\nmessage pops up if I run R in directory x, with the \"/usr/local/lib/R/bin\"\nreplaced by \"x\".\n\nI have no idea how to deal with this error. Any suggestions? \n\n\nKung-Sik\n\n> You are pretty much on your own when it comes to C++, I don't have any\n> idea if what you want to do will work.  BUT, it looks like you are\n> missing routines to handle streams.  You could try using \"dyn.load\" to\n> load these missing routines from a system library before using\n> \t\n> \tlibrary(chaos)\n> \n> Something like\n> \n> \tdyn.load(\"/usr/local/lib/libg++.so\")\n> \n> may do the trick, but I really have no idea.\n> \n> I think that Doug Bates has some experience with using C++ with R ...\n> \n> \tRoss\n> \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Ross,\n\nMany thanks for your suggestions. I have tried the trick, but got another\nerror message:\n\n>  dyn.load('/usr/lib/libg++.so')\n> library(chaos)\n/usr/local/lib/R/bin/R.binary: '/usr/local/lib/R/bin",
+      "thread_id": "thread-5935bce2f085",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-ffab3a35b5e5",
+      "message_id": "<19970914193803.09609@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-09-14T19:38:03-07:00",
+      "subject": "R-beta: linking c++ functions",
+      "subject_clean": "R-beta: linking c++ functions",
+      "in_reply_to": null,
+      "references": [
+        "<19970914181400.06828@stat.uiowa.edu>",
+        "<199709150232.VAA13105@toliman.cc.umanitoba.ca>"
+      ],
+      "body_plain": "I am running R under Linux 2.0.28, with R installed following the\ninstructions that come with the R package, that is, using configure,\nmake and make install-help. I have only changed the config.site with\nFC= option so to enable automatic detection of F77. I have no problems \nlinking some of the contributed libraries to R. It seems that the\ncurrent problem might be specific to C++ functions.  \n\nKung-Sik\n\nQuoting Dennis J. Murphy (dmurphy at cc.UManitoba.CA):\n> Kung-Sik Chan writes:\n> > \n> > >  dyn.load('/usr/lib/libg++.so')\n> > > library(chaos)\n> > /usr/local/lib/R/bin/R.binary: '/usr/local/lib/R/bin/' is not an ELF file\n> > Error in dyn.load(system.file(\"lib\", name)) : unable to load shared library \"/us\n> > r/local/lib/R/bin/\"\n> > > traceback()\n> > [1] \"library.dynam(\\\"chaos.so\\\")\"   \"eval(i, env)\"\n> > [3] \"lib.source(file, env)\"         \".library(name, lib = lib.loc)\"\n> > [5] \"library(chaos)\"  \n> > \n> > I run R in the directory /usr/local/lib/R/bin, but the same error\n> > message pops up if I run R in directory x, with the \"/usr/local/lib/R/bin\"\n> > replaced by \"x\".\n> > \n> Hi,\n> \n> I'm no expert on this subject, but an ELF file would mean that your shared\n> library was compiled under Solaris 2.x, while the fact that the R binary is\n> not an ELF file would mean that it was not compiled under Solaris 2.x; for\n> example, it might be a SunOS4.1.3 binary, whose objects are not in ELF format.\n> Since you didn't mention the platform under which you are working, this is a\n> psuedorandom guess on my part: you might get a more profound answer from \n> others by clearing mentioning the setup under which you're operating.\n> \n> Good luck,\n> \n> Dennis\n> -- \n> Dennis Murphy, PhD cand.|It's what you learn after you|(204) 453-5834/474-8930\n> Statistics, U. Manitoba | know it all that counts.    |dmurphy at cc.umanitoba.ca\n> Winnipeg, MB Canada     |                 John Wooden |         On, Wisconsin!\n> --------  When you come to a fork in the road, take it.   Yogi Berra  --------\n> \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I am running R under Linux 2.0.28, with R installed following the\ninstructions that come with the R package, that is, using configure,\nmake and make install-help. I have only changed the config.site w",
+      "thread_id": "thread-ffab3a35b5e5",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-98ed61a851a0",
+      "message_id": "<9709151719.AA16928@chanane.ucsf.edu>",
+      "from_name": "Stephen Shiboski",
+      "from_email_hash": "ac176c8f8cddc694a3ff319edeb07acec5534668decd40ae7cfb1bdd81899ba1",
+      "date": "1997-09-15T10:19:50-07:00",
+      "subject": "R-beta: R binaries for NEXTSTEP  (I386 and M68k) on CRAN",
+      "subject_clean": "R-beta: R binaries for NEXTSTEP  (I386 and M68k) on CRAN",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Binary distributions of R-0.49 for NEXTSTEP (Intel and M68k) are now\navailable on CRAN:\n\n        http://www.ci.tuwien.ac.at/R/bin/i386-nextstep/R.0.49.I.b.tar.gz\n\thttp://www.ci.tuwien.ac.at/R/bin/m68k-nextstep/R.0.49.N.b.tar.gz\n\nBecause NEXTSTEP doesn't support dynamic loading, I've compiled\nin a number of additional functions (mostly from the user contributed\nsection of CRAN) which I find useful, including:\n\n        - acepack: ACE and AVAS regression library\n\n        - survival4: survival analysis function library\n\n        - gee: generalized estimating equation regression\n\n        - splines: spline regression function library\n\n        - bootstrap:  bootstrap utilities\n\n        - integrate: numerical integration functions\n\n        - date: date handling utilities\n\n        - ctest: miscellaneous standard statistical tests\n\n        - local: miscellaneous functions including isotonic regression\n\nI haven't gotten R-0.50a to compile under NEXTSTEP, but will try to make a\nnewer version available eventually.\n\n---\nStephen Shiboski                          email: steve at biostat.ucsf.edu\nDivision of Biostatistics                 voice: 415-476-0533\nUniversity of California San Francisco    fax:   415-476-6014\n500 Parnassus Avenue, MU 420-W;  San Francisco, CA 94143-0560\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Binary distributions of R-0.49 for NEXTSTEP (Intel and M68k) are now\navailable on CRAN:\n\n        http://www.ci.tuwien.ac.at/R/bin/i386-nextstep/R.0.49.I.b.tar.gz\n\thttp://www.ci.tuwien.ac.at/R/bin/m68k",
+      "thread_id": "thread-98ed61a851a0",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-c08184b087d6",
+      "message_id": "<19970916093629.23333@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-09-16T09:36:29-07:00",
+      "subject": "R-beta: linking c++ functions",
+      "subject_clean": "R-beta: linking c++ functions",
+      "in_reply_to": null,
+      "references": [
+        "<19970817195120.15070@stat.uiowa.edu>",
+        "<x24t8ndfbx.fsf@bush.kubism.ku.dk>",
+        "<19970914170129.44612@stat.uiowa.edu>",
+        "<199709150034.MAA25541@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "Ross, \n\nA few days ago, I posted a question on how to link C++ functions\nto R. I have now solved the problem, with my C++ function using\nthe newmat library now successfully called from R. The tricks are:\n(1) use g++ to do the linking,\n(2) modify the C++ functions, only those that you need to call from R,\nso that they are callable by C codes.\nThe scond step is rather simple. Suppose that we want to call \nvoid f(int *i, char *c, double *x) \nfrom R.  \nIn the file containing f, add the line\nextern \"C\" void f(int *i, char *c, double *x);\nbefore the definition of f. This statement tells the compiler that\nthe external information sent to the linker should use C calling\nconventions and name mangling. I learn this trick from Marshall Cline's\nC++ faq\nhttp://www.cerfnet.com/~mpcline/C++-FAQs-Lite/\nunder the item of how to mix C and C++.\n\nThe Makefile file in the src directory of my chaos library is as\nfollows:\n\n.cc.o:\n        g++ -c -fPIC -I/usr/include/newmat -I/usr/include/nric $<\nLIBNAME=chaos\nLD=g++\n\nOBJS=   lyapunov.o\n\nchaos.so:       $(OBJS)\n        $(LD) $(SHLIBLDFLAGS) -o $(LIBNAME).so $(OBJS)  \\\n        -lnewmat -lm\n\nclean:\n        @rm -f *.o *.so\n\nrealclean:\n        @rm -f Makefile *.o *.so       \n\n\nKung-Sik\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Ross, \n\nA few days ago, I posted a question on how to link C++ functions\nto R. I have now solved the problem, with my C++ function using\nthe newmat library now successfully called from R. The tricks a",
+      "thread_id": "thread-c08184b087d6",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-d7da7e42c570",
+      "message_id": "<199709181158.HAA01779@c0230.ae.ge.com>",
+      "from_name": "U-E59264-Osman Buyukisik",
+      "from_email_hash": "44cb4e9037ca940e744e82344ea467af4bc5dd4e8a0f2ca9fe59a04ae014a1c1",
+      "date": "1997-09-18T07:58:41-04:00",
+      "subject": "R-beta: par(tck=xxx) not working?",
+      "subject_clean": "R-beta: par(tck=xxx) not working?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n I was trying to get grid lines drawn in an XY plot. I set par(tck=1),\nand then issued a plot command. Grid lines were not drawn. tick lines\nwere in their usual(default) places and lengths. I tried setting tck\nin the \"plot\" function, but to no avail. Any help would be\nappreciated. I checked to see if different values were stored, and\nthey were. foo<-par() shows tck to be 1.0. The source also showed that\nin par.c they were stored inp GP<-tck, but not used in plot.c.\nBTW I am using R-0.50-a1 on an hpukes-10.2.\n\nTIA\nOsman\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi,\n I was trying to get grid lines drawn in an XY plot. I set par(tck=1),\nand then issued a plot command. Grid lines were not drawn. tick lines\nwere in their usual(default) places and lengths. I trie",
+      "thread_id": "thread-d7da7e42c570",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-96a4302ddf7a",
+      "message_id": "<Pine.OSF.3.95.970919105836.20564C-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-19T11:03:55-05:00",
+      "subject": "R-beta: plot with error bars?",
+      "subject_clean": "R-beta: plot with error bars?",
+      "in_reply_to": "<Pine.OSF.3.95.970905154515.11507A-100000@io.uwinnipeg.ca>",
+      "references": [],
+      "body_plain": "I have read the Venables & Smith Notes on R.\nI was wondering if someone could tell me how to make an XY plot with error\nbars.\n1. x holds x values, y holds y values, ci contains confidence interval\n(error bar stretches from y-ci to y+ci)\n2. x, y, ucl contains upper confidence limit, lcl contains lower\nconfidence limit.  Error bar stretches from lcl to ucl. Need this for\nasymmetrical error bars.\n\nThanks very much for any help.\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have read the Venables & Smith Notes on R.\nI was wondering if someone could tell me how to make an XY plot with error\nbars.\n1. x holds x values, y holds y values, ci contains confidence interval\n(er",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-099d2a2ad098",
+      "message_id": "<x2oh5pz29q.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-09-19T18:39:29+02:00",
+      "subject": "R-beta: plot with error bars?",
+      "subject_clean": "R-beta: plot with error bars?",
+      "in_reply_to": "Bill Simpson's message of Fri, 19 Sep 1997 11:03:55 -0500 (CDT)",
+      "references": [
+        "<Pine.OSF.3.95.970919105836.20564C-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> \n> I have read the Venables & Smith Notes on R.\n> I was wondering if someone could tell me how to make an XY plot with error\n> bars.\n> 1. x holds x values, y holds y values, ci contains confidence interval\n> (error bar stretches from y-ci to y+ci)\n> 2. x, y, ucl contains upper confidence limit, lcl contains lower\n> confidence limit.  Error bar stretches from lcl to ucl. Need this for\n> asymmetrical error bars.\n\nTry refinements of the following:\n\n> x<-rnorm(10)\n> y<-rnorm(10)\n> plot(x,y)\n> arrows(x,y+.1,x,y-.1,length=.05,angle=90,code=3)\n\n- or segments(x,y+.1,x,y-.1), maybe\n\n[actually, we could do with an errbar function that essentially does\nthe arrows call above]\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> \n> I have read the Venables & Smith Notes on R.\n> I was wondering if someone could tell me how to make an XY plot with error\n> bars.\n> 1. x holds x v",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-1b2b1f066be3",
+      "message_id": "<Pine.OSF.3.95.970919120932.23902A-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-19T12:09:51-05:00",
+      "subject": "R-beta: plot with error bars?",
+      "subject_clean": "R-beta: plot with error bars?",
+      "in_reply_to": "<x2oh5pz29q.fsf@bush.kubism.ku.dk>",
+      "references": [],
+      "body_plain": "That works great, Peter.  Thanks very much.\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "That works great, Peter.  Thanks very much.\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 3,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-78baf2864485",
+      "message_id": "<9709200003.AA02491@attunga.stats.adelaide.edu.au>",
+      "from_name": "Bill Venables",
+      "from_email_hash": "ca1c88963fb5cd5f4cd9053b781854479dba812db3b38705b8ccc9a407159d5b",
+      "date": "1997-09-20T09:33:37+09:30",
+      "subject": "R-beta: plot with error bars?",
+      "subject_clean": "R-beta: plot with error bars?",
+      "in_reply_to": "<Pine.OSF.3.95.970919105836.20564C-100000@io.uwinnipeg.ca>",
+      "references": [
+        "<Pine.OSF.3.95.970905154515.11507A-100000@io.uwinnipeg.ca>",
+        "<Pine.OSF.3.95.970919105836.20564C-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "Bill Simpson writes:\n > I have read the Venables & Smith Notes on R.\n > I was wondering if someone could tell me how to make an XY plot with error\n > bars.\n > 1. x holds x values, y holds y values, ci contains confidence interval\n > (error bar stretches from y-ci to y+ci)\n > 2. x, y, ucl contains upper confidence limit, lcl contains lower\n > confidence limit.  Error bar stretches from lcl to ucl. Need this for\n > asymmetrical error bars.\n\nPeter Dalgaard has already offered a suggestion but here is a\nmore formal function that I often find useful. \n\nplotCI <- function (x, y = NULL, uiw, liw = uiw, ..., sfrac = 0.01)  {\n  if (is.list(x)) {\n    y <- x$y\n    x <- x$x\n  }\n  if (is.null(y)) {\n    if (is.null(x)) \n      stop(\"both x and y NULL\")\n    y <- as.numeric(x)\n    x <- seq(along = x)\n  }\n  ui <- y + uiw\n  li <- y - liw\n  plot(x, y, ylim = range(c(y, ui, li)), ...)\n  smidge <- diff(par(\"usr\")[1:2]) * sfrac\n  segments(x, li, x, ui)\n  x2 <- c(x, x)\n  ul <- c(li, ui)\n  segments(x2 - smidge, ul, x2 + smidge, ul)\n  invisible(list(x = x, y = y))\n}\n\nThe arguments are pretty self-explanatory, but here is a brief\nrun-down:\n\nx, y are as you would expect, although both may be replaced by an\n     xy-list, or if y is omitted, x is plotted against 1:length(x),\n\nuiw is the distance(s) from y to the upper end of the interval,\nliw is the distance(s) from y to the lower end of the interval,\n     (if omitted taken to be the same as uiw),\n\n... allows extra arguments to be passed to plot, eg xlab, ylab,\n    type, lty, lwd, &c. (but not passed to segments()),\n\nsfrac is the fraction of the x-axis width to be used as the\n     half-length of the seriphs that customarily go at each end\n     of the intervals, (by default 1%).\n\n-- \nBill Venables, Head, Dept of Statistics,    Tel.: +61 8 8303 5418\nUniversity of Adelaide,                     Fax.: +61 8 8303 3696\nSouth AUSTRALIA.     5005.   Email: Bill.Venables at adelaide.edu.au\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Simpson writes:\n > I have read the Venables & Smith Notes on R.\n > I was wondering if someone could tell me how to make an XY plot with error\n > bars.\n > 1. x holds x values, y holds y values, ci",
+      "thread_id": "thread-eaf19008ebd4",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-26c9986344e1",
+      "message_id": "<199709222010.PAA580150@mail1.doit.wisc.edu>",
+      "from_name": "hassan chehime",
+      "from_email_hash": "7a33b61da1e4fd90f1094d14eb57104f442d8426f94cba7d1c1598439bdbf77f",
+      "date": "1997-09-22T15:11:52-05:00",
+      "subject": "No subject",
+      "subject_clean": "No subject",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am wondering if there is a newer (than rapril) version of R for Windows..\nthanx\nHassan Chehime\nPuelicher Center for Banking Education\nFinance Dept. UW-Madison\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi,\n\nI am wondering if there is a newer (than rapril) version of R for Windows..\nthanx\nHassan Chehime\nPuelicher Center for Banking Education\nFinance Dept. UW-Madison\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "thread_id": "thread-26c9986344e1",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-d4717af85a76",
+      "message_id": "<199709231951.VAA14118@hypatia.math.ethz.ch>",
+      "from_name": "Ennapadam Venkatraman",
+      "from_email_hash": "e958c5a0d8b90c2bd276dc367a4f3882ff3058d9694be76398d6a81cf023c498",
+      "date": "1997-09-23T15:44:00-05:00",
+      "subject": "R-beta: Survival 4",
+      "subject_clean": "R-beta: Survival 4",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \nsurvival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nR> library(survival4)\nAutoloading required library: splines \nR> survfit(Surv(runif(25),rbinom(25,1,0.4)) ~ 1)\nError in eval(frame, data)[subset, , drop = FALSE] : incorrect number of\ndimensions\n\nThanks\nE. S. Venkatraman\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \nsurvival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nR> library(survival4)\nAutoloading required library: splines ",
+      "thread_id": "thread-d4717af85a76",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-e91e8e73ddc2",
+      "message_id": "<3428423B.25BD@macalester.edu>",
+      "from_name": "Daniel Kaplan",
+      "from_email_hash": "a4a510252641cb041ddce9fa2c7ef553d3cc63f1afee16e3f1e88749393a945d",
+      "date": "1997-09-23T17:27:08-05:00",
+      "subject": "R-beta: R for Win95/NT",
+      "subject_clean": "R-beta: R for Win95/NT",
+      "in_reply_to": null,
+      "references": [
+        "<Pine.LNX.3.93.970731140738.14979A-100000@solzhenitsyn.ens.gu.edu.au>"
+      ],
+      "body_plain": "Hi,\nI am teaching a class using R on W95 PCs (April 97 version).  \nThe software is, of course, great.  But....the PCs seem to crash more\noften when R is running than otherwise.  On my own NT machine,\ncrashing is not a problem, but when the session is left open ---\neven though no activity is taking place from my perspective ---\nvirtual memory appears to fill up (to the tune of 200 MB).\n\nI wonder whether:\n1) anyone else has seen this behavior?\n2) does anyone know what I can do about it?\n3) there is a Mac version that is compatible with the W95 version\n(but does not crash)?\n\nThanks,\nDanny Kaplan\nMath/CS\nMacalester College\nSt. Paul, MN\n\nP.S.\nThe R-FAQ has an interesting disclaimer that I had\ndiscounted, but which in hindsight appears to be\nquite accurate:\n> This version is quite limited in\n> Windows-specific features and probably contains many bugs, although it > has been reported to work\n> rather nicely. As always, there is no limit to the damage a buggy > program can do under Windows, so, at\n> least until more experience have been gained with it, it should > probably not be used on systems\n> containing very important data. It is not clear whether it works under > Windows 3.11 or NT (the HTML\n> help system cannot work under 3.11 as it needs long file names).\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi,\nI am teaching a class using R on W95 PCs (April 97 version).  \nThe software is, of course, great.  But....the PCs seem to crash more\noften when R is running than otherwise.  On my own NT machine,\n",
+      "thread_id": "thread-e91e8e73ddc2",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-e15aab88dc9c",
+      "message_id": "<199709241327.JAA16585@c0230.ae.ge.com>",
+      "from_name": "U-E59264-Osman Buyukisik",
+      "from_email_hash": "44cb4e9037ca940e744e82344ea467af4bc5dd4e8a0f2ca9fe59a04ae014a1c1",
+      "date": "1997-09-24T09:27:57-04:00",
+      "subject": "R-beta: R-0.50-a4  library problem (survival4)",
+      "subject_clean": "R-beta: R-0.50-a4  library problem (survival4)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have built R-0.50-a4 on HP9000/C160-hpux10.2 with gcc (cc for\nlibs). When I try \nlibrary(survival4)\nError in pos.to.env(pos) : invalid \"pos\" argument\n\nAnd it does not load. Other libs seem to work. I tested integrate (has\nf2c translated c), polynomial.\n\nIs this a problem with my system only???\nTIA\nosman\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have built R-0.50-a4 on HP9000/C160-hpux10.2 with gcc (cc for\nlibs). When I try \nlibrary(survival4)\nError in pos.to.env(pos) : invalid \"pos\" argument\n\nAnd it does not load. Other libs seem to work. ",
+      "thread_id": "thread-e15aab88dc9c",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-cd2e76920ff4",
+      "message_id": "<199709241411.QAA14201@aragorn.ci.tuwien.ac.at>",
+      "from_name": "Kurt Hornik",
+      "from_email_hash": "6e49e5789d24862255bc60d8e4c5d8665b01105c5c098a9e7289a025e4708eb8",
+      "date": "1997-09-24T16:11:29+02:00",
+      "subject": "R-beta: Survival 4",
+      "subject_clean": "R-beta: Survival 4",
+      "in_reply_to": "<199709231951.VAA14118@hypatia.math.ethz.ch>",
+      "references": [
+        "<199709231951.VAA14118@hypatia.math.ethz.ch>"
+      ],
+      "body_plain": ">>>>> Ennapadam Venkatraman writes:\n\n> I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \n> survival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nR> library(survival4)\n> Autoloading required library: splines \nR> survfit(Surv(runif(25),rbinom(25,1,0.4)) ~ 1)\n> Error in eval(frame, data)[subset, , drop = FALSE] : incorrect number of\n> dimensions\n\nIt seems that the latest released version of survival4 (which as far as\nI know is not meant to be used with the `final' 0.50 which will in fact\nbe a 0.60, hopefully soon) has versions of model.frame and\nmodel.frame.default which break things.\n\nFor me (note under the current development snapshot, so maybe not under\n0.50-a4) it works to do\n\trm(model.frame, pos = N)\n\trm(model.frame.default, pos = N)\nwhere N is the position of the survival4 package in the search list.\n\n-k\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> Ennapadam Venkatraman writes:\n\n> I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \n> survival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nR> library(survival",
+      "thread_id": "thread-d4717af85a76",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-7f524833530a",
+      "message_id": "<342921A5.399F@rulfsw.fsw.leidenuniv.nl>",
+      "from_name": "bensmail",
+      "from_email_hash": "a62de423b44f0db2acc6338d7d519b58a520959f6cedead10478a726b4045e03",
+      "date": "1997-09-24T14:20:21Z",
+      "subject": "R-beta: density function and others",
+      "subject_clean": "R-beta: density function and others",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "hello,\n\nI have been using R for few months now, it seems very\nhelpful even on Macintosh ;-), but there are some functions\nI don't find.\nFor example, I am ploting some histograms and I would\nlike to put over the hist, the curve of the distribution of my data.\nIf my memory is right, in Splus it could be done\nby using the function \"density\", I looked at R manual and find\nthe function \"density\" but it doesn't\nexist when I run R, the same thing happens for many function\nlike \"library\".\nAny help?.... Thank you\n\nHalima from Leiden\nHolland\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "hello,\n\nI have been using R for few months now, it seems very\nhelpful even on Macintosh ;-), but there are some functions\nI don't find.\nFor example, I am ploting some histograms and I would\nlike to pu",
+      "thread_id": "thread-7f524833530a",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-bdb513cf83d9",
+      "message_id": "<Pine.SUN.3.95.970924084922.4465A-100000@troi>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-09-24T09:02:56-07:00",
+      "subject": "R-beta: R-0.50-a4  library problem (survival4)",
+      "subject_clean": "R-beta: R-0.50-a4  library problem (survival4)",
+      "in_reply_to": "<199709241327.JAA16585@c0230.ae.ge.com>",
+      "references": [],
+      "body_plain": "On Wed, 24 Sep 1997, U-E59264-Osman Buyukisik wrote:\n\n> I have built R-0.50-a4 on HP9000/C160-hpux10.2 with gcc (cc for\n> libs). When I try \n> library(survival4)\n> Error in pos.to.env(pos) : invalid \"pos\" argument\n> \n> And it does not load. Other libs seem to work. I tested integrate (has\n> f2c translated c), polynomial.\n> \n\nI'm not sure that r-help is the best place for this problem: the theory is\nthat r-devel is for people who want to be exposed to the full horrors of\nprerelease versions of R. In any case, there have been two questions about\nsurvival4, so I am giving a full description of the problem.\n\nIn R-0.50-a4 model.frame() has been made into a generic function and has\nbeen improved in various ways.  This breaks the gee and survival4\npackages. I have not sent the revised versions to CRAN as they don't work\nwith R-0.49, the current \"stable\" release, and they won't work with the\nnext release R-0.60, which includes major reorganisations of the package\nsystem. Also, the S gee() package is being rewritten by its author, Vince\nCarey, and I am hoping to port the new version soon.\n\nA probably working, full version of survival4, including the expected\nsurvival functions, is available from my homepage. This will work with\nR-0.50-a4 *only*. \nThe survival4 library is at\n\thttp://www.biostat.washington.edu/~thomas/survival4-1.0.tar.gz\nand the US mortality tables are in the separate library\n\thttp://www.biostat.washington.edu/~thomas/ratetables-R1.tar.gz\n\n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "On Wed, 24 Sep 1997, U-E59264-Osman Buyukisik wrote:\n\n> I have built R-0.50-a4 on HP9000/C160-hpux10.2 with gcc (cc for\n> libs). When I try \n> library(survival4)\n> Error in pos.to.env(pos) : invalid \"",
+      "thread_id": "thread-e15aab88dc9c",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-9315d637d47e",
+      "message_id": "<Pine.SOL.3.95.970924084616.10863C-100000@gorn>",
+      "from_name": "Gregory R. Warnes",
+      "from_email_hash": "b6309973da3808b682ea5ff54ccf0a82b70de74c0095911e7f6f32f0a1a4df68",
+      "date": "1997-09-24T09:06:45-07:00",
+      "subject": "R-beta: Survival 4",
+      "subject_clean": "R-beta: Survival 4",
+      "in_reply_to": "<199709241411.QAA14201@aragorn.ci.tuwien.ac.at>",
+      "references": [],
+      "body_plain": ">>>>> Ennapadam Venkatraman writes:\n\n> I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \n> survival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nI initially had the same problems with the survival 4 code and 0.50-r4,\nbut I have the large advantage of being classmates with Thomas Lumley who\ndoes the port from Splus.  Working with him we resolved the problems. The\nsolution involves 2 steps. \n1) get the newest version of the survuval4 port from\n     http://www.biostat.washington.edu/survival-4R1.0.tar.gz\n2) and make a slight change to the terms.formula function in\n     $RHOME/src/library/base/funs/models\n   by adding two lines to the beginning to ensure that the data argument\n   is a data frame:\n\n        if(!is.null(data) & !is.data.frame(data))  ## Added 9/12/97 GRW\n          data _ as.data.frame(data)               ## Added 9/12/97 GRW\n\n   a patch to do this is at the end of this message.  \n\nThis corrected the problems I was having.  I hope it helps.\n\nGreg\n\n-------------------------------------------------------------------------------\n    Gregory R. Warnes          | It is high time that the ideal of success\nwarnes at biostat.washington.edu  |  be replaced by the ideal of service.\n                               |                       Albert Einstein\n-------------------------------------------------------------------------------\n\n\n====patch startes here-- run in $RHOME/src/library/base/funs =====\n--- models.orig Wed Sep 24 08:57:29 1997\n+++ models      Wed Sep 24 08:59:05 1997\n@@ -58,6 +58,8 @@\n terms.formula <-\n function (x, specials = NULL, abb = NULL, data = NULL, keep.order =\nFALSE) \n {\n+        if(!is.null(data) & !is.data.frame(data))  ## Added 9/12/97 GRW \n+          data _ as.data.frame(data)               ## Added 9/12/97 GRW\n        new.specials <- unique(c(specials, \"offset\"))\n        terms <- .Internal(terms.formula(x, new.specials, abb, data,\nkeep.order))\n        offsets <- attr(terms,\"specials\")$offset\n=====patch ends here===========\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> Ennapadam Venkatraman writes:\n\n> I installed the latest version of R (Version 0.50 Alpha-4) and it breaks \n> survival4 as follows (it worked fine under Version 0.50 Alpha-3)\n\nI initially had the",
+      "thread_id": "thread-d4717af85a76",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-4a5c9ddd0b75",
+      "message_id": "<x2n2l2bfec.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-09-24T22:55:39+02:00",
+      "subject": "R-beta: R for Win95/NT",
+      "subject_clean": "R-beta: R for Win95/NT",
+      "in_reply_to": "Daniel Kaplan's message of Tue, 23 Sep 1997 17:27:08 -0500",
+      "references": [
+        "<Pine.LNX.3.93.970731140738.14979A-100000@solzhenitsyn.ens.gu.edu.au>",
+        "<3428423B.25BD@macalester.edu>"
+      ],
+      "body_plain": "Daniel Kaplan <kaplan at macalester.edu> writes:\n\n> I am teaching a class using R on W95 PCs (April 97 version).  \n..\n> \n> I wonder whether:\n> 1) anyone else has seen this behavior?\n\nNope. But starting next week, I probably will... I've seen one or two\nthings crashing R itself - mainly relating to save/load, and of course\nthe 1:2+1:3 bug, but nothing taking the whole of W95 down.\n\n> 2) does anyone know what I can do about it?\n\nRestart occasionally?\n\n> 3) there is a Mac version that is compatible with the W95 version\n> (but does not crash)?\n> \n\nMac development is lagging severely behind UNIX and PCs, so the only\navailable version is MANY versions behind.\n\n> The R-FAQ has an interesting disclaimer that I had\n> discounted, but which in hindsight appears to be\n> quite accurate:\n...\n> > rather nicely. As always, there is no limit to the damage a buggy \n  > program can do under Windows, so, at\n...\n\nI think I was responsible for that blurb. I had actually hoped that\nenough experience had been gained by now. Anyway, after some further\nexperience with W95, I think I'd moderate the remark somewhat. In view\nof the weird things that go on in W95, there's no particular reason to\nsingle out R as a cause for system malfunction....\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Daniel Kaplan <kaplan at macalester.edu> writes:\n\n> I am teaching a class using R on W95 PCs (April 97 version).  \n..\n> \n> I wonder whether:\n> 1) anyone else has seen this behavior?\n\nNope. But startin",
+      "thread_id": "thread-e91e8e73ddc2",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-252ffb0ed01e",
+      "message_id": "<199709250115.NAA24997@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-09-25T13:15:05+12:00",
+      "subject": "R-beta: Stuff",
+      "subject_clean": "R-beta: Stuff",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I seem to have a semi-functioning version for Windows95. I have a few more\ntests (and hopefully I'll uncover a couple more bugs) before I put it out.\nIt does seem to draw something under 3.1 now (I'm going to check NT this aft).\n\n\nOn a not unrelated issue:\n  somehow ... got dropped from that argument list to print.tabular;\n  any objections to putting it back?? I have no idea what putting it\n  back will break but it needs to be there so that args can be passed\n  down to print.default.\n  \n  \nrobert\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I seem to have a semi-functioning version for Windows95. I have a few more\ntests (and hopefully I'll uncover a couple more bugs) before I put it out.\nIt does seem to draw something under 3.1 now (I'm ",
+      "thread_id": "thread-252ffb0ed01e",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-94dace2920e8",
+      "message_id": "<199709251230.IAA04586@c0230.ae.ge.com>",
+      "from_name": "U-E59264-Osman Buyukisik",
+      "from_email_hash": "44cb4e9037ca940e744e82344ea467af4bc5dd4e8a0f2ca9fe59a04ae014a1c1",
+      "date": "1997-09-25T08:30:48-04:00",
+      "subject": "R-beta: Survival 4",
+      "subject_clean": "R-beta: Survival 4",
+      "in_reply_to": "<Pine.SOL.3.95.970924084616.10863C-100000@gorn> (warnes@biostat.washington.edu)",
+      "references": [],
+      "body_plain": "Thanks to all who replied. After the small change, new source for\nsurvival4, it loads cleanly now.\nThanks again,\nOsman\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Thanks to all who replied. After the small change, new source for\nsurvival4, it loads cleanly now.\nThanks again,\nOsman\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-h",
+      "thread_id": "thread-94dace2920e8",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-40a6c97e7434",
+      "message_id": "<Pine.OSF.3.95.970925120342.24572A-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-25T12:07:31-05:00",
+      "subject": "R-beta: return()",
+      "subject_clean": "R-beta: return()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a question on the use of return(). (Nothing on it in the docs I\nhave)\n\nThe test code below gives the error: Error: Object \"x\" not found\nwhen I do: thingy2().\nHow should it be fixed?  Thanks very much for any help!\n(My original solution to this sort of problem was to use global variables\nx<<-...\ny<<-...)\n\nBill Simpson\n-----------------------------\nthingy<-function(k)\n{\nx<-5+k\ny<-5-k\nreturn(list(x=x,y=y))\n}\n\nthingy2<-function()\n{\nthingy(10)\ncat(\"x,y:\",x,y,\"\\n\")\n}\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have a question on the use of return(). (Nothing on it in the docs I\nhave)\n\nThe test code below gives the error: Error: Object \"x\" not found\nwhen I do: thingy2().\nHow should it be fixed?  Thanks ver",
+      "thread_id": "thread-40a6c97e7434",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-4f2cca46932d",
+      "message_id": "<x2soutxpnc.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-09-25T19:35:35+02:00",
+      "subject": "R-beta: return()",
+      "subject_clean": "R-beta: return()",
+      "in_reply_to": "Bill Simpson's message of Thu, 25 Sep 1997 12:07:31 -0500 (CDT)",
+      "references": [
+        "<Pine.OSF.3.95.970925120342.24572A-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> thingy<-function(k)\n> {\n> x<-5+k\n> y<-5-k\n> return(list(x=x,y=y))\n> }\n> \n> thingy2<-function()\n> {\n> thingy(10)\n> cat(\"x,y:\",x,y,\"\\n\")\n> }\n\nTry\nthingy2<-function()\n{\nl<-thingy(10)\ncat(\"x,y:\",l$x,l$y,\"\\n\")\n}\n\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> thingy<-function(k)\n> {\n> x<-5+k\n> y<-5-k\n> return(list(x=x,y=y))\n> }\n> \n> thingy2<-function()\n> {\n> thingy(10)\n> cat(\"x,y:\",x,y,\"\\n\")\n> }\n\nTry\nthing",
+      "thread_id": "thread-40a6c97e7434",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-97c44d23183e",
+      "message_id": "<6rlo0lqoht.fsf@franz.stat.wisc.edu>",
+      "from_name": "Douglas Bates",
+      "from_email_hash": "c908588836123be177df15f4b3132be3a2b4b95c4eaeddcc72b433a3981bb1b3",
+      "date": "1997-09-25T12:42:22-05:00",
+      "subject": "R-beta: return()",
+      "subject_clean": "R-beta: return()",
+      "in_reply_to": "Bill Simpson's message of Thu, 25 Sep 1997 12:07:31 -0500 (CDT)",
+      "references": [
+        "<Pine.OSF.3.95.970925120342.24572A-100000@io.uwinnipeg.ca>"
+      ],
+      "body_plain": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> I have a question on the use of return(). (Nothing on it in the docs I\n> have)\n\nBecause S and R are functional languages (i.e. based on functions), the\npreferred way of communicating results is through the object that is\nreturned.  The problem in your example is that you do not assign the\nresult of the thingy(10) call in the definition of thingy2 so the\nvalue is discarded.\n\nYour code\n\n> thingy<-function(k)\n> {\n> x<-5+k\n> y<-5-k\n> return(list(x=x,y=y))\n> }\n> \n> thingy2<-function()\n> {\n> thingy(10)\n> cat(\"x,y:\",x,y,\"\\n\")\n> }\n\nworks just fine if you either eliminate the \"cat\" call in thingy2\n-----------------\nthingy <-\n  function(k)\n{\n  x <- 5+k\n  y <- 5-k\n  return(list(x=x,y=y))\n}\n\nthingy2 <-\n  function()\n{\n  thingy(10)\n}\n----------------\nR> thingy2()\n$x\n[1] 15\n\n$y\n[1] -5\n\nor you assign the result of the call to thingy and use the components\nof that object\n\nR> thingy2\nfunction () \n{\n        t1 <- thingy(10)\n        cat(\"x,y:\", t1$x, t1$y, \"\\n\")\n}\nR> thingy2()\nx,y: 15 -5 \n\nGenerally the first method is preferred.  The idea of spending a lot\nof time playing around with cat and dput to get pretty output is\ndeprecated.\n\nReaders of the list are invited to make up their own \"catcall\" puns.\n-- \nDouglas Bates                            bates at stat.wisc.edu\nStatistics Department                    608/262-2598\nUniversity of Wisconsin - Madison        http://www.stat.wisc.edu/~bates/\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Simpson <wsimpson at uwinnipeg.ca> writes:\n\n> I have a question on the use of return(). (Nothing on it in the docs I\n> have)\n\nBecause S and R are functional languages (i.e. based on functions), t",
+      "thread_id": "thread-40a6c97e7434",
+      "thread_depth": 1,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-8eff0cc7bf0e",
+      "message_id": "<Pine.OSF.3.95.970926100252.27578A-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-26T10:04:23-05:00",
+      "subject": "R-beta: return()",
+      "subject_clean": "R-beta: return()",
+      "in_reply_to": "<x2soutxpnc.fsf@bush.kubism.ku.dk>",
+      "references": [],
+      "body_plain": "Thanks very much Peter and Douglas for your help.\n\nBill\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Thanks very much Peter and Douglas for your help.\n\nBill\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/",
+      "thread_id": "thread-40a6c97e7434",
+      "thread_depth": 2,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-e54534367f78",
+      "message_id": "<342FE394.4164@rulfsw.fsw.leidenuniv.nl>",
+      "from_name": "bensmail",
+      "from_email_hash": "a62de423b44f0db2acc6338d7d519b58a520959f6cedead10478a726b4045e03",
+      "date": "1997-09-29T17:21:22Z",
+      "subject": "R-beta: How to save a function",
+      "subject_clean": "R-beta: How to save a function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI had trouble lately using R in Mac platform so I switched\nto Ms windows, I have just installed it in Ms windows, and and... \nit is really better, what a relief!, but I can not save my files,\nand function and data by clicking at save on the top of R window, \nas I usually do on Mac, do you have an idea how to save the files\ncreated on R....\n\nThank you so much..\n\n\nHalima from Leiden,\n\nThe Netherlands\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hello,\n\nI had trouble lately using R in Mac platform so I switched\nto Ms windows, I have just installed it in Ms windows, and and... \nit is really better, what a relief!, but I can not save my files,\n",
+      "thread_id": "thread-e54534367f78",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-221ac9b91c2d",
+      "message_id": "<9709300855.AA18236@alpha.luc.ac.be>",
+      "from_name": "Jim Lindsey",
+      "from_email_hash": "a24138a0840979234b066b332130f2f20f4f659487d37814fc36a960e6b62b5f",
+      "date": "1997-09-30T10:55:27+02:00",
+      "subject": "R-beta: R for windows",
+      "subject_clean": "R-beta: R for windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 523 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19970930/02a71f90/attachment.pl",
+      "body_snippet": "A non-text attachment was scrubbed...\nName: not available\nType: text\nSize: 523 bytes\nDesc: not available\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/19970930/02a71f90/attachment.pl",
+      "thread_id": "thread-221ac9b91c2d",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-f309ea35107b",
+      "message_id": "<3430F69E.25FF@kodak.com>",
+      "from_name": "Jeff Morris",
+      "from_email_hash": "f16468d14d86303f0bbe3da0ab46d832c96042a8c56bc1742ccccb98d028a522",
+      "date": "1997-09-30T08:54:54-04:00",
+      "subject": "R-beta: Plots with NT",
+      "subject_clean": "R-beta: Plots with NT",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've downloaded the latest Windows version of R and it looks great,\nbut when I change the size of the graphics window, the plot disappears.\nIs this typical behavior?  I had thought that the Restore command\nin the graphics window would redraw but it is not highlighted.  Is\nthere a quick way to restore the plot.  I working with NT 4.0\n\nThanks!\n\nJeff\n\n-- \nJeffrey D. Morris, Ph.D.\nEastman Kodak Co.\nRochester, NY 14652\nmorris at kodak.com\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I've downloaded the latest Windows version of R and it looks great,\nbut when I change the size of the graphics window, the plot disappears.\nIs this typical behavior?  I had thought that the Restore co",
+      "thread_id": "thread-f309ea35107b",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-2a052bbf0e0e",
+      "message_id": "<34316852.16D2@kodak.com>",
+      "from_name": "Jeff Morris",
+      "from_email_hash": "f16468d14d86303f0bbe3da0ab46d832c96042a8c56bc1742ccccb98d028a522",
+      "date": "1997-09-30T17:00:02-04:00",
+      "subject": "R-beta: Plots with NT",
+      "subject_clean": "R-beta: Plots with NT",
+      "in_reply_to": null,
+      "references": [
+        "<199709302030.IAA11610@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "Ross Ihaka wrote:\n> \n>         From: Jeff Morris <morris at kodak.com>\n> \n>         I've downloaded the latest Windows version of R and it looks great,\n>         but when I change the size of the graphics window, the plot disappears.\n>         Is this typical behavior?  I had thought that the Restore command\n>         in the graphics window would redraw but it is not highlighted.  Is\n>         there a quick way to restore the plot.  I working with NT 4.0\n> \n> I'm not sure about the specifics of the windows version(s), but this\n> is a general problem in R graphics.  We are working on a solution\n> (which will also include multiple device drivers and copying between\n> devices).  The code should be ready to roll later in the year.\n> \n> It hasn't seemed worthwhile producing solutions for specific devices\n> when such a general solution is in the works.\n>         Ross\n\n\nThanks Ross and Robert...Now that I know that the behavior is a feature,\nthen I will act accordingly.  I have no burning desire to see it \nchange.  Now...If I could only run R at home on my Mac...:>)\n\nJeff\n-- \nJeffrey D. Morris, Ph.D.\nEastman Kodak Co.\nRochester, NY 14652\nmorris at kodak.com\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Ross Ihaka wrote:\n> \n>         From: Jeff Morris <morris at kodak.com>\n> \n>         I've downloaded the latest Windows version of R and it looks great,\n>         but when I change the size of the grap",
+      "thread_id": "thread-2a052bbf0e0e",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-0e0855f45ddf",
+      "message_id": "<199709302134.RAA10490@c0230.ae.ge.com>",
+      "from_name": "U-E59264-Osman Buyukisik",
+      "from_email_hash": "44cb4e9037ca940e744e82344ea467af4bc5dd4e8a0f2ca9fe59a04ae014a1c1",
+      "date": "1997-09-30T17:34:29-04:00",
+      "subject": "R-beta: Plots with NT",
+      "subject_clean": "R-beta: Plots with NT",
+      "in_reply_to": "<34316852.16D2@kodak.com> (message from Jeff Morris on Tue, 30 Sep 1997 17:00:02 -0400)",
+      "references": [],
+      "body_plain": ">>> change.  Now...If I could only run R at home on my Mac...:>)\n\nJust put Linux O/S on it, it'll run R just fine :-)\nOsman\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>> change.  Now...If I could only run R at home on my Mac...:>)\n\nJust put Linux O/S on it, it'll run R just fine :-)\nOsman\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
+      "thread_id": "thread-0e0855f45ddf",
+      "thread_depth": 0,
+      "month": "1997-09"
+    },
+    {
+      "id": "msg-6d63a68eb3ae",
+      "message_id": "<Pine.OSF.3.95.970930163305.23732B-100000@io.uwinnipeg.ca>",
+      "from_name": "Bill Simpson",
+      "from_email_hash": "516434c58562bd1525cc59a78833fd0b5ce24784dce07eecaedfbed3fd50fcce",
+      "date": "1997-09-30T16:37:30-05:00",
+      "subject": "R-beta: Plots with NT",
+      "subject_clean": "R-beta: Plots with NT",
+      "in_reply_to": "<34316852.16D2@kodak.com>",
+      "references": [],
+      "body_plain": "> \n> Thanks Ross and Robert...Now that I know that the behavior is a feature,\n> then I will act accordingly.  I have no burning desire to see it \n> change.  Now...If I could only run R at home on my Mac...:>)\n> \nWhat's stopping you?  I am running R on Macs right now.\nHowever the Mac version is WAY behind unix.\n\nMy solution:\nswitch to linux!  Quite a move for a Mac user, but I am in the process of\nsetting up linux box (should arrive this week).  If all works out I am\ndumping the Mac.  I will use LyX for document preparation.  It will be\nnice to be M$-free.\n\nBTW linux is available for Apple machines as well. So I can switch those\nmachines over eventually if I want to.\n\nBill Simpson\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> \n> Thanks Ross and Robert...Now that I know that the behavior is a feature,\n> then I will act accordingly.  I have no burning desire to see it \n> change.  Now...If I could only run R at home on my M",
+      "thread_id": "thread-2a052bbf0e0e",
+      "thread_depth": 1,
+      "month": "1997-09"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-eaf19008ebd4",
+      "subject": "R-beta: help with R simulation",
+      "message_count": 6,
+      "participants": [
+        "Bill Simpson",
+        "Bill Venables",
+        "Peter Dalgaard BSA",
+        "kjetil halvorsen"
+      ],
+      "started": "1997-09-05T15:47:46-05:00",
+      "last_reply": "1997-09-20T09:33:37+09:30",
+      "root_message_id": "msg-eaf19008ebd4"
+    },
+    {
+      "id": "thread-5781d5dc335d",
+      "subject": "R-beta: \"Comparison of Mathematical Programs for Analysis\"",
+      "message_count": 5,
+      "participants": [
+        "Bill Venables",
+        "Paul Gilbert",
+        "Ross Ihaka",
+        "Thomas Lumley",
+        "U-E59264-Osman Buyukisik"
+      ],
+      "started": "1997-09-09T10:54:38-04:00",
+      "last_reply": "1997-09-10T11:57:03+12:00",
+      "root_message_id": "msg-5781d5dc335d"
+    },
+    {
+      "id": "thread-c373c398f51b",
+      "subject": "R-beta: linking c++ functions",
+      "message_count": 1,
+      "participants": [
+        "Kung-Sik Chan"
+      ],
+      "started": "1997-09-14T17:01:29-07:00",
+      "last_reply": "1997-09-14T17:01:29-07:00",
+      "root_message_id": "msg-c373c398f51b"
+    },
+    {
+      "id": "thread-5935bce2f085",
+      "subject": "R-beta: linking c++ functions",
+      "message_count": 1,
+      "participants": [
+        "Kung-Sik Chan"
+      ],
+      "started": "1997-09-14T18:14:00-07:00",
+      "last_reply": "1997-09-14T18:14:00-07:00",
+      "root_message_id": "msg-5935bce2f085"
+    },
+    {
+      "id": "thread-ffab3a35b5e5",
+      "subject": "R-beta: linking c++ functions",
+      "message_count": 1,
+      "participants": [
+        "Kung-Sik Chan"
+      ],
+      "started": "1997-09-14T19:38:03-07:00",
+      "last_reply": "1997-09-14T19:38:03-07:00",
+      "root_message_id": "msg-ffab3a35b5e5"
+    },
+    {
+      "id": "thread-98ed61a851a0",
+      "subject": "R-beta: R binaries for NEXTSTEP  (I386 and M68k) on CRAN",
+      "message_count": 1,
+      "participants": [
+        "Stephen Shiboski"
+      ],
+      "started": "1997-09-15T10:19:50-07:00",
+      "last_reply": "1997-09-15T10:19:50-07:00",
+      "root_message_id": "msg-98ed61a851a0"
+    },
+    {
+      "id": "thread-c08184b087d6",
+      "subject": "R-beta: linking c++ functions",
+      "message_count": 1,
+      "participants": [
+        "Kung-Sik Chan"
+      ],
+      "started": "1997-09-16T09:36:29-07:00",
+      "last_reply": "1997-09-16T09:36:29-07:00",
+      "root_message_id": "msg-c08184b087d6"
+    },
+    {
+      "id": "thread-d7da7e42c570",
+      "subject": "R-beta: par(tck=xxx) not working?",
+      "message_count": 1,
+      "participants": [
+        "U-E59264-Osman Buyukisik"
+      ],
+      "started": "1997-09-18T07:58:41-04:00",
+      "last_reply": "1997-09-18T07:58:41-04:00",
+      "root_message_id": "msg-d7da7e42c570"
+    },
+    {
+      "id": "thread-26c9986344e1",
+      "subject": "No subject",
+      "message_count": 1,
+      "participants": [
+        "hassan chehime"
+      ],
+      "started": "1997-09-22T15:11:52-05:00",
+      "last_reply": "1997-09-22T15:11:52-05:00",
+      "root_message_id": "msg-26c9986344e1"
+    },
+    {
+      "id": "thread-d4717af85a76",
+      "subject": "R-beta: Survival 4",
+      "message_count": 3,
+      "participants": [
+        "Ennapadam Venkatraman",
+        "Gregory R. Warnes",
+        "Kurt Hornik"
+      ],
+      "started": "1997-09-23T15:44:00-05:00",
+      "last_reply": "1997-09-24T09:06:45-07:00",
+      "root_message_id": "msg-d4717af85a76"
+    },
+    {
+      "id": "thread-e91e8e73ddc2",
+      "subject": "R-beta: R for Win95/NT",
+      "message_count": 2,
+      "participants": [
+        "Daniel Kaplan",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-09-23T17:27:08-05:00",
+      "last_reply": "1997-09-24T22:55:39+02:00",
+      "root_message_id": "msg-e91e8e73ddc2"
+    },
+    {
+      "id": "thread-e15aab88dc9c",
+      "subject": "R-beta: R-0.50-a4  library problem (survival4)",
+      "message_count": 2,
+      "participants": [
+        "Thomas Lumley",
+        "U-E59264-Osman Buyukisik"
+      ],
+      "started": "1997-09-24T09:27:57-04:00",
+      "last_reply": "1997-09-24T09:02:56-07:00",
+      "root_message_id": "msg-e15aab88dc9c"
+    },
+    {
+      "id": "thread-7f524833530a",
+      "subject": "R-beta: density function and others",
+      "message_count": 1,
+      "participants": [
+        "bensmail"
+      ],
+      "started": "1997-09-24T14:20:21+00:00",
+      "last_reply": "1997-09-24T14:20:21+00:00",
+      "root_message_id": "msg-7f524833530a"
+    },
+    {
+      "id": "thread-94dace2920e8",
+      "subject": "R-beta: Survival 4",
+      "message_count": 1,
+      "participants": [
+        "U-E59264-Osman Buyukisik"
+      ],
+      "started": "1997-09-25T08:30:48-04:00",
+      "last_reply": "1997-09-25T08:30:48-04:00",
+      "root_message_id": "msg-94dace2920e8"
+    },
+    {
+      "id": "thread-40a6c97e7434",
+      "subject": "R-beta: return()",
+      "message_count": 4,
+      "participants": [
+        "Bill Simpson",
+        "Douglas Bates",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-09-25T12:07:31-05:00",
+      "last_reply": "1997-09-26T10:04:23-05:00",
+      "root_message_id": "msg-40a6c97e7434"
+    },
+    {
+      "id": "thread-252ffb0ed01e",
+      "subject": "R-beta: Stuff",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-09-25T13:15:05+12:00",
+      "last_reply": "1997-09-25T13:15:05+12:00",
+      "root_message_id": "msg-252ffb0ed01e"
+    },
+    {
+      "id": "thread-e54534367f78",
+      "subject": "R-beta: How to save a function",
+      "message_count": 1,
+      "participants": [
+        "bensmail"
+      ],
+      "started": "1997-09-29T17:21:22+00:00",
+      "last_reply": "1997-09-29T17:21:22+00:00",
+      "root_message_id": "msg-e54534367f78"
+    },
+    {
+      "id": "thread-f309ea35107b",
+      "subject": "R-beta: Plots with NT",
+      "message_count": 1,
+      "participants": [
+        "Jeff Morris"
+      ],
+      "started": "1997-09-30T08:54:54-04:00",
+      "last_reply": "1997-09-30T08:54:54-04:00",
+      "root_message_id": "msg-f309ea35107b"
+    },
+    {
+      "id": "thread-221ac9b91c2d",
+      "subject": "R-beta: R for windows",
+      "message_count": 1,
+      "participants": [
+        "Jim Lindsey"
+      ],
+      "started": "1997-09-30T10:55:27+02:00",
+      "last_reply": "1997-09-30T10:55:27+02:00",
+      "root_message_id": "msg-221ac9b91c2d"
+    },
+    {
+      "id": "thread-2a052bbf0e0e",
+      "subject": "R-beta: Plots with NT",
+      "message_count": 2,
+      "participants": [
+        "Bill Simpson",
+        "Jeff Morris"
+      ],
+      "started": "1997-09-30T17:00:02-04:00",
+      "last_reply": "1997-09-30T16:37:30-05:00",
+      "root_message_id": "msg-2a052bbf0e0e"
+    },
+    {
+      "id": "thread-0e0855f45ddf",
+      "subject": "R-beta: Plots with NT",
+      "message_count": 1,
+      "participants": [
+        "U-E59264-Osman Buyukisik"
+      ],
+      "started": "1997-09-30T17:34:29-04:00",
+      "last_reply": "1997-09-30T17:34:29-04:00",
+      "root_message_id": "msg-0e0855f45ddf"
+    }
+  ]
+}

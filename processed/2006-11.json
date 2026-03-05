@@ -1,0 +1,122 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2006-11",
+  "messages": [
+    {
+      "id": "msg-8420f533b6c9",
+      "message_id": "<45479B59.60103@stat.auckland.ac.nz>",
+      "from_name": "Paul Murrell",
+      "from_email_hash": "71bf5cc945d7d1be4a537186b0b66a69b1cc63d99d978b8a16f5750506707116",
+      "date": "2006-11-01T07:52:09+13:00",
+      "subject": "[R] R News, volume 6, issue 4 is now available",
+      "subject_clean": "R News, volume 6, issue 4 is now available",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi\n\nThe October 2006 issue of R News is now available on CRAN under the\nDocumentation/Newsletter link.\n\nPaul\n(on behalf of the R News Editorial Board)\n-- \nDr Paul Murrell\nDepartment of Statistics\nThe University of Auckland\nPrivate Bag 92019\nAuckland\nNew Zealand\n64 9 3737599 x85392\npaul at stat.auckland.ac.nz\nhttp://www.stat.auckland.ac.nz/~paul/\n\n_______________________________________________\nR-announce at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-announce",
+      "body_snippet": "Hi\n\nThe October 2006 issue of R News is now available on CRAN under the\nDocumentation/Newsletter link.\n\nPaul\n(on behalf of the R News Editorial Board)\n-- \nDr Paul Murrell\nDepartment of Statistics\nThe ",
+      "thread_id": "thread-8420f533b6c9",
+      "thread_depth": 0,
+      "month": "2006-11"
+    },
+    {
+      "id": "msg-5cf3ff349752",
+      "message_id": "<4547A80B.3020709@stat.auckland.ac.nz>",
+      "from_name": "Paul Murrell",
+      "from_email_hash": "71bf5cc945d7d1be4a537186b0b66a69b1cc63d99d978b8a16f5750506707116",
+      "date": "2006-11-01T08:46:19+13:00",
+      "subject": "[R] graphics ignore tabs in text",
+      "subject_clean": "graphics ignore tabs in text",
+      "in_reply_to": "<1162310216.4104.5.camel@localhost.localdomain>",
+      "references": [
+        "<39B6DDB9048D0F4DAD42CB26AAFF0AFA0325E347@usctmx1106.merck.com>",
+        "<1162310216.4104.5.camel@localhost.localdomain>"
+      ],
+      "body_plain": "Hi\n\n\nMarc Schwartz wrote:\n> On Tue, 2006-10-31 at 09:13 -0500, Liaw, Andy wrote:\n>> Dear R-help,\n>>\n>> I seem to recall that I can use \"\\t\" to get tab in a string on a\n>> graphics device, but it doesn't seem to work.  Try:\n>>\n>> lab <- \"a\\tb\\tc\"\n>> cat(lab, \"\\n\")       # works in the console output\n>> plot(1:5, main=lab)  # no tabs in the title\n>> text(3, 3, lab)      # no tabs in the text\n>>\n>> I get the same result both in the windows() and pdf() devices.  Any\n>> ideas?\n>>\n>> This is R-patched Windows binary just downloaded from CRAN.\n>> R version 2.4.0 Patched (2006-10-29 r39744)\n>>\n>> Best,\n>> Andy\n> \n> Andy, \n> \n> I don't believe that tab expansion works in plots, though I will stand\n> to be corrected on that.\n\n\nI'm surprised that this has never come up before, but I know of no\nspecial handling of tabs in the graphics code.  I suspect if we wanted\nto do something we would have to add code to detect '\\t' and replace it\nwith a number of spaces (maybe based on a user-settable option).\n\nPaul\n\n\n> Using the X11() device on FC5 (which I recreated using png() and\n> attached here), you can clearly see the dashed boxes where the tab\n> character (non-printable 0x9) is being drawn. However, it is one\n> character, not expanded as is the case in a textual console/GUI.\n> \n> What are you trying to accomplish? \n> \n> Perhaps there is a better way (ie. to do column alignments, etc.) such\n> as textplot() in the gplots package.\n> \n> HTH,\n> \n> Marc Schwartz\n> \n> \n> \n> ------------------------------------------------------------------------\n> \n> \n> ------------------------------------------------------------------------\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nDr Paul Murrell\nDepartment of Statistics\nThe University of Auckland\nPrivate Bag 92019\nAuckland\nNew Zealand\n64 9 3737599 x85392\npaul at stat.auckland.ac.nz\nhttp://www.stat.auckland.ac.nz/~paul/",
+      "body_snippet": "Hi\n\n\nMarc Schwartz wrote:\n> On Tue, 2006-10-31 at 09:13 -0500, Liaw, Andy wrote:\n>> Dear R-help,\n>>\n>> I seem to recall that I can use \"\\t\" to get tab in a string on a\n>> graphics device, but it doesn",
+      "thread_id": "thread-5cf3ff349752",
+      "thread_depth": 0,
+      "month": "2006-11"
+    },
+    {
+      "id": "msg-8cabcdbfee64",
+      "message_id": "<4547AD2F.5090905@stat.auckland.ac.nz>",
+      "from_name": "Paul Murrell",
+      "from_email_hash": "71bf5cc945d7d1be4a537186b0b66a69b1cc63d99d978b8a16f5750506707116",
+      "date": "2006-11-01T09:08:15+13:00",
+      "subject": "[R] savePlot and dev.copy",
+      "subject_clean": "savePlot and dev.copy",
+      "in_reply_to": "<ki7fk21t52nfk7hhdepj23pdf2rgr7j1rg@4ax.com>",
+      "references": [
+        "<ki7fk21t52nfk7hhdepj23pdf2rgr7j1rg@4ax.com>"
+      ],
+      "body_plain": "Hi\n\n\nMike Prager wrote:\n> Dear R gurus,\n> \n> R 2.4.0 under Windows XP.\n> \n> We have developed several dozen R functions to make and save\n> specialized plots.  These use savePlot() to optionally save the\n> plot to files (eps, jpg, png, ...).\n> \n> The thought has come up of putting the functions into an R\n> package.  Because savePlot is available only on Windows, we\n> would instead detect the OS and use dev.copy in place of\n> savePlot when not running under Windows.\n> \n> My question is, if this code is rewritten anyway, what are the\n> pros and cons of using dev.copy under *all* operating systems\n> vs. using savePlot on Windows and dev.copy on other platforms?\n\n\nThe underlying mechanisms of dev.copy() and savePlot() are identical --\ncopy the display list from one device to another -- but savePlot() has\nsome niceties wrapped around the outside.\n\nThese boil down to making the copy the same size as the original.  If\nyou use dev.copy() naively, you can get a copy which is a very different\nsize from the original.  The function dev.print() does a bit better in\nterms of retaining the original size, but there is trouble when you copy\nfrom a device for which the size is specified in inches [like windows(),\nx11(), postscript() and pdf()] to a device for which the size is in\npixels [png(), jpeg(), bitmap()].\n\nsavePlot() handles all of the sizing problems for you (but only works on\nWindows).  dev.copy() works everywhere, but you would have to do a bit\nof mucking about yourself to get around the sizing problems -- see the\nsource for dev.print() for a starting point.\n\nThe authors of the Windows device might have more to say.\n\nPaul\n-- \nDr Paul Murrell\nDepartment of Statistics\nThe University of Auckland\nPrivate Bag 92019\nAuckland\nNew Zealand\n64 9 3737599 x85392\npaul at stat.auckland.ac.nz\nhttp://www.stat.auckland.ac.nz/~paul/",
+      "body_snippet": "Hi\n\n\nMike Prager wrote:\n> Dear R gurus,\n> \n> R 2.4.0 under Windows XP.\n> \n> We have developed several dozen R functions to make and save\n> specialized plots.  These use savePlot() to optionally save t",
+      "thread_id": "thread-8cabcdbfee64",
+      "thread_depth": 0,
+      "month": "2006-11"
+    },
+    {
+      "id": "msg-7b112f08e2dc",
+      "message_id": "<4547B2C8.2000709@auckland.ac.nz>",
+      "from_name": "Thomas Yee",
+      "from_email_hash": "1f06015f08945c7db8790ca7b08d88e0ceab14f9726e8d08f44d68650af0851b",
+      "date": "2006-11-01T09:32:08+13:00",
+      "subject": "[R] VGAM-vglm",
+      "subject_clean": "VGAM-vglm",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> Can somebody explain to me why I get different results using \nmultinom(package\n > nnet) and vglm(package VGAM)?\n\nThe multinom function in the nnet package\nuses the first level of the factor as baseline, whereas the last\nlevel of the factor is used with multinomial().\nConsequently the estimated regression coefficients differ.\nThey can be reconciled very easily with some basic maths.\n\ncheers\nThomas",
+      "body_snippet": "> Can somebody explain to me why I get different results using \nmultinom(package\n > nnet) and vglm(package VGAM)?\n\nThe multinom function in the nnet package\nuses the first level of the factor as basel",
+      "thread_id": "thread-7b112f08e2dc",
+      "thread_depth": 0,
+      "month": "2006-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-8420f533b6c9",
+      "subject": "R News, volume 6, issue 4 is now available",
+      "message_count": 1,
+      "participants": [
+        "Paul Murrell"
+      ],
+      "started": "2006-11-01T07:52:09+13:00",
+      "last_reply": "2006-11-01T07:52:09+13:00",
+      "root_message_id": "msg-8420f533b6c9"
+    },
+    {
+      "id": "thread-5cf3ff349752",
+      "subject": "graphics ignore tabs in text",
+      "message_count": 1,
+      "participants": [
+        "Paul Murrell"
+      ],
+      "started": "2006-11-01T08:46:19+13:00",
+      "last_reply": "2006-11-01T08:46:19+13:00",
+      "root_message_id": "msg-5cf3ff349752"
+    },
+    {
+      "id": "thread-8cabcdbfee64",
+      "subject": "savePlot and dev.copy",
+      "message_count": 1,
+      "participants": [
+        "Paul Murrell"
+      ],
+      "started": "2006-11-01T09:08:15+13:00",
+      "last_reply": "2006-11-01T09:08:15+13:00",
+      "root_message_id": "msg-8cabcdbfee64"
+    },
+    {
+      "id": "thread-7b112f08e2dc",
+      "subject": "VGAM-vglm",
+      "message_count": 1,
+      "participants": [
+        "Thomas Yee"
+      ],
+      "started": "2006-11-01T09:32:08+13:00",
+      "last_reply": "2006-11-01T09:32:08+13:00",
+      "root_message_id": "msg-7b112f08e2dc"
+    }
+  ]
+}

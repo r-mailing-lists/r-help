@@ -1,0 +1,177 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2004-02",
+  "messages": [
+    {
+      "id": "msg-8cbe2a848f98",
+      "message_id": "<006101c3ff1d$d3155170$6501a8c0@lankhmar>",
+      "from_name": "Gabriel Lawson",
+      "from_email_hash": "387b10a6b2e3e16c3f16fe56363def66f51448f609ed56788532006fe1167475",
+      "date": "2004-02-29T15:43:25-08:00",
+      "subject": "[R] Rcmd SHLIB",
+      "subject_clean": "Rcmd SHLIB",
+      "in_reply_to": null,
+      "references": [
+        "<Pine.LNX.4.44.0402290748330.29606-100000@gannet.stats>"
+      ],
+      "body_plain": "Thanks tons.  If you get a moment and feel like answering another question:\nRegarding the readme.packages file excerpt below:  How can I set the R_HOME\npath?  Is it always the R install directory?  Also, is creating libR.a and\nlibRblas.a a neccessary step in creating ANY dll for use with R?\nBEWARE: Don't expect this to work if the path to R_HOME contains spaces.\n\nIt may work, but we don't recommend it.\n\n\n\nThanks for your time,\n\ngabe\n\n\n\n\n\n----- Original Message ----- \nFrom: \"Prof Brian Ripley\" <ripley at stats.ox.ac.uk>\nTo: \"Gabriel Lawson\" <gagongabe at earthlink.net>\nCc: <r-help at stat.math.ethz.ch>\nSent: Saturday, February 28, 2004 11:54 PM\nSubject: Re: [R] Rcmd SHLIB\n\n\n> Most likely you don't have dlltool in your path.  Further, I suspect you\n> don't have the correct make in your path since AFAIK that does not use\n> CreateProcess.\n>\n> Please check and check again that you have followed exactly all the\n> instructions in the file readme.packages.  See Q3.1 in the rw-FAQ.\n>\n> On Sat, 28 Feb 2004, Gabriel Lawson wrote:\n>\n> > Ok, I think I may have a path or permissions problem (below).  Anyone\n> > know which settings I should check?\n> >\n> > When I use\n> >\n> > \"Rcmd SHLIB <filename>\"\n> >\n> > I get:\n> >\n> > C:\\Program Files\\R\\rw1081\\bin>Rcmd SHLIB info.diffusion.c\n> > process_begin: CreateProcess((null), dlltool -k --as as --dllname\nR.dll --def R.\n> > exp --output-lib libR.a, ...) failed.\n> > make (e=2): The system cannot find the file specified.\n> > make[1]: *** [libR.a] Error 2\n> > make: *** [libR] Error 2\n>\n> -- \n> Brian D. Ripley,                  ripley at stats.ox.ac.uk\n> Professor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\n> University of Oxford,             Tel:  +44 1865 272861 (self)\n> 1 South Parks Road,                     +44 1865 272866 (PA)\n> Oxford OX1 3TG, UK                Fax:  +44 1865 272595\n>\n>",
+      "body_snippet": "Thanks tons.  If you get a moment and feel like answering another question:\nRegarding the readme.packages file excerpt below:  How can I set the R_HOME\npath?  Is it always the R install directory?  Al",
+      "thread_id": "thread-8cbe2a848f98",
+      "thread_depth": 0,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-460b1530bd1b",
+      "message_id": "<20040301002712.E07373958@mprdmxin.myway.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "f41070d4141f8364fbc9fbb8bdca03539ba49c4bcda2ef692c89d59c36c43273",
+      "date": "2004-02-29T19:27:12-05:00",
+      "subject": "[R] Proportions again",
+      "subject_clean": "Proportions again",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "That's true; however, \n\nCrossTable(x,x)\n\ndoes give the desired counts and proportions in the margin\nline at the bottom.  See the row labelled Column Total in\nthe following example based on Carlos' vector:\n\n> sex<-c(1,2,2,1,1,2,2,2)\n> CrossTable(sex,sex)\n\n \n   Cell Contents\n|-----------------|\n|               N |\n|   N / Row Total |\n|   N / Col Total |\n| N / Table Total |\n|-----------------|\n\n \nTotal Observations in Table:  8 \n\n \n             | sex \n         sex |         1 |         2 | Row Total | \n-------------|-----------|-----------|-----------|\n           1 |         3 |         0 |         3 | \n             |     1.000 |     0.000 |     0.375 | \n             |     1.000 |     0.000 |           | \n             |     0.375 |     0.000 |           | \n-------------|-----------|-----------|-----------|\n           2 |         0 |         5 |         5 | \n             |     0.000 |     1.000 |     0.625 | \n             |     0.000 |     1.000 |           | \n             |     0.000 |     0.625 |           | \n-------------|-----------|-----------|-----------|\nColumn Total |         3 |         5 |         8 | \n             |     0.375 |     0.625 |           | \n-------------|-----------|-----------|-----------|\n\n\n---\nDate:   Sun, 29 Feb 2004 13:48:27 -0600 \nFrom:   Marc Schwartz <MSchwartz at MedAnalytics.com>\nTo:   <ggrothendieck at myway.com> \nCc:   <mcardeal at atarde.com.br>,R-Help <r-help at stat.math.ethz.ch> \nSubject:   RE: [R] Proportions again \n\n \nOn Sun, 2004-02-29 at 12:40, Gabor Grothendieck wrote:\n> Several people have alrady answered you by this time and\n> in addition to their answers you might also be interested\n> in CrossTable in package gregmisc.\n\nGabor,\n\nThanks for pointing out CrossTable().\n\nJust as a quick heads up/clarification for Carlos, CrossTable() is\ndesigned to cross-tabulate two vectors and generate counts,\nrow/column/table proportions and other results from the 2 dimensional\ncross-tab in a (hopefully) nicely formatted fashion.\n\nIt is not presently designed to handle generating proportions from the\ntabulation of a single vector with repeating values (such as Carlos'\nexample) and will generate an error message if a single vector is\npassed.\n\nIn that scenario, as many folks have already recommended, the\ncombination of table() and prop.table() would be preferred.\n\nHTH,\n\nMarc Schwartz",
+      "body_snippet": "That's true; however, \n\nCrossTable(x,x)\n\ndoes give the desired counts and proportions in the margin\nline at the bottom.  See the row labelled Column Total in\nthe following example based on Carlos' vec",
+      "thread_id": "thread-460b1530bd1b",
+      "thread_depth": 0,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-def350a4dbc4",
+      "message_id": "<uqv440h0eqsab4nicvvmsghlodmcg3fm0o@4ax.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "0b169dc9578e443c97ef875feba9794619f6e667997aabcb13de6d581cba9312",
+      "date": "2004-02-29T19:29:45-05:00",
+      "subject": "[R] Rcmd SHLIB",
+      "subject_clean": "Rcmd SHLIB",
+      "in_reply_to": "<006101c3ff1d$d3155170$6501a8c0@lankhmar>",
+      "references": [
+        "<Pine.LNX.4.44.0402290748330.29606-100000@gannet.stats>",
+        "<006101c3ff1d$d3155170$6501a8c0@lankhmar>"
+      ],
+      "body_plain": "On Sun, 29 Feb 2004 15:43:25 -0800, you wrote:\n\n>Thanks tons.  If you get a moment and feel like answering another question:\n>Regarding the readme.packages file excerpt below:  How can I set the R_HOME\n>path?  Is it always the R install directory?  Also, is creating libR.a and\n>libRblas.a a neccessary step in creating ANY dll for use with R?\n\nR_HOME should be the base directory where you install R.\n\nThe libR.a and libRblas.a files are used by the gcc linker to tell it\nhow to make calls into R.dll or Rblas.dll.  If you're using a\ndifferent compiler or you don't need to make calls into those dlls\n(e.g. you've got a very simple DLL), you won't need them.\n\nDuncan Murdoch",
+      "body_snippet": "On Sun, 29 Feb 2004 15:43:25 -0800, you wrote:\n\n>Thanks tons.  If you get a moment and feel like answering another question:\n>Regarding the readme.packages file excerpt below:  How can I set the R_HOM",
+      "thread_id": "thread-8cbe2a848f98",
+      "thread_depth": 1,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-28ab80908159",
+      "message_id": "<1078103969.7704.62.camel@localhost.localdomain>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "4b86ff84f5d62156e717c04d35ae6020e0413e7e7a4ba753da6d0c4c53322f74",
+      "date": "2004-02-29T19:19:29-06:00",
+      "subject": "[R] Proportions again",
+      "subject_clean": "Proportions again",
+      "in_reply_to": "<20040301002712.E07373958@mprdmxin.myway.com>",
+      "references": [
+        "<20040301002712.E07373958@mprdmxin.myway.com>"
+      ],
+      "body_plain": "On Sun, 2004-02-29 at 18:27, Gabor Grothendieck wrote:\n> That's true; however, \n> \n> CrossTable(x,x)\n> \n> does give the desired counts and proportions in the margin\n> line at the bottom.  See the row labelled Column Total in\n> the following example based on Carlos' vector:\n> \n> > sex<-c(1,2,2,1,1,2,2,2)\n> > CrossTable(sex,sex)\n\nsnip\n\nOK....true. I had not considered that approach from a design\nperspective, but it does provide the requisite information.\n\nOne could feasibly reduce some of the complexity of the table by setting\nsome of the prop.* arguments to false:\n\nCrossTable(sex, sex, prop.c = FALSE, prop.t = FALSE)\n\nwhich would yield:\n\n\n   Cell Contents\n|-----------------|\n|               N |\n|   N / Row Total |\n|-----------------|\n\n \nTotal Observations in Table:  8 \n\n \n             | sex \n         sex |         1 |         2 | Row Total | \n-------------|-----------|-----------|-----------|\n           1 |         3 |         0 |         3 | \n             |     1.000 |     0.000 |     0.375 | \n-------------|-----------|-----------|-----------|\n           2 |         0 |         5 |         5 | \n             |     0.000 |     1.000 |     0.625 | \n-------------|-----------|-----------|-----------|\nColumn Total |         3 |         5 |         8 | \n-------------|-----------|-----------|-----------|\n\n\nThis gives you the proportions in the row margins versus the columns.\nYou still end up with some extraneous data, but perhaps a little less\nso.\n\nJust seems like overkill to get the same information that:\n\n> prop.table(table(sex))\nsex\n    1     2\n0.375 0.625\n\ngives you, without the lengthy function call.  :-)\n\n\nThanks Gabor.\n\nBest regards,\n\nMarc",
+      "body_snippet": "On Sun, 2004-02-29 at 18:27, Gabor Grothendieck wrote:\n> That's true; however, \n> \n> CrossTable(x,x)\n> \n> does give the desired counts and proportions in the margin\n> line at the bottom.  See the row ",
+      "thread_id": "thread-460b1530bd1b",
+      "thread_depth": 1,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-e2b1bdd7ebd0",
+      "message_id": "<20040301012643.341D0396B@mprdmxin.myway.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "f41070d4141f8364fbc9fbb8bdca03539ba49c4bcda2ef692c89d59c36c43273",
+      "date": "2004-02-29T20:26:43-05:00",
+      "subject": "[R] Proportions again",
+      "subject_clean": "Proportions again",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I agree its overkill but prop.table generalizes to mulitple\ndimensions, in which case it becomes comparable to CrossTable,\nso I thought it was worth mentioning.\n\nBy the way, as the author of CrossTable, perhaps you \nmight might consider generalizing CrossTable to the 1D \ncase too?\n\n---\nDate:   Sun, 29 Feb 2004 19:19:29 -0600 \nFrom:   Marc Schwartz <MSchwartz at MedAnalytics.com>\nTo:   <ggrothendieck at myway.com> \nCc:   <mcardeal at atarde.com.br>,R-Help <r-help at stat.math.ethz.ch> \nSubject:   RE: [R] Proportions again \n\n \nOn Sun, 2004-02-29 at 18:27, Gabor Grothendieck wrote:\n> That's true; however, \n> \n> CrossTable(x,x)\n> \n> does give the desired counts and proportions in the margin\n> line at the bottom. See the row labelled Column Total in\n> the following example based on Carlos' vector:\n> \n> > sex<-c(1,2,2,1,1,2,2,2)\n> > CrossTable(sex,sex)\n\nsnip\n\nOK....true. I had not considered that approach from a design\nperspective, but it does provide the requisite information.\n\nOne could feasibly reduce some of the complexity of the table by setting\nsome of the prop.* arguments to false:\n\nCrossTable(sex, sex, prop.c = FALSE, prop.t = FALSE)\n\nwhich would yield:\n\n\nCell Contents\n|-----------------|\n| N |\n| N / Row Total |\n|-----------------|\n\n\nTotal Observations in Table: 8 \n\n\n| sex \nsex | 1 | 2 | Row Total | \n-------------|-----------|-----------|-----------|\n1 | 3 | 0 | 3 | \n| 1.000 | 0.000 | 0.375 | \n-------------|-----------|-----------|-----------|\n2 | 0 | 5 | 5 | \n| 0.000 | 1.000 | 0.625 | \n-------------|-----------|-----------|-----------|\nColumn Total | 3 | 5 | 8 | \n-------------|-----------|-----------|-----------|\n\n\nThis gives you the proportions in the row margins versus the columns.\nYou still end up with some extraneous data, but perhaps a little less\nso.\n\nJust seems like overkill to get the same information that:\n\n> prop.table(table(sex))\nsex\n1 2\n0.375 0.625\n\ngives you, without the lengthy function call. :-)\n\n\nThanks Gabor.\n\nBest regards,\n\nMarc",
+      "body_snippet": "I agree its overkill but prop.table generalizes to mulitple\ndimensions, in which case it becomes comparable to CrossTable,\nso I thought it was worth mentioning.\n\nBy the way, as the author of CrossTabl",
+      "thread_id": "thread-e2b1bdd7ebd0",
+      "thread_depth": 0,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-33a1da9d5e37",
+      "message_id": "<1078106075.7704.92.camel@localhost.localdomain>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "4b86ff84f5d62156e717c04d35ae6020e0413e7e7a4ba753da6d0c4c53322f74",
+      "date": "2004-02-29T19:54:35-06:00",
+      "subject": "[R] Proportions again",
+      "subject_clean": "Proportions again",
+      "in_reply_to": "<20040301012643.341D0396B@mprdmxin.myway.com>",
+      "references": [
+        "<20040301012643.341D0396B@mprdmxin.myway.com>"
+      ],
+      "body_plain": "On Sun, 2004-02-29 at 19:26, Gabor Grothendieck wrote:\n> I agree its overkill but prop.table generalizes to mulitple\n> dimensions, in which case it becomes comparable to CrossTable,\n> so I thought it was worth mentioning.\n> \n> By the way, as the author of CrossTable, perhaps you \n> might might consider generalizing CrossTable to the 1D \n> case too?\n\n\n\nAs a result of this exchange, it is now on my todo list... :-)\n\nThanks Gabor.\n\nMarc",
+      "body_snippet": "On Sun, 2004-02-29 at 19:26, Gabor Grothendieck wrote:\n> I agree its overkill but prop.table generalizes to mulitple\n> dimensions, in which case it becomes comparable to CrossTable,\n> so I thought it ",
+      "thread_id": "thread-e2b1bdd7ebd0",
+      "thread_depth": 1,
+      "month": "2004-02"
+    },
+    {
+      "id": "msg-a2a0c2823a4d",
+      "message_id": "<1078119812.c7fba21cru68y7s@myrealbox.com>",
+      "from_name": "s viswanath",
+      "from_email_hash": "ef9b5071ffe52e6f4d838f615a108e3e62a236cb164e044e3d0f673144112cad",
+      "date": "2004-02-29T22:43:32-07:00",
+      "subject": "[R] Re: R-help Digest, Vol 12, Issue 27",
+      "subject_clean": "R-help Digest, Vol 12, Issue 27",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R helpers,\n\nI am interested in doing an overlapping moving block bootstrap (Davinson and Hinkley(1997)) on financial market data\nusing R.\n\nI have daily stock returns and have tried\n( unsuccessfully using sample and boot function) to create a sample containing consecutive \"trading days\"\n\n\nFor example i want to sample data from a return series x days forward when an event(binary) occurs.\n\nAlso, has anyone programmed the 'omega' function used by some funds to rank returns using cdf's and comparing areas under two return curves for a mutual fund?\n\nAny help is greatly appreciated.\n\nThank you ,\n\nS Viswanath",
+      "body_snippet": "Dear R helpers,\n\nI am interested in doing an overlapping moving block bootstrap (Davinson and Hinkley(1997)) on financial market data\nusing R.\n\nI have daily stock returns and have tried\n( unsuccessful",
+      "thread_id": "thread-a2a0c2823a4d",
+      "thread_depth": 0,
+      "month": "2004-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-8cbe2a848f98",
+      "subject": "Rcmd SHLIB",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Gabriel Lawson"
+      ],
+      "started": "2004-02-29T15:43:25-08:00",
+      "last_reply": "2004-02-29T19:29:45-05:00",
+      "root_message_id": "msg-8cbe2a848f98"
+    },
+    {
+      "id": "thread-460b1530bd1b",
+      "subject": "Proportions again",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "Marc Schwartz"
+      ],
+      "started": "2004-02-29T19:27:12-05:00",
+      "last_reply": "2004-02-29T19:19:29-06:00",
+      "root_message_id": "msg-460b1530bd1b"
+    },
+    {
+      "id": "thread-e2b1bdd7ebd0",
+      "subject": "Proportions again",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "Marc Schwartz"
+      ],
+      "started": "2004-02-29T20:26:43-05:00",
+      "last_reply": "2004-02-29T19:54:35-06:00",
+      "root_message_id": "msg-e2b1bdd7ebd0"
+    },
+    {
+      "id": "thread-a2a0c2823a4d",
+      "subject": "R-help Digest, Vol 12, Issue 27",
+      "message_count": 1,
+      "participants": [
+        "s viswanath"
+      ],
+      "started": "2004-02-29T22:43:32-07:00",
+      "last_reply": "2004-02-29T22:43:32-07:00",
+      "root_message_id": "msg-a2a0c2823a4d"
+    }
+  ]
+}

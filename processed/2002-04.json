@@ -1,0 +1,175 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2002-04",
+  "messages": [
+    {
+      "id": "msg-9739f71f4454",
+      "message_id": "<p05111713b8f4cce9c0b2@[128.115.153.6]>",
+      "from_name": "Don MacQueen",
+      "from_email_hash": "175f4fa90b8d6445baa141105bd5754ace34836009cb94ddb056a9ce4ea7ff75",
+      "date": "2002-04-30T15:43:16-07:00",
+      "subject": "[R] generating graphical output when DISPLAY is not set?",
+      "subject_clean": "generating graphical output when DISPLAY is not set?",
+      "in_reply_to": "<Pine.LNX.4.33.0204301341580.3566-100000@luino.neomorphic.com>",
+      "references": [
+        "<Pine.LNX.4.33.0204301341580.3566-100000@luino.neomorphic.com>"
+      ],
+      "body_plain": "Having asked this question myself within the last 6 months or so, I \nthink I can answer.\n\nThe R png() driver relies on the png libraries, which come from \nanother open-source project, not R. Those libraries require an active \nX11 display. Thus there is no within-R solution for the png() device \nwithout X11.\n\nThere is, however, the bitmap() device (thanks to Prof. Ripley), \nwhich takes a different approach, and will produce png files without \nX11, provided you have ghostscript installed. In my experience, fonts \nrendered by ghostscript are not as good as fonts with the png(),X11 \ncombination.\n\nAnother approach might be to use the Xvfb \"device\", and see if you \ncan't guarantee that it will always be running.\n\n-Don\n\nAt 1:51 PM -0700 4/30/02, Simon Cawley wrote:\n>Is it possible to generate graphical output (to a file) when the\n>DISPLAY environment variable is not set?  Here's the problem:\n>\n>   $ unset DISPLAY\n>   $ R\n>   > png(\"foo.png\")\n>   Error in X11(paste(\"png::\", filename, sep = \"\"), width, height, \n>pointsize,  :\n>           unable to start device PNG\n>   In addition: Warning message:\n>   unable to open connection to X11 display`'\n>\n>I want to have a process running on a server call R to generate graphical\n>output, and the problem is that I'm not guaranteed to have a valid\n>DISPLAY set.  I have some clumsy workarounds, but it would be cleaner if\n>if I had some way to have R not require the DISPLAY.\n>\n>Thanks,\n>\n>-Simon\n>\n>-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n>r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n>Send \"info\", \"help\", or \"[un]subscribe\"\n>(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n\n-- \n--------------------------------------\nDon MacQueen\nEnvironmental Protection Department\nLawrence Livermore National Laboratory\nLivermore, CA, USA\n--------------------------------------\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Having asked this question myself within the last 6 months or so, I \nthink I can answer.\n\nThe R png() driver relies on the png libraries, which come from \nanother open-source project, not R. Those lib",
+      "thread_id": "thread-9739f71f4454",
+      "thread_depth": 0,
+      "month": "2002-04"
+    },
+    {
+      "id": "msg-a28b4455e81e",
+      "message_id": "<3CCF1ECC.151C275A@pdf.com>",
+      "from_name": "Sundar Dorai-Raj",
+      "from_email_hash": "ac2c634a66bfd4b92f22c1a5b2b6f7e05e85b6ba3c0356381de94540481fd269",
+      "date": "2002-04-30T17:46:36-05:00",
+      "subject": "[R] A sample question",
+      "subject_clean": "A sample question",
+      "in_reply_to": null,
+      "references": [
+        "<PPEGLLABFLFCJDLCGPGHCEIPCAAA.klavan@tiscalinet.it>"
+      ],
+      "body_plain": "Ambrosini Alessandro wrote:\n> \n> Hello.\n> Given a vector 1 3 4 2 8 9 5\n> I want to obtain a vector with all 0 except in the second position and in\n> the fifth, where the numbers are the same of the first vector.\n> The new vector must be\n>  0 3 0 0 8 0 0\n> \n\nx <- c(1,3,4,2,8,9,5)\nx[-c(2,5)] <- 0\n\n-- \n\nSundar Dorai-Raj, Ph.D.\nStatistical Methods Engineer\nPDF Solutions, Inc.\nRichardson TX\n(972) 889-3085 x216\n(214) 392-7619 cell\nsundard at pdf.com\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Ambrosini Alessandro wrote:\n> \n> Hello.\n> Given a vector 1 3 4 2 8 9 5\n> I want to obtain a vector with all 0 except in the second position and in\n> the fifth, where the numbers are the same of the fi",
+      "thread_id": "thread-a28b4455e81e",
+      "thread_depth": 0,
+      "month": "2002-04"
+    },
+    {
+      "id": "msg-36bb7ad99928",
+      "message_id": "<D670CBFB481BB64D8F2B53F4DE8086CF49FC78@EXCHCLUSTER01.lj.gnf.org>",
+      "from_name": "Petre Dimitrov",
+      "from_email_hash": "511868a46b906123ec4935174762eaf5d0ece877fd069412d4a4ee11623ad75a",
+      "date": "2002-04-30T17:09:43-07:00",
+      "subject": "[R] generating graphical output when DISPLAY is not set?",
+      "subject_clean": "generating graphical output when DISPLAY is not set?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Do you have libpng installed properly on your machine? It seems R is not linked against that library. Check the output of ./configure or config.log whether the check for libpng was succesfull. If not, go to www.libpng.org/pub/png/libpng.html to download and install the relevant binary or source. Assuming you have Linux distro with rpm package management, you can download libpng-devel package from ftp.redhat.com or mirrors.\n\nOnce R is linked against that library, look at the help for png() for the proper way to redirect the plotting to a file.\n\nPeter Dimitrov\n\n-----Original Message-----\nFrom: Simon Cawley [mailto:simon_cawley at affymetrix.com]\nSent: Tuesday, April 30, 2002 1:51 PM\nTo: r-help at stat.math.ethz.ch\nSubject: [R] generating graphical output when DISPLAY is not set?\n\n\n\nIs it possible to generate graphical output (to a file) when the\nDISPLAY environment variable is not set?  Here's the problem:\n\n  $ unset DISPLAY\n  $ R\n  > png(\"foo.png\")\n  Error in X11(paste(\"png::\", filename, sep = \"\"), width, height, pointsize,  :\n          unable to start device PNG\n  In addition: Warning message:\n  unable to open connection to X11 display`'\n\nI want to have a process running on a server call R to generate graphical\noutput, and the problem is that I'm not guaranteed to have a valid\nDISPLAY set.  I have some clumsy workarounds, but it would be cleaner if\nif I had some way to have R not require the DISPLAY.\n\nThanks,\n\n-Simon\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Do you have libpng installed properly on your machine? It seems R is not linked against that library. Check the output of ./configure or config.log whether the check for libpng was succesfull. If not,",
+      "thread_id": "thread-36bb7ad99928",
+      "thread_depth": 0,
+      "month": "2002-04"
+    },
+    {
+      "id": "msg-6ba1297e3356",
+      "message_id": "<D670CBFB481BB64D8F2B53F4DE8086CF488D3F@EXCHCLUSTER01.lj.gnf.org>",
+      "from_name": "Petre Dimitrov",
+      "from_email_hash": "511868a46b906123ec4935174762eaf5d0ece877fd069412d4a4ee11623ad75a",
+      "date": "2002-04-30T18:01:18-07:00",
+      "subject": "[R] generating graphical output when DISPLAY is not set?",
+      "subject_clean": "generating graphical output when DISPLAY is not set?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Do you have libpng installed properly on your machine? It seems R is not linked against that library. Check the output of ./configure or config.log whether the check for libpng was succesfull. If not, go to www.libpng.org/pub/png/libpng.html to download and install the relevant binary or source. Assuming you have Linux distro with rpm package management, you can download libpng-devel package from ftp.redhat.com or mirrors.\n\nOnce R is linked against that library, look at the help for png() for the proper way to redirect the plotting to a file.\n\nPeter Dimitrov\n\n-----Original Message-----\nFrom: Simon Cawley [mailto:simon_cawley at affymetrix.com]\nSent: Tuesday, April 30, 2002 1:51 PM\nTo: r-help at stat.math.ethz.ch\nSubject: [R] generating graphical output when DISPLAY is not set?\n\n\n\nIs it possible to generate graphical output (to a file) when the\nDISPLAY environment variable is not set?  Here's the problem:\n\n  $ unset DISPLAY\n  $ R\n  > png(\"foo.png\")\n  Error in X11(paste(\"png::\", filename, sep = \"\"), width, height, pointsize,  :\n          unable to start device PNG\n  In addition: Warning message:\n  unable to open connection to X11 display`'\n\nI want to have a process running on a server call R to generate graphical\noutput, and the problem is that I'm not guaranteed to have a valid\nDISPLAY set.  I have some clumsy workarounds, but it would be cleaner if\nif I had some way to have R not require the DISPLAY.\n\nThanks,\n\n-Simon\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Do you have libpng installed properly on your machine? It seems R is not linked against that library. Check the output of ./configure or config.log whether the check for libpng was succesfull. If not,",
+      "thread_id": "thread-6ba1297e3356",
+      "thread_depth": 0,
+      "month": "2002-04"
+    },
+    {
+      "id": "msg-b114acdcde00",
+      "message_id": "<51F9C42DA15CD311BD220008C707D81906FFC285@usrymx10.merck.com>",
+      "from_name": "Liaw, Andy",
+      "from_email_hash": "898c214b2bc6c21da39a883e12ded19760ce149cfa1067d738a1a4f3200f2bc0",
+      "date": "2002-04-30T22:43:41-04:00",
+      "subject": "[R] R-1.5.0: compiling package foreign on WinNT failed",
+      "subject_clean": "R-1.5.0: compiling package foreign on WinNT failed",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-help,\n\nI was able to build R-1.5.0 on WinNT w/o problem (actually it seems easier\nthan previous version).  However, I encountered problem when trying to\ncompile the recommended package foreign:\n\nmake: Entering directory `/cygdrive/g/rbuild/R-1.5.0/src/gnuwin32'\nmake DLLNM=  FLIBS=\"-lg2c -lRblas\" BUILD=MINGW \\\n  -C G:/Rbuild/R-1.5.0-recommended/R.INSTALL/foreign PKG=foreign\nRHOME=g:/rbuild\n/R-1.5.0 RLIB=g:/rbuild/R-1.5.0/library \\\n  -f g:/rbuild/R-1.5.0/src/gnuwin32/MakePkg\nmake[1]: Entering directory\n`/cygdrive/g/Rbuild/R-1.5.0-recommended/R.INSTALL/fo\nreign'\n---------- Making package foreign ------------\nconfigure.win: not found\nmake[1]: *** [g:/rbuild/R-1.5.0/library/foreign/zzzz] Error 127\nmake[1]: Leaving directory\n`/cygdrive/g/Rbuild/R-1.5.0-recommended/R.INSTALL/for\neign'\nmake: *** [pkg-foreign] Error 2\nmake: Leaving directory `/cygdrive/g/rbuild/R-1.5.0/src/gnuwin32'\n*** Installation of foreign failed ***\n\nDoes anyone have any idea what's wrong?  configure.win is there, and all it\ndoes is copying two files in src from .h.in to .h.\n\nCheers,\nAndy\n\n\n------------------------------------------------------------------------------\nNotice: This e-mail message, together with any attachments, contains information of Merck & Co., Inc. (Whitehouse Station, New Jersey, USA) that may be confidential, proprietary copyrighted and/or legally privileged, and is intended solely for the use of the individual or entity named on this message.  If you are not the intended recipient, and have received this message in error, please immediately return this by e-mail and then delete it.\n\n==============================================================================\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Dear R-help,\n\nI was able to build R-1.5.0 on WinNT w/o problem (actually it seems easier\nthan previous version).  However, I encountered problem when trying to\ncompile the recommended package foreign:",
+      "thread_id": "thread-b114acdcde00",
+      "thread_depth": 0,
+      "month": "2002-04"
+    },
+    {
+      "id": "msg-8547d9bb9a33",
+      "message_id": "<02043023355601.01158@ts46-01-qdr1297.knnwck.wa.charter.com>",
+      "from_name": "Rajiv Prasad",
+      "from_email_hash": "aab18a7b60765641c0708d1ca43771ac042ef9372ecbe67876caa7e06316a264",
+      "date": "2002-04-30T23:35:55-07:00",
+      "subject": "[R] upgrading to 1.5.0/uninstalling 1.4.1 on Linux",
+      "subject_clean": "upgrading to 1.5.0/uninstalling 1.4.1 on Linux",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi folks:\n\nI have a feeling this must be a FAQ, but I did not find the answer in R \nInstallation and Administration manual.  Please point me to the right place \nto look for answer to this question if it's already answered.\n\nI am running 1.4.1 on an Alpha PCA56 (aka 164SX) running Redhat Linux 7.1 \n(kernel 2.4.19-pre4).  I built 1.4.1 from sources and it is installed in \n/usr/local (the default).  I did compile and install some additional packages \nfor 1.4.1 besides the recommended ones.\n\nI want to upgrade to 1.5.0 now (it is being built now).  Do I need to \nuninstall 1.4.1 before I \"make install\" 1.5.0?  If yes, how exactly?\n\nThanks.\n\nRajiv\n\nPS:\n\n1.4.1 info:\n> version\n         _\nplatform alphapca56-unknown-linux-gnu\narch     alphapca56\nos       linux-gnu\nsystem   alphapca56, linux-gnu\nstatus\nmajor    1\nminor    4.1\nyear     2002\nmonth    01\nday      30\nlanguage R\n\nSystem info:\n$ uname -a\nLinux <hostname> 2.4.19-pre4 #1 Mon Apr 1 01:01:11 PST 2002 alpha unknown\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Hi folks:\n\nI have a feeling this must be a FAQ, but I did not find the answer in R \nInstallation and Administration manual.  Please point me to the right place \nto look for answer to this question if ",
+      "thread_id": "thread-8547d9bb9a33",
+      "thread_depth": 0,
+      "month": "2002-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-9739f71f4454",
+      "subject": "generating graphical output when DISPLAY is not set?",
+      "message_count": 1,
+      "participants": [
+        "Don MacQueen"
+      ],
+      "started": "2002-04-30T15:43:16-07:00",
+      "last_reply": "2002-04-30T15:43:16-07:00",
+      "root_message_id": "msg-9739f71f4454"
+    },
+    {
+      "id": "thread-36bb7ad99928",
+      "subject": "generating graphical output when DISPLAY is not set?",
+      "message_count": 1,
+      "participants": [
+        "Petre Dimitrov"
+      ],
+      "started": "2002-04-30T17:09:43-07:00",
+      "last_reply": "2002-04-30T17:09:43-07:00",
+      "root_message_id": "msg-36bb7ad99928"
+    },
+    {
+      "id": "thread-a28b4455e81e",
+      "subject": "A sample question",
+      "message_count": 1,
+      "participants": [
+        "Sundar Dorai-Raj"
+      ],
+      "started": "2002-04-30T17:46:36-05:00",
+      "last_reply": "2002-04-30T17:46:36-05:00",
+      "root_message_id": "msg-a28b4455e81e"
+    },
+    {
+      "id": "thread-6ba1297e3356",
+      "subject": "generating graphical output when DISPLAY is not set?",
+      "message_count": 1,
+      "participants": [
+        "Petre Dimitrov"
+      ],
+      "started": "2002-04-30T18:01:18-07:00",
+      "last_reply": "2002-04-30T18:01:18-07:00",
+      "root_message_id": "msg-6ba1297e3356"
+    },
+    {
+      "id": "thread-b114acdcde00",
+      "subject": "R-1.5.0: compiling package foreign on WinNT failed",
+      "message_count": 1,
+      "participants": [
+        "Liaw, Andy"
+      ],
+      "started": "2002-04-30T22:43:41-04:00",
+      "last_reply": "2002-04-30T22:43:41-04:00",
+      "root_message_id": "msg-b114acdcde00"
+    },
+    {
+      "id": "thread-8547d9bb9a33",
+      "subject": "upgrading to 1.5.0/uninstalling 1.4.1 on Linux",
+      "message_count": 1,
+      "participants": [
+        "Rajiv Prasad"
+      ],
+      "started": "2002-04-30T23:35:55-07:00",
+      "last_reply": "2002-04-30T23:35:55-07:00",
+      "root_message_id": "msg-8547d9bb9a33"
+    }
+  ]
+}

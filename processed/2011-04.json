@@ -1,0 +1,236 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2011-04",
+  "messages": [
+    {
+      "id": "msg-8ec0f96da191",
+      "message_id": "<BANLkTinwRH4vAERQbBnTvk9vZV0Z0FPY6g@mail.gmail.com>",
+      "from_name": "Alice Wines",
+      "from_email_hash": "cb79765b045997487518d90de1514585a164d157ca1f4207f32c6d0034bb18f4",
+      "date": "2011-04-30T19:18:50-04:00",
+      "subject": "[R] indexing into a data.frame using another data.frame that also contains values for replacement",
+      "subject_clean": "indexing into a data.frame using another data.frame that also contains values for replacement",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello all,\n\n     I have a quandry I have been scratching my head about for a\nwhile. I've searched the manual and the web and have not been able to\nfind an acceptable result, so I am hoping for some help.\n\n     I have two data frames and I want to index into the first using\nthe second, and replace the specific values I have indexed with more\nvalues from the second data.frame. I can do this using a loop, but I\nwanted a quicker solution with no loops involved.\n\nAlthough my data set is much larger than this, a small example of what\nI am trying to do is as follows:\n\ndf1 <- data.frame(rows=c(\"A\",\"B\",\"C\", \"B\", \"C\", \"A\"),\ncolumns=c(\"21_2\", \"22_2\", \"23_2\", \"21_2\", \"22_2\", \"23_2\"),\nvalues=c(3.3, 2.5, 67.2, 44.3, 53, 66))\ndf2 <- data.frame(matrix(rep(NA, length(df1$values)),nrow=3, ncol=3))\nnames(df2) <- c(\"21_2\", \"22_2\", \"23_2\")\nrow.names(df2) <- c(\"A\", \"B\", \"C\")\n\n> df1\n  rows columns values\n1    A    21_2    3.3\n2    B    22_2    2.5\n3    C    23_2   67.2\n4    B    21_2   44.3\n5    C    22_2   53.0\n6    A    23_2   66.0\n\n\n\n> df2\n  21_2 22_2 23_2\nA   NA   NA   NA\nB   NA   NA   NA\nC   NA   NA   NA\n\n\n     Note that none of the same locations in df2 are specified twice\nin df2, so I'm not worried about over-writing it.\n\n    I have tried 'mapply' and 'replace', but apparently either they do\nnot work well for this or I don't understand how to use them properly\nfor this purpose. My understanding is that 'replace' needs a vector\ninput and that one cannot create a vector of vectors, so I couldn't\npass my indices to 'replace'.\n\n     When I tried mapply, the code I used was something like what follows:\n\ndf3 <- mapply('[<-' , df2, paste(as.character(df1$rows),\nas.character(df1$columns), sep=', '), df1$values)\n\nbut it yields the following strange result\n\n> df3\n        21_2 22_2 23_2 <NA> <NA> <NA>\n          NA   NA   NA   NA   NA   NA\n          NA   NA   NA   NA   NA   NA\n          NA   NA   NA   NA   NA   NA\nA, 21_2  3.3  2.5 67.2 44.3   53   66\n\n\nWhat I want to see is the following:\n\n>df3\n    21_2   22_2  23_2\nA   3.3    NA    66.0\nB   44.3  2.5    NA\nC   NA   53.0   67.2\n\n\n     I will greatly appreciate any help that can be given as I am\ncompletely bamboozled by this problem and although I found many useful\nthings in my search for an answer, I did not find out how to do this.\n\nThanks,\n\nAlice",
+      "body_snippet": "Hello all,\n\n     I have a quandry I have been scratching my head about for a\nwhile. I've searched the manual and the web and have not been able to\nfind an acceptable result, so I am hoping for some he",
+      "thread_id": "thread-8ec0f96da191",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-ab43ac81b940",
+      "message_id": "<1304213798297-3486973.post@n4.nabble.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2011-04-30T18:36:38-07:00",
+      "subject": "[R] regressing on variable with heavy tails",
+      "subject_clean": "regressing on variable with heavy tails",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a dependent variable with is very peaked and has heavy tails,\nsomething I haven't encountered before. (histogram:\nhttp://postimage.org/image/2sw9bn8pw/). What could be an appropriate family\nor transformation to do regress on this?--\nView this message in context: http://r.789695.n4.nabble.com/regressing-on-variable-with-heavy-tails-tp3486973p3486973.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I have a dependent variable with is very peaked and has heavy tails,\nsomething I haven't encountered before. (histogram:\nhttp://postimage.org/image/2sw9bn8pw/). What could be an appropriate family\nor ",
+      "thread_id": "thread-ab43ac81b940",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-9fd6476f4cdc",
+      "message_id": "<1304218221827-3487118.post@n4.nabble.com>",
+      "from_name": "Wonjae Lee",
+      "from_email_hash": "a15bdf44b03452c9d1e8e93f1a85a63f1eb147d4b0cab241f59f053077d59a6d",
+      "date": "2011-04-30T19:50:21-07:00",
+      "subject": "[R] Conversion to xlsx file",
+      "subject_clean": "Conversion to xlsx file",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, all\n\nI would like to convert xls files to xlsx files with R commands in R console\ninstead of saving xls files as xlsx files after opening xls files.\nPlease show me how.\n\n\nThanks.\nWonjae\n\n --\nView this message in context: http://r.789695.n4.nabble.com/Conversion-to-xlsx-file-tp3487118p3487118.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi, all\n\nI would like to convert xls files to xlsx files with R commands in R console\ninstead of saving xls files as xlsx files after opening xls files.\nPlease show me how.\n\n\nThanks.\nWonjae\n\n --\nView ",
+      "thread_id": "thread-9fd6476f4cdc",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-8edb397d583b",
+      "message_id": "<6BCE37AF-632A-4A41-8116-DDBEC2C79A9C@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2011-04-30T23:15:49-04:00",
+      "subject": "[R] regressing on variable with heavy tails",
+      "subject_clean": "regressing on variable with heavy tails",
+      "in_reply_to": "<1304213798297-3486973.post@n4.nabble.com>",
+      "references": [
+        "<1304213798297-3486973.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Apr 30, 2011, at 9:36 PM, Jeroen Ooms wrote:\n\n> I have a dependent variable with is very peaked and has heavy tails,\n> something I haven't encountered before. (histogram:\n> http://postimage.org/image/2sw9bn8pw/). What could be an appropriate  \n> family\n> or transformation to do regress on this?\n\nNone. You have not yet established that the residuals of your analysis  \nviolate any of linear regression assumptions. It is the residuals that  \nneed to be Normal, not the dependent variable.\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Apr 30, 2011, at 9:36 PM, Jeroen Ooms wrote:\n\n> I have a dependent variable with is very peaked and has heavy tails,\n> something I haven't encountered before. (histogram:\n> http://postimage.org/ima",
+      "thread_id": "thread-ab43ac81b940",
+      "thread_depth": 1,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-6e54ab211f88",
+      "message_id": "<BANLkTi==_zZZSeXWKaC7Reb2WrDp-_1+jA@mail.gmail.com>",
+      "from_name": "Yihui Xie",
+      "from_email_hash": "233321ed9815f7d81a1c5f64502dfaacb2b6f3570ae39ee0e7d761f5b987e884",
+      "date": "2011-04-30T22:35:40-05:00",
+      "subject": "[R] Plotting an Underbrace in R",
+      "subject_clean": "Plotting an Underbrace in R",
+      "in_reply_to": "<BANLkTikKBbvgwawGU-O2mY53EgTdwfut9Q@mail.gmail.com>",
+      "references": [
+        "<BANLkTimw1vx1T1uUx_=X9cMtXjPKAc0R=g@mail.gmail.com>",
+        "<loom.20110414T232051-756@post.gmane.org>",
+        "<BANLkTim_gAyF72HGZM57fM8Ekyfknx2C9g@mail.gmail.com>",
+        "<BANLkTi=0ece+0cuuWSLGj3k4mBQNz2fGZw@mail.gmail.com>",
+        "<BANLkTikKBbvgwawGU-O2mY53EgTdwfut9Q@mail.gmail.com>"
+      ],
+      "body_plain": "Oh, I did not see this post and I just saw your message in my blog.\nAnyway, here is a solution for other people's future reference:\nhttp://yihui.name/en/2011/04/produce-authentic-math-formulas-in-r-graphics/\n\nRegards,\nYihui\n--\nYihui Xie <xieyihui at gmail.com>\nPhone: 515-294-2465 Web: http://yihui.name\nDepartment of Statistics, Iowa State University\n2215 Snedecor Hall, Ames, IA\n\n\n\nOn Fri, Apr 15, 2011 at 4:42 AM, Michael McAssey <mpmcassey at gmail.com> wrote:\n> Baptiste,\n>\n> Thank you. ?The examples in the documentation for tikz helped me solve\n> this problem, and give me a good tool for future plots. ?I only need\n> to figure out how to incorporate LaTeX packages like amssymb so that I\n> can use \\mathbb{} to put the real numbers symbol in my plot.\n>\n> Regards,\n>\n> Michael\n>\n> On Fri, Apr 15, 2011 at 10:48 AM, baptiste auguie\n> <baptiste.auguie at googlemail.com> wrote:\n>> Hi,\n>>\n>> Through pgfSweave you can use the tikz device, which is the one that\n>> can interpret Latex code (package tikzDevice). I would start with a\n>> minimal self-contained plot with this function. see ?tikz for\n>> examples.\n>>\n>> HTH,\n>>\n>> baptiste\n>>\n>>\n>>\n>>\n>> On 15 April 2011 20:03, Michael McAssey <mpmcassey at gmail.com> wrote:\n>>> Ben,\n>>>\n>>> This example of pgfSweave looks like it would address my problem.? I\n>>> installed this package, but I cannot determine how to use it to make R\n>>> convert LaTeX commands into mathematical symbols on an R plot.? The\n>>> documentation does not seem to address this.? I tried to mimic the\n>>> example from Yihui Xie that you provided but R only puts the LaTeX\n>>> code on my plot without converting it.? That is, if in the R GUI I\n>>> have:\n>>>\n>>>> library(pgfSweave)\n>>>> plot(1:10, 1:10, \"$Y=\\\\beta_0 + \\\\beta_1 x + \\\\epsilon$\")\n>>>\n>>> then in the plot the y-axis label is $Y=\\beta_0 + \\beta_1 x +\n>>> \\epsilon$ rather than what I want. ?I can't find any useful help on\n>>> Google. ?Any further suggestions?\n>>>\n>>> Thanks.\n>>>\n>>> Michael\n>>>\n>>>\n>>> On Thu, Apr 14, 2011 at 11:22 PM, Ben Bolker <bbolker at gmail.com> wrote:\n>>>>\n>>>> Michael McAssey <mpmcassey <at> gmail.com> writes:\n>>>>\n>>>> >\n>>>> > I need to include some mathematical expressions in a plot I am creating in\n>>>> > R, one of which requires an underbrace, which in LaTeX would be written like\n>>>> >\n>>>> > \\underbrace{T \\cdots T}_{n times}\n>>>> >\n>>>> > There does not appear to be a provision for this in plotmath, and I cannot\n>>>> > find anything on the topic in the R-help archive or in a Google search. ?I\n>>>> > would appreciate some help with this.\n>>>>\n>>>> ?Does\n>>>>\n>>>> <http://yihui.name/en/wp-content/uploads/2010/02/lyx-pgfsweave-demo.pdf>\n>>>>\n>>>> ?help at all?\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>>\n>>>\n>>> --\n>>> Michael P. McAssey, Ph.D.\n>>> Statistics for Life Sciences, Department of Mathematics\n>>> Faculty of Sciences, Vrije Universiteit Amsterdam\n>>> De Boelelaan 1081a, 1081 HV Amsterdam, The Netherlands\n>>> Office: S-230, W&N building\n>>> Tel: +31 (0)20 598 7724\n>>> Fax: +31 (0)20 598 7653\n>>> Mobile: +31 (0)62 113 8600\n>>> http://www.few.vu.nl/~mmy700/\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>\n>\n>\n>\n> --\n> Michael P. McAssey, Ph.D.\n> Statistics for Life Sciences, Department of Mathematics\n> Faculty of Sciences, Vrije Universiteit Amsterdam\n> De Boelelaan 1081a, 1081 HV Amsterdam, The Netherlands\n> Office: S-230, W&N building\n> Tel: +31 (0)20 598 7724\n> Fax: +31 (0)20 598 7653\n> Mobile: +31 (0)62 113 8600\n> http://www.few.vu.nl/~mmy700/\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Oh, I did not see this post and I just saw your message in my blog.\nAnyway, here is a solution for other people's future reference:\nhttp://yihui.name/en/2011/04/produce-authentic-math-formulas-in-r-gr",
+      "thread_id": "thread-6e54ab211f88",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-ae89364398d9",
+      "message_id": "<7976B75F085949799C0B54770DCEC4A5@XbiT>",
+      "from_name": "Chee Chen",
+      "from_email_hash": "3828ade96401ccd943af288dc8129437dd7c1e6883c2d6ff9b1f17a22f6212e7",
+      "date": "2011-04-30T23:39:43-04:00",
+      "subject": "[R] Question on where samples are grouped in rmvnorm{mvtnorm}",
+      "subject_clean": "Question on where samples are grouped in rmvnorm{mvtnorm}",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110430/ee695867/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110430/ee695867/attachment.pl>",
+      "thread_id": "thread-ae89364398d9",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-7b413d0e0b8f",
+      "message_id": "<1304225429735-3487234.post@n4.nabble.com>",
+      "from_name": "Berend Hasselman",
+      "from_email_hash": "997bb787abf80042157dc28e91db13eb5e5c0f433207dba7fcb5331fa2e472af",
+      "date": "2011-04-30T21:50:29-07:00",
+      "subject": "[R] indexing into a data.frame using another data.frame that also contains values for replacement",
+      "subject_clean": "indexing into a data.frame using another data.frame that also contains values for replacement",
+      "in_reply_to": "<BANLkTinwRH4vAERQbBnTvk9vZV0Z0FPY6g@mail.gmail.com>",
+      "references": [
+        "<BANLkTinwRH4vAERQbBnTvk9vZV0Z0FPY6g@mail.gmail.com>"
+      ],
+      "body_plain": "Alice Wines wrote:\n> \n> Hello all,\n> \n>      I have a quandry I have been scratching my head about for a\n> while. I've searched the manual and the web and have not been able to\n> find an acceptable result, so I am hoping for some help.\n> \n>      I have two data frames and I want to index into the first using\n> the second, and replace the specific values I have indexed with more\n> values from the second data.frame. I can do this using a loop, but I\n> wanted a quicker solution with no loops involved.\n> \n> Although my data set is much larger than this, a small example of what\n> I am trying to do is as follows:\n> \n> df1 <- data.frame(rows=c(\"A\",\"B\",\"C\", \"B\", \"C\", \"A\"),\n> columns=c(\"21_2\", \"22_2\", \"23_2\", \"21_2\", \"22_2\", \"23_2\"),\n> values=c(3.3, 2.5, 67.2, 44.3, 53, 66))\n> df2 <- data.frame(matrix(rep(NA, length(df1$values)),nrow=3, ncol=3))\n> names(df2) <- c(\"21_2\", \"22_2\", \"23_2\")\n> row.names(df2) <- c(\"A\", \"B\", \"C\")\n> \n>> df1\n>   rows columns values\n> 1    A    21_2    3.3\n> 2    B    22_2    2.5\n> 3    C    23_2   67.2\n> 4    B    21_2   44.3\n> 5    C    22_2   53.0\n> 6    A    23_2   66.0\n> \n> .......\n> \n> What I want to see is the following:\n> \n>>df3\n>     21_2   22_2  23_2\n> A   3.3    NA    66.0\n> B   44.3  2.5    NA\n> C   NA   53.0   67.2\n> \n\nHow about this (I have converted df2 into a matrix)\n\ndf2 <- matrix(rep(NA, length(df1$values)),nrow=3, ncol=3)\ncolnames(df2) <- c(\"21_2\", \"22_2\", \"23_2\")\nrownames(df2) <- c(\"A\", \"B\", \"C\")\n\ndf2[cbind(df1$rows,df1$columns)] <- df1$values\n\n# convert df2 to a data.frame\n\nBerend--\nView this message in context: http://r.789695.n4.nabble.com/indexing-into-a-data-frame-using-another-data-frame-that-also-contains-values-for-replacement-tp3487147p3487234.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Alice Wines wrote:\n> \n> Hello all,\n> \n>      I have a quandry I have been scratching my head about for a\n> while. I've searched the manual and the web and have not been able to\n> find an acceptable re",
+      "thread_id": "thread-8ec0f96da191",
+      "thread_depth": 1,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-a7e714fe52a4",
+      "message_id": "<BANLkTinGcQBk3KNnMOsS65CntqaQDdQDhg@mail.gmail.com>",
+      "from_name": "Dennis Murphy",
+      "from_email_hash": "e4a5a8dffeb093c4485cbdaf24417516db9183251269103e90963889fce45f74",
+      "date": "2011-04-30T22:03:24-07:00",
+      "subject": "[R] using tapply with multiple variables",
+      "subject_clean": "using tapply with multiple variables",
+      "in_reply_to": "<BANLkTimNG6trL-Ufv-B7Bvvf5nmY-93-ZA@mail.gmail.com>",
+      "references": [
+        "<BANLkTimNG6trL-Ufv-B7Bvvf5nmY-93-ZA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi:\n\nIf you have R 2.11.x or later, one can use the formula version of aggregate():\n\naggregate(Correct ~ Subject + Group, data = ALLDATA, FUN = function(x)\nsum(x == 'C'))\n\nA variety of contributed packages (plyr, data.table, doBy, sqldf and\nremix, among others) have similar capabilities.\n\nIf you want some additional summaries (e.g., percent correct), here is\nan example function for a single subject/group that aggregate() can\nuse to propagate to all subgroups and subjects (I encourage you to\nplay with it):\n\nf <- function(x) {\n    Correct <- sum(x == 'C')\n    Percent <- round(100 * Correct/length(x), 3)\n    c(Number = Correct, Percent = Percent)\n  }\naggregate(Correct ~ Subject + Group, data = ALLDATA, FUN = f)\n\nThe particular function isn't as important as knowing you can do this\nsort of thing. Several of the contributed packages indicated above\nhave similar, if not superior, capabilities, depending on the\nsituation.\n\nToy example to test the above:\n\ndd <- data.frame(Subject = rep(1:5, each = 100),\n                  Group = rep(rep(c('C', 'T'), each = 50), 5),\n                  Correct = factor(rbinom(500, 1, 0.8), labels = c('I', 'C')))\naggregate(Correct ~ Subject + Group, data = dd, FUN = function(x) sum(x == 'C'))\n   Subject Group Correct\n1        1     C      40\n2        2     C      36\n3        3     C      39\n4        4     C      37\n5        5     C      41\n6        1     T      43\n7        2     T      45\n8        3     T      37\n9        4     T      45\n10       5     T      36\naggregate(Correct ~ Subject + Group, data = dd, FUN = f)\n   Subject Group Correct.Number Correct.Percent\n1        1     C             40              80\n2        2     C             36              72\n3        3     C             39              78\n4        4     C             37              74\n5        5     C             41              82\n6        1     T             43              86\n7        2     T             45              90\n8        3     T             37              74\n9        4     T             45              90\n10       5     T             36              72\n\nHTH,\nDennis\n\nOn Sat, Apr 30, 2011 at 12:28 PM, Kevin Burnham <kburnham at gmail.com> wrote:\n> HI All,\n>\n> I have a long data file generated from a minimal pair test that I gave to\n> learners of Arabic before and after a phonetic training regime. ?For each of\n> thirty some subjects there are 800 rows of data, from each of 400 items at\n> pre and posttest. ?For each item the subject got correct, there is a 'C' in\n> the column 'Correct'. ?The line:\n>\n> tapply(ALLDATA$Correct, ALLDATA$Subject, function(x)sum(x==\"C\"))\n>\n> gives me the sum of correct answers for each subject.\n>\n> However, I would like to have that sum separated by Time (pre or post). ?Is\n> there a simple way to do that?\n>\n>\n> What if I further wish to separate by Group (T or C)?\n>\n> Thanks,\n> Kevin\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Hi:\n\nIf you have R 2.11.x or later, one can use the formula version of aggregate():\n\naggregate(Correct ~ Subject + Group, data = ALLDATA, FUN = function(x)\nsum(x == 'C'))\n\nA variety of contributed pac",
+      "thread_id": "thread-a7e714fe52a4",
+      "thread_depth": 0,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-61406791df2e",
+      "message_id": "<BANLkTim4w23P_J5f=PiggdZBCQMg_mbXqg@mail.gmail.com>",
+      "from_name": "Dennis Murphy",
+      "from_email_hash": "e4a5a8dffeb093c4485cbdaf24417516db9183251269103e90963889fce45f74",
+      "date": "2011-04-30T22:09:34-07:00",
+      "subject": "[R] indexing into a data.frame using another data.frame that also contains values for replacement",
+      "subject_clean": "indexing into a data.frame using another data.frame that also contains values for replacement",
+      "in_reply_to": "<BANLkTinwRH4vAERQbBnTvk9vZV0Z0FPY6g@mail.gmail.com>",
+      "references": [
+        "<BANLkTinwRH4vAERQbBnTvk9vZV0Z0FPY6g@mail.gmail.com>"
+      ],
+      "body_plain": "Hi:\n\nHere are two possibilities:\n\n df1 <- data.frame(rows=c(\"A\",\"B\",\"C\", \"B\", \"C\", \"A\"),\n columns=c(\"21_2\", \"22_2\", \"23_2\", \"21_2\", \"22_2\", \"23_2\"),\n values=c(3.3, 2.5, 67.2, 44.3, 53, 66))\n\nwith(df1, xtabs(values ~ rows + columns))\n\n    columns\nrows 21_2 22_2 23_2\n   A  3.3  0.0 66.0\n   B 44.3  2.5  0.0\n   C  0.0 53.0 67.2\n\nlibrary(reshape2)\ndcast(df1, rows ~ columns)\n\nUsing values as value column: use value_var to override.\n  rows 21_2 22_2 23_2\n1    A  3.3   NA 66.0\n2    B 44.3  2.5   NA\n3    C   NA 53.0 67.2\n\nHTH,\nDennis\n\nOn Sat, Apr 30, 2011 at 4:18 PM, Alice Wines <aabroadh at ncsu.edu> wrote:\n> Hello all,\n>\n> ? ? I have a quandry I have been scratching my head about for a\n> while. I've searched the manual and the web and have not been able to\n> find an acceptable result, so I am hoping for some help.\n>\n> ? ? I have two data frames and I want to index into the first using\n> the second, and replace the specific values I have indexed with more\n> values from the second data.frame. I can do this using a loop, but I\n> wanted a quicker solution with no loops involved.\n>\n> Although my data set is much larger than this, a small example of what\n> I am trying to do is as follows:\n>\n> df1 <- data.frame(rows=c(\"A\",\"B\",\"C\", \"B\", \"C\", \"A\"),\n> columns=c(\"21_2\", \"22_2\", \"23_2\", \"21_2\", \"22_2\", \"23_2\"),\n> values=c(3.3, 2.5, 67.2, 44.3, 53, 66))\n> df2 <- data.frame(matrix(rep(NA, length(df1$values)),nrow=3, ncol=3))\n> names(df2) <- c(\"21_2\", \"22_2\", \"23_2\")\n> row.names(df2) <- c(\"A\", \"B\", \"C\")\n>\n>> df1\n> ?rows columns values\n> 1 ? ?A ? ?21_2 ? ?3.3\n> 2 ? ?B ? ?22_2 ? ?2.5\n> 3 ? ?C ? ?23_2 ? 67.2\n> 4 ? ?B ? ?21_2 ? 44.3\n> 5 ? ?C ? ?22_2 ? 53.0\n> 6 ? ?A ? ?23_2 ? 66.0\n>\n>\n>\n>> df2\n> ?21_2 22_2 23_2\n> A ? NA ? NA ? NA\n> B ? NA ? NA ? NA\n> C ? NA ? NA ? NA\n>\n>\n> ? ? Note that none of the same locations in df2 are specified twice\n> in df2, so I'm not worried about over-writing it.\n>\n> ? ?I have tried 'mapply' and 'replace', but apparently either they do\n> not work well for this or I don't understand how to use them properly\n> for this purpose. My understanding is that 'replace' needs a vector\n> input and that one cannot create a vector of vectors, so I couldn't\n> pass my indices to 'replace'.\n>\n> ? ? When I tried mapply, the code I used was something like what follows:\n>\n> df3 <- mapply('[<-' , df2, paste(as.character(df1$rows),\n> as.character(df1$columns), sep=', '), df1$values)\n>\n> but it yields the following strange result\n>\n>> df3\n> ? ? ? ?21_2 22_2 23_2 <NA> <NA> <NA>\n> ? ? ? ? ?NA ? NA ? NA ? NA ? NA ? NA\n> ? ? ? ? ?NA ? NA ? NA ? NA ? NA ? NA\n> ? ? ? ? ?NA ? NA ? NA ? NA ? NA ? NA\n> A, 21_2 ?3.3 ?2.5 67.2 44.3 ? 53 ? 66\n>\n>\n> What I want to see is the following:\n>\n>>df3\n> ? ?21_2 ? 22_2 ?23_2\n> A ? 3.3 ? ?NA ? ?66.0\n> B ? 44.3 ?2.5 ? ?NA\n> C ? NA ? 53.0 ? 67.2\n>\n>\n> ? ? I will greatly appreciate any help that can be given as I am\n> completely bamboozled by this problem and although I found many useful\n> things in my search for an answer, I did not find out how to do this.\n>\n> Thanks,\n>\n> Alice\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Hi:\n\nHere are two possibilities:\n\n df1 <- data.frame(rows=c(\"A\",\"B\",\"C\", \"B\", \"C\", \"A\"),\n columns=c(\"21_2\", \"22_2\", \"23_2\", \"21_2\", \"22_2\", \"23_2\"),\n values=c(3.3, 2.5, 67.2, 44.3, 53, 66))\n\nwith(df1,",
+      "thread_id": "thread-8ec0f96da191",
+      "thread_depth": 1,
+      "month": "2011-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-ab43ac81b940",
+      "subject": "regressing on variable with heavy tails",
+      "message_count": 2,
+      "participants": [
+        "David Winsemius",
+        "Jeroen Ooms"
+      ],
+      "started": "2011-04-30T18:36:38-07:00",
+      "last_reply": "2011-04-30T23:15:49-04:00",
+      "root_message_id": "msg-ab43ac81b940"
+    },
+    {
+      "id": "thread-8ec0f96da191",
+      "subject": "indexing into a data.frame using another data.frame that also contains values for replacement",
+      "message_count": 3,
+      "participants": [
+        "Alice Wines",
+        "Berend Hasselman",
+        "Dennis Murphy"
+      ],
+      "started": "2011-04-30T19:18:50-04:00",
+      "last_reply": "2011-04-30T22:09:34-07:00",
+      "root_message_id": "msg-8ec0f96da191"
+    },
+    {
+      "id": "thread-9fd6476f4cdc",
+      "subject": "Conversion to xlsx file",
+      "message_count": 1,
+      "participants": [
+        "Wonjae Lee"
+      ],
+      "started": "2011-04-30T19:50:21-07:00",
+      "last_reply": "2011-04-30T19:50:21-07:00",
+      "root_message_id": "msg-9fd6476f4cdc"
+    },
+    {
+      "id": "thread-a7e714fe52a4",
+      "subject": "using tapply with multiple variables",
+      "message_count": 1,
+      "participants": [
+        "Dennis Murphy"
+      ],
+      "started": "2011-04-30T22:03:24-07:00",
+      "last_reply": "2011-04-30T22:03:24-07:00",
+      "root_message_id": "msg-a7e714fe52a4"
+    },
+    {
+      "id": "thread-6e54ab211f88",
+      "subject": "Plotting an Underbrace in R",
+      "message_count": 1,
+      "participants": [
+        "Yihui Xie"
+      ],
+      "started": "2011-04-30T22:35:40-05:00",
+      "last_reply": "2011-04-30T22:35:40-05:00",
+      "root_message_id": "msg-6e54ab211f88"
+    },
+    {
+      "id": "thread-ae89364398d9",
+      "subject": "Question on where samples are grouped in rmvnorm{mvtnorm}",
+      "message_count": 1,
+      "participants": [
+        "Chee Chen"
+      ],
+      "started": "2011-04-30T23:39:43-04:00",
+      "last_reply": "2011-04-30T23:39:43-04:00",
+      "root_message_id": "msg-ae89364398d9"
+    }
+  ]
+}

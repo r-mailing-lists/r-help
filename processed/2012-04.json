@@ -1,0 +1,500 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2012-04",
+  "messages": [
+    {
+      "id": "msg-e983aafe31ed",
+      "message_id": "<1335823932971-4599541.post@n4.nabble.com>",
+      "from_name": "strycker",
+      "from_email_hash": "458f7feeb5d52239359dc26c25836ec614471d2ce025d4b8b8593a33009e0c75",
+      "date": "2012-04-30T15:12:12-07:00",
+      "subject": "[R] compiling an R script",
+      "subject_clean": "compiling an R script",
+      "in_reply_to": "<4BEAAB09.9060207@gmail.com>",
+      "references": [
+        "<AANLkTikBYbfNNnyiAISg2Kqoe-1fYJLQpSeRugZ0d32z@mail.gmail.com>",
+        "<4BEAAB09.9060207@gmail.com>"
+      ],
+      "body_plain": "I'm interested in this question, too, not so I can hide code, but so I can\nrun R code faster.  It's been my experience that compiled code always runs\nfaster than interpreted code.  Can you explain further how to compile a\nfront-end?\n\n--\nView this message in context: http://r.789695.n4.nabble.com/compiling-an-R-script-tp2195949p4599541.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I'm interested in this question, too, not so I can hide code, but so I can\nrun R code faster.  It's been my experience that compiled code always runs\nfaster than interpreted code.  Can you explain fur",
+      "thread_id": "thread-e983aafe31ed",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-32ebb0651900",
+      "message_id": "<1335824654131-4599559.post@n4.nabble.com>",
+      "from_name": "kebrab67",
+      "from_email_hash": "5eb71c49786a3f374e7131b1ad30faaf0cc5e4b47db40fd44ed549b9e9e783ca",
+      "date": "2012-04-30T15:24:14-07:00",
+      "subject": "[R] IV estimation",
+      "subject_clean": "IV estimation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello, \nI have a set of 100 variables with 1560 observations. I did an O.L.S\nregression of three of these variables on a fourth. But there are problems\nof endogeneity... So I look in my dataset for instruments to do an IV. I\ncan't find a good instrument because their correlation with my endogeneous\nvariables are too low. But I see that when I create a combined variable\ncomposed of 12 variables of the dataset my correlation is much stronger.\nCan I use such a combined variable to estimate my equation with 2SLS, or\nGMM.\n\n--\nView this message in context: http://r.789695.n4.nabble.com/IV-estimation-tp4599559.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello, \nI have a set of 100 variables with 1560 observations. I did an O.L.S\nregression of three of these variables on a fourth. But there are problems\nof endogeneity... So I look in my dataset for in",
+      "thread_id": "thread-32ebb0651900",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-970673bd4e13",
+      "message_id": "<4b95e3e3-59cc-4e51-a582-2244c90b495b@email.android.com>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2012-04-30T16:14:19-07:00",
+      "subject": "[R] Subtract days to dates in POSIXct format",
+      "subject_clean": "Subtract days to dates in POSIXct format",
+      "in_reply_to": "<1335822956.28574.YahooMailNeo@web126006.mail.ne1.yahoo.com>",
+      "references": [
+        "<1335792661.91122.YahooMailNeo@web126002.mail.ne1.yahoo.com>",
+        "<alpine.BSF.2.00.1204300816280.5693@pedal.dcn.davis.ca.us>",
+        "<1335822956.28574.YahooMailNeo@web126006.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "The sunrise and sunset are calculated for each time value on the input vector, but all times are treated in the TZ timezone. I can see that the Canary Islands are in the GMT timezone, so the example TZ is right.\n\n I can see that you entered the latitude and longitude backward (longitude is \"x\"), but I am not able to look at your data at the moment so I don't know whether that fixes your problem. Maptools assumes one location Depending on where the bird went in the South Atlantic, the assumed latitude could be several hours wrong, though. Also, there is dependence of length of day on latitude (made more noticeable by crossing the equator). \n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nSantiago Guallar <sguallar at yahoo.com> wrote:\n\n>Thanks a lot, Jeff\n>\n>Yes, I applied colsplit in package reshape. Sorry, I forgot to state it\n>in the piece of code I attached.\n>Actually, these are archival data from a geolocator attached to a\n>seabird. The origin lies on Gran Canaria and data were gathered all\n>along its migratory journey for one full year, from the Canary Islands\n>all the way to the South Atlantic Ocean and back.\n>Variable lig, which stands for light, indicates daylight (aprox lig>2)\n>or its absence (lig<2), so I know when it is nighttime or daytime for\n>sure. However, I'd like to compare it with the output of the maptools\n>functions.?\n>If I understood well maptools functions use astronomical algorithms to\n>calculate sunrise and sunset based on one location and one POSIXct\n>time. If I changed your invented coordinates and time for the real ones\n>in my dataset would do the job correctly? When I put the aproximate\n>coordinates it yields an incorrect output:\n>site <- SpatialPoints( matrix(c(27.82, -15.77),\n>nrow=1),proj4string=CRS(\"+proj=longlat +datum=WGS84\")) # didn't touch\n>the rest of your code\n>\n>But I'm probably doing something wrong.\n>\n>Santi?\n>\n>\n>\n>\n>>________________________________\n>> From: Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\n>>To: Santiago Guallar <sguallar at yahoo.com> \n>>Cc: \"r-help at r-project.org\" <r-help at r-project.org> \n>>Sent: Monday, April 30, 2012 5:51 PM\n>>Subject: Re: [R] Subtract days to dates in POSIXct format\n>> \n>>On Mon, 30 Apr 2012, Santiago Guallar wrote:\n>>\n>>> Hello,\n>>> \n>>> I'm having problems working with date values in POSIXct format.\n>>\n>>Indeed you are.\n>>\n>>> Here is what I got (eg.lig attached):\n>>> \n>>> x <- read.table(\"eg.txt\", sep = ',',\n>col.names=c(\"ok\",\"time\",\"secs\",\"lig\")) # it gives time as factor\n>>> z <- cbind(x,colsplit(x$time, split=\"\\\\s\", names=c(\"date\",\n>\"clock\")))\n>>\n>>colsplit is not defined in base R, and it is redefined in a couple of\n>packages.? I am guessing you mean the one that is in the reshape\n>package.\n>>\n>>> zh<-cbind(z,colsplit(z$clock,split=\":\",names=c(\"h\",\"m\",\"s\")))\n>>> zn <- subset(zh, zh$lig<= 5 & zh$h<8?|?zh$h>=22) # nighttime\n>>> zn$timepos<-as.POSIXct(zn$time,tz=\"GMT\",format=\"%d/%m/%y %H:%M:%S\")\n>>\n>>> I want to assign timepos to its ?natural? night, that is, the night\n>that goes from sunset of day x to sunrise of day x+1 corresponds to day\n>x:\n>>\n>>You are working here with GMT, but there are many other possible\n>timezones that this data could correspond to, and if the input time\n>really is in GMT, then the interval of night could be anytime.\n>>\n>>> \n>>> zn$night<-ifelse(zn$h>=0 & zn$h<9,zn$timepos\n>??oneday?,zn$timepos)??#doesn?t work\n>>> \n>>> How can I subtract one day (24 hours) to zn$timepos and obtain a\n>POSIXct output?\n>>\n>>Well, a literal answer to your question is:\n>>\n>>zn$timepos - as.difftime( 1, units=\"days\" )\n>>\n>>but in response to your stated goal perhaps you should study the\n>following:\n>>\n>>library(maptools)\n>>Sys.setenv( TZ=\"GMT\" ) # set to the local timezone for column \"time\"\n>>dta <- read.table( \"eg.txt\"\n>>? ? ? ? ? ? ? ?  , sep=','\n>>? ? ? ? ? ? ? ?  , col.names=c(\"ok\",\"time\",\"secs\",\"lig\")\n>>? ? ? ? ? ? ? ?  , stringsAsFactors=FALSE)\n>>dta$dtm <- as.POSIXct( dta$time, format=\"%d/%m/%y %T\" ) # depends on\n>TZ\n>># site is invented in GMT timezone for illustration\n>>site <- SpatialPoints( matrix( 0, 51.5, nrow=1 )\n>>? ? ? ? ? ? ? ? ? ?  , proj4string=CRS(\"+proj=longlat +datum=WGS84\" )\n>)\n>>dta$rise <- sunriset( site\n>>? ? ? ? ? ? ? ? ? ? , dta$dtm\n>>? ? ? ? ? ? ? ? ? ? , direction=\"sunrise\"\n>>? ? ? ? ? ? ? ? ? ? , POSIXct.out=TRUE )$time\n>>dta$set <- sunriset( site\n>>? ? ? ? ? ? ? ? ?  , dta$dtm\n>>? ? ? ? ? ? ? ? ?  , direction=\"sunset\"\n>>? ? ? ? ? ? ? ? ?  , POSIXct.out=TRUE )$time\n>>dta$isnight <- with( dta, !( rise < dtm & dtm < set ) )\n>>\n>>\n>>---------------------------------------------------------------------------\n>>Jeff Newmiller? ? ? ? ? ? ? ? ? ? ? ? The? ?  .....? ? ?  .....? Go\n>Live...\n>>DCN:<jdnewmil at dcn.davis.ca.us>? ? ? ? Basics: ##.#.? ? ?  ##.#.? Live\n>Go...\n>>? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Live:?  OO#.. Dead: OO#..?\n>Playing\n>>Research Engineer (Solar/Batteries? ? ? ? ? ? O.O#.? ? ?  #.O#.? with\n>>/Software/Embedded Controllers)? ? ? ? ? ? ?  .OO#.? ? ?  .OO#.?\n>rocks...1k\n>>---------------------------------------------------------------------------\n>>\n>>",
+      "body_snippet": "The sunrise and sunset are calculated for each time value on the input vector, but all times are treated in the TZ timezone. I can see that the Canary Islands are in the GMT timezone, so the example T",
+      "thread_id": "thread-970673bd4e13",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-1f80b6fffdb6",
+      "message_id": "<1335828143521-4599692.post@n4.nabble.com>",
+      "from_name": "baconbeach",
+      "from_email_hash": "f4ca04a25965aa8185f9b25aef093fdb887fbe1787ea366e124e88878806f255",
+      "date": "2012-04-30T16:22:23-07:00",
+      "subject": "[R] 95% confidence interval of the coefficients from a bootstrap analysis",
+      "subject_clean": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI am doing a simple linear regression analysis that includes few variables.\nI am using a bootstrap analysis to obtain the variation of my variables to\nreplacement.\n\nI am trying to obtain the coefficients  95% confidence interval from the\nbootstrap procedure.\n\nHere is my script for the bootstrap:\n\n\n\n\nN = length (data_Pb[,1])\nB = 10000\n\n\nstor.r2 = rep(0,B)\nstor.r2 = rep(0,B)\nstor.inter = rep(0,B)\nstor.Ind5 = rep(0,B)\nstor.LNPRI25  = rep(0,B)\nstor.NPRI10 = rep(0,B)\nstor.Mine  = rep(0,B)\n\nfor (i in 1:B){\nidx = sample(1:N, replace=T)\nnewdata = data_Pb[idx,]\n\n\nL_NPRI_25k <- log(newdata$NPRI_25k+1)\n\ndata_Pb.boot = lm(newdata$Log_Level ~   \n  \n  newdata$Ind_5k + newdata$MineP_50k + \n  newdata$NPRI_10k + L_NPRI_25k )\n\nstor.r2[i] = summary(data_Pb.boot)$r.squared\nstor.inter[i] = summary(data_Pb.boot)$coefficients[1,1]\nstor.Ind5[i] = summary(data_Pb.boot)$coefficients[2,1]\nstor.LNPRI25 [i] = summary(data_Pb.boot)$coefficients[3,1]\nstor.NPRI10[i] = summary(data_Pb.boot)$coefficients[4,1]\nstor.Mine [i] = summary(data_Pb.boot)$coefficients[5,1]\n}\n\n\nhist(stor.r2, xlab=\"R-squared\",main=\"Distribution of R-squared - Lead\n(log)\")\nhist(stor.inter, xlab=\"Intercept\",main=\"Distribution of Intercept - Lead\n(log)\")\nhist(stor.Ind5, xlab=\"Industrial 5 km\",main=\"Distribution of Industrial 5 km\n- Lead (log)\")\nhist(stor.LNPRI25, xlab=\"NPRI 25 km (log)\",main=\"Distribution of NPRI 25 km\n- Lead (log)\")\nhist(stor.NPRI10, xlab=\"NPRI 10 km\",main=\"Distribution of NPRI 10 km - Lead\n(log)\")\nhist(stor.Mine, xlab=\"Past Mines 50 km\",main=\"Distribution of Past Mines 50\nkm - Lead (log)\")\n\n\nsummary(stor.r2)\nsummary(stor.inter)\nsummary(stor.Ind5)\nsummary(stor.LNPRI25)\nsummary(stor.NPRI10)\nsummary(stor.Mine)\n\n\n###Valid only for the last calculated model of the bootstrap analysis ???\n\nconfint(data_Pb.boot)\n\n\nCan anybody show me the best way to get the 95% confidence interval of the\ncoefficients?\n\nThank you\n\nSteeve\n\n--\nView this message in context: http://r.789695.n4.nabble.com/95-confidence-interval-of-the-coefficients-from-a-bootstrap-analysis-tp4599692.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello,\n\nI am doing a simple linear regression analysis that includes few variables.\nI am using a bootstrap analysis to obtain the variation of my variables to\nreplacement.\n\nI am trying to obtain the c",
+      "thread_id": "thread-1f80b6fffdb6",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-ea31d3571732",
+      "message_id": "<1335830082421-4599734.post@n4.nabble.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "46b93819287d062cad8c235168128396704d16cef6015fa4ff365e8f816de22f",
+      "date": "2012-04-30T16:54:42-07:00",
+      "subject": "[R] 95% confidence interval of the coefficients from a bootstrap analysis",
+      "subject_clean": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "in_reply_to": "<1335828143521-4599692.post@n4.nabble.com>",
+      "references": [
+        "<1335828143521-4599692.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hello,\n\n\nbaconbeach wrote\n> \n> Hello,\n> \n> I am doing a simple linear regression analysis that includes few\n> variables. I am using a bootstrap analysis to obtain the variation of my\n> variables to replacement.\n> \n> I am trying to obtain the coefficients  95% confidence interval from the\n> bootstrap procedure.\n> \n> Here is my script for the bootstrap:\n> \n> \n> \n> \n> N = length (data_Pb[,1])\n> B = 10000\n> \n> \n> stor.r2 = rep(0,B)\n> stor.r2 = rep(0,B)\n> stor.inter = rep(0,B)\n> stor.Ind5 = rep(0,B)\n> stor.LNPRI25  = rep(0,B)\n> stor.NPRI10 = rep(0,B)\n> stor.Mine  = rep(0,B)\n> \n> for (i in 1:B){\n> idx = sample(1:N, replace=T)\n> newdata = data_Pb[idx,]\n> \n> \n> L_NPRI_25k <- log(newdata$NPRI_25k+1)\n> \n> data_Pb.boot = lm(newdata$Log_Level ~   \n>   \n>   newdata$Ind_5k + newdata$MineP_50k + \n>   newdata$NPRI_10k + L_NPRI_25k )\n> \n> stor.r2[i] = summary(data_Pb.boot)$r.squared\n> stor.inter[i] = summary(data_Pb.boot)$coefficients[1,1]\n> stor.Ind5[i] = summary(data_Pb.boot)$coefficients[2,1]\n> stor.LNPRI25 [i] = summary(data_Pb.boot)$coefficients[3,1]\n> stor.NPRI10[i] = summary(data_Pb.boot)$coefficients[4,1]\n> stor.Mine [i] = summary(data_Pb.boot)$coefficients[5,1]\n> }\n> \n> \n> hist(stor.r2, xlab=\"R-squared\",main=\"Distribution of R-squared - Lead\n> (log)\")\n> hist(stor.inter, xlab=\"Intercept\",main=\"Distribution of Intercept - Lead\n> (log)\")\n> hist(stor.Ind5, xlab=\"Industrial 5 km\",main=\"Distribution of Industrial 5\n> km - Lead (log)\")\n> hist(stor.LNPRI25, xlab=\"NPRI 25 km (log)\",main=\"Distribution of NPRI 25\n> km - Lead (log)\")\n> hist(stor.NPRI10, xlab=\"NPRI 10 km\",main=\"Distribution of NPRI 10 km -\n> Lead (log)\")\n> hist(stor.Mine, xlab=\"Past Mines 50 km\",main=\"Distribution of Past Mines\n> 50 km - Lead (log)\")\n> \n> \n> summary(stor.r2)\n> summary(stor.inter)\n> summary(stor.Ind5)\n> summary(stor.LNPRI25)\n> summary(stor.NPRI10)\n> summary(stor.Mine)\n> \n> \n> ###Valid only for the last calculated model of the bootstrap analysis ???\n> \n> confint(data_Pb.boot)\n> \n> \n> Can anybody show me the best way to get the 95% confidence interval of the\n> coefficients?\n> \n> Thank you\n> \n> Steeve\n> \n\nI think you're complicating a bit, you could save r2 in a vector and the\ncoefficients in a list (see (*) below),\nlike the one that follows:\n\nAfter creating your stor vars, and before the bootstarp loop, put this\n\nstor.confint <- vector(\"list\", B)\n\nThen, inside the loop, at it's end,\n\nstor.confint[[i]] <- confint(data_Pb.boot)\n\nThis creates a list of matrices.\n\n(*) The same for the coefficients, create a list first then in the loop use\nfunction coef()\n\nstor.coeffs <- vector(\"list\", B)\n\nstor.coeffs <- coef(data_Pb.boot)\n\n\nHope this helps,\n\nRui Barradas\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/95-confidence-interval-of-the-coefficients-from-a-bootstrap-analysis-tp4599692p4599734.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello,\n\n\nbaconbeach wrote\n> \n> Hello,\n> \n> I am doing a simple linear regression analysis that includes few\n> variables. I am using a bootstrap analysis to obtain the variation of my\n> variables to re",
+      "thread_id": "thread-1f80b6fffdb6",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-d06314d32d37",
+      "message_id": "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>",
+      "from_name": "Schreiber, Stefan",
+      "from_email_hash": "a37924533caf2265ea5eb894f2efa2d6de74a95c17c45b7128082d85fbdcefb7",
+      "date": "2012-04-30T17:57:02-06:00",
+      "subject": "[R] for loop problem",
+      "subject_clean": "for loop problem",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/15202886/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/15202886/attachment.pl>",
+      "thread_id": "thread-d06314d32d37",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-5a0c43219ae9",
+      "message_id": "<CAAmySGNBk6TVP6ummR+ZZVKdEimESnwb4BYAXbybMaA0L6AJJQ@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-04-30T20:04:25-04:00",
+      "subject": "[R] for loop problem",
+      "subject_clean": "for loop problem",
+      "in_reply_to": "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>",
+      "references": [
+        "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>"
+      ],
+      "body_plain": "Perhaps this is easier: convert your data to Date objects and use the\nyday (year day) function from the lubridate package:\n\ni.e., something like this:\n\njd <- apply(DAT, 1, function(x) as.Date(paste(x, collapse = \" \"),\nformat = \"%Y %m %d\")\n# Just a guess you might have to debug it a little\n\nyday(jd)\n\nIt will also be generally easier to use proper Date objects in R anyways :-)\n\nHope this helps,\n\nMichael\n\nOn Mon, Apr 30, 2012 at 7:57 PM, Schreiber, Stefan\n<Stefan.Schreiber at ales.ualberta.ca> wrote:\n> Hi all,\n>\n> I was wondering if you can help me with the following situation:\n>\n> I have a data frame that includes weather station data for 30 years in\n> the form:\n>\n> YEAR, MONTH, DAY, TEMP\n> 1970, 01, 01, -15\n> ...\n> 1999, 12, 31, -21\n>\n> I would like to add another variable \"JULIAN\" that assigns the integers\n> 1 to 365 (and 1 to 366 for leap years) for each day of a year over\n> multiple years.\n>\n> Here is what I came up with:\n>\n> counter<-1\n>\n> for(i in 1:12){\n> for (j in 1:31){\n>\n> df$JULIAN[df$MONTH==i & stn$DAY==j]<- counter\n> counter<-counter+1\n> }\n> }\n>\n> R does it exactly what I told it to but I am not satisfied with it since\n> it doesn't stop assigning the integers when months have 28, 29 or 30\n> days. For instance on Feb-28 JULIAN is 59 and on March-1 it's 64, as\n> opposed to be 60.\n>\n> I am assuming it must be an ifelse statement, and I was messing around\n> with it already but without success.\n>\n> I guess I am missing some vocabulary here and hope someone can give me\n> some pointers.\n>\n> Thanks,\n> Stefan\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Perhaps this is easier: convert your data to Date objects and use the\nyday (year day) function from the lubridate package:\n\ni.e., something like this:\n\njd <- apply(DAT, 1, function(x) as.Date(paste(x,",
+      "thread_id": "thread-d06314d32d37",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-bea67711f925",
+      "message_id": "<1335832781469-4599813.post@n4.nabble.com>",
+      "from_name": "baconbeach",
+      "from_email_hash": "f4ca04a25965aa8185f9b25aef093fdb887fbe1787ea366e124e88878806f255",
+      "date": "2012-04-30T17:39:41-07:00",
+      "subject": "[R] 95% confidence interval of the coefficients from a bootstrap analysis",
+      "subject_clean": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "in_reply_to": "<1335830082421-4599734.post@n4.nabble.com>",
+      "references": [
+        "<1335828143521-4599692.post@n4.nabble.com>",
+        "<1335830082421-4599734.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi Rui,\n\nThanks for your help!!\n\nIt works perfectly, but when I call stor.confint, I obtain the list of\nconfidence interval (10,000 times).  Is there an easy way to summarize the\nresults and getting only one 2.5% and 97.5% values for each variable?\n\nThanks again for your help\n\nSteeve\n\n--\nView this message in context: http://r.789695.n4.nabble.com/95-confidence-interval-of-the-coefficients-from-a-bootstrap-analysis-tp4599692p4599813.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi Rui,\n\nThanks for your help!!\n\nIt works perfectly, but when I call stor.confint, I obtain the list of\nconfidence interval (10,000 times).  Is there an easy way to summarize the\nresults and getting o",
+      "thread_id": "thread-1f80b6fffdb6",
+      "thread_depth": 2,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-467ee1516c92",
+      "message_id": "<BLU142-W2343B7AD17602D67F038A0EF290@phx.gbl>",
+      "from_name": "Tyler Rinker",
+      "from_email_hash": "192c5a5c2cf714557361f22b3321228f178e2588db202a9d36282ce6a9620983",
+      "date": "2012-04-30T20:40:43-04:00",
+      "subject": "[R] for loop problem",
+      "subject_clean": "for loop problem",
+      "in_reply_to": "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>",
+      "references": [
+        "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>"
+      ],
+      "body_plain": "I don't really work with dates but thought I'd pass a solution on. ?I think that there some great packages for handling dates though (lubridate) and you may want to convert your data to a true date instead of separate columns.\n\n# FUNCTION TO INDEX DATES\n\n\ndate.int <- function(month, year, day){\n\n\n? ? yearLength <- function(year) year %% 4 == 0\n\n\n? ? key1 <- data.frame(m=1:12, nm=c(31, 28, 31, 30, 31, 30, 31, 30, 31, 31, 30, 31))\n\n\n? ? key1$sum <- c(0, cumsum(key1$nm)[-12])\n\n\n? ? key2 <- data.frame(m=1:12, nm=c(31, 29, 31, 30, 31, 30, 31, 30, 31, 31, 30, 31))\n\n\n? ? key2$sum <- c(0, cumsum(key2$nm)[-12])\n\n\n? ? ifelse(yearLength(year), key1[month-1, 3] + day, key2[month-1, 3] + day)\n\n\n}\n\n\n#TRY IT OUT ON A MADE UP DATA SET\n\n\nM <- sort(sample(seq(as.Date(\"2000/1/1\"), by=\"day\", length.out=1000), 10))\n\n\nN <- do.call(rbind, strsplit(as.character(M), \"\\\\-\"))\n\n\nN <- data.frame(apply(N, 2, as.numeric))\n\n\ncolnames(N) <- c('year', 'month', 'day')\n\n\nwith(N, date.int(month=month, year=year, day=day))\n\n\n----------------------------------------\n> Date: Mon, 30 Apr 2012 17:57:02 -0600\n> From: Stefan.Schreiber at ales.ualberta.ca\n> To: r-help at r-project.org\n> Subject: [R] for loop problem\n>\n> Hi all,\n>\n> I was wondering if you can help me with the following situation:\n>\n> I have a data frame that includes weather station data for 30 years in\n> the form:\n>\n> YEAR, MONTH, DAY, TEMP\n> 1970, 01, 01, -15\n> ...\n> 1999, 12, 31, -21\n>\n> I would like to add another variable \"JULIAN\" that assigns the integers\n> 1 to 365 (and 1 to 366 for leap years) for each day of a year over\n> multiple years.\n>\n> Here is what I came up with:\n>\n> counter<-1\n>\n> for(i in 1:12){\n> for (j in 1:31){\n>\n> df$JULIAN[df$MONTH==i & stn$DAY==j]<- counter\n> counter<-counter+1\n> }\n> }\n>\n> R does it exactly what I told it to but I am not satisfied with it since\n> it doesn't stop assigning the integers when months have 28, 29 or 30\n> days. For instance on Feb-28 JULIAN is 59 and on March-1 it's 64, as\n> opposed to be 60.\n>\n> I am assuming it must be an ifelse statement, and I was messing around\n> with it already but without success.\n>\n> I guess I am missing some vocabulary here and hope someone can give me\n> some pointers.\n>\n> Thanks,\n> Stefan\n>\n> [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I don't really work with dates but thought I'd pass a solution on. ?I think that there some great packages for handling dates though (lubridate) and you may want to convert your data to a true date in",
+      "thread_id": "thread-d06314d32d37",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-85f7ae3e6d55",
+      "message_id": "<1335833229961-4599823.post@n4.nabble.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "46b93819287d062cad8c235168128396704d16cef6015fa4ff365e8f816de22f",
+      "date": "2012-04-30T17:47:09-07:00",
+      "subject": "[R] 95% confidence interval of the coefficients from a bootstrap analysis",
+      "subject_clean": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "in_reply_to": "<1335832781469-4599813.post@n4.nabble.com>",
+      "references": [
+        "<1335828143521-4599692.post@n4.nabble.com>",
+        "<1335830082421-4599734.post@n4.nabble.com>",
+        "<1335832781469-4599813.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hello,\n\n\nbaconbeach wrote\n> \n> Hi Rui,\n> \n> Thanks for your help!!\n> \n> It works perfectly, but when I call stor.confint, I obtain the list of\n> confidence interval (10,000 times).  Is there an easy way to summarize the\n> results and getting only one 2.5% and 97.5% values for each variable?\n> \n> Thanks again for your help\n> \n> Steeve\n> \n\nYes, there is.\n\nrowMeans(sapply(stor.confint, colMeans))\n\nRui Barradas\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/95-confidence-interval-of-the-coefficients-from-a-bootstrap-analysis-tp4599692p4599823.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello,\n\n\nbaconbeach wrote\n> \n> Hi Rui,\n> \n> Thanks for your help!!\n> \n> It works perfectly, but when I call stor.confint, I obtain the list of\n> confidence interval (10,000 times).  Is there an easy w",
+      "thread_id": "thread-1f80b6fffdb6",
+      "thread_depth": 3,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-bbe193f5a11d",
+      "message_id": "<Gophermail.2.0.1204301948210.13274@vs-w.tc.umn.edu>",
+      "from_name": "haugb002 at umn.edu",
+      "from_email_hash": "8e60dfc5e2effc87e9cc5219694a752877d5ebc8ce710e265554ecacd74edc23",
+      "date": "2012-04-30T19:48:21-05:00",
+      "subject": "[R] Questions",
+      "subject_clean": "Questions",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI am having difficulty putting a frequency table on my clipboard in R \nstudio. I do not know what the error message is. I was thinking it might \nhave to do with changing a setting on my clipboard but I do not know how to \ndo this. I will copy and paste the exact command and error message:\n\nwrite.table(dpx,\"clipboard\",sep=\"\\t\")\nError in file(file, ifelse(append, \"a\", \"w\")) : \n  'mode' for the clipboard must be 'r' on Unix\n\nI was able to create a frequency table as a \"value\" in my workspace. \nHowever, I am trying to put it on my clipboard and then export it into \nexcel. I copied and pasted some of the commands below that I was getting \nerror messages for which may be helpful.\n\nOnce I am able to get the frequency table to show up on my workbook I was \nalso wondering how to export it to excel and keep the same formatting \n(spaces between the different frequency tables)?\n\nThank you!\n\nLana\n\n\n> getwd()\n[1] \"/Users/JoshandLana\"\n> dpx <- read.table(file.choose(), header = T, sep = \"\\t\")\n> #edit(dpx)\n> View(dpx)\n> freqTable <- table(dpx$ActorID,dpx$EmotionFaceTask.RESP,dpx$Emotion)\n> write.table(dpx,\"clipboard\",sep=\"\\t\",col.names=NA)\nError in file(file, ifelse(append, \"a\", \"w\")) : \n  'mode' for the clipboard must be 'r' on Unix\n> write.table(dpx,\"clipboard\",sep=\"\\t\")\nError in file(file, ifelse(append, \"a\", \"w\")) : \n  'mode' for the clipboard must be 'r' on Unix\n> edit(dpx)\nError in dataentry(datalist, modes) : \n  Editing of matrix and data.frame objects is not currently supported in \nRStudio",
+      "body_snippet": "Hello,\n\nI am having difficulty putting a frequency table on my clipboard in R \nstudio. I do not know what the error message is. I was thinking it might \nhave to do with changing a setting on my clipbo",
+      "thread_id": "thread-bbe193f5a11d",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-f8e255834105",
+      "message_id": "<70F02259E17B6242B15D81E58EB7EB1107B36180@afhe-ex.afhe.ualberta.ca>",
+      "from_name": "Schreiber, Stefan",
+      "from_email_hash": "a37924533caf2265ea5eb894f2efa2d6de74a95c17c45b7128082d85fbdcefb7",
+      "date": "2012-04-30T20:02:14-06:00",
+      "subject": "[R] for loop problem",
+      "subject_clean": "for loop problem",
+      "in_reply_to": null,
+      "references": [
+        "<70F02259E17B6242B15D81E58EB7EB11087B5BBE@afhe-ex.afhe.ualberta.ca>",
+        "<BLU142-W2343B7AD17602D67F038A0EF290@phx.gbl>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/fb3931e7/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/fb3931e7/attachment.pl>",
+      "thread_id": "thread-d06314d32d37",
+      "thread_depth": 2,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-bf42ebb0835d",
+      "message_id": "<CACftpvp5xdysoMWTw_hTyFcUUBUkyMW469LmL3QdkTXw8ktUsQ@mail.gmail.com>",
+      "from_name": "David Doyle",
+      "from_email_hash": "8c56751e13f2cdd14174a4fd11c271551cede55df9d0299059d707ded91c841a",
+      "date": "2012-04-30T21:49:51-05:00",
+      "subject": "[R] Scatter plot / LOESS, or LOWESS for more than one parameter",
+      "subject_clean": "Scatter plot / LOESS, or LOWESS for more than one parameter",
+      "in_reply_to": "<CAFEqCdzA6XPZ1DtRyKAmGb-m4WLvYZi3xE1NVsBv1RjmGmQ3WA@mail.gmail.com>",
+      "references": [
+        "<CACftpvqunPAFAygnPUbc-YzHHyPSYw7GhDF8tWT8k8mJh6k3ig@mail.gmail.com>",
+        "<CAAmySGME_Mz6f=BEFFMrmZjCtGzyWUBi7f+wX0TXg5+bQEhQJA@mail.gmail.com>",
+        "<CAFEqCdxRrM6UCX+2O9QJC_83wErbrckJdUd_ZzX0k76EZ5yFfA@mail.gmail.com>",
+        "<CACftpvpvR+7Le70TWJYTWPM1=dDzdy-uVXZ2QZNSTy-i1dRQTw@mail.gmail.com>",
+        "<CACftpvqeiRcUSa9myfrr7dM8km=VWYy7du0x7Yo+vBtyQf43kA@mail.gmail.com>",
+        "<CAFEqCdzA6XPZ1DtRyKAmGb-m4WLvYZi3xE1NVsBv1RjmGmQ3WA@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/4048ed39/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120430/4048ed39/attachment.pl>",
+      "thread_id": "thread-bf42ebb0835d",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-1b018f6b7617",
+      "message_id": "<1335841524036-4599994.post@n4.nabble.com>",
+      "from_name": "baconbeach",
+      "from_email_hash": "f4ca04a25965aa8185f9b25aef093fdb887fbe1787ea366e124e88878806f255",
+      "date": "2012-04-30T20:05:24-07:00",
+      "subject": "[R] 95% confidence interval of the coefficients from a bootstrap analysis",
+      "subject_clean": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "in_reply_to": "<1335833229961-4599823.post@n4.nabble.com>",
+      "references": [
+        "<1335828143521-4599692.post@n4.nabble.com>",
+        "<1335830082421-4599734.post@n4.nabble.com>",
+        "<1335832781469-4599813.post@n4.nabble.com>",
+        "<1335833229961-4599823.post@n4.nabble.com>"
+      ],
+      "body_plain": "Thanks again for your swift response!!\n\nWith your last line, I get \n\n> rowMeans(sapply(stor.confint, colMeans)) \n    2.5 %    97.5 % \n0.3256882 0.4604677 \n\nI need the values (2.5% and 97.5%) for each variable of my model. I don't\nthink this what I am getting.\n\nThis is what my script looks like now, after your help:\n\nN = length (data_Pb[,1])\nB = 10000\nstor.r2 = rep(0,B)\nstor.coeffs <- vector(\"list\", B) \nstor.confint <- vector(\"list\", B) \n\nfor (i in 1:B){\nidx = sample(1:N, replace=T)\nnewdata = data_Pb[idx,]\nL_NPRI_25k <- log(newdata$NPRI_25k+1)\ndata_Pb.boot = lm(newdata$Log_Level ~   \n    newdata$Ind_5k + newdata$MineP_50k + \n  newdata$NPRI_10k + L_NPRI_25k )\n\nstor.r2[i] = summary(data_Pb.boot)$r.squared\nstor.coeffs [[i]] <- coef(data_Pb.boot) \nstor.confint[[i]] <- confint(data_Pb.boot) \n}\n\nhist(stor.r2, xlab=\"R-squared\",main=\"Distribution of R-squared - Lead\n(log)\")\nsummary(stor.r2)\nrowMeans(sapply(stor.confint, colMeans)) \nrowMeans(sapply(stor.coeffs, colMeans))\n\n\nThanks \n\nSteeve\n\n--\nView this message in context: http://r.789695.n4.nabble.com/95-confidence-interval-of-the-coefficients-from-a-bootstrap-analysis-tp4599692p4599994.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks again for your swift response!!\n\nWith your last line, I get \n\n> rowMeans(sapply(stor.confint, colMeans)) \n    2.5 %    97.5 % \n0.3256882 0.4604677 \n\nI need the values (2.5% and 97.5%) for each ",
+      "thread_id": "thread-1f80b6fffdb6",
+      "thread_depth": 4,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-f5dfde98a11e",
+      "message_id": "<CANz9Z_Ji5obwjrgQaXrm-G4kQ1yj2MMpsvsEy0RwDXc_kSqgoA@mail.gmail.com>",
+      "from_name": "Joshua Wiley",
+      "from_email_hash": "c7f07c588294f110fffa28fa75e197f5a9d40a76afe0853fbdeb1992dab12a4a",
+      "date": "2012-04-30T20:37:22-07:00",
+      "subject": "[R] Usage line in .pdf version of manual is truncated",
+      "subject_clean": "Usage line in .pdf version of manual is truncated",
+      "in_reply_to": "<CBC46188.120D5%zeebergb@mail.nih.gov>",
+      "references": [
+        "<CBC46188.120D5%zeebergb@mail.nih.gov>"
+      ],
+      "body_plain": "Break the line :)\n\nOn Mon, Apr 30, 2012 at 12:34 PM, Zeeberg, Barry (NIH/NCI) [E]\n<zeebergb at mail.nih.gov> wrote:\n> I am creating a package, and a rather long usage line for one function becomes truncated in the generated .pdf manual. Is there a way that I can prevent that truncation?\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nJoshua Wiley\nPh.D. Student, Health Psychology\nProgrammer Analyst II, Statistical Consulting Group\nUniversity of California, Los Angeles\nhttps://joshuawiley.com/",
+      "body_snippet": "Break the line :)\n\nOn Mon, Apr 30, 2012 at 12:34 PM, Zeeberg, Barry (NIH/NCI) [E]\n<zeebergb at mail.nih.gov> wrote:\n> I am creating a package, and a rather long usage line for one function becomes tru",
+      "thread_id": "thread-f5dfde98a11e",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-c8919b1ace94",
+      "message_id": "<CA+hbrhUJ6rCXh_ovfDu+owzNo5zqDvksPO+kNDuv_PJCqP0O5Q@mail.gmail.com>",
+      "from_name": "Peter Langfelder",
+      "from_email_hash": "3744676ae29cb7c74d1e451fd4074c638de7249507d66700c3663b4b8db6be68",
+      "date": "2012-04-30T21:07:57-07:00",
+      "subject": "[R] Usage line in .pdf version of manual is truncated",
+      "subject_clean": "Usage line in .pdf version of manual is truncated",
+      "in_reply_to": "<CBC46188.120D5%zeebergb@mail.nih.gov>",
+      "references": [
+        "<CBC46188.120D5%zeebergb@mail.nih.gov>"
+      ],
+      "body_plain": "On Mon, Apr 30, 2012 at 12:34 PM, Zeeberg, Barry (NIH/NCI) [E]\n<zeebergb at mail.nih.gov> wrote:\n> I am creating a package, and a rather long usage line for one function becomes truncated in the generated .pdf manual. Is there a way that I can prevent that truncation?\n\nHow long is \"rather long\"? In our WGCNA package we have a function\nwhose usage line spans two pages of the pdf manual (no kidding...) and\nthe usage is complete in the pdf manual. Perhaps there's something\nelse going on?\n\nPeter",
+      "body_snippet": "On Mon, Apr 30, 2012 at 12:34 PM, Zeeberg, Barry (NIH/NCI) [E]\n<zeebergb at mail.nih.gov> wrote:\n> I am creating a package, and a rather long usage line for one function becomes truncated in the gener",
+      "thread_id": "thread-c8919b1ace94",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-39c5e0cbfe5f",
+      "message_id": "<4b152538-d43a-437a-ab0e-ba26558ffcf6@email.android.com>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2012-04-30T21:47:55-07:00",
+      "subject": "[R] Questions",
+      "subject_clean": "Questions",
+      "in_reply_to": "<Gophermail.2.0.1204301948210.13274@vs-w.tc.umn.edu>",
+      "references": [
+        "<Gophermail.2.0.1204301948210.13274@vs-w.tc.umn.edu>"
+      ],
+      "body_plain": "This is not the RStudio support forum. I use it, I like it, but you need to learn the difference between R and RStudio.\n\nIn this case, the fact that you are using RStudio is probably irrelevant. What is more relevant is that you are not on windows, though I can't be sure what OS you actually are using. Your error message refers to UNIX, you refer to Excel, so you could be on MacOSX or on windows with a pipe into a UNIX server. (If the latter, the RStudio support team may have a FAQ on this problem.) Please read the Posting Guide mentioned at the end of every message on this list.\nI Googled this problem and found https://stat.ethz.ch/pipermail/r-help/2006-October/116363.html, which probably applies, but only you can tell for sure.\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nhaugb002 at umn.edu wrote:\n\n>Hello,\n>\n>I am having difficulty putting a frequency table on my clipboard in R \n>studio. I do not know what the error message is. I was thinking it\n>might \n>have to do with changing a setting on my clipboard but I do not know\n>how to \n>do this. I will copy and paste the exact command and error message:\n>\n>write.table(dpx,\"clipboard\",sep=\"\\t\")\n>Error in file(file, ifelse(append, \"a\", \"w\")) : \n>  'mode' for the clipboard must be 'r' on Unix\n>\n>I was able to create a frequency table as a \"value\" in my workspace. \n>However, I am trying to put it on my clipboard and then export it into \n>excel. I copied and pasted some of the commands below that I was\n>getting \n>error messages for which may be helpful.\n>\n>Once I am able to get the frequency table to show up on my workbook I\n>was \n>also wondering how to export it to excel and keep the same formatting \n>(spaces between the different frequency tables)?\n>\n>Thank you!\n>\n>Lana\n>\n>\n>> getwd()\n>[1] \"/Users/JoshandLana\"\n>> dpx <- read.table(file.choose(), header = T, sep = \"\\t\")\n>> #edit(dpx)\n>> View(dpx)\n>> freqTable <- table(dpx$ActorID,dpx$EmotionFaceTask.RESP,dpx$Emotion)\n>> write.table(dpx,\"clipboard\",sep=\"\\t\",col.names=NA)\n>Error in file(file, ifelse(append, \"a\", \"w\")) : \n>  'mode' for the clipboard must be 'r' on Unix\n>> write.table(dpx,\"clipboard\",sep=\"\\t\")\n>Error in file(file, ifelse(append, \"a\", \"w\")) : \n>  'mode' for the clipboard must be 'r' on Unix\n>> edit(dpx)\n>Error in dataentry(datalist, modes) : \n>Editing of matrix and data.frame objects is not currently supported in \n>RStudio\n>\n>______________________________________________\n>R-help at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "This is not the RStudio support forum. I use it, I like it, but you need to learn the difference between R and RStudio.\n\nIn this case, the fact that you are using RStudio is probably irrelevant. What ",
+      "thread_id": "thread-bbe193f5a11d",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-64ec2e048092",
+      "message_id": "<CACk-te13_-GwHu8N2eGRaGcgWhn7QPJHi0U22iQP5Bp_kFtiiA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2012-04-30T22:27:23-07:00",
+      "subject": "[R] Help with loess \"Standard Error of the Residuals\"",
+      "subject_clean": "Help with loess \"Standard Error of the Residuals\"",
+      "in_reply_to": "<78C7A455D07CF049832F2E05839F841E02235FE4FC25@GOMAIL.college.tcd.ie>",
+      "references": [
+        "<78C7A455D07CF049832F2E05839F841E02235FE4FC25@GOMAIL.college.tcd.ie>"
+      ],
+      "body_plain": "John:\n\n1. This is not really an R question. You should post on statistics\nhelp list , e.f. stats.stackexchange.com\n\nAlso, inline below.\n\n-- Bert\n\nOn Mon, Apr 30, 2012 at 8:44 AM, John Haslett <JHASLETT at tcd.ie> wrote:\n> Dear All\n>\n> I'm having trouble working out what exactly loess means by its \"Standard Error of the Residuals\" ? denoted s\n> and in particular when the weights argument is invoked.\n>\n> For example, if the weights are weights are all =1, then s^2 is nearly sum sq res/ (n -1 - 'equiv num paras')\n>\n> If the weights are all k then s is proportional to k\n>\n> If the weights are unequal, I don't know what it does.\n>\n> Help directs me to very old documentation on cloess, which sheds no great light.\n>\n> I'm sure this is written down somewhere...........\nDon't be. Lowess/loess is very old, going back to the 1970's or early\n80's I believe. You may have to go back to (Bill Cleveland's I\nbelieve) original papers.\n\nBut, more to the point, lo(w)ess is algorithm, not model-based; so it\nis not exactly clear how to determine df used by the fitting and\ntherefore those left for residuals. I'm not sure how accepted the\ndefinitions baked into R's calculations are. Again, original resources\nmay be the only resource.\n\n\n>\n> Thanks in advance\n>\n> John Haslett\n>\n>\n>\n>\n>\n> Prof of Statistics, Trinity College Dublin\n> Office phone + 353 1 896 1114\n>\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \n\nBert Gunter\nGenentech Nonclinical Biostatistics\n\nInternal Contact Info:\nPhone: 467-7374\nWebsite:\nhttp://pharmadevelopment.roche.com/index/pdb/pdb-functional-groups/pdb-biostatistics/pdb-ncb-home.htm",
+      "body_snippet": "John:\n\n1. This is not really an R question. You should post on statistics\nhelp list , e.f. stats.stackexchange.com\n\nAlso, inline below.\n\n-- Bert\n\nOn Mon, Apr 30, 2012 at 8:44 AM, John Haslett <JHASLET",
+      "thread_id": "thread-64ec2e048092",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-70cadbbe1b73",
+      "message_id": "<CACk-te1SaZWxD=KWLWy2ab6qrLtpa_0P33DasGzCWJ6FsusGbQ@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2012-04-30T22:32:27-07:00",
+      "subject": "[R] IV estimation",
+      "subject_clean": "IV estimation",
+      "in_reply_to": "<1335824654131-4599559.post@n4.nabble.com>",
+      "references": [
+        "<1335824654131-4599559.post@n4.nabble.com>"
+      ],
+      "body_plain": "Whatever your post means, it's about statistics, not R. Post to a\nstatistics list like stats.stackexchange.com instead.\n\n-- Bert\n\nOn Mon, Apr 30, 2012 at 3:24 PM, kebrab67 <selamgetachew at gmail.com> wrote:\n> Hello,\n> I have a set of 100 variables with 1560 observations. I did an O.L.S\n> regression of three of these variables on a fourth. But there are problems\n> of endogeneity... So I look in my dataset for instruments to do an IV. I\n> can't find a good instrument because their correlation with my endogeneous\n> variables are too low. But I see that when I create a combined variable\n> composed of 12 variables of the dataset my correlation is much stronger.\n> Can I use such a combined variable to estimate my equation with 2SLS, or\n> GMM.\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/IV-estimation-tp4599559.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \n\nBert Gunter\nGenentech Nonclinical Biostatistics\n\nInternal Contact Info:\nPhone: 467-7374\nWebsite:\nhttp://pharmadevelopment.roche.com/index/pdb/pdb-functional-groups/pdb-biostatistics/pdb-ncb-home.htm",
+      "body_snippet": "Whatever your post means, it's about statistics, not R. Post to a\nstatistics list like stats.stackexchange.com instead.\n\n-- Bert\n\nOn Mon, Apr 30, 2012 at 3:24 PM, kebrab67 <selamgetachew at gmail.com>",
+      "thread_id": "thread-32ebb0651900",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-fff5c855f21e",
+      "message_id": "<1335852842462-4600234.post@n4.nabble.com>",
+      "from_name": "80past2",
+      "from_email_hash": "af0a24e99b8fd57ad7cb524484d5843d9b2d09c6c40c5a4af603a0cf79f39d6e",
+      "date": "2012-04-30T23:14:02-07:00",
+      "subject": "[R] testing parallel slopes assumption for Ordinal Logistic Regression",
+      "subject_clean": "testing parallel slopes assumption for Ordinal Logistic Regression",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone, I'm a bit new here (and new to R), and I was trying to do an\nOLR, and testing the parallel slope assumption seems be very important. I\nbrowsed through past postings, and didn't find much to help me in this area.\nI was wondering if anyone knew how I could go about doing this. Thank you.\n\n--\nView this message in context: http://r.789695.n4.nabble.com/testing-parallel-slopes-assumption-for-Ordinal-Logistic-Regression-tp4600234.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi everyone, I'm a bit new here (and new to R), and I was trying to do an\nOLR, and testing the parallel slope assumption seems be very important. I\nbrowsed through past postings, and didn't find much ",
+      "thread_id": "thread-fff5c855f21e",
+      "thread_depth": 0,
+      "month": "2012-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-e983aafe31ed",
+      "subject": "compiling an R script",
+      "message_count": 1,
+      "participants": [
+        "strycker"
+      ],
+      "started": "2012-04-30T15:12:12-07:00",
+      "last_reply": "2012-04-30T15:12:12-07:00",
+      "root_message_id": "msg-e983aafe31ed"
+    },
+    {
+      "id": "thread-32ebb0651900",
+      "subject": "IV estimation",
+      "message_count": 2,
+      "participants": [
+        "Bert Gunter",
+        "kebrab67"
+      ],
+      "started": "2012-04-30T15:24:14-07:00",
+      "last_reply": "2012-04-30T22:32:27-07:00",
+      "root_message_id": "msg-32ebb0651900"
+    },
+    {
+      "id": "thread-970673bd4e13",
+      "subject": "Subtract days to dates in POSIXct format",
+      "message_count": 1,
+      "participants": [
+        "Jeff Newmiller"
+      ],
+      "started": "2012-04-30T16:14:19-07:00",
+      "last_reply": "2012-04-30T16:14:19-07:00",
+      "root_message_id": "msg-970673bd4e13"
+    },
+    {
+      "id": "thread-1f80b6fffdb6",
+      "subject": "95% confidence interval of the coefficients from a bootstrap analysis",
+      "message_count": 5,
+      "participants": [
+        "Rui Barradas",
+        "baconbeach"
+      ],
+      "started": "2012-04-30T16:22:23-07:00",
+      "last_reply": "2012-04-30T20:05:24-07:00",
+      "root_message_id": "msg-1f80b6fffdb6"
+    },
+    {
+      "id": "thread-d06314d32d37",
+      "subject": "for loop problem",
+      "message_count": 4,
+      "participants": [
+        "R. Michael Weylandt",
+        "Schreiber, Stefan",
+        "Tyler Rinker"
+      ],
+      "started": "2012-04-30T17:57:02-06:00",
+      "last_reply": "2012-04-30T20:02:14-06:00",
+      "root_message_id": "msg-d06314d32d37"
+    },
+    {
+      "id": "thread-bbe193f5a11d",
+      "subject": "Questions",
+      "message_count": 2,
+      "participants": [
+        "Jeff Newmiller",
+        "haugb002 at umn.edu"
+      ],
+      "started": "2012-04-30T19:48:21-05:00",
+      "last_reply": "2012-04-30T21:47:55-07:00",
+      "root_message_id": "msg-bbe193f5a11d"
+    },
+    {
+      "id": "thread-f5dfde98a11e",
+      "subject": "Usage line in .pdf version of manual is truncated",
+      "message_count": 1,
+      "participants": [
+        "Joshua Wiley"
+      ],
+      "started": "2012-04-30T20:37:22-07:00",
+      "last_reply": "2012-04-30T20:37:22-07:00",
+      "root_message_id": "msg-f5dfde98a11e"
+    },
+    {
+      "id": "thread-c8919b1ace94",
+      "subject": "Usage line in .pdf version of manual is truncated",
+      "message_count": 1,
+      "participants": [
+        "Peter Langfelder"
+      ],
+      "started": "2012-04-30T21:07:57-07:00",
+      "last_reply": "2012-04-30T21:07:57-07:00",
+      "root_message_id": "msg-c8919b1ace94"
+    },
+    {
+      "id": "thread-bf42ebb0835d",
+      "subject": "Scatter plot / LOESS, or LOWESS for more than one parameter",
+      "message_count": 1,
+      "participants": [
+        "David Doyle"
+      ],
+      "started": "2012-04-30T21:49:51-05:00",
+      "last_reply": "2012-04-30T21:49:51-05:00",
+      "root_message_id": "msg-bf42ebb0835d"
+    },
+    {
+      "id": "thread-64ec2e048092",
+      "subject": "Help with loess \"Standard Error of the Residuals\"",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2012-04-30T22:27:23-07:00",
+      "last_reply": "2012-04-30T22:27:23-07:00",
+      "root_message_id": "msg-64ec2e048092"
+    },
+    {
+      "id": "thread-fff5c855f21e",
+      "subject": "testing parallel slopes assumption for Ordinal Logistic Regression",
+      "message_count": 1,
+      "participants": [
+        "80past2"
+      ],
+      "started": "2012-04-30T23:14:02-07:00",
+      "last_reply": "2012-04-30T23:14:02-07:00",
+      "root_message_id": "msg-fff5c855f21e"
+    }
+  ]
+}

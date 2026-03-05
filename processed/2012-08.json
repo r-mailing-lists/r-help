@@ -1,0 +1,398 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2012-08",
+  "messages": [
+    {
+      "id": "msg-173b246c0631",
+      "message_id": "<30525537.10478833.1346451035443.JavaMail.root@neo.tamu.edu>",
+      "from_name": "Rebecca Clark",
+      "from_email_hash": "c87863e032701e2a82a4d968296883357c46f52a9c87ff768fc65dc190751a67",
+      "date": "2012-08-31T17:10:35-05:00",
+      "subject": "[R] R package fields: Thin-plate splines question",
+      "subject_clean": "R package fields: Thin-plate splines question",
+      "in_reply_to": "<216157640.10462317.1346448982176.JavaMail.root@neo.tamu.edu>",
+      "references": [],
+      "body_plain": "Greetings, R helpers,\n\nI have been using the Tps() function in the fields package to model response surfaces for some dietary research in crickets.  Overall, I have *three* independent variables of interest, two continuous variables (\"protein\" and \"carbohydrate\") and one categorical variable (cricket \"morph\").  My overall goal is to produce two heat maps where colors are scaled on the same absolute scale.  As best I see it, there are two possible ways to achieve this: some adjustment to the image() function parameters, or some adjustment to the Tps() function and subsequent method to separate the two plots (this would also require rearrangement of the data frame).  \n\nHowever, I am stumped on the particulars.  Does anyone have an idea of how to do this?  I am including (hopefully reproducible) syntax for the two separate surfaces below.\n\nThank you,\nRebecca Clark\nPostdoctoral Research Associate\nTexas A&M University\n\n\n######\n\nlibrary(fields)\n\ntriact<-structure(list(Diet = structure(1:13, .Label = c(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\"), class = \"factor\"), LW = c(19, 14, 9, 19, 13, 6.8, 16.9, 2.4, 18.1, 3.5, 16, 8.3, 11), SW = c(5.5, 8.5, 11.7, 6, 3.5, 4, 5.5, 3.2, 9.1, 3.1, 7.5, 3, 3.5), protein = c(18, 28, 8, 28.75, 4, 17.25, 13, 14, 16.25, 9, 27, 9.75, 23), carbohydrate = c(24, 14, 34, 23.75, 17, 14.25, 29, 7, 36.25, 12, 36, 21.75, 19)), .Names = c(\"Diet\", \"LW\", \"SW\", \"protein\", \"carbohydrate\"), class = \"data.frame\", row.names = c(NA, -13L))\n\nattach(triact)\n\nsurf.teLW=Tps(cbind(protein,carbohydrate),LW, lambda = 0.01)\nsurf.teSW=Tps(cbind(protein,carbohydrate),SW, lambda = 0.01)\n\n# Method for separately producing the surface and then mapping contour lines onto it (instead of using \"surface()\"):\nsurf.te.outLW=predict.surface(surf.teLW)\nsurf.te.outSW=predict.surface(surf.teSW)\n\npar(mfrow=c(1,2))\n\nimage(surf.te.outLW, col=tim.colors(128), lwd=5, las=1, font.lab=2, cex.lab=1.3, mgp=c(2.7,0.5,0), font.axis=1, lab=c(4,5,6), xlab=expression(\"Protein content\"), ylab=expression(\"Carbohydrate Content\"),main=\"Triglyceride (LW)\", asp=1, xlim=c(0,38), ylim=c(0,38))\ncontour(surf.te.outLW, lwd=2, labcex=1, add=T)\n\nimage(surf.te.outSW, col=tim.colors(128), lwd=5, las=1, font.lab=2, cex.lab=1.3, mgp=c(2.7,0.5,0), font.axis=1, lab=c(4,5,6), xlab=expression(\"Protein content\"), ylab=expression(\"Carbohydrate Content\"),main=\"Triglyceride (SW)\", asp=1, xlim=c(0,38), ylim=c(0,38))\ncontour(surf.te.outSW, lwd=2, labcex=1, add=T)\n\n# Note how different the scales are between the two images, as indicated by the contour lines, but the color ranges are the same.",
+      "body_snippet": "Greetings, R helpers,\n\nI have been using the Tps() function in the fields package to model response surfaces for some dietary research in crickets.  Overall, I have *three* independent variables of in",
+      "thread_id": "thread-173b246c0631",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-173b246c0631",
+      "message_id": "<30525537.10478833.1346451035443.JavaMail.root@neo.tamu.edu>",
+      "from_name": "Rebecca Clark",
+      "from_email_hash": "c87863e032701e2a82a4d968296883357c46f52a9c87ff768fc65dc190751a67",
+      "date": "2012-08-31T17:10:35-05:00",
+      "subject": "[R] R package fields: Thin-plate splines question",
+      "subject_clean": "R package fields: Thin-plate splines question",
+      "in_reply_to": "<216157640.10462317.1346448982176.JavaMail.root@neo.tamu.edu>",
+      "references": [],
+      "body_plain": "Greetings, R helpers,\n\nI have been using the Tps() function in the fields package to model response surfaces for some dietary research in crickets.  Overall, I have *three* independent variables of interest, two continuous variables (\"protein\" and \"carbohydrate\") and one categorical variable (cricket \"morph\").  My overall goal is to produce two heat maps where colors are scaled on the same absolute scale.  As best I see it, there are two possible ways to achieve this: some adjustment to the image() function parameters, or some adjustment to the Tps() function and subsequent method to separate the two plots (this would also require rearrangement of the data frame).  \n\nHowever, I am stumped on the particulars.  Does anyone have an idea of how to do this?  I am including (hopefully reproducible) syntax for the two separate surfaces below.\n\nThank you,\nRebecca Clark\nPostdoctoral Research Associate\nTexas A&M University\n\n\n######\n\nlibrary(fields)\n\ntriact<-structure(list(Diet = structure(1:13, .Label = c(\"A\", \"B\", \"C\", \"D\", \"E\", \"F\", \"G\", \"H\", \"I\", \"J\", \"K\", \"L\", \"M\"), class = \"factor\"), LW = c(19, 14, 9, 19, 13, 6.8, 16.9, 2.4, 18.1, 3.5, 16, 8.3, 11), SW = c(5.5, 8.5, 11.7, 6, 3.5, 4, 5.5, 3.2, 9.1, 3.1, 7.5, 3, 3.5), protein = c(18, 28, 8, 28.75, 4, 17.25, 13, 14, 16.25, 9, 27, 9.75, 23), carbohydrate = c(24, 14, 34, 23.75, 17, 14.25, 29, 7, 36.25, 12, 36, 21.75, 19)), .Names = c(\"Diet\", \"LW\", \"SW\", \"protein\", \"carbohydrate\"), class = \"data.frame\", row.names = c(NA, -13L))\n\nattach(triact)\n\nsurf.teLW=Tps(cbind(protein,carbohydrate),LW, lambda = 0.01)\nsurf.teSW=Tps(cbind(protein,carbohydrate),SW, lambda = 0.01)\n\n# Method for separately producing the surface and then mapping contour lines onto it (instead of using \"surface()\"):\nsurf.te.outLW=predict.surface(surf.teLW)\nsurf.te.outSW=predict.surface(surf.teSW)\n\npar(mfrow=c(1,2))\n\nimage(surf.te.outLW, col=tim.colors(128), lwd=5, las=1, font.lab=2, cex.lab=1.3, mgp=c(2.7,0.5,0), font.axis=1, lab=c(4,5,6), xlab=expression(\"Protein content\"), ylab=expression(\"Carbohydrate Content\"),main=\"Triglyceride (LW)\", asp=1, xlim=c(0,38), ylim=c(0,38))\ncontour(surf.te.outLW, lwd=2, labcex=1, add=T)\n\nimage(surf.te.outSW, col=tim.colors(128), lwd=5, las=1, font.lab=2, cex.lab=1.3, mgp=c(2.7,0.5,0), font.axis=1, lab=c(4,5,6), xlab=expression(\"Protein content\"), ylab=expression(\"Carbohydrate Content\"),main=\"Triglyceride (SW)\", asp=1, xlim=c(0,38), ylim=c(0,38))\ncontour(surf.te.outSW, lwd=2, labcex=1, add=T)\n\n# Note how different the scales are between the two images, as indicated by the contour lines, but the color ranges are the same.",
+      "body_snippet": "Greetings, R helpers,\n\nI have been using the Tps() function in the fields package to model response surfaces for some dietary research in crickets.  Overall, I have *three* independent variables of in",
+      "thread_id": "thread-173b246c0631",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-e1f509c9a03e",
+      "message_id": "<1346452062621-4641951.post@n4.nabble.com>",
+      "from_name": "jjthaden",
+      "from_email_hash": "e4d816cf3b76af134f378d426988473e9e53d6e1552427decd0e760a9ce58599",
+      "date": "2012-08-31T15:27:42-07:00",
+      "subject": "[R] predict.lm(...,type=\"terms\") question",
+      "subject_clean": "predict.lm(...,type=\"terms\") question",
+      "in_reply_to": "<1346446107772-4641947.post@n4.nabble.com>",
+      "references": [
+        "<CAGSUPrKW0rJV9d5AnSjZCeRvYLvAtXBqjtTpgU7SYT4nBdArRQ@mail.gmail.com>",
+        "<CAGSUPrJ7chFiArazcoZGb97asxgCdY_cfQXQ-8KOM7ZHc2D0zA@mail.gmail.com>",
+        "<503F565A.2030204@sapo.pt>",
+        "<CAGSUPrJeEqL2Q7D1mvnzih8vp6P-dzihuLu9GNd12_+sxLYU6g@mail.gmail.com>",
+        "<0223AE53-D5A0-41E6-9CF2-58B14B85FE0E@comcast.net>",
+        "<1346446107772-4641947.post@n4.nabble.com>"
+      ],
+      "body_plain": "The error is generated in the last line of code shown here from predict.lm\n\n> predict.lm\nfunction (object, newdata, se.fit = FALSE, scale = NULL, df = Inf, \n    interval = c(\"none\", \"confidence\", \"prediction\"), level = 0.95, \n    type = c(\"response\", \"terms\"), terms = NULL, na.action = na.pass, \n    pred.var = res.var/weights, weights = 1, ...) \n{\n    tt <- terms(object)\n    if (!inherits(object, \"lm\")) \n        warning(\"calling predict.lm(<fake-lm-object>) ...\")\n    if (missing(newdata) || is.null(newdata)) {\n        mm <- X <- model.matrix(object)\n        mmDone <- TRUE\n        offset <- object$offset\n    }\n    else {\n        Terms <- delete.response(tt)\n        m <- model.frame(Terms, newdata, na.action = na.action, \n            xlev = object$xlevels)\n#MORE LINES DELETED HERE...\n\nAs written, if newdata is specified but it doesn't contain every term  in\nthe original data frame, then an error is thrown. But for predict.lm to\npredict values for a term, i.e., type = \"term\", those terms cannot be in the\nnewdata vector. \n-John\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/predict-lm-type-terms-question-tp4641665p4641951.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "The error is generated in the last line of code shown here from predict.lm\n\n> predict.lm\nfunction (object, newdata, se.fit = FALSE, scale = NULL, df = Inf, \n    interval = c(\"none\", \"confidence\", \"pre",
+      "thread_id": "thread-e1f509c9a03e",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-e1f509c9a03e",
+      "message_id": "<1346452062621-4641951.post@n4.nabble.com>",
+      "from_name": "jjthaden",
+      "from_email_hash": "e4d816cf3b76af134f378d426988473e9e53d6e1552427decd0e760a9ce58599",
+      "date": "2012-08-31T15:27:42-07:00",
+      "subject": "[R] predict.lm(...,type=\"terms\") question",
+      "subject_clean": "predict.lm(...,type=\"terms\") question",
+      "in_reply_to": "<1346446107772-4641947.post@n4.nabble.com>",
+      "references": [
+        "<CAGSUPrKW0rJV9d5AnSjZCeRvYLvAtXBqjtTpgU7SYT4nBdArRQ@mail.gmail.com>",
+        "<CAGSUPrJ7chFiArazcoZGb97asxgCdY_cfQXQ-8KOM7ZHc2D0zA@mail.gmail.com>",
+        "<503F565A.2030204@sapo.pt>",
+        "<CAGSUPrJeEqL2Q7D1mvnzih8vp6P-dzihuLu9GNd12_+sxLYU6g@mail.gmail.com>",
+        "<0223AE53-D5A0-41E6-9CF2-58B14B85FE0E@comcast.net>",
+        "<1346446107772-4641947.post@n4.nabble.com>"
+      ],
+      "body_plain": "The error is generated in the last line of code shown here from predict.lm\n\n> predict.lm\nfunction (object, newdata, se.fit = FALSE, scale = NULL, df = Inf, \n    interval = c(\"none\", \"confidence\", \"prediction\"), level = 0.95, \n    type = c(\"response\", \"terms\"), terms = NULL, na.action = na.pass, \n    pred.var = res.var/weights, weights = 1, ...) \n{\n    tt <- terms(object)\n    if (!inherits(object, \"lm\")) \n        warning(\"calling predict.lm(<fake-lm-object>) ...\")\n    if (missing(newdata) || is.null(newdata)) {\n        mm <- X <- model.matrix(object)\n        mmDone <- TRUE\n        offset <- object$offset\n    }\n    else {\n        Terms <- delete.response(tt)\n        m <- model.frame(Terms, newdata, na.action = na.action, \n            xlev = object$xlevels)\n#MORE LINES DELETED HERE...\n\nAs written, if newdata is specified but it doesn't contain every term  in\nthe original data frame, then an error is thrown. But for predict.lm to\npredict values for a term, i.e., type = \"term\", those terms cannot be in the\nnewdata vector. \n-John\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/predict-lm-type-terms-question-tp4641665p4641951.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "The error is generated in the last line of code shown here from predict.lm\n\n> predict.lm\nfunction (object, newdata, se.fit = FALSE, scale = NULL, df = Inf, \n    interval = c(\"none\", \"confidence\", \"pre",
+      "thread_id": "thread-e1f509c9a03e",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-bae9e163f8de",
+      "message_id": "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2012-08-31T16:03:07-07:00",
+      "subject": "[R] how to find the index of points selected from a scatter plot?",
+      "subject_clean": "how to find the index of points selected from a scatter plot?",
+      "in_reply_to": "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>",
+      "references": [
+        "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120831/137a3091/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120831/137a3091/attachment.pl>",
+      "thread_id": "thread-bae9e163f8de",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-bae9e163f8de",
+      "message_id": "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2012-08-31T16:03:07-07:00",
+      "subject": "[R] how to find the index of points selected from a scatter plot?",
+      "subject_clean": "how to find the index of points selected from a scatter plot?",
+      "in_reply_to": "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>",
+      "references": [
+        "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120831/137a3091/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120831/137a3091/attachment-0001.pl>",
+      "thread_id": "thread-bae9e163f8de",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-dcea75d9d374",
+      "message_id": "<50414471.40700@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2012-08-31T16:10:41-07:00",
+      "subject": "[R] how to find the index of points selected from a scatter plot?",
+      "subject_clean": "how to find the index of points selected from a scatter plot?",
+      "in_reply_to": "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>",
+      "references": [
+        "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>",
+        "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>"
+      ],
+      "body_plain": "On 2012-08-31 16:03, Bert Gunter wrote:\n> ?which ##\n> as in ix <- which(x==values)\n>\n> -- Bert\n\nOr maybe ?identify.\n\nPeter Ehlers\n\n>\n> On Fri, Aug 31, 2012 at 2:09 PM, Michael <comtech.usa at gmail.com> wrote:\n>\n>> Hi all,\n>>\n>> I am using \"locator\" to select the points from a scatter plot...\n>>\n>> This is all fine.\n>>\n>> But the problem is that the locator only returns the axis values of the\n>> selected points.\n>>\n>> Instead, I would like to get the index of these select points...\n>>\n>> The axis values are real-values so it's a bit hard for me to directly\n>> reverse-engineer the index nubmers..\n>>\n>> How to do that?\n>>\n>> Thank you!\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n>\n>",
+      "body_snippet": "On 2012-08-31 16:03, Bert Gunter wrote:\n> ?which ##\n> as in ix <- which(x==values)\n>\n> -- Bert\n\nOr maybe ?identify.\n\nPeter Ehlers\n\n>\n> On Fri, Aug 31, 2012 at 2:09 PM, Michael <comtech.usa at gmail.co",
+      "thread_id": "thread-bae9e163f8de",
+      "thread_depth": 1,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-dcea75d9d374",
+      "message_id": "<50414471.40700@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2012-08-31T16:10:41-07:00",
+      "subject": "[R] how to find the index of points selected from a scatter plot?",
+      "subject_clean": "how to find the index of points selected from a scatter plot?",
+      "in_reply_to": "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>",
+      "references": [
+        "<CAPNjSFZA0ePRs65BC88pvg0Y76bi25Q5XBp=nfZMJsQE5xkosA@mail.gmail.com>",
+        "<CACk-te32fXCx-qUmPdcB6D+moEBrRmywJAvVtzW1nn+UeJf4fA@mail.gmail.com>"
+      ],
+      "body_plain": "On 2012-08-31 16:03, Bert Gunter wrote:\n> ?which ##\n> as in ix <- which(x==values)\n>\n> -- Bert\n\nOr maybe ?identify.\n\nPeter Ehlers\n\n>\n> On Fri, Aug 31, 2012 at 2:09 PM, Michael <comtech.usa at gmail.com> wrote:\n>\n>> Hi all,\n>>\n>> I am using \"locator\" to select the points from a scatter plot...\n>>\n>> This is all fine.\n>>\n>> But the problem is that the locator only returns the axis values of the\n>> selected points.\n>>\n>> Instead, I would like to get the index of these select points...\n>>\n>> The axis values are real-values so it's a bit hard for me to directly\n>> reverse-engineer the index nubmers..\n>>\n>> How to do that?\n>>\n>> Thank you!\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n>\n>",
+      "body_snippet": "On 2012-08-31 16:03, Bert Gunter wrote:\n> ?which ##\n> as in ix <- which(x==values)\n>\n> -- Bert\n\nOr maybe ?identify.\n\nPeter Ehlers\n\n>\n> On Fri, Aug 31, 2012 at 2:09 PM, Michael <comtech.usa at gmail.co",
+      "thread_id": "thread-bae9e163f8de",
+      "thread_depth": 1,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-a728b774841d",
+      "message_id": "<CAKstpn7uhc-k50yUP7rC+vQ4Rmdw=uH7kKJ3cHet9_QL64bgfQ@mail.gmail.com>",
+      "from_name": "Jennifer Lyon",
+      "from_email_hash": "6e894cb0d44055edab71ce853bd046d966024e1b20001d7978813f04d986003a",
+      "date": "2012-08-31T17:22:57-06:00",
+      "subject": "[R] using apply with sparse matrix from package Matrix",
+      "subject_clean": "using apply with sparse matrix from package Matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi:\n\nI was trying to use apply on a sparse matrix from package Matrix,\nand I get the error:\n\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\nIs there a way to apply a function to all the rows without bumping\ninto this problem?\n\nHere is a simplified example:\n\n> dim(sm)\n[1] 72913 43052\n\n> class(sm)\n[1] \"dgCMatrix\"\nattr(,\"package\")\n[1] \"Matrix\"\n\n> str(sm)\nFormal class 'dgCMatrix' [package \"Matrix\"] with 6 slots\n  ..@ i       : int [1:6590004] 789 801 802 1231 1236 11739 17817\n17943 18148 18676 ...\n  ..@ p       : int [1:43053] 0 147 303 450 596 751 908 1053 1188 1347 ...\n  ..@ Dim     : int [1:2] 72913 43052\n  ..@ Dimnames:List of 2\n  .. ..$ : NULL\n  .. ..$ : NULL\n  ..@ x       : num [1:6590004] 0.601 0.527 0.562 0.641 0.684 ...\n  ..@ factors : list()\n\n> my.sum<-apply(sm, 1, sum)\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\n> sessionInfo()\nR version 2.15.1 (2012-06-22)\nPlatform: x86_64-unknown-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=C                 LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nother attached packages:\n[1] Matrix_1.0-6   lattice_0.20-6 stringr_0.6.1\n\nloaded via a namespace (and not attached):\n[1] grid_2.15.1 plyr_1.7.1\n\nThanks.\n\nJen",
+      "body_snippet": "Hi:\n\nI was trying to use apply on a sparse matrix from package Matrix,\nand I get the error:\n\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\n",
+      "thread_id": "thread-a728b774841d",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-a728b774841d",
+      "message_id": "<CAKstpn7uhc-k50yUP7rC+vQ4Rmdw=uH7kKJ3cHet9_QL64bgfQ@mail.gmail.com>",
+      "from_name": "Jennifer Lyon",
+      "from_email_hash": "6e894cb0d44055edab71ce853bd046d966024e1b20001d7978813f04d986003a",
+      "date": "2012-08-31T17:22:57-06:00",
+      "subject": "[R] using apply with sparse matrix from package Matrix",
+      "subject_clean": "using apply with sparse matrix from package Matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi:\n\nI was trying to use apply on a sparse matrix from package Matrix,\nand I get the error:\n\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\nIs there a way to apply a function to all the rows without bumping\ninto this problem?\n\nHere is a simplified example:\n\n> dim(sm)\n[1] 72913 43052\n\n> class(sm)\n[1] \"dgCMatrix\"\nattr(,\"package\")\n[1] \"Matrix\"\n\n> str(sm)\nFormal class 'dgCMatrix' [package \"Matrix\"] with 6 slots\n  ..@ i       : int [1:6590004] 789 801 802 1231 1236 11739 17817\n17943 18148 18676 ...\n  ..@ p       : int [1:43053] 0 147 303 450 596 751 908 1053 1188 1347 ...\n  ..@ Dim     : int [1:2] 72913 43052\n  ..@ Dimnames:List of 2\n  .. ..$ : NULL\n  .. ..$ : NULL\n  ..@ x       : num [1:6590004] 0.601 0.527 0.562 0.641 0.684 ...\n  ..@ factors : list()\n\n> my.sum<-apply(sm, 1, sum)\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\n> sessionInfo()\nR version 2.15.1 (2012-06-22)\nPlatform: x86_64-unknown-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=C                 LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nother attached packages:\n[1] Matrix_1.0-6   lattice_0.20-6 stringr_0.6.1\n\nloaded via a namespace (and not attached):\n[1] grid_2.15.1 plyr_1.7.1\n\nThanks.\n\nJen",
+      "body_snippet": "Hi:\n\nI was trying to use apply on a sparse matrix from package Matrix,\nand I get the error:\n\nError in asMethod(object) :\n  Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 106\n\n",
+      "thread_id": "thread-a728b774841d",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-530d39dd4499",
+      "message_id": "<1346462698.78397.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-08-31T18:24:58-07:00",
+      "subject": "[R] splits with 0s in middle columns",
+      "subject_clean": "splits with 0s in middle columns",
+      "in_reply_to": "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>",
+      "references": [
+        "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "Hi,\nTry this:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\", gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\", gsub(\"(.*)/(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 \\\\3 \\\\4\",dat1$V1)))\ndat3<-data.frame(do.call(rbind,strsplit(dat2, \" \")))\n?colnames(dat3)<-paste0(\"A\",1:4)\n?dat3\n#? A1 A2 A3 A4\n#1 10 20? 0 30\n#2 40? 0? 0 20\n#3 60 10 10? 5\n#4 80? 0? 0 10\nA.K.\n\n\n\n\n----- Original Message -----\nFrom: Sapana Lohani <lohani.sapana at ymail.com>\nTo: R help <r-help at r-project.org>\nCc: \nSent: Friday, August 31, 2012 12:10 PM\nSubject: [R] splits with 0s in middle columns\n\nHi, \n\nA column of my df looks like\n\nA\n10/20/30\n\n40/20\n60/10/10/5\n80/10\n\nI want to split it such that the last column has the last composition and if there are not enough the middle columns get the 0s. That way my df would look like\n\nA1 A2 A3 A4\n10 20 0 30\n40 0 0 20\n60 10 10 5\n80 0 0 10\n\nHow can I do that ??\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nTry this:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\", gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\", gsub(\"(",
+      "thread_id": "thread-530d39dd4499",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-530d39dd4499",
+      "message_id": "<1346462698.78397.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-08-31T18:24:58-07:00",
+      "subject": "[R] splits with 0s in middle columns",
+      "subject_clean": "splits with 0s in middle columns",
+      "in_reply_to": "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>",
+      "references": [
+        "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "Hi,\nTry this:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\", gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\", gsub(\"(.*)/(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 \\\\3 \\\\4\",dat1$V1)))\ndat3<-data.frame(do.call(rbind,strsplit(dat2, \" \")))\n?colnames(dat3)<-paste0(\"A\",1:4)\n?dat3\n#? A1 A2 A3 A4\n#1 10 20? 0 30\n#2 40? 0? 0 20\n#3 60 10 10? 5\n#4 80? 0? 0 10\nA.K.\n\n\n\n\n----- Original Message -----\nFrom: Sapana Lohani <lohani.sapana at ymail.com>\nTo: R help <r-help at r-project.org>\nCc: \nSent: Friday, August 31, 2012 12:10 PM\nSubject: [R] splits with 0s in middle columns\n\nHi, \n\nA column of my df looks like\n\nA\n10/20/30\n\n40/20\n60/10/10/5\n80/10\n\nI want to split it such that the last column has the last composition and if there are not enough the middle columns get the 0s. That way my df would look like\n\nA1 A2 A3 A4\n10 20 0 30\n40 0 0 20\n60 10 10 5\n80 0 0 10\n\nHow can I do that ??\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nTry this:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\", gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\", gsub(\"(",
+      "thread_id": "thread-530d39dd4499",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-dac0bb1e7c5d",
+      "message_id": "<1346464589.27751.YahooMailNeo@web142601.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-08-31T18:56:29-07:00",
+      "subject": "[R] splits with 0s in middle columns",
+      "subject_clean": "splits with 0s in middle columns",
+      "in_reply_to": "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>",
+      "references": [
+        "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "HI,\nYou can also use ifelse:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==1,gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\",dat1$V1),ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==2,gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\",dat1$V1),gsub(\"(.*)/(.*)/(.*)/(.*)\", \"\\\\1 \\\\2 \\\\3 \\\\4\",dat1$V1)))\n?dat3<-data.frame(do.call(rbind,strsplit(dat2, \" \")))\n?colnames(dat3)<-paste0(\"A\",1:4)\n?dat3\n#? A1 A2 A3 A4\n#1 10 20? 0 30\n#2 40? 0? 0 20\n#3 60 10 10? 5\n#4 80? 0? 0 10\nA.K.\n\n\n\n----- Original Message -----\nFrom: Sapana Lohani <lohani.sapana at ymail.com>\nTo: R help <r-help at r-project.org>\nCc: \nSent: Friday, August 31, 2012 12:10 PM\nSubject: [R] splits with 0s in middle columns\n\nHi, \n\nA column of my df looks like\n\nA\n10/20/30\n\n40/20\n60/10/10/5\n80/10\n\nI want to split it such that the last column has the last composition and if there are not enough the middle columns get the 0s. That way my df would look like\n\nA1 A2 A3 A4\n10 20 0 30\n40 0 0 20\n60 10 10 5\n80 0 0 10\n\nHow can I do that ??\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "HI,\nYou can also use ifelse:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==1,gsub(\"(.*)/(.*)\",\"\\\\1 ",
+      "thread_id": "thread-dac0bb1e7c5d",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-dac0bb1e7c5d",
+      "message_id": "<1346464589.27751.YahooMailNeo@web142601.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-08-31T18:56:29-07:00",
+      "subject": "[R] splits with 0s in middle columns",
+      "subject_clean": "splits with 0s in middle columns",
+      "in_reply_to": "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>",
+      "references": [
+        "<1346429459.10182.YahooMailNeo@web125201.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "HI,\nYou can also use ifelse:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==1,gsub(\"(.*)/(.*)\",\"\\\\1 0 0 \\\\2\",dat1$V1),ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==2,gsub(\"(.*)/(.*)/(.*)\",\"\\\\1 \\\\2 0 \\\\3\",dat1$V1),gsub(\"(.*)/(.*)/(.*)/(.*)\", \"\\\\1 \\\\2 \\\\3 \\\\4\",dat1$V1)))\n?dat3<-data.frame(do.call(rbind,strsplit(dat2, \" \")))\n?colnames(dat3)<-paste0(\"A\",1:4)\n?dat3\n#? A1 A2 A3 A4\n#1 10 20? 0 30\n#2 40? 0? 0 20\n#3 60 10 10? 5\n#4 80? 0? 0 10\nA.K.\n\n\n\n----- Original Message -----\nFrom: Sapana Lohani <lohani.sapana at ymail.com>\nTo: R help <r-help at r-project.org>\nCc: \nSent: Friday, August 31, 2012 12:10 PM\nSubject: [R] splits with 0s in middle columns\n\nHi, \n\nA column of my df looks like\n\nA\n10/20/30\n\n40/20\n60/10/10/5\n80/10\n\nI want to split it such that the last column has the last composition and if there are not enough the middle columns get the 0s. That way my df would look like\n\nA1 A2 A3 A4\n10 20 0 30\n40 0 0 20\n60 10 10 5\n80 0 0 10\n\nHow can I do that ??\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "HI,\nYou can also use ifelse:\ndat1<-read.table(text=\"\n10/20/30\n40/20\n60/10/10/5\n80/10\n\",sep=\"\",header=FALSE,stringsAsFactors=FALSE)\ndat2<-ifelse(nchar(gsub(\"[^/]\",\"\",dat1$V1))==1,gsub(\"(.*)/(.*)\",\"\\\\1 ",
+      "thread_id": "thread-dac0bb1e7c5d",
+      "thread_depth": 0,
+      "month": "2012-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-e1f509c9a03e",
+      "subject": "predict.lm(...,type=\"terms\") question",
+      "message_count": 1,
+      "participants": [
+        "jjthaden"
+      ],
+      "started": "2012-08-31T15:27:42-07:00",
+      "last_reply": "2012-08-31T15:27:42-07:00",
+      "root_message_id": "msg-e1f509c9a03e"
+    },
+    {
+      "id": "thread-e1f509c9a03e",
+      "subject": "predict.lm(...,type=\"terms\") question",
+      "message_count": 1,
+      "participants": [
+        "jjthaden"
+      ],
+      "started": "2012-08-31T15:27:42-07:00",
+      "last_reply": "2012-08-31T15:27:42-07:00",
+      "root_message_id": "msg-e1f509c9a03e"
+    },
+    {
+      "id": "thread-bae9e163f8de",
+      "subject": "how to find the index of points selected from a scatter plot?",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2012-08-31T16:03:07-07:00",
+      "last_reply": "2012-08-31T16:03:07-07:00",
+      "root_message_id": "msg-bae9e163f8de"
+    },
+    {
+      "id": "thread-bae9e163f8de",
+      "subject": "how to find the index of points selected from a scatter plot?",
+      "message_count": 3,
+      "participants": [
+        "Bert Gunter",
+        "Peter Ehlers"
+      ],
+      "started": "2012-08-31T16:03:07-07:00",
+      "last_reply": "2012-08-31T16:10:41-07:00",
+      "root_message_id": "msg-bae9e163f8de"
+    },
+    {
+      "id": "thread-173b246c0631",
+      "subject": "R package fields: Thin-plate splines question",
+      "message_count": 1,
+      "participants": [
+        "Rebecca Clark"
+      ],
+      "started": "2012-08-31T17:10:35-05:00",
+      "last_reply": "2012-08-31T17:10:35-05:00",
+      "root_message_id": "msg-173b246c0631"
+    },
+    {
+      "id": "thread-173b246c0631",
+      "subject": "R package fields: Thin-plate splines question",
+      "message_count": 1,
+      "participants": [
+        "Rebecca Clark"
+      ],
+      "started": "2012-08-31T17:10:35-05:00",
+      "last_reply": "2012-08-31T17:10:35-05:00",
+      "root_message_id": "msg-173b246c0631"
+    },
+    {
+      "id": "thread-a728b774841d",
+      "subject": "using apply with sparse matrix from package Matrix",
+      "message_count": 1,
+      "participants": [
+        "Jennifer Lyon"
+      ],
+      "started": "2012-08-31T17:22:57-06:00",
+      "last_reply": "2012-08-31T17:22:57-06:00",
+      "root_message_id": "msg-a728b774841d"
+    },
+    {
+      "id": "thread-a728b774841d",
+      "subject": "using apply with sparse matrix from package Matrix",
+      "message_count": 1,
+      "participants": [
+        "Jennifer Lyon"
+      ],
+      "started": "2012-08-31T17:22:57-06:00",
+      "last_reply": "2012-08-31T17:22:57-06:00",
+      "root_message_id": "msg-a728b774841d"
+    },
+    {
+      "id": "thread-530d39dd4499",
+      "subject": "splits with 0s in middle columns",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2012-08-31T18:24:58-07:00",
+      "last_reply": "2012-08-31T18:24:58-07:00",
+      "root_message_id": "msg-530d39dd4499"
+    },
+    {
+      "id": "thread-530d39dd4499",
+      "subject": "splits with 0s in middle columns",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2012-08-31T18:24:58-07:00",
+      "last_reply": "2012-08-31T18:24:58-07:00",
+      "root_message_id": "msg-530d39dd4499"
+    },
+    {
+      "id": "thread-dac0bb1e7c5d",
+      "subject": "splits with 0s in middle columns",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2012-08-31T18:56:29-07:00",
+      "last_reply": "2012-08-31T18:56:29-07:00",
+      "root_message_id": "msg-dac0bb1e7c5d"
+    },
+    {
+      "id": "thread-dac0bb1e7c5d",
+      "subject": "splits with 0s in middle columns",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2012-08-31T18:56:29-07:00",
+      "last_reply": "2012-08-31T18:56:29-07:00",
+      "root_message_id": "msg-dac0bb1e7c5d"
+    }
+  ]
+}

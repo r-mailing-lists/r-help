@@ -1,0 +1,342 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2010-08",
+  "messages": [
+    {
+      "id": "msg-9c47002e8d99",
+      "message_id": "<000401cb4959$e9053260$bb0f9720$@ca>",
+      "from_name": "alexander pswarayi",
+      "from_email_hash": "74242145a9e527c068c81f497bc2c654b31ba44a5d82cefb7347d06deccc82bf",
+      "date": "2010-08-31T16:14:41-06:00",
+      "subject": "[R] Retrieving predictions after fitting a model",
+      "subject_clean": "Retrieving predictions after fitting a model",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100831/9c6b6885/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100831/9c6b6885/attachment.pl>",
+      "thread_id": "thread-9c47002e8d99",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-e3bba4ab98fe",
+      "message_id": "<20100831221842.GC11105@laura>",
+      "from_name": "Norm Matloff",
+      "from_email_hash": "4db7a9be8e09c28ffe81d430bd8de418df530a8cc929aef3c751368ba81d90dc",
+      "date": "2010-08-31T15:18:42-07:00",
+      "subject": "[R] Question regarding significance of a covariate in a coxme\tsurvival",
+      "subject_clean": "Question regarding significance of a covariate in a coxme\tsurvival",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "In 2010-08-30, C. Peng <button_an at hotmail.com> wrote:\n\n> What statistical measure(s) tend to be answering ALL(?) question of\n> practical interest?\n\nNone.  All I had said was that significance testing doesn't really\nanswer any questions of practical interest.  Unfortunately, that doesn't\nmean there's something to answer all such questions.\n\nIn the regression case brought up by the original poster (that was Cox\nregression, but the principle is the same), prediction-oriented measures\nsuch AIC or cross-validation directly address the question of interest,\nif that question is predictive ability.\n\nIn general, one should at the very least form confidence intervals\ninstead of significance tests.  In the case in which tests are\ndemanded, e.g. medical journals, replace \"instead of\" by \"in addition\nto.\"\n\nNorm",
+      "body_snippet": "In 2010-08-30, C. Peng <button_an at hotmail.com> wrote:\n\n> What statistical measure(s) tend to be answering ALL(?) question of\n> practical interest?\n\nNone.  All I had said was that significance testi",
+      "thread_id": "thread-e3bba4ab98fe",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-47ce0753352c",
+      "message_id": "<1283296331666-2402437.post@n4.nabble.com>",
+      "from_name": "Paul",
+      "from_email_hash": "9648c887330e8a5b7711582a440d44157023462d297e3b17ea8d76e84720dcaa",
+      "date": "2010-08-31T16:12:11-07:00",
+      "subject": "[R] Reading multiple text files where some files are empty",
+      "subject_clean": "Reading multiple text files where some files are empty",
+      "in_reply_to": "<882b5888-a4e6-42bc-a1d9-06c5b218ff1a@email.android.com>",
+      "references": [
+        "<1283230063393-2401035.post@n4.nabble.com>",
+        "<882b5888-a4e6-42bc-a1d9-06c5b218ff1a@email.android.com>"
+      ],
+      "body_plain": "Thanks for the responses. 'Try' seems to be the function that I needed. I had\nto adapt the code suggested below because vapply wasn't recognised, but this\nseemed to work:\n\na<-list.files()\nx<-lapply(a,function(x){try(read.table(x,colClasses='character'))})\nbad <- sapply(x, function(x){inherits(x, \"try-error\")}) #Identifies the\nelements of the list with the try-error i.e. empty files\ngood<-x[!bad] #Removes the elements identified above\nmyData<-do.call(rbind, good)\n\nCheers,\nPaul\n\n\nWilliam Dunlap wrote:\n> \n> \n> You could use the try() (or tryCatch()) function\n> in lapply().  try(expr) returns the value of the\n> expression if there is no error and an object of\n> class \"try?error\" containing the error message if\n> there was an error.  Execution continues normally\n> after that.\n> \n> E.g.,\n>   x<?lapply(a,function(x){try(read.table(x,colClasses='character'))})\n>   # now remove entries corresponding to bad files\n>   bad <? vapply(x, inherits, \"try?error\", FUN.VALUE=logical(1))\n>   xgood <? x[!bad]  # x[bad] would show you the error messages\n>   myData <? do.call(rbind, xgood)\n> Use try's silent=TRUE argument if you don't want to\n> see the error messages while lapply is running.\n> \n> Bill Dunlap\n> Spotfire, TIBCO Software\n> wdunlap tibco.com \n> \n> \n\n-- \nView this message in context: http://r.789695.n4.nabble.com/Reading-multiple-text-files-where-some-files-are-empty-tp2401035p2402437.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks for the responses. 'Try' seems to be the function that I needed. I had\nto adapt the code suggested below because vapply wasn't recognised, but this\nseemed to work:\n\na<-list.files()\nx<-lapply(a,",
+      "thread_id": "thread-47ce0753352c",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-1a2a08b05c39",
+      "message_id": "<loom.20100901T013115-413@post.gmane.org>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "18f6c2b0b79bec76f7afe0fad5e36fffd27297982eaee9a3a21101b9461258e5",
+      "date": "2010-08-31T23:32:56Z",
+      "subject": "[R] Retrieving predictions after fitting a model",
+      "subject_clean": "Retrieving predictions after fitting a model",
+      "in_reply_to": null,
+      "references": [
+        "<000401cb4959$e9053260$bb0f9720$@ca>"
+      ],
+      "body_plain": "alexander pswarayi <pswarayi <at> ualberta.ca> writes:\n\n> \n> Hi there\n> \n> I am trying to retrieve the predicted values after fitting a model (dose\n> response model). How do I do it. What is the code for it? For estimated\n> parameters, one uses : summary(filename). And for the predicted values, what\n> do I use? Many thanks.\n\n  It depends on the model, but try\n\npredict()\n\nand/or\n\nfitted()\n\n  (See the generic help pages ?predict and ?fitted, also possibly\nthe specific help pages corresponding to your model type, for example\n?predict.glm)\n\n  If you need more detail, you're going to have to give us more detail\nabout what you did.",
+      "body_snippet": "alexander pswarayi <pswarayi <at> ualberta.ca> writes:\n\n> \n> Hi there\n> \n> I am trying to retrieve the predicted values after fitting a model (dose\n> response model). How do I do it. What is the code ",
+      "thread_id": "thread-9c47002e8d99",
+      "thread_depth": 1,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-06183b7287d7",
+      "message_id": "<AANLkTiktc=ijM3KBCa+Xgf4gUPYqYb1f2OrfFWqFtd8P@mail.gmail.com>",
+      "from_name": "Kjetil Halvorsen",
+      "from_email_hash": "c81cc06f35818c3d710f7b7d144f2e9c48a291c60b8119a651c73f51b934f72f",
+      "date": "2010-08-31T20:49:06-04:00",
+      "subject": "[R] 3D tomography data",
+      "subject_clean": "3D tomography data",
+      "in_reply_to": "<1283262108148-2401591.post@n4.nabble.com>",
+      "references": [
+        "<1283262108148-2401591.post@n4.nabble.com>"
+      ],
+      "body_plain": "I guess you need to be more specific about what you want to do.\nBut a search with     RSiteSearch(\"Tomography\")\nleeds to  one package names RTOMO,\nwhich you can install by calling\ninstall.packages(\"RTOMO\",dep=T)\nthen type\nlibrary(RTOMO)\nlibrary(help=RTOMO)\n\nkjetil\n\nOn Tue, Aug 31, 2010 at 9:41 AM, Steve <knight_steven at hotmail.com> wrote:\n>\n> Hi all,\n>\n> I was recently informed about R, as i need a program that can calculate the\n> nearest neighbour in 3D tomography data with its vector. However, I am new\n> to R and it isnt exactly intuitive. Does anyone know of any 3D tutorials\n> that may help me get started?\n>\n> Cheers,\n> Steve\n> --\n> View this message in context: http://r.789695.n4.nabble.com/3D-tomography-data-tp2401591p2401591.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "I guess you need to be more specific about what you want to do.\nBut a search with     RSiteSearch(\"Tomography\")\nleeds to  one package names RTOMO,\nwhich you can install by calling\ninstall.packages(\"RT",
+      "thread_id": "thread-06183b7287d7",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-5cba0957fafa",
+      "message_id": "<AANLkTinzttJR4KYbCseStLqfYDKrChL0Lhnyga-1yZ5J@mail.gmail.com>",
+      "from_name": "Saeed Abu Nimeh",
+      "from_email_hash": "ef52eb9b84b0895eb12aa62050d91ce599c349ec0430f37fafc99a0ea5de325a",
+      "date": "2010-08-31T18:07:56-07:00",
+      "subject": "[R] Collapsing levels of categorical variables",
+      "subject_clean": "Collapsing levels of categorical variables",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "In this paper [1] the author mentioned a procedure by M. Greenace that\ncan be used to collapse the levels of a categorical variable by\nsetting up a\ntable with the frequency of each level and the proportion of the\ntarget value in each level. Then collapsing the table\nlevel by level looking at the change in chi-square as the table is\ncollapsed. Does anyone know if such a procedure is available in R.\n\n[1] http://www2.sas.com/proceedings/sugi31/079-31.pdf",
+      "body_snippet": "In this paper [1] the author mentioned a procedure by M. Greenace that\ncan be used to collapse the levels of a categorical variable by\nsetting up a\ntable with the frequency of each level and the propo",
+      "thread_id": "thread-5cba0957fafa",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-6671fecc37ab",
+      "message_id": "<AANLkTimvFNaeB0ijT6hWTr92Z8aR+tjOGmKupGsui2nZ@mail.gmail.com>",
+      "from_name": "Marlin Keith Cox",
+      "from_email_hash": "57cff1977f1ac64975b354c81ab2feddbc2e52c4b5b6076e2d44c229765c9107",
+      "date": "2010-08-31T18:21:05-08:00",
+      "subject": "[R] non-linear plot parameters",
+      "subject_clean": "non-linear plot parameters",
+      "in_reply_to": "<4C780B02.5010108@ucalgary.ca>",
+      "references": [
+        "<AANLkTin60Kp-x7XRhP154JLPYgmEgKWCJ3=245HB1m2m@mail.gmail.com>",
+        "<75BF2613-85AF-4F0B-B62D-1AC4E9D10F10@comcast.net>",
+        "<AANLkTinvCi89E1quwoVgoMCnK7u3i+kq4mTqeJm_LFA2@mail.gmail.com>",
+        "<AANLkTik2zi1zZdSm9LHCo1PBxyEp2z+8oqEA80nHjNyQ@mail.gmail.com>",
+        "<AANLkTikWvUafkWOAR3Juw47-45iLHRt2oZM45pPiHo-1@mail.gmail.com>",
+        "<4C778ABC.5030001@ucalgary.ca>",
+        "<4C780B02.5010108@ucalgary.ca>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100831/0b517b2b/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100831/0b517b2b/attachment.pl>",
+      "thread_id": "thread-6671fecc37ab",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-068861ca34b9",
+      "message_id": "<D6847F35-A706-4A66-A01D-6A998FFC04D1@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2010-08-31T22:42:14-04:00",
+      "subject": "[R] \"mode\" function",
+      "subject_clean": "\"mode\" function",
+      "in_reply_to": "<SNT119-W581E8FB4389A3A9FD67987B88A0@phx.gbl>",
+      "references": [
+        "<SNT119-W581E8FB4389A3A9FD67987B88A0@phx.gbl>"
+      ],
+      "body_plain": "On Aug 31, 2010, at 5:19 PM, Iain Martyn wrote:\n\n>\n> Hi, I have what I think is a simple question/issue but I have unable  \n> to find the answer for it either in the R-manual or by browsing the  \n> web.\n>\n>\n>\n> I would like to know if there is a \"mode\" function in R, such that  \n> from a vector or matrix the function returns the most common value.   \n> In other programs I use (such as Matlab) I can have for exampe a 3X3  \n> matrix A, A=[1 2 3; 1 3 2; 3 3 2] and I can find the mode of the  \n> rows so that mode(A[1:3,:]) returns a 1X3 matrix [1 3 2].\n\nMatlab must use row major order? Otherwise you statement doesn't make  \nsense. (You are going to need to adjust to R's default column major  \norder, if that's the case.)\n\n>\n>\n>\n> Is this possible in R as well?  If not, how would one go about this?\n\nHave you considered using names(), which.max() and table()?\n\nA=matrix(c(1, 2, 3, 1, 3, 2, 3, 3, 2), 3 ,3, byrow=TRUE)\n\n  apply(A, 2, function(x) names(which.max(table(x)) ))\n# [1] \"1\" \"3\" \"2\"\n\nYou cannot use just which.max(table(.)) since that would return the  \ncounts. If you want the number, then you need to wrap as.numeric  \naround the whole mess.\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Aug 31, 2010, at 5:19 PM, Iain Martyn wrote:\n\n>\n> Hi, I have what I think is a simple question/issue but I have unable  \n> to find the answer for it either in the R-manual or by browsing the  \n> we",
+      "thread_id": "thread-068861ca34b9",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-9a167c0477fe",
+      "message_id": "<3D3B9812A981A841A17E988BA7065F760F083FE40E@MBX3.AD.UCSD.EDU>",
+      "from_name": "Moore, Meagan",
+      "from_email_hash": "1a6d47d401528b7d8025a3b10326fc3c50873064e4133aa8973629b872542ff6",
+      "date": "2010-08-31T19:59:30-07:00",
+      "subject": "[R] problems with JGR and standard R GUI closing during calculations",
+      "subject_clean": "problems with JGR and standard R GUI closing during calculations",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi R help,\n\nI am having problems running calculations in both the standard R GUI (ver 2.11.0)  and the Java GUI for R (1.7-2) in Windows XP Service Pack 3 (2.2 GHz processor with 2 GB of RAM). When I try to import my data and run calculations on it, the GUI closes within a minute, sometimes almost instantaneously after I try to import data to then run the rest of my script. Has anyone had this problem before? Or does anyone recommend a different GUI for intense number crunching? I have included details of my script below for further reference.\n\nAny advice is much appreciated.\n\nThanks,\n\nMeagan\n\n\nScript objective/specific problem: Trying to read 'fCCN' values every second off of 'SMPS' data every 5 mins to calculate output of 'activation diameter' every second).Total time series is about 3 weeks, however, even when I try shortening the data to about half a day or so, I still have the same problem. Sometimes the GUI will close right away, sometimes it will read the first time series of data and close when I try to read the second time series in. This is before I even try to really run the calculation where I am trying to read a value from one time series off of the other. \n\nScript:\n###load libraries\nlibrary(chron)\n\n###define functions\n## read SMPS\nread.smps <- function(filename,patt=\"%m/%d/%Y %H:%M:%S\") {\n  f <- file(filename,open=\"rt\")\n  header <- scan(f,what=\"\",quiet=TRUE,sep=\"\\t\",nlines=1)\n  smps <- read.table(f,check.names=FALSE,comment.char=\"\",sep=\"\\t\",\n                     colClasses=c(\"character\",rep(\"numeric\",length(header)-1)))\n  close(f)\n  list(size=as.numeric(header[-1]),\n       time=as.chron(smps[,1],patt),\n       dat=`dimnames<-`(as.matrix(smps[,-1]),list(smps[,1],header[-1])))\n}\n\n## read fCCN file\nread.fCCN <- function(filename,patt=\"%m/%d/%Y %H:%M:%S\") {\n  dat <- read.table(filename,check.names=FALSE,comment.char=\"\",\n                    sep=\"\\t\",header=TRUE,colClasses=c(\"character\",\n                                           \"numeric\"))\n  dat$times <- as.chron(dat$times,patt)\n  dat\n}\n\n## to get activation diameters\ngetDact <- function(size,perc,fccn) approx(perc,size,(1-fccn)*100)$y\n\n## format times for output\nformatTimes <- function (x, patt = \"%m/%d/%Y %H:%M:%S\") {\n  posixtime <- as.POSIXct(paste(as.Date(dates(x)), times(x)%%1))\n  format(posixtime, patt)\n}\n\n###import data ***(where the GUI will close)****\nsmps <- read.smps(\"SMPS_OL_cuml_v2.txt\")\nfccn <- read.fCCN(\"fCCN_ONLY_forSMPS_v1.txt\")\n\n###output table by fCCN times\n## loop\nDactTable <- data.frame(times=fccn$times,Dact=NA)\nfor( x in 2:length(smps$time) ) {\n  ## find fCCN times corresonding to SMPS\n  selection <- (fccn$times >= smps$time[x-1] &\n                fccn$times <= smps$time[x])\n  ## if any, calculate activation diameters, otherwise, NA\n  if( any(selection) ) \n    DactTable[selection,\"Dact\"] <-\n      getDact(smps$size,smps$dat[x-1,],fccn$fCCN[selection])\n}\n## format the table\nDactTable$times <- formatTimes(DactTable$times)\nwrite.table(DactTable,\n            file=\"Dact-output3.txt\",sep=\"\\t\",quote=FALSE,\n            row.names=FALSE,col.names=TRUE)\n\n***********************\nMeagan J.K. Moore\nChemistry and Biochemistry\nUC San Diego\nGraduate Student\nmoore at ucsd.edu",
+      "body_snippet": "Hi R help,\n\nI am having problems running calculations in both the standard R GUI (ver 2.11.0)  and the Java GUI for R (1.7-2) in Windows XP Service Pack 3 (2.2 GHz processor with 2 GB of RAM). When I ",
+      "thread_id": "thread-9a167c0477fe",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-ca5c72e6f511",
+      "message_id": "<AANLkTik+PWsuipiiPWNr7dgUE6ZC43YA=E7yYBs5Nwh-@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2010-08-31T23:11:30-04:00",
+      "subject": "[R] weird to me interaction between time() and %%, %/%",
+      "subject_clean": "weird to me interaction between time() and %%, %/%",
+      "in_reply_to": "<4C7D8A92.3070906@paradise.net.nz>",
+      "references": [
+        "<4C7D8A92.3070906@paradise.net.nz>"
+      ],
+      "body_plain": "On Tue, Aug 31, 2010 at 7:04 PM, Alistair Gray <aggray at paradise.net.nz> wrote:\n> Dear List,\n> I'm getting weird and unexpected behaviour using time and %%, or %/%. It's\n> likely I'm not appreciating the nuances of floating point arithmetic. Or it\n> could be a bug.\n>\n\nHere are two workarounds to get the year\n\n   time(junk) - (cycle(junk) - 1) / frequency(junk)\n\n   library(chron)\n   month.day.year(junk)$year\n\nand this will get the month as a number between 1 and 12:\n\n   cycle(junk)\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Tue, Aug 31, 2010 at 7:04 PM, Alistair Gray <aggray at paradise.net.nz> wrote:\n> Dear List,\n> I'm getting weird and unexpected behaviour using time and %%, or %/%. It's\n> likely I'm not appreciatin",
+      "thread_id": "thread-ca5c72e6f511",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-a4a1dcc43c12",
+      "message_id": "<1283316734901-2402613.post@n4.nabble.com>",
+      "from_name": "pdb",
+      "from_email_hash": "b29bf9da33c40521e92af3eb35d020a08e8bd6fa14d429eb9c29c0900dc6710e",
+      "date": "2010-08-31T21:52:14-07:00",
+      "subject": "[R] transaction object - how to coerce this data",
+      "subject_clean": "transaction object - how to coerce this data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am wanting to look at frequent item sets using the arules package. I need\nto transform my data into a \"transactions\" object. The data I read in from a\nfile has 2 columns, an ID and an item. How do I convert data like this into\na transactions object?\n\nI've tried \nclass? transactions\nbut it only confuses me.\n\nMy data is like this....\n \nbasketID \titem\n1 \tbread\n1 \tcheese\n1 \tmilk\n2 \tbread\n2 \tcheese \n2 \teggs\n3 \tbread\n3 \tcheese\n3 \tbeer\n\nand from what I gather it should be like this?\n\n data <- list(\n  c(\"bread\",\"cheese\",\"milk\"),\n  c(\"bread\",\"cheese\",\"eggs\"),\n  c(\"bread\",\"cheese\",\"beer\")\n)\n\nso I can use:\n\nt <- as(data, \"transactions\")\n\nThanks in advance.\n\nPhil\n\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/transaction-object-how-to-coerce-this-data-tp2402613p2402613.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi,\n\nI am wanting to look at frequent item sets using the arules package. I need\nto transform my data into a \"transactions\" object. The data I read in from a\nfile has 2 columns, an ID and an item. How",
+      "thread_id": "thread-a4a1dcc43c12",
+      "thread_depth": 0,
+      "month": "2010-08"
+    },
+    {
+      "id": "msg-6b9df2518d40",
+      "message_id": "<AANLkTimGmr8U9p9t0iw9nbFESdEQ=E1fU2HfKjXma_D5@mail.gmail.com>",
+      "from_name": "Erin Hodgess",
+      "from_email_hash": "b26e9c7bfb605fed8b617b744d8476ab90f8218ca2710a5f80794303575b1adc",
+      "date": "2010-08-31T23:57:25-05:00",
+      "subject": "[R]  problem with jpeg and Rbitmap.dll",
+      "subject_clean": "problem with jpeg and Rbitmap.dll",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R People:\n\nI am having trouble saving a plot to jpeg via the graphics device.  I put it:\n\nplot(1:10)\n\nand click on the graphics device.  I save it to jpeg at 100% quality,\nput the file name in, and then receive an \"Impossible to load\nRbitmapp.dll\" message.\n\nThis is on Windows XP on a new Netbook.  I built the R via from sources.\n\nIt seemed to work fine on Sunday.\n\n> sessionInfo()\nR version 2.11.1 (2010-05-31)\ni386-pc-mingw32\n\nlocale:\n[1] LC_COLLATE=English_United States.1252\n[2] LC_CTYPE=English_United States.1252\n[3] LC_MONETARY=English_United States.1252\n[4] LC_NUMERIC=C\n[5] LC_TIME=English_United States.1252\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nloaded via a namespace (and not attached):\n[1] tools_2.11.1\n>\n\nThanks for any help.\n\nSincerely,\nErin\n\n\n-- \nErin Hodgess\nAssociate Professor\nDepartment of Computer and Mathematical Sciences\nUniversity of Houston - Downtown\nmailto: erinm.hodgess at gmail.com",
+      "body_snippet": "Dear R People:\n\nI am having trouble saving a plot to jpeg via the graphics device.  I put it:\n\nplot(1:10)\n\nand click on the graphics device.  I save it to jpeg at 100% quality,\nput the file name in, a",
+      "thread_id": "thread-6b9df2518d40",
+      "thread_depth": 0,
+      "month": "2010-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-e3bba4ab98fe",
+      "subject": "Question regarding significance of a covariate in a coxme\tsurvival",
+      "message_count": 1,
+      "participants": [
+        "Norm Matloff"
+      ],
+      "started": "2010-08-31T15:18:42-07:00",
+      "last_reply": "2010-08-31T15:18:42-07:00",
+      "root_message_id": "msg-e3bba4ab98fe"
+    },
+    {
+      "id": "thread-47ce0753352c",
+      "subject": "Reading multiple text files where some files are empty",
+      "message_count": 1,
+      "participants": [
+        "Paul"
+      ],
+      "started": "2010-08-31T16:12:11-07:00",
+      "last_reply": "2010-08-31T16:12:11-07:00",
+      "root_message_id": "msg-47ce0753352c"
+    },
+    {
+      "id": "thread-9c47002e8d99",
+      "subject": "Retrieving predictions after fitting a model",
+      "message_count": 2,
+      "participants": [
+        "Ben Bolker",
+        "alexander pswarayi"
+      ],
+      "started": "2010-08-31T16:14:41-06:00",
+      "last_reply": "2010-08-31T23:32:56+00:00",
+      "root_message_id": "msg-9c47002e8d99"
+    },
+    {
+      "id": "thread-5cba0957fafa",
+      "subject": "Collapsing levels of categorical variables",
+      "message_count": 1,
+      "participants": [
+        "Saeed Abu Nimeh"
+      ],
+      "started": "2010-08-31T18:07:56-07:00",
+      "last_reply": "2010-08-31T18:07:56-07:00",
+      "root_message_id": "msg-5cba0957fafa"
+    },
+    {
+      "id": "thread-6671fecc37ab",
+      "subject": "non-linear plot parameters",
+      "message_count": 1,
+      "participants": [
+        "Marlin Keith Cox"
+      ],
+      "started": "2010-08-31T18:21:05-08:00",
+      "last_reply": "2010-08-31T18:21:05-08:00",
+      "root_message_id": "msg-6671fecc37ab"
+    },
+    {
+      "id": "thread-9a167c0477fe",
+      "subject": "problems with JGR and standard R GUI closing during calculations",
+      "message_count": 1,
+      "participants": [
+        "Moore, Meagan"
+      ],
+      "started": "2010-08-31T19:59:30-07:00",
+      "last_reply": "2010-08-31T19:59:30-07:00",
+      "root_message_id": "msg-9a167c0477fe"
+    },
+    {
+      "id": "thread-06183b7287d7",
+      "subject": "3D tomography data",
+      "message_count": 1,
+      "participants": [
+        "Kjetil Halvorsen"
+      ],
+      "started": "2010-08-31T20:49:06-04:00",
+      "last_reply": "2010-08-31T20:49:06-04:00",
+      "root_message_id": "msg-06183b7287d7"
+    },
+    {
+      "id": "thread-a4a1dcc43c12",
+      "subject": "transaction object - how to coerce this data",
+      "message_count": 1,
+      "participants": [
+        "pdb"
+      ],
+      "started": "2010-08-31T21:52:14-07:00",
+      "last_reply": "2010-08-31T21:52:14-07:00",
+      "root_message_id": "msg-a4a1dcc43c12"
+    },
+    {
+      "id": "thread-068861ca34b9",
+      "subject": "\"mode\" function",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2010-08-31T22:42:14-04:00",
+      "last_reply": "2010-08-31T22:42:14-04:00",
+      "root_message_id": "msg-068861ca34b9"
+    },
+    {
+      "id": "thread-ca5c72e6f511",
+      "subject": "weird to me interaction between time() and %%, %/%",
+      "message_count": 1,
+      "participants": [
+        "Gabor Grothendieck"
+      ],
+      "started": "2010-08-31T23:11:30-04:00",
+      "last_reply": "2010-08-31T23:11:30-04:00",
+      "root_message_id": "msg-ca5c72e6f511"
+    },
+    {
+      "id": "thread-6b9df2518d40",
+      "subject": "problem with jpeg and Rbitmap.dll",
+      "message_count": 1,
+      "participants": [
+        "Erin Hodgess"
+      ],
+      "started": "2010-08-31T23:57:25-05:00",
+      "last_reply": "2010-08-31T23:57:25-05:00",
+      "root_message_id": "msg-6b9df2518d40"
+    }
+  ]
+}

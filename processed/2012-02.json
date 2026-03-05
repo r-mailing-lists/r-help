@@ -1,0 +1,1064 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2012-02",
+  "messages": [
+    {
+      "id": "msg-6d1a2a17059f",
+      "message_id": "<1330556417871-4433394.post@n4.nabble.com>",
+      "from_name": "Mickael R problem",
+      "from_email_hash": "51661e77761a80638dcbd9ee1eb37c511df46d8cdb63e23a305778732c446098",
+      "date": "2012-02-29T15:00:17-08:00",
+      "subject": "[R] TM reader with text",
+      "subject_clean": "TM reader with text",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello everybody,\nI work, I try, with TM but I have a problem with some special words in\nfrench. I think this is due to the manner to transform PDF to text, but I'm\nnot perfectly sure. \nLet's see to the example :\n\nfindFreqTerms(tdm1,30)\n    [33] \"<U+F0A3>\"            \"<U+FB01>n\"           \"<U+FB01>nancement\"  \n\"<U+FB01>nancier\"     \"<U+FB01>nanci?re\"    \"<U+FB01>nanci?res\"  \n\"<U+FB01>nanciers\"    \"<U+FB01>xe\"         \n\nSome french words are not well reading by TM with the reader readPlain. I\ntry to use reader= reader PDF. But it doesn't work so I must transformed PDF\ntext to text. And some words are not understand so when I use \nTermDocumentMatrix a word like inflation diseappear. It's a big probleme for\nme. I spend lot of time on this problem, any idea ? Thank's for you time.\nBest regard\"s\nMicka?l    \n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/TM-reader-with-text-tp4433394p4433394.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello everybody,\nI work, I try, with TM but I have a problem with some special words in\nfrench. I think this is due to the manner to transform PDF to text, but I'm\nnot perfectly sure. \nLet's see to th",
+      "thread_id": "thread-6d1a2a17059f",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-b549236b484e",
+      "message_id": "<686DF18D10EF1C428C2760321FB5B69E063C614E44@DC1VEX07MB001.air.org>",
+      "from_name": "Doran, Harold",
+      "from_email_hash": "92d2bc653019a2d5a0fa1618e3004819dccf7a9f65c746de6a1bc55fa1e194db",
+      "date": "2012-02-29T18:07:43-05:00",
+      "subject": "[R] Quantile scores as dependent variables.. an R and general method question",
+      "subject_clean": "Quantile scores as dependent variables.. an R and general method question",
+      "in_reply_to": "<CAK4FJ1ARYqwxt-tOeurk_vh57Equk7C5DqK9xAiC4-0=59iBMw@mail.gmail.com>",
+      "references": [
+        "<CAB_wvQ5472ipV0qOi6gDNFLmxMX-kssT8Z4rsP+tzcM6wR+zGw@mail.gmail.com>",
+        "<CAK4FJ1D8K5sADh5XuK+c1y_OxZcbJPc4+KkBU7=oB_6466MoTA@mail.gmail.com>",
+        "<686DF18D10EF1C428C2760321FB5B69E063C614E34@DC1VEX07MB001.air.org>",
+        "<CAK4FJ1ARYqwxt-tOeurk_vh57Equk7C5DqK9xAiC4-0=59iBMw@mail.gmail.com>"
+      ],
+      "body_plain": "Typically this list doesn't support general statistical questions and unfortunately I don't have a better recommendation. It may be more helpful for you to work with a statistician than seek help here. \n\nMy point is simply that quantile regression is not for modeling outcomes that are quantiles. The fact that you have a dependent variables expressed as a percentile doesn't mean that quantile regression is the appropriate approach.\n________________________________________\nFrom: ilaik9 at gmail.com [ilaik9 at gmail.com] On Behalf Of ilai [keren at math.montana.edu]\nSent: Wednesday, February 29, 2012 5:52 PM\nTo: Doran, Harold\nCc: Rob James; r-help at r-project.org\nSubject: Re: [R] Quantile scores as dependent variables.. an R and general method question\n\nOn Wed, Feb 29, 2012 at 1:23 PM, Doran, Harold <HDoran at air.org> wrote:\n>\n> The OP is looking for a way to deal with outcomes scores that are quantiles, not a method that models different quantiles of the conditional distribution where an outcome is a continuous variable. So, I don't think QR methods is what is needed.\n\nHuhh?\nFirst, \"deal with\" is rather vague, does it mean summary? plot?\ndelete? as the OP is worried about independence, some modelling\nexercise is more likely. Second, where do you think the OP quantiles\ncome from if not from the conditional distribution of some continuous\nRV ? hint: not France.\nSo for \"...leads to theory, texts or R code..\" on the distributional\nproperties of quantiles/order statistics, do you have a better\nsuggestion for a starting point than QR methods?\n\nCheers\n\n> ________________________________________\n> From: r-help-bounces at r-project.org [r-help-bounces at r-project.org] On Behalf Of ilai [keren at math.montana.edu]\n> Sent: Wednesday, February 29, 2012 1:30 PM\n> To: Rob James\n> Cc: r-help at r-project.org\n> Subject: Re: [R] Quantile scores as dependent variables.. an R and general method question\n>\n> On Tue, Feb 28, 2012 at 3:54 PM, Rob James <aetiologic at gmail.com> wrote:\n>> I have a dataset that does not include native scores, but only serial\n>> quantile rankings for a set of units.\n>>\n>> Clearly these observations are dependent (in that you can't alter one\n>> observation without also altering others).\n>>\n>> Are there methods for dealing with quantile dependent variables. My atempt\n>> to find such methods has not bee successful.\n>>\n>\n> Really? because google found 227k hits for \"R quantile regression\" -\n> none of them lead anywhere ?\n>\n>\n>> Any leads to theory, texts or R code would be most appeciated.\n>>\n>>        [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Typically this list doesn't support general statistical questions and unfortunately I don't have a better recommendation. It may be more helpful for you to work with a statistician than seek help here",
+      "thread_id": "thread-b549236b484e",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-9c633369da24",
+      "message_id": "<15D17E44-FAE6-415E-AC27-52B63B703039@gmail.com>",
+      "from_name": "Leong Keat Chan",
+      "from_email_hash": "82441ed0dad030b9b05280e20fea4b6a97fce9e394f231c8dcc43ec8a287fb39",
+      "date": "2012-02-29T15:19:31-08:00",
+      "subject": "[R] Contour plot",
+      "subject_clean": "Contour plot",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/c90e6638/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/c90e6638/attachment.pl>",
+      "thread_id": "thread-9c633369da24",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-c3180662bf40",
+      "message_id": "<CAGx1TMC6Hx89Ekd9DhB8hsqBy65Cp0rjd2rWzo3UF1Poax0J9g@mail.gmail.com>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2012-02-29T18:21:30-05:00",
+      "subject": "[R] Cannot use negative argument in function",
+      "subject_clean": "Cannot use negative argument in function",
+      "in_reply_to": "<1330542852538-4432628.post@n4.nabble.com>",
+      "references": [
+        "<1330495399217-4430667.post@n4.nabble.com>",
+        "<E93170C7-6BAF-45E7-A660-341903B7CA84@xs4all.nl>",
+        "<1330542852538-4432628.post@n4.nabble.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/d4daf633/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/d4daf633/attachment.pl>",
+      "thread_id": "thread-c3180662bf40",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-c53742984f60",
+      "message_id": "<CAM_vjunE7mnRUFrH-JHsaKMJP1gprvB8QUb4VdL78ZYp15422Q@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2012-02-29T18:28:06-05:00",
+      "subject": "[R] The joys of Nabble: Re: Cannot use negative argument in function",
+      "subject_clean": "The joys of Nabble: Re: Cannot use negative argument in function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This is yet another problem with the Nabble interface to\nthe list.\n\nOn Wed, Feb 29, 2012 at 6:21 PM, Richard M. Heiberger <rmh at temple.edu> wrote:\n> This line\n>\n> ?TT <- *Temp*+273.15\n> makes it unexecutable. ?that is not the error you mentioned.\n\nOn nabble, that variable is in bold. When it's reformatted for\nthe plain-text email list, the formatting is converted to ** surrounding\nthat bit of text.\n\nThis is not helpful.\n\nPlease note, this is an argument for NOT using nabble, rather\nthan for converting the list to HTML. The latter would cause\nmany more problems.\n\nAnother problem with nabble is that there is no context in this\npost. What error? What reproducible example? What are we\ntrying to solve? With the erroneous formatting codes removed,\nthe function runs, as far as I can tell.\n\nSarah\n\n> should that be\n>\n> ?TT <- \"Temp\"+273.15\n> or\n> ?TT <- Temp+273.15\n> or something else?\n>\n> On Wed, Feb 29, 2012 at 2:14 PM, lidaky <svfilhol at alaska.edu> wrote:\n>\n>> here is the code:\n>>\n>> index.refraction <- function(Temp,Press, RH, CO2)\n>> {\n>> ?#define constant\n>> ?lambda ?<- ?531 #nm\n>> ?Co ?<- 299792458 #m/s\n>> ?ww <- c(295.235,2.6422,-0.03238,0.004028)\n>> ?kk ?<- c( 238.0185 ,5792105 ,57.362 ,167917)\n>> ?aa ?<- c( 1.58123 * 10^(-6) , -2.9331 * 10^(-8) , 1.1043 * 10^(-10))\n>> ?bb ?<- c( 5.707 * 10^(-6) , -2.051 * 10^(-8))\n>> ?cc ?<- ?c(1.9898 * 10^(-4) , -2.376 * 10^(-6))\n>> ?dd ?<- 1.83 * 10^(-11)\n>> ?ee ?<- ?-0.765 * 10^(-8)\n>> ?pp <- 101325\n>> ?tt <- 288.15\n>> ?zz <- 0.9995922115\n>> ?ro <- 0.00985938\n>> ?R <- 8.314472\n>> ?M <- 0.018015\n>>\n>> ?S <- 1/(lambda*10^-3)^2\n>> ?ras <- 10^-8*((kk[2]/(kk[1]-S))+(kk[4]/(kk[3]-S)))\n>> ?rvs ?<- 1.022*10^-8*(ww[1]+S*ww[2]+ww[3]*S^2+ww[4]*S^3)\n>> ?Ma ?<- ?0.0289635 + 1.2011 * 10^(-8) * (CO2 - 400)\n>> ?raxs ?<- ras*(1+5.34*10^-7*(CO2-450))\n>> ?TT <- *Temp*+273.15\n>>\n>> #Saturation vapor pressure over ice\n>> # A1 <- -13.928169\n>> # A2 <- 34.7078238\n>> # Theta <- (*Temp*+273.15)/273.16\n>> # Y ?<- ?A1 * (1 - Theta^(-1.5)) + A2 * (1 - Theta^(-1.25))\n>> # Psv <- 611.657*exp(Y)\n>>\n>> ?#Saturation vapor pressure over water\n>> ?Tc ?<- ?647.096 ? ? ? # K ? : Temperature at the critical point\n>> ?Pc ?<- ?22.064 * 10^4 # hPa : Vapor pressure at the critical point\n>> ?nu ?<- ?(1-TT/Tc)\n>> ?a1 ?<- ?-7.85951783\n>> ?a2 ?<- ?1.84408259\n>> ?a3 ?<- ?-11.7866497\n>> ?a4 ?<- ?22.6807411\n>> ?a5 ?<- ?-15.9618719\n>> ?a6 ?<- ?1.80122502\n>> ?Psv ?<- ?Pc * exp(Tc/TT * (a1*nu + a2*nu^1.5 + a3*nu^3. + a4*nu^3.5 +\n>> a5*nu^4. + a6*nu^7.5))\n>>\n>> Alpha ?<- ?1.00062\n>> Beta ?<- ?3.14 * 10^(-8)\n>> Gamma ?<- ?5.60 * 10^(-7)\n>> fpt <- Alpha+Beta*Press+Gamma**Temp*^2\n>> Xv <- (RH/100)*fpt*Psv/Press\n>>\n>> ?Zm <- 1-(Press/TT)*(aa[1]+aa[2]**Temp*+aa[3]**Temp*^2\n>> ? ? ? ? ? ? ? ? ? ? ?+(bb[1]+bb[2]*Temp)*Xv+(cc[1]+cc[2]**Temp*)*Xv^2)\n>> +(Press/TT)^2*(dd+ee*Xv^2)\n>> Roaxs <- pp*Ma/(zz*R*tt)\n>> Rov <- Xv*Press*M/(Zm*R*TT)\n>> Roa <- (1-Xv)*Press*Ma/(Zm*R*TT)\n>> n <- 1+(Roa/Roaxs)*raxs+(Rov/ro)*rvs\n>> return(n)\n>> }\n>>\n>>\n>> Basically, this is just a function to calculate index of refraction in air.\n>> The function is just dealing with numbers.\n>> So i am quite surprise getting this error.\n>> Simon\n>>\n>> --\n>> View this message in context:\n>> http://r.789695.n4.nabble.com/Cannot-use-negative-argument-in-function-tp4430667p4432628.html\n>> Sent from the R help mailing list archive at Nabble.com.\n>>\n>> ?______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html<http://www.r-project.org/posting-guide.html>\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
+      "body_snippet": "This is yet another problem with the Nabble interface to\nthe list.\n\nOn Wed, Feb 29, 2012 at 6:21 PM, Richard M. Heiberger <rmh at temple.edu> wrote:\n> This line\n>\n> ?TT <- *Temp*+273.15\n> makes it une",
+      "thread_id": "thread-c53742984f60",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-a67a7473bfb6",
+      "message_id": "<CAP01uRnZrVGzHeU8nvSZqJgwHyvjf3NLWoBrAnGQG=4odW+52w@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2012-02-29T18:34:00-05:00",
+      "subject": "[R] regular expression",
+      "subject_clean": "regular expression",
+      "in_reply_to": "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>",
+      "references": [
+        "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>"
+      ],
+      "body_plain": "On Wed, Feb 29, 2012 at 2:24 PM, Fred G <bayespokerguy at gmail.com> wrote:\n> Computer Friends,\n>\n> with the following example lines:\n>\n> [107] \"98-610: Cell type: S; Surv(months): 6; STATUS(0=alive, 1=dead): 1\"\n>\n> [108] \"99-625: Cell type: S; Surv(months): 21; STATUS(0=alive, 1=dead): 1\"\n>\n> i want to be able to isolate the number of months of survival for each row.\n>\n> is there a regular expression that can find the first instance of a \";\",\n> delete everything in front of it-- and find the second instance of an \";\"\n> and delete everything behind it? in python there is a function line.find(),\n> would be grateful to hear the R equiv; or, any other better alternatives to\n> get the number of months of survival stored as a variable.\n>\n\nThis extracts all the numeric fields:\n\n# sample data\nLines <- c(\"98-610: Cell type: S; Surv(months): 6; STATUS(0=alive, 1=dead): 1\",\n\"99-625: Cell type: S; Surv(months): 21; STATUS(0=alive, 1=dead): 1\")\n\nlibrary(gsubfn)\nstrapply(Lines, \"(\\\\d+);\", as.numeric, simplify = TRUE)\n\n\n# We can also get all numeric fields in case that is of interest:\n\nstrapply(Lines, \"\\\\d+\", as.numeric, simplify = rbind)\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Wed, Feb 29, 2012 at 2:24 PM, Fred G <bayespokerguy at gmail.com> wrote:\n> Computer Friends,\n>\n> with the following example lines:\n>\n> [107] \"98-610: Cell type: S; Surv(months): 6; STATUS(0=alive, ",
+      "thread_id": "thread-a67a7473bfb6",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-fcfb456e9f42",
+      "message_id": "<EDE4C1C5-DB0C-4D59-93D5-A4EEB1DB5D2F@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T18:35:31-05:00",
+      "subject": "[R] regular expression",
+      "subject_clean": "regular expression",
+      "in_reply_to": "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>",
+      "references": [
+        "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 2:24 PM, Fred G wrote:\n\n> Computer Friends,\n>\n> with the following example lines:\n\nModified to be correct R code. Please emulate my example in the future.\n\ninp <-c( \"98-610: Cell type: S; Surv(months): 6; STATUS(0=alive,  \n1=dead): 1\",\n\"99-625: Cell type: S; Surv(months): 21; STATUS(0=alive, 1=dead): 1\")\n\n>\n> i want to be able to isolate the number of months of survival for  \n> each row.\n>\n> is there a regular expression that can find the first instance of a  \n> \";\",\n> delete everything in front of it-- and find the second instance of  \n> an \";\"\n> and delete everything behind it? in python there is a function  \n> line.find(),\n> would be grateful to hear the R equiv; or, any other better  \n> alternatives to\n> get the number of months of survival stored as a variable.\n\nYou can use either regex methods (noting that the \"?\" is necessary to  \ndefeat the default greedy nature of regex match.\n\n\n > sub( \";.+$\", \"\", sub(\"^.+?;\", \"\", inp) )\n[1] \" Surv(months): 6\"  \" Surv(months): 21\"\n\n...  or you can read these as lines and pass the results to read.table  \nwith sep =\";\".\n\n > read.table(text=inp, sep=\";\", stringsAsFactors=FALSE)[ ,2]\n[1] \" Surv(months): 6\"  \" Surv(months): 21\"\n\n>\n> \t[[alternative HTML version deleted]]\n\nPlease learn to post in palin text.\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 2:24 PM, Fred G wrote:\n\n> Computer Friends,\n>\n> with the following example lines:\n\nModified to be correct R code. Please emulate my example in the future.\n\ninp <-c( \"98-610: Cell t",
+      "thread_id": "thread-fcfb456e9f42",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-47af817cae5c",
+      "message_id": "<CAFaj53=YAXVbp0mqra+8chdYve7koY_r6R9CTwHgG=cF-OGMdg@mail.gmail.com>",
+      "from_name": "Justin Haynes",
+      "from_email_hash": "29fe997e531dfac8431686eafc3cddfcf398974dbc0dcc9520fef506b44f1944",
+      "date": "2012-02-29T15:37:13-08:00",
+      "subject": "[R] regular expression",
+      "subject_clean": "regular expression",
+      "in_reply_to": "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>",
+      "references": [
+        "<CAMg+7mZ+jVtFwtbG8WS0X+Ff=WuJ-_KsUavQeYyEp8qbZoQ0kw@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/d913614e/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/d913614e/attachment.pl>",
+      "thread_id": "thread-47af817cae5c",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-b5ccb2c68e2d",
+      "message_id": "<A48E657E-19EB-4CA2-872D-63F4764F2998@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T18:39:32-05:00",
+      "subject": "[R] linear regression by column",
+      "subject_clean": "linear regression by column",
+      "in_reply_to": "<1330541589164-4432564.post@n4.nabble.com>",
+      "references": [
+        "<1330541589164-4432564.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n\n> Hi everyone.\n>\n> I have a DF with the first column being my independant variable and  \n> all\n> other columns the dependent variables.\n>\n> Something like:\n>\n> x\ty1\ty2\ty3\n> ...\t...\t...\t...\n> ...\t...\t...\t...\n>\n> What I'm trying to do is to perform a linear model for each of my  \n> \"y\". It is\n> pretty simple with loops, but I'm trying to vectorize it using  \n> *apply*.\n>\n> For instance, I tried something like:\n>\n> apply(DF, 1, function(DF){lm(DF[,1] ~ Band1[,2:5])})\n\napply( DF[2:5], 2, function(x){lm(DF[,1] ~ x)})\n\nYou need to use the variable name that you created in the function  \ncall and loop over columns, not rows.\n\n>\n> But apparently it does not work.\n\nFor about four or five reasons.\n\n> .\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n\n> Hi everyone.\n>\n> I have a DF with the first column being my independant variable and  \n> all\n> other columns the dependent variables.\n>\n> Something like:",
+      "thread_id": "thread-b5ccb2c68e2d",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-36f28e10be25",
+      "message_id": "<35A9AC24-0A4B-4D03-BE4E-CD4A22AA0A05@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T18:41:59-05:00",
+      "subject": "[R] Cannot use negative argument in function",
+      "subject_clean": "Cannot use negative argument in function",
+      "in_reply_to": "<1330542852538-4432628.post@n4.nabble.com>",
+      "references": [
+        "<1330495399217-4430667.post@n4.nabble.com>",
+        "<E93170C7-6BAF-45E7-A660-341903B7CA84@xs4all.nl>",
+        "<1330542852538-4432628.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 2:14 PM, lidaky wrote:\n\n> index.refraction <- function(Temp,Press, RH, CO2)\n> {\n>  #define constant\n>  lambda  <-  531 #nm\n>  Co  <- 299792458 #m/s\n>  ww <- c(295.235,2.6422,-0.03238,0.004028)\n>  kk  <- c( 238.0185 ,5792105 ,57.362 ,167917)\n>  aa  <- c( 1.58123 * 10^(-6) , -2.9331 * 10^(-8) , 1.1043 * 10^(-10))\n>  bb  <- c( 5.707 * 10^(-6) , -2.051 * 10^(-8))\n>  cc  <-  c(1.9898 * 10^(-4) , -2.376 * 10^(-6))\n>  dd  <- 1.83 * 10^(-11)\n>  ee  <-  -0.765 * 10^(-8)\n>  pp <- 101325\n>  tt <- 288.15\n>  zz <- 0.9995922115\n>  ro <- 0.00985938\n>  R <- 8.314472\n>  M <- 0.018015\n>\n>  S <- 1/(lambda*10^-3)^2\n>  ras <- 10^-8*((kk[2]/(kk[1]-S))+(kk[4]/(kk[3]-S)))\n>  rvs  <- 1.022*10^-8*(ww[1]+S*ww[2]+ww[3]*S^2+ww[4]*S^3)\n>  Ma  <-  0.0289635 + 1.2011 * 10^(-8) * (CO2 - 400)\n>  raxs  <- ras*(1+5.34*10^-7*(CO2-450))\n>  TT <- *Temp*+273.15\n\nThat was the first line with an error. Why are you using \"*\"'s in that  \nmanner?\n\n>\n> #Saturation vapor pressure over ice\n> # A1 <- -13.928169\n> # A2 <- 34.7078238\n> # Theta <- (*Temp*+273.15)/273.16\n> # Y  <-  A1 * (1 - Theta^(-1.5)) + A2 * (1 - Theta^(-1.25))\n> # Psv <- 611.657*exp(Y)\n>\n>  #Saturation vapor pressure over water\n>  Tc  <-  647.096       # K   : Temperature at the critical point\n>  Pc  <-  22.064 * 10^4 # hPa : Vapor pressure at the critical point\n>  nu  <-  (1-TT/Tc)\n>  a1  <-  -7.85951783\n>  a2  <-  1.84408259\n>  a3  <-  -11.7866497\n>  a4  <-  22.6807411\n>  a5  <-  -15.9618719\n>  a6  <-  1.80122502\n>  Psv  <-  Pc * exp(Tc/TT * (a1*nu + a2*nu^1.5 + a3*nu^3. + a4*nu^3.5 +\n> a5*nu^4. + a6*nu^7.5))\n>\n> Alpha  <-  1.00062\n> Beta  <-  3.14 * 10^(-8)\n> Gamma  <-  5.60 * 10^(-7)\n> fpt <- Alpha+Beta*Press+Gamma**Temp*^2\n> Xv <- (RH/100)*fpt*Psv/Press\n>\n>  Zm <- 1-(Press/TT)*(aa[1]+aa[2]**Temp*+aa[3]**Temp*^2\n>                      +(bb[1]+bb[2]*Temp)*Xv+(cc[1]+cc[2]**Temp*)*Xv^2)\n> +(Press/TT)^2*(dd+ee*Xv^2)\n> Roaxs <- pp*Ma/(zz*R*tt)\n> Rov <- Xv*Press*M/(Zm*R*TT)\n> Roa <- (1-Xv)*Press*Ma/(Zm*R*TT)\n> n <- 1+(Roa/Roaxs)*raxs+(Rov/ro)*rvs\n> return(n)\n> }\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 2:14 PM, lidaky wrote:\n\n> index.refraction <- function(Temp,Press, RH, CO2)\n> {\n>  #define constant\n>  lambda  <-  531 #nm\n>  Co  <- 299792458 #m/s\n>  ww <- c(295.235,2.6422,-0.032",
+      "thread_id": "thread-36f28e10be25",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-fbc09ad0d126",
+      "message_id": "<0A4A1C68-74A9-46ED-961D-26C178A4522D@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T18:45:27-05:00",
+      "subject": "[R] linear regression by column",
+      "subject_clean": "linear regression by column",
+      "in_reply_to": "<A48E657E-19EB-4CA2-872D-63F4764F2998@comcast.net>",
+      "references": [
+        "<1330541589164-4432564.post@n4.nabble.com>",
+        "<A48E657E-19EB-4CA2-872D-63F4764F2998@comcast.net>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 6:39 PM, David Winsemius wrote:\n\n>\n> On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n>\n>> Hi everyone.\n>>\n>> I have a DF with the first column being my independant variable and  \n>> all\n>> other columns the dependent variables.\n>>\n>> Something like:\n>>\n>> x\ty1\ty2\ty3\n>> ...\t...\t...\t...\n>> ...\t...\t...\t...\n>>\n>> What I'm trying to do is to perform a linear model for each of my  \n>> \"y\". It is\n>> pretty simple with loops, but I'm trying to vectorize it using  \n>> *apply*.\n>>\n>> For instance, I tried something like:\n>>\n>> apply(DF, 1, function(DF){lm(DF[,1] ~ Band1[,2:5])})\n>\n> apply( DF[2:5], 2, function(x){lm(DF[,1] ~ x)})\n>\n> You need to use the variable name that you created in the function  \n> call and loop over columns, not rows.\n\nI read the request wrong. It would be:\n\napply( DF[2:5], 2, function(y){y ~ DF$x)})\n\n\n>\n>>\n>> But apparently it does not work.\n>\n> For about four or five reasons.\n>\n>> .\n>\n> David Winsemius, MD\n> West Hartford, CT\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 6:39 PM, David Winsemius wrote:\n\n>\n> On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n>\n>> Hi everyone.\n>>\n>> I have a DF with the first column being my independant variable and  \n>> al",
+      "thread_id": "thread-b5ccb2c68e2d",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-b1b8cddcedf8",
+      "message_id": "<F1D433B3-2730-4797-9DD8-06A4B7B2614C@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T18:49:20-05:00",
+      "subject": "[R] TM reader with text",
+      "subject_clean": "TM reader with text",
+      "in_reply_to": "<1330556417871-4433394.post@n4.nabble.com>",
+      "references": [
+        "<1330556417871-4433394.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 6:00 PM, Mickael R problem wrote:\n\n> Hello everybody,\n> I work, I try, with TM but I have a problem with some special words in\n> french. I think this is due to the manner to transform PDF to text,  \n> but I'm\n> not perfectly sure.\n> Let's see to the example :\n>\n> findFreqTerms(tdm1,30)\n>    [33] \"<U+F0A3>\"            \"<U+FB01>n\"           \"<U \n> +FB01>nancement\"\n> \"<U+FB01>nancier\"     \"<U+FB01>nanci?re\"    \"<U+FB01>nanci?res\"\n> \"<U+FB01>nanciers\"    \"<U+FB01>xe\"\n>\n> Some french words are not well reading by TM with the reader  \n> readPlain. I\n> try to use reader= reader PDF. But it doesn't work so I must  \n> transformed PDF\n> text to text. And some words are not understand so when I use\n> TermDocumentMatrix a word like inflation diseappear. It's a big  \n> probleme for\n> me. I spend lot of time on this problem, any idea ? Thank's for you  \n> time.\n\nYou included no information about your platform, locale settings, or  \nencoding of the text.\n\n?Encoding\n?sessionInfo\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 6:00 PM, Mickael R problem wrote:\n\n> Hello everybody,\n> I work, I try, with TM but I have a problem with some special words in\n> french. I think this is due to the manner to transf",
+      "thread_id": "thread-6d1a2a17059f",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-9e78d74e8b6e",
+      "message_id": "<4F4EBAF3.4020109@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2012-02-29T15:55:31-08:00",
+      "subject": "[R] puzzling results from logistic regression",
+      "subject_clean": "puzzling results from logistic regression",
+      "in_reply_to": "<CAAmySGPjD4Zfdu=JC7UuemrhnhZ23UgdZ-RhcB4ie7RjBx==zQ@mail.gmail.com>",
+      "references": [
+        "<CAPNjSFb0DT77Hosx241R-cvxjB3UQEhOUtaYAea82saNvQgK7Q@mail.gmail.com>",
+        "<CAM_vjukZRMXdayMnC_fNy1LhyUMPdre-Lz8Xuczb1oXKCa3SCQ@mail.gmail.com>",
+        "<CAPNjSFZzrXqBmPkq8rCm8L6eQTN93=ZdEchpjzWjh1ngeh-zeg@mail.gmail.com>",
+        "<CAAmySGPjD4Zfdu=JC7UuemrhnhZ23UgdZ-RhcB4ie7RjBx==zQ@mail.gmail.com>"
+      ],
+      "body_plain": "Michael (OP),\n\nNot that it's necessary, but you might also find\n  confint(aa)\nto be instructive.\n\nPeter Ehlers\n\nOn 2012-02-29 07:20, R. Michael Weylandt wrote:\n> Formally, look at Pr(>|z|). Informally, look at the null and residual\n> deviances from print(aa).\n>\n> Michael\n>\n> On Wed, Feb 29, 2012 at 10:14 AM, Michael<comtech.usa at gmail.com>  wrote:\n>> How did you see it's non-significant?\n>>\n>> Thanks!\n>>\n>> On Wed, Feb 29, 2012 at 9:10 AM, Sarah Goslee<sarah.goslee at gmail.com>wrote:\n>>\n>>> On Wed, Feb 29, 2012 at 10:02 AM, Michael<comtech.usa at gmail.com>  wrote:\n>>>> Hi all,\n>>>>\n>>>> As you can see from below, the result is strange...\n>>>\n>>> Not really.\n>>>\n>>>> I would imagined that the bb result should be much higher and close to 1,\n>>>> any way to improve the fit?\n>>>>\n>>>> Any other classification methods?\n>>>>\n>>>> Thank you!\n>>>>\n>>>> data=data.frame(y=rep(c(0, 1), times=100), x=1:200)\n>>>> aa=glm(y~x, data=data, family=binomial(link=\"logit\"))\n>>>>\n>>>> newdata=data.frame(x=6, y=100)\n>>>> bb=predict(aa, newdata=newdata, type=\"response\")\n>>>> bb\n>>>>\n>>>>\n>>>>> bb\n>>>>\n>>>> 1\n>>>>\n>>>> 0.4929125\n>>>\n>>>\n>>> What did you expect? Your model is completely nonsignificant; there's no\n>>> way to predict y from x, and that's what your predicted value tells you.\n>>>\n>>>> summary(aa)\n>>>\n>>> Call:\n>>> glm(formula = y ~ x, family = binomial(link = \"logit\"), data = data)\n>>>\n>>> Deviance Residuals:\n>>>    Min      1Q  Median      3Q     Max\n>>> -1.190  -1.177   0.000   1.177   1.190\n>>>\n>>> Coefficients:\n>>>              Estimate Std. Error z value Pr(>|z|)\n>>> (Intercept) -0.030152   0.283924  -0.106    0.915\n>>> x            0.000300   0.002450   0.122    0.903\n>>>\n>>> (Dispersion parameter for binomial family taken to be 1)\n>>>\n>>>     Null deviance: 277.26  on 199  degrees of freedom\n>>> Residual deviance: 277.24  on 198  degrees of freedom\n>>> AIC: 281.24\n>>>\n>>> Number of Fisher Scoring iterations: 3\n>>>\n>>>\n>>> I can only assume that you didn't construct the data frame that\n>>> you intended to test.\n>>>\n>>> --\n>>> Sarah Goslee\n>>> http://www.functionaldiversity.org\n>>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Michael (OP),\n\nNot that it's necessary, but you might also find\n  confint(aa)\nto be instructive.\n\nPeter Ehlers\n\nOn 2012-02-29 07:20, R. Michael Weylandt wrote:\n> Formally, look at Pr(>|z|). Informally",
+      "thread_id": "thread-9e78d74e8b6e",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-b23a7e2ec748",
+      "message_id": "<1330560002703-4433526.post@n4.nabble.com>",
+      "from_name": "Mickael R problem",
+      "from_email_hash": "51661e77761a80638dcbd9ee1eb37c511df46d8cdb63e23a305778732c446098",
+      "date": "2012-02-29T16:00:02-08:00",
+      "subject": "[R] TM reader with text",
+      "subject_clean": "TM reader with text",
+      "in_reply_to": "<F1D433B3-2730-4797-9DD8-06A4B7B2614C@comcast.net>",
+      "references": [
+        "<1330556417871-4433394.post@n4.nabble.com>",
+        "<F1D433B3-2730-4797-9DD8-06A4B7B2614C@comcast.net>"
+      ],
+      "body_plain": "my computer run under windows vista 64 sp2. The question about encoding, I\ndon't understand it, sorry ?\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/TM-reader-with-text-tp4433394p4433526.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "my computer run under windows vista 64 sp2. The question about encoding, I\ndon't understand it, sorry ?\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/TM-reader-with-text-tp4433394p4",
+      "thread_id": "thread-6d1a2a17059f",
+      "thread_depth": 2,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-d9785e246590",
+      "message_id": "<3147295A-D228-44B5-97DF-C2F71EB4C8B8@gmail.com>",
+      "from_name": "Leong Keat Chan",
+      "from_email_hash": "82441ed0dad030b9b05280e20fea4b6a97fce9e394f231c8dcc43ec8a287fb39",
+      "date": "2012-02-29T16:04:49-08:00",
+      "subject": "[R] Contour plot",
+      "subject_clean": "Contour plot",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/81a1042c/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/81a1042c/attachment.pl>",
+      "thread_id": "thread-d9785e246590",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-f00db6826fb1",
+      "message_id": "<1330560300531-4433537.post@n4.nabble.com>",
+      "from_name": "lidaky",
+      "from_email_hash": "eb00dbdd1d883865cda93b9c95d4572cf116cf566405d3ca1b0cd8132fdcd4eb",
+      "date": "2012-02-29T16:05:00-08:00",
+      "subject": "[R] Cannot use negative argument in function",
+      "subject_clean": "Cannot use negative argument in function",
+      "in_reply_to": "<35A9AC24-0A4B-4D03-BE4E-CD4A22AA0A05@comcast.net>",
+      "references": [
+        "<1330495399217-4430667.post@n4.nabble.com>",
+        "<E93170C7-6BAF-45E7-A660-341903B7CA84@xs4all.nl>",
+        "<1330542852538-4432628.post@n4.nabble.com>",
+        "<35A9AC24-0A4B-4D03-BE4E-CD4A22AA0A05@comcast.net>"
+      ],
+      "body_plain": "the \"*\" character in front of the Temp variable is there because i just\nwanted to bold the variable in the threade that you can see where it is\nused.\n\nI just restart my computer and R. Now the function is working great. No clue\nwhat was happening, but now everything works.\nSorry for the false notice, and thanks so much for this quick support by all\nof you. Next time i'll restart R before posting on the forum...\nSimon\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Cannot-use-negative-argument-in-function-tp4430667p4433537.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "the \"*\" character in front of the Temp variable is there because i just\nwanted to bold the variable in the threade that you can see where it is\nused.\n\nI just restart my computer and R. Now the functio",
+      "thread_id": "thread-36f28e10be25",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-99b46a7914b8",
+      "message_id": "<9336C1921DF642F79FB376957498E0EE@kcom.edu>",
+      "from_name": "Robert Baer",
+      "from_email_hash": "ddd5677bd41ce9ccb8239fe4a8cc1ce533091d0e3a66b906fbf82801b2b76509",
+      "date": "2012-02-29T18:06:15-06:00",
+      "subject": "[R] ggplot2 dot chart-start at zero",
+      "subject_clean": "ggplot2 dot chart-start at zero",
+      "in_reply_to": "<4F55150FF44.00000266jrkrideau@inbox.com>",
+      "references": [
+        "<4F55150FF44.00000266jrkrideau@inbox.com>"
+      ],
+      "body_plain": "Not sure I'm interpreting what you want to do correctly, but how about:\n> p2 <- pa + scale_x_continuous(limits=c(0,80))\n> p2\n\n\n-----Original Message----- \nFrom: John Kane\nSent: Wednesday, February 29, 2012 2:32 PM\nTo: r-help at r-project.org\nSubject: [R] ggplot2 dot chart-start at zero\n\nI am trying to create a simple dot-plot in ggplot2  with a solid line from \nthe y-axis to the dot, something I first saw in Cleveland's 1984 book\n\nWhat I would like is to have the graph start at zero on the x-axis but leave \nsome space on the right side of the plot area.\n\nI assumed that I should be able to do this with expand() in \nscale_x_continuous() but either I'm wrong or just don't understand what \nexpand() is doing. So far, I see that scale_x_continuous(expand=c(0,0)) \nremoves the space on the right and left. but I don't understand how to just \nget the left only to disappear.\n\nAny help would be appreciated\n\nCode below\n#========================================\nlibrary(ggplot2)\nxx<- structure(list(Food = c(\"Milk\", \"Bread\", \"Potatoes\", \"Rice\"),\n    Expense = c(25L, 49L, 34L, 15L)), .Names = c(\"Food\", \"Expense\"\n), class = \"data.frame\", row.names = c(NA, -4L))\n\n\np <- ggplot(xx, aes(Expense, Food))\n\npa <- p + geom_point(aes(Expense, Food, colour=Food)) +\n       geom_segment(aes(x = 0, xend = Expense,\n           y = Food, yend = Food,colour=Food)) +\n       opts(legend.position = \"none\")\n\npa  # so far so good\n\np1 <- pa + scale_x_continuous(expand=c(0,0))\n#=======================================\n\nR version 2.13.1 (2011-07-08)\nPlatform: i686-pc-linux-gnu (32-bit)\n\nlocale:\n[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n[3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n[5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8\n[7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n[9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] grid      stats     graphics  grDevices utils     datasets  methods\n[8] base\n\nother attached packages:\n[1] ggplot2_0.8.9 proto_0.3-9.2 reshape_0.8.4 plyr_1.7\n\n\nJohn Kane\nKingston ON Canada\n\n____________________________________________________________\nFREE 3D MARINE AQUARIUM SCREENSAVER - Watch dolphins, sharks & orcas on your \ndesktop!\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.\n\n\n------------------------------------------\nRobert W. Baer, Ph.D.\nProfessor of Physiology\nKirksville College of Osteopathic Medicine\nA. T. Still University of Health Sciences\n800 W. Jefferson St.\nKirksville, MO 63501\n660-626-2322\nFAX 660-626-2965",
+      "body_snippet": "Not sure I'm interpreting what you want to do correctly, but how about:\n> p2 <- pa + scale_x_continuous(limits=c(0,80))\n> p2\n\n\n-----Original Message----- \nFrom: John Kane\nSent: Wednesday, February 29,",
+      "thread_id": "thread-99b46a7914b8",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-0fa4f580f9e6",
+      "message_id": "<8B76F137-B940-4B75-95F3-96C2F2EA5411@gmail.com>",
+      "from_name": "Leong Keat Chan",
+      "from_email_hash": "6a15759f6ba3ba54ae74878f377e081c8d579e4c8c881df5d14c4662b14f4d47",
+      "date": "2012-02-29T16:08:54-08:00",
+      "subject": "[R] Contour plot- repost message",
+      "subject_clean": "Contour plot- repost message",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/48165ac7/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/48165ac7/attachment.pl>",
+      "thread_id": "thread-0fa4f580f9e6",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-c0a2acabe82f",
+      "message_id": "<CAGx1TMDfLhoGw3ZGDZJ9Npg0VXj2B-0qJ_k99NUdUyjgFdzp9Q@mail.gmail.com>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2012-02-29T19:16:50-05:00",
+      "subject": "[R] TM reader with text",
+      "subject_clean": "TM reader with text",
+      "in_reply_to": "<F1D433B3-2730-4797-9DD8-06A4B7B2614C@comcast.net>",
+      "references": [
+        "<1330556417871-4433394.post@n4.nabble.com>",
+        "<F1D433B3-2730-4797-9DD8-06A4B7B2614C@comcast.net>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/323abf29/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/323abf29/attachment.pl>",
+      "thread_id": "thread-6d1a2a17059f",
+      "thread_depth": 2,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-edb5a1105f98",
+      "message_id": "<4F4EC1CB.6020701@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2012-02-29T19:24:43-05:00",
+      "subject": "[R] The joys of Nabble: Re: Cannot use negative argument in function",
+      "subject_clean": "The joys of Nabble: Re: Cannot use negative argument in function",
+      "in_reply_to": "<CAM_vjunE7mnRUFrH-JHsaKMJP1gprvB8QUb4VdL78ZYp15422Q@mail.gmail.com>",
+      "references": [
+        "<CAM_vjunE7mnRUFrH-JHsaKMJP1gprvB8QUb4VdL78ZYp15422Q@mail.gmail.com>"
+      ],
+      "body_plain": "On 12-02-29 6:28 PM, Sarah Goslee wrote:\n> This is yet another problem with the Nabble interface to\n> the list.\n>\n> On Wed, Feb 29, 2012 at 6:21 PM, Richard M. Heiberger<rmh at temple.edu>  wrote:\n>> This line\n>>\n>>   TT<- *Temp*+273.15\n>> makes it unexecutable.  that is not the error you mentioned.\n>\n> On nabble, that variable is in bold. When it's reformatted for\n> the plain-text email list, the formatting is converted to ** surrounding\n> that bit of text.\n>\n> This is not helpful.\n>\n> Please note, this is an argument for NOT using nabble, rather\n> than for converting the list to HTML. The latter would cause\n> many more problems.\n>\n> Another problem with nabble is that there is no context in this\n> post. What error? What reproducible example? What are we\n> trying to solve? With the erroneous formatting codes removed,\n> the function runs, as far as I can tell.\n\nNo need to complain about nabble, just filter them out.  Look for a \n\"Message-ID\" header containing \"nabble.com\".\n\nDuncan Murdoch",
+      "body_snippet": "On 12-02-29 6:28 PM, Sarah Goslee wrote:\n> This is yet another problem with the Nabble interface to\n> the list.\n>\n> On Wed, Feb 29, 2012 at 6:21 PM, Richard M. Heiberger<rmh at temple.edu>  wrote:\n>> ",
+      "thread_id": "thread-c53742984f60",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-d61f782fde85",
+      "message_id": "<4990B833-21A6-4C80-9B72-2F7B29A00FC7@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T19:26:32-05:00",
+      "subject": "[R] R can't load a large dataset",
+      "subject_clean": "R can't load a large dataset",
+      "in_reply_to": "<CAG7aifKQhin-jsHp4so5pWyGw+V8Kv7AkGBK1mSft0mOgcC7kw@mail.gmail.com>",
+      "references": [
+        "<CAG7aifKQhin-jsHp4so5pWyGw+V8Kv7AkGBK1mSft0mOgcC7kw@mail.gmail.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 7:00 PM, Francesco Sarracino wrote:\n\n> Dear R listers,\n>\n> I have a silly problem. I am trying to load a dta (Stata) file in R.\n> The dta is about 650 MB and contains the integrated World Values\n> Survey/ European Value Study data-set.\n> My problem is that I don't manage to load the file. After almost 1\n> hour I issued the following command:\n> data <- read.dta(\"http://www.stata-press.com/data/kkd/data1.dta\",\n>  convert.dates = TRUE, convert.factors = TRUE,\n>      missing.type = FALSE,\n>      convert.underscore = FALSE, warn.missing.labels = TRUE)\n\nI get MUCH smaller data.frame;\n\nrequire(foreign)\n...then your code:\n\n(Almost instantaneous return to console prompt.)\n\n > str(data)\n'data.frame':\t3340 obs. of  47 variables:\n  $ persnr  : int  2229 3994 6326 8660 10622 13277 15241 17852 19635  \n21501 ...\n  $ intnr   : int  145700 256862 166979 120826 154849 138118 13277  \n160539 194697 150495 ...\n  $ state   : Factor w/ 16 levels \"Berlin\",\"Schl.Hst\",..: 6 15 2 6 6  \n10 6 6 10 9 ...\n  $ gender  : Factor w/ 2 levels \"Maenner\",\"Frauen\": 1 1 2 1 1 1 1 1 2  \n2 ...\nSnipped a few pages...\n\n\nThe column names don't really look like what you describe:\n\n >  names(data)\n  [1] \"persnr\"   \"intnr\"    \"state\"    \"gender\"   \"ybirth\"   \"ymove\"\n  [7] \"ybuild\"   \"hcond\"    \"sqm\"      \"rooms\"    \"fseval\"   \"kitchen\"\n[13] \"shower\"   \"wc\"       \"heating\"  \"cellar\"   \"balcony\"  \"garden\"\n[19] \"phone\"    \"renttype\" \"rent\"     \"renteval\" \"hhtype\"   \"htype\"\n[25] \"area\"     \"np11701\"  \"np0105\"   \"np9401\"   \"np9402\"   \"np9403\"\n[31] \"np9501\"   \"np9502\"   \"np9503\"   \"np9504\"   \"np9506\"   \"np9507\"\n[37] \"hhpos\"    \"hhsize\"   \"marital\"  \"edu\"      \"voc\"      \"yedu\"\n[43] \"emp\"      \"occ\"      \"hhinc\"    \"income\"   \"egph\"\n\n >  sessionInfo()\nR version 2.14.0 Patched (2011-11-13 r57650)\nPlatform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\nattached base packages:\n[1] stats     grDevices utils     datasets  graphics  methods\n[7] base\n\nother attached packages:\n[1] foreign_0.8-47 sos_1.3-1      brew_1.0-6     lattice_0.20-0\n\nloaded via a namespace (and not attached):\n[1] grid_2.14.0  tools_2.14.0\n\n\n>\n> I still don't have my data loaded. Moreover, my system becomes very\n> slow and not responsive.\n> I can't figure out what is going on.\n> Here you are my specs:\n> Ubuntu Linux 11.10 x86_64-pc-linux-gnu (64-bit)\n> Intel Core i7, 4 GB RAM, 367 GB Free HD, 8 GB swap memory\n> R:\n> R version 2.14.1 (2011-12-22)\n>\n> Can you please help me figuring out what's wrong? I think it's\n> impossible that R can't handle files of similar sizes.\n> Thanks a lot,\n> f.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 7:00 PM, Francesco Sarracino wrote:\n\n> Dear R listers,\n>\n> I have a silly problem. I am trying to load a dta (Stata) file in R.\n> The dta is about 650 MB and contains the integrate",
+      "thread_id": "thread-d61f782fde85",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-c13b5a71c864",
+      "message_id": "<4F4EC4AE.1020800@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2012-02-29T16:37:02-08:00",
+      "subject": "[R] linear regression by column",
+      "subject_clean": "linear regression by column",
+      "in_reply_to": "<0A4A1C68-74A9-46ED-961D-26C178A4522D@comcast.net>",
+      "references": [
+        "<1330541589164-4432564.post@n4.nabble.com>",
+        "<A48E657E-19EB-4CA2-872D-63F4764F2998@comcast.net>",
+        "<0A4A1C68-74A9-46ED-961D-26C178A4522D@comcast.net>"
+      ],
+      "body_plain": "On 2012-02-29 15:45, David Winsemius wrote:\n>\n> On Feb 29, 2012, at 6:39 PM, David Winsemius wrote:\n>\n>>\n>> On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n>>\n>>> Hi everyone.\n>>>\n>>> I have a DF with the first column being my independant variable and\n>>> all\n>>> other columns the dependent variables.\n>>>\n>>> Something like:\n>>>\n>>> x\ty1\ty2\ty3\n>>> ...\t...\t...\t...\n>>> ...\t...\t...\t...\n>>>\n>>> What I'm trying to do is to perform a linear model for each of my\n>>> \"y\". It is\n>>> pretty simple with loops, but I'm trying to vectorize it using\n>>> *apply*.\n>>>\n>>> For instance, I tried something like:\n>>>\n>>> apply(DF, 1, function(DF){lm(DF[,1] ~ Band1[,2:5])})\n>>\n>> apply( DF[2:5], 2, function(x){lm(DF[,1] ~ x)})\n>>\n>> You need to use the variable name that you created in the function\n>> call and loop over columns, not rows.\n>\n> I read the request wrong. It would be:\n>\n> apply( DF[2:5], 2, function(y){y ~ DF$x)})\n\nAnother possibility: from ?lm:\n\n\"If response is a matrix a linear model is fitted separately by\n  least-squares to each column of the matrix.\"\n\nPeter Ehlers\n\n>\n>\n>>\n>>>\n>>> But apparently it does not work.\n>>\n>> For about four or five reasons.\n>>\n>>> .\n>>\n>> David Winsemius, MD\n>> West Hartford, CT\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>\n> David Winsemius, MD\n> West Hartford, CT\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "On 2012-02-29 15:45, David Winsemius wrote:\n>\n> On Feb 29, 2012, at 6:39 PM, David Winsemius wrote:\n>\n>>\n>> On Feb 29, 2012, at 1:53 PM, Filoche wrote:\n>>\n>>> Hi everyone.\n>>>\n>>> I have a DF with the",
+      "thread_id": "thread-b5ccb2c68e2d",
+      "thread_depth": 2,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-f026de014d34",
+      "message_id": "<A0EA4638-3A2E-42A4-B5F6-84DBCB28E224@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T19:45:39-05:00",
+      "subject": "[R] Contour plot- repost message",
+      "subject_clean": "Contour plot- repost message",
+      "in_reply_to": "<8B76F137-B940-4B75-95F3-96C2F2EA5411@gmail.com>",
+      "references": [
+        "<8B76F137-B940-4B75-95F3-96C2F2EA5411@gmail.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 7:08 PM, Leong Keat Chan wrote:\n\n> Hi, I would like to make a contour plot using R with the following  \n> information (data at the end): x-axis= arranged according to day  \n> (from 1 to 365, labels= use\n\nI am really getting tired of seeing this message. This must be the  \nfourth duplicate today. There is clearly insufficient data offered to  \nallow plotting such as that offered as the desired output. I saw no  \nreason to do any coding to attempt the impossible.\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 7:08 PM, Leong Keat Chan wrote:\n\n> Hi, I would like to make a contour plot using R with the following  \n> information (data at the end): x-axis= arranged according to day  \n> (from",
+      "thread_id": "thread-0fa4f580f9e6",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-ad40f796b3cf",
+      "message_id": "<193CFC2D-91BD-4B5B-9DC9-52AC9225C509@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T19:49:43-05:00",
+      "subject": "[R] Cannot use negative argument in function",
+      "subject_clean": "Cannot use negative argument in function",
+      "in_reply_to": "<1330560300531-4433537.post@n4.nabble.com>",
+      "references": [
+        "<1330495399217-4430667.post@n4.nabble.com>",
+        "<E93170C7-6BAF-45E7-A660-341903B7CA84@xs4all.nl>",
+        "<1330542852538-4432628.post@n4.nabble.com>",
+        "<35A9AC24-0A4B-4D03-BE4E-CD4A22AA0A05@comcast.net>",
+        "<1330560300531-4433537.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 7:05 PM, lidaky wrote:\n\n> the \"*\" character in front of the Temp variable is there because i  \n> just\n> wanted to bold the variable in the threade that you can see where it  \n> is\n> used.\n>\n> I just restart my computer and R. Now the function is working great.  \n> No clue\n> what was happening, but now everything works.\n> Sorry for the false notice, and thanks so much for this quick  \n> support by all\n> of you. Next time i'll restart R before posting on the forum...\n\nAND don't use bold on Nabble, infact don't use Nabble.\nAND don't highjack existing threads.\n>\n>\n> Sent from the R help mailing list archive at Nabble.com.\n\nWhich is neither an archive nor is it the R help mailing list.\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 7:05 PM, lidaky wrote:\n\n> the \"*\" character in front of the Temp variable is there because i  \n> just\n> wanted to bold the variable in the threade that you can see where it  \n> is\n",
+      "thread_id": "thread-36f28e10be25",
+      "thread_depth": 2,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-94d998589839",
+      "message_id": "<E8007F8B-73C9-4B2A-B419-890973424CD6@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-02-29T19:56:04-05:00",
+      "subject": "[R] Binning continuous data",
+      "subject_clean": "Binning continuous data",
+      "in_reply_to": "<CB740A82.3E6C%faryabib@mail.nih.gov>",
+      "references": [
+        "<CB740A82.3E6C%faryabib@mail.nih.gov>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 5:01 PM, Faryabi, Robert (NIH/NCI) [F] wrote:\n\n> Hi there,\n>\n> Here is the scenario:\n>\n> I have a measurement of some sort for two variables, I would like to  \n> figure out a rough pattern between them. Let say if the values of  \n> the first variable are low, middle, high, and extremely high, then  \n> what would be the corresponding pattern of the second variable. The  \n> idea is not to find the 2d distribution, but plot a conditional  \n> distribution of the second variable based on the binning of the the  \n> first variable and then present it in a boxplot.\n>\n> I got the breakpoints for binning the first variables by a bi-modal  \n> density estimation. Now I need to bin the first variable accordingly  \n> and map them to a categorical value.\n>\n> Is there an R command that does the binning?\n\nIt sounds as though you want `cut` and `table`. Whether that is the  \nbest use of the data is more questionable. Generally the  \ncategorization process removes quite a bit of the information content  \nand may either introduce significant biases or lower power  when the  \ncuts are chosen after looking at the data or lower power when any  \ninferential test is used. You _should_ also look at 2d density  \nestimation as a method that is less susceptible to these distortions.\n\nhelp( kde2d, package=MASS)\n\nhelp( bkde2D , package=KernSmooth)\n\nhelp( s.kde2d , package=ade4)\n\n-- \nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Feb 29, 2012, at 5:01 PM, Faryabi, Robert (NIH/NCI) [F] wrote:\n\n> Hi there,\n>\n> Here is the scenario:\n>\n> I have a measurement of some sort for two variables, I would like to  \n> figure out a rough",
+      "thread_id": "thread-94d998589839",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-90a0caf9e610",
+      "message_id": "<12B361FB-8370-4F8C-B1A1-AF3EFF7B9D79@plessthan.com>",
+      "from_name": "Dennis Fisher",
+      "from_email_hash": "aae8714c70229398df44248b7fcdedd8e16ddfc74206fcd6fc8fe8dab4d942f2",
+      "date": "2012-02-29T17:41:16-08:00",
+      "subject": "[R] Plotting a registered sign",
+      "subject_clean": "Plotting a registered sign",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "R 2.14.0\nOS X\n\nColleagues\n\nProbably a simple question but it alludes me at the moment.  I want to embed a registered sign in the text in a legend.  The text would look like:\n\tSOMETEXT? \nwith ? superscripted.  \n\nThanks in advance.\n\nDennis\n\nDennis Fisher MD\nP < (The \"P Less Than\" Company)\nPhone: 1-866-PLessThan (1-866-753-7784)\nFax: 1-866-PLessThan (1-866-753-7784)\nwww.PLessThan.com",
+      "body_snippet": "R 2.14.0\nOS X\n\nColleagues\n\nProbably a simple question but it alludes me at the moment.  I want to embed a registered sign in the text in a legend.  The text would look like:\n\tSOMETEXT? \nwith ? supersc",
+      "thread_id": "thread-90a0caf9e610",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-4642383ed98f",
+      "message_id": "<CAPud8ToFKsw=NYboXuG89JXJut7EsJy8w-K80xz2Uz6swndN1w@mail.gmail.com>",
+      "from_name": "Dmitriy Lyubimov",
+      "from_email_hash": "65093d5af99cd524ce3f86c2f7067d69923e35475526dc60c808231d8404e54a",
+      "date": "2012-02-29T18:22:32-08:00",
+      "subject": "[R] GLM with regularization",
+      "subject_clean": "GLM with regularization",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nThank you for probably not so new question, but i am new to R.\n\nDoes any of packages have something like glm+regularization? So far i\nsee probably something close to that as a ridge regression in MASS but\nI think i need something like GLM, in particular binomial regularized\nversions of polynomial regression.\n\nAlso I am not sure how some of the K-fold crossvalidation helpers out\nthere (cv.glm) could be used to adjust reg rate as there seems to be\nno way to apply them over data not used for training (or  i am not\nseeing a solution here as training is completely separated from\ncrossvalidation error computation here) .\n\nThe example here in cv.glm doesn't look right to me since it computes\ncv error over model trained on 100% of data. (e.g. wikipedia\ncrossvalidation article lists this as an example of misuse of K-fold\nCV).\n\n\n----- doc quote ----\n# leave-one-out and 6-fold cross-validation prediction error for\n# the mammals data set.\ndata(mammals, package=\"MASS\")\nmammals.glm <- glm(log(brain)~log(body),data=mammals)\ncv.err <- cv.glm(mammals,mammals.glm)\ncv.err.6 <- cv.glm(mammals, mammals.glm, K=6)\n---- end of quote ---\n\n\nThose seem to be pretty common techniques, any poniter in the right\ndirection (package) will be greatly appreciated.\n\nthank you very much.\n-Dmitriy",
+      "body_snippet": "Hello,\n\nThank you for probably not so new question, but i am new to R.\n\nDoes any of packages have something like glm+regularization? So far i\nsee probably something close to that as a ridge regression",
+      "thread_id": "thread-4642383ed98f",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-45418d5c2671",
+      "message_id": "<5654CDC8-8A44-4E36-9BF3-779B2E6074E6@gmail.com>",
+      "from_name": "Keith Weintraub",
+      "from_email_hash": "46f98489670c53241c8d38eb202f6d3227b3640dae4884277c714ec22926cbdc",
+      "date": "2012-02-29T21:41:22-05:00",
+      "subject": "[R] Create a function \"automatically\" from lm formula and coefficients?",
+      "subject_clean": "Create a function \"automatically\" from lm formula and coefficients?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/b70b42c1/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/b70b42c1/attachment.pl>",
+      "thread_id": "thread-45418d5c2671",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-7bfbae77d8e9",
+      "message_id": "<1330570206681-4433870.post@n4.nabble.com>",
+      "from_name": "Frank Harrell",
+      "from_email_hash": "aac2104e568f1b4bc608deccefed75168aaf244b4de06a96ffe1c917f66b7853",
+      "date": "2012-02-29T18:50:06-08:00",
+      "subject": "[R] Create a function \"automatically\" from lm formula and coefficients?",
+      "subject_clean": "Create a function \"automatically\" from lm formula and coefficients?",
+      "in_reply_to": "<5654CDC8-8A44-4E36-9BF3-779B2E6074E6@gmail.com>",
+      "references": [
+        "<5654CDC8-8A44-4E36-9BF3-779B2E6074E6@gmail.com>"
+      ],
+      "body_plain": "require(rms)\nf <- ols(y ~ rcs(age,4)*sex + blood.pressure + rcs(height,5))\nlatex(f)   # typeset algebraic form of model\nFunction(f)   # create an R function that computes Y hat\n\nFrank\n\n\n-----\nFrank Harrell\nDepartment of Biostatistics, Vanderbilt University\n--\nView this message in context: http://r.789695.n4.nabble.com/Create-a-function-automatically-from-lm-formula-and-coefficients-tp4433854p4433870.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "require(rms)\nf <- ols(y ~ rcs(age,4)*sex + blood.pressure + rcs(height,5))\nlatex(f)   # typeset algebraic form of model\nFunction(f)   # create an R function that computes Y hat\n\nFrank\n\n\n-----\nFrank Ha",
+      "thread_id": "thread-45418d5c2671",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-026c54bf9b8e",
+      "message_id": "<E240881A-712D-4B54-88F9-765C6CCB490C@gmail.com>",
+      "from_name": "Keith Weintraub",
+      "from_email_hash": "46f98489670c53241c8d38eb202f6d3227b3640dae4884277c714ec22926cbdc",
+      "date": "2012-02-29T21:50:26-05:00",
+      "subject": "[R] Simulate values from VAR",
+      "subject_clean": "Simulate values from VAR",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/1eeb72ff/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/1eeb72ff/attachment.pl>",
+      "thread_id": "thread-026c54bf9b8e",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-4f2ab05edd7b",
+      "message_id": "<D3A5500C-05B4-4E60-972E-26AD479B358A@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2012-02-29T20:55:48-06:00",
+      "subject": "[R] Plotting a registered sign",
+      "subject_clean": "Plotting a registered sign",
+      "in_reply_to": "<12B361FB-8370-4F8C-B1A1-AF3EFF7B9D79@plessthan.com>",
+      "references": [
+        "<12B361FB-8370-4F8C-B1A1-AF3EFF7B9D79@plessthan.com>"
+      ],
+      "body_plain": "On Feb 29, 2012, at 7:41 PM, Dennis Fisher wrote:\n\n> R 2.14.0\n> OS X\n> \n> Colleagues\n> \n> Probably a simple question but it alludes me at the moment.  I want to embed a registered sign in the text in a legend.  The text would look like:\n> \tSOMETEXT? \n> with ? superscripted.  \n> \n> Thanks in advance.\n> \n> Dennis\n\n\nDennis,\n\nDepending upon some additional fine tuning, here is a generic example:\n\n  plot(1)\n  legend(\"topright\", pch = 1, legend = expression(SOMETEXT ^ symbol(\"\\342\")))\n\n\nSee ?plotmath for more information. The above works on my MBP running Lion.\n\nHTH,\n\nMarc Schwartz",
+      "body_snippet": "On Feb 29, 2012, at 7:41 PM, Dennis Fisher wrote:\n\n> R 2.14.0\n> OS X\n> \n> Colleagues\n> \n> Probably a simple question but it alludes me at the moment.  I want to embed a registered sign in the text in ",
+      "thread_id": "thread-90a0caf9e610",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-cef6f39c7ed1",
+      "message_id": "<1330571759712-4433903.post@n4.nabble.com>",
+      "from_name": "michaelyb",
+      "from_email_hash": "8616830e8f2eaa59cd9c591db6318000fbaa3f6fde9eab240ba8994f042f225f",
+      "date": "2012-02-29T19:15:59-08:00",
+      "subject": "[R] Using a FOR LOOP to name objects",
+      "subject_clean": "Using a FOR LOOP to name objects",
+      "in_reply_to": "<CAAmySGM4-3i3YDVC6+4bxTA=DyhWbVtugX-4c9-zwvSHJrgshg@mail.gmail.com>",
+      "references": [
+        "<1330486848930-4430454.post@n4.nabble.com>",
+        "<CAAmySGM4-3i3YDVC6+4bxTA=DyhWbVtugX-4c9-zwvSHJrgshg@mail.gmail.com>"
+      ],
+      "body_plain": "Michael - thank you so much! Just what I needed! \n\n--\nView this message in context: http://r.789695.n4.nabble.com/Using-a-FOR-LOOP-to-name-objects-tp4430454p4433903.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Michael - thank you so much! Just what I needed! \n\n--\nView this message in context: http://r.789695.n4.nabble.com/Using-a-FOR-LOOP-to-name-objects-tp4430454p4433903.html\nSent from the R help mailing l",
+      "thread_id": "thread-cef6f39c7ed1",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-c40e59e81627",
+      "message_id": "<1330572242238-4433924.post@n4.nabble.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "7dccdaf619d1fc5f71178c06b5df2b75a5bf5822b2df736a90e44a7989fa3e48",
+      "date": "2012-02-29T19:24:02-08:00",
+      "subject": "[R] identifying a column name correctly to use in a formula",
+      "subject_clean": "identifying a column name correctly to use in a formula",
+      "in_reply_to": "<CAMMiRhzc6Tu0dVmemugoPP8FesnymXxv5Of90bFNOfdVRW7ahg@mail.gmail.com>",
+      "references": [
+        "<CAMMiRhzc6Tu0dVmemugoPP8FesnymXxv5Of90bFNOfdVRW7ahg@mail.gmail.com>"
+      ],
+      "body_plain": "Hello,\n\n>\n> I have a large matrix (SNPs) that I want to cycle over with logistic\n> regression with interaction terms. I have made a loop but I am struggling\n> to identify to the formula the name of the column in a way which is\n> meaningful to the formula. It errors becasue it is not evaluated proporly. \n> You have must first write the formula in full, using 'paste'.\n> \n\nTry\n\nDF <- data.frame(Resp=rnorm(10), B=rnorm(10), C=rnorm(10),\nInteraction=rnorm(10))\n#DF\n\nfor(i in 2:3){\n\tcname <- colnames(DF)[i]\n\t#\n\t# In 3 steps to be more readable\n\tRegr <- paste(cname, \"Interaction\", sep=\"*\")\n\tfmlaText <- paste(\"Resp\", Regr, sep=\"~\")\n\t# After step 2 it's already printable\n\tprint(fmlaText)\n\t# Step 3: transform it into a formula object\n\tfmla <- as.formula(fmlaText)\n\tmodel1 <- glm(fmla, data=DF)\n\tprint(summary(model1))\n}\n\nYou have must first write the formula in full, using 'paste'.\n\nHope this helps,\n\nRui Barradas\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/identifying-a-column-name-correctly-to-use-in-a-formula-tp4433605p4433924.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello,\n\n>\n> I have a large matrix (SNPs) that I want to cycle over with logistic\n> regression with interaction terms. I have made a loop but I am struggling\n> to identify to the formula the name of th",
+      "thread_id": "thread-c40e59e81627",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-fe3a3ac2ed55",
+      "message_id": "<CAAmySGMoD4-2TvKEY7ap5v_bv=506+m9e9NmAU5cKYNfQyX3kw@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-02-29T23:04:43-05:00",
+      "subject": "[R] identifying a column name correctly to use in a formula",
+      "subject_clean": "identifying a column name correctly to use in a formula",
+      "in_reply_to": "<CAMMiRhzc6Tu0dVmemugoPP8FesnymXxv5Of90bFNOfdVRW7ahg@mail.gmail.com>",
+      "references": [
+        "<CAMMiRhzc6Tu0dVmemugoPP8FesnymXxv5Of90bFNOfdVRW7ahg@mail.gmail.com>"
+      ],
+      "body_plain": "Your method of constructing a formula is funny: is there a term called\n\"interaction\" or do you mean an interaction in the statistical sense?\nOnce you do that, I'd think the easiest way to proceed is to use\nas.formula() to construct your formula programmatically and then to\npass that to glm(). Something like\n\nform <- as.formula(paste(\"AS ~ \", colnames(n)[i], sep = \"\"))\nglm(form, data = n, framily = bonimial(\"logit\")\n\nMichael\n\nOn Wed, Feb 29, 2012 at 7:42 PM, Philip Robinson\n<philip.c.robinson at gmail.com> wrote:\n> Hi,\n>\n> I have a large matrix (SNPs) that I want to cycle over with logistic\n> regression with interaction terms. I have made a loop but I am struggling\n> to identify to the formula the name of the column in a way which is\n> meaningful to the formula. It errors becasue it is not evaluated proporly.\n>\n> (below is a pilot with only 7 to 33 columns, my actual has 200,000 columns)\n>\n> My attempts:\n>\n>\n> for (i in 7:33) {\n> ?label <- colnames(n)[i]\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> } #variable lengths differ\n>\n> Error in model.frame.default(formula = AS ~ label, data = n,\n> drop.unused.levels = TRUE) :\n> ?variable lengths differ (found for 'label')\n>\n> #This is because it is trying to do logistic regression on a character\n> string\n>\n> for (i in 7:33) {\n> ?label <- eval(colnames(n)[i])\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> } #variable lengths differ\n>\n> Error in model.frame.default(formula = AS ~ label, data = n,\n> drop.unused.levels = TRUE) :\n> ?variable lengths differ (found for 'label')\n>\n> #same as above\n>\n> for (i in 7:33) {\n> ?label <- as.name(colnames(n)[i])\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> }\n>\n> Error in model.frame.default(formula = AS ~ label, data = n,\n> drop.unused.levels = TRUE) :\n> ?invalid type (symbol) for variable 'label\n> #not sure what this error is\n>\n> for (i in 7:33) {\n> ?label <- eval(as.name(colnames(n)[i]))\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> }\n>\n> # Error in eval(expr, envir, enclos) : object 'B1' not found\n> B1 is the name of the first column - this isn't an object and that seems to\n> be why it is causing an error\n>\n> for (i in 7:33) {\n> ?label <- as.formula(colnames(n)[i])\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> }\n> Error in eval(expr, envir, enclos) : object 'B1' not found\n>\n> #same as above\n>\n> for (i in 7:33) {\n> ?label <- eval(as.formula(colnames(n)[i]))\n> model1 <- glm(AS~label*interaction,family=binomial(\"logit\"),data=n)\n> ? ?X <- summary(model1)$coefficients[2,1]\n> Y <- c(label,X)\n> vector <- rbind(vector,Y)\n> }\n>\n> Error in eval(expr, envir, enclos) : object 'B1' not found\n> #same as above\n>\n> Any help would be appreciated.\n>\n> Thanks\n> Philip\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Your method of constructing a formula is funny: is there a term called\n\"interaction\" or do you mean an interaction in the statistical sense?\nOnce you do that, I'd think the easiest way to proceed is t",
+      "thread_id": "thread-fe3a3ac2ed55",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-3e54c849d5bd",
+      "message_id": "<CAAmySGOEa6o5R30S_yjk3_VSxNyDCBLpicFFu5rh08HyKh4vqA@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-02-29T23:08:37-05:00",
+      "subject": "[R] How are the coefficients for the ur.ers, type DF-GLS calculated?",
+      "subject_clean": "How are the coefficients for the ur.ers, type DF-GLS calculated?",
+      "in_reply_to": "<1330532429255-4432015.post@n4.nabble.com>",
+      "references": [
+        "<1330532429255-4432015.post@n4.nabble.com>"
+      ],
+      "body_plain": "Simply type ur.ers on a line by itself to see how the calculation is\nimplemented.\n\nMichael\n\nOn Wed, Feb 29, 2012 at 11:20 AM, ackbar03 <wdai03 at gmail.com> wrote:\n> I need some real help on this, really stuck\n>\n> how are the coefficients for\n> ur.ers(y, type = c(\"DF-GLS\", \"P-test\"), model = c(\"constant\", \"trend\"),\n> ? ? ? lag.max = 0)\n>\n> The max lag is set at zero, so the regression should simply be\n>\n> Diff(zt) = a*z(t-1)\n>\n> where a is the value i'm trying to find and z(t)'s are the detrended values.\n> but through performing my own regression on the two time series I get\n> different values. This could only mean\n>\n> 1) Its not just a simple regression\n> or\n> 2) I'm detrending my data incorrectly.\n>\n> However, i've followed the instructions I've seen in research papers and it\n> doesn't seem to be right. Basically I take Y*t = Yt-(1-(1-7/T)*Y(t-1) and\n> regress that on 1-(1-7/T) ?for all t>1 and leave the values at T=1\n> unchanged. Then I take Yt and subtract the coefficient of the regression to\n> get the detrended value.\n>\n> I'm really stuck on this and its really frustrating. I think the easiest\n> thing would be if someone can tell me exactly how R carries out the\n> calculations for the functions. Help will be highly appreciated!!\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/How-are-the-coefficients-for-the-ur-ers-type-DF-GLS-calculated-tp4432015p4432015.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Simply type ur.ers on a line by itself to see how the calculation is\nimplemented.\n\nMichael\n\nOn Wed, Feb 29, 2012 at 11:20 AM, ackbar03 <wdai03 at gmail.com> wrote:\n> I need some real help on this, rea",
+      "thread_id": "thread-3e54c849d5bd",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-8b657500dd87",
+      "message_id": "<CAAmySGMSqADNz6sUJaD_Hh9f_+NQw26dAebxxkxY=i8HxHipXA@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-02-29T23:12:06-05:00",
+      "subject": "[R] How to extract numerical values from time series forecast",
+      "subject_clean": "How to extract numerical values from time series forecast",
+      "in_reply_to": "<1330534863263-4432165.post@n4.nabble.com>",
+      "references": [
+        "<1330534863263-4432165.post@n4.nabble.com>"
+      ],
+      "body_plain": "Perhaps you need the forecast() function?\n\nMichael\n\nOn Wed, Feb 29, 2012 at 12:01 PM, ForzaBruta <s207027016 at live.nmmu.ac.za> wrote:\n> hi all. i'm busy with some time series data, starting from an earlier period\n> until the current day.\n>\n> i have created a time series forecast taking into account the entire data\n> from the earlier date up until 2007, using the \"forecast\" package for R. i\n> am comparing this forecasted data to the actual/ observed data (which starts\n> from the earlier date up until the current day).\n>\n> my question is, how do i extract the estimated data from the forecast as\n> actual values so that i can do further analysis with it?\n>\n> thanking you all in advance\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/How-to-extract-numerical-values-from-time-series-forecast-tp4432165p4432165.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Perhaps you need the forecast() function?\n\nMichael\n\nOn Wed, Feb 29, 2012 at 12:01 PM, ForzaBruta <s207027016 at live.nmmu.ac.za> wrote:\n> hi all. i'm busy with some time series data, starting from an ",
+      "thread_id": "thread-8b657500dd87",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-71b22f042988",
+      "message_id": "<1330575755932-4434009.post@n4.nabble.com>",
+      "from_name": "hchui",
+      "from_email_hash": "9d9f299248249217bf6d1a3353cc48e95c32d892cc211afd592c634a380cebc4",
+      "date": "2012-02-29T20:22:35-08:00",
+      "subject": "[R] the problem about sample size",
+      "subject_clean": "the problem about sample size",
+      "in_reply_to": "<4ed662d3.2115.1275f813b8f.Coremail.lm_mengxin@163.com>",
+      "references": [
+        "<4ed662d3.2115.1275f813b8f.Coremail.lm_mengxin@163.com>"
+      ],
+      "body_plain": "Hi, there,\n\nI run into the same sample size error in JM. Have you found the solution for\nthe error?\n\nMany thanks,\nHelena\n\n--\nView this message in context: http://r.789695.n4.nabble.com/the-problem-about-sample-size-tp1592855p4434009.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi, there,\n\nI run into the same sample size error in JM. Have you found the solution for\nthe error?\n\nMany thanks,\nHelena\n\n--\nView this message in context: http://r.789695.n4.nabble.com/the-problem-abo",
+      "thread_id": "thread-71b22f042988",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-6321db3eec7d",
+      "message_id": "<000601ccf76a$00ab1d70$02015850$@in>",
+      "from_name": "Yashwanth M.R",
+      "from_email_hash": "69af191cc32dc5478005eb4ac890be6065e5b35af6fb87afef845f739986c672",
+      "date": "2012-02-29T21:13:52-08:00",
+      "subject": "[R] To define a function which includes two functions as arguments such as \"plot\" and \"text\"",
+      "subject_clean": "To define a function which includes two functions as arguments such as \"plot\" and \"text\"",
+      "in_reply_to": "<4F4E64DE.5080704@statistik.tu-dortmund.de>",
+      "references": [
+        "<1330082558311-4416881.post@n4.nabble.com>",
+        "<4F47B058.3020306@statistik.tu-dortmund.de>",
+        "<000001ccf5de$bd944f20$38bced60$@in>",
+        "<4F4E64DE.5080704@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/88b86317/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120229/88b86317/attachment.pl>",
+      "thread_id": "thread-6321db3eec7d",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-15ff96d0d071",
+      "message_id": "<1732095889.20120229235249@gmail.com>",
+      "from_name": "genomenet at gmail.com",
+      "from_email_hash": "73165dc9e447ea694a535328b856d94c59eb8aa72f2d4aa5f5614ec086522b0a",
+      "date": "2012-02-29T23:52:49-06:00",
+      "subject": "[R] ordered lable in ROCR",
+      "subject_clean": "ordered lable in ROCR",
+      "in_reply_to": "<mailman.27.1329994807.18212.r-help@r-project.org>",
+      "references": [
+        "<mailman.27.1329994807.18212.r-help@r-project.org>"
+      ],
+      "body_plain": "Hi There,\n\nI  don't understand how to order the label in ROCR package in order to\nget the correct result. I am wondering whether you can help me.\n\nlibrary(ROCR)\ndata(ROCR.simple)\npred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)\nsvm.auc <- performance(pred, 'tpr', 'fpr')\nplot(svm.auc)\n\n#####label \nROCR.simple$labels[ROCR.simple$labels==\"0\"]=\"tumor\"\nROCR.simple$labels[ROCR.simple$labels==1]=\"normal\"\n\npred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)\n\nsvm.auc <- performance(pred, 'tpr', 'fpr')\n\nplot(svm.auc)\n\nThe ROC curve is fliped. How do we know which order of labels we should choose?\n\nIs this a bug of ROC?\n\nthank you very much.\n\nMike",
+      "body_snippet": "Hi There,\n\nI  don't understand how to order the label in ROCR package in order to\nget the correct result. I am wondering whether you can help me.\n\nlibrary(ROCR)\ndata(ROCR.simple)\npred <- prediction(RO",
+      "thread_id": "thread-15ff96d0d071",
+      "thread_depth": 0,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-26839e7a65ed",
+      "message_id": "<1682372992.20120229235416@gmail.com>",
+      "from_name": "genomenet at gmail.com",
+      "from_email_hash": "73165dc9e447ea694a535328b856d94c59eb8aa72f2d4aa5f5614ec086522b0a",
+      "date": "2012-02-29T23:54:16-06:00",
+      "subject": "[R] ordered lable in ROCR",
+      "subject_clean": "ordered lable in ROCR",
+      "in_reply_to": "<mailman.27.1329994807.18212.r-help@r-project.org>",
+      "references": [
+        "<mailman.27.1329994807.18212.r-help@r-project.org>"
+      ],
+      "body_plain": "Hi There,\n\nI  don't understand how to order the label in ROCR package in order to\nget the correct result. I am wondering whether you can help me.\n\nlibrary(ROCR)\ndata(ROCR.simple)\npred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)\nsvm.auc <- performance(pred, 'tpr', 'fpr')\nplot(svm.auc)\n\n#####label \nROCR.simple$labels[ROCR.simple$labels==\"0\"]=\"tumor\"\nROCR.simple$labels[ROCR.simple$labels==1]=\"normal\"\n\npred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)\n\nsvm.auc <- performance(pred, 'tpr', 'fpr')\n\nplot(svm.auc)\n\nThe ROC curve is flipped. How do we know which order of labels we should choose?\n\nIs this a bug of ROC?\n\nthank you very much.\n\nMike",
+      "body_snippet": "Hi There,\n\nI  don't understand how to order the label in ROCR package in order to\nget the correct result. I am wondering whether you can help me.\n\nlibrary(ROCR)\ndata(ROCR.simple)\npred <- prediction(RO",
+      "thread_id": "thread-26839e7a65ed",
+      "thread_depth": 0,
+      "month": "2012-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-6d1a2a17059f",
+      "subject": "TM reader with text",
+      "message_count": 4,
+      "participants": [
+        "David Winsemius",
+        "Mickael R problem",
+        "Richard M. Heiberger"
+      ],
+      "started": "2012-02-29T15:00:17-08:00",
+      "last_reply": "2012-02-29T19:16:50-05:00",
+      "root_message_id": "msg-6d1a2a17059f"
+    },
+    {
+      "id": "thread-9c633369da24",
+      "subject": "Contour plot",
+      "message_count": 1,
+      "participants": [
+        "Leong Keat Chan"
+      ],
+      "started": "2012-02-29T15:19:31-08:00",
+      "last_reply": "2012-02-29T15:19:31-08:00",
+      "root_message_id": "msg-9c633369da24"
+    },
+    {
+      "id": "thread-47af817cae5c",
+      "subject": "regular expression",
+      "message_count": 1,
+      "participants": [
+        "Justin Haynes"
+      ],
+      "started": "2012-02-29T15:37:13-08:00",
+      "last_reply": "2012-02-29T15:37:13-08:00",
+      "root_message_id": "msg-47af817cae5c"
+    },
+    {
+      "id": "thread-9e78d74e8b6e",
+      "subject": "puzzling results from logistic regression",
+      "message_count": 1,
+      "participants": [
+        "Peter Ehlers"
+      ],
+      "started": "2012-02-29T15:55:31-08:00",
+      "last_reply": "2012-02-29T15:55:31-08:00",
+      "root_message_id": "msg-9e78d74e8b6e"
+    },
+    {
+      "id": "thread-d9785e246590",
+      "subject": "Contour plot",
+      "message_count": 1,
+      "participants": [
+        "Leong Keat Chan"
+      ],
+      "started": "2012-02-29T16:04:49-08:00",
+      "last_reply": "2012-02-29T16:04:49-08:00",
+      "root_message_id": "msg-d9785e246590"
+    },
+    {
+      "id": "thread-0fa4f580f9e6",
+      "subject": "Contour plot- repost message",
+      "message_count": 2,
+      "participants": [
+        "David Winsemius",
+        "Leong Keat Chan"
+      ],
+      "started": "2012-02-29T16:08:54-08:00",
+      "last_reply": "2012-02-29T19:45:39-05:00",
+      "root_message_id": "msg-0fa4f580f9e6"
+    },
+    {
+      "id": "thread-90a0caf9e610",
+      "subject": "Plotting a registered sign",
+      "message_count": 2,
+      "participants": [
+        "Dennis Fisher",
+        "Marc Schwartz"
+      ],
+      "started": "2012-02-29T17:41:16-08:00",
+      "last_reply": "2012-02-29T20:55:48-06:00",
+      "root_message_id": "msg-90a0caf9e610"
+    },
+    {
+      "id": "thread-99b46a7914b8",
+      "subject": "ggplot2 dot chart-start at zero",
+      "message_count": 1,
+      "participants": [
+        "Robert Baer"
+      ],
+      "started": "2012-02-29T18:06:15-06:00",
+      "last_reply": "2012-02-29T18:06:15-06:00",
+      "root_message_id": "msg-99b46a7914b8"
+    },
+    {
+      "id": "thread-b549236b484e",
+      "subject": "Quantile scores as dependent variables.. an R and general method question",
+      "message_count": 1,
+      "participants": [
+        "Doran, Harold"
+      ],
+      "started": "2012-02-29T18:07:43-05:00",
+      "last_reply": "2012-02-29T18:07:43-05:00",
+      "root_message_id": "msg-b549236b484e"
+    },
+    {
+      "id": "thread-c3180662bf40",
+      "subject": "Cannot use negative argument in function",
+      "message_count": 1,
+      "participants": [
+        "Richard M. Heiberger"
+      ],
+      "started": "2012-02-29T18:21:30-05:00",
+      "last_reply": "2012-02-29T18:21:30-05:00",
+      "root_message_id": "msg-c3180662bf40"
+    },
+    {
+      "id": "thread-4642383ed98f",
+      "subject": "GLM with regularization",
+      "message_count": 1,
+      "participants": [
+        "Dmitriy Lyubimov"
+      ],
+      "started": "2012-02-29T18:22:32-08:00",
+      "last_reply": "2012-02-29T18:22:32-08:00",
+      "root_message_id": "msg-4642383ed98f"
+    },
+    {
+      "id": "thread-c53742984f60",
+      "subject": "The joys of Nabble: Re: Cannot use negative argument in function",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Sarah Goslee"
+      ],
+      "started": "2012-02-29T18:28:06-05:00",
+      "last_reply": "2012-02-29T19:24:43-05:00",
+      "root_message_id": "msg-c53742984f60"
+    },
+    {
+      "id": "thread-a67a7473bfb6",
+      "subject": "regular expression",
+      "message_count": 1,
+      "participants": [
+        "Gabor Grothendieck"
+      ],
+      "started": "2012-02-29T18:34:00-05:00",
+      "last_reply": "2012-02-29T18:34:00-05:00",
+      "root_message_id": "msg-a67a7473bfb6"
+    },
+    {
+      "id": "thread-fcfb456e9f42",
+      "subject": "regular expression",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2012-02-29T18:35:31-05:00",
+      "last_reply": "2012-02-29T18:35:31-05:00",
+      "root_message_id": "msg-fcfb456e9f42"
+    },
+    {
+      "id": "thread-b5ccb2c68e2d",
+      "subject": "linear regression by column",
+      "message_count": 3,
+      "participants": [
+        "David Winsemius",
+        "Peter Ehlers"
+      ],
+      "started": "2012-02-29T18:39:32-05:00",
+      "last_reply": "2012-02-29T16:37:02-08:00",
+      "root_message_id": "msg-b5ccb2c68e2d"
+    },
+    {
+      "id": "thread-36f28e10be25",
+      "subject": "Cannot use negative argument in function",
+      "message_count": 3,
+      "participants": [
+        "David Winsemius",
+        "lidaky"
+      ],
+      "started": "2012-02-29T18:41:59-05:00",
+      "last_reply": "2012-02-29T19:49:43-05:00",
+      "root_message_id": "msg-36f28e10be25"
+    },
+    {
+      "id": "thread-cef6f39c7ed1",
+      "subject": "Using a FOR LOOP to name objects",
+      "message_count": 1,
+      "participants": [
+        "michaelyb"
+      ],
+      "started": "2012-02-29T19:15:59-08:00",
+      "last_reply": "2012-02-29T19:15:59-08:00",
+      "root_message_id": "msg-cef6f39c7ed1"
+    },
+    {
+      "id": "thread-c40e59e81627",
+      "subject": "identifying a column name correctly to use in a formula",
+      "message_count": 1,
+      "participants": [
+        "Rui Barradas"
+      ],
+      "started": "2012-02-29T19:24:02-08:00",
+      "last_reply": "2012-02-29T19:24:02-08:00",
+      "root_message_id": "msg-c40e59e81627"
+    },
+    {
+      "id": "thread-d61f782fde85",
+      "subject": "R can't load a large dataset",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2012-02-29T19:26:32-05:00",
+      "last_reply": "2012-02-29T19:26:32-05:00",
+      "root_message_id": "msg-d61f782fde85"
+    },
+    {
+      "id": "thread-94d998589839",
+      "subject": "Binning continuous data",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2012-02-29T19:56:04-05:00",
+      "last_reply": "2012-02-29T19:56:04-05:00",
+      "root_message_id": "msg-94d998589839"
+    },
+    {
+      "id": "thread-71b22f042988",
+      "subject": "the problem about sample size",
+      "message_count": 1,
+      "participants": [
+        "hchui"
+      ],
+      "started": "2012-02-29T20:22:35-08:00",
+      "last_reply": "2012-02-29T20:22:35-08:00",
+      "root_message_id": "msg-71b22f042988"
+    },
+    {
+      "id": "thread-6321db3eec7d",
+      "subject": "To define a function which includes two functions as arguments such as \"plot\" and \"text\"",
+      "message_count": 1,
+      "participants": [
+        "Yashwanth M.R"
+      ],
+      "started": "2012-02-29T21:13:52-08:00",
+      "last_reply": "2012-02-29T21:13:52-08:00",
+      "root_message_id": "msg-6321db3eec7d"
+    },
+    {
+      "id": "thread-45418d5c2671",
+      "subject": "Create a function \"automatically\" from lm formula and coefficients?",
+      "message_count": 2,
+      "participants": [
+        "Frank Harrell",
+        "Keith Weintraub"
+      ],
+      "started": "2012-02-29T21:41:22-05:00",
+      "last_reply": "2012-02-29T18:50:06-08:00",
+      "root_message_id": "msg-45418d5c2671"
+    },
+    {
+      "id": "thread-026c54bf9b8e",
+      "subject": "Simulate values from VAR",
+      "message_count": 1,
+      "participants": [
+        "Keith Weintraub"
+      ],
+      "started": "2012-02-29T21:50:26-05:00",
+      "last_reply": "2012-02-29T21:50:26-05:00",
+      "root_message_id": "msg-026c54bf9b8e"
+    },
+    {
+      "id": "thread-fe3a3ac2ed55",
+      "subject": "identifying a column name correctly to use in a formula",
+      "message_count": 1,
+      "participants": [
+        "R. Michael Weylandt"
+      ],
+      "started": "2012-02-29T23:04:43-05:00",
+      "last_reply": "2012-02-29T23:04:43-05:00",
+      "root_message_id": "msg-fe3a3ac2ed55"
+    },
+    {
+      "id": "thread-3e54c849d5bd",
+      "subject": "How are the coefficients for the ur.ers, type DF-GLS calculated?",
+      "message_count": 1,
+      "participants": [
+        "R. Michael Weylandt"
+      ],
+      "started": "2012-02-29T23:08:37-05:00",
+      "last_reply": "2012-02-29T23:08:37-05:00",
+      "root_message_id": "msg-3e54c849d5bd"
+    },
+    {
+      "id": "thread-8b657500dd87",
+      "subject": "How to extract numerical values from time series forecast",
+      "message_count": 1,
+      "participants": [
+        "R. Michael Weylandt"
+      ],
+      "started": "2012-02-29T23:12:06-05:00",
+      "last_reply": "2012-02-29T23:12:06-05:00",
+      "root_message_id": "msg-8b657500dd87"
+    },
+    {
+      "id": "thread-15ff96d0d071",
+      "subject": "ordered lable in ROCR",
+      "message_count": 1,
+      "participants": [
+        "genomenet at gmail.com"
+      ],
+      "started": "2012-02-29T23:52:49-06:00",
+      "last_reply": "2012-02-29T23:52:49-06:00",
+      "root_message_id": "msg-15ff96d0d071"
+    },
+    {
+      "id": "thread-26839e7a65ed",
+      "subject": "ordered lable in ROCR",
+      "message_count": 1,
+      "participants": [
+        "genomenet at gmail.com"
+      ],
+      "started": "2012-02-29T23:54:16-06:00",
+      "last_reply": "2012-02-29T23:54:16-06:00",
+      "root_message_id": "msg-26839e7a65ed"
+    }
+  ]
+}

@@ -1,0 +1,903 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "1997-08",
+  "messages": [
+    {
+      "id": "msg-8b3afaba61d2",
+      "message_id": "<Pine.LNX.3.96.970802192208.1843B-100000@buffy>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-08-02T19:28:47-07:00",
+      "subject": "R-beta: acepack with 0.50-a1",
+      "subject_clean": "R-beta: acepack with 0.50-a1",
+      "in_reply_to": "<199707311950.PAA26348@c0230.ae.ge.com>",
+      "references": [],
+      "body_plain": "On Thu, 31 Jul 1997, U-E59264-Osman Buyukisik wrote:\n> I have an hp9000/c160 with hpux10.20+gcc2.7.2. When I try the example\n> in the ace help I get:\n> > library(acepack)\n> > ?ace\n> > TWOPI <- 8*atan(1)\n> >              x <- runif(200,0,TWOPI)\n>              y <- exp(sin(x)+rnorm(200)/2)\n>              a <- avas(x,y)\n> /usr/lib/dld.sl: Unresolved symbol: pow_dd (code)  from /home/buyuk/R-0.50-a1/lib/acepack.so\n> ABORT instruction (core dumped)\n> \n\nThe solution to this appears to be to add -lf2c to the end of the line in\nthe Makefile that begins\n\n\t@$(LD) $(SHLIBLDFLAGS)....\n\nThis raises a general issue, though.  What should be done with f2c\ntranslations?  Should we simply assume that everyone has f2c and link with\n-lf2c or should we supply copies of routines that are needed in translated\nlibraries? \n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "On Thu, 31 Jul 1997, U-E59264-Osman Buyukisik wrote:\n> I have an hp9000/c160 with hpux10.20+gcc2.7.2. When I try the example\n> in the ace help I get:\n> > library(acepack)\n> > ?ace\n> > TWOPI <- 8*atan(",
+      "thread_id": "thread-8b3afaba61d2",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-6579a4c979cb",
+      "message_id": "<33E63787.9D516E62@post1.tele.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "f58c59b5b48780c9c9704a77094159d48b9bfdbb2d119d50cd8894c2e8ee26ae",
+      "date": "1997-08-04T22:11:51+02:00",
+      "subject": "R-beta: unix failure in windows R ?",
+      "subject_clean": "R-beta: unix failure in windows R ?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I installed the RApril with all the warnings of a pre-beta version, but\nhad it quickly produce some beautiful graphs etc. Then, since I'm\ninterested in regression, I downloaded the S-plus package for Aalen's\nadditive regression model, and I got a fixed version for Windows/R\nalready by the next day, but when I tried\nlibrary(addreg) I got the error below.\nError in system(call, intern) : \"system\" is only available on Unix>\nWell, all beginning is difficult, but what now ?\nR really looks funny, thanks a lot\nTroels\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I installed the RApril with all the warnings of a pre-beta version, but\nhad it quickly produce some beautiful graphs etc. Then, since I'm\ninterested in regression, I downloaded the S-plus package for ",
+      "thread_id": "thread-6579a4c979cb",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-194392369824",
+      "message_id": "<Pine.SUN.3.95.970804131725.516B-100000@zen>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-08-04T13:21:41-07:00",
+      "subject": "R-beta: unix failure in windows R ?",
+      "subject_clean": "R-beta: unix failure in windows R ?",
+      "in_reply_to": "<33E63787.9D516E62@post1.tele.dk>",
+      "references": [],
+      "body_plain": "On Mon, 4 Aug 1997, Troels Ring wrote:\n> I installed the RApril with all the warnings of a pre-beta version, but\n> had it quickly produce some beautiful graphs etc. Then, since I'm\n> interested in regression, I downloaded the S-plus package for Aalen's\n> additive regression model, and I got a fixed version for Windows/R\n> already by the next day, but when I tried\n> library(addreg) I got the error below.\n> Error in system(call, intern) : \"system\" is only available on Unix>\n\nThe Windows version of R does not support libraries yet.  The\naddreg library can be used, since it contains no C or FORTRAN code.  It is\nnecessary to load it using the source() command.  The help will not be\navailable, but there is a PostScript manual with the library. \n\nIf you have the newer version of addreg that supports model formulas then\nthis will not work under Windows, but there are instructions on how to\nload only the older parts of the library in a README file. \n\n\nThomas Lumley\n-----------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "On Mon, 4 Aug 1997, Troels Ring wrote:\n> I installed the RApril with all the warnings of a pre-beta version, but\n> had it quickly produce some beautiful graphs etc. Then, since I'm\n> interested in reg",
+      "thread_id": "thread-6579a4c979cb",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-176c61da87a1",
+      "message_id": "<x22049fy9z.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-04T23:12:24+02:00",
+      "subject": "R-beta: unix failure in windows R ?",
+      "subject_clean": "R-beta: unix failure in windows R ?",
+      "in_reply_to": "Troels Ring's message of Mon, 04 Aug 1997 22:11:51 +0200",
+      "references": [
+        "<33E63787.9D516E62@post1.tele.dk>"
+      ],
+      "body_plain": "Troels Ring <ring at post1.tele.dk> writes:\n\n> Error in system(call, intern) : \"system\" is only available on Unix>\n> Well, all beginning is difficult, but what now ?\n\nInstall Linux and use the *real* version? \n\nI'm only half-joking there. Of course I realize that some people won't\nwant to install an alternative operating system, because they'll never\nfigure out how to use it. Or think that they won't. Unix is too\ncomplicated, etc. On the other hand, Unix is the main development\nplatform for R, and Linux (or FreeBSD for that matter) provides what\nis to all intents and purposes a Unix for the PC.\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Troels Ring <ring at post1.tele.dk> writes:\n\n> Error in system(call, intern) : \"system\" is only available on Unix>\n> Well, all beginning is difficult, but what now ?\n\nInstall Linux and use the *real* ",
+      "thread_id": "thread-6579a4c979cb",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-422853f5f4c9",
+      "message_id": "<56B5C15CC3@facstaff.cas.unt.edu>",
+      "from_name": "Joel Allen",
+      "from_email_hash": "c35814a3303cff53c7594f0ab044ea2449134ade145595ae7b384f2e3c8f478e",
+      "date": "1997-08-05T10:10:47-06:00",
+      "subject": "R-beta: q and postscript in win95",
+      "subject_clean": "R-beta: q and postscript in win95",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have recently been introduced to R for win95 and have been impressed by\nit.  It seems to outperform S-Plus greatly.  I have had 2 problems.  I am\nusing visual basic to automate an analysis.  The vis basic routine waits\nfor the creation of a data file then calls R to start the analysis.  I have\nplaced the source() command in the rprofile file so it will be run\nautomatically.  Output of the analysis is a graph.  I have not been able to\nget the postscript command to work.  The command line that I am using\nfollows\n\npostscript(file=\"c:/rdata/current.ps\", paper=\"letter\", landscape=TRUE,\nfamily=\"Helvetica\", pointsize=12,bg=\"white\", fg=\"black\")\n\nIs the command incorrect or is there a larger problem with postscript()?\nWill other graphical output formats such as the Windows Metafile be added?\n\nI am also trying to use the q(\"no\") command from within the script to quit\nR.  When I do this, R asks if I want to save the image anyway.  I need R to\nclose itself after the script has been run.  q(\"no\") when entered at the\ncommand line works as it should.  Any suggestions?   \n\nThanks\nJoel Allen\njallen at students.cas.unt.edu\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have recently been introduced to R for win95 and have been impressed by\nit.  It seems to outperform S-Plus greatly.  I have had 2 problems.  I am\nusing visual basic to automate an analysis.  The vis",
+      "thread_id": "thread-422853f5f4c9",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-662a89a14ff1",
+      "message_id": "<x290yg2whc.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-05T22:41:51+02:00",
+      "subject": "R-beta: q and postscript in win95",
+      "subject_clean": "R-beta: q and postscript in win95",
+      "in_reply_to": "\"Joel Allen\"'s message of Tue, 5 Aug 1997 10:10:47 -0600",
+      "references": [
+        "<56B5C15CC3@facstaff.cas.unt.edu>"
+      ],
+      "body_plain": "\"Joel Allen\" <jallen at students.cas.unt.edu> writes:\n\n> I have recently been introduced to R for win95 and have been impressed by\n> it.  It seems to outperform S-Plus greatly.  I have had 2 problems.  I am\n> using visual basic to automate an analysis.  The vis basic routine waits\n> for the creation of a data file then calls R to start the analysis. \n\n...\n\n> I am also trying to use the q(\"no\") command from within the script to quit\n> R.  When I do this, R asks if I want to save the image anyway.  I need R to\n> close itself after the script has been run.  q(\"no\") when entered at the\n> command line works as it should.  Any suggestions?   \n\nThis may be a little far out, but if you get the current version of\nthe gnuwin32 tools from Cygnus, it is possible to compile the *unix*\nversion with only a few modifications. There were some bugs in the\nPostScript code around the time that Rapril was built, which might be\nwhat is bothering you. \n\nWhat you get from the gnuwin32 compile is a straight stdin/out\napplication with all of the Unixy bits nicely emulated but *with no\ngraphics display*, but that actually fits your bill rather nicely. The\nwhole thing is not for the faint at heart, pre-beta versions and\npatches that must be obtained from obscure places and whatnot. I would\nnot recommend it unless you (or a coworker) are fairly well-versed in\nthe Unix way of doing things.\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "\"Joel Allen\" <jallen at students.cas.unt.edu> writes:\n\n> I have recently been introduced to R for win95 and have been impressed by\n> it.  It seems to outperform S-Plus greatly.  I have had 2 problems.",
+      "thread_id": "thread-422853f5f4c9",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-5b79ebfa50ed",
+      "message_id": "<199708052047.IAA20293@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-08-06T08:47:08+12:00",
+      "subject": "R-beta: q and postscript in win95",
+      "subject_clean": "R-beta: q and postscript in win95",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "The big problem is that the postscript driver is not in either the Windows\nversion or the Mac version. It was ifdef'd out in the early days and I\nkeep forgetting to include it. It was of little use on the Mac and most windows\nusers use cut and paste via the clip board so it wasn't much use there either.\n\nI'll get  it in.\n\nOtherwise Peter's suggestion (for the strong hearted); or compiling up the\nwindows code yourself. Everything I use is in the general R distribution.\n\nrobert\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "The big problem is that the postscript driver is not in either the Windows\nversion or the Mac version. It was ifdef'd out in the early days and I\nkeep forgetting to include it. It was of little use on",
+      "thread_id": "thread-5b79ebfa50ed",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-5f4f04d5aae1",
+      "message_id": "<199708060311.PAA14297@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-08-06T15:11:40+12:00",
+      "subject": "R-beta: Characters in .C",
+      "subject_clean": "R-beta: Characters in .C",
+      "in_reply_to": "<21004.9708050954@laplace.maths.qmw.ac.uk>",
+      "references": [
+        "<21004.9708050954@laplace.maths.qmw.ac.uk>"
+      ],
+      "body_plain": "Ian Wilson writes:\n > \n > I am having some difficulties using dynamically loaded\n > C functions on a Sparc 10 with R compiled\n > using cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \n > error message:\n > Error: character variables must be duplicated in .C/.Fortran,\n > with C functions which pass character variables.\n > \n > my C functions look like:  anyfunc(char **filename, other variables )\n > \n > This error message appears about 25% of the time.\n > \n > What is the problem ? \n \nThis is an uninitialized variable problem.  The fix is as follows:\n\nIn the file RHOME/src/main/dotcode.c, find the function declaration\nfor \"naoktrim\" and make the change noted below.\n\nstatic SEXP naoktrim(SEXP s, int * len, int *naok, int *dup)\n{\n        SEXP value;\n\n        if(s == R_NilValue) {\n                value = R_NilValue;\n                *naok = 0;\n                *dup = 0;\t/* !!!! Add this line !!!! */\n                *len = 0;\n        }\n\nThis will be in the next lot of patches we send out for 0.50.\nSorry 'bout that.\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Ian Wilson writes:\n > \n > I am having some difficulties using dynamically loaded\n > C functions on a Sparc 10 with R compiled\n > using cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \n >",
+      "thread_id": "thread-5f4f04d5aae1",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-b4abf0ea0eab",
+      "message_id": "<Pine.SUN.3.95.970806111853.2623C-100000@zen>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-08-06T11:28:46-07:00",
+      "subject": "R-beta: ?faq example of scoping",
+      "subject_clean": "R-beta: ?faq example of scoping",
+      "in_reply_to": "<199708060311.PAA14297@stat1.stat.auckland.ac.nz>",
+      "references": [],
+      "body_plain": "The current examples of the scoping rules of R in the faq and in R&R's\nJCGS paper are clear but a bit artificial.  The following example may be\nof interest as it\na) does something useful in R\nb) doesn't work in S\nc) was written in S independently by myself and at least three of my\nfellow students over the past couple of years, causing literally hours of\nconfusion on each occasion.\n\njackknife.lm<-function (lmobj) \n{\n        n <- length(resid(lmobj))\n        jval <- t(apply(as.matrix(1:n), 1, function(i) coef(update(lmobj, \n                subset = -i))))\n        (n - 1)* (n-1) * var(jval)/n\n}\n\nIn order to make it work in S you need to explicitly pass the linear model\nobject into the function nested in apply(). If you don't and you are lucky\nyou will get  \nError: Object \"lmobj\" not found\nIf you are unlucky enough to have a linear model called lmobj in your\nglobal environment you will get the wrong answer with no warning. \n\nThis version works in S\n\njackknife.S.lm<-function (lmobj) \n{\n        n <- length(resid(lmobj))\n        jval <- t(apply(as.matrix(1:n), 1, function(i,lmobj)\n coef(update(lmobj, subset = -i)),lmobj=lmobj))\n        (n - 1)* (n-1) * var(jval)/n\n}\n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "The current examples of the scoping rules of R in the faq and in R&R's\nJCGS paper are clear but a bit artificial.  The following example may be\nof interest as it\na) does something useful in R\nb) doesn",
+      "thread_id": "thread-5f4f04d5aae1",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-3b5f7a9dc6d6",
+      "message_id": "<199708062021.IAA21936@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-08-07T08:21:01+12:00",
+      "subject": "R-beta: ?faq example of scoping",
+      "subject_clean": "R-beta: ?faq example of scoping",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I like Thomas' example. Kurt can you include it in the FAQ. \n \n Recently I have been doing a lot of programming that has required either\n optimization or zero-finding. Unfortunately most of the functions need\n some arguments to be optimized over and have other parameters that depend on\n the data but are fixed with respect to optimization. With R scoping rules\n this is a trivial problem; simply make up the function with the required\n definitions in the same environment and scoping takes care of it. With\n Splus my solution has been to add an extra parameter to the function and\n to the optimizer to pass in these extras. That's fine for optimizers I \n write myself but it doesn't work for the builtin ones. Fortunately I haven't\n yet found a one-d problem that some thought and bisection won't take care\n of.\n \n robert\n \n \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I like Thomas' example. Kurt can you include it in the FAQ. \n \n Recently I have been doing a lot of programming that has required either\n optimization or zero-finding. Unfortunately most of the functi",
+      "thread_id": "thread-3b5f7a9dc6d6",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-f6bf24cec32c",
+      "message_id": "<Pine.LNX.3.95.970807011848.8396D-100000@mercury.quantex>",
+      "from_name": "John Logsdon",
+      "from_email_hash": "d6ee46feb0960d05da45a7118e7789d267b6b3f19520cb8eb2345b6e65e52583",
+      "date": "1997-08-07T01:30:30+01:00",
+      "subject": "R-beta: R and funfits ",
+      "subject_clean": "R-beta: R and funfits",
+      "in_reply_to": "<Pine.SUN.3.95.970806111853.2623C-100000@zen>",
+      "references": [],
+      "body_plain": "Further to my message ...\n\nFirstly for some reason (possibly the time of day) x11 now appears to work\nOK with R0.50a1.  I did try it lower case but some funny stuff was\npossibly lying around in the workspace (apologies for the 1960s\nprogramming terminology).\n\nAnyway, back to funfits.\n\nPreviously, even on startup, if I loaded the .RData file, the graphics\nwouldn't work.  The possible key was that there is a plot.window function\nin funfits which is also of course a plotting primitive.  So I checked in\nall the fortran code (which could have passed the name back), found\nnothing and trusted the authors not to have used nasty fortran 66 r*4's\nfor characters, and changed the S-code to grot.window etc. \n\nI also tidied up the fortran and hey presto the graphics now appears to\nwork when the funfits objects are loaded.  However NAs are not allowed in\nxlim in plot.window so there is still a problem.  Also there is no maps\nlibrary and I couldn't find the thin plate surface fitting routine tps for\nsome reason.\n\nThe story goes on but the problem does not appear to be as fundamental as\nI  thought it was.  Welcome to hacker's heaven.\n\nJohn\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Further to my message ...\n\nFirstly for some reason (possibly the time of day) x11 now appears to work\nOK with R0.50a1.  I did try it lower case but some funny stuff was\npossibly lying around in the wo",
+      "thread_id": "thread-5f4f04d5aae1",
+      "thread_depth": 2,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-c41ecebcf323",
+      "message_id": "<6rsowh1zdw.fsf@franz.stat.wisc.edu>",
+      "from_name": "Douglas Bates",
+      "from_email_hash": "c908588836123be177df15f4b3132be3a2b4b95c4eaeddcc72b433a3981bb1b3",
+      "date": "1997-08-10T16:50:19-05:00",
+      "subject": "R-beta: logical indexing on a list",
+      "subject_clean": "R-beta: logical indexing on a list",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I haven't had a chance to track this one down in the source code yet.\nI am reporting it here in case someone else has time to look at it.\n\nWhen using a logical vector as an index on a vector, things work as\nexpected until you get to a list for which the indices are all FALSE.\n> tn <- 1:2\n> tn[c(T,T)]\n[1] 1 2\n> tn[c(F,T)]\n[1] 2\n> tn[c(F,F)]\ninteger(0)\n> tt <- list(foo = 1, bar = 2)\n> tt[c(T,T)]\n$foo\n[1] 1\n\n$bar\n[1] 2\n\n> tt[c(F,T)]\n$bar\n[1] 2\n\n> tt[c(F,F)]\nError: attempt to set an attribute on NULL\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I haven't had a chance to track this one down in the source code yet.\nI am reporting it here in case someone else has time to look at it.\n\nWhen using a logical vector as an index on a vector, things w",
+      "thread_id": "thread-c41ecebcf323",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-20bcbdb96888",
+      "message_id": "<199708102352.LAA19451@stat1.stat.auckland.ac.nz>",
+      "from_name": "Robert Gentleman",
+      "from_email_hash": "291c1691bb3652d7a0dabfa65946a606d56f63031b9f3260c41a2249304c478b",
+      "date": "1997-08-11T11:52:10+12:00",
+      "subject": "R-beta: logical indexing on a list",
+      "subject_clean": "R-beta: logical indexing on a list",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Doug Bates reports the problem:\n\n  tt <- list(foo = 1, bar = 2)\n  \n  > tt[c(F,F)]\nError: attempt to set an attribute on NULL\n\nThe problem is that in R there is only one NULL and if attributes are\nset on it they appear in all instances of NULL which is a bit undesireable.\nThis problem will go away once we get generic vectors going. In the meantime,\nchanging line 184 of src/main/subset.c to only carry out the attribute\nassignment when result != R_NilValue  will take care of it. This will be\ndistributed with the next set of patches.\n   robert\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Doug Bates reports the problem:\n\n  tt <- list(foo = 1, bar = 2)\n  \n  > tt[c(F,F)]\nError: attempt to set an attribute on NULL\n\nThe problem is that in R there is only one NULL and if attributes are\nset ",
+      "thread_id": "thread-20bcbdb96888",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-312264555c45",
+      "message_id": "<97Aug13.100850edt.26506@mailgate.bank-banque-canada.ca>",
+      "from_name": "Paul Gilbert",
+      "from_email_hash": "51f348dc0febec9b32e9d9dcb86f6de731958e1295e818209b4c127bffef5569",
+      "date": "1997-08-13T10:07:10-04:00",
+      "subject": "R-beta: patches",
+      "subject_clean": "R-beta: patches",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've loaded R-0.50-a1 but when I try to apply the patches it cannot find the files to apply patches to.\n\n[9]  gilp/R0.50 : patch <R-0.50-a1.patch1\n  Looks like a new-style context diff.\nFile to patch: \u0003\n[10] gilp/R0.50 : \n[10] gilp/R0.50 : \n[10] gilp/R0.50 : cd R-0.50-a1\n[11] gilp/R0.50/R-0.50-a1 : ls\nCHANGES\t\t\tRESOURCES\t\tconfigure.mac*\nCOPYING\t\t\tTASKS\t\t\tconfigure.win*\nCOPYRIGHTS\t\tTASKS.OLD\t\tdata/\nINSTALL\t\t\tVERSION_DATE\t\tdemos/\nMIRROR-SITES\t\tbin/\t\t\tdvi/\nMakefile\t\tcmd/\t\t\tetc/\nMakefile.in\t\tconfig.cache\t\thelp/\nPLATFORMS\t\tconfig.log\t\thtml/\nPROJECTS\t\tconfig.site\t\tlib/\nR-0.50-a1.patch1\tconfig.status*\t\tlibrary/\nR.1\t\t\tconfigure*\t\tmansrc/\nREADME\t\t\tconfigure.in\t\tsrc/\n[12]  gilp/R0.50/R-0.50-a1 : patch <R-0.50-a1.patch1\n  Looks like a new-style context diff.\nFile to patch: \u0003\n\nThis happens in both Solaris and Linux, but did not happen with patches to previous versions (at least under Linux). There does not appear to be any junk in the patch file. Does anyone know what's wrong?\n\nPaul Gilbert\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I've loaded R-0.50-a1 but when I try to apply the patches it cannot find the files to apply patches to.\n\n[9]  gilp/R0.50 : patch <R-0.50-a1.patch1\n  Looks like a new-style context diff.\nFile to patch:",
+      "thread_id": "thread-312264555c45",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-7053ab3b3951",
+      "message_id": "<199708131423.QAA01174@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-08-13T16:23:32+02:00",
+      "subject": "R-beta: patches -- in proper directory !",
+      "subject_clean": "R-beta: patches -- in proper directory !",
+      "in_reply_to": "<97Aug13.100850edt.26506@mailgate.bank-banque-canada.ca> (pgilbert@bank-banque-canada.ca)",
+      "references": [],
+      "body_plain": "Oh, now I see :\n\nYou are in the WRONG directory when applying the patch.\n\nYour \n\tcd R-0.50-a1\n\nshould come BEFORE you do\n\n\tpatch < R-0.50-a1.patch1\n\n-- Martin\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Oh, now I see :\n\nYou are in the WRONG directory when applying the patch.\n\nYour \n\tcd R-0.50-a1\n\nshould come BEFORE you do\n\n\tpatch < R-0.50-a1.patch1\n\n-- Martin\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "thread_id": "thread-7053ab3b3951",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-f7e92fc17989",
+      "message_id": "<x2yb66yvyr.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-13T16:54:36+02:00",
+      "subject": "R-beta: patches",
+      "subject_clean": "R-beta: patches",
+      "in_reply_to": "pgilbert@bank-banque-canada.ca's message of Wed, 13 Aug 1997 10:07:10 -0400",
+      "references": [
+        "<97Aug13.100850edt.26506@mailgate.bank-banque-canada.ca>"
+      ],
+      "body_plain": "pgilbert at bank-banque-canada.ca (Paul Gilbert) writes:\n\n> \n> I've loaded R-0.50-a1 but when I try to apply the patches it cannot find the files to apply patches to.\n> \n> [9]  gilp/R0.50 : patch <R-0.50-a1.patch1\n>   Looks like a new-style context diff.\n> File to patch: \u0003\n\n1) Questions about alpha versions belong on r-devel...\n\n2) the way to apply patches is \n\ncd R-0.50-a1\ngunzip -c R-0.50-a1.patch1.gz | patch -p0\n\nNot having the -p option is asking for trouble and *will* make trouble\nwith patch2 (guess how I know...), but shouldn't do it with patch1. I\ndon't know why it goes wrong for you, it might be related to your\nhaving a different directory name. Hum, but my own directory  is still\nR-0.50-a1 and the 2nd patch refers to R-0.50-a2 and I did get it\npatched up to alpha-3, using -p0. Strange. As I read the man page, -p2\nshould have been necessary....\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "pgilbert at bank-banque-canada.ca (Paul Gilbert) writes:\n\n> \n> I've loaded R-0.50-a1 but when I try to apply the patches it cannot find the files to apply patches to.\n> \n> [9]  gilp/R0.50 : patch <R-0",
+      "thread_id": "thread-312264555c45",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-3f2cff2b7013",
+      "message_id": "<9708131608.AA11484@isdux1.bham.ac.uk>",
+      "from_name": "Dr X Cai",
+      "from_email_hash": "72b800fb23ca56c5d8c84d7a1be16e6a8bfb895fd65b8b182aa719e26ff7c1d9",
+      "date": "1997-08-13T17:08:31+01:00",
+      "subject": "R-beta: compiling R-5.0 on IRIX6.1",
+      "subject_clean": "R-beta: compiling R-5.0 on IRIX6.1",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am compiling R-0.50 on my SGI Indigo 2 R8000 machine with IRIX6.1\nand it stopped in the middle.  Could anyone help me to fix it?\n\nMany thanks!\n\np.s.:  The last lines of message:\n\n\t: ../lib/libappl.a\n\tcd regex; make\n\tcc -g -I../include -DPOSIX_MISTAKE -c regcomp.c\n\"regcomp.c\", line 753: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\tcc -g -I../include -DPOSIX_MISTAKE -c regerror.c\n\tcc -g -I../include -DPOSIX_MISTAKE -c regexec.c\n\"engine.c\", line 604: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 610: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 616: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 627: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 648: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 659: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 670: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 604: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 610: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 616: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 627: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 648: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 659: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\n\"engine.c\", line 670: warning(1110): statement is unreachable\n  \t\tbreak;\n  \t\t^\n\nSignal: SIGSEGV in Scope Setup phase.\n### Error (user routine 'sdissect'):\n### Signal SIGSEGV in phase Scope Setup -- processing aborted\ncc ERROR:  /usr/lib64/cmplrs/fec died due to signal 4\ncc ERROR:  core dumped\n*** Error code 2 (bu21)\n*** Error code 1 (bu21)\n*** Error code 1 (bu21)\n13Aug(16:55){art29}[R-0.50-a1]<100>\n-- \n\n                                     Xiaoming Cai\n                                     School of Geography\n      .&______~*@*~______&.          University of Birmingham\n    \"w/%%%%%%%%%%%%%%%%%%%\\w\"        Edgbaston, Birmingham\n      `Y\"\"Y\"\"Y\"\"\"\"\"Y\"\"Y\"\"Y'          B15 2TT United Kingdom\n   p-p_|__|__|_____|__|__|_q-q       Tel: 44 (121) 414-5533 (O)\n_-[EEEEM==M==MM===MM==M==MEEEE]-_    Tel: 44 (121) 454-4018 (H)\n                                     Fax: 44 (121) 414-5528\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi,\n\nI am compiling R-0.50 on my SGI Indigo 2 R8000 machine with IRIX6.1\nand it stopped in the middle.  Could anyone help me to fix it?\n\nMany thanks!\n\np.s.:  The last lines of message:\n\n\t: ../lib/liba",
+      "thread_id": "thread-3f2cff2b7013",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-5dc80c3bb2d4",
+      "message_id": "<Pine.3.87.9708150735.B21491-0100000@superh.hg.med.umich.edu>",
+      "from_name": "Matthew R. Nelson",
+      "from_email_hash": "ead0c12c397d41b7a178bb7452ada6688fdc62db9a0ca8d66aae812af7cfd677",
+      "date": "1997-08-15T07:44:35-04:00",
+      "subject": "R-beta: Polynomials in lm/glm",
+      "subject_clean": "R-beta: Polynomials in lm/glm",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "R users,\n\nI was a bit surprised to find that when I attempted to add a polynomial \nterm to a linear model using either lm or glm as could be done in S \nresulted in a fit without that term included and without warning(!!), e.g.\n\n> lm(response ~ x + x^2, data).\n\nAs far as I can gather, there is no poly() yet in R, and if lm/glm do not \nallow functions of variables as their formula arguements, is our only \noption to add variables to our dataframe before using lm/glm?\n\n> data2 <- cbind(data,x2=data$x^2)\n\nI did search the archive for a discussion of this topic, but did not come \nup with any discussion on this topic.  Have I missed something?  \n\nBTW:  Version 0.50 Alpha-1 (July 22, 1997)\n\nThanks for any help,\n\nMatt\n----------------------------------------------------------------------------\nMatthew R. Nelson\nDept. of Human Genetics         \nUniversity of Michigan              http://www-personal.umich.edu/~ticul/\n4711 Medical Science II             email: ticul at umich.edu\nAnn Arbor, MI  48109-0618           phone: (313) 647-3151\n----------------------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "R users,\n\nI was a bit surprised to find that when I attempted to add a polynomial \nterm to a linear model using either lm or glm as could be done in S \nresulted in a fit without that term included and",
+      "thread_id": "thread-5dc80c3bb2d4",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-ff0b3c4a48ca",
+      "message_id": "<199708151307.PAA02583@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-08-15T15:07:07+02:00",
+      "subject": "R-beta: Powers ('x^2') in lm/glm",
+      "subject_clean": "R-beta: Powers ('x^2') in lm/glm",
+      "in_reply_to": "<Pine.3.87.9708150735.B21491-0100000@superh.hg.med.umich.edu> (mrn@superh.hg.med.umich.edu)",
+      "references": [],
+      "body_plain": ">>>>> \"Matt\" == Matthew R Nelson <mrn at superh.hg.med.umich.edu> writes:\n\n    Matt> R users, I was a bit surprised to find that when I attempted to\n    Matt> add a polynomial term to a linear model using either lm or glm as\n    Matt> could be done in S resulted in a fit without that term included\n    Matt> and without warning(!!), e.g.\n\n    >> lm(response ~ x + x^2, data).\n\n    Matt> As far as I can gather, there is no poly() yet in R, and if\n    Matt> lm/glm do not allow functions of variables as their formula\n    Matt> arguements, is our only option to add variables to our dataframe\n    Matt> before using lm/glm?\n\n    >> data2 <- cbind(data,x2=data$x^2)\n\n    Matt> I did search the archive for a discussion of this topic, but did\n    Matt> not come up with any discussion on this topic.  Have I missed\n    Matt> something?\n\nThis is an older topic that has been discussed a bit, however not resolved.\n\nYou would have found the answer in the archives,\ni.e.,\n\tftp://ftp.stat.math.ethz.ch/Mail-archives/r-help-97-04-28--97-05-09\n\nand then search for 'x^2'.\n\n------------------\n>From that discussion, my feeling was that it was accepted to a be bug\nrather than a feature.....\n\nUnfortunately, it did not make its way into \neither  $RHOME/TASKS  nor the R-FAQ. \n\t\t(I think it should go into BOTH -- yes it IS important).   !!!\n\n---\n\n\nThe gist is :  You  MUST use  I(x^2)   etc. instead of  'x^2' etc\n\t\t--------------------\n\nAs Bill Venables had pointed out, the problem really becomes a pain\nfor anova with several factors,e.g.\n\t(w + x + y + z)^3\ngives something very different in R than in S\n[and you would have to replace it by\n\n\t(w + x + y + z)^3 +\n\t\t I(w^2) + I(x^2) + I(y^2) + I(z^2) +\n\t\t I(w^3) + I(x^3) + I(y^3) + I(z^3)\n\n which is quite long, especially when the variables have more than 1-letter\n names ...\n]\n\t\n\nAs Ross had pointed out, it's really the    terms(.) function which  \neither needs fixing or should be replaced by another function for term\nextraction of model formulas.\n\nThis is R :\n\n> attr(terms(formula(y ~ x + x^2)),\"variables\")\n\t\t\t     ---\nmodel.data.frame(y, x)\n\t\t   ===\n> attr(terms(formula(y ~ x + I(x^2))),\"variables\")\n\t\t\t     ------\nmodel.data.frame(y, x, I(x^2))\n\t\t   ==========\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> \"Matt\" == Matthew R Nelson <mrn at superh.hg.med.umich.edu> writes:\n\n    Matt> R users, I was a bit surprised to find that when I attempted to\n    Matt> add a polynomial term to a linear model u",
+      "thread_id": "thread-ff0b3c4a48ca",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-32d49edb795e",
+      "message_id": "<x2wwln60vt.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-15T15:17:58+02:00",
+      "subject": "R-beta: Polynomials in lm/glm",
+      "subject_clean": "R-beta: Polynomials in lm/glm",
+      "in_reply_to": "\"Matthew R. Nelson\"'s message of Fri, 15 Aug 1997 07:44:35 -0400 (EDT)",
+      "references": [
+        "<Pine.3.87.9708150735.B21491-0100000@superh.hg.med.umich.edu>"
+      ],
+      "body_plain": "\"Matthew R. Nelson\" <mrn at superh.hg.med.umich.edu> writes:\n\n> I was a bit surprised to find that when I attempted to add a polynomial \n> term to a linear model using either lm or glm as could be done in S \n> resulted in a fit without that term included and without warning(!!), e.g.\n> \n> > lm(response ~ x + x^2, data).\n> \n> As far as I can gather, there is no poly() yet in R, and if lm/glm do not \n> allow functions of variables as their formula arguements, is our only \n> option to add variables to our dataframe before using lm/glm?\n\nI(x^2) should work. We've discussed previously, whether x^2 should do\nwhat you expect, and as far as I remember the consensus was positive.\n\nIn general, one cannot expect to be able to do computations in model\nformulas (think of autoflu~onset+duration != autoflu~age).\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "\"Matthew R. Nelson\" <mrn at superh.hg.med.umich.edu> writes:\n\n> I was a bit surprised to find that when I attempted to add a polynomial \n> term to a linear model using either lm or glm as could be don",
+      "thread_id": "thread-5dc80c3bb2d4",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-da34243a574d",
+      "message_id": "<9708170829.AA15344@attunga.stats.adelaide.edu.au>",
+      "from_name": "Bill Venables",
+      "from_email_hash": "ca1c88963fb5cd5f4cd9053b781854479dba812db3b38705b8ccc9a407159d5b",
+      "date": "1997-08-17T17:59:58+09:30",
+      "subject": "R-beta: Bug or feature?",
+      "subject_clean": "R-beta: Bug or feature?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Here is a difference between R-0.50-a3 and S that surprised me\n\n> x\n [1]  1  2  3  4  5  6  7  8  9 10\n\n> f1\nfunction (x, nam = deparse(substitute(x))) \n{\n        x <- x\n        nam\n}\n\n> f2\nfunction (x, nam = deparse(substitute(x))) \n{\n        nam <- nam\n        x <- x\n        nam\n}\n\n> f2(x)\n[1] \"x\"\n\n> f1(x)\n[1] \"c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)\"\n\n-- \nBill Venables, Head, Dept of Statistics,    Tel.: +61 8 8303 5418\nUniversity of Adelaide,                     Fax.: +61 8 8303 3696\nSouth AUSTRALIA.     5005.   Email: Bill.Venables at adelaide.edu.au\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Here is a difference between R-0.50-a3 and S that surprised me\n\n> x\n [1]  1  2  3  4  5  6  7  8  9 10\n\n> f1\nfunction (x, nam = deparse(substitute(x))) \n{\n        x <- x\n        nam\n}\n\n> f2\nfunction (",
+      "thread_id": "thread-da34243a574d",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-2deb71744dc4",
+      "message_id": "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-08-17T21:21:10+12:00",
+      "subject": "R-beta: Bug or feature?",
+      "subject_clean": "R-beta: Bug or feature?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> Bill Venables writes:\n> Here is a difference between R-0.50-a3 and S that surprised me\n\nThis follows from the way we have implemented lazy evaluation.\nFunction arguments are \"promises\" to evaluate an expression\nand return a value \"if asked\".  Evaluation happens only once\nand because the \"promise\" remembers its value.\n\n\nIn the example,\n\n\tx <- 1:10\n\ttest1 <-\n\tfunction (x, nam = deparse(substitute(x))) \n\t{\n\t\tx <- x\n\t\tnam\n\t}\n\ttest1(x)\n\nthe argument x is bound to a promise to evaluate the symbol\n\"x\" in the calling environment.  If we were to call substitute\nat this point we would be handed the expression part of the\npromise (this is what substitute does in our universe).\nHowever, the assignment\n\n\tx <- x\n\nforces the evaluation of the promise and its value is\nassigned to x.  Thus x is no longer bound to a promise,\nbut rather to the value of the promise - i.e. the result\nof evaluating 1:10.  When substitute is called on this\nwe get this value.\n\nThis is certainly different from S and I implemented it this\nway deliberately (I think it might even have been when R still\nhad Lisp syntax).\n\nI think that if formal arguments to functions should forget that they\nare arguments when they are assigned to.\n\nI.e. the behavior of\n\n\tx <- 1:10\n\tsubstitute(x)\n\nshould not depend on whether x is a formal argument or not\nfor example, consider:\n\n\tf <- function(x)\n\t{\n\t\tx <- 1:10\n\t\ty <- 1:10\n\t\tcat(deparse(substitute(x)), \"\\n\")\n\t\tcat(deparse(substitute(y)), \"\\n\")\n\t\tinvisible()\n\t}\n\n\t# (1) Now let's run S on it\n\n\t> z <- 7\n\t> f(z)\n\tz \n\tc(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) \n\nI think this is pretty weird, but look what happens when the\nactual argument is a constant.\n\n\t# (2)\n\n\t> f(7) \n\tc(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) \n\tc(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) \n\nWhy isn't the first line here just 7, since that was the actual\nargument?\n\nAnyway, I decided this was a bug and I fixed it!\n\nWe could change things so that things would work like (1) (we'd lose\nsome efficiency though), but it would be hard to make both (1) and (2)\nwork.\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "> Bill Venables writes:\n> Here is a difference between R-0.50-a3 and S that surprised me\n\nThis follows from the way we have implemented lazy evaluation.\nFunction arguments are \"promises\" to evaluate a",
+      "thread_id": "thread-2deb71744dc4",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-18a472103b94",
+      "message_id": "<9708172313.AA15474@attunga.stats.adelaide.edu.au>",
+      "from_name": "Bill Venables",
+      "from_email_hash": "ca1c88963fb5cd5f4cd9053b781854479dba812db3b38705b8ccc9a407159d5b",
+      "date": "1997-08-18T08:43:16+09:30",
+      "subject": "R-beta: Bug or feature?  [+ better histograms]",
+      "subject_clean": "R-beta: Bug or feature?  [+ better histograms]",
+      "in_reply_to": "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>",
+      "references": [
+        "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "[On the differences between substitute() in R and S]\n\nI would not suggest changing it, but somehow it has to be pretty\nclearly signposted.\n\nBelow is the code that caused me to discover this difference, by\nthe way.  It also uncovered differences between polygon() and\ncut() on R and S but these seem less important.\n\nFirst a bit of an explanation.  Brian Ripley and I are firmly of\nthe opinion that, to be any use in teaching at all, histograms\nshould be nonparametric estimators of the probability density\nfunction.  That is, the vertical scale should be a relative\nfrequency density scale.  It seems impossible to get this in R, so\nhere is a function (+ a few extras) that does give you a \"true\"\nhistogram, (unless you are peverse enough to request otherwise.)\n\ntruehist <- function(data, nbins = nclass.scott(data), h, x0 =\n\t -h/1000, breaks, prob = T, xlim = range(breaks), ymax =\n\t max(est), col = NULL, border = \"black\", ylab = if(prob)\n\t \"Density\" else \"Frequency\", xlab =\n\t deparse(substitute(data)), bty = \"n\", ...)\n{\n  xlab <- xlab\t\t# must come first!\n  data <- data[!is.na(data)]\n  if(missing(breaks)) {\n    if(missing(h)) h <- diff(pretty(data, nbins))[1]\n    first <- floor((min(data) - x0)/h)\n    last <- ceiling((max(data) - x0)/h)\n    breaks <- x0 + h * c(first:last)\n  }\n  if(any(diff(breaks) <= 0)) stop(\"breaks must be strictly increasing\")\n  if(min(data) < min(breaks) || max(data) > max(breaks))\n     stop(\"breaks do not cover the data\")\n  db <- diff(breaks)\n  if(!prob && sqrt(var(db)) > mean(db)/1000)\n    warning(\"Uneven breaks with prob = F will give a misleading plot\")\n  o <- data == breaks[1]\t\t# cut has no 'include.lowest'\n  if(any(o)) data[o] <- data[o] + .Machine$single.eps\n  bin <- cut(data, breaks)\n  est <- tabulate(bin, length(levels(bin)))\n  if(prob) est <- est/(diff(breaks) * length(data))\n  n <- length(breaks)\n  plot(xlim, c(0, ymax), type = \"n\", xlab = xlab, ylab = ylab, bty = bty)\n  rect(breaks[-n], 0, breaks[-1], est, col = col, border = border)\n  invisible()\n}\n\nnclass.scott <- function(x) {\n    h <- 3.5 * sqrt(var(x)) * length(x)^{-1/3}\n    ceiling(diff(range(x))/h)\n}\n\nnclass.freq <- function(x) {\n    h <- 2.15 * sqrt(var(x)) * length(x)^{-1/5}\n    ceiling(diff(range(x))/h)\n}\n\n-- \nBill Venables, Head, Dept of Statistics,    Tel.: +61 8 8303 5418\nUniversity of Adelaide,                     Fax.: +61 8 8303 3696\nSouth AUSTRALIA.     5005.   Email: Bill.Venables at adelaide.edu.au\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "[On the differences between substitute() in R and S]\n\nI would not suggest changing it, but somehow it has to be pretty\nclearly signposted.\n\nBelow is the code that caused me to discover this difference",
+      "thread_id": "thread-2deb71744dc4",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-b618d2cf4081",
+      "message_id": "<199708172342.LAA09442@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-08-18T11:42:02+12:00",
+      "subject": "R-beta: Bug or feature?  [+ better histograms]",
+      "subject_clean": "R-beta: Bug or feature?  [+ better histograms]",
+      "in_reply_to": "<9708172313.AA15474@attunga.stats.adelaide.edu.au>",
+      "references": [
+        "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>",
+        "<9708172313.AA15474@attunga.stats.adelaide.edu.au>"
+      ],
+      "body_plain": "Bill Venables writes:\n > First a bit of an explanation.  Brian Ripley and I are firmly of\n > the opinion that, to be any use in teaching at all, histograms\n > should be nonparametric estimators of the probability density\n > function.  That is, the vertical scale should be a relative\n > frequency density scale.  It seems impossible to get this in R, so\n > here is a function (+ a few extras) that does give you a \"true\"\n > histogram, (unless you are peverse enough to request otherwise.)\n\nOh goody!  I HATE the present hist; partly because of the\nfrequency/density aspect, but mainly because if I ask for 10 cells I\nexpect to get 10 cells, not 7 or 35 or whatever.  I'd like propose\nthat the present hist get renamed hist.old (or something similar) and\nthat Bill's \"truehist\" become the true \"hist\".\n\nAny takers?\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Venables writes:\n > First a bit of an explanation.  Brian Ripley and I are firmly of\n > the opinion that, to be any use in teaching at all, histograms\n > should be nonparametric estimators of the",
+      "thread_id": "thread-2deb71744dc4",
+      "thread_depth": 2,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-27ab69627639",
+      "message_id": "<9708180000.AA15558@attunga.stats.adelaide.edu.au>",
+      "from_name": "Bill Venables",
+      "from_email_hash": "ca1c88963fb5cd5f4cd9053b781854479dba812db3b38705b8ccc9a407159d5b",
+      "date": "1997-08-18T09:30:51+09:30",
+      "subject": "R-beta: Bug or feature?  [+ better histograms]",
+      "subject_clean": "R-beta: Bug or feature?  [+ better histograms]",
+      "in_reply_to": "<199708172342.LAA09442@stat1.stat.auckland.ac.nz>",
+      "references": [
+        "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>",
+        "<9708172313.AA15474@attunga.stats.adelaide.edu.au>",
+        "<199708172342.LAA09442@stat1.stat.auckland.ac.nz>"
+      ],
+      "body_plain": "Ross Ihaka writes:\n > \n > Oh goody!  I HATE the present hist; partly because of the\n > frequency/density aspect, but mainly because if I ask for 10 cells I\n > expect to get 10 cells, not 7 or 35 or whatever.  I'd like propose\n > that the present hist get renamed hist.old (or something similar) and\n > that Bill's \"truehist\" become the true \"hist\".\n > \n > Any takers?\n\nUnfortunately it still has that rather curious aspect of not\ntaking you seriously when you ask for N (yes, N) cells.  It is a\nV&R function and we thought people loved that part...\n\n(In fact yesterday I was using it and when I asked for 5 cells I\ngot 6.  For 6 I got 7.  For 7 I got ... 14!)\n\nI could fix it, of course.\n\nBill\n\n-- \nBill Venables, Head, Dept of Statistics,    Tel.: +61 8 8303 5418\nUniversity of Adelaide,                     Fax.: +61 8 8303 3696\nSouth AUSTRALIA.     5005.   Email: Bill.Venables at adelaide.edu.au\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Ross Ihaka writes:\n > \n > Oh goody!  I HATE the present hist; partly because of the\n > frequency/density aspect, but mainly because if I ask for 10 cells I\n > expect to get 10 cells, not 7 or 35 or wh",
+      "thread_id": "thread-2deb71744dc4",
+      "thread_depth": 3,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-afc99d5fd528",
+      "message_id": "<199708180023.MAA10567@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-08-18T12:23:46+12:00",
+      "subject": "R-beta: Bug or feature?  [+ better histograms]",
+      "subject_clean": "R-beta: Bug or feature?  [+ better histograms]",
+      "in_reply_to": "<9708180000.AA15558@attunga.stats.adelaide.edu.au>",
+      "references": [
+        "<199708170921.VAA03388@stat1.stat.auckland.ac.nz>",
+        "<9708172313.AA15474@attunga.stats.adelaide.edu.au>",
+        "<199708172342.LAA09442@stat1.stat.auckland.ac.nz>",
+        "<9708180000.AA15558@attunga.stats.adelaide.edu.au>"
+      ],
+      "body_plain": "Bill Venables writes:\n\n > Unfortunately it still has that rather curious aspect of not\n > taking you seriously when you ask for N (yes, N) cells.  It is a\n > V&R function and we thought people loved that part...\n > \n > (In fact yesterday I was using it and when I asked for 5 cells I\n > got 6.  For 6 I got 7.  For 7 I got ... 14!)\n > \n > I could fix it, of course.\n \nI guess I missed the \"pretty\" on my first pass through.  Since you\ndon't end up with \"nice\" cell endpoints anyway, why not just compute a\nbinwidth (e.g. h.scott or bw.scott) and supply this as the default \"h\"\nargument, leaving the user the option of specifying an exact number of\ncells.  If you jack things up right you could use the same bandwidth\nfunction for both \"density\" and \"hist\".\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Bill Venables writes:\n\n > Unfortunately it still has that rather curious aspect of not\n > taking you seriously when you ask for N (yes, N) cells.  It is a\n > V&R function and we thought people loved t",
+      "thread_id": "thread-2deb71744dc4",
+      "thread_depth": 4,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-caedfebb36ec",
+      "message_id": "<19970817195120.15070@stat.uiowa.edu>",
+      "from_name": "Kung-Sik Chan",
+      "from_email_hash": "07328e5dbab24643fa20f5f0a7b5c95b2000d884a30b71d6592ef119bf39e653",
+      "date": "1997-08-17T19:51:20-07:00",
+      "subject": "R-beta: bug report",
+      "subject_clean": "R-beta: bug report",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "The following seems to be a bug when I tried to use the predict function.\n\n> forbes\n      boil.pt pressure log.pressure\n [1,]   194.5    20.79     303.4472\n [2,]   194.3    20.79     303.4472\n [3,]   197.9    22.40     310.9061\n [4,]   198.4    22.67     312.1042\n [5,]   199.4    23.15     314.1995\n [6,]   199.9    23.35     315.0597\n [7,]   200.9    23.89     317.3460\n [8,]   201.1    23.99     317.7637\n [9,]   201.4    24.02     317.8887\n[10,]   201.3    24.01     317.8470\n[11,]   203.6    25.14     322.4460\n[12,]   204.6    26.57     327.9783\n[13,]   209.5    28.49     334.9553\n[14,]   208.6    27.76     332.3596\n[15,]   210.7    29.04     336.8674\n[16,]   211.9    29.88     339.7189\n[17,]   212.2    30.06     340.3195\n> lm3                               \n\nCall:\nlm(formula = log.pressure ~ boil.pt, subset = c(-12))\n\nCoefficients:\n(Intercept)     boil.pt\n -95.176624    2.051855  \n> forbes.pred\n    boil.pt\n190     190\n200     200  \n> predict(lm3,newdata=forbes.pred)\nError in if (object$intercept) X <- cbind(rep(1, NROW(X)), X) : missing value wh\nere logical needed   \n\n\nFor this problem, I have fixed the predict function in src/library/base/funs as follows:\nAnd the predict function now seems to work ok.\n\npredict <- function(fit,...) UseMethod(\"predict\")\n\npredict.default <- function (object, ...) {\n                 namelist <- list(...)\n                 names(namelist) <- substitute(list(...))[-1]\n                 m <- length(namelist)\n                 X <- as.matrix(namelist[[1]])\n                 if (m > 1) \n                   for (i in (2:m)) X <- cbind(X, namelist[[i]])\n                 if (attr(object$terms,'intercept')) \n                   X <- cbind(rep(1, NROW(X)), X)\n                 k <- NCOL(X)\n                 if (length(object$coef) != k) \n                   stop(\"Wrong number of predictors\")\n                 predictor <- X %*% object$coef\n                 ip <- real(NROW(X))\n\t\t sum1_summary(object)\n\t\t covmat_sum1$cov.unscaled*sum1$sigma^2\n                 for (i in (1:NROW(X))) ip[i] <- sum(X[i, ] * \n                       (covmat %*% X[i, ]))\n                 stderr1 <- sqrt(ip)\n                 stderr2 <- sqrt(sum1$sigma^2 + ip)\n                 tt <- qt(0.975, object$df)\n                 conf.l <- predictor - tt * stderr1\n                 conf.u <- predictor + tt * stderr1\n                 pred.l <- predictor - tt * stderr2\n                 pred.u <- predictor + tt * stderr2\n                 z <- cbind(predictor, conf.l, conf.u, pred.l, pred.u)\n                 rownames(z) <- paste(\"P\", 1:NROW(X), sep = \"\")\n                 colnames(z) <- c(\"Predicted\", \"Conf lower\", \"Conf upper\",\n                                  \"Pred lower\", \"Pred upper\")\n                 z\n}\n******************\n\nAnother problem I have is that when I use the sink function to divert output\nto an external file, I used the command options(echo=T) so that the commands\nwill be echoed in the external file. However, the echo command doesn't seem\nto work. Any suggestions?\n\nThanks.\n\nKung-Sik\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "The following seems to be a bug when I tried to use the predict function.\n\n> forbes\n      boil.pt pressure log.pressure\n [1,]   194.5    20.79     303.4472\n [2,]   194.3    20.79     303.4472\n [3,]   ",
+      "thread_id": "thread-caedfebb36ec",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-7549e25c07b2",
+      "message_id": "<x24t8ndfbx.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-18T11:13:06+02:00",
+      "subject": "R-beta: bug report",
+      "subject_clean": "R-beta: bug report",
+      "in_reply_to": "Kung-Sik Chan's message of Sun, 17 Aug 1997 19:51:20 -0700",
+      "references": [
+        "<19970817195120.15070@stat.uiowa.edu>"
+      ],
+      "body_plain": "Kung-Sik Chan <kchan at stat.uiowa.edu> writes:\n\n\n> > predict(lm3,newdata=forbes.pred)\n> Error in if (object$intercept) X <- cbind(rep(1, NROW(X)), X) : missing value wh\n> ere logical needed   \n> \n...\n> \n> For this problem, I have fixed the predict function in src/library/base/funs as follows:\n> And the predict function now seems to work ok.\n> \n> predict <- function(fit,...) UseMethod(\"predict\")\n> \n> predict.default <- function (object, ...) {\n>                  namelist <- list(...)\n...\n\nYup. The current predict() has little relevance to what it should do.\nIt seens to come from an ancient version where almost everything\ninvolving fit objects was different. A proper fix is somewhat more\ntricky and should probably work like the one in Splus. Actually I'd\nwant it to do better because the factor-matching is such a pain\n(prediction data may have different levels represented). I've been\nworking on it, but I got distracted by other matters. Will try to get\nback to it soon.\n\n> Another problem I have is that when I use the sink function to divert output\n> to an external file, I used the command options(echo=T) so that the commands\n> will be echoed in the external file. However, the echo command doesn't seem\n> to work. Any suggestions?\n\nHmm:\n\n> options()$echo\nNULL\n\nSo it isn't implemented (yet?). One option is to do \n\n'R < infile > outfile'\n\nAnother is to go and implement the echo option.... ;)\n\nOr pick up the modified S-mode and run things from emacs. (It's all\nin the FAQ)\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Kung-Sik Chan <kchan at stat.uiowa.edu> writes:\n\n\n> > predict(lm3,newdata=forbes.pred)\n> Error in if (object$intercept) X <- cbind(rep(1, NROW(X)), X) : missing value wh\n> ere logical needed   \n> \n...",
+      "thread_id": "thread-caedfebb36ec",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-ad0fb2b260cf",
+      "message_id": "<Pine.GSO.3.95.970818135113.11654A-100000@pc30.stat.umu.se>",
+      "from_name": "Goran Brostrom",
+      "from_email_hash": "46e8fec038c0b7b8bf60a73b1504e8b32c6b6237b92eaaaa95c75489f02f797f",
+      "date": "1997-08-18T14:10:10+02:00",
+      "subject": "R-beta: .C and dyn.load for Windows",
+      "subject_clean": "R-beta: .C and dyn.load for Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-users,\n\nI maintain software for survival analysis written in C and Fortran since\nmany years ago. Recently I have rewritten part of it as functions to\nbe called from R by .C. This works fine with the unix version. I just\ncreate a \".so\" file as described in an example in the R distribution.\n\nHowever, when I try this approach in Windows (NT or 95), using the \nCygnus gcc latest version, the \"ld\" command to create the \".so\" file fails\nmiserably. The Windows R documentation talks about \"DLL\"s, of which I\nknow very little.\n\nCan anyone tell me how to create R-loadable C-code with Cygnus gcc under\nWindows (NT, 95)?\nMaybe it isn't possible?\n\nGoran Brostrom\nDept. of Statistics\nUmea University\nUmea, Sweden\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Dear R-users,\n\nI maintain software for survival analysis written in C and Fortran since\nmany years ago. Recently I have rewritten part of it as functions to\nbe called from R by .C. This works fine wit",
+      "thread_id": "thread-ad0fb2b260cf",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-9630ad378eb6",
+      "message_id": "<x2yb5zbq3a.fsf@bush.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "2f63cffe777527e90e617a28339696db36859b8af882add2f71389c7afdca4a4",
+      "date": "1997-08-18T15:03:37+02:00",
+      "subject": "R-beta: .C and dyn.load for Windows",
+      "subject_clean": "R-beta: .C and dyn.load for Windows",
+      "in_reply_to": "Goran Brostrom's message of Mon, 18 Aug 1997 14:10:10 +0200 (MET DST)",
+      "references": [
+        "<Pine.GSO.3.95.970818135113.11654A-100000@pc30.stat.umu.se>"
+      ],
+      "body_plain": "Goran Brostrom <gb at pc30.stat.umu.se> writes:\n\n> \n> Dear R-users,\n> \n> I maintain software for survival analysis written in C and Fortran since\n> many years ago. Recently I have rewritten part of it as functions to\n> be called from R by .C. This works fine with the unix version. I just\n> create a \".so\" file as described in an example in the R distribution.\n> \n> However, when I try this approach in Windows (NT or 95), using the \n> Cygnus gcc latest version, the \"ld\" command to create the \".so\" file fails\n> miserably. The Windows R documentation talks about \"DLL\"s, of which I\n> know very little.\n> \n> Can anyone tell me how to create R-loadable C-code with Cygnus gcc under\n> Windows (NT, 95)?\n> Maybe it isn't possible?\n\n(This really is alpha/development  stuff, belonging on r-devel)\n\nIs this the Cygnus gcc from gnuwin32? You're a very brave person..!\nYou didn't happen to get the Windows GUI stuff going while you were at\nit, did you?\n\nRobert Gentleman says that he has DLL loading \"near the top of his\nlist\" for the next Windows binary version.\n\nAnother pointer is that it is rumored that *scilab* has some code to\ndo the trick on the windows platforms\n\nSome nice guy on the gnuwin32 list claimed to have compatibility\nfunctions for the whole dlopen/dlsym/.. slew a few weeks ago.\n\nBTW: You do know that there already is a quite comprehensive survival\npackage for R?\n\nHere is the note from gnuwin32:\n\n------------------\nDear all,\n\nI have made some work to let dlls have almost the same behavior as so on UNIX:\n\n        - implementation of dlopen,dlclose,dlsym,dlerror\n        - correct init when loaded + call of global contructors\n        - call of global destructors when detached\n        - dlls are accessible and correctly initialized in forked process\n        - handles got through dlopen or dlsym in parent are accessible in child\n        - use of LD_LIBRARY_PATH in dlopen search\n\nI think it can help people who need an intensive use of dll ( plugins ... )\n\nMy patch is 59082 bytes, so I will not send it to the list.\nAnyway, if you are interested, send me a mail and I will send you the patch\npersonnaly ...\n\nRegards.\n\nP.S: I will send the patch to Geoffrey Noer\n\n\n ==========================================================================\n|                         Philippe GIACINTI                                |\n|                                                                          |\n| DALiM GmbH R&D                                email:  giac at dalim.de      |\n| Daimler Strasse 2,                            tel:    +49.7851.9196-28   |\n| D-77694 Kehl-Sundheim Germany                 fax:    +49.7851.73576     |\n|                                                                          |\n ==========================================================================\n\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Goran Brostrom <gb at pc30.stat.umu.se> writes:\n\n> \n> Dear R-users,\n> \n> I maintain software for survival analysis written in C and Fortran since\n> many years ago. Recently I have rewritten part of it",
+      "thread_id": "thread-ad0fb2b260cf",
+      "thread_depth": 1,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-0d67af6adf54",
+      "message_id": "<Pine.SUN.3.95.970821094708.21685A-100000@chekov>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "61bcce0fdf9d5f23a30b727658d7a47ac11811000a72b388d394906e16dc4416",
+      "date": "1997-08-21T09:56:19-07:00",
+      "subject": "R-beta: problem with gee() with singletons ",
+      "subject_clean": "R-beta: problem with gee() with singletons",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A bug (misfeature) has been found in the S gee library (and thus in the R\ngee library).  The problem, which is shared by nearly all gee\nimplementations, involves the calculation of working correlations when\nsome clusters have only one observation.  For compatibility reasons nearly\neveryone uses the computing formula from  the first SAS macro by Karim,\nrather than the formula from the original GEE paper. This results in\nbiased estimates of the working correlation.\n\nThis does not affect the (large sample) validity of inferences from GEE,\nwhich doesn't depend on the working correlation matrix.  It may  mean\nlower efficiency in some cases. \n\nA more complete description of the problem is given by the author of the S\nlibrary at\nhttp://biosun1.harvard.edu/~carey/gee.html\n\nAs soon as the S code stabilises I will redo the port to R.\n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "A bug (misfeature) has been found in the S gee library (and thus in the R\ngee library).  The problem, which is shared by nearly all gee\nimplementations, involves the calculation of working correlation",
+      "thread_id": "thread-0d67af6adf54",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-72ddd48097ce",
+      "message_id": "<Pine.GSO.3.95.970822000802.6087A-100000@pc30.stat.umu.se>",
+      "from_name": "Goran Brostrom",
+      "from_email_hash": "46e8fec038c0b7b8bf60a73b1504e8b32c6b6237b92eaaaa95c75489f02f797f",
+      "date": "1997-08-22T00:17:25+02:00",
+      "subject": "R-beta: R-0.49 under SunOS-4.1.3",
+      "subject_clean": "R-beta: R-0.49 under SunOS-4.1.3",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Compiling and installing R-0.49 on a SunOS-4.1.3 (gcc-2.6.3) seemingly\nworks OK, but when I try to start R, I get the message:\n\nld.so: Undefined symbol: _sys_nerr\n\nToo old gnu stuff? Or what is missing? (I also tried R-0.50; ditto.)\n\nGoran Brostrom\nDept. of Statistics\nUmea University\nUmea, Sweden\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Compiling and installing R-0.49 on a SunOS-4.1.3 (gcc-2.6.3) seemingly\nworks OK, but when I try to start R, I get the message:\n\nld.so: Undefined symbol: _sys_nerr\n\nToo old gnu stuff? Or what is missin",
+      "thread_id": "thread-72ddd48097ce",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-36bdb7b8c856",
+      "message_id": "<Pine.OSF.3.95.970822083827.2588L-100000@edac.sr.unh.edu>",
+      "from_name": "Richard Lammers",
+      "from_email_hash": "c23724fcaa5c3f6ea66b3d6e608511ba16391f6ae5515b7afecd869bf1dc5c12",
+      "date": "1997-08-22T08:46:56-04:00",
+      "subject": "R-beta: odd result with sum?",
+      "subject_clean": "R-beta: odd result with sum?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am using R 0.49 and I did not see this in the archives:\n\nGiven sum() defaults to na.rm = FALSE, should both of these results be NA?\n\n> sum(c(1,NA))\n[1] NA\n> sum(c(NA,1))\n[1] 0\n\n\n--\n\nRichard Lammers                  Phone: (603) 862-4699\nComplex System Research Center     Fax: (603) 862-0188\nUniversity of New Hampshire      email: Richard.Lammers at unh.edu\nDurham, NH  03824 (USA)            URL: http://pyramid.sr.unh.edu/~lammers\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I am using R 0.49 and I did not see this in the archives:\n\nGiven sum() defaults to na.rm = FALSE, should both of these results be NA?\n\n> sum(c(1,NA))\n[1] NA\n> sum(c(NA,1))\n[1] 0\n\n\n--\n\nRichard Lammers ",
+      "thread_id": "thread-36bdb7b8c856",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-7d235564b951",
+      "message_id": "<199708221257.OAA26569@sophie.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "1997-08-22T14:57:43+02:00",
+      "subject": "R-beta: odd result with sum -- yes, fixed.",
+      "subject_clean": "R-beta: odd result with sum -- yes, fixed.",
+      "in_reply_to": "<Pine.OSF.3.95.970822083827.2588L-100000@edac.sr.unh.edu> (message from Richard Lammers on Fri, 22 Aug 1997 08:46:56 -0400 (EDT))",
+      "references": [],
+      "body_plain": ">>>>> \"RL\" == Richard Lammers <lammers at edac.sr.unh.edu> writes:\n\n    RL> I am using R 0.49 and I did not see this in the archives:\n\nIt was a bug; and it has been corrected a while.\nUnfortunately, there hasn't been a new beta release of R in the mean time.\n\n    RL> Given sum() defaults to na.rm = FALSE, should both of these results\n    RL> be NA?\n\n    > sum(c(1,NA))\n    RL> [1] NA\n    > sum(c(NA,1))\n    RL> [1] 0\n\nThis is the current [0.50-a3 \"alpha\"]  (and desired) behavior :\n\n> sum(c(1,NA)); sum(c(NA,1))\n[1] NA\n[1] NA\n> sum(c(1,NA), na.rm=TRUE); sum(c(NA,1),na.rm=TRUE)\n[1] 1\n[1] 1\n> \n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": ">>>>> \"RL\" == Richard Lammers <lammers at edac.sr.unh.edu> writes:\n\n    RL> I am using R 0.49 and I did not see this in the archives:\n\nIt was a bug; and it has been corrected a while.\nUnfortunately, t",
+      "thread_id": "thread-7d235564b951",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-bcb9be74ed0c",
+      "message_id": "<199708271638.SAA00468@galadriel.ci.tuwien.ac.at>",
+      "from_name": "Friedrich Leisch",
+      "from_email_hash": "5a5fdfa4351343af049914cd2641c9feb963f07285041256e0164002823b1114",
+      "date": "1997-08-27T18:38:47+02:00",
+      "subject": "R-beta: CRAN goes HTML",
+      "subject_clean": "R-beta: CRAN goes HTML",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nthanks help by Thomas Lumley (who provided us also with a beautiful\nlogo!) I've finally made a start for an html frontend for CRAN. It\nshould be available on all mirror sites tomorrow.\n\nThe master site is at\n\n\thttp://www.ci.tuwien.ac.at/R\n\nand the usual mirror sites are\n\nhttp://www.stat.unipg.it/pub/stat/statlib/R/CRAN/ (IASC archive, Italy)\nftp://ftp.u-aizu.ac.jp/pub/lang/R/CRAN/           (University of Aizu, Japan)\nftp://ftp.stat.math.ethz.ch/R-CRAN/               (ETH Z?rich, Switzerland)\nhttp://lib.stat.cmu.edu/R/CRAN/                   (Statlib, CMU, USA)\nftp://ftp.biostat.washington.edu/mirrors/R/CRAN/  (University of Washington, USA)\nftp://franz.stat.wisc.edu/pub/R/                  (University of Wisconsin, USA)\t\n\n\nBest,\nFritz\n\n-- \n-------------------------------------------------------------------\n                        Friedrich  Leisch                             \nInstitut f?r Statistik                      Tel: (+43 1) 58801 4541\nTechnische Universit?t Wien                 Fax: (+43 1)  504 14 98\nWiedner Hauptstra?e 8-10/1071      Friedrich.Leisch at ci.tuwien.ac.at\nA-1040 Wien, Austria             http://www.ci.tuwien.ac.at/~leisch\n     PGP public key http://www.ci.tuwien.ac.at/~leisch/pgp.key\n-------------------------------------------------------------------\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",
+      "body_snippet": "Hi all,\n\nthanks help by Thomas Lumley (who provided us also with a beautiful\nlogo!) I've finally made a start for an html frontend for CRAN. It\nshould be available on all mirror sites tomorrow.\n\nThe m",
+      "thread_id": "thread-bcb9be74ed0c",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-bcb9be74ed0c",
+      "message_id": "<199708271638.SAA00468@galadriel.ci.tuwien.ac.at>",
+      "from_name": "Friedrich Leisch",
+      "from_email_hash": "5a5fdfa4351343af049914cd2641c9feb963f07285041256e0164002823b1114",
+      "date": "1997-08-27T18:38:47+02:00",
+      "subject": "R-beta: CRAN goes HTML",
+      "subject_clean": "R-beta: CRAN goes HTML",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nthanks help by Thomas Lumley (who provided us also with a beautiful\nlogo!) I've finally made a start for an html frontend for CRAN. It\nshould be available on all mirror sites tomorrow.\n\nThe master site is at\n\n\thttp://www.ci.tuwien.ac.at/R\n\nand the usual mirror sites are\n\nhttp://www.stat.unipg.it/pub/stat/statlib/R/CRAN/ (IASC archive, Italy)\nftp://ftp.u-aizu.ac.jp/pub/lang/R/CRAN/           (University of Aizu, Japan)\nftp://ftp.stat.math.ethz.ch/R-CRAN/               (ETH Z?rich, Switzerland)\nhttp://lib.stat.cmu.edu/R/CRAN/                   (Statlib, CMU, USA)\nftp://ftp.biostat.washington.edu/mirrors/R/CRAN/  (University of Washington, USA)\nftp://franz.stat.wisc.edu/pub/R/                  (University of Wisconsin, USA)\n\n\nBest,\nFritz\n\n--\n-------------------------------------------------------------------\n                        Friedrich  Leisch\nInstitut f?r Statistik                      Tel: (+43 1) 58801 4541\nTechnische Universit?t Wien                 Fax: (+43 1)  504 14 98\nWiedner Hauptstra?e 8-10/1071      Friedrich.Leisch at ci.tuwien.ac.at\nA-1040 Wien, Austria             http://www.ci.tuwien.ac.at/~leisch\n     PGP public key http://www.ci.tuwien.ac.at/~leisch/pgp.key\n-------------------------------------------------------------------\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "Hi all,\n\nthanks help by Thomas Lumley (who provided us also with a beautiful\nlogo!) I've finally made a start for an html frontend for CRAN. It\nshould be available on all mirror sites tomorrow.\n\nThe m",
+      "thread_id": "thread-bcb9be74ed0c",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
+      "id": "msg-2b523b4c7596",
+      "message_id": "<97Aug29.165547edt.26510@mailgate.bank-banque-canada.ca>",
+      "from_name": "Paul Gilbert",
+      "from_email_hash": "51f348dc0febec9b32e9d9dcb86f6de731958e1295e818209b4c127bffef5569",
+      "date": "1997-08-29T16:53:43-04:00",
+      "subject": "R-beta: ar",
+      "subject_clean": "R-beta: ar",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have been trying to get a working version of ar, since I have used it\nin several calculations in the test suite for my time series library.\nThe following limited version (order.max must be specified and other\nshort comings) works more or less, but the results differ by more than\nI would expect from those given by Splus. I have tried several\nvariations with no success. If anyone can see a reason I would much\nappreciate help.\n\nFurther below is a limited version of acf, which reproduces Splus\nresults a little better.\n\nPaul Gilbert\n\n____________\n\nar.test <-function(x, aic=T, order.max=NULL, method=\"yule-walker\")\n   {if(method==\"burg\") stop(\"burg method for ar not yet implemented.\")\n    warning(\" ar function not complete and not checked.\")   \n    if (is.vector(x))x <- matrix(x, length(x),1)\n    sampleT <- nrow(x)\n    if (is.null(order.max)) order.max <- round(10*log10(sampleT/ncol(x)))\n    AC <- array(NA, c(order.max+1, ncol(x), ncol(x)))\n    # x <- x - t(array(apply(z,2,sum)/nrow(x), rev(dim(x))))\n    for (i in 0:order.max)\n\t  {#Om<- (t(x[(i+1):sampleT,,drop=F]) %*% \n           #        x[1:(sampleT-i),,drop=F])/(sampleT-i)\n\t   Om<- cor(x[(i+1):sampleT,,drop=F],\n                    x[1:(sampleT-i),,drop=F]) # cor seems better than var\n           if(i==0) Om0 <- solve(Om)\n           Om <- Om0 %*% Om\n           AC[i+1,,] <-  Om\n          }\n\n   # now solve yule walker eqns.\n   n <- ncol(x)\n   a <- matrix(NA, n*(order.max), n*(order.max) )\n   # using AC[1,,] in place of I\n   # there must be a better way (with outer?)\n    for (i in 0:(order.max-1))\n       for (j in 0:(order.max-1))\n\t  a[(1+i*n):(n+i*n),(1+j*n):(n+j*n)] <- AC[abs(i-j)+1,,] \n   AR <-solve(a, matrix(aperm(AC[2:(order.max+1),,,drop=F],c(2,1,3)), n*order.max,n))\n   AR <- aperm(array(AR,c(dim(AC)-c(1,0,0))), c(2,1,3)) \n   order <- order.max # need aic here\n   list(ar=AR, order=order, order.max=order.max, method=method)\n   }\n\n\nacf <-function (residual, plot = F, type = \"correlation\") \n       {if (plot) warning(\" acf plot not yet supported.\")\n        if(0==charmatch(type,c(\"covariance\",\"correlation\",\"partial\"),nomatch=0))\n             stop(\"type not allowed in acf\")\n        if (is.vector(residual))residual <- matrix(residual, length(residual),1)\n\tsampleT <- nrow(residual)\n        N <- round(10*(log10(sampleT)-log10(ncol(residual)))) \n        acf <- array(NA, c(N, ncol(residual), ncol(residual)))\n\tfor (i in 0:(N-1))\n\t  {Om<- var(residual[(i+1):sampleT,,drop=F], \n                    residual[1:(sampleT-i),,drop=F])\n           if (type==\"correlation\")\n                {if(i==0) Om0 <- diag(1/sqrt(diag(Om)),nrow=nrow(Om))\n                            # nrow above for univariate case\n                 Om <- Om0 %*% Om %*% Om0\n                }\n           acf[i+1,,] <-  Om \n          }\n        if (type==\"partial\") \n          {warning(\"acf type partial not yet supported. 0 value being returned\")\n           acf <- array(0, dim(acf))\n          }\n\tlist(acf=acf, type=type )\n       }\n\n\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I have been trying to get a working version of ar, since I have used it\nin several calculations in the test suite for my time series library.\nThe following limited version (order.max must be specified",
+      "thread_id": "thread-2b523b4c7596",
+      "thread_depth": 0,
+      "month": "1997-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-8b3afaba61d2",
+      "subject": "R-beta: acepack with 0.50-a1",
+      "message_count": 1,
+      "participants": [
+        "Thomas Lumley"
+      ],
+      "started": "1997-08-02T19:28:47-07:00",
+      "last_reply": "1997-08-02T19:28:47-07:00",
+      "root_message_id": "msg-8b3afaba61d2"
+    },
+    {
+      "id": "thread-6579a4c979cb",
+      "subject": "R-beta: unix failure in windows R ?",
+      "message_count": 3,
+      "participants": [
+        "Peter Dalgaard BSA",
+        "Thomas Lumley",
+        "Troels Ring"
+      ],
+      "started": "1997-08-04T22:11:51+02:00",
+      "last_reply": "1997-08-04T23:12:24+02:00",
+      "root_message_id": "msg-6579a4c979cb"
+    },
+    {
+      "id": "thread-422853f5f4c9",
+      "subject": "R-beta: q and postscript in win95",
+      "message_count": 2,
+      "participants": [
+        "Joel Allen",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-08-05T10:10:47-06:00",
+      "last_reply": "1997-08-05T22:41:51+02:00",
+      "root_message_id": "msg-422853f5f4c9"
+    },
+    {
+      "id": "thread-5b79ebfa50ed",
+      "subject": "R-beta: q and postscript in win95",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-08-06T08:47:08+12:00",
+      "last_reply": "1997-08-06T08:47:08+12:00",
+      "root_message_id": "msg-5b79ebfa50ed"
+    },
+    {
+      "id": "thread-5f4f04d5aae1",
+      "subject": "R-beta: Characters in .C",
+      "message_count": 3,
+      "participants": [
+        "John Logsdon",
+        "Ross Ihaka",
+        "Thomas Lumley"
+      ],
+      "started": "1997-08-06T15:11:40+12:00",
+      "last_reply": "1997-08-07T01:30:30+01:00",
+      "root_message_id": "msg-5f4f04d5aae1"
+    },
+    {
+      "id": "thread-3b5f7a9dc6d6",
+      "subject": "R-beta: ?faq example of scoping",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-08-07T08:21:01+12:00",
+      "last_reply": "1997-08-07T08:21:01+12:00",
+      "root_message_id": "msg-3b5f7a9dc6d6"
+    },
+    {
+      "id": "thread-c41ecebcf323",
+      "subject": "R-beta: logical indexing on a list",
+      "message_count": 1,
+      "participants": [
+        "Douglas Bates"
+      ],
+      "started": "1997-08-10T16:50:19-05:00",
+      "last_reply": "1997-08-10T16:50:19-05:00",
+      "root_message_id": "msg-c41ecebcf323"
+    },
+    {
+      "id": "thread-20bcbdb96888",
+      "subject": "R-beta: logical indexing on a list",
+      "message_count": 1,
+      "participants": [
+        "Robert Gentleman"
+      ],
+      "started": "1997-08-11T11:52:10+12:00",
+      "last_reply": "1997-08-11T11:52:10+12:00",
+      "root_message_id": "msg-20bcbdb96888"
+    },
+    {
+      "id": "thread-312264555c45",
+      "subject": "R-beta: patches",
+      "message_count": 2,
+      "participants": [
+        "Paul Gilbert",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-08-13T10:07:10-04:00",
+      "last_reply": "1997-08-13T16:54:36+02:00",
+      "root_message_id": "msg-312264555c45"
+    },
+    {
+      "id": "thread-7053ab3b3951",
+      "subject": "R-beta: patches -- in proper directory !",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-08-13T16:23:32+02:00",
+      "last_reply": "1997-08-13T16:23:32+02:00",
+      "root_message_id": "msg-7053ab3b3951"
+    },
+    {
+      "id": "thread-3f2cff2b7013",
+      "subject": "R-beta: compiling R-5.0 on IRIX6.1",
+      "message_count": 1,
+      "participants": [
+        "Dr X Cai"
+      ],
+      "started": "1997-08-13T17:08:31+01:00",
+      "last_reply": "1997-08-13T17:08:31+01:00",
+      "root_message_id": "msg-3f2cff2b7013"
+    },
+    {
+      "id": "thread-5dc80c3bb2d4",
+      "subject": "R-beta: Polynomials in lm/glm",
+      "message_count": 2,
+      "participants": [
+        "Matthew R. Nelson",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-08-15T07:44:35-04:00",
+      "last_reply": "1997-08-15T15:17:58+02:00",
+      "root_message_id": "msg-5dc80c3bb2d4"
+    },
+    {
+      "id": "thread-ff0b3c4a48ca",
+      "subject": "R-beta: Powers ('x^2') in lm/glm",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-08-15T15:07:07+02:00",
+      "last_reply": "1997-08-15T15:07:07+02:00",
+      "root_message_id": "msg-ff0b3c4a48ca"
+    },
+    {
+      "id": "thread-da34243a574d",
+      "subject": "R-beta: Bug or feature?",
+      "message_count": 1,
+      "participants": [
+        "Bill Venables"
+      ],
+      "started": "1997-08-17T17:59:58+09:30",
+      "last_reply": "1997-08-17T17:59:58+09:30",
+      "root_message_id": "msg-da34243a574d"
+    },
+    {
+      "id": "thread-caedfebb36ec",
+      "subject": "R-beta: bug report",
+      "message_count": 2,
+      "participants": [
+        "Kung-Sik Chan",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-08-17T19:51:20-07:00",
+      "last_reply": "1997-08-18T11:13:06+02:00",
+      "root_message_id": "msg-caedfebb36ec"
+    },
+    {
+      "id": "thread-2deb71744dc4",
+      "subject": "R-beta: Bug or feature?",
+      "message_count": 5,
+      "participants": [
+        "Bill Venables",
+        "Ross Ihaka"
+      ],
+      "started": "1997-08-17T21:21:10+12:00",
+      "last_reply": "1997-08-18T12:23:46+12:00",
+      "root_message_id": "msg-2deb71744dc4"
+    },
+    {
+      "id": "thread-ad0fb2b260cf",
+      "subject": "R-beta: .C and dyn.load for Windows",
+      "message_count": 2,
+      "participants": [
+        "Goran Brostrom",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1997-08-18T14:10:10+02:00",
+      "last_reply": "1997-08-18T15:03:37+02:00",
+      "root_message_id": "msg-ad0fb2b260cf"
+    },
+    {
+      "id": "thread-0d67af6adf54",
+      "subject": "R-beta: problem with gee() with singletons",
+      "message_count": 1,
+      "participants": [
+        "Thomas Lumley"
+      ],
+      "started": "1997-08-21T09:56:19-07:00",
+      "last_reply": "1997-08-21T09:56:19-07:00",
+      "root_message_id": "msg-0d67af6adf54"
+    },
+    {
+      "id": "thread-72ddd48097ce",
+      "subject": "R-beta: R-0.49 under SunOS-4.1.3",
+      "message_count": 1,
+      "participants": [
+        "Goran Brostrom"
+      ],
+      "started": "1997-08-22T00:17:25+02:00",
+      "last_reply": "1997-08-22T00:17:25+02:00",
+      "root_message_id": "msg-72ddd48097ce"
+    },
+    {
+      "id": "thread-36bdb7b8c856",
+      "subject": "R-beta: odd result with sum?",
+      "message_count": 1,
+      "participants": [
+        "Richard Lammers"
+      ],
+      "started": "1997-08-22T08:46:56-04:00",
+      "last_reply": "1997-08-22T08:46:56-04:00",
+      "root_message_id": "msg-36bdb7b8c856"
+    },
+    {
+      "id": "thread-7d235564b951",
+      "subject": "R-beta: odd result with sum -- yes, fixed.",
+      "message_count": 1,
+      "participants": [
+        "Martin Maechler"
+      ],
+      "started": "1997-08-22T14:57:43+02:00",
+      "last_reply": "1997-08-22T14:57:43+02:00",
+      "root_message_id": "msg-7d235564b951"
+    },
+    {
+      "id": "thread-bcb9be74ed0c",
+      "subject": "R-beta: CRAN goes HTML",
+      "message_count": 1,
+      "participants": [
+        "Friedrich Leisch"
+      ],
+      "started": "1997-08-27T18:38:47+02:00",
+      "last_reply": "1997-08-27T18:38:47+02:00",
+      "root_message_id": "msg-bcb9be74ed0c"
+    },
+    {
+      "id": "thread-bcb9be74ed0c",
+      "subject": "R-beta: CRAN goes HTML",
+      "message_count": 1,
+      "participants": [
+        "Friedrich Leisch"
+      ],
+      "started": "1997-08-27T18:38:47+02:00",
+      "last_reply": "1997-08-27T18:38:47+02:00",
+      "root_message_id": "msg-bcb9be74ed0c"
+    },
+    {
+      "id": "thread-2b523b4c7596",
+      "subject": "R-beta: ar",
+      "message_count": 1,
+      "participants": [
+        "Paul Gilbert"
+      ],
+      "started": "1997-08-29T16:53:43-04:00",
+      "last_reply": "1997-08-29T16:53:43-04:00",
+      "root_message_id": "msg-2b523b4c7596"
+    }
+  ]
+}

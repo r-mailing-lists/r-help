@@ -1,0 +1,179 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2016-04",
+  "messages": [
+    {
+      "id": "msg-258f492e9207",
+      "message_id": "<1D7DB03F-C03B-48E4-B508-6C23406F26A2@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2016-04-30T16:16:11-07:00",
+      "subject": "[R] Removing NAs from dataframe  (for use in Vioplot)",
+      "subject_clean": "Removing NAs from dataframe  (for use in Vioplot)",
+      "in_reply_to": "<142423783.20160430205840@hsm.org.uk>",
+      "references": [
+        "<142423783.20160430205840@hsm.org.uk>"
+      ],
+      "body_plain": "> On Apr 30, 2016, at 12:58 PM, Mike Smith <mike at hsm.org.uk> wrote:\n> \n> Hi\n> \n> First post and a relative R newbie....\n> \n> I am using the vioplot library to produce some violin plots. I have an input CSV with columns off irregular length that contain NAs. I want to strip the NAs out and produce a multiple violin plot automatically labelled using the headers. At the moment I do this\n> \n> Code: \n> ds1 = read.csv(\"http://www.lecturematerials.co.uk/data/spelling.csv\")\n> library(vioplot)\n> y6<-na.omit(ds1$y6)\n> y5<-na.omit(ds1$y5)\n> y4<-na.omit(ds1$y4)\n> y3<-na.omit(ds1$y3)\n> y2<-na.omit(ds1$y2)\n> y1<-na.omit(ds1$y1)\n> vioplot(y6, y5, y4,y3,y2,y1,horizontal=TRUE, names=c(\"Y6\", \"Y5\",\"Y4\",\"Y3\",\"Y2\",\"Y1\"), col = \"lightblue\")\n> \n> \n> Two queries:\n> \n> 1. Is there a more elegant way of automatically stripping the NAs, passing the columns to the function along with the header names??\n> \n\nds2 <- lapply( ds1, na.omit)\n\n\n> 2. Can I easily add the sample size to each violin plotted??\n\n> ?violplot\nNo documentation for ?violplot? in specified packages and libraries:\nyou could try ???violplot?\n\n> \n\n\n> thanks\n> \n> mike\n> \t\t\t\t\t\t\n> \n> \n> ---\n> Mike Smith\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "> On Apr 30, 2016, at 12:58 PM, Mike Smith <mike at hsm.org.uk> wrote:\n> \n> Hi\n> \n> First post and a relative R newbie....\n> \n> I am using the vioplot library to produce some violin plots. I have an i",
+      "thread_id": "thread-258f492e9207",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-e6674d8b8c29",
+      "message_id": "<39FB27E5-65B5-4388-9849-02ABE585BC4D@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2016-04-30T16:23:43-07:00",
+      "subject": "[R] Removing NAs from dataframe  (for use in Vioplot)",
+      "subject_clean": "Removing NAs from dataframe  (for use in Vioplot)",
+      "in_reply_to": "<1D7DB03F-C03B-48E4-B508-6C23406F26A2@comcast.net>",
+      "references": [
+        "<142423783.20160430205840@hsm.org.uk>",
+        "<1D7DB03F-C03B-48E4-B508-6C23406F26A2@comcast.net>"
+      ],
+      "body_plain": "> On Apr 30, 2016, at 4:16 PM, David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> \n>> On Apr 30, 2016, at 12:58 PM, Mike Smith <mike at hsm.org.uk> wrote:\n>> \n>> Hi\n>> \n>> First post and a relative R newbie....\n>> \n>> I am using the vioplot library to produce some violin plots.\n\nIt's a package,  .... not a library.\n\n>> I have an input CSV with columns off irregular length that contain NAs. I want to strip the NAs out and produce a multiple violin plot automatically labelled using the headers. At the moment I do this\n>> \n>> Code: \n>> ds1 = read.csv(\"http://www.lecturematerials.co.uk/data/spelling.csv\")\n>> library(vioplot)\n>> y6<-na.omit(ds1$y6)\n>> y5<-na.omit(ds1$y5)\n>> y4<-na.omit(ds1$y4)\n>> y3<-na.omit(ds1$y3)\n>> y2<-na.omit(ds1$y2)\n>> y1<-na.omit(ds1$y1)\n>> vioplot(y6, y5, y4,y3,y2,y1,horizontal=TRUE, names=c(\"Y6\", \"Y5\",\"Y4\",\"Y3\",\"Y2\",\"Y1\"), col = \"lightblue\")\n>> \n>> \n>> Two queries:\n>> \n>> 1. Is there a more elegant way of automatically stripping the NAs, passing the columns to the function along with the header names??\n>> \n> \n> ds2 <- lapply( ds1, na.omit)\n> \n> \n>> 2. Can I easily add the sample size to each violin plotted??\n> \n>> ?violplot\n> No documentation for ?violplot? in specified packages and libraries:\n> you could try ???violplot?\n\nI see that I mispled that _package_ name. However, after loading it I realized that I had no way of replicating what you are seeing, because you didn't provide that file (or even something that resembles it. It's rather unclear how you wanted this information presented.\n\n-- \nDavid.\n\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "> On Apr 30, 2016, at 4:16 PM, David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> \n>> On Apr 30, 2016, at 12:58 PM, Mike Smith <mike at hsm.org.uk> wrote:\n>> \n>> Hi\n>> \n>> First post and a relati",
+      "thread_id": "thread-258f492e9207",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-790d3bca1a3d",
+      "message_id": "<5F0DE1C6-4D0D-495B-9F00-247C275AF10F@bigelow.org>",
+      "from_name": "Ben Tupper",
+      "from_email_hash": "3c4da9a06015404ea2b09943b4ac835cb8a3d03dc3aa58a98b648d60e491ccde",
+      "date": "2016-04-30T20:33:14-04:00",
+      "subject": "[R] Could not find function \"pointsToRaster\"",
+      "subject_clean": "Could not find function \"pointsToRaster\"",
+      "in_reply_to": "<CAC8ss33c8=K_-t-uM3pt62csn_BDpv6d2ZAhdJ35ifD7uYCY7A@mail.gmail.com>",
+      "references": [
+        "<CAC8ss30OF5jHDmvMrXLw0NJt68Ect9FsxYWK+56aH=q0bL7JFw@mail.gmail.com>",
+        "<9D970500-C4F5-47B1-AA9C-3447D50A8E02@bigelow.org>",
+        "<CAC8ss33c8=K_-t-uM3pt62csn_BDpv6d2ZAhdJ35ifD7uYCY7A@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\n\nI think you need to check the order of your arguments to rasterize().  See the documentation with ?rasterize and compare to what you did below.\n\nCheers,\nBen\n\n \n> On Apr 30, 2016, at 9:55 AM, Ogbos Okike <giftedlife2014 at gmail.com> wrote:\n> \n> Dear All,\n> Thanks for your inputs. I did replace pointsToRaster () with\n> raster::rasterize(). Below is part of my script.\n> \n> But I got another error:\n> Error in (function (classes, fdef, mtable)  :\n>  unable to find an inherited method for function ?rasterize? for\n> signature ?\"RasterLayer\", \"matrix\"?\n> \n> Thank you for more inputs.\n> Ogbos\n> \n> k<-read.table(\"Lat05w3.txt\")\n> colnames(k)<-c(\"y\",\"x\")\n> xy<-cbind(k$x,k$y)\n> library(raster)\n> r<-raster()\n> #library(sp)\n> pr<-raster::rasterize(r,xy)\n> \n> #pr<-pointsToRaster(r,xy)\n> \n> library(maps)\n> w = map(\"world\")\n> wc = cbind(w$x, w$y)\n> wc=wc[!is.na(wc[,1]),]\n> write.table(wc, file = \"my.fileb\", sep=\" \",row=FALSE,col=FALSE)\n> my<-read.table(\"my.out\",col.names=c(\"a\",\"b\"))\n> rena = function(X,Z){\n> Y=rep(NA,length(X))\n> Y[!is.na(X)]=Z\n> Y\n> }\n> \n> \n> \n> \n> On 4/30/16, Ben Tupper <btupper at bigelow.org> wrote:\n>> Hi,\n>> \n>> A terrific resource for this type of issue (and pretty much anything related\n>> to R) is http://rseek.org/  I'm sure I use it at least daily.  Check out\n>> ...\n>> \n>> http://rseek.org/?q=pointsToRaster\n>> \n>> The first hit is about pointsToRaster() - it has been replaced by\n>> raster::rasterize()\n>> \n>> Cheers,\n>> Ben\n>> \n>>> On Apr 30, 2016, at 4:28 AM, Ogbos Okike <giftedlife2014 at gmail.com>\n>>> wrote:\n>>> \n>>> Dear All,\n>>> I have a script that draws longitude and latitude of lightning\n>>> occurrence. This script was running fine before. But when I changed my\n>>> system and do a fresh install on another laptop, this error persist.\n>>> source(\"script\")\n>>> Error in eval(expr, envir, enclos) :\n>>> could not find function \"pointsToRaster\"\n>>> \n>>> I have tried to see if  there is any other package I need to install\n>>> to take of the problem, I could not see. Already, when I installed\n>>> raster, it installed its dependencies such as sp.\n>>> Can any body please bail me out.\n>>> \n>>> Thanks\n>>> Ogbos\n>>> \n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>> \n>> Ben Tupper\n>> Bigelow Laboratory for Ocean Sciences\n>> 60 Bigelow Drive, P.O. Box 380\n>> East Boothbay, Maine 04544\n>> http://www.bigelow.org\n>> \n>> \n\nBen Tupper\nBigelow Laboratory for Ocean Sciences\n60 Bigelow Drive, P.O. Box 380\nEast Boothbay, Maine 04544\nhttp://www.bigelow.org",
+      "body_snippet": "Hi,\n\nI think you need to check the order of your arguments to rasterize().  See the documentation with ?rasterize and compare to what you did below.\n\nCheers,\nBen\n\n \n> On Apr 30, 2016, at 9:55 AM, Ogbo",
+      "thread_id": "thread-790d3bca1a3d",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-a10cfd435816",
+      "message_id": "<CABcx46CwPnejdpYYYxpuPh-71hPv1Zf0noiTW3tZ_qwou_4Qzw@mail.gmail.com>",
+      "from_name": "jpm miao",
+      "from_email_hash": "2bcb4bd23fa0ee9086a5d1918a6fd1eb9f3491b482dfd97c44fe2f2095897cd5",
+      "date": "2016-04-30T18:19:00-07:00",
+      "subject": "[R] How to print the frequency table (produced by the command \"table\" to Excel",
+      "subject_clean": "How to print the frequency table (produced by the command \"table\" to Excel",
+      "in_reply_to": "<CA+8X3fWC_Uj1oOhmVag=Nh8rorL2Mb=Khq3-JOrDCk8-BvOt1w@mail.gmail.com>",
+      "references": [
+        "<CABcx46D_isFkbjCB_uN-epssdoOsnyx34uu7ey-aQHkkWOkk2Q@mail.gmail.com>",
+        "<CA+8X3fVbX1ptDr_xaaQyCrbskqQNqBS0mN8fm8Utm-y2rnbfwA@mail.gmail.com>",
+        "<CABcx46AsBxGTurGu9hJ9+XUFg+o0hyQYt6k=qiP4TWJWQc=imQ@mail.gmail.com>",
+        "<CA+8X3fWC_Uj1oOhmVag=Nh8rorL2Mb=Khq3-JOrDCk8-BvOt1w@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks.\nCould we print the row/column names, \"alpha1\" and \"alpha2\" to the csv file?\n\n2016-04-30 17:06 GMT-07:00 Jim Lemon <drjimlemon at gmail.com>:\n\n> Hi jpm miao,\n> I think you can get what you want like this:\n>\n> alpha1<-sample(LETTERS[1:3],50,TRUE)\n> alpha2<-sample(LETTERS[1:2],50,TRUE)\n> alphas<-data.frame(alpha1,alpha2)\n> library(prettyR)\n> alphatab<-xtab(alpha1~alpha2,alphas)\n> sink(\"temp_table3.csv\",append=TRUE)\n> delim.xtab(alphatab,pct=NA,delim=\",\")\n> sink()\n>\n> Jim\n>\n> On Sun, May 1, 2016 at 4:47 AM, jpm miao <miaojpm at gmail.com> wrote:\n> > Jim,\n> >\n> >    Thanks for creating such a fantastic package \"prettyR\".\n> >    I want to print the pretty frequency table (with row total and column\n> > total) to an excel (or csv ) file. Is it possible?\n> >>alphatab\n> >\n> > A B Total\n> > A 8 10 18\n> > B 7 5 12\n> > C 9 11 20\n> > Total 24 26 50\n> >\n> >    Two issues I encountered (See the attached csv file).\n> > 1. When I tried to print the above table to csv file, all elements on the\n> > same row are printed in one cell.\n> > 2. If I write \"delim.table(alpha tab)\", the table is distorted (see\n> > attached). Of course, I can adjust it manually but sometimes the number\n> of\n> > files is big.\n> >\n> >     Thanks!\n> >\n> > Miao\n> >\n> >> alpha1<-sample(LETTERS[1:3],50,TRUE)\n> >> alpha2<-sample(LETTERS[1:2],50,TRUE)\n> >>\n> >> alphas<-data.frame(alpha1,alpha2)\n> >> alphatab<-xtab(alpha1~alpha2,alphas)\n> > Crosstabulation of alpha1 by alpha2\n> > alpha2\n> > alpha1      A      B\n> > A      8     10     18\n> >    44.44  55.56      -\n> >    33.33  38.46  36.00\n> >\n> > B      7      5     12\n> >    58.33  41.67      -\n> >    29.17  19.23  24.00\n> >\n> > C      9     11     20\n> >       45     55      -\n> >    37.50  42.31  40.00\n> >\n> >       24     26     50\n> >       48     52    100\n> >> delim.xtab(alphatab,pct=NA,interdigitate=TRUE)\n> > alphatab\n> >\n> > A B Total\n> > A 8 10 18\n> > B 7 5 12\n> > C 9 11 20\n> > Total 24 26 50\n> >\n> >> sink(\"temp_table3.csv\")\n> >> delim.xtab(alphatab,pct=NA,interdigitate=TRUE)\n> >> sink()\n> >> sink(\"temp_table3.csv\", append=TRUE)\n> >> delim.table(alphatab)\n> >> sink()\n> >> sink(\"temp_table3.csv\", append=TRUE)\n> >> delim.table(alphatab)\n> >> sink()\n> >> ?delim.xtab\n> >\n> >\n> > 2016-04-26 16:14 GMT-07:00 Jim Lemon <drjimlemon at gmail.com>:\n> >>\n> >> Hi jpm miao,\n> >> You can get CSV files that can be imported into Excel like this:\n> >>\n> >> library(prettyR)\n> >> sink(\"excel_table1.csv\")\n> >> delim.table(table(df[,c(\"y\",\"z\")]))\n> >> sink()\n> >> sink(\"excel_table2.csv\")\n> >> delim.table(as.data.frame(table(df[,c(\"y\",\"z\")])),label=\"\")\n> >> sink()\n> >> sink(\"excel_table3.csv\")\n> >> delim.table(as.matrix(table(df[,c(\"y\",\"z\")])),label=\"\")\n> >> sink()\n> >>\n> >> Jim\n> >>\n> >> On Wed, Apr 27, 2016 at 8:35 AM, jpm miao <miaojpm at gmail.com> wrote:\n> >> > Hi,\n> >> >\n> >> >    How could we print the frequency table (produced by \"table\") to an\n> >> > Excel\n> >> > file?\n> >> >    Is there an easy way to do so? Thanks,\n> >> >\n> >> > Miao\n> >> >\n> >> >> df <- data.frame(x = 1:3, y = 3:1, z = letters[1:3])\n> >> >\n> >> >> table(df[,c(\"y\",\"z\")])\n> >> >    z\n> >> > y   a b c\n> >> >   1 0 0 1\n> >> >   2 0 1 0\n> >> >   3 1 0 0\n> >> >> test<-table(df[,c(\"y\",\"z\")])\n> >> >> as.data.frame(test)\n> >> >   y z Freq\n> >> > 1 1 a    0\n> >> > 2 2 a    0\n> >> > 3 3 a    1\n> >> > 4 1 b    0\n> >> > 5 2 b    1\n> >> > 6 3 b    0\n> >> > 7 1 c    1\n> >> > 8 2 c    0\n> >> > 9 3 c    0\n> >> >> as.matrix(test)\n> >> >    z\n> >> > y   a b c\n> >> >   1 0 0 1\n> >> >   2 0 1 0\n> >> >   3 1 0 0\n> >> >> testm<-as.matrix(test)\n> >> >> testm\n> >> >    z\n> >> > y   a b c\n> >> >   1 0 0 1\n> >> >   2 0 1 0\n> >> >   3 1 0 0\n> >> >> typeof(testm)\n> >> > [1] \"integer\"\n> >> >\n> >> >         [[alternative HTML version deleted]]\n> >> >\n> >> > ______________________________________________\n> >> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> >> > https://stat.ethz.ch/mailman/listinfo/r-help\n> >> > PLEASE do read the posting guide\n> >> > http://www.R-project.org/posting-guide.html\n> >> > and provide commented, minimal, self-contained, reproducible code.\n> >\n> >\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks.\nCould we print the row/column names, \"alpha1\" and \"alpha2\" to the csv file?\n\n2016-04-30 17:06 GMT-07:00 Jim Lemon <drjimlemon at gmail.com>:\n\n> Hi jpm miao,\n> I think you can get what you want",
+      "thread_id": "thread-a10cfd435816",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-b75d00b50c78",
+      "message_id": "<CAKmUXV_M+gWRfHqoLLsxiD6r47W7gX6t7NHxxO36F7foyesUcA@mail.gmail.com>",
+      "from_name": "Tom Wright",
+      "from_email_hash": "066ceb690c1876bb37e367d88924496c2538e661a53bd9157ae80d5cf3d5cf88",
+      "date": "2016-04-30T19:03:59-07:00",
+      "subject": "[R] Removing NAs from dataframe (for use in Vioplot)",
+      "subject_clean": "Removing NAs from dataframe (for use in Vioplot)",
+      "in_reply_to": "<142423783.20160430205840@hsm.org.uk>",
+      "references": [
+        "<142423783.20160430205840@hsm.org.uk>"
+      ],
+      "body_plain": "Never let it be said there's only one way to do a thing:\n\nrequire(ggplot2)\nrequire(dplyr)\n\n#create a sample dataset\ndat <- data.frame(y1=sample(c(1:10,NA),20,replace=TRUE),\n                          y2=sample(c(1:10,NA),20,replace=TRUE),\n                          y3=sample(c(1:10,NA),20,replace=TRUE))\n\n# convert from wide to long\ndat <- melt(dat)\n\n# add the counts as a label\ndat <- merge(dat,\n          group_by(dat,variable) %>%\n               summarise(lab=paste0('n=',length(na.omit(value)))))\n\n# do the plot\nggplot(dat,aes(x=variable,y=value)) +\n    geom_violin() +\n    geom_text(aes(y=max(value,na.rm=TRUE)/2,label=lab))\n\n\n# apologies to David Winsemius for directing this answer to him, I'll work\nout how to use email one day.\n\nOn Sat, Apr 30, 2016 at 12:58 PM, Mike Smith <mike at hsm.org.uk> wrote:\n\n> Hi\n>\n> First post and a relative R newbie....\n>\n> I am using the vioplot library to produce some violin plots. I have an\n> input CSV with columns off irregular length that contain NAs. I want to\n> strip the NAs out and produce a multiple violin plot automatically labelled\n> using the headers. At the moment I do this\n>\n> Code:\n> ds1 = read.csv(\"http://www.lecturematerials.co.uk/data/spelling.csv\")\n> library(vioplot)\n> y6<-na.omit(ds1$y6)\n> y5<-na.omit(ds1$y5)\n> y4<-na.omit(ds1$y4)\n> y3<-na.omit(ds1$y3)\n> y2<-na.omit(ds1$y2)\n> y1<-na.omit(ds1$y1)\n> vioplot(y6, y5, y4,y3,y2,y1,horizontal=TRUE, names=c(\"Y6\",\n> \"Y5\",\"Y4\",\"Y3\",\"Y2\",\"Y1\"), col = \"lightblue\")\n>\n>\n> Two queries:\n>\n> 1. Is there a more elegant way of automatically stripping the NAs, passing\n> the columns to the function along with the header names??\n>\n> 2. Can I easily add the sample size to each violin plotted??\n>\n> thanks\n>\n> mike\n>\n>\n>\n> ---\n> Mike Smith\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Never let it be said there's only one way to do a thing:\n\nrequire(ggplot2)\nrequire(dplyr)\n\n#create a sample dataset\ndat <- data.frame(y1=sample(c(1:10,NA),20,replace=TRUE),\n                          y",
+      "thread_id": "thread-b75d00b50c78",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-273101e727ec",
+      "message_id": "<CAKmUXV9KC+hn6kKT=yEJTehyVgLhCdjiqR-OEumWavHgU=2wCg@mail.gmail.com>",
+      "from_name": "Tom Wright",
+      "from_email_hash": "066ceb690c1876bb37e367d88924496c2538e661a53bd9157ae80d5cf3d5cf88",
+      "date": "2016-04-30T19:07:34-07:00",
+      "subject": "[R] how to use AND in grepl",
+      "subject_clean": "how to use AND in grepl",
+      "in_reply_to": "<1930216316.8287881.1462052327296.JavaMail.yahoo@mail.yahoo.com>",
+      "references": [
+        "<1930216316.8287881.1462052327296.JavaMail.yahoo.ref@mail.yahoo.com>",
+        "<1930216316.8287881.1462052327296.JavaMail.yahoo@mail.yahoo.com>"
+      ],
+      "body_plain": "subset(df,grepl(\"t2|pd\",x$Command))\n\n\nOn Sat, Apr 30, 2016 at 2:38 PM, ch.elahe via R-help <r-help at r-project.org>\nwrote:\n\n> Hi all,\n>\n> I have one factor variable in my df and I want to extract the names from\n> it which contain both \"t2\" and \"pd\":\n>\n>   'data.frame': 36919 obs. of 162 variables\n>    $TE                :int 38,41,11,52,48,75,.....\n>    $TR                :int 100,210,548,546,.....\n>    $Command          :factor W/2229 levels\n> \"_localize_PD\",\"_localize_tre_t2\",\"_abdomen_t1_seq\",\"knee_pd_t1_localize\",\"pd_local_abdomen_t2\"...\n>\n> I have tried this but I did not get result:\n>\n>   t2pd=subset(df,grepl(\"t2\",Command) & grepl(\"pd\",Command))\n>\n>\n> does anyone know how to apply AND in grepl?\n>\n> Thanks\n> Elahe\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "subset(df,grepl(\"t2|pd\",x$Command))\n\n\nOn Sat, Apr 30, 2016 at 2:38 PM, ch.elahe via R-help <r-help at r-project.org>\nwrote:\n\n> Hi all,\n>\n> I have one factor variable in my df and I want to extract the",
+      "thread_id": "thread-273101e727ec",
+      "thread_depth": 0,
+      "month": "2016-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-258f492e9207",
+      "subject": "Removing NAs from dataframe  (for use in Vioplot)",
+      "message_count": 2,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2016-04-30T16:16:11-07:00",
+      "last_reply": "2016-04-30T16:23:43-07:00",
+      "root_message_id": "msg-258f492e9207"
+    },
+    {
+      "id": "thread-a10cfd435816",
+      "subject": "How to print the frequency table (produced by the command \"table\" to Excel",
+      "message_count": 1,
+      "participants": [
+        "jpm miao"
+      ],
+      "started": "2016-04-30T18:19:00-07:00",
+      "last_reply": "2016-04-30T18:19:00-07:00",
+      "root_message_id": "msg-a10cfd435816"
+    },
+    {
+      "id": "thread-b75d00b50c78",
+      "subject": "Removing NAs from dataframe (for use in Vioplot)",
+      "message_count": 1,
+      "participants": [
+        "Tom Wright"
+      ],
+      "started": "2016-04-30T19:03:59-07:00",
+      "last_reply": "2016-04-30T19:03:59-07:00",
+      "root_message_id": "msg-b75d00b50c78"
+    },
+    {
+      "id": "thread-273101e727ec",
+      "subject": "how to use AND in grepl",
+      "message_count": 1,
+      "participants": [
+        "Tom Wright"
+      ],
+      "started": "2016-04-30T19:07:34-07:00",
+      "last_reply": "2016-04-30T19:07:34-07:00",
+      "root_message_id": "msg-273101e727ec"
+    },
+    {
+      "id": "thread-790d3bca1a3d",
+      "subject": "Could not find function \"pointsToRaster\"",
+      "message_count": 1,
+      "participants": [
+        "Ben Tupper"
+      ],
+      "started": "2016-04-30T20:33:14-04:00",
+      "last_reply": "2016-04-30T20:33:14-04:00",
+      "root_message_id": "msg-790d3bca1a3d"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2021-08",
+  "messages": [
+    {
+      "id": "msg-fd22ff1bbafc",
+      "message_id": "<7013D663-1266-4422-A405-537DA425F676@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2021-08-31T16:51:09-07:00",
+      "subject": "[R] Calculate daily means from 5-minute interval data",
+      "subject_clean": "Calculate daily means from 5-minute interval data",
+      "in_reply_to": "<alpine.LNX.2.20.2108311402330.6620@salmo.appl-ecosys.com>",
+      "references": [
+        "<alpine.LNX.2.20.2108290801570.32406@salmo.appl-ecosys.com>",
+        "<0AAD5464-4D4C-497C-87B3-C929842CA237@dcn.davis.ca.us>",
+        "<alpine.LNX.2.20.2108311402330.6620@salmo.appl-ecosys.com>"
+      ],
+      "body_plain": "Never use stringsAsFactors on uncleaned data. For one thing you give a factor to as.Date and it tries to make sense of the integer representation, not the character representation.\n\nlibrary(dplyr)\ndta <- read.csv( text =\n\"sampdate,samptime,cfs\n2020-08-26,09:30,136000\n2020-08-26,09:35,126000\n2020-08-26,09:40,130000\n2020-08-26,09:45,128000\n2020-08-26,09:50,126000\n2020-08-26,09:55,125000\n2020-08-26,10:00,121000\n2020-08-26,10:05,117000\n2020-08-26,10:10,120000\n\", stringsAsFactors = FALSE)\ndtad <- (   dta\n        %>% group_by( sampdate )\n        %>% summarise( exp_value = mean(cfs, na.rm = TRUE)\n                     , Count = n()\n                     )\n        )\n\nOn August 31, 2021 2:11:05 PM PDT, Rich Shepard <rshepard at appl-ecosys.com> wrote:\n>On Sun, 29 Aug 2021, Jeff Newmiller wrote:\n>\n>> The general idea is to create a \"grouping\" column with repeated values for\n>> each day, and then to use aggregate to compute your combined results. The\n>> dplyr package's group_by/summarise functions can also do this, and there\n>> are also proponents of the data.table package which is high performance\n>> but tends to depend on altering data in-place unlike most other R data\n>> handling functions.\n>\n>Jeff,\n>\n>I've read a number of docs discussing dplyr's summerize and group_by\n>functions (including that section of Hadley's 'R for Data Science' book, yet\n>I'm missing something; I think that I need to separate the single sampdate\n>column into colums for year, month, and day and group_by year/month\n>summarizing within those groups.\n>\n>The data are of this format:\n>sampdate,samptime,cfs\n>2020-08-26,09:30,136000\n>2020-08-26,09:35,126000\n>2020-08-26,09:40,130000\n>2020-08-26,09:45,128000\n>2020-08-26,09:50,126000\n>2020-08-26,09:55,125000\n>2020-08-26,10:00,121000\n>2020-08-26,10:05,117000\n>2020-08-26,10:10,120000\n>\n>My curent script is:\n>\n>-------8<--------------\n>library('tidyverse')\n>\n>discharge <- read.table('../data/discharge.dat', header = TRUE, sep = ',', stringsAsFactors = TRUE)\n>discharge$sampdate <- as.Date(discharge$sampdate)\n>discharge$cfs <- as.numeric(discharge$cfs, length = 6)\n>\n># use dplyr.summarize grouped by date\n>\n># need to separate sampdate into %Y-%M-%D in order to group_by the month?\n>by_month <- discharge %>%\n>   group_by(sampdate ...\n>summarize(by_month, exp_value = mean(cfs, na.rm = TRUE), sd(cfs))\n>---------------->8--------\n>\n>and the results are:\n>\n>> str(discharge)\n>'data.frame':\t93254 obs. of  3 variables:\n>  $ sampdate: Date, format: \"2020-08-26\" \"2020-08-26\" ...\n>  $ samptime: Factor w/ 728 levels \"00:00\",\"00:05\",..: 115 116 117 118 123 128 133 138 143 148 ...\n>  $ cfs     : num  176 156 165 161 156 154 144 137 142 142 ...\n>> ls()\n>[1] \"by_month\"  \"discharge\"\n>> by_month\n># A tibble: 93,254 ? 3\n># Groups:   sampdate [322]\n>    sampdate   samptime   cfs\n>    <date>     <fct>    <dbl>\n>  1 2020-08-26 09:30      176\n>  2 2020-08-26 09:35      156\n>  3 2020-08-26 09:40      165\n>  4 2020-08-26 09:45      161\n>  5 2020-08-26 09:50      156\n>  6 2020-08-26 09:55      154\n>  7 2020-08-26 10:00      144\n>  8 2020-08-26 10:05      137\n>  9 2020-08-26 10:10      142\n>10 2020-08-26 10:15      142\n># ? with 93,244 more rows\n>\n>I don't know why the discharge values are truncated to 3 digits when they're\n>6 digits in the input data.\n>\n>Suggested readings appreciated,\n>\n>Rich\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n-- \nSent from my phone. Please excuse my brevity.",
+      "body_snippet": "Never use stringsAsFactors on uncleaned data. For one thing you give a factor to as.Date and it tries to make sense of the integer representation, not the character representation.\n\nlibrary(dplyr)\ndta",
+      "thread_id": "thread-fd22ff1bbafc",
+      "thread_depth": 0,
+      "month": "2021-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-fd22ff1bbafc",
+      "subject": "Calculate daily means from 5-minute interval data",
+      "message_count": 1,
+      "participants": [
+        "Jeff Newmiller"
+      ],
+      "started": "2021-08-31T16:51:09-07:00",
+      "last_reply": "2021-08-31T16:51:09-07:00",
+      "root_message_id": "msg-fd22ff1bbafc"
+    }
+  ]
+}

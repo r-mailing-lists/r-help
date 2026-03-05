@@ -1,0 +1,38 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2022-12",
+  "messages": [
+    {
+      "id": "msg-532c11822a3b",
+      "message_id": "<20221201085928.18573b32@rolf-Latitude-E7470>",
+      "from_name": "Rolf Turner",
+      "from_email_hash": "85365426fbf4496cfac2415de7f8b411ee0133e9a8b2316f8939adcd30c2a157",
+      "date": "2022-12-01T08:59:28+13:00",
+      "subject": "[R] Select dataframe row containing a digit",
+      "subject_clean": "Select dataframe row containing a digit",
+      "in_reply_to": "<CAMk+s2SbBEZVU6ey_Ua3vzmwdtfNnatfYRXJ0_ecV-hpBKfdPw@mail.gmail.com>",
+      "references": [
+        "<CAMk+s2SbBEZVU6ey_Ua3vzmwdtfNnatfYRXJ0_ecV-hpBKfdPw@mail.gmail.com>"
+      ],
+      "body_plain": "On Wed, 30 Nov 2022 13:40:50 +0100\nLuigi Marongiu <marongiu.luigi at gmail.com> wrote:\n\n> Hello,\n> I have a data frame where some lines containing strings including\n> digits. How do I select those rows and change their values?\n> \n> In essence, I have a data frame with different values assigned to the\n> column \"val\". I am formatting everything to either \"POS\" and \"NEG\",\n> but values entered as number should get the value \"NUM\".\n> How do I change such values?\n> \n\nWhat I do in such circumstances:\n\nsuppressWarnings(X$val[!is.na(as.numeric(X$val))] <- \"NUM\")\n\nThe \"suppressWarnings()\" bit is just included due to my OCD.\n\nThis avoids fooling about with regular expressions, which always\nrequires a huge amount of trial and error, and a great diminishment of\nthe amount of hair on one's head (as a result of tearing out).\n\nNote that I have changed the name of your data frame from \"df\" to \"X\",\nsince df() is a built-in R function (density of the F-distribution).\n\nSee fortunes::fortune(\"might clash\").\n\ncheers,\n\nRolf Turner\n\n-- \nHonorary Research Fellow\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276",
+      "body_snippet": "On Wed, 30 Nov 2022 13:40:50 +0100\nLuigi Marongiu <marongiu.luigi at gmail.com> wrote:\n\n> Hello,\n> I have a data frame where some lines containing strings including\n> digits. How do I select those row",
+      "thread_id": "thread-532c11822a3b",
+      "thread_depth": 0,
+      "month": "2022-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-532c11822a3b",
+      "subject": "Select dataframe row containing a digit",
+      "message_count": 1,
+      "participants": [
+        "Rolf Turner"
+      ],
+      "started": "2022-12-01T08:59:28+13:00",
+      "last_reply": "2022-12-01T08:59:28+13:00",
+      "root_message_id": "msg-532c11822a3b"
+    }
+  ]
+}

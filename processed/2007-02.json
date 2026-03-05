@@ -1,0 +1,224 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2007-02",
+  "messages": [
+    {
+      "id": "msg-53ac0c327d7e",
+      "message_id": "<59d7961d0702281501o7523bfc7j2e9f1a9ea439ab3f@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "9990c0a46f707a7b7a32dc78108db722c1ccf39a8c5733e31eb392daba5a47ca",
+      "date": "2007-02-28T15:01:08-08:00",
+      "subject": "[R] Removing directory?",
+      "subject_clean": "Removing directory?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI'm trying to remove/delete a directory usingR.  I've tried the\nfollowing with no success:\n\n% Rterm --vanilla\n> getwd()\n[1] \"C:/Documents and Settings/hb/braju.com.R/aroma.affymetrix/test\"\n\n> dir.create(\"foo\")\n> file.info(\"foo\")\n    size isdir mode               mtime               ctime               atime\nfoo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n\n# Using file.remove()\n> res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), file.remove)\n> res\n   foo   foo/  foo\\\\  ./foo ./foo/\n FALSE  FALSE  FALSE  FALSE  FALSE\n\n# Using unlink()\n> res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), unlink)\n> res\n   foo   foo/  foo\\\\  ./foo ./foo/\n     1      0      0      1      0\n\n# Directory is still there\n> file.info(\"foo\")\n    size isdir mode               mtime               ctime               atime\nfoo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n\nI've tried the above from a different directory too, i.e.\nsetwd(\"C:/\"), with no success.  Using absolute pathnames the same.\n\nThis is on WinXP R v2.4.1:\n\n> sessionInfo()\nR version 2.4.1 Patched (2007-01-13 r40470)\ni386-pc-mingw32\n\nlocale:\nLC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MON\nETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252\n\n\nattached base packages:\n[1] \"stats\"     \"graphics\"  \"grDevices\" \"utils\"     \"datasets\"  \"methods\"\n[7] \"base\"\n\nThanks\n\nHenrik",
+      "body_snippet": "Hi,\n\nI'm trying to remove/delete a directory usingR.  I've tried the\nfollowing with no success:\n\n% Rterm --vanilla\n> getwd()\n[1] \"C:/Documents and Settings/hb/braju.com.R/aroma.affymetrix/test\"\n\n> dir",
+      "thread_id": "thread-53ac0c327d7e",
+      "thread_depth": 0,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-80d957e21e44",
+      "message_id": "<BAY132-F10B746E67AC7046CC9E7B1AA810@phx.gbl>",
+      "from_name": "Talbot Katz",
+      "from_email_hash": "5fab81ff0cedf4fcbdfa1da0ba35b21413f546fda00a02243e406696239b0916",
+      "date": "2007-02-28T18:07:21-05:00",
+      "subject": "[R] Efficient way to repeat rows (or columns) of a matrix?",
+      "subject_clean": "Efficient way to repeat rows (or columns) of a matrix?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi.\n\nIf I have a vector, v_1, and another vector of positive integers, i_1, the \nsame length as v_1, then rep(v_1,i_1) will repeat v_i[j] exactly i_1[j] \ntimes, like so:\n\n>rep(c(1,2,3),c(3,2,1))\n[1] 1 1 1 2 2 3\n>\n\nI'd like to do the same sort of thing where I replace v_1 with a matrix, and \nthe jth row of the matrix is repeated i_1 times.\n\nObviously, I could do this with for loops, like the following:\n\n>(ma1=matrix(1:6,nrow=2))\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n>vr1=c(2,3)\n>rma1=NULL\n>for(i in 1:length(vr1)){for(j in 1:vr1[i]){rma1=rbind(rma1,ma1[i,])}}\n>rma1\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    1    3    5\n[3,]    2    4    6\n[4,]    2    4    6\n[5,]    2    4    6\n>\n\nI just thought some of you clever programmers could show me a more efficient \nway.  (I apologize if this question has come up before and you're tired of \nanswering it ;-)\n\nThanks!\n\n--  TMK  --\n212-460-5430\thome\n917-656-5351\tcell",
+      "body_snippet": "Hi.\n\nIf I have a vector, v_1, and another vector of positive integers, i_1, the \nsame length as v_1, then rep(v_1,i_1) will repeat v_i[j] exactly i_1[j] \ntimes, like so:\n\n>rep(c(1,2,3),c(3,2,1))\n[1] 1",
+      "thread_id": "thread-80d957e21e44",
+      "thread_depth": 0,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-b2df39dee7a6",
+      "message_id": "<45E60BB4.8020907@med.umich.edu>",
+      "from_name": "James W. MacDonald",
+      "from_email_hash": "51e0486782bd6ed6ad0d8d179dbc9204aca523620b6842837909c743527fce1d",
+      "date": "2007-02-28T18:09:40-05:00",
+      "subject": "[R] Removing directory?",
+      "subject_clean": "Removing directory?",
+      "in_reply_to": "<59d7961d0702281501o7523bfc7j2e9f1a9ea439ab3f@mail.gmail.com>",
+      "references": [
+        "<59d7961d0702281501o7523bfc7j2e9f1a9ea439ab3f@mail.gmail.com>"
+      ],
+      "body_plain": "I think you want to add a recursive = TRUE to your call to unlink().\n\nBest,\n\nJim\n\nHenrik Bengtsson wrote:\n> Hi,\n> \n> I'm trying to remove/delete a directory usingR.  I've tried the\n> following with no success:\n> \n> % Rterm --vanilla\n> \n>>getwd()\n> \n> [1] \"C:/Documents and Settings/hb/braju.com.R/aroma.affymetrix/test\"\n> \n> \n>>dir.create(\"foo\")\n>>file.info(\"foo\")\n> \n>     size isdir mode               mtime               ctime               atime\n> foo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n> \n> # Using file.remove()\n> \n>>res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), file.remove)\n>>res\n> \n>    foo   foo/  foo\\\\  ./foo ./foo/\n>  FALSE  FALSE  FALSE  FALSE  FALSE\n> \n> # Using unlink()\n> \n>>res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), unlink)\n>>res\n> \n>    foo   foo/  foo\\\\  ./foo ./foo/\n>      1      0      0      1      0\n> \n> # Directory is still there\n> \n>>file.info(\"foo\")\n> \n>     size isdir mode               mtime               ctime               atime\n> foo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n> \n> I've tried the above from a different directory too, i.e.\n> setwd(\"C:/\"), with no success.  Using absolute pathnames the same.\n> \n> This is on WinXP R v2.4.1:\n> \n> \n>>sessionInfo()\n> \n> R version 2.4.1 Patched (2007-01-13 r40470)\n> i386-pc-mingw32\n> \n> locale:\n> LC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MON\n> ETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252\n> \n> \n> attached base packages:\n> [1] \"stats\"     \"graphics\"  \"grDevices\" \"utils\"     \"datasets\"  \"methods\"\n> [7] \"base\"\n> \n> Thanks\n> \n> Henrik\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nJames W. MacDonald\nUniversity of Michigan\nAffymetrix and cDNA Microarray Core\n1500 E Medical Center Drive\nAnn Arbor MI 48109\n734-647-5623\n\n\n\n**********************************************************\nElectronic Mail is not secure, may not be read every day, and should not be used for urgent or sensitive issues.",
+      "body_snippet": "I think you want to add a recursive = TRUE to your call to unlink().\n\nBest,\n\nJim\n\nHenrik Bengtsson wrote:\n> Hi,\n> \n> I'm trying to remove/delete a directory usingR.  I've tried the\n> following with no",
+      "thread_id": "thread-53ac0c327d7e",
+      "thread_depth": 1,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-ea61cee537d9",
+      "message_id": "<loom.20070301T001232-961@post.gmane.org>",
+      "from_name": "D L McArthur",
+      "from_email_hash": "6972666d832e30caa9be7a35389ce9aaa452c154313d22f5a103c1bc0eea141c",
+      "date": "2007-02-28T23:13:35Z",
+      "subject": "[R] Packages in R for least median squares regression and computing\toutliers (thompson tau technique etc.)",
+      "subject_clean": "Packages in R for least median squares regression and computing\toutliers (thompson tau technique etc.)",
+      "in_reply_to": null,
+      "references": [
+        "<916363.92662.qm@web43135.mail.sp1.yahoo.com>"
+      ],
+      "body_plain": "lalitha viswanath <lalithaviswanath <at> yahoo.com> writes:\n> \n> Hi\n> I am looking for suitable packages in R that do\n> regression analyses using least median squares method\n> (or better). Additionally, I am also looking for\n> packages that implement algorithms/methods for\n> detecting outliers that can be discarded before doing\n> the regression analyses....\n> \nFunction lmsreg in package MASS provides least median of \nsquares regression estimator.  See RR Wilcox, Introduction \nto Robust Estimation and Hypothesis Testing, Elsevier 2005 \nand a wealth of corresponding R functions for robust data\nanalyses available at \nhttp://psychology.usc.edu/faculty_homepage.php?id=43",
+      "body_snippet": "lalitha viswanath <lalithaviswanath <at> yahoo.com> writes:\n> \n> Hi\n> I am looking for suitable packages in R that do\n> regression analyses using least median squares method\n> (or better). Additionall",
+      "thread_id": "thread-ea61cee537d9",
+      "thread_depth": 0,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-2e700232cc61",
+      "message_id": "<45E60E40.5040903@med.umich.edu>",
+      "from_name": "James W. MacDonald",
+      "from_email_hash": "51e0486782bd6ed6ad0d8d179dbc9204aca523620b6842837909c743527fce1d",
+      "date": "2007-02-28T18:20:32-05:00",
+      "subject": "[R] Efficient way to repeat rows (or columns) of a matrix?",
+      "subject_clean": "Efficient way to repeat rows (or columns) of a matrix?",
+      "in_reply_to": "<BAY132-F10B746E67AC7046CC9E7B1AA810@phx.gbl>",
+      "references": [
+        "<BAY132-F10B746E67AC7046CC9E7B1AA810@phx.gbl>"
+      ],
+      "body_plain": "Hi Talbot,\n\nma <- matrix(1:6, nrow  = 2)\nrma <- ma[rep(1:2, c(2,3)),]\n\nBest,\n\nJim\n\n\n\nTalbot Katz wrote:\n> Hi.\n> \n> If I have a vector, v_1, and another vector of positive integers, i_1, the \n> same length as v_1, then rep(v_1,i_1) will repeat v_i[j] exactly i_1[j] \n> times, like so:\n> \n> \n>>rep(c(1,2,3),c(3,2,1))\n> \n> [1] 1 1 1 2 2 3\n> \n> \n> I'd like to do the same sort of thing where I replace v_1 with a matrix, and \n> the jth row of the matrix is repeated i_1 times.\n> \n> Obviously, I could do this with for loops, like the following:\n> \n> \n>>(ma1=matrix(1:6,nrow=2))\n> \n>      [,1] [,2] [,3]\n> [1,]    1    3    5\n> [2,]    2    4    6\n> \n>>vr1=c(2,3)\n>>rma1=NULL\n>>for(i in 1:length(vr1)){for(j in 1:vr1[i]){rma1=rbind(rma1,ma1[i,])}}\n>>rma1\n> \n>      [,1] [,2] [,3]\n> [1,]    1    3    5\n> [2,]    1    3    5\n> [3,]    2    4    6\n> [4,]    2    4    6\n> [5,]    2    4    6\n> \n> \n> I just thought some of you clever programmers could show me a more efficient \n> way.  (I apologize if this question has come up before and you're tired of \n> answering it ;-)\n> \n> Thanks!\n> \n> --  TMK  --\n> 212-460-5430\thome\n> 917-656-5351\tcell\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nJames W. MacDonald\nUniversity of Michigan\nAffymetrix and cDNA Microarray Core\n1500 E Medical Center Drive\nAnn Arbor MI 48109\n734-647-5623\n\n\n\n**********************************************************\nElectronic Mail is not secure, may not be read every day, and should not be used for urgent or sensitive issues.",
+      "body_snippet": "Hi Talbot,\n\nma <- matrix(1:6, nrow  = 2)\nrma <- ma[rep(1:2, c(2,3)),]\n\nBest,\n\nJim\n\n\n\nTalbot Katz wrote:\n> Hi.\n> \n> If I have a vector, v_1, and another vector of positive integers, i_1, the \n> same le",
+      "thread_id": "thread-80d957e21e44",
+      "thread_depth": 1,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-d6e54aee3e99",
+      "message_id": "<BAY132-F21B1A6FC00CE122E8031D8AA810@phx.gbl>",
+      "from_name": "Talbot Katz",
+      "from_email_hash": "5fab81ff0cedf4fcbdfa1da0ba35b21413f546fda00a02243e406696239b0916",
+      "date": "2007-02-28T18:35:00-05:00",
+      "subject": "[R] Efficient way to repeat rows (or columns) of a matrix?",
+      "subject_clean": "Efficient way to repeat rows (or columns) of a matrix?",
+      "in_reply_to": "<45E60E40.5040903@med.umich.edu>",
+      "references": [],
+      "body_plain": "Brilliant, thanks!\n\n--  TMK  --\n212-460-5430\thome\n917-656-5351\tcell\n\n\n\n>From: \"James W. MacDonald\" <jmacdon at med.umich.edu>\n>To: Talbot Katz <topkatz at msn.com>\n>CC: r-help at stat.math.ethz.ch\n>Subject: Re: [R] Efficient way to repeat rows (or columns) of a matrix?\n>Date: Wed, 28 Feb 2007 18:20:32 -0500\n>\n>Hi Talbot,\n>\n>ma <- matrix(1:6, nrow  = 2)\n>rma <- ma[rep(1:2, c(2,3)),]\n>\n>Best,\n>\n>Jim\n>\n>\n>\n>Talbot Katz wrote:\n>>Hi.\n>>\n>>If I have a vector, v_1, and another vector of positive integers, i_1, the \n>>same length as v_1, then rep(v_1,i_1) will repeat v_i[j] exactly i_1[j] \n>>times, like so:\n>>\n>>\n>>>rep(c(1,2,3),c(3,2,1))\n>>\n>>[1] 1 1 1 2 2 3\n>>\n>>\n>>I'd like to do the same sort of thing where I replace v_1 with a matrix, \n>>and the jth row of the matrix is repeated i_1 times.\n>>\n>>Obviously, I could do this with for loops, like the following:\n>>\n>>\n>>>(ma1=matrix(1:6,nrow=2))\n>>\n>>      [,1] [,2] [,3]\n>>[1,]    1    3    5\n>>[2,]    2    4    6\n>>\n>>>vr1=c(2,3)\n>>>rma1=NULL\n>>>for(i in 1:length(vr1)){for(j in 1:vr1[i]){rma1=rbind(rma1,ma1[i,])}}\n>>>rma1\n>>\n>>      [,1] [,2] [,3]\n>>[1,]    1    3    5\n>>[2,]    1    3    5\n>>[3,]    2    4    6\n>>[4,]    2    4    6\n>>[5,]    2    4    6\n>>\n>>\n>>I just thought some of you clever programmers could show me a more \n>>efficient way.  (I apologize if this question has come up before and \n>>you're tired of answering it ;-)\n>>\n>>Thanks!\n>>\n>>--  TMK  --\n>>212-460-5430\thome\n>>917-656-5351\tcell\n>>\n>>______________________________________________\n>>R-help at stat.math.ethz.ch mailing list\n>>https://stat.ethz.ch/mailman/listinfo/r-help\n>>PLEASE do read the posting guide \n>>http://www.R-project.org/posting-guide.html\n>>and provide commented, minimal, self-contained, reproducible code.\n>\n>\n>--\n>James W. MacDonald\n>University of Michigan\n>Affymetrix and cDNA Microarray Core\n>1500 E Medical Center Drive\n>Ann Arbor MI 48109\n>734-647-5623\n>\n>\n>\n>**********************************************************\n>Electronic Mail is not secure, may not be read every day, and should not be \n>used for urgent or sensitive issues.",
+      "body_snippet": "Brilliant, thanks!\n\n--  TMK  --\n212-460-5430\thome\n917-656-5351\tcell\n\n\n\n>From: \"James W. MacDonald\" <jmacdon at med.umich.edu>\n>To: Talbot Katz <topkatz at msn.com>\n>CC: r-help at stat.math.ethz.ch\n>Su",
+      "thread_id": "thread-80d957e21e44",
+      "thread_depth": 2,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-256ee517e6b1",
+      "message_id": "<59d7961d0702281552t78fd1da3pae3af0f731706546@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "9990c0a46f707a7b7a32dc78108db722c1ccf39a8c5733e31eb392daba5a47ca",
+      "date": "2007-02-28T15:52:12-08:00",
+      "subject": "[R] Removing directory?",
+      "subject_clean": "Removing directory?",
+      "in_reply_to": "<45E60BB4.8020907@med.umich.edu>",
+      "references": [
+        "<59d7961d0702281501o7523bfc7j2e9f1a9ea439ab3f@mail.gmail.com>",
+        "<45E60BB4.8020907@med.umich.edu>"
+      ],
+      "body_plain": "Thanks!  ...as the help indeed says:\n\n     If 'recursive = FALSE' directories are not deleted, not even empty\n     ones.\n\nIt works;\n\n> dir.create(\"foo\")\n> file.info(\"foo\")\n    size isdir mode               mtime               ctime               atime\nfoo    0  TRUE  777 2007-02-28 15:50:33 2007-02-28 15:50:33 2007-02-28 15:50:33\n> print(file.remove(\"foo\", recursive=TRUE))\n[1] FALSE\n> file.info(\"foo\")\n    size isdir mode               mtime               ctime               atime\nfoo    0  TRUE  777 2007-02-28 15:50:33 2007-02-28 15:50:33 2007-02-28 15:50:33\n> print(unlink(\"foo\", recursive=TRUE))\n[1] 0\n> file.info(\"foo\")\n    size isdir mode mtime ctime atime\nfoo   NA    NA <NA>  <NA>  <NA>  <NA>\n> file.exists(\"foo\")\n[1] FALSE\n\n/Henrik\n\nOn 2/28/07, James W. MacDonald <jmacdon at med.umich.edu> wrote:\n> I think you want to add a recursive = TRUE to your call to unlink().\n>\n> Best,\n>\n> Jim\n>\n> Henrik Bengtsson wrote:\n> > Hi,\n> >\n> > I'm trying to remove/delete a directory usingR.  I've tried the\n> > following with no success:\n> >\n> > % Rterm --vanilla\n> >\n> >>getwd()\n> >\n> > [1] \"C:/Documents and Settings/hb/braju.com.R/aroma.affymetrix/test\"\n> >\n> >\n> >>dir.create(\"foo\")\n> >>file.info(\"foo\")\n> >\n> >     size isdir mode               mtime               ctime               atime\n> > foo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n> >\n> > # Using file.remove()\n> >\n> >>res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), file.remove)\n> >>res\n> >\n> >    foo   foo/  foo\\\\  ./foo ./foo/\n> >  FALSE  FALSE  FALSE  FALSE  FALSE\n> >\n> > # Using unlink()\n> >\n> >>res <- sapply(c(\"foo\", \"foo/\", \"foo\\\\\", \"./foo\", \"./foo/\"), unlink)\n> >>res\n> >\n> >    foo   foo/  foo\\\\  ./foo ./foo/\n> >      1      0      0      1      0\n> >\n> > # Directory is still there\n> >\n> >>file.info(\"foo\")\n> >\n> >     size isdir mode               mtime               ctime               atime\n> > foo    0  TRUE  777 2007-02-28 14:52:10 2007-02-28 14:52:10 2007-02-28 14:52:10\n> >\n> > I've tried the above from a different directory too, i.e.\n> > setwd(\"C:/\"), with no success.  Using absolute pathnames the same.\n> >\n> > This is on WinXP R v2.4.1:\n> >\n> >\n> >>sessionInfo()\n> >\n> > R version 2.4.1 Patched (2007-01-13 r40470)\n> > i386-pc-mingw32\n> >\n> > locale:\n> > LC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MON\n> > ETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252\n> >\n> >\n> > attached base packages:\n> > [1] \"stats\"     \"graphics\"  \"grDevices\" \"utils\"     \"datasets\"  \"methods\"\n> > [7] \"base\"\n> >\n> > Thanks\n> >\n> > Henrik\n> >\n> > ______________________________________________\n> > R-help at stat.math.ethz.ch mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n>\n> --\n> James W. MacDonald\n> University of Michigan\n> Affymetrix and cDNA Microarray Core\n> 1500 E Medical Center Drive\n> Ann Arbor MI 48109\n> 734-647-5623\n>\n>\n>\n> **********************************************************\n> Electronic Mail is not secure, may not be read every day, and should not be used for urgent or sensitive issues.\n>",
+      "body_snippet": "Thanks!  ...as the help indeed says:\n\n     If 'recursive = FALSE' directories are not deleted, not even empty\n     ones.\n\nIt works;\n\n> dir.create(\"foo\")\n> file.info(\"foo\")\n    size isdir mode         ",
+      "thread_id": "thread-53ac0c327d7e",
+      "thread_depth": 2,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-c27514a5b470",
+      "message_id": "<971536df0702281606u4a4b3f19h34fc1f8fdcdbd991@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2007-02-28T19:06:51-05:00",
+      "subject": "[R] What is a expression good for?",
+      "subject_clean": "What is a expression good for?",
+      "in_reply_to": "<20070228205814.M50062@centroin.com.br>",
+      "references": [
+        "<20070228205814.M50062@centroin.com.br>"
+      ],
+      "body_plain": "You can evaluate it, differentiate it, pick apart its components,\nuse it as a title or legend in a plot, use it as a function body\nand probably other things too:\n\ne <- expression(x+y)\n\neval(e, list(x = 1, y = 2)) # 3\n\nD(e, \"x\")\n\ne[[1]][[1]] # +\ne[[1]][[2]] # x\ne[[1]][[3]] # y\n\nplot(1:10, main = e)\nlegend(\"topleft\", e, pch = 1)\n\n\nf <- function(x,y) {}\nbody(f) <- e\nf(1,2) # 3\n\nOn 2/28/07, Alberto Monteiro <albmont at centroin.com.br> wrote:\n> I mean, I can generate a expression, for example, with:\n>\n> z <- expression(x+y)\n>\n> But then how can I _use_ it? Is it possible to retrieve\n> information from it, for example, that z is a sum, its\n> first argument is x (or expression(x)) and its second\n> argument is y?\n>\n> Alberto Monteiro\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "You can evaluate it, differentiate it, pick apart its components,\nuse it as a title or legend in a plot, use it as a function body\nand probably other things too:\n\ne <- expression(x+y)\n\neval(e, list(x ",
+      "thread_id": "thread-c27514a5b470",
+      "thread_depth": 0,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-77e9c37f4d84",
+      "message_id": "<200702281941.33368.dylan.beaudette@gmail.com>",
+      "from_name": "Dylan Beaudette",
+      "from_email_hash": "7c20155ca48d79149860fd59c6ecfd0102a020d5b1ab9c12459a9a47e1089d4c",
+      "date": "2007-02-28T19:41:33-08:00",
+      "subject": "[R] prop.test or chisq.test ..?",
+      "subject_clean": "prop.test or chisq.test ..?",
+      "in_reply_to": "<17893.17994.538502.77917@stat.math.ethz.ch>",
+      "references": [
+        "<200702261736.31001.dylan.beaudette@gmail.com>",
+        "<17893.17994.538502.77917@stat.math.ethz.ch>"
+      ],
+      "body_plain": "On Wednesday 28 February 2007 01:07, Christoph Buser wrote:\n> Hi\n>\n> Some comments are inside.\n>\n> Dylan Beaudette writes:\n>  > Hi everyone,\n>  >\n>  > Suppose I have a count the occurrences of positive results, and the\n>  > total number of occurrences:\n>  >\n>  >\n>  > pos <- 14\n>  > total <- 15\n>  >\n>  > testing that the proportion of positive occurrences is greater than 0.5\n>  > gives a p-value and confidence interval:\n>  >\n>  > prop.test( pos, total, p=0.5, alternative='greater')\n>  >\n>  >         1-sample proportions test with continuity correction\n>  >\n>  > data:  14 out of 15, null probability 0.5\n>  > X-squared = 9.6, df = 1, p-value = 0.0009729\n>  > alternative hypothesis: true p is greater than 0.5\n>  > 95 percent confidence interval:\n>  >  0.706632 1.000000\n>  > sample estimates:\n>  >         p\n>  > 0.9333333\n>\n> First of all by default there is a continuity correction in\n> prop.test(). If you use\n>\n> prop.test(pos, total, p=0.5, alternative=\"greater\", correct = FALSE)\n>\n> \t1-sample proportions test without continuity correction\n>\n> data:  pos out of total, null probability 0.5\n> X-squared = 11.2667, df = 1, p-value = 0.0003946\n> alternative hypothesis: true p is greater than 0.5\n> 95 percent confidence interval:\n>  0.7492494 1.0000000\n> sample estimates:\n>         p\n> 0.9333333\n>\n> Remark that know the X-squared is identical to  your result from\n> chisq.test(), but the p-value is 0.0007891/2\n>\n> The reason is that you are testing here the against the\n> alternative \"greater\"\n>\n> If you use a two sided test\n>\n> prop.test(pos, total, p=0.5, alternative=\"two.sided\", correct = FALSE)\n>\n> then you reporduce the results form chisq.test().\n>\n>  > My question is how does the use of chisq.test() differ from the above\n>  > operation. For example:\n>  >\n>  > chisq.test(table( c(rep('pos', 14), rep('neg', 1)) ))\n>  >\n>  >         Chi-squared test for given probabilities\n>  >\n>  > data:  table(c(rep(\"pos\", 14), rep(\"neg\", 1)))\n>  > X-squared = 11.2667, df = 1, p-value = 0.0007891\n>  >\n>  > ... gives slightly different results. I am corrent in interpreting that\n>  > the chisq.test() function in this case is giving me a p-value associated\n>  > with the test that the probabilities of pos are *different* than the\n>  > probabilities of neg -- and thus a larger p-value than the prop.test(...\n>  > , p=0.5, alternative='greater') ?\n>\n> Yes. In your example chisq.test() tests the null hypothesis if\n> all population probabilities are equal\n>\n> ?chisq.test says:\n> \"In this case, the hypothesis tested is whether the population\n> probabilities equal those in 'p', or are all equal if 'p' is not\n> given.\"\n>\n> which means p1 = p2 = 0.5 in your two population case against\n> the alternative p1 != p2.\n>\n> This is similar to the test in prop.test() p=0.5 against p!=0.5\n> and therefore you get identical results if you choose\n> alternative=\"two.sided\" in prop.test().\n>\n>  > I realize that this is a rather elementary question, and references to a\n>  > text would be just as helpful. Ideally, I would like a measure of how\n>  > much I can 'trust' that a larger proportion is also statistically\n>  > meaningful. Thus far the results from prop.test() match my intuition,\n>  > but\n>  > affirmation would be\n>\n> Your intuition was correct. Nevertheless in your original\n> results (with the continuity correction), the p-value of\n> prop.test()  (0.0009729) was larger than the p-value of\n> chisq.test() (0.0007891) and therefore against your intuition.\n>\n>  > great.\n>  >\n>  > Cheers,\n>  >\n>  >\n>  > --\n>  > Dylan Beaudette\n>  > Soils and Biogeochemistry Graduate Group\n>  > University of California at Davis\n>  > 530.754.7341\n>  >\n>  > ______________________________________________\n>  > R-help at stat.math.ethz.ch mailing list\n>  > https://stat.ethz.ch/mailman/listinfo/r-help\n>  > PLEASE do read the posting guide\n>  > http://www.R-project.org/posting-guide.html and provide commented,\n>  > minimal, self-contained, reproducible code.\n>\n> Hope this helps\n>\n> Christoph Buser\n>\n\nThanks for the tips Christoph, this was the help that I was looking for.\n\ncheers,\n\n-- \nDylan Beaudette\nSoils and Biogeochemistry Graduate Group\nUniversity of California at Davis\n530.754.7341",
+      "body_snippet": "On Wednesday 28 February 2007 01:07, Christoph Buser wrote:\n> Hi\n>\n> Some comments are inside.\n>\n> Dylan Beaudette writes:\n>  > Hi everyone,\n>  >\n>  > Suppose I have a count the occurrences of positiv",
+      "thread_id": "thread-77e9c37f4d84",
+      "thread_depth": 0,
+      "month": "2007-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-53ac0c327d7e",
+      "subject": "Removing directory?",
+      "message_count": 3,
+      "participants": [
+        "Henrik Bengtsson",
+        "James W. MacDonald"
+      ],
+      "started": "2007-02-28T15:01:08-08:00",
+      "last_reply": "2007-02-28T15:52:12-08:00",
+      "root_message_id": "msg-53ac0c327d7e"
+    },
+    {
+      "id": "thread-80d957e21e44",
+      "subject": "Efficient way to repeat rows (or columns) of a matrix?",
+      "message_count": 3,
+      "participants": [
+        "James W. MacDonald",
+        "Talbot Katz"
+      ],
+      "started": "2007-02-28T18:07:21-05:00",
+      "last_reply": "2007-02-28T18:35:00-05:00",
+      "root_message_id": "msg-80d957e21e44"
+    },
+    {
+      "id": "thread-c27514a5b470",
+      "subject": "What is a expression good for?",
+      "message_count": 1,
+      "participants": [
+        "Gabor Grothendieck"
+      ],
+      "started": "2007-02-28T19:06:51-05:00",
+      "last_reply": "2007-02-28T19:06:51-05:00",
+      "root_message_id": "msg-c27514a5b470"
+    },
+    {
+      "id": "thread-77e9c37f4d84",
+      "subject": "prop.test or chisq.test ..?",
+      "message_count": 1,
+      "participants": [
+        "Dylan Beaudette"
+      ],
+      "started": "2007-02-28T19:41:33-08:00",
+      "last_reply": "2007-02-28T19:41:33-08:00",
+      "root_message_id": "msg-77e9c37f4d84"
+    },
+    {
+      "id": "thread-ea61cee537d9",
+      "subject": "Packages in R for least median squares regression and computing\toutliers (thompson tau technique etc.)",
+      "message_count": 1,
+      "participants": [
+        "D L McArthur"
+      ],
+      "started": "2007-02-28T23:13:35+00:00",
+      "last_reply": "2007-02-28T23:13:35+00:00",
+      "root_message_id": "msg-ea61cee537d9"
+    }
+  ]
+}

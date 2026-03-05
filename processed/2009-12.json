@@ -1,0 +1,140 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2009-12",
+  "messages": [
+    {
+      "id": "msg-7a0396de077d",
+      "message_id": "<77EB52C6DD32BA4D87471DCD70C8D700024DD3D9@NA-PA-VBE03.na.tibco.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2009-12-31T15:07:36-08:00",
+      "subject": "[R] How x[, 'colname1'] is implemented?",
+      "subject_clean": "How x[, 'colname1'] is implemented?",
+      "in_reply_to": "<366c6f340912311415qfd00d4codf366e1919ca8b5f@mail.gmail.com>",
+      "references": [
+        "<366c6f340912311415qfd00d4codf366e1919ca8b5f@mail.gmail.com>"
+      ],
+      "body_plain": "Bill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com  \n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Peng Yu\n> Sent: Thursday, December 31, 2009 2:16 PM\n> To: r-help at stat.math.ethz.ch\n> Subject: [R] How x[, 'colname1'] is implemented?\n> \n> I don't see where describes the implementation of '[]'.\n\nYou'd probably have to look in the source code for implementation\ndetails like that.\n\n> For example, if x is a matrix or a data.frame, how the lookup of\n> 'colname1' is x[, 'colname1'] executed. Does R perform a lookup in the\n> a hash of the colnames? Is the reference O(1) or O(n), where n is the\n> second dim of x?\n\nYou can easily run timing tests in R by using system.time().\nThe sum of the first 2 components of its output gives the\nCPU time.  E.g.,\n\n  > f<-function(ncol){\n       d<-data.frame(as.list(1:ncol))\n       names(d)<-paste(\"Col\",1:ncol)\n       sum(system.time(for(i in 1:100)d['Col 1'])[1:2])\n    }\n  > z <- sapply(n<-2^(0:20), f)\n  > z\n   [1]  0.06  0.01  0.01  0.02  0.00  0.03\n   [7]  0.02  0.01  0.01  0.03  0.02  0.02\n  [13]  0.02  0.10  0.16  0.33  0.63  1.49\n  [19]  3.22  8.35 18.91\n  > plot(n, z, log=\"xy\") # neither 0(1) nor O(ncol)\n\nCompare the results to subscripting by number and see how fast\nthe column name to column number algorithm with various naming\nschemes.\n\nBill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com \n\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Bill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com  \n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Peng Yu\n> Sent: ",
+      "thread_id": "thread-7a0396de077d",
+      "thread_depth": 0,
+      "month": "2009-12"
+    },
+    {
+      "id": "msg-54b30eefc544",
+      "message_id": "<971536df0912311515u6be3aab2o28a67d6954da90aa@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2009-12-31T18:15:02-05:00",
+      "subject": "[R] iterating over a data frame the R way?",
+      "subject_clean": "iterating over a data frame the R way?",
+      "in_reply_to": "<DD1E3C96-DF8C-444A-8E67-4AFB95F45E7E@me.com>",
+      "references": [
+        "<149377.71701.qm@web38402.mail.mud.yahoo.com>",
+        "<DD1E3C96-DF8C-444A-8E67-4AFB95F45E7E@me.com>"
+      ],
+      "body_plain": "This iterates functions f over successive rows of mytable:\n\napply(mytable, 1, f)\n\nor if you want to use SQL on R data frames then see sqldf\nhttp://sqldf.googlecode.com\n\nOn Thu, Dec 31, 2009 at 5:52 PM,  <donahchoo at me.com> wrote:\n> In this specific case I'm going to do another select, from a different table\n> with the where clause being based on the start_time and end_time.\n>\n> select * from table_name where time >= start_time and time <= end_time;\n>\n>\n> On Dec 31, 2009, at 3:57 PM, John Kane wrote:\n>\n>> Uh what do you want to do to it/them?\n>>\n>> Here are a couple of R-type commands on a data.frame.\n>>\n>> mydata ?<- data.frame(vec1 = ?seq(19,109, by=10),\n>> vec2 =seq(30,120, by=10))\n>>\n>> mydata[,1]+mydata[,2]\n>> apply(mydata, 2, mean)\n>>\n>>\n>>\n>> --- On Thu, 12/31/09, donahchoo at me.com <donahchoo at me.com> wrote:\n>>\n>>> From: donahchoo at me.com <donahchoo at me.com>\n>>> Subject: [R] iterating over a data frame the R way?\n>>> To: r-help at r-project.org\n>>> Received: Thursday, December 31, 2009, 2:44 PM\n>>> Hi,\n>>>\n>>> I have a data frame that was create by issuing a select\n>>> against my sqlite database. ?I want to get each row\n>>> from the data frame and use the each of the column\n>>> values. ?The data frame looks like this:\n>>>\n>>> start_time ? ?end_time\n>>> 09:30:00 ? ? ?10:00:00\n>>> 10:00:01 ? ? ?10:30:00\n>>> etc\n>>>\n>>> Can a point me to a tutorial/example of doing this? ?I\n>>> the other programming languages I'm familiar with I would\n>>> just loop over the frame and access the elements, but I\n>>> believe that's not the R way and can't find examples of\n>>> doing this.\n>>>\n>>> Thanks!\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org\n>>> mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained,\n>>> reproducible code.\n>>>\n>>\n>>\n>> ? ? __________________________________________________________________\n>> Make your browsing faster, safer, and easier with the new Internet\n>> Explorer? 8. Optimized for Yahoo! Get it Now for Free! at\n>> http://downloads.yahoo.com/ca/internetexplorer/\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "This iterates functions f over successive rows of mytable:\n\napply(mytable, 1, f)\n\nor if you want to use SQL on R data frames then see sqldf\nhttp://sqldf.googlecode.com\n\nOn Thu, Dec 31, 2009 at 5:52 PM",
+      "thread_id": "thread-54b30eefc544",
+      "thread_depth": 0,
+      "month": "2009-12"
+    },
+    {
+      "id": "msg-ed0ab3fc6c50",
+      "message_id": "<77EB52C6DD32BA4D87471DCD70C8D700024DD3DB@NA-PA-VBE03.na.tibco.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2009-12-31T15:46:40-08:00",
+      "subject": "[R] iterating over a data frame the R way?",
+      "subject_clean": "iterating over a data frame the R way?",
+      "in_reply_to": "<971536df0912311515u6be3aab2o28a67d6954da90aa@mail.gmail.com>",
+      "references": [
+        "<149377.71701.qm@web38402.mail.mud.yahoo.com>",
+        "<DD1E3C96-DF8C-444A-8E67-4AFB95F45E7E@me.com>",
+        "<971536df0912311515u6be3aab2o28a67d6954da90aa@mail.gmail.com>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Gabor Grothendieck\n> Sent: Thursday, December 31, 2009 3:15 PM\n> To: donahchoo at me.com\n> Cc: r-help at r-project.org\n> Subject: Re: [R] iterating over a data frame the R way?\n> \n> This iterates functions f over successive rows of mytable:\n> \n> apply(mytable, 1, f)\n\nUnless all columns of the data.frame mytable are numeric\napply() is not usually a good way to go, as it converts the\ndata.frame to a matrix, coercing all the columns to a common\ntype, often character.  E.g.,\n > mytable <- data.frame(\n   start_time=seq(as.POSIXct(\"2009-12-31 15:27\"), by=\"hours\", len=12),\n   end_time=seq(as.POSIXct(\"2009-12-31 15:27\"), by=\"days\", len=12))\n > apply(mytable, 1, function(row)row['end_time']-row['start_time'])\n Error in row[\"end_time\"] - row[\"start_time\"] : \n  non-numeric argument to binary operator\nTry apply(mytable,1,class) to see that all rows are character\ndata.\n\nI prefer columnwise operations like the following when they\nare feasible.  They directly express what you want to do\nand are quick to execute.\n\n > mytable$duration <- mytable$end_time - mytable$start_time\n > mytable\n             start_time            end_time    duration\n 1  2009-12-31 15:27:00 2009-12-31 15:27:00      0 secs\n 2  2009-12-31 16:27:00 2010-01-01 15:27:00  82800 secs\n ...\n 11 2010-01-01 01:27:00 2010-01-10 15:27:00 828000 secs\n 12 2010-01-01 02:27:00 2010-01-11 15:27:00 910800 secs\n\nThe expression\n > mytable <- within(mytable, duration <- end_time - start_time)\nis syntactic sugar for the one I gave above.\n\nBill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com \n> \n> or if you want to use SQL on R data frames then see sqldf\n> http://sqldf.googlecode.com\n> \n> On Thu, Dec 31, 2009 at 5:52 PM,  <donahchoo at me.com> wrote:\n> > In this specific case I'm going to do another select, from \n> a different table\n> > with the where clause being based on the start_time and end_time.\n> >\n> > select * from table_name where time >= start_time and time \n> <= end_time;\n> >\n> >\n> > On Dec 31, 2009, at 3:57 PM, John Kane wrote:\n> >\n> >> Uh what do you want to do to it/them?\n> >>\n> >> Here are a couple of R-type commands on a data.frame.\n> >>\n> >> mydata ?<- data.frame(vec1 = ?seq(19,109, by=10),\n> >> vec2 =seq(30,120, by=10))\n> >>\n> >> mydata[,1]+mydata[,2]\n> >> apply(mydata, 2, mean)\n> >>\n> >>\n> >>\n> >> --- On Thu, 12/31/09, donahchoo at me.com <donahchoo at me.com> wrote:\n> >>\n> >>> From: donahchoo at me.com <donahchoo at me.com>\n> >>> Subject: [R] iterating over a data frame the R way?\n> >>> To: r-help at r-project.org\n> >>> Received: Thursday, December 31, 2009, 2:44 PM\n> >>> Hi,\n> >>>\n> >>> I have a data frame that was create by issuing a select\n> >>> against my sqlite database. ?I want to get each row\n> >>> from the data frame and use the each of the column\n> >>> values. ?The data frame looks like this:\n> >>>\n> >>> start_time ? ?end_time\n> >>> 09:30:00 ? ? ?10:00:00\n> >>> 10:00:01 ? ? ?10:30:00\n> >>> etc\n> >>>\n> >>> Can a point me to a tutorial/example of doing this? ?I\n> >>> the other programming languages I'm familiar with I would\n> >>> just loop over the frame and access the elements, but I\n> >>> believe that's not the R way and can't find examples of\n> >>> doing this.\n> >>>\n> >>> Thanks!\n> >>>\n> >>> ______________________________________________\n> >>> R-help at r-project.org\n> >>> mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-help\n> >>> PLEASE do read the posting guide\n> >>> http://www.R-project.org/posting-guide.html\n> >>> and provide commented, minimal, self-contained,\n> >>> reproducible code.\n> >>>\n> >>\n> >>\n> >> ? ? \n> __________________________________________________________________\n> >> Make your browsing faster, safer, and easier with the new Internet\n> >> Explorer? 8. Optimized for Yahoo! Get it Now for Free! at\n> >> http://downloads.yahoo.com/ca/internetexplorer/\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Gabor Grothendieck\n> Sent: Thursday, December 31, 2009 3:15 PM\n> To: donah",
+      "thread_id": "thread-54b30eefc544",
+      "thread_depth": 1,
+      "month": "2009-12"
+    },
+    {
+      "id": "msg-ba7aa5dc7197",
+      "message_id": "<7856B132-4B85-49C2-ADBA-3A4FEB9BD225@me.com>",
+      "from_name": "donahchoo at me.com",
+      "from_email_hash": "b9e2bf85f3c032e5331fc243297e53293115d86f866bfb30592e1921ebf07a1f",
+      "date": "2009-12-31T17:59:54-06:00",
+      "subject": "[R] iterating over a data frame the R way?",
+      "subject_clean": "iterating over a data frame the R way?",
+      "in_reply_to": "<77EB52C6DD32BA4D87471DCD70C8D700024DD3DB@NA-PA-VBE03.na.tibco.com>",
+      "references": [
+        "<149377.71701.qm@web38402.mail.mud.yahoo.com>",
+        "<DD1E3C96-DF8C-444A-8E67-4AFB95F45E7E@me.com>",
+        "<971536df0912311515u6be3aab2o28a67d6954da90aa@mail.gmail.com>",
+        "<77EB52C6DD32BA4D87471DCD70C8D700024DD3DB@NA-PA-VBE03.na.tibco.com>"
+      ],
+      "body_plain": "On Dec 31, 2009, at 5:46 PM, William Dunlap wrote:\n>\n>> mytable$duration <- mytable$end_time - mytable$start_time\n>> mytable\n>             start_time            end_time    duration\n> 1  2009-12-31 15:27:00 2009-12-31 15:27:00      0 secs\n> 2  2009-12-31 16:27:00 2010-01-01 15:27:00  82800 secs\n> ...\n> 11 2010-01-01 01:27:00 2010-01-10 15:27:00 828000 secs\n> 12 2010-01-01 02:27:00 2010-01-11 15:27:00 910800 secs\n>\n\nokay, that's cool.\n\nperiods$sql <- sprintf(\"select * from data where start_time >= periods \n$start_time and start_time <= periods$end_time\")",
+      "body_snippet": "On Dec 31, 2009, at 5:46 PM, William Dunlap wrote:\n>\n>> mytable$duration <- mytable$end_time - mytable$start_time\n>> mytable\n>             start_time            end_time    duration\n> 1  2009-12-31 15",
+      "thread_id": "thread-54b30eefc544",
+      "thread_depth": 2,
+      "month": "2009-12"
+    },
+    {
+      "id": "msg-7e2774f69941",
+      "message_id": "<644e1f320912311859r50abd7dey512c6b0fc679c7ab@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2009-12-31T21:59:58-05:00",
+      "subject": "[R] xyplot - help with multiple Y's vs. X of a member data in multiple panels",
+      "subject_clean": "xyplot - help with multiple Y's vs. X of a member data in multiple panels",
+      "in_reply_to": "<816b5ce40912310325o30c52de3ve1dc46d85f714710@mail.gmail.com>",
+      "references": [
+        "<816b5ce40912310325o30c52de3ve1dc46d85f714710@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20091231/7d2ff973/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20091231/7d2ff973/attachment.pl>",
+      "thread_id": "thread-7e2774f69941",
+      "thread_depth": 0,
+      "month": "2009-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-7a0396de077d",
+      "subject": "How x[, 'colname1'] is implemented?",
+      "message_count": 1,
+      "participants": [
+        "William Dunlap"
+      ],
+      "started": "2009-12-31T15:07:36-08:00",
+      "last_reply": "2009-12-31T15:07:36-08:00",
+      "root_message_id": "msg-7a0396de077d"
+    },
+    {
+      "id": "thread-54b30eefc544",
+      "subject": "iterating over a data frame the R way?",
+      "message_count": 3,
+      "participants": [
+        "Gabor Grothendieck",
+        "William Dunlap",
+        "donahchoo at me.com"
+      ],
+      "started": "2009-12-31T18:15:02-05:00",
+      "last_reply": "2009-12-31T17:59:54-06:00",
+      "root_message_id": "msg-54b30eefc544"
+    },
+    {
+      "id": "thread-7e2774f69941",
+      "subject": "xyplot - help with multiple Y's vs. X of a member data in multiple panels",
+      "message_count": 1,
+      "participants": [
+        "jim holtman"
+      ],
+      "started": "2009-12-31T21:59:58-05:00",
+      "last_reply": "2009-12-31T21:59:58-05:00",
+      "root_message_id": "msg-7e2774f69941"
+    }
+  ]
+}

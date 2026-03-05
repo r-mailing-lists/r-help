@@ -1,0 +1,3451 @@
+From bdwgen @end|ng |rom gm@||@com  Tue Feb  3 00:14:50 2026
+From: bdwgen @end|ng |rom gm@||@com (Barnet Wagman)
+Date: Mon, 2 Feb 2026 15:14:50 -0800
+Subject: [R] Voice coding R?
+Message-ID: <94c8e86c-bb84-4526-afe9-db719128cc24@gmail.com>
+
+Is anyone using voice coding to work with R?? I need to give my hands a 
+rest and would like to hear anyone's experience.
+
+I'm currently using Rstudio but could change IDE if necessary. I'd 
+strongly prefer tools that work under Linux.
+
+More specifically, Serenade seems like a possible solution.? It does not 
+support Rstudio directly but does support VS Code, which is supposed to 
+support R.
+
+Any thoughts would be appreciated.
+
+Thanks
+
+
+From er|cjberger @end|ng |rom gm@||@com  Tue Feb  3 16:22:23 2026
+From: er|cjberger @end|ng |rom gm@||@com (Eric Berger)
+Date: Tue, 3 Feb 2026 17:22:23 +0200
+Subject: [R] Voice coding R?
+In-Reply-To: <94c8e86c-bb84-4526-afe9-db719128cc24@gmail.com>
+References: <94c8e86c-bb84-4526-afe9-db719128cc24@gmail.com>
+Message-ID: <CAGgJW75E5AaRWKq8tPv7b1oVLpfPXQxn3ZOxobR73AEqAEauQA@mail.gmail.com>
+
+I don't have any experience with this personally. I asked ChatGPT5.2.
+Here is its answer, FWIW.
+
+=============================================================
+
+For Linux with full voice control (hands-free editing, navigation, and
+coding) the landscape today is mostly powered by voice-control systems
+that work across editors/IDEs, rather than an IDE that natively
+supports voice as the primary input method. Here are the best options
+you can realistically use:
+
+________________________________
+
+?? 1) Talon Voice (hands-free control + voice coding)
+
+What it is:
+A full voice-control system that lets you dictate text, control the
+OS, edit code, navigate your editor/IDE, and issue complex commands by
+voice. It works on Linux alongside tools like VS Code or RStudio.
+
+Highlights
+
+Voice control + dictation + custom commands.
+
+Programmable and scriptable using Talon ?.talon? scripts.
+
+With community command sets (e.g., knausj_talon), you get extensive
+code-oriented voice commands and symbol insertion tricks.
+
+Works on Linux (X11).
+
+How it integrates:
+
+VS Code / RStudio / terminal / browsers ? you control them via voice,
+not by typing.
+
+You can say things like ?insert parentheses?, ?select next word?, ?go
+to line 42?, ?copy that?, etc. (command sophistication depends on your
+voice command set).
+
+? Talon is the gold standard for hands-free coding on Linux but comes
+with a learning curve and requires installing Talon + a command set.
+
+________________________________
+
+? 2) Serenade (voice-to-code assistant)
+
+What it is:
+A voice-coding assistant that runs side-by-side with your editor
+(e.g., VS Code) and lets you speak commands like ?create function
+called foo? or ?insert for loop?. Serenade is available for Linux.
+
+Highlights
+
+Designed for programming languages, including code structures.
+
+Uses either cloud or local speech recognition (configurable).
+
+Works with VS Code and other editors via plugin.
+
+?? Not as comprehensive for system-wide control as Talon, but more
+focused on generating code snippets by voice.
+
+
+On Tue, Feb 3, 2026 at 4:28?PM Barnet Wagman <bdwgen at gmail.com> wrote:
+>
+> Is anyone using voice coding to work with R?  I need to give my hands a
+> rest and would like to hear anyone's experience.
+>
+> I'm currently using Rstudio but could change IDE if necessary. I'd
+> strongly prefer tools that work under Linux.
+>
+> More specifically, Serenade seems like a possible solution.  It does not
+> support Rstudio directly but does support VS Code, which is supposed to
+> support R.
+>
+> Any thoughts would be appreciated.
+>
+> Thanks
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From y@nnco5 @end|ng |rom gm@||@com  Tue Feb  3 21:30:05 2026
+From: y@nnco5 @end|ng |rom gm@||@com (Yann Coh)
+Date: Tue, 3 Feb 2026 16:30:05 -0400
+Subject: [R] its time for an update for install.packages!
+Message-ID: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+
+Hey Core,
+followed by my Bluesky post
+<https://bsky.app/profile/yannco.bsky.social/post/3mdy4rlios226>,
+I felt like this was such a simple, yet required change!
+Let's default to using pak when prompted or when running old scripts with
+install.packages.
+```r
+.utils_install_packages <- utils::install.packages
+install.packages <- function(pkgs, ...) {
+ if (requireNamespace("pak", quietly = TRUE)) { pak::pkg_install(pkgs, ...)
+}
+else { .utils_install_packages(pkgs, ...) }
+ }
+```
+btw, util's home help page shows the r-core email address as maintainer,
+and the description file shows r-help
+-- 
+Yann Cohen
+? www,yann-dev,io <https://iamyannc.github.io/Yann-dev>
+? +596 696 66 58 93 <https://wa.me/596696665893>
+
+	[[alternative HTML version deleted]]
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Tue Feb  3 22:22:51 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Tue, 03 Feb 2026 13:22:51 -0800
+Subject: [R] its time for an update for install.packages!
+In-Reply-To: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+References: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+Message-ID: <CB28C698-7888-4C9E-87EE-61FA1B32F6C0@dcn.davis.ca.us>
+
+My non-core vote is to discard this suggestion. 
+
+FWIW R-Core doesn't pay much attention to this volunteer helpers list anyway... I suggest to OP that you spend a little more time with the official documentation before suggesting significant changes.
+
+On February 3, 2026 12:30:05 PM PST, Yann Coh <yannco5 at gmail.com> wrote:
+>Hey Core,
+>followed by my Bluesky post
+><https://bsky.app/profile/yannco.bsky.social/post/3mdy4rlios226>,
+>I felt like this was such a simple, yet required change!
+>Let's default to using pak when prompted or when running old scripts with
+>install.packages.
+>```r
+>.utils_install_packages <- utils::install.packages
+>install.packages <- function(pkgs, ...) {
+> if (requireNamespace("pak", quietly = TRUE)) { pak::pkg_install(pkgs, ...)
+>}
+>else { .utils_install_packages(pkgs, ...) }
+> }
+>```
+>btw, util's home help page shows the r-core email address as maintainer,
+>and the description file shows r-help
+>-- 
+>Yann Cohen
+>? www,yann-dev,io <https://iamyannc.github.io/Yann-dev>
+>? +596 696 66 58 93 <https://wa.me/596696665893>
+>
+>	[[alternative HTML version deleted]]
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Tue Feb  3 22:46:26 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Tue, 3 Feb 2026 22:46:26 +0100
+Subject: [R] its time for an update for install.packages!
+In-Reply-To: <CB28C698-7888-4C9E-87EE-61FA1B32F6C0@dcn.davis.ca.us>
+References: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+ <CB28C698-7888-4C9E-87EE-61FA1B32F6C0@dcn.davis.ca.us>
+Message-ID: <07b26e0a-4a2a-45bd-9472-a10fdf4b16c4@statistik.tu-dortmund.de>
+
+
+
+On 03.02.2026 22:22, Jeff Newmiller via R-help wrote:
+> My non-core vote is to discard this suggestion.
+> 
+> FWIW R-Core doesn't pay much attention to this volunteer helpers list anyway...
+
+R-Core does. Several R-Core members are reading this list carefully.
+
+install.packages() installs from CRAN and BioC standard repositories by 
+default and allows for more CRAN-style repositories optionally.
+If other kinds of repositories are requested, one can easily provide 
+code in add on packages such as the pak package which already happened 
+for the mentioned problem below, apparently.
+
+Best,
+Uwe Ligges
+
+
+
+
+  I suggest to OP that you spend a little more time with the official 
+documentation before suggesting significant changes.
+> 
+> On February 3, 2026 12:30:05 PM PST, Yann Coh <yannco5 at gmail.com> wrote:
+>> Hey Core,
+>> followed by my Bluesky post
+>> <https://bsky.app/profile/yannco.bsky.social/post/3mdy4rlios226>,
+>> I felt like this was such a simple, yet required change!
+>> Let's default to using pak when prompted or when running old scripts with
+>> install.packages.
+>> ```r
+>> .utils_install_packages <- utils::install.packages
+>> install.packages <- function(pkgs, ...) {
+>> if (requireNamespace("pak", quietly = TRUE)) { pak::pkg_install(pkgs, ...)
+>> }
+>> else { .utils_install_packages(pkgs, ...) }
+>> }
+>> ```
+>> btw, util's home help page shows the r-core email address as maintainer,
+>> and the description file shows r-help
+>> -- 
+>> Yann Cohen
+>> ? www,yann-dev,io <https://iamyannc.github.io/Yann-dev>
+>> ? +596 696 66 58 93 <https://wa.me/596696665893>
+>>
+>> 	[[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> --
+> Sent from my phone. Please excuse my brevity.
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From n@re@h_gurbux@n| @end|ng |rom hotm@||@com  Wed Feb  4 12:56:37 2026
+From: n@re@h_gurbux@n| @end|ng |rom hotm@||@com (Naresh Gurbuxani)
+Date: Wed, 4 Feb 2026 11:56:37 +0000
+Subject: [R] Split apply combine in data.table
+Message-ID: <DM3PPF9A5B544E03A627A9171F34ED96B14FA98A@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+
+
+In this code, I want to create and store an interpolation function for
+each date.  It seems that data.table saves the same interpolation
+function (for the last date) for all three dates.  How can this problem
+be fixed?
+
+Thanks,
+Naresh
+
+mydt <- list(data.table(date = as.IDate("2025-01-01"), x = c(1, 2, 3), y = c(3, 4, 5)), data.table(date = as.IDate("2025-01-15"), x = c(1, 2, 3), y = c(9, 8, 7)), data.table(date = as.IDate("2025-01-31"), x = c(1, 2, 3), y = c(10, 12, 9)))
+mydt <- rbindlist(mydt)
+myapprox <- mydt[, list(yfunc = list(approxfun(x, y, rule = 2))), by =
+list(date)]
+testdt <- data.table(date = as.IDate(c("2025-01-01", "2025-01-15",
+"2025-01-31")), x = 2)
+testdt <- merge(testdt, myapprox, by = "date")
+testdt[, let(yapprox = yfunc[[1]](x)), by = .I]
+testdt <- merge(testdt, mydt, by = c("date", "x"))
+testdt
+Key: <date, x>
+       date     x         yfunc yapprox     y
+     <IDat> <num>        <list>   <num> <num>
+1: 2025-01-01     2 <function[1]>      12     4
+2: 2025-01-15     2 <function[1]>      12     8
+3: 2025-01-31     2 <function[1]>      12    12
+
+Using split function, it is possible to get the desired result.
+mydtsplit <- split(mydt, f = mydt$date)
+splitapprox <- lapply(mydtsplit, function(dt) dt[, approxfun(x, y,
+rule = 2)])
+newdt <- data.table(date = as.IDate(c("2025-01-01", "2025-01-15",
+"2025-01-31")), x = 2)
+newdt[, let(yfunc = splitapprox[as.character(date)]), by = .I]
+newdt[, let(yapprox = yfunc[[1]](x)), by = .I]
+newdt <- merge(newdt, mydt, by = c("date", "x"))
+newdt
+Key: <date, x>
+       date     x         yfunc yapprox     y
+     <IDat> <num>        <list>   <num> <num>
+1: 2025-01-01     2 <function[1]>       4     4
+2: 2025-01-15     2 <function[1]>       8     8
+3: 2025-01-31     2 <function[1]>      12    12
+
+
+	[[alternative HTML version deleted]]
+
+
+From j@ork|n @end|ng |rom @om@um@ry|@nd@edu  Wed Feb  4 13:49:44 2026
+From: j@ork|n @end|ng |rom @om@um@ry|@nd@edu (Sorkin, John)
+Date: Wed, 4 Feb 2026 12:49:44 +0000
+Subject: [R] its time for an update for install.packages!
+In-Reply-To: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+References: <CAD_W9NA0HQ4NyQyFJe+=Jo-vL=mjbBtwuzUU_wb5TmALFan6Bw@mail.gmail.com>
+Message-ID: <DM6PR03MB50493A8F0C58D1B1CB1FDBE9E298A@DM6PR03MB5049.namprd03.prod.outlook.com>
+
+Yann,
+For those of us who are not as knowledable about the inner workings of R may I request that you give us more information:
+(1) What is the problem with the current version of install.packages?
+(2) What do you want install.packages to do that it currently does not do?
+Thank you,
+John
+
+P.S. I looked at your Bluesky post, but it did not answer my quesitons.
+
+
+
+John David Sorkin M.D., Ph.D.
+Professor of Medicine, University of Maryland School of Medicine;
+Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+Senior Statistician University of Maryland Center for Vascular Research;
+
+Division of Gerontology, Geriatrics and Palliative Medicine,
+10 North Greene Street
+GRECC (BT/18/GR)
+Baltimore, MD 21201-1524
+Cell phone 443-418-5382
+
+
+
+
+
+________________________________________
+From: R-help <r-help-bounces at r-project.org> on behalf of Yann Coh <yannco5 at gmail.com>
+Sent: Tuesday, February 3, 2026 3:30 PM
+To: r-help at r-project.org <r-help at r-project.org>; R-core at r-project.org <R-core at r-project.org>
+Subject: [R] its time for an update for install.packages!
+
+
+Hey Core,
+followed by my Bluesky post
+<https://bsky.app/profile/yannco.bsky.social/post/3mdy4rlios226>,
+I felt like this was such a simple, yet required change!
+Let's default to using pak when prompted or when running old scripts with
+install.packages.
+```r
+.utils_install_packages <- utils::install.packages
+install.packages <- function(pkgs, ...) {
+ if (requireNamespace("pak", quietly = TRUE)) { pak::pkg_install(pkgs, ...)
+}
+else { .utils_install_packages(pkgs, ...) }
+ }
+```
+btw, util's home help page shows the r-core email address as maintainer,
+and the description file shows r-help
+--
+Yann Cohen
+? www,yann-dev,io <https://iamyannc.github.io/Yann-dev>
+? +596 696 66 58 93 <https://wa.me/596696665893>
+
+        [[alternative HTML version deleted]]
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.r-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+
+From |kry|ov @end|ng |rom d|@root@org  Wed Feb  4 14:10:52 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Wed, 4 Feb 2026 16:10:52 +0300
+Subject: [R] Split apply combine in data.table
+In-Reply-To: <DM3PPF9A5B544E03A627A9171F34ED96B14FA98A@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+References: <DM3PPF9A5B544E03A627A9171F34ED96B14FA98A@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+Message-ID: <20260204161052.12f02316@arachnoid>
+
+? Wed, 4 Feb 2026 11:56:37 +0000
+Naresh Gurbuxani <naresh_gurbuxani at hotmail.com> ?????:
+
+> myapprox <- mydt[, list(yfunc = list(approxfun(x, y, rule = 2))), by =
+> list(date)]
+
+The grouping operations in data.table reuse the same objects 'x', 'y'
+with different contents when evaluating the expression for different
+groups. As a result, the same objects end up being captured by
+approxfun() for different groups:
+
+myapprox$yfunc |> sapply(\(.) environment(.)$x |> address()) |> unique()
+# [1] "0x562038fdbd88" # <-- only one address instead of three
+
+Ideally, data.table should notice that its internal object is captured
+instead of blindly reusing it for the next group, but it doesn't
+currently do that. As a workaround, you can copy the otherwise-shared
+objects explicitly:
+
+myapprox <- mydt[, 
+ .(yfunc = .(approxfun(copy(x), copy(y), rule = 2))),
+ by = .(date)
+]
+myapprox$yfunc |> sapply(\(.) environment(.)$x |> address()) |> unique()
+# [1] "0x562039b93238" "0x562039b92d38" "0x562039b92888"
+
+-- 
+Best regards,
+Ivan
+
+
+From pb @end|ng |rom |n|o||nk@com@br  Wed Feb  4 21:49:45 2026
+From: pb @end|ng |rom |n|o||nk@com@br (Paulo Barata)
+Date: Wed, 4 Feb 2026 17:49:45 -0300
+Subject: [R] Voice coding R?
+In-Reply-To: <mailman.373495.1.1770202802.33064.r-help@r-project.org>
+References: <mailman.373495.1.1770202802.33064.r-help@r-project.org>
+Message-ID: <28d4a658-9942-4bf3-b234-4d4cab9d595a@infolink.com.br>
+
+Dear Mr. Wagman,
+
+About 10 years ago I experienced some real difficulties with my hands. At that time, I tried to use my computer, including coding, by means of voice commands, but it didn't work well for me. It is possible that voice-control software have improved since that time, I cannot know.
+
+My computer runs on Windows, not on Linux, so I am not sure whether the following suggestions would work on Linux.
+
+Years ago, there were two resources that helped me quite a lot to decrease the use of my hands:
+
+1. I found that the single most aggressive movement to my hands was the mouse click. So, I started to use the mouse only for positioning the cursor on the screen, but the "click" was performed by means of a foot switch (a pedal). This, below, is the one that I have used for many years, USA made, really sturdy, advertised as Windows and Mac OS compatible, sold in USB versions with either 1, 2 or 3 pedals, each pedal can be programmed to act as we wish:
+
+[At the manufacturer] Savant Elite2 Dual Pedal
+https://kinesis-ergo.com/shop/savant-elite2-dual-pedal/
+
+[At Amazon] Kinesis Savant Elite2 Programmable USB Foot Switch with 1, 2 or 3 Pedals
+https://www.amazon.com/Kinesis-Savant-Elite2-Programmable-FP20A/dp/B00QYRTTHI
+
+2. To write, I have used (much less now, but very often at the peak of my hand impairment) the software Dasher, a tree-like way of writing any character on the screen, whether letters, numbers or punctuation characters. This was originally developed by Prof. David MacKay at Cambridge University in the UK, and is a free software. It has a learning curve, but it does work. It allows us to write without any mouse click, just by continuously positioning the cursor on the screen.
+
+The last working version of Dasher is Dasher 5.0 beta, at the address below (on that page, it is said that Linux users must compile from source code):
+
+https://github.com/dasher-project/dasher/releases
+
+A version 6 of Dasher seems to be under development, but I think it actually has not been released yet.
+
+On YouTube, you can get a feeling about how Dasher works. The first video is a one-hour-long 2007 Google Tech Talk by Prof. MacKay himself, explaining the concepts behind Dasher. The other two videos are well shorter, just demonstrations of the software.
+
+Dasher: information-efficient text entry
+https://www.youtube.com/watch?v=ie9Se7FneXE
+
+Ada Majorek Introduction - CSUN Dasher
+https://www.youtube.com/watch?v=SvsSrClBwPM
+
+Dasher alternative input software - review and how to use
+https://www.youtube.com/watch?v=2Z7fr4pZhmQ
+
+Please note:
+
+(1) At least on Windows, Dasher can send its output (the written text) directly to any other active window, so you could write directly to your text editor, word processor or web browser.
+
+(2) You will notice in the videos that, as the writing progresses, whole words appear on the Dasher screen, which can very much facilitate the writing of text. Dasher uses a background file of saved text (anything, like pieces of newspaper news, etc.), and we can add our own "dictionaries" to that backgroud file, anything we wish, anything that seems to be frequently used, like our own name or home address. In my case, I have added to that background file the most common R functions, a lot of them, like log, sqrt, data.frame, read.table, glm, and so on, and also functions used by some R packages, and other pieces of R code frequently used; this really makes it easier the writing of some R code.
+
+(3) Dasher allows one to write in many different languages, not only English, as there exist background files (each with the proper "dictionary") in really many languages. In the Dasher settings, we can define which will be the background file of our choice.
+
+I hope this will be of interest to you.
+
+Best regards,
+
+Paulo Barata
+
+Rio de Janeiro - Brazil
+
+------------------------------------------------------
+
+> Message: 1
+> Date: Mon, 2 Feb 2026 15:14:50 -0800
+> From: Barnet Wagman<bdwgen at gmail.com>
+> To:r-help at r-project.org
+> Subject: [R] Voice coding R?
+> Message-ID:<94c8e86c-bb84-4526-afe9-db719128cc24 at gmail.com>
+> Content-Type: text/plain; charset="utf-8"; Format="flowed"
+> 
+> Is anyone using voice coding to work with R?? I need to give my hands a
+> rest and would like to hear anyone's experience.
+> 
+> I'm currently using Rstudio but could change IDE if necessary. I'd
+> strongly prefer tools that work under Linux.
+> 
+> More specifically, Serenade seems like a possible solution.? It does not
+> support Rstudio directly but does support VS Code, which is supposed to
+> support R.
+> 
+> Any thoughts would be appreciated.
+> 
+> Thanks
+
+
+From @erv|ce @end|ng |rom @hd@w@on@com  Thu Feb  5 17:09:01 2026
+From: @erv|ce @end|ng |rom @hd@w@on@com (Stephen H. Dawson, DSL)
+Date: Thu, 5 Feb 2026 11:09:01 -0500
+Subject: [R] Voice coding R?
+In-Reply-To: <28d4a658-9942-4bf3-b234-4d4cab9d595a@infolink.com.br>
+References: <mailman.373495.1.1770202802.33064.r-help@r-project.org>
+ <28d4a658-9942-4bf3-b234-4d4cab9d595a@infolink.com.br>
+Message-ID: <1575f828-cda6-49dd-bce0-457cd19f403d@shdawson.com>
+
+Good comments, Paulo.
+
+I had serious hand and wrist problems years ago. I moved to supporting 
+my arms on the table and going to a touch pad. Many of my problems were 
+solved. I then moved to working on my neck and back problems by standing 
+and speaking to capture my audio.
+
+I then reviewed my audio and took notes of coding that mattered. I 
+separated thinking from typing at the same time. The result has been 
+increased physical health and?increased typing productivity.
+
+Your mileage may vary.
+
+
+Kindly,
+*Stephen Dawson, DSL*
+/Executive Strategy Consultant/
+Business & Technology
++1 (865) 804-3454
+http://www.shdawson.com
+
+
+On 2/4/26 15:49, Paulo Barata wrote:
+> Dear Mr. Wagman,
+>
+> About 10 years ago I experienced some real difficulties with my hands. 
+> At that time, I tried to use my computer, including coding, by means 
+> of voice commands, but it didn't work well for me. It is possible that 
+> voice-control software have improved since that time, I cannot know.
+>
+> My computer runs on Windows, not on Linux, so I am not sure whether 
+> the following suggestions would work on Linux.
+>
+> Years ago, there were two resources that helped me quite a lot to 
+> decrease the use of my hands:
+>
+> 1. I found that the single most aggressive movement to my hands was 
+> the mouse click. So, I started to use the mouse only for positioning 
+> the cursor on the screen, but the "click" was performed by means of a 
+> foot switch (a pedal). This, below, is the one that I have used for 
+> many years, USA made, really sturdy, advertised as Windows and Mac OS 
+> compatible, sold in USB versions with either 1, 2 or 3 pedals, each 
+> pedal can be programmed to act as we wish:
+>
+> [At the manufacturer] Savant Elite2 Dual Pedal
+> https://kinesis-ergo.com/shop/savant-elite2-dual-pedal/
+>
+> [At Amazon] Kinesis Savant Elite2 Programmable USB Foot Switch with 1, 
+> 2 or 3 Pedals
+> https://www.amazon.com/Kinesis-Savant-Elite2-Programmable-FP20A/dp/B00QYRTTHI 
+>
+>
+> 2. To write, I have used (much less now, but very often at the peak of 
+> my hand impairment) the software Dasher, a tree-like way of writing 
+> any character on the screen, whether letters, numbers or punctuation 
+> characters. This was originally developed by Prof. David MacKay at 
+> Cambridge University in the UK, and is a free software. It has a 
+> learning curve, but it does work. It allows us to write without any 
+> mouse click, just by continuously positioning the cursor on the screen.
+>
+> The last working version of Dasher is Dasher 5.0 beta, at the address 
+> below (on that page, it is said that Linux users must compile from 
+> source code):
+>
+> https://github.com/dasher-project/dasher/releases
+>
+> A version 6 of Dasher seems to be under development, but I think it 
+> actually has not been released yet.
+>
+> On YouTube, you can get a feeling about how Dasher works. The first 
+> video is a one-hour-long 2007 Google Tech Talk by Prof. MacKay 
+> himself, explaining the concepts behind Dasher. The other two videos 
+> are well shorter, just demonstrations of the software.
+>
+> Dasher: information-efficient text entry
+> https://www.youtube.com/watch?v=ie9Se7FneXE
+>
+> Ada Majorek Introduction - CSUN Dasher
+> https://www.youtube.com/watch?v=SvsSrClBwPM
+>
+> Dasher alternative input software - review and how to use
+> https://www.youtube.com/watch?v=2Z7fr4pZhmQ
+>
+> Please note:
+>
+> (1) At least on Windows, Dasher can send its output (the written text) 
+> directly to any other active window, so you could write directly to 
+> your text editor, word processor or web browser.
+>
+> (2) You will notice in the videos that, as the writing progresses, 
+> whole words appear on the Dasher screen, which can very much 
+> facilitate the writing of text. Dasher uses a background file of saved 
+> text (anything, like pieces of newspaper news, etc.), and we can add 
+> our own "dictionaries" to that backgroud file, anything we wish, 
+> anything that seems to be frequently used, like our own name or home 
+> address. In my case, I have added to that background file the most 
+> common R functions, a lot of them, like log, sqrt, data.frame, 
+> read.table, glm, and so on, and also functions used by some R 
+> packages, and other pieces of R code frequently used; this really 
+> makes it easier the writing of some R code.
+>
+> (3) Dasher allows one to write in many different languages, not only 
+> English, as there exist background files (each with the proper 
+> "dictionary") in really many languages. In the Dasher settings, we can 
+> define which will be the background file of our choice.
+>
+> I hope this will be of interest to you.
+>
+> Best regards,
+>
+> Paulo Barata
+>
+> Rio de Janeiro - Brazil
+>
+> ------------------------------------------------------
+>
+>> Message: 1
+>> Date: Mon, 2 Feb 2026 15:14:50 -0800
+>> From: Barnet Wagman<bdwgen at gmail.com>
+>> To:r-help at r-project.org
+>> Subject: [R] Voice coding R?
+>> Message-ID:<94c8e86c-bb84-4526-afe9-db719128cc24 at gmail.com>
+>> Content-Type: text/plain; charset="utf-8"; Format="flowed"
+>>
+>> Is anyone using voice coding to work with R?? I need to give my hands a
+>> rest and would like to hear anyone's experience.
+>>
+>> I'm currently using Rstudio but could change IDE if necessary. I'd
+>> strongly prefer tools that work under Linux.
+>>
+>> More specifically, Serenade seems like a possible solution.? It does not
+>> support Rstudio directly but does support VS Code, which is supposed to
+>> support R.
+>>
+>> Any thoughts would be appreciated.
+>>
+>> Thanks
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide 
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From y@r|-b@ud|g @end|ng |rom m@||oo@org  Thu Feb  5 18:52:25 2026
+From: y@r|-b@ud|g @end|ng |rom m@||oo@org (Yarl)
+Date: Thu, 05 Feb 2026 18:52:25 +0100
+Subject: [R] nlme aarch64 float inequality : check fails
+Message-ID: <87cy2jrsbq.fsf@mailoo.org>
+
+Dear R people,
+
+Tests of nlme on aarch64 seem to fail:
+
+--8<---------------cut here---------------start------------->8---
+Running specific tests for package ?nlme?
+  Running ?anova.gls.R?
+Error: running the tests in ?anova.gls.R? failed
+
+Tests failed, dumping logs.
+
+--- ./nlme-tests/anova.gls.Rout.fail ----------------------------------------
+
+
+R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-unknown-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## Example of scoping problem.
+> ## Originally from a report by Markus Jantti:
+> ## https://stat.ethz.ch/pipermail/r-help/2005-November/081382.html
+> library(nlme)
+> data(Ovary)
+> ## stolen from example(anova.gls)
+> # AR(1) errors within each Mare
+> ## tolerance increased for flang (was 6e-6)
+> fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
++            correlation = corAR1(form = ~ 1 | Mare))
+> int1 <- intervals(fm1)
+> ## no longer print attr(,"label"), PR#18196 :
+> writeLines(intOut <- capture.output(int1))
+Approximate 95% confidence intervals
+
+ Coefficients:
+                       lower       est.      upper
+(Intercept)        10.908531 12.2163982 13.5242656
+sin(2 * pi * Time) -4.044019 -2.7747122 -1.5054050
+cos(2 * pi * Time) -2.272201 -0.8996047  0.4729919
+
+ Correlation structure:
+       lower      est.     upper
+Phi 0.668414 0.7532079 0.8186747
+
+ Residual standard error:
+   lower     est.    upper 
+3.974642 4.616172 5.361248 
+> stopifnot({
++     length(grep(',"label"', intOut, fixed=TRUE)) == 0
++     all.equal(int1$corStruct["Phi",],
++ 	      c(lower=0.66842829, est.=0.753207889, upper=0.81866619),
++ 	      tol = 1e-5)# 7e-6 needed for flan
++     all.equal(as.vector(int1$sigma),
++ 	      c(3.9747061, 4.61617157, 5.361161), tol = 1e-5)
++ })
+Error: { .... is not TRUE
+--8<---------------cut here---------------end--------------->8---
+
+I got luck, I tried to compile with gcc's flag -ffp-contract=false, the 
+check then passed.
+
+Question 1 : Is it known? I don't have other aarch64 boards at hand
+(this one is rk3399 based).
+
+Question 2 : If I build nlme with this flag and other packages
+without it, should I expect problems? I am asking because I am trying to
+upgrade the package definition in my gnu/linux distribution (Guix) in
+order to support aarch64 (tests being required to pass).
+
+Thank you!
+
+Yarl
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Thu Feb 12 13:01:26 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Thu, 12 Feb 2026 13:01:26 +0100
+Subject: [R] Seeking Guidance on Advancing Functional Programming Skills in R
+Message-ID: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+
+Dear R Users,
+
+I am looking for a roadmap to learn advanced functional programming in R.
+
+I have already read *Functional Programming* by Thomas Mailund, and I have
+been studying base R functions to understand how they are written and to
+learn from their design. I have analyzed and rewritten dozens of base R
+functions, and this process has been very instructive. However, I still
+find it difficult to write more complex and robust functions on my own.
+
+I would be very grateful for any advice you might have ? whether in the
+form of recommended books, learning strategies, advanced resources, or
+suggestions for progressing toward more advanced functional programming
+skills in R. Additionally, I was wondering if there are any official
+workshops, teaching sessions, or training initiatives focused on advanced
+functional programming within the R ecosystem.
+
+Kind regards.
+
+	[[alternative HTML version deleted]]
+
+
+From tr@xp|@yer @end|ng |rom gm@||@com  Fri Feb 13 12:51:49 2026
+From: tr@xp|@yer @end|ng |rom gm@||@com (=?UTF-8?Q?Martin_M=C3=B8ller_Skarbiniks_Pedersen?=)
+Date: Fri, 13 Feb 2026 12:51:49 +0100
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+Message-ID: <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+
+On Thu, 12 Feb 2026 at 18:00, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+>
+> Dear R Users,
+>
+> I am looking for a roadmap to learn advanced functional programming in R.
+
+Which part of functional programming in R do you find hard to understand?
+Thomas Mailund's book has a lot of focus on R4 but functional
+programming is so much more.
+
+Have you looked at the purrr-packages and the family of apply-functions ?
+If you want to make your own packages I suggest you read about vctrs:
+https://vctrs.r-lib.org/
+
+But it sounds like you already have read a lot of materiale including
+source code so maybe you should not focus on reading.
+I suggest that you instead just start writing a lot of code yourself.
+
+And once every month look at your old code and improve it.
+
+Maybe solve some of the many fun problems at https://adventofcode.com/
+
+You can also learn a lot by trying to solve issues with existing
+packages. Just find the source on github and
+look at the issues eg. https://github.com/tidyverse/ggplot2/issues
+
+Regards
+Martin
+
+
+From bgunter@4567 @end|ng |rom gm@||@com  Fri Feb 13 17:16:53 2026
+From: bgunter@4567 @end|ng |rom gm@||@com (Bert Gunter)
+Date: Fri, 13 Feb 2026 08:16:53 -0800
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+Message-ID: <CAGxFJbQKxjWqLUctzaS2tgnd_WQRkL+GTd2U3NiwQrY5_r5eEw@mail.gmail.com>
+
+Saad,
+
+To add a bit to the previous excellent advice,...
+
+I think your query may be too vague to elicit helpful responses. A better
+strategy might be to give a few **simple** examples of the sorts of
+problems that demonstrate your concerns and your code for how you
+approached them and reasons why you think these approaches need
+improvement. To maximize your chance of useful responses, keep your code
+snippets **short** (less than a dozen lines, say). For must of us, our eyes
+glaze over when confronted with pages of code that we are supposed to
+analyze and diagnose.
+
+Cheers,
+Bert
+
+
+On Fri, Feb 13, 2026 at 3:57?AM Martin M?ller Skarbiniks Pedersen <
+traxplayer at gmail.com> wrote:
+
+> On Thu, 12 Feb 2026 at 18:00, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+> >
+> > Dear R Users,
+> >
+> > I am looking for a roadmap to learn advanced functional programming in R.
+>
+> Which part of functional programming in R do you find hard to understand?
+> Thomas Mailund's book has a lot of focus on R4 but functional
+> programming is so much more.
+>
+> Have you looked at the purrr-packages and the family of apply-functions ?
+> If you want to make your own packages I suggest you read about vctrs:
+> https://vctrs.r-lib.org/
+>
+> But it sounds like you already have read a lot of materiale including
+> source code so maybe you should not focus on reading.
+> I suggest that you instead just start writing a lot of code yourself.
+>
+> And once every month look at your old code and improve it.
+>
+> Maybe solve some of the many fun problems at https://adventofcode.com/
+>
+> You can also learn a lot by trying to solve issues with existing
+> packages. Just find the source on github and
+> look at the issues eg. https://github.com/tidyverse/ggplot2/issues
+>
+> Regards
+> Martin
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From |kry|ov @end|ng |rom d|@root@org  Fri Feb 13 20:11:48 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Fri, 13 Feb 2026 22:11:48 +0300
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+Message-ID: <20260213221148.74a32232@Tarkus>
+
+Dear Saad Lamjadli,
+
+? Thu, 12 Feb 2026 13:01:26 +0100
+SAAD LAMJADLI <s.lamjadli at uca.ac.ma> ?????:
+
+> I have analyzed and rewritten dozens of base R functions, and this
+> process has been very instructive. However, I still find it difficult
+> to write more complex and robust functions on my own.
+> 
+> I would be very grateful for any advice you might have ? whether in
+> the form of recommended books, learning strategies, advanced
+> resources, or suggestions for progressing toward more advanced
+> functional programming skills in R.
+
+If you're solely focused on functional programming, try Structure and
+Implementation of Computer Programs [1] or How to Design Programs [2],
+but be ready to learn some theory and an unfamiliar language (Scheme).
+For purely functional programming, you can try learning OCaml or
+Haskell, but it's not a task for the faint of heart. Once you're done,
+you'll be saying things like "a monad is just a monoid in the category
+of endofunctors" and not understanding why people are giving you
+strange looks in return.
+
+If you'd like to make your programs more complex and robust, you need
+to study software architecture. The Architecture of Open Source
+Applications [3] is a free resource on the topic. Clean Architecture by
+Robert C. Martin is a more fundamental book, very much worth obtaining.
+
+As for learning software development in R... R is an environment where
+you can interact with data; it only moonlights as a programming
+language when you develop packages in it. To this end you can read
+Extending R by John M. Chambers, Writing R Extensions
+(RShowDoc("R-exts")) and many other free resources on the Web.
+
+Finally, Functional Programming by Thomas Mailund predates the native R
+pipe (|>) and the currently experimental tail call support (Tailcall(),
+Exec()), so it's probably worth spending some time to learn the new
+tools as well.
+
+-- 
+Best regards,
+Ivan
+
+[1]
+https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html
+
+[2]
+https://htdp.org/2025-12-27/Book/index.html
+
+[3]
+https://aosabook.org/en/
+
+
+From r@oknz @end|ng |rom gm@||@com  Fri Feb 13 21:15:00 2026
+From: r@oknz @end|ng |rom gm@||@com (Richard O'Keefe)
+Date: Sat, 14 Feb 2026 09:15:00 +1300
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <20260213221148.74a32232@Tarkus>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <20260213221148.74a32232@Tarkus>
+Message-ID: <CABcYAdJET2JWvzSH3cAALc6tLEOsnnkZjPVfdrFW9Y4XW7nMnQ@mail.gmail.com>
+
+If you want to learn cdunctional programming, you?ve been given some
+wxcellent advice.  R is not the best place for that.  If you want to become
+excellent at R programming,  functional programming is one tool in the box.
+
+FP has a few key ideas.  Working with immutable data is one.  Functions as
+values is one.  And composition is a very important one. Designing
+computations so that they are built out of reusable pieces that can be
+combined using a handful of combinators.
+
+A lot of R code, some of it extremely useful, has been written by people
+who ae expert statisticians but poor programmers.  A lot of useful R
+packages have been designed by people who weren?t thinking in terms of
+making reusable pieces that could be easily combined.  Functions with
+oodles of optional keyword parameters.  Interfaces with obvious gaps.
+
+So don?t just think about rewriting code.  Think about redesigning whole
+interfaces.
+
+On Sat, 14 Feb 2026 at 8:13?AM, Ivan Krylov via R-help <r-help at r-project.org>
+wrote:
+
+> Dear Saad Lamjadli,
+>
+> ? Thu, 12 Feb 2026 13:01:26 +0100
+> SAAD LAMJADLI <s.lamjadli at uca.ac.ma> ?????:
+>
+> > I have analyzed and rewritten dozens of base R functions, and this
+> > process has been very instructive. However, I still find it difficult
+> > to write more complex and robust functions on my own.
+> >
+> > I would be very grateful for any advice you might have ? whether in
+> > the form of recommended books, learning strategies, advanced
+> > resources, or suggestions for progressing toward more advanced
+> > functional programming skills in R.
+>
+> If you're solely focused on functional programming, try Structure and
+> Implementation of Computer Programs [1] or How to Design Programs [2],
+> but be ready to learn some theory and an unfamiliar language (Scheme).
+> For purely functional programming, you can try learning OCaml or
+> Haskell, but it's not a task for the faint of heart. Once you're done,
+> you'll be saying things like "a monad is just a monoid in the category
+> of endofunctors" and not understanding why people are giving you
+> strange looks in return.
+>
+> If you'd like to make your programs more complex and robust, you need
+> to study software architecture. The Architecture of Open Source
+> Applications [3] is a free resource on the topic. Clean Architecture by
+> Robert C. Martin is a more fundamental book, very much worth obtaining.
+>
+> As for learning software development in R... R is an environment where
+> you can interact with data; it only moonlights as a programming
+> language when you develop packages in it. To this end you can read
+> Extending R by John M. Chambers, Writing R Extensions
+> (RShowDoc("R-exts")) and many other free resources on the Web.
+>
+> Finally, Functional Programming by Thomas Mailund predates the native R
+> pipe (|>) and the currently experimental tail call support (Tailcall(),
+> Exec()), so it's probably worth spending some time to learn the new
+> tools as well.
+>
+> --
+> Best regards,
+> Ivan
+>
+> [1]
+>
+> https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html
+>
+> [2]
+> https://htdp.org/2025-12-27/Book/index.html
+>
+> [3]
+> https://aosabook.org/en/
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Fri Feb 13 22:44:51 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Fri, 13 Feb 2026 16:44:51 -0500
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+Message-ID: <cb230b04-c5ac-42dc-bc50-4516ee71a08a@gmail.com>
+
+On 2026-02-12 7:01 a.m., SAAD LAMJADLI wrote:
+> Dear R Users,
+> 
+> I am looking for a roadmap to learn advanced functional programming in R.
+> 
+> I have already read *Functional Programming* by Thomas Mailund, and I have
+> been studying base R functions to understand how they are written and to
+> learn from their design. I have analyzed and rewritten dozens of base R
+> functions, and this process has been very instructive. However, I still
+> find it difficult to write more complex and robust functions on my own.
+> 
+> I would be very grateful for any advice you might have ? whether in the
+> form of recommended books, learning strategies, advanced resources, or
+> suggestions for progressing toward more advanced functional programming
+> skills in R. Additionally, I was wondering if there are any official
+> workshops, teaching sessions, or training initiatives focused on advanced
+> functional programming within the R ecosystem.
+
+Others have told you how to learn functional programming.  I'm just 
+writing to say I suspect you may not have used the jargon correctly: 
+"functional programming" is a particular style of programming, and I 
+suspect you may just want to know about programming in R (which involves 
+writing functions, but that doesn't make it "functional programming").
+
+Whether or not that's the case, I hope you follow Bert's advice, and 
+show us more concrete examples of what you are really asking.  Without 
+those it'll just be by luck if any of the responses are helpful.
+
+Duncan Murdoch
+
+
+From |@n@|@rm @end|ng |rom m@|ne@edu  Fri Feb 13 23:45:38 2026
+From: |@n@|@rm @end|ng |rom m@|ne@edu (Ian Farm)
+Date: Fri, 13 Feb 2026 17:45:38 -0500
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+Message-ID: <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+
+Advanced R by Hadley Wickham has a helpful section on functional
+programming in R:
+
+https://adv-r.hadley.nz/fp.html
+
+Best of luck,
+Ian
+____
+Ian Farm
+Laboratory Manager, University of Maine Agroecology Lab
+
+On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+
+> Dear R Users,
+>
+> I am looking for a roadmap to learn advanced functional programming in R.
+>
+> I have already read *Functional Programming* by Thomas Mailund, and I have
+> been studying base R functions to understand how they are written and to
+> learn from their design. I have analyzed and rewritten dozens of base R
+> functions, and this process has been very instructive. However, I still
+> find it difficult to write more complex and robust functions on my own.
+>
+> I would be very grateful for any advice you might have ? whether in the
+> form of recommended books, learning strategies, advanced resources, or
+> suggestions for progressing toward more advanced functional programming
+> skills in R. Additionally, I was wondering if there are any official
+> workshops, teaching sessions, or training initiatives focused on advanced
+> functional programming within the R ecosystem.
+>
+> Kind regards.
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @run@kum@r@@@h@ @end|ng |rom gm@||@com  Sat Feb 14 20:40:58 2026
+From: @run@kum@r@@@h@ @end|ng |rom gm@||@com (Arun Kumar Saha)
+Date: Sun, 15 Feb 2026 01:10:58 +0530
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+Message-ID: <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+
+In the era of tools like ChatGPT, is it still worthwhile to invest
+significant effort in writing R programs from scratch?
+
+
+
+On Sat, 14 Feb 2026 at 04:16, Ian Farm <ian.farm at maine.edu> wrote:
+>
+> Advanced R by Hadley Wickham has a helpful section on functional
+> programming in R:
+>
+> https://adv-r.hadley.nz/fp.html
+>
+> Best of luck,
+> Ian
+> ____
+> Ian Farm
+> Laboratory Manager, University of Maine Agroecology Lab
+>
+> On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+>
+> > Dear R Users,
+> >
+> > I am looking for a roadmap to learn advanced functional programming in R.
+> >
+> > I have already read *Functional Programming* by Thomas Mailund, and I have
+> > been studying base R functions to understand how they are written and to
+> > learn from their design. I have analyzed and rewritten dozens of base R
+> > functions, and this process has been very instructive. However, I still
+> > find it difficult to write more complex and robust functions on my own.
+> >
+> > I would be very grateful for any advice you might have ? whether in the
+> > form of recommended books, learning strategies, advanced resources, or
+> > suggestions for progressing toward more advanced functional programming
+> > skills in R. Additionally, I was wondering if there are any official
+> > workshops, teaching sessions, or training initiatives focused on advanced
+> > functional programming within the R ecosystem.
+> >
+> > Kind regards.
+> >
+> >         [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> > https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+> >
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Sat Feb 14 21:22:01 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Sat, 14 Feb 2026 12:22:01 -0800
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+ <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+Message-ID: <69A27364-3101-46BC-B2CB-6C9451D452A0@dcn.davis.ca.us>
+
+Yes, you need to study. AI is good at doing things repetitively, but it misses obvious vectorizations and duplicates analyses at the drop of a hat rather than factoring code into functions if you don't guide it.
+
+I know, I know, "it is improving fast"... but you need to understand good architecture to avoid letting "almost identical" analyses slip through and having missed requirements. The better you know how to explain what you want, the better the results will be...  and you cannot do that if you don't already have a vision for how it will accomplish your task.
+
+The better AI gets at being creative, the more trouble it has meeting requirements... the "temperature" it is setup with has to be high enough for it to refine from its initial bad attempts toward a goal, but not so high that it hallucinates, and this is no easier to get right with AI than it is with junior programmers.
+
+Study hard... the productivity floor is rising.
+
+On February 14, 2026 11:40:58 AM PST, Arun Kumar Saha <arun.kumar.saha at gmail.com> wrote:
+>In the era of tools like ChatGPT, is it still worthwhile to invest
+>significant effort in writing R programs from scratch?
+>
+>
+>
+>On Sat, 14 Feb 2026 at 04:16, Ian Farm <ian.farm at maine.edu> wrote:
+>>
+>> Advanced R by Hadley Wickham has a helpful section on functional
+>> programming in R:
+>>
+>> https://adv-r.hadley.nz/fp.html
+>>
+>> Best of luck,
+>> Ian
+>> ____
+>> Ian Farm
+>> Laboratory Manager, University of Maine Agroecology Lab
+>>
+>> On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+>>
+>> > Dear R Users,
+>> >
+>> > I am looking for a roadmap to learn advanced functional programming in R.
+>> >
+>> > I have already read *Functional Programming* by Thomas Mailund, and I have
+>> > been studying base R functions to understand how they are written and to
+>> > learn from their design. I have analyzed and rewritten dozens of base R
+>> > functions, and this process has been very instructive. However, I still
+>> > find it difficult to write more complex and robust functions on my own.
+>> >
+>> > I would be very grateful for any advice you might have ? whether in the
+>> > form of recommended books, learning strategies, advanced resources, or
+>> > suggestions for progressing toward more advanced functional programming
+>> > skills in R. Additionally, I was wondering if there are any official
+>> > workshops, teaching sessions, or training initiatives focused on advanced
+>> > functional programming within the R ecosystem.
+>> >
+>> > Kind regards.
+>> >
+>> >         [[alternative HTML version deleted]]
+>> >
+>> > ______________________________________________
+>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>> > PLEASE do read the posting guide
+>> > https://www.R-project.org/posting-guide.html
+>> > and provide commented, minimal, self-contained, reproducible code.
+>> >
+>>
+>>         [[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sat Feb 14 21:30:17 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sat, 14 Feb 2026 21:30:17 +0100
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+ <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+Message-ID: <CAK4zTkbcv_PkoOq4O42Mutq8YT3WYFeBWAozbre1vnEgO7r7Uw@mail.gmail.com>
+
+R helped me with more than just data analysis in my line of work, which
+deals with healthcare data. It influenced my perspective. Healthcare data
+frequently felt like noise, too many variables, and too much uncertainty
+prior to R. But after I began working with data in R, something suddenly
+made sense to me. It seems like something I can do myself, or at least
+that's the intention. There is still a long way to go.
+
+Data becomes a puzzle instead of a chaotic mess. That mindset?perceiving
+everything as a manipulable puzzle. AI is unable to do so since it does not
+have the same worldview as humans. Beyond the information it observes, it
+lacks intuition, lived experience, and context.
+
+AI is fascinating too. It can help debug. It can make tedious tasks easier.
+It can suggest ideas. It can accelerate certain workflows. AI can assist.
+
+But writing code builds you, that internal clarity is priceless.
+
+Le sam. 14 f?vr. 2026 ? 20:41, Arun Kumar Saha <arun.kumar.saha at gmail.com>
+a ?crit :
+
+> In the era of tools like ChatGPT, is it still worthwhile to invest
+> significant effort in writing R programs from scratch?
+>
+>
+>
+> On Sat, 14 Feb 2026 at 04:16, Ian Farm <ian.farm at maine.edu> wrote:
+> >
+> > Advanced R by Hadley Wickham has a helpful section on functional
+> > programming in R:
+> >
+> > https://adv-r.hadley.nz/fp.html
+> >
+> > Best of luck,
+> > Ian
+> > ____
+> > Ian Farm
+> > Laboratory Manager, University of Maine Agroecology Lab
+> >
+> > On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma>
+> wrote:
+> >
+> > > Dear R Users,
+> > >
+> > > I am looking for a roadmap to learn advanced functional programming in
+> R.
+> > >
+> > > I have already read *Functional Programming* by Thomas Mailund, and I
+> have
+> > > been studying base R functions to understand how they are written and
+> to
+> > > learn from their design. I have analyzed and rewritten dozens of base R
+> > > functions, and this process has been very instructive. However, I still
+> > > find it difficult to write more complex and robust functions on my own.
+> > >
+> > > I would be very grateful for any advice you might have ? whether in the
+> > > form of recommended books, learning strategies, advanced resources, or
+> > > suggestions for progressing toward more advanced functional programming
+> > > skills in R. Additionally, I was wondering if there are any official
+> > > workshops, teaching sessions, or training initiatives focused on
+> advanced
+> > > functional programming within the R ecosystem.
+> > >
+> > > Kind regards.
+> > >
+> > >         [[alternative HTML version deleted]]
+> > >
+> > > ______________________________________________
+> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > > https://stat.ethz.ch/mailman/listinfo/r-help
+> > > PLEASE do read the posting guide
+> > > https://www.R-project.org/posting-guide.html
+> > > and provide commented, minimal, self-contained, reproducible code.
+> > >
+> >
+> >         [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:44:30 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:44:30 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbcv_PkoOq4O42Mutq8YT3WYFeBWAozbre1vnEgO7r7Uw@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+ <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+ <CAK4zTkbcv_PkoOq4O42Mutq8YT3WYFeBWAozbre1vnEgO7r7Uw@mail.gmail.com>
+Message-ID: <CAK4zTkbjkgfwNtuBJRnHm4wgvzBW85r5EcTZ_5KAPaJvFfQuGA@mail.gmail.com>
+
+Thanks, I really appreciate all your suggestions. I?ll work on them.
+
+Le sam. 14 f?vr. 2026 ? 21:30, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> a
+?crit :
+
+> R helped me with more than just data analysis in my line of work, which
+> deals with healthcare data. It influenced my perspective. Healthcare data
+> frequently felt like noise, too many variables, and too much uncertainty
+> prior to R. But after I began working with data in R, something suddenly
+> made sense to me. It seems like something I can do myself, or at least
+> that's the intention. There is still a long way to go.
+>
+> Data becomes a puzzle instead of a chaotic mess. That mindset?perceiving
+> everything as a manipulable puzzle. AI is unable to do so since it does not
+> have the same worldview as humans. Beyond the information it observes, it
+> lacks intuition, lived experience, and context.
+>
+> AI is fascinating too. It can help debug. It can make tedious tasks
+> easier. It can suggest ideas. It can accelerate certain workflows. AI can
+> assist.
+>
+> But writing code builds you, that internal clarity is priceless.
+>
+> Le sam. 14 f?vr. 2026 ? 20:41, Arun Kumar Saha <arun.kumar.saha at gmail.com>
+> a ?crit :
+>
+>> In the era of tools like ChatGPT, is it still worthwhile to invest
+>> significant effort in writing R programs from scratch?
+>>
+>>
+>>
+>> On Sat, 14 Feb 2026 at 04:16, Ian Farm <ian.farm at maine.edu> wrote:
+>> >
+>> > Advanced R by Hadley Wickham has a helpful section on functional
+>> > programming in R:
+>> >
+>> > https://adv-r.hadley.nz/fp.html
+>> >
+>> > Best of luck,
+>> > Ian
+>> > ____
+>> > Ian Farm
+>> > Laboratory Manager, University of Maine Agroecology Lab
+>> >
+>> > On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma>
+>> wrote:
+>> >
+>> > > Dear R Users,
+>> > >
+>> > > I am looking for a roadmap to learn advanced functional programming
+>> in R.
+>> > >
+>> > > I have already read *Functional Programming* by Thomas Mailund, and I
+>> have
+>> > > been studying base R functions to understand how they are written and
+>> to
+>> > > learn from their design. I have analyzed and rewritten dozens of base
+>> R
+>> > > functions, and this process has been very instructive. However, I
+>> still
+>> > > find it difficult to write more complex and robust functions on my
+>> own.
+>> > >
+>> > > I would be very grateful for any advice you might have ? whether in
+>> the
+>> > > form of recommended books, learning strategies, advanced resources, or
+>> > > suggestions for progressing toward more advanced functional
+>> programming
+>> > > skills in R. Additionally, I was wondering if there are any official
+>> > > workshops, teaching sessions, or training initiatives focused on
+>> advanced
+>> > > functional programming within the R ecosystem.
+>> > >
+>> > > Kind regards.
+>> > >
+>> > >         [[alternative HTML version deleted]]
+>> > >
+>> > > ______________________________________________
+>> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> > > https://stat.ethz.ch/mailman/listinfo/r-help
+>> > > PLEASE do read the posting guide
+>> > > https://www.R-project.org/posting-guide.html
+>> > > and provide commented, minimal, self-contained, reproducible code.
+>> > >
+>> >
+>> >         [[alternative HTML version deleted]]
+>> >
+>> > ______________________________________________
+>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>> > PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> > and provide commented, minimal, self-contained, reproducible code.
+>>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:52:53 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:52:53 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <cb230b04-c5ac-42dc-bc50-4516ee71a08a@gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <cb230b04-c5ac-42dc-bc50-4516ee71a08a@gmail.com>
+Message-ID: <CAK4zTkbVocAQ2C2Ur892UNScqYbCH1mpT=j6bVf-8j5hxptUTw@mail.gmail.com>
+
+I understand that functional programming is a specific paradigm and not
+just writing functions in R. I appreciate the feedback.
+
+Le ven. 13 f?vr. 2026 ? 22:44, Duncan Murdoch <murdoch.duncan at gmail.com> a
+?crit :
+
+> On 2026-02-12 7:01 a.m., SAAD LAMJADLI wrote:
+> > Dear R Users,
+> >
+> > I am looking for a roadmap to learn advanced functional programming in R.
+> >
+> > I have already read *Functional Programming* by Thomas Mailund, and I
+> have
+> > been studying base R functions to understand how they are written and to
+> > learn from their design. I have analyzed and rewritten dozens of base R
+> > functions, and this process has been very instructive. However, I still
+> > find it difficult to write more complex and robust functions on my own.
+> >
+> > I would be very grateful for any advice you might have ? whether in the
+> > form of recommended books, learning strategies, advanced resources, or
+> > suggestions for progressing toward more advanced functional programming
+> > skills in R. Additionally, I was wondering if there are any official
+> > workshops, teaching sessions, or training initiatives focused on advanced
+> > functional programming within the R ecosystem.
+>
+> Others have told you how to learn functional programming.  I'm just
+> writing to say I suspect you may not have used the jargon correctly:
+> "functional programming" is a particular style of programming, and I
+> suspect you may just want to know about programming in R (which involves
+> writing functions, but that doesn't make it "functional programming").
+>
+> Whether or not that's the case, I hope you follow Bert's advice, and
+> show us more concrete examples of what you are really asking.  Without
+> those it'll just be by luck if any of the responses are helpful.
+>
+> Duncan Murdoch
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:45:34 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:45:34 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAK4zTkbjkgfwNtuBJRnHm4wgvzBW85r5EcTZ_5KAPaJvFfQuGA@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+ <CAPVuaOf0=MyfOjkD9QGmANB+f9Q9NNb=NGJoE=A1Oywa8Jhvmg@mail.gmail.com>
+ <CAK4zTkbcv_PkoOq4O42Mutq8YT3WYFeBWAozbre1vnEgO7r7Uw@mail.gmail.com>
+ <CAK4zTkbjkgfwNtuBJRnHm4wgvzBW85r5EcTZ_5KAPaJvFfQuGA@mail.gmail.com>
+Message-ID: <CAK4zTkZocQN1WJf=LFRTvyhBZiYPZLr=NAcjpcjeeR7R1jsPHw@mail.gmail.com>
+
+  Thanks a lot. I really appreciate the recommendations.
+
+Le dim. 15 f?vr. 2026 ? 12:44, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> a
+?crit :
+
+> Thanks, I really appreciate all your suggestions. I?ll work on them.
+>
+> Le sam. 14 f?vr. 2026 ? 21:30, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> a
+> ?crit :
+>
+>> R helped me with more than just data analysis in my line of work, which
+>> deals with healthcare data. It influenced my perspective. Healthcare data
+>> frequently felt like noise, too many variables, and too much uncertainty
+>> prior to R. But after I began working with data in R, something suddenly
+>> made sense to me. It seems like something I can do myself, or at least
+>> that's the intention. There is still a long way to go.
+>>
+>> Data becomes a puzzle instead of a chaotic mess. That mindset?perceiving
+>> everything as a manipulable puzzle. AI is unable to do so since it does not
+>> have the same worldview as humans. Beyond the information it observes, it
+>> lacks intuition, lived experience, and context.
+>>
+>> AI is fascinating too. It can help debug. It can make tedious tasks
+>> easier. It can suggest ideas. It can accelerate certain workflows. AI can
+>> assist.
+>>
+>> But writing code builds you, that internal clarity is priceless.
+>>
+>> Le sam. 14 f?vr. 2026 ? 20:41, Arun Kumar Saha <arun.kumar.saha at gmail.com>
+>> a ?crit :
+>>
+>>> In the era of tools like ChatGPT, is it still worthwhile to invest
+>>> significant effort in writing R programs from scratch?
+>>>
+>>>
+>>>
+>>> On Sat, 14 Feb 2026 at 04:16, Ian Farm <ian.farm at maine.edu> wrote:
+>>> >
+>>> > Advanced R by Hadley Wickham has a helpful section on functional
+>>> > programming in R:
+>>> >
+>>> > https://adv-r.hadley.nz/fp.html
+>>> >
+>>> > Best of luck,
+>>> > Ian
+>>> > ____
+>>> > Ian Farm
+>>> > Laboratory Manager, University of Maine Agroecology Lab
+>>> >
+>>> > On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma>
+>>> wrote:
+>>> >
+>>> > > Dear R Users,
+>>> > >
+>>> > > I am looking for a roadmap to learn advanced functional programming
+>>> in R.
+>>> > >
+>>> > > I have already read *Functional Programming* by Thomas Mailund, and
+>>> I have
+>>> > > been studying base R functions to understand how they are written
+>>> and to
+>>> > > learn from their design. I have analyzed and rewritten dozens of
+>>> base R
+>>> > > functions, and this process has been very instructive. However, I
+>>> still
+>>> > > find it difficult to write more complex and robust functions on my
+>>> own.
+>>> > >
+>>> > > I would be very grateful for any advice you might have ? whether in
+>>> the
+>>> > > form of recommended books, learning strategies, advanced resources,
+>>> or
+>>> > > suggestions for progressing toward more advanced functional
+>>> programming
+>>> > > skills in R. Additionally, I was wondering if there are any official
+>>> > > workshops, teaching sessions, or training initiatives focused on
+>>> advanced
+>>> > > functional programming within the R ecosystem.
+>>> > >
+>>> > > Kind regards.
+>>> > >
+>>> > >         [[alternative HTML version deleted]]
+>>> > >
+>>> > > ______________________________________________
+>>> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> > > https://stat.ethz.ch/mailman/listinfo/r-help
+>>> > > PLEASE do read the posting guide
+>>> > > https://www.R-project.org/posting-guide.html
+>>> > > and provide commented, minimal, self-contained, reproducible code.
+>>> > >
+>>> >
+>>> >         [[alternative HTML version deleted]]
+>>> >
+>>> > ______________________________________________
+>>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>>> > PLEASE do read the posting guide
+>>> https://www.R-project.org/posting-guide.html
+>>> > and provide commented, minimal, self-contained, reproducible code.
+>>>
+>>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:47:17 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:47:17 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <20260213221148.74a32232@Tarkus>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <20260213221148.74a32232@Tarkus>
+Message-ID: <CAK4zTkYdoM2TL=Jf-mM2uU5C6u+Uh2FjC_oNAD-vwvhgVyCYkg@mail.gmail.com>
+
+ I?ll definitely check out the resources you mentioned.  Thanks a lot .
+
+Le ven. 13 f?vr. 2026 ? 20:12, Ivan Krylov <ikrylov at disroot.org> a ?crit :
+
+> Dear Saad Lamjadli,
+>
+> ? Thu, 12 Feb 2026 13:01:26 +0100
+> SAAD LAMJADLI <s.lamjadli at uca.ac.ma> ?????:
+>
+> > I have analyzed and rewritten dozens of base R functions, and this
+> > process has been very instructive. However, I still find it difficult
+> > to write more complex and robust functions on my own.
+> >
+> > I would be very grateful for any advice you might have ? whether in
+> > the form of recommended books, learning strategies, advanced
+> > resources, or suggestions for progressing toward more advanced
+> > functional programming skills in R.
+>
+> If you're solely focused on functional programming, try Structure and
+> Implementation of Computer Programs [1] or How to Design Programs [2],
+> but be ready to learn some theory and an unfamiliar language (Scheme).
+> For purely functional programming, you can try learning OCaml or
+> Haskell, but it's not a task for the faint of heart. Once you're done,
+> you'll be saying things like "a monad is just a monoid in the category
+> of endofunctors" and not understanding why people are giving you
+> strange looks in return.
+>
+> If you'd like to make your programs more complex and robust, you need
+> to study software architecture. The Architecture of Open Source
+> Applications [3] is a free resource on the topic. Clean Architecture by
+> Robert C. Martin is a more fundamental book, very much worth obtaining.
+>
+> As for learning software development in R... R is an environment where
+> you can interact with data; it only moonlights as a programming
+> language when you develop packages in it. To this end you can read
+> Extending R by John M. Chambers, Writing R Extensions
+> (RShowDoc("R-exts")) and many other free resources on the Web.
+>
+> Finally, Functional Programming by Thomas Mailund predates the native R
+> pipe (|>) and the currently experimental tail call support (Tailcall(),
+> Exec()), so it's probably worth spending some time to learn the new
+> tools as well.
+>
+> --
+> Best regards,
+> Ivan
+>
+> [1]
+>
+> https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html
+>
+> [2]
+> https://htdp.org/2025-12-27/Book/index.html
+>
+> [3]
+> https://aosabook.org/en/
+>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:46:28 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:46:28 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAGxFJbQKxjWqLUctzaS2tgnd_WQRkL+GTd2U3NiwQrY5_r5eEw@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+ <CAGxFJbQKxjWqLUctzaS2tgnd_WQRkL+GTd2U3NiwQrY5_r5eEw@mail.gmail.com>
+Message-ID: <CAK4zTkZr=LO7hL58dB_j6gT84BNU0xYo6=ONtBFoPzGeX0LQWA@mail.gmail.com>
+
+I think the hard part for me is shifting from using functional programming
+tools to actually thinking functionally.  I?ll try in future posts to share
+small, concrete examples of where I get stuck. Thanks.
+
+Le ven. 13 f?vr. 2026 ? 17:17, Bert Gunter <bgunter.4567 at gmail.com> a
+?crit :
+
+> Saad,
+>
+> To add a bit to the previous excellent advice,...
+>
+> I think your query may be too vague to elicit helpful responses. A better
+> strategy might be to give a few **simple** examples of the sorts of
+> problems that demonstrate your concerns and your code for how you
+> approached them and reasons why you think these approaches need
+> improvement. To maximize your chance of useful responses, keep your code
+> snippets **short** (less than a dozen lines, say). For must of us, our eyes
+> glaze over when confronted with pages of code that we are supposed to
+> analyze and diagnose.
+>
+> Cheers,
+> Bert
+>
+>
+> On Fri, Feb 13, 2026 at 3:57?AM Martin M?ller Skarbiniks Pedersen <
+> traxplayer at gmail.com> wrote:
+>
+>> On Thu, 12 Feb 2026 at 18:00, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+>> >
+>> > Dear R Users,
+>> >
+>> > I am looking for a roadmap to learn advanced functional programming in
+>> R.
+>>
+>> Which part of functional programming in R do you find hard to understand?
+>> Thomas Mailund's book has a lot of focus on R4 but functional
+>> programming is so much more.
+>>
+>> Have you looked at the purrr-packages and the family of apply-functions ?
+>> If you want to make your own packages I suggest you read about vctrs:
+>> https://vctrs.r-lib.org/
+>>
+>> But it sounds like you already have read a lot of materiale including
+>> source code so maybe you should not focus on reading.
+>> I suggest that you instead just start writing a lot of code yourself.
+>>
+>> And once every month look at your old code and improve it.
+>>
+>> Maybe solve some of the many fun problems at https://adventofcode.com/
+>>
+>> You can also learn a lot by trying to solve issues with existing
+>> packages. Just find the source on github and
+>> look at the issues eg. https://github.com/tidyverse/ggplot2/issues
+>>
+>> Regards
+>> Martin
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:52:05 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:52:05 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CABcYAdJET2JWvzSH3cAALc6tLEOsnnkZjPVfdrFW9Y4XW7nMnQ@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <20260213221148.74a32232@Tarkus>
+ <CABcYAdJET2JWvzSH3cAALc6tLEOsnnkZjPVfdrFW9Y4XW7nMnQ@mail.gmail.com>
+Message-ID: <CAK4zTkYmHUe9EHK_SPcZqkBkaKoQWJN48CQtuUktOwqyNF7YEw@mail.gmail.com>
+
+Thanks a lot.
+
+Le ven. 13 f?vr. 2026 ? 21:15, Richard O'Keefe <raoknz at gmail.com> a ?crit :
+
+> If you want to learn cdunctional programming, you?ve been given some
+> wxcellent advice.  R is not the best place for that.  If you want to become
+> excellent at R programming,  functional programming is one tool in the box.
+>
+> FP has a few key ideas.  Working with immutable data is one.  Functions as
+> values is one.  And composition is a very important one. Designing
+> computations so that they are built out of reusable pieces that can be
+> combined using a handful of combinators.
+>
+> A lot of R code, some of it extremely useful, has been written by people
+> who ae expert statisticians but poor programmers.  A lot of useful R
+> packages have been designed by people who weren?t thinking in terms of
+> making reusable pieces that could be easily combined.  Functions with
+> oodles of optional keyword parameters.  Interfaces with obvious gaps.
+>
+> So don?t just think about rewriting code.  Think about redesigning whole
+> interfaces.
+>
+> On Sat, 14 Feb 2026 at 8:13?AM, Ivan Krylov via R-help <
+> r-help at r-project.org> wrote:
+>
+>> Dear Saad Lamjadli,
+>>
+>> ? Thu, 12 Feb 2026 13:01:26 +0100
+>> SAAD LAMJADLI <s.lamjadli at uca.ac.ma> ?????:
+>>
+>> > I have analyzed and rewritten dozens of base R functions, and this
+>> > process has been very instructive. However, I still find it difficult
+>> > to write more complex and robust functions on my own.
+>> >
+>> > I would be very grateful for any advice you might have ? whether in
+>> > the form of recommended books, learning strategies, advanced
+>> > resources, or suggestions for progressing toward more advanced
+>> > functional programming skills in R.
+>>
+>> If you're solely focused on functional programming, try Structure and
+>> Implementation of Computer Programs [1] or How to Design Programs [2],
+>> but be ready to learn some theory and an unfamiliar language (Scheme).
+>> For purely functional programming, you can try learning OCaml or
+>> Haskell, but it's not a task for the faint of heart. Once you're done,
+>> you'll be saying things like "a monad is just a monoid in the category
+>> of endofunctors" and not understanding why people are giving you
+>> strange looks in return.
+>>
+>> If you'd like to make your programs more complex and robust, you need
+>> to study software architecture. The Architecture of Open Source
+>> Applications [3] is a free resource on the topic. Clean Architecture by
+>> Robert C. Martin is a more fundamental book, very much worth obtaining.
+>>
+>> As for learning software development in R... R is an environment where
+>> you can interact with data; it only moonlights as a programming
+>> language when you develop packages in it. To this end you can read
+>> Extending R by John M. Chambers, Writing R Extensions
+>> (RShowDoc("R-exts")) and many other free resources on the Web.
+>>
+>> Finally, Functional Programming by Thomas Mailund predates the native R
+>> pipe (|>) and the currently experimental tail call support (Tailcall(),
+>> Exec()), so it's probably worth spending some time to learn the new
+>> tools as well.
+>>
+>> --
+>> Best regards,
+>> Ivan
+>>
+>> [1]
+>>
+>> https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html
+>>
+>> [2]
+>> https://htdp.org/2025-12-27/Book/index.html
+>>
+>> [3]
+>> https://aosabook.org/en/
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 13:54:07 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (SAAD LAMJADLI)
+Date: Sun, 15 Feb 2026 12:54:07 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAP8nD2xuRLi4en-dNh63Myd-h5JhfHTHhVwuFFnuM7dGPwNeqw@mail.gmail.com>
+Message-ID: <CAK4zTkYDaDzsf0LBL0TveSEd-VL0sjk3_9_NVXQLje9GR3xb+Q@mail.gmail.com>
+
+Thanks a lot .
+
+Le ven. 13 f?vr. 2026 ? 23:45, Ian Farm <ian.farm at maine.edu> a ?crit :
+
+> Advanced R by Hadley Wickham has a helpful section on functional
+> programming in R:
+>
+> https://adv-r.hadley.nz/fp.html
+>
+> Best of luck,
+> Ian
+> ____
+> Ian Farm
+> Laboratory Manager, University of Maine Agroecology Lab
+>
+> On Thu, Feb 12, 2026 at 12:00?PM SAAD LAMJADLI <s.lamjadli at uca.ac.ma>
+> wrote:
+>
+>> Dear R Users,
+>>
+>> I am looking for a roadmap to learn advanced functional programming in R.
+>>
+>> I have already read *Functional Programming* by Thomas Mailund, and I have
+>> been studying base R functions to understand how they are written and to
+>> learn from their design. I have analyzed and rewritten dozens of base R
+>> functions, and this process has been very instructive. However, I still
+>> find it difficult to write more complex and robust functions on my own.
+>>
+>> I would be very grateful for any advice you might have ? whether in the
+>> form of recommended books, learning strategies, advanced resources, or
+>> suggestions for progressing toward more advanced functional programming
+>> skills in R. Additionally, I was wondering if there are any official
+>> workshops, teaching sessions, or training initiatives focused on advanced
+>> functional programming within the R ecosystem.
+>>
+>> Kind regards.
+>>
+>>         [[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @@|@mj@d|| @end|ng |rom uc@@@c@m@  Sun Feb 15 14:45:31 2026
+From: @@|@mj@d|| @end|ng |rom uc@@@c@m@ (Saad Lamjadli)
+Date: Sun, 15 Feb 2026 13:45:31 +0000
+Subject: [R] 
+ Seeking Guidance on Advancing Functional Programming Skills in R
+In-Reply-To: <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+References: <CAK4zTkbKLOpw3jvA_5S5JZxxkznNRVSpsZe4utu13=rG9wxXLQ@mail.gmail.com>
+ <CAGAA5bcf7EsggtHJYwFUs+TEanJjeH27_OOipKyHcU0SN_zxtg@mail.gmail.com>
+Message-ID: <CAK4zTkaJL+zWb3gvUgwu=02TZGdGCUVZFnVd9ozGL0RxO3wBgg@mail.gmail.com>
+
+Thanks, I really appreciate all your suggestions. I?ll work on them.
+
+Le ven. 13 f?vr. 2026 ? 12:52, Martin M?ller Skarbiniks Pedersen <
+traxplayer at gmail.com> a ?crit :
+
+> On Thu, 12 Feb 2026 at 18:00, SAAD LAMJADLI <s.lamjadli at uca.ac.ma> wrote:
+> >
+> > Dear R Users,
+> >
+> > I am looking for a roadmap to learn advanced functional programming in R.
+>
+> Which part of functional programming in R do you find hard to understand?
+> Thomas Mailund's book has a lot of focus on R4 but functional
+> programming is so much more.
+>
+> Have you looked at the purrr-packages and the family of apply-functions ?
+> If you want to make your own packages I suggest you read about vctrs:
+> https://vctrs.r-lib.org/
+>
+> But it sounds like you already have read a lot of materiale including
+> source code so maybe you should not focus on reading.
+> I suggest that you instead just start writing a lot of code yourself.
+>
+> And once every month look at your old code and improve it.
+>
+> Maybe solve some of the many fun problems at https://adventofcode.com/
+>
+> You can also learn a lot by trying to solve issues with existing
+> packages. Just find the source on github and
+> look at the issues eg. https://github.com/tidyverse/ggplot2/issues
+>
+> Regards
+> Martin
+>
+
+	[[alternative HTML version deleted]]
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Wed Feb 18 18:40:12 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Wed, 18 Feb 2026 09:40:12 -0800
+Subject: [R] Problem with R-File
+In-Reply-To: <92d165bd9d38458aa17656a39592e204@student.uni-siegen.de>
+References: <92d165bd9d38458aa17656a39592e204@student.uni-siegen.de>
+Message-ID: <ca98839e-e8d6-475f-910a-37d819d577de@dcn.davis.ca.us>
+
+There are many, many ways to save your work in R, and the "obvious" one 
+(since R comes configured to automatically prompt you to do this) is to 
+save your workspace in a file named ".RData" (note the period at the 
+beginning) into whatever directory is the "current" directory at the 
+time you quit. "IF" you then restart R with that directory as the 
+current directory, it will reload those object automatically into memory.
+
+Since there are different ways that people start and use R on different 
+platforms, there are some challenges for anyone else on the list to tell 
+you how you should proceed to find and load that data. One partial 
+solution is you could restart R from any current directory and use:
+
+load(file.choose())
+
+which will bring up a file selection dialog box with which you can tell 
+R where your file is.
+
+However, you should know that people make mistakes, and saving an RData 
+file will save any mistakes you make along with all your good data into 
+a file where it is hard to see what is right and what is wrong. For this 
+reason, most people using R take great care to keep the R commands that 
+work properly in a text file with an .R extension (like 
+"my_analysis.R"). This can be opened and run from top to bottom to 
+re-load all those files you were working with to put your workspace back 
+where it was, with the advantage that you can change any line in the 
+file and re-run it to get a more correct result than you had before. 
+Once you make this your normal way of using R, the helpful "prompt" to 
+save your work in an .RData file becomes more of a nuisance than a help 
+because you know how troublesome those files can be if they do happen to 
+have a mistake... particularly since they get loaded automatically if 
+there is nothing to the left of the period ("my_workspace.RData" will 
+never get loaded automatically... only when you choose to load it).
+
+Finally, please set your mail program to send plain text on the list, as 
+the mailing list will mess up formatted (HTML) emails, so we won't see 
+exactly what you see, no matter how nice you make it look on your 
+screen. Read more in the Posting Guide mentioned at the bottom of every 
+email on the mailing list.
+
+Hello everyone,
+
+>
+> I have an problem with loading my data in R.
+>
+>
+> When I wanted to continue working on my R-file today, I couldn't load it, even though I had saved it yesterday. Do you know how I can get the data set back?
+>
+>
+> [https://download.mail.uni-siegen.de/owa/volkan.batit at student.uni-siegen.de/service.svc/s/GetFileAttachment?id=AAMkADdkOGJhZTU1LTk5MjYtNGE0ZS1iN2FkLWQ5NzNlMjQwMzU3MABGAAAAAAAIpVyi%2F1rSQb9Ri%2FjR4bhABwAi5fasp1aORKiJzHuBnrJCAAAAAAEJAAAi5fasp1aORKiJzHuBnrJCAARdySHRAAABEgAQAEU6Ael00wlDig3aTfQM1UI%3D&X-OWA-CANARY=aOZAdcKiyUWSJljKbL7MvrBYKDK6Ht4IeSAhvwwjarIG4ux5lg6S6be1oYUbd2kmuxxoRr8XqHg.&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImttV2ZOQVI1dlFWVmNtODd5QjNxaS1OQ0c4ZyJ9.eyJ2ZXIiOiJFeGNoYW5nZS5DYWxsYmFjay5WMSIsImFwcGN0eHNlbmRlciI6Ik93YURvd25sb2FkQHVuaS1zaWVnZW4uZGUiLCJhcHBjdHgiOiJ7XCJtc2V4Y2hwcm90XCI6XCJvd2FcIixcInByaW1hcnlzaWRcIjpcIlMtMS01LTIxLTMwNDIyMjM2MjYtNDIzNTczNzc2NS0zNjEzMzg1ODg2LTMyMjA0NVwiLFwicHVpZFwiOm51bGwsXCJvaWRcIjpcIlwiLFwic2NvcGVcIjpcIk93YURvd25sb2FkXCJ9IiwiaXNzIjoiMDAwMDAwMDItMDAwMC0wZmYxLWNlMDAtMDAwMDAwMDAwMDAwQHVuaS1zaWVnZW4uZGUiLCJhdWQiOiIwMDAwMDAwMi0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvZG93bmxvYWQubWFpbC51bmktc2llZ2VuLmRlQHVuaS1zaWVnZW4uZGUiLCJleHAiOjE
+>   3NjI2MDE
+>   4OTksIm5iZiI6MTc2MjYwMTI5OX0.f7So41J2heLcTDsF9uYARQT6PwDs_oPHkhMEnpAJspi8DMSD3wO05pmvb2JD7_Lka3Fl9iyGG-wyz2Yv3_dvt4u6wmGoumwibHXXHKpZrv-ukl05HlAIXtHS_xmkrFCpWVWNUd6VcAU5i2rEa-MX3Nhv9kYvSO5a5qM4d38LLomkpxMEQVfNxMsJfRVAtNStRxiGG0TM6niZi98Y7khl3VE1BQ07D2U31Vdhie-38HqDZeQkuuwlcEwgTR-O4XjRYvqpm1zvYa1q4veY4cyC7IOzeBtRabeyhlfjLAk0vxFdLukRIKu7HmlMGUuOqTMTobOROcUgcyKGDCF0DkSwhg&owa=mail.uni-siegen.de&isImagePreview=True]
+>
+>
+> I hope you can help me with my problem.
+>
+>
+> Thanks and kind regards
+>
+> Volkan
+>
+>
+> 	[[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+From peterv@n@ummeren @end|ng |rom gm@||@com  Sat Feb 21 19:23:15 2026
+From: peterv@n@ummeren @end|ng |rom gm@||@com (Peter van Summeren)
+Date: Sat, 21 Feb 2026 19:23:15 +0100
+Subject: [R] Tontines in R
+Message-ID: <CACYMGE1-a2Cj2+cJTkM_KB7MKVmnfQAXw+pX8TRy4G8zkEZDfg@mail.gmail.com>
+
+Hello,
+Moshe Arye Milevsky wrote a book about Tontines in R: "How to build a
+modern tontine".
+Does anyone know about it?
+With friendly greetings,
+Peter
+
+	[[alternative HTML version deleted]]
+
+
+From @vi@e@gross m@iii@g oii gm@ii@com  Sun Feb 22 14:08:45 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Sun, 22 Feb 2026 08:08:45 -0500
+Subject: [R] Tontines in R
+In-Reply-To: <CACYMGE1-a2Cj2+cJTkM_KB7MKVmnfQAXw+pX8TRy4G8zkEZDfg@mail.gmail.com>
+References: <CACYMGE1-a2Cj2+cJTkM_KB7MKVmnfQAXw+pX8TRy4G8zkEZDfg@mail.gmail.com>
+Message-ID: <005601dca3fc$60624010$2126c030$@gmail.com>
+
+Not sure what the bok is about but it seems free to download here:
+
+https://link.springer.com/book/10.1007/978-3-031-00928-0
+
+
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Peter van Summeren
+Sent: Saturday, February 21, 2026 1:23 PM
+To: r-help at r-project.org
+Subject: [R] Tontines in R
+
+Hello,
+Moshe Arye Milevsky wrote a book about Tontines in R: "How to build a
+modern tontine".
+Does anyone know about it?
+With friendly greetings,
+Peter
+
+	[[alternative HTML version deleted]]
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide
+https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From r-@nnounce @end|ng |rom r-project@org  Mon Feb 23 15:04:01 2026
+From: r-@nnounce @end|ng |rom r-project@org (Peter Dalgaard via R-announce)
+Date: Mon, 23 Feb 2026 14:04:01 +0000
+Subject: [R] [Rd] R 4.5.3 scheduled for March 11
+Message-ID: <922F989B-5BFE-4A04-BC94-AE8E94EDAE43@cbs.dk>
+
+Full schedule is available on developer.r-project.org <http://developer.r-project.org/> (...soon; the impatient might try: https://svn.r-project.org/R-dev-web/trunk/index.html).
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+______________________________________________
+R-devel at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-devel
+
+_______________________________________________
+R-announce at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-announce
+
+
+From wo||g@ng@v|echtb@uer @end|ng |rom m@@@tr|chtun|ver@|ty@n|  Thu Feb 26 11:54:36 2026
+From: wo||g@ng@v|echtb@uer @end|ng |rom m@@@tr|chtun|ver@|ty@n| (Viechtbauer, Wolfgang (NP))
+Date: Thu, 26 Feb 2026 10:54:36 +0000
+Subject: [R] Resolution of RGui With High DPI Scaling
+Message-ID: <PA4PR08MB74354677E78E5EEAB5C3904C8B72A@PA4PR08MB7435.eurprd08.prod.outlook.com>
+
+Hi all,
+
+I rarely use Windows, but noticed that Rgui itself and plots under Windows using the windows() plotting device looked very fuzzy even with a 4k resolution. This seems to be related to DPI scaling, since the system was using 200% scaling (so that things aren't super tiny). If I change the high DPI settings for Rgui (Properties, Compatibility, Change high DPI settings, High DPI scaling override, Application), then things are nice and crisp. Is this common knowledge for Windows people? If not, should this be documented somewhere, like the Windows FAQ?
+
+Best,
+Wolfgang
+
+--
+Wolfgang Viechtbauer, PhD, Statistician | Department of Psychiatry and
+Neuropsychology | Maastricht University | PO Box 616 (VIJV1) | 6200 MD
+Maastricht, The Netherlands | +31(43)3884170 | https://www.wvbauer.com
+
+
+From j@zh@o @end|ng |rom ye@h@net  Thu Feb 26 13:30:41 2026
+From: j@zh@o @end|ng |rom ye@h@net (Jinsong Zhao)
+Date: Thu, 26 Feb 2026 20:30:41 +0800
+Subject: [R] Resolution of RGui With High DPI Scaling
+In-Reply-To: <PA4PR08MB74354677E78E5EEAB5C3904C8B72A@PA4PR08MB7435.eurprd08.prod.outlook.com>
+References: <PA4PR08MB74354677E78E5EEAB5C3904C8B72A@PA4PR08MB7435.eurprd08.prod.outlook.com>
+Message-ID: <205bb6af-cf26-4bd8-ac01-05be6895de78@yeah.net>
+
+Thanks a lot for the solution. I always use the Windows system, but I 
+wasn't aware of this setting before.
+
+Best,
+
+Jinsong
+
+On 2/26/2026 6:54 PM, Viechtbauer, Wolfgang (NP) via R-help wrote:
+> Hi all,
+>
+> I rarely use Windows, but noticed that Rgui itself and plots under Windows using the windows() plotting device looked very fuzzy even with a 4k resolution. This seems to be related to DPI scaling, since the system was using 200% scaling (so that things aren't super tiny). If I change the high DPI settings for Rgui (Properties, Compatibility, Change high DPI settings, High DPI scaling override, Application), then things are nice and crisp. Is this common knowledge for Windows people? If not, should this be documented somewhere, like the Windows FAQ?
+>
+> Best,
+> Wolfgang
+>
+> --
+> Wolfgang Viechtbauer, PhD, Statistician | Department of Psychiatry and
+> Neuropsychology | Maastricht University | PO Box 616 (VIJV1) | 6200 MD
+> Maastricht, The Netherlands | +31(43)3884170 | https://www.wvbauer.com
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From j@ork|n @end|ng |rom @om@um@ry|@nd@edu  Thu Feb 26 16:23:04 2026
+From: j@ork|n @end|ng |rom @om@um@ry|@nd@edu (Sorkin, John)
+Date: Thu, 26 Feb 2026 15:23:04 +0000
+Subject: [R] Function that uses a parameter to form an as.POSIXct function
+Message-ID: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+
+I am trying to write a function which will take accept an argument and use the value of the argument to indicate the source of the data that should be processed in an as.POSIXct function. My attempt at writing the function is below:
+
+readit <- function(species){
+  no[,"NewTime"] <- as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+}
+
+If the value of species is no2, I want the function call
+readit("no2")
+to produce a statement:
+no[,"NewTime"] <- as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+If the value of species is co2, I want the function call
+readit("co2")
+to produce a statement:
+no[,"NewTime"] <- as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+When I run either version of the function and the call to the function I receive the following error message:
+
+Browse[1]> readit("no2")
+Error during wrapup: incorrect number of dimensions
+Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+
+Please help me fix my code
+
+Thank you,
+
+John
+
+John David Sorkin M.D., Ph.D.
+Professor of Medicine, University of Maryland School of Medicine;
+Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?
+Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+Senior Statistician University of Maryland Center for Vascular Research;
+
+Division of Gerontology, Geriatrics and Palliative Medicine,
+10 North Greene Street
+GRECC (BT/18/GR)
+Baltimore, MD 21201-1524
+Cell phone 443-418-5382
+
+
+
+
+From e@ @end|ng |rom enr|co@chum@nn@net  Thu Feb 26 16:46:02 2026
+From: e@ @end|ng |rom enr|co@chum@nn@net (Enrico Schumann)
+Date: Thu, 26 Feb 2026 16:46:02 +0100
+Subject: [R] 
+ Function that uses a parameter to form an as.POSIXct function
+In-Reply-To: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+ (John Sorkin's message of "Thu, 26 Feb 2026 15:23:04 +0000")
+References: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <87ms0veced.fsf@enricoschumann.net>
+
+On Thu, 26 Feb 2026, Sorkin, John writes:
+
+> I am trying to write a function which will take accept
+> an argument and use the value of the argument to
+> indicate the source of the data that should be
+> processed in an as.POSIXct function. My attempt at
+> writing the function is below:
+>
+> readit <- function(species){
+>   no[,"NewTime"] <- as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> }
+>
+> If the value of species is no2, I want the function call
+> readit("no2")
+> to produce a statement:
+> no[,"NewTime"] <- as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+>
+> If the value of species is co2, I want the function call
+> readit("co2")
+> to produce a statement:
+> no[,"NewTime"] <- as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+>
+> When I run either version of the function and the call to the function I receive the following error message:
+>
+> Browse[1]> readit("no2")
+> Error during wrapup: incorrect number of dimensions
+> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+>
+> Please help me fix my code
+>
+> Thank you,
+>
+> John
+
+You could put all your data into a list, like here:
+
+    Data <- list(no = data.frame("Time" = "2026-02-26_13:00:00"),
+                 co = data.frame("Time" = "2026-02-25_13:00:00"))
+
+Now you you can access specific data.frames from that list
+(but I'd pass the list as an argument):
+
+    readit <- function(species, Data){
+        as.POSIXct(Data[[species]][, "Time"],
+                   format = "%Y-%m-%d_%H:%M:%OS",
+                   tz = "UTC")
+    }
+
+    readit("co", Data)
+    ## [1] "2026-02-25 13:00:00 UTC"
+    readit("no", Data)
+    ## [1] "2026-02-26 13:00:00 UTC"
+
+These values could then be assigned to another
+data.frame 'no2', say:
+
+    no2[, "NewTime"] <- readit("no", Data)
+
+
+(You would probably get more/better help if you posted
+ a reproducible example, with a small example dataset
+ and the desired result.)
+
+
+kind regards
+    Enrico
+    
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?
+> Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+>
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+
+-- 
+Enrico Schumann
+Lucerne, Switzerland
+https://enricoschumann.net
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Thu Feb 26 17:05:23 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Thu, 26 Feb 2026 08:05:23 -0800
+Subject: [R] 
+ Function that uses a parameter to form an as.POSIXct function
+In-Reply-To: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <94FAB5B1-A637-4233-984D-31B960B586CB@dcn.davis.ca.us>
+
+Your proposed function's behaviour will be obscure to anyone else reading the code where you use it. 
+
+Pools of named vectors are used throughout R because humans have difficulty mixing too many names in one place without running into problems with accidentally re-using names and wiping out useful information related to one part of the analysis with information related to another part. These "pools" come in different flavors: data frames, lists, named vectors and environments.
+
+You seem to be assuming that you will always be working with data in the global environment... but this is one of the most at-risk places to have name collisions that will mess you up. For example, you might have one timestamp vector tracking when patients visited a doctor, and another one keeping track of times when they got sick. this is exactly the kind of situation where those should be in their own "pools" (data frames) because there will be other vectors that should line up with the time stamps.
+
+It is better to have a function that accepts two parameters... one being the name of the object containing the data and the other being the name of that data. Also, assignment is one of the most clear operations someone reading the code can learn from, so burying it in a function hides the most useful and reusable/modifiable part of what you are doing. 
+
+So,
+
+readit <- function(data, name) {
+  data[[ name ]]
+}
+
+can be re-used as
+
+no[[ "Time" ]] <- readit( globalenv(), "Time" )
+
+or
+
+no[[ "Time" ]] <- readit( raw_data, "Time" )
+
+
+On February 26, 2026 7:23:04 AM PST, "Sorkin, John" <jsorkin at som.umaryland.edu> wrote:
+>I am trying to write a function which will take accept an argument and use the value of the argument to indicate the source of the data that should be processed in an as.POSIXct function. My attempt at writing the function is below:
+>
+>readit <- function(species){
+>  no[,"NewTime"] <- as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+>}
+>
+>If the value of species is no2, I want the function call
+>readit("no2")
+>to produce a statement:
+>no[,"NewTime"] <- as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+>
+>If the value of species is co2, I want the function call
+>readit("co2")
+>to produce a statement:
+>no[,"NewTime"] <- as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+>
+>When I run either version of the function and the call to the function I receive the following error message:
+>
+>Browse[1]> readit("no2")
+>Error during wrapup: incorrect number of dimensions
+>Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+>
+>Please help me fix my code
+>
+>Thank you,
+>
+>John
+>
+>John David Sorkin M.D., Ph.D.
+>Professor of Medicine, University of Maryland School of Medicine;
+>Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?
+>Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+>Senior Statistician University of Maryland Center for Vascular Research;
+>
+>Division of Gerontology, Geriatrics and Palliative Medicine,
+>10 North Greene Street
+>GRECC (BT/18/GR)
+>Baltimore, MD 21201-1524
+>Cell phone 443-418-5382
+>
+>
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From er|cjberger @end|ng |rom gm@||@com  Thu Feb 26 17:24:35 2026
+From: er|cjberger @end|ng |rom gm@||@com (Eric Berger)
+Date: Thu, 26 Feb 2026 18:24:35 +0200
+Subject: [R] 
+ Function that uses a parameter to form an as.POSIXct function
+In-Reply-To: <94FAB5B1-A637-4233-984D-31B960B586CB@dcn.davis.ca.us>
+References: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <94FAB5B1-A637-4233-984D-31B960B586CB@dcn.davis.ca.us>
+Message-ID: <CAGgJW74wxwS7Hf4mH+khVgTtnMHgJ4iLTSRd-zhyv6tKkLwX_w@mail.gmail.com>
+
+I copy-pasted your code into an LLM and it returned the reason for the
+error message.
+
+On Thu, Feb 26, 2026 at 6:05?PM Jeff Newmiller via R-help <
+r-help at r-project.org> wrote:
+
+> Your proposed function's behaviour will be obscure to anyone else reading
+> the code where you use it.
+>
+> Pools of named vectors are used throughout R because humans have
+> difficulty mixing too many names in one place without running into problems
+> with accidentally re-using names and wiping out useful information related
+> to one part of the analysis with information related to another part. These
+> "pools" come in different flavors: data frames, lists, named vectors and
+> environments.
+>
+> You seem to be assuming that you will always be working with data in the
+> global environment... but this is one of the most at-risk places to have
+> name collisions that will mess you up. For example, you might have one
+> timestamp vector tracking when patients visited a doctor, and another one
+> keeping track of times when they got sick. this is exactly the kind of
+> situation where those should be in their own "pools" (data frames) because
+> there will be other vectors that should line up with the time stamps.
+>
+> It is better to have a function that accepts two parameters... one being
+> the name of the object containing the data and the other being the name of
+> that data. Also, assignment is one of the most clear operations someone
+> reading the code can learn from, so burying it in a function hides the most
+> useful and reusable/modifiable part of what you are doing.
+>
+> So,
+>
+> readit <- function(data, name) {
+>   data[[ name ]]
+> }
+>
+> can be re-used as
+>
+> no[[ "Time" ]] <- readit( globalenv(), "Time" )
+>
+> or
+>
+> no[[ "Time" ]] <- readit( raw_data, "Time" )
+>
+>
+> On February 26, 2026 7:23:04 AM PST, "Sorkin, John" <
+> jsorkin at som.umaryland.edu> wrote:
+> >I am trying to write a function which will take accept an argument and
+> use the value of the argument to indicate the source of the data that
+> should be processed in an as.POSIXct function. My attempt at writing the
+> function is below:
+> >
+> >readit <- function(species){
+> >  no[,"NewTime"] <-
+> as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> >}
+> >
+> >If the value of species is no2, I want the function call
+> >readit("no2")
+> >to produce a statement:
+> >no[,"NewTime"] <-
+> as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> >
+> >If the value of species is co2, I want the function call
+> >readit("co2")
+> >to produce a statement:
+> >no[,"NewTime"] <-
+> as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> >
+> >When I run either version of the function and the call to the function I
+> receive the following error message:
+> >
+> >Browse[1]> readit("no2")
+> >Error during wrapup: incorrect number of dimensions
+> >Error: no more error handlers available (recursive errors?); invoking
+> 'abort' restart
+> >
+> >Please help me fix my code
+> >
+> >Thank you,
+> >
+> >John
+> >
+> >John David Sorkin M.D., Ph.D.
+> >Professor of Medicine, University of Maryland School of Medicine;
+> >Associate Director for Biostatistics and Informatics, Baltimore VA
+> Medical Center Geriatrics Research, Education, and Clinical Center;
+> >Former PI Biostatistics and Informatics Core, University of Maryland
+> School of Medicine Claude D. Pepper Older Americans Independence Center;
+> >Senior Statistician University of Maryland Center for Vascular Research;
+> >
+> >Division of Gerontology, Geriatrics and Palliative Medicine,
+> >10 North Greene Street
+> >GRECC (BT/18/GR)
+> >Baltimore, MD 21201-1524
+> >Cell phone 443-418-5382
+> >
+> >
+> >
+> >______________________________________________
+> >R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> >https://stat.ethz.ch/mailman/listinfo/r-help
+> >PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> >and provide commented, minimal, self-contained, reproducible code.
+>
+> --
+> Sent from my phone. Please excuse my brevity.
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Thu Feb 26 18:34:12 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Thu, 26 Feb 2026 17:34:12 +0000
+Subject: [R] 
+ Function that uses a parameter to form an as.POSIXct function
+In-Reply-To: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <374132fc-10b3-4e31-ab44-b0e351d247e0@sapo.pt>
+
+?s 15:23 de 26/02/2026, Sorkin, John escreveu:
+> I am trying to write a function which will take accept an argument and use the value of the argument to indicate the source of the data that should be processed in an as.POSIXct function. My attempt at writing the function is below:
+> 
+> readit <- function(species){
+>    no[,"NewTime"] <- as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> }
+> 
+> If the value of species is no2, I want the function call
+> readit("no2")
+> to produce a statement:
+> no[,"NewTime"] <- as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> 
+> If the value of species is co2, I want the function call
+> readit("co2")
+> to produce a statement:
+> no[,"NewTime"] <- as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+> 
+> When I run either version of the function and the call to the function I receive the following error message:
+> 
+> Browse[1]> readit("no2")
+> Error during wrapup: incorrect number of dimensions
+> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+> 
+> Please help me fix my code
+> 
+> Thank you,
+> 
+> John
+> 
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+> Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+> 
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+> 
+> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+Hello,
+
+This is very similar to other answers.
+
+
+
+readit <- function(x, col = "Time") {
+   new_col <- paste0("New", col)
+   x[[new_col]] <- as.POSIXct(x[[col]],
+                              format = "%Y-%m-%d_%H:%M:%S",
+                              tz = "UTC")
+   x
+}
+
+# data borrowed from Enrico's answer.
+no <- data.frame("Time" = "2026-02-26_13:00:00")
+co <- data.frame("Time" = "2026-02-25_13:00:00")
+
+readit(no)
+#>                  Time             NewTime
+#> 1 2026-02-26_13:00:00 2026-02-26 13:00:00
+readit(co)
+#>                  Time             NewTime
+#> 1 2026-02-25_13:00:00 2026-02-25 13:00:00
+
+
+I thought the new column prefix could also be a function argument with 
+default value "New".
+
+
+readit <- function(x, col = "Time", prefix = "New") {
+   new_col <- paste0(prefix, col)
+   x[[new_col]] <- as.POSIXct(x[[col]],
+                              format = "%Y-%m-%d_%H:%M:%S",
+                              tz = "UTC")
+   x
+}
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+From @vi@e@gross m@iii@g oii gm@ii@com  Fri Feb 27 00:12:48 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Thu, 26 Feb 2026 18:12:48 -0500
+Subject: [R] 
+ Function that uses a parameter to form an as.POSIXct function
+In-Reply-To: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049ED65D2B85DB14F3FC4B6E272A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <00cc01dca775$6cc5d930$46518b90$@gmail.com>
+
+Hohn,
+
+It may be that you are using a different attempt to specify where you are
+putting the result than I might.
+
+Before the code is run, you do not have a variable called "no" and it is not
+a dataframe just because you put something in it. Ideally, you create a
+data.frame of the right number of rows first. The length of the species
+variable , as in nrow(species) may be what you want to initialize with.
+
+Then, I personally might prefer the dollar sign notation as in:
+
+No$NewTime <-
+as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+
+I think this part is scrambled:
+
+	
+as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+It looks like you want to take a column from the pass-in variable species
+which I would guess is a data.frame. As before, I think a simpler way to say
+what you want is species$Time and you want to get the current time as a
+formatted string and append it to each item in that vector. Is that right?
+
+Well, you may have switched the order of using paste and as.POSIXct.
+
+The as.POSIXct function takes two arguments. The first is an object to be
+converted and the second is a format. There are other optional arguments but
+the first argument should be something like "2011-03-27 01:30:00". I assume
+you only need to take this time snapshot once BEFORE tring to patch the same
+string to the end of each of the contents in species.
+
+So you want to create one variable and reuse it in a paste. What you asked
+for above is badly formatted and even if you want to keep the in-line
+version above, it should look like this in a formatted version that makes it
+clearer.
+
+no[,"NewTime"] <- 
+  paste(species$Time,
+        as.POSIXct(SOMETHING,
+                   format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+        )
+
+Sorry, but this is not a constant width font.
+
+Note I added the word SOMETHING above. That should be replaced by either a
+fixed date in the expected format or a cll to the operating system to
+deliver the date and time. 
+
+Ideally there are no spaces in the output .
+
+The goal is to make one such date string and paste will concatenate the same
+copy to each of the items you have. Be careful as paste by default includes
+a space and I supect you do not want one. Here is an example:
+
+> temp = c("a", "b", "c")
+
+> paste(temp, ".suf")
+[1] "a .suf" "b .suf" "c .suf"
+
+> paste(temp, ".suf", sep="")
+[1] "a.suf" "b.suf" "c.suf"
+
+When doing unfamiliar things, it is easier to build smaller pieces and
+verify on examples that they do what you want and then keep going and maybe
+at the end, rewrite it.
+
+
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Sorkin, John
+Sent: Thursday, February 26, 2026 10:23 AM
+To: r-help at r-project.org (r-help at r-project.org) <r-help at r-project.org>
+Subject: [R] Function that uses a parameter to form an as.POSIXct function
+
+I am trying to write a function which will take accept an argument and use
+the value of the argument to indicate the source of the data that should be
+processed in an as.POSIXct function. My attempt at writing the function is
+below:
+
+readit <- function(species){
+  no[,"NewTime"] <-
+as.POSIXct(paste(species)[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+}
+
+If the value of species is no2, I want the function call
+readit("no2")
+to produce a statement:
+no[,"NewTime"] <-
+as.POSIXct(no[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+If the value of species is co2, I want the function call
+readit("co2")
+to produce a statement:
+no[,"NewTime"] <-
+as.POSIXct(co2[,"Time"],format=("%Y-%m-%d_%H:%M:%OS"),tz="UTC")
+
+When I run either version of the function and the call to the function I
+receive the following error message:
+
+Browse[1]> readit("no2")
+Error during wrapup: incorrect number of dimensions
+Error: no more error handlers available (recursive errors?); invoking
+'abort' restart
+
+Please help me fix my code
+
+Thank you,
+
+John
+
+John David Sorkin M.D., Ph.D.
+Professor of Medicine, University of Maryland School of Medicine;
+Associate Director for Biostatistics and Informatics, Baltimore VA Medical
+Center Geriatrics Research, Education, and Clinical Center;?
+Former PI Biostatistics and Informatics Core,?University of Maryland School
+of Medicine Claude D. Pepper Older Americans Independence Center;
+Senior Statistician University of Maryland Center for Vascular Research;
+
+Division of Gerontology, Geriatrics and Palliative Medicine,
+10 North Greene Street
+GRECC (BT/18/GR)
+Baltimore, MD 21201-1524
+Cell phone 443-418-5382
+
+
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide
+https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From j@ork|n @end|ng |rom @om@um@ry|@nd@edu  Sat Feb 28 06:08:07 2026
+From: j@ork|n @end|ng |rom @om@um@ry|@nd@edu (Sorkin, John)
+Date: Sat, 28 Feb 2026 05:08:07 +0000
+Subject: [R] aggregate function does not work: arguments must have same
+ length
+Message-ID: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+
+PLEASE READ THIS ENTIRE MESSAGE. It explains my problem and contains a reproducible example of the problem.
+
+I am trying to run an aggregate function. The function produces the following error message:
+ERROR MESSAGE: 
+Error in aggregate.data.frame(as.data.frame(x), ...) : 
+  arguments must have same length
+
+Everything beyond this line can be pasted into an R session and run:
+
+####Start of code
+#I am trying to write a code that will compute the number of hours for which we have data for each day.
+#Here are my data:
+
+  inJan<-
+    structure(list(NewTime = structure(c(1597363200, 1597366800, 
+     1597370400, 1597374000, 1597377600, 1597381200, 1597384800, 1597388400, 
+     1597392000, 1597395600, 1597399200, 1597402800, 1597406400, 1597410000, 
+     1597413600, 1597417200, 1597420800, 1597424400, 1597428000, 1597431600, 
+     1597435200, 1597438800, 1597442400, 1597446000, 1597449600, 1597453200, 
+     1597456800, 1597460400, 1597464000, 1597467600, 1597471200, 1597474800, 
+     1597478400, 1597482000, 1597485600, 1597489200, 1597492800, 1597496400, 
+     1597500000, 1597503600, 1597507200, 1597510800, 1597514400, 1597518000, 
+     1597521600, 1597525200, 1597528800, 1597532400, 1597536000, 1597539600
+    ), class = c("POSIXct", "POSIXt"), tzone = "UTC"), Days = structure(c(18488, 
+     18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 
+     18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 
+     18488, 18488, 18488, 18488, 18488, 18489, 18489, 18489, 18489, 
+     18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 
+     18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 
+     18489, 18489, 18490, 18490), class = "Date")), class = "data.frame", row.names = c(NA,-50L))
+inJan
+names(inJan)
+
+#I have written a function which finds the number of hours between a last time last(x) and a first time first(x).
+
+# Number of follow-up hours in each day
+timediff <- function(x) {
+difftime(last(x),first(x),units="hours")
+ }
+
+#The function I wrote is used in an aggregate function which 
+# finds the minimum and maximum time in each day, and then
+# calls timediff to find the number of hours in each day.
+zoop <- aggregate(inJan[,"NewTime"],as.list(inJan[,"Days"]),timediff)
+
+#When I run the aggregate function I receive and error:
+#Error in aggregate.data.frame(as.data.frame(x), ...) : 
+#arguments must have same length
+
+#HOWEVER I believe inJan[,"NewTime"] and inJan[,"Days"] have the same length   
+
+llength(inJan[,"NewTime"]) 
+#[1] 50
+length(inJan[,"Days"])  
+#[1] 50
+
+#Can someone tell my why the aggregate function thinks the arguments are a different length?
+#### End of code
+
+Thank you,
+John
+
+John David Sorkin M.D., Ph.D.
+Professor of Medicine, University of Maryland School of Medicine;
+Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?
+Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+Senior Statistician University of Maryland Center for Vascular Research;
+
+Division of Gerontology, Geriatrics and Palliative Medicine,
+10 North Greene Street
+GRECC (BT/18/GR)
+Baltimore, MD 21201-1524
+Cell phone 443-418-5382
+
+
+
+
+From pd@|gd @end|ng |rom gm@||@com  Sat Feb 28 08:27:34 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Sat, 28 Feb 2026 08:27:34 +0100
+Subject: [R] aggregate function does not work: arguments must have same
+ length
+In-Reply-To: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <F9C378EB-38CA-45B8-A90F-BC689BEF1796@gmail.com>
+
+Untested, but maybe as.list() should be list()?
+
+Sendt fra min iPhone
+
+> Den 28. feb. 2026 kl. 06.08 skrev Sorkin, John <jsorkin at som.umaryland.edu>:
+> 
+> ?PLEASE READ THIS ENTIRE MESSAGE. It explains my problem and contains a reproducible example of the problem.
+> 
+> I am trying to run an aggregate function. The function produces the following error message:
+> ERROR MESSAGE: 
+> Error in aggregate.data.frame(as.data.frame(x), ...) : 
+>  arguments must have same length
+> 
+> Everything beyond this line can be pasted into an R session and run:
+> 
+> ####Start of code
+> #I am trying to write a code that will compute the number of hours for which we have data for each day.
+> #Here are my data:
+> 
+>  inJan<-
+>    structure(list(NewTime = structure(c(1597363200, 1597366800, 
+>     1597370400, 1597374000, 1597377600, 1597381200, 1597384800, 1597388400, 
+>     1597392000, 1597395600, 1597399200, 1597402800, 1597406400, 1597410000, 
+>     1597413600, 1597417200, 1597420800, 1597424400, 1597428000, 1597431600, 
+>     1597435200, 1597438800, 1597442400, 1597446000, 1597449600, 1597453200, 
+>     1597456800, 1597460400, 1597464000, 1597467600, 1597471200, 1597474800, 
+>     1597478400, 1597482000, 1597485600, 1597489200, 1597492800, 1597496400, 
+>     1597500000, 1597503600, 1597507200, 1597510800, 1597514400, 1597518000, 
+>     1597521600, 1597525200, 1597528800, 1597532400, 1597536000, 1597539600
+>    ), class = c("POSIXct", "POSIXt"), tzone = "UTC"), Days = structure(c(18488, 
+>     18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 
+>     18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 
+>     18488, 18488, 18488, 18488, 18488, 18489, 18489, 18489, 18489, 
+>     18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 
+>     18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 
+>     18489, 18489, 18490, 18490), class = "Date")), class = "data.frame", row.names = c(NA,-50L))
+> inJan
+> names(inJan)
+> 
+> #I have written a function which finds the number of hours between a last time last(x) and a first time first(x).
+> 
+> # Number of follow-up hours in each day
+> timediff <- function(x) {
+> difftime(last(x),first(x),units="hours")
+> }
+> 
+> #The function I wrote is used in an aggregate function which 
+> # finds the minimum and maximum time in each day, and then
+> # calls timediff to find the number of hours in each day.
+> zoop <- aggregate(inJan[,"NewTime"],as.list(inJan[,"Days"]),timediff)
+> 
+> #When I run the aggregate function I receive and error:
+> #Error in aggregate.data.frame(as.data.frame(x), ...) : 
+> #arguments must have same length
+> 
+> #HOWEVER I believe inJan[,"NewTime"] and inJan[,"Days"] have the same length   
+> 
+> llength(inJan[,"NewTime"]) 
+> #[1] 50
+> length(inJan[,"Days"])  
+> #[1] 50
+> 
+> #Can someone tell my why the aggregate function thinks the arguments are a different length?
+> #### End of code
+> 
+> Thank you,
+> John
+> 
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center; 
+> Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+> 
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+> 
+> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Sat Feb 28 09:40:58 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Sat, 28 Feb 2026 08:40:58 +0000
+Subject: [R] aggregate function does not work: arguments must have same
+ length
+In-Reply-To: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <0742bec5-d1b1-4e10-9533-29d07f7699e4@sapo.pt>
+
+?s 05:08 de 28/02/2026, Sorkin, John escreveu:
+> PLEASE READ THIS ENTIRE MESSAGE. It explains my problem and contains a reproducible example of the problem.
+> 
+> I am trying to run an aggregate function. The function produces the following error message:
+> ERROR MESSAGE:
+> Error in aggregate.data.frame(as.data.frame(x), ...) :
+>    arguments must have same length
+> 
+> Everything beyond this line can be pasted into an R session and run:
+> 
+> ####Start of code
+> #I am trying to write a code that will compute the number of hours for which we have data for each day.
+> #Here are my data:
+> 
+>    inJan<-
+>      structure(list(NewTime = structure(c(1597363200, 1597366800,
+>       1597370400, 1597374000, 1597377600, 1597381200, 1597384800, 1597388400,
+>       1597392000, 1597395600, 1597399200, 1597402800, 1597406400, 1597410000,
+>       1597413600, 1597417200, 1597420800, 1597424400, 1597428000, 1597431600,
+>       1597435200, 1597438800, 1597442400, 1597446000, 1597449600, 1597453200,
+>       1597456800, 1597460400, 1597464000, 1597467600, 1597471200, 1597474800,
+>       1597478400, 1597482000, 1597485600, 1597489200, 1597492800, 1597496400,
+>       1597500000, 1597503600, 1597507200, 1597510800, 1597514400, 1597518000,
+>       1597521600, 1597525200, 1597528800, 1597532400, 1597536000, 1597539600
+>      ), class = c("POSIXct", "POSIXt"), tzone = "UTC"), Days = structure(c(18488,
+>       18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>       18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>       18488, 18488, 18488, 18488, 18488, 18489, 18489, 18489, 18489,
+>       18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>       18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>       18489, 18489, 18490, 18490), class = "Date")), class = "data.frame", row.names = c(NA,-50L))
+> inJan
+> names(inJan)
+> 
+> #I have written a function which finds the number of hours between a last time last(x) and a first time first(x).
+> 
+> # Number of follow-up hours in each day
+> timediff <- function(x) {
+> difftime(last(x),first(x),units="hours")
+>   }
+> 
+> #The function I wrote is used in an aggregate function which
+> # finds the minimum and maximum time in each day, and then
+> # calls timediff to find the number of hours in each day.
+> zoop <- aggregate(inJan[,"NewTime"],as.list(inJan[,"Days"]),timediff)
+> 
+> #When I run the aggregate function I receive and error:
+> #Error in aggregate.data.frame(as.data.frame(x), ...) :
+> #arguments must have same length
+> 
+> #HOWEVER I believe inJan[,"NewTime"] and inJan[,"Days"] have the same length
+> 
+> llength(inJan[,"NewTime"])
+> #[1] 50
+> length(inJan[,"Days"])
+> #[1] 50
+> 
+> #Can someone tell my why the aggregate function thinks the arguments are a different length?
+> #### End of code
+> 
+> Thank you,
+> John
+> 
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+> Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+> 
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+> 
+> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+Hello,
+
+The problem is not in the input vectors' lengths, it's the output length.
+
+When aggregating, I find it better to use the formula interface.
+It avoids the list() call and eventual errors due to as.list() being 
+mistaken for it.
+
+Also, when using non base packages, please include a call to library() 
+or similar. I had to revise the function for it to work.
+
+
+# Number of follow-up hours in each day
+timediff <- function(x) {
+   difftime(dplyr::last(x), dplyr::first(x), units = "hours")
+}
+
+aggregate(NewTime ~ Days, inJan, timediff)
+#>         Days  NewTime
+#> 1 2020-08-14 23 hours
+#> 2 2020-08-15 23 hours
+#> 3 2020-08-16  1 hours
+
+
+Alternative versions:
+
+# This is what Peter Daalgard proposed (list, not as.list)
+aggregate(inJan[,"NewTime"], list(inJan[,"Days"]), timediff)
+
+# another one
+aggregate(inJan[["NewTime"]], list(inJan[["Days"]]), timediff)
+
+
+# not relevant, but if you ever want just a vector, here it is.
+tapply(inJan[,"NewTime"], inJan[,"Days"], timediff)
+#> 2020-08-14 2020-08-15 2020-08-16
+#>         23         23          1
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Sat Feb 28 09:44:32 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Sat, 28 Feb 2026 08:44:32 +0000
+Subject: [R] aggregate function does not work: arguments must have same
+ length
+In-Reply-To: <0742bec5-d1b1-4e10-9533-29d07f7699e4@sapo.pt>
+References: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <0742bec5-d1b1-4e10-9533-29d07f7699e4@sapo.pt>
+Message-ID: <af83f53d-9af9-4e21-a517-37940fae4f1f@sapo.pt>
+
+?s 08:40 de 28/02/2026, Rui Barradas escreveu:
+> ?s 05:08 de 28/02/2026, Sorkin, John escreveu:
+>> PLEASE READ THIS ENTIRE MESSAGE. It explains my problem and contains a 
+>> reproducible example of the problem.
+>>
+>> I am trying to run an aggregate function. The function produces the 
+>> following error message:
+>> ERROR MESSAGE:
+>> Error in aggregate.data.frame(as.data.frame(x), ...) :
+>> ?? arguments must have same length
+>>
+>> Everything beyond this line can be pasted into an R session and run:
+>>
+>> ####Start of code
+>> #I am trying to write a code that will compute the number of hours for 
+>> which we have data for each day.
+>> #Here are my data:
+>>
+>> ?? inJan<-
+>> ???? structure(list(NewTime = structure(c(1597363200, 1597366800,
+>> ????? 1597370400, 1597374000, 1597377600, 1597381200, 1597384800, 
+>> 1597388400,
+>> ????? 1597392000, 1597395600, 1597399200, 1597402800, 1597406400, 
+>> 1597410000,
+>> ????? 1597413600, 1597417200, 1597420800, 1597424400, 1597428000, 
+>> 1597431600,
+>> ????? 1597435200, 1597438800, 1597442400, 1597446000, 1597449600, 
+>> 1597453200,
+>> ????? 1597456800, 1597460400, 1597464000, 1597467600, 1597471200, 
+>> 1597474800,
+>> ????? 1597478400, 1597482000, 1597485600, 1597489200, 1597492800, 
+>> 1597496400,
+>> ????? 1597500000, 1597503600, 1597507200, 1597510800, 1597514400, 
+>> 1597518000,
+>> ????? 1597521600, 1597525200, 1597528800, 1597532400, 1597536000, 
+>> 1597539600
+>> ???? ), class = c("POSIXct", "POSIXt"), tzone = "UTC"), Days = 
+>> structure(c(18488,
+>> ????? 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>> ????? 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>> ????? 18488, 18488, 18488, 18488, 18488, 18489, 18489, 18489, 18489,
+>> ????? 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>> ????? 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>> ????? 18489, 18489, 18490, 18490), class = "Date")), class = 
+>> "data.frame", row.names = c(NA,-50L))
+>> inJan
+>> names(inJan)
+>>
+>> #I have written a function which finds the number of hours between a 
+>> last time last(x) and a first time first(x).
+>>
+>> # Number of follow-up hours in each day
+>> timediff <- function(x) {
+>> difftime(last(x),first(x),units="hours")
+>> ? }
+>>
+>> #The function I wrote is used in an aggregate function which
+>> # finds the minimum and maximum time in each day, and then
+>> # calls timediff to find the number of hours in each day.
+>> zoop <- aggregate(inJan[,"NewTime"],as.list(inJan[,"Days"]),timediff)
+>>
+>> #When I run the aggregate function I receive and error:
+>> #Error in aggregate.data.frame(as.data.frame(x), ...) :
+>> #arguments must have same length
+>>
+>> #HOWEVER I believe inJan[,"NewTime"] and inJan[,"Days"] have the same 
+>> length
+>>
+>> llength(inJan[,"NewTime"])
+>> #[1] 50
+>> length(inJan[,"Days"])
+>> #[1] 50
+>>
+>> #Can someone tell my why the aggregate function thinks the arguments 
+>> are a different length?
+>> #### End of code
+>>
+>> Thank you,
+>> John
+>>
+>> John David Sorkin M.D., Ph.D.
+>> Professor of Medicine, University of Maryland School of Medicine;
+>> Associate Director for Biostatistics and Informatics, Baltimore VA 
+>> Medical Center Geriatrics Research, Education, and Clinical Center;
+>> Former PI Biostatistics and Informatics Core,?University of Maryland 
+>> School of Medicine Claude D. Pepper Older Americans Independence Center;
+>> Senior Statistician University of Maryland Center for Vascular Research;
+>>
+>> Division of Gerontology, Geriatrics and Palliative Medicine,
+>> 10 North Greene Street
+>> GRECC (BT/18/GR)
+>> Baltimore, MD 21201-1524
+>> Cell phone 443-418-5382
+>>
+>>
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting- 
+>> guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> Hello,
+> 
+> The problem is not in the input vectors' lengths, it's the output length.
+> 
+> When aggregating, I find it better to use the formula interface.
+> It avoids the list() call and eventual errors due to as.list() being 
+> mistaken for it.
+> 
+> Also, when using non base packages, please include a call to library() 
+> or similar. I had to revise the function for it to work.
+> 
+> 
+> # Number of follow-up hours in each day
+> timediff <- function(x) {
+>  ? difftime(dplyr::last(x), dplyr::first(x), units = "hours")
+> }
+> 
+> aggregate(NewTime ~ Days, inJan, timediff)
+> #>???????? Days? NewTime
+> #> 1 2020-08-14 23 hours
+> #> 2 2020-08-15 23 hours
+> #> 3 2020-08-16? 1 hours
+> 
+> 
+> Alternative versions:
+> 
+> # This is what Peter Daalgard proposed (list, not as.list)
+> aggregate(inJan[,"NewTime"], list(inJan[,"Days"]), timediff)
+> 
+> # another one
+> aggregate(inJan[["NewTime"]], list(inJan[["Days"]]), timediff)
+> 
+> 
+> # not relevant, but if you ever want just a vector, here it is.
+> tapply(inJan[,"NewTime"], inJan[,"Days"], timediff)
+> #> 2020-08-14 2020-08-15 2020-08-16
+> #>???????? 23???????? 23????????? 1
+> 
+> 
+> Hope this helps,
+> 
+> Rui Barradas
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting- 
+> guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+Sorry, it's Peter Dalgaard.
+:(
+
+Rui Barradas
+
+
+From m@rbert@ @end|ng |rom protonm@||@com  Sat Feb 28 06:53:58 2026
+From: m@rbert@ @end|ng |rom protonm@||@com (Steve Martin)
+Date: Sat, 28 Feb 2026 05:53:58 +0000
+Subject: [R] aggregate function does not work: arguments must have same
+ length
+In-Reply-To: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB5049311BE1E28B5A255FDEC8E270A@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <dLQWeLezSGCKQHGeYSRpuP74DL6pOoX9DTc3GpOH5LZeO98XWbvKMlSwzx-bShuMdfF3tiiqOAqR19A_A7C8UQ4KGeG4_oxJRAAkFflSlFA=@protonmail.com>
+
+John,
+
+The issue is the `as.list(inJan[,"Days"])` in the call to `aggregate()`. This makes a list with 50 elements. Try `list(inJan[,"Days"])` instead. Note that there is still an error, but now coming from the `timediff()` function and unrelated to `aggregate()`.
+
+Hope this helps.
+
+Steve
+
+On Saturday, February 28th, 2026 at 12:08 AM, Sorkin, John <jsorkin at som.umaryland.edu> wrote:
+
+> PLEASE READ THIS ENTIRE MESSAGE. It explains my problem and contains a reproducible example of the problem.
+> 
+> I am trying to run an aggregate function. The function produces the following error message:
+> ERROR MESSAGE:
+> Error in aggregate.data.frame(as.data.frame(x), ...) :
+>   arguments must have same length
+> 
+> Everything beyond this line can be pasted into an R session and run:
+> 
+> ####Start of code
+> #I am trying to write a code that will compute the number of hours for which we have data for each day.
+> #Here are my data:
+> 
+>   inJan<-
+>     structure(list(NewTime = structure(c(1597363200, 1597366800,
+>      1597370400, 1597374000, 1597377600, 1597381200, 1597384800, 1597388400,
+>      1597392000, 1597395600, 1597399200, 1597402800, 1597406400, 1597410000,
+>      1597413600, 1597417200, 1597420800, 1597424400, 1597428000, 1597431600,
+>      1597435200, 1597438800, 1597442400, 1597446000, 1597449600, 1597453200,
+>      1597456800, 1597460400, 1597464000, 1597467600, 1597471200, 1597474800,
+>      1597478400, 1597482000, 1597485600, 1597489200, 1597492800, 1597496400,
+>      1597500000, 1597503600, 1597507200, 1597510800, 1597514400, 1597518000,
+>      1597521600, 1597525200, 1597528800, 1597532400, 1597536000, 1597539600
+>     ), class = c("POSIXct", "POSIXt"), tzone = "UTC"), Days = structure(c(18488,
+>      18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>      18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488, 18488,
+>      18488, 18488, 18488, 18488, 18488, 18489, 18489, 18489, 18489,
+>      18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>      18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489, 18489,
+>      18489, 18489, 18490, 18490), class = "Date")), class = "data.frame", row.names = c(NA,-50L))
+> inJan
+> names(inJan)
+> 
+> #I have written a function which finds the number of hours between a last time last(x) and a first time first(x).
+> 
+> # Number of follow-up hours in each day
+> timediff <- function(x) {
+> difftime(last(x),first(x),units="hours")
+>  }
+> 
+> #The function I wrote is used in an aggregate function which
+> # finds the minimum and maximum time in each day, and then
+> # calls timediff to find the number of hours in each day.
+> zoop <- aggregate(inJan[,"NewTime"],as.list(inJan[,"Days"]),timediff)
+> 
+> #When I run the aggregate function I receive and error:
+> #Error in aggregate.data.frame(as.data.frame(x), ...) :
+> #arguments must have same length
+> 
+> #HOWEVER I believe inJan[,"NewTime"] and inJan[,"Days"] have the same length
+> 
+> llength(inJan[,"NewTime"])
+> #[1] 50
+> length(inJan[,"Days"])
+> #[1] 50
+> 
+> #Can someone tell my why the aggregate function thinks the arguments are a different length?
+> #### End of code
+> 
+> Thank you,
+> John
+> 
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center; 
+> Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+> 
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+> 
+> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+

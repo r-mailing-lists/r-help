@@ -1,0 +1,401 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2010-02",
+  "messages": [
+    {
+      "id": "msg-e3fcb83a498a",
+      "message_id": "<p06240800c7b0aaaef1bf@[192.168.11.8]>",
+      "from_name": "Don MacQueen",
+      "from_email_hash": "175f4fa90b8d6445baa141105bd5754ace34836009cb94ddb056a9ce4ea7ff75",
+      "date": "2010-02-28T15:28:06-08:00",
+      "subject": "[R] A slight trap in read.table/read.csv.",
+      "subject_clean": "A slight trap in read.table/read.csv.",
+      "in_reply_to": "<971536df1002281437t204d8236hac8c710c3d8ffe81@mail.gmail.com>",
+      "references": [
+        "<9A893931-08E2-4254-BB71-7FD41BF02D9F@auckland.ac.nz>",
+        "<971536df1002281437t204d8236hac8c710c3d8ffe81@mail.gmail.com>"
+      ],
+      "body_plain": "There is, however, an important distinction.\n\nQuoting from ?TRUE  (or ?logical):\n\n'TRUE' and 'FALSE' are reserved words denoting logical constants\n      in the R language, whereas 'T' and 'F' are global variables whose\n      initial values set to these.  All four are 'logical(1)' vectors.\n\n>  TRUE <- 3\nError in TRUE <- 3 : invalid (do_set) left-hand side to assignment\n\nIn other words, the rule is\n   T is TRUE unless otherwise defined by the user\n(ditto for F)\n\nSo this rule apparently applies to input from a file. Using \ncolClasses is then an example of \"otherwise defined by the user.\"\n\nI think it's logical (pun not particularly intended) and consistent \n(though perhaps not ideal, but that's another question...)\n\n-Don\n\n\nAt 5:37 PM -0500 2/28/10, Gabor Grothendieck wrote:\n>It is strange.  Even in R itself T and F are not guaranteed to be TRUE\n>and FALSE.\n>\n>>  T <- 1:3\n>>  T\n>[1] 1 2 3\n>\n>\n>On Sun, Feb 28, 2010 at 4:55 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>>\n>>  I had occasion recently to read in a one-line *.csv file that\n>>  looked like:\n>>\n>>  \"CandidateName\",\"NSN\",\"Ethnicity\",\"dob\",\"gender\"\n>>  \"Smith, Mary Jane\",111222333,\"E\",\"2/25/1989\",\"F\"\n>>\n>>  That \"F\" (for female) in the last field got transformed to\n>>  FALSE.  Apparently read.csv (and hence read.table) are inferring\n>>  that if the entries of a file are all F's and T's then the\n>>  field is interpreted as logical.\n>>\n>>  If I change the file to\n>>\n>>  \"CandidateName\",\"NSN\",\"Ethnicity\",\"dob\",\"gender\"\n>>  \"Smith, Mary Jane\",111222333,\"E\",\"2/25/1989\",\"F\"\n>>  \"Mingdinkler, Melvin Queue\",999888777,\"01/04/1942\",\"M\"\n>>\n>>  then the read functions correctly interpret the last field\n>>  as being character.\n>>\n>>  The translation of \"F\" into FALSE resulted in some mysterious\n>>  contretemps in further analysis, which it took me a while to\n>>  track down.\n>>\n>>  I solved the problem by putting in a colClasses argument in my\n>>  call to read.csv().  But I really think that the read functions\n>>  are being too clever by half here.  If field entries are surrounded\n>>  by quotes, shouldn't they be left as character?  Even if they are\n>>  all F's and T's?\n>>\n>>  Furthermore using F's and T's to represent TRUE's and FALSE's is\n>>  bad practice anyway.  Since FALSE and TRUE are reserved words it\n>>  would make sense for the read function to assume that a field is\n>>  logical if it consists entirely of these words.  But T's and F's\n>>  .... I don't think so.\n>>\n>>  I would argue that this behaviour should be changed.  I can see no\n>>  downside to such a change.\n>>\n>>         cheers,\n>>\n>>                 Rolf Turner\n>>\n>>  ######################################################################\n>>  Attention:\\ This e-mail message is privileged and confid...{{dropped:9}}\n>>\n>>  ______________________________________________\n>>  R-help at r-project.org mailing list\n>>  https://*stat.ethz.ch/mailman/listinfo/r-help\n>>  PLEASE do read the posting guide \n>>http://*www.*R-project.org/posting-guide.html\n>>  and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n>______________________________________________\n>R-help at r-project.org mailing list\n>https://*stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide http://*www.*R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \n---------------------------------\nDon MacQueen\nLawrence Livermore National Laboratory\nLivermore, CA, USA\n925-423-1062\nmacq at llnl.gov",
+      "body_snippet": "There is, however, an important distinction.\n\nQuoting from ?TRUE  (or ?logical):\n\n'TRUE' and 'FALSE' are reserved words denoting logical constants\n      in the R language, whereas 'T' and 'F' are glob",
+      "thread_id": "thread-e3fcb83a498a",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-8445b7a0754a",
+      "message_id": "<08f201cab8cd$c7562b00$56028100$@gmail.com>",
+      "from_name": "kMan",
+      "from_email_hash": "8adf02832f083173fda460810a3b191ab804d56e7a26c8d78de728866fdaf906",
+      "date": "2010-02-28T16:28:46-07:00",
+      "subject": "[R] Best Hardware & OS For Large Data Sets",
+      "subject_clean": "Best Hardware & OS For Large Data Sets",
+      "in_reply_to": "<1267292836655-1572129.post@n4.nabble.com>",
+      "references": [
+        "<1267292836655-1572129.post@n4.nabble.com>"
+      ],
+      "body_plain": "JD,\n\nI would recommend 64 bit, and win 7 on a quad core system has been\nsurprisingly stable for me. Allan's points are also spot on. I would suggest\nreading the references Allan provided.\n\nIncreased memory will increase your ability to handle n vectors of 2^31-1\nelements, a limit that was a design decision to make results comparable\nbetween 32 bit and 64 bit systems. This means larger scale data will need to\nbe handled in chunks, but a 64 bit system lets you handle more of those\nchunks in memory simultaneously. \n\nAs far as memory allocation problems, this is just a next-jump in the\nlearning curve. Technically, you can handle large scale data on a 32 bit\nsystem with 2 G RAM. It would just mean your chunks may be smaller, the\ncomputations would take a little longer (more read calls to the disk, more\ncareful planning to avoid paging in Windows environments), and your\nparameter estimates would be based on perhaps more aggregates. That's not to\nsay chunk-size could not be made the same on 64 bit systems with loads of\nRAM so that the estimates would remain comparable.\n\nWelcome to the world of portions, JD.\n\nSincerely,\n\nKeithC.\n\n-----Original Message-----\nFrom: J. Daniel [mailto:jdlecy at gmail.com] \nSent: Saturday, February 27, 2010 10:47 AM\nTo: r-help at r-project.org\nSubject: [R] Best Hardware & OS For Large Data Sets\n\n\nGreetings,\n\nI am acquiring a new computer in order to conduct data analysis.  I\ncurrently have a 32-bit Vista OS with 3G of RAM and I consistently run into\nmemory allocation problems.  I will likely be required to run Windows 7 on\nthe new system, but have flexibility as far as hardware goes.  Can people\nrecommend the best hardware to minimize memory allocation problems?  I am\nleaning towards dual core on a 64-bit system with 8G of RAM.  Given the\nWindows constraint, is there anything I am missing here?\n\nI know that Windows limits the RAM that a single application can access. \nDoes this fact over-ride many hardware considerations?  Any way around this?\n\nThanks,\n\nJD\n\n\n--\nView this message in context:\nhttp://n4.nabble.com/Best-Hardware-OS-For-Large-Data-Sets-tp1572129p1572129.\nhtml\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "JD,\n\nI would recommend 64 bit, and win 7 on a quad core system has been\nsurprisingly stable for me. Allan's points are also spot on. I would suggest\nreading the references Allan provided.\n\nIncreased m",
+      "thread_id": "thread-8445b7a0754a",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-b774f82b7209",
+      "message_id": "<4B6101A4-0D80-4E67-BDF2-72B41EB7DFB6@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2010-02-28T19:04:18-05:00",
+      "subject": "[R] trend test for frequencies",
+      "subject_clean": "trend test for frequencies",
+      "in_reply_to": "<71095C31-E015-4BDB-8ADD-E9B4BDF6C8D2@googlemail.com>",
+      "references": [
+        "<71095C31-E015-4BDB-8ADD-E9B4BDF6C8D2@googlemail.com>"
+      ],
+      "body_plain": "On Feb 28, 2010, at 5:33 PM, Martin Batholdy wrote:\n\n> Hi,\n>\n> which test do I have to use if I want to test if the following data  \n> follow a monotone trend;\n>\n> min\t5min\t10min\t20min\t30min\n> 5\t\t20\t\t55\t\t70\t\t90\n>\n> ... where the dependent variable contains frequencies.\n\nIt is not clear what you mean by \"frequencies\". Do you mean counts?  \nI's also unclear what your data situation is and what sort of  \nindependence assumptions might be met (or not). Here's a possible  \ncomputational run that might have a plausible error structure for  \ncount data and form the basis for a \"linear trend test\" but whether it  \ncan be applied to your experiment is not assured. In particular the  \nindependence assumption seems questionable if the counts are arising  \nfrom the same experimental subjects. You may want to calculate the  \ndifferences if these are cumulative counts:\n\n > dta <-data.frame(time=c(1,5,10,20,30), counts=c(5,20,55,70, 90))\n\n > glm(counts~time, data=dta, family=\"poisson\")\n\nCall:  glm(formula = counts ~ time, family = \"poisson\", data = dta)\n\nCoefficients:\n(Intercept)         time\n     2.92950      0.05704\n\nDegrees of Freedom: 4 Total (i.e. Null);  3 Residual\nNull Deviance:\t    123.3\nResidual Deviance: 32.91 \tAIC: 63.51\n\nIf these are cumulative counts, the \"monotone trend\" may not be as  \nsolidly supported:\n\n > dta$diffs <-c(dta$counts[1], diff(dta$counts))\n > dta\n   time counts diffs\n1    1      5     5\n2    5     20    15\n3   10     55    35\n4   20     70    15\n5   30     90    20\n > mod0 <- glm(diffs~1, data=dta, family=\"poisson\")\n > mod <- glm(diffs~time, data=dta, family=\"poisson\")\n > anova(mod,mod0)\nAnalysis of Deviance Table\n\nModel 1: diffs ~ time\nModel 2: diffs ~ 1\n   Resid. Df Resid. Dev Df Deviance\n1         3     25.034\n2         4     27.014 -1  -1.9799\n\n\n\n\n-- \nDavid Winsemius, MD, MPH",
+      "body_snippet": "On Feb 28, 2010, at 5:33 PM, Martin Batholdy wrote:\n\n> Hi,\n>\n> which test do I have to use if I want to test if the following data  \n> follow a monotone trend;\n>\n> min\t5min\t10min\t20min\t30min\n> 5\t\t20\t\t",
+      "thread_id": "thread-b774f82b7209",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-8155283304a6",
+      "message_id": "<1267403004050-1573068.post@n4.nabble.com>",
+      "from_name": "Sharpie",
+      "from_email_hash": "61a5157bf3b50056b8fad9b559d93b86915f2e7b847327766122b4f2cfc76e33",
+      "date": "2010-02-28T16:23:24-08:00",
+      "subject": "[R] Why software fails in scientific research",
+      "subject_clean": "Why software fails in scientific research",
+      "in_reply_to": "<6DE32437-9577-49F2-9B9C-1AFEA666015C@anu.edu.au>",
+      "references": [
+        "<6DE32437-9577-49F2-9B9C-1AFEA666015C@anu.edu.au>"
+      ],
+      "body_plain": "John Maindonald wrote:\n> \n> I came across this notice of an upcoming webinar.   The issues identified\n> in the \n> first paragraph below seem to me exactly those that the R project is\n> designed\n> to address.  The claim that \"most research software is barely fit for\n> purpose \n> compared to equivalent systems in the commercial world\" seems to me not\n> quite accurate!  Comments!\n> \n> \n> WEBINAR SERIES \n> A Crack in the Code: Why software fails in scientific research, and how to\n> fix it. \n> Thursday, March 25, 2010, 3:00 PM GMT \n> http://physicsworld.com/cws/go/webinar9\n> \n> \"\n> In the 60 years since the invention of the digital computer, millions of\n> lines of code have been developed to support scientific research. Although\n> an increasingly important part of almost all research projects, most\n> research software is barely fit for purpose compared to equivalent systems\n> in the commercial world. The code is hard to understand or maintain,\n> lacking documentation and version control, and is continually\n> ?re-invented? as the code writers move on to new jobs. This represents a\n> tremendous waste of the already inadequate resources that are put into its\n> development. We will investigate how this situation has come about, why it\n> is important to the future of research, and what can be done about it. \n> \n> Robert McGreevy will draw on his extensive experience at the STFC ISIS\n> Facility, and explain how these issues are being addressed for the benefit\n> of research science globally. Nicholas Draper, consultant at Tessella,\n> will then expand on this, using the example of the Mantid project at ISIS. \n> \"\n> \n> Tessella (www.tessella.com) is a technology and consultancy firm, based in\n> Oxford.\n> \n> ISIS (International Species Information System) (www.isis.org) has as its\n> mission the facilitation of \"international collaboration in the collection\n> and sharing of knowledge on animals and their environments for zoos,\n> aquariums and related organizationsvalues the use of objective data to\n> benefit conservation, science, animal welfare, education, and collection\n> management.\"\n> \n> John Maindonald             email: john.maindonald at anu.edu.au\n> phone : +61 2 (6125)3473    fax  : +61 2(6125)5549\n> Centre for Mathematics & Its Applications, Room 1194,\n> John Dedman Mathematical Sciences Building (Building 27)\n> Australian National University, Canberra ACT 0200.\n> http://www.maths.anu.edu.au/~johnm\n> \n\nI personally feel that a lot of this is a result of failing to publish the\ncode that was developed to perform research along with the results of the\nresearch.  When setting out to do start a new project, one can dig up tons\nof journal articles that will happily inform how data was gathered, what\nequations were used and wrap it all up with nicely formatted tables and\ngraphs that show X is correlated to Y.\n\nWhat these articles fail to report is the code that was developed to filter\nand process the raw data and then apply the equations to produce the figures\nand tables.  The next generation of researchers that are seeking to extend\nthe results then end up writing their own code rather than building upon\nwhat has already been done.\n\nThe R community has done a tremendous job in encouraging truly reproducible\nresearch through the package system and tools like Sweave which provide a\nmeans to combine and maintain data, code and reports-- but we need more.\n\nIn my opinion, we need to start seeing websites that provide services\nsimilar to github or bitbucket-- but with a focus on scientific research.  I\nshould be able to set up a versioned repository somewhere in the cloud for\nmy research projects that hosts not only my code, but my data and reports. \nI could then choose to make this resource publicly available and other\nresearchers could fork my work with a single mouse click and start\ncollaborating on my project or extend what I've done into a project of their\nown.\n\nAnd that's my two cents on the state of software in research.\n\n-Charlie\n-- \nView this message in context: http://n4.nabble.com/Why-software-fails-in-scientific-research-tp1573062p1573068.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "John Maindonald wrote:\n> \n> I came across this notice of an upcoming webinar.   The issues identified\n> in the \n> first paragraph below seem to me exactly those that the R project is\n> designed\n> to a",
+      "thread_id": "thread-8155283304a6",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-ae4f3f7a3f45",
+      "message_id": "<20100301003923.GB11630@klutometis.wikitex.org>",
+      "from_name": "Peter Danenberg",
+      "from_email_hash": "25f3e3a4bbf4f8f7bbfc6f58e8e012a38b128d572f4c642b86e5b13601139710",
+      "date": "2010-02-28T18:39:23-06:00",
+      "subject": "[R] Defective help pages",
+      "subject_clean": "Defective help pages",
+      "in_reply_to": "<4B894C14.4040607@stats.uwo.ca>",
+      "references": [
+        "<20100224203422.GA18622@klutometis.wikitex.org>",
+        "<4B87F1F5.8080409@statistik.tu-dortmund.de>",
+        "<20100226202238.GA11700@klutometis.wikitex.org>",
+        "<4B894C14.4040607@stats.uwo.ca>"
+      ],
+      "body_plain": "> As of R 2.10.0, the plain text is generated by the tools::Rd2txt function \n> from the same source as the HTML, i.e. the parsed Rd files stored in the \n> .rdb file in the package help directories.\n>\n> It looks as though ESS is the problem here, but I don't really know what it \n> is doing that could cause the symptoms you saw.\n\nI notice that there are windows-style newlines, even though I compiled\nHEAD from scratch in Cygwin; and running `R CMD Rd2txt <file.Rd>'\nproduces the same defective output, so I'm not sure it's an ESS\nproblem.\n\nMy hypothesis was that Rd2txt is invoking some defective system\ncommand; but it appears to do all of its parsing and output itself.",
+      "body_snippet": "> As of R 2.10.0, the plain text is generated by the tools::Rd2txt function \n> from the same source as the HTML, i.e. the parsed Rd files stored in the \n> .rdb file in the package help directories.\n>\n",
+      "thread_id": "thread-ae4f3f7a3f45",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-962c1be9f2ff",
+      "message_id": "<1267405548206-1573080.post@n4.nabble.com>",
+      "from_name": "gauravbhatti",
+      "from_email_hash": "5a6803d80b256c61a75e81c23d90739152cd8a5cfc1056d62be021f7842fcc88",
+      "date": "2010-02-28T17:05:48-08:00",
+      "subject": "[R] aadding labels to panel plots",
+      "subject_clean": "aadding labels to panel plots",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "hi I have a panel with 12 plots . All the plots have their own x and y labels\nas well as titles. I want add additional labels a, b, c, d,\ne,................on the upper left side of each plot in the panel. Please\nsuggest how I can do that.\nGaurav \n-- \nView this message in context: http://n4.nabble.com/aadding-labels-to-panel-plots-tp1573080p1573080.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "hi I have a panel with 12 plots . All the plots have their own x and y labels\nas well as titles. I want add additional labels a, b, c, d,\ne,................on the upper left side of each plot in the p",
+      "thread_id": "thread-962c1be9f2ff",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-a86f6f748e88",
+      "message_id": "<1267406871422-1573084.post@n4.nabble.com>",
+      "from_name": "D Sonderegger",
+      "from_email_hash": "ad11ff3dcc70461071e8d71457d34c50a7da0b40a857169c9e02fc29861c4050",
+      "date": "2010-02-28T17:27:51-08:00",
+      "subject": "[R] What Bayesian Framework?",
+      "subject_clean": "What Bayesian Framework?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have found myself doing a large amount of Bayesian analysis and I am\nuncertain what framework learn and I'm posing this question to get a sense\nof perspective.  As I am doing a lot of applied work right now, I need to do\na fair amount of \"standard data analysis\" (eg mixed models, glm, etc) but I\nalso have to have the flexibility to write more complicated models. As near\nas I can tell, there are three routes I could take:\n\n1) Use OpenBUGS.  This has the benefit of being well established but there\nare a number of things I dislike. While the Windows OS can be addressed\nthrough Wine, my biggest complaint is how restrictive the language is. \nTrying to do anything complex requires using 'tricks' (the zeros trick for\nspecifying an arbitrary likelihood, or the delta trick for specifying a\ndirichlet distribution using gammas) that often require already knowing them\nto be able to find them in the examples.  The 'cut' function is pretty\nawesome, though.  \n\n2) Use JAGS.  Currently this seems like the most appealing because it looks\nlike the easier models can be implemented using the BUGS language and it\nseems like the modules will provide a very nice way to specify more\ncomplicated models.  The downside is that I have no idea if it has a future\nand I'm somewhat reluctant to put my eggs into a basket that might go\nnowhere.  \n\n3) The MCMCpack library in R.  This seems like it would be flexible enough\nfor the complicated models, but I don't know if is automated enough for the\neasier analysis.  For example, a hierarchical model has a likelihood that\nhas a large number of pieces and it is far too easy to make simple coding\nmistake.  Because of it's flexibility, I also wonder if I will find myself\nalways wrestling with what sampler to use.\n\nIdeally I would write a model in BUGS and for part of the hierarchy have it\ncall an ugly likelihood function that I wrote in R and if the default\nsamplers weren't working, I could start tweeking them to figure out what was\nhappening.  (I suppose while I'm wishing I might as well throw out something\nabout world peace and a cushy faculty position.)\n\nAny advise and/or perspective would be appreciated.\n\nDerek Sonderegger\n\n-- \nView this message in context: http://n4.nabble.com/What-Bayesian-Framework-tp1573084p1573084.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I have found myself doing a large amount of Bayesian analysis and I am\nuncertain what framework learn and I'm posing this question to get a sense\nof perspective.  As I am doing a lot of applied work r",
+      "thread_id": "thread-a86f6f748e88",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-13579a8080b0",
+      "message_id": "<4B8B1A74.2070504@stats.uwo.ca>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f10e1920504dfef879061667fbcfa0823bbc832410cad04707fb294db3bd8d83",
+      "date": "2010-02-28T20:37:56-05:00",
+      "subject": "[R] Defective help pages",
+      "subject_clean": "Defective help pages",
+      "in_reply_to": "<20100301003923.GB11630@klutometis.wikitex.org>",
+      "references": [
+        "<20100224203422.GA18622@klutometis.wikitex.org>",
+        "<4B87F1F5.8080409@statistik.tu-dortmund.de>",
+        "<20100226202238.GA11700@klutometis.wikitex.org>",
+        "<4B894C14.4040607@stats.uwo.ca>",
+        "<20100301003923.GB11630@klutometis.wikitex.org>"
+      ],
+      "body_plain": "On 28/02/2010 7:39 PM, Peter Danenberg wrote:\n>> As of R 2.10.0, the plain text is generated by the tools::Rd2txt function \n>> from the same source as the HTML, i.e. the parsed Rd files stored in the \n>> .rdb file in the package help directories.\n>>\n>> It looks as though ESS is the problem here, but I don't really know what it \n>> is doing that could cause the symptoms you saw.\n> \n> I notice that there are windows-style newlines, even though I compiled\n> HEAD from scratch in Cygwin; and running `R CMD Rd2txt <file.Rd>'\n> produces the same defective output, so I'm not sure it's an ESS\n> problem.\n\nWe don't support Cygwin builds; that could be part of your problem.  The \nonly supported builds on Windows are using MinGW.\n\nDuncan Murdoch\n\n> \n> My hypothesis was that Rd2txt is invoking some defective system\n> command; but it appears to do all of its parsing and output itself.",
+      "body_snippet": "On 28/02/2010 7:39 PM, Peter Danenberg wrote:\n>> As of R 2.10.0, the plain text is generated by the tools::Rd2txt function \n>> from the same source as the HTML, i.e. the parsed Rd files stored in the ",
+      "thread_id": "thread-ae4f3f7a3f45",
+      "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-595249529fbb",
+      "message_id": "<7b88a62348b3e84e50a8398415a13c2a.squirrel@calmail.berkeley.edu>",
+      "from_name": "jefreier at berkeley.edu",
+      "from_email_hash": "fb9220d7cbce9bdbf54bb4e55e78a24b07944cad64ce5e29319f3eabba7b40ca",
+      "date": "2010-02-28T18:11:42-08:00",
+      "subject": "[R] Multicolumn Listbox selectcommand trouble",
+      "subject_clean": "Multicolumn Listbox selectcommand trouble",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hey folks,\nThis is my first message to the mailing list so please let me know if I\nmess something up.\n\nI'm trying to use the selectcommand for the mclistbox but I'm not very\nadept at using functions. Ideally I'd like to change the editor text when\na different list item is selected but any help using the selectcommand\nwould be appreciated and I think I could get the rest working.\n\nThanks a lot.\nJohn\n\nUC Berkeley Student\n\nHere's some links for thought\nhttp://www1.clearlight.com/~oakley/tcl/\nhttp://tech.groups.yahoo.com/group/tcl_announce/message/298\n\nHere is is some of my code. I think selectcommand is supposed to go in the\ntk2mclistbox()\n\ntotalcols = 5\ntotalrows = 100\nidb <- matrix(NA, nrow = totalrows, ncol = totalcols, dimnames =\nlist(c(),c(\"Date\",\"URL\", \"Title\", \"List Price\", \"Category\")))\n\n\nbase <- tktoplevel()\nlistings <- tkframe(parent = base)\neditor <- tkframe(parent = base)\ntkwm.title(base, \"my super program\")\n\n#changeeditor function(){\n#\t}\n\n\nmlb <- tk2mclistbox(listings, height = 20, width = 95, resizablecolumns =\nTRUE, yscrollcommand = function(...)tkset(scr1,...))\n\n#?tk2mclistbox\n# Define the columns\ntk2column(mlb, \"add\", \"date\", label = \"col1\", width = 20)\ntk2column(mlb, \"add\", \"title\", label = \"col2\", width = 40)\ntk2column(mlb, \"add\", \"listprice\", label = \"col3\", width = 15)\ntk2column(mlb, \"add\", \"categ\", label = \"col4\", width = 20)\n\n# Collect data from insurance companies\nscr1 <- tkscrollbar(listings, repeatinterval = 5, command =\nfunction(...)tkyview(mlb,...))\ntkgrid(mlb, scr1)\ntkgrid.configure(scr1, stick = \"ns\")\ntk2insert.multi(mlb, \"end\", idb[,c(1,2,3,4)])\ntkpack(listings, side = \"top\")\n\ntxtviewer <- tktext(editor, font = \"courier\", width = 66, height = 20,\nyscrollcommand = function(...)tkset(scr2,...))\nscr2 <- tkscrollbar(editor, repeatinterval = 5, command =\nfunction(...)tkyview(txtviewer,...))\n\ntkgrid(txtviewer, scr2)\ntkgrid.configure(scr2, sticky = \"ns\")\ntkmark.set(txtviewer,\"insert\",\"0.0\")\ntkinsert(txtviewer,\"end\",\"This is some stuff\")\n\nDeleteSelection <- function()\n{\n    fruitIndex <- as.integer(tkcurselection(mlb))\n    tkdelete(mlb,fruitIndex)\n}\nDeleteSelection.but <- tkbutton(editor,text=\"Delete\",command=DeleteSelection)\ntkgrid(DeleteSelection.but)\n\n\ntkfocus(txtviewer)\n\ntkpack(editor, side = \"bottom\")",
+      "body_snippet": "Hey folks,\nThis is my first message to the mailing list so please let me know if I\nmess something up.\n\nI'm trying to use the selectcommand for the mclistbox but I'm not very\nadept at using functions. ",
+      "thread_id": "thread-595249529fbb",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-a4a9d9d7408f",
+      "message_id": "<1267409690237-1573091.post@n4.nabble.com>",
+      "from_name": "Brad Patrick Schneid",
+      "from_email_hash": "457a1427405330a78f4410f642ebe11ae4b38c0e2b6aea68debc791b7fc90d29",
+      "date": "2010-02-28T18:14:50-08:00",
+      "subject": "[R] Similarity Percentage Analysis",
+      "subject_clean": "Similarity Percentage Analysis",
+      "in_reply_to": "<47C06FC9EDB44308A40655F176EA596C@Rodrigo>",
+      "references": [
+        "<47C06FC9EDB44308A40655F176EA596C@Rodrigo>"
+      ],
+      "body_plain": "I'm guessing the answer is no?  I too am looking for a function for SIMPER,\nit seems logical that this would be in the Vegan package with the ANOSIM\nfunction.\n-- \nView this message in context: http://n4.nabble.com/Similarity-Percentage-Analysis-tp868460p1573091.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I'm guessing the answer is no?  I too am looking for a function for SIMPER,\nit seems logical that this would be in the Vegan package with the ANOSIM\nfunction.\n-- \nView this message in context: http://",
+      "thread_id": "thread-a4a9d9d7408f",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-d73d3a88b1c1",
+      "message_id": "<Pine.LNX.4.64.1002281838520.5980@shell.eskimo.com>",
+      "from_name": "Adrian Dragulescu",
+      "from_email_hash": "3a57f1f3e4717db33f6d2143b097097eb2a3ebcb97c7dccae2a90fc3b819643e",
+      "date": "2010-02-28T18:45:44-08:00",
+      "subject": "[R] R mentioned in the Economist volume 394, number 8671",
+      "subject_clean": "R mentioned in the Economist volume 394, number 8671",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "There is a special report on managing information.  See page 8.\n\n\"A free programming language called R lets companies examine and present \nbig data sets, and free software called Hadoop now allows ordinary pC to \nanalyse huge quantities of data that previously required a supercomputer.\"\n\nhttp://www.economist.com/specialreports/displayStory.cfm?story_id=15557443\n\nBest,\nAdrian",
+      "body_snippet": "There is a special report on managing information.  See page 8.\n\n\"A free programming language called R lets companies examine and present \nbig data sets, and free software called Hadoop now allows ord",
+      "thread_id": "thread-d73d3a88b1c1",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-af5c59656e85",
+      "message_id": "<Pine.LNX.4.64.1002281846400.5980@shell.eskimo.com>",
+      "from_name": "Adrian Dragulescu",
+      "from_email_hash": "3a57f1f3e4717db33f6d2143b097097eb2a3ebcb97c7dccae2a90fc3b819643e",
+      "date": "2010-02-28T18:47:08-08:00",
+      "subject": "[R] R mentioned in the Economist volume 394, number 8671",
+      "subject_clean": "R mentioned in the Economist volume 394, number 8671",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "There is a special report on managing information.  See page 8.\n\n\"A free programming language called R lets companies examine and present big \ndata sets, and free software called Hadoop now allows ordinary pC to analyse \nhuge quantities of data that previously required a supercomputer.\"\n\nhttp://www.economist.com/specialreports/displayStory.cfm?story_id=15557443\n\nBest,\nAdrian",
+      "body_snippet": "There is a special report on managing information.  See page 8.\n\n\"A free programming language called R lets companies examine and present big \ndata sets, and free software called Hadoop now allows ord",
+      "thread_id": "thread-af5c59656e85",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-23d10cb56fec",
+      "message_id": "<77EB52C6DD32BA4D87471DCD70C8D7000294800F@NA-PA-VBE03.na.tibco.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2010-02-28T19:06:54-08:00",
+      "subject": "[R] Expanding a data structure",
+      "subject_clean": "Expanding a data structure",
+      "in_reply_to": "<77c10f271002281721s21d394d7h2036dc0ae4ad5482@mail.gmail.com>",
+      "references": [
+        "<77c10f271002281721s21d394d7h2036dc0ae4ad5482@mail.gmail.com>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Worik R\n> Sent: Sunday, February 28, 2010 5:22 PM\n> To: r-help\n> Subject: [R] Expanding a data structure\n> \n> I have a xts object with logical data .\n> \n> > tail(q1)\n>              ..1\n> 2010-02-19  TRUE\n> 2010-02-22 FALSE\n> 2010-02-23 FALSE\n> 2010-02-24 FALSE\n> 2010-02-25 FALSE\n> 2010-02-26 FALSE\n> >\n> \n> I want to build a xts that records the dates that there is a \n> change.  If\n> TRUE -> FALSE it is \"down\" if FALSE -> TRUE it is \"up\"\n\n   change <- c(NA, diff(q1$..1))\nwill be 1 when ..1 goes from FALSE\nto TRUE, -1 for TRUE to FALSE, 0 for no change, and NA\nfor the first element.  You may find it convenient to\nchange that NA to something else or to not deal with\nthe first element after computing the diff.\n\nYou can map the -1,0,1 of diff() to your \"down\",\"up\"\nor \"SELL\",\"BUY\" with ifelse() or subscripting, as in\n   ifelse(change>0, \"up\", ifelse(change<0, \"down\",\"no change\"))\nor\n   c(\"down\",\"no change\",\"up\")[change+2]\nand extract the dates of the ups with\n   index(q1)[change==1]\n\nBill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com \n\n> \n> I can do it like this...\n> \n> q2 <- matrix(ncol=2, nrow = length(q1[,1]))\n> for(i in 1:length(q1)){\n>   if(q1[i-1,1]){\n>     ## Last one was TRUE\n>     if(!q1[i, 1]){\n>       ## Changed to FALSE\n>       q2[j,] = c(as.character(index(q1[i,1])), \"SELL\")\n>       j <- j+1\n>     }\n>   }else{\n>     ## Last one was FALSE\n>     if(q1[i, 1]){\n>       ## Changed to TRUE\n>       q2[j,] = c(as.character(index(q1[i,1])), \"BUY\")\n>       j <- j+1\n>     }\n>   }\n> }\n>  q3 <- xts(q2[1:(j-1), 2], order.by=as.Date(q2[1:(j-1), 1]))\n> \n> q3 is now the xts I want.  But there *has* to be a better way!\n> \n> can anybody help?\n> \n> cheers\n> Worik\n> \n> \n> What is wrong:\n> * I am building a huge matrix then only using a few rows.  I need a\n> structure I can dynamically add rows to.\n> * q1[,1] is already a date.  Converting it to a string then \n> back to a date\n> is superfluous, surly?\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Worik R\n> Sent: Sunday, February 28, 2010 5:22 PM\n> To: r-help\n> Subject: ",
+      "thread_id": "thread-23d10cb56fec",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-0b56104605b2",
+      "message_id": "<1267414877178-1573131.post@n4.nabble.com>",
+      "from_name": "pinkdd",
+      "from_email_hash": "07c28a7b944acee0aeadd4cdc7cc92a72d1abd038be8099cdf75991bea49bd5c",
+      "date": "2010-02-28T19:41:17-08:00",
+      "subject": "[R] Smoothing Spline Basis Matrix",
+      "subject_clean": "Smoothing Spline Basis Matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Anybody knows how to generate the basis matrix for smoothing spline? \n\nAnd how about the smoother matrix? I tried to use the following code, but\nthere exist replicated data in X, and the length of smooth.spline(X,\nS[,i])$y  is smaller than X, and then there is error in the last step.\n\nspl <- smooth.spline(X, Y)\nS <- diag(X)\nfor (i in 1:N)\nS[i,] <- smooth.spline(X, S[,i])$y #smoother matrix S\n\n\nSomeone help please! Thanks in advance.\n-- \nView this message in context: http://n4.nabble.com/Smoothing-Spline-Basis-Matrix-tp1573131p1573131.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Anybody knows how to generate the basis matrix for smoothing spline? \n\nAnd how about the smoother matrix? I tried to use the following code, but\nthere exist replicated data in X, and the length of smo",
+      "thread_id": "thread-0b56104605b2",
+      "thread_depth": 0,
+      "month": "2010-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-e3fcb83a498a",
+      "subject": "A slight trap in read.table/read.csv.",
+      "message_count": 1,
+      "participants": [
+        "Don MacQueen"
+      ],
+      "started": "2010-02-28T15:28:06-08:00",
+      "last_reply": "2010-02-28T15:28:06-08:00",
+      "root_message_id": "msg-e3fcb83a498a"
+    },
+    {
+      "id": "thread-8155283304a6",
+      "subject": "Why software fails in scientific research",
+      "message_count": 1,
+      "participants": [
+        "Sharpie"
+      ],
+      "started": "2010-02-28T16:23:24-08:00",
+      "last_reply": "2010-02-28T16:23:24-08:00",
+      "root_message_id": "msg-8155283304a6"
+    },
+    {
+      "id": "thread-8445b7a0754a",
+      "subject": "Best Hardware & OS For Large Data Sets",
+      "message_count": 1,
+      "participants": [
+        "kMan"
+      ],
+      "started": "2010-02-28T16:28:46-07:00",
+      "last_reply": "2010-02-28T16:28:46-07:00",
+      "root_message_id": "msg-8445b7a0754a"
+    },
+    {
+      "id": "thread-962c1be9f2ff",
+      "subject": "aadding labels to panel plots",
+      "message_count": 1,
+      "participants": [
+        "gauravbhatti"
+      ],
+      "started": "2010-02-28T17:05:48-08:00",
+      "last_reply": "2010-02-28T17:05:48-08:00",
+      "root_message_id": "msg-962c1be9f2ff"
+    },
+    {
+      "id": "thread-a86f6f748e88",
+      "subject": "What Bayesian Framework?",
+      "message_count": 1,
+      "participants": [
+        "D Sonderegger"
+      ],
+      "started": "2010-02-28T17:27:51-08:00",
+      "last_reply": "2010-02-28T17:27:51-08:00",
+      "root_message_id": "msg-a86f6f748e88"
+    },
+    {
+      "id": "thread-595249529fbb",
+      "subject": "Multicolumn Listbox selectcommand trouble",
+      "message_count": 1,
+      "participants": [
+        "jefreier at berkeley.edu"
+      ],
+      "started": "2010-02-28T18:11:42-08:00",
+      "last_reply": "2010-02-28T18:11:42-08:00",
+      "root_message_id": "msg-595249529fbb"
+    },
+    {
+      "id": "thread-a4a9d9d7408f",
+      "subject": "Similarity Percentage Analysis",
+      "message_count": 1,
+      "participants": [
+        "Brad Patrick Schneid"
+      ],
+      "started": "2010-02-28T18:14:50-08:00",
+      "last_reply": "2010-02-28T18:14:50-08:00",
+      "root_message_id": "msg-a4a9d9d7408f"
+    },
+    {
+      "id": "thread-ae4f3f7a3f45",
+      "subject": "Defective help pages",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Peter Danenberg"
+      ],
+      "started": "2010-02-28T18:39:23-06:00",
+      "last_reply": "2010-02-28T20:37:56-05:00",
+      "root_message_id": "msg-ae4f3f7a3f45"
+    },
+    {
+      "id": "thread-d73d3a88b1c1",
+      "subject": "R mentioned in the Economist volume 394, number 8671",
+      "message_count": 1,
+      "participants": [
+        "Adrian Dragulescu"
+      ],
+      "started": "2010-02-28T18:45:44-08:00",
+      "last_reply": "2010-02-28T18:45:44-08:00",
+      "root_message_id": "msg-d73d3a88b1c1"
+    },
+    {
+      "id": "thread-af5c59656e85",
+      "subject": "R mentioned in the Economist volume 394, number 8671",
+      "message_count": 1,
+      "participants": [
+        "Adrian Dragulescu"
+      ],
+      "started": "2010-02-28T18:47:08-08:00",
+      "last_reply": "2010-02-28T18:47:08-08:00",
+      "root_message_id": "msg-af5c59656e85"
+    },
+    {
+      "id": "thread-b774f82b7209",
+      "subject": "trend test for frequencies",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2010-02-28T19:04:18-05:00",
+      "last_reply": "2010-02-28T19:04:18-05:00",
+      "root_message_id": "msg-b774f82b7209"
+    },
+    {
+      "id": "thread-23d10cb56fec",
+      "subject": "Expanding a data structure",
+      "message_count": 1,
+      "participants": [
+        "William Dunlap"
+      ],
+      "started": "2010-02-28T19:06:54-08:00",
+      "last_reply": "2010-02-28T19:06:54-08:00",
+      "root_message_id": "msg-23d10cb56fec"
+    },
+    {
+      "id": "thread-0b56104605b2",
+      "subject": "Smoothing Spline Basis Matrix",
+      "message_count": 1,
+      "participants": [
+        "pinkdd"
+      ],
+      "started": "2010-02-28T19:41:17-08:00",
+      "last_reply": "2010-02-28T19:41:17-08:00",
+      "root_message_id": "msg-0b56104605b2"
+    }
+  ]
+}

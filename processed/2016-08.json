@@ -1,0 +1,152 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2016-08",
+  "messages": [
+    {
+      "id": "msg-447368a0f1f8",
+      "message_id": "<CAOjnRsb-6w=mZ8AFnWcwc0pBD4+ijCfA-+wiq0OokmYt49Td=A@mail.gmail.com>",
+      "from_name": "jeremiah rounds",
+      "from_email_hash": "8b51ac6468428d3c7e57db25ac8eba13df7cb3e5f7916a18729b249585441a4a",
+      "date": "2016-08-31T15:04:25-07:00",
+      "subject": "[R] Time format lagging issue",
+      "subject_clean": "Time format lagging issue",
+      "in_reply_to": "<D3EC9D33.184DAB%macqueen1@llnl.gov>",
+      "references": [
+        "<CAEGXkYUYJ9uZP=mWYJqUArCpozwb=jkGVwtCovOgdT72X68MoA@mail.gmail.com>",
+        "<D3EC9D33.184DAB%macqueen1@llnl.gov>"
+      ],
+      "body_plain": "Building on Don's example here is something that looks a lot like what I do\nevery day:\nSys.setenv(TZ=\"UTC\")\nmydf <- data.frame(t1=c('2011-12-31-22-30', '2011-12-31-23-30'))\nlibrary(lubridate)\nmydf$timestamp = lubridate::ymd_hm(mydf$t1)\nmydf$t2 = mydf$timestamp - period(minute=30)\n\n\n\nOn Wed, Aug 31, 2016 at 2:44 PM, MacQueen, Don <macqueen1 at llnl.gov> wrote:\n\n> Try following this example:\n>\n> mydf <- data.frame(t1=c('201112312230', '201112312330'))\n> tmp1 <- as.POSIXct(mydf$t1, format='%Y%m%d%H%M')\n> tmp2 <- tmp1 - 30*60\n> mydf$t2 <- format(tmp2, '%Y%m%d%H%M')\n>\n> It can be made into a single line, but I used intermediate variables tmp1\n> and tmp2 so that it would be easier to follow.\n>\n> Base R is more than adequate for this task.\n>\n> Please get rid of the asterisks in your next email. The just get in the\n> way. Learn how to send plain text email, not HTML email. Please.\n>\n>\n>\n>\n> --\n> Don MacQueen\n>\n> Lawrence Livermore National Laboratory\n> 7000 East Ave., L-627\n> Livermore, CA 94550\n> 925-423-1062\n>\n>\n>\n>\n>\n> On 8/31/16, 9:07 AM, \"R-help on behalf of Bhaskar Mitra\"\n> <r-help-bounces at r-project.org on behalf of bhaskar.kolkata at gmail.com>\n> wrote:\n>\n> >Hello Everyone,\n> >\n> >I am trying a shift the time series in a dataframe (df) by 30 minutes . My\n> >current format looks something like this :\n> >\n> >\n> >\n> >*df$$Time 1*\n> >\n> >\n> >*201112312230*\n> >\n> >*201112312300*\n> >\n> >*201112312330*\n> >\n> >\n> >\n> >*I am trying to add an additional column of time (df$Time 2) next to  Time\n> >1 by lagging it by ? 30minutes. Something like this :*\n> >\n> >\n> >*df$Time1                   **df$$Time2*\n> >\n> >\n> >*201112312230          **201112312200*\n> >\n> >*201112312300          **201112312230*\n> >\n> >*201112312330          **201112312300*\n> >\n> >*201112312330          *\n> >\n> >\n> >\n> >\n> >\n> >*Based on some of the suggestions available, I have tried this option *\n> >\n> >\n> >\n> >*require(zoo)*\n> >\n> >*df1$Time2  <- lag(df1$Time1, -1, na.pad = TRUE)*\n> >\n> >*View(df1)*\n> >\n> >\n> >\n> >*This does not however give me the desired result. I would appreciate any\n> >suggestions/advice in this regard.*\n> >\n> >\n> >*Thanks,*\n> >\n> >*Bhaskar*\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> >______________________________________________\n> >R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> >https://stat.ethz.ch/mailman/listinfo/r-help\n> >PLEASE do read the posting guide\n> >http://www.R-project.org/posting-guide.html\n> >and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/\n> posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Building on Don's example here is something that looks a lot like what I do\nevery day:\nSys.setenv(TZ=\"UTC\")\nmydf <- data.frame(t1=c('2011-12-31-22-30', '2011-12-31-23-30'))\nlibrary(lubridate)\nmydf$tim",
+      "thread_id": "thread-447368a0f1f8",
+      "thread_depth": 0,
+      "month": "2016-08"
+    },
+    {
+      "id": "msg-59a691f4a86c",
+      "message_id": "<CAF8bMcY-s9com=ON+COWihd7PaW245bwgR-4eXDRtEZ5MTi5mg@mail.gmail.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2016-08-31T15:09:26-07:00",
+      "subject": "[R] Time format lagging issue",
+      "subject_clean": "Time format lagging issue",
+      "in_reply_to": "<D3EC9D33.184DAB%macqueen1@llnl.gov>",
+      "references": [
+        "<CAEGXkYUYJ9uZP=mWYJqUArCpozwb=jkGVwtCovOgdT72X68MoA@mail.gmail.com>",
+        "<D3EC9D33.184DAB%macqueen1@llnl.gov>"
+      ],
+      "body_plain": "That\n  tmp1 - 30*60\ncan also be done as\n  tmp1 - as.difftime(30, units=\"mins\")\nso you don't have to remember that the internal representation of POSIXct\nis seconds since the start of 1970.  You can choose from the following\nequivalent expressions.\n  tmp1 - as.difftime(0.5, units=\"hours\")\n  tmp1 - as.difftime(1/2 * 1/24, units=\"days\")\n  tmp1 - as.difftime(30*60, units=\"secs\")\n  tmp1 - as.difftime(1/2 * 1/24 * 1/7, units=\"weeks\")\n\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Wed, Aug 31, 2016 at 2:44 PM, MacQueen, Don <macqueen1 at llnl.gov> wrote:\n\n> Try following this example:\n>\n> mydf <- data.frame(t1=c('201112312230', '201112312330'))\n> tmp1 <- as.POSIXct(mydf$t1, format='%Y%m%d%H%M')\n> tmp2 <- tmp1 - 30*60\n> mydf$t2 <- format(tmp2, '%Y%m%d%H%M')\n>\n> It can be made into a single line, but I used intermediate variables tmp1\n> and tmp2 so that it would be easier to follow.\n>\n> Base R is more than adequate for this task.\n>\n> Please get rid of the asterisks in your next email. The just get in the\n> way. Learn how to send plain text email, not HTML email. Please.\n>\n>\n>\n>\n> --\n> Don MacQueen\n>\n> Lawrence Livermore National Laboratory\n> 7000 East Ave., L-627\n> Livermore, CA 94550\n> 925-423-1062\n>\n>\n>\n>\n>\n> On 8/31/16, 9:07 AM, \"R-help on behalf of Bhaskar Mitra\"\n> <r-help-bounces at r-project.org on behalf of bhaskar.kolkata at gmail.com>\n> wrote:\n>\n> >Hello Everyone,\n> >\n> >I am trying a shift the time series in a dataframe (df) by 30 minutes . My\n> >current format looks something like this :\n> >\n> >\n> >\n> >*df$$Time 1*\n> >\n> >\n> >*201112312230*\n> >\n> >*201112312300*\n> >\n> >*201112312330*\n> >\n> >\n> >\n> >*I am trying to add an additional column of time (df$Time 2) next to  Time\n> >1 by lagging it by ? 30minutes. Something like this :*\n> >\n> >\n> >*df$Time1                   **df$$Time2*\n> >\n> >\n> >*201112312230          **201112312200*\n> >\n> >*201112312300          **201112312230*\n> >\n> >*201112312330          **201112312300*\n> >\n> >*201112312330          *\n> >\n> >\n> >\n> >\n> >\n> >*Based on some of the suggestions available, I have tried this option *\n> >\n> >\n> >\n> >*require(zoo)*\n> >\n> >*df1$Time2  <- lag(df1$Time1, -1, na.pad = TRUE)*\n> >\n> >*View(df1)*\n> >\n> >\n> >\n> >*This does not however give me the desired result. I would appreciate any\n> >suggestions/advice in this regard.*\n> >\n> >\n> >*Thanks,*\n> >\n> >*Bhaskar*\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> >______________________________________________\n> >R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> >https://stat.ethz.ch/mailman/listinfo/r-help\n> >PLEASE do read the posting guide\n> >http://www.R-project.org/posting-guide.html\n> >and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/\n> posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "That\n  tmp1 - 30*60\ncan also be done as\n  tmp1 - as.difftime(30, units=\"mins\")\nso you don't have to remember that the internal representation of POSIXct\nis seconds since the start of 1970.  You can ch",
+      "thread_id": "thread-59a691f4a86c",
+      "thread_depth": 0,
+      "month": "2016-08"
+    },
+    {
+      "id": "msg-095f2b17cd51",
+      "message_id": "<CAGxFJbQ6Df7aXk4S21emw46KxWaD528uQGQDRaznqcRq8Omrqw@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2016-08-31T15:28:49-07:00",
+      "subject": "[R] Looping through different groups of variables in models",
+      "subject_clean": "Looping through different groups of variables in models",
+      "in_reply_to": "<CAHOWgNXd+UWOSg55fCNa3kdbC9JOOyLJFncUy3qCeH6ovU_MjQ@mail.gmail.com>",
+      "references": [
+        "<CAHOWgNXd+UWOSg55fCNa3kdbC9JOOyLJFncUy3qCeH6ovU_MjQ@mail.gmail.com>"
+      ],
+      "body_plain": "Kai:\n\n1. I think that this is a very bad idea, statistically, if I\nunderstand you correctly. Generally, your model should incorporate all\ngroups, time points, and conditions together, not individually.\n\n2. But plotting results in \"small multiples\" -- aka \"trellis plots\"\nmay be useful. This is done in ggplot through \"faceting\" which you\ncould read up on and try (I use lattice, not ggplot, to do this sort\nof thing, so can't help with code).\n\n3. However, I think your question is mostly statistical in nature\n(define \"elegant\"), and if so, is off topic here. You might therefore\ntry stats.stackexchange.com instead to get ideas on how to approach\nyour data, solicit other opinions on whether what you want to do makes\nsense (and if not, what else), etc. Or, perhaps better yet, consult a\nlocal statistical resource.\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Wed, Aug 31, 2016 at 2:58 PM, Kai Mx <govokai at gmail.com> wrote:\n> Hi all,\n>\n> I am having trouble wrapping my head around a probably simple issue:\n>\n> After using the reshape package, I have a melted dataframe with the columns\n> group (factor), time (int), condition (factor), value(int).\n>\n> These are experimental data. The data were obtained from different\n> treatment groups (group) under different conditions at different time\n> points.\n>\n> I would now like to perform ANOVA, boxplots and calculate means to compare\n> groups for all combinations of conditions and time points with something\n> like\n>\n> fit <- lm(value~group, data=[subset of data with combination of\n> condition/timepoint])\n> summary (fit)\n> p <- ggplot([subset of data with combination of condition/timepoint],\n> aes(x= group, y=value)) + geom_boxplot ()\n> print (p)\n> tapply ([subset of data with combination of condition/timepoint]$value,\n> subset of data with combination of condition/timepoint]$group, mean)\n>\n> How can I loop through these combinations and output the data in an elegant\n> way?\n>\n> Thanks so much!\n>\n> Best,\n>\n> Kai\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Kai:\n\n1. I think that this is a very bad idea, statistically, if I\nunderstand you correctly. Generally, your model should incorporate all\ngroups, time points, and conditions together, not individually",
+      "thread_id": "thread-095f2b17cd51",
+      "thread_depth": 0,
+      "month": "2016-08"
+    },
+    {
+      "id": "msg-fdcfae4ef713",
+      "message_id": "<CAMwU6B0zCcLAN7ScAg=+qaxF2CkgaagWBrVfPwMuBV9bMifoig@mail.gmail.com>",
+      "from_name": "Marna Wagley",
+      "from_email_hash": "581075da89ece5735ce5340e7f9f786da0bf6b9488f478952f6ad2a5c1f62a7f",
+      "date": "2016-08-31T16:35:29-07:00",
+      "subject": "[R] How can I add text in plot and x axis of figures created in ggplot2?",
+      "subject_clean": "How can I add text in plot and x axis of figures created in ggplot2?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi R users,\nI have created four figures using ggplot2, but I am having trouble  to add\n\"r2=XXX, p=XX\" value on the upper left in each figure and also unit of X\naxis of each figure are different. I was also trying to write following  :\n1.  \"rainfall (mm/year\") on X axix for fig A.\n2. \"temp (degree Celsius)\" on X axis for fig B\n3.  \"distance (m)\" on X axis for fig C\n4.  \"survival Proba(%) on X axis for fig D\n\nI am wondering how I can create the figures with the above information\n\nThank you for your help in advance\n\nSincerely,\n\nMarna\n\nfollowing code and the example I have used.\n\ndat<-structure(list(x = c(0.31, 0.04, 0.1, 0.54, 0.03, 0.86, 0.97,\n\n0.4, 0.62, 0.3, 0.44, 0.51, 0.03, 0.12, 0.79, 0.3, 0.22, 0.66,\n\n0.75, 0.45), y = c(0.38, 0.61, 0.16, 0.06, 0.42, 0.67, 0.85,\n\n0.11, 0.79, 0.21, 0.84, 0.95, 0.3, 0.47, 0.79, 0.2, 0.34, 0.21,\n\n0.62, 0.25), group = structure(c(1L, 1L, 1L, 1L, 1L, 1L, 2L,\n\n2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L), .Label = c(\"A\",\n\n\"B\", \"C\", \"D\"), class = \"factor\")), .Names = c(\"x\", \"y\", \"group\"\n\n), class = \"data.frame\", row.names = c(NA, -20L))\n\n\ngp<-ggplot(data=dat, aes(x=x, y=y))\n\nGp<-gp + geom_point(size=1, col=\"blue\")\n\nGp<-Gp+ stat_smooth(method=\"lm\", level=0.99, col=\"black\",formula=y~poly(x,1\n))+\n\ncoord_cartesian(ylim=c(0, 1))+theme_bw()+\n\ntheme(axis.text.y = element_text(angle = 90, vjust = 0))+\n\nylab <http://docs.ggplot2.org/0.9.2.1/labs.html>*(*\"My Y\"*)+*theme(\naxis.text.x = element_text(size=8))\n\nGp+ facet_wrap(~group,ncol=5, scales=\"free_x\")\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi R users,\nI have created four figures using ggplot2, but I am having trouble  to add\n\"r2=XXX, p=XX\" value on the upper left in each figure and also unit of X\naxis of each figure are different. I was",
+      "thread_id": "thread-fdcfae4ef713",
+      "thread_depth": 0,
+      "month": "2016-08"
+    },
+    {
+      "id": "msg-55175e10f5a4",
+      "message_id": "<CACdH2ZYhVh_4xNyEbjwq_9QDJnyOW07v_=ZZ+E_hhdLbU7ZzKQ@mail.gmail.com>",
+      "from_name": "Michael Hannon",
+      "from_email_hash": "347909ffc1f094a3fd62b64a1b3536363977d407afe8fc9f5b80e3d4e87f62fc",
+      "date": "2016-08-31T20:34:41-07:00",
+      "subject": "[R] Need advice on linear programming in R",
+      "subject_clean": "Need advice on linear programming in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Greetings.  A subset of a problem that the group I work with turns out to be\nan optimization problem, in the sense of linear programming.\n\nWe've looked at several approaches to this but haven't found one that seems to\nbe the right fit.  I'm looking for some guidance in finding an R package that\ndoes what we want in an acceptable time.\n\nHere's a toy example.  We start with a matrix, called \"gMat1\" (historical\nreasons):\n\n> gMat1 <- matrix(c(3, 6, 9, 5, 9, 5), nrow=3)\n> print(gMat1)\n     [,1] [,2]\n[1,]    3    5\n[2,]    6    9\n[3,]    9    5\n\nThe goal is to add the contents of one column of each row to one of two bins\n(in general the number of bins equals the number of columns) such that the\nminimum number in each bin is maximized.  An example follows.\n\nIn the toy example, the possibilities can be enumerated simply:\n\n> allChoices <- expand.grid(rep(list(1:ncol(gMat1)), nrow(gMat1)))\n> print(allChoices)\n  Var1 Var2 Var3\n1    1    1    1\n2    2    1    1\n3    1    2    1\n4    2    2    1\n5    1    1    2\n6    2    1    2\n7    1    2    2\n8    2    2    2\n\nFor example, with the first choice, (1, 1, 1), column 1, hence, bin 1, is\nselected for all three rows, giving a result for the two bins of:\n\n    18   0\n\nFor the second choice, (2, 1, 1), the '2' in the first position selects the\ncontents of column 2 for bin 2.  The remaining (1, 1) select the (6, 9) in the\nfirst column and assign those to bin 1:\n\n    15   5\n\nThe result is a set of \"binSums\" corresponding to the each of the set of\npossible choices:\n\n> print(binSums)\n     [,1] [,2]\n[1,]   18    0\n[2,]   15    5\n[3,]   12    9\n[4,]    9   14\n[5,]    9    5\n[6,]    6   10\n[7,]    3   14\n[8,]    0   19\n\nHaving generated the sums, the goal is to pick the row that has the largest\nminimum and map that back to the original choice.  In the toy example, both\nrows 3 and 4 satisfy that criterion ('9' is the minimum in each, and '9' is\nbigger than the minima in the other 6 rows -- 0, 3, 5, 6).\n\nIn the real case there are potentially thousands of rows and columns, so\neye-balling is not an option.  And, in fact, using \"expand.grid\" isn't even an\noption to generate the original choices.\n\nWe've tried some ad hoc approaches that seem to work tolerably well.  Here's\none that we *might* have considered, if we *could* have generated the\n\"allChoices/binSums\":\n\n> bsVar <- apply(binSums, 1, var)\n> locBestVar <- which(bsVar == min(bsVar))\n> allChoices[locBestVar, ]\n  Var1 Var2 Var3\n3    1    2    1\n\nBut there was a feeling within the group that we didn't have a solid-enough\nfoundation using the ad hoc approaches.  Hence, we asked for help from an\nexpert in Operations Research.  He was able to solve a problem of realistic\nsize in more or less no time at all using the \"GAMS\" software:\n\n    https://www.gams.com/\n\nUnfortunately, GAMS is not free software, and we are hoping to produce an R\npackage that is freely distributable.  The next suggestion was to use Gurobi:\n\n    http://www.gurobi.com/\n\nwhich is evidently free for academic use but not otherwise.  Better, but still\nnot perfect.  (And I couldn't use the free version of Gurobi while working\nfrom home, as it didn't consider my home network to be associated with an\nacademic institution -- which of course it isn't).\n\nFinally, we tried:\n\n    Rglpk_solve_LP\n\nfrom the R package \"Rglpk\":\n\n    https://cran.r-project.org/web/packages/Rglpk/index.html\n\nThis satisfied the licensing constraints, but we were unable to produce a\nresult in a \"finite\" amount of time.  By this I mean that we ran the Rglpk\nsoftware on a problem with 200 rows and 20 columns on the latest Mac Pro with\n64GB of memory, and it didn't finish overnight.  A realistic problem would\nhave at least 10000 rows and 50 columns.  (This admittedly might simply have\nbeen a consequence of our unfamiliarity with the package. Suggestions\nwelcome.) To be clear, this process is not something we'd be doing once in\norder to build the package.  This is something an end user would have to do\nevery time he/she ran our package.\n\nIf you've managed to read this far and have any suggestions as to how we might\nproceed, please send them my way.  Thanks.\n\n-- Mike",
+      "body_snippet": "Greetings.  A subset of a problem that the group I work with turns out to be\nan optimization problem, in the sense of linear programming.\n\nWe've looked at several approaches to this but haven't found ",
+      "thread_id": "thread-55175e10f5a4",
+      "thread_depth": 0,
+      "month": "2016-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-447368a0f1f8",
+      "subject": "Time format lagging issue",
+      "message_count": 1,
+      "participants": [
+        "jeremiah rounds"
+      ],
+      "started": "2016-08-31T15:04:25-07:00",
+      "last_reply": "2016-08-31T15:04:25-07:00",
+      "root_message_id": "msg-447368a0f1f8"
+    },
+    {
+      "id": "thread-59a691f4a86c",
+      "subject": "Time format lagging issue",
+      "message_count": 1,
+      "participants": [
+        "William Dunlap"
+      ],
+      "started": "2016-08-31T15:09:26-07:00",
+      "last_reply": "2016-08-31T15:09:26-07:00",
+      "root_message_id": "msg-59a691f4a86c"
+    },
+    {
+      "id": "thread-095f2b17cd51",
+      "subject": "Looping through different groups of variables in models",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2016-08-31T15:28:49-07:00",
+      "last_reply": "2016-08-31T15:28:49-07:00",
+      "root_message_id": "msg-095f2b17cd51"
+    },
+    {
+      "id": "thread-fdcfae4ef713",
+      "subject": "How can I add text in plot and x axis of figures created in ggplot2?",
+      "message_count": 1,
+      "participants": [
+        "Marna Wagley"
+      ],
+      "started": "2016-08-31T16:35:29-07:00",
+      "last_reply": "2016-08-31T16:35:29-07:00",
+      "root_message_id": "msg-fdcfae4ef713"
+    },
+    {
+      "id": "thread-55175e10f5a4",
+      "subject": "Need advice on linear programming in R",
+      "message_count": 1,
+      "participants": [
+        "Michael Hannon"
+      ],
+      "started": "2016-08-31T20:34:41-07:00",
+      "last_reply": "2016-08-31T20:34:41-07:00",
+      "root_message_id": "msg-55175e10f5a4"
+    }
+  ]
+}

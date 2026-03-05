@@ -1,0 +1,38 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2024-08",
+  "messages": [
+    {
+      "id": "msg-a0a898cc410e",
+      "message_id": "<017a01dafbf3$902a31c0$b07e9540$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2024-08-31T18:17:27-04:00",
+      "subject": "[R] aggregating data with quality control",
+      "subject_clean": "aggregating data with quality control",
+      "in_reply_to": "<27c3b1964d64474aac11678760647e61@regione.marche.it>",
+      "references": [
+        "<27c3b1964d64474aac11678760647e61@regione.marche.it>"
+      ],
+      "body_plain": "Stefano,\n\nI see you already have an answer that works for you.\n\nSometimes you want to step back and see if some modification makes a problem easier to solve.\n\nI often simply switch to using tools in the tidyverse such as dplyr for parts of the job albeit much of the same can be done using functions built-in to R.\n\nIn your case, there are many possible solutions besides taking the max in some way as in a factor column.\n\nYou seem to expect exactly 48 measurements. Currently you encode them as one of two character strings but if this is really a binary choice, you could have used a 0/1 or TRUE/FALSE column instead, or make one. This lets you do things like take the sum and compare it to 48 to see if all are true, or to zero to check if all are false. You could take the product to check if at least one is false or use a negation for another perspective. If the number of rows may not be 48, you can compare to a calculation of the actual number of rows in that subset.\n\nIf your data was placed into wide format, say based on your hs field being unique for each test site, there are similar ideas by taking a subset of the columns and applying things  by using functions like rowSum.\n\nAgain, some things I commonly use in dplyr such as group_by() and how it impacts other operations including reports, makes this a little different but most things can be done with careful use of base R, except areas where dplyr supports more and more abstract ways to specify what you want and that your example does not need.\n\nJust FYI, you did not share what your function my.mean() is. \n\nI won't share the code unless interested but it looks like part of what you are doing is to bundle by a truncated version of date/time to just a day.  I am not sure your method is optimal. You make a list of three different things containing parts of a date. That can work but as dates are already looking like 2024-01-02 which sorts and compares well alphabetically, I wonder if instead you group by that.\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Stefano Sofia\nSent: Saturday, August 31, 2024 7:15 AM\nTo: r-help at R-project.org\nSubject: [R] aggregating data with quality control\n\nDear R-list users,\n\nI deal with semi-hourly data from automatic meteorological stations.\n\nThey have to pass a manual validation; suppose that status = \"C\" stands for correct and status = \"D\" for discarded.\n\nHere a simple example with \"Snow height\" (HS):\n\n\nmydf <- data.frame(data_POSIX=seq(as.POSIXct(\"2024-01-01 00:00:00\", format = \"%Y-%m-%d %H:%M:%S\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2024-01-02 23:30:00\", format = \"%Y-%m-%d %H:%M:%S\", tz=\"Etc/GMT-1\"), by=\"30 min\"))\n\nmydf$hs <- round(runif(96, 0, 100))\n\nmydf$status <- c(rep(\"C\", 50), \"S\", rep(\"C\", 45))\n\n\nEvaluating the daily mean indipendently from the status is very easy:\n\naggregate(mydf$hs, by=list(format(mydf$data_POSIX, \"%Y\"), format(mydf$data_POSIX, \"%m\"), format(mydf$data_POSIX, \"%d\")), my.mean)\n\n\nThings become more complicated when I need to export also the status: this should be \"C\" when all 48 data have status equal to \"C\", and status \"D\" when at least one value has status =\"D\".\n\n\nI have no clue on how to do that in an efficient way.\n\nCould some of you give me some clues on how to do that?\n\n\nThank you for your usual support\n\nStefano Sofia\n\n\n         (oo)\n--oOO--( )--OOo--------------------------------------\nStefano Sofia PhD\nCivil Protection - Marche Region - Italy\nMeteo Section\nSnow Section\nVia del Colle Ameno 5\n60126 Torrette di Ancona, Ancona (AN)\nUff: +39 071 806 7743\nE-mail: stefano.sofia at regione.marche.it\n---Oo---------oO----------------------------------------\n\n________________________________\n\nAVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. 6 della DGR n. 1394/2008 si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\nIMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Stefano,\n\nI see you already have an answer that works for you.\n\nSometimes you want to step back and see if some modification makes a problem easier to solve.\n\nI often simply switch to using tools in t",
+      "thread_id": "thread-a0a898cc410e",
+      "thread_depth": 0,
+      "month": "2024-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a0a898cc410e",
+      "subject": "aggregating data with quality control",
+      "message_count": 1,
+      "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com"
+      ],
+      "started": "2024-08-31T18:17:27-04:00",
+      "last_reply": "2024-08-31T18:17:27-04:00",
+      "root_message_id": "msg-a0a898cc410e"
+    }
+  ]
+}

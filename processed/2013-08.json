@@ -1,0 +1,131 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2013-08",
+  "messages": [
+    {
+      "id": "msg-28398dd7fc91",
+      "message_id": "<CAHh0FZDurOw4F2smRjChy-g+TCew7rdxyosfrRR5HCWfMEm_SA@mail.gmail.com>",
+      "from_name": "Simona Augyte",
+      "from_email_hash": "36d3aa428c51656f52dfc6bbb9599f6756f989eef4e4251cc16d6dbad60b95de",
+      "date": "2013-08-31T18:30:54-04:00",
+      "subject": "[R] NMDS QUESTION",
+      "subject_clean": "NMDS QUESTION",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130831/d088d39e/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130831/d088d39e/attachment.pl>",
+      "thread_id": "thread-28398dd7fc91",
+      "thread_depth": 0,
+      "month": "2013-08"
+    },
+    {
+      "id": "msg-2f35eeae1042",
+      "message_id": "<1377998719.29983.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-08-31T18:25:19-07:00",
+      "subject": "[R] Insert null columns and rows into a matrix to make it square",
+      "subject_clean": "Insert null columns and rows into a matrix to make it square",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "HI,\nYou could try this:\n\ndat1<- read.table(text=\"\nA? B? C? D\nA 1? 2? 3? 4\nE 5? 6? 7? 8\nF 9 10 11 12\n\",sep=\"\",header=TRUE,stringsAsFactors=FALSE)\n\n\ndat1$ID<-row.names(dat1)\nlibrary(reshape2)\ndat1New<-melt(dat1,id.var=\"ID\")\ndat2<- data.frame(expand.grid(ID=LETTERS[1:6],variable=LETTERS[1:6]),value=0)\ndatM<-merge(dat1New,dat2,all=TRUE)\n\n\n?res<-xtabs(value~ID+variable,data=datM)\n\n?names(attr(res,\"dimnames\"))<-NULL\n?res\n#?? A? B? C? D? E? F\n#A? 1? 2? 3? 4? 0? 0\n#B? 0? 0? 0? 0? 0? 0\n#C? 0? 0? 0? 0? 0? 0\n#D? 0? 0? 0? 0? 0? 0\n#E? 5? 6? 7? 8? 0? 0\n#F? 9 10 11 12? 0? 0\n\n#or\nres2<-dcast(datM,ID~variable,value.var=\"value\",sum)\nrow.names(res2)<- res2[,1]\nres2New<- res2[,-1]\n?res2New\n#? A? B? C? D E F\n#A 1? 2? 3? 4 0 0\n#B 0? 0? 0? 0 0 0\n#C 0? 0? 0? 0 0 0\n#D 0? 0? 0? 0 0 0\n#E 5? 6? 7? 8 0 0\n#F 9 10 11 12 0 0\n\n\n\n#or\n\ndat2<- expand.grid(ID=LETTERS[1:6],variable=LETTERS[1:6])\ndatM<-merge(dat1New,dat2,all=TRUE)\n?dcast(datM,ID~variable,value.var=\"value\",fill=0)\n#? ID A? B? C? D E F\n#1? A 1? 2? 3? 4 0 0\n#2? B 0? 0? 0? 0 0 0\n#3? C 0? 0? 0? 0 0 0\n#4? D 0? 0? 0? 0 0 0\n#5? E 5? 6? 7? 8 0 0\n#6? F 9 10 11 12 0 0\n\nA.K.\n\n\nHi, \nI wish to convert rectangular matrices such as this: \n? A ?B ?C ?D \nA 1 ?2 ?3 ?4 \nE 5 ?6 ?7 ?8 \nF 9 10 11 12 \ninto square ones with null rows and columns named with the missing names such as this: \n? A ?B ?C ?D ?E ?F \nA 1 ?2 ?3 ?4 ?0 ?0 \nB 0 ?0 ?0 ?0 ?0 ?0 \nC 0 ?0 ?0 ?0 ?0 ?0 \nD 0 ?0 ?0 ?0 ?0 ?0 \nE 5 ?6 ?7 ?8 ?0 ?0 \nF 9 10 11 12 ?0 ?0 \nCould anyone give me a hand please. \nThanks \nMariki",
+      "body_snippet": "HI,\nYou could try this:\n\ndat1<- read.table(text=\"\nA? B? C? D\nA 1? 2? 3? 4\nE 5? 6? 7? 8\nF 9 10 11 12\n\",sep=\"\",header=TRUE,stringsAsFactors=FALSE)\n\n\ndat1$ID<-row.names(dat1)\nlibrary(reshape2)\ndat1New<-m",
+      "thread_id": "thread-2f35eeae1042",
+      "thread_depth": 0,
+      "month": "2013-08"
+    },
+    {
+      "id": "msg-d610cb42b351",
+      "message_id": "<1377999888.56895.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-08-31T18:44:48-07:00",
+      "subject": "[R] Insert null columns and rows into a matrix to make it square",
+      "subject_clean": "Insert null columns and rows into a matrix to make it square",
+      "in_reply_to": "<1377998719.29983.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "references": [
+        "<1377998719.29983.YahooMailNeo@web142605.mail.bf1.yahoo.com>"
+      ],
+      "body_plain": "HI,\n\nWithout converting to data.frame, you can also try:\n\n\ndat1<- read.table(text=\"\nA? B? C? D\nA 1? 2? 3? 4\nE 5? 6? 7? 8\nF 9 10 11 12\n\",sep=\"\",header=TRUE,stringsAsFactors=FALSE)\nmat1<- as.matrix(dat1)\nnames1<-unique(c(colnames(mat1),rownames(mat1)))\nmat2<- matrix(0,length(names1),length(names1),dimnames=list(names1,names1))\n?vec1<-paste0(colnames(mat1)[col(mat1)],rownames(mat1)[row(mat1)])\n?vec2<- paste0(colnames(mat2)[col(mat2)],colnames(mat2)[row(mat2)])\n\n?mat2[match(vec1,vec2)]<- mat1\n?mat2\n#? A? B? C? D E F\n#A 1? 2? 3? 4 0 0\n#B 0? 0? 0? 0 0 0\n#C 0? 0? 0? 0 0 0\n#D 0? 0? 0? 0 0 0\n#E 5? 6? 7? 8 0 0\n#F 9 10 11 12 0 0\nA.K.\n\n\n\n----- Original Message -----\nFrom: arun <smartpink111 at yahoo.com>\nTo: R help <r-help at r-project.org>\nCc: \nSent: Saturday, August 31, 2013 9:25 PM\nSubject: Re: Insert null columns and rows into a matrix to make it square\n\nHI,\nYou could try this:\n\ndat1<- read.table(text=\"\nA? B? C? D\nA 1? 2? 3? 4\nE 5? 6? 7? 8\nF 9 10 11 12\n\",sep=\"\",header=TRUE,stringsAsFactors=FALSE)\n\n\ndat1$ID<-row.names(dat1)\nlibrary(reshape2)\ndat1New<-melt(dat1,id.var=\"ID\")\ndat2<- data.frame(expand.grid(ID=LETTERS[1:6],variable=LETTERS[1:6]),value=0)\ndatM<-merge(dat1New,dat2,all=TRUE)\n\n\n?res<-xtabs(value~ID+variable,data=datM)\n\n?names(attr(res,\"dimnames\"))<-NULL\n?res\n#?? A? B? C? D? E? F\n#A? 1? 2? 3? 4? 0? 0\n#B? 0? 0? 0? 0? 0? 0\n#C? 0? 0? 0? 0? 0? 0\n#D? 0? 0? 0? 0? 0? 0\n#E? 5? 6? 7? 8? 0? 0\n#F? 9 10 11 12? 0? 0\n\n#or\nres2<-dcast(datM,ID~variable,value.var=\"value\",sum)\nrow.names(res2)<- res2[,1]\nres2New<- res2[,-1]\n?res2New\n#? A? B? C? D E F\n#A 1? 2? 3? 4 0 0\n#B 0? 0? 0? 0 0 0\n#C 0? 0? 0? 0 0 0\n#D 0? 0? 0? 0 0 0\n#E 5? 6? 7? 8 0 0\n#F 9 10 11 12 0 0\n\n\n\n#or\n\ndat2<- expand.grid(ID=LETTERS[1:6],variable=LETTERS[1:6])\ndatM<-merge(dat1New,dat2,all=TRUE)\n?dcast(datM,ID~variable,value.var=\"value\",fill=0)\n#? ID A? B? C? D E F\n#1? A 1? 2? 3? 4 0 0\n#2? B 0? 0? 0? 0 0 0\n#3? C 0? 0? 0? 0 0 0\n#4? D 0? 0? 0? 0 0 0\n#5? E 5? 6? 7? 8 0 0\n#6? F 9 10 11 12 0 0\n\nA.K.\n\n\nHi, \nI wish to convert rectangular matrices such as this: \n? A ?B ?C ?D \nA 1 ?2 ?3 ?4 \nE 5 ?6 ?7 ?8 \nF 9 10 11 12 \ninto square ones with null rows and columns named with the missing names such as this: \n? A ?B ?C ?D ?E ?F \nA 1 ?2 ?3 ?4 ?0 ?0 \nB 0 ?0 ?0 ?0 ?0 ?0 \nC 0 ?0 ?0 ?0 ?0 ?0 \nD 0 ?0 ?0 ?0 ?0 ?0 \nE 5 ?6 ?7 ?8 ?0 ?0 \nF 9 10 11 12 ?0 ?0 \nCould anyone give me a hand please. \nThanks \nMariki",
+      "body_snippet": "HI,\n\nWithout converting to data.frame, you can also try:\n\n\ndat1<- read.table(text=\"\nA? B? C? D\nA 1? 2? 3? 4\nE 5? 6? 7? 8\nF 9 10 11 12\n\",sep=\"\",header=TRUE,stringsAsFactors=FALSE)\nmat1<- as.matrix(dat1",
+      "thread_id": "thread-2f35eeae1042",
+      "thread_depth": 1,
+      "month": "2013-08"
+    },
+    {
+      "id": "msg-69d2131e2df7",
+      "message_id": "<1378013768.80574.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-08-31T22:36:08-07:00",
+      "subject": "[R] To represent on the same plot the relation (y1, x) and (y2, x)",
+      "subject_clean": "To represent on the same plot the relation (y1, x) and (y2, x)",
+      "in_reply_to": "<5222CE41.1000204@cirad.fr>",
+      "references": [
+        "<52222E75.3050108@cirad.fr>",
+        "<1377977251.50857.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+        "<5222CE41.1000204@cirad.fr>"
+      ],
+      "body_plain": "Hi Arnaud,\nNo problem.\nTry,\nx<- 1:10\n?set.seed(28)\n?y1<- rnorm(10)\nset.seed(485)\n?y2<- rnorm(10,25)\nlibrary(plotrix)\n?twoord.plot(x,y1,y2,lylim=c(-2,2),rylim=c(20,30),ylab=\"y1\",rylab=\"y2\",lcol=2,rcol=4,main=\"y1, y2 vs. x\")\n\nA.K.\n\n\n\n\n----- Original Message -----\nFrom: Arnaud Michel <michel.arnaud at cirad.fr>\nTo: arun <smartpink111 at yahoo.com>\nCc: R help <r-help at r-project.org>\nSent: Sunday, September 1, 2013 1:18 AM\nSubject: Re: [R] To represent on the same plot the relation (y1, x) and (y2, x)\n\nThank you Arun\nBut have you a solution if y1 and y2 have not the same unit (ex : the \nunit of y1 is meter and the unit of y2 is Kg)? and if I want the axe of \ny1 at the left of the plot and the axe of y2 at the rigth of the plot....\nMichel\n\nLe 31/08/2013 21:27, arun a ?crit :\n> Hi,\n> May be this helps:\n>?  x<- 1:10\n>?  set.seed(28)\n>?  y1<- rnorm(10)\n> set.seed(485)\n>?  y2<- rnorm(10)\n>?  plot(x,y1,col=\"red\",type=\"b\",ylab=\"y1:y2\")\n> lines(y2,col=\"blue\",type=\"b\")\n> legend(\"topleft\", legend = c(\"y1\", \"y2\"),text.col=c(\"red\",\"blue\"))\n>\n>\n>\n> #or\n> library(ggplot2)\n> dat1<- data.frame(x,y1,y2)\n> ggplot(dat1,aes(x))+geom_line(aes(y=y1,colour=\"y1\"))+\n>? ? geom_line(aes(y=y2,colour=\"y2\")) +ylab(\"y1:y2\")\n>\n> A.K.\n>\n>\n>\n>\n>\n> ----- Original Message -----\n> From: Arnaud Michel <michel.arnaud at cirad.fr>\n> To: R help <r-help at r-project.org>\n> Cc:\n> Sent: Saturday, August 31, 2013 1:57 PM\n> Subject: [R] To represent on the same plot the relation (y1, x) and (y2, x)\n>\n> Hello,\n> I have 3 vectors x, y1 and y2\n> I would like to represent on the same plot the two graph (y1, x) and\n> (y2, x).\n> Is it possible with ggplot ? other package ?\n> Thanks for your help\n>\n\n-- \nMichel ARNAUD\nCharg? de mission aupr?s du DRH\nDGDRD-Drh - TA 174/04\nAv Agropolis 34398 Montpellier cedex 5\ntel : 04.67.61.75.38\nfax : 04.67.61.57.87\nport: 06.47.43.55.31",
+      "body_snippet": "Hi Arnaud,\nNo problem.\nTry,\nx<- 1:10\n?set.seed(28)\n?y1<- rnorm(10)\nset.seed(485)\n?y2<- rnorm(10,25)\nlibrary(plotrix)\n?twoord.plot(x,y1,y2,lylim=c(-2,2),rylim=c(20,30),ylab=\"y1\",rylab=\"y2\",lcol=2,rcol=",
+      "thread_id": "thread-69d2131e2df7",
+      "thread_depth": 0,
+      "month": "2013-08"
+    },
+    {
+      "id": "msg-258e8cbae6cc",
+      "message_id": "<1378017685.76572.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-08-31T23:41:25-07:00",
+      "subject": "[R] NMDS QUESTION",
+      "subject_clean": "NMDS QUESTION",
+      "in_reply_to": "<CAHh0FZDurOw4F2smRjChy-g+TCew7rdxyosfrRR5HCWfMEm_SA@mail.gmail.com>",
+      "references": [
+        "<CAHh0FZDurOw4F2smRjChy-g+TCew7rdxyosfrRR5HCWfMEm_SA@mail.gmail.com>"
+      ],
+      "body_plain": "HI,\ncoma<- read.table(text=\"\ngr T C M B\narcor 6 4 6 5\ncorfo 24 21 23 24\ncorma 25 15 26 17\ncrust 3 2 6 5\nfil 15 12 15 15\nfol 11 9 6 8\nleat 10 11 13 13\nseag 2 2 2 2\n\",sep=\"\",header=TRUE)\n\n?coma.x<- as.matrix(coma)\n\nstr(coma.x)\n# chr [1:8, 1:5] \"arcor\" \"corfo\" \"corma\" \"crust\" \"fil\" \"fol\" ...\n# - attr(*, \"dimnames\")=List of 2\n#? ..$ : NULL\n#? ..$ : chr [1:5] \"gr\" \"T\" \"C\" \"M\" ...\n\n\ncoma.dist<- dist(coma.x)\n#Warning message:\n#In dist(coma.x) : NAs introduced by coercion\n\n\n?dist() #documentation\n# dist(x, method = \"euclidean\", diag = FALSE, upper = FALSE, p = 2)\n# x: a numeric matrix, data frame or ?\"dist\"? object.\n\n\n\n?coma.x<- as.matrix(coma[,-1]) #####\n?str(coma.x)\n# int [1:8, 1:4] 6 24 25 3 15 11 10 2 4 21 ...\n# - attr(*, \"dimnames\")=List of 2\n?# ..$ : NULL\n?# ..$ : chr [1:4] \"T\" \"C\" \"M\" \"B\"\n\n\n?coma.dist<- dist(coma.x)\nA.K.\n\n\n\n----- Original Message -----\nFrom: Simona Augyte <simona.augyte at uconn.edu>\nTo: r-help at r-project.org\nCc: \nSent: Saturday, August 31, 2013 6:30 PM\nSubject: [R] NMDS QUESTION\n\nI'm trying to run a very simple non-metric multidimensional scaling code on\na 8x5 character matrix.\ngr T C M B\narcor 6 4 6 5\ncorfo 24 21 23 24\ncorma 25 15 26 17\ncrust 3 2 6 5\nfil 15 12 15 15\nfol 11 9 6 8\nleat 10 11 13 13\nseag 2 2 2 2\n\nMy code is as follows;\ncoma<-read.csv(\"coma.csv\",header=TRUE)\ncoma.x<-as.matrix(coma)\ncoma.dist <- dist(coma.x) # right here I get a warning message -> In\ndist(coma.x) : NAs introduced by coercion\n\nWHAT DOES THAT MEAN??? the table has values and there are not NAs. Could\nthis be a by product of the way I inserted the data?\n\nPlease help.\n\n-- \n\nSimona Augyte, MS\nPhD student\nEcology and Evolutionary Biology\nUniversity of Connecticut\ncell 707-832-7007\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "HI,\ncoma<- read.table(text=\"\ngr T C M B\narcor 6 4 6 5\ncorfo 24 21 23 24\ncorma 25 15 26 17\ncrust 3 2 6 5\nfil 15 12 15 15\nfol 11 9 6 8\nleat 10 11 13 13\nseag 2 2 2 2\n\",sep=\"\",header=TRUE)\n\n?coma.x<- as.m",
+      "thread_id": "thread-28398dd7fc91",
+      "thread_depth": 1,
+      "month": "2013-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-2f35eeae1042",
+      "subject": "Insert null columns and rows into a matrix to make it square",
+      "message_count": 2,
+      "participants": [
+        "arun"
+      ],
+      "started": "2013-08-31T18:25:19-07:00",
+      "last_reply": "2013-08-31T18:44:48-07:00",
+      "root_message_id": "msg-2f35eeae1042"
+    },
+    {
+      "id": "thread-28398dd7fc91",
+      "subject": "NMDS QUESTION",
+      "message_count": 2,
+      "participants": [
+        "Simona Augyte",
+        "arun"
+      ],
+      "started": "2013-08-31T18:30:54-04:00",
+      "last_reply": "2013-08-31T23:41:25-07:00",
+      "root_message_id": "msg-28398dd7fc91"
+    },
+    {
+      "id": "thread-69d2131e2df7",
+      "subject": "To represent on the same plot the relation (y1, x) and (y2, x)",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2013-08-31T22:36:08-07:00",
+      "last_reply": "2013-08-31T22:36:08-07:00",
+      "root_message_id": "msg-69d2131e2df7"
+    }
+  ]
+}

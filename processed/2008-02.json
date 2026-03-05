@@ -1,0 +1,293 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2008-02",
+  "messages": [
+    {
+      "id": "msg-88332c4c078e",
+      "message_id": "<1wd4qfwelw.fsf@bass.biostat.umn.edu>",
+      "from_name": "Michael",
+      "from_email_hash": "fd43b97fcfaf22429da44f516e46ad782a492a8cbefe74644d76993fbd603e04",
+      "date": "2008-02-29T17:02:35-06:00",
+      "subject": "[R] Running LaTeX dvi previewer on MacOS X",
+      "subject_clean": "Running LaTeX dvi previewer on MacOS X",
+      "in_reply_to": null,
+      "references": [
+        "<47C831C9.2000900@vanderbilt.edu>",
+        "<hoskzbwtla.fsf@bass.biostat.umn.edu>",
+        "<167FB502-64C2-44B0-AA8B-4E45F2CAC25A@gmail.com>",
+        "<3qlk53wfno.fsf@bass.biostat.umn.edu>",
+        "<F543EDCC-0F77-4FF8-9C4B-396B8EE9CFB6@gmail.com>"
+      ],
+      "body_plain": "On 29 Feb 2008, Charilaos Skiadas wrote:\n\n> Why is it important that the output file be a dvi file? Would it be a  \n> problem to have the latex() function produce a pdf file on mac systems?\n\nThat was what I was saying.\n\n> I thought the latex() command was just producing tex code.\n\nBy defaults it gives a 'preview' which is currently a dvi file.  \n\nMichael",
+      "body_snippet": "On 29 Feb 2008, Charilaos Skiadas wrote:\n\n> Why is it important that the output file be a dvi file? Would it be a  \n> problem to have the latex() function produce a pdf file on mac systems?\n\nThat was ",
+      "thread_id": "thread-88332c4c078e",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-afc885f002c3",
+      "message_id": "<644e1f320802291636g3456f478u369c7d150107bb89@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2008-02-29T19:36:22-05:00",
+      "subject": "[R] can the matrix size limit be increased?",
+      "subject_clean": "can the matrix size limit be increased?",
+      "in_reply_to": "<855F7156-AD78-48B7-849E-FA6522EA81A7@ccr.buffalo.edu>",
+      "references": [
+        "<855F7156-AD78-48B7-849E-FA6522EA81A7@ccr.buffalo.edu>"
+      ],
+      "body_plain": "You only have 1 row in your matrix, so what you are getting printed\nout is not an empty matrix, but the header.  If you print the\ntranspose you get:\n\n> head(t(tst))\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n[5,]    5\n[6,]    6\n>\n\nThe default is to only print out 100000 values.  Your data is there,\nyou just have to wait for the headers to print out, or at least make a\nmatrix with more than one row.\n\nOn Fri, Feb 29, 2008 at 2:25 PM, Robert Leach <rwleach at ccr.buffalo.edu> wrote:\n> Hi there,\n>\n> I'm brand new to R, so let me know if this question is not\n> appropriate for this list.  I've been reading through the\n> documentation and have tried a number of things, but am pretty much\n> stuck so far.  Here's the session info:\n>\n>  > sessionInfo()\n> R version 2.6.2 (2008-02-08)\n> i386-apple-darwin8.10.1\n>\n> locale:\n> C\n>\n> attached base packages:\n> [1] stats     graphics  grDevices utils     datasets  methods   base\n>\n> loaded via a namespace (and not attached):\n> [1] rcompgen_0.1-17\n>\n>\n> So I seem to be hitting a limit on matrix size.  First I read in my\n> data into a list and it's OK:\n>\n>  > mz <- scan(\"data.column3.txt\", list(0))\n> Read 158991 records\n>  >mz\n>  > mz\n> [[1]]\n>     [1] 0.000000e+00 0.000000e+00 1.003393e+01 3.651888e+00 0.000000e\n> +00\n>     [6] 0.000000e+00 3.067042e+00 1.277249e+00 1.984366e+00 3.644203e\n> +01\n>    [11] 1.172925e+02 1.933753e+02 2.020940e+02 1.570501e+02 8.990829e\n> +01\n> ...\n>\n> But when I try to put it into a matrix like this, I don't get an\n> error, but the matrix appears empty...\n>\n>  > MZ=matrix(mz[[1]],nrow=1)\n>  > MZ\n>      [,1] [,2]     [,3]     [,4] [,5] [,6]     [,7]     [,8]     [,\n> 9]    [,10]\n>         [,11]    [,12]    [,13]    [,14]   [,15]    [,16]    [,\n> 17]    [,18]\n>         [,19]    [,20]    [,21]    [,22]    [,23]    [,24]    [,\n> 25]    [,26]\n> ...\n>\n> When I did a subset of my data, it was fine.  I did a manual binary\n> search and determined the cutoff to be 100000 elements.  So if I do\n> just 99,999 elements, it looks as I would expect:\n>\n>  > mz <- scan(\"data.column3.txt\", list(0), 99999)\n> Read 99999 records\n>  > tst <- matrix(mz[[1]],nrow=1)\n>  > tst\n>      [,1] [,2]     [,3]     [,4] [,5] [,6]     [,7]     [,8]     [,\n> 9]    [,10]\n> [1,]    0    0 10.03393 3.651888    0    0 3.067042 1.277249 1.984366\n> 36.44203\n>         [,11]    [,12]    [,13]    [,14]   [,15]    [,16]    [,\n> 17]    [,18]\n> [1,] 117.2925 193.3753 202.0940 157.0501 89.9083 26.44127 17.05373\n> 53.40315\n>         [,19]    [,20]    [,21]    [,22]    [,23]    [,24]    [,\n> 25]    [,26]\n> [1,] 65.20086 37.33463 17.71247 27.37268 41.83289 48.46916 58.94969\n> 76.05099\n> ...\n>\n> If I do 100,000, I get the same empty appearance.  I've assumed that\n> there must be a limitation on the number of elements in a matrix.  Is\n> that right?  If so, how do I increase the maximum number of\n> elements?  I tried another machine's installation of R and it\n> apparently doesn't have a 99,999 element limit.  I've tried using:\n>\n> R --max-mem-size=2G\n> R --max-vsize=200000\n> R --max-nsize=200000\n> R --max-vsize=200000 --max-nsize=200000 --max-ppsize=200000\n> R --max-vsize=10M\n>\n> I still end up with the empty-looking matrix when I try these.  How\n> do I get my installation to work like the installation on another\n> computer I tried where I was able to have larger matrices?\n>\n> Oh yeah, I also tried this, just to rule out problems with my data:\n>\n>  > tst <- matrix(seq(1,158991),nrow=1,ncol=158991)\n>  > tst\n>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]\n> [,13] [,14]\n>      [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,\n> 25] [,26]\n>      [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36] [,\n> 37] [,38]\n> ...\n>\n> Thanks,\n> Rob\n>\n> Robert W. Leach\n> Scientific Programmer\n> Center for Computational Research\n> Center of Excellence in Bioinformatics\n> University at Buffalo\n> http://www.ccr.buffalo.edu/\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem you are trying to solve?  Tell me what you want to\ndo, not how you want to do it.",
+      "body_snippet": "You only have 1 row in your matrix, so what you are getting printed\nout is not an empty matrix, but the header.  If you print the\ntranspose you get:\n\n> head(t(tst))\n     [,1]\n[1,]    1\n[2,]    2\n[3,] ",
+      "thread_id": "thread-afc885f002c3",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-b21e33aaae11",
+      "message_id": "<47C8A6D4.5090208@vanderbilt.edu>",
+      "from_name": "Frank E Harrell Jr",
+      "from_email_hash": "aac2104e568f1b4bc608deccefed75168aaf244b4de06a96ffe1c917f66b7853",
+      "date": "2008-02-29T18:44:04-06:00",
+      "subject": "[R] Running LaTeX dvi previewer on MacOS X",
+      "subject_clean": "Running LaTeX dvi previewer on MacOS X",
+      "in_reply_to": "<5jhcfrwfm8.fsf@bass.biostat.umn.edu>",
+      "references": [
+        "<47C831C9.2000900@vanderbilt.edu>",
+        "<p06230903c3ee13d75434@[128.115.92.33]>",
+        "<5jhcfrwfm8.fsf@bass.biostat.umn.edu>"
+      ],
+      "body_plain": "Michael wrote:\n> On 29 Feb 2008, Don MacQueen wrote:\n> \n>> The generic way to open an arbitrary file with an arbitrary \n>> application in OS X at the command line in a shell window is\n>>\n>> open -a application_name file_name\n> \n> But there is no native Mac program to open a dvi file.\n> \n> Michael\n\nBut you can install one.\nYou missed the earlier e-mails on this subject.\n\nFrank\n\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\n\n-- \nFrank E Harrell Jr   Professor and Chair           School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
+      "body_snippet": "Michael wrote:\n> On 29 Feb 2008, Don MacQueen wrote:\n> \n>> The generic way to open an arbitrary file with an arbitrary \n>> application in OS X at the command line in a shell window is\n>>\n>> open -a ap",
+      "thread_id": "thread-b21e33aaae11",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-a382766a46dd",
+      "message_id": "<200849.56256.qm@web56401.mail.re3.yahoo.com>",
+      "from_name": "Mirela Tulbure",
+      "from_email_hash": "1cd98a903ad7333ae0e2b4a81866712827fd770befab675dbaba16204af70a69",
+      "date": "2008-02-29T16:47:03-08:00",
+      "subject": "[R] model R^2 and partial R^2 values for CART analysis in R",
+      "subject_clean": "model R^2 and partial R^2 values for CART analysis in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-list members,\n \nI am doing a CART analysis in R using the rpart function in the rpart package:\nPhrag.rpart=rpart(PhragDiff~., data = Phrag, method=\"anova\", xval=10). \n \nI used the xerror values in the CP table to prune the tree to 4 nsplits:\n\n   CP            nsplit  rel error  xerror    xstd\n1 0.098172      0   1.00000 1.02867 0.12768\n2 0.055991      3   0.70548 1.00823 0.12911\n3 0.029306      4   0.64949 0.83275 0.12074\n4 0.018943      5   0.62019 0.86994 0.12467\n5 0.010503      6   0.60124 0.86975 0.12080\n6 0.010000      7   0.59074 0.87944 0.11757\n \nI would like to get R^2 values for the model as well as partial R^2 values for each split. \nI?ve read that the R^2 = 1-rel error, so I am assuming that in my case this would be 1-0.64949. Is this correct? Are the relative R^2 values the CP values? \n \nYour help would be much appreciated. Many thanks in advance,\n \nMirela \n\n\n      ____________________________________________________________________________________\nLooking for last minute shopping deals?  \nFind them fast with Yahoo! Search.  http://tools.search.yahoo.com/newsearch/category.php?category=shopping",
+      "body_snippet": "Dear R-list members,\n \nI am doing a CART analysis in R using the rpart function in the rpart package:\nPhrag.rpart=rpart(PhragDiff~., data = Phrag, method=\"anova\", xval=10). \n \nI used the xerror values",
+      "thread_id": "thread-a382766a46dd",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-dedf175a3bb6",
+      "message_id": "<da79af330802291647g4df88199i8283f0a3d31eb721@mail.gmail.com>",
+      "from_name": "Henrique Dallazuanna",
+      "from_email_hash": "2b1bfd6f54e91efeea57642f19c49816d1cdbe76d5726a5b5ac5c88460e5abd5",
+      "date": "2008-02-29T21:47:31-03:00",
+      "subject": "[R] Fitting long names in boxplot",
+      "subject_clean": "Fitting long names in boxplot",
+      "in_reply_to": "<47C889F4.9010600@stamlab.org>",
+      "references": [
+        "<47C889F4.9010600@stamlab.org>"
+      ],
+      "body_plain": "Try this:\n\nAssuming that 'build' is a factor\n\npar(mar=c(7,2,2,2), xpd = TRUE)\nboxplot(time ~ build, horiz = T, col='lightblue', xaxt='n')\ntext(1:nlevels(build), par(\"usr\")[3]-0.50, levels(build), srt=45, cex=0.6)\n\n\n\n\nOn 29/02/2008, Alex Reynolds <areynolds at stamlab.org> wrote:\n> I have the following code:\n>\n>  subsetTimeDataPlot <- boxplot(subsetTimeData$time ~\n>  subsetTimeData$build, horizontal=True, col=\"lightblue\", ...)\n>\n>  The 'names' component consists of strings that can be up to 20-30\n>  characters long.\n>\n>  How would I go about drawing the names vertically (not the boxplot) or\n>  shrinking the names text (I tried cex.names=0.7 but this didn't help).\n>\n>  Thanks for any advice, I apologize if these are stupid questions,\n>\n>  -Alex\n>\n>  --\n>  Alex Reynolds\n>  University of Washington Medical Genetics\n>  2211 Elliot\n>  Seattle, WA 98121\n>  areynolds at stamlab.org\n>\n>  ______________________________________________\n>  R-help at r-project.org mailing list\n>  https://stat.ethz.ch/mailman/listinfo/r-help\n>  PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>  and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n-- \nHenrique Dallazuanna\nCuritiba-Paran?-Brasil\n25? 25' 40\" S 49? 16' 22\" O",
+      "body_snippet": "Try this:\n\nAssuming that 'build' is a factor\n\npar(mar=c(7,2,2,2), xpd = TRUE)\nboxplot(time ~ build, horiz = T, col='lightblue', xaxt='n')\ntext(1:nlevels(build), par(\"usr\")[3]-0.50, levels(build), srt=",
+      "thread_id": "thread-dedf175a3bb6",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-b35c035e0f95",
+      "message_id": "<alpine.OSX.1.00.0802292104390.774@fchq.ybpny>",
+      "from_name": "Steve Revilak",
+      "from_email_hash": "167ee06faea63a6f4185640a2bbf21d3d39442821f7fb4e29930d96555c08659",
+      "date": "2008-02-29T21:22:38-05:00",
+      "subject": "[R] datetime on x-axis of plot",
+      "subject_clean": "datetime on x-axis of plot",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "> From: joshv\n\n> Hello, I'm reading Time Series Analysis and its Applilcations with R Examples\n> and I have a question...\n> \n> I notice that in the book there are timeseries plots but without the x-axis\n> being labeled with dates.  They are just numbers 1,...50,...100, etc.  How\n> do I get the date to show up on the x-axis?\n> \n> Here is my dateframe:\n> \n> > head(myData, 5)\n> \n> 1 2008-01-30 08:30   7.00\n> 2 2008-01-30 08:32   9.25\n> 3 2008-01-30 08:34   5.50\n> 4 2008-01-30 08:36   5.00\n> 5 2008-01-30 08:38 -26.25\n\nTry this:\n\n   # \"foo.dat\" is a two-column file with the data you gave earlier\n   myData <- read.table(\"foo.dat\", sep=\"\\t\", colClasses=c(\"POSIXct\", \"numeric\"))\n\n   # plot, but don't label the x-axis\n   plot(myData, type=\"l\", xaxt=\"n\")\n\n   # now, add labels to the x-axis\n   axis.POSIXct(1, myData$V1, format=\"%m/%d %H:%M\")\n\nSteve",
+      "body_snippet": "> From: joshv\n\n> Hello, I'm reading Time Series Analysis and its Applilcations with R Examples\n> and I have a question...\n> \n> I notice that in the book there are timeseries plots but without the x-ax",
+      "thread_id": "thread-b35c035e0f95",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-0ce776a9b0c6",
+      "message_id": "<509e0620802291918k49de256fve38f9963433ebab2@mail.gmail.com>",
+      "from_name": "Michael Lawrence",
+      "from_email_hash": "e9ff4b3acc925189bce61741d9f30f26f996837e9604d7ac3a80794d259750a9",
+      "date": "2008-02-29T21:18:19-06:00",
+      "subject": "[R] GUI developement / Matlab",
+      "subject_clean": "GUI developement / Matlab",
+      "in_reply_to": "<47C7FE5A.5030604@yahoo.de>",
+      "references": [
+        "<47C7FE5A.5030604@yahoo.de>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20080229/b89697b3/attachment.pl",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20080229/b89697b3/attachment.pl",
+      "thread_id": "thread-0ce776a9b0c6",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-7686bc1fa7f1",
+      "message_id": "<315151.20322.qm@web56408.mail.re3.yahoo.com>",
+      "from_name": "Mirela Tulbure",
+      "from_email_hash": "1cd98a903ad7333ae0e2b4a81866712827fd770befab675dbaba16204af70a69",
+      "date": "2008-02-29T20:23:52-08:00",
+      "subject": "[R] model R^2 and partial R^2 values",
+      "subject_clean": "model R^2 and partial R^2 values",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-list members,\n\nI am doing a CART analysis in R using the rpart function in the rpart package:\nPhrag.rpart=rpart(PhragDiff~., data = Phrag, method=\"anova\", xval=10). \n\nI used the xerror values in the CP table to prune the tree to 4 nsplits:\n\n  CP            nsplit  rel error  xerror    xstd\n1 0.098172      0  1.00000 1.02867 0.12768\n2 0.055991      3  0.70548 1.00823 0.12911\n3 0.029306      4  0.64949 0.83275 0.12074\n4 0.018943      5  0.62019 0.86994 0.12467\n5 0.010503      6  0.60124 0.86975 0.12080\n6 0.010000      7  0.59074 0.87944 0.11757\n\nI would like to get R^2 values for the model as well as partial R^2 values for each split. \nI?ve read that the R^2 = 1-rel error, so I am assuming that in my case this would be 1-0.64949. Is this correct? Are the relative R^2 values the CP values? \n\nYour help would be much appreciated. Many thanks in advance,\n\nMirela \n\n\n      ____________________________________________________________________________________\nLooking for la\nols.search.yahoo.com/newsearch/category.php?category=shopping",
+      "body_snippet": "Dear R-list members,\n\nI am doing a CART analysis in R using the rpart function in the rpart package:\nPhrag.rpart=rpart(PhragDiff~., data = Phrag, method=\"anova\", xval=10). \n\nI used the xerror values i",
+      "thread_id": "thread-7686bc1fa7f1",
+      "thread_depth": 0,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-0dcd0032204b",
+      "message_id": "<15773072.post@talk.nabble.com>",
+      "from_name": "Mark Difford",
+      "from_email_hash": "ffbc2a8286edd6140c1ea0c5e5e376580485e8c569294788829a75584c9dd975",
+      "date": "2008-02-29T23:21:21-08:00",
+      "subject": "[R] model R^2 and partial R^2 values",
+      "subject_clean": "model R^2 and partial R^2 values",
+      "in_reply_to": "<315151.20322.qm@web56408.mail.re3.yahoo.com>",
+      "references": [
+        "<315151.20322.qm@web56408.mail.re3.yahoo.com>"
+      ],
+      "body_plain": "Hi Mirela,\n\n>> Are the relative R^2 values the CP values?\n\nNo.  CP is your complexity parameter.\n\n>> I?ve read that the R^2 = 1-rel error, so I am assuming that in my case\n>> this \n>> would be 1-0.64949. Is this correct?\n\nYes.  See ?rsq.rpart, and run the example, which I've copied below.\n\n##\npar(ask=T)\nz.auto <- rpart(Mileage ~ Weight, car.test.frame)\nrsq.rpart(z.auto)\npar(ask=F)\n\nThe values plotted in graph-1 come from 1-rel.error and 1-xerror.\n\nHTH, Mark.\n\n\nMirela Tulbure wrote:\n> \n> Dear R-list members,\n> \n> I am doing a CART analysis in R using the rpart function in the rpart\n> package:\n> Phrag.rpart=rpart(PhragDiff~., data = Phrag, method=\"anova\", xval=10). \n> \n> I used the xerror values in the CP table to prune the tree to 4 nsplits:\n> \n>   CP            nsplit  rel error  xerror    xstd\n> 1 0.098172      0  1.00000 1.02867 0.12768\n> 2 0.055991      3  0.70548 1.00823 0.12911\n> 3 0.029306      4  0.64949 0.83275 0.12074\n> 4 0.018943      5  0.62019 0.86994 0.12467\n> 5 0.010503      6  0.60124 0.86975 0.12080\n> 6 0.010000      7  0.59074 0.87944 0.11757\n> \n> I would like to get R^2 values for the model as well as partial R^2 values\n> for each split. \n> I?ve read that the R^2 = 1-rel error, so I am assuming that in my case\n> this would be 1-0.64949. Is this correct? Are the relative R^2 values the\n> CP values? \n> \n> Your help would be much appreciated. Many thanks in advance,\n> \n> Mirela \n> \n> \n>      \n> ____________________________________________________________________________________\n> Looking for la\n> ols.search.yahoo.com/newsearch/category.php?category=shopping\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/model-R%5E2-and-partial-R%5E2-values-tp15772594p15773072.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi Mirela,\n\n>> Are the relative R^2 values the CP values?\n\nNo.  CP is your complexity parameter.\n\n>> I?ve read that the R^2 = 1-rel error, so I am assuming that in my case\n>> this \n>> would be 1-0.649",
+      "thread_id": "thread-7686bc1fa7f1",
+      "thread_depth": 1,
+      "month": "2008-02"
+    },
+    {
+      "id": "msg-0eda7d226f63",
+      "message_id": "<15773081.post@talk.nabble.com>",
+      "from_name": "Mark Difford",
+      "from_email_hash": "ffbc2a8286edd6140c1ea0c5e5e376580485e8c569294788829a75584c9dd975",
+      "date": "2008-02-29T23:53:48-08:00",
+      "subject": "[R] [OT] Make plots with GNUplot. Have anyone tried that?",
+      "subject_clean": "[OT] Make plots with GNUplot. Have anyone tried that?",
+      "in_reply_to": "<30c82f5f0802291554p1b03cbd4p4b788a296191ec21@mail.gmail.com>",
+      "references": [
+        "<30c82f5f0802291237qc4ca3a6xc09befd12a4b016f@mail.gmail.com>",
+        "<200802292209.37158.singularitaet@gmx.net>",
+        "<30c82f5f0802291412t25552d6nd6c23e9b08391903@mail.gmail.com>",
+        "<20080229223153.GA31135@localdomain>",
+        "<30c82f5f0802291554p1b03cbd4p4b788a296191ec21@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Everyone,\n\nPlease don't denigrate the capabilities of GNUplot (Louise excluded).  It\ncan, in fact, do some truly awesome stuff.\n\nhttp://linuxgazette.net/133/luana.html\n\nThe PDF is worth a shot.\n\nCheers, Mark.\n\n\nLouise Hoffman-3 wrote:\n> \n>>  If you still want to then read ?write.table, that can export your data\n>>  into a spreadsheet-like ascii format which can be used from GNUplot\n>>  easily.\n> \n> Very interesting.\n> \n> So if I e.g. write:\n> ts.sim <- arima.sim(list(order = c(1,1,0), ar = 0.7), n = 200)\n> ts.plot(ts.sim)\n> \n> How do I know the names of the rows to put in the data.frame() command?\n> \n>>  Btw, comparing the graphics capabilities of GNUplot and R, it is\n>>  something like a three-wheel bicycle and a spaceship. Guess\n>>  which is which.\n> \n> =) I know that I will most likely spend a lot of time on just making\n> the plots, but I atleast (for now =) ) think it could be fun to try.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/Make-plots-with-GNUplot.-Have-anyone-tried-that--tp15767196p15773081.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi Everyone,\n\nPlease don't denigrate the capabilities of GNUplot (Louise excluded).  It\ncan, in fact, do some truly awesome stuff.\n\nhttp://linuxgazette.net/133/luana.html\n\nThe PDF is worth a shot.\n\nCh",
+      "thread_id": "thread-0eda7d226f63",
+      "thread_depth": 0,
+      "month": "2008-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a382766a46dd",
+      "subject": "model R^2 and partial R^2 values for CART analysis in R",
+      "message_count": 1,
+      "participants": [
+        "Mirela Tulbure"
+      ],
+      "started": "2008-02-29T16:47:03-08:00",
+      "last_reply": "2008-02-29T16:47:03-08:00",
+      "root_message_id": "msg-a382766a46dd"
+    },
+    {
+      "id": "thread-88332c4c078e",
+      "subject": "Running LaTeX dvi previewer on MacOS X",
+      "message_count": 1,
+      "participants": [
+        "Michael"
+      ],
+      "started": "2008-02-29T17:02:35-06:00",
+      "last_reply": "2008-02-29T17:02:35-06:00",
+      "root_message_id": "msg-88332c4c078e"
+    },
+    {
+      "id": "thread-b21e33aaae11",
+      "subject": "Running LaTeX dvi previewer on MacOS X",
+      "message_count": 1,
+      "participants": [
+        "Frank E Harrell Jr"
+      ],
+      "started": "2008-02-29T18:44:04-06:00",
+      "last_reply": "2008-02-29T18:44:04-06:00",
+      "root_message_id": "msg-b21e33aaae11"
+    },
+    {
+      "id": "thread-afc885f002c3",
+      "subject": "can the matrix size limit be increased?",
+      "message_count": 1,
+      "participants": [
+        "jim holtman"
+      ],
+      "started": "2008-02-29T19:36:22-05:00",
+      "last_reply": "2008-02-29T19:36:22-05:00",
+      "root_message_id": "msg-afc885f002c3"
+    },
+    {
+      "id": "thread-7686bc1fa7f1",
+      "subject": "model R^2 and partial R^2 values",
+      "message_count": 2,
+      "participants": [
+        "Mark Difford",
+        "Mirela Tulbure"
+      ],
+      "started": "2008-02-29T20:23:52-08:00",
+      "last_reply": "2008-02-29T23:21:21-08:00",
+      "root_message_id": "msg-7686bc1fa7f1"
+    },
+    {
+      "id": "thread-0ce776a9b0c6",
+      "subject": "GUI developement / Matlab",
+      "message_count": 1,
+      "participants": [
+        "Michael Lawrence"
+      ],
+      "started": "2008-02-29T21:18:19-06:00",
+      "last_reply": "2008-02-29T21:18:19-06:00",
+      "root_message_id": "msg-0ce776a9b0c6"
+    },
+    {
+      "id": "thread-b35c035e0f95",
+      "subject": "datetime on x-axis of plot",
+      "message_count": 1,
+      "participants": [
+        "Steve Revilak"
+      ],
+      "started": "2008-02-29T21:22:38-05:00",
+      "last_reply": "2008-02-29T21:22:38-05:00",
+      "root_message_id": "msg-b35c035e0f95"
+    },
+    {
+      "id": "thread-dedf175a3bb6",
+      "subject": "Fitting long names in boxplot",
+      "message_count": 1,
+      "participants": [
+        "Henrique Dallazuanna"
+      ],
+      "started": "2008-02-29T21:47:31-03:00",
+      "last_reply": "2008-02-29T21:47:31-03:00",
+      "root_message_id": "msg-dedf175a3bb6"
+    },
+    {
+      "id": "thread-0eda7d226f63",
+      "subject": "[OT] Make plots with GNUplot. Have anyone tried that?",
+      "message_count": 1,
+      "participants": [
+        "Mark Difford"
+      ],
+      "started": "2008-02-29T23:53:48-08:00",
+      "last_reply": "2008-02-29T23:53:48-08:00",
+      "root_message_id": "msg-0eda7d226f63"
+    }
+  ]
+}

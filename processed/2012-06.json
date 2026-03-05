@@ -1,0 +1,68 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2012-06",
+  "messages": [
+    {
+      "id": "msg-ebdfd70bf4ce",
+      "message_id": "<CAJ55+dJ-hZ3FW2+c7k6MDX8U=5gP74ON_m5cjQNtdD54Rkt9Tw@mail.gmail.com>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "7d3e82acd7a177485858a278f82b82d7e665640301fe16d4c1d9312e4963cff3",
+      "date": "2012-06-01T09:20:27+12:00",
+      "subject": "[R] bigglm binomial negative fitted value",
+      "subject_clean": "bigglm binomial negative fitted value",
+      "in_reply_to": "<CAAS1aP9Ecd3ttKvW+X3mO8cDudzhFMt==1E3NKQgY-DxnOCSoA@mail.gmail.com>",
+      "references": [
+        "<CAAS1aP9Ecd3ttKvW+X3mO8cDudzhFMt==1E3NKQgY-DxnOCSoA@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Jun 1, 2012 at 1:17 AM, Yue Guan <pipehappy at gmail.com> wrote:\n> Hi, there\n>\n> Since glm cannot handle factors very well. I try to use bigglm like this:\n>\n> logit_model <- bigglm(responser~var1+var2+var3, data, chunksize=1000,\n> family=binomial(), weights=~trial, sandwich=FALSE)\n>\n> fitted <- predict(logit_model, data)\n>\n> only var2 is factor, var1 and var3 are numeric.\n>\n> I expect fitted should be a vector of value falls in (0,1)\n>\n> However, I get something like this:\n> str(fitted)\n> ?num [1:260617, 1] -0.0564 -0.0564 -0.1817 -0.1842 -0.1852 ...\n> ?- attr(*, \"dimnames\")=List of 2\n> ?..$ : chr [1:260617] \"1\" \"2\" \"3\" \"4\" ...\n> ?..$ : NULL\n>\n\nAs the help says, the default is predictions of the linear predictor.\nTo get predictions of the probability, use type=\"response\"\n\n   -thomas\n\n-- \nThomas Lumley\nProfessor of Biostatistics\nUniversity of Auckland",
+      "body_snippet": "On Fri, Jun 1, 2012 at 1:17 AM, Yue Guan <pipehappy at gmail.com> wrote:\n> Hi, there\n>\n> Since glm cannot handle factors very well. I try to use bigglm like this:\n>\n> logit_model <- bigglm(responser~v",
+      "thread_id": "thread-ebdfd70bf4ce",
+      "thread_depth": 0,
+      "month": "2012-06"
+    },
+    {
+      "id": "msg-67ea04481687",
+      "message_id": "<CAJ55+dLBXvZAhApTuFPghnM7UDf5cT3tJ+nEr0H63uTtvX52FQ@mail.gmail.com>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "7d3e82acd7a177485858a278f82b82d7e665640301fe16d4c1d9312e4963cff3",
+      "date": "2012-06-01T09:34:43+12:00",
+      "subject": "[R] svychisq??",
+      "subject_clean": "svychisq??",
+      "in_reply_to": "<SNT130-W788A1A5EB81B4798047F1D80B0@phx.gbl>",
+      "references": [
+        "<SNT130-ds20C1505F5B22700AF08B3FD80B0@phx.gbl>",
+        "<SNT130-W788A1A5EB81B4798047F1D80B0@phx.gbl>"
+      ],
+      "body_plain": "On Fri, Jun 1, 2012 at 6:07 AM, Diana Marcela Martinez Ruiz\n<dianammr06 at hotmail.com> wrote:\n>\n> Hello forum,\n>\n>\n> I\n> want to do a test of independence\n> with svychisq, but I\n> get an error, then this my code:\n>\n> am18 <- ? read.spss(\"C:/Users/diana/Dropbox/Semestre\n> 10/Tesis 10/Tesis Diana/AMcomuna18-29MAR2012.sav\",\n> ? use.value.labels=TRUE, max.value.labels=Inf,\n> to.data.frame=TRUE)\n> b<-matrix(c(am18$N6_MANZANA),ncol=1)\n> c<-matrix(c(am18$PM1_1_PONDEMUESTRA),ncol=1)\n> d<-matrix(c(am18$M1_3_ESTRATO),ncol=1)\n> e<-matrix(c(rep(0.078,315)),ncol=1)\n> Muestra.comp<-svydesign(id=~b,strata\n> =~d,nest=TRUE,weights=~c,data=am18, fpc=~e)\n>\n> ocupacion\n> <-matrix(c(am18$M1_19_OCUPACIONPRINCIPALACTUAL),ncol=1)\n> APES<-matrix(c(am18$M3_11_AUTOPERCEPCIONSALUDGENERAL),ncol=1)\n>\n> tbl1<-svytable(~ocupacion+APES,Muestra.comp)\n> summary(tbl1, statistic=\"Chisq\")\n>\n> ? ? Error en\n> `[.data.frame`(design$variables, , as.character(rows)) :\n> ? ? ?undefined columns\n> selected\n> ?when I call am18 at the\n> end says it is a data.frame\n> (to.data.frame = TRUE))\n> and by that I aprace error.\n>\n> I would appreciate help\n> with this problem\n\nVariables that you refer to with a formula have to be in the design object.\n\nYou don't need to turn the variables into matrices, so you could just do\n\ntbl1<-svytable(~M1_19_OCUPACIONPRINCIPALACTUAL+M3_11_AUTOPERCEPCIONSALUDGENERAL,Muestra.comp)\n\nor if you want shorter names, create renamed variables in the design object:\n\nMuestra.comp <- update(Muestra.comp, ocupacion =\nM1_19_OCUPACIONPRINCIPALACTUAL, APES=\nM3_11_AUTOPERCEPCIONSALUDGENERAL)\n\n     -thomas\n\n-- \nThomas Lumley\nProfessor of Biostatistics\nUniversity of Auckland",
+      "body_snippet": "On Fri, Jun 1, 2012 at 6:07 AM, Diana Marcela Martinez Ruiz\n<dianammr06 at hotmail.com> wrote:\n>\n> Hello forum,\n>\n>\n> I\n> want to do a test of independence\n> with svychisq, but I\n> get an error, then ",
+      "thread_id": "thread-67ea04481687",
+      "thread_depth": 0,
+      "month": "2012-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-ebdfd70bf4ce",
+      "subject": "bigglm binomial negative fitted value",
+      "message_count": 1,
+      "participants": [
+        "Thomas Lumley"
+      ],
+      "started": "2012-06-01T09:20:27+12:00",
+      "last_reply": "2012-06-01T09:20:27+12:00",
+      "root_message_id": "msg-ebdfd70bf4ce"
+    },
+    {
+      "id": "thread-67ea04481687",
+      "subject": "svychisq??",
+      "message_count": 1,
+      "participants": [
+        "Thomas Lumley"
+      ],
+      "started": "2012-06-01T09:34:43+12:00",
+      "last_reply": "2012-06-01T09:34:43+12:00",
+      "root_message_id": "msg-67ea04481687"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2012-12",
+  "messages": [
+    {
+      "id": "msg-eb19c6324cac",
+      "message_id": "<002c01cde7ad$2e63bfe0$8b2b3fa0$@edu>",
+      "from_name": "David L Carlson",
+      "from_email_hash": "1c6db2a0e5c011c43dfe903f318d9c072dd5005c8454c036c319f4e4b032fd69",
+      "date": "2012-12-31T17:18:45-06:00",
+      "subject": "[R] cut ()",
+      "subject_clean": "cut ()",
+      "in_reply_to": "<E18C153EBB81024CB60FCE9B4C34D57C08A0E9CC@PL-EMSMB11.ees.hhs.gov>",
+      "references": [
+        "<E18C153EBB81024CB60FCE9B4C34D57C08A0E9CC@PL-EMSMB11.ees.hhs.gov>"
+      ],
+      "body_plain": "A misplaced right parenthesis caused the problem:\n\np1_st_data$ob_mrj_cat <- cut (p1_st_data$obt_mrj_p, quantile\n(p1_st_data$obt_mrj_p, (0:5/5), include.lowest=TRUE)) \n\nShould be\n\np1_st_data$ob_mrj_cat <- cut (p1_st_data$obt_mrj_p, quantile\n(p1_st_data$obt_mrj_p, (0:5/5)), include.lowest=TRUE)\n\n---------------------------------------------\nDavid L Carlson\nAssociate Professor of Anthropology\nTexas A&M University\nCollege Station, TX 77843-4352\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Muhuri, Pradip (SAMHSA/CBHSQ)\n> Sent: Monday, December 31, 2012 4:25 PM\n> To: R help\n> Subject: [R] cut ()\n> \n> Hello List,\n> \n> \n> My goal is to create a 5 category variable (p1_st_data$ob_mrj_cat),\n> based on the p1_st_data$obt_mrj_p variable, using the following code\n> for 50 States and District of Columbia (N=51).\n> \n> p1_st_data$ob_mrj_cat <- cut (p1_st_data$obt_mrj_p, quantile\n> (p1_st_data$obt_mrj_p, (0:5/5), include.lowest=TRUE))\n> \n> The issue is that, for Utah, I am getting an <NA> instead of (42,48.7]\n> in the ob_mrj_cat column.\n> \n> Is there a way to tweak the code (i.e., programmatically) to resolve\n> the issue?\n> \n> I would appreciate receiving your help.\n> \n> Happy New Year and Best Wishes to R Expert-members, who have been so\n> kind and helpful to beginner R users like me.\n> \n> Thanks and regards,\n> \n> Pradip Muhuri\n> \n> \n> \n> ##########################  console followed the reproducible example\n> #######\n> > table(p1_st_data$ob_mrj_cat)\n> \n>   (42,48.7] (48.7,50.9] (50.9,52.8] (52.8,54.2] (54.2,58.7]\n>          10          10          10          10          10\n> \n> > p1_st_data [p1_st_data$state ==\"Utah\",] [, 1:4]\n>    state obt_mrj_p obt_mrj_se ob_mrj_cat\n> 45  Utah        42       1.49       <NA>    # I expected this to be\n> (42,48.7] instead of <NA>.\n> \n> \n> ### The Reproducible Example (data and code) is shown below:\n> \n> \n> #read estimates of risk factors for substances use (ages 12-17) by\n> State obtained from SUDAAN output\n> p1_st_data <-read.table (text=\"\n> Alabama,  49.60,               1.37\n> Alaska,  55.00,    1.41\n> Arizona,  52.50, 1.56\n> Arkansas,            50.50,    1.22\n> California,            51.10,    0.65\n> Colorado,            55.10,    1.26\n> Connecticut,      56.30,    1.28\n> Delaware,           53.60,    1.30\n> District of Columbia,  53.50,         1.22\n> Florida,  52.70,   0.67\n> Georgia,               52.50,    1.15\n> Hawaii, 49.40,    1.33\n> Idaho,   48.30,    1.23\n> Illinois,  52.70,    0.63\n> Indiana,                49.60,    1.16\n> Iowa,     46.30,    1.37\n> Kansas, 44.30,    1.43\n> Kentucky,            52.90,    1.37\n> Louisiana,            49.70,    1.23\n> Maine,  55.60,    1.44\n> Maryland,           53.90,    1.46\n> Massachusetts,                55.40,    1.41\n> Michigan,            52.40,    0.62\n> Minnesota,         51.50,    1.20\n> Mississippi,         43.20,    1.14\n> Missouri,             48.70,    1.20\n> Montana,            56.40,    1.16\n> Nebraska,           45.70,    1.51\n> Nevada,               54.20,    1.17\n> New Hampshire,              56.10,    1.30\n> New Jersey,       53.20,    1.45\n> New Mexico,     57.60,    1.34\n> New York,           53.70,    0.67\n> North Carolina, 52.20,    1.26\n> North Dakota,   48.60,    1.34\n> Ohio,     50.90,    0.61\n> Oklahoma,          47.20,    1.42\n> Oregon,               54.00,    1.35\n> Pennsylvania,    53.00,    0.63\n> Rhode Island,    57.20,    1.20\n> South Carolina, 50.50,    1.21\n> South Dakota,   43.40,    1.30\n> Tennessee,        48.90,    1.35\n> Texas,   48.70,    0.62\n> Utah,     42.00,    1.49\n> Vermont,            58.70,    1.24\n> Virginia,                51.80,    1.18\n> Washington,      53.50,    1.39\n> West Virginia,    52.80,    1.07\n> Wisconsin,          49.90,    1.50\n> Wyoming,           49.20,    1.29\",\n> sep=  \",\" , col.names = c(\"state\" ,   \"Obt_mrj_p\" ,  \"Obt_mrj_se\" ),\n> colClasses = c( \"character\" ,  \"numeric\" , \"numeric\" )\n> )\n> \n> #change the names to lower cases\n> names(p1_st_data) <- tolower (names(p1_st_data))\n> \n> # cerate five equal-sized groups for the perceived ease of obtaining\n> marijuana variable\n> p1_st_data$ob_mrj_cat <- cut (p1_st_data$obt_mrj_p, quantile\n> (p1_st_data$obt_mrj_p, (0:5/5), include.lowest=TRUE))\n> \n> p1_st_data\n> dim (p1_st_data)\n> table(p1_st_data$ob_mrj_cat)\n> p1_st_data [p1_st_data$state ==\"Utah\",] [, 1:4]\n> \n> \n> \n> Pradip K. Muhuri, PhD\n> Statistician\n> Substance Abuse & Mental Health Services Administration\n> The Center for Behavioral Health Statistics and Quality\n> Division of Population Surveys\n> 1 Choke Cherry Road, Room 2-1071\n> Rockville, MD 20857\n> \n> Tel: 240-276-1070\n> Fax: 240-276-1260\n> e-mail:\n> Pradip.Muhuri at samhsa.hhs.gov<mailto:Pradip.Muhuri at samhsa.hhs.gov>\n> \n> The Center for Behavioral Health Statistics and Quality your feedback.\n> Please click on the following link to complete a brief customer survey:\n> http://cbhsqsurvey.samhsa.gov<http://cbhsqsurvey.samhsa.gov/>\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "A misplaced right parenthesis caused the problem:\n\np1_st_data$ob_mrj_cat <- cut (p1_st_data$obt_mrj_p, quantile\n(p1_st_data$obt_mrj_p, (0:5/5), include.lowest=TRUE)) \n\nShould be\n\np1_st_data$ob_mrj_cat",
+      "thread_id": "thread-eb19c6324cac",
+      "thread_depth": 0,
+      "month": "2012-12"
+    },
+    {
+      "id": "msg-ee81b45b1bf7",
+      "message_id": "<badb4b18-3da4-470d-b32c-787dcca6cd0c@email.android.com>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "ee1094c33a9a250a7334f3a1fc915e1e7bae14a1c68d3b0c50991971fd069cb2",
+      "date": "2012-12-31T15:44:11-08:00",
+      "subject": "[R] Installing R-2.15.2 in Debian Wheezy/Testing",
+      "subject_clean": "Installing R-2.15.2 in Debian Wheezy/Testing",
+      "in_reply_to": "<87vcbhx3fv.wl%neal@walfield.org>",
+      "references": [
+        "<50E1F7B2.8070701@sbcglobal.net>",
+        "<87vcbhx3fv.wl%neal@walfield.org>"
+      ],
+      "body_plain": "In the teaching to fish department, see http://cran.R-project.org/bin/linux/debian/ and customise your mirror as appropriate.\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\n\"Neal H. Walfield\" <neal at walfield.org> wrote:\n\n>At Mon, 31 Dec 2012 15:38:10 -0500,\n>Stephen P. Molnar wrote:\n>> The current version of R that is available in Wheezy is 2.15.1.\n>However, \n>> version 2.15.2 is available at CRAN sites.\n>> ...\n>> My question is what should be the format of the line in the\n>sources.lists?\n>\n>Here's what I have:\n>\n>  deb http://ftp5.gwdg.de/pub/misc/cran/bin/linux/debian squeeze-cran/\n>\n>Neal\n>\n>______________________________________________\n>R-help at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "In the teaching to fish department, see http://cran.R-project.org/bin/linux/debian/ and customise your mirror as appropriate.\n--------------------------------------------------------------------------",
+      "thread_id": "thread-ee81b45b1bf7",
+      "thread_depth": 0,
+      "month": "2012-12"
+    },
+    {
+      "id": "msg-06afb6d7f40f",
+      "message_id": "<02D77410-CF95-44AC-9912-68295976AE52@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-12-31T20:30:57-08:00",
+      "subject": "[R] Plot survival analysis with time dependent variables",
+      "subject_clean": "Plot survival analysis with time dependent variables",
+      "in_reply_to": "<4D31E9C6-EDA9-4D9D-9690-51B38605371E@gmail.com>",
+      "references": [
+        "<4D31E9C6-EDA9-4D9D-9690-51B38605371E@gmail.com>"
+      ],
+      "body_plain": "On Dec 31, 2012, at 4:38 PM, moleps wrote:\n\n> Dear all,\n> Is there an implementation of Simon & Makuch method of plotting the  \n> survival function with time-dependent variables. I?m only able to  \n> find event.chart in Hmisc for the purpose and I would prefer the  \n> Simon and Makuch method. I believe stata has it implemented for this  \n> purpose, but I cannot find it on CRAN.\n>\n>\n> Simon R, Makuch RW. A non-parametric graphical representation of the  \n> relationship between survival and the occurrence of an event:  \n> application to responder versus non-responder bias.  Statistics in  \n> Medicine 1984; 3: 35-44.\n>\n\nHave you done any searching?\n\nhttp://markmail.org/search/?q=list%3Aorg.r-project.r-help+Simon+%26+Makuch#query \n:list%3Aorg.r-project.r-help%20Simon%20%26%20Makuch+page:1+mid:p7kssr6awkrwnnoo+state:results\n>\n\n\n-- \n\nDavid Winsemius, MD\nAlameda, CA, USA",
+      "body_snippet": "On Dec 31, 2012, at 4:38 PM, moleps wrote:\n\n> Dear all,\n> Is there an implementation of Simon & Makuch method of plotting the  \n> survival function with time-dependent variables. I?m only able to  \n> ",
+      "thread_id": "thread-06afb6d7f40f",
+      "thread_depth": 0,
+      "month": "2012-12"
+    },
+    {
+      "id": "msg-765fd413a8fb",
+      "message_id": "<1357017042.57066.YahooMailNeo@web140805.mail.bf1.yahoo.com>",
+      "from_name": "Debs Majumdar",
+      "from_email_hash": "ba7b1fd59ac060ea8a01e135e2c03c6cd7f4ddecdf329a4b7a0ce18a345b2468",
+      "date": "2012-12-31T21:10:42-08:00",
+      "subject": "[R] Order variables automatically",
+      "subject_clean": "Order variables automatically",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have a dataset with 6 categorical variables. I have used this following code to make the variables u1-u6 ordered factors and this works well.\n\n\ncat1cat2 cat3 cat4 cat5 cat6 \n? 0 ? ?? 1 ? ? 1????? 0 ??? 0? ?? 1\n? 1 ? ?? 1 ? ? 0 ? ?? 0 ? ? 0 ? ? 0\n.......\n....\n\n\n############\ndata<-read,table(\"example.txt\")\n\ndata <- as.data.frame(lapply(data, ordered)) \n\n############\n\nNow, suppose I have bigger dataset where some variables are categorical (cat) and others are continuous (cont)..\n\ncat1 cat2 cont1 cont2 ...cont10 cat3 cont11....cat 40 cont25? etc.\n\n\nIs there a way to code so that R goes through each variable and orders a variable if it is categorical and leaves a variable alone if it is continuous?\n\n\nThanks,\n\n?Debs",
+      "body_snippet": "Hi,\n\nI have a dataset with 6 categorical variables. I have used this following code to make the variables u1-u6 ordered factors and this works well.\n\n\ncat1cat2 cat3 cat4 cat5 cat6 \n? 0 ? ?? 1 ? ? 1???",
+      "thread_id": "thread-765fd413a8fb",
+      "thread_depth": 0,
+      "month": "2012-12"
+    },
+    {
+      "id": "msg-fe4411ee5c6a",
+      "message_id": "<C4FDF43680CC4F82B44F7DB63C7F91C2@mail2world.com>",
+      "from_name": "Irucka Embry",
+      "from_email_hash": "a94abb2f80eb6c2c6f3a18549d076ac1f48a7d0b6bbd750518847973d41796df",
+      "date": "2012-12-31T22:59:50-08:00",
+      "subject": "[R] error when using subset (0 observations)",
+      "subject_clean": "error when using subset (0 observations)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20121231/b5060f54/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20121231/b5060f54/attachment-0001.pl>",
+      "thread_id": "thread-fe4411ee5c6a",
+      "thread_depth": 0,
+      "month": "2012-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-ee81b45b1bf7",
+      "subject": "Installing R-2.15.2 in Debian Wheezy/Testing",
+      "message_count": 1,
+      "participants": [
+        "Jeff Newmiller"
+      ],
+      "started": "2012-12-31T15:44:11-08:00",
+      "last_reply": "2012-12-31T15:44:11-08:00",
+      "root_message_id": "msg-ee81b45b1bf7"
+    },
+    {
+      "id": "thread-eb19c6324cac",
+      "subject": "cut ()",
+      "message_count": 1,
+      "participants": [
+        "David L Carlson"
+      ],
+      "started": "2012-12-31T17:18:45-06:00",
+      "last_reply": "2012-12-31T17:18:45-06:00",
+      "root_message_id": "msg-eb19c6324cac"
+    },
+    {
+      "id": "thread-06afb6d7f40f",
+      "subject": "Plot survival analysis with time dependent variables",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2012-12-31T20:30:57-08:00",
+      "last_reply": "2012-12-31T20:30:57-08:00",
+      "root_message_id": "msg-06afb6d7f40f"
+    },
+    {
+      "id": "thread-765fd413a8fb",
+      "subject": "Order variables automatically",
+      "message_count": 1,
+      "participants": [
+        "Debs Majumdar"
+      ],
+      "started": "2012-12-31T21:10:42-08:00",
+      "last_reply": "2012-12-31T21:10:42-08:00",
+      "root_message_id": "msg-765fd413a8fb"
+    },
+    {
+      "id": "thread-fe4411ee5c6a",
+      "subject": "error when using subset (0 observations)",
+      "message_count": 1,
+      "participants": [
+        "Irucka Embry"
+      ],
+      "started": "2012-12-31T22:59:50-08:00",
+      "last_reply": "2012-12-31T22:59:50-08:00",
+      "root_message_id": "msg-fe4411ee5c6a"
+    }
+  ]
+}

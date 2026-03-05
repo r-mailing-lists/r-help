@@ -1,0 +1,317 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2006-08",
+  "messages": [
+    {
+      "id": "msg-c38a01015f45",
+      "message_id": "<17655.23757.25543.839815@basebud.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2006-08-31T17:03:57-05:00",
+      "subject": "[R] cumulative growth rates indexed to a common starting point over n series of observations",
+      "subject_clean": "cumulative growth rates indexed to a common starting point over n series of observations",
+      "in_reply_to": "<OF75466F68.0199D2DA-ON862571DB.006CFE77-862571DB.006FEC8F@americancentury.com>",
+      "references": [
+        "<OF75466F68.0199D2DA-ON862571DB.006CFE77-862571DB.006FEC8F@americancentury.com>"
+      ],
+      "body_plain": "On 31 August 2006 at 15:22, toby_marks at americancentury.com wrote:\n| What is the R way of computing cumulative growth rates given a series of \n| discrete values indexed .\n| \n| For instance, given a matrix of 20 observations for each of 5 series (zz), \n| what is the most straight forward technique in R for computing cumulative \n| growth (zzcum) ?\n| It seems for the solution I'm after might be imbedding the following cum \n| growth rate calc as a function into a function call to apply, mapply, ...? \n| \n| \n| \n| zz = rnorm(100)\n| dim(zz) = c(20,5)\n| zz\n| zzcum=matrix(nrow=20,ncol=5)\n| zzcum\n| zzcum[1,]=100*(1+zz[1,]/100)\n| zzcum\n| for(i in 2:20){zzcum[i,] = zzcum[i-1,]*(1+zz[i,]/100)}\n| zzcum\n\nHow about cumprod() inside apply() ?\n\n zzcum <- matrix(rnorm(100), ncol=5)\n apply(zzcum/100 + 1, 2, cumprod)\n\nHth, Dirk\n\n-- \nHell, there are no rules here - we're trying to accomplish something. \n                                                  -- Thomas A. Edison",
+      "body_snippet": "On 31 August 2006 at 15:22, toby_marks at americancentury.com wrote:\n| What is the R way of computing cumulative growth rates given a series of \n| discrete values indexed .\n| \n| For instance, given a ",
+      "thread_id": "thread-c38a01015f45",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-0e62605dec4a",
+      "message_id": "<4f31b0bd0608311705y6acf296ci5d51dd18f4988bf@mail.gmail.com>",
+      "from_name": "Lord Tyranus",
+      "from_email_hash": "1e41667eabb2b1b26d2d18131d4b612822fb368ac2afaee2b6e2bf8f4d741e36",
+      "date": "2006-08-31T18:05:20-06:00",
+      "subject": "[R] How to get argument number",
+      "subject_clean": "How to get argument number",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I create a function with R, I want to know how many argument number.\nThanks in advance.\n\n-- \nWeb Page\nhttp://geocities.com/lord_tyranus_96/",
+      "body_snippet": "I create a function with R, I want to know how many argument number.\nThanks in advance.\n\n-- \nWeb Page\nhttp://geocities.com/lord_tyranus_96/",
+      "thread_id": "thread-0e62605dec4a",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-f264d57b03d4",
+      "message_id": "<20060901002159.75122.qmail@web56313.mail.re3.yahoo.com>",
+      "from_name": "array chip",
+      "from_email_hash": "d79d0fdfa45d83d6de5d8a451424c09a0f171cf43bcf672f6b52ce7193d2e4a8",
+      "date": "2006-08-31T17:21:59-07:00",
+      "subject": "[R] write.table to Excel file",
+      "subject_clean": "write.table to Excel file",
+      "in_reply_to": "<451E7762.8000307@ese.u-psud.fr>",
+      "references": [],
+      "body_plain": "Hi, I found that when writing a matrix with row names\nand column names to an Excel file, the Excel file when\nopened has column names shifted towards left resulting\ndisalignment. Here is an exmaple\n\nx<-matrix(1:20,nrow=4,dimnames=list(paste('r',1:4,sep=''),paste('c',1:5,sep='')))\nwrite.table(x,\"xx.xls\",sep='\\t')\n\nIf you open the xx.xls file, you will understand what\nI meant. Is there anyway to solve the disalignment?\n\nThanks",
+      "body_snippet": "Hi, I found that when writing a matrix with row names\nand column names to an Excel file, the Excel file when\nopened has column names shifted towards left resulting\ndisalignment. Here is an exmaple\n\nx<",
+      "thread_id": "thread-f264d57b03d4",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-edd4af106dea",
+      "message_id": "<971536df0608311731r3e0229b8r2a2bf336558bcee8@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2006-08-31T20:31:29-04:00",
+      "subject": "[R] grep question",
+      "subject_clean": "grep question",
+      "in_reply_to": "<644e1f320608311459l47f5e276gd013f1bc3e3a038a@mail.gmail.com>",
+      "references": [
+        "<mailman.15.1156845603.16465.r-help@stat.math.ethz.ch>",
+        "<5.1.0.14.0.20060901070041.00c5e630@pop3.brisnet.org.au>",
+        "<644e1f320608311459l47f5e276gd013f1bc3e3a038a@mail.gmail.com>"
+      ],
+      "body_plain": "Or using the same x:\n\n> setdiff(x, grep(\"Farrah|Common\", x, value = TRUE))\n[1] \"more\" \"last\"\n\nOn 8/31/06, jim holtman <jholtman at gmail.com> wrote:\n> This finds the matching indices of Farrah and Common and then create a\n> set that does not include them:\n>\n> > x <- c('Farrah', 'more', 'Common', 'last')\n> > got.F <- grep('Farrah',x)\n> > got.C <- grep('Common', x)\n> > not.ForC <- setdiff(seq(along=x), c(got.F, got.C))\n> > x[not.ForC]\n> [1] \"more\" \"last\"\n> >\n>\n>\n> On 8/31/06, Bob Green <bgreen at dyson.brisnet.org.au> wrote:\n> >\n> > I am hoping for some advice as to how to modify the following syntax, so\n> > that instead of saving all records which refer to Farrah, I select all\n> > instances that do not include Farrah, or the word Coolum.\n> >\n> >\n> > test <- read.csv(\"c:\\\\newdat.csv\", as.is=TRUE, header=T)\n> > sure <- test[grep('Farrah', paste(test$V3.HD, test$V3.LP, test$V3.TD)),]\n> > write.csv(sure,\"c:/farrah4.csv\")\n> >\n> >\n> > Any assistance is appreciated,\n> >\n> > regards\n> >\n> > Bob  Green\n> >\n> > ______________________________________________\n> > R-help at stat.math.ethz.ch mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >\n>\n>\n> --\n> Jim Holtman\n> Cincinnati, OH\n> +1 513 646 9390\n>\n> What is the problem you are trying to solve?\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Or using the same x:\n\n> setdiff(x, grep(\"Farrah|Common\", x, value = TRUE))\n[1] \"more\" \"last\"\n\nOn 8/31/06, jim holtman <jholtman at gmail.com> wrote:\n> This finds the matching indices of Farrah and Com",
+      "thread_id": "thread-edd4af106dea",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-ca7bc6dade8f",
+      "message_id": "<971536df0608311800h49763f01sbc763b2f75d3e0d0@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2006-08-31T21:00:58-04:00",
+      "subject": "[R] problems with plot.data.frame",
+      "subject_clean": "problems with plot.data.frame",
+      "in_reply_to": "<BAY108-F1F7FAE5A5EC316283ABB8C33F0@phx.gbl>",
+      "references": [
+        "<Pine.LNX.4.64.0608311759030.6673@gannet.stats.ox.ac.uk>",
+        "<BAY108-F1F7FAE5A5EC316283ABB8C33F0@phx.gbl>"
+      ],
+      "body_plain": "On 8/31/06, Monica Pisica <pisicandru at hotmail.com> wrote:\n> Hi again,\n>\n> OK i came up with this after i got few good sugegstions.\n>\n> First my data.frame actually looks like that (Thanks for clarifications to\n> Prof. Brian Ripley)\n>\n>   V1 V2 V3 V4\n> 1  jan  3  1   7\n> 2  mar 2  4  2\n> 3  may 1  3  2\n> 4  jul   3  7  4\n> 5  sep  5  2  3\n> 6  nov  3  1  5\n>\n> What i want: 1. On x axis i want the ticks with labels column V1 in that\n> order and not alpha order.\n> 2. i want points to represent the data, not horizoltal bars as a box-plot\n> with only one value as it will plot if i use plot.data.frame\n>\n> Note. In my table i already have the order i want, but if i wouldn't have it\n> prof. Ripley's sugegstion is very welcome.\n>\n> What i've done in the end:\n>\n> >plot (mydata$V3, xlab=\"month\")\n> >axis (side=1, at=c(1:6), labels=c(1:6), ticks=TRUE, col.axis=\"white\")\n> >month.label <- as.character(mydata[[1]])\n> >axis(side=1, at=c(1:6), labels = month.label, ticks=TRUE)\n>\n> This is not an elegant solution but i get the graph i wanted. If anybody has\n> a better solution certainly i would like to see it.\n>\n> thanks you again for all your help,\n>\n\nTry plotting without the axis using xaxt = \"n\" and then call axis:\n\nplot(mydata$V3, xlab = \"month\", xaxt = \"n\")\naxis(1, 1:nrow(mydata), format(mydata$V1))\n\nor convert V1 to \"Date\" class and then plot:\n\ndd <- as.Date(paste(\"2006\", mydata$V1, 1), \"%Y %b %d\")\nplot(V3 ~ dd, mydata)",
+      "body_snippet": "On 8/31/06, Monica Pisica <pisicandru at hotmail.com> wrote:\n> Hi again,\n>\n> OK i came up with this after i got few good sugegstions.\n>\n> First my data.frame actually looks like that (Thanks for clari",
+      "thread_id": "thread-ca7bc6dade8f",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-9dd7b31fa634",
+      "message_id": "<644e1f320608311818s7539ce88oda0c78ccffece9c8@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2006-08-31T21:18:05-04:00",
+      "subject": "[R] grep question",
+      "subject_clean": "grep question",
+      "in_reply_to": "<971536df0608311731r3e0229b8r2a2bf336558bcee8@mail.gmail.com>",
+      "references": [
+        "<mailman.15.1156845603.16465.r-help@stat.math.ethz.ch>",
+        "<5.1.0.14.0.20060901070041.00c5e630@pop3.brisnet.org.au>",
+        "<644e1f320608311459l47f5e276gd013f1bc3e3a038a@mail.gmail.com>",
+        "<971536df0608311731r3e0229b8r2a2bf336558bcee8@mail.gmail.com>"
+      ],
+      "body_plain": "You have to be careful if the strings are embedded:\n\n> x <- c('xxxFarrahxxx' ,'more than last time', 'some Common numbers', 'last one')\n> setdiff(x, grep('Farrah|Common', x))  # not correct\n[1] \"xxxFarrahxxx\"        \"more than last time\" \"some Common numbers\"\n\"last one\"\n> ForC <- grep('Farrah|Common', x)\n> x[setdiff(seq(along=x), ForC)]\n[1] \"more than last time\" \"last one\"\n>\n\n\nOn 8/31/06, Gabor Grothendieck <ggrothendieck at gmail.com> wrote:\n> Or using the same x:\n>\n> > setdiff(x, grep(\"Farrah|Common\", x, value = TRUE))\n> [1] \"more\" \"last\"\n>\n> On 8/31/06, jim holtman <jholtman at gmail.com> wrote:\n> > This finds the matching indices of Farrah and Common and then create a\n> > set that does not include them:\n> >\n> > > x <- c('Farrah', 'more', 'Common', 'last')\n> > > got.F <- grep('Farrah',x)\n> > > got.C <- grep('Common', x)\n> > > not.ForC <- setdiff(seq(along=x), c(got.F, got.C))\n> > > x[not.ForC]\n> > [1] \"more\" \"last\"\n> > >\n> >\n> >\n> > On 8/31/06, Bob Green <bgreen at dyson.brisnet.org.au> wrote:\n> > >\n> > > I am hoping for some advice as to how to modify the following syntax, so\n> > > that instead of saving all records which refer to Farrah, I select all\n> > > instances that do not include Farrah, or the word Coolum.\n> > >\n> > >\n> > > test <- read.csv(\"c:\\\\newdat.csv\", as.is=TRUE, header=T)\n> > > sure <- test[grep('Farrah', paste(test$V3.HD, test$V3.LP, test$V3.TD)),]\n> > > write.csv(sure,\"c:/farrah4.csv\")\n> > >\n> > >\n> > > Any assistance is appreciated,\n> > >\n> > > regards\n> > >\n> > > Bob  Green\n> > >\n> > > ______________________________________________\n> > > R-help at stat.math.ethz.ch mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> > >\n> >\n> >\n> > --\n> > Jim Holtman\n> > Cincinnati, OH\n> > +1 513 646 9390\n> >\n> > What is the problem you are trying to solve?\n> >\n> > ______________________________________________\n> > R-help at stat.math.ethz.ch mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem you are trying to solve?",
+      "body_snippet": "You have to be careful if the strings are embedded:\n\n> x <- c('xxxFarrahxxx' ,'more than last time', 'some Common numbers', 'last one')\n> setdiff(x, grep('Farrah|Common', x))  # not correct\n[1] \"xxxFa",
+      "thread_id": "thread-edd4af106dea",
+      "thread_depth": 1,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-b032109eb0ca",
+      "message_id": "<3a3063250608311819k63b21294jdf9019e26048b31a@mail.gmail.com>",
+      "from_name": "Jeff Bricker",
+      "from_email_hash": "2de15c70ee7e9a26814b03a291058051f5474d5b2e5aa375dd26569a3b6d7ccf",
+      "date": "2006-08-31T21:19:32-04:00",
+      "subject": "[R] write.table to Excel file",
+      "subject_clean": "write.table to Excel file",
+      "in_reply_to": "<20060901002159.75122.qmail@web56313.mail.re3.yahoo.com>",
+      "references": [
+        "<451E7762.8000307@ese.u-psud.fr>",
+        "<20060901002159.75122.qmail@web56313.mail.re3.yahoo.com>"
+      ],
+      "body_plain": "from ?write.table:\n\n     By default there is no column name for a column of row names.  If\n     'col.names = NA' and 'row.names = TRUE' a blank column name is\n     added, which is the convention for CSV files to be read by\n     spreadsheets.\n\n\nOn 8/31/06, array chip <arrayprofile at yahoo.com> wrote:\n> Hi, I found that when writing a matrix with row names\n> and column names to an Excel file, the Excel file when\n> opened has column names shifted towards left resulting\n> disalignment. Here is an exmaple\n>\n> x<-matrix(1:20,nrow=4,dimnames=list(paste('r',1:4,sep=''),paste('c',1:5,sep='')))\n> write.table(x,\"xx.xls\",sep='\\t')\n>\n> If you open the xx.xls file, you will understand what\n> I meant. Is there anyway to solve the disalignment?\n>\n> Thanks\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "from ?write.table:\n\n     By default there is no column name for a column of row names.  If\n     'col.names = NA' and 'row.names = TRUE' a blank column name is\n     added, which is the convention for C",
+      "thread_id": "thread-f264d57b03d4",
+      "thread_depth": 1,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-3e85bef9df80",
+      "message_id": "<644e1f320608311819q646cc21pa1c7fa9a5b39bd99@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2006-08-31T21:19:39-04:00",
+      "subject": "[R] grep question",
+      "subject_clean": "grep question",
+      "in_reply_to": "<644e1f320608311818s7539ce88oda0c78ccffece9c8@mail.gmail.com>",
+      "references": [
+        "<mailman.15.1156845603.16465.r-help@stat.math.ethz.ch>",
+        "<5.1.0.14.0.20060901070041.00c5e630@pop3.brisnet.org.au>",
+        "<644e1f320608311459l47f5e276gd013f1bc3e3a038a@mail.gmail.com>",
+        "<971536df0608311731r3e0229b8r2a2bf336558bcee8@mail.gmail.com>",
+        "<644e1f320608311818s7539ce88oda0c78ccffece9c8@mail.gmail.com>"
+      ],
+      "body_plain": "Forget the last reply.  I left the 'value=TRUE' off the grep.\n\n> x <- c('xxxFarrahxxx' ,'more than last time', 'some Common numbers', 'last one')\n> setdiff(x, grep('Farrah|Common', x, value=TRUE))\n[1] \"more than last time\" \"last one\"\n> ForC <- grep('Farrah|Common', x)\n> x[setdiff(seq(along=x), ForC)]\n[1] \"more than last time\" \"last one\"\n>\n\n\nOn 8/31/06, jim holtman <jholtman at gmail.com> wrote:\n> You have to be careful if the strings are embedded:\n>\n> > x <- c('xxxFarrahxxx' ,'more than last time', 'some Common numbers', 'last one')\n> > setdiff(x, grep('Farrah|Common', x))  # not correct\n> [1] \"xxxFarrahxxx\"        \"more than last time\" \"some Common numbers\"\n> \"last one\"\n> > ForC <- grep('Farrah|Common', x)\n> > x[setdiff(seq(along=x), ForC)]\n> [1] \"more than last time\" \"last one\"\n> >\n>\n>\n> On 8/31/06, Gabor Grothendieck <ggrothendieck at gmail.com> wrote:\n> > Or using the same x:\n> >\n> > > setdiff(x, grep(\"Farrah|Common\", x, value = TRUE))\n> > [1] \"more\" \"last\"\n> >\n> > On 8/31/06, jim holtman <jholtman at gmail.com> wrote:\n> > > This finds the matching indices of Farrah and Common and then create a\n> > > set that does not include them:\n> > >\n> > > > x <- c('Farrah', 'more', 'Common', 'last')\n> > > > got.F <- grep('Farrah',x)\n> > > > got.C <- grep('Common', x)\n> > > > not.ForC <- setdiff(seq(along=x), c(got.F, got.C))\n> > > > x[not.ForC]\n> > > [1] \"more\" \"last\"\n> > > >\n> > >\n> > >\n> > > On 8/31/06, Bob Green <bgreen at dyson.brisnet.org.au> wrote:\n> > > >\n> > > > I am hoping for some advice as to how to modify the following syntax, so\n> > > > that instead of saving all records which refer to Farrah, I select all\n> > > > instances that do not include Farrah, or the word Coolum.\n> > > >\n> > > >\n> > > > test <- read.csv(\"c:\\\\newdat.csv\", as.is=TRUE, header=T)\n> > > > sure <- test[grep('Farrah', paste(test$V3.HD, test$V3.LP, test$V3.TD)),]\n> > > > write.csv(sure,\"c:/farrah4.csv\")\n> > > >\n> > > >\n> > > > Any assistance is appreciated,\n> > > >\n> > > > regards\n> > > >\n> > > > Bob  Green\n> > > >\n> > > > ______________________________________________\n> > > > R-help at stat.math.ethz.ch mailing list\n> > > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > > > and provide commented, minimal, self-contained, reproducible code.\n> > > >\n> > >\n> > >\n> > > --\n> > > Jim Holtman\n> > > Cincinnati, OH\n> > > +1 513 646 9390\n> > >\n> > > What is the problem you are trying to solve?\n> > >\n> > > ______________________________________________\n> > > R-help at stat.math.ethz.ch mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> > >\n> >\n> > ______________________________________________\n> > R-help at stat.math.ethz.ch mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >\n>\n>\n> --\n> Jim Holtman\n> Cincinnati, OH\n> +1 513 646 9390\n>\n> What is the problem you are trying to solve?\n>\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem you are trying to solve?",
+      "body_snippet": "Forget the last reply.  I left the 'value=TRUE' off the grep.\n\n> x <- c('xxxFarrahxxx' ,'more than last time', 'some Common numbers', 'last one')\n> setdiff(x, grep('Farrah|Common', x, value=TRUE))\n[1]",
+      "thread_id": "thread-edd4af106dea",
+      "thread_depth": 2,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-c3b4ee1b29c6",
+      "message_id": "<971536df0608311826y3719ebx4e742345ebe49040@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2006-08-31T21:26:18-04:00",
+      "subject": "[R] How to get argument number",
+      "subject_clean": "How to get argument number",
+      "in_reply_to": "<4f31b0bd0608311705y6acf296ci5d51dd18f4988bf@mail.gmail.com>",
+      "references": [
+        "<4f31b0bd0608311705y6acf296ci5d51dd18f4988bf@mail.gmail.com>"
+      ],
+      "body_plain": "Look at ?nargs\n\nOn 8/31/06, Lord Tyranus <lord.tyranus.96 at gmail.com> wrote:\n> I create a function with R, I want to know how many argument number.\n> Thanks in advance.\n>\n> --\n> Web Page\n> http://geocities.com/lord_tyranus_96/\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Look at ?nargs\n\nOn 8/31/06, Lord Tyranus <lord.tyranus.96 at gmail.com> wrote:\n> I create a function with R, I want to know how many argument number.\n> Thanks in advance.\n>\n> --\n> Web Page\n> http://ge",
+      "thread_id": "thread-0e62605dec4a",
+      "thread_depth": 1,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-3400850bbbb1",
+      "message_id": "<836F00680EECD340A96AD34ECFF3B53461B1F6@iu-mssg-mbx106.ads.iu.edu>",
+      "from_name": "Kimpel, Mark William",
+      "from_email_hash": "b4f7757439c8a1092b0cb5dccc5f09865e42d6af31a85595fbd1e85252128b72",
+      "date": "2006-08-31T22:40:35-04:00",
+      "subject": "[R] problem with postscript output of R-devel on Windows",
+      "subject_clean": "problem with postscript output of R-devel on Windows",
+      "in_reply_to": "<44F74613.3040200@stats.uwo.ca>",
+      "references": [],
+      "body_plain": "I installed GSView and the file opens correctly and the output is as is\nshould be. As you suggest, this must be a bug in Adobe CS2 Illustrator\nand Photoshop.\n\nThanks for your help.\n\nMark\n\nMark W. Kimpel MD \n\n \n\n(317) 490-5129 Work, & Mobile\n\n \n\n(317) 663-0513 Home (no voice mail please)\n\n1-(317)-536-2730 FAX\n\n\n-----Original Message-----\nFrom: Duncan Murdoch [mailto:murdoch at stats.uwo.ca] \nSent: Thursday, August 31, 2006 4:27 PM\nTo: Kimpel, Mark William\nCc: ripley at stats.ox.ac.uk; r-help at stat.math.ethz.ch\nSubject: Re: [R] problem with postscript output of R-devel on Windows\n\nOn 8/31/2006 3:51 PM, Kimpel, Mark William wrote:\n> I apologize for my previous confusing example. Below is some sample\n> code, taken directly from the \"image\" help file, that reproduces a\n> postscript problem. This now happens with both R 2.3.1 and R 2.4\n> \n> What I get appears to be output of only certain postscript \"objects\",\nto\n> use an Adobe term. When I use the R GUI menu to \"save as\", jpeg and\npdf\n> files save correctly, but the postscript file does not. I am not\ngetting\n> any axis labels or topo labels. This is true whether I import the PS\n> file into either Photoshop or Illustrator.\n\nI don't see a problem using GSView.  Maybe this is an Adobe bug?\n\nDuncan\n\n> \n> Thanks, Mark\n> \n> x <- 10*(1:nrow(volcano))\n>      y <- 10*(1:ncol(volcano))\n>      image(x, y, volcano, col = terrain.colors(100), axes = FALSE)\n>      contour(x, y, volcano, levels = seq(90, 200, by = 5),\n>              add = TRUE, col = \"peru\")\n>      axis(1, at = seq(100, 800, by = 100))\n>      axis(2, at = seq(100, 600, by = 100))\n>      box()\n>      title(main = \"Maunga Whau Volcano\", font.main = 4)\n> \n>> sessionInfo()\n> Version 2.3.1 (2006-06-01) \n> i386-pc-mingw32 \n> \n> attached base packages:\n> [1] \"methods\"   \"stats\"     \"graphics\"  \"grDevices\" \"utils\"\n> \"datasets\" \n> [7] \"base\"  \n> \n> Mark W. Kimpel MD \n> \n>  \n> \n> (317) 490-5129 Work, & Mobile\n> \n>  \n> \n> (317) 663-0513 Home (no voice mail please)\n> \n> 1-(317)-536-2730 FAX\n> \n> \n> -----Original Message-----\n> From: Duncan Murdoch [mailto:murdoch at stats.uwo.ca] \n> Sent: Thursday, August 31, 2006 12:52 PM\n> To: Kimpel, Mark William\n> Cc: r-help at stat.math.ethz.ch\n> Subject: Re: [R] problem with postscript output of R-devel on Windows\n> \n> On 8/31/2006 11:27 AM, Kimpel, Mark William wrote:\n>> I have developed a problem with the postscript output of plot on\n> Windows. My code still works properly with R 2.3 but, with R 2.4, the\n> white text on red background does not show up. It does, however, show\nup\n> when output is sent to the screen. Below is my code and sessionInfo.\n>> \n>> R version 2.4.0 Under development (unstable) (2006-08-29 r39012) \n>> i386-pc-mingw32 \n>> \n>> locale:\n>> LC_COLLATE=English_United States.1252;LC_CTYPE=English_United\n> States.1252;LC_MONETARY=English_United\n> States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252\n>> \n>> attached base packages:\n>> [1] \"splines\"   \"tools\"     \"methods\"   \"stats\"     \"graphics\"\n> \"grDevices\" \"utils\"     \"datasets\" \n>> [9] \"base\"     \n>> \n>> other attached packages:\n>>   Rgraphviz geneplotter         XML     GOstats    Category\n> hgu95av2        KEGG    multtest      xtable \n>>    \"1.11.9\"    \"1.11.8\"    \"0.99-8\"     \"1.6.0\"     \"1.4.1\"\n> \"1.12.0\"     \"1.8.1\"    \"1.11.2\"     \"1.3-2\" \n>>        RBGL    annotate          GO       graph       Ruuid\n> limma  genefilter    survival     rat2302 \n>>     \"1.8.1\"    \"1.11.5\"     \"1.6.5\"   \"1.11.13\"    \"1.11.2\"\n> \"2.7.9\"    \"1.11.8\"      \"2.28\"    \"1.12.0\" \n>>        affy      affyio     Biobase \n>>    \"1.11.6\"     \"1.1.8\"   \"1.11.29\"\n>> \n>> \n>> fileName<-paste(experiment, contrast, \"FDR\", FDR, \"Graph\", \"ps\",\n> sep=\".\")\n>>     postscript(file=fileName, paper=\"special\",width=width,\n> height=height) #set up graphics device\n>>     plot(result.gN, layout.param, nodeAttrs = nAttrs, edgeAttrs =\n> eAttrs,\n>>         main=paste(paste(\"Experiment:\", experiment, \";  Contrast:\",\n> contrast,\";  FDR:\", FDR, sep=\"\"), paste(\"Min. connections ==\",\n> min.edges, \"Min. citations per connection ==\", min.cites, \"Additional\n> search criteria:\",\n>>             termAdditional, sep=\" \"), sep=\"    \"))\n> \n> \n> Could you put together a reproducible example to illustrate the\nproblem?\n> \n>   We don't have all the variables used in that example.  I think you \n> should be able to do it with just base packages attached; if not, it's\n\n> likely a problem with one of the contributed packages, rather than\nwith\n> R.\n> \n> Duncan Murdoch\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\nhttp://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I installed GSView and the file opens correctly and the output is as is\nshould be. As you suggest, this must be a bug in Adobe CS2 Illustrator\nand Photoshop.\n\nThanks for your help.\n\nMark\n\nMark W. Kimp",
+      "thread_id": "thread-3400850bbbb1",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-cc39ee44d7b7",
+      "message_id": "<1346.128.193.139.146.1157078436.squirrel@www.forestinformatics.com>",
+      "from_name": "Jeff D. Hamann",
+      "from_email_hash": "bbc7806d7d3641c02d8ee1af4aad3272134ffd2d4c692bc181d43a0307f8fb66",
+      "date": "2006-08-31T19:40:36-07:00",
+      "subject": "[R] core dump with point.in.polygon",
+      "subject_clean": "core dump with point.in.polygon",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've been trying to get some code to run on a 64-bit FreeBSD machine running\n\nR : Copyright 2006, The R Foundation for Statistical Computing\nVersion 2.3.0 (2006-04-24)\nISBN 3-900051-07-0\n\nand keep getting a core dump with the following results:\n\n *** caught segfault ***\naddress 0x0, cause 'unknown'\n\nTraceback:\n 1: .Call(\"R_point_in_polygon_sp\", as.numeric(point.x),\nas.numeric(point.y),     as.numeric(pol.x), as.numeric(pol.y), PACKAGE =\n\"sp\")\n 2: sp::point.in.polygon(point.x = stems$easting, point.y =\nstems$northing,     pol.x = get.pts(gpc.plot)[[1]]$x, pol.y =\nget.pts(gpc.plot)[[1]]$y)\n 3: as.logical(sp::point.in.polygon(point.x = stems$easting, point.y =\nstems$northing,     pol.x = get.pts(gpc.plot)[[1]]$x, pol.y =\nget.pts(gpc.plot)[[1]]$y))\n 4: poi.fp(gpc.perim, plot.grid[i, ], stems, plot.designs[1, ], plot.it =\nFALSE)\n 5: eval.with.vis(expr, envir, enclos)\n 6: eval.with.vis(ei, envir)\n 7: source(\"generate_samples.r\")\n\nNot sure what to do now. I've been running this on 2.3 Winxp box just fine\nand will continue to do so.\n\n\n-- \nForest Informatics, Inc.\nPO Box 1421\nCorvallis, Oregon 97339-1421",
+      "body_snippet": "I've been trying to get some code to run on a 64-bit FreeBSD machine running\n\nR : Copyright 2006, The R Foundation for Statistical Computing\nVersion 2.3.0 (2006-04-24)\nISBN 3-900051-07-0\n\nand keep get",
+      "thread_id": "thread-cc39ee44d7b7",
+      "thread_depth": 0,
+      "month": "2006-08"
+    },
+    {
+      "id": "msg-f6f5a8667bf4",
+      "message_id": "<8858BFBCB86F8D4BA996BEA6FF05F3DA0187680C@US01WEMBX2.internal.synopsys.com>",
+      "from_name": "David Ziger",
+      "from_email_hash": "1c2751fc2b4f4519ae2c05c3598ab689e10cd408359a8ccc8e8e307765775e57",
+      "date": "2006-08-31T21:08:04-07:00",
+      "subject": "[R] problem with png",
+      "subject_clean": "problem with png",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20060831/d139a2f0/attachment.pl",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20060831/d139a2f0/attachment.pl",
+      "thread_id": "thread-f6f5a8667bf4",
+      "thread_depth": 0,
+      "month": "2006-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-c38a01015f45",
+      "subject": "cumulative growth rates indexed to a common starting point over n series of observations",
+      "message_count": 1,
+      "participants": [
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2006-08-31T17:03:57-05:00",
+      "last_reply": "2006-08-31T17:03:57-05:00",
+      "root_message_id": "msg-c38a01015f45"
+    },
+    {
+      "id": "thread-f264d57b03d4",
+      "subject": "write.table to Excel file",
+      "message_count": 2,
+      "participants": [
+        "Jeff Bricker",
+        "array chip"
+      ],
+      "started": "2006-08-31T17:21:59-07:00",
+      "last_reply": "2006-08-31T21:19:32-04:00",
+      "root_message_id": "msg-f264d57b03d4"
+    },
+    {
+      "id": "thread-0e62605dec4a",
+      "subject": "How to get argument number",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "Lord Tyranus"
+      ],
+      "started": "2006-08-31T18:05:20-06:00",
+      "last_reply": "2006-08-31T21:26:18-04:00",
+      "root_message_id": "msg-0e62605dec4a"
+    },
+    {
+      "id": "thread-cc39ee44d7b7",
+      "subject": "core dump with point.in.polygon",
+      "message_count": 1,
+      "participants": [
+        "Jeff D. Hamann"
+      ],
+      "started": "2006-08-31T19:40:36-07:00",
+      "last_reply": "2006-08-31T19:40:36-07:00",
+      "root_message_id": "msg-cc39ee44d7b7"
+    },
+    {
+      "id": "thread-edd4af106dea",
+      "subject": "grep question",
+      "message_count": 3,
+      "participants": [
+        "Gabor Grothendieck",
+        "jim holtman"
+      ],
+      "started": "2006-08-31T20:31:29-04:00",
+      "last_reply": "2006-08-31T21:19:39-04:00",
+      "root_message_id": "msg-edd4af106dea"
+    },
+    {
+      "id": "thread-ca7bc6dade8f",
+      "subject": "problems with plot.data.frame",
+      "message_count": 1,
+      "participants": [
+        "Gabor Grothendieck"
+      ],
+      "started": "2006-08-31T21:00:58-04:00",
+      "last_reply": "2006-08-31T21:00:58-04:00",
+      "root_message_id": "msg-ca7bc6dade8f"
+    },
+    {
+      "id": "thread-f6f5a8667bf4",
+      "subject": "problem with png",
+      "message_count": 1,
+      "participants": [
+        "David Ziger"
+      ],
+      "started": "2006-08-31T21:08:04-07:00",
+      "last_reply": "2006-08-31T21:08:04-07:00",
+      "root_message_id": "msg-f6f5a8667bf4"
+    },
+    {
+      "id": "thread-3400850bbbb1",
+      "subject": "problem with postscript output of R-devel on Windows",
+      "message_count": 1,
+      "participants": [
+        "Kimpel, Mark William"
+      ],
+      "started": "2006-08-31T22:40:35-04:00",
+      "last_reply": "2006-08-31T22:40:35-04:00",
+      "root_message_id": "msg-3400850bbbb1"
+    }
+  ]
+}

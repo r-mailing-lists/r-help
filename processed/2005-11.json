@@ -1,0 +1,63 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2005-11",
+  "messages": [
+    {
+      "id": "msg-13b161fecbdc",
+      "message_id": "<Pine.LNX.4.61.0511010940290.28280@stat12.stat.auckland.ac.nz>",
+      "from_name": "David Scott",
+      "from_email_hash": "2c9d506f932f52e297603989c7487f952af79f0b8c5b08cc411a7b40db8096d8",
+      "date": "2005-11-01T09:55:38+13:00",
+      "subject": "[R] Help with try or tryCatch",
+      "subject_clean": "Help with try or tryCatch",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am having trouble with try and tryCatch.\n\nI have read the documentation but I just don't get it.\n\nHere is what I am trying to do. I am testing a function which has a number \nof parameters. I want to test it for different values of the parameters \nand I have some loops, in the middle of which is a test of the function. \nSometimes the routine fails and so I have put the bit that might fail \ninside try(). I would like to keep running through the loops when that \nhappens, but the whole computation stops. I have read in the documentation \nabout restarts and seen that there is a pre-established restart which \njumps to the top level, and I am guessing that that is what is happening. \nWhat I can't see is how to get the computation to restart from the error \nand just continue through the loop.\n\nAny suggestions or pointers would be most welcome.\n\nDavid Scott\n\n_________________________________________________________________\nDavid Scott\tDepartment of Statistics, Tamaki Campus\n \t\tThe University of Auckland, PB 92019\n \t\tAuckland\tNEW ZEALAND\nPhone: +64 9 373 7599 ext 86830\t\tFax: +64 9 373 7000\nEmail:\td.scott at auckland.ac.nz\n\n\nGraduate Officer, Department of Statistics",
+      "body_snippet": "I am having trouble with try and tryCatch.\n\nI have read the documentation but I just don't get it.\n\nHere is what I am trying to do. I am testing a function which has a number \nof parameters. I want to",
+      "thread_id": "thread-13b161fecbdc",
+      "thread_depth": 0,
+      "month": "2005-11"
+    },
+    {
+      "id": "msg-b5110a25730b",
+      "message_id": "<7C773F4D89C83147A023704E9E78103704AC49B2@cantwe.canterbury.ac.nz>",
+      "from_name": "Roger Dungan",
+      "from_email_hash": "5b9754f794ad7c6bfe23d91acf97fa7d5925091758df1ddd2576b11c7f4652bd",
+      "date": "2005-11-01T10:23:43+13:00",
+      "subject": "[R] Still a bug with NA in sd() or var()?",
+      "subject_clean": "Still a bug with NA in sd() or var()?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-users,\n\nRunning R 2.1.1 in WindowsXP, there seems to be a 'bug' in sd()\nIf\n>x<-c(1,2,3,NA,5)\n>mean(x) \n[1] NA\n\nBut \n>sd(x) \nOr\n>var(x)\ngive\nError in var(x, na.rm = na.rm) : missing observations in cov/cor\n\nThere are obvious work-rounds, like\n>sd(x, is.na(x)==F)\nwhich gives the result (with error message)\n[1] 1.707825\nWarning message:\nthe condition has length > 1 and only the first element will be used in:\nif (na.rm) \"complete.obs\" else \"all.obs\"\n\nor\n\n>y<-subset(x, is.na(x)==F)\n>sd(y)\n[1] 1.707825\n\nAm I missing something, or is this a problem with sd()? Why does mean(x)\ngive a simple NA, but var(x) requires some additional work? There was\nsome previous discussion in r-help about this for R v 1.6.0, with\nmention of a fix for 1.6.1. \n\nDr Roger Dungan\nSchool of Biological Sciences\nUniversity of Cantebury\nChristchurch, New Zealand\nph +64 3 366 7001 ext. 4848\nfax +64 3 364 2590",
+      "body_snippet": "Dear R-users,\n\nRunning R 2.1.1 in WindowsXP, there seems to be a 'bug' in sd()\nIf\n>x<-c(1,2,3,NA,5)\n>mean(x) \n[1] NA\n\nBut \n>sd(x) \nOr\n>var(x)\ngive\nError in var(x, na.rm = na.rm) : missing observations",
+      "thread_id": "thread-b5110a25730b",
+      "thread_depth": 0,
+      "month": "2005-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-13b161fecbdc",
+      "subject": "Help with try or tryCatch",
+      "message_count": 1,
+      "participants": [
+        "David Scott"
+      ],
+      "started": "2005-11-01T09:55:38+13:00",
+      "last_reply": "2005-11-01T09:55:38+13:00",
+      "root_message_id": "msg-13b161fecbdc"
+    },
+    {
+      "id": "thread-b5110a25730b",
+      "subject": "Still a bug with NA in sd() or var()?",
+      "message_count": 1,
+      "participants": [
+        "Roger Dungan"
+      ],
+      "started": "2005-11-01T10:23:43+13:00",
+      "last_reply": "2005-11-01T10:23:43+13:00",
+      "root_message_id": "msg-b5110a25730b"
+    }
+  ]
+}

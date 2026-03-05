@@ -1,0 +1,159 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2008-12",
+  "messages": [
+    {
+      "id": "msg-402ac1fb8f45",
+      "message_id": "<2052992310.672251230766586274.JavaMail.root@zm07.stanford.edu>",
+      "from_name": "George Chen",
+      "from_email_hash": "6b9e05f7c4311515a158acc6d4a8fd418da2debd8397700f9a697d11de0cffe7",
+      "date": "2008-12-31T15:36:26-08:00",
+      "subject": "[R] How do I plot multiple XY plots on the same graph",
+      "subject_clean": "How do I plot multiple XY plots on the same graph",
+      "in_reply_to": "<650810804.671171230766128153.JavaMail.root@zm07.stanford.edu>",
+      "references": [],
+      "body_plain": "Hello,\nI have multiple data sets I would like to plot on the same XY scatterplot.\nThe data sets have in common the same Y values.\nCould somebody tell me how to do this?\nI tried par(T=new)   (I think this was it) but it literally overlays plots on each other.\n\nThanks in advance.\n\nGeorge",
+      "body_snippet": "Hello,\nI have multiple data sets I would like to plot on the same XY scatterplot.\nThe data sets have in common the same Y values.\nCould somebody tell me how to do this?\nI tried par(T=new)   (I think t",
+      "thread_id": "thread-402ac1fb8f45",
+      "thread_depth": 0,
+      "month": "2008-12"
+    },
+    {
+      "id": "msg-3ba3bbbd612a",
+      "message_id": "<693A15E1-4684-4609-94DE-9E0EBEBC6E1F@sas.upenn.edu>",
+      "from_name": "Chris Poliquin",
+      "from_email_hash": "c8cc7e640e5685c8a7b26a807745b61a5ce44b5a56c1fea4de0207ac13b6a239",
+      "date": "2008-12-31T18:41:51-05:00",
+      "subject": "[R] Lattice trellis.focus() with pdf",
+      "subject_clean": "Lattice trellis.focus() with pdf",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have a the code for a plot that works perfectly running in R and  \nprinting to a Quartz object but which doesn't work when I make the  \ntrellis device a pdf.\n\nThe code is as follows:\n----\n\ntrellis.device(device=\"pdf\", new=TRUE)\ntrellis.par.set(my.theme())\ndotplot(Y ~ X | C, groups=G, data=D, layout=c(2,1), ... )\n\ntrellis.focus(\"panel\", 1, 1)\nfor (y in 1:5) {\n\tpanel.segments(...)\n}\ntrellis.unfocus()\n\ntrellis.focus(\"panel\", 2, 1)\nfor (y in 6:10) {\n\tpanel.segments(...)\n}\ntrellis.unfocus()\n\ndev.off()\n\n----\n\nThe first for loop draws perfectly but the next panel never takes the  \nfocus and doesn't draw anything.  The resulting file has the red focus  \nbox around the first panel still when the commands finish.  Again,  \neverything is fine when the device is a Quartz object.\n\n- Chris",
+      "body_snippet": "Hi,\n\nI have a the code for a plot that works perfectly running in R and  \nprinting to a Quartz object but which doesn't work when I make the  \ntrellis device a pdf.\n\nThe code is as follows:\n----\n\ntrel",
+      "thread_id": "thread-3ba3bbbd612a",
+      "thread_depth": 0,
+      "month": "2008-12"
+    },
+    {
+      "id": "msg-be10995295f9",
+      "message_id": "<loom.20081231T235130-232@post.gmane.org>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "e939ee505cc6d7a90d0153f4adc5952232fd23faf5cf21e6fd51dcdff5d5ae73",
+      "date": "2008-12-31T23:53:32Z",
+      "subject": "[R] Lattice trellis.focus() with pdf",
+      "subject_clean": "Lattice trellis.focus() with pdf",
+      "in_reply_to": null,
+      "references": [
+        "<693A15E1-4684-4609-94DE-9E0EBEBC6E1F@sas.upenn.edu>"
+      ],
+      "body_plain": "Chris Poliquin <poliquin <at> sas.upenn.edu> writes:\n\n> \n> Hi,\n> \n> I have a the code for a plot that works perfectly running in R and  \n> printing to a Quartz object but which doesn't work when I make the  \n> trellis device a pdf.\n> \n\n\n  Is this FAQ 7.22\nhttp://cran.r-project.org/doc/FAQ/R-FAQ.html#Why-do-lattice_002ftrellis-graphics-not-work_003f\n\n?\n\n  (I'm not sure it is, but it might be)\n\n  Ben Bolker",
+      "body_snippet": "Chris Poliquin <poliquin <at> sas.upenn.edu> writes:\n\n> \n> Hi,\n> \n> I have a the code for a plot that works perfectly running in R and  \n> printing to a Quartz object but which doesn't work when I mak",
+      "thread_id": "thread-3ba3bbbd612a",
+      "thread_depth": 1,
+      "month": "2008-12"
+    },
+    {
+      "id": "msg-c9c534ee0a74",
+      "message_id": "<948586.11904.qm@web56607.mail.re3.yahoo.com>",
+      "from_name": "Felipe Carrillo",
+      "from_email_hash": "32d2c3e04b0a30ca0da050057d4418140b571c23d3a94d76c76c252a57699de6",
+      "date": "2008-12-31T15:57:33-08:00",
+      "subject": "[R] finding yap.exe with Sweave",
+      "subject_clean": "finding yap.exe with Sweave",
+      "in_reply_to": "<495BD068.40002@binghamton.edu>",
+      "references": [],
+      "body_plain": "This is what I did: \nInstalled R,Tinn-R and MikTex. Then I tried to Sweave an Rnw file, something like Sweave(\"test.rnw\"),then texi2dvi(\"test.rnw,pdf=TRUE) but I had a message saying saying that it couldn't find \"pdflatex\". After doing a little bit of research I went ahead and downloaded notepad++ and followed the wizard instructions which asked me to find the path to C:\\Program Files\\MikTex\\.....latex.exe and then to follow and save the same path to yap.exe. After I did this notepad++ asked me to perform a test to see if I could generate a dvi file which I did and everything worked beautifully. No I am able to run Sweave from R and everything works ok but I feel that I has to be a workaround it because I don't use notepad++ at all, I only used it once to do what I described above. I am thinking that based on what you described, I just need to put Sweave.sty on MikTex path. I'll try that and see what happens. R resides on my C:\\drive and MikTex resides in C:\\Program\n Files\\MikTex so I wonder if those two need to be in the same directory. Thanks for looking into it.\n\n\n--- On Wed, 12/31/08, Christopher W. Ryan <cryan at binghamton.edu> wrote:\n\n> From: Christopher W. Ryan <cryan at binghamton.edu>\n> Subject: Re: [R] finding yap.exe with Sweave\n> To: r-help at stat.math.ethz.ch\n> Date: Wednesday, December 31, 2008, 12:04 PM\n> Hmm, it's been a while since I installed my R and\n> Sweave, so I can't\n> remember exactly how I did it, but I don't recall any\n> particular\n> difficulties. I think I had to copy the Sweave.sty to my\n> localtexmf\n> tree; I see it there now in\n> C:\\localtexmf\\tex\\latex\\Sweave\\Sweave.sty,\n> in addition to having it in\n> C:\\Program\n> Files\\R\\R-2.5.1\\share\\texmf\\Sweave.sty.\n> \n> I suppose instead I could have just put the latter\n> directory in my\n> MikTex as a local tree, in which to look for .sty files.\n> \n> I use MikTex too, and I don't use any particular\n> editor; I write in\n> TinnR but have used Programmers Notepad and others\n> successfully.\n> \n> What do you mean you had to use, \"notepad++ to tell\n> Sweave where\n> Latex.exe and yap.exe where located under MikTex\n> path?\"\n> \n> --Chris\n> Christopher W. Ryan, MD\n> SUNY Upstate Medical University Clinical Campus at\n> Binghamton\n> 40 Arch Street, Johnson City, NY  13790\n> cryanatbinghamtondotedu\n> PGP public keys available at\n> http://home.stny.rr.com/ryancw/\n> \n> \"If you want to build a ship, don't drum up the\n> men to gather wood,\n> divide the work and give orders. Instead, teach them to\n> yearn for the\n> vast and endless sea.\"  [Antoine de St. Exupery]\n> \n> Felipe Carrillo wrote:\n> > Dear all:\n> > Just to make sure I am on the same page as everyone\n> else. \n> > I just got a new computer and had to reinstall MikTex\n> and  of course R and Tinn-R. In order to be able to generate\n> PDF's with Sweave I had to install notepad++ to tell\n> Sweave where Latex.exe and yap.exe where located under\n> MikTex path. So,I have two questions: \n> > 1- Do I need to have a Miktex editor in order to use\n> Sweave? I am not using the editor because I am generating my\n> PDF's from R using Sweave.\n> > 2- Is Sweave able to find the path to Latex.exe and\n> yap.exe by itself?\n> > Everything works fine now but I am just want to get it\n> right for future installations.\n> > I'm running on windows xp and have R-2.8.1\n> installed\n> > Thanks in advance\n> > \n> > \n> > Felipe D. Carrillo  \n> > Supervisory Fishery Biologist  \n> > Department of the Interior  \n> > US Fish & Wildlife Service  \n> > California, USA\n> > \n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained,\n> reproducible code.\n> >\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained,\n> reproducible code.",
+      "body_snippet": "This is what I did: \nInstalled R,Tinn-R and MikTex. Then I tried to Sweave an Rnw file, something like Sweave(\"test.rnw\"),then texi2dvi(\"test.rnw,pdf=TRUE) but I had a message saying saying that it co",
+      "thread_id": "thread-c9c534ee0a74",
+      "thread_depth": 0,
+      "month": "2008-12"
+    },
+    {
+      "id": "msg-78a4d465a7fb",
+      "message_id": "<eb555e660812311620j2dd0b051j724dbfaed5e68988@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2008-12-31T16:20:53-08:00",
+      "subject": "[R] Lattice trellis.focus() with pdf",
+      "subject_clean": "Lattice trellis.focus() with pdf",
+      "in_reply_to": "<693A15E1-4684-4609-94DE-9E0EBEBC6E1F@sas.upenn.edu>",
+      "references": [
+        "<693A15E1-4684-4609-94DE-9E0EBEBC6E1F@sas.upenn.edu>"
+      ],
+      "body_plain": "On Wed, Dec 31, 2008 at 3:41 PM, Chris Poliquin <poliquin at sas.upenn.edu> wrote:\n> Hi,\n>\n> I have a the code for a plot that works perfectly running in R and printing\n> to a Quartz object but which doesn't work when I make the trellis device a\n> pdf.\n>\n> The code is as follows:\n> ----\n>\n> trellis.device(device=\"pdf\", new=TRUE)\n> trellis.par.set(my.theme())\n> dotplot(Y ~ X | C, groups=G, data=D, layout=c(2,1), ... )\n>\n> trellis.focus(\"panel\", 1, 1)\n> for (y in 1:5) {\n>        panel.segments(...)\n> }\n> trellis.unfocus()\n>\n> trellis.focus(\"panel\", 2, 1)\n> for (y in 6:10) {\n>        panel.segments(...)\n> }\n> trellis.unfocus()\n>\n> dev.off()\n>\n> ----\n>\n> The first for loop draws perfectly but the next panel never takes the focus\n> and doesn't draw anything.  The resulting file has the red focus box around\n> the first panel still when the commands finish.\n\nLook more closely at your PDF file; it has more than one page.\n\n\"Removing\" graphical objects in grid (the red box in this case) has\nthe effect of redrawing everything else in a new page. To avoid new\npages, you need to avoid such removal, which in this case is as easy\nas\n\ntrellis.focus(\"panel\", 1, 1, highlight = FALSE)\n\netc.\n\n-Deepayan",
+      "body_snippet": "On Wed, Dec 31, 2008 at 3:41 PM, Chris Poliquin <poliquin at sas.upenn.edu> wrote:\n> Hi,\n>\n> I have a the code for a plot that works perfectly running in R and printing\n> to a Quartz object but which ",
+      "thread_id": "thread-3ba3bbbd612a",
+      "thread_depth": 1,
+      "month": "2008-12"
+    },
+    {
+      "id": "msg-3a894cfaa9cc",
+      "message_id": "<21239643.post@talk.nabble.com>",
+      "from_name": "RON70",
+      "from_email_hash": "65f51988f27bd0044ef337c01d7528726b9cb5276fd5ca2f48823da6b5f5df1f",
+      "date": "2008-12-31T23:06:14-08:00",
+      "subject": "[R] Downloading data from Economagic",
+      "subject_clean": "Downloading data from Economagic",
+      "in_reply_to": "<971536df0812300652x3a391c14veef266ee8bf95f42@mail.gmail.com>",
+      "references": [
+        "<21215913.post@talk.nabble.com>",
+        "<21215929.post@talk.nabble.com>",
+        "<971536df0812300652x3a391c14veef266ee8bf95f42@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks Gabor for your reply. However it seems that data is not downloaded\nproperly. Please take a look on downloaded data :\n\n> tail(dat2, 20)\nGMT\n           libor/day-ussnon\n2008-11-25          0.93125\n2008-11-26          0.98750\n2008-11-28               NA\n2008-12-01          1.08750\n2008-12-02               NA\n2008-12-03          0.88125\n2008-12-04          0.51875\n2008-12-05               NA\n2008-12-08          0.18625\n2008-12-09               NA\n2008-12-10               NA\n2008-12-11               NA\n2008-12-12          0.11875\n2008-12-15          0.11938\n2008-12-16               NA\n2008-12-17          0.13250\n2008-12-18               NA\n2008-12-19          0.11000\n2008-12-22               NA\n2008-12-23          0.11750\n\nData for 2008-12-22 is given as NA, whereas in the website it is 0?11375.\nDoes anyone have a better idea on how to download data from Economagic more\nefficiently?\n\n\n\n\nGabor Grothendieck wrote:\n> \n> Try this (last line only needed if you want times as Date class):\n> \n> library(zoo)\n> z <- zoo(as.matrix(dat2), time(dat2))\n> time(z) <- as.Date(time(z)) # optional\n> \n> \n> or you can use as.zoo.timeSeries from the devel version of zoo:\n> \n> source(\"http://r-forge.r-project.org/plugins/scmsvn/viewcvs.php/*checkout*/pkg/R/as.zoo.R?rev=557&root=zoo\")\n> z <- as.zoo(dat2)\n> time(z) <- as.Date(time(z)) # optional\n> \n> \n> \n> On Tue, Dec 30, 2008 at 6:25 AM, RON70 <ron_michael70 at yahoo.com> wrote:\n>>\n>> Oh my mistake, I missed the argument nDaysBack = 366.\n>>\n>> However pls let me know how to change the data to zoo object.\n>>\n>>\n>> RON70 wrote:\n>>>\n>>> I was trying to dw data from Economagic\n>>> [http://www.economagic.com/em-cgi/data.exe/libor/day-ussnon], using\n>>> following code :\n>>>\n>>> library(fimport)\n>>> dat2 = economagicSeries(\"libor/day-ussnon\", frequency = \"daily\")\n>>>\n>>> Here I see that data is not complete, downloaded data starts from\n>>> \"2007-12-31 \", whereas actual data is available from 2001.\n>>>\n>>> secondly, how I convert that data to a Zoo-object?\n>>>\n>>\n>> --\n>> View this message in context:\n>> http://www.nabble.com/Downloading-data-from-Economagic-tp21215913p21215929.html\n>> Sent from the R help mailing list archive at Nabble.com.\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/Downloading-data-from-Economagic-tp21215913p21239643.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks Gabor for your reply. However it seems that data is not downloaded\nproperly. Please take a look on downloaded data :\n\n> tail(dat2, 20)\nGMT\n           libor/day-ussnon\n2008-11-25          0.9312",
+      "thread_id": "thread-3a894cfaa9cc",
+      "thread_depth": 0,
+      "month": "2008-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-402ac1fb8f45",
+      "subject": "How do I plot multiple XY plots on the same graph",
+      "message_count": 1,
+      "participants": [
+        "George Chen"
+      ],
+      "started": "2008-12-31T15:36:26-08:00",
+      "last_reply": "2008-12-31T15:36:26-08:00",
+      "root_message_id": "msg-402ac1fb8f45"
+    },
+    {
+      "id": "thread-c9c534ee0a74",
+      "subject": "finding yap.exe with Sweave",
+      "message_count": 1,
+      "participants": [
+        "Felipe Carrillo"
+      ],
+      "started": "2008-12-31T15:57:33-08:00",
+      "last_reply": "2008-12-31T15:57:33-08:00",
+      "root_message_id": "msg-c9c534ee0a74"
+    },
+    {
+      "id": "thread-3ba3bbbd612a",
+      "subject": "Lattice trellis.focus() with pdf",
+      "message_count": 3,
+      "participants": [
+        "Ben Bolker",
+        "Chris Poliquin",
+        "Deepayan Sarkar"
+      ],
+      "started": "2008-12-31T18:41:51-05:00",
+      "last_reply": "2008-12-31T16:20:53-08:00",
+      "root_message_id": "msg-3ba3bbbd612a"
+    },
+    {
+      "id": "thread-3a894cfaa9cc",
+      "subject": "Downloading data from Economagic",
+      "message_count": 1,
+      "participants": [
+        "RON70"
+      ],
+      "started": "2008-12-31T23:06:14-08:00",
+      "last_reply": "2008-12-31T23:06:14-08:00",
+      "root_message_id": "msg-3a894cfaa9cc"
+    }
+  ]
+}

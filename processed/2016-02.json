@@ -1,0 +1,63 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2016-02",
+  "messages": [
+    {
+      "id": "msg-221211d98326",
+      "message_id": "<CAD2s_FQR12xuEVR39vVmh71v0XzT1s_-8Es+ubQiRc5mQmAqSQ@mail.gmail.com>",
+      "from_name": "Alnazer Elbedairy",
+      "from_email_hash": "c1b96e6400a20a4e443c8da03713ee0b0beef1c8b4f06ff0652fcba0d68e7d3e",
+      "date": "2016-02-29T15:49:52-08:00",
+      "subject": "[R] help in KNN",
+      "subject_clean": "help in KNN",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "dear all\nattached you will find a csv datasets, there are many steps before these\nthey work properly. but I have errors in these steps I guess. any help\nappreciated.\n\nStep1: convert the data from continuous to categorical\n\n##nautodata is the normalized data. I did it in the previous steps.\n\nMPGCat= c(0,10,15,20,25,30, 35, 40)\nMPG <- cut(nautodata$mydata.MPG, MPGCat,labels = c(1:7))\nnautodata = data.frame(MPG, nautodata[2:7])\nnautodata\n\n\nStep 2: divided into 10 folds: as follow\n\n\nfold1= nautodata[1:39,]\nfold2= nautodata[40:79,]\nfold3= nautodata[80:119,]\nfold4= nautodata[120:159,]\nfold5= nautodata[160:199,]\nfold6= nautodata[200:139,]\nfold7= nautodata[240:279,]\nfold8= nautodata[280:319,]\nfold9= nautodata[320:359,]\nfold10= nautodata[360:398,]\n\ndatafolds= list(fold1, fold2, fold3, fold4,\nfold5,fold6,fold7,fold8,fold9,fold10)\n\nstep3:\n##conduct 10-fold cross validation on KNN\n\nKNNFoldError= c(0,0,0,0,0,0,0,0,0,0)\nMGFoldError=  c(0,0,0,0,0,0,0,0,0,0)\n\nfor (i in 1:10)\n{\ntrainData = NULL\nfor(j in 1:10)\n{\n  if(i !=j)\n    {\n     trainData = rbind(trainData, datafolds[[j]])\n    }\n  else\n    testData = datafolds[[j]]\n}\n#print (trainData)\n#print(testData)\n  targetData = trainData$MPG\n  testTargetData = testData$MPG\n\n  trainData$MPG= NULL\n  testData$MPG = NULL\n\n  M1 = knn(train=trainData, test=testData, cl=targetData, k=20)\n  M2 = MajorityGuessing(testData,MPGCat)\n  print(table(testTargetData,M1))\n  print(testTargetData)\n  print(M1)\n  print(M2)\n\n  KNNFoldError[i] = round(mean(testTargetData != M1), 3)\n  MGFoldError[i] = round(mean(testTargetData != M2), 3)\n  print(KNNFoldError)\n  print(MGFoldError)\n}\n\n## these are the error I got:\nQuitting from lines 80-86 (Lab3 at M.Rmd)\nError in cut.default(nautodata$mydata.MPG, MPGCat, labels = c(1:7)) :\n  'x' must be numeric\nCalls: <Anonymous> ... withCallingHandlers -> withVisible -> eval -> eval\n-> cut -> cut.default\nExecution halted",
+      "body_snippet": "dear all\nattached you will find a csv datasets, there are many steps before these\nthey work properly. but I have errors in these steps I guess. any help\nappreciated.\n\nStep1: convert the data from cont",
+      "thread_id": "thread-221211d98326",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-acceb1112c2c",
+      "message_id": "<000001d17384$9639e930$c2adbb90$@net>",
+      "from_name": "jake88",
+      "from_email_hash": "ce1da00fb76129d4fa4acade322da7e2eec90fa6f19f8236aa0739bec2deeda4",
+      "date": "2016-02-29T22:35:45-08:00",
+      "subject": "[R] RSNNS neural network",
+      "subject_clean": "RSNNS neural network",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am new to R and neural networks . So I trained and predicted an elman\nnetwork like so :?\n\nrequire ( RSNNS )?\nmydata = read.csv(\"mydata.csv\",header = TRUE)?\nmydata.train = mydata[1000:2000,]?\nmydata.test = mydata[800:999,]?\n\nfit <- elman ( mydata.train[,2:10],mydata.train[,1], size =100?\n? ? ?learnFuncParams =c (0.1) , maxit =1000)?\npred <-predict (fit , mydata.test[,2:10])?\n\nSo pred contains the predictions . \nThe problem I am having is that when I run pred <-predict (fit ,\nmydata.test[1,2:10]) repeatedly , it gives me different results each time .\nShould not the weights and bias be set permanently in the network and give\nthe same result everytime   ?  ?",
+      "body_snippet": "I am new to R and neural networks . So I trained and predicted an elman\nnetwork like so :?\n\nrequire ( RSNNS )?\nmydata = read.csv(\"mydata.csv\",header = TRUE)?\nmydata.train = mydata[1000:2000,]?\nmydata.",
+      "thread_id": "thread-acceb1112c2c",
+      "thread_depth": 0,
+      "month": "2016-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-221211d98326",
+      "subject": "help in KNN",
+      "message_count": 1,
+      "participants": [
+        "Alnazer Elbedairy"
+      ],
+      "started": "2016-02-29T15:49:52-08:00",
+      "last_reply": "2016-02-29T15:49:52-08:00",
+      "root_message_id": "msg-221211d98326"
+    },
+    {
+      "id": "thread-acceb1112c2c",
+      "subject": "RSNNS neural network",
+      "message_count": 1,
+      "participants": [
+        "jake88"
+      ],
+      "started": "2016-02-29T22:35:45-08:00",
+      "last_reply": "2016-02-29T22:35:45-08:00",
+      "root_message_id": "msg-acceb1112c2c"
+    }
+  ]
+}

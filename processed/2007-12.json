@@ -1,0 +1,134 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2007-12",
+  "messages": [
+    {
+      "id": "msg-4beceaa8a3d9",
+      "message_id": "<Pine.LNX.4.64.0712311453250.21903@tajo.ucsd.edu>",
+      "from_name": "Charles C. Berry",
+      "from_email_hash": "2e60b7324e5cc583defcedd7a675a324250ffb84da081638c31baf739e5c08e2",
+      "date": "2007-12-31T15:13:28-08:00",
+      "subject": "[R] Program output to file using a batch command file",
+      "subject_clean": "Program output to file using a batch command file",
+      "in_reply_to": "<BAY111-F21746ADC992400F783466BD9500@phx.gbl>",
+      "references": [
+        "<BAY111-F21746ADC992400F783466BD9500@phx.gbl>"
+      ],
+      "body_plain": "On Mon, 31 Dec 2007, Jean-Victor C?t? wrote:\n\n>\n> If I copy the following commands in my batch file to the R console, R\n> creates a file named \"basicStatsIBM.lis\" with the program output in it:\n>\n> Sortie <- file(description = \"basicStatsIBM.lis\", open = \"wt\", blocking =\n> TRUE,\n>     encoding = \"UTF-8\")\n> sink(file = Sortie, append = FALSE, type = \"output\", split = FALSE)\n> basicStats(ibm)\n> close(Sortie)\n>\n> However, the same commands in a text file (named batch.txt, for instance)\n> referred to from the R console by the command source(\"batch.txt\") yields an\n> empty \"basicStatsIBM.lis\" file.\n>\n> Why the discrepancy in processing?\n> How to make the batch commands work as if the commands were pasted directly\n> in the R console?\n> A solution to this problem would save time and aggravation to many people.\n\nAs it happens, the R Development Core Team provides just such a solution \n(to 'save time and aggravation to many' of us) in the form of:\n\n \t1) EXCELLENT DOCUMENTATION to enable you to figure out why this\n            happens\n\n \t2) flexible functions like source() with useful arguments like\n            'print.eval' and sensible defaults for them.\n\nand\n \t3) Useful problem solving advice in the Posting Guide.\n\nBy following the advice in the Posting Guide, you would find this help \npage:\n\n \t?source\n\nand I expect see this bit:\n\n \tArguments:\n.\n.\n.\n \tprint.eval: logical; if 'TRUE', the result of 'eval(i)' is printed\n \t\t    for  each expression 'i'; defaults to 'echo'.\n\n\n---\n\nYou might be confused by the word 'printed', which seems to refer only to \nexpressions that would autoprint (and not stuff like 'x <- y')\n\n---\n\n'Nother words use 'source(\"batch.txt\", print.eval=TRUE)' and try the \nsuggestions in the Posting Guide when you hit a snag.\n\nChuck\n\n> Thank you.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\nCharles C. Berry                            (858) 534-2098\n                                             Dept of Family/Preventive Medicine\nE mailto:cberry at tajo.ucsd.edu\t            UC San Diego\nhttp://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901",
+      "body_snippet": "On Mon, 31 Dec 2007, Jean-Victor C?t? wrote:\n\n>\n> If I copy the following commands in my batch file to the R console, R\n> creates a file named \"basicStatsIBM.lis\" with the program output in it:\n>\n> So",
+      "thread_id": "thread-4beceaa8a3d9",
+      "thread_depth": 0,
+      "month": "2007-12"
+    },
+    {
+      "id": "msg-7d28bee5e31e",
+      "message_id": "<Pine.LNX.4.64.0712311514090.21903@tajo.ucsd.edu>",
+      "from_name": "Charles C. Berry",
+      "from_email_hash": "2e60b7324e5cc583defcedd7a675a324250ffb84da081638c31baf739e5c08e2",
+      "date": "2007-12-31T15:58:58-08:00",
+      "subject": "[R] How to import ENSEMBL text data using R",
+      "subject_clean": "How to import ENSEMBL text data using R",
+      "in_reply_to": "<797458.21759.qm@web55702.mail.re3.yahoo.com>",
+      "references": [
+        "<797458.21759.qm@web55702.mail.re3.yahoo.com>"
+      ],
+      "body_plain": "On Mon, 31 Dec 2007, mohamed nur anisah wrote:\n\n> Dear all,\n>  I have a data which is in text file and i would like to import the data\n>  to R. From the manual, i've found the read.table command function is\n>  the most appropriate but when i wrote the command an error had occur.\n>  It say 'Error in read.table\"C:/Users/user/Documents/cfa-1.txt\", header\n>  = T, sep = \"\\t\",skip=10) :more columns than column names'. Please help\n>  me with this as i'm a first time user to R.\n\nFirst, did you read\n\n        R Data Import/Export\n        2 Spreadsheet-like data\n\nespecially 2.1 Variations on read.table ??\n\nIf not go there and study up - there are many useful hints.\n\nLooking at your file I see complications. Consider these questions:\n\n \tWhat is the field separator?\n\n \t     looks like '\\t', but ...\n\n \tDo you have the same number of field separators (and fields)\n \tin every row?\n\n \t   apparently not, and there seem to be unusual variations on\n \t   the record structure - like tabs missing where I would have\n \t   expected to see them (starting line line CSO 8.4 following\n \t   the first ']') and text fields in some but not all records\n \t   - and the use of square brackets to enclose some fields and\n \t   reverse square brackets for others is new to me!\n\n \tDid some gremlin edit this file in WORD or EXCEL or otherwise\n \tcorrupt it?\n\n \t    If so all bets are off. Tell whoever did this to you to\n \t    go memorize\n \t    http://www.burns-stat.com/pages/Tutor/spreadsheet_addiction.html\n \t    and make him/her/them promise never to do it again.\n\n\nIf you do not have the same number of field separators in each row,\nyou will quickly run aground without resorting to more programmerish\ntricks.\n\nIf it were me, I'd swallow all of the data ( or a few thousand lines\nfor exploratory purposes ) with readLines() and then use string\nprocessing and regular expression trickery to decipher the\nrecords. But if you are not skilled in that art it may take you a\nwhile to catch on.\n\nAlso, I might see if there is another output format available (XML?)\nthat R might parse, and/or I'd see if there is an annotation or\npackage on BioConductor that can give what is needed (consider posting\nto that list, but state the problem you want to solve broadly rather\nthan just posting the same troublesome line of code as here).\n\nHTH,\n\nChuck\n\np.s. Did you read the Posting Guide (as requested)? There have been\nlots of read.table questions posted to this list and plenty of\nguidance on getting past read.table hiccups.\n\n\n>\n>  Thanks in advance.\n>\n>  Cheers,\n>  Anisah\n>\n>\n>\n> ---------------------------------\n>\n\nCharles C. Berry                            (858) 534-2098\n                                             Dept of Family/Preventive Medicine\nE mailto:cberry at tajo.ucsd.edu\t            UC San Diego\nhttp://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901",
+      "body_snippet": "On Mon, 31 Dec 2007, mohamed nur anisah wrote:\n\n> Dear all,\n>  I have a data which is in text file and i would like to import the data\n>  to R. From the manual, i've found the read.table command funct",
+      "thread_id": "thread-7d28bee5e31e",
+      "thread_depth": 0,
+      "month": "2007-12"
+    },
+    {
+      "id": "msg-e44145461605",
+      "message_id": "<6ph63ye2yi2.fsf@gopher4.fhcrc.org>",
+      "from_name": "Martin Morgan",
+      "from_email_hash": "9f5a643078023be7f11cfed10069ce2b31d0a2cc98705fa84c2ae0e157a1fb93",
+      "date": "2007-12-31T16:14:13-08:00",
+      "subject": "[R] How to import ENSEMBL text data using R",
+      "subject_clean": "How to import ENSEMBL text data using R",
+      "in_reply_to": "<Pine.LNX.4.64.0712311514090.21903@tajo.ucsd.edu> (Charles C. Berry's message of \"Mon, 31 Dec 2007 15:58:58 -0800\")",
+      "references": [
+        "<797458.21759.qm@web55702.mail.re3.yahoo.com>",
+        "<Pine.LNX.4.64.0712311514090.21903@tajo.ucsd.edu>"
+      ],
+      "body_plain": "The biomaRt package might be what you're interested in. See the\nBioconductor web site\n\nhttp://bioconductor.org\n\nfor details, in particular\n\nhttp://bioconductor.org/download\n\nfor instructions on downloading Bioconductor packages and\n\nhttp://www.bioconductor.org/packages/release/Software.html\n\nfor current links to package descriptions. The biomaRt package has a\nvignette (biomaRt.pdf) that provides extensive illustration, and can\nbe perused before package download.\n\nAs Charles suggests, if you choose the biomaRt option then follow-up\nquestions will most effectively be answered on the Bioconductor\nmailing list. You'll want to include the output of sessionInfo(), too.\n\nCongratulations, Charles, on the first posts of the new year!\n\nMartin\n\n\"Charles C. Berry\" <cberry at tajo.ucsd.edu> writes:\n\n> On Mon, 31 Dec 2007, mohamed nur anisah wrote:\n>\n>> Dear all,\n>>  I have a data which is in text file and i would like to import the data\n>>  to R. From the manual, i've found the read.table command function is\n>>  the most appropriate but when i wrote the command an error had occur.\n>>  It say 'Error in read.table\"C:/Users/user/Documents/cfa-1.txt\", header\n>>  = T, sep = \"\\t\",skip=10) :more columns than column names'. Please help\n>>  me with this as i'm a first time user to R.\n>\n> First, did you read\n>\n>         R Data Import/Export\n>         2 Spreadsheet-like data\n>\n> especially 2.1 Variations on read.table ??\n>\n> If not go there and study up - there are many useful hints.\n>\n> Looking at your file I see complications. Consider these questions:\n>\n>  \tWhat is the field separator?\n>\n>  \t     looks like '\\t', but ...\n>\n>  \tDo you have the same number of field separators (and fields)\n>  \tin every row?\n>\n>  \t   apparently not, and there seem to be unusual variations on\n>  \t   the record structure - like tabs missing where I would have\n>  \t   expected to see them (starting line line CSO 8.4 following\n>  \t   the first ']') and text fields in some but not all records\n>  \t   - and the use of square brackets to enclose some fields and\n>  \t   reverse square brackets for others is new to me!\n>\n>  \tDid some gremlin edit this file in WORD or EXCEL or otherwise\n>  \tcorrupt it?\n>\n>  \t    If so all bets are off. Tell whoever did this to you to\n>  \t    go memorize\n>  \t    http://www.burns-stat.com/pages/Tutor/spreadsheet_addiction.html\n>  \t    and make him/her/them promise never to do it again.\n>\n>\n> If you do not have the same number of field separators in each row,\n> you will quickly run aground without resorting to more programmerish\n> tricks.\n>\n> If it were me, I'd swallow all of the data ( or a few thousand lines\n> for exploratory purposes ) with readLines() and then use string\n> processing and regular expression trickery to decipher the\n> records. But if you are not skilled in that art it may take you a\n> while to catch on.\n>\n> Also, I might see if there is another output format available (XML?)\n> that R might parse, and/or I'd see if there is an annotation or\n> package on BioConductor that can give what is needed (consider posting\n> to that list, but state the problem you want to solve broadly rather\n> than just posting the same troublesome line of code as here).\n>\n> HTH,\n>\n> Chuck\n>\n> p.s. Did you read the Posting Guide (as requested)? There have been\n> lots of read.table questions posted to this list and plenty of\n> guidance on getting past read.table hiccups.\n>\n>\n>>\n>>  Thanks in advance.\n>>\n>>  Cheers,\n>>  Anisah\n>>\n>>\n>>\n>> ---------------------------------\n>>\n>\n> Charles C. Berry                            (858) 534-2098\n>                                              Dept of Family/Preventive Medicine\n> E mailto:cberry at tajo.ucsd.edu\t            UC San Diego\n> http://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nMartin Morgan\nComputational Biology / Fred Hutchinson Cancer Research Center\n1100 Fairview Ave. N.\nPO Box 19024 Seattle, WA 98109\n\nLocation: Arnold Building M2 B169\nPhone: (206) 667-2793",
+      "body_snippet": "The biomaRt package might be what you're interested in. See the\nBioconductor web site\n\nhttp://bioconductor.org\n\nfor details, in particular\n\nhttp://bioconductor.org/download\n\nfor instructions on downlo",
+      "thread_id": "thread-7d28bee5e31e",
+      "thread_depth": 1,
+      "month": "2007-12"
+    },
+    {
+      "id": "msg-dd5dc220fe2a",
+      "message_id": "<Pine.LNX.4.64.0712311623080.21903@tajo.ucsd.edu>",
+      "from_name": "Charles C. Berry",
+      "from_email_hash": "2e60b7324e5cc583defcedd7a675a324250ffb84da081638c31baf739e5c08e2",
+      "date": "2007-12-31T16:32:01-08:00",
+      "subject": "[R] How to import ENSEMBL text data using R",
+      "subject_clean": "How to import ENSEMBL text data using R",
+      "in_reply_to": "<6ph63ye2yi2.fsf@gopher4.fhcrc.org>",
+      "references": [
+        "<797458.21759.qm@web55702.mail.re3.yahoo.com>",
+        "<Pine.LNX.4.64.0712311514090.21903@tajo.ucsd.edu>",
+        "<6ph63ye2yi2.fsf@gopher4.fhcrc.org>"
+      ],
+      "body_plain": "On Mon, 31 Dec 2007, Martin Morgan wrote:\n\n[substantive part of reply deleted]\n\n>\n> Congratulations, Charles, on the first posts of the new year!\n>\n> Martin\n>\n\nMartin,\n\nThanks!\n\nIt really feels good to know I am 'ahead of my time'.\n\nI'd never thought of this before, but it's a great incentive to post to \nthis list. (Here is California it is still 2007.)\n\n;-)\n\nChuck\n\n[rest deleted]\n\n\nCharles C. Berry                            (858) 534-2098\n                                             Dept of Family/Preventive Medicine\nE mailto:cberry at tajo.ucsd.edu\t            UC San Diego\nhttp://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901",
+      "body_snippet": "On Mon, 31 Dec 2007, Martin Morgan wrote:\n\n[substantive part of reply deleted]\n\n>\n> Congratulations, Charles, on the first posts of the new year!\n>\n> Martin\n>\n\nMartin,\n\nThanks!\n\nIt really feels good t",
+      "thread_id": "thread-7d28bee5e31e",
+      "thread_depth": 2,
+      "month": "2007-12"
+    },
+    {
+      "id": "msg-9c02e943150a",
+      "message_id": "<47798F6B.2080004@braverock.com>",
+      "from_name": "Brian G. Peterson",
+      "from_email_hash": "2d44e89a02cb2a9eb2f2113de72098dcb74d077b13b61958f1336c3292aa0254",
+      "date": "2007-12-31T18:55:07-06:00",
+      "subject": "[R] [R-pkgs] PerformanceAnalytics version 0.9.6 released to CRAN",
+      "subject_clean": "PerformanceAnalytics version 0.9.6 released to CRAN",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "We are pleased to announce the availability on CRAN of\nPerformanceAnalytics version 0.9.6.\n\nThis is a feature and bugfix release.\n\nhttp://cran.r-project.org/src/contrib/Descriptions/PerformanceAnalytics.html\n\nPerformanceAnalytics is a library of econometric functions for\nperformance and risk analysis. This library aims to aid practitioners\nand researchers in utilizing the latest research in analysis of\nnon-normal return streams.\n\nPackage: PerformanceAnalytics\nType: Package\nTitle: Econometric tools for performance and risk analysis.\nVersion: 0.9.6\nDate: 2007-12-29\nLicense: GPL\nURL:\nhttp://cran.r-project.org/src/contrib/Descriptions/PerformanceAnalytics.html\nURL: http://braverock.com/R/\n\nNew Functions:\n     chart.ECDF\n         Creates an empirical cumulative distribution function (ECDF)\n         overlaid with a cumulative distribution function (CDF)\n         Inspired by:\n         Ruppert, David. 2004.\n         Statistics and Finance, an Introduction.\n         Ch. 2 Fig. 2.5\n\n     chart.ACF\n     chart.ACFplus\n         Inspired by (and partially ported from) the website:\n         http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R\n         \"here's an R function that will plot the ACF and PACF of a time\n         series at the same time on the SAME SCALE, and it leaves out\n         the zero lag in the ACF [and uses the number of observations\n         as the default]\"\n         That description made a lot of sense, so it's implemented here\n         for both the ACF alone and the ACF with the PACF.\n\n     chart.Regression\n         Uses a scatterplot to display the relationship of returns\n         to a market benchmark.  Fits a linear model and overlays the\n         resulting model.  Also overlays a Loess line for comparison.\n\n     Return.read\n         Wrapper of 'read.zoo' with some defaults for different\n         date formats and frequencies.\n\n     Return.Geltner\n         Calculate Geltner liquidity-risk-adjusted return series.\n         David Geltner developed a method to remove estimating/liquidity\n         bias in real estate index returns.  It has since been applied\n         to other return series that show autocorrelation or\n         illiquidity effects. The theory is that by correcting for\n         autocorrelation, you are uncovering a \"true\" return from series\n         of observed returns that contain illiquidity or manual pricing\n         effects.\n\n     SmoothingIndex\n         Proposed by Getmansky et al to provide a normalized measure of\n         liquidity risk.  The index will produces a number from zero to\n         one.  A low number indicates low liquidity risk.  A number\n         trending towards one indicates a higher liquidity risk.\n\n     table.Autocorrelation\n         Produces data table of autocorrelation coefficients rho and\n         corresponding Q(6)-statistic for each column in return series.\n\n     table.CalendarReturns\n         Returns a table of returns formatted with years in rows, months\n         in columns, and a total column in the last column.\n         For additional columns, annual returns will be appended.\n\n\nSignificantly Changed Functions:\n     chart.Boxplot\n         Added the ability to more completely control the visual display.\n         Added the ability to render a Tufte-style compact boxplot.\n\n     chart.Histogram\n         Improved visual display for print-quality graphics\n         Added fits for extra distributions (stable,cauchy,skew-T)\n         Added more control over risk lines\n         Added event lines\n\n     chart.QQPlot\n         Replaced most internals with port of John Fox's\n         qq.plot from 'car'\n         Now fits arbitrary distributions\n         Allows use of error bands\n\n     We have made changes throughout the package to allow the\n     risk-free rate to contain a vector of changing rates corresponding\n     with the return series being examined.\n\n     In addition, we have made more extensive use of the features of the\n     'zoo' package in this release of PerformanceAnalytics, and removed\n     a few external dependencies where those dependencies were minor and\n     easily replicated or ported to this package.  We expect both of\n     these trends to continue in later releases.  Hopefully, we have\n     properly credited the original authors and functions both in our\n     code and in the manual pages.\n\nDeprecated Functions:\n     rollingCorrelation\n     rollingFunction\n         These functions have been replaced in our code by the use of\n         zoo's 'rollapply' function, and are no longer needed as\n         separate custom functions.\n\nNew Vignettes:\n     We have added as vignettes the presentations we gave on\n     PerformanceAnalytics at the R/RMetrics Conference in Mielesalp\n     in July 2007 and at UseR! 2007 in Ames, Iowa.\n\nOther:\n     This version of PerformanceAnalytics contains many, many minor\n     improvements and changes.  We added aver 1500 lines of code\n     and comments, and over 1000 lines of documentation.\n\nWe have benefited greatly from feedback and comments from the users of\nPerformanceAnalytics and from R-SIG-Finance.  Please continue to send\nyour questions, comments, and complaints.\n\nFull details available in the ChangeLog or in the CVS logs in all .R\nfiles in the source package.\n\nRegards,\n\n     - Brian\n\n_______________________________________________\nR-packages mailing list\nR-packages at r-project.org\nhttps://stat.ethz.ch/mailman/listinfo/r-packages",
+      "body_snippet": "We are pleased to announce the availability on CRAN of\nPerformanceAnalytics version 0.9.6.\n\nThis is a feature and bugfix release.\n\nhttp://cran.r-project.org/src/contrib/Descriptions/PerformanceAnalyti",
+      "thread_id": "thread-9c02e943150a",
+      "thread_depth": 0,
+      "month": "2007-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-4beceaa8a3d9",
+      "subject": "Program output to file using a batch command file",
+      "message_count": 1,
+      "participants": [
+        "Charles C. Berry"
+      ],
+      "started": "2007-12-31T15:13:28-08:00",
+      "last_reply": "2007-12-31T15:13:28-08:00",
+      "root_message_id": "msg-4beceaa8a3d9"
+    },
+    {
+      "id": "thread-7d28bee5e31e",
+      "subject": "How to import ENSEMBL text data using R",
+      "message_count": 3,
+      "participants": [
+        "Charles C. Berry",
+        "Martin Morgan"
+      ],
+      "started": "2007-12-31T15:58:58-08:00",
+      "last_reply": "2007-12-31T16:32:01-08:00",
+      "root_message_id": "msg-7d28bee5e31e"
+    },
+    {
+      "id": "thread-9c02e943150a",
+      "subject": "PerformanceAnalytics version 0.9.6 released to CRAN",
+      "message_count": 1,
+      "participants": [
+        "Brian G. Peterson"
+      ],
+      "started": "2007-12-31T18:55:07-06:00",
+      "last_reply": "2007-12-31T18:55:07-06:00",
+      "root_message_id": "msg-9c02e943150a"
+    }
+  ]
+}

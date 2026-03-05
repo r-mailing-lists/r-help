@@ -1,0 +1,335 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2013-12",
+  "messages": [
+    {
+      "id": "msg-bafd29ed74a5",
+      "message_id": "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-12-31T15:33:41-08:00",
+      "subject": "[R] Working with Date",
+      "subject_clean": "Working with Date",
+      "in_reply_to": "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>",
+      "references": [
+        "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr,sep=\"-\"), paste(months, yr+1,sep=\"-\"))\n}\n\nelse{\npaste(months,yr,sep=\"-\")\n} \n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\nfun1(Months,Given_Date)\n#[1] \"Jan-2013\" \"Dec-2014\" \"Mar-2013\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\nA.K.\n\n\n\n\nOn Tuesday, December 31, 2013 4:55 PM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\nHi again,\n\nHappy new year 2014 to every R gurus and users.\n\nI am struggling with some calculation with dates... Let say I have\nfollowing vector of months:\n\nMonths <- c(\"Jan\", \"Dec\", \"Mar\")\n\nNow I need to assign year with them. This assignment will be based on some\ngiven date. Let say my given date is :\n\nGiven_Date <- as.Date(\"2013-12-23\")\n\nSo in this case, the modified month will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2013\", \"Mar-2014\")\n\nHowever if given date is:\n\nGiven_Date <- as.Date(\"2014-01-04\")\n\nthen the modified months will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2014\", \"Mar-2014\")\n\nMy problem is that, I can not extablish some logic around it, so that I can\ndo it programmatically for any Month-vector and for any Given-date.\n\nCan someone help me to accomplice this?\n\nThank for your help\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\")",
+      "thread_id": "thread-bafd29ed74a5",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-bafd29ed74a5",
+      "message_id": "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-12-31T15:33:41-08:00",
+      "subject": "[R] Working with Date",
+      "subject_clean": "Working with Date",
+      "in_reply_to": "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>",
+      "references": [
+        "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr,sep=\"-\"), paste(months, yr+1,sep=\"-\"))\n}\n\nelse{\npaste(months,yr,sep=\"-\")\n} \n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\nfun1(Months,Given_Date)\n#[1] \"Jan-2013\" \"Dec-2014\" \"Mar-2013\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\nA.K.\n\n\n\n\nOn Tuesday, December 31, 2013 4:55 PM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\nHi again,\n\nHappy new year 2014 to every R gurus and users.\n\nI am struggling with some calculation with dates... Let say I have\nfollowing vector of months:\n\nMonths <- c(\"Jan\", \"Dec\", \"Mar\")\n\nNow I need to assign year with them. This assignment will be based on some\ngiven date. Let say my given date is :\n\nGiven_Date <- as.Date(\"2013-12-23\")\n\nSo in this case, the modified month will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2013\", \"Mar-2014\")\n\nHowever if given date is:\n\nGiven_Date <- as.Date(\"2014-01-04\")\n\nthen the modified months will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2014\", \"Mar-2014\")\n\nMy problem is that, I can not extablish some logic around it, so that I can\ndo it programmatically for any Month-vector and for any Given-date.\n\nCan someone help me to accomplice this?\n\nThank for your help\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\")",
+      "thread_id": "thread-bafd29ed74a5",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-31a258352b24",
+      "message_id": "<1388533007.18726.YahooMailNeo@web142603.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-12-31T15:36:47-08:00",
+      "subject": "[R] Working with Date",
+      "subject_clean": "Working with Date",
+      "in_reply_to": "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "references": [
+        "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>",
+        "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>"
+      ],
+      "body_plain": "Hi,\nSorry, a correction:\n\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr+1,sep=\"-\"), paste(months, yr,sep=\"-\")) \n}\nelse{\npaste(months,yr,sep=\"-\")\n}\n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\n\nfun1(Months,Given_Date)\n#[1] \"Jan-2014\" \"Dec-2013\" \"Mar-2014\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\n\nA.K.\n\n\n\nOn , arun <smartpink111 at yahoo.com> wrote:\nHi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr,sep=\"-\"), paste(months, yr+1,sep=\"-\"))\n}\n\nelse{\npaste(months,yr,sep=\"-\")\n} \n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\nfun1(Months,Given_Date)\n#[1] \"Jan-2013\" \"Dec-2014\" \"Mar-2013\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\nA.K.\n\n\n\n\n\nOn Tuesday, December 31, 2013 4:55 PM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\nHi again,\n\nHappy new year 2014 to every R gurus and users.\n\nI am struggling with some calculation with dates... Let say I have\nfollowing vector of months:\n\nMonths <- c(\"Jan\", \"Dec\", \"Mar\")\n\nNow I need to assign year with them. This assignment will be based on some\ngiven date. Let say my given date is :\n\nGiven_Date <- as.Date(\"2013-12-23\")\n\nSo in this case, the modified month will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2013\", \"Mar-2014\")\n\nHowever if given date is:\n\nGiven_Date <- as.Date(\"2014-01-04\")\n\nthen the modified months will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2014\", \"Mar-2014\")\n\nMy problem is that, I can not extablish some logic around it, so that I can\ndo it programmatically for any Month-vector and for any Given-date.\n\nCan someone help me to accomplice this?\n\nThank for your help\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nSorry, a correction:\n\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%",
+      "thread_id": "thread-bafd29ed74a5",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-31a258352b24",
+      "message_id": "<1388533007.18726.YahooMailNeo@web142603.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-12-31T15:36:47-08:00",
+      "subject": "[R] Working with Date",
+      "subject_clean": "Working with Date",
+      "in_reply_to": "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "references": [
+        "<CA+dpOJk=Kkv3P5p64WsKm-M9w0mR59usEFpAYzyLPXrcq1bHnA@mail.gmail.com>",
+        "<1388532821.4190.YahooMailNeo@web142604.mail.bf1.yahoo.com>"
+      ],
+      "body_plain": "Hi,\nSorry, a correction:\n\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr+1,sep=\"-\"), paste(months, yr,sep=\"-\")) \n}\nelse{\npaste(months,yr,sep=\"-\")\n}\n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\n\nfun1(Months,Given_Date)\n#[1] \"Jan-2014\" \"Dec-2013\" \"Mar-2014\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\n\nA.K.\n\n\n\nOn , arun <smartpink111 at yahoo.com> wrote:\nHi,\nMay be this helps:\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%Y\"))\nif(any(indx1 < indx2)){\n?ifelse(indx1 < indx2, paste(months, yr,sep=\"-\"), paste(months, yr+1,sep=\"-\"))\n}\n\nelse{\npaste(months,yr,sep=\"-\")\n} \n}\n\nGiven_Date2 <- as.Date(\"2014-01-04\")\nfun1(Months,Given_Date)\n#[1] \"Jan-2013\" \"Dec-2014\" \"Mar-2013\"\n?fun1(Months,Given_Date2)\n#[1] \"Jan-2014\" \"Dec-2014\" \"Mar-2014\"\nA.K.\n\n\n\n\n\nOn Tuesday, December 31, 2013 4:55 PM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\nHi again,\n\nHappy new year 2014 to every R gurus and users.\n\nI am struggling with some calculation with dates... Let say I have\nfollowing vector of months:\n\nMonths <- c(\"Jan\", \"Dec\", \"Mar\")\n\nNow I need to assign year with them. This assignment will be based on some\ngiven date. Let say my given date is :\n\nGiven_Date <- as.Date(\"2013-12-23\")\n\nSo in this case, the modified month will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2013\", \"Mar-2014\")\n\nHowever if given date is:\n\nGiven_Date <- as.Date(\"2014-01-04\")\n\nthen the modified months will be:\n\nMonths_Mod <- c(\"Jan-2014\", \"Dec-2014\", \"Mar-2014\")\n\nMy problem is that, I can not extablish some logic around it, so that I can\ndo it programmatically for any Month-vector and for any Given-date.\n\nCan someone help me to accomplice this?\n\nThank for your help\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nSorry, a correction:\n\n\nfun1 <- function(months, Given_date){\n?g1 <- format(Given_date, \"%b\")\n?indx1 <- match(months,month.abb)\n?indx2 <- match(g1, month.abb)\n?yr <- as.numeric(format(Given_date,\"%",
+      "thread_id": "thread-bafd29ed74a5",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-82e1da32a0ed",
+      "message_id": "<52C358EA.6000103@imap.iu.edu>",
+      "from_name": "David Parkhurst",
+      "from_email_hash": "8e6c03c227f1881877d35a36aa88e7b592f367d26eccf7af13653362bfd492f1",
+      "date": "2013-12-31T18:53:14-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've just uninstalled and then reinstalled R on my windows 7 machine.\nTo test my understanding of data frames, I'm trying the following code.\n(I plan to do other things with it, if it would only work.)\nHere's the code, which seems pretty basic to me:\nls()\nnums ? c(1,2,3,4,5)\nltrs ? c(?a?,?b?,?c?,?d?,?e?)\ndf1 ? data.frame(nums,ltrs)\n\nHere's what happens when I try to run it:\n > ls()\ncharacter(0)\n > nums ? c(1,2,3,4,5)\nError: unexpected input in \"nums \\\"\n > ltrs ? c(?a?,?b?,?c?,?d?,?e?)\nError: unexpected input in \"ltrs \\\"\n > df1 ? data.frame(nums,ltrs)\nError: unexpected input in \"df1 \\\"\n >\n\nAm I really misunderstanding the basics, or is there something\nwrong with my installation?\nDavid",
+      "body_snippet": "I've just uninstalled and then reinstalled R on my windows 7 machine.\nTo test my understanding of data frames, I'm trying the following code.\n(I plan to do other things with it, if it would only work.",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-82e1da32a0ed",
+      "message_id": "<52C358EA.6000103@imap.iu.edu>",
+      "from_name": "David Parkhurst",
+      "from_email_hash": "8e6c03c227f1881877d35a36aa88e7b592f367d26eccf7af13653362bfd492f1",
+      "date": "2013-12-31T18:53:14-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've just uninstalled and then reinstalled R on my windows 7 machine.\nTo test my understanding of data frames, I'm trying the following code.\n(I plan to do other things with it, if it would only work.)\nHere's the code, which seems pretty basic to me:\nls()\nnums ? c(1,2,3,4,5)\nltrs ? c(?a?,?b?,?c?,?d?,?e?)\ndf1 ? data.frame(nums,ltrs)\n\nHere's what happens when I try to run it:\n > ls()\ncharacter(0)\n > nums ? c(1,2,3,4,5)\nError: unexpected input in \"nums \\\"\n > ltrs ? c(?a?,?b?,?c?,?d?,?e?)\nError: unexpected input in \"ltrs \\\"\n > df1 ? data.frame(nums,ltrs)\nError: unexpected input in \"df1 \\\"\n >\n\nAm I really misunderstanding the basics, or is there something\nwrong with my installation?\nDavid",
+      "body_snippet": "I've just uninstalled and then reinstalled R on my windows 7 machine.\nTo test my understanding of data frames, I'm trying the following code.\n(I plan to do other things with it, if it would only work.",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-489cd262d303",
+      "message_id": "<CAP01uRkLSpiL_pRac19TH78m3P8vWbffy9HgYrFFQcWoGb_9hQ@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2013-12-31T19:51:06-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<52C358EA.6000103@imap.iu.edu>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>"
+      ],
+      "body_plain": "On Tue, Dec 31, 2013 at 6:53 PM, David Parkhurst <parkhurs at imap.iu.edu> wrote:\n> I've just uninstalled and then reinstalled R on my windows 7 machine.\n> To test my understanding of data frames, I'm trying the following code.\n> (I plan to do other things with it, if it would only work.)\n> Here's the code, which seems pretty basic to me:\n> ls()\n> nums ? c(1,2,3,4,5)\n> ltrs ? c(?a?,?b?,?c?,?d?,?e?)\n> df1 ? data.frame(nums,ltrs)\n>\n> Here's what happens when I try to run it:\n>> ls()\n> character(0)\n>> nums ? c(1,2,3,4,5)\n> Error: unexpected input in \"nums \\\"\n>> ltrs ? c(?a?,?b?,?c?,?d?,?e?)\n> Error: unexpected input in \"ltrs \\\"\n>> df1 ? data.frame(nums,ltrs)\n> Error: unexpected input in \"df1 \\\"\n>>\n>\n> Am I really misunderstanding the basics, or is there something\n> wrong with my installation?\n\n\nThe assignment operator is TWO characters: a less than sign\nimmediately followed by a minus sign.  Try copying and pasting this:\n\nx <- 3\nx\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Tue, Dec 31, 2013 at 6:53 PM, David Parkhurst <parkhurs at imap.iu.edu> wrote:\n> I've just uninstalled and then reinstalled R on my windows 7 machine.\n> To test my understanding of data frames, I'm",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-489cd262d303",
+      "message_id": "<CAP01uRkLSpiL_pRac19TH78m3P8vWbffy9HgYrFFQcWoGb_9hQ@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2013-12-31T19:51:06-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<52C358EA.6000103@imap.iu.edu>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>"
+      ],
+      "body_plain": "On Tue, Dec 31, 2013 at 6:53 PM, David Parkhurst <parkhurs at imap.iu.edu> wrote:\n> I've just uninstalled and then reinstalled R on my windows 7 machine.\n> To test my understanding of data frames, I'm trying the following code.\n> (I plan to do other things with it, if it would only work.)\n> Here's the code, which seems pretty basic to me:\n> ls()\n> nums ? c(1,2,3,4,5)\n> ltrs ? c(?a?,?b?,?c?,?d?,?e?)\n> df1 ? data.frame(nums,ltrs)\n>\n> Here's what happens when I try to run it:\n>> ls()\n> character(0)\n>> nums ? c(1,2,3,4,5)\n> Error: unexpected input in \"nums \\\"\n>> ltrs ? c(?a?,?b?,?c?,?d?,?e?)\n> Error: unexpected input in \"ltrs \\\"\n>> df1 ? data.frame(nums,ltrs)\n> Error: unexpected input in \"df1 \\\"\n>>\n>\n> Am I really misunderstanding the basics, or is there something\n> wrong with my installation?\n\n\nThe assignment operator is TWO characters: a less than sign\nimmediately followed by a minus sign.  Try copying and pasting this:\n\nx <- 3\nx\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Tue, Dec 31, 2013 at 6:53 PM, David Parkhurst <parkhurs at imap.iu.edu> wrote:\n> I've just uninstalled and then reinstalled R on my windows 7 machine.\n> To test my understanding of data frames, I'm",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-afb02f744e07",
+      "message_id": "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2013-12-31T19:54:50-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<52C358EA.6000103@imap.iu.edu>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20131231/63bcafb2/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20131231/63bcafb2/attachment.pl>",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-afb02f744e07",
+      "message_id": "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2013-12-31T19:54:50-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<52C358EA.6000103@imap.iu.edu>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20131231/63bcafb2/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20131231/63bcafb2/attachment-0001.pl>",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 1,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-bb1d95204639",
+      "message_id": "<52C33991020000CB000FC491@smtp.medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "6f24ec44f0b672836986fb2c6959e74c7df7158deedbd284a5d1e1172a85eb89",
+      "date": "2013-12-31T21:37:45-05:00",
+      "subject": "[R] Fortune?",
+      "subject_clean": "Fortune?",
+      "in_reply_to": "<52C2F31E.2070009@imap.iu.edu>",
+      "references": [
+        "<52C2D51B.5090705@indiana.edu>",
+        "<52C2D939.8090300@imap.iu.edu>",
+        "<52C2F184.5030409@gmail.com>",
+        "<52C2F31E.2070009@imap.iu.edu>"
+      ],
+      "body_plain": "Fortune?\nWhere did lost variables go, with example\n\nSent from my iPhone\n\n> On Dec 31, 2013, at 7:36 PM, \"David Parkhurst <parkhurs at imap.iu.edu>\" <parkhurs at imap.iu.edu> wrote:\n> \n> Thank you.  I've tried what you're suggesting, at an earlier suggestion \n> from another respondent, and I don't find my variable in any of lists \n> ls() through ls(7).\n> \n> I'm just going back to using R after being away from statistics for \n> several years.  I'm thinking I might uninstall R, then reinstall it, and \n> redo my work so far (I've kept the commands elsewhere), and avoid using \n> \"attach,\" as someone else has suggested.\n> \n> David\n>> On 12/31/2013 11:32 AM, Duncan Murdoch wrote:\n>>> On 13-12-31 9:48 AM, David Parkhurst wrote:\n>>> Two or three respondents asked for an example of my problem.  Here's\n>>> what's happening to me now.  I can't reproduce how I got to this point,\n>>> though:\n>>> \n>>>> ls()\n>>> [1] \"All8\"   \"All8Sites\"  \"A\"   \"B\"  \"C\"  \"i\"  \"n\"  \"D\"  \"F\"\n>>>> X\n>>> Error: object 'X' not found\n>>>> attach(All8Sites)\n>>>> ls()\n>>> [1] \"All8\"  \"All8Sites\"  \"A\"  \"B\"  \"C\"  \"i\"  \"n\"  \"D\"  \"F\"\n>>> \n>>> \n>>> \"X\" is one of the variables in the data frame I attached in the third\n>>> command above, but it's not listed by >ls().  If I enter > X now, its\n>>> values ARE listed, but it's hiding somewhere.  What is happening here?\n>>> How can I get the variables in that data frame listed when I attach it?\n>> \n>> Use search() to see the search list.  Your dataframe will likely be in \n>> position 2.  Use ls(2) to see the variables there.\n>> \n>> Duncan Murdoch\n> \n> \n>    [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\nConfidentiality Statement:\nThis email message, including any attachments, is for th...{{dropped:6}}",
+      "body_snippet": "Fortune?\nWhere did lost variables go, with example\n\nSent from my iPhone\n\n> On Dec 31, 2013, at 7:36 PM, \"David Parkhurst <parkhurs at imap.iu.edu>\" <parkhurs at imap.iu.edu> wrote:\n> \n> Thank you.  I'",
+      "thread_id": "thread-bb1d95204639",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-bb1d95204639",
+      "message_id": "<52C33991020000CB000FC491@smtp.medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "6f24ec44f0b672836986fb2c6959e74c7df7158deedbd284a5d1e1172a85eb89",
+      "date": "2013-12-31T21:37:45-05:00",
+      "subject": "[R] Fortune?",
+      "subject_clean": "Fortune?",
+      "in_reply_to": "<52C2F31E.2070009@imap.iu.edu>",
+      "references": [
+        "<52C2D51B.5090705@indiana.edu>",
+        "<52C2D939.8090300@imap.iu.edu>",
+        "<52C2F184.5030409@gmail.com>",
+        "<52C2F31E.2070009@imap.iu.edu>"
+      ],
+      "body_plain": "Fortune?\nWhere did lost variables go, with example\n\nSent from my iPhone\n\n> On Dec 31, 2013, at 7:36 PM, \"David Parkhurst <parkhurs at imap.iu.edu>\" <parkhurs at imap.iu.edu> wrote:\n> \n> Thank you.  I've tried what you're suggesting, at an earlier suggestion \n> from another respondent, and I don't find my variable in any of lists \n> ls() through ls(7).\n> \n> I'm just going back to using R after being away from statistics for \n> several years.  I'm thinking I might uninstall R, then reinstall it, and \n> redo my work so far (I've kept the commands elsewhere), and avoid using \n> \"attach,\" as someone else has suggested.\n> \n> David\n>> On 12/31/2013 11:32 AM, Duncan Murdoch wrote:\n>>> On 13-12-31 9:48 AM, David Parkhurst wrote:\n>>> Two or three respondents asked for an example of my problem.  Here's\n>>> what's happening to me now.  I can't reproduce how I got to this point,\n>>> though:\n>>> \n>>>> ls()\n>>> [1] \"All8\"   \"All8Sites\"  \"A\"   \"B\"  \"C\"  \"i\"  \"n\"  \"D\"  \"F\"\n>>>> X\n>>> Error: object 'X' not found\n>>>> attach(All8Sites)\n>>>> ls()\n>>> [1] \"All8\"  \"All8Sites\"  \"A\"  \"B\"  \"C\"  \"i\"  \"n\"  \"D\"  \"F\"\n>>> \n>>> \n>>> \"X\" is one of the variables in the data frame I attached in the third\n>>> command above, but it's not listed by >ls().  If I enter > X now, its\n>>> values ARE listed, but it's hiding somewhere.  What is happening here?\n>>> How can I get the variables in that data frame listed when I attach it?\n>> \n>> Use search() to see the search list.  Your dataframe will likely be in \n>> position 2.  Use ls(2) to see the variables there.\n>> \n>> Duncan Murdoch\n> \n> \n>    [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\nConfidentiality Statement:\nThis email message, including any attachments, is for th...{{dropped:6}}",
+      "body_snippet": "Fortune?\nWhere did lost variables go, with example\n\nSent from my iPhone\n\n> On Dec 31, 2013, at 7:36 PM, \"David Parkhurst <parkhurs at imap.iu.edu>\" <parkhurs at imap.iu.edu> wrote:\n> \n> Thank you.  I'",
+      "thread_id": "thread-bb1d95204639",
+      "thread_depth": 0,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-b2a902b8cf58",
+      "message_id": "<52C39B3D.2060604@imap.iu.edu>",
+      "from_name": "David Parkhurst",
+      "from_email_hash": "8e6c03c227f1881877d35a36aa88e7b592f367d26eccf7af13653362bfd492f1",
+      "date": "2013-12-31T23:36:13-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>",
+        "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks to the three people who saw what I missed.  I typed my\ncode in Libre Office as \"<\" followed by \"-\", and that program\nconverted those two characters into a single left arrow symbol.\nI copied the commands from Libre into R without noticing that\nthat had happened.  Wierd.\n\nOn 12/31/2013 7:54 PM, Sarah Goslee wrote:\n> Hi David,\n>\n> Your code is showing up here with an arrow symbols. If it's an actual\n> cut and paste, that's your problem: assignment in R is the two-character\n> <- and not an arrow symbol.?\n>\n> Otherwise your code looks fine.\n>\n> Sarah\n>\n> On Tuesday, December 31, 2013, David Parkhurst wrote:\n>\n>     I've just uninstalled and then reinstalled R on my windows 7 machine.\n>     To test my understanding of data frames, I'm trying the following code.\n>     (I plan to do other things with it, if it would only work.)\n>     Here's the code, which seems pretty basic to me:\n>     ls()\n>     nums ??? c(1,2,3,4,5)\n>     ltrs ??? c(???a???,???b???,???c???,???d???,???e???)\n>     df1 ??? data.frame(nums,ltrs)\n>\n>     Here's what happens when I try to run it:\n>      > ls()\n>     character(0)\n>      > nums ??? c(1,2,3,4,5)\n>     Error: unexpected input in \"nums \\\"\n>      > ltrs ??? c(???a???,???b???,???c???,???d???,???e???)\n>     Error: unexpected input in \"ltrs \\\"\n>      > df1 ??? data.frame(nums,ltrs)\n>     Error: unexpected input in \"df1 \\\"\n>      >\n>\n>     Am I really misunderstanding the basics, or is there something\n>     wrong with my installation?\n>     David\n>\n>     ________________________________________________\n>     R-help at r-project.org? mailing list\n>     https://stat.ethz.ch/mailman/__listinfo/r-help\n>     <https://stat.ethz.ch/mailman/listinfo/r-help>\n>     PLEASE do read the posting guide\n>     http://www.R-project.org/__posting-guide.html\n>     <http://www.R-project.org/posting-guide.html>\n>     and provide commented, minimal, self-contained, reproducible code.\n>\n>\n>\n> --\n> Sarah Goslee\n> http://www.stringpage.com\n> http://www.sarahgoslee.com\n> http://www.functionaldiversity.org",
+      "body_snippet": "Thanks to the three people who saw what I missed.  I typed my\ncode in Libre Office as \"<\" followed by \"-\", and that program\nconverted those two characters into a single left arrow symbol.\nI copied the",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 2,
+      "month": "2013-12"
+    },
+    {
+      "id": "msg-b2a902b8cf58",
+      "message_id": "<52C39B3D.2060604@imap.iu.edu>",
+      "from_name": "David Parkhurst",
+      "from_email_hash": "8e6c03c227f1881877d35a36aa88e7b592f367d26eccf7af13653362bfd492f1",
+      "date": "2013-12-31T23:36:13-05:00",
+      "subject": "[R] Basic misunderstanding, or problem with my installation?",
+      "subject_clean": "Basic misunderstanding, or problem with my installation?",
+      "in_reply_to": "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>",
+      "references": [
+        "<52C358EA.6000103@imap.iu.edu>",
+        "<CAM_vju=9whWZ7-qS3muR1-cM0OP+iTbRJYtUv6dOY99eQ_w6ig@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks to the three people who saw what I missed.  I typed my\ncode in Libre Office as \"<\" followed by \"-\", and that program\nconverted those two characters into a single left arrow symbol.\nI copied the commands from Libre into R without noticing that\nthat had happened.  Wierd.\n\nOn 12/31/2013 7:54 PM, Sarah Goslee wrote:\n> Hi David,\n>\n> Your code is showing up here with an arrow symbols. If it's an actual\n> cut and paste, that's your problem: assignment in R is the two-character\n> <- and not an arrow symbol.?\n>\n> Otherwise your code looks fine.\n>\n> Sarah\n>\n> On Tuesday, December 31, 2013, David Parkhurst wrote:\n>\n>     I've just uninstalled and then reinstalled R on my windows 7 machine.\n>     To test my understanding of data frames, I'm trying the following code.\n>     (I plan to do other things with it, if it would only work.)\n>     Here's the code, which seems pretty basic to me:\n>     ls()\n>     nums ??? c(1,2,3,4,5)\n>     ltrs ??? c(???a???,???b???,???c???,???d???,???e???)\n>     df1 ??? data.frame(nums,ltrs)\n>\n>     Here's what happens when I try to run it:\n>      > ls()\n>     character(0)\n>      > nums ??? c(1,2,3,4,5)\n>     Error: unexpected input in \"nums \\\"\n>      > ltrs ??? c(???a???,???b???,???c???,???d???,???e???)\n>     Error: unexpected input in \"ltrs \\\"\n>      > df1 ??? data.frame(nums,ltrs)\n>     Error: unexpected input in \"df1 \\\"\n>      >\n>\n>     Am I really misunderstanding the basics, or is there something\n>     wrong with my installation?\n>     David\n>\n>     ________________________________________________\n>     R-help at r-project.org? mailing list\n>     https://stat.ethz.ch/mailman/__listinfo/r-help\n>     <https://stat.ethz.ch/mailman/listinfo/r-help>\n>     PLEASE do read the posting guide\n>     http://www.R-project.org/__posting-guide.html\n>     <http://www.R-project.org/posting-guide.html>\n>     and provide commented, minimal, self-contained, reproducible code.\n>\n>\n>\n> --\n> Sarah Goslee\n> http://www.stringpage.com\n> http://www.sarahgoslee.com\n> http://www.functionaldiversity.org",
+      "body_snippet": "Thanks to the three people who saw what I missed.  I typed my\ncode in Libre Office as \"<\" followed by \"-\", and that program\nconverted those two characters into a single left arrow symbol.\nI copied the",
+      "thread_id": "thread-82e1da32a0ed",
+      "thread_depth": 2,
+      "month": "2013-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-bafd29ed74a5",
+      "subject": "Working with Date",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2013-12-31T15:33:41-08:00",
+      "last_reply": "2013-12-31T15:33:41-08:00",
+      "root_message_id": "msg-bafd29ed74a5"
+    },
+    {
+      "id": "thread-bafd29ed74a5",
+      "subject": "Working with Date",
+      "message_count": 3,
+      "participants": [
+        "arun"
+      ],
+      "started": "2013-12-31T15:33:41-08:00",
+      "last_reply": "2013-12-31T15:36:47-08:00",
+      "root_message_id": "msg-bafd29ed74a5"
+    },
+    {
+      "id": "thread-82e1da32a0ed",
+      "subject": "Basic misunderstanding, or problem with my installation?",
+      "message_count": 7,
+      "participants": [
+        "David Parkhurst",
+        "Gabor Grothendieck",
+        "Sarah Goslee"
+      ],
+      "started": "2013-12-31T18:53:14-05:00",
+      "last_reply": "2013-12-31T23:36:13-05:00",
+      "root_message_id": "msg-82e1da32a0ed"
+    },
+    {
+      "id": "thread-82e1da32a0ed",
+      "subject": "Basic misunderstanding, or problem with my installation?",
+      "message_count": 1,
+      "participants": [
+        "David Parkhurst"
+      ],
+      "started": "2013-12-31T18:53:14-05:00",
+      "last_reply": "2013-12-31T18:53:14-05:00",
+      "root_message_id": "msg-82e1da32a0ed"
+    },
+    {
+      "id": "thread-bb1d95204639",
+      "subject": "Fortune?",
+      "message_count": 1,
+      "participants": [
+        "John Sorkin"
+      ],
+      "started": "2013-12-31T21:37:45-05:00",
+      "last_reply": "2013-12-31T21:37:45-05:00",
+      "root_message_id": "msg-bb1d95204639"
+    },
+    {
+      "id": "thread-bb1d95204639",
+      "subject": "Fortune?",
+      "message_count": 1,
+      "participants": [
+        "John Sorkin"
+      ],
+      "started": "2013-12-31T21:37:45-05:00",
+      "last_reply": "2013-12-31T21:37:45-05:00",
+      "root_message_id": "msg-bb1d95204639"
+    }
+  ]
+}

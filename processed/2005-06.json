@@ -1,0 +1,121 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2005-06",
+  "messages": [
+    {
+      "id": "msg-6eec81dc135e",
+      "message_id": "<Pine.LNX.4.61.0506010017100.18901@stat12.stat.auckland.ac.nz>",
+      "from_name": "David Scott",
+      "from_email_hash": "2c9d506f932f52e297603989c7487f952af79f0b8c5b08cc411a7b40db8096d8",
+      "date": "2005-06-01T00:26:40+12:00",
+      "subject": "[R] POSIX problem",
+      "subject_clean": "POSIX problem",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am having trouble with creating a POSIXct object. If I create a variable \nof class Date first out of the date part of my data, I am ok, but if I \njust paste the date and time parts together and try and create the POSIXct \nobject, I have problems.\n\nHere is a toy example created from the actual data which caused the \nproblem. I am using R 2.0.1 on Windows XP.\n\n> # Data frame with dates and times, as character\n> PeopleData.df\n    StartDate StartTime\n1 29/10/2001     15:26\n2  7/12/2001     10:32\n3 16/11/2001     13:58\n4 28/11/2001     14:00\n5  2/11/2001     15:22\n6 26/11/2001     11:15\n> str(PeopleData.df)\n`data.frame':   6 obs. of  2 variables:\n  $ StartDate: chr  \"29/10/2001\" \"7/12/2001\" \"16/11/2001\" \"28/11/2001\" ...\n  $ StartTime: chr  \"15:26\" \"10:32\" \"13:58\" \"14:00\" ...\n> dput(PeopleData.df)\nstructure(list(StartDate = c(\"29/10/2001\", \"7/12/2001\", \"16/11/2001\",\n\"28/11/2001\", \"2/11/2001\", \"26/11/2001\"), StartTime = c(\"15:26\",\n\"10:32\", \"13:58\", \"14:00\", \"15:22\", \"11:15\")), .Names = c(\"StartDate\",\n\"StartTime\"), row.names = c(\"1\", \"2\", \"3\", \"4\", \"5\", \"6\"), class = \n\"data.frame\")\n> BeginDate <- as.Date(PeopleData.df$StartDate,format=\"%d/%m/%Y\")\n> BeginDate\n[1] \"2001-10-29\" \"2001-12-07\" \"2001-11-16\" \"2001-11-28\" \"2001-11-02\"\n[6] \"2001-11-26\"\n> # Create POSIXct date-time object without difficulty\n> BeginTime <- as.POSIXct(format(paste(BeginDate,PeopleData.df$StartTime),\n+                                 format=\"%Y/%m/%d %H:%M\"))\n> BeginTime\n[1] \"2001-10-29 15:26:00 New Zealand Standard Time\"\n[2] \"2001-12-07 10:32:00 New Zealand Standard Time\"\n[3] \"2001-11-16 13:58:00 New Zealand Standard Time\"\n[4] \"2001-11-28 14:00:00 New Zealand Standard Time\"\n[5] \"2001-11-02 15:22:00 New Zealand Standard Time\"\n[6] \"2001-11-26 11:15:00 New Zealand Standard Time\"\n> # But not directly from the dates and times\n> BeginTime <- \nas.POSIXct(format(paste(PeopleData.df$StartDate,PeopleData.df$StartTime),\n+                                 format=\"%d/%m/%Y %H:%M\"))\n> BeginTime\n[1] \"0029-10-20 New Zealand Standard Time\"\n[2] \"0007-12-20 New Zealand Standard Time\"\n[3] \"0016-11-20 New Zealand Standard Time\"\n[4] \"0028-11-20 New Zealand Standard Time\"\n[5] \"0002-11-20 New Zealand Standard Time\"\n[6] \"0026-11-20 New Zealand Standard Time\"\n> # Format looks correct to me\n> paste(PeopleData.df$StartDate,PeopleData.df$StartTime)\n[1] \"29/10/2001 15:26\" \"7/12/2001 10:32\"  \"16/11/2001 13:58\" \"28/11/2001 \n14:00\"\n[5] \"2/11/2001 15:22\"  \"26/11/2001 11:15\"\n\nWhat I think might be causing the problem is the lack of a leading zero \nfor some of the days (as in 7/12/2001). This doesn't phase as.Date though.\n\nDavid Scott\n\n\n\n_________________________________________________________________\nDavid Scott\tDepartment of Statistics, Tamaki Campus\n \t\tThe University of Auckland, PB 92019\n \t\tAuckland\tNEW ZEALAND\nPhone: +64 9 373 7599 ext 86830\t\tFax: +64 9 373 7000\nEmail:\td.scott at auckland.ac.nz\n\n\nGraduate Officer, Department of Statistics",
+      "body_snippet": "I am having trouble with creating a POSIXct object. If I create a variable \nof class Date first out of the date part of my data, I am ok, but if I \njust paste the date and time parts together and try ",
+      "thread_id": "thread-6eec81dc135e",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-4351dd20e39b",
+      "message_id": "<0IHD00BOZ2TW34@mail.fudan.edu.cn>",
+      "from_name": "ronggui",
+      "from_email_hash": "85d06a634b6ef7416e3ca412736b71827f317496e67d406a07fbae5efed5e956",
+      "date": "2005-06-01T00:04:22+08:00",
+      "subject": "[R] is there material about Longitudinal Data Analysis with R?",
+      "subject_clean": "is there material about Longitudinal Data Analysis with R?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "i am studying Longitudinal Data Analysis and want to carry it with R.anyone knows  any materials about Longitudinal Data Analysis with R in the internet which i can download?\n\nthank you.",
+      "body_snippet": "i am studying Longitudinal Data Analysis and want to carry it with R.anyone knows  any materials about Longitudinal Data Analysis with R in the internet which i can download?\n\nthank you.",
+      "thread_id": "thread-4351dd20e39b",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-093f510741f0",
+      "message_id": "<429CCC08.6000403@stat.auckland.ac.nz>",
+      "from_name": "Paul Murrell",
+      "from_email_hash": "71bf5cc945d7d1be4a537186b0b66a69b1cc63d99d978b8a16f5750506707116",
+      "date": "2005-06-01T08:41:44+12:00",
+      "subject": "[R] persp, add lines/highlights",
+      "subject_clean": "persp, add lines/highlights",
+      "in_reply_to": null,
+      "references": [
+        "<1117486427.1669.235259524@webmail.messagingengine.com>",
+        "<429BAC6A.1010306@stat.auckland.ac.nz>",
+        "<ecebd24df865ae9a51fcb562fa82160d@soc.soton.ac.uk>"
+      ],
+      "body_plain": "Hi\n\n\nRobin Hankin wrote:\n> Hello everyone\n> \n> I always cut-n-paste Paul's suggestions and end up learning something!\n> \n> In this case, though, I have a query.\n> \n> I was wondering how the second persp() call dealt with hidden line\n> removal,  because pieces of mesh with NA values are see-through.\n> \n> If you replace xi in the code below with 10:28\n> and yi with 19:20, then all the pink grid\n> appears in front of the blue grid; I would expect  the blue grid to hide \n> some of the pink\n> grid.  Is there any way to enforce\n> hidden line removal here?\n\n\npersp() just draws the mesh from \"back\" to \"front\";  a sort of \nbrute-force hidden-line removal.  R graphics has a simple \"painters\" \nmodel with later output overlaying previous output;  so you can only \ndraw extra stuff on the \"front\" of a persp() plot.  If you want more \nsophisticated hidden-line removal you'll probably have to go to the rgl \npackage (which does the real thing).\n\nPaul\n\n\n> On May 31, 2005, at 01:14 am, Paul Murrell wrote:\n> \n>> Hi\n>>\n>>\n>> jjorgensen at fastmail.fm wrote:\n>>\n>>> Hello R-sters,\n>>> I'm trying to add several lines to a response surface that I've plotted\n>>> using persp().  I've tried lines() using the \"trans3d\" function but I've\n>>> been unsuccessful in getting it to work (R v2.0.1).  Essentially, I'm\n>>> trying to highlight one or more of the surface wireframe lines in a\n>>> bolder (or different) color.  Any tips from those of you who have some\n>>> experience with this would be greatly appreciated.  [Would it be easier\n>>> using wireframe() in library(lattice) instead?]\n>>\n>>\n>>\n>> Here's an example that just overlays two persp() plots ...\n>>\n>> x <- seq(-10, 10, length= 30)\n>> y <- x\n>> f <- function(x,y) { r <- sqrt(x^2+y^2); 10 * sin(r)/r }\n>> z <- outer(x, y, f)\n>> z[is.na(z)] <- 1\n>> op <- par(bg = \"white\")\n>> persp(x, y, z, theta = 30, phi = 30, expand = 0.5, col = \"lightblue\",\n>>       zlim=range(z))\n>>\n>> # overlay plot with just \"highlighted\" surface area\n>> par(new=TRUE)\n>> z2 <- matrix(NA, ncol=30, nrow=30)\n>> xi <- 15:18\n>> yi <- 13:14\n>> z2[xi, yi] <- z[xi, yi]\n>> persp(x, y, z2, theta = 30, phi = 30, expand = 0.5,\n>>       zlim=range(z), border=\"red\", col=\"pink\", box=FALSE, axes=FALSE)\n>>\n>>\n>>> And, any suggestions on how to add text outside of the persp() plot next\n>>> to the highlighted line would be much appreciated.\n>>\n>>\n>>\n>> Do you mean like a legend?\n>>\n>> Paul\n>> -- \n>> Dr Paul Murrell\n>> Department of Statistics\n>> The University of Auckland\n>> Private Bag 92019\n>> Auckland\n>> New Zealand\n>> 64 9 3737599 x85392\n>> paul at stat.auckland.ac.nz\n>> http://www.stat.auckland.ac.nz/~paul/\n>>\n>> ______________________________________________\n>> R-help at stat.math.ethz.ch mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide! \n>> http://www.R-project.org/posting-guide.html\n>>\n>>\n> -- \n> Robin Hankin\n> Uncertainty Analyst\n> National Oceanography Centre, Southampton\n> European Way, Southampton SO14 3ZH, UK\n>  tel  023-8059-7743\n\n\n-- \nDr Paul Murrell\nDepartment of Statistics\nThe University of Auckland\nPrivate Bag 92019\nAuckland\nNew Zealand\n64 9 3737599 x85392\npaul at stat.auckland.ac.nz\nhttp://www.stat.auckland.ac.nz/~paul/",
+      "body_snippet": "Hi\n\n\nRobin Hankin wrote:\n> Hello everyone\n> \n> I always cut-n-paste Paul's suggestions and end up learning something!\n> \n> In this case, though, I have a query.\n> \n> I was wondering how the second per",
+      "thread_id": "thread-093f510741f0",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-854eabc7b4d0",
+      "message_id": "<s29d7d4a.082@hra2.marc.hort.cri.nz>",
+      "from_name": "Peter Alspach",
+      "from_email_hash": "148af7510f63b6eb1ba795c79fc8126840a181092bf369de35cb78104f45b64a",
+      "date": "2005-06-01T09:16:38+12:00",
+      "subject": "[R] simple predict question",
+      "subject_clean": "simple predict question",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Alternatively, one can convert dat to a data frame first (?lm states that data is \"an optional data frame containing the variables in the model.\"):\n\ndat<-matrix(c(0,0,10,20),2,byrow=T)\ndat <- as.data.frame(dat)\nlm1<-lm(V2~V1, dat)\npredict(lm1, data.frame(V1=seq(0,10,1)))\n 1  2  3  4  5  6  7  8  9 10 11 \n 0  2  4  6  8 10 12 14 16 18 20 \n\nCheers .........\n\nPeter Alspach\n\n\n>>> Gabor Grothendieck <ggrothendieck at gmail.com> 01/06/05 09:00:15 >>>\nOn 5/31/05, sms13+ at pitt.edu <sms13+ at pitt.edu> wrote:\n> Excuse the simple question...\n> I'm not sure what I'm doing wrong with predict, but let me use this example:\n> Suppose I do:\n> dat<-matrix(c(0,0,10,20),2,byrow=T)\n> lm1<-lm(dat[,2]~dat[,1])\n> \n> Suppose I want to generate the linearly-interpolated y-values between the\n> point (0,0) and (0,20) at every unit interval.\n> I thought I just do:\n> predict(lm1, data.frame(seq(0,10,1))) to get 0,2,4,6...,18,20, but instead\n> I just get:\n> 1    2\n> 0  20\n> \n\nI think the names are confusing it.  Try:\n\nx <- dat[,1]; y <- dat[,2]\nlm1 <- lm(y ~ x)\npredict(lm1, data.frame(x = 1:10))\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help \nPLEASE do read the posting guide! http://www.R-project.org/posting-guide.html\n\n______________________________________________________\n\nThe contents of this e-mail are privileged and/or confidenti...{{dropped}}",
+      "body_snippet": "Alternatively, one can convert dat to a data frame first (?lm states that data is \"an optional data frame containing the variables in the model.\"):\n\ndat<-matrix(c(0,0,10,20),2,byrow=T)\ndat <- as.data.",
+      "thread_id": "thread-854eabc7b4d0",
+      "thread_depth": 0,
+      "month": "2005-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-4351dd20e39b",
+      "subject": "is there material about Longitudinal Data Analysis with R?",
+      "message_count": 1,
+      "participants": [
+        "ronggui"
+      ],
+      "started": "2005-06-01T00:04:22+08:00",
+      "last_reply": "2005-06-01T00:04:22+08:00",
+      "root_message_id": "msg-4351dd20e39b"
+    },
+    {
+      "id": "thread-6eec81dc135e",
+      "subject": "POSIX problem",
+      "message_count": 1,
+      "participants": [
+        "David Scott"
+      ],
+      "started": "2005-06-01T00:26:40+12:00",
+      "last_reply": "2005-06-01T00:26:40+12:00",
+      "root_message_id": "msg-6eec81dc135e"
+    },
+    {
+      "id": "thread-093f510741f0",
+      "subject": "persp, add lines/highlights",
+      "message_count": 1,
+      "participants": [
+        "Paul Murrell"
+      ],
+      "started": "2005-06-01T08:41:44+12:00",
+      "last_reply": "2005-06-01T08:41:44+12:00",
+      "root_message_id": "msg-093f510741f0"
+    },
+    {
+      "id": "thread-854eabc7b4d0",
+      "subject": "simple predict question",
+      "message_count": 1,
+      "participants": [
+        "Peter Alspach"
+      ],
+      "started": "2005-06-01T09:16:38+12:00",
+      "last_reply": "2005-06-01T09:16:38+12:00",
+      "root_message_id": "msg-854eabc7b4d0"
+    }
+  ]
+}

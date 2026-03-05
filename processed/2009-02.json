@@ -1,0 +1,174 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2009-02",
+  "messages": [
+    {
+      "id": "msg-3d9310957c54",
+      "message_id": "<fff7708f0902281519g5d47022dgef96f0999c27111e@mail.gmail.com>",
+      "from_name": "Andrew Ziem",
+      "from_email_hash": "a06cb12e626f01abe5876924ef46c612df7d45b4e0bc457466f5a4c294d3c982",
+      "date": "2009-02-28T16:19:10-07:00",
+      "subject": "[R] How to join many records against SQL database",
+      "subject_clean": "How to join many records against SQL database",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This is a working example of how to merge records with a SQL database\ngiven the constraints\n1. The database is too large to pull all the records\n2. The database permissions don't allow creating a table for\ntemporarily storing identifiers\n3. The R database driver doesn't allow creating temporary table\n4. There are too many identifiers to pass in a single query\n\n\nlibrary(RSQLite)\n\nmax_ids <- 100 # try a larger number for greater efficiency\n\n# manufacture data\ny <- data.frame( list(1:1000), list(rnorm(1000)) )\ncolnames(y) <- c(\"id\", \"rnd\")\n\nm <- dbDriver(\"SQLite\")\ntfile <- tempfile()\ncon <- dbConnect(m, dbname = tfile)\ndbWriteTable(con, \"y\", y)\n\nrm(y)\n\nx <- data.frame(1:1000)\nx['letter'] <- head(rep(LETTERS, 1000/(24+1)),1000)\ncolnames(x) <- c(\"id\", \"letter\")\n\n# define functions\nget_y <- function(ids)\n{\n        ids2 <- paste(ids, collapse = \",\")\n        cmd <- paste(\"select * from y where id in (\", ids2, \")\")\n        d <- dbSendQuery(con, cmd)\n        rs <- fetch(d)\n        rs[,2:3]\n}\n\nloop <- function()\n{\n        y <<- get_y(x[x$part==0, 'id'])\n\n        for (i in 1:(max_ids-1))\n        {\n                y2 <- get_y(x[x$part==i, 'id'])\n                y <<- rbind(y, y2)\n        }\n}\n\ncall_y <- function(z)\n{\n        get_y(x[x$part==z, 'id'])\n}\n\n# work\nx$part <- as.numeric(row.names(x)) %% max_ids\n\nsystem.time(loop())\n\nmerged <- subset(merge(x, y), select=c('id', 'letter', 'rnd'))\n\n\n\n\nAndrew",
+      "body_snippet": "This is a working example of how to merge records with a SQL database\ngiven the constraints\n1. The database is too large to pull all the records\n2. The database permissions don't allow creating a tabl",
+      "thread_id": "thread-3d9310957c54",
+      "thread_depth": 0,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-5b89885cf762",
+      "message_id": "<20090228185940.4HADB.831617.root@mp08>",
+      "from_name": "rkevinburton at charter.net",
+      "from_email_hash": "86acf360c0742d1fce222796b5ec732528a1d7fa9594dafeb2f90a5c33dbf05c",
+      "date": "2009-02-28T18:59:40-05:00",
+      "subject": "[R] object \".trPaths\" not found",
+      "subject_clean": "object \".trPaths\" not found",
+      "in_reply_to": "<2ad0cc110902281456g23d847b3t8672036192b633f0@mail.gmail.com>",
+      "references": [],
+      "body_plain": "FYI. I found the solution. My RProfile.site file could not be written to because of permissions. Whan I selected the \"Configure/Permanent\" option in Tinn-R it was silently ignoring the fact that the file could not be written to. When I adjusted the permissions, all was well. \n\nThank you.\n\nKevin\n\n---- Kingsford Jones <kingsfordjones at gmail.com> wrote: \n> RSiteSearch('trpaths')\n> \n> will lead you to potential solutions...\n> \n> \n> \n> On Fri, Feb 27, 2009 at 7:18 PM,  <rkevinburton at charter.net> wrote:\n> > I am running an R script with Tinn-R (2.2.0.1) and I get the error message\n> >\n> > Error in source(.trPaths[4], echo = TRUE, max.deparse.length = 150) :\n> > ?object \".trPaths\" not found\n> >\n> > Any solutions?\n> >\n> > Thank you.\n> >\n> > Kevin\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >",
+      "body_snippet": "FYI. I found the solution. My RProfile.site file could not be written to because of permissions. Whan I selected the \"Configure/Permanent\" option in Tinn-R it was silently ignoring the fact that the f",
+      "thread_id": "thread-5b89885cf762",
+      "thread_depth": 0,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-77e1af08190c",
+      "message_id": "<fff7708f0902281636w791e2f4fm727db884428ded6f@mail.gmail.com>",
+      "from_name": "Andrew Ziem",
+      "from_email_hash": "a06cb12e626f01abe5876924ef46c612df7d45b4e0bc457466f5a4c294d3c982",
+      "date": "2009-02-28T17:36:21-07:00",
+      "subject": "[R] How to create temporary table in MySQL",
+      "subject_clean": "How to create temporary table in MySQL",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Creating a temp table isn't completely intuitive with MySQL 5 and R\n2.8..1, but it can be done.\n\n> library(RMySQL)\nLoading required package: DBI\n> con <- dbConnect(dbDriver(\"MySQL\"), dbname = \"foo\", user=\"me\",password=\"secret\")\n> x<- data.frame(1:10)\n> colnames(x) <-c(\"x\")\n> dbWriteTable(con, \"#x\", x, verbose=TRUE,row.names=FALSE, overwrite=T) # fails\nError in mysqlExecStatement(conn, statement, ...) :\n  RS-DBI driver: (could not run statement: You have an error in your\nSQL syntax; check the manual that corresponds to your MySQL server\nversion for the right syntax to use near '(\n\tx bigint\n)' at line 2)\n[1] FALSE\nWarning message:\nIn mysqlWriteTable(conn, name, value, ...) :\n  could not create table: aborting mysqlWriteTable\n> dbGetQuery(con, \"create temporary table x ( x int);\") # workaround\nNULL\n> dbWriteTable(con, \"x\", x, verbose=TRUE,row.names=FALSE, overwrite=T)\n[1] TRUE\n> dbGetQuery(con, \"select * from x;\")\n    x\n1   1\n2   2\n3   3\n4   4\n5   5\n6   6\n7   7\n8   8\n9   9\n10 10\n> dbGetQuery(con, \"drop table x;\") # clean up\nNULL\n\n\n\n\nAndrew",
+      "body_snippet": "Creating a temp table isn't completely intuitive with MySQL 5 and R\n2.8..1, but it can be done.\n\n> library(RMySQL)\nLoading required package: DBI\n> con <- dbConnect(dbDriver(\"MySQL\"), dbname = \"foo\", u",
+      "thread_id": "thread-77e1af08190c",
+      "thread_depth": 0,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-d18cb2fee0cd",
+      "message_id": "<fff7708f0902281712n25d488f2i3803b6b8b00a8522@mail.gmail.com>",
+      "from_name": "Andrew Ziem",
+      "from_email_hash": "a06cb12e626f01abe5876924ef46c612df7d45b4e0bc457466f5a4c294d3c982",
+      "date": "2009-02-28T18:12:48-07:00",
+      "subject": "[R] Temporary tables with Microsoft SQL?",
+      "subject_clean": "Temporary tables with Microsoft SQL?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I can create a temp table with MySQL and R DBI[1], but I don't see how\nto do the same with Microsoft SQL 2005 and RODBC.  R 2.8.1 creates the\ntable, but then it can never see it.  I'm looking to avoid replacing\nthe convenience functions like sqlSave().\n\n[1] https://stat.ethz.ch/pipermail/r-help/2009-March/190033.html\n\n> library(RODBC)\n> channel <- odbcDriverConnect(\"driver=SQL Server;server=foo;Initial Catalog=bar;Integrated Security=SSPI;\")\n> x<-data.frame(1:10)\n> colnames(x) <-c(\"x\")\n\n> sqlSave(channel, x, \"#x\", verbose=TRUE)\nQuery: CREATE TABLE \"#x\"  (\"rownames\" varchar(255), \"x\" int)\nError in sqlColumns(channel, tablename) :\n  ?#x?: table not found on channel\n\n> sqlSave(channel, \"#x\", verbose=TRUE) #repeat\nQuery: CREATE TABLE \"#x\"  (\"rownames\" varchar(255), \"x\" int)\nError in sqlSave(db_i3_eic, x, \"#x\", verbose = TRUE) :\n  [RODBC] ERROR: Could not SQLExecDirect\n42S01 2714 [Microsoft][ODBC SQL Server Driver][SQL Server]There is\nalready an object named '#x' in the database.\n\n> sqlSave(channel, \"x\", verbose=TRUE) # try without hash\nQuery: CREATE TABLE \"x\"  (\"rownames\" varchar(255), \"x\" int)\nError in sqlSave(db_i3_eic, x, \"x\", verbose = TRUE) :\n  [RODBC] ERROR: Could not SQLExecDirect\n42000 262 [Microsoft][ODBC SQL Server Driver][SQL Server]CREATE TABLE\npermission denied in database 'bar'.\n\n\n\nAndrew",
+      "body_snippet": "I can create a temp table with MySQL and R DBI[1], but I don't see how\nto do the same with Microsoft SQL 2005 and RODBC.  R 2.8.1 creates the\ntable, but then it can never see it.  I'm looking to avoid",
+      "thread_id": "thread-d18cb2fee0cd",
+      "thread_depth": 0,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-99ceabc3127c",
+      "message_id": "<20090228212659.OV5XF.834569.root@mp08>",
+      "from_name": "rkevinburton at charter.net",
+      "from_email_hash": "86acf360c0742d1fce222796b5ec732528a1d7fa9594dafeb2f90a5c33dbf05c",
+      "date": "2009-02-28T18:26:59-08:00",
+      "subject": "[R] Variable scope.",
+      "subject_clean": "Variable scope.",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a question on scope/reference/value type of variables with 'R'.\n\nThe issue cam up first when I look at the arima code.\n\nI see code like:\n\n    myupARIMA <- function(mod, phi, theta) {\n. . . .\n                           mod\n    }\n\nThen \n\narmafn <- function(p, trans) {\n. . . .\n        Z <- upARIMA(mod, trarma[[1]], trarma[[2]])\n. . . .\n        res <- .Call(R_ARIMA_Like, x, Z$phi, Z$theta, Z$Delta, \n            Z$a, Z$P, Z$Pn, as.integer(0), FALSE)\n. . . . \n}\n\nThe question is that ARIMA_Like will make changes to the arrays Z$P etc. Since upARIMA essentially returns 'mod' are changes to the arrays passed as Z$... to ARUINA_Like refkected in the original 'mod'? Or another way of phrasing the question is 'Z' a reference variable? Are the members such as Z$a also passed as reference hence changes to Z$a should also be seen in mod$a? In the arima code the references to x and mod seem to be essentially global variables as armafn is 'nested' in arima. Will changes to x also be reflected in the original x? (Like x <- x - (xreg %*% par[narma + (1:ncxreg)))\n\nThank you.\n\nKevin",
+      "body_snippet": "I have a question on scope/reference/value type of variables with 'R'.\n\nThe issue cam up first when I look at the arima code.\n\nI see code like:\n\n    myupARIMA <- function(mod, phi, theta) {\n. . . .\n  ",
+      "thread_id": "thread-99ceabc3127c",
+      "thread_depth": 0,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-f61f2398bf76",
+      "message_id": "<F9CD6772-3D5A-46EC-A4D7-B3069DC83032@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2009-02-28T23:09:26-05:00",
+      "subject": "[R] creating log-log survival plots that are not inverted",
+      "subject_clean": "creating log-log survival plots that are not inverted",
+      "in_reply_to": "<20090228224911.8A0B55949E7@borg.st.net.au>",
+      "references": [
+        "<mailman.21.1235732407.4926.r-help@r-project.org>",
+        "<20090228224911.8A0B55949E7@borg.st.net.au>"
+      ],
+      "body_plain": "I think what you want may be produced by this code for InvNormal(S) vs  \nlog(time):\n\nsurvplot(fit, fun=qnorm, logT=T, conf = \"none\")\n\nThat is not what you describe, however.\n\nI am worried about the plot on the page you cite, because it is not  \nsimilar to other log(-log(S)) (complementary log-log)  plots I am  \nfamiliar with. I checked the errata listing and do not see a  \ncorrection, but I am still concerned it might not be not a log(- \nlog(S)) vs time plot.\n\nTerry Therneau has always been very helpful to readers of this group  \nand I suspect he can clarify any confusion I may be laboring under.\n\n-- \nDavid Winsemius\nHeritage Laboratories\n\nOn Feb 28, 2009, at 5:48 PM, Bob Green wrote:\n\n> I am hoping for some advice regarding how to obtain a log-log  \n> survival plot that is not in the inverse. On page 128 of Modelling  \n> survival data by Therneau & Grambsch there is the an example of the  \n> type of desired plot, with a log of the survival curve  by years.   \n> Marc Schwartz has provided me with some reproducible code.\n>\n> The code below produces inverted plots.\n>\n> library(surv2sample)\n> data(gastric)\n> fit <- survfit ( Surv(time, event) ~ treatment, data = gastric)\n> #Default plot:\n> plot(fit)\n> plot(fit, fun = \"cloglog\")\n>\n> library(Design)\n> survplot(fit, loglog = TRUE, conf = \"none\")\n>\n> Any assistance is much appreciated,\n>\n> regards\n>\n> Bob\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I think what you want may be produced by this code for InvNormal(S) vs  \nlog(time):\n\nsurvplot(fit, fun=qnorm, logT=T, conf = \"none\")\n\nThat is not what you describe, however.\n\nI am worried about the pl",
+      "thread_id": "thread-f61f2398bf76",
+      "thread_depth": 0,
+      "month": "2009-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-3d9310957c54",
+      "subject": "How to join many records against SQL database",
+      "message_count": 1,
+      "participants": [
+        "Andrew Ziem"
+      ],
+      "started": "2009-02-28T16:19:10-07:00",
+      "last_reply": "2009-02-28T16:19:10-07:00",
+      "root_message_id": "msg-3d9310957c54"
+    },
+    {
+      "id": "thread-77e1af08190c",
+      "subject": "How to create temporary table in MySQL",
+      "message_count": 1,
+      "participants": [
+        "Andrew Ziem"
+      ],
+      "started": "2009-02-28T17:36:21-07:00",
+      "last_reply": "2009-02-28T17:36:21-07:00",
+      "root_message_id": "msg-77e1af08190c"
+    },
+    {
+      "id": "thread-d18cb2fee0cd",
+      "subject": "Temporary tables with Microsoft SQL?",
+      "message_count": 1,
+      "participants": [
+        "Andrew Ziem"
+      ],
+      "started": "2009-02-28T18:12:48-07:00",
+      "last_reply": "2009-02-28T18:12:48-07:00",
+      "root_message_id": "msg-d18cb2fee0cd"
+    },
+    {
+      "id": "thread-99ceabc3127c",
+      "subject": "Variable scope.",
+      "message_count": 1,
+      "participants": [
+        "rkevinburton at charter.net"
+      ],
+      "started": "2009-02-28T18:26:59-08:00",
+      "last_reply": "2009-02-28T18:26:59-08:00",
+      "root_message_id": "msg-99ceabc3127c"
+    },
+    {
+      "id": "thread-5b89885cf762",
+      "subject": "object \".trPaths\" not found",
+      "message_count": 1,
+      "participants": [
+        "rkevinburton at charter.net"
+      ],
+      "started": "2009-02-28T18:59:40-05:00",
+      "last_reply": "2009-02-28T18:59:40-05:00",
+      "root_message_id": "msg-5b89885cf762"
+    },
+    {
+      "id": "thread-f61f2398bf76",
+      "subject": "creating log-log survival plots that are not inverted",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2009-02-28T23:09:26-05:00",
+      "last_reply": "2009-02-28T23:09:26-05:00",
+      "root_message_id": "msg-f61f2398bf76"
+    }
+  ]
+}

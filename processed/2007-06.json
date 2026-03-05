@@ -1,0 +1,63 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2007-06",
+  "messages": [
+    {
+      "id": "msg-fcbddec632af",
+      "message_id": "<EC0F8FF776F3F74E9C63CE16641C9628020812C2@AKLEXB02.hort.net.nz>",
+      "from_name": "Peter Alspach",
+      "from_email_hash": "148af7510f63b6eb1ba795c79fc8126840a181092bf369de35cb78104f45b64a",
+      "date": "2007-06-01T08:22:47+12:00",
+      "subject": "[R] Aggregate to find majority level of a factor",
+      "subject_clean": "Aggregate to find majority level of a factor",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Jon\n\nOne way:  assuming your data.frame is 'jon'\n\naggregate(jon[,2], list(jon[,1]), function(x)\nlevels(x)[which.max(table(x))])\n  Group.1     x\n1   Plot1   big\n2   Plot2 small\n3   Plot3 small \n\nHTH ........\n\nPeter Alspach\n\n> -----Original Message-----\n> From: r-help-bounces at stat.math.ethz.ch \n> [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of \n> Thompson, Jonathan\n> Sent: Friday, 1 June 2007 7:26 a.m.\n> To: r-help at stat.math.ethz.ch\n> Subject: [R] Aggregate to find majority level of a factor\n> \n> I want to use the aggregate function to summarize data by a \n> factor (my field plots), but I want the summary to be the \n> majority level of another factor.\n> \n>  \n> For example, given the dataframe:\n> \n> Plot1     big\n> Plot1     big\n> Plot1     small\n> Plot2     big\n> Plot2     small    \n> Plot2     small\n> Plot3     small\n> Plot3     small\n> Plot3     small\n> \n> \n> My desired result would be:\n> Plot1 big\n> Plot2 small\n> Plot3 small\n> \n> \n> I can't seem to find a scalar function that will give me the \n> majority level. \n> \n> Thanks in advance,\n> \n> Jonathan Thompson\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\n______________________________________________________\n\nThe contents of this e-mail are privileged and/or confidenti...{{dropped}}",
+      "body_snippet": "Jon\n\nOne way:  assuming your data.frame is 'jon'\n\naggregate(jon[,2], list(jon[,1]), function(x)\nlevels(x)[which.max(table(x))])\n  Group.1     x\n1   Plot1   big\n2   Plot2 small\n3   Plot3 small \n\nHTH ..",
+      "thread_id": "thread-fcbddec632af",
+      "thread_depth": 0,
+      "month": "2007-06"
+    },
+    {
+      "id": "msg-df249e1f6940",
+      "message_id": "<465F4273.2010805@uchicago.edu>",
+      "from_name": "Mark Novak",
+      "from_email_hash": "ac3f407df8b55a818a75975061d53f76b4a306286d0450b906a4daa2a6593f84",
+      "date": "2007-06-01T09:47:31+12:00",
+      "subject": "[R] Permanent of a matrix",
+      "subject_clean": "Permanent of a matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello all,\nDoes anyone know of a function for calculating the permanent of a matrix? \n\nI have found only the function for calculating a matrix's determinant, \nand my beginner attempts to figure out a working script (see below) have \nfailed.  (That is, I don't get the same answer as when I calculate the \npermanent in Maple or Mathematica.)\n\nMy understanding and experience is that it can be an exceedingly \ndifficult (memory intensive) calculation for matrices larger than ~24x24 \n(which also suggests that there is something wrong in the way I've coded \nthis) but I can't seem to figure out where my error lies; whether it's \nin my code or in my understanding of how a matrix permanent is defined.\n\nThanks in advance\n-Mark\n\n\nperm<-function(A){   \n    m<-dim(A)[1]\n    M1<-dim(0)\n    for (i in \n1:nrow(A)){temp.M<-c(A)[i+0:(m-i)*(m+1)];M1<-c(M1,prod(temp.M))}\n   \n    M2<-dim(0)\n    for (i in \n2:nrow(A)){temp.M<-c(t(A))[i+0:(m-i)*(m+1)];M2<-c(M2,prod(temp.M))}\n   \n    B<-A[nrow(A):1,]\n    M3<-dim(0)\n    for (i in \n1:nrow(B)){temp.M<-c(B)[i+0:(m-i)*(m+1)];M3<-c(M3,prod(temp.M))}\n   \n    M4<-dim(0)\n    for (i in \n2:nrow(B)){temp.M<-c(t(B))[i+0:(m-i)*(m+1)];M4<-c(M4,prod(temp.M))}\n   \n    Perm<-sum(M1,M2,M3,M4)\n    Perm\n}\nS<-4\nA<-array(seq(1,S^2),dim=c(S,S))\nperm(A)\n\n\n-- \n\n \n\n~~~~~~~~~~~~~~~~~~~~~~~~~~\nDept. of Ecology & Evolution\n1101 E. 57th St., U. of Chicago\nChicago, IL 60637\nOffice/Lab: 773-702-4815\nCell: 773-256-8645\nFax: 773-702-9740\nhttp://home.uchicago.edu/~mnovak/ <http://home.uchicago.edu/%7Emnovak/>\n~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "body_snippet": "Hello all,\nDoes anyone know of a function for calculating the permanent of a matrix? \n\nI have found only the function for calculating a matrix's determinant, \nand my beginner attempts to figure out a ",
+      "thread_id": "thread-df249e1f6940",
+      "thread_depth": 0,
+      "month": "2007-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-fcbddec632af",
+      "subject": "Aggregate to find majority level of a factor",
+      "message_count": 1,
+      "participants": [
+        "Peter Alspach"
+      ],
+      "started": "2007-06-01T08:22:47+12:00",
+      "last_reply": "2007-06-01T08:22:47+12:00",
+      "root_message_id": "msg-fcbddec632af"
+    },
+    {
+      "id": "thread-df249e1f6940",
+      "subject": "Permanent of a matrix",
+      "message_count": 1,
+      "participants": [
+        "Mark Novak"
+      ],
+      "started": "2007-06-01T09:47:31+12:00",
+      "last_reply": "2007-06-01T09:47:31+12:00",
+      "root_message_id": "msg-df249e1f6940"
+    }
+  ]
+}

@@ -1,0 +1,459 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2011-02",
+  "messages": [
+    {
+      "id": "msg-4746bb9ee026",
+      "message_id": "<2A462CD218D03249B384CABF3E6F6DE50719CADC@PHSXMB14.partners.org>",
+      "from_name": "Wittner, Ben, Ph.D.",
+      "from_email_hash": "17d565ca51e2f68ccef611d4c89d21215a7113420b46c50e9c0157b1693ebe73",
+      "date": "2011-02-28T18:04:18-05:00",
+      "subject": "[R] Gamma mixture models with flexmix",
+      "subject_clean": "Gamma mixture models with flexmix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've been trying with no success to model mixtures of Gamma distributions using\nthe package flexmix (see examples below). Can anyone help me get it to model\nbetter? Thanks very much.\n\n-Ben\n\n##\n##  Please help me get flexmix to correctly model mixtures of\n##  Gamma distributions. See examples below.\n##\nlibrary('flexmix')\n\n##\n##  Plot a histogram of dat and the Gamma mixture model given by\n##  shapes, rates and pis that is intended as a model of the\n##  distribution from which dat was drawn.\n##\nplotGammaMixture <- function(dat, shapes, rates, pis) {\n\n  KK <- length(pis)\n  stopifnot(KK == length(shapes))\n  stopifnot(KK == length(rates))\n\n  ho <- hist(dat, plot=FALSE)\n  x <- seq(ho$breaks[1], ho$breaks[length(ho$breaks)],\n           length.out=1000)\n  y <- list()\n  for (ii in 1:KK) {\n    y[[ii]] <- pis[ii]*dgamma(x, shape=shapes[ii],\n                              rate=rates[ii])\n  }\n\n  uy <- unlist(y)\n  ylim <- if (any(uy == Inf)) {\n    c(0, 2*max(ho$intensities))\n  } else {\n    c(0, max(c(ho$intensities, uy)))\n  }\n  plot(ho, col='lightgray', freq=FALSE, ylim=ylim,\n       main=paste(KK, 'component(s) in model\\nmodel prior(s) =',\n         paste(round(pis, 2), collapse=', ')))\n  cols <- rainbow(KK)\n  for (ii in 1:KK) {\n    lines(x, y[[ii]], col=cols[ii])\n  }\n}\n\n##\n##  Model dat as a mixture of Gammas then plot.\n##\nmodelGammas <- function(dat, which='BIC') {\n  set.seed(939458)\n  fmo <- stepFlexmix(dat ~ 1, k=1:3,\n                     model=FLXMRglm(family='Gamma'))\n  mdl <- getModel(fmo, which=which)\n  print(smry <- summary(mdl))\n  print(prm <- parameters(mdl))\n  plotGammaMixture(dat, prm['shape', ],\n                   prm['shape', ]*prm['coef.(Intercept)', ],\n                   smry at comptab[, 'prior'])\n}\n\n##\n##  Works well for a single Gamma distribution.\n##\nset.seed(78483)\ndat1 <- rgamma(6000, shape=2, rate=0.5)\nmodelGammas(dat1)\n\nset.seed(78483)\ndat2 <- rgamma(6000, shape=5, rate=0.3)\nmodelGammas(dat2)\n\n##\n##  Please help me get it to work for mixtures of\n##  two Gamma distributions.\n##\nset.seed(78483)\ndat3 <- c(rgamma(6000, shape=3, rate=.5),\n          rgamma(4000, shape=5, rate=.1))\nmodelGammas(dat3)\n\n## Even telling it that there are two components\n## does not help. I get two nearly identical distributions,\nmodelGammas(dat3, which=2)\n\n## whereas what I want to see is something like this.\nplotGammaMixture(dat3, shapes=c(3, 5), rates=c(.5, .1),\n                 pis=c(.6, .4))\n\n###############################\nHere's the output of sessionInfo()\nR version 2.12.1 (2010-12-16)\nPlatform: x86_64-unknown-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              \n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    \n [5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8   \n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 \n [9] LC_ADDRESS=C               LC_TELEPHONE=C            \n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       \n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\n\n\nThe information in this e-mail is intended only for the ...{{dropped:11}}",
+      "body_snippet": "I've been trying with no success to model mixtures of Gamma distributions using\nthe package flexmix (see examples below). Can anyone help me get it to model\nbetter? Thanks very much.\n\n-Ben\n\n##\n##  Ple",
+      "thread_id": "thread-4746bb9ee026",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-ca90b78e7631",
+      "message_id": "<AANLkTim493wjMqrNxcjpRpb+ysfZFkWXdk0v4MpTAjP_@mail.gmail.com>",
+      "from_name": "Carson Farmer",
+      "from_email_hash": "0d05a947486dfc277aec25d9d8d4772e3631a1ee2b00e99bea3942cbe5ce4f9f",
+      "date": "2011-02-28T23:15:09Z",
+      "subject": "[R] mixture models/latent class regression comparison",
+      "subject_clean": "mixture models/latent class regression comparison",
+      "in_reply_to": "<alpine.DEB.1.00.1102281617040.7656@oak.stats.ucl.ac.uk>",
+      "references": [
+        "<AANLkTi==o6omHUumLgXpgLQozdQcz4zSSOB6CgNr8z1y@mail.gmail.com>",
+        "<alpine.DEB.1.00.1102281617040.7656@oak.stats.ucl.ac.uk>"
+      ],
+      "body_plain": "Thanks for the reply Christian,\n\n> I have never used mmlcr for this, but quite generally when fitting such\n> models, the likelihood has often very many local optima. This means that the\n> result of the EM (or a similar) algorithm depends on the initialisation,\n> which in flexmix (and perhaps also in mmlcr) is done in a random fashion.\n> This means that results may differ even if the same method is applied twice,\n> and unfortunately, depending on the dataset, the result may be quite\n> unstable. This may explain that the two functions give you strongly\n> different results, not of course implying that one of them is generally\n> better.\nI though this might be the issue here. So is the solution to simply\nrun it many times and look for the best likelihood? I am still\nconfused as to why the mmlcr function consistently produces 'poorer'\nresults? Perhaps the flexmix package is being a bit more 'clever' in\nterms of avoiding local optima? I will have to dig a bit deeper.\n\nCheers,\n\nCarson\n\n>> Dear list,\n>>\n>> I have been comparing the outputs of two packages for latent class\n>> regression, namely 'flexmix', and 'mmlcr'. What I have noticed is that\n>> the flexmix package appears to come up with a much better fit than the\n>> mmlcr package (based on logLik, AIC, BIC, and visual inspection). Has\n>> anyone else observed such behaviour? Has anyone else been successful\n>> in using the mmlcr package? I ask because I am interested in latent\n>> class negative binomial regression, which the mmlcr package appears to\n>> support, however, the results for basic Poisson latent class\n>> regression appear to be inferior to the results from flexmix. Below is\n>> a simple reproducible example to illustrate the comparison:\n>>\n>> library(flexmix)\n>> library(mmlcr)\n>> data(NPreg) # from package flexmix\n>> m1 <- flexmix(yp ~ x, k=2, data=NPreg, model=FLXMRglm(family='poisson'))\n>> NPreg$id <- 1:200 # mmlcr requires an id column\n>> m2 <- mmlcr(outer=~1|id, components=list(list(formula=yp~x,\n>> class=\"poisonce\")), data=NPreg, n.groups=2)\n>>\n>> # summary and coefficients for flexmix model\n>> summary(m1)\n>> summary(refit(m1))\n>>\n>> # summary and coefficients for mmlcr model\n>> summary(m2)\n>> m2\n>>\n>> Regards,\n>>\n>> Carson\n>>\n>> P.S. I have attached a copy of the mmlcr package with a modified\n>> mmlcr.poisonce function due to errors in the version available here:\n>> http://cran.r-project.org/src/contrib/Archive/mmlcr/. See also\n>> http://jeldi.com/Members/jthacher/tips-and-tricks/programs/r/mmlcr\n>> section \"Bugs?\" subsection \"Poisson\".\n>>\n>> --\n>> Carson J. Q. Farmer\n>> ISSP Doctoral Fellow\n>> National Centre for Geocomputation\n>> National University of Ireland, Maynooth,\n>> http://www.carsonfarmer.com/\n>>\n>\n> *** --- ***\n> Christian Hennig\n> University College London, Department of Statistical Science\n> Gower St., London WC1E 6BT, phone +44 207 679 1698\n> chrish at stats.ucl.ac.uk, www.homepages.ucl.ac.uk/~ucakche\n>\n\n\n\n-- \nCarson J. Q. Farmer\nISSP Doctoral Fellow\nNational Centre for Geocomputation\nNational University of Ireland, Maynooth,\nhttp://www.carsonfarmer.com/",
+      "body_snippet": "Thanks for the reply Christian,\n\n> I have never used mmlcr for this, but quite generally when fitting such\n> models, the likelihood has often very many local optima. This means that the\n> result of th",
+      "thread_id": "thread-ca90b78e7631",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-1ab2ad52d38a",
+      "message_id": "<4D6C2E8B.5080503@gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "18f6c2b0b79bec76f7afe0fad5e36fffd27297982eaee9a3a21101b9461258e5",
+      "date": "2011-02-28T16:23:55-07:00",
+      "subject": "[R] Measuring correlations in repeated measures data",
+      "subject_clean": "Measuring correlations in repeated measures data",
+      "in_reply_to": "<755bd4eb-5bb3-4792-e247-ecbe876f2459@me.com>",
+      "references": [
+        "<755bd4eb-5bb3-4792-e247-ecbe876f2459@me.com>"
+      ],
+      "body_plain": "On 11-02-28 11:59 AM, Brant Inman wrote:\n> Ben,\n> \n> Thanks for the response.  Your method generates an answer that is\n> slightly different than what I was looking for.  In the Orthodont\n> dataset there are 4 age groups (8, 10, 12, 14).  I would like to\n> calculate the correlation of \"distance\" for all combinations of the\n> categorical variable \"age\".  The anticipated output would therefore be a\n> matrix with 4 columns and 4 rows and a diagonal of ones.\n> \n> For example, in such a table I would be able to look at the mean within\n> individual correlation coefficient for distance b/t ages 8 and 10 or,\n> alternatively, ages 10 and 14.  Is there a function in nlme or lme4 that\n> does this?\n\nGiven the model below,\n\n fit2$modelStruct$corStruct\n\n produces\n\nCorrelation structure of class corSymm representing\n Correlation:\n  1      2      3\n2 -0.099\n3  0.021 -0.242\n4 -0.298  0.184  0.262\n\n (this is also shown at the end of summary(fit2))\n\n  This is the lower triangle of the (symmetric) correlation matrix; the\ndiagonal is 1 by definition.\n\n  Isn't that what you're looking for? (Sorry if I'm misunderstanding.)\n\n  Ben\n\n> \n> Brant\n> \n> On Feb 28, 2011, at 02:24 AM, Ben Bolker <bbolker at gmail.com> wrote:\n> \n>> Brant Inman <brant.inman <at> mac.com <http://mac.com>> writes:\n>>\n>> >\n>> > R-helpers:\n>> >\n>> > I would like to measure the correlation coefficient between the repeated\n>> measures of a single variable\n>> > that is measured over time and is unbalanced. As an example,\n>> consider the\n>> Orthodont dataset from package\n>> > nlme, where the model is:\n>> >\n>> > fit <- lmer(distance ~ age + (1 | Subject), data=Orthodont)\n>> >\n>> > I would like to measure the correlation b/t the variable \"distance\" at\n>> different ages such that I would have\n>> > a matrix of correlation coefficients like the following:\n>> >\n>> > age08 age09 age10 age11 age12 age13 age14\n>> > age08 1\n>> > age09 1\n>> > age10 1\n>> > age11 1\n>> > age12 1\n>> > age13 1\n>> > age14 1\n>> >\n>> > The idea would be to demonstrate that the correlations b/t\n>> > repeated measures of the variable \"distance\"\n>> > decrease as the time b/t measures increases For example,\n>> > one might expect the correlation\n>> > coefficient? b/t age08 and age09 to be higher than that\n>> > between age08 and age14.\n>> >\n>>\n>> This stuff is not currently possible in lmer/lme4 but is\n>> easy in nlme:\n>>\n>> library(nlme)\n>> Orthodont$age0 <- Orthodont$age/2-3\n>> ## later code requires a time index of consecutive integers\n>> ## (which apparently must also start at 1, although not stated)\n>>\n>> fit <- lme(distance~age,random=~1|Subject,data=Orthodont)\n>>\n>> ## compute autocorrelation on the basis of lag only, plot\n>> a <- ACF(fit)\n>> plot(a,alpha=0.05)\n>>\n>>\n>> fit2 <- update(fit, correlation=corSymm(form=~age0|Subject))\n>> fit3 <- update(fit, correlation=corAR1(form=~age0|Subject))\n>>\n>> AIC(fit,fit2,fit3)\n>> ## at least on the basis of AIC, this extra complexity is\n>> ## not warranted\n>>\n>> anova(fit,fit2) ## likelihood ratio test\n>>\n>> ______________________________________________\n>> R-help at r-project.org <mailto:R-help at r-project.org> mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "On 11-02-28 11:59 AM, Brant Inman wrote:\n> Ben,\n> \n> Thanks for the response.  Your method generates an answer that is\n> slightly different than what I was looking for.  In the Orthodont\n> dataset the",
+      "thread_id": "thread-1ab2ad52d38a",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-fc54768df534",
+      "message_id": "<4D6BED20020000CB00081895@medicine.umaryland.edu>",
+      "from_name": "John Sorkin",
+      "from_email_hash": "6f24ec44f0b672836986fb2c6959e74c7df7158deedbd284a5d1e1172a85eb89",
+      "date": "2011-02-28T18:44:48-05:00",
+      "subject": "[R] lme error: Error in getGroups.data.frame(dataMix, groups)",
+      "subject_clean": "lme error: Error in getGroups.data.frame(dataMix, groups)",
+      "in_reply_to": "<AANLkTi=XnRskpk+wyhSPgJATtWgQuV3Lb6n1NDQ6TzLa@mail.gmail.com>",
+      "references": [
+        "<34de8d3c-b6fb-c257-90e5-a06fbe1e8e5e@me.com>",
+        "<AANLkTin+Tn=3CmhfRzzWBQB=gya-mP5rHe9A2VqTDNVO@mail.gmail.com>",
+        "<4D6B8A35020000CB000817CE@medicine.umaryland.edu>",
+        "<AANLkTi=XnRskpk+wyhSPgJATtWgQuV3Lb6n1NDQ6TzLa@mail.gmail.com>"
+      ],
+      "body_plain": "Dennis,\nThank you,\nJohn\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing)>>> Dennis Murphy <djmuser at gmail.com> 2/28/2011 4:08 PM >>>\nHi:\n\nOn Mon, Feb 28, 2011 at 8:42 AM, John Sorkin <jsorkin at grecc.umaryland.edu>wrote:\n\n> R 2.10.0\n> Windows XP\n>\n> I am trying to run lme. I receive the following error message:\n> My lme code is:\n> fitRandom <- lme(values ~ factor(subject),\n> data=withindata)\n>\n\nWhere's the random factor? Perhaps you mean\n\nlme(values ~ 1, random = ~ 1 | subject, data = withindata)\n\nor in lme4,\n\nlmer(values ~ 1 + (1 | subject), data = withindata)\n\nHTH,\nDennis\n\nPS: Use of dput() output is more helpful than copying from the console, as\nit retains the same classes you have on your end.\n\n\n> dput(withindata)\nstructure(list(subject = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,\n1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L,\n3L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L),\n    values = c(2.3199639, -8.5795802, -4.1901241, 0.4588128,\n    16.9128232, 8.9856358, 1.9303254, -1.4320313, -15.4225123,\n    5.9293529, -29.2014153, -8.9684986, -11.906217, 13.2133887,\n    1.2491941, -8.0613768, -5.6340179, 3.1916857, -7.7447932,\n    2.2316354, 0.6444938, 4.6912677, 20.9135073, 2.1433533, -0.8057022,\n    -13.0187979, 8.9634065, 13.4815344, 4.6148061, -18.4781373,\n    15.5263564, -2.1993412, 5.183026, 16.2311097, -2.5781897,\n    -3.016729, -0.1119353, 1.1983126, -8.8212143, 3.8895263)), .Names =\nc(\"subject\",\n\"values\"), class = \"data.frame\", row.names = c(\"1\", \"2\", \"3\",\n\"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\", \"15\",\n\"16\", \"17\", \"18\", \"19\", \"20\", \"21\", \"22\", \"23\", \"24\", \"25\", \"26\",\n\"27\", \"28\", \"29\", \"30\", \"31\", \"32\", \"33\", \"34\", \"35\", \"36\", \"37\",\n\"38\", \"39\", \"40\"))\n\nBelow I have printed the console output, and at the bottom of this message,\n> I have printed my code.\n> I hope someone can tell my what I am doing wrong.\n> Thank you,\n> John\n>\n> > print(withindata)\n>   subject      values\n> 1        1   2.3199639\n> 2        1  -8.5795802\n> 3        1  -4.1901241\n> 4        1   0.4588128\n> 5        1  16.9128232\n> 6        1   8.9856358\n> 7        1   1.9303254\n> 8        1  -1.4320313\n> 9        1 -15.4225123\n> 10       1   5.9293529\n> 11       2 -29.2014153\n> 12       2  -8.9684986\n> 13       2 -11.9062170\n> 14       2  13.2133887\n> 15       2   1.2491941\n> 16       2  -8.0613768\n> 17       2  -5.6340179\n> 18       2   3.1916857\n> 19       2  -7.7447932\n> 20       2   2.2316354\n> 21       3   0.6444938\n> 22       3   4.6912677\n> 23       3  20.9135073\n> 24       3   2.1433533\n> 25       3  -0.8057022\n> 26       3 -13.0187979\n> 27       3   8.9634065\n> 28       3  13.4815344\n> 29       3   4.6148061\n> 30       3 -18.4781373\n> 31       4  15.5263564\n> 32       4  -2.1993412\n> 33       4   5.1830260\n> 34       4  16.2311097\n> 35       4  -2.5781897\n> 36       4  -3.0167290\n> 37       4  -0.1119353\n> 38       4   1.1983126\n> 39       4  -8.8212143\n> 40       4   3.8895263\n> > fitRandom <- lme(values ~ factor(subject),\n> + data=withindata)\n> Error in getGroups.data.frame(dataMix, groups) :\n>  Invalid formula for groups\n> > summary(fitRandom)\n> Error in summary(fitRandom) : object 'fitRandom' not found\n> >\n>\n> My code:\n>\n> library(nlme)\n>\n> # Define essential constants.\n> # Number of subject studied.\n> NSubs <- 4\n> # Number of observations per subject.\n> NObs <- 10\n> # Between study SD\n> tau <- 4\n> # Within study SD.\n> sigma <- 8\n> # END Define essential constants.\n>\n> # Define between subject variation\n> between <- matrix(nrow=10,ncol=1)\n> between <- rnorm(NSubs,0,tau)\n> between\n> # END Define between subject variation.\n>\n> # Define within subject varation.\n> within <- matrix(nrow=NObs*NSubs,ncol=2)\n> for (subject in 1:NSubs) {\n>  # Create a variable defining subject.\n>  within[c(1:NObs)+((subject-1)*NObs),1] <- subject\n>  # Create within subject variation.\n>  within[c(1:NObs)+((subject-1)*NObs),2] <-\n> rnorm(NObs,between[subject],sigma)\n> }\n> # END Define within subject variation.\n>\n> # Create a dataframe to hold values.\n> withindata <- data.frame(subject=within[,1],values=within[,2])\n> print(withindata[1:4,])\n>\n> print(withindata)\n> fitRandom <- lme(values ~ subject,\n> data=withindata)\n> summary(fitRandom)\n>\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Chief, Biostatistics and Informatics\n> University of Maryland School of Medicine Division of Gerontology\n> Baltimore VA Medical Center\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> (Phone) 410-605-7119\n> (Fax) 410-605-7913 (Please call phone number above prior to faxing)\n>\n> Confidentiality Statement:\n> This email message, including any attachments, is for ...{{dropped:17}}",
+      "body_snippet": "Dennis,\nThank you,\nJohn\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology\nBaltimore VA Medical Center\n10 North Gr",
+      "thread_id": "thread-fc54768df534",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-111b3fefe6cb",
+      "message_id": "<AANLkTi=Dfo6xoe-b-y4LMNwBKKjgJJDbWoSARavRHNkH@mail.gmail.com>",
+      "from_name": "Seth Falcon",
+      "from_email_hash": "11c6971bcb88df56e639b6a132437a8a73d7e421ce61eb5feaa3d85efef832df",
+      "date": "2011-02-28T15:48:40-08:00",
+      "subject": "[R] Data type problem when extract data from SQLite to R by using RSQLite",
+      "subject_clean": "Data type problem when extract data from SQLite to R by using RSQLite",
+      "in_reply_to": "<AANLkTikc4HXhhQCCtQS4tknsmDeCmy-s4nS9M60FxGY0@mail.gmail.com>",
+      "references": [
+        "<AANLkTikc4HXhhQCCtQS4tknsmDeCmy-s4nS9M60FxGY0@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Jia,\n\nOn Mon, Feb 28, 2011 at 12:37 PM, chen jia <chen_1002 at fisher.osu.edu> wrote:\n> When I extract data from SQLite to R, the data types (or modes) of the\n> extracted data seems to be determined by the value of the first row.\n> Please see the following example.\n\nIt would help to provide the output of sessionInfo() as well as the\nschema definition for the table in SQLite (or at least description of\nhow it was created).\n\nHere's an example that works as you'd like:\n\n    > library(RSQLite)\n    > db = dbConnect(SQLite(), dbname = \":memory:\")\n    > dbGetQuery(db, \"create table t (a int, b real, c text)\")\n    > df = data.frame(a=c(NA, 1L, 2L), b=c(NA, 1.1, 2.2), c=c(NA, \"x\",\n\"y\"),stringsAsFactors=FALSE)\n    > df\n       a   b    c\n    1 NA  NA <NA>\n    2  1 1.1    x\n    3  2 2.2    y\n    > dbGetPreparedQuery(db, \"insert into t values (?, ?, ?)\", df)\n    > dbGetQuery(db, \"select * from t\")\n       a   b    c\n    1 NA  NA <NA>\n    2  1 1.1    x\n    3  2 2.2    y\n    > sapply(dbGetQuery(db, \"select * from t\"), typeof)\n              a           b           c\n      \"integer\"    \"double\" \"character\"\n    > sapply(dbGetQuery(db, \"select * from t limit 1\"), typeof)\n              a           b           c\n      \"integer\"    \"double\" \"character\"\n    > sapply(dbGetQuery(db, \"select a from t limit 1\"), typeof)\n            a\n    \"integer\"\n    > sapply(dbGetQuery(db, \"select a from t limit 2\"), typeof)\n            a\n    \"integer\"\n    > sapply(dbGetQuery(db, \"select a from t limit 1\"), typeof)\n            a\n    \"integer\"\n\n\n> sessionInfo()\nR version 2.11.1 (2010-05-31)\nx86_64-apple-darwin9.8.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/C/C/en_US.UTF-8/en_US.UTF-8\n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base\n\nother attached packages:\n[1] RSQLite_0.9-4 DBI_0.2-5\n\nloaded via a namespace (and not attached):\n[1] tools_2.11.1\n\n\n\n\n-- \nSeth Falcon | @sfalcon | http://userprimary.net/",
+      "body_snippet": "Hi Jia,\n\nOn Mon, Feb 28, 2011 at 12:37 PM, chen jia <chen_1002 at fisher.osu.edu> wrote:\n> When I extract data from SQLite to R, the data types (or modes) of the\n> extracted data seems to be determine",
+      "thread_id": "thread-111b3fefe6cb",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-442749d22a96",
+      "message_id": "<AANLkTi=zdn0rQt61yK_LLanYnRg81N4Xq9GNuVXXw=JA@mail.gmail.com>",
+      "from_name": "James Shaw",
+      "from_email_hash": "443ab86ed9b6d13553a7423e68a27a964d3c46de0ae23cc03632100dba00d5dd",
+      "date": "2011-02-28T17:50:53-06:00",
+      "subject": "[R] Robust variance estimation with rq (failure of the bootstrap?)",
+      "subject_clean": "Robust variance estimation with rq (failure of the bootstrap?)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am fitting quantile regression models using data collected from a\nsample of 124 patients.  When modeling cross-sectional associations, I\nhave noticed that nonparametric bootstrap estimates of the variances\nof parameter estimates are much greater in magnitude than the\nempirical Huber estimates derived using summary.rq's \"nid\" option.\nThe outcome variable is severely skewed, and I am afraid that this may\nbe affecting the consistency of the bootstrap variance estimates.  I\nhave read that the m out of n bootstrap can be used to overcome this\nproblem.  However, this procedure requires both the original sample\n(n) and the subsample (m) sizes to be large.  The version implemented\nin rq.boot does not appear to provide any improvement over the naive\nbootstrap.  Ultimately, I am interested in using median regression to\nmodel changes in the outcome variable over time.  Summary.rq's robust\nvariance estimator is not applicable to repeated-measures data.  I\nquestion whether the block (cluster) bootstrap variance estimator,\nwhich can accommodate intraclass correlation, would perform well.  Can\nanyone suggest alternatives for variance estimation in this situation?\n\nRegards,\n\nJim\n\n\nJames W. Shaw, Ph.D., Pharm.D., M.P.H.\nAssistant Professor\nDepartment of Pharmacy Administration\nCollege of Pharmacy\nUniversity of Illinois at Chicago\n833 South Wood Street, M/C 871, Room 266\nChicago, IL 60612\nTel.: 312-355-5666\nFax: 312-996-0868\nMobile Tel.: 215-852-3045",
+      "body_snippet": "I am fitting quantile regression models using data collected from a\nsample of 124 patients.  When modeling cross-sectional associations, I\nhave noticed that nonparametric bootstrap estimates of the va",
+      "thread_id": "thread-442749d22a96",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-df890ca45237",
+      "message_id": "<AANLkTi=SFPPmHjLyQySh6rYUU2Jh8G93MNOHzfU0ouAb@mail.gmail.com>",
+      "from_name": "Jonathan DuBois",
+      "from_email_hash": "a5a616553923426697afa7ad12e519d205d950389823637127edae3e0da9d056",
+      "date": "2011-02-28T19:14:32-05:00",
+      "subject": "[R] regression with categorical nuisance variable",
+      "subject_clean": "regression with categorical nuisance variable",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am new to R, so I am unsure of the formula to set up this analysis.\nI would like to run a linear model with a continuous dependent\nvariable (brain volume) and a continuous independent variable (age)\nwhile controlling for a categorical nuisance variable (gender).\n\nAge and brain volume are correlated.\nThere are no gender differences in age but there are significant\ngender differences in brain volume.\nTherefore, I would like to control for gender when assessing the\nassociation between brain volume and age.\n\nAny help would be very much appreciated.\n\nJon",
+      "body_snippet": "Hi,\n\nI am new to R, so I am unsure of the formula to set up this analysis.\nI would like to run a linear model with a continuous dependent\nvariable (brain volume) and a continuous independent variable ",
+      "thread_id": "thread-df890ca45237",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-55fd31d585fa",
+      "message_id": "<AANLkTi=UwZYmyJCMNXjRqLPptAWfJNxe447=P+Md88zu@mail.gmail.com>",
+      "from_name": "Ista Zahn",
+      "from_email_hash": "2e4c8f48786fb76b910812e6407745b24d3e39c79018966c1f928657fc9989f2",
+      "date": "2011-02-28T19:31:17-05:00",
+      "subject": "[R] regression with categorical nuisance variable",
+      "subject_clean": "regression with categorical nuisance variable",
+      "in_reply_to": "<AANLkTi=SFPPmHjLyQySh6rYUU2Jh8G93MNOHzfU0ouAb@mail.gmail.com>",
+      "references": [
+        "<AANLkTi=SFPPmHjLyQySh6rYUU2Jh8G93MNOHzfU0ouAb@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Jon,\nJust enter it as a predictor in the model. You almost can't go wrong\nwith this one. Usually I would caution you to convert your categorical\nvariables to factors and make sure the contrasts are set how you want\nthem, but in this case it doesn't matter because there are (I assume)\nonly two levels of gender, and you don't really care about\ninterpreting the coefficient anyway.\n\nBest,\nIsta\n\nOn Mon, Feb 28, 2011 at 7:14 PM, Jonathan DuBois\n<jonathan.m.dubois at gmail.com> wrote:\n> Hi,\n>\n> I am new to R, so I am unsure of the formula to set up this analysis.\n> I would like to run a linear model with a continuous dependent\n> variable (brain volume) and a continuous independent variable (age)\n> while controlling for a categorical nuisance variable (gender).\n>\n> Age and brain volume are correlated.\n> There are no gender differences in age but there are significant\n> gender differences in brain volume.\n> Therefore, I would like to control for gender when assessing the\n> association between brain volume and age.\n>\n> Any help would be very much appreciated.\n>\n> Jon\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nIsta Zahn\nGraduate student\nUniversity of Rochester\nDepartment of Clinical and Social Psychology\nhttp://yourpsyche.org",
+      "body_snippet": "Hi Jon,\nJust enter it as a predictor in the model. You almost can't go wrong\nwith this one. Usually I would caution you to convert your categorical\nvariables to factors and make sure the contrasts are",
+      "thread_id": "thread-df890ca45237",
+      "thread_depth": 1,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-deeb961ba13e",
+      "message_id": "<4D6C3E6F.8030101@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2011-02-28T16:31:43-08:00",
+      "subject": "[R] nls not solving",
+      "subject_clean": "nls not solving",
+      "in_reply_to": "<1298931261660-3328862.post@n4.nabble.com>",
+      "references": [
+        "<1298924582492-3328647.post@n4.nabble.com>",
+        "<AANLkTi=fnRPE10jSS0rxzD-xdLRrgtcbdCTake9hLfMy@mail.gmail.com>",
+        "<1298931261660-3328862.post@n4.nabble.com>"
+      ],
+      "body_plain": "On 2011-02-28 14:14, Schatzi wrote:\n> I am not sure how you simplified the model to:\n> y = a + b(1 - exp(kl)) - b exp(-kx)\n>\n> I tried simplifying it but only got to:\n> y = a + b - b * exp(kl) * exp(-kx)\n>\n> I agree that the model must not be identifiable. That makes sense,\n> especially given that removing either a or l makes the model work. Can you\n> please further explain the math though as I am not understanding it? I do\n> not see you obtained your equation and when I tried to solve using your\n> equation I got quite different numbers. Thank you.\n\nYou can obviously write your function as\n\n  f <- f(x, A, B, K) {A - B * exp(-Kx)}\n\ni.e. in terms of *3* parameters. In that form,\nit's apple pie for nls().\n\n  fm <- nls(y ~ f(x, A, B, K),\n            start = list(A = 50, B = 60, K = 1)\n\n  coef(fm)\n  xx <- seq(0, 72, length = 101)\n  yy <- predict(fm, newdata = list(x = xx))\n  plot(x, y)\n  lines(xx, yy, col = \"red\")\n\nPeter Ehlers",
+      "body_snippet": "On 2011-02-28 14:14, Schatzi wrote:\n> I am not sure how you simplified the model to:\n> y = a + b(1 - exp(kl)) - b exp(-kx)\n>\n> I tried simplifying it but only got to:\n> y = a + b - b * exp(kl) * exp(-",
+      "thread_id": "thread-deeb961ba13e",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-6f790bfed098",
+      "message_id": "<1298939953082-3329057.post@n4.nabble.com>",
+      "from_name": "ufuk beyaztas",
+      "from_email_hash": "35baf2ff2b837481cca32bd2ae2db143f939259aa39fcd2570e1ca3dee4448ba",
+      "date": "2011-02-28T16:39:13-08:00",
+      "subject": "[R] selection of a subset from a loop",
+      "subject_clean": "selection of a subset from a loop",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi dear all, \n\nThe code like this;\n\ne <- rnorm(n=50, mean=0, sd=sqrt(0.5625))\nx0 <- c(rep(1,50))\nx1 <- rnorm(n=50,mean=2,sd=1)\nx2 <- rnorm(n=50,mean=2,sd=1)\nx3 <- rnorm(n=50,mean=2,sd=1)\nx4 <- rnorm(n=50,mean=2,sd=1)\ny <- 1+ 2*x1+4*x2+3*x3+2*x4+e\nx2[1] = 10     #influential observarion\ny[1] = 10      #influential observarion\n\nX <- matrix(c(x0,x1,x2,x3,x4),ncol=5)\nY <- matrix(y,ncol=1)\nDesign.data <- cbind(X, Y)\n\nresult <- list ()\n\nfor( i in 1: 3100) {\n\n\ndata <- Design.data[sample(50,50,replace=TRUE),]\ndataX <- data[,1:5]\ndataY <- data[,6]\n\nB.cap.simulation <- solve(crossprod(dataX)) %*% crossprod(dataX, dataY)\nP.simulation <- dataX %*% solve(crossprod(dataX)) %*% t(dataX)\nY.cap.simulation <- P.simulation %*% dataY\ne.simulation <- dataY - Y.cap.simulation\ndX.simulation <- nrow(dataX) - ncol(dataX)\nvar.cap.simulation <- crossprod(e.simulation) / (dX.simulation)\nei.simulation <- as.vector(dataY - dataX %*% B.cap.simulation)\npi.simulation <- diag(P.simulation)\nvar.cap.i.simulation <- (((dX.simulation) *\nvar.cap.simulation)/(dX.simulation - 1)) -\n(ei.simulation^2/((dX.simulation - 1) * (1 - pi.simulation)))\nti.simulation <- ei.simulation / sqrt(var.cap.simulation * (1 -\npi.simulation))\nti.star.simulation <- ei.simulation / sqrt(var.cap.i.simulation * (1 -\npi.simulation))\npi.star.simulation <- pi.simulation + ei.simulation^2 /\ncrossprod(e.simulation)\nWKi.simulation <- (ti.star.simulation)*sqrt(pi.simulation/(1-pi.simulation))\n\nresult<- c(result,list(WKi.simulation))\n\n}\n\nFinally i get the result which contains 3100 WKi.simulation. I'm trying to\nget a subset for those subset do not contain any Y[1,] that is point 10. Can\nanyone help me about how to be?\nThanks for any idea...\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/selection-of-a-subset-from-a-loop-tp3329057p3329057.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi dear all, \n\nThe code like this;\n\ne <- rnorm(n=50, mean=0, sd=sqrt(0.5625))\nx0 <- c(rep(1,50))\nx1 <- rnorm(n=50,mean=2,sd=1)\nx2 <- rnorm(n=50,mean=2,sd=1)\nx3 <- rnorm(n=50,mean=2,sd=1)\nx4 <- rnorm(n",
+      "thread_id": "thread-6f790bfed098",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-befb0a5bd448",
+      "message_id": "<357B5A86D35642DF950B091F25CE333F@OwnerPC>",
+      "from_name": "Umesh Rosyara",
+      "from_email_hash": "80debb384463aa70c870330bbc5549c20be0505c482baf49af209aff87c58152",
+      "date": "2011-02-28T19:58:13-05:00",
+      "subject": "[R] stuk at another point: simple question",
+      "subject_clean": "stuk at another point: simple question",
+      "in_reply_to": null,
+      "references": [
+        "<E6D5EC0D5852498287A3A07BC9340BF6@OwnerPC>",
+        "<AANLkTikS8xsytrKeBnnr8hEvrZs_Xyhd=vG+6q+i7cyw@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110228/f717c888/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110228/f717c888/attachment.pl>",
+      "thread_id": "thread-befb0a5bd448",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-4d6cfacbfef2",
+      "message_id": "<253166.80532.qm@web56305.mail.re3.yahoo.com>",
+      "from_name": "array chip",
+      "from_email_hash": "d79d0fdfa45d83d6de5d8a451424c09a0f171cf43bcf672f6b52ce7193d2e4a8",
+      "date": "2011-02-28T17:02:54-08:00",
+      "subject": "[R] nested case-control study",
+      "subject_clean": "nested case-control study",
+      "in_reply_to": "<1298905163.15393.13.camel@punchbuggy>",
+      "references": [
+        "<1298905163.15393.13.camel@punchbuggy>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110228/e5088b7d/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110228/e5088b7d/attachment.pl>",
+      "thread_id": "thread-4d6cfacbfef2",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-642fc6dcdcad",
+      "message_id": "<AANLkTikoAwGFhEnJYgDm_=KJ1M5BO+6vEOqtTj8Z6Yer@mail.gmail.com>",
+      "from_name": "chen jia",
+      "from_email_hash": "e6f8b55e3d4b2b2e732057d100528a4aa771911b3d61a7c2c97b19ca4fe4f3a9",
+      "date": "2011-02-28T21:57:13-05:00",
+      "subject": "[R] Data type problem when extract data from SQLite to R by using RSQLite",
+      "subject_clean": "Data type problem when extract data from SQLite to R by using RSQLite",
+      "in_reply_to": "<AANLkTi=Dfo6xoe-b-y4LMNwBKKjgJJDbWoSARavRHNkH@mail.gmail.com>",
+      "references": [
+        "<AANLkTikc4HXhhQCCtQS4tknsmDeCmy-s4nS9M60FxGY0@mail.gmail.com>",
+        "<AANLkTi=Dfo6xoe-b-y4LMNwBKKjgJJDbWoSARavRHNkH@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Seth,\n\nThanks for the reply. I provide info from sessionInfo() and about\nschema that you ask. Please take a look.\n\nThe output from sessionInfo() is\n> sessionInfo()\nR version 2.12.2 (2011-02-25)\nPlatform: x86_64-pc-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=en_US.UT> sessionInfo()\nR version 2.12.2 (2011-02-25)\nPlatform: x86_64-pc-linux-gnu (64-bit)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nother attached packages:\n[1] plyr_1.2.1     RSQLite_0.9-2  DBI_0.2-5      filehash_2.1-1F-8\n  LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nother attached packages:\n[1] plyr_1.2.1     RSQLite_0.9-2  DBI_0.2-5      filehash_2.1-1\n\nThe .schema of table annual_data3 is\nsqlite> .schema annual_data3\nCREATE TABLE \"annual_data3\"(\n  PERMNO INT,\n  DATE INT,\n  CUSIP TEXT,\n  EXCHCD INT,\n  SICCD INT,\n  SHROUT INT,\n  PRC REAL,\n  RET REAL,\n  ...\n  pret_var,\n  pRET_sd,\n  nmret,\n  pya_var,\n  pya_sd,\n  nya,\n  pya_var_ebi,\n  pya_sd_ebi,\n  pya_var_ebit,\n  pya_sd_ebit,\n  pya_var_ebitda,\n  pya_sd_ebitda,\n  logage REAL,\n  logasset REAL,\n  ...\n  loglead1stdaret, loglead2stdaret)\n\nTable annual_data3 is created by joining table annual_data2 and\nya_vol. The column pya_var is initially in ya_vol.\n\ndbGetQuery(sql.industry,\n           \"create table annual_data3 as\n            select a.*, b.pya_var, b.pya_sd,\n                   b.nya, b.pya_var_ebi, b.pya_sd_ebi,\n                   b.pya_var_ebit, b.pya_sd_ebit,\n                   b.pya_var_ebitda, b.pya_sd_ebitda\n            from   annual_data2 as a left join\n                      ya_vol as b\n            on     a.permno = b.permno and\n                     a.year = b.year\n            order by permno, year\")\n\nTable ya_vol is created by\ndbGetQuery(sql.industry,\n           \"create table ya_vol as\n            select PERMNO, year,\n                   variance(ya) as pya_var,\n                   stdev(ya) as pya_sd,\n                   count(*) as nya,\n                   variance(ya_ebi) as pya_var_ebi,\n                   stdev(ya_ebi) as pya_sd_ebi,\n                   variance(ya_ebit) as pya_var_ebit,\n                   stdev(ya_ebit) as pya_sd_ebit,\n                   variance(ya_ebitda) as pya_var_ebitda,\n                   stdev(ya_ebitda) as pya_sd_ebitda\n            from   past_ya\n            where  ya is not null\n            group by PERMNO, year\n            order by PERMNO, year\")\n\nThe schema info of ya_vol is\nsqlite> .schema ya_vol\nCREATE TABLE ya_vol(\n  PERMNO INT,\n  year INT,\n  pya_var,\n  pya_sd,\n  nya,\n  pya_var_ebi,\n  pya_sd_ebi,\n  pya_var_ebit,\n  pya_sd_ebit,\n  pya_var_ebitda,\n  pya_sd_ebitda\n);\nCREATE INDEX ya_vol_permno_year_idx\n            on ya_vol (permno,year);\n\nInterestingly, I find that the problem I reported does not for columns\nlabeled real in the schema info. For example, the type of column RET\nnever changes no matter what the first observation is.\n\n> str(dbGetQuery(sql.industry,\n+                \"select RET from annual_data3\n+                 where RET is not null limit 5\"))\n'data.frame':\t5 obs. of  1 variable:\n $ RET: num  -0.03354 -0.02113 0.03797 0.0013 -0.00678\n>\n> str(dbGetQuery(sql.industry,\n+                \"select RET from annual_data3\n+                 where RET is null limit 5\"))\n'data.frame':\t5 obs. of  1 variable:\n $ RET: num  NA NA NA NA NA\n> sapply(dbGetQuery(sql.industry,\n+                \"select RET from annual_data3\n+                 where RET is null limit 5\"),\n+        typeof)\n     RET\n\"double\"\n> sapply(dbGetQuery(sql.industry,\n+                \"select RET from annual_data3\n+                 where RET is not null limit 5\"),\n+        typeof)\n     RET\n\"double\"\n\nI still don't know how to solve this problem for variable pya_var,\nplease help. Thanks.\n\nBest,\nJia\n\n\nOn Mon, Feb 28, 2011 at 6:48 PM, Seth Falcon <seth at userprimary.net> wrote:\n> Hi Jia,\n>\n> On Mon, Feb 28, 2011 at 12:37 PM, chen jia <chen_1002 at fisher.osu.edu> wrote:\n>> When I extract data from SQLite to R, the data types (or modes) of the\n>> extracted data seems to be determined by the value of the first row.\n>> Please see the following example.\n>\n> It would help to provide the output of sessionInfo() as well as the\n> schema definition for the table in SQLite (or at least description of\n> how it was created).\n>\n> Here's an example that works as you'd like:\n>\n> ? ?> library(RSQLite)\n> ? ?> db = dbConnect(SQLite(), dbname = \":memory:\")\n> ? ?> dbGetQuery(db, \"create table t (a int, b real, c text)\")\n> ? ?> df = data.frame(a=c(NA, 1L, 2L), b=c(NA, 1.1, 2.2), c=c(NA, \"x\",\n> \"y\"),stringsAsFactors=FALSE)\n> ? ?> df\n> ? ? ? a ? b ? ?c\n> ? ?1 NA ?NA <NA>\n> ? ?2 ?1 1.1 ? ?x\n> ? ?3 ?2 2.2 ? ?y\n> ? ?> dbGetPreparedQuery(db, \"insert into t values (?, ?, ?)\", df)\n> ? ?> dbGetQuery(db, \"select * from t\")\n> ? ? ? a ? b ? ?c\n> ? ?1 NA ?NA <NA>\n> ? ?2 ?1 1.1 ? ?x\n> ? ?3 ?2 2.2 ? ?y\n> ? ?> sapply(dbGetQuery(db, \"select * from t\"), typeof)\n> ? ? ? ? ? ? ?a ? ? ? ? ? b ? ? ? ? ? c\n> ? ? ?\"integer\" ? ?\"double\" \"character\"\n> ? ?> sapply(dbGetQuery(db, \"select * from t limit 1\"), typeof)\n> ? ? ? ? ? ? ?a ? ? ? ? ? b ? ? ? ? ? c\n> ? ? ?\"integer\" ? ?\"double\" \"character\"\n> ? ?> sapply(dbGetQuery(db, \"select a from t limit 1\"), typeof)\n> ? ? ? ? ? ?a\n> ? ?\"integer\"\n> ? ?> sapply(dbGetQuery(db, \"select a from t limit 2\"), typeof)\n> ? ? ? ? ? ?a\n> ? ?\"integer\"\n> ? ?> sapply(dbGetQuery(db, \"select a from t limit 1\"), typeof)\n> ? ? ? ? ? ?a\n> ? ?\"integer\"\n>\n>\n>> sessionInfo()\n> R version 2.11.1 (2010-05-31)\n> x86_64-apple-darwin9.8.0\n>\n> locale:\n> [1] en_US.UTF-8/en_US.UTF-8/C/C/en_US.UTF-8/en_US.UTF-8\n>\n> attached base packages:\n> [1] stats ? ? graphics ?grDevices datasets ?utils ? ? methods ? base\n>\n> other attached packages:\n> [1] RSQLite_0.9-4 DBI_0.2-5\n>\n> loaded via a namespace (and not attached):\n> [1] tools_2.11.1\n>\n>\n>\n>\n> --\n> Seth Falcon | @sfalcon | http://userprimary.net/\n>\n\n\n\n-- \n700 Fisher Hall\n2100 Neil Ave.\nColumbus, Ohio? 43210\nhttp://www.fisher.osu.edu/~chen_1002/",
+      "body_snippet": "Hi Seth,\n\nThanks for the reply. I provide info from sessionInfo() and about\nschema that you ask. Please take a look.\n\nThe output from sessionInfo() is\n> sessionInfo()\nR version 2.12.2 (2011-02-25)\nPla",
+      "thread_id": "thread-111b3fefe6cb",
+      "thread_depth": 1,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-e1a767f8fdfd",
+      "message_id": "<1298948385.1668.106.camel@matt-laptop>",
+      "from_name": "Matt Shotwell",
+      "from_email_hash": "a073d79788737082c80232013e9740b8fbe5e6a646d0a44729dada28f09178a0",
+      "date": "2011-02-28T21:59:45-05:00",
+      "subject": "[R] Robust variance estimation with rq (failure of the bootstrap?)",
+      "subject_clean": "Robust variance estimation with rq (failure of the bootstrap?)",
+      "in_reply_to": "<AANLkTi=zdn0rQt61yK_LLanYnRg81N4Xq9GNuVXXw=JA@mail.gmail.com>",
+      "references": [
+        "<AANLkTi=zdn0rQt61yK_LLanYnRg81N4Xq9GNuVXXw=JA@mail.gmail.com>"
+      ],
+      "body_plain": "Jim, \n\nIf repeated measurements on patients are correlated, then resampling all\nmeasurements independently induces an incorrect sampling distribution\n(=> incorrect variance) on a statistic of these data. One solution, as\nyou mention, is the block or cluster bootstrap, which preserves the\ncorrelation among repeated observations in resamples. I don't\nimmediately see why the cluster bootstrap is unsuitable.\n\nBeyond this, I would be concerned about *any* variance estimates that\nare blind to correlated observations.\n\nThe bootstrap variance estimate may be larger than the asymptotic\nvariance estimate, but that alone isn't evidence to favor one over the\nother.\n\nAlso, I can't justify (to myself) why skew would hamper the quality of\nbootstrap variance estimates. I wonder how it affects the sandwich\nvariance estimate...\n\nBest,\nMatt\n\nOn Mon, 2011-02-28 at 17:50 -0600, James Shaw wrote:\n> I am fitting quantile regression models using data collected from a\n> sample of 124 patients.  When modeling cross-sectional associations, I\n> have noticed that nonparametric bootstrap estimates of the variances\n> of parameter estimates are much greater in magnitude than the\n> empirical Huber estimates derived using summary.rq's \"nid\" option.\n> The outcome variable is severely skewed, and I am afraid that this may\n> be affecting the consistency of the bootstrap variance estimates.  I\n> have read that the m out of n bootstrap can be used to overcome this\n> problem.  However, this procedure requires both the original sample\n> (n) and the subsample (m) sizes to be large.  The version implemented\n> in rq.boot does not appear to provide any improvement over the naive\n> bootstrap.  Ultimately, I am interested in using median regression to\n> model changes in the outcome variable over time.  Summary.rq's robust\n> variance estimator is not applicable to repeated-measures data.  I\n> question whether the block (cluster) bootstrap variance estimator,\n> which can accommodate intraclass correlation, would perform well.  Can\n> anyone suggest alternatives for variance estimation in this situation?\n> Regards,\n> \n> Jim\n> \n> \n> James W. Shaw, Ph.D., Pharm.D., M.P.H.\n> Assistant Professor\n> Department of Pharmacy Administration\n> College of Pharmacy\n> University of Illinois at Chicago\n> 833 South Wood Street, M/C 871, Room 266\n> Chicago, IL 60612\n> Tel.: 312-355-5666\n> Fax: 312-996-0868\n> Mobile Tel.: 215-852-3045\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Jim, \n\nIf repeated measurements on patients are correlated, then resampling all\nmeasurements independently induces an incorrect sampling distribution\n(=> incorrect variance) on a statistic of these da",
+      "thread_id": "thread-442749d22a96",
+      "thread_depth": 1,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-0fbd13f76d96",
+      "message_id": "<1298949498526-3329173.post@n4.nabble.com>",
+      "from_name": "bwaxxlo",
+      "from_email_hash": "5d0c25d9ec4647a976221c5abd6e78265beb7c750a823bc9ff22eaa9b0596de2",
+      "date": "2011-02-28T19:18:18-08:00",
+      "subject": "[R] Simulation",
+      "subject_clean": "Simulation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I tried looking for help but I couldn't locate the exact solution.\nI have data that has several variables. I want to do several sample\nsimulations using only two of the variables (eg: say you have data between\npeople and properties owned. You only want to check how many in the samples\nwill come up with bicycles) to estimate probabilities and that sort of\nthing.\nNow, I can only do a simulation in terms of this code: sample(1:10, size =\n15, replace = TRUE).\nI do not know how select specific variables only. \nI'll appreciate the help\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/Simulation-tp3329173p3329173.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I tried looking for help but I couldn't locate the exact solution.\nI have data that has several variables. I want to do several sample\nsimulations using only two of the variables (eg: say you have dat",
+      "thread_id": "thread-0fbd13f76d96",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-7e7b769f213f",
+      "message_id": "<1298953048526-3329209.post@n4.nabble.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2011-02-28T20:17:28-08:00",
+      "subject": "[R] getting attributes of list without the \"names\".",
+      "subject_clean": "getting attributes of list without the \"names\".",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to encode arbitrary S3 objects by recursively looping over the\nobject and all its attributes. However, there is an unfortunate feature of\nthe attributes() function that is causing trouble. From the manual for\n?attributes:\n\nThe names of a pairlist are not stored as attributes, but are reported as if\nthey were (and can be set by the replacement method for attributes).\n\nNow because of this, my program ends up in infinite recursion, because it\nwill try to encode\nattributes(attributes(attributes(attributes(list(foo=123)))) etc. I can't\nremove the 'names' attribute, because this will actually affect the list\nstructure. And even when I do:\n\nattributes(attributes(obj)[names(attributes(obj)) != \"names\"])\n\nThis will keep giving me a named list. Is there any way I can get the\nattributes() of a list without it reporting the names of a list as\nattributes? I.e it should hold that:\n\natr1 <- attributes(list(foo=\"bar\"));\natr2 <- attributes(list());\nidentical(atr1,atr2);\n\n\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/getting-attributes-of-list-without-the-names-tp3329209p3329209.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I am trying to encode arbitrary S3 objects by recursively looping over the\nobject and all its attributes. However, there is an unfortunate feature of\nthe attributes() function that is causing trouble.",
+      "thread_id": "thread-7e7b769f213f",
+      "thread_depth": 0,
+      "month": "2011-02"
+    },
+    {
+      "id": "msg-70468aa5f20c",
+      "message_id": "<AANLkTimFRkSAuz1fcjeB+9Q8PAOKNMfZA2_CKqv8PCGc@mail.gmail.com>",
+      "from_name": "Seth Falcon",
+      "from_email_hash": "11c6971bcb88df56e639b6a132437a8a73d7e421ce61eb5feaa3d85efef832df",
+      "date": "2011-02-28T22:16:42-08:00",
+      "subject": "[R] Data type problem when extract data from SQLite to R by using RSQLite",
+      "subject_clean": "Data type problem when extract data from SQLite to R by using RSQLite",
+      "in_reply_to": "<AANLkTikoAwGFhEnJYgDm_=KJ1M5BO+6vEOqtTj8Z6Yer@mail.gmail.com>",
+      "references": [
+        "<AANLkTikc4HXhhQCCtQS4tknsmDeCmy-s4nS9M60FxGY0@mail.gmail.com>",
+        "<AANLkTi=Dfo6xoe-b-y4LMNwBKKjgJJDbWoSARavRHNkH@mail.gmail.com>",
+        "<AANLkTikoAwGFhEnJYgDm_=KJ1M5BO+6vEOqtTj8Z6Yer@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Jia,\n\nOn Mon, Feb 28, 2011 at 6:57 PM, chen jia <chen_1002 at fisher.osu.edu> wrote:\n> The .schema of table annual_data3 is\n> sqlite> .schema annual_data3\n> CREATE TABLE \"annual_data3\"(\n> ?PERMNO INT,\n> ?DATE INT,\n> ?CUSIP TEXT,\n> ?EXCHCD INT,\n> ?SICCD INT,\n> ?SHROUT INT,\n> ?PRC REAL,\n> ?RET REAL,\n> ?...\n> ?pret_var,\n> ?pRET_sd,\n> ?nmret,\n> ?pya_var,\n\n[snip]\n\nIs there a reason that you've told SQLite the expected data type for\nonly some of the columns?\n\n> Interestingly, I find that the problem I reported does not for columns\n> labeled real in the schema info. For example, the type of column RET\n> never changes no matter what the first observation is.\n\nYes, that is expected and I think it is the solution to your problem:\nsetup your schema so that all columns have a declared type.  For some\ndetails on SQLite's type system see\nhttp://www.sqlite.org/datatype3.html.\n\nRSQLite currently maps NA values to NULL in the database.  Pulling\ndata out of a SELECT query, RSQLite uses the sqlite3_column_type\nSQLite API to determine the data type and map it to an R type.  If\nNULL is encountered, then the schema is inspected using\nsqlite3_column_decltype to attempt to obtain a type.  If that fails,\nthe data is mapped to a character vector at the R level.  The type\nselection is done once after the first row has been fetched.\n\nTo work around this you can:\n\n- make sure your schema has well defined\n  types (which will help SQLite perform its operations);\n\n- check whether the returned column has the expected type and convert\n  if needed at the R level.\n\n- remove NA/NULL values from the db or decide on a different way of\n  encoding them (e.g you might be able to use -1 in the db in some\n  situation to indicate missing).  Your R code would then need to map\n  these to proper NA.\n\nHope that helps.\n\n+ seth\n\n\n\n-- \nSeth Falcon | @sfalcon | http://userprimary.net/",
+      "body_snippet": "Hi Jia,\n\nOn Mon, Feb 28, 2011 at 6:57 PM, chen jia <chen_1002 at fisher.osu.edu> wrote:\n> The .schema of table annual_data3 is\n> sqlite> .schema annual_data3\n> CREATE TABLE \"annual_data3\"(\n> ?PERMNO I",
+      "thread_id": "thread-111b3fefe6cb",
+      "thread_depth": 2,
+      "month": "2011-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-111b3fefe6cb",
+      "subject": "Data type problem when extract data from SQLite to R by using RSQLite",
+      "message_count": 3,
+      "participants": [
+        "Seth Falcon",
+        "chen jia"
+      ],
+      "started": "2011-02-28T15:48:40-08:00",
+      "last_reply": "2011-02-28T22:16:42-08:00",
+      "root_message_id": "msg-111b3fefe6cb"
+    },
+    {
+      "id": "thread-1ab2ad52d38a",
+      "subject": "Measuring correlations in repeated measures data",
+      "message_count": 1,
+      "participants": [
+        "Ben Bolker"
+      ],
+      "started": "2011-02-28T16:23:55-07:00",
+      "last_reply": "2011-02-28T16:23:55-07:00",
+      "root_message_id": "msg-1ab2ad52d38a"
+    },
+    {
+      "id": "thread-deeb961ba13e",
+      "subject": "nls not solving",
+      "message_count": 1,
+      "participants": [
+        "Peter Ehlers"
+      ],
+      "started": "2011-02-28T16:31:43-08:00",
+      "last_reply": "2011-02-28T16:31:43-08:00",
+      "root_message_id": "msg-deeb961ba13e"
+    },
+    {
+      "id": "thread-6f790bfed098",
+      "subject": "selection of a subset from a loop",
+      "message_count": 1,
+      "participants": [
+        "ufuk beyaztas"
+      ],
+      "started": "2011-02-28T16:39:13-08:00",
+      "last_reply": "2011-02-28T16:39:13-08:00",
+      "root_message_id": "msg-6f790bfed098"
+    },
+    {
+      "id": "thread-4d6cfacbfef2",
+      "subject": "nested case-control study",
+      "message_count": 1,
+      "participants": [
+        "array chip"
+      ],
+      "started": "2011-02-28T17:02:54-08:00",
+      "last_reply": "2011-02-28T17:02:54-08:00",
+      "root_message_id": "msg-4d6cfacbfef2"
+    },
+    {
+      "id": "thread-442749d22a96",
+      "subject": "Robust variance estimation with rq (failure of the bootstrap?)",
+      "message_count": 2,
+      "participants": [
+        "James Shaw",
+        "Matt Shotwell"
+      ],
+      "started": "2011-02-28T17:50:53-06:00",
+      "last_reply": "2011-02-28T21:59:45-05:00",
+      "root_message_id": "msg-442749d22a96"
+    },
+    {
+      "id": "thread-4746bb9ee026",
+      "subject": "Gamma mixture models with flexmix",
+      "message_count": 1,
+      "participants": [
+        "Wittner, Ben, Ph.D."
+      ],
+      "started": "2011-02-28T18:04:18-05:00",
+      "last_reply": "2011-02-28T18:04:18-05:00",
+      "root_message_id": "msg-4746bb9ee026"
+    },
+    {
+      "id": "thread-fc54768df534",
+      "subject": "lme error: Error in getGroups.data.frame(dataMix, groups)",
+      "message_count": 1,
+      "participants": [
+        "John Sorkin"
+      ],
+      "started": "2011-02-28T18:44:48-05:00",
+      "last_reply": "2011-02-28T18:44:48-05:00",
+      "root_message_id": "msg-fc54768df534"
+    },
+    {
+      "id": "thread-df890ca45237",
+      "subject": "regression with categorical nuisance variable",
+      "message_count": 2,
+      "participants": [
+        "Ista Zahn",
+        "Jonathan DuBois"
+      ],
+      "started": "2011-02-28T19:14:32-05:00",
+      "last_reply": "2011-02-28T19:31:17-05:00",
+      "root_message_id": "msg-df890ca45237"
+    },
+    {
+      "id": "thread-0fbd13f76d96",
+      "subject": "Simulation",
+      "message_count": 1,
+      "participants": [
+        "bwaxxlo"
+      ],
+      "started": "2011-02-28T19:18:18-08:00",
+      "last_reply": "2011-02-28T19:18:18-08:00",
+      "root_message_id": "msg-0fbd13f76d96"
+    },
+    {
+      "id": "thread-befb0a5bd448",
+      "subject": "stuk at another point: simple question",
+      "message_count": 1,
+      "participants": [
+        "Umesh Rosyara"
+      ],
+      "started": "2011-02-28T19:58:13-05:00",
+      "last_reply": "2011-02-28T19:58:13-05:00",
+      "root_message_id": "msg-befb0a5bd448"
+    },
+    {
+      "id": "thread-7e7b769f213f",
+      "subject": "getting attributes of list without the \"names\".",
+      "message_count": 1,
+      "participants": [
+        "Jeroen Ooms"
+      ],
+      "started": "2011-02-28T20:17:28-08:00",
+      "last_reply": "2011-02-28T20:17:28-08:00",
+      "root_message_id": "msg-7e7b769f213f"
+    },
+    {
+      "id": "thread-ca90b78e7631",
+      "subject": "mixture models/latent class regression comparison",
+      "message_count": 1,
+      "participants": [
+        "Carson Farmer"
+      ],
+      "started": "2011-02-28T23:15:09+00:00",
+      "last_reply": "2011-02-28T23:15:09+00:00",
+      "root_message_id": "msg-ca90b78e7631"
+    }
+  ]
+}

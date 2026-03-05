@@ -1,0 +1,40 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2021-02",
+  "messages": [
+    {
+      "id": "msg-a13481a5a450",
+      "message_id": "<001301d70e2d$25f83660$71e8a320$@sbcglobal.net>",
+      "from_name": "Jeff Reichman",
+      "from_email_hash": "51d6d139afe7517ba530b38dc5f31acb1006b1b4691c17357f22c59c86be7c4f",
+      "date": "2021-02-28T17:55:08-06:00",
+      "subject": "[R] Making model predictions",
+      "subject_clean": "Making model predictions",
+      "in_reply_to": "<1a0badbb-14ab-66b5-ff25-702caea57faa@sapo.pt>",
+      "references": [
+        "<002f01d70d16$c0d6c060$42844120$.ref@sbcglobal.net>",
+        "<002f01d70d16$c0d6c060$42844120$@sbcglobal.net>",
+        "<1a0badbb-14ab-66b5-ff25-702caea57faa@sapo.pt>"
+      ],
+      "body_plain": "Rui\n\nActually yes.  I was able to work this into my shiny app this afternoon. \n\nThank you\n\nJeff\n\n-----Original Message-----\nFrom: Rui Barradas <ruipbarradas at sapo.pt> \nSent: Sunday, February 28, 2021 5:26 AM\nTo: reichmanj at sbcglobal.net; R-help at r-project.org\nSubject: Re: [R] Making model predictions\n\nHello,\n\nAre you looking for this?\n\n\nnewd <- data.frame(\n   Class = '1st',\n   Sex = 'Male',\n   Age = 'Child'\n)\npredict(m, newdata = newd, type = 'raw')\n#            No       Yes\n#[1,] 0.3169345 0.6830655\n\n\nWith the default type = 'class' the result is\n\npredict(m, newdata = newd)\n#[1] Yes\n#Levels: No Yes\n\n\nHope this helps,\n\nRui Barradas\n\n?s 14:42 de 27/02/21, Jeff Reichman escreveu:\n> R User Forum\n> \n> Is there a better way than grabbing individual cell values from a \n> model output to make predictions. For example the output from the \n> following Na?ve Bayes model\n> \n> library(e1071)\n> \n> ## Example of using a contingency table:\n> data(Titanic)\n> m <- naiveBayes(Survived ~ ., data = Titanic) m\n> \n> will produce the following results:\n> \n> Call:\n> naiveBayes.formula(formula = Survived ~ ., data = Titanic)\n> \n> A-priori probabilities:\n> Survived\n>        No      Yes\n> 0.676965 0.323035\n> \n> Conditional probabilities:\n>          Class\n> Survived        1st        2nd        3rd       Crew\n>       No  0.08187919 0.11208054 0.35436242 0.45167785\n>       Yes 0.28551336 0.16596343 0.25035162 0.29817159\n> \n>          Sex\n> Survived       Male     Female\n>       No  0.91543624 0.08456376\n>       Yes 0.51617440 0.48382560\n> \n>          Age\n> Survived      Child      Adult\n>       No  0.03489933 0.96510067\n>       Yes 0.08016878 0.91983122\n> \n> Say I want to calculate the probability of P(survival = No | Class = \n> 1st, Sex = Male, and Age= Child).\n> \n> While I  can set an object (e.g. myObj <- m$tables$Class[1,1])  to the \n> respective cell and perform the calculation, there must be a better \n> way, as I continue to learn R.\n> \n> Jeff\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Rui\n\nActually yes.  I was able to work this into my shiny app this afternoon. \n\nThank you\n\nJeff\n\n-----Original Message-----\nFrom: Rui Barradas <ruipbarradas at sapo.pt> \nSent: Sunday, February 28, 202",
+      "thread_id": "thread-a13481a5a450",
+      "thread_depth": 0,
+      "month": "2021-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a13481a5a450",
+      "subject": "Making model predictions",
+      "message_count": 1,
+      "participants": [
+        "Jeff Reichman"
+      ],
+      "started": "2021-02-28T17:55:08-06:00",
+      "last_reply": "2021-02-28T17:55:08-06:00",
+      "root_message_id": "msg-a13481a5a450"
+    }
+  ]
+}

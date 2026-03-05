@@ -1,0 +1,109 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2001-04",
+  "messages": [
+    {
+      "id": "msg-eae2b12986fc",
+      "message_id": "<OF0E02CB5C.ED3F733F-ON86256A3E.0074EC19@mmm.com>",
+      "from_name": "apjaworski@mmm.com",
+      "from_email_hash": "7049f4a4cfeec3e4ea1f93556d75ad1140536694b2115117874bfd9c7d09063a",
+      "date": "2001-04-30T17:20:56-05:00",
+      "subject": "[R] plotting an expression",
+      "subject_clean": "plotting an expression",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am sure it is just me not understanding how R works, but could somebody\nexplain why\n\n     curve(cos(x))\n\nworks and\n\n     curve(expression(cos(x))\n\ndoes not?\n\nI have done some investigating and here is what I found.  If I comment out\nthe line of curve indicated below, both calls work fine.\n\nfunction (expr, from, to, n = 101, add = FALSE, type = \"l\", ylab = NULL,\n    log = NULL, xlim = NULL, ...)\n{\n    sexpr <- substitute(expr)\n    if (is.name(sexpr)) {\n        fcall <- paste(sexpr, \"(x)\")\n        expr <- parse(text = fcall)\n        if (is.null(ylab))\n            ylab <- fcall\n    }\n    else {\n        if (!(is.call(sexpr) && match(\"x\", all.vars(sexpr), nomatch = 0)))\n            stop(\"'expr' must be a function or an expression containing\n'x'\")\n #     expr <- sexpr\n        if (is.null(ylab))\n            ylab <- deparse(sexpr)\n    }\n    lims <- if (is.null(xlim))\n    < ... >\n\nThis is confusing, since\n\n     substitiue(expression(cos(x)))\n\nreturns just\n\n     expression(cos(x)).\n\nMust be some side effects I do not understand.  What is even more confusing\nis that the above code (with one line commented out) does not work when\ncalled as\n\n     curve(parse(text=\"cos(x)\"))\n\nalthough\n\n     parse(text=\"cos(x)\")\n\nreturns\n\n     expression(cos(x)).\n\n\nWhat I am really trying to do is plot a rather compilcated expression that\nhas been built from pieces by pasting strings together.  SInce the parse\nfunction returns an expression I thought I could just feed the result of\nparse to plot ( or curve).\n\nAny help or explanation will be appreciated,\n\nAndy\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "I am sure it is just me not understanding how R works, but could somebody\nexplain why\n\n     curve(cos(x))\n\nworks and\n\n     curve(expression(cos(x))\n\ndoes not?\n\nI have done some investigating and here ",
+      "thread_id": "thread-eae2b12986fc",
+      "thread_depth": 0,
+      "month": "2001-04"
+    },
+    {
+      "id": "msg-ac7c01dfe336",
+      "message_id": "<Pine.A41.4.33.0104301537500.85214-100000@homer11.u.washington.edu>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "fd3f6e9367b335430f74a8f6feb36e5e9d187865079d5ca2018b64dfb89dd278",
+      "date": "2001-04-30T16:06:06-07:00",
+      "subject": "[R] plotting an expression",
+      "subject_clean": "plotting an expression",
+      "in_reply_to": "<OF0E02CB5C.ED3F733F-ON86256A3E.0074EC19@mmm.com>",
+      "references": [],
+      "body_plain": "On Mon, 30 Apr 2001 apjaworski at mmm.com wrote:\n\n> I am sure it is just me not understanding how R works, but could somebody\n> explain why\n>\n>      curve(cos(x))\n>\n> works and\n>\n>      curve(expression(cos(x))\n>\n> does not?\n\nThe short answer is that cos(x) is an expression returning a real number\n(the cosine of the value of x) but expression(cos(x)) is an expression\nreturning the expression cox(x), and so is not plottable.\n\nR> x<-0\nR> evalq(cos(x))\n[1] 1\nR> evalq(expression(cos(x)))\nexpression(cos(x))\n\n\n\n> I have done some investigating and here is what I found.  If I comment out\n> the line of curve indicated below, both calls work fine.\n\nWhen I comment out that line I get\nR> curve(cos(x))\nError in xy.coords(x, y, xlabel, ylabel, log) :\n        x and y lengths differ\n\n> function (expr, from, to, n = 101, add = FALSE, type = \"l\", ylab = NULL,\n>     log = NULL, xlim = NULL, ...)\n> {\n>     sexpr <- substitute(expr)\n>     if (is.name(sexpr)) {\n>         fcall <- paste(sexpr, \"(x)\")\n>         expr <- parse(text = fcall)\n>         if (is.null(ylab))\n>             ylab <- fcall\n>     }\n>     else {\n>         if (!(is.call(sexpr) && match(\"x\", all.vars(sexpr), nomatch = 0)))\n>             stop(\"'expr' must be a function or an expression containing\n> 'x'\")\n>  #     expr <- sexpr\n>         if (is.null(ylab))\n>             ylab <- deparse(sexpr)\n>     }\n>     lims <- if (is.null(xlim))\n>     < ... >\n>\n> This is confusing, since\n>\n>      substitiue(expression(cos(x)))\n>\n> returns just\n>\n>      expression(cos(x)).\n>\n> Must be some side effects I do not understand.\n\nIt's not side effects, it's evaluation.  It's tricky.\n\nSuppose you type\n\n curve(cos(x))\n\nThen expr contains a promise to compute the cosine of the value of x.\nSince x may not exist, this promise will cause an error when the\nevaluation is done (unless x happens to exist)\n\nAs expr is a formal parameter of the function, substitute(expr) returns\nthe unevaluated actual parameter, which is the expression cox(x).\n\nThis expression, when evaluated in an environment containing a suitable\nvector x will return the vector of cosines of the values in x, which we\ncan plot.\n\nOTOH if you type curve(expression(cos(x)) then expr contains a promise to\nevaluate expression(cos(x)), which returns the expression cos(x). When\nthis is evaluated in a suitable environment you get the vector of cosines\nof x.  But substitute(expr) will now return the unevaluated expression\nexpression(cos(x)) and when you evaluate this you will get the expression\ncos(x) rather than a vector of cosines of the values of x.\n\n\nSo the way the function is written it will work as documented, with your\nchange it will fail when it should work, unless the correct x vector is\ncoincidentally hanging around in the calling environment.\n\n>\t\t\t\t\t\t What is even more confusing\n> is that the above code (with one line commented out) does not work when\n> called as\n>      curve(parse(text=\"cos(x)\"))\n>\n> although\n>\n>      parse(text=\"cos(x)\")\n>\n> returns\n>\n>      expression(cos(x)).\n\nThat's because curve() sneakily looks at the unevaluated parameter sexpr\nbefore evaluating it, and notices it isn't an expression depending on the\nsymbol x (it's an expression depending on the string \"cos(x)\").\n\nTo prove this (it would be silly to do for any  other reason) you can\nconfuse your modified curve() into working with\nR> x<-\"cos(x)\"\nR> curve(parse(text=x))\n\n> What I am really trying to do is plot a rather compilcated expression that\n> has been built from pieces by pasting strings together.  SInce the parse\n> function returns an expression I thought I could just feed the result of\n> parse to plot ( or curve).\n\nIt's likely to be less painful to define a suitable vector x and use\neval() to evaluate the expression.\n\n\t-thomas\n\nThomas Lumley\t\t\tAsst. Professor, Biostatistics\ntlumley at u.washington.edu\tUniversity of Washington, Seattle\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "On Mon, 30 Apr 2001 apjaworski at mmm.com wrote:\n\n> I am sure it is just me not understanding how R works, but could somebody\n> explain why\n>\n>      curve(cos(x))\n>\n> works and\n>\n>      curve(expressi",
+      "thread_id": "thread-eae2b12986fc",
+      "thread_depth": 1,
+      "month": "2001-04"
+    },
+    {
+      "id": "msg-8add8a5bc35b",
+      "message_id": "<5.0.2.1.2.20010430203602.02c095b8@mcmail.cis.mcmaster.ca>",
+      "from_name": "John Fox",
+      "from_email_hash": "26b3c2bfbc5587a1119fc93e98ed6834f6847804a317ae5707e7442251474735",
+      "date": "2001-04-30T20:37:39-04:00",
+      "subject": "[R] Re: two new packages",
+      "subject_clean": "two new packages",
+      "in_reply_to": "<3AED905F.345A85A@StonyBrook.Edu>",
+      "references": [
+        "<5.0.2.1.2.20010427224918.0193d588@mcmail.cis.mcmaster.ca>"
+      ],
+      "body_plain": "As Tim has suggested, I've uploaded these packages to CRAN, to be placed in \nthe \"Devel\" directory.\n\nJohn\n\nAt 12:18 PM 30/04/2001 -0400, Timothy H. Keitt wrote:\n>Great!  I think we should encourage people to upload complete, but not yet \n>fully\n>tested packages to the \"devel\" section of CRAN.  It gets really hard to \n>keep track\n>of source that is scattered all over the 'net.\n>\n>Cheers,\n>Tim\n>\n>John Fox wrote:\n>\n> > I've prepared preliminary versions of two packages that I plan eventually\n> > to contribute to CRAN:\n> >\n> >\n> > For the present, I'm making these packages available on my web site, at\n> > <http://www.socsci.mcmaster.ca/jfox/Misc/car/> and\n> > <http://socserv.socsci.mcmaster.ca/jfox/Misc/sem/>.\n> >\n> > I'm particularly interested in suggestions and comments.\n\n\n________________________________\n  John Fox\n  Department of Sociology\n  McMaster University\n  email: jfox at McMaster.ca\n  web: www.socsci.mcmaster.ca/jfox\n________________________________\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "As Tim has suggested, I've uploaded these packages to CRAN, to be placed in \nthe \"Devel\" directory.\n\nJohn\n\nAt 12:18 PM 30/04/2001 -0400, Timothy H. Keitt wrote:\n>Great!  I think we should encourage pe",
+      "thread_id": "thread-8add8a5bc35b",
+      "thread_depth": 0,
+      "month": "2001-04"
+    },
+    {
+      "id": "msg-1411540ded8c",
+      "message_id": "<KKEGJOGBELBHDIKPINBMAEDPCEAA.henrikb@braju.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "f1a865fcb35fd0a72477eda519359b2a1d10ba105e5667d04492a6f87db61563",
+      "date": "2001-04-30T22:29:53-07:00",
+      "subject": "[R] scan without line numbers?",
+      "subject_clean": "scan without line numbers?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "When using the function scan(quiet=TRUE) the line numbers are printed.\nExample:\n\n > scan(quiet=TRUE)\n 1: 123 [ENTER]\n 2: [ENTER]\n [1] 123\n >\n\nIs it possible to not show the line numbers? I know about readLines() but I\nwould like to be able to use the extra features of scan().\n\nThanks for you help!\n\nHenrik Bengtsson\nhenrikb at braju.com\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "When using the function scan(quiet=TRUE) the line numbers are printed.\nExample:\n\n > scan(quiet=TRUE)\n 1: 123 [ENTER]\n 2: [ENTER]\n [1] 123\n >\n\nIs it possible to not show the line numbers? I know about ",
+      "thread_id": "thread-1411540ded8c",
+      "thread_depth": 0,
+      "month": "2001-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-eae2b12986fc",
+      "subject": "plotting an expression",
+      "message_count": 2,
+      "participants": [
+        "Thomas Lumley",
+        "apjaworski@mmm.com"
+      ],
+      "started": "2001-04-30T17:20:56-05:00",
+      "last_reply": "2001-04-30T16:06:06-07:00",
+      "root_message_id": "msg-eae2b12986fc"
+    },
+    {
+      "id": "thread-8add8a5bc35b",
+      "subject": "two new packages",
+      "message_count": 1,
+      "participants": [
+        "John Fox"
+      ],
+      "started": "2001-04-30T20:37:39-04:00",
+      "last_reply": "2001-04-30T20:37:39-04:00",
+      "root_message_id": "msg-8add8a5bc35b"
+    },
+    {
+      "id": "thread-1411540ded8c",
+      "subject": "scan without line numbers?",
+      "message_count": 1,
+      "participants": [
+        "Henrik Bengtsson"
+      ],
+      "started": "2001-04-30T22:29:53-07:00",
+      "last_reply": "2001-04-30T22:29:53-07:00",
+      "root_message_id": "msg-1411540ded8c"
+    }
+  ]
+}

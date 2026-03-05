@@ -1,0 +1,146 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2011-06",
+  "messages": [
+    {
+      "id": "msg-62e5392be513",
+      "message_id": "<BANLkTin7yA8VcRfNecFs03VLst6KoC-MAg@mail.gmail.com>",
+      "from_name": "Nipesh Bajaj",
+      "from_email_hash": "1b4292e9bb92546d79336e14150171f0c992513fbd0e6661059fcc59cf40f789",
+      "date": "2011-06-01T01:06:08+05:30",
+      "subject": "[R] Problem with package development",
+      "subject_clean": "Problem with package development",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all, I am having a strage problem while I was trying to build a\npackage. Here is my package skeleton:\n\nfn1 <- Vectorize(function(x,y,z) {\n\t\t\treturn(x + y +z)\n\t\t}, vectorize.args = c(\"x\"), SIMPLIFY = TRUE)\npackage.skeleton(\"trial3\",namespace = TRUE)\n\n\nHowever when I tun \"R CMD INSTALL trial3\" in CMD, the execution\nstopped with following message:\n\n*** installing help indices\n** building package indices...\n** testing if install package can be loaded\nError: unexpected symbol in \"tools:::test_load_package(..............\"\nExecution haulted\nERROR: loading failed.............\n\nI am using R 2.13.0 in Vista with latest Rtools installed. Can\nsomebody guide me where I have done wrong?\n\nThanks,",
+      "body_snippet": "Dear all, I am having a strage problem while I was trying to build a\npackage. Here is my package skeleton:\n\nfn1 <- Vectorize(function(x,y,z) {\n\t\t\treturn(x + y +z)\n\t\t}, vectorize.args = c(\"x\"), SIMPLIF",
+      "thread_id": "thread-62e5392be513",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-2071b98df136",
+      "message_id": "<BANLkTimfOeeq8xXP-RcW1u7roHNAk=-PTg@mail.gmail.com>",
+      "from_name": "Nipesh Bajaj",
+      "from_email_hash": "1b4292e9bb92546d79336e14150171f0c992513fbd0e6661059fcc59cf40f789",
+      "date": "2011-06-01T01:20:45+05:30",
+      "subject": "[R] Problem with package development",
+      "subject_clean": "Problem with package development",
+      "in_reply_to": "<4DE5440A.4050101@gmail.com>",
+      "references": [
+        "<BANLkTin7yA8VcRfNecFs03VLst6KoC-MAg@mail.gmail.com>",
+        "<4DE5440A.4050101@gmail.com>"
+      ],
+      "body_plain": "Actually partly I followed. Here is the more details what I have done so far:\n\n1. Edit the help file skeletons in 'man', possibly combining help\nfiles for multiple functions.\nI have modified with following:\n\\name{fn1}\n\\alias{fn1}\n\n\\title{\nA function.\n}\n\n\\description{\nA function.\n}\n\n\\usage{\nA function.\n}\n\n\\arguments{\nA function.\n}\n\n\\value{\nA function.\n}\n\n\\author{\n\\bold{Me}\n\\cr\n\\email{Me at me.com}\n}\n\n2. Edit the exports in 'NAMESPACE', and add necessary imports.\nActually I really do not know what I would do here. In the\ncorresponding file, only \"exportPattern(\"^[[:alpha:]]+\")\" is there.\nTherefore I put that unaltered.\n\n3. Put any C/C++/Fortran code in 'src'.\nI do not have any such code\n\n4. If you have compiled code, add a useDynLib() directive to 'NAMESPACE'.\nAgain I do not know what to do, so ingored this step.\n\n5. Run R CMD build to build the package tarball.\n* Run R CMD check to check the package tarball.\n\nI did not follow this step exactly. What I done is, put 'trial3'\nfolder in R/R-2.13.0bin folder (after above modification), from the\nR-working folder. Then just run R CMD INSTALL trial3. However\npreviously with this job, I could create package effectively. After\nupdating R to the current version my problem starts.\n\nThose are not sufficient?\n\nThanks,\n\nOn Wed, Jun 1, 2011 at 1:09 AM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> On 11-05-31 3:36 PM, Nipesh Bajaj wrote:\n>>\n>> Dear all, I am having a strage problem while I was trying to build a\n>> package. Here is my package skeleton:\n>>\n>> fn1<- Vectorize(function(x,y,z) {\n>> ? ? ? ? ? ? ? ? ? ? ? ?return(x + y +z)\n>> ? ? ? ? ? ? ? ?}, vectorize.args = c(\"x\"), SIMPLIFY = TRUE)\n>> package.skeleton(\"trial3\",namespace = TRUE)\n>\n> Did you follow the instructions that package.skeleton printed?\n>\n> Duncan Murdoch\n>\n>>\n>> However when I tun \"R CMD INSTALL trial3\" in CMD, the execution\n>> stopped with following message:\n>>\n>> *** installing help indices\n>> ** building package indices...\n>> ** testing if install package can be loaded\n>> Error: unexpected symbol in \"tools:::test_load_package(..............\"\n>> Execution haulted\n>> ERROR: loading failed.............\n>>\n>> I am using R 2.13.0 in Vista with latest Rtools installed. Can\n>> somebody guide me where I have done wrong?\n>>\n>> Thanks,\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>\n>",
+      "body_snippet": "Actually partly I followed. Here is the more details what I have done so far:\n\n1. Edit the help file skeletons in 'man', possibly combining help\nfiles for multiple functions.\nI have modified with foll",
+      "thread_id": "thread-2071b98df136",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-7ce716a404ef",
+      "message_id": "<4DE54B12.3010306@xtra.co.nz>",
+      "from_name": "Rolf Turner",
+      "from_email_hash": "d072e940bc78bafa3715f1e248fd84a53d2f004a6db70ef168bf2ff6b3a080a0",
+      "date": "2011-06-01T08:09:54+12:00",
+      "subject": "[R] Please HELP",
+      "subject_clean": "Please HELP",
+      "in_reply_to": "<59062.78.174.71.29.1306851163.mynet@webmail191.mynet.com>",
+      "references": [
+        "<59062.78.174.71.29.1306851163.mynet@webmail191.mynet.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110601/6654e77d/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110601/6654e77d/attachment.pl>",
+      "thread_id": "thread-7ce716a404ef",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-f085d081da66",
+      "message_id": "<BANLkTikt1B9jmNQpEjWHJ_TSUQy_JrxhTg@mail.gmail.com>",
+      "from_name": "Thomas Lumley",
+      "from_email_hash": "7d3e82acd7a177485858a278f82b82d7e665640301fe16d4c1d9312e4963cff3",
+      "date": "2011-06-01T08:41:18+12:00",
+      "subject": "[R] Value of 'pi'",
+      "subject_clean": "Value of 'pi'",
+      "in_reply_to": "<2F9EA67EF9AE1C48A147CB41BE2E15C30151CC@DOM-EB-MAIL2.win.ad.jhu.edu>",
+      "references": [
+        "<535237.59277.qm@web120313.mail.ne1.yahoo.com>",
+        "<BANLkTinppHCqMUX2jnNznBqAmBWjeKE4gw@mail.gmail.com>",
+        "<2F9EA67EF9AE1C48A147CB41BE2E15C30151CC@DOM-EB-MAIL2.win.ad.jhu.edu>"
+      ],
+      "body_plain": "On Wed, Jun 1, 2011 at 2:12 AM, Ravi Varadhan <rvaradhan at jhmi.edu> wrote:\n>\n> I have also heard (courtesy: John Nash) that `pi' is the ratio of actual time it takes to complete your thesis to the anticipated time.\n\n\nAnd I find it a useful mnemonic that there are pi times ten million\nseconds in a year (accurate to better than half a percent).\n\n     -thomas\n\n-- \nThomas Lumley\nProfessor of Biostatistics\nUniversity of Auckland",
+      "body_snippet": "On Wed, Jun 1, 2011 at 2:12 AM, Ravi Varadhan <rvaradhan at jhmi.edu> wrote:\n>\n> I have also heard (courtesy: John Nash) that `pi' is the ratio of actual time it takes to complete your thesis to the a",
+      "thread_id": "thread-f085d081da66",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-f666846cf0c5",
+      "message_id": "<BANLkTikHXvCCegRva6oJDYW_w15P0r2cVA@mail.gmail.com>",
+      "from_name": "Nipesh Bajaj",
+      "from_email_hash": "1b4292e9bb92546d79336e14150171f0c992513fbd0e6661059fcc59cf40f789",
+      "date": "2011-06-01T02:28:06+05:30",
+      "subject": "[R] Problem with package development",
+      "subject_clean": "Problem with package development",
+      "in_reply_to": "<BANLkTimfOeeq8xXP-RcW1u7roHNAk=-PTg@mail.gmail.com>",
+      "references": [
+        "<BANLkTin7yA8VcRfNecFs03VLst6KoC-MAg@mail.gmail.com>",
+        "<4DE5440A.4050101@gmail.com>",
+        "<BANLkTimfOeeq8xXP-RcW1u7roHNAk=-PTg@mail.gmail.com>"
+      ],
+      "body_plain": "I have been struggling for last one hour but not yet any through.\n\nHowever again I recreate the package.skeleton and run R CMD check trial3\n\nHere are the errors:\n\nwarning in dir.create(pkgoutdir, mode = \"0755\"):\ncannot create dir 'c:\\Program files\\R\\R-2.13.0\\bin\\trial3.Rcheck',\nreason .................\nError in printLog(Log, \"\", text, \"\\n\"): object 'Log' not found\nExecution haulted\n\nWhy I am getting this error? what is that \"Log\". I will really\nappreciate if somebody please help me to figure out.\n\nThanks,\n\nOn Wed, Jun 1, 2011 at 1:20 AM, Nipesh Bajaj <bajaj141003 at gmail.com> wrote:\n> Actually partly I followed. Here is the more details what I have done so far:\n>\n> 1. Edit the help file skeletons in 'man', possibly combining help\n> files for multiple functions.\n> I have modified with following:\n> \\name{fn1}\n> \\alias{fn1}\n>\n> \\title{\n> A function.\n> }\n>\n> \\description{\n> A function.\n> }\n>\n> \\usage{\n> A function.\n> }\n>\n> \\arguments{\n> A function.\n> }\n>\n> \\value{\n> A function.\n> }\n>\n> \\author{\n> \\bold{Me}\n> \\cr\n> \\email{Me at me.com}\n> }\n>\n> 2. Edit the exports in 'NAMESPACE', and add necessary imports.\n> Actually I really do not know what I would do here. In the\n> corresponding file, only \"exportPattern(\"^[[:alpha:]]+\")\" is there.\n> Therefore I put that unaltered.\n>\n> 3. Put any C/C++/Fortran code in 'src'.\n> I do not have any such code\n>\n> 4. If you have compiled code, add a useDynLib() directive to 'NAMESPACE'.\n> Again I do not know what to do, so ingored this step.\n>\n> 5. Run R CMD build to build the package tarball.\n> * Run R CMD check to check the package tarball.\n>\n> I did not follow this step exactly. What I done is, put 'trial3'\n> folder in R/R-2.13.0bin folder (after above modification), from the\n> R-working folder. Then just run R CMD INSTALL trial3. However\n> previously with this job, I could create package effectively. After\n> updating R to the current version my problem starts.\n>\n> Those are not sufficient?\n>\n> Thanks,\n>\n> On Wed, Jun 1, 2011 at 1:09 AM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> On 11-05-31 3:36 PM, Nipesh Bajaj wrote:\n>>>\n>>> Dear all, I am having a strage problem while I was trying to build a\n>>> package. Here is my package skeleton:\n>>>\n>>> fn1<- Vectorize(function(x,y,z) {\n>>> ? ? ? ? ? ? ? ? ? ? ? ?return(x + y +z)\n>>> ? ? ? ? ? ? ? ?}, vectorize.args = c(\"x\"), SIMPLIFY = TRUE)\n>>> package.skeleton(\"trial3\",namespace = TRUE)\n>>\n>> Did you follow the instructions that package.skeleton printed?\n>>\n>> Duncan Murdoch\n>>\n>>>\n>>> However when I tun \"R CMD INSTALL trial3\" in CMD, the execution\n>>> stopped with following message:\n>>>\n>>> *** installing help indices\n>>> ** building package indices...\n>>> ** testing if install package can be loaded\n>>> Error: unexpected symbol in \"tools:::test_load_package(..............\"\n>>> Execution haulted\n>>> ERROR: loading failed.............\n>>>\n>>> I am using R 2.13.0 in Vista with latest Rtools installed. Can\n>>> somebody guide me where I have done wrong?\n>>>\n>>> Thanks,\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>>\n>",
+      "body_snippet": "I have been struggling for last one hour but not yet any through.\n\nHowever again I recreate the package.skeleton and run R CMD check trial3\n\nHere are the errors:\n\nwarning in dir.create(pkgoutdir, mode",
+      "thread_id": "thread-2071b98df136",
+      "thread_depth": 1,
+      "month": "2011-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-62e5392be513",
+      "subject": "Problem with package development",
+      "message_count": 1,
+      "participants": [
+        "Nipesh Bajaj"
+      ],
+      "started": "2011-06-01T01:06:08+05:30",
+      "last_reply": "2011-06-01T01:06:08+05:30",
+      "root_message_id": "msg-62e5392be513"
+    },
+    {
+      "id": "thread-2071b98df136",
+      "subject": "Problem with package development",
+      "message_count": 2,
+      "participants": [
+        "Nipesh Bajaj"
+      ],
+      "started": "2011-06-01T01:20:45+05:30",
+      "last_reply": "2011-06-01T02:28:06+05:30",
+      "root_message_id": "msg-2071b98df136"
+    },
+    {
+      "id": "thread-7ce716a404ef",
+      "subject": "Please HELP",
+      "message_count": 1,
+      "participants": [
+        "Rolf Turner"
+      ],
+      "started": "2011-06-01T08:09:54+12:00",
+      "last_reply": "2011-06-01T08:09:54+12:00",
+      "root_message_id": "msg-7ce716a404ef"
+    },
+    {
+      "id": "thread-f085d081da66",
+      "subject": "Value of 'pi'",
+      "message_count": 1,
+      "participants": [
+        "Thomas Lumley"
+      ],
+      "started": "2011-06-01T08:41:18+12:00",
+      "last_reply": "2011-06-01T08:41:18+12:00",
+      "root_message_id": "msg-f085d081da66"
+    }
+  ]
+}

@@ -1,0 +1,957 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2010-04",
+  "messages": [
+    {
+      "id": "msg-d9b06a64180f",
+      "message_id": "<w2i971536df1004301506z5870b1a4u1ff51ed95f54fac5@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2010-04-30T18:06:47-04:00",
+      "subject": "[R] Curve Fitting",
+      "subject_clean": "Curve Fitting",
+      "in_reply_to": "<361A5030-4293-4287-B7EE-A8891957EFA9@phys.ethz.ch>",
+      "references": [
+        "<361A5030-4293-4287-B7EE-A8891957EFA9@phys.ethz.ch>"
+      ],
+      "body_plain": "You can use nls2 to try many starting values. It works just like nls but:\n\n- if you give it a two row data frame as the start value it will\ncreate a grid between the upper and lower values of each parameter and\nthen run an optimization starting at each such point on the grid\nreturning the best\n\n- it has all the algorithms that nls has (because it calls nls) plus\nan additional algorithm called \"brute-force\" which simply evaluates\nthe formula at the start value\n\nThus you can use it in two ways:\n\n1. perform a brute force run and take the best to get a good starting\nvalue and using that starting value run nls, or\n2. run an nls from each starting value\n\nObviously the second approach takes more run time but has some\nadvantages in certain cases.  In many cases either approach will work.\n\n> library(nls2)\n> # 1. First approach\n> fo <- y ~ a * x ^ b + c\n> start <- data.frame(a = c(-10, 10), b = c(-10, 10), c = c(-10, 10))\n> fm.brute <- nls2(fo, start = start, alg = \"brute\")\n> fm <- nls2(fo, start = fm.brute)\n> fm\nNonlinear regression model\n  model:  y ~ a * x^b + c\n   data:  <environment>\n     a      b      c\n3.1865 0.5025 7.0900\n residual sum-of-squares: 5.677e-05\n\nNumber of iterations to convergence: 7\nAchieved convergence tolerance: 4.437e-06\n\n> # 2. Second approach\n> fm2 <- nls2(fo, start = start, control = nls.control(warnOnly = TRUE))\nThere were 32 warnings (use warnings() to see them)\n> fm2\nNonlinear regression model\n  model:  y ~ a * x^b + c\n   data:  <environment>\n     a      b      c\n3.1865 0.5025 7.0900\n residual sum-of-squares: 5.677e-05\n\nNumber of iterations to convergence: 9\nAchieved convergence tolerance: 1.149e-07\n\n\n\nOn Fri, Apr 30, 2010 at 4:30 PM, Thomas Bschorr <bschorr at phys.ethz.ch> wrote:\n> I am having troubles in fitting functions of the form\n>\n> y~a*x^b+c\n> ?to data, for example\n>\n> x<-c(0.1,0.36,0.63,0.90,1.166,1.43, 1.70, 1.96, 2.23)\n> y<-c(8.09,9.0,9.62,10.11,10.53,10.9, 11.25, 11.56, 11.86)\n>\n> I tried for example with nls, which did only work with really good initial guessed values.\n> Any suggestion, what I should use?\n> Thanks a lot\n> Thomas\n>\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "You can use nls2 to try many starting values. It works just like nls but:\n\n- if you give it a two row data frame as the start value it will\ncreate a grid between the upper and lower values of each par",
+      "thread_id": "thread-d9b06a64180f",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-0adf4d91c144",
+      "message_id": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "from_name": "Max Gunther",
+      "from_email_hash": "ae7ead29b37792a95bdd6f1c1f9acc78e27dd279352df6e001abe5478372e734",
+      "date": "2010-04-30T17:13:06-05:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/b872922c/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/b872922c/attachment.pl>",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-2e7946326b50",
+      "message_id": "<55a5dc7d-c1b3-4a08-86ec-83cdce226c32@q32g2000yqb.googlegroups.com>",
+      "from_name": "V N",
+      "from_email_hash": "5337117189247ddcbb134e34f841418c5c6cec36eda91a78955d81de1ac5b067",
+      "date": "2010-04-30T15:15:49-07:00",
+      "subject": "[R] installing R2.11 on RHEL5.3",
+      "subject_clean": "installing R2.11 on RHEL5.3",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to install R2.11 on RHEL5.3. The main code and base\npackages compile fine and get installed to \\usr\\local\\R211 (which I\nset using --prefix).  I would like to install a set of contrib\npackages (car, ggplot2, etc.) also to the same location. Once R is\nfired up, I can do install.packages() and it gets installed in ~/\nR/...  Is there any way of installing these packages to the main R\ninstallation. There are some packages which all of us in the group use\nand would prefer not to repeat for each user.  (if sudo R CMD install\nis the way to do it, is there a way in which I can specify just the\npackage names and have it figure out the dependencies without me\nhaving to download all the tar balls manually?).\n\nThanks.",
+      "body_snippet": "I am trying to install R2.11 on RHEL5.3. The main code and base\npackages compile fine and get installed to \\usr\\local\\R211 (which I\nset using --prefix).  I would like to install a set of contrib\npacka",
+      "thread_id": "thread-2e7946326b50",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-b486e9b96964",
+      "message_id": "<CB0B9468-2BCF-4A87-B560-34649FD39D2B@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2010-04-30T18:23:01-04:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 6:13 PM, Max Gunther wrote:\n\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I  \n> would like\n> to be able to copy and past tables from \"R\" output directly into a  \n> Microsoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers  \n> more\n> easily.\n>\n> Do people have suggestions for the best way to do this?\n>\n> I am a novice to \"R\" but I do work with a couple of\n> very knowledgeable statisticians who do most of the heavy statistical\n> lifting for our research group.\n\nprint.xtable in xtable package would allow output as html format. Not  \nsure about copy-pastable into MSWord, but MSWord can surely import  \nthem.  Excel is quite good about pasting HTML formated tables.\n\n\n>\n> Many thanks,\n> Max\n>\n>\n> Max Gunther, PhD\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Apr 30, 2010, at 6:13 PM, Max Gunther wrote:\n\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I  \n> would like\n> to be able to copy and past tables from \"R\" out",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-cf5c9b94b934",
+      "message_id": "<g2l6050b5d21004301534g3a0728abg2a1a7a73942376bc@mail.gmail.com>",
+      "from_name": "Sachi Ito",
+      "from_email_hash": "9521e4decbb655ccf6c7d19ee0fea710a5b9aa0b9ef58300b71ddbc2cd5e8b99",
+      "date": "2010-04-30T17:34:50-05:00",
+      "subject": "[R] QIC for GEE",
+      "subject_clean": "QIC for GEE",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/992f19a3/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/992f19a3/attachment.pl>",
+      "thread_id": "thread-cf5c9b94b934",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-b92dae7abd4a",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFDFF@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T16:35:18-06:00",
+      "subject": "[R] Curve Fitting/Regression with Multiple Observations",
+      "subject_clean": "Curve Fitting/Regression with Multiple Observations",
+      "in_reply_to": "<x2o31f9eb41004300309v343bea9fk4d57277a7cb7c268@mail.gmail.com>",
+      "references": [
+        "<j2q31f9eb41004271030qf6087976r5c34807c3c53528b@mail.gmail.com>",
+        "<m2h971536df1004271135nb47360c7s719fdffc66ac1db4@mail.gmail.com>",
+        "<w2p31f9eb41004271207ve73cb49ckca791fa8d5afdcbb@mail.gmail.com>",
+        "<n2k971536df1004271246hf05bc68vcdc04749cbbdb320@mail.gmail.com>",
+        "<j2k31f9eb41004271332h7a1e6d66xed162308175638fc@mail.gmail.com>",
+        "<018401cae814$d5c41d70$814c5850$@gmail.com>",
+        "<x2o31f9eb41004300309v343bea9fk4d57277a7cb7c268@mail.gmail.com>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Kyeong Soo (Joseph) Kim\n> Sent: Friday, April 30, 2010 4:10 AM\n> To: kMan\n> Cc: r-help at r-project.org\n> Subject: Re: [R] Curve Fitting/Regression with Multiple Observations\n\n[snip]\n\n> By the way, I wonder why most of the responses I've received from this\n> list are so cynical (or skeptical?) and in some sense done in a quite\n> arrogant way. It's very hard to imagine that one would receive such\n> responses in my own areas of computer simulation and optical\n> communications/networking. If a newbie asks a question to the list not\n> making much sense or another FAQ, that is usually ignored (i.e., no\n> response) because all we are too busy to deal with that. Sometimes,\n> though, a kind soul (like Gabor) takes his/her own valuable time and\n> doesn't mind explaining all the details from simple basics.\n\nIn my experience with this list, and others, the perceived level of cynical/skeptical/arrogant answers has more to do with the reader than with the writer.  If you want to be offended, you will find things to be offended about even when none was intended.  If you look for help and useful responses (follow the posting guide) and are thankful for what you learn, you will learn more and be bothered less.\n\nR-help is a mixture of different levels and cultures.  In framing responses it is hard to know what the other person may find offensive (I was once yelled at and chewed out quite thoroughly for truthfully answering \"no\" when asked if I drink coffee).\n\nMost responders on this list (actually I would say all, but there might be an exception that I have not noticed) are trying to be helpful, there is just a large variability in the tones of the responses.  \n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Kyeong Soo (Joseph) Kim\n> Sent: Friday, April 30, 2010 4:10 AM\n> To: kMan\n",
+      "thread_id": "thread-b92dae7abd4a",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-43050566e727",
+      "message_id": "<g2od8ad40b51004301538k362b03aau6474c4b3df040d77@mail.gmail.com>",
+      "from_name": "Barry Rowlingson",
+      "from_email_hash": "94f5c718996fafe3dcf7003ba82c6656414e43b8d3f2b04af298250f493ba5eb",
+      "date": "2010-04-30T23:38:27+01:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Apr 30, 2010 at 11:13 PM, Max Gunther\n<max.gunther at vanderbilt.edu> wrote:\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to copy and past tables from \"R\" output directly into a Microsoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers more\n> easily.\n>\n> Do people have suggestions for the best way to do this?\n\n Learn to use Sweave for your documents, and then you can create\ndynamic reports with the R code mixed in with your text. New data\ncomes in? Just run Sweave again, it does the R analysis, redoes the\ntables, graphs etc, and out pops an updated PDF. Obviously if the\nconclusions change you might have to rewrite some paragraphs.\n\nIt will save you tons of time, be more accurate to minimise\ncopy-and-paste errors, and help you update everything in your papers\nmore easily.\n\nhttp://www.stat.uni-muenchen.de/~leisch/Sweave/\n\nBarry",
+      "body_snippet": "On Fri, Apr 30, 2010 at 11:13 PM, Max Gunther\n<max.gunther at vanderbilt.edu> wrote:\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to c",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-77cf05de5e93",
+      "message_id": "<CECFE685-732C-4796-B802-67C8198F6885@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2010-04-30T17:38:50-05:00",
+      "subject": "[R] confused on model.frame evaluation",
+      "subject_clean": "confused on model.frame evaluation",
+      "in_reply_to": "<4BDB525D.2070708@ccbr.umn.edu>",
+      "references": [
+        "<4BDB510D.9020500@ccbr.umn.edu>",
+        "<4BDB525D.2070708@ccbr.umn.edu>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 4:57 PM, Erik Iverson wrote:\n\n> <snip>\n>> I'm sure it's not a bug, but could someone point to a thread or offer some gentle advice on what's happening?  I think it's related to:\n>> test <- data.frame(name1 = 1:5, name2 = 6:10, test = 11:15)\n>> eval(expression(test[c(\"name1\", \"name2\")]))\n>> eval(expression(interco[c(\"name1\", \"test\")]))\n> \n> scratch that last one, obviously a typo was causing my confusion there!  The model.frame stuff remains a mystery to me though...\n\n\nHi Erik,\n\nIt's late on a Friday, it's grey and raining here in Minneapolis and I am short on caffeine, but, that being said, consider the following :-)\n\n\n> working\n  france manual famanual total working  no\n1      1      1        1   107      85  22\n2      1      1        0    65      44  21\n3      1      0        1    66      24  42\n4      1      0        0   171      17 154\n5      0      1        1    87      24  63\n6      0      1        0    65      22  43\n7      0      0        1    85       1  84\n8      0      0        0   148       6 142\n\n\n> as.matrix(working[c(\"working\", \"no\")])\n     working  no\n[1,]      85  22\n[2,]      44  21\n[3,]      24  42\n[4,]      17 154\n[5,]      24  63\n[6,]      22  43\n[7,]       1  84\n[8,]       6 142\n\n\n> with(working, as.matrix(working[c(\"working\", \"no\")]))\n     [,1]\n[1,]   NA\n[2,]   NA\n\n\nFor the incantations of model.frame(), the formula terms are evaluated first within the scope of the data frame indicated for the 'data' argument.\n\nThus, in the second case, I am asking for the as.matrix(...) call to be evaluated within the scope of the 'working' data frame, which returns a matrix with only two rows, one NA for each column that was asked for and not found, which is different than the number of rows in 'working', thus you get the error as soon as the 'france' column is evaluated in the formula to create the model frame:\n\nError in model.frame.default(formula = as.matrix(working[c(\"working\",  :\n variable lengths differ (found for 'france')\n\n\n2 rows in the response matrix versus 8 rows for 'france'...\n\n\nIt is kind of like you are asking for:\n\n> as.matrix(working$working[c(\"working\", \"no\")])\n     [,1]\n[1,]   NA\n[2,]   NA\n\n\n\nNow, try this:\n\n> with(working, matrix(c(working, no), ncol = 2))\n     [,1] [,2]\n[1,]   85   22\n[2,]   44   21\n[3,]   24   42\n[4,]   17  154\n[5,]   24   63\n[6,]   22   43\n[7,]    1   84\n[8,]    6  142\n\n\nand then:\n\n> summary(glm(matrix(c(working, no), ncol = 2) ~ france + manual + famanual, data = working, family = binomial))\n\nCall:\nglm(formula = matrix(c(working, no), ncol = 2) ~ france + manual + \n    famanual, family = binomial, data = working)\n\nDeviance Residuals: \n       1         2         3         4         5         6         7  \n 0.09316  -0.14108   2.38028  -1.91838  -1.48196   1.84993  -1.61864  \n       8  \n 1.16747  \n\nCoefficients:\n            Estimate Std. Error z value Pr(>|z|)    \n(Intercept)  -3.6902     0.2547 -14.489  < 2e-16 ***\nfrance        1.9474     0.2162   9.008  < 2e-16 ***\nmanual        2.5199     0.2168  11.625  < 2e-16 ***\nfamanual      0.5522     0.2017   2.738  0.00618 ** \n---\nSignif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1 \n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 308.329  on 7  degrees of freedom\nResidual deviance:  18.976  on 4  degrees of freedom\nAIC: 60.162\n\nNumber of Fisher Scoring iterations: 4\n\n\n\nDoes that help top clarify?\n\nRegards,\n\nMarc Schwartz",
+      "body_snippet": "On Apr 30, 2010, at 4:57 PM, Erik Iverson wrote:\n\n> <snip>\n>> I'm sure it's not a bug, but could someone point to a thread or offer some gentle advice on what's happening?  I think it's related to:\n>>",
+      "thread_id": "thread-77cf05de5e93",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-64223b513621",
+      "message_id": "<4BDB5CFE.1000602@vanderbilt.edu>",
+      "from_name": "Frank E Harrell Jr",
+      "from_email_hash": "416ca93053912cfc2e0362d90740df9d9f64f8e27fd2a2c6da59687e4401fc59",
+      "date": "2010-04-30T17:43:10-05:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>"
+      ],
+      "body_plain": "On 04/30/2010 05:13 PM, Max Gunther wrote:\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to copy and past tables from \"R\" output directly into a Microsoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers more\n> easily.\n>\n> Do people have suggestions for the best way to do this?\n>\n> I am a novice to \"R\" but I do work with a couple of\n> very knowledgeable statisticians who do most of the heavy statistical\n> lifting for our research group.\n>\n> Many thanks,\n> Max\n>\n>\n> Max Gunther, PhD\n>\n> Vanderbilt University - Radiology\n> Institute of Imaging Sciences - VUIIS\n> Center for Health Services Research\n> Nashville, TN www.ICUdelirium.org\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\nSee http://biostat.mc.vanderbilt.edu/SweaveConvert\n\n-- \nFrank E Harrell Jr   Professor and Chairman        School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
+      "body_snippet": "On 04/30/2010 05:13 PM, Max Gunther wrote:\n> Dear \"R\" list,\n>\n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to copy and past tables from \"R\" output direct",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-9ebebcb87cc1",
+      "message_id": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "from_name": "Sebastian Kruk",
+      "from_email_hash": "0b28094931e4264e59e6c3689cc574e54b6c6dc4a437db94ede95b7bbfd835fb",
+      "date": "2010-04-30T19:44:44-03:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, i have a vector filled with names:\n\n[1] Alvaro Adela ...\n[25] Beatriz Berta ...\n...\n[100000] ...\n\nI would like to drop last character in every name.\n\nI use the next program:\n\nfor (i in 1:100000) {\n? ? ? ? ? ? ? ? ? ? ? ? ? largo <- nchar(names[i]-1)\n? ? ? ? ? ? ? ? ? ? ? ? ? names[i] <- substring (names[i],1,largo]\n? ? ? ? ? ? ? ? ? ? ? ? ?}\n\nIs another and faster way of do it?\n\nThanks,\n\nSebasti?n.",
+      "body_snippet": "Hi, i have a vector filled with names:\n\n[1] Alvaro Adela ...\n[25] Beatriz Berta ...\n...\n[100000] ...\n\nI would like to drop last character in every name.\n\nI use the next program:\n\nfor (i in 1:100000) {",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-9ebebcb87cc1",
+      "message_id": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "from_name": "Sebastian Kruk",
+      "from_email_hash": "0b28094931e4264e59e6c3689cc574e54b6c6dc4a437db94ede95b7bbfd835fb",
+      "date": "2010-04-30T19:44:44-03:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, i have a vector filled with names:\n\n[1] Alvaro Adela ...\n[25] Beatriz Berta ...\n...\n[100000] ...\n\nI would like to drop last character in every name.\n\nI use the next program:\n\nfor (i in 1:100000) {\n? ? ? ? ? ? ? ? ? ? ? ? ? largo <- nchar(names[i]-1)\n? ? ? ? ? ? ? ? ? ? ? ? ? names[i] <- substring (names[i],1,largo]\n? ? ? ? ? ? ? ? ? ? ? ? ?}\n\nIs another and faster way of do it?\n\nThanks,\n\nSebasti?n.",
+      "body_snippet": "Hi, i have a vector filled with names:\n\n[1] Alvaro Adela ...\n[25] Beatriz Berta ...\n...\n[100000] ...\n\nI would like to drop last character in every name.\n\nI use the next program:\n\nfor (i in 1:100000) {",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-ce97a4ec259e",
+      "message_id": "<CC9A5F00-8542-42E4-974A-32B2FF2F8ED7@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2010-04-30T17:45:53-05:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 5:13 PM, Max Gunther wrote:\n\n> Dear \"R\" list,\n> \n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to copy and past tables from \"R\" output directly into a Microsoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers more\n> easily.\n> \n> Do people have suggestions for the best way to do this?\n> \n> I am a novice to \"R\" but I do work with a couple of\n> very knowledgeable statisticians who do most of the heavy statistical\n> lifting for our research group.\n> \n> Many thanks,\n> Max\n\nMax,\n\nI would urge you to consider using Sweave. It enables the use of R and LaTeX to facilitate reproducible research, which seems to be your goal here.\n\nYou might want to talk to your campus neighbor Frank Harrell, who has extensive information on the Vanderbilt Biostatistics department web site on this:\n\n  http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport \n\nFrank also has some pointers for converting between various formats:\n\n  http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/SweaveConvert\n\nHTH,\n\nMarc Schwartz",
+      "body_snippet": "On Apr 30, 2010, at 5:13 PM, Max Gunther wrote:\n\n> Dear \"R\" list,\n> \n> Our statisticians usually give us results back in a PDF format. I would like\n> to be able to copy and past tables from \"R\" output",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-a0e1d6907b6e",
+      "message_id": "<2836E245-4B9B-4A32-B3DC-D1CA50B552B4@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2010-04-30T18:47:06-04:00",
+      "subject": "[R] Flattening and unflattening symmetric matrices",
+      "subject_clean": "Flattening and unflattening symmetric matrices",
+      "in_reply_to": "<x2rf3335761004301426s233ba1dbl7ff6460a7465510b@mail.gmail.com>",
+      "references": [
+        "<x2rf3335761004301426s233ba1dbl7ff6460a7465510b@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 5:26 PM, Nicholas Andrews wrote:\n\n> Here's an easy question: I'd like to convert a symmetric matrix to a\n> vector composed of the upper.tri() part of it plus the diagonal, and\n> convert it back again.  What's the best way to achieve this?  I'm\n> wondering if there are some built in functions to do this easily.  I\n> can encode fine:\n>\n> v <- c(diag(A),A[upper.tri(A)])\n>\n> but I don't see an easy way to recover A from v without loops.  Any  \n> tips?\n\n  mtx <- matrix(1:9, 3,3)\n  v  <- c(diag(mtx), mtx[upper.tri(mtx)])\n  mtx2 <- matrix( , 3,3)               #init\n\n2 part indexing appraoch:\n  mtx2[row(mtx2)==col(mtx2)] <- v[1:3] #could use 1:length(diag(mtx))\n  mtx2[upper.tri(mtx2)] <- v[4:6]      #logical indexing with \"[<-\"\n\n > mtx2\n      [,1] [,2] [,3]\n[1,]    1    4    7\n[2,]   NA    5    8\n[3,]   NA   NA    9\n\nWould it be any easier to use upper.tri( , diag=TRUE)? It wouldn't put  \nall your diag elements together, but it would be reversible.\n\n-- \nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Apr 30, 2010, at 5:26 PM, Nicholas Andrews wrote:\n\n> Here's an easy question: I'd like to convert a symmetric matrix to a\n> vector composed of the upper.tri() part of it plus the diagonal, and\n> co",
+      "thread_id": "thread-a0e1d6907b6e",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-d9e869109b43",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE1E@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T16:54:39-06:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word\tformat?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word\tformat?",
+      "in_reply_to": "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>"
+      ],
+      "body_plain": "When I work with clients who want to cut and paste to word or powerpoint I usually use the odfWeave package, set up a template file with the tables and graphs (possibly other output), then I run that through odfWeave and then use openoffice to save the results as a word file that I can send to the client (and they happily copy and paste from it).  \n\nThere is also development on Sword (still in beta) from the people who brought us Rexcel.  It works similarly, but directly with word, I will probably start using it more in the future.\n\nHope this helps,\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Max Gunther\n> Sent: Friday, April 30, 2010 4:13 PM\n> To: r-help at r-project.org\n> Subject: [R] What is the best way to have \"R\" output tables in an MS\n> Word format?\n> \n> Dear \"R\" list,\n> \n> Our statisticians usually give us results back in a PDF format. I would\n> like\n> to be able to copy and past tables from \"R\" output directly into a\n> Microsoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers\n> more\n> easily.\n> \n> Do people have suggestions for the best way to do this?\n> \n> I am a novice to \"R\" but I do work with a couple of\n> very knowledgeable statisticians who do most of the heavy statistical\n> lifting for our research group.\n> \n> Many thanks,\n> Max\n> \n> \n> Max Gunther, PhD\n> \n> Vanderbilt University - Radiology\n> Institute of Imaging Sciences - VUIIS\n> Center for Health Services Research\n> Nashville, TN www.ICUdelirium.org\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "When I work with clients who want to cut and paste to word or powerpoint I usually use the odfWeave package, set up a template file with the tables and graphs (possibly other output), then I run that ",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-062c7acd7658",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE21@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T16:58:18-06:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>"
+      ],
+      "body_plain": "The nchar and substring functions are both vectorized, you can do something like:\n\n> substring(state.name, 1, nchar(state.name)-1)\n\nAnd it should be much faster.\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Sebastian Kruk\n> Sent: Friday, April 30, 2010 4:45 PM\n> To: r-help at r-project.org; r-help at stat.math.ethz.ch\n> Subject: [R] drop last character in a names'vector\n> \n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last character in every name.\n> \n> I use the next program:\n> \n> for (i in 1:100000) {\n> ? ? ? ? ? ? ? ? ? ? ? ? ? largo <- nchar(names[i]-1)\n> ? ? ? ? ? ? ? ? ? ? ? ? ? names[i] <- substring (names[i],1,largo]\n> ? ? ? ? ? ? ? ? ? ? ? ? ?}\n> \n> Is another and faster way of do it?\n> \n> Thanks,\n> \n> Sebasti?n.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The nchar and substring functions are both vectorized, you can do something like:\n\n> substring(state.name, 1, nchar(state.name)-1)\n\nAnd it should be much faster.\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\nSta",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-062c7acd7658",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE21@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T16:58:18-06:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>"
+      ],
+      "body_plain": "The nchar and substring functions are both vectorized, you can do something like:\n\n> substring(state.name, 1, nchar(state.name)-1)\n\nAnd it should be much faster.\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Sebastian Kruk\n> Sent: Friday, April 30, 2010 4:45 PM\n> To: r-help at r-project.org; r-help at stat.math.ethz.ch\n> Subject: [R] drop last character in a names'vector\n> \n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last character in every name.\n> \n> I use the next program:\n> \n> for (i in 1:100000) {\n> ? ? ? ? ? ? ? ? ? ? ? ? ? largo <- nchar(names[i]-1)\n> ? ? ? ? ? ? ? ? ? ? ? ? ? names[i] <- substring (names[i],1,largo]\n> ? ? ? ? ? ? ? ? ? ? ? ? ?}\n> \n> Is another and faster way of do it?\n> \n> Thanks,\n> \n> Sebasti?n.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The nchar and substring functions are both vectorized, you can do something like:\n\n> substring(state.name, 1, nchar(state.name)-1)\n\nAnd it should be much faster.\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\nSta",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-6c2595724f66",
+      "message_id": "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2010-04-30T18:04:01-05:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n\n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last character in every name.\n> \n> I use the next program:\n> \n> for (i in 1:100000) {\n>                           largo <- nchar(names[i]-1)\n>                           names[i] <- substring (names[i],1,largo]\n>                          }\n> \n> Is another and faster way of do it?\n> \n> Thanks,\n> \n> Sebasti?n.\n\n\nAs is the case with R, more than one, but the fastest may be:\n\nnames <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n\n> gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n[1] \"Alvaro Adel\"  \"Beatriz Bert\"\n\n\nJust to show that it works with entries of varying lengths:\n\n> gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nSee ?gsub and ?regex\n\n\n\nYou could use substr(), but the arguments for substring lengths are not vectorized, so the following won't work:\n\n> substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n[1] \"ABC\"    \"ABCD\"   \"ABCDE\"  \"ABCDEF\"\n\n\nYou would have to do something like this:\n\n> as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), \n            function(x) substr(x, 1, nchar(x) - 1)))\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nSee ?substr and ?nchar\n\nHTH,\n\nMarc Schwartz",
+      "body_snippet": "On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n\n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last char",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-6c2595724f66",
+      "message_id": "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2010-04-30T18:04:01-05:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n\n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last character in every name.\n> \n> I use the next program:\n> \n> for (i in 1:100000) {\n>                           largo <- nchar(names[i]-1)\n>                           names[i] <- substring (names[i],1,largo]\n>                          }\n> \n> Is another and faster way of do it?\n> \n> Thanks,\n> \n> Sebasti?n.\n\n\nAs is the case with R, more than one, but the fastest may be:\n\nnames <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n\n> gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n[1] \"Alvaro Adel\"  \"Beatriz Bert\"\n\n\nJust to show that it works with entries of varying lengths:\n\n> gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nSee ?gsub and ?regex\n\n\n\nYou could use substr(), but the arguments for substring lengths are not vectorized, so the following won't work:\n\n> substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n[1] \"ABC\"    \"ABCD\"   \"ABCDE\"  \"ABCDEF\"\n\n\nYou would have to do something like this:\n\n> as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), \n            function(x) substr(x, 1, nchar(x) - 1)))\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nSee ?substr and ?nchar\n\nHTH,\n\nMarc Schwartz",
+      "body_snippet": "On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n\n> Hi, i have a vector filled with names:\n> \n> [1] Alvaro Adela ...\n> [25] Beatriz Berta ...\n> ...\n> [100000] ...\n> \n> I would like to drop last char",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-6cc817cf8cd0",
+      "message_id": "<002701cae8b9$71c26700$04d01f0a@gne.windows.gene.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2010-04-30T16:04:10-07:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<CC9A5F00-8542-42E4-974A-32B2FF2F8ED7@me.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+        "<CC9A5F00-8542-42E4-974A-32B2FF2F8ED7@me.com>"
+      ],
+      "body_plain": "odfWeave might be a less daunting option here, as it can output results in\nsome .doc formats. I have no idea how well tables would survive the\ntranslations, however.\n\n-- Bert \n\nBert Gunter\nGenentech Nonclinical Statistics\n\n-----Original Message-----\nFrom: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On\nBehalf Of Marc Schwartz\nSent: Friday, April 30, 2010 3:46 PM\nTo: Max Gunther\nCc: r-help at r-project.org\nSubject: Re: [R] What is the best way to have \"R\" output tables in an MS\nWord format?\n\nOn Apr 30, 2010, at 5:13 PM, Max Gunther wrote:\n\n> Dear \"R\" list,\n> \n> Our statisticians usually give us results back in a PDF format. I would\nlike\n> to be able to copy and past tables from \"R\" output directly into a\nMicrosoft\n> Word table since this will save us tons of time, be more accurate to\n> minimize human copying errors and help us update data in our papers more\n> easily.\n> \n> Do people have suggestions for the best way to do this?\n> \n> I am a novice to \"R\" but I do work with a couple of\n> very knowledgeable statisticians who do most of the heavy statistical\n> lifting for our research group.\n> \n> Many thanks,\n> Max\n\nMax,\n\nI would urge you to consider using Sweave. It enables the use of R and LaTeX\nto facilitate reproducible research, which seems to be your goal here.\n\nYou might want to talk to your campus neighbor Frank Harrell, who has\nextensive information on the Vanderbilt Biostatistics department web site on\nthis:\n\n  http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport \n\nFrank also has some pointers for converting between various formats:\n\n  http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/SweaveConvert\n\nHTH,\n\nMarc Schwartz\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "odfWeave might be a less daunting option here, as it can output results in\nsome .doc formats. I have no idea how well tables would survive the\ntranslations, however.\n\n-- Bert \n\nBert Gunter\nGenentech N",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 2,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-d2bdf5eb82a7",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE24@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:04:16-06:00",
+      "subject": "[R] as.environment Error",
+      "subject_clean": "as.environment Error",
+      "in_reply_to": "<201004301920.55311.mailing-list@gmx.net>",
+      "references": [
+        "<201004301920.55311.mailing-list@gmx.net>"
+      ],
+      "body_plain": "I don't know what is specifically causing the error, but I think that you will be happier in the long run (and probably short run) if you abandon the use of assign and <<- and instead use lists.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of mailing-list at gmx.net\n> Sent: Friday, April 30, 2010 11:21 AM\n> To: r-help at r-project.org\n> Subject: [R] as.environment Error\n> \n> \n> Dear R community,\n> \n> I have a problem with assign:\n> \n> <snip>\n> \t      for ( iii in 1:dim(ref_df)[2] )\n> \t      {\n> \t\t    ret <<-\n> ref_df[,iii][names(single_string[ii])]*(single_count/sum(ref_df[,iii]))\n> \n> assign(paste(\"expected_sing_ref\",iii,sep=\"\"),c(get(paste(\"expected_sing\n> le_ref\",iii,sep=\"\"))), ret)\n> \t      }\n> <snap>\n> \n> The Error:\n> Error in as.environment(pos) : invalid argument\n> \n> Has anybody an idea, how to solve this error ?\n> \n> Thanks in advance,\n> Georg\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I don't know what is specifically causing the error, but I think that you will be happier in the long run (and probably short run) if you abandon the use of assign and <<- and instead use lists.\n\n-- \n",
+      "thread_id": "thread-d2bdf5eb82a7",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-64c4894dedc3",
+      "message_id": "<4BDB645A.4050506@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2010-04-30T17:14:34-06:00",
+      "subject": "[R] Flattening and unflattening symmetric matrices",
+      "subject_clean": "Flattening and unflattening symmetric matrices",
+      "in_reply_to": "<x2rf3335761004301426s233ba1dbl7ff6460a7465510b@mail.gmail.com>",
+      "references": [
+        "<x2rf3335761004301426s233ba1dbl7ff6460a7465510b@mail.gmail.com>"
+      ],
+      "body_plain": "On 2010-04-30 15:26, Nicholas Andrews wrote:\n> Here's an easy question: I'd like to convert a symmetric matrix to a\n> vector composed of the upper.tri() part of it plus the diagonal, and\n> convert it back again.  What's the best way to achieve this?  I'm\n> wondering if there are some built in functions to do this easily.  I\n> can encode fine:\n>\n> v<- c(diag(A),A[upper.tri(A)])\n>\n> but I don't see an easy way to recover A from v without loops.  Any tips?\n\nTo (re)create a symmetric matrix, use A + t(A):\nIf vd is diag(A) part of v and vu is the rest of v, and\nlet's take A to be 4-by-4, then\n\n  A <- matrix(0, 4, 4)\n  A[upper.tri(A)] <- vu\n  A <- A + t(A)\n  diag(A) <- vd\n  A\n\n  -Peter Ehlers\n\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n>\n\n-- \nPeter Ehlers\nUniversity of Calgary",
+      "body_snippet": "On 2010-04-30 15:26, Nicholas Andrews wrote:\n> Here's an easy question: I'd like to convert a symmetric matrix to a\n> vector composed of the upper.tri() part of it plus the diagonal, and\n> convert it ",
+      "thread_id": "thread-64c4894dedc3",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-88f151682084",
+      "message_id": "<77EB52C6DD32BA4D87471DCD70C8D70002DA5188@NA-PA-VBE03.na.tibco.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2010-04-30T16:19:08-07:00",
+      "subject": "[R] as.environment Error",
+      "subject_clean": "as.environment Error",
+      "in_reply_to": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE24@LP-EXMBVS10.CO.IHC.COM>",
+      "references": [
+        "<201004301920.55311.mailing-list@gmx.net>",
+        "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE24@LP-EXMBVS10.CO.IHC.COM>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Greg Snow\n> Sent: Friday, April 30, 2010 4:04 PM\n> To: mailing-list at gmx.net; r-help at r-project.org\n> Subject: Re: [R] as.environment Error\n> \n> I don't know what is specifically causing the error, but I \n> think that you will be happier in the long run (and probably \n> short run) if you abandon the use of assign and <<- and \n> instead use lists.\n> \n> -- \n> Gregory (Greg) L. Snow Ph.D.\n> Statistical Data Center\n> Intermountain Healthcare\n> greg.snow at imail.org\n> 801.408.8111\n> \n> \n> > -----Original Message-----\n> > From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> > project.org] On Behalf Of mailing-list at gmx.net\n> > Sent: Friday, April 30, 2010 11:21 AM\n> > To: r-help at r-project.org\n> > Subject: [R] as.environment Error\n> > \n> > \n> > Dear R community,\n> > \n> > I have a problem with assign:\n> > \n> > <snip>\n> > \t      for ( iii in 1:dim(ref_df)[2] )\n> > \t      {\n> > \t\t    ret <<-\n> > \n> ref_df[,iii][names(single_string[ii])]*(single_count/sum(ref_d\n> f[,iii]))\n> > \n> > \n> assign(paste(\"expected_sing_ref\",iii,sep=\"\"),c(get(paste(\"expe\n> cted_sing\n> > le_ref\",iii,sep=\"\"))), ret)\n\nThat assign() call is equivalent to\n   assign(x=paste(...), value=c(get(paste(...))), pos=ret)\nand the subsequent envir=as.environment(pos) causes the\nerror you got.\n\nDid you misplace the closing parenthesis in the call to c()\nso ret became the 3rd argument to assign()?\n\nBill Dunlap\nSpotfire, TIBCO Software\nwdunlap tibco.com \n\n> > \t      }\n> > <snap>\n> > \n> > The Error:\n> > Error in as.environment(pos) : invalid argument\n> > \n> > Has anybody an idea, how to solve this error ?\n> > \n> > Thanks in advance,\n> > Georg\n> > \n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-\n> > guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org \n> [mailto:r-help-bounces at r-project.org] On Behalf Of Greg Snow\n> Sent: Friday, April 30, 2010 4:04 PM\n> To: mailing-list at gmx",
+      "thread_id": "thread-d2bdf5eb82a7",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-acf49b8ed509",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2A@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:19:43-06:00",
+      "subject": "[R] understanding behavior of \"merge\"",
+      "subject_clean": "understanding behavior of \"merge\"",
+      "in_reply_to": "<y2kcb93aadc1004291626p10144d3bxf74c1454e7e34b67@mail.gmail.com>",
+      "references": [
+        "<y2kcb93aadc1004291626p10144d3bxf74c1454e7e34b67@mail.gmail.com>"
+      ],
+      "body_plain": "So does each person have multiple rows and you want to sample the set of rows?\n\nThe usual approach that I take is to split them into a list, sample from the list, the put the list back together, for example:\n\n\ntmp1 <- split(as.data.frame(state.x77), state.division)\ntmp2 <- sample(tmp1, replace=TRUE)\ntmp3 <- do.call( 'rbind', tmp2 )\ntmp3$newid <- rep( 1:length(tmp2), sapply(tmp2, nrow) )\n\nwrap that in a function and you have the bootstrap resampling.\n\nHope this helps,\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Chris__ Barker\n> Sent: Thursday, April 29, 2010 5:26 PM\n> To: r-help at r-project.org\n> Subject: [R] understanding behavior of \"merge\"\n> \n> I'm trying to bootstrap resample from a repeated measures dataset. I\n> sample\n> a vector of \"ID\"'s from my dataframe with replacement.\n> Then I merge this back with my dataframe.\n> I'm re-sampling subjects in the dataset rather than rows of the data.\n> \n> I thought I could use the left/right join features of the merge to\n> select\n> the records I want from the dataframe (mydataframe), like this.\n> \n> boot.sample <-  merge(  id.boot.draw,mydataframe, by=c(\"ID\") ,\n> all.x=TRUE )\n> \n> \n> when I do that, the correct records are selected from \"mydataframe\" but\n> the\n> values for all the variables, other than the matching variable are now\n> \"NA\".\n> \n> My other option is to right a for loop, which I would hope to avoid.\n> \n> Thanks in advance for any suggestions\n> \n> --\n>               Chris Barker,\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "So does each person have multiple rows and you want to sample the set of rows?\n\nThe usual approach that I take is to split them into a list, sample from the list, the put the list back together, for e",
+      "thread_id": "thread-acf49b8ed509",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-afe2ff69a7c9",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2C@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:24:29-06:00",
+      "subject": "[R] Periodic regression - lunar percent cover",
+      "subject_clean": "Periodic regression - lunar percent cover",
+      "in_reply_to": "<81731.95996.qm@web36108.mail.mud.yahoo.com>",
+      "references": [
+        "<81731.95996.qm@web36108.mail.mud.yahoo.com>"
+      ],
+      "body_plain": "You have the correct general idea, but it looks like lp may have already been transformed to be in the range 0-1 rather than number of days, if that is the case then you don't need to dived by 29. Again.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Tim Clark\n> Sent: Thursday, April 29, 2010 5:50 PM\n> To: r-help at r-project.org\n> Subject: [R] Periodic regression - lunar percent cover\n> \n> Dear List,\n> \n> I am trying include a lunar variable in a model and am having problems\n> figuring out the correct way to include it.  I want to convert the\n> percent lunar illumination (fraction of moon showing) to a combination\n> of sin and cos variables to account for the periodic nature of the\n> lunar cycle.  Would someone let me know if I am doing this correctly?\n> I have included the first 20 variables from my dataset as an example.\n> Y is count data and lp is the lunar percent cover.  The lunar period is\n> 29.53.\n> \n> y<-c(1, 3, 0, 0, 0, 0, 2, 4, 0, 1, 0, 5, 3, 2, 4, 2, 0, 1, 3, 5)\n> lp<-c(0.80, 0.88, 0.62, 0.19, 0.21, 0.01, 0.70, 1.00, 0.88, 0.04, 0.70,\n> 0.93, 0.23, 0.99, 0.19, 0.79, 1.00, 0.03, 0.01, 0.00)\n> g1<-glm(y~cos((2*pi*lp)/29.530589)+sin((2*pi*lp)/29.530589))\n> \n> Thanks,\n> \n> Tim\n> \n> \n> \n> \n> Tim Clark\n> Department of Zoology\n> University of Hawaii\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "You have the correct general idea, but it looks like lp may have already been transformed to be in the range 0-1 rather than number of days, if that is the case then you don't need to dived by 29. Aga",
+      "thread_id": "thread-afe2ff69a7c9",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-0d18ff6dd2f2",
+      "message_id": "<4BDB66B4.7070208@ucalgary.ca>",
+      "from_name": "Peter Ehlers",
+      "from_email_hash": "ff8508a418e1a7d04a0ac1fdb599069bf027bc56c8344eb7ebfbe65177e59a01",
+      "date": "2010-04-30T17:24:36-06:00",
+      "subject": "[R] Trouble using Ecdf () from the Hmisc library",
+      "subject_clean": "Trouble using Ecdf () from the Hmisc library",
+      "in_reply_to": "<m2xde8c7cb41004301448q1fecf671pd53970c975d54143@mail.gmail.com>",
+      "references": [
+        "<m2xde8c7cb41004301448q1fecf671pd53970c975d54143@mail.gmail.com>"
+      ],
+      "body_plain": "On 2010-04-30 15:48, Prasenjit Kapat wrote:\n> Hello:\n>\n> [Kindly Cc when replying]\n>\n> The question in a nutshell is this: Is there a more robust alternative\n> to Ecdf ()?\n>\n> The details:\n>\n> I've used Ecdf () _a lot_ over the past few years and I have learned\n> to live with its warnings. But I am running short on time and patience\n> now [*] Here is a reproducible example:\n>\n>> library (Hmisc)\n>> x<- read.csv ( file = 'http://www.stat.osu.edu/~pkapat/miscl/Data4Ecdf.csv')\n>> table (x[, c('X1','X2')])\n>      X2\n> X1    A  B\n>    6   0  1\n>    13  7 20\n>    15 13 26\n>    16 13 13\n>    17 10 19\n>    18 12 10\n>\n> As you can see (X1=6,X2=A) is a degenerate cell and (X1=6,X2=B) is\n> \"near\" degenerate! So, errors/warnings are certainly expected while\n> dealing with these, as seen here:\n>\n>> Ecdf (~Y|X2, groups=X1, data=x)\n>> Ecdf (~Y|X2, groups=X1, data=x, label.curves=FALSE)\n>\n> Hence the question:\n> Is there a robust function which can ignore such degenerate (and/or\n> \"near\" degenerate) cells and be able to plot the rest.\n\nI don't know of any robust ecdf function, but I would\nconsider a data manipulation step before the call to Ecdf\nto submit only valid data. (But you've probably already\ntried that and found it too cumbersome.)\n\n  -Peter Ehlers\n\n>\n> Any help is certainly appreciated.\n\n-- \nPeter Ehlers\nUniversity of Calgary",
+      "body_snippet": "On 2010-04-30 15:48, Prasenjit Kapat wrote:\n> Hello:\n>\n> [Kindly Cc when replying]\n>\n> The question in a nutshell is this: Is there a more robust alternative\n> to Ecdf ()?\n>\n> The details:\n>\n> I've us",
+      "thread_id": "thread-0d18ff6dd2f2",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-95266a36d985",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2D@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:28:36-06:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+        "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>"
+      ],
+      "body_plain": "No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Marc Schwartz\n> Sent: Friday, April 30, 2010 5:04 PM\n> To: Sebastian Kruk\n> Cc: r-help at r-project.org; r-help at stat.math.ethz.ch\n> Subject: Re: [R] drop last character in a names'vector\n> \n> \n> On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n> \n> > Hi, i have a vector filled with names:\n> >\n> > [1] Alvaro Adela ...\n> > [25] Beatriz Berta ...\n> > ...\n> > [100000] ...\n> >\n> > I would like to drop last character in every name.\n> >\n> > I use the next program:\n> >\n> > for (i in 1:100000) {\n> >                           largo <- nchar(names[i]-1)\n> >                           names[i] <- substring (names[i],1,largo]\n> >                          }\n> >\n> > Is another and faster way of do it?\n> >\n> > Thanks,\n> >\n> > Sebasti?n.\n> \n> \n> As is the case with R, more than one, but the fastest may be:\n> \n> names <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n> \n> > gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n> [1] \"Alvaro Adel\"  \"Beatriz Bert\"\n> \n> \n> Just to show that it works with entries of varying lengths:\n> \n> > gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n> \n> \n> See ?gsub and ?regex\n> \n> \n> \n> You could use substr(), but the arguments for substring lengths are not\n> vectorized, so the following won't work:\n> \n> > substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n> [1] \"ABC\"    \"ABCD\"   \"ABCDE\"  \"ABCDEF\"\n> \n> \n> You would have to do something like this:\n> \n> > as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"),\n>             function(x) substr(x, 1, nchar(x) - 1)))\n> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n> \n> \n> See ?substr and ?nchar\n> \n> HTH,\n> \n> Marc Schwartz\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ng",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 2,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-95266a36d985",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2D@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:28:36-06:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+        "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>"
+      ],
+      "body_plain": "No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Marc Schwartz\n> Sent: Friday, April 30, 2010 5:04 PM\n> To: Sebastian Kruk\n> Cc: r-help at r-project.org; r-help at stat.math.ethz.ch\n> Subject: Re: [R] drop last character in a names'vector\n> \n> \n> On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n> \n> > Hi, i have a vector filled with names:\n> >\n> > [1] Alvaro Adela ...\n> > [25] Beatriz Berta ...\n> > ...\n> > [100000] ...\n> >\n> > I would like to drop last character in every name.\n> >\n> > I use the next program:\n> >\n> > for (i in 1:100000) {\n> >                           largo <- nchar(names[i]-1)\n> >                           names[i] <- substring (names[i],1,largo]\n> >                          }\n> >\n> > Is another and faster way of do it?\n> >\n> > Thanks,\n> >\n> > Sebasti?n.\n> \n> \n> As is the case with R, more than one, but the fastest may be:\n> \n> names <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n> \n> > gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n> [1] \"Alvaro Adel\"  \"Beatriz Bert\"\n> \n> \n> Just to show that it works with entries of varying lengths:\n> \n> > gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n> \n> \n> See ?gsub and ?regex\n> \n> \n> \n> You could use substr(), but the arguments for substring lengths are not\n> vectorized, so the following won't work:\n> \n> > substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n> [1] \"ABC\"    \"ABCD\"   \"ABCDE\"  \"ABCDEF\"\n> \n> \n> You would have to do something like this:\n> \n> > as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"),\n>             function(x) substr(x, 1, nchar(x) - 1)))\n> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n> \n> \n> See ?substr and ?nchar\n> \n> HTH,\n> \n> Marc Schwartz\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ng",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 2,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-162bfbe1a203",
+      "message_id": "<2FCF8611-BCE8-47F2-984F-F65D3BED450C@me.com>",
+      "from_name": "Marc Schwartz",
+      "from_email_hash": "1c0c26ffdc63f8bcd27163d1af93be76a2c5ad37789d7759468aa44285929e74",
+      "date": "2010-04-30T18:33:34-05:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2D@LP-EXMBVS10.CO.IHC.COM>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+        "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+        "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2D@LP-EXMBVS10.CO.IHC.COM>"
+      ],
+      "body_plain": "Dang it....you are right Greg.  \n\nnames <- c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\")\n\n> substr(names, 1, nchar(names) - 1)\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nand...that is faster than using gsub().\n\n\nThanks for catching that....now it's time for cawfee....\n\nMarc\n\n\nOn Apr 30, 2010, at 6:28 PM, Greg Snow wrote:\n\n> No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n> \n> -- \n> Gregory (Greg) L. Snow Ph.D.\n> Statistical Data Center\n> Intermountain Healthcare\n> greg.snow at imail.org\n> 801.408.8111\n> \n> \n>> -----Original Message-----\n>> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n>> project.org] On Behalf Of Marc Schwartz\n>> Sent: Friday, April 30, 2010 5:04 PM\n>> To: Sebastian Kruk\n>> Cc: r-help at r-project.org; r-help at stat.math.ethz.ch\n>> Subject: Re: [R] drop last character in a names'vector\n>> \n>> \n>> On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n>> \n>>> Hi, i have a vector filled with names:\n>>> \n>>> [1] Alvaro Adela ...\n>>> [25] Beatriz Berta ...\n>>> ...\n>>> [100000] ...\n>>> \n>>> I would like to drop last character in every name.\n>>> \n>>> I use the next program:\n>>> \n>>> for (i in 1:100000) {\n>>>                          largo <- nchar(names[i]-1)\n>>>                          names[i] <- substring (names[i],1,largo]\n>>>                         }\n>>> \n>>> Is another and faster way of do it?\n>>> \n>>> Thanks,\n>>> \n>>> Sebasti?n.\n>> \n>> \n>> As is the case with R, more than one, but the fastest may be:\n>> \n>> names <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n>> \n>>> gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n>> [1] \"Alvaro Adel\"  \"Beatriz Bert\"\n>> \n>> \n>> Just to show that it works with entries of varying lengths:\n>> \n>>> gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n>> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n>> \n>> \n>> See ?gsub and ?regex\n>> \n>> \n>> \n>> You could use substr(), but the arguments for substring lengths are not\n>> vectorized, so the following won't work:\n>> \n>>> substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n>> [1] \"ABC\"    \"ABCD\"   \"ABCDE\"  \"ABCDEF\"\n>> \n>> \n>> You would have to do something like this:\n>> \n>>> as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"),\n>>            function(x) substr(x, 1, nchar(x) - 1)))\n>> [1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n>> \n>> \n>> See ?substr and ?nchar\n>> \n>> HTH,\n>> \n>> Marc Schwartz",
+      "body_snippet": "Dang it....you are right Greg.  \n\nnames <- c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\")\n\n> substr(names, 1, nchar(names) - 1)\n[1] \"AB\"    \"ABC\"   \"ABCD\"  \"ABCDE\"\n\n\nand...that is faster than using gsub().\n\n\nTha",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 3,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-0fa5fb5f36e8",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE31@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2010-04-30T17:41:35-06:00",
+      "subject": "[R] Curve Fitting/Regression with Multiple Observations",
+      "subject_clean": "Curve Fitting/Regression with Multiple Observations",
+      "in_reply_to": "<j2w31f9eb41004301624i15a57348yfdcb2fcd67a4352d@mail.gmail.com>",
+      "references": [
+        "<j2q31f9eb41004271030qf6087976r5c34807c3c53528b@mail.gmail.com>",
+        "<m2h971536df1004271135nb47360c7s719fdffc66ac1db4@mail.gmail.com>",
+        "<w2p31f9eb41004271207ve73cb49ckca791fa8d5afdcbb@mail.gmail.com>",
+        "<n2k971536df1004271246hf05bc68vcdc04749cbbdb320@mail.gmail.com>",
+        "<j2k31f9eb41004271332h7a1e6d66xed162308175638fc@mail.gmail.com>",
+        "<018401cae814$d5c41d70$814c5850$@gmail.com>",
+        "<x2o31f9eb41004300309v343bea9fk4d57277a7cb7c268@mail.gmail.com>",
+        "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFDFF@LP-EXMBVS10.CO.IHC.COM>",
+        "<j2w31f9eb41004301624i15a57348yfdcb2fcd67a4352d@mail.gmail.com>"
+      ],
+      "body_plain": "I did not understand enough of the rest of your question to give any better response than others have given.\n\nLooking back at your previous posts, there is one suggestion that I can make that may help.  You can use the approx or approxfun functions to approximate an inverse, just generate a bunch of x,y pairs from your function, then feed them to approx while switching x and y.  Not an exact inverse, but if you give it enough points then it will be close.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: Kyeong Soo (Joseph) Kim [mailto:kyeongsoo.kim at gmail.com]\n> Sent: Friday, April 30, 2010 5:24 PM\n> To: Greg Snow\n> Cc: r-help at r-project.org\n> Subject: Re: [R] Curve Fitting/Regression with Multiple Observations\n> \n> I have already learned a lot from the list, both technical and not,\n> and cannot thank enough for those valuable suggestions. In fact, as\n> said in my previous posts, I got really critical help and advices,\n> which really addresses the issues I have.\n> \n> By the way, there is one point or two in your post I agree on, but I\n> am not sure why you just pointed out side issues (by snipping a part\n> of my saying) without touching the main topic of this thread at all. I\n> can go on but won't because arguing for the sake of argument is of no\n> value to anyone in this thread.\n> \n> It would have been better if you could have focused on the topic and\n> provided some technical and practical information which I could learn\n> from and be very thankful for.\n> \n> Regards,\n> Joseph\n> \n> On Fri, Apr 30, 2010 at 11:35 PM, Greg Snow <Greg.Snow at imail.org>\n> wrote:\n> >\n> >> -----Original Message-----\n> >> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> >> project.org] On Behalf Of Kyeong Soo (Joseph) Kim\n> >> Sent: Friday, April 30, 2010 4:10 AM\n> >> To: kMan\n> >> Cc: r-help at r-project.org\n> >> Subject: Re: [R] Curve Fitting/Regression with Multiple Observations\n> >\n> > [snip]\n> >\n> >> By the way, I wonder why most of the responses I've received from\n> this\n> >> list are so cynical (or skeptical?) and in some sense done in a\n> quite\n> >> arrogant way. It's very hard to imagine that one would receive such\n> >> responses in my own areas of computer simulation and optical\n> >> communications/networking. If a newbie asks a question to the list\n> not\n> >> making much sense or another FAQ, that is usually ignored (i.e., no\n> >> response) because all we are too busy to deal with that. Sometimes,\n> >> though, a kind soul (like Gabor) takes his/her own valuable time and\n> >> doesn't mind explaining all the details from simple basics.\n> >\n> > In my experience with this list, and others, the perceived level of\n> cynical/skeptical/arrogant answers has more to do with the reader than\n> with the writer. ?If you want to be offended, you will find things to\n> be offended about even when none was intended. ?If you look for help\n> and useful responses (follow the posting guide) and are thankful for\n> what you learn, you will learn more and be bothered less.\n> >\n> > R-help is a mixture of different levels and cultures. ?In framing\n> responses it is hard to know what the other person may find offensive\n> (I was once yelled at and chewed out quite thoroughly for truthfully\n> answering \"no\" when asked if I drink coffee).\n> >\n> > Most responders on this list (actually I would say all, but there\n> might be an exception that I have not noticed) are trying to be\n> helpful, there is just a large variability in the tones of the\n> responses.\n> >\n> > --\n> > Gregory (Greg) L. Snow Ph.D.\n> > Statistical Data Center\n> > Intermountain Healthcare\n> > greg.snow at imail.org\n> > 801.408.8111\n> >\n> >\n> >\n> >",
+      "body_snippet": "I did not understand enough of the rest of your question to give any better response than others have given.\n\nLooking back at your previous posts, there is one suggestion that I can make that may help",
+      "thread_id": "thread-0fa5fb5f36e8",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-31d47537f072",
+      "message_id": "<s2q971536df1004301642r4cc139c6w660890f46293ac40@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2010-04-30T19:42:19-04:00",
+      "subject": "[R] QIC for GEE",
+      "subject_clean": "QIC for GEE",
+      "in_reply_to": "<g2l6050b5d21004301534g3a0728abg2a1a7a73942376bc@mail.gmail.com>",
+      "references": [
+        "<g2l6050b5d21004301534g3a0728abg2a1a7a73942376bc@mail.gmail.com>"
+      ],
+      "body_plain": "The yags package has QIC.   Try\n\nlibrary(yags)\nexample(yags)\nSPRUJ\n\n\nOn Fri, Apr 30, 2010 at 6:34 PM, Sachi Ito <s.ito.tcu at gmail.com> wrote:\n> Hi,\n>\n> I'm using 'geepack' to run Generalized Estimating Equations. ?I'm aware that\n> I can use anova to compare two models, but would it be possible to test QIC\n> on R? ?It seems that there were similar questions a couple of years ago, but\n> the question has not been answered yet.\n>\n> I'd appreciate if someone could show me the code!\n>\n> Thank you,\n> Sachi\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "The yags package has QIC.   Try\n\nlibrary(yags)\nexample(yags)\nSPRUJ\n\n\nOn Fri, Apr 30, 2010 at 6:34 PM, Sachi Ito <s.ito.tcu at gmail.com> wrote:\n> Hi,\n>\n> I'm using 'geepack' to run Generalized Estimat",
+      "thread_id": "thread-cf5c9b94b934",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-01a3221a46d7",
+      "message_id": "<002d01cae8c0$f94c4310$04d01f0a@gne.windows.gene.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2010-04-30T16:58:04-07:00",
+      "subject": "[R] Flattening and unflattening symmetric matrices",
+      "subject_clean": "Flattening and unflattening symmetric matrices",
+      "in_reply_to": "<4BDB645A.4050506@ucalgary.ca>",
+      "references": [
+        "<x2rf3335761004301426s233ba1dbl7ff6460a7465510b@mail.gmail.com>",
+        "<4BDB645A.4050506@ucalgary.ca>"
+      ],
+      "body_plain": "Note the \"diag\" argument of upper.tri(). Thus:\n\nx <- A[upper.tri(A,diag=TRUE)]\n\nThen to recreate A from x:\n\n  A <- matrix(0, 4, 4)\n  A[upper.tri(A,dia=TRUE)] <- X\n  A <- A+t(A)\n  diag(A) <- diag(A)/2\n\n(I grant that the division may cause slight floating point precision error)\n\nBert Gunter\nGenentech Nonclinical Statistics\n\n-----Original Message-----\nFrom: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On\nBehalf Of Peter Ehlers\nSent: Friday, April 30, 2010 4:15 PM\nTo: Nicholas Andrews\nCc: r-help at r-project.org\nSubject: Re: [R] Flattening and unflattening symmetric matrices\n\nOn 2010-04-30 15:26, Nicholas Andrews wrote:\n> Here's an easy question: I'd like to convert a symmetric matrix to a\n> vector composed of the upper.tri() part of it plus the diagonal, and\n> convert it back again.  What's the best way to achieve this?  I'm\n> wondering if there are some built in functions to do this easily.  I\n> can encode fine:\n>\n> v<- c(diag(A),A[upper.tri(A)])\n>\n> but I don't see an easy way to recover A from v without loops.  Any tips?\n\nTo (re)create a symmetric matrix, use A + t(A):\nIf vd is diag(A) part of v and vu is the rest of v, and\nlet's take A to be 4-by-4, then\n\n  A <- matrix(0, 4, 4)\n  A[upper.tri(A)] <- vu\n  A <- A + t(A)\n  diag(A) <- vd\n  A\n\n  -Peter Ehlers\n\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\nhttp://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n>\n\n-- \nPeter Ehlers\nUniversity of Calgary\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Note the \"diag\" argument of upper.tri(). Thus:\n\nx <- A[upper.tri(A,diag=TRUE)]\n\nThen to recreate A from x:\n\n  A <- matrix(0, 4, 4)\n  A[upper.tri(A,dia=TRUE)] <- X\n  A <- A+t(A)\n  diag(A) <- diag(A)/2\n",
+      "thread_id": "thread-64c4894dedc3",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-856b9f737909",
+      "message_id": "<t2ta7961d101004301743x5c2f748fg4845de7bb0b5dacb@mail.gmail.com>",
+      "from_name": "Sebastian Kruk",
+      "from_email_hash": "0b28094931e4264e59e6c3689cc574e54b6c6dc4a437db94ede95b7bbfd835fb",
+      "date": "2010-04-30T21:43:39-03:00",
+      "subject": "[R] drop last character in a names'vector",
+      "subject_clean": "drop last character in a names'vector",
+      "in_reply_to": "<2FCF8611-BCE8-47F2-984F-F65D3BED450C@me.com>",
+      "references": [
+        "<g2ha7961d101004301544h3953451bp72c01672322c200b@mail.gmail.com>",
+        "<989728C1-1E5C-4CEC-96F0-A96833A41A2D@me.com>",
+        "<B37C0A15B8FB3C468B5BC7EBC7DA14CC6335CCFE2D@LP-EXMBVS10.CO.IHC.COM>",
+        "<2FCF8611-BCE8-47F2-984F-F65D3BED450C@me.com>"
+      ],
+      "body_plain": "Sorted!\n\nThanks everybody!\n\n2010/4/30 Marc Schwartz <marc_schwartz at me.com>:\n> Dang it....you are right Greg.\n>\n> names <- c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\")\n>\n>> substr(names, 1, nchar(names) - 1)\n> [1] \"AB\" ? ?\"ABC\" ? \"ABCD\" ?\"ABCDE\"\n>\n>\n> and...that is faster than using gsub().\n>\n>\n> Thanks for catching that....now it's time for cawfee....\n>\n> Marc\n>\n>\n> On Apr 30, 2010, at 6:28 PM, Greg Snow wrote:\n>\n>> No, substr is vectorized, you just have a typo, you are using a different vector for nchar than you are subsetting.\n>>\n>> --\n>> Gregory (Greg) L. Snow Ph.D.\n>> Statistical Data Center\n>> Intermountain Healthcare\n>> greg.snow at imail.org\n>> 801.408.8111\n>>\n>>\n>>> -----Original Message-----\n>>> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n>>> project.org] On Behalf Of Marc Schwartz\n>>> Sent: Friday, April 30, 2010 5:04 PM\n>>> To: Sebastian Kruk\n>>> Cc: r-help at r-project.org; r-help at stat.math.ethz.ch\n>>> Subject: Re: [R] drop last character in a names'vector\n>>>\n>>>\n>>> On Apr 30, 2010, at 5:44 PM, Sebastian Kruk wrote:\n>>>\n>>>> Hi, i have a vector filled with names:\n>>>>\n>>>> [1] Alvaro Adela ...\n>>>> [25] Beatriz Berta ...\n>>>> ...\n>>>> [100000] ...\n>>>>\n>>>> I would like to drop last character in every name.\n>>>>\n>>>> I use the next program:\n>>>>\n>>>> for (i in 1:100000) {\n>>>> ? ? ? ? ? ? ? ? ? ? ? ? ?largo <- nchar(names[i]-1)\n>>>> ? ? ? ? ? ? ? ? ? ? ? ? ?names[i] <- substring (names[i],1,largo]\n>>>> ? ? ? ? ? ? ? ? ? ? ? ? }\n>>>>\n>>>> Is another and faster way of do it?\n>>>>\n>>>> Thanks,\n>>>>\n>>>> Sebasti?n.\n>>>\n>>>\n>>> As is the case with R, more than one, but the fastest may be:\n>>>\n>>> names <- c(\"Alvaro Adela\", \"Beatriz Berta\")\n>>>\n>>>> gsub(\"^(.*).{1}$\", \"\\\\1\", names)\n>>> [1] \"Alvaro Adel\" ?\"Beatriz Bert\"\n>>>\n>>>\n>>> Just to show that it works with entries of varying lengths:\n>>>\n>>>> gsub(\"^(.*).{1}$\", \"\\\\1\", c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"))\n>>> [1] \"AB\" ? ?\"ABC\" ? \"ABCD\" ?\"ABCDE\"\n>>>\n>>>\n>>> See ?gsub and ?regex\n>>>\n>>>\n>>>\n>>> You could use substr(), but the arguments for substring lengths are not\n>>> vectorized, so the following won't work:\n>>>\n>>>> substr(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"), 1, nchar(names) - 1)\n>>> [1] \"ABC\" ? ?\"ABCD\" ? \"ABCDE\" ?\"ABCDEF\"\n>>>\n>>>\n>>> You would have to do something like this:\n>>>\n>>>> as.vector(sapply(c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\"),\n>>> ? ? ? ? ? ?function(x) substr(x, 1, nchar(x) - 1)))\n>>> [1] \"AB\" ? ?\"ABC\" ? \"ABCD\" ?\"ABCDE\"\n>>>\n>>>\n>>> See ?substr and ?nchar\n>>>\n>>> HTH,\n>>>\n>>> Marc Schwartz\n>\n>",
+      "body_snippet": "Sorted!\n\nThanks everybody!\n\n2010/4/30 Marc Schwartz <marc_schwartz at me.com>:\n> Dang it....you are right Greg.\n>\n> names <- c(\"ABC\", \"ABCD\", \"ABCDE\", \"ABCDEF\")\n>\n>> substr(names, 1, nchar(names) - 1)",
+      "thread_id": "thread-9ebebcb87cc1",
+      "thread_depth": 4,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-21a8309c8d73",
+      "message_id": "<s2n771b899a1004301757w85f54b5ah629d2ca464bc4993@mail.gmail.com>",
+      "from_name": "Mandy Xu",
+      "from_email_hash": "b73da8daa6c1f8889444f1797a83b272cf6b5389f0c1cb0adf42e759f8697a50",
+      "date": "2010-04-30T20:57:44-04:00",
+      "subject": "[R] how to set chart output size in rgl (surface3d)?",
+      "subject_clean": "how to set chart output size in rgl (surface3d)?",
+      "in_reply_to": "<4BD64C6A.1020904@gmail.com>",
+      "references": [
+        "<o2q771b899a1004261852sb97b35e5ufc224ed13bb5e065@mail.gmail.com>",
+        "<4BD64C6A.1020904@gmail.com>"
+      ],
+      "body_plain": "i tried using your suggestion but still can't manipulate the dimensions such\nthat the chart fills the whole window. i've attached the picture i get when\ni tried your suggested method. as you can see, there's still a lot of white\nspace around it.\n\nis there anyway i can:\na) output to png ONLY the 3d chart, NOT the a screenshot of the whole\nwindow? or\nb) set the dimensions of the 3d chart so it COMPLETELY fills the window such\nthat there won't be any white space? or\nc) anyway to crop pictures in R?\n\nthanks again!! i've racked my brains trying to do this for over a week now,\nand still no solution...\n\n\nOn Mon, Apr 26, 2010 at 10:31 PM, Duncan Murdoch\n<murdoch.duncan at gmail.com>wrote:\n\n> Mandy Xu wrote:\n>\n>> Hi R users,\n>>\n>> Does anyone know how to change the size of 3d charts? I'm using surface3d\n>> in\n>> rgl package, opening a new window each time to display the chart. I want\n>> it\n>> so that the chart fills the whole window, because when I output it to png,\n>> I\n>> don't want all the white space around the chart (right now, i'm getting\n>> this\n>> white \"border\" around the chart because the chart is smaller than the\n>> window).\n>>\n>> I know how to set the size of the window, but not the chart. When I make\n>> the\n>> window smaller, the chart automatically resizes so it gets even smaller.\n>> Is\n>> there a way to set the chart output size so it fills all (or most) of the\n>> window?\n>>\n>\n> Open a window, resize it to the look you want (the right button resizes),\n> then save the par3d(\"zoom\") value into r3dDefaults$zoom.  That will be the\n> default zoom for new windows you open using open3d.  (You may also want to\n> save par3d(\"userMatrix\") into r3dDefaults$userMatrix, if you want to change\n> the orientation of the default view.)\n>\n> Duncan Murdoch\n>\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: vol surface.png\nType: image/png\nSize: 19392 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/e8bbeba4/attachment.png>",
+      "body_snippet": "i tried using your suggestion but still can't manipulate the dimensions such\nthat the chart fills the whole window. i've attached the picture i get when\ni tried your suggested method. as you can see, ",
+      "thread_id": "thread-21a8309c8d73",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-5ce702cf5e26",
+      "message_id": "<j2r771b899a1004301801r263318dpb23f171acab1d2eb@mail.gmail.com>",
+      "from_name": "Mandy Xu",
+      "from_email_hash": "e56898b8b45bc90d2fef31de6122fc9c0bb598167a96e586b97daafd325ce097",
+      "date": "2010-04-30T21:01:44-04:00",
+      "subject": "[R] how to set chart output size in rgl (surface3d)?",
+      "subject_clean": "how to set chart output size in rgl (surface3d)?",
+      "in_reply_to": "<4BD64C6A.1020904@gmail.com>",
+      "references": [
+        "<o2q771b899a1004261852sb97b35e5ufc224ed13bb5e065@mail.gmail.com>",
+        "<4BD64C6A.1020904@gmail.com>"
+      ],
+      "body_plain": "i tried using your suggestion but still can't manipulate the dimensions such\nthat the chart fills the whole window. i've attached the picture i get when\ni tried your suggested method. as you can see, there's still a lot of white\nspace around it.\n\nis there anyway i can:\na) output to png ONLY the 3d chart, NOT the a screenshot of the whole\nwindow? or\nb) set the dimensions of the 3d chart so it COMPLETELY fills the window such\nthat there won't be any white space? or\nc) anyway to crop pictures in R?\n\nthanks again!! i've racked my brains trying to do this for over a week now,\nand still no solution...\n\nOn Mon, Apr 26, 2010 at 10:31 PM, Duncan Murdoch\n<murdoch.duncan at gmail.com>wrote:\n\n> Mandy Xu wrote:\n>\n>> Hi R users,\n>>\n>> Does anyone know how to change the size of 3d charts? I'm using surface3d\n>> in\n>> rgl package, opening a new window each time to display the chart. I want\n>> it\n>> so that the chart fills the whole window, because when I output it to png,\n>> I\n>> don't want all the white space around the chart (right now, i'm getting\n>> this\n>> white \"border\" around the chart because the chart is smaller than the\n>> window).\n>>\n>> I know how to set the size of the window, but not the chart. When I make\n>> the\n>> window smaller, the chart automatically resizes so it gets even smaller.\n>> Is\n>> there a way to set the chart output size so it fills all (or most) of the\n>> window?\n>>\n>\n> Open a window, resize it to the look you want (the right button resizes),\n> then save the par3d(\"zoom\") value into r3dDefaults$zoom.  That will be the\n> default zoom for new windows you open using open3d.  (You may also want to\n> save par3d(\"userMatrix\") into r3dDefaults$userMatrix, if you want to change\n> the orientation of the default view.)\n>\n> Duncan Murdoch\n>\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: vol surface.png\nType: image/png\nSize: 19392 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/26321407/attachment.png>",
+      "body_snippet": "i tried using your suggestion but still can't manipulate the dimensions such\nthat the chart fills the whole window. i've attached the picture i get when\ni tried your suggested method. as you can see, ",
+      "thread_id": "thread-5ce702cf5e26",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-7b8b3babf6e5",
+      "message_id": "<v2g3c29f3e21004302013l2f0b6991v811b53fb666950a4@mail.gmail.com>",
+      "from_name": "Joshua Wiley",
+      "from_email_hash": "c7f07c588294f110fffa28fa75e197f5a9d40a76afe0853fbdeb1992dab12a4a",
+      "date": "2010-04-30T20:13:58-07:00",
+      "subject": "[R] access http directories requiring authentication across platforms",
+      "subject_clean": "access http directories requiring authentication across platforms",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello R users,\n\nI am trying to read files from a website that requires authentication.\n I have been working with url() to to open a connection in Windows.\n\nFor example:\n\nsetInternet2(TRUE)\ncon <- url(description=\"http://myusername:mypassword at www.somesite.com/myfile.txt\",\nopen=\"r\")\nopen(con)\nread.table(con, sep=\"\\t\")\n\nThis works like a charm.  My question is does this work across\nplatforms, or only on Windows?  The reason I ask is this quote form\nthe ?url documentation\n\n     Note that 'https://' connections are only supported if\n     '--internet2' or 'setInternet2(TRUE)' was used (to make use of\n     Internet Explorer internals), and then only if the certificate is\n     considered to be valid.  With that option only, the\n     'http://user:pass at site' notation for sites requiring\n     authentication is also accepted.\n\nI am sending some scripts to people who use Mac OS X, and (I am\nassuming) they will not have Internet Explorer installed.  If it does\nnot work, is there a more general way?  At least for now, the website\nis not using encryption (regular http) and is using basic\nauthentication controlled via .htaccess and .htpasswd files.\n\nThanks,\n\nJosh\n\n\n--\nJoshua Wiley\nSenior in Psychology\nUniversity of California, Riverside\nhttp://www.joshuawiley.com/",
+      "body_snippet": "Hello R users,\n\nI am trying to read files from a website that requires authentication.\n I have been working with url() to to open a connection in Windows.\n\nFor example:\n\nsetInternet2(TRUE)\ncon <- url(",
+      "thread_id": "thread-7b8b3babf6e5",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-b4faedfff0ae",
+      "message_id": "<4BDBA166.8080505@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2010-04-30T23:35:02-04:00",
+      "subject": "[R] how to set chart output size in rgl (surface3d)?",
+      "subject_clean": "how to set chart output size in rgl (surface3d)?",
+      "in_reply_to": "<j2r771b899a1004301801r263318dpb23f171acab1d2eb@mail.gmail.com>",
+      "references": [
+        "<o2q771b899a1004261852sb97b35e5ufc224ed13bb5e065@mail.gmail.com>",
+        "<4BD64C6A.1020904@gmail.com>",
+        "<j2r771b899a1004301801r263318dpb23f171acab1d2eb@mail.gmail.com>"
+      ],
+      "body_plain": "On 30/04/2010 9:01 PM, Mandy Xu wrote:\n> i tried using your suggestion but still can't manipulate the dimensions such\n> that the chart fills the whole window. i've attached the picture i get when\n> i tried your suggested method. as you can see, there's still a lot of white\n> space around it.\n>\n> is there anyway i can:\n> a) output to png ONLY the 3d chart, NOT the a screenshot of the whole\n> window? or\n>   \n\nThe rgl.snapshot function will only save the whole window.\n> b) set the dimensions of the 3d chart so it COMPLETELY fills the window such\n> that there won't be any white space? or\n>   \n\nYou can zoom in to eliminate the white space, but since the outline of \nyour figure is not rectangular, you'll lose things like the axes and \nedges of your figure.\n> c) anyway to crop pictures in R?\n>   \n\nR isn't an image editor, but I imagine you could convert an image into \nan array, select a subset of the array, and then convert back to an \nimage.  But you'd be better off cropping in an image editor.\n\nDuncan Murdoch\n> thanks again!! i've racked my brains trying to do this for over a week now,\n> and still no solution...\n>\n> On Mon, Apr 26, 2010 at 10:31 PM, Duncan Murdoch\n> <murdoch.duncan at gmail.com>wrote:\n>\n>   \n>> Mandy Xu wrote:\n>>\n>>     \n>>> Hi R users,\n>>>\n>>> Does anyone know how to change the size of 3d charts? I'm using surface3d\n>>> in\n>>> rgl package, opening a new window each time to display the chart. I want\n>>> it\n>>> so that the chart fills the whole window, because when I output it to png,\n>>> I\n>>> don't want all the white space around the chart (right now, i'm getting\n>>> this\n>>> white \"border\" around the chart because the chart is smaller than the\n>>> window).\n>>>\n>>> I know how to set the size of the window, but not the chart. When I make\n>>> the\n>>> window smaller, the chart automatically resizes so it gets even smaller.\n>>> Is\n>>> there a way to set the chart output size so it fills all (or most) of the\n>>> window?\n>>>\n>>>       \n>> Open a window, resize it to the look you want (the right button resizes),\n>> then save the par3d(\"zoom\") value into r3dDefaults$zoom.  That will be the\n>> default zoom for new windows you open using open3d.  (You may also want to\n>> save par3d(\"userMatrix\") into r3dDefaults$userMatrix, if you want to change\n>> the orientation of the default view.)\n>>\n>> Duncan Murdoch\n>>\n>>     \n>\n>",
+      "body_snippet": "On 30/04/2010 9:01 PM, Mandy Xu wrote:\n> i tried using your suggestion but still can't manipulate the dimensions such\n> that the chart fills the whole window. i've attached the picture i get when\n> i ",
+      "thread_id": "thread-5ce702cf5e26",
+      "thread_depth": 1,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-5d06c348d89b",
+      "message_id": "<4BDBA192.80807@vanderbilt.edu>",
+      "from_name": "Frank E Harrell Jr",
+      "from_email_hash": "416ca93053912cfc2e0362d90740df9d9f64f8e27fd2a2c6da59687e4401fc59",
+      "date": "2010-04-30T22:35:46-05:00",
+      "subject": "[R] What is the best way to have \"R\" output tables in an MS Word format?",
+      "subject_clean": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "in_reply_to": "<CC9A5F00-8542-42E4-974A-32B2FF2F8ED7@me.com>",
+      "references": [
+        "<r2l748bdf0f1004301513x689900deq83ec283063c1c7b1@mail.gmail.com>",
+        "<CC9A5F00-8542-42E4-974A-32B2FF2F8ED7@me.com>"
+      ],
+      "body_plain": "On 04/30/2010 05:45 PM, Marc Schwartz wrote:\n> On Apr 30, 2010, at 5:13 PM, Max Gunther wrote:\n>\n>> Dear \"R\" list,\n>>\n>> Our statisticians usually give us results back in a PDF format. I would like\n>> to be able to copy and past tables from \"R\" output directly into a Microsoft\n>> Word table since this will save us tons of time, be more accurate to\n>> minimize human copying errors and help us update data in our papers more\n>> easily.\n>>\n>> Do people have suggestions for the best way to do this?\n>>\n>> I am a novice to \"R\" but I do work with a couple of\n>> very knowledgeable statisticians who do most of the heavy statistical\n>> lifting for our research group.\n>>\n>> Many thanks,\n>> Max\n>\n> Max,\n>\n> I would urge you to consider using Sweave. It enables the use of R and LaTeX to facilitate reproducible research, which seems to be your goal here.\n>\n> You might want to talk to your campus neighbor Frank Harrell, who has extensive information on the Vanderbilt Biostatistics department web site on this:\n>\n\nAnd note Max that we have an R clinic every Thursday at 2pm.  LaTeX and \nSweave are frequently discussed during the clinic.\n\nFrank\n\n>    http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport\n>\n> Frank also has some pointers for converting between various formats:\n>\n>    http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/SweaveConvert\n>\n> HTH,\n>\n> Marc Schwartz\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n-- \nFrank E Harrell Jr   Professor and Chairman        School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
+      "body_snippet": "On 04/30/2010 05:45 PM, Marc Schwartz wrote:\n> On Apr 30, 2010, at 5:13 PM, Max Gunther wrote:\n>\n>> Dear \"R\" list,\n>>\n>> Our statisticians usually give us results back in a PDF format. I would like\n>>",
+      "thread_id": "thread-0adf4d91c144",
+      "thread_depth": 2,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-f2dd8c182a6d",
+      "message_id": "<20100501044049.GA26389@sfu.ca>",
+      "from_name": "Sigal Blay",
+      "from_email_hash": "4ecf5c103cd4994edeeda757e107364d8c2e086628bd9431fabd0ca8f1caa31f",
+      "date": "2010-04-30T21:40:49-07:00",
+      "subject": "[R] Resize Graphics Window",
+      "subject_clean": "Resize Graphics Window",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Need way to resize an existing graphics window.\nThis should be applicable across platforms (as part of a package).\nContext: function1() draws main plot (I'm using grid), function2() adds smaller plot \nabove main plot, but this one can sometimes overflow the original graphics window \narea.\n\nThanks,\nSigal",
+      "body_snippet": "Need way to resize an existing graphics window.\nThis should be applicable across platforms (as part of a package).\nContext: function1() draws main plot (I'm using grid), function2() adds smaller plot ",
+      "thread_id": "thread-f2dd8c182a6d",
+      "thread_depth": 0,
+      "month": "2010-04"
+    },
+    {
+      "id": "msg-1022639007a6",
+      "message_id": "<826553.64313.qm@web113319.mail.gq1.yahoo.com>",
+      "from_name": "Shant Ch",
+      "from_email_hash": "9d04634dd4e6daa1ba64c00ec8bed60f893e39ec5cf0750c5b791b4191824c34",
+      "date": "2010-04-30T22:09:24-07:00",
+      "subject": "[R] Solving equation",
+      "subject_clean": "Solving equation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/46507ba1/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100430/46507ba1/attachment.pl>",
+      "thread_id": "thread-1022639007a6",
+      "thread_depth": 0,
+      "month": "2010-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-2e7946326b50",
+      "subject": "installing R2.11 on RHEL5.3",
+      "message_count": 1,
+      "participants": [
+        "V N"
+      ],
+      "started": "2010-04-30T15:15:49-07:00",
+      "last_reply": "2010-04-30T15:15:49-07:00",
+      "root_message_id": "msg-2e7946326b50"
+    },
+    {
+      "id": "thread-b92dae7abd4a",
+      "subject": "Curve Fitting/Regression with Multiple Observations",
+      "message_count": 1,
+      "participants": [
+        "Greg Snow"
+      ],
+      "started": "2010-04-30T16:35:18-06:00",
+      "last_reply": "2010-04-30T16:35:18-06:00",
+      "root_message_id": "msg-b92dae7abd4a"
+    },
+    {
+      "id": "thread-d2bdf5eb82a7",
+      "subject": "as.environment Error",
+      "message_count": 2,
+      "participants": [
+        "Greg Snow",
+        "William Dunlap"
+      ],
+      "started": "2010-04-30T17:04:16-06:00",
+      "last_reply": "2010-04-30T16:19:08-07:00",
+      "root_message_id": "msg-d2bdf5eb82a7"
+    },
+    {
+      "id": "thread-0adf4d91c144",
+      "subject": "What is the best way to have \"R\" output tables in an MS Word format?",
+      "message_count": 8,
+      "participants": [
+        "Barry Rowlingson",
+        "Bert Gunter",
+        "David Winsemius",
+        "Frank E Harrell Jr",
+        "Greg Snow",
+        "Marc Schwartz",
+        "Max Gunther"
+      ],
+      "started": "2010-04-30T17:13:06-05:00",
+      "last_reply": "2010-04-30T22:35:46-05:00",
+      "root_message_id": "msg-0adf4d91c144"
+    },
+    {
+      "id": "thread-64c4894dedc3",
+      "subject": "Flattening and unflattening symmetric matrices",
+      "message_count": 2,
+      "participants": [
+        "Bert Gunter",
+        "Peter Ehlers"
+      ],
+      "started": "2010-04-30T17:14:34-06:00",
+      "last_reply": "2010-04-30T16:58:04-07:00",
+      "root_message_id": "msg-64c4894dedc3"
+    },
+    {
+      "id": "thread-acf49b8ed509",
+      "subject": "understanding behavior of \"merge\"",
+      "message_count": 1,
+      "participants": [
+        "Greg Snow"
+      ],
+      "started": "2010-04-30T17:19:43-06:00",
+      "last_reply": "2010-04-30T17:19:43-06:00",
+      "root_message_id": "msg-acf49b8ed509"
+    },
+    {
+      "id": "thread-afe2ff69a7c9",
+      "subject": "Periodic regression - lunar percent cover",
+      "message_count": 1,
+      "participants": [
+        "Greg Snow"
+      ],
+      "started": "2010-04-30T17:24:29-06:00",
+      "last_reply": "2010-04-30T17:24:29-06:00",
+      "root_message_id": "msg-afe2ff69a7c9"
+    },
+    {
+      "id": "thread-0d18ff6dd2f2",
+      "subject": "Trouble using Ecdf () from the Hmisc library",
+      "message_count": 1,
+      "participants": [
+        "Peter Ehlers"
+      ],
+      "started": "2010-04-30T17:24:36-06:00",
+      "last_reply": "2010-04-30T17:24:36-06:00",
+      "root_message_id": "msg-0d18ff6dd2f2"
+    },
+    {
+      "id": "thread-cf5c9b94b934",
+      "subject": "QIC for GEE",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "Sachi Ito"
+      ],
+      "started": "2010-04-30T17:34:50-05:00",
+      "last_reply": "2010-04-30T19:42:19-04:00",
+      "root_message_id": "msg-cf5c9b94b934"
+    },
+    {
+      "id": "thread-77cf05de5e93",
+      "subject": "confused on model.frame evaluation",
+      "message_count": 1,
+      "participants": [
+        "Marc Schwartz"
+      ],
+      "started": "2010-04-30T17:38:50-05:00",
+      "last_reply": "2010-04-30T17:38:50-05:00",
+      "root_message_id": "msg-77cf05de5e93"
+    },
+    {
+      "id": "thread-0fa5fb5f36e8",
+      "subject": "Curve Fitting/Regression with Multiple Observations",
+      "message_count": 1,
+      "participants": [
+        "Greg Snow"
+      ],
+      "started": "2010-04-30T17:41:35-06:00",
+      "last_reply": "2010-04-30T17:41:35-06:00",
+      "root_message_id": "msg-0fa5fb5f36e8"
+    },
+    {
+      "id": "thread-d9b06a64180f",
+      "subject": "Curve Fitting",
+      "message_count": 1,
+      "participants": [
+        "Gabor Grothendieck"
+      ],
+      "started": "2010-04-30T18:06:47-04:00",
+      "last_reply": "2010-04-30T18:06:47-04:00",
+      "root_message_id": "msg-d9b06a64180f"
+    },
+    {
+      "id": "thread-a0e1d6907b6e",
+      "subject": "Flattening and unflattening symmetric matrices",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2010-04-30T18:47:06-04:00",
+      "last_reply": "2010-04-30T18:47:06-04:00",
+      "root_message_id": "msg-a0e1d6907b6e"
+    },
+    {
+      "id": "thread-9ebebcb87cc1",
+      "subject": "drop last character in a names'vector",
+      "message_count": 9,
+      "participants": [
+        "Greg Snow",
+        "Marc Schwartz",
+        "Sebastian Kruk"
+      ],
+      "started": "2010-04-30T19:44:44-03:00",
+      "last_reply": "2010-04-30T21:43:39-03:00",
+      "root_message_id": "msg-9ebebcb87cc1"
+    },
+    {
+      "id": "thread-9ebebcb87cc1",
+      "subject": "drop last character in a names'vector",
+      "message_count": 1,
+      "participants": [
+        "Sebastian Kruk"
+      ],
+      "started": "2010-04-30T19:44:44-03:00",
+      "last_reply": "2010-04-30T19:44:44-03:00",
+      "root_message_id": "msg-9ebebcb87cc1"
+    },
+    {
+      "id": "thread-7b8b3babf6e5",
+      "subject": "access http directories requiring authentication across platforms",
+      "message_count": 1,
+      "participants": [
+        "Joshua Wiley"
+      ],
+      "started": "2010-04-30T20:13:58-07:00",
+      "last_reply": "2010-04-30T20:13:58-07:00",
+      "root_message_id": "msg-7b8b3babf6e5"
+    },
+    {
+      "id": "thread-21a8309c8d73",
+      "subject": "how to set chart output size in rgl (surface3d)?",
+      "message_count": 1,
+      "participants": [
+        "Mandy Xu"
+      ],
+      "started": "2010-04-30T20:57:44-04:00",
+      "last_reply": "2010-04-30T20:57:44-04:00",
+      "root_message_id": "msg-21a8309c8d73"
+    },
+    {
+      "id": "thread-5ce702cf5e26",
+      "subject": "how to set chart output size in rgl (surface3d)?",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Mandy Xu"
+      ],
+      "started": "2010-04-30T21:01:44-04:00",
+      "last_reply": "2010-04-30T23:35:02-04:00",
+      "root_message_id": "msg-5ce702cf5e26"
+    },
+    {
+      "id": "thread-f2dd8c182a6d",
+      "subject": "Resize Graphics Window",
+      "message_count": 1,
+      "participants": [
+        "Sigal Blay"
+      ],
+      "started": "2010-04-30T21:40:49-07:00",
+      "last_reply": "2010-04-30T21:40:49-07:00",
+      "root_message_id": "msg-f2dd8c182a6d"
+    },
+    {
+      "id": "thread-1022639007a6",
+      "subject": "Solving equation",
+      "message_count": 1,
+      "participants": [
+        "Shant Ch"
+      ],
+      "started": "2010-04-30T22:09:24-07:00",
+      "last_reply": "2010-04-30T22:09:24-07:00",
+      "root_message_id": "msg-1022639007a6"
+    }
+  ]
+}

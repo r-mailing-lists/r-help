@@ -1,0 +1,123 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2018-07",
+  "messages": [
+    {
+      "id": "msg-965f3bac0ba5",
+      "message_id": "<CA+dpOJnYysBxJaJTV998e9TUYT9yU3H2G5BWnwZNiWd93H_Ozw@mail.gmail.com>",
+      "from_name": "Christofer Bogaso",
+      "from_email_hash": "8e50c97001f58201230b8c89cbf56e225d81f286a22b014d4bfc5d07e098ee72",
+      "date": "2018-07-01T01:09:14+05:30",
+      "subject": "[R] A question on Statistics",
+      "subject_clean": "A question on Statistics",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have a quick question on Statistical distribution as follows, hoping\nStatisticians here would give me very insightful feedback.\n\nSay, I have a large sample from a highly asymmetric distribution ranging\nfrom -Inf to +Inf. Now I wish to calculate sample X1 and X2 within which\nmiddle 70% probability would reside.\n\nOne approach\nx = my sample\ncalculatte quantile(x, prob = 15%) & quantile(x, prob = 85%)\n\nanother approach\ncalculate quantile(abs[x], prob = 85%)\nIn this case X1 and X2 would be +/- of above result.\n\nMy question is in all scenarios, are above two approach equivalent? If not\nwhich is the better approach to find such range.\n\nThanks,\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have a quick question on Statistical distribution as follows, hoping\nStatisticians here would give me very insightful feedback.\n\nSay, I have a large sample from a highly asymmetric distribution",
+      "thread_id": "thread-965f3bac0ba5",
+      "thread_depth": 0,
+      "month": "2018-07"
+    },
+    {
+      "id": "msg-965f3bac0ba5",
+      "message_id": "<CA+dpOJnYysBxJaJTV998e9TUYT9yU3H2G5BWnwZNiWd93H_Ozw@mail.gmail.com>",
+      "from_name": "Christofer Bogaso",
+      "from_email_hash": "a9644b1ce4ffb1973d84cbcef4f2647e0d603469b526448b1e6dd7deaf97da39",
+      "date": "2018-07-01T01:09:14+05:30",
+      "subject": "[R] A question on Statistics",
+      "subject_clean": "A question on Statistics",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have a quick question on Statistical distribution as follows, hoping\nStatisticians here would give me very insightful feedback.\n\nSay, I have a large sample from a highly asymmetric distribution ranging\nfrom -Inf to +Inf. Now I wish to calculate sample X1 and X2 within which\nmiddle 70% probability would reside.\n\nOne approach\nx = my sample\ncalculatte quantile(x, prob = 15%) & quantile(x, prob = 85%)\n\nanother approach\ncalculate quantile(abs[x], prob = 85%)\nIn this case X1 and X2 would be +/- of above result.\n\nMy question is in all scenarios, are above two approach equivalent? If not\nwhich is the better approach to find such range.\n\nThanks,\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have a quick question on Statistical distribution as follows, hoping\nStatisticians here would give me very insightful feedback.\n\nSay, I have a large sample from a highly asymmetric distribution",
+      "thread_id": "thread-965f3bac0ba5",
+      "thread_depth": 0,
+      "month": "2018-07"
+    },
+    {
+      "id": "msg-e309c10d0d39",
+      "message_id": "<50d1370d-9783-1917-e37b-c96b2142fc79@slingshot.co.nz>",
+      "from_name": "Patrick Connolly",
+      "from_email_hash": "fc49add7242d0c13bf985e220a864ce02f5810c92bf22abc452a972fec5cf241",
+      "date": "2018-07-01T09:05:33+12:00",
+      "subject": "[R] parallel processing in r...",
+      "subject_clean": "parallel processing in r...",
+      "in_reply_to": "<845BDBA2-B070-4F09-9F64-3246B789307D@dcn.davis.ca.us>",
+      "references": [
+        "<SL2P216MB009102A054E8184CB0F5B1BBC84D0@SL2P216MB0091.KORP216.PROD.OUTLOOK.COM>",
+        "<845BDBA2-B070-4F09-9F64-3246B789307D@dcn.davis.ca.us>"
+      ],
+      "body_plain": "If you use gkrellm, you'll get a plot of each core's activity so it's \neasy to see how many are being used.\n\nyum install gkrellm.\n\n\nHTH\n\nOn 07/01/2018 06:16 AM, Jeff Newmiller wrote:\n> Use \"top\" at the bash prompt.\n>\n> Read about the \"mc.cores\" parameter to mclapply.\n>\n> Make a simplified example version of your analysis and post your question in the context of that example [1][2][3]. You will learn about the issues you are dealing with in the process of trimming your problem, and will have code you can share that demonstrates the issue without exposing private information.\n>\n> Running parallel does not necessarily improve performance because other factors like task switching overhead and Inter-process-communication (data sharing) can drag it down. Read about the real benefits and drawbacks of parallelism... there are many discussions out there out there... you might start with [4].\n>\n>\n> [1] http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example\n>\n> [2] http://adv-r.had.co.nz/Reproducibility.html\n>\n> [3] https://cran.r-project.org/web/packages/reprex/index.html (read the vignette)\n>\n> [4] https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html\n>\n> On June 30, 2018 10:07:49 AM PDT, akshay kulkarni <akshay_e4 at hotmail.com> wrote:\n>> dear members,\n>> I am using mclapply to parallelize my code. I am using Red Hat Linux in\n>> AWS.\n>>\n>> When I use mclapply, I see no speed increase. I doubt that the Linux OS\n>> is allowing fewer than the maximum number of cores to mclapply ( by\n>> default, mclapply takes all the available cores to it).\n>>\n>> How do you check if the number of workers is less than the output given\n>> by detectCores(), in Linux? Is there any R function for it?\n>>\n>> I do acknowledge that help on an OS is not suitable for this mailing\n>> list, but even Internet could'nt help me. Therefore this mail......\n>>\n>> very many thanks for your time  and effort...\n>> yours sincerely,\n>> AKSHAY M KULKARNI\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If you use gkrellm, you'll get a plot of each core's activity so it's \neasy to see how many are being used.\n\nyum install gkrellm.\n\n\nHTH\n\nOn 07/01/2018 06:16 AM, Jeff Newmiller wrote:\n> Use \"top\" at th",
+      "thread_id": "thread-e309c10d0d39",
+      "thread_depth": 0,
+      "month": "2018-07"
+    },
+    {
+      "id": "msg-e309c10d0d39",
+      "message_id": "<50d1370d-9783-1917-e37b-c96b2142fc79@slingshot.co.nz>",
+      "from_name": "Patrick Connolly",
+      "from_email_hash": "fbb15ee8c9c26ce5f61f19a2bb7c29ad8729abc5d3491b385c9a0f9e9231fbee",
+      "date": "2018-07-01T09:05:33+12:00",
+      "subject": "[R] parallel processing in r...",
+      "subject_clean": "parallel processing in r...",
+      "in_reply_to": "<845BDBA2-B070-4F09-9F64-3246B789307D@dcn.davis.ca.us>",
+      "references": [
+        "<SL2P216MB009102A054E8184CB0F5B1BBC84D0@SL2P216MB0091.KORP216.PROD.OUTLOOK.COM>",
+        "<845BDBA2-B070-4F09-9F64-3246B789307D@dcn.davis.ca.us>"
+      ],
+      "body_plain": "If you use gkrellm, you'll get a plot of each core's activity so it's \neasy to see how many are being used.\n\nyum install gkrellm.\n\n\nHTH\n\nOn 07/01/2018 06:16 AM, Jeff Newmiller wrote:\n> Use \"top\" at the bash prompt.\n>\n> Read about the \"mc.cores\" parameter to mclapply.\n>\n> Make a simplified example version of your analysis and post your question in the context of that example [1][2][3]. You will learn about the issues you are dealing with in the process of trimming your problem, and will have code you can share that demonstrates the issue without exposing private information.\n>\n> Running parallel does not necessarily improve performance because other factors like task switching overhead and Inter-process-communication (data sharing) can drag it down. Read about the real benefits and drawbacks of parallelism... there are many discussions out there out there... you might start with [4].\n>\n>\n> [1] http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example\n>\n> [2] http://adv-r.had.co.nz/Reproducibility.html\n>\n> [3] https://cran.r-project.org/web/packages/reprex/index.html (read the vignette)\n>\n> [4] https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html\n>\n> On June 30, 2018 10:07:49 AM PDT, akshay kulkarni <akshay_e4 at hotmail.com> wrote:\n>> dear members,\n>> I am using mclapply to parallelize my code. I am using Red Hat Linux in\n>> AWS.\n>>\n>> When I use mclapply, I see no speed increase. I doubt that the Linux OS\n>> is allowing fewer than the maximum number of cores to mclapply ( by\n>> default, mclapply takes all the available cores to it).\n>>\n>> How do you check if the number of workers is less than the output given\n>> by detectCores(), in Linux? Is there any R function for it?\n>>\n>> I do acknowledge that help on an OS is not suitable for this mailing\n>> list, but even Internet could'nt help me. Therefore this mail......\n>>\n>> very many thanks for your time  and effort...\n>> yours sincerely,\n>> AKSHAY M KULKARNI\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If you use gkrellm, you'll get a plot of each core's activity so it's \neasy to see how many are being used.\n\nyum install gkrellm.\n\n\nHTH\n\nOn 07/01/2018 06:16 AM, Jeff Newmiller wrote:\n> Use \"top\" at th",
+      "thread_id": "thread-e309c10d0d39",
+      "thread_depth": 0,
+      "month": "2018-07"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-965f3bac0ba5",
+      "subject": "A question on Statistics",
+      "message_count": 1,
+      "participants": [
+        "Christofer Bogaso"
+      ],
+      "started": "2018-07-01T01:09:14+05:30",
+      "last_reply": "2018-07-01T01:09:14+05:30",
+      "root_message_id": "msg-965f3bac0ba5"
+    },
+    {
+      "id": "thread-965f3bac0ba5",
+      "subject": "A question on Statistics",
+      "message_count": 1,
+      "participants": [
+        "Christofer Bogaso"
+      ],
+      "started": "2018-07-01T01:09:14+05:30",
+      "last_reply": "2018-07-01T01:09:14+05:30",
+      "root_message_id": "msg-965f3bac0ba5"
+    },
+    {
+      "id": "thread-e309c10d0d39",
+      "subject": "parallel processing in r...",
+      "message_count": 1,
+      "participants": [
+        "Patrick Connolly"
+      ],
+      "started": "2018-07-01T09:05:33+12:00",
+      "last_reply": "2018-07-01T09:05:33+12:00",
+      "root_message_id": "msg-e309c10d0d39"
+    },
+    {
+      "id": "thread-e309c10d0d39",
+      "subject": "parallel processing in r...",
+      "message_count": 1,
+      "participants": [
+        "Patrick Connolly"
+      ],
+      "started": "2018-07-01T09:05:33+12:00",
+      "last_reply": "2018-07-01T09:05:33+12:00",
+      "root_message_id": "msg-e309c10d0d39"
+    }
+  ]
+}

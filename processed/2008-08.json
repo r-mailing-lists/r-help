@@ -1,0 +1,243 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2008-08",
+  "messages": [
+    {
+      "id": "msg-3f30e246c994",
+      "message_id": "<19247124.post@talk.nabble.com>",
+      "from_name": "dxc13",
+      "from_email_hash": "f112e555a437a0fa1ab312b8df755e9fd60bf441d6417f0ea6498f97b628cedd",
+      "date": "2008-08-31T16:21:30-07:00",
+      "subject": "[R]  how to draw a perspective pyramid",
+      "subject_clean": "how to draw a perspective pyramid",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\n\nI am trying to construct a perspective plot of a 2D triangle, or pyramid.  I\ncan easily do the one dimensional plot (code below), but I can't figure out\nhow to do it in a perspective plot for two input variables.  Does anyone\nhave a simple solution? \n\nThanks!\nDerek\n\n#code for a triangle\nu <- seq(-1,1,.001)\ntri <- (1-abs(u))\nplot(tri~u,type=\"l\",main=\"Second Iteration Kernel: Two Input\nVariables\",lwd=2,\n\txlab=\"x\",ylab=\"y\",col=\"blue\")\n\n-- \nView this message in context: http://www.nabble.com/how-to-draw-a-perspective-pyramid-tp19247124p19247124.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear list,\n\nI am trying to construct a perspective plot of a 2D triangle, or pyramid.  I\ncan easily do the one dimensional plot (code below), but I can't figure out\nhow to do it in a perspective plot ",
+      "thread_id": "thread-3f30e246c994",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-87ff1dfbd7fb",
+      "message_id": "<50d1c22d0808311639y6b390c8av680dce36e88084ef@mail.gmail.com>",
+      "from_name": "ivo welch",
+      "from_email_hash": "4ab47487d470eb333fcd289e455165e3252ead182a846264a8745289c192d32d",
+      "date": "2008-08-31T19:39:18-04:00",
+      "subject": "[R] error instead of warning?",
+      "subject_clean": "error instead of warning?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "dear R experts---is it possible to ask R to abort with an error\ninstead of just giving a warning when I am mis-assigning vectors (or\nother data structures) that are not compatible?  that is, I would like\n\n1: In matrix(value, n, p) ... :\n  data length [12] is not a sub-multiple or multiple of the number of\ncolumns [11]\n\nto force an error.  are there any other warnings() that are really\nmore programming errors that I could also convert into an abort?\n\nsincerely,\n\n/iaw",
+      "body_snippet": "dear R experts---is it possible to ask R to abort with an error\ninstead of just giving a warning when I am mis-assigning vectors (or\nother data structures) that are not compatible?  that is, I would l",
+      "thread_id": "thread-87ff1dfbd7fb",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-fc8404d06b90",
+      "message_id": "<48BB31D4.4040202@stats.uwo.ca>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f10e1920504dfef879061667fbcfa0823bbc832410cad04707fb294db3bd8d83",
+      "date": "2008-08-31T20:05:40-04:00",
+      "subject": "[R] error instead of warning?",
+      "subject_clean": "error instead of warning?",
+      "in_reply_to": "<50d1c22d0808311639y6b390c8av680dce36e88084ef@mail.gmail.com>",
+      "references": [
+        "<50d1c22d0808311639y6b390c8av680dce36e88084ef@mail.gmail.com>"
+      ],
+      "body_plain": "ivo welch wrote:\n> dear R experts---is it possible to ask R to abort with an error\n> instead of just giving a warning when I am mis-assigning vectors (or\n> other data structures) that are not compatible?  that is, I would like\n>\n> 1: In matrix(value, n, p) ... :\n>   data length [12] is not a sub-multiple or multiple of the number of\n> columns [11]\n>\n> to force an error.  are there any other warnings() that are really\n> more programming errors that I could also convert into an abort?\n>\n>   \nYou can convert all warnings to errors using option(warn=2).\n\nDuncan Murdoch\n> sincerely,\n>\n> /iaw\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "ivo welch wrote:\n> dear R experts---is it possible to ask R to abort with an error\n> instead of just giving a warning when I am mis-assigning vectors (or\n> other data structures) that are not compatib",
+      "thread_id": "thread-87ff1dfbd7fb",
+      "thread_depth": 1,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-644d790ba56e",
+      "message_id": "<48BB383C.8010008@yahoo.com.br>",
+      "from_name": "Cleber Nogueira Borges",
+      "from_email_hash": "0b8bcead7baccf2b0076ea176ba18d3d66b73de88c9e56149b6ac78c2f7e6170",
+      "date": "2008-08-31T21:33:00-03:00",
+      "subject": "[R] reading data in serial port - win32",
+      "subject_clean": "reading data in serial port - win32",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello all\n\nI'd like to get some instruments data by serial port (COM1 - win32)\n\nI make a loopback serial adapter for a testing with the code:\n\nsystem('mode COM1 9600,N,8,1')\nser <- file(\"COM1\", open='r+')\nisOpen(ser)\nwrite('12345', ser)\nscan(ser, what=as.character(1), n=1)\n\n\nSo I get the data that I wrote in the port...\nBut I don't have a more fine control about the serial configuration with\nthis approach like timeout, handshake etc...\n\nIs there a specific package (library?) for hardware communications?\n( For serial port specifically )\n\nThanks\n\nCleber\n\n\t\t\n_______________________________________________________ \n\nExperimente j? e veja as novidades.",
+      "body_snippet": "Hello all\n\nI'd like to get some instruments data by serial port (COM1 - win32)\n\nI make a loopback serial adapter for a testing with the code:\n\nsystem('mode COM1 9600,N,8,1')\nser <- file(\"COM1\", open='",
+      "thread_id": "thread-644d790ba56e",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-1555a1ed72a9",
+      "message_id": "<50d1c22d0808311829i70d538a6j2b01eed47d9a0093@mail.gmail.com>",
+      "from_name": "ivo welch",
+      "from_email_hash": "4ab47487d470eb333fcd289e455165e3252ead182a846264a8745289c192d32d",
+      "date": "2008-08-31T21:29:38-04:00",
+      "subject": "[R] SQL Primer for R",
+      "subject_clean": "SQL Primer for R",
+      "in_reply_to": "<Pine.LNX.4.64.0808260750040.19140@homer23.u.washington.edu>",
+      "references": [
+        "<50d1c22d0808250612q4dd8b8ecu6340ce7e37df3cec@mail.gmail.com>",
+        "<4bc14e460808250617g7baa4fabxdc404c830337c2e2@mail.gmail.com>",
+        "<971536df0808250639h5b4f6605w2974a816b0b8bc69@mail.gmail.com>",
+        "<4bc14e460808250738s4f94a1f0m9b48df286319551b@mail.gmail.com>",
+        "<50d1c22d0808260558o13c678cak5b5ad5eabcd4a250@mail.gmail.com>",
+        "<Pine.LNX.4.64.0808260750040.19140@homer23.u.washington.edu>"
+      ],
+      "body_plain": "stumped again by SQL...  If I have a table named \"main\" in an SQLite\ndata base, how do I get the names of all its columns?  (I have a mysql\nbook that claims the SHOW command does this sort of thing, but it does\nnot seem to work on SQLite.)\n\nregards,  /iaw\n\nPS: Thanks for the earlier emails on \"warn=2\".",
+      "body_snippet": "stumped again by SQL...  If I have a table named \"main\" in an SQLite\ndata base, how do I get the names of all its columns?  (I have a mysql\nbook that claims the SHOW command does this sort of thing, b",
+      "thread_id": "thread-1555a1ed72a9",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-806aa59b69f2",
+      "message_id": "<D1B13C00-1224-48D8-855B-1E6A5C594152@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2008-08-31T21:45:17-04:00",
+      "subject": "[R] how to draw a perspective pyramid",
+      "subject_clean": "how to draw a perspective pyramid",
+      "in_reply_to": "<19247124.post@talk.nabble.com>",
+      "references": [
+        "<19247124.post@talk.nabble.com>"
+      ],
+      "body_plain": "On Aug 31, 2008, at 7:21 PM, dxc13 wrote:\n\n>\n> Dear list,\n>\n> I am trying to construct a perspective plot of a 2D triangle, or  \n> pyramid.  I\n> can easily do the one dimensional plot (code below), but I can't  \n> figure out\n> how to do it in a perspective plot for two input variables.  Does  \n> anyone\n> have a simple solution?\n>\n> Thanks!\n> Derek\n>\n> #code for a triangle\n> u <- seq(-1,1,.001)\n> tri <- (1-abs(u))\n> plot(tri~u,type=\"l\",main=\"Second Iteration Kernel: Two Input\n> Variables\",lwd=2,\n> \txlab=\"x\",ylab=\"y\",col=\"blue\")\n\nYou probably don't want to have quite so many points in your parameter  \nvariables.\n\nThis is not a correct solution, but maybe it will get you further along:\n\nu <- seq(-1,1,.1)\n  v <- seq(-1,1,.1)\n  z <- outer(u,v,f)\n  f <- function(u,v) { val <- 1 -abs(u) -abs(v) }\n  z <- outer(u,v,f)\n  persp(u,v,z, xlim = c(-2,2), phi = 30, theta=30)\n\nFor one complete solution fry ?ifelse\n\n-- \nDavid Winsemius",
+      "body_snippet": "On Aug 31, 2008, at 7:21 PM, dxc13 wrote:\n\n>\n> Dear list,\n>\n> I am trying to construct a perspective plot of a 2D triangle, or  \n> pyramid.  I\n> can easily do the one dimensional plot (code below), bu",
+      "thread_id": "thread-3f30e246c994",
+      "thread_depth": 1,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-1d257f328d36",
+      "message_id": "<971536df0808312024s34197759iefa96b8fdde58797@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2008-08-31T23:24:56-04:00",
+      "subject": "[R] SQL Primer for R",
+      "subject_clean": "SQL Primer for R",
+      "in_reply_to": "<50d1c22d0808311829i70d538a6j2b01eed47d9a0093@mail.gmail.com>",
+      "references": [
+        "<50d1c22d0808250612q4dd8b8ecu6340ce7e37df3cec@mail.gmail.com>",
+        "<4bc14e460808250617g7baa4fabxdc404c830337c2e2@mail.gmail.com>",
+        "<971536df0808250639h5b4f6605w2974a816b0b8bc69@mail.gmail.com>",
+        "<4bc14e460808250738s4f94a1f0m9b48df286319551b@mail.gmail.com>",
+        "<50d1c22d0808260558o13c678cak5b5ad5eabcd4a250@mail.gmail.com>",
+        "<Pine.LNX.4.64.0808260750040.19140@homer23.u.washington.edu>",
+        "<50d1c22d0808311829i70d538a6j2b01eed47d9a0093@mail.gmail.com>"
+      ],
+      "body_plain": "On Sun, Aug 31, 2008 at 9:29 PM, ivo welch <ivowel at gmail.com> wrote:\n> stumped again by SQL...  If I have a table named \"main\" in an SQLite\n> data base, how do I get the names of all its columns?  (I have a mysql\n> book that claims the SHOW command does this sort of thing, but it does\n> not seem to work on SQLite.)\n\nlook up the pragma command.",
+      "body_snippet": "On Sun, Aug 31, 2008 at 9:29 PM, ivo welch <ivowel at gmail.com> wrote:\n> stumped again by SQL...  If I have a table named \"main\" in an SQLite\n> data base, how do I get the names of all its columns?  ",
+      "thread_id": "thread-1555a1ed72a9",
+      "thread_depth": 1,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-43d0a7e0507c",
+      "message_id": "<317737de0808312054s35ce5ba0w4a52b98e21e80d8f@mail.gmail.com>",
+      "from_name": "Jorge Ivan Velez",
+      "from_email_hash": "060ad10c3f62d22ec62f72e51d33b6bd4b3864499ca6dc0a5646c2e462af1f3d",
+      "date": "2008-08-31T23:54:22-04:00",
+      "subject": "[R] why isoMDS not found?",
+      "subject_clean": "why isoMDS not found?",
+      "in_reply_to": "<2f5200a00808311914h1f2dad92ye1f50e15157ec90a@mail.gmail.com>",
+      "references": [
+        "<2f5200a00808311914h1f2dad92ye1f50e15157ec90a@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/7e0d2857/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/7e0d2857/attachment.pl>",
+      "thread_id": "thread-43d0a7e0507c",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-b62193380daa",
+      "message_id": "<20080901015019.CDV88.85559.root@mp20>",
+      "from_name": "rkevinburton at charter.net",
+      "from_email_hash": "86acf360c0742d1fce222796b5ec732528a1d7fa9594dafeb2f90a5c33dbf05c",
+      "date": "2008-08-31T22:50:19-07:00",
+      "subject": "[R] Help with stl",
+      "subject_clean": "Help with stl",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I just realized after some tips and a little digging that what I was trying to do \"manually\" has already been done. I was trying to fit my data using 'lm' then taking the \"residual\" data and trying to do a spectral estimate (for seasonality) usiing fft and then passing the \"residual\" of all of that to arima to get the irregular portion of the time series forecast equation. I found 'stl' that advertises that it does all of this (and probably better than my efforts). The only problem that I found was that it takes a time-series object. Time-series objects don't handle missing observations. Say I only have two observations for the year (enough to fit a line through). I can easily fit a line through the observation points but if I add in zeros for the missing observations least squares will undoubtedly throw my observations out and fit the \"wrong\" line. The other steps will more than likely have residual data so I don't have to worry for these steps about missing data. Has anyone used 'stl' with missing observations? If so what sort of tricks did you use to get around the missing data and time series?\n\nThank you.\n\nKevin",
+      "body_snippet": "I just realized after some tips and a little digging that what I was trying to do \"manually\" has already been done. I was trying to fit my data using 'lm' then taking the \"residual\" data and trying to",
+      "thread_id": "thread-b62193380daa",
+      "thread_depth": 0,
+      "month": "2008-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-3f30e246c994",
+      "subject": "how to draw a perspective pyramid",
+      "message_count": 2,
+      "participants": [
+        "David Winsemius",
+        "dxc13"
+      ],
+      "started": "2008-08-31T16:21:30-07:00",
+      "last_reply": "2008-08-31T21:45:17-04:00",
+      "root_message_id": "msg-3f30e246c994"
+    },
+    {
+      "id": "thread-87ff1dfbd7fb",
+      "subject": "error instead of warning?",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "ivo welch"
+      ],
+      "started": "2008-08-31T19:39:18-04:00",
+      "last_reply": "2008-08-31T20:05:40-04:00",
+      "root_message_id": "msg-87ff1dfbd7fb"
+    },
+    {
+      "id": "thread-1555a1ed72a9",
+      "subject": "SQL Primer for R",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "ivo welch"
+      ],
+      "started": "2008-08-31T21:29:38-04:00",
+      "last_reply": "2008-08-31T23:24:56-04:00",
+      "root_message_id": "msg-1555a1ed72a9"
+    },
+    {
+      "id": "thread-644d790ba56e",
+      "subject": "reading data in serial port - win32",
+      "message_count": 1,
+      "participants": [
+        "Cleber Nogueira Borges"
+      ],
+      "started": "2008-08-31T21:33:00-03:00",
+      "last_reply": "2008-08-31T21:33:00-03:00",
+      "root_message_id": "msg-644d790ba56e"
+    },
+    {
+      "id": "thread-b62193380daa",
+      "subject": "Help with stl",
+      "message_count": 1,
+      "participants": [
+        "rkevinburton at charter.net"
+      ],
+      "started": "2008-08-31T22:50:19-07:00",
+      "last_reply": "2008-08-31T22:50:19-07:00",
+      "root_message_id": "msg-b62193380daa"
+    },
+    {
+      "id": "thread-43d0a7e0507c",
+      "subject": "why isoMDS not found?",
+      "message_count": 1,
+      "participants": [
+        "Jorge Ivan Velez"
+      ],
+      "started": "2008-08-31T23:54:22-04:00",
+      "last_reply": "2008-08-31T23:54:22-04:00",
+      "root_message_id": "msg-43d0a7e0507c"
+    }
+  ]
+}

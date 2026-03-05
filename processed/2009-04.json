@@ -1,0 +1,540 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2009-04",
+  "messages": [
+    {
+      "id": "msg-8c8a954b93b1",
+      "message_id": "<49FA2067.8050603@vanderbilt.edu>",
+      "from_name": "Frank E Harrell Jr",
+      "from_email_hash": "aac2104e568f1b4bc608deccefed75168aaf244b4de06a96ffe1c917f66b7853",
+      "date": "2009-04-30T17:04:23-05:00",
+      "subject": "[R] Multi-variate rcs() error",
+      "subject_clean": "Multi-variate rcs() error",
+      "in_reply_to": "<533971.66527.qm@web51511.mail.re2.yahoo.com>",
+      "references": [
+        "<533971.66527.qm@web51511.mail.re2.yahoo.com>"
+      ],
+      "body_plain": "x wrote:\n> Hi,\n> \n> My code, output, error message, and sample data are all below. As always, all help is appreciated.\n> \n> Code:\n> ====\n> library(Design); library(lattice)\n> \n> df = read.table(\"./data_cub4.txt\", header=TRUE, nrows=100)\n> attach(df); dd = datadist(df); options(datadist = 'dd'); describe(df);\n> \n> m = (y1 ~ ( rcs(x1,3) + rcs(x2,3) ) )\n> f = ols(m, data=df)\n> print(f)\n> print( Function(f) )\n> detach(df)\n> \n> Output:\n> ======\n> Linear Regression Model ...\n>          n Model L.R.       d.f.         R2      Sigma \n>        100      720.7          4     0.9993      82.44 \n> Residuals:\n>     Min      1Q  Median      3Q     Max \n> -113.21  -70.46  -20.09   65.77  214.77 \n> Coefficients:\n>            Value Std. Error         t Pr(>|t|)\n> Intercept 757.85  1.647e+17 4.601e-15        1\n> x1         35.58  9.080e+14 3.919e-14        1\n> x1'        85.92  6.475e+14 1.327e-13        1\n> x2            NA  1.797e+14        NA       NA\n> x2'           NA  6.475e+14        NA       NA\n> \n> Residual standard error: 82.44 on 95 degrees of freedom\n> Adjusted R-Squared: 0.9992 \n> \n> Error in if (coef[i] > 0 & (i > 2 | coef[1] != 0 | Intc != 0)) \"+\" else NULL : missing value where TRUE/FALSE needed\n> \n> Sample data:\n> =================\n> config\tbenchmark\ty1\tx1\tx2\tnoise\n> 1\tverify2\t1008.2\t1\t1000\t0.72\n> 2\tverify2\t1019\t2\t999\t1.6\n> \n\nIt just appears that you have perfect prediction, so you have quite an \nunusual dataset to be doing inference on.\n\nFrank\n\n\n\n-- \nFrank E Harrell Jr   Professor and Chair           School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
+      "body_snippet": "x wrote:\n> Hi,\n> \n> My code, output, error message, and sample data are all below. As always, all help is appreciated.\n> \n> Code:\n> ====\n> library(Design); library(lattice)\n> \n> df = read.table(\"./dat",
+      "thread_id": "thread-8c8a954b93b1",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-ab6122ffe26e",
+      "message_id": "<23325204.post@talk.nabble.com>",
+      "from_name": "jdeisenberg",
+      "from_email_hash": "3d3efeced7e856b58b938ba2c3214d9753da47f20fdff4e12d007c1100297a8c",
+      "date": "2009-04-30T15:06:16-07:00",
+      "subject": "[R] gridding values in a data frame",
+      "subject_clean": "gridding values in a data frame",
+      "in_reply_to": "<23319190.post@talk.nabble.com>",
+      "references": [
+        "<23319190.post@talk.nabble.com>"
+      ],
+      "body_plain": "dxc13 wrote:\n> \n> Hi all,\n> I have a data frame that looks like such:\n> LATITUDE   LONGITUDE   TEMPERATURE   TIME\n> 36.73         -176.43        58.32               1\n> \n> and this goes on for a A LOT more records, until time=1200\n> \n> I want to create a 5 degree by 5 degree grid of this data, with the value\n> of temperature in the appropriate grid cell.  I want one grid for each\n> time value.  \n> \n> dxc13\n> \n\nThe following appears to work, but is most definitely *not* in the \"spirit\nof R\" -- it's more like a C program written in R.  Undoubtedly someone will\ncome up with a much more clever method. (This is always my problem; I come\nup with a workable solution, but it's not elegant.)\n\nNote: the grid has to have 37 rows, since latitude -90 to +90 (inclusive)\ntakes 37 5-degree increments; since -180 and +180 longitude are the same,\nyou would never have them as separate numbers.\n\nd <- read.csv(\"weather.csv\")\nfor (i in 1:1200)\n{\n    x <- d[d$TIME==i,]\n    if (length(x$TIME) > 0)\n    {\n        print(sprintf(\"# of elements for time %d:  %d\", i,\n            length(x$TIME)))\n        grid <- matrix(NA, nrow=37, ncol=72)\n        for (j in 1:length(x$TIME))\n        {\n            lat <- 1 + trunc((90 + x$LATITUDE[j]) / 5)\n            long <-  1 + trunc((180 + x$LONGITUDE[j]) / 5)\n            grid[lat,long] <- x$TEMPERATURE[j]\n        }\n        write(t(grid), file=sprintf(\"time%d.csv\", i), ncolumns=72, sep=\",\")\n    }\n}\n\n-- \nView this message in context: http://www.nabble.com/gridding-values-in-a-data-frame-tp23319190p23325204.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "dxc13 wrote:\n> \n> Hi all,\n> I have a data frame that looks like such:\n> LATITUDE   LONGITUDE   TEMPERATURE   TIME\n> 36.73         -176.43        58.32               1\n> \n> and this goes on for a A LOT",
+      "thread_id": "thread-ab6122ffe26e",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-48faf214a85c",
+      "message_id": "<f8e6ff050904301515s32f0ec35le4f251dbc8c4ee6e@mail.gmail.com>",
+      "from_name": "hadley wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2009-04-30T17:15:55-05:00",
+      "subject": "[R] gridding values in a data frame",
+      "subject_clean": "gridding values in a data frame",
+      "in_reply_to": "<23319190.post@talk.nabble.com>",
+      "references": [
+        "<23319190.post@talk.nabble.com>"
+      ],
+      "body_plain": "It's hard to check without a reproducible example, but the following\ncode should give you a 3d array of lat x long x time:\n\nlibrary(reshape)\n\ndf$lat <- round_any(df$LATITUDE, 5)\ndf$long <- round_any(df$LONGITUDE, 5)\ndf$value <- df$TIME\n\ncast(df, lat ~ long ~ time, mean)\n\n\nOn Thu, Apr 30, 2009 at 10:55 AM, dxc13 <dxc13 at health.state.ny.us> wrote:\n>\n> Hi all,\n> I have a data frame that looks like such:\n> LATITUDE ? LONGITUDE ? TEMPERATURE ? TIME\n> 36.73 ? ? ? ? -176.43 ? ? ? ?58.32 ? ? ? ? ? ? ? 1\n> 50.95 ? ? ? ? ? ?90.00 ? ? ? ?74.39 ? ? ? ? ? ? ? 1\n> -30.42 ? ? ? ? ? ?5.45 ? ? ? ?23.26 ? ? ? ? ? ? ? 1\n> 15.81 ? ? ? ? -109.31 ? ? ? ?52.44 ? ? ? ? ? ? ? 1\n> -80.75 ? ? ? ?-144.95 ? ? ? ?66.19 ? ? ? ? ? ? ?2\n> 90.00 ? ? ? ? ?100.55 ? ? ? ?37.50 ? ? ? ? ? ? ? 2\n> 65.41 ? ? ? ? -4.49 ? ? ? ? ? 29.83 ? ? ? ? ? ? ? 2\n>\n> and this goes on for a A LOT more records, until time=1200\n>\n> I want to create a 5 degree by 5 degree grid of this data, with the value of\n> temperature in the appropriate grid cell. ?I want one grid for each time\n> value. ?For each time value, this works out to be a 36x72 grid with 2592\n> cells because the longitude spans -180 to 180 and latitude spans 90 to -90\n> and they would be in increments of 5 degrees. ?If there are no temperatures\n> available to be put into a grid cell, than that cell should get a missing\n> value, NA, put into it.\n> Also, could the gridded result for each time be written to a text file\n> before processing the next time value?\n>\n> Hope this is clear.\n> Thanks in advance.\n>\n> dxc13\n> --\n> View this message in context: http://www.nabble.com/gridding-values-in-a-data-frame-tp23319190p23319190.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "It's hard to check without a reproducible example, but the following\ncode should give you a 3d array of lat x long x time:\n\nlibrary(reshape)\n\ndf$lat <- round_any(df$LATITUDE, 5)\ndf$long <- round_any(d",
+      "thread_id": "thread-48faf214a85c",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-cb5b0fb101ec",
+      "message_id": "<49FA248B.7010605@cognigencorp.com>",
+      "from_name": "Sebastien Bihorel",
+      "from_email_hash": "8db8176455a0775f825a6075901b42ab7cf96599c5c905bf6c61661273577161",
+      "date": "2009-04-30T18:22:03-04:00",
+      "subject": "[R] Understanding padding in lattice",
+      "subject_clean": "Understanding padding in lattice",
+      "in_reply_to": "<49F8F226.7090706@stat.auckland.ac.nz>",
+      "references": [
+        "<49F7501B.9000709@cognigencorp.com>",
+        "<eb555e660904281623y6e857c9an129831b2b79b93b8@mail.gmail.com>",
+        "<49F8F226.7090706@stat.auckland.ac.nz>"
+      ],
+      "body_plain": "Thanks Paul,\n\nThis function could indeed be helpful. Unfortunately, I cannot install a \ndevelopment version at work, so I will have to wait before using it :D\n\nSebastien\n\nPaul Murrell wrote:\n> Hi\n>\n> In the development version of R, there is a new showViewport() function\n> that might help with debugging this sort of thing.  Try ...\n>\n> showViewport()\n>\n> ... or possibly ...\n>\n> showViewport(newpage=TRUE)\n>\n> ... just after drawing your plot.\n>\n> Paul\n>\n>\n> Deepayan Sarkar wrote:\n>   \n>> On Tue, Apr 28, 2009 at 11:51 AM, Sebastien Bihorel\n>> <Sebastien.Bihorel at cognigencorp.com> wrote:\n>>     \n>>> Dear R-users,\n>>>\n>>> I am trying to understand what the different padding arguments in\n>>> trellis.par.set are exactly controlling the space around lattice plots. I\n>>> have used the following code as a basis for testing but it did not really\n>>> help me to visualize how the value of each argument changes the margins and\n>>> the plotting area. I guess a better way to visualize the effects of these\n>>> padding items would be to create colored polygons for each related \"area\" of\n>>> interest... but I would need to know what are these areas beforehand!\n>>>       \n>> You can retrieve the undelying grid layout and show it using\n>>\n>> library(grid)\n>> grid.show.layout(lattice:::lattice.getStatus(\"layout.details\")$page.layout)\n>>\n>> which is close to what you are describing. Otherwise, there's no easy\n>> way to insert polygons in these areas that I know of.\n>>\n>> You could try setting negative padding values to see what they do.\n>>\n>> -Deepayan\n>>\n>>     \n>>> Any advise on how to improve this code would be greatly appreciated.\n>>>\n>>> Sebastien\n>>>\n>>> #######################\n>>> library(lattice)\n>>> foo <-\n>>> data.frame(x=rep(seq(10),9),y=rep(seq(10),9),z=rep(0,90),id=rep(seq(9),each=10))\n>>> plot1 <- xyplot(y+z~x|id,\n>>>               data=foo,\n>>>               type=c(\"p\",\"l\"),\n>>>               distribute.type = TRUE,\n>>>               main=\"This is a test\",\n>>>               sub=\"Subtitle\",\n>>>               auto.key=T)\n>>> trellis.device(pdf, file = \"trellis_par_test.pdf\",\n>>>              paper=\"letter\",\n>>>              #family=\"Courier\",\n>>>              theme = list(fontsize = list(text = 10, points = 10)))\n>>> trellis.par.set(layout.widths =list(left.padding=0,\n>>>                                   right.padding=0),\n>>>               layout.heights=list(top.padding =1,\n>>>                                   main.key.padding =1,\n>>>                                   axis.xlab.padding=1,\n>>>                                   key.sub.padding  =1,\n>>>                                   bottom.padding   =1),\n>>>               axis.components=list(top=list(tck=1,\n>>>                     pad1=1,\n>>> pad2=1),                                    right=list(tck=1,\n>>>                                 pad1=1,\n>>>                                               pad2=1))) print(plot1)\n>>> dev.off()\n>>> ###########################\n>>>\n>>>\n>>>\n>>> --\n>>> *Sebastien Bihorel, PharmD, PhD*\n>>> PKPD Scientist\n>>> Cognigen Corp\n>>> Email: sebastien.bihorel at cognigencorp.com\n>>> <mailto:sebastien.bihorel at cognigencorp.com>\n>>> Phone: (716) 633-3463 ext. 323\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>>       \n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>     \n>\n>",
+      "body_snippet": "Thanks Paul,\n\nThis function could indeed be helpful. Unfortunately, I cannot install a \ndevelopment version at work, so I will have to wait before using it :D\n\nSebastien\n\nPaul Murrell wrote:\n> Hi\n>\n> ",
+      "thread_id": "thread-cb5b0fb101ec",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-b4455cf15e7e",
+      "message_id": "<23325394.post@talk.nabble.com>",
+      "from_name": "dxc13",
+      "from_email_hash": "f112e555a437a0fa1ab312b8df755e9fd60bf441d6417f0ea6498f97b628cedd",
+      "date": "2009-04-30T15:22:11-07:00",
+      "subject": "[R] gridding values in a data frame",
+      "subject_clean": "gridding values in a data frame",
+      "in_reply_to": "<23325204.post@talk.nabble.com>",
+      "references": [
+        "<23319190.post@talk.nabble.com>",
+        "<23325204.post@talk.nabble.com>"
+      ],
+      "body_plain": "Thank you for your input. I will give it a try and see how it works out.  I\nalways have the same problem when programming...I always make things more\ncomplicated than they really are :-).\nMuch appreciated.\n\n\njdeisenberg wrote:\n> \n> \n> \n> dxc13 wrote:\n>> \n>> Hi all,\n>> I have a data frame that looks like such:\n>> LATITUDE   LONGITUDE   TEMPERATURE   TIME\n>> 36.73         -176.43        58.32               1\n>> \n>> and this goes on for a A LOT more records, until time=1200\n>> \n>> I want to create a 5 degree by 5 degree grid of this data, with the value\n>> of temperature in the appropriate grid cell.  I want one grid for each\n>> time value.  \n>> \n>> dxc13\n>> \n> \n> The following appears to work, but is most definitely *not* in the \"spirit\n> of R\" -- it's more like a C program written in R.  Undoubtedly someone\n> will come up with a much more clever method. (This is always my problem; I\n> come up with a workable solution, but it's not elegant.)\n> \n> Note: the grid has to have 37 rows, since latitude -90 to +90 (inclusive)\n> takes 37 5-degree increments; since -180 and +180 longitude are the same,\n> you would never have them as separate numbers.\n> \n> d <- read.csv(\"weather.csv\")\n> for (i in 1:1200)\n> {\n>     x <- d[d$TIME==i,]\n>     if (length(x$TIME) > 0)\n>     {\n>         print(sprintf(\"# of elements for time %d:  %d\", i,\n>             length(x$TIME)))\n>         grid <- matrix(NA, nrow=37, ncol=72)\n>         for (j in 1:length(x$TIME))\n>         {\n>             lat <- 1 + trunc((90 + x$LATITUDE[j]) / 5)\n>             long <-  1 + trunc((180 + x$LONGITUDE[j]) / 5)\n>             grid[lat,long] <- x$TEMPERATURE[j]\n>         }\n>         write(t(grid), file=sprintf(\"time%d.csv\", i), ncolumns=72,\n> sep=\",\")\n>     }\n> }\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/gridding-values-in-a-data-frame-tp23319190p23325394.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thank you for your input. I will give it a try and see how it works out.  I\nalways have the same problem when programming...I always make things more\ncomplicated than they really are :-).\nMuch appreci",
+      "thread_id": "thread-ab6122ffe26e",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-5456ceb0e485",
+      "message_id": "<E77D2A80-9F06-477F-A1AA-9E2036BD3963@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2009-04-30T18:34:05-04:00",
+      "subject": "[R] setting key boxes in xyplot",
+      "subject_clean": "setting key boxes in xyplot",
+      "in_reply_to": "<OF630CC429.9673E7D0-ON852575A8.004C3B5F-852575A8.00502A81@nps.gov>",
+      "references": [
+        "<OF630CC429.9673E7D0-ON852575A8.004C3B5F-852575A8.00502A81@nps.gov>"
+      ],
+      "body_plain": "On Apr 30, 2009, at 10:35 AM, Steve_Friedman at nps.gov wrote:\n>\n> I thought I mimicked the coded correctly, but find an error/omission\n> somewhere in the xyplot function shown below.\n>\n>> eggs # alligator egg fate\n>\n> dput(round(eggs, 2), file = \"\")\n> structure(list(Year = c(1985, 1986, 1987, 1988, 1989, 1990, 1991,\n> 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000), NumEggs =  \n> c(323,\n> 1729, 1127, 104, 267, 291, 352, 478, 532, 569, 263, 490, 244,\n> 428, 527, 670), Failed = c(183, 199, 257, 503, 99, 139, 273,\n> NA, 0, 55, 237, 581, 271, 144, 117, 43), Mean = c(0.29, 0.49,\n> 0.55, 0.45, 0.26, 0.34, 0, 0.49, 0.77, 0.57, 0.77, NA, 0.69,\n> 0.64, 0.51, 0.66), Eggs.p = c(0.19, 1, 0.65, 0.06, 0.15, 0.17,\n> 0.2, 0.28, 0.31, 0.33, 0.15, 0.28, 0.14, 0.25, 0.3, 0.39), Fail.p =  \n> c(0.31,\n> 0.34, 0.44, 0.87, 0.17, 0.24, 0.47, NA, 0, 0.09, 0.41, 1, 0.47,\n> 0.25, 0.2, 0.07)), .Names = c(\"Year\", \"NumEggs\", \"Failed\", \"Mean\",\n> \"Eggs.p\", \"Fail.p\"), row.names = c(\"1985\", \"1986\", \"1987\", \"1988\",\n> \"1989\", \"1990\", \"1991\", \"1992\", \"1993\", \"1994\", \"1995\", \"1996\",\n> \"1997\", \"1998\", \"1999\", \"2000\"), class = \"data.frame\")\n>\n>\n>  xyplot(Eggs.p + Fail.p + Mean ~ Year , data = eggs, cex = 0.8, pch  \n> = c(2,\n> 5),\n>         panel = panel.superpose.2, main = \"Alligator Nest Fate\",\n>         ylab = \"Prop. of Total Number of Hatched Eggs \\n Prop. of  \n> Total\n> Flooded Eggs\",\n>         legend = list(right = list(fun = grid::textGrob(\"Mean HSI\",\n> rot=90))), col=(1:3),  type = c(\"b\", \"b\", \"h\"),\n>         key = list(text = list(c(\"Proportion Hatched R^2 = 0.13,\n> Proportion Flooded R^2 = -0.23, Mean HSI\")),\n>         col = c(\"black\",\"red\", \"green\")), columns = 3)\n\nIt runs without error on my machine ... after loading lattice. Perhaps  \nyou ought to provide the error message .... and the other usual needed  \ninformation. See that nice compact but very imformative message at the  \nbottom of this reply.\n\n-- \nDavid\n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
+      "body_snippet": "On Apr 30, 2009, at 10:35 AM, Steve_Friedman at nps.gov wrote:\n>\n> I thought I mimicked the coded correctly, but find an error/omission\n> somewhere in the xyplot function shown below.\n>\n>> eggs # alli",
+      "thread_id": "thread-5456ceb0e485",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-5cb72d18fda0",
+      "message_id": "<CA0F13C9-537D-40DC-9B51-D5854E68139D@cmu.edu>",
+      "from_name": "David Reitter",
+      "from_email_hash": "113247da6b261d1c5177372637b9d49ff1c940a3f22aa4e4265719641fd3ccd0",
+      "date": "2009-04-30T18:49:25-04:00",
+      "subject": "[R] Hmisc: xYplot and panel.lines",
+      "subject_clean": "Hmisc: xYplot and panel.lines",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Using the Hmisc package, I tried to create an xYplot (single panel  \nonly) and was confused to find that I could not add anything else to  \nthe plot (abline, lines, etc.).\n\nThankfully, [1] points out panel functions.\n\nThis works as expected for panel.abline, but as soon as I'm using  \npanel.lines (or llines or lpoints) from the \"lattice\" package (version  \n0.17-17 with R 2.8.1), it seems that it is not using the coordinate  \nsystem that the original plot used, i.e. the graph does not work at all.\n\nMy code:\n\n\npfunc <- function(x,y,...) {\n   panel.xYplot(x, y, ...)\n   panel.abline(h=4.0, col = \"grey\") # works fine\n   panel.lines(-d$chosenValveSetting, col=\"orange\")  # in the wrong  \nplace\n}\n\nxYplot(I(AmountInTank) + I(-UserOutFlow+UserInFlow) + I(EnvirInFlow) ~  \nTime.Step,  data=subset(h, Version==\"Linear increase\"), nx=F,  \nmethod=smean.cl.boot, type='b',lty.bands=c(2,2), ylim=c(-20,20),  \npanel=pfunc)\n\n\nWhat am I doing wrong?\nHmisc 3.6.0, but older versions reacted similarly.\n\n\nThanks for your help!\n\n\n\n\n[1] http://tolstoy.newcastle.edu.au/R/help/06/01/18860.html",
+      "body_snippet": "Using the Hmisc package, I tried to create an xYplot (single panel  \nonly) and was confused to find that I could not add anything else to  \nthe plot (abline, lines, etc.).\n\nThankfully, [1] points out ",
+      "thread_id": "thread-5cb72d18fda0",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-e636b4c597ed",
+      "message_id": "<A6039F4E-ABF4-41C5-B03E-FFF32E07C37A@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2009-04-30T18:49:55-04:00",
+      "subject": "[R] Extracting Element from S4 objects",
+      "subject_clean": "Extracting Element from S4 objects",
+      "in_reply_to": "<23302265.post@talk.nabble.com>",
+      "references": [
+        "<23302265.post@talk.nabble.com>"
+      ],
+      "body_plain": "I don't think very many of us have a version that is quite that old.\n\nSorry;\nDavid.\n\nOn Apr 29, 2009, at 4:37 PM, tbigdeli wrote:\n\n>\n> Are there internal methods available for R2.6 (I'm using the mac os  \n> x gui)\n> for extracting (or subsetting) S4 objects?\n>\n> Using the independence_test() function implemented in the COIN  \n> package, I\n> can't seem to select out p-values upon completion of each iteration  \n> of a\n> loop.\n>\n> Sorry if my search was incomplete beforehand.\n> -- \n\n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
+      "body_snippet": "I don't think very many of us have a version that is quite that old.\n\nSorry;\nDavid.\n\nOn Apr 29, 2009, at 4:37 PM, tbigdeli wrote:\n\n>\n> Are there internal methods available for R2.6 (I'm using the mac ",
+      "thread_id": "thread-e636b4c597ed",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-9313245ce66f",
+      "message_id": "<FE44E0D7EAD2ED4BB2165071DB8E328C04E84ADE@egcrc-ex01.egcrc.org>",
+      "from_name": "Tena Sakai",
+      "from_email_hash": "81086045dec5f3fa10afbda2d0105ec706ddcc23d10ef00724ba74f0f8fcd29e",
+      "date": "2009-04-30T15:56:40-07:00",
+      "subject": "[R] newbie HWRITER package question",
+      "subject_clean": "newbie HWRITER package question",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090430/bb045c11/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090430/bb045c11/attachment-0001.pl>",
+      "thread_id": "thread-9313245ce66f",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-dac24fc548c2",
+      "message_id": "<5FF74B16-E3F3-43AE-93AD-8978FA032114@cmu.edu>",
+      "from_name": "David Reitter",
+      "from_email_hash": "113247da6b261d1c5177372637b9d49ff1c940a3f22aa4e4265719641fd3ccd0",
+      "date": "2009-04-30T19:13:17-04:00",
+      "subject": "[R] Hmisc: xYplot and panel.lines",
+      "subject_clean": "Hmisc: xYplot and panel.lines",
+      "in_reply_to": "<CA0F13C9-537D-40DC-9B51-D5854E68139D@cmu.edu>",
+      "references": [
+        "<CA0F13C9-537D-40DC-9B51-D5854E68139D@cmu.edu>"
+      ],
+      "body_plain": "On Apr 30, 2009, at 6:49 PM, David Reitter wrote:\n> This works as expected for panel.abline, but as soon as I'm using  \n> panel.lines (or llines or lpoints) from the \"lattice\" package  \n> (version 0.17-17 with R 2.8.1), it seems that it is not using the  \n> coordinate system that the original plot used, i.e. the graph does  \n> not work at all.\n\nDisregard my message:  I managed to figure it out.  panel.lines  \ninsists on x and y rather than y ~ x  or y (x are just discrete steps).\n\nThe question that remains is whether it is possible to draw to a panel  \ndirectly using the normal plotting functions in cases where only one  \npanel is shown.  The latest version of Hmisc seems to disallow this  \n(error: \"plot.new has not been called yet\"), and with earlier versions  \nI had said problems about ablines appearing in the wrong locations.",
+      "body_snippet": "On Apr 30, 2009, at 6:49 PM, David Reitter wrote:\n> This works as expected for panel.abline, but as soon as I'm using  \n> panel.lines (or llines or lpoints) from the \"lattice\" package  \n> (version 0.1",
+      "thread_id": "thread-5cb72d18fda0",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-2f268a1a782e",
+      "message_id": "<FE44E0D7EAD2ED4BB2165071DB8E328C04E84AE2@egcrc-ex01.egcrc.org>",
+      "from_name": "Tena Sakai",
+      "from_email_hash": "81086045dec5f3fa10afbda2d0105ec706ddcc23d10ef00724ba74f0f8fcd29e",
+      "date": "2009-04-30T17:04:26-07:00",
+      "subject": "[R] newbie HWRITER package question",
+      "subject_clean": "newbie HWRITER package question",
+      "in_reply_to": null,
+      "references": [
+        "<FE44E0D7EAD2ED4BB2165071DB8E328C04E84ADE@egcrc-ex01.egcrc.org>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090430/47fc9d00/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090430/47fc9d00/attachment-0001.pl>",
+      "thread_id": "thread-9313245ce66f",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-4bcb921d8288",
+      "message_id": "<49FA406F.3060600@cox.net>",
+      "from_name": "Ron Burns",
+      "from_email_hash": "7f9c1ef996492927a6bd0f3b6be904860a12f130cc2548636ffe481a797dccd5",
+      "date": "2009-04-30T17:21:03-07:00",
+      "subject": "[R] AICc",
+      "subject_clean": "AICc",
+      "in_reply_to": "<FBB35D43-6E64-4208-B354-A1C12FAFED93@nau.edu>",
+      "references": [
+        "<FBB35D43-6E64-4208-B354-A1C12FAFED93@nau.edu>"
+      ],
+      "body_plain": "Katie-\n\nI think you can calculate it easily in R using the definitions:\n\nAIC<- -2*LL + 2*K\nAICc<-AIC + 2*K*(K+1)/(n-K-1)\n\nwhere LL is the logLik, K is the the number of parameters in the fitted \nmodel, and n is the number of observation, so if you know AIC then it is \neasy to calculate AICc\n\nRon\n\nKatie Stumpf wrote:\n> I am fitting logistic regression models, by defining my own link \n> function, and would like to get AICc values.  Using the glm command \n> gives a value for AIC, but I haven't been able to get R to convert \n> that to AICc.  Is there a code that has already been written for \n> this?  Right now I am just putting the AIC values into an excel \n> spreadsheet and calculating AICc, likelihood, and AIC weights that \n> way, but it would be much more efficient if I could do this in R.\n>\n> Thanks!\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n-- \nR. R. Burns\nOceanside, CA",
+      "body_snippet": "Katie-\n\nI think you can calculate it easily in R using the definitions:\n\nAIC<- -2*LL + 2*K\nAICc<-AIC + 2*K*(K+1)/(n-K-1)\n\nwhere LL is the logLik, K is the the number of parameters in the fitted \nmodel",
+      "thread_id": "thread-4bcb921d8288",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-b70c05957288",
+      "message_id": "<23327067.post@talk.nabble.com>",
+      "from_name": "RLearner",
+      "from_email_hash": "56e9c5aba07ec7508295223ddec735b3f57ba25bd46ca6ca3b2de4b6225cb696",
+      "date": "2009-04-30T18:01:51-07:00",
+      "subject": "[R] How can I create all possible contigency tables if the total count and number of rows and columns are fixed?",
+      "subject_clean": "How can I create all possible contigency tables if the total count and number of rows and columns are fixed?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all\n\nIt sounds an easy task, but I got stuck with creating all possible\ncontigency tables if the total count is fixed. For example, if the total\ncount is 2, and number of cells in the table is 4 (nrow=2,ncol=2), there\nshould be 10 possible tables:\n0 0     0 0    0 0     0 1     0 1      0 2      1 0     1 0     1 1     2 0\n0 2     1 1    2 0     0 1     1 0      0 0      0 1     1 0     0 0     0 0\n\nAnd, are there any suggestions on creating hash and inverse hash function\nsuch that whenever we know the index integer, we can find the corresponding\ntable?\n\nPlease let me know if you have any thoughts. Thanks a lot!\n-- \nView this message in context: http://www.nabble.com/How-can-I-create-all-possible-contigency-tables-if-the-total-count-and-number-of-rows-and-columns-are-fixed--tp23327067p23327067.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear all\n\nIt sounds an easy task, but I got stuck with creating all possible\ncontigency tables if the total count is fixed. For example, if the total\ncount is 2, and number of cells in the table is 4 ",
+      "thread_id": "thread-b70c05957288",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-0af290a71df8",
+      "message_id": "<7acc7a990904301841h7cb7a3aap6ac0c7efebc53acd@mail.gmail.com>",
+      "from_name": "Erin Hodgess",
+      "from_email_hash": "b26e9c7bfb605fed8b617b744d8476ab90f8218ca2710a5f80794303575b1adc",
+      "date": "2009-04-30T20:41:39-05:00",
+      "subject": "[R]  Rscript vs R CMD BATCH",
+      "subject_clean": "Rscript vs R CMD BATCH",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R People:\n\nIs is better to use Rscrpt or R CMD BATCH or does it not matter, please?\n\nThanks,\nErin\n\n\n-- \nErin Hodgess\nAssociate Professor\nDepartment of Computer and Mathematical Sciences\nUniversity of Houston - Downtown\nmailto: erinm.hodgess at gmail.com",
+      "body_snippet": "Dear R People:\n\nIs is better to use Rscrpt or R CMD BATCH or does it not matter, please?\n\nThanks,\nErin\n\n\n-- \nErin Hodgess\nAssociate Professor\nDepartment of Computer and Mathematical Sciences\nUniversit",
+      "thread_id": "thread-0af290a71df8",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-7e991db0264e",
+      "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC61D19A1195@LP-EXMBVS10.CO.IHC.COM>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "d2f9bb4886b25a9f732759fe05a19061c499befbba553fe79bba4cc9f00cec28",
+      "date": "2009-04-30T19:50:22-06:00",
+      "subject": "[R] Curved arrows",
+      "subject_clean": "Curved arrows",
+      "in_reply_to": "<23312316.post@talk.nabble.com>",
+      "references": [
+        "<23312316.post@talk.nabble.com>"
+      ],
+      "body_plain": "?xspline for the shaft, do the head by hand (or using arrows with a very short shaft)\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.8111\n\n\n> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Paul Chatfield\n> Sent: Thursday, April 30, 2009 2:57 AM\n> To: r-help at r-project.org\n> Subject: [R] Curved arrows\n> \n> \n> I'm trying to draw an arrow with a curved shaft on the graph as a\n> straight\n> one looks messy on a detailed graph.  I've looked in arrows but it\n> doesn't\n> seem to give an option.  larrows doesn't look much more promising.  I\n> had a\n> look in the archive and couldn't find anything.  Any thoughts?\n> \n> Thanks\n> \n> Paul\n> --\n> View this message in context: http://www.nabble.com/Curved-arrows-\n> tp23312316p23312316.html\n> Sent from the R help mailing list archive at Nabble.com.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-\n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "?xspline for the shaft, do the head by hand (or using arrows with a very short shaft)\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatistical Data Center\nIntermountain Healthcare\ngreg.snow at imail.org\n801.408.",
+      "thread_id": "thread-7e991db0264e",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-48b9654d5b4b",
+      "message_id": "<4EE7FF8D-6135-40BB-B535-58420A231089@gmail.com>",
+      "from_name": "JiHO",
+      "from_email_hash": "3090e2e5df1d685e1f3916ba10a92eb0e0b611b57bffac0ee67d95b85177550a",
+      "date": "2009-04-30T22:10:31-04:00",
+      "subject": "[R] Evaluating content of command line arguments",
+      "subject_clean": "Evaluating content of command line arguments",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello everyone,\n\nI am writing an R script which will be provided with command line  \narguments by a shell script. I read them with commandArgs() but I have  \nan issue to make that fool proof.\n\nFor example, with test.R containing:\n\n         args=commandArgs(trailingOnly=TRUE)\n         args\n\nI get:\n\n         $ Rscript test_commandLineArgs.R 3 4 5\n         [1] \"3\" \"4\" \"5\"\n\nNow, to make the input more flexible and robust, I want to pass  \n*named* arguments, so that the R script does not depend on the order  \nof arguments passed and can check which are present/absent etc. I.e.\n\n         $ Rscript test_commandLineArgs.R foo=3 bar=4 5\n         [1] \"foo=3\" \"bar=4\"\n\nBut I am stuck on how to actually execute the code within those  \nstrings so as to get two variables foo and bar equal to 3 and 4  \nrespectively. I looked at eval, deparse, substitute and all that but  \ndid not find anything. Is that possible?\n\nOtherwise I will resort to parsing the arguments with strsplit but I  \nwould much prefer and more elegant solution.\n\nThank you very much in advance. Sincerely,\n\nJiHO\n---\nhttp://jo.irisson.free.fr/",
+      "body_snippet": "Hello everyone,\n\nI am writing an R script which will be provided with command line  \narguments by a shell script. I read them with commandArgs() but I have  \nan issue to make that fool proof.\n\nFor exa",
+      "thread_id": "thread-48b9654d5b4b",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-5fdcc401044f",
+      "message_id": "<971536df0904301928g56177d1fxc9029ee81f80d4e8@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2009-04-30T22:28:49-04:00",
+      "subject": "[R] Evaluating content of command line arguments",
+      "subject_clean": "Evaluating content of command line arguments",
+      "in_reply_to": "<4EE7FF8D-6135-40BB-B535-58420A231089@gmail.com>",
+      "references": [
+        "<4EE7FF8D-6135-40BB-B535-58420A231089@gmail.com>"
+      ],
+      "body_plain": "Check out the getopt package.\n\nOn Thu, Apr 30, 2009 at 10:10 PM, JiHO <jo.lists at gmail.com> wrote:\n> Hello everyone,\n>\n> I am writing an R script which will be provided with command line arguments\n> by a shell script. I read them with commandArgs() but I have an issue to\n> make that fool proof.\n>\n> For example, with test.R containing:\n>\n> ? ? ? ?args=commandArgs(trailingOnly=TRUE)\n> ? ? ? ?args\n>\n> I get:\n>\n> ? ? ? ?$ Rscript test_commandLineArgs.R 3 4 5\n> ? ? ? ?[1] \"3\" \"4\" \"5\"\n>\n> Now, to make the input more flexible and robust, I want to pass *named*\n> arguments, so that the R script does not depend on the order of arguments\n> passed and can check which are present/absent etc. I.e.\n>\n> ? ? ? ?$ Rscript test_commandLineArgs.R foo=3 bar=4 5\n> ? ? ? ?[1] \"foo=3\" \"bar=4\"\n>\n> But I am stuck on how to actually execute the code within those strings so\n> as to get two variables foo and bar equal to 3 and 4 respectively. I looked\n> at eval, deparse, substitute and all that but did not find anything. Is that\n> possible?\n>\n> Otherwise I will resort to parsing the arguments with strsplit but I would\n> much prefer and more elegant solution.\n>\n> Thank you very much in advance. Sincerely,\n>\n> JiHO\n> ---\n> http://jo.irisson.free.fr/\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Check out the getopt package.\n\nOn Thu, Apr 30, 2009 at 10:10 PM, JiHO <jo.lists at gmail.com> wrote:\n> Hello everyone,\n>\n> I am writing an R script which will be provided with command line arguments\n>",
+      "thread_id": "thread-48b9654d5b4b",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-f5fbfc27f42b",
+      "message_id": "<23327660.post@talk.nabble.com>",
+      "from_name": "tedzzx",
+      "from_email_hash": "503df3d30a3981b097e0b506130651278efbc14cbf6180dbdd93a4a9de37fafd",
+      "date": "2009-04-30T19:32:46-07:00",
+      "subject": "[R] problem in reading data",
+      "subject_clean": "problem in reading data",
+      "in_reply_to": "<644e1f320904301139r408e00b4ta9a9c374dfc02f74@mail.gmail.com>",
+      "references": [
+        "<23316321.post@talk.nabble.com>",
+        "<644e1f320904301139r408e00b4ta9a9c374dfc02f74@mail.gmail.com>"
+      ],
+      "body_plain": "Dear jholtman,\n\nThe problem is that in this case, it seems that the blank is not replaced by\nNA according to the information I quote. It is replaced by blank. I have\ntry: which(is.na(a$V4)), but get NA.\n\nI want to delete the rows that have different format from others.\n\njholtman wrote:\n> \n> In some cases the missing values have been replaced by NAs so you can look\n> for those.\n> \n> On Thu, Apr 30, 2009 at 9:28 AM, tedzzx <zengzhenxing at gmail.com> wrote:\n> \n>>\n>> Dear R users\n>> I am runing into a problem in reading data in R\n>> This is the error information\n>>\n>> a<-read.table(\"tt_mb_200409.txt\",as.is=T)\n>> Error in scan(file, what, nmax, sep, dec, quote, skip, nlines,\n>> na.strings,\n>> :\n>>  line 1653997 did not have 5 elements\n>>\n>> It seams that some lines don't have equal variables. I want to try\n>>\n>> > a<-read.table(\"tt_mb_200409.txt\",as.is=T,fill=T)\n>> > a[1653997,]\n>>           V1      V2        V3     V4     V5\n>> 1653997 00992 2777010\n>>\n>> But, I want to delect the rows that do not have the same number of\n>> variables\n>> with others, how can I do this?\n>>\n>> Many thanks\n>>\n>> Ted\n>>\n>>\n>> --\n>> View this message in context:\n>> http://www.nabble.com/problem-in-reading-data-tp23316321p23316321.html\n>> Sent from the R help mailing list archive at Nabble.com.\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html<http://www.r-project.org/posting-guide.html>\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> \n> \n> -- \n> Jim Holtman\n> Cincinnati, OH\n> +1 513 646 9390\n> \n> What is the problem that you are trying to solve?\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/problem-in-reading-data-tp23316321p23327660.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear jholtman,\n\nThe problem is that in this case, it seems that the blank is not replaced by\nNA according to the information I quote. It is replaced by blank. I have\ntry: which(is.na(a$V4)), but get N",
+      "thread_id": "thread-f5fbfc27f42b",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-34c6d82bd831",
+      "message_id": "<7DBA9A73028.00000214bearmarketsrule@inbox.com>",
+      "from_name": "Rob Denniker",
+      "from_email_hash": "1b2d6e907fd20852c4f1f6132515795e3dd655f419a5f6794e9a8d34ff388498",
+      "date": "2009-04-30T18:50:27-08:00",
+      "subject": "[R] Confusion going from Stata -> R",
+      "subject_clean": "Confusion going from Stata -> R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\n\nI am trying to replicate some Stata results but having a tough time doing it in R.  The goal is to obtain a difference-in-difference estimate in a model with simple state fixed effects. The \"state\" variable is a factor, but some levels are missing.  It appears that Stata automatically recognizes this and works around it. It also automatically pick \"ME\" as the base state  (see below), but trying to do the same thing in R does not yield the same results... \n\nThe data is as follows:\n\n# States were assigned to treatment and control groups in 1976, and  residents surveyed in 1976 and 1985\n# i.year indicates the year the respondent was surveyed\n# i.st is a factor indicating the respondent's state of residence\n# i.treatment is a dummy indicating whether that individual was resident in a treatment state\n# hwover is the binary response variable of interest\n\nload(url(\"http://h1.ripway.com/rdump/d.rdata\"))\n# load data frame \"d\" (slow to load, retry if 404)\n\n# Code i.st as a factor\nd$i.st <- factor(d$st)\nn.i.st <- length(levels(d$i.st))\nlevels(d$i.st)[14] # Level 14 == \"ME\"\ncontrasts(d$i.st) <- contr.treatment(n.i.st, base = 14, contrasts=T)  # Sets base level to \"ME\"\nattributes(d$i.st)\n\n# Difference-in-difference estimate\nreg1 <- lm(hwover ~ i.treatment*i.year + i.st, data=d, weights=weight1)\nsummary(reg1)\n# Output (correctly) omit state \"14\" (\"ME\")\n# Estimates of average treatment effect (coefficient on i.treatment1:i.year1985) same as Stata's\n# So is the coefficient on i.year1985.\n# All other params are off.\n\n\nFor comparison, I am pasting Stata's output below.\nAny ideas would be much appreciated!\n\n\nxi: reg hwover i.treatment*i.year i.st if st1976==1 [pw=weight1]\ni.treatment       _Itreatment_0-1     (naturally coded; _Itreatment_0 omitted)\n(characteristic year[omit]: 1968\nyet variable year never equals 1968; characteristic ignored)\ni.year            _Iyear_1976-1985    (naturally coded; _Iyear_1976 omitted)\ni.tre~t*i.year    _ItreXyea_#_#       (coded as above)\ni.st              _Ist_1-52           (_Ist_23 for st==ME omitted)\n(sum of wgt is   6.0268e+03)\n\nLinear regression                                      Number of obs =    5976\n                                                       F( 37,  5938) =    1.37\n                                                       Prob > F      =  0.0650\n                                                       R-squared     =  0.0083\n                                                       Root MSE      =  .32063\n\n------------------------------------------------------------------------------\n             |               Robust\n      hwover |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]\n-------------+----------------------------------------------------------------\n_Itreatmen~1 |   .0117852   .0438655     0.27   0.788    -.0742072    .0977775\n _Iyear_1985 |   .0297313   .0163587     1.82   0.069    -.0023377    .0618004\n_ItreXy~1985 |   -.055271   .0198304    -2.79   0.005    -.0941457   -.0163963\n      _Ist_1 |  (dropped)\n      _Ist_2 |  (dropped)\n      _Ist_3 |  -.0029799   .0325302    -0.09   0.927     -.066751    .0607912\n      _Ist_4 |  (dropped)\n      _Ist_5 |   .0472988   .0408782     1.16   0.247    -.0328373    .1274349\n      _Ist_6 |    .072884   .0292795     2.49   0.013     .0154855    .1302826\n      _Ist_7 |   .0995722   .0440573     2.26   0.024     .0132039    .1859406\n      _Ist_8 |   .0489226   .0424768     1.15   0.249    -.0343473    .1321926\n      _Ist_9 |  (dropped)\n     _Ist_10 |  (dropped)\n     _Ist_11 |   .0591339   .0341094     1.73   0.083    -.0077329    .1260008\n     _Ist_12 |   .0229454   .0355917     0.64   0.519    -.0468274    .0927181\n     _Ist_13 |  (dropped)\n     _Ist_14 |  (dropped)\n     _Ist_15 |   .0058994   .0511652     0.12   0.908     -.094403    .1062018\n     _Ist_16 |   .0830382   .0326732     2.54   0.011     .0189868    .1470896\n     _Ist_17 |   .0579801   .0385756     1.50   0.133    -.0176421    .1336022\n     _Ist_18 |  -.0013615   .0342379    -0.04   0.968    -.0684803    .0657573\n     _Ist_19 |  (dropped)\n     _Ist_20 |   .0310298   .0428693     0.72   0.469    -.0530095    .1150692\n     _Ist_21 |  (dropped)\n     _Ist_22 |   .0302868   .0448914     0.67   0.500    -.0577166    .1182902\n     _Ist_24 |    .060111   .0334748     1.80   0.073    -.0055119    .1257338\n     _Ist_25 |   .0003036   .0329512     0.01   0.993    -.0642926    .0648999\n     _Ist_26 |    -.00681   .0307812    -0.22   0.825    -.0671522    .0535323\n     _Ist_27 |   .0452638   .0503703     0.90   0.369    -.0534803    .1440078\n     _Ist_28 |   .0869412   .0867014     1.00   0.316     -.083025    .2569075\n     _Ist_29 |  -.0059285   .0384747    -0.15   0.878    -.0813529    .0694959\n     _Ist_30 |  (dropped)\n     _Ist_31 |   .1421038   .0558453     2.54   0.011     .0326267    .2515808\n     _Ist_32 |  (dropped)\n     _Ist_33 |   .0552327   .0331347     1.67   0.096    -.0097233    .1201887\n     _Ist_34 |  (dropped)\n     _Ist_35 |  (dropped)\n     _Ist_36 |   .0245104   .0377347     0.65   0.516    -.0494633    .0984841\n     _Ist_37 |   .0558682   .0307152     1.82   0.069    -.0043448    .1160812\n     _Ist_38 |  (dropped)\n     _Ist_39 |   .0429489     .04253     1.01   0.313    -.0404253    .1263232\n     _Ist_40 |   .0230925   .0301413     0.77   0.444    -.0359955    .0821804\n     _Ist_41 |  (dropped)\n     _Ist_42 |   .0408904   .0374549     1.09   0.275    -.0325349    .1143157\n     _Ist_43 |  (dropped)\n     _Ist_44 |   .0039713   .0431761     0.09   0.927    -.0806695    .0886122\n     _Ist_45 |   .0425491   .0295203     1.44   0.150    -.0153213    .1004196\n     _Ist_46 |   .0148853   .0447929     0.33   0.740    -.0729251    .1026957\n     _Ist_47 |   .0146356   .0427135     0.34   0.732    -.0690984    .0983695\n     _Ist_48 |   .1538798   .0817703     1.88   0.060    -.0064197    .3141793\n     _Ist_49 |   .0191617   .0332331     0.58   0.564    -.0459873    .0843107\n     _Ist_50 |    .033731   .0389537     0.87   0.387    -.0426325    .1100945\n     _Ist_51 |   .0431437   .0482243     0.89   0.371    -.0513934    .1376808\n     _Ist_52 |  (dropped)\n       _cons |   .0765964   .0365322     2.10   0.036       .00498    .1482128\n------------------------------------------------------------------------------",
+      "body_snippet": "Dear list,\n\nI am trying to replicate some Stata results but having a tough time doing it in R.  The goal is to obtain a difference-in-difference estimate in a model with simple state fixed effects. Th",
+      "thread_id": "thread-34c6d82bd831",
+      "thread_depth": 0,
+      "month": "2009-04"
+    },
+    {
+      "id": "msg-40ee9fa258bb",
+      "message_id": "<23328500.post@talk.nabble.com>",
+      "from_name": "cameron.bracken",
+      "from_email_hash": "020a769e735b40b41b51198f839f2fc5533f7323b1c06483bcac5d5d323f5587",
+      "date": "2009-04-30T22:00:47-07:00",
+      "subject": "[R] postscript printer breaking up long strings",
+      "subject_clean": "postscript printer breaking up long strings",
+      "in_reply_to": "<XFMail.090430214002.Ted.Harding@manchester.ac.uk>",
+      "references": [
+        "<23322197.post@talk.nabble.com>",
+        "<XFMail.090430214002.Ted.Harding@manchester.ac.uk>"
+      ],
+      "body_plain": "Ted.Harding-2 wrote:\n> \n> In the graph shown in your URL above, the xlab and the ylab\n> appear in their entirety, unbroken. So does the one plotted\n> in the middle of the graph. I get the same when I run your code.\n> \n\nHi-\n\nI am one of the developers of pgfSweave. The problem (although it is\nconsidered a feature) is this (from https://svn.r-project.org/R/trunk/NEWS):\n\nNEW FEATURES (in 2.9.0)\n\n    o\tpdf() and postscript() gain a 'useKerning' argument to place\n\tstrings using kerning (which had previously been ignored in\n\tdisplay but not in strwidth), based in part on an idea and\n\tcode from Ei-ji Nakama. The default is TRUE.\n\n\tKerning involving spaces is now ignored (it was previously\n\tonly used in the computation of string widths).\n\nThis is normally not a problem but converting to pgf and then to pdf causes\nlarge gaps when the useKerning option is turned on. The following will cause\nthe long strings to not break.\n\n  postscript('linebreaktest.eps',useKerning=FALSE) \n  plot(1,xlab='aReallyLongStringToSeeHowItBreaks', \n         ylab='aReallyLongStringToSeeHowItBreaks') \n  for(i in c(.6,1,1.4))text(i,i,'aReallyLongStringToSeeHowItBreaks') \n  dev.off()\n \nKerning will be turned off by default in the latest snapshot of pgfSweave.\n\n-Cameron Bracken\n-- \nView this message in context: http://www.nabble.com/postscript-printer-breaking-up-long-strings-tp23322197p23328500.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Ted.Harding-2 wrote:\n> \n> In the graph shown in your URL above, the xlab and the ylab\n> appear in their entirety, unbroken. So does the one plotted\n> in the middle of the graph. I get the same when I ",
+      "thread_id": "thread-40ee9fa258bb",
+      "thread_depth": 0,
+      "month": "2009-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-ab6122ffe26e",
+      "subject": "gridding values in a data frame",
+      "message_count": 2,
+      "participants": [
+        "dxc13",
+        "jdeisenberg"
+      ],
+      "started": "2009-04-30T15:06:16-07:00",
+      "last_reply": "2009-04-30T15:22:11-07:00",
+      "root_message_id": "msg-ab6122ffe26e"
+    },
+    {
+      "id": "thread-9313245ce66f",
+      "subject": "newbie HWRITER package question",
+      "message_count": 2,
+      "participants": [
+        "Tena Sakai"
+      ],
+      "started": "2009-04-30T15:56:40-07:00",
+      "last_reply": "2009-04-30T17:04:26-07:00",
+      "root_message_id": "msg-9313245ce66f"
+    },
+    {
+      "id": "thread-8c8a954b93b1",
+      "subject": "Multi-variate rcs() error",
+      "message_count": 1,
+      "participants": [
+        "Frank E Harrell Jr"
+      ],
+      "started": "2009-04-30T17:04:23-05:00",
+      "last_reply": "2009-04-30T17:04:23-05:00",
+      "root_message_id": "msg-8c8a954b93b1"
+    },
+    {
+      "id": "thread-48faf214a85c",
+      "subject": "gridding values in a data frame",
+      "message_count": 1,
+      "participants": [
+        "hadley wickham"
+      ],
+      "started": "2009-04-30T17:15:55-05:00",
+      "last_reply": "2009-04-30T17:15:55-05:00",
+      "root_message_id": "msg-48faf214a85c"
+    },
+    {
+      "id": "thread-4bcb921d8288",
+      "subject": "AICc",
+      "message_count": 1,
+      "participants": [
+        "Ron Burns"
+      ],
+      "started": "2009-04-30T17:21:03-07:00",
+      "last_reply": "2009-04-30T17:21:03-07:00",
+      "root_message_id": "msg-4bcb921d8288"
+    },
+    {
+      "id": "thread-b70c05957288",
+      "subject": "How can I create all possible contigency tables if the total count and number of rows and columns are fixed?",
+      "message_count": 1,
+      "participants": [
+        "RLearner"
+      ],
+      "started": "2009-04-30T18:01:51-07:00",
+      "last_reply": "2009-04-30T18:01:51-07:00",
+      "root_message_id": "msg-b70c05957288"
+    },
+    {
+      "id": "thread-cb5b0fb101ec",
+      "subject": "Understanding padding in lattice",
+      "message_count": 1,
+      "participants": [
+        "Sebastien Bihorel"
+      ],
+      "started": "2009-04-30T18:22:03-04:00",
+      "last_reply": "2009-04-30T18:22:03-04:00",
+      "root_message_id": "msg-cb5b0fb101ec"
+    },
+    {
+      "id": "thread-5456ceb0e485",
+      "subject": "setting key boxes in xyplot",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2009-04-30T18:34:05-04:00",
+      "last_reply": "2009-04-30T18:34:05-04:00",
+      "root_message_id": "msg-5456ceb0e485"
+    },
+    {
+      "id": "thread-5cb72d18fda0",
+      "subject": "Hmisc: xYplot and panel.lines",
+      "message_count": 2,
+      "participants": [
+        "David Reitter"
+      ],
+      "started": "2009-04-30T18:49:25-04:00",
+      "last_reply": "2009-04-30T19:13:17-04:00",
+      "root_message_id": "msg-5cb72d18fda0"
+    },
+    {
+      "id": "thread-e636b4c597ed",
+      "subject": "Extracting Element from S4 objects",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2009-04-30T18:49:55-04:00",
+      "last_reply": "2009-04-30T18:49:55-04:00",
+      "root_message_id": "msg-e636b4c597ed"
+    },
+    {
+      "id": "thread-34c6d82bd831",
+      "subject": "Confusion going from Stata -> R",
+      "message_count": 1,
+      "participants": [
+        "Rob Denniker"
+      ],
+      "started": "2009-04-30T18:50:27-08:00",
+      "last_reply": "2009-04-30T18:50:27-08:00",
+      "root_message_id": "msg-34c6d82bd831"
+    },
+    {
+      "id": "thread-f5fbfc27f42b",
+      "subject": "problem in reading data",
+      "message_count": 1,
+      "participants": [
+        "tedzzx"
+      ],
+      "started": "2009-04-30T19:32:46-07:00",
+      "last_reply": "2009-04-30T19:32:46-07:00",
+      "root_message_id": "msg-f5fbfc27f42b"
+    },
+    {
+      "id": "thread-7e991db0264e",
+      "subject": "Curved arrows",
+      "message_count": 1,
+      "participants": [
+        "Greg Snow"
+      ],
+      "started": "2009-04-30T19:50:22-06:00",
+      "last_reply": "2009-04-30T19:50:22-06:00",
+      "root_message_id": "msg-7e991db0264e"
+    },
+    {
+      "id": "thread-0af290a71df8",
+      "subject": "Rscript vs R CMD BATCH",
+      "message_count": 1,
+      "participants": [
+        "Erin Hodgess"
+      ],
+      "started": "2009-04-30T20:41:39-05:00",
+      "last_reply": "2009-04-30T20:41:39-05:00",
+      "root_message_id": "msg-0af290a71df8"
+    },
+    {
+      "id": "thread-40ee9fa258bb",
+      "subject": "postscript printer breaking up long strings",
+      "message_count": 1,
+      "participants": [
+        "cameron.bracken"
+      ],
+      "started": "2009-04-30T22:00:47-07:00",
+      "last_reply": "2009-04-30T22:00:47-07:00",
+      "root_message_id": "msg-40ee9fa258bb"
+    },
+    {
+      "id": "thread-48b9654d5b4b",
+      "subject": "Evaluating content of command line arguments",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "JiHO"
+      ],
+      "started": "2009-04-30T22:10:31-04:00",
+      "last_reply": "2009-04-30T22:28:49-04:00",
+      "root_message_id": "msg-48b9654d5b4b"
+    }
+  ]
+}

@@ -1,0 +1,595 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2014-02",
+  "messages": [
+    {
+      "id": "msg-e191f87d5767",
+      "message_id": "<186BAD21-E58A-4D18-833C-273C2FE3D1E0@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2014-02-28T15:01:33-08:00",
+      "subject": "[R] Saving a map as a postscript file",
+      "subject_clean": "Saving a map as a postscript file",
+      "in_reply_to": "<DUB111-W959FDE2E36B8FA2F577AD7DC820@phx.gbl>",
+      "references": [
+        "<DUB111-W959FDE2E36B8FA2F577AD7DC820@phx.gbl>"
+      ],
+      "body_plain": "On Feb 28, 2014, at 8:22 AM, Ciara O'Hara wrote:\n\n> Hi all, \n> I am running the script below to produce a map. The problem I am having is saving it as a postscript file. A postscript file is created, but it is blank. I have also run this is linux (with different paths) and I get the same thing (blank postscript file). Does anyone know how to do this? \n> P.S. the 'There were 50 or more warnings (use warnings() to see the first 50)' error doesn't seem to be making any difference to the map so don't worry about that. The legend is not working either, but one thing at a time.\n> Thanks,Ciara\n>> library(ncdf)> library(maps)> library(mapdata)> library(maptools)> library(RColorBrewer)> shapefile<-readShapeLines(\"C:\\\\Users\\\\sophysics\\\\Desktop\\\\IRL_adm\\\\IRL_adm1.shp\")> file<-open.ncdf(\"C:\\\\Users\\\\sophysics\\\\Desktop\\\\TempData\\\\average\\\\average_1961.nc\")> data<-get.var.ncdf(file,\"var61\")> lat<-get.var.ncdf(file,\"lat\")> lon<-get.var.ncdf(file,\"lon\")> postscript(\"Average_1961.ps\")> map(\"worldHires\",\"Ireland\",col=\"purple\",fill=FALSE,box=NULL)> image(lon,lat,data,col=rev(brewer.pal(9,\"RdBu\")),xaxt=\"n\",yaxt=\"n\",ann=FALSE,box=NULL,xlab=NULL,ylab=NULL,asp=-1)> plot(shapefile,add=TRUE,border=FALSE)There were 50 or more warnings (use warnings() to see the first 50)> title(main=\"Average temperature 1961\")> legend(\"bottom\",legend=leg,title = \"Temp\",col=rev(brewer.pal(9,\"RdBu\")))Error in as.graphicsAnnot(legend) : object 'leg' not found> dev.off()null device           1  \t\t \t   \t\t  \n> \t[[alternative HTML version deleted]]\n\nYou apparently find it difficult to read  the Posting Guide and the error message displayed on the console.\n\n> \n> ________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nFollowing advice above would help greatly in your efforts at communicating.\n\n-- \n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Feb 28, 2014, at 8:22 AM, Ciara O'Hara wrote:\n\n> Hi all, \n> I am running the script below to produce a map. The problem I am having is saving it as a postscript file. A postscript file is created, ",
+      "thread_id": "thread-e191f87d5767",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-e191f87d5767",
+      "message_id": "<186BAD21-E58A-4D18-833C-273C2FE3D1E0@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2014-02-28T15:01:33-08:00",
+      "subject": "[R] Saving a map as a postscript file",
+      "subject_clean": "Saving a map as a postscript file",
+      "in_reply_to": "<DUB111-W959FDE2E36B8FA2F577AD7DC820@phx.gbl>",
+      "references": [
+        "<DUB111-W959FDE2E36B8FA2F577AD7DC820@phx.gbl>"
+      ],
+      "body_plain": "On Feb 28, 2014, at 8:22 AM, Ciara O'Hara wrote:\n\n> Hi all, \n> I am running the script below to produce a map. The problem I am having is saving it as a postscript file. A postscript file is created, but it is blank. I have also run this is linux (with different paths) and I get the same thing (blank postscript file). Does anyone know how to do this? \n> P.S. the 'There were 50 or more warnings (use warnings() to see the first 50)' error doesn't seem to be making any difference to the map so don't worry about that. The legend is not working either, but one thing at a time.\n> Thanks,Ciara\n>> library(ncdf)> library(maps)> library(mapdata)> library(maptools)> library(RColorBrewer)> shapefile<-readShapeLines(\"C:\\\\Users\\\\sophysics\\\\Desktop\\\\IRL_adm\\\\IRL_adm1.shp\")> file<-open.ncdf(\"C:\\\\Users\\\\sophysics\\\\Desktop\\\\TempData\\\\average\\\\average_1961.nc\")> data<-get.var.ncdf(file,\"var61\")> lat<-get.var.ncdf(file,\"lat\")> lon<-get.var.ncdf(file,\"lon\")> postscript(\"Average_1961.ps\")> map(\"worldHires\",\"Ireland\",col=\"purple\",fill=FALSE,box=NULL)> image(lon,lat,data,col=rev(brewer.pal(9,\"RdBu\")),xaxt=\"n\",yaxt=\"n\",ann=FALSE,box=NULL,xlab=NULL,ylab=NULL,asp=-1)> plot(shapefile,add=TRUE,border=FALSE)There were 50 or more warnings (use warnings() to see the first 50)> title(main=\"Average temperature 1961\")> legend(\"bottom\",legend=leg,title = \"Temp\",col=rev(brewer.pal(9,\"RdBu\")))Error in as.graphicsAnnot(legend) : object 'leg' not found> dev.off()null device           1  \t\t \t   \t\t  \n> \t[[alternative HTML version deleted]]\n\nYou apparently find it difficult to read  the Posting Guide and the error message displayed on the console.\n\n> \n> ________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nFollowing advice above would help greatly in your efforts at communicating.\n\n-- \n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Feb 28, 2014, at 8:22 AM, Ciara O'Hara wrote:\n\n> Hi all, \n> I am running the script below to produce a map. The problem I am having is saving it as a postscript file. A postscript file is created, ",
+      "thread_id": "thread-e191f87d5767",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-0ee0bdea6dd5",
+      "message_id": "<1393628516546-4686043.post@n4.nabble.com>",
+      "from_name": "ltdm",
+      "from_email_hash": "8dbc8ad1e7383d8b182224131ce2184a29b9c28771e0e3499137174a1dbe8c7f",
+      "date": "2014-02-28T15:01:56-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393626543882-4686040.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = T)\nX <- df[du1|du2,]\naggRows <- aggregate(cbind(NT,PT) ~St.Sam+Species+Var1+Var2, X,sum)\ndfNew <- rbind(df[!(du1|du2),], aggRows)\n\nJust need to \"polish\" dfNew and its OK. But maybe there is a more elegant\nsolution.\n\nCheers,\n\nTito\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040p4686043.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(d",
+      "thread_id": "thread-0ee0bdea6dd5",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-0ee0bdea6dd5",
+      "message_id": "<1393628516546-4686043.post@n4.nabble.com>",
+      "from_name": "ltdm",
+      "from_email_hash": "8dbc8ad1e7383d8b182224131ce2184a29b9c28771e0e3499137174a1dbe8c7f",
+      "date": "2014-02-28T15:01:56-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393626543882-4686040.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = T)\nX <- df[du1|du2,]\naggRows <- aggregate(cbind(NT,PT) ~St.Sam+Species+Var1+Var2, X,sum)\ndfNew <- rbind(df[!(du1|du2),], aggRows)\n\nJust need to \"polish\" dfNew and its OK. But maybe there is a more elegant\nsolution.\n\nCheers,\n\nTito\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040p4686043.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(d",
+      "thread_id": "thread-0ee0bdea6dd5",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-b50949b50c65",
+      "message_id": "<1393629844.18679.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:24:04-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393626543882-4686040.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>"
+      ],
+      "body_plain": "If, 'dat' is the dataset:\nres <- as.data.frame(do.call(rbind,lapply(split(dat,list(dat$St.Sam,dat$Sp),drop=TRUE),function(x) c(unlist(x[1,1:4]),colSums(x[,5:6])))))\n?row.names(res) <- 1:nrow(res)\nres\n?? St.Sam? Sp Var1 Var2 NT PT\n1? ST1.S1 Sp1?? 12?? aa 23 37\n2? ST1.S2 Sp1?? 25?? dd 29 66\n3? ST2.S1 Sp1?? 15?? aa 30 45\n4? ST3.S1 Sp1?? 25?? aa 26 69\n5? ST1.S1 Sp2?? 32?? bb 45 26\n6? ST1.S2 Sp2?? 59?? ee 89 35\n7? ST2.S1 Sp2?? 45?? cc 55 23\n8? ST3.S1 Sp2?? 36?? bb 65 48\n9? ST1.S1 Sp3?? 47?? cc 89 35\n10 ST2.S1 Sp3?? 27?? aa 85 12\n11 ST2.S1 Sp4?? 42?? cc? 8? 3\nA.K.\n\n\n\n\nOn Friday, February 28, 2014 5:31 PM, ltdm <Luis.Tito-de-Morais at ird.fr> wrote:\nHi list,\n\nI have a dataframe df looking like this one:\n\nSt.Sam? ? Sp? ? Var1? Var2? ? NT? ? PT\nST1.S1? ? Sp1? ? 12? ? aa? ? 20? ? 32\nST1.S1? ? Sp2? ? 32? ? bb? ? 45? ? 26\nST1.S1? ? Sp1? ? 12? ? aa? ?  3? ?  5\nST1.S1? ? Sp3? ? 47? ? cc? ? 89? ? 35\nST1.S2? ? Sp1? ? 25? ? dd? ? 29? ? 66\nST1.S2? ? Sp2? ? 59? ? ee? ? 89? ? 35\nST2.S1? ? Sp1? ? 15? ? aa? ? 30? ? 45\nST2.S1? ? Sp2? ? 45? ? cc? ? 55? ? 23\nST2.S1? ? Sp3? ? 27? ? aa? ? 85? ? 12\nST2.S1? ? Sp4? ? 42? ? cc? ? ? 8? ?  3\nST3.S1? ? Sp1? ? 25? ? aa? ? 26? ? 69\nST3.S1? ? Sp2? ? 36? ? bb? ? 56? ? 36\nST3.S1? ? Sp2? ? 36? ? bb? ?  9? ?  12\n\nSt.Sam : indicates the Station and the sample #\nSp is a species code\nVar1 is numeric, Var2 is a factor\nNT and PT are numeric\nPlease note that lines 2 and 3 are the same species (Sp1) in the same\nstation and sample. Var1 and Var2 have the same values and NT and PT differ.\nAlso the last 2 lines? are the same species in the same station and sample.\nVar1 and Var2 have the same values, and NT and PT differ.\n\nWhat I would like to have is a dataframe like this one:\n\nSt.Sam? ? Sp? ? Var1? Var2? ? NT? ? PT\nST1.S1? ? Sp1? ? 12? ? aa? ? 23? ? 37\nST1.S1? ? Sp2? ? 32? ? bb? ? 45? ? 26\nST1.S1? ? Sp3? ? 47? ? cc? ? 89? ? 35\nST1.S2? ? Sp1? ? 25? ? dd? ? 29? ? 66\nST1.S2? ? Sp2? ? 59? ? ee? ? 89? ? 35\nST2.S1? ? Sp1? ? 15? ? aa? ? 30? ? 45\nST2.S1? ? Sp2? ? 45? ? cc? ? 55? ? 23\nST2.S1? ? Sp3? ? 27? ? aa? ? 85? ? 12\nST2.S1? ? Sp4? ? 42? ? cc? ? ? 8? ? ? 3\nST3.S1? ? Sp1? ? 25? ? aa? ? 26? ? 69\nST3.S1? ? Sp2? ? 36? ? bb? ? 65? ? 48\n\ni.e. the lines with same pair of St.Sam/Sp have been aggregated and the\nvalues NT and PT summed.\nVar1 and Var2 are untouched (they are allways equal for a given pair\nSt.Sam/Species).\n\nI know how to find and extract the lines of interest using \"duplicated\", but\nI am unable to automatically sum the NT and PT. I have been struggling with\n\"aggregate\" and the like but I am stuck.\nI searched the web and the archives but found no answer nor similar\nquestion.\n\nDoes anybody have a solution or a link to a page or suggestion to help me ?\n\nThank you very much for your help\n\nTito\n\nHere is a quick&dirty way to build the toy dataframe above:\nSt.Sam <-\nc(\"ST1.S1\",\"ST1.S1\",\"ST1.S1\",\"ST1.S1\",\"ST1.S2\",\"ST1.S2\",\"ST2.S1\",\"ST2.S1\",\"ST2.S1\",\"ST2.S1\",\"ST3.S1\",\"ST3.S1\",\"ST3.S1\")\nSpecies <-\nc(\"Sp1\",\"Sp2\",\"Sp1\",\"Sp3\",\"Sp1\",\"Sp2\",\"Sp1\",\"Sp2\",\"Sp3\",\"Sp4\",\"Sp1\",\"Sp2\",\"Sp2\")\nVar1 <- c(12,32,12,47,25,59,15,45,27,42,25,36,36)\nVar2 <- c(\"aa\",\"bb\",\"aa\",\"cc\",\"dd\",\"ee\",\"aa\",\"cc\",\"aa\",\"cc\",\"aa\",\"bb\",\"bb\")\nNT <- c(20,45,3,89,29,89,30,55,85,8,26,56,9)\nPT <- c(32,26,5,35,66,35,45,23,12,3,69,36,12)\ndf <- data.frame(St.Sam,Species,Var1,Var2,NT,PT)\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040.html\nSent from the R help mailing list archive at Nabble.com.\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "If, 'dat' is the dataset:\nres <- as.data.frame(do.call(rbind,lapply(split(dat,list(dat$St.Sam,dat$Sp),drop=TRUE),function(x) c(unlist(x[1,1:4]),colSums(x[,5:6])))))\n?row.names(res) <- 1:nrow(res)\nres\n",
+      "thread_id": "thread-b50949b50c65",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-b50949b50c65",
+      "message_id": "<1393629844.18679.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:24:04-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393626543882-4686040.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>"
+      ],
+      "body_plain": "If, 'dat' is the dataset:\nres <- as.data.frame(do.call(rbind,lapply(split(dat,list(dat$St.Sam,dat$Sp),drop=TRUE),function(x) c(unlist(x[1,1:4]),colSums(x[,5:6])))))\n?row.names(res) <- 1:nrow(res)\nres\n?? St.Sam? Sp Var1 Var2 NT PT\n1? ST1.S1 Sp1?? 12?? aa 23 37\n2? ST1.S2 Sp1?? 25?? dd 29 66\n3? ST2.S1 Sp1?? 15?? aa 30 45\n4? ST3.S1 Sp1?? 25?? aa 26 69\n5? ST1.S1 Sp2?? 32?? bb 45 26\n6? ST1.S2 Sp2?? 59?? ee 89 35\n7? ST2.S1 Sp2?? 45?? cc 55 23\n8? ST3.S1 Sp2?? 36?? bb 65 48\n9? ST1.S1 Sp3?? 47?? cc 89 35\n10 ST2.S1 Sp3?? 27?? aa 85 12\n11 ST2.S1 Sp4?? 42?? cc? 8? 3\nA.K.\n\n\n\n\nOn Friday, February 28, 2014 5:31 PM, ltdm <Luis.Tito-de-Morais at ird.fr> wrote:\nHi list,\n\nI have a dataframe df looking like this one:\n\nSt.Sam? ? Sp? ? Var1? Var2? ? NT? ? PT\nST1.S1? ? Sp1? ? 12? ? aa? ? 20? ? 32\nST1.S1? ? Sp2? ? 32? ? bb? ? 45? ? 26\nST1.S1? ? Sp1? ? 12? ? aa? ?  3? ?  5\nST1.S1? ? Sp3? ? 47? ? cc? ? 89? ? 35\nST1.S2? ? Sp1? ? 25? ? dd? ? 29? ? 66\nST1.S2? ? Sp2? ? 59? ? ee? ? 89? ? 35\nST2.S1? ? Sp1? ? 15? ? aa? ? 30? ? 45\nST2.S1? ? Sp2? ? 45? ? cc? ? 55? ? 23\nST2.S1? ? Sp3? ? 27? ? aa? ? 85? ? 12\nST2.S1? ? Sp4? ? 42? ? cc? ? ? 8? ?  3\nST3.S1? ? Sp1? ? 25? ? aa? ? 26? ? 69\nST3.S1? ? Sp2? ? 36? ? bb? ? 56? ? 36\nST3.S1? ? Sp2? ? 36? ? bb? ?  9? ?  12\n\nSt.Sam : indicates the Station and the sample #\nSp is a species code\nVar1 is numeric, Var2 is a factor\nNT and PT are numeric\nPlease note that lines 2 and 3 are the same species (Sp1) in the same\nstation and sample. Var1 and Var2 have the same values and NT and PT differ.\nAlso the last 2 lines? are the same species in the same station and sample.\nVar1 and Var2 have the same values, and NT and PT differ.\n\nWhat I would like to have is a dataframe like this one:\n\nSt.Sam? ? Sp? ? Var1? Var2? ? NT? ? PT\nST1.S1? ? Sp1? ? 12? ? aa? ? 23? ? 37\nST1.S1? ? Sp2? ? 32? ? bb? ? 45? ? 26\nST1.S1? ? Sp3? ? 47? ? cc? ? 89? ? 35\nST1.S2? ? Sp1? ? 25? ? dd? ? 29? ? 66\nST1.S2? ? Sp2? ? 59? ? ee? ? 89? ? 35\nST2.S1? ? Sp1? ? 15? ? aa? ? 30? ? 45\nST2.S1? ? Sp2? ? 45? ? cc? ? 55? ? 23\nST2.S1? ? Sp3? ? 27? ? aa? ? 85? ? 12\nST2.S1? ? Sp4? ? 42? ? cc? ? ? 8? ? ? 3\nST3.S1? ? Sp1? ? 25? ? aa? ? 26? ? 69\nST3.S1? ? Sp2? ? 36? ? bb? ? 65? ? 48\n\ni.e. the lines with same pair of St.Sam/Sp have been aggregated and the\nvalues NT and PT summed.\nVar1 and Var2 are untouched (they are allways equal for a given pair\nSt.Sam/Species).\n\nI know how to find and extract the lines of interest using \"duplicated\", but\nI am unable to automatically sum the NT and PT. I have been struggling with\n\"aggregate\" and the like but I am stuck.\nI searched the web and the archives but found no answer nor similar\nquestion.\n\nDoes anybody have a solution or a link to a page or suggestion to help me ?\n\nThank you very much for your help\n\nTito\n\nHere is a quick&dirty way to build the toy dataframe above:\nSt.Sam <-\nc(\"ST1.S1\",\"ST1.S1\",\"ST1.S1\",\"ST1.S1\",\"ST1.S2\",\"ST1.S2\",\"ST2.S1\",\"ST2.S1\",\"ST2.S1\",\"ST2.S1\",\"ST3.S1\",\"ST3.S1\",\"ST3.S1\")\nSpecies <-\nc(\"Sp1\",\"Sp2\",\"Sp1\",\"Sp3\",\"Sp1\",\"Sp2\",\"Sp1\",\"Sp2\",\"Sp3\",\"Sp4\",\"Sp1\",\"Sp2\",\"Sp2\")\nVar1 <- c(12,32,12,47,25,59,15,45,27,42,25,36,36)\nVar2 <- c(\"aa\",\"bb\",\"aa\",\"cc\",\"dd\",\"ee\",\"aa\",\"cc\",\"aa\",\"cc\",\"aa\",\"bb\",\"bb\")\nNT <- c(20,45,3,89,29,89,30,55,85,8,26,56,9)\nPT <- c(32,26,5,35,66,35,45,23,12,3,69,36,12)\ndf <- data.frame(St.Sam,Species,Var1,Var2,NT,PT)\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040.html\nSent from the R help mailing list archive at Nabble.com.\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "If, 'dat' is the dataset:\nres <- as.data.frame(do.call(rbind,lapply(split(dat,list(dat$St.Sam,dat$Sp),drop=TRUE),function(x) c(unlist(x[1,1:4]),colSums(x[,5:6])))))\n?row.names(res) <- 1:nrow(res)\nres\n",
+      "thread_id": "thread-b50949b50c65",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-ee4a45f0b62e",
+      "message_id": "<1393630341.97544.YahooMailNeo@web142601.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:32:21-08:00",
+      "subject": "[R] (no subject)",
+      "subject_clean": "(no subject)",
+      "in_reply_to": "<1393626454.79967.YahooMailNeo@web141704.mail.bf1.yahoo.com>",
+      "references": [
+        "<1393626454.79967.YahooMailNeo@web141704.mail.bf1.yahoo.com>"
+      ],
+      "body_plain": "HI Farnoosh,\nTry:\nD1= c(\"5/25/2012 14:48\", \"5/29/2012 16:53\",? \"6/1/2012 18:30\")\nD2= c(\"6/8/2012 21:26\", \"6/11/2012 15:10\" , \"6/14/2012 17:57\")\nas.numeric(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\")-as.POSIXct(D1,format=\"%m/%d/%Y %H:%M\")) #days\n#[1] 14.27639 12.92847 12.97708\n\n#or\nas.numeric(difftime(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\"),as.POSIXct(D1,format=\"%m/%d/%Y %H:%M\"),units=\"days\"))\n#[1] 14.27639 12.92847 12.97708\nA.K.\n\n\n\n\n\n\nOn Friday, February 28, 2014 5:27 PM, farnoosh sheikhi <farnoosh_81 at yahoo.com> wrote:\n\nHi,\n\nI have a two column with date/time format like below:\nD1= (?5/25/2012 14:48,?5/29/2012 16:53, ?6/1/2012 18:30).\nD2= (6/8/2012 21:26, 6/11/2012 15:10 , 6/14/2012 17:57)\n\nI want to subtract D1-D2 and obtain the difference between them.\nI have tried as.date and as.numeric, but the values convert to NAs.\n\nThanks for your help.",
+      "body_snippet": "HI Farnoosh,\nTry:\nD1= c(\"5/25/2012 14:48\", \"5/29/2012 16:53\",? \"6/1/2012 18:30\")\nD2= c(\"6/8/2012 21:26\", \"6/11/2012 15:10\" , \"6/14/2012 17:57\")\nas.numeric(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\")-as.POS",
+      "thread_id": "thread-ee4a45f0b62e",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-ee4a45f0b62e",
+      "message_id": "<1393630341.97544.YahooMailNeo@web142601.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:32:21-08:00",
+      "subject": "[R] (no subject)",
+      "subject_clean": "(no subject)",
+      "in_reply_to": "<1393626454.79967.YahooMailNeo@web141704.mail.bf1.yahoo.com>",
+      "references": [
+        "<1393626454.79967.YahooMailNeo@web141704.mail.bf1.yahoo.com>"
+      ],
+      "body_plain": "HI Farnoosh,\nTry:\nD1= c(\"5/25/2012 14:48\", \"5/29/2012 16:53\",? \"6/1/2012 18:30\")\nD2= c(\"6/8/2012 21:26\", \"6/11/2012 15:10\" , \"6/14/2012 17:57\")\nas.numeric(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\")-as.POSIXct(D1,format=\"%m/%d/%Y %H:%M\")) #days\n#[1] 14.27639 12.92847 12.97708\n\n#or\nas.numeric(difftime(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\"),as.POSIXct(D1,format=\"%m/%d/%Y %H:%M\"),units=\"days\"))\n#[1] 14.27639 12.92847 12.97708\nA.K.\n\n\n\n\n\n\nOn Friday, February 28, 2014 5:27 PM, farnoosh sheikhi <farnoosh_81 at yahoo.com> wrote:\n\nHi,\n\nI have a two column with date/time format like below:\nD1= (?5/25/2012 14:48,?5/29/2012 16:53, ?6/1/2012 18:30).\nD2= (6/8/2012 21:26, 6/11/2012 15:10 , 6/14/2012 17:57)\n\nI want to subtract D1-D2 and obtain the difference between them.\nI have tried as.date and as.numeric, but the values convert to NAs.\n\nThanks for your help.",
+      "body_snippet": "HI Farnoosh,\nTry:\nD1= c(\"5/25/2012 14:48\", \"5/29/2012 16:53\",? \"6/1/2012 18:30\")\nD2= c(\"6/8/2012 21:26\", \"6/11/2012 15:10\" , \"6/14/2012 17:57\")\nas.numeric(as.POSIXct(D2,format=\"%m/%d/%Y %H:%M\")-as.POS",
+      "thread_id": "thread-ee4a45f0b62e",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-a68fc4c4d8ec",
+      "message_id": "<1393631459.80953.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:50:59-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393628516546-4686043.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>",
+        "<1393628516546-4686043.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi,\nYou could use ?ddply\nlibrary(plyr)\n\ncbind(ddply(dat,.(St.Sam,Sp),function(x) x[!duplicated(x$Var1),])[,-c(5:6)],ddply(dat,.(St.Sam,Sp),colwise(sum,.(NT,PT)))[,-c(1:2)])\n?? St.Sam? Sp Var1 Var2 NT PT\n1? ST1.S1 Sp1?? 12?? aa 23 37\n2? ST1.S1 Sp2?? 32?? bb 45 26\n3? ST1.S1 Sp3?? 47?? cc 89 35\n4? ST1.S2 Sp1?? 25?? dd 29 66\n5? ST1.S2 Sp2?? 59?? ee 89 35\n6? ST2.S1 Sp1?? 15?? aa 30 45\n7? ST2.S1 Sp2?? 45?? cc 55 23\n8? ST2.S1 Sp3?? 27?? aa 85 12\n9? ST2.S1 Sp4?? 42?? cc? 8? 3\n10 ST3.S1 Sp1?? 25?? aa 26 69\n11 ST3.S1 Sp2?? 36?? bb 65 48\nA.K.\n\n\n\n\nOn Friday, February 28, 2014 6:47 PM, ltdm <Luis.Tito-de-Morais at ird.fr> wrote:\nHi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = T)\nX <- df[du1|du2,]\naggRows <- aggregate(cbind(NT,PT) ~St.Sam+Species+Var1+Var2, X,sum)\ndfNew <- rbind(df[!(du1|du2),], aggRows)\n\nJust need to \"polish\" dfNew and its OK. But maybe there is a more elegant\nsolution.\n\nCheers,\n\nTito\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040p4686043.html\n\nSent from the R help mailing list archive at Nabble.com.\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nYou could use ?ddply\nlibrary(plyr)\n\ncbind(ddply(dat,.(St.Sam,Sp),function(x) x[!duplicated(x$Var1),])[,-c(5:6)],ddply(dat,.(St.Sam,Sp),colwise(sum,.(NT,PT)))[,-c(1:2)])\n?? St.Sam? Sp Var1 Var2 NT ",
+      "thread_id": "thread-0ee0bdea6dd5",
+      "thread_depth": 1,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-a68fc4c4d8ec",
+      "message_id": "<1393631459.80953.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2014-02-28T15:50:59-08:00",
+      "subject": "[R] aggregate and sum on some columns fromduplicate rows",
+      "subject_clean": "aggregate and sum on some columns fromduplicate rows",
+      "in_reply_to": "<1393628516546-4686043.post@n4.nabble.com>",
+      "references": [
+        "<1393626543882-4686040.post@n4.nabble.com>",
+        "<1393628516546-4686043.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi,\nYou could use ?ddply\nlibrary(plyr)\n\ncbind(ddply(dat,.(St.Sam,Sp),function(x) x[!duplicated(x$Var1),])[,-c(5:6)],ddply(dat,.(St.Sam,Sp),colwise(sum,.(NT,PT)))[,-c(1:2)])\n?? St.Sam? Sp Var1 Var2 NT PT\n1? ST1.S1 Sp1?? 12?? aa 23 37\n2? ST1.S1 Sp2?? 32?? bb 45 26\n3? ST1.S1 Sp3?? 47?? cc 89 35\n4? ST1.S2 Sp1?? 25?? dd 29 66\n5? ST1.S2 Sp2?? 59?? ee 89 35\n6? ST2.S1 Sp1?? 15?? aa 30 45\n7? ST2.S1 Sp2?? 45?? cc 55 23\n8? ST2.S1 Sp3?? 27?? aa 85 12\n9? ST2.S1 Sp4?? 42?? cc? 8? 3\n10 ST3.S1 Sp1?? 25?? aa 26 69\n11 ST3.S1 Sp2?? 36?? bb 65 48\nA.K.\n\n\n\n\nOn Friday, February 28, 2014 6:47 PM, ltdm <Luis.Tito-de-Morais at ird.fr> wrote:\nHi again,\n\nSorry for disturbing. After posting I suddenly found a solution.\nAs it may help someone else here it goes.\n\ndf\ndu1 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = F)\ndu2 <- duplicated(df[,c(\"St.Sam\",\"Species\")],fromLast = T)\nX <- df[du1|du2,]\naggRows <- aggregate(cbind(NT,PT) ~St.Sam+Species+Var1+Var2, X,sum)\ndfNew <- rbind(df[!(du1|du2),], aggRows)\n\nJust need to \"polish\" dfNew and its OK. But maybe there is a more elegant\nsolution.\n\nCheers,\n\nTito\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/aggregate-and-sum-on-some-columns-fromduplicate-rows-tp4686040p4686043.html\n\nSent from the R help mailing list archive at Nabble.com.\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nYou could use ?ddply\nlibrary(plyr)\n\ncbind(ddply(dat,.(St.Sam,Sp),function(x) x[!duplicated(x$Var1),])[,-c(5:6)],ddply(dat,.(St.Sam,Sp),colwise(sum,.(NT,PT)))[,-c(1:2)])\n?? St.Sam? Sp Var1 Var2 NT ",
+      "thread_id": "thread-0ee0bdea6dd5",
+      "thread_depth": 1,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-ffa9a490b23a",
+      "message_id": "<CA+vqiLErWkDLoEeJ=wghfZe_WBtKP38agCqZN2Hv1Bgm3Jp_rw@mail.gmail.com>",
+      "from_name": "Ista Zahn",
+      "from_email_hash": "098a31f0cc45d6b90198bf3b75e03deed7c570292be352a10b98aeee4bf7012e",
+      "date": "2014-02-28T19:50:54-05:00",
+      "subject": "[R] New to R",
+      "subject_clean": "New to R",
+      "in_reply_to": "<BAY175-W28917ED8E6637FFC1C31EAD9820@phx.gbl>",
+      "references": [
+        "<BAY404-EAS357B1DFABAF9FB9AB8DC615D9820@phx.gbl>",
+        "<CA+vqiLEgiPJZB-Xcv3f3h5k5+L333SErOsKEbaAXq6fpTHma=g@mail.gmail.com>",
+        "<BAY175-W28917ED8E6637FFC1C31EAD9820@phx.gbl>"
+      ],
+      "body_plain": "Hi George,\n\nPlease keep the R mailing list copied--I've added them back.\n\nThe example on the webpage you listed is wrong, in a way that would be\nobvious if you took the time to familiarize yourself with the basics\nof R. stocks has no names.\n\nBest,\nIsta\n\n\n\nOn Fri, Feb 28, 2014 at 6:45 PM, George Katsuras <geokat05 at hotmail.com> wrote:\n> http://economistatlarge.com/portfolio-theory/r-optimized-portfolio\n>\n> Thanks for your prompt response.  I think the above link provides the\n> reproducible example you are looking for.\n>\n>\n>\n>> From: istazahn at gmail.com\n>> Date: Fri, 28 Feb 2014 13:16:57 -0500\n>> Subject: Re: [R] New to R\n>> To: geokat05 at hotmail.com\n>> CC: r-help at r-project.org\n>\n>>\n>> Please give a reproducible example. When I run your code I get \"object\n>> 'stocks' not found\". So what is stocks?\n>>\n>> On Thu, Feb 27, 2014 at 11:24 PM, George Katsuras <geokat05 at hotmail.com>\n>> wrote:\n>> > I successfully downloaded and loaded the stockPortfolio and quadprog\n>> > packages, but when I entered the following command I got an error:\n>> >\n>> >\n>> > returns <- getReturns(names(stocks), freq=\"week\")\n>> > Error in file(file, \"rt\") : cannot open the connection\n>> > In addition: Warning message:\n>> > In file(file, \"rt\") : cannot open: HTTP status was '404 Not Found'\n>> >\n>> >\n>> >\n>> >\n>> > When I tried discovering the source of this error, it appears that the\n>> > file has been temporarily moved to a new URL address.\n>> >\n>> >\n>> > I?m currently running Windows 8.1.\n>> >\n>> >\n>> > Is there a fix for this?\n>> >\n>> >\n>> >\n>> >\n>> > Sent from Windows Mail\n>> > [[alternative HTML version deleted]]\n>> >\n>> >\n>> > ______________________________________________\n>> > R-help at r-project.org mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > PLEASE do read the posting guide\n>> > http://www.R-project.org/posting-guide.html\n>> > and provide commented, minimal, self-contained, reproducible code.\n>> >",
+      "body_snippet": "Hi George,\n\nPlease keep the R mailing list copied--I've added them back.\n\nThe example on the webpage you listed is wrong, in a way that would be\nobvious if you took the time to familiarize yourself wi",
+      "thread_id": "thread-ffa9a490b23a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-ffa9a490b23a",
+      "message_id": "<CA+vqiLErWkDLoEeJ=wghfZe_WBtKP38agCqZN2Hv1Bgm3Jp_rw@mail.gmail.com>",
+      "from_name": "Ista Zahn",
+      "from_email_hash": "098a31f0cc45d6b90198bf3b75e03deed7c570292be352a10b98aeee4bf7012e",
+      "date": "2014-02-28T19:50:54-05:00",
+      "subject": "[R] New to R",
+      "subject_clean": "New to R",
+      "in_reply_to": "<BAY175-W28917ED8E6637FFC1C31EAD9820@phx.gbl>",
+      "references": [
+        "<BAY404-EAS357B1DFABAF9FB9AB8DC615D9820@phx.gbl>",
+        "<CA+vqiLEgiPJZB-Xcv3f3h5k5+L333SErOsKEbaAXq6fpTHma=g@mail.gmail.com>",
+        "<BAY175-W28917ED8E6637FFC1C31EAD9820@phx.gbl>"
+      ],
+      "body_plain": "Hi George,\n\nPlease keep the R mailing list copied--I've added them back.\n\nThe example on the webpage you listed is wrong, in a way that would be\nobvious if you took the time to familiarize yourself with the basics\nof R. stocks has no names.\n\nBest,\nIsta\n\n\n\nOn Fri, Feb 28, 2014 at 6:45 PM, George Katsuras <geokat05 at hotmail.com> wrote:\n> http://economistatlarge.com/portfolio-theory/r-optimized-portfolio\n>\n> Thanks for your prompt response.  I think the above link provides the\n> reproducible example you are looking for.\n>\n>\n>\n>> From: istazahn at gmail.com\n>> Date: Fri, 28 Feb 2014 13:16:57 -0500\n>> Subject: Re: [R] New to R\n>> To: geokat05 at hotmail.com\n>> CC: r-help at r-project.org\n>\n>>\n>> Please give a reproducible example. When I run your code I get \"object\n>> 'stocks' not found\". So what is stocks?\n>>\n>> On Thu, Feb 27, 2014 at 11:24 PM, George Katsuras <geokat05 at hotmail.com>\n>> wrote:\n>> > I successfully downloaded and loaded the stockPortfolio and quadprog\n>> > packages, but when I entered the following command I got an error:\n>> >\n>> >\n>> > returns <- getReturns(names(stocks), freq=\"week\")\n>> > Error in file(file, \"rt\") : cannot open the connection\n>> > In addition: Warning message:\n>> > In file(file, \"rt\") : cannot open: HTTP status was '404 Not Found'\n>> >\n>> >\n>> >\n>> >\n>> > When I tried discovering the source of this error, it appears that the\n>> > file has been temporarily moved to a new URL address.\n>> >\n>> >\n>> > I?m currently running Windows 8.1.\n>> >\n>> >\n>> > Is there a fix for this?\n>> >\n>> >\n>> >\n>> >\n>> > Sent from Windows Mail\n>> > [[alternative HTML version deleted]]\n>> >\n>> >\n>> > ______________________________________________\n>> > R-help at r-project.org mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > PLEASE do read the posting guide\n>> > http://www.R-project.org/posting-guide.html\n>> > and provide commented, minimal, self-contained, reproducible code.\n>> >",
+      "body_snippet": "Hi George,\n\nPlease keep the R mailing list copied--I've added them back.\n\nThe example on the webpage you listed is wrong, in a way that would be\nobvious if you took the time to familiarize yourself wi",
+      "thread_id": "thread-ffa9a490b23a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-cfb95089ecf8",
+      "message_id": "<CA+vqiLHnkh7KBkZQny2suhr=6rEBOYpUay8FuK8fHvWz5YEJ_A@mail.gmail.com>",
+      "from_name": "Ista Zahn",
+      "from_email_hash": "098a31f0cc45d6b90198bf3b75e03deed7c570292be352a10b98aeee4bf7012e",
+      "date": "2014-02-28T20:32:38-05:00",
+      "subject": "[R] Problem importing file in R after switching from windows to Ubuntu",
+      "subject_clean": "Problem importing file in R after switching from windows to Ubuntu",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi Christian,\n\nI know you've checked many times, but it is very likely that you are\nnot typing the file name correctly, or that the file is not where you\nthink it is. Please run these lines and post the output back here:\n\nsetwd(\"~/Documents/DATABASES/Functional_Annotations\")\nlist.files()\n\nBest,\nIsta\n\nOn Fri, Feb 28, 2014 at 4:47 PM, Christian De Santis\n<christian.desantis at stir.ac.uk> wrote:\n> Dear R List,\n>\n> today i have installed Ubuntu as i decided to give this a try after running R in windows was always running out of memory in making my figures. I have copied my working folders into Ubuntu and changed the WD and the \\\\ into /. I tried to re run the script and it was going all well till i tried to read a csv database into R.\n>\n> Annot <- read.csv(\"~/Documents/DATABASES/Functional_Annotations/Salar_2_Annot_light.csv\", header = TRUE)\n> Error in file(file, \"rt\") : cannot open the connection In addition: Warning message: In file(file, \"rt\") : cannot open file '/home/cd46/Documents/DATABASES/Functional_Annotations/Salar_2_Annot_light.csv': No such file or directory\n>\n> The code is right, and i checked it many times. I copied pasted in\n>\n> setwd(\"~/Documents/DATABASES/Functional_Annotations\")\n> and it works fine! The file is there too, i have checked and manually opened it. I know the message is telling me that he can't find the file or the directory but really, they are there and they are right (i think).\n>\n> Can someone give me some suggestions? What could i try? Or even better maybe you have a solution.\n>\n> Thanks and have a nice weekend.\n> Christian\n>\n> --\n> The University of Stirling has been ranked in the top 12 of UK universities for graduate employment*.\n> 94% of our 2012 graduates were in work and/or further study within six months of graduation.\n> *The Telegraph\n> The University of Stirling is a charity registered in Scotland, number SC 011159.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi Christian,\n\nI know you've checked many times, but it is very likely that you are\nnot typing the file name correctly, or that the file is not where you\nthink it is. Please run these lines and post t",
+      "thread_id": "thread-cfb95089ecf8",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-cfb95089ecf8",
+      "message_id": "<CA+vqiLHnkh7KBkZQny2suhr=6rEBOYpUay8FuK8fHvWz5YEJ_A@mail.gmail.com>",
+      "from_name": "Ista Zahn",
+      "from_email_hash": "098a31f0cc45d6b90198bf3b75e03deed7c570292be352a10b98aeee4bf7012e",
+      "date": "2014-02-28T20:32:38-05:00",
+      "subject": "[R] Problem importing file in R after switching from windows to Ubuntu",
+      "subject_clean": "Problem importing file in R after switching from windows to Ubuntu",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi Christian,\n\nI know you've checked many times, but it is very likely that you are\nnot typing the file name correctly, or that the file is not where you\nthink it is. Please run these lines and post the output back here:\n\nsetwd(\"~/Documents/DATABASES/Functional_Annotations\")\nlist.files()\n\nBest,\nIsta\n\nOn Fri, Feb 28, 2014 at 4:47 PM, Christian De Santis\n<christian.desantis at stir.ac.uk> wrote:\n> Dear R List,\n>\n> today i have installed Ubuntu as i decided to give this a try after running R in windows was always running out of memory in making my figures. I have copied my working folders into Ubuntu and changed the WD and the \\\\ into /. I tried to re run the script and it was going all well till i tried to read a csv database into R.\n>\n> Annot <- read.csv(\"~/Documents/DATABASES/Functional_Annotations/Salar_2_Annot_light.csv\", header = TRUE)\n> Error in file(file, \"rt\") : cannot open the connection In addition: Warning message: In file(file, \"rt\") : cannot open file '/home/cd46/Documents/DATABASES/Functional_Annotations/Salar_2_Annot_light.csv': No such file or directory\n>\n> The code is right, and i checked it many times. I copied pasted in\n>\n> setwd(\"~/Documents/DATABASES/Functional_Annotations\")\n> and it works fine! The file is there too, i have checked and manually opened it. I know the message is telling me that he can't find the file or the directory but really, they are there and they are right (i think).\n>\n> Can someone give me some suggestions? What could i try? Or even better maybe you have a solution.\n>\n> Thanks and have a nice weekend.\n> Christian\n>\n> --\n> The University of Stirling has been ranked in the top 12 of UK universities for graduate employment*.\n> 94% of our 2012 graduates were in work and/or further study within six months of graduation.\n> *The Telegraph\n> The University of Stirling is a charity registered in Scotland, number SC 011159.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi Christian,\n\nI know you've checked many times, but it is very likely that you are\nnot typing the file name correctly, or that the file is not where you\nthink it is. Please run these lines and post t",
+      "thread_id": "thread-cfb95089ecf8",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-26701c652ff6",
+      "message_id": "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>",
+      "from_name": "Chirag Gupta",
+      "from_email_hash": "d11f9dd30933e65f15aea9101db66974ff40a6df81b304f4c341ec96a4583cd4",
+      "date": "2014-02-28T19:49:26-06:00",
+      "subject": "[R] reshape non-square matrix",
+      "subject_clean": "reshape non-square matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/1f568707/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/1f568707/attachment.pl>",
+      "thread_id": "thread-26701c652ff6",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-26701c652ff6",
+      "message_id": "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>",
+      "from_name": "Chirag Gupta",
+      "from_email_hash": "d11f9dd30933e65f15aea9101db66974ff40a6df81b304f4c341ec96a4583cd4",
+      "date": "2014-02-28T19:49:26-06:00",
+      "subject": "[R] reshape non-square matrix",
+      "subject_clean": "reshape non-square matrix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/1f568707/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/1f568707/attachment-0001.pl>",
+      "thread_id": "thread-26701c652ff6",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-4012f23ffe5a",
+      "message_id": "<1393639018563-4686057.post@n4.nabble.com>",
+      "from_name": "shkingdom",
+      "from_email_hash": "4b911770d4a1dd5144e40c908666ba15f6368c6eaa1cbdc4076910b02e5523f7",
+      "date": "2014-02-28T17:56:58-08:00",
+      "subject": "[R] Multilevel analysis for ordinal responses",
+      "subject_clean": "Multilevel analysis for ordinal responses",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI need to fit a multielvel model for an ordinal response. Does R have a\ncommand for conducting a multilevel ordinal logistic regression when the\nmodel violates the parallel regression or proportional odds assumption?\nAdditionally, are there any tests to check the parallel regression\nassumption for the multilevel ordered model? Providing an syntax would be\nreally helpful.\n\nThanks in advance,\n\nWander\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Multilevel-analysis-for-ordinal-responses-tp4686057.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear all,\n\nI need to fit a multielvel model for an ordinal response. Does R have a\ncommand for conducting a multilevel ordinal logistic regression when the\nmodel violates the parallel regression or pr",
+      "thread_id": "thread-4012f23ffe5a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-4012f23ffe5a",
+      "message_id": "<1393639018563-4686057.post@n4.nabble.com>",
+      "from_name": "shkingdom",
+      "from_email_hash": "4b911770d4a1dd5144e40c908666ba15f6368c6eaa1cbdc4076910b02e5523f7",
+      "date": "2014-02-28T17:56:58-08:00",
+      "subject": "[R] Multilevel analysis for ordinal responses",
+      "subject_clean": "Multilevel analysis for ordinal responses",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI need to fit a multielvel model for an ordinal response. Does R have a\ncommand for conducting a multilevel ordinal logistic regression when the\nmodel violates the parallel regression or proportional odds assumption?\nAdditionally, are there any tests to check the parallel regression\nassumption for the multilevel ordered model? Providing an syntax would be\nreally helpful.\n\nThanks in advance,\n\nWander\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Multilevel-analysis-for-ordinal-responses-tp4686057.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear all,\n\nI need to fit a multielvel model for an ordinal response. Does R have a\ncommand for conducting a multilevel ordinal logistic regression when the\nmodel violates the parallel regression or pr",
+      "thread_id": "thread-4012f23ffe5a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-32e6c3c9671a",
+      "message_id": "<CAMCXXmo5rGGvhJ=-KEm3+Ofu2iqx+E9bEbGh_mqy02cGqhFBjw@mail.gmail.com>",
+      "from_name": "Jun Shen",
+      "from_email_hash": "1c8b2eac5ec3519b8a6e858d8cd9fe9e496a319e61c43b721bdbe7bc8aadc3a8",
+      "date": "2014-02-28T22:08:39-05:00",
+      "subject": "[R] How to change the label size in axis",
+      "subject_clean": "How to change the label size in axis",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/29be3daa/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/29be3daa/attachment.pl>",
+      "thread_id": "thread-32e6c3c9671a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-32e6c3c9671a",
+      "message_id": "<CAMCXXmo5rGGvhJ=-KEm3+Ofu2iqx+E9bEbGh_mqy02cGqhFBjw@mail.gmail.com>",
+      "from_name": "Jun Shen",
+      "from_email_hash": "1c8b2eac5ec3519b8a6e858d8cd9fe9e496a319e61c43b721bdbe7bc8aadc3a8",
+      "date": "2014-02-28T22:08:39-05:00",
+      "subject": "[R] How to change the label size in axis",
+      "subject_clean": "How to change the label size in axis",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/29be3daa/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140228/29be3daa/attachment-0001.pl>",
+      "thread_id": "thread-32e6c3c9671a",
+      "thread_depth": 0,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-283c94b429a6",
+      "message_id": "<b184a840-87bb-49c7-85b4-89bf95fa98ec@email.android.com>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2014-02-28T22:38:34-08:00",
+      "subject": "[R] reshape non-square matrix",
+      "subject_clean": "reshape non-square matrix",
+      "in_reply_to": "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>",
+      "references": [
+        "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>"
+      ],
+      "body_plain": "library(reshape2)\nmx <- matrix( 1:12, nrow=3 )\nmxdf <- melt( mx )\nnames( mxdf ) <- c( \"m\", \"n\", \"value\" )\n\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn February 28, 2014 5:49:26 PM PST, Chirag Gupta <cxg040 at email.uark.edu> wrote:\n>Hi list\n>\n>I have a matrix of size m x n (m and n are different, hence non\n>square!)\n>I want to melt it in such a way that I get a df of 3 columns. m ,n and\n>cell\n>value in the original matrix.\n>\n>Any suggestions?",
+      "body_snippet": "library(reshape2)\nmx <- matrix( 1:12, nrow=3 )\nmxdf <- melt( mx )\nnames( mxdf ) <- c( \"m\", \"n\", \"value\" )\n\n---------------------------------------------------------------------------\nJeff Newmiller   ",
+      "thread_id": "thread-26701c652ff6",
+      "thread_depth": 1,
+      "month": "2014-02"
+    },
+    {
+      "id": "msg-283c94b429a6",
+      "message_id": "<b184a840-87bb-49c7-85b4-89bf95fa98ec@email.android.com>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2014-02-28T22:38:34-08:00",
+      "subject": "[R] reshape non-square matrix",
+      "subject_clean": "reshape non-square matrix",
+      "in_reply_to": "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>",
+      "references": [
+        "<CADESCNyRYkTUxE7+imV2PPckf_=Z6W7Y9_D=TfJsAtDfjbxHUQ@mail.gmail.com>"
+      ],
+      "body_plain": "library(reshape2)\nmx <- matrix( 1:12, nrow=3 )\nmxdf <- melt( mx )\nnames( mxdf ) <- c( \"m\", \"n\", \"value\" )\n\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn February 28, 2014 5:49:26 PM PST, Chirag Gupta <cxg040 at email.uark.edu> wrote:\n>Hi list\n>\n>I have a matrix of size m x n (m and n are different, hence non\n>square!)\n>I want to melt it in such a way that I get a df of 3 columns. m ,n and\n>cell\n>value in the original matrix.\n>\n>Any suggestions?",
+      "body_snippet": "library(reshape2)\nmx <- matrix( 1:12, nrow=3 )\nmxdf <- melt( mx )\nnames( mxdf ) <- c( \"m\", \"n\", \"value\" )\n\n---------------------------------------------------------------------------\nJeff Newmiller   ",
+      "thread_id": "thread-26701c652ff6",
+      "thread_depth": 1,
+      "month": "2014-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-e191f87d5767",
+      "subject": "Saving a map as a postscript file",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2014-02-28T15:01:33-08:00",
+      "last_reply": "2014-02-28T15:01:33-08:00",
+      "root_message_id": "msg-e191f87d5767"
+    },
+    {
+      "id": "thread-e191f87d5767",
+      "subject": "Saving a map as a postscript file",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2014-02-28T15:01:33-08:00",
+      "last_reply": "2014-02-28T15:01:33-08:00",
+      "root_message_id": "msg-e191f87d5767"
+    },
+    {
+      "id": "thread-0ee0bdea6dd5",
+      "subject": "aggregate and sum on some columns fromduplicate rows",
+      "message_count": 3,
+      "participants": [
+        "arun",
+        "ltdm"
+      ],
+      "started": "2014-02-28T15:01:56-08:00",
+      "last_reply": "2014-02-28T15:50:59-08:00",
+      "root_message_id": "msg-0ee0bdea6dd5"
+    },
+    {
+      "id": "thread-0ee0bdea6dd5",
+      "subject": "aggregate and sum on some columns fromduplicate rows",
+      "message_count": 1,
+      "participants": [
+        "ltdm"
+      ],
+      "started": "2014-02-28T15:01:56-08:00",
+      "last_reply": "2014-02-28T15:01:56-08:00",
+      "root_message_id": "msg-0ee0bdea6dd5"
+    },
+    {
+      "id": "thread-b50949b50c65",
+      "subject": "aggregate and sum on some columns fromduplicate rows",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2014-02-28T15:24:04-08:00",
+      "last_reply": "2014-02-28T15:24:04-08:00",
+      "root_message_id": "msg-b50949b50c65"
+    },
+    {
+      "id": "thread-b50949b50c65",
+      "subject": "aggregate and sum on some columns fromduplicate rows",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2014-02-28T15:24:04-08:00",
+      "last_reply": "2014-02-28T15:24:04-08:00",
+      "root_message_id": "msg-b50949b50c65"
+    },
+    {
+      "id": "thread-ee4a45f0b62e",
+      "subject": "(no subject)",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2014-02-28T15:32:21-08:00",
+      "last_reply": "2014-02-28T15:32:21-08:00",
+      "root_message_id": "msg-ee4a45f0b62e"
+    },
+    {
+      "id": "thread-ee4a45f0b62e",
+      "subject": "(no subject)",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2014-02-28T15:32:21-08:00",
+      "last_reply": "2014-02-28T15:32:21-08:00",
+      "root_message_id": "msg-ee4a45f0b62e"
+    },
+    {
+      "id": "thread-4012f23ffe5a",
+      "subject": "Multilevel analysis for ordinal responses",
+      "message_count": 1,
+      "participants": [
+        "shkingdom"
+      ],
+      "started": "2014-02-28T17:56:58-08:00",
+      "last_reply": "2014-02-28T17:56:58-08:00",
+      "root_message_id": "msg-4012f23ffe5a"
+    },
+    {
+      "id": "thread-4012f23ffe5a",
+      "subject": "Multilevel analysis for ordinal responses",
+      "message_count": 1,
+      "participants": [
+        "shkingdom"
+      ],
+      "started": "2014-02-28T17:56:58-08:00",
+      "last_reply": "2014-02-28T17:56:58-08:00",
+      "root_message_id": "msg-4012f23ffe5a"
+    },
+    {
+      "id": "thread-26701c652ff6",
+      "subject": "reshape non-square matrix",
+      "message_count": 3,
+      "participants": [
+        "Chirag Gupta",
+        "Jeff Newmiller"
+      ],
+      "started": "2014-02-28T19:49:26-06:00",
+      "last_reply": "2014-02-28T22:38:34-08:00",
+      "root_message_id": "msg-26701c652ff6"
+    },
+    {
+      "id": "thread-26701c652ff6",
+      "subject": "reshape non-square matrix",
+      "message_count": 1,
+      "participants": [
+        "Chirag Gupta"
+      ],
+      "started": "2014-02-28T19:49:26-06:00",
+      "last_reply": "2014-02-28T19:49:26-06:00",
+      "root_message_id": "msg-26701c652ff6"
+    },
+    {
+      "id": "thread-ffa9a490b23a",
+      "subject": "New to R",
+      "message_count": 1,
+      "participants": [
+        "Ista Zahn"
+      ],
+      "started": "2014-02-28T19:50:54-05:00",
+      "last_reply": "2014-02-28T19:50:54-05:00",
+      "root_message_id": "msg-ffa9a490b23a"
+    },
+    {
+      "id": "thread-ffa9a490b23a",
+      "subject": "New to R",
+      "message_count": 1,
+      "participants": [
+        "Ista Zahn"
+      ],
+      "started": "2014-02-28T19:50:54-05:00",
+      "last_reply": "2014-02-28T19:50:54-05:00",
+      "root_message_id": "msg-ffa9a490b23a"
+    },
+    {
+      "id": "thread-cfb95089ecf8",
+      "subject": "Problem importing file in R after switching from windows to Ubuntu",
+      "message_count": 1,
+      "participants": [
+        "Ista Zahn"
+      ],
+      "started": "2014-02-28T20:32:38-05:00",
+      "last_reply": "2014-02-28T20:32:38-05:00",
+      "root_message_id": "msg-cfb95089ecf8"
+    },
+    {
+      "id": "thread-cfb95089ecf8",
+      "subject": "Problem importing file in R after switching from windows to Ubuntu",
+      "message_count": 1,
+      "participants": [
+        "Ista Zahn"
+      ],
+      "started": "2014-02-28T20:32:38-05:00",
+      "last_reply": "2014-02-28T20:32:38-05:00",
+      "root_message_id": "msg-cfb95089ecf8"
+    },
+    {
+      "id": "thread-32e6c3c9671a",
+      "subject": "How to change the label size in axis",
+      "message_count": 1,
+      "participants": [
+        "Jun Shen"
+      ],
+      "started": "2014-02-28T22:08:39-05:00",
+      "last_reply": "2014-02-28T22:08:39-05:00",
+      "root_message_id": "msg-32e6c3c9671a"
+    },
+    {
+      "id": "thread-32e6c3c9671a",
+      "subject": "How to change the label size in axis",
+      "message_count": 1,
+      "participants": [
+        "Jun Shen"
+      ],
+      "started": "2014-02-28T22:08:39-05:00",
+      "last_reply": "2014-02-28T22:08:39-05:00",
+      "root_message_id": "msg-32e6c3c9671a"
+    }
+  ]
+}

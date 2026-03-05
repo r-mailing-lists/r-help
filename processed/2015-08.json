@@ -1,0 +1,181 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2015-08",
+  "messages": [
+    {
+      "id": "msg-daaf32ffb313",
+      "message_id": "<C1183D3A-5DEA-4E52-80F0-E71E84EA76F1@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2015-08-31T16:34:10-07:00",
+      "subject": "[R] modify strip labels with given text using lattice package",
+      "subject_clean": "modify strip labels with given text using lattice package",
+      "in_reply_to": "<CAMk+s2RKfDsNeQM30dvrEkrST6i+t2URWvbAsoirWES+UYbsPw@mail.gmail.com>",
+      "references": [
+        "<CAMk+s2RKfDsNeQM30dvrEkrST6i+t2URWvbAsoirWES+UYbsPw@mail.gmail.com>"
+      ],
+      "body_plain": "On Aug 31, 2015, at 1:17 PM, Luigi Marongiu wrote:\n\n> Dear all,\n> I am drawing a barchart plot with lattice and the resulting strips are\n> taking the value of the variable being compared (in this example\n> \"assay\"). However I would like to write myself the value to place into\n> the strips, let's say I want to call the variables as \"molecular test\"\n> and \"serological test\" the values \"a\" and \"b\" respectively within\n> \"assay\". I have tried different approaches taken from the web but\n> nothing worked.\n\nLook at ?barchart in the section on arguments to strip and then at ?strip.default for how to use `strip.custom`. If you needed finer control there are functions that return the panel, but this request did not require using it:\n\nbarchart(\n   test ~ count|assay,\n   df,\n   groups = res,\n   stack = TRUE,\n   main = \"Comparison of test results\",\n   xlab = \"Count\",\n   col = c(\"yellow\", \"blue\"),\n   par.settings = list(\n       strip.background = list(col=\"light grey\"),\n       superpose.polygon=list(col= c(\"yellow\", \"blue\"))\n   ),\n   strip = strip.custom( factor.levels=c(\"molecular test\",\"serological test\") ),\n\n   scales = list(\n       alternating = FALSE\n   ),\n   key = list(\n       space=\"top\",\n       columns=2,\n       text=list(c(\"Negative\", \"Positive\"), col=\"black\"),\n       rectangles=list(col=c(\"yellow\", \"blue\"))\n   )\n)\n\n> Would you have any tip?\n> Best regards\n> Luigi\n> \n>>>> \n> test <- rep(c(\"Adenovirus\", \"Rotavirus\", \"Norovirus\", \"Rotarix\",\n> \"Sapovirus\"), 2)\n> res <- c(0, 1, 0, 1,0, 1,0, 1,0, 1, 0, 1, 0, 1,0, 1,0, 1,0, 1)\n> count <- rnorm(20)\n> assay <- c(rep(\"a\", 10), rep(\"b\", 10))\n> \n> df <- data.frame(test, res, count, assay, stringsAsFactors = FALSE)\n> \n> library(lattice)\n> barchart(\n>    test ~ count|assay,\n>    df,\n>    groups = res,\n>    stack = TRUE,\n>    main = \"Comparison of test results\",\n>    xlab = \"Count\",\n>    col = c(\"yellow\", \"blue\"),\n>    par.settings = list(\n>        strip.background = list(col=\"light grey\"),\n>        superpose.polygon=list(col= c(\"yellow\", \"blue\"))\n>    ),\n>    scales = list(\n>        alternating = FALSE\n>    ),\n>    key = list(\n>        space=\"top\",\n>        columns=2,\n>        text=list(c(\"Negative\", \"Positive\"), col=\"black\"),\n>        rectangles=list(col=c(\"yellow\", \"blue\"))\n>    )\n> )\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Aug 31, 2015, at 1:17 PM, Luigi Marongiu wrote:\n\n> Dear all,\n> I am drawing a barchart plot with lattice and the resulting strips are\n> taking the value of the variable being compared (in this exam",
+      "thread_id": "thread-daaf32ffb313",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-191f8bea1c1f",
+      "message_id": "<A7D83169-C0AC-446D-9417-A44337677896@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2015-08-31T16:48:15-07:00",
+      "subject": "[R] Conditional replacement and removal of data frame values",
+      "subject_clean": "Conditional replacement and removal of data frame values",
+      "in_reply_to": "<CAMk+s2R_yPO3ygNFLUnaM9TVZy7ZB7neO-3o_=4s2jRGACHZqg@mail.gmail.com>",
+      "references": [
+        "<CAMk+s2R_yPO3ygNFLUnaM9TVZy7ZB7neO-3o_=4s2jRGACHZqg@mail.gmail.com>"
+      ],
+      "body_plain": "On Aug 31, 2015, at 1:49 PM, Luigi Marongiu wrote:\n\n> Dear all,\n> I have a data frame and I would like to do the following:\n> a) replace value of one variable \"a\" according to the value of another one \"b\"\n> b) remove all the instances of the variable \"b\"\n> \n> For the sake of argument, let's say I have the following data frame:\n> test <- rep(c(\"Adenovirus\", \"Rotavirus\", \"Norovirus\", \"Rotarix\",\n> \"Sapovirus\"), 3)\n> res <- c(0, 1, 0, 0, 1,\n>         1, 0, 1, 1, 0,\n>         0, 1, 0, 1, 0)\n> samp <- c(rep(1, 5), rep(2, 5), rep(3, 5))\n> df <- data.frame(test, res, samp, stringsAsFactors = FALSE)\n> \n> The task I need is to coerce the results of the \"Rotavirus\" to\n> negative (0) if and only if \"Rotarix\" is positive (1). In this\n> example, the results shows that for \"samp\" 3 \"Rotavirus\" should be 0:\n>    test           res samp\n> 2  Rotavirus   1    1\n> 4  Rotarix       0    1\n> 7  Rotavirus    0    2\n> 9  Rotarix       1    2\n> 12 Rotavirus   1    3\n> 14 Rotarix       1    3\n> \n> I can't use the subset function because then I would work on a\n> separate object and I don't know how to implement the conditions for\n> the replacements.\n> Finally, all the \"Rotarix\" entries should be removed from the data frame.",
+      "body_snippet": "On Aug 31, 2015, at 1:49 PM, Luigi Marongiu wrote:\n\n> Dear all,\n> I have a data frame and I would like to do the following:\n> a) replace value of one variable \"a\" according to the value of another one",
+      "thread_id": "thread-191f8bea1c1f",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-5559b3fb9757",
+      "message_id": "<CAF8bMcaHM0ms-qtnQdKg4u_ACdmZmb-7_vgz3kFY=1dQy2LLuA@mail.gmail.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2015-08-31T18:24:33-07:00",
+      "subject": "[R] Non zero padding dates",
+      "subject_clean": "Non zero padding dates",
+      "in_reply_to": "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>",
+      "references": [
+        "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>"
+      ],
+      "body_plain": "> For example: \"2015119_06\"  (\"2015-01-19 06:00\")\n\nHow would the ninth of November be represented?\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Mon, Aug 31, 2015 at 1:11 PM, Dominic Roye <dominic.roye at gmail.com>\nwrote:\n\n> Hello,\n>\n> How can I convert date-time in which month and day have non zero padding?\n>\n> For example: \"2015119_06\"  (\"2015-01-19 06:00\")\n>\n> Thanks\n>\n> Dominic\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "> For example: \"2015119_06\"  (\"2015-01-19 06:00\")\n\nHow would the ninth of November be represented?\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Mon, Aug 31, 2015 at 1:11 PM, Dominic Roye <dominic",
+      "thread_id": "thread-5559b3fb9757",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-dd2abdbd3200",
+      "message_id": "<CAAxdm-5HWUBdnE=hGhk5BDW6wDgBXwUcfsX5t4Dt4BEhnkOiXg@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2015-08-31T21:28:22-04:00",
+      "subject": "[R] Non zero padding dates",
+      "subject_clean": "Non zero padding dates",
+      "in_reply_to": "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>",
+      "references": [
+        "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>"
+      ],
+      "body_plain": "you will probably have to take a guess since your example is also\n 2015-11-09 06:00; so how do you determine which one.  come up with an\nalgorithm and the solution is easy.\n\n\nJim Holtman\nData Munger Guru\n\nWhat is the problem that you are trying to solve?\nTell me what you want to do, not how you want to do it.\n\nOn Mon, Aug 31, 2015 at 4:11 PM, Dominic Roye <dominic.roye at gmail.com>\nwrote:\n\n> Hello,\n>\n> How can I convert date-time in which month and day have non zero padding?\n>\n> For example: \"2015119_06\"  (\"2015-01-19 06:00\")\n>\n> Thanks\n>\n> Dominic\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "you will probably have to take a guess since your example is also\n 2015-11-09 06:00; so how do you determine which one.  come up with an\nalgorithm and the solution is easy.\n\n\nJim Holtman\nData Munger G",
+      "thread_id": "thread-dd2abdbd3200",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-8583d014eba1",
+      "message_id": "<CAGxFJbSpYhhv8VA41oojLpJSjoO1FO2FWpgXSP1v-P-AMD_0Zw@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2015-08-31T18:34:06-07:00",
+      "subject": "[R] Non zero padding dates",
+      "subject_clean": "Non zero padding dates",
+      "in_reply_to": "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>",
+      "references": [
+        "<CALvVS-HZ3QUXYT+cDqedxJTTtzQTLfSJRoYGbO9DhvWyx4E86w@mail.gmail.com>"
+      ],
+      "body_plain": "In your example, how would you know that it is not 2015-11-9 06:00. ?\n\nCheers,\nBert\n\n\n\nOn Monday, August 31, 2015, Dominic Roye <dominic.roye at gmail.com> wrote:\n\n> Hello,\n>\n> How can I convert date-time in which month and day have non zero padding?\n>\n> For example: \"2015119_06\"  (\"2015-01-19 06:00\")\n>\n> Thanks\n>\n> Dominic\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org <javascript:;> mailing list -- To UNSUBSCRIBE and\n> more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n-- \nBert Gunter\n\n\"Data is not information. Information is not knowledge. And knowledge is\ncertainly not wisdom.\"\n   -- Clifford Stoll\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "In your example, how would you know that it is not 2015-11-9 06:00. ?\n\nCheers,\nBert\n\n\n\nOn Monday, August 31, 2015, Dominic Roye <dominic.roye at gmail.com> wrote:\n\n> Hello,\n>\n> How can I convert date-",
+      "thread_id": "thread-8583d014eba1",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-0377f40807e0",
+      "message_id": "<CANbrOWd0mGGatb=9WY8PfWPYJXPCGcL5AG-B=+=vU1+P4pLTHQ@mail.gmail.com>",
+      "from_name": "Matt Pickard",
+      "from_email_hash": "1c6a519b1839b28f0589812f57e193adebaf20744a51aedeb909914199e6aa9e",
+      "date": "2015-08-31T22:14:10-06:00",
+      "subject": "[R] reshape: melt and cast",
+      "subject_clean": "reshape: melt and cast",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have data that looks like this:\n\n\n\n\n\n\n\n\n\n*> head(ratings)  QCode  PID  RaterName SI1 SI2 SI3 SI4 SI5 SI6 SI7 SI8 SI9\nSI10 SI111 GUILT 1123 cwormhoudt   2   2   3   1   1   1   3   3   3\n2    12  LOVE 1123 cwormhoudt   1   2   3   2   1   1   1   1   1    1\n33 GUILT 1136 cwormhoudt   1   2   3   1   1   1   2   3   2    2    14\nLOVE 1136 cwormhoudt   1   2   3   1   1   1   1   1   1    1    25 GUILT\n1137 cwormhoudt   2   2   2   1   1   1   2   3   1    2    16  LOVE 1137\ncwormhoudt   1   3   4   1   1   1   1   1   1    1    4*\n\n\n\n\n\n\n\n\n*> tail(ratings)      QCode  PID RaterName SI1 SI2 SI3 SI4 SI5 SI6 SI7 SI8\nSI9 SI10 SI112456    FUN 1555  zspeidel   1   3   3   1   1   1   1   1\n1    1    12457    FUN 1556  zspeidel   1   2   2   1   1   1   1   1\n1    1    12458    FUN 1558  zspeidel   1   2   3   1   1   1   1   1\n1    1    12459 APPEAR 1558  zspeidel   1   3   3   1   1   1   2   1\n1    2    12460 APPEAR 1559  zspeidel   1   3   3   1   1   1   2   1\n1    2    12461    FUN 1559  zspeidel   1   2   2   1   1   1   1   1\n1    1    1*\nI am trying to use the melt and cast functions to re-arrange it to look\nlike this:\n\n\n\n\n\n\n\n\n*   QCode  PID sItem cwormhoudt zspeidel1 APPEAR 1123   SI1\n1        12 APPEAR 1123   SI2          4        13 APPEAR 1123\nSI3          1        24 APPEAR 1123   SI4          3        15 APPEAR\n1123   SI5          1        16 APPEAR 1123   SI6          1        3*\nSo, I melt the data like this:\n\n\n\n*mratings = melt(ratings, variable_name=\"sItem\")*\nThen cast the data like this:\n\n\n*> outData = cast(mratings, QCode + PID + sItem ~ RaterName)Aggregation\nrequires fun.aggregate: length used as default*\n\nBut the value columns appear to be displaying counts and not the original\nvalues:\n\n\n\n\n\n\n\n\n\n\n\n\n\n*> head(outData)   QCode  PID sItem cwormhoudt zspeidel1 APPEAR 1123\nSI1          1        12 APPEAR 1123   SI2          1        13 APPEAR\n1123   SI3          1        14 APPEAR 1123   SI4          1        15\nAPPEAR 1123   SI5          1        16 APPEAR 1123   SI6          1\n1> which(outData$zpeidel==3)integer(0)*\nHow to I prevent cast from aggregating the data according to counts?  Am I\ndoing something wrong?\n\nThanks in advance.\n\nMP\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have data that looks like this:\n\n\n\n\n\n\n\n\n\n*> head(ratings)  QCode  PID  RaterName SI1 SI2 SI3 SI4 SI5 SI6 SI7 SI8 SI9\nSI10 SI111 GUILT 1123 cwormhoudt   2   2   3   1   1   1   3   3   3\n2    12",
+      "thread_id": "thread-0377f40807e0",
+      "thread_depth": 0,
+      "month": "2015-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-daaf32ffb313",
+      "subject": "modify strip labels with given text using lattice package",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2015-08-31T16:34:10-07:00",
+      "last_reply": "2015-08-31T16:34:10-07:00",
+      "root_message_id": "msg-daaf32ffb313"
+    },
+    {
+      "id": "thread-191f8bea1c1f",
+      "subject": "Conditional replacement and removal of data frame values",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2015-08-31T16:48:15-07:00",
+      "last_reply": "2015-08-31T16:48:15-07:00",
+      "root_message_id": "msg-191f8bea1c1f"
+    },
+    {
+      "id": "thread-5559b3fb9757",
+      "subject": "Non zero padding dates",
+      "message_count": 1,
+      "participants": [
+        "William Dunlap"
+      ],
+      "started": "2015-08-31T18:24:33-07:00",
+      "last_reply": "2015-08-31T18:24:33-07:00",
+      "root_message_id": "msg-5559b3fb9757"
+    },
+    {
+      "id": "thread-8583d014eba1",
+      "subject": "Non zero padding dates",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2015-08-31T18:34:06-07:00",
+      "last_reply": "2015-08-31T18:34:06-07:00",
+      "root_message_id": "msg-8583d014eba1"
+    },
+    {
+      "id": "thread-dd2abdbd3200",
+      "subject": "Non zero padding dates",
+      "message_count": 1,
+      "participants": [
+        "jim holtman"
+      ],
+      "started": "2015-08-31T21:28:22-04:00",
+      "last_reply": "2015-08-31T21:28:22-04:00",
+      "root_message_id": "msg-dd2abdbd3200"
+    },
+    {
+      "id": "thread-0377f40807e0",
+      "subject": "reshape: melt and cast",
+      "message_count": 1,
+      "participants": [
+        "Matt Pickard"
+      ],
+      "started": "2015-08-31T22:14:10-06:00",
+      "last_reply": "2015-08-31T22:14:10-06:00",
+      "root_message_id": "msg-0377f40807e0"
+    }
+  ]
+}

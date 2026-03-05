@@ -1,0 +1,267 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2007-08",
+  "messages": [
+    {
+      "id": "msg-0971b480de71",
+      "message_id": "<12434887.post@talk.nabble.com>",
+      "from_name": "Gen",
+      "from_email_hash": "c25a184b49ba1574bfda4b6c5da6901a5da470fbf9abf77e9c6958df5dfebd37",
+      "date": "2007-08-31T15:12:05-07:00",
+      "subject": "[R] customizing the color and point shape for each line drawn using lattice's xyplot",
+      "subject_clean": "customizing the color and point shape for each line drawn using lattice's xyplot",
+      "in_reply_to": "<eb555e660708301632q58c32d56saac442b13d51ecd9@mail.gmail.com>",
+      "references": [
+        "<12400517.post@talk.nabble.com>",
+        "<eb555e660708301632q58c32d56saac442b13d51ecd9@mail.gmail.com>"
+      ],
+      "body_plain": "I have succeeded in controlling the line colors and point symbols of each\nMethod plotted in each frame of my xyplot, using the help files you\nsuggested so that some methods can be represented by the same color and\ndistinguished by symbols using the following code (I can not, however, seem\nto make the key reflect these color and symbol changes):\n\n#assign colors to each method\nlcol <- rep(0, 243)\nlcol[common$Method==1] <- 1 \nlcol[common$Method==2] <- 2\nlcol[common$Method==3] <- 3\nlcol[common$Method==4] <- 6\nlcol[common$Method==5] <- 4\nlcol[common$Method==6] <- 4\nlcol[common$Method==7] <- 5\nlcol[common$Method==8] <- 5  \nlcol[common$Method==9] <- 6 \n\n#assign the type of symbol that corresponds to each method\nptype <- rep(0, 243)\nptype[common$Method==1] <- NA \nptype[common$Method==2] <- NA\nptype[common$Method==3] <- NA\nptype[common$Method==4] <- 3\nptype[common$Method==5] <- 6\nptype[common$Method==6] <- 2\nptype[common$Method==7] <- NA\nptype[common$Method==8] <- NA  \nptype[common$Method==9] <- NA \n\nxyplot(Yvar~ Xvar| Avar * Bvar, data=common.without.Method478,\ngroups=method.not478.f, type=\"o\", col=lcol, pch=ptype, cex=0.5,\nauto.key=list\n(text=c(\"Method 1\",\"Method 2\",\"Method 3\",\"Method 4a\",\"Method 4b\",\"Method\n9\"), points = TRUE, lines = TRUE, col=c(1,2,3,4,4,6), cex=1,\npch=c(NA,NA,NA,6,2,NA)))\n\t\nThe above code obtains the desired plot, and is the closest that I have come\nto obtaining the desired key.  Using the above code, within the key, I\nobtain the appropriate text and the text is colored such that the text\n\"Method 1\" corresponds to the color of method 1 in the plot. The symbol\nshape and line color to the right of this text, however, does not change\nfrom its default settings, and therefore does not reflect the plot.  I am\ntrying to obtain black text with appropriate symbols and appropriately\ncolored lines to the right. \n\nHave I misinterpreted the syntax of the atuo.key function?\n\n- Genevieve\n\n-- \nView this message in context: http://www.nabble.com/customizing-the-color-and-point-shape-for-each-line-drawn-using-lattice%27s-xyplot-tf4351934.html#a12434887\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "I have succeeded in controlling the line colors and point symbols of each\nMethod plotted in each frame of my xyplot, using the help files you\nsuggested so that some methods can be represented by the s",
+      "thread_id": "thread-0971b480de71",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-c55444525324",
+      "message_id": "<eb555e660708311518w260106cdi83a0a9164f8cee13@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2007-08-31T15:18:04-07:00",
+      "subject": "[R] Sweave rendering of simple character",
+      "subject_clean": "Sweave rendering of simple character",
+      "in_reply_to": "<49396.82.231.93.240.1188592566.squirrel@webmail.lyon.inserm.fr>",
+      "references": [
+        "<49396.82.231.93.240.1188592566.squirrel@webmail.lyon.inserm.fr>"
+      ],
+      "body_plain": "On 8/31/07, Ken Knoblauch <knoblauch at lyon.inserm.fr> wrote:\n> Hi,\n>\n> When I compile the construction\n>\n> \\begin{Scode}{eval=FALSE}\n> ?HSP\n> \\end{Scode}\n>\n> with Sweave and latex, it outputs in the pdf as,\n>\n>  > `?` (HSP)\n>\n> which is not incorrect but a bit more formal than I wanted\n> for demonstrating the use of the help shortcut.\n> I would like the output to look like,\n>\n> > ?HSP\n>\n> but I can't seem to make this work.\n\nI'm not familiar with the Scode environment, but\n\n\n<<eval=FALSE,keep.source=TRUE>>=\n?HSP\n@\n\n\ndoes what you want.\n\n-Deepayan",
+      "body_snippet": "On 8/31/07, Ken Knoblauch <knoblauch at lyon.inserm.fr> wrote:\n> Hi,\n>\n> When I compile the construction\n>\n> \\begin{Scode}{eval=FALSE}\n> ?HSP\n> \\end{Scode}\n>\n> with Sweave and latex, it outputs in the",
+      "thread_id": "thread-e56c5524386b",
+      "thread_depth": 1,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-ca3875eea2b4",
+      "message_id": "<eb555e660708311532n27c53f1dmf6bae720785d3f97@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2007-08-31T15:32:32-07:00",
+      "subject": "[R] Assigning line colors in xyplot",
+      "subject_clean": "Assigning line colors in xyplot",
+      "in_reply_to": "<46D7E617.9020108@env.ethz.ch>",
+      "references": [
+        "<46D6B5E9.1010908@env.ethz.ch>",
+        "<eb555e660708300940v28a70503m3eac68df7966b784@mail.gmail.com>",
+        "<46D7E617.9020108@env.ethz.ch>"
+      ],
+      "body_plain": "On 8/31/07, Christof Bigler <christof.bigler at env.ethz.ch> wrote:\n> The suggestions by Deepayan Sarkar and Hadley Wickham work for that\n> case, but I get into troubles when I try to draw e.g. a panel for \"A\"\n> and \"B\":\n>\n> xyplot(y ~ x | f , groups=g, data=tmp,type=\"l\",\n>       par.settings=list(superpose.line=list(col=c(\"red\",\"blue\"))),\n>       auto.key=list(space=\"top\",\n> text=levels(tmp$f),points=FALSE,lines=TRUE))\n>\n> Similarly for xyplot(y ~ x | f , groups=f, ...)\n>\n>\n> Let's assume that we use a slightly more complex dataframe, where we\n> have different individuals a, ..., f (grouping variable \"h\") with 1 or 2\n> series of measurements per individual (grouping variable \"g\"). The\n> individuals are grouped as \"A\" or \"B\" (grouping variable \"f\") according\n> to the distribution of the values in the variable \"y\".\n>\n> set.seed(1)\n> tmp2 <- data.frame(\n>\n> y=c(rnorm(10,0,1),rnorm(10,4,2),rnorm(10,4,2),rnorm(10,4,2),rnorm(10,0,1),rnorm(10,0,1),rnorm(10,0,1),rnorm(10,4,2),rnorm(10,0,1)),\n>       x=1:10,\n>\n> f=c(rep(\"A\",10),rep(\"B\",10),rep(\"B\",10),rep(\"B\",10),rep(\"A\",10),rep(\"A\",10),rep(\"A\",10),rep(\"B\",10),rep(\"A\",10)),\n>\n> g=c(rep(\"1\",10),rep(\"2\",10),rep(\"3\",10),rep(\"4\",10),rep(\"5\",10),rep(\"6\",10),rep(\"7\",10),rep(\"8\",10),rep(\"9\",10)),\n>\n> h=c(rep(\"a\",10),rep(\"b\",10),rep(\"b\",10),rep(\"c\",10),rep(\"d\",10),rep(\"d\",10),rep(\"e\",10),rep(\"f\",10),rep(\"e\",10)))\n>\n> Again, the line colors in the following plot are correct:\n>\n> xyplot(y ~ x | g , groups=f, data=tmp2,type=\"l\",\n>       par.settings=list(superpose.line=list(col=c(\"red\",\"blue\"))),\n>       auto.key=list(space=\"top\", points=FALSE,lines=TRUE))\n>\n> But, if I want to show e.g. one panel per individual, the assignment of\n> the colors is not correct:\n>\n> xyplot(y ~ x | h , groups=g,\n> data=tmp2,type=\"l\",\n>\n> par.settings=list(superpose.line=list(col=c(\"red\",\"blue\"))),\n>\n>       auto.key=list(space=\"top\", text=levels(tmp2$f),\n> points=FALSE,lines=TRUE))\n>\n>\n> Any suggestions?\n\nThis works (only the 'groups' argument is different from your call):\n\nxyplot(y ~ x | h , groups=interaction(f, g),\ndata=tmp2,type=\"l\",\n\npar.settings=list(superpose.line=list(col=c(\"red\",\"blue\"))),\n\n     auto.key=list(space=\"top\", text=levels(tmp2$f),\npoints=FALSE,lines=TRUE))\n\n\nNote that unlike ggplot, you cannot (easily) use a different variable\nfor grouping and coloring. Fortunately, the levels of interaction(f,\ng) are such that your colors (red, blue) are repeated in the right\norder, so you don't need to do much extra work.\n\n-Deepayan",
+      "body_snippet": "On 8/31/07, Christof Bigler <christof.bigler at env.ethz.ch> wrote:\n> The suggestions by Deepayan Sarkar and Hadley Wickham work for that\n> case, but I get into troubles when I try to draw e.g. a pane",
+      "thread_id": "thread-ca3875eea2b4",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-2a8d5492c476",
+      "message_id": "<46D8A569.8070602@stats.uwo.ca>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f10e1920504dfef879061667fbcfa0823bbc832410cad04707fb294db3bd8d83",
+      "date": "2007-08-31T19:34:01-04:00",
+      "subject": "[R] Sweave rendering of simple character",
+      "subject_clean": "Sweave rendering of simple character",
+      "in_reply_to": "<eb555e660708311518w260106cdi83a0a9164f8cee13@mail.gmail.com>",
+      "references": [
+        "<49396.82.231.93.240.1188592566.squirrel@webmail.lyon.inserm.fr>",
+        "<eb555e660708311518w260106cdi83a0a9164f8cee13@mail.gmail.com>"
+      ],
+      "body_plain": "Deepayan Sarkar wrote:\n> On 8/31/07, Ken Knoblauch <knoblauch at lyon.inserm.fr> wrote:\n>   \n>> Hi,\n>>\n>> When I compile the construction\n>>\n>> \\begin{Scode}{eval=FALSE}\n>> ?HSP\n>> \\end{Scode}\n>>\n>> with Sweave and latex, it outputs in the pdf as,\n>>\n>>  > `?` (HSP)\n>>\n>> which is not incorrect but a bit more formal than I wanted\n>> for demonstrating the use of the help shortcut.\n>> I would like the output to look like,\n>>\n>>     \n>>> ?HSP\n>>>       \n>> but I can't seem to make this work.\n>>     \n>\n> I'm not familiar with the Scode environment, but\n>\n>\n> <<eval=FALSE,keep.source=TRUE>>=\n> ?HSP\n> @\n>\n>\n> does what you want.\n>   \nLike Deepayan, I also use <<>>= notation, but this probably works \nanywhere:  put keep.source=TRUE in your \\SweaveOpts{} at the start of \nthe file. \n\nDuncan Murdoch",
+      "body_snippet": "Deepayan Sarkar wrote:\n> On 8/31/07, Ken Knoblauch <knoblauch at lyon.inserm.fr> wrote:\n>   \n>> Hi,\n>>\n>> When I compile the construction\n>>\n>> \\begin{Scode}{eval=FALSE}\n>> ?HSP\n>> \\end{Scode}\n>>\n>> w",
+      "thread_id": "thread-e56c5524386b",
+      "thread_depth": 2,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-e9fca8d61d2b",
+      "message_id": "<63F107BCC37AEA49A75FD94AA3E07CB099F518@pacpbsex01.pac.dfo-mpo.ca>",
+      "from_name": "Folkes, Michael",
+      "from_email_hash": "0efe0fc933482acbe8bf360ef520921ad4767b7388d33680ef385856c7b744bf",
+      "date": "2007-08-31T16:51:07-07:00",
+      "subject": "[R] Lattice:can't subset in panel function using other variables",
+      "subject_clean": "Lattice:can't subset in panel function using other variables",
+      "in_reply_to": "<eb555e660708311404r3797089bp2a07faa57bdd4bd1@mail.gmail.com>",
+      "references": [],
+      "body_plain": "Thanks Deepayan for your response.\nThe first subset you suggest was just a test for me and not what I\nwanted.\nI can't do your second suggested subset action as I wish to plot all the\npanel data, but then add a coloured datapoint for just one year (see\nexample code).\nI think I have found my problem but don't know how to solve it.\nThe subscripts of data going into each panel are almost always the same\nlength, except maybe one or two panels have 1 less datapoint.  \nI've attached a script that builds a quick dataset and plots what I was\naiming for.  It works great.  If you then remove one line of data from\nthe DF (using \"df<-df[-1,]\" in the script), the plotting goes awry.\n\nAny suggestions about dealing with unequal data lengths for panel\nfunction subsetting?\nThanks so much\nMichael\n\n***********Start of code\n#________________________\n#This builds fake dataset\n\nyears<-2000:2006\nweeks<-1:20\nyr<-rep(years,rep(length(weeks)*6,length(years)))\nwk<-rep(weeks,rep(6,length(weeks)))\ntemp<-rep(4:9,length(years)*length(weeks))\nyvar<-round(rnorm(length(years)*length(weeks)*6,mean=30,sd=4),0)\nxvar<-(rnorm(length(years)*length(weeks)*6)+5)/10\n\ndf<-data.frame(year=yr,week=wk,temp=temp,yvar=yvar,xvar=xvar)\n#________________________\n\nlibrary(lattice)\ndf<-df[df$temp==4 ,]\ndf$year2<-as.factor(df$year)\ndf$week2<-as.factor(df$week)\n\n#!!!!!!!!!!!!!!!!!\n#df<-df[-1,]   #<-run this to see problem if panel data are of unequal\nlength\n#!!!!!!!!!!!!!!!!!\n\nprint(xyplot(yvar~xvar|week2,data=df,layout = c(4, 5),\n  scales=list(cex=0.7,x=list(rot=45)),\n  par.strip=list(cex=.7),\n  as.table=T,\n  strip = strip.custom(strip.names = F, strip.levels = TRUE),\n panel=function(x,y,subscripts){\n      panel.xyplot(x,y,type='p',col=1,cex=.5)\n \npanel.xyplot(df$xvar[df$year==2005][subscripts],df$yvar[df$year==2005][s\nubscripts],type='p',pch=1,col=3,cex=1.5)\n\t},\n))\n***********End of code\n\n\n\n\n-----Original Message-----\nFrom: Deepayan Sarkar [mailto:deepayan.sarkar at gmail.com] \nSent: August 31, 2007 2:04 PM\nTo: Folkes, Michael\nCc: r-help at stat.math.ethz.ch\nSubject: Re: [R] Lattice:can't subset in panel function using other\nvariables\n\n\nOn 8/30/07, Folkes, Michael <FolkesM at pac.dfo-mpo.gc.ca> wrote:\n> I've succeeded doing a subset within the panel function of xyplot - if\nI'm subsetting based on either the value of 'x' or 'y' (e.g. below).\nHowever, I wish to subset based on the value of another variable and\ncolour that one plotted point.  It's not working.  Either it doesn't\nplot the coloured data point, or if I sort the data differently it\ncolours one datapoint, but the wrong one.   I assume this means it's not\ngetting the right subscripts?    Finally I can sort of see the light as\nif I remove the conditioning variable (week) and subset before the\nxyplot (e.g. week==1) to get just one panel, it plots the correct data\nincluding the correct single red point.\n> Where am I erring?\n> _______________________________________\n> print(xyplot(yval~xval|week,data=mydata,\n>  panel=function(x,y,subscripts){\n>         #panel.xyplot(x,y,type='p',col=1,cex=.5)\n>         panel.xyplot(x[y<=40],y[y<=40],type='p',col=2,cex=.5)  #\n<-----this works\n>         \n>\npanel.xyplot(x[mydata$yr==2005],y[mydata$yr==2005],type='p',pch=16,col=2\n,cex=.5)  #  <-----sometimes this won't work or it colours wrong\ndatapoint\n> }))\n> ___________________________\n\nWhy not\n\nxyplot(yval~xval|week,data=mydata, subset = yval < 40)\n\nor\n\nxyplot(yval~xval|week,data=mydata, subset = yr==2005)\n\n-Deepayan",
+      "body_snippet": "Thanks Deepayan for your response.\nThe first subset you suggest was just a test for me and not what I\nwanted.\nI can't do your second suggested subset action as I wish to plot all the\npanel data, but t",
+      "thread_id": "thread-e9fca8d61d2b",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-73a7d1cf80e9",
+      "message_id": "<eb555e660708311718x59f17f8bv9a580a1470457b3e@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2007-08-31T17:18:43-07:00",
+      "subject": "[R] Lattice:can't subset in panel function using other variables",
+      "subject_clean": "Lattice:can't subset in panel function using other variables",
+      "in_reply_to": "<63F107BCC37AEA49A75FD94AA3E07CB099F518@pacpbsex01.pac.dfo-mpo.ca>",
+      "references": [
+        "<eb555e660708311404r3797089bp2a07faa57bdd4bd1@mail.gmail.com>",
+        "<63F107BCC37AEA49A75FD94AA3E07CB099F518@pacpbsex01.pac.dfo-mpo.ca>"
+      ],
+      "body_plain": "On 8/31/07, Folkes, Michael <FolkesM at pac.dfo-mpo.gc.ca> wrote:\n> Thanks Deepayan for your response.\n> The first subset you suggest was just a test for me and not what I\n> wanted.\n> I can't do your second suggested subset action as I wish to plot all the\n> panel data, but then add a coloured datapoint for just one year (see\n> example code).\n> I think I have found my problem but don't know how to solve it.\n> The subscripts of data going into each panel are almost always the same\n> length, except maybe one or two panels have 1 less datapoint.\n> I've attached a script that builds a quick dataset and plots what I was\n> aiming for.  It works great.  If you then remove one line of data from\n> the DF (using \"df<-df[-1,]\" in the script), the plotting goes awry.\n>\n> Any suggestions about dealing with unequal data lengths for panel\n> function subsetting?\n\nIf your goal is to highlight one particular year, why not use something like\n\nxyplot(yvar~xvar|week2,data=df,layout = c(4, 5), as.table=TRUE,\n       groups = (year == 2005), col = 1, pch = c(1, 16))\n\n? Your code doesn't work because you don't seem to understand what\n'subscripts' is supposed to be (either that, or you are confusing\nyourself with multiple indices). Here's a version with the correct\nusage:\n\nxyplot(yvar~xvar|week2,data=df,layout = c(4, 5), as.table=TRUE,\n       panel = function(x, y, subscripts, ...) {\n           highlight <- (df$year == 2005)\n           highlight.panel <- highlight[subscripts]\n           panel.xyplot(x, y, type='p', col=1, cex=.5)\n           panel.xyplot(x[highlight.panel], y[highlight.panel],\n                        type='p', pch=1, col=3, cex=1.5)\n       })\n\n-Deepayan",
+      "body_snippet": "On 8/31/07, Folkes, Michael <FolkesM at pac.dfo-mpo.gc.ca> wrote:\n> Thanks Deepayan for your response.\n> The first subset you suggest was just a test for me and not what I\n> wanted.\n> I can't do your ",
+      "thread_id": "thread-e9fca8d61d2b",
+      "thread_depth": 1,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-de16f0f40792",
+      "message_id": "<20070901003026.GB6502@phenix.progiciels-bpi.ca>",
+      "from_name": "François Pinard",
+      "from_email_hash": "171674e7cba1ece67a25dd5da2a923eeaf5d50431e54bc35dbbea00a444ab5e4",
+      "date": "2007-08-31T20:30:26-04:00",
+      "subject": "[R] R 2.5.1 - Rscript through tee",
+      "subject_clean": "R 2.5.1 - Rscript through tee",
+      "in_reply_to": "<18130.55671.500000.412572@ron.nulle.part>",
+      "references": [
+        "<20070827024718.GA20217@alcyon.progiciels-bpi.ca>",
+        "<18130.55671.500000.412572@ron.nulle.part>"
+      ],
+      "body_plain": "[Dirk Eddelbuettel]\n>[Fran?ois Pinard]\n\n>>    #!/usr/bin/Rscript\n>>    options(echo=TRUE)\n>>    a <- 1\n>>    Sys.sleep(3)\n>>    a <- 2\n\n>> If I execute \"./pp.R\" at the shell prompt, the output shows the \n>> timely progress of the script as expected.  If I use \"./pp.R | tee \n>> OUT\" instead, the output seems buffered and I see it all at once at \n>> the end.  [...] So, is there a way to tell R (or Rscript) that \n>> standard output should be unbuffered, even if it is not directly \n>> connected to a terminal?\n\n> Use explicit print statements, e.g.  print(a <- 1)\n\nYes, I noticed that \"print\" statements get written.  But I wanted the \nmere \"echo\" trace of the execution of the script to be synchronous (as \nsome statements take many seconds to compute, which I symbolically \nreplaced by \"Sys.sleep\" above).\n\n> Littler5D actually won't show anything unless you explicitly call \n> cat() or print(), but then it does [...]\n\nIt shares the limitation of Rscript, then.\n\n> Littler is an 'all-in' binary and starts and runs demonstrably faster \n> than Rscript.\n\nI'm not familiar with Littler.  Speedwise, Rscript is OK for me so far, \nas most time is spent within R computations, not much in language \ncompilation or script interpretation.\n\n> [...] the rather petty refusal of Rscript's main author to a least \n> give a reference to littler in Rscript's documentation, let alone \n> credit as 'we were there first', [...]\n\nI've long been in academic circles (and elsewhere too), so I'm familiar \nwith the need of recognizing authorship and people's works.  However, \nperusing R mailing list archives, and following actual list contents, \nI'm sometimes surprised, and even a bit annoyed, by the recurrent starve \nfor credit I observe.  Of course, maintainers and contributors much \ndeserve our thanks and, without going into arguments about what is due \nto whom, I think contributors receive praise on average, would it be \nonly by all the interest shown by the community.  However, it gets a bit \nmuddy when maintainers or contributors show bad temper when not \nreceiving the systematic credit they would like to read.\n\nCicero's friends were telling him how upset they felt that there was \nstill no statute of Cicero on the public place.  Cicero replied that he \nmuch preferred to hear people saying \"Why no Cicero statute yet?\" than \nto hear people saying \"Why the Cicero statute?\".  A wise attitude! :-)\n\n-- \nFran?ois Pinard   http://pinard.progiciels-bpi.ca",
+      "body_snippet": "[Dirk Eddelbuettel]\n>[Fran?ois Pinard]\n\n>>    #!/usr/bin/Rscript\n>>    options(echo=TRUE)\n>>    a <- 1\n>>    Sys.sleep(3)\n>>    a <- 2\n\n>> If I execute \"./pp.R\" at the shell prompt, the output shows t",
+      "thread_id": "thread-de16f0f40792",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-e56c5524386b",
+      "message_id": "<49396.82.231.93.240.1188592566.squirrel@webmail.lyon.inserm.fr>",
+      "from_name": "Ken Knoblauch",
+      "from_email_hash": "cd1eec8a1ad6dd6ca45868d4d8bd582ed8e9931848426612a8bc1afdbbf20bb5",
+      "date": "2007-08-31T22:36:06-02:00",
+      "subject": "[R] Sweave rendering of simple character",
+      "subject_clean": "Sweave rendering of simple character",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nWhen I compile the construction\n\n\\begin{Scode}{eval=FALSE}\n?HSP\n\\end{Scode}\n\nwith Sweave and latex, it outputs in the pdf as,\n\n > `?` (HSP)\n\nwhich is not incorrect but a bit more formal than I wanted\nfor demonstrating the use of the help shortcut.\nI would like the output to look like,\n\n> ?HSP\n\nbut I can't seem to make this work.\nI have also tried the results=verbatim argument.\n\nThanks, in advance for any suggestions.\n\nbest,\n\nken\n\n\n-- \nKen Knoblauch\nInserm U846\nInstitut Cellule Souche et Cerveau\nD?partement Neurosciences Int?gratives\n18 avenue du Doyen L?pine\n69500 Bron\nFrance\ntel: +33 (0)4 72 91 34 77\nfax: +33 (0)4 72 91 34 61\nportable: +33 (0)6 84 10 64 10\nhttp://www.lyon.inserm.fr/846/english.html",
+      "body_snippet": "Hi,\n\nWhen I compile the construction\n\n\\begin{Scode}{eval=FALSE}\n?HSP\n\\end{Scode}\n\nwith Sweave and latex, it outputs in the pdf as,\n\n > `?` (HSP)\n\nwhich is not incorrect but a bit more formal than I wa",
+      "thread_id": "thread-e56c5524386b",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-2e9ee7210360",
+      "message_id": "<793e846d0708312057j79897d3cv92bbf460022f9ba4@mail.gmail.com>",
+      "from_name": "Scott Hyde",
+      "from_email_hash": "09b7700f60b9dbebf49851ae79694748f4a8ff8644121c0390818ae790e16f15",
+      "date": "2007-08-31T17:57:02-10:00",
+      "subject": "[R] row echelon form",
+      "subject_clean": "row echelon form",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone,\n\nI am looking to use R as a MATLAB replacement for linear algebra.\nI've done a fairly good job for finding replacements for most of the\nfunctions I'm interested in, I\nJohn Fox wrote a program for implementing the reduced row echelon form\nof a matrix (by doing the Gauss-Jordan elimination).  I modified it a\nbit:\n\nrref <- function(A, tol=sqrt(.Machine$double.eps),verbose=FALSE,\n                 fractions=FALSE){\n  ## A: coefficient matrix\n  ## tol: tolerance for checking for 0 pivot\n  ## verbose: if TRUE, print intermediate steps\n  ## fractions: try to express nonintegers as rational numbers\n  ## Written by John Fox\n  if (fractions) {\n    mass <- require(MASS)\n    if (!mass) stop(\"fractions=TRUE needs MASS package\")\n  }\n  if ((!is.matrix(A)) || (!is.numeric(A)))\n    stop(\"argument must be a numeric matrix\")\n  n <- nrow(A)\n  m <- ncol(A)\n  for (i in 1:min(c(m, n))){\n    col <- A[,i]\n    col[1:n < i] <- 0\n    # find maximum pivot in current column at or below current row\n    which <- which.max(abs(col))\n    pivot <- A[which, i]\n    if (abs(pivot) <= tol) next     # check for 0 pivot\n    if (which > i) A[c(i, which),] <- A[c(which, i),]  # exchange rows\n    A[i,] <- A[i,]/pivot            # pivot\n    row <- A[i,]\n    A <- A - outer(A[,i], row)      # sweep\n    A[i,] <- row                    # restore current row\n    if (verbose)\n      if (fractions) print(fractions(A))\n      else print(round(A,round(abs(log(tol,10)))))\n  }\n  for (i in 1:n)\n    if (max(abs(A[i,1:m])) <= tol)\n      A[c(i,n),] <- A[c(n,i),] # 0 rows to bottom\n  if (fractions) fractions (A)\n  else round(A, round(abs(log(tol,10))))\n}\n\nI've found its useful for my students.\n\nI wrote a program for implementing row echelon form, which is only\nconcerned with the getting the lower triangular part to be zero, along\nwith the first non-zero entry in each non-zero row being a one.  Here\nis what I wrote:\n\nref <- function(A) {\n  ## Implements gaussian elimination using the QR factorization.\n  ## Note: ref form is not unique.\n  ## written by S. K. Hyde\n  ##\n\n  qrA <- qr(A)\n  r <- qrA$rank  ##computed rank of the matrix\n  R <- qr.R(qrA)\n\n  if (r < nrow(R))\n    R[-(1:r),] <- 0 #zero out rows that should be zero (according to the rank).\n\n  #Get ones as the first nonzero entry in each row and return result.\n  diag(c(1/diag(R)[1:r],rep(1,nrow(R)-r)))%*%R\n}\n\nAny suggestions of problems that anyone sees?\n\n-Scott\n\n\n\n-- \n*****************************************************************\nScott K. Hyde\nAssistant Professor of Statistics and Mathematics\nBrigham Young University -- Hawaii",
+      "body_snippet": "Hi everyone,\n\nI am looking to use R as a MATLAB replacement for linear algebra.\nI've done a fairly good job for finding replacements for most of the\nfunctions I'm interested in, I\nJohn Fox wrote a pro",
+      "thread_id": "thread-2e9ee7210360",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-2f6b75d3acec",
+      "message_id": "<297801.81534.qm@web58111.mail.re3.yahoo.com>",
+      "from_name": "Megh Dal",
+      "from_email_hash": "ac75a705f36baba80297fe074c4d6f2bea70f2e9278e0c34cda34238862562ef",
+      "date": "2007-08-31T22:19:57-07:00",
+      "subject": "[R] Choosing the optimum lag order of ARIMA model",
+      "subject_clean": "Choosing the optimum lag order of ARIMA model",
+      "in_reply_to": "<D3AEEDA31E57474B840BEBC25A8A83440195791E@NYWEXMB23.msad.ms.com>",
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/aa4c1202/attachment.pl",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/aa4c1202/attachment.pl",
+      "thread_id": "thread-2f6b75d3acec",
+      "thread_depth": 0,
+      "month": "2007-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-0971b480de71",
+      "subject": "customizing the color and point shape for each line drawn using lattice's xyplot",
+      "message_count": 1,
+      "participants": [
+        "Gen"
+      ],
+      "started": "2007-08-31T15:12:05-07:00",
+      "last_reply": "2007-08-31T15:12:05-07:00",
+      "root_message_id": "msg-0971b480de71"
+    },
+    {
+      "id": "thread-ca3875eea2b4",
+      "subject": "Assigning line colors in xyplot",
+      "message_count": 1,
+      "participants": [
+        "Deepayan Sarkar"
+      ],
+      "started": "2007-08-31T15:32:32-07:00",
+      "last_reply": "2007-08-31T15:32:32-07:00",
+      "root_message_id": "msg-ca3875eea2b4"
+    },
+    {
+      "id": "thread-e9fca8d61d2b",
+      "subject": "Lattice:can't subset in panel function using other variables",
+      "message_count": 2,
+      "participants": [
+        "Deepayan Sarkar",
+        "Folkes, Michael"
+      ],
+      "started": "2007-08-31T16:51:07-07:00",
+      "last_reply": "2007-08-31T17:18:43-07:00",
+      "root_message_id": "msg-e9fca8d61d2b"
+    },
+    {
+      "id": "thread-2e9ee7210360",
+      "subject": "row echelon form",
+      "message_count": 1,
+      "participants": [
+        "Scott Hyde"
+      ],
+      "started": "2007-08-31T17:57:02-10:00",
+      "last_reply": "2007-08-31T17:57:02-10:00",
+      "root_message_id": "msg-2e9ee7210360"
+    },
+    {
+      "id": "thread-de16f0f40792",
+      "subject": "R 2.5.1 - Rscript through tee",
+      "message_count": 1,
+      "participants": [
+        "François Pinard"
+      ],
+      "started": "2007-08-31T20:30:26-04:00",
+      "last_reply": "2007-08-31T20:30:26-04:00",
+      "root_message_id": "msg-de16f0f40792"
+    },
+    {
+      "id": "thread-2f6b75d3acec",
+      "subject": "Choosing the optimum lag order of ARIMA model",
+      "message_count": 1,
+      "participants": [
+        "Megh Dal"
+      ],
+      "started": "2007-08-31T22:19:57-07:00",
+      "last_reply": "2007-08-31T22:19:57-07:00",
+      "root_message_id": "msg-2f6b75d3acec"
+    },
+    {
+      "id": "thread-e56c5524386b",
+      "subject": "Sweave rendering of simple character",
+      "message_count": 3,
+      "participants": [
+        "Deepayan Sarkar",
+        "Duncan Murdoch",
+        "Ken Knoblauch"
+      ],
+      "started": "2007-08-31T22:36:06-02:00",
+      "last_reply": "2007-08-31T22:36:06-02:00",
+      "root_message_id": "msg-e56c5524386b"
+    }
+  ]
+}

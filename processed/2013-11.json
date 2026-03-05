@@ -1,0 +1,38 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2013-11",
+  "messages": [
+    {
+      "id": "msg-21c86dfa977d",
+      "message_id": "<000001ced68b$39004400$ab00cc00$@bigpond.com>",
+      "from_name": "Duncan Mackay",
+      "from_email_hash": "600edc7ceed1415bcb57972edb00bf3ec54a4177a1d6c67899b70f2acdbd8d48",
+      "date": "2013-11-01T08:47:47+10:00",
+      "subject": "[R] Lattice Legend/Key by row instead of by column",
+      "subject_clean": "Lattice Legend/Key by row instead of by column",
+      "in_reply_to": "<CAJU8Py06n=EBxAP=HBbiUBcGjyXK7ye=qQCat2L_LvTHP+w2Lg@mail.gmail.com>",
+      "references": [
+        "<CAJU8Py06n=EBxAP=HBbiUBcGjyXK7ye=qQCat2L_LvTHP+w2Lg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Richard\n\nIf you cannot get a better suggestion this example from Deepayan Sarkar may\nhelp. \nIt is way back in the archives and I do not have a reference for it.\n\nI have used it about a year ago as a template to do a complicated key\n\nfl <- grid.layout(nrow = 2, ncol = 6, \n                  heights = unit(rep(1, 2), \"lines\"),\n                  widths = unit(c(2, 1, 2, 1, 2, 1), \n \nc(\"cm\",\"strwidth\",\"cm\",\"strwidth\",\"cm\",\"strwidth\"), \n                  data = list(NULL,\"John\",NULL,\"George\",NULL,\"The\nBeatles\"))) \n\nfoo <- frameGrob(layout = fl)\nfoo <- placeGrob(foo, \n                 pointsGrob(.5, .5, pch=19, \n                            gp = gpar(col=\"red\", cex=0.5)), \n                 row = 1, col = 1) \nfoo <- placeGrob(foo, \n                 linesGrob(c(0.2, 0.8), c(.5, .5), \n                           gp = gpar(col=\"blue\")), \n                 row = 2, col = 1) \nfoo <- placeGrob(foo, \n                 linesGrob(c(0.2, 0.8), c(.5, .5), \n                           gp = gpar(col=\"green\")), \n                 row = 1, col = 3) \nfoo <- placeGrob(foo, \n                 linesGrob(c(0.2, 0.8), c(.5, .5), \n                           gp = gpar(col=\"orange\")), \n                 row = 2, col = 3) \nfoo <- placeGrob(foo, \n                 rectGrob(width = 0.6, \n                          gp = gpar(col=\"#FFFFCC\", \n                          fill = \"#FFFFCC\")), \n                 row = 1, col = 5) \nfoo <- placeGrob(foo, \n                 textGrob(lab = \"John\"), \n                 row = 1, col = 2) \nfoo <- placeGrob(foo, \n                 textGrob(lab = \"Paul\"), \n                 row = 2, col = 2) \nfoo <- placeGrob(foo, \n                 textGrob(lab = \"George\"), \n                 row = 1, col = 4) \nfoo <- placeGrob(foo, \n                 textGrob(lab = \"Ringo\"), \n                 row = 2, col = 4) \nfoo <- placeGrob(foo, \n                 textGrob(lab = \"The Beatles\"), \n                 row = 1, col = 6) \n\nxyplot(1 ~ 1, legend = list(top = list(fun = foo)))\n\nIn my case I changed  \"strwidth\" to \"cm\" for the text as I was cramped for\nspace\n\nHTH\n\nDuncan\n\nDuncan Mackay\nDepartment of Agronomy and Soil Science\nUniversity of New England\nArmidale NSW 2351\nEmail: home: mackay at northnet.com.au\n\n-----Original Message-----\nFrom: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On\nBehalf Of Richard Kwock\nSent: Friday, 1 November 2013 06:42\nTo: R help\nSubject: [R] Lattice Legend/Key by row instead of by column\n\nHi All,\n\nI am having some trouble getting lattice to display the legend names by row\ninstead of by column (default).\n\nExample:\n\nlibrary(lattice)\nset.seed(456846)\ndata <- matrix(c(1:10) + runif(50), ncol = 5, nrow = 10) dataset <-\ndata.frame(data = as.vector(data), group = rep(1:5, each = 10), time = 1:10)\n\nxyplot(data ~ time, group = group, dataset, t = \"l\",\n  key = list(text = list(paste(\"group\", unique(dataset$group)) ),\n    lines = list(col = trellis.par.get()$superpose.symbol$col[1:5]),\n    columns = 4\n  )\n)\n\nWhat I'm hoping for are 4 columns in the legend, like this:\nLegend row 1: \"group 1\", \"group 2\", \"group 3\", \"group 4\"\nLegend row 2: \"group 5\"\n\nHowever, I'm getting:\nLegend row 1: \"group 1\", \"group 3\", \"group 5\"\nLegend row 2: \"group 2\", \"group 4\"\n\nI can see how this might work if I include blanks/NULLs in the legend as\nplaceholders, but that might get messy in data sets with many groups.\n\nAny ideas on how to get around this?\n\nThanks,\nRichard\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi Richard\n\nIf you cannot get a better suggestion this example from Deepayan Sarkar may\nhelp. \nIt is way back in the archives and I do not have a reference for it.\n\nI have used it about a year ago as ",
+      "thread_id": "thread-21c86dfa977d",
+      "thread_depth": 0,
+      "month": "2013-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-21c86dfa977d",
+      "subject": "Lattice Legend/Key by row instead of by column",
+      "message_count": 1,
+      "participants": [
+        "Duncan Mackay"
+      ],
+      "started": "2013-11-01T08:47:47+10:00",
+      "last_reply": "2013-11-01T08:47:47+10:00",
+      "root_message_id": "msg-21c86dfa977d"
+    }
+  ]
+}
