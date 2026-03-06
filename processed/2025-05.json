@@ -2102,6 +2102,63 @@
       "thread_id": "thread-0c5856b3a9db",
       "thread_depth": 1,
       "month": "2025-05"
+    },
+    {
+      "id": "msg-48b385a70bdc",
+      "message_id": "<CAGxFJbRVvxYtVgYdV20v6WWdKVznJSMWLYpcpnrTcOm_HJHOBw@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2025-05-31T15:08:32-07:00",
+      "subject": "[R] Simulating mid-points from a defined range",
+      "subject_clean": "Simulating mid-points from a defined range",
+      "in_reply_to": "<CAHUBDY_GYN_g5GGPLL3vuLbxrqWfodsxcaw6Q=t7--7Rh+UXTA@mail.gmail.com>",
+      "references": [
+        "<CAHUBDY_GYN_g5GGPLL3vuLbxrqWfodsxcaw6Q=t7--7Rh+UXTA@mail.gmail.com>"
+      ],
+      "body_plain": "If this is a real problem and not homework, can you tell us the\ncontext? It is not at all clear (to me) what you mean by \"simulate\",\ni.e. what your target distribution is, which may depend on/be defined\nby the context.\n\nBert\n\n\"An educated person is one who can entertain new ideas, entertain\nothers, and entertain herself.\"\n\n\nOn Sat, May 31, 2025 at 11:52?AM Brian Smith <briansmith199312 at gmail.com> wrote:\n>\n> Hi,\n>\n> Let say I have a range [0, 100]\n>\n> Now I need to simulate 1000 10 mid-points within the range with\n> accuracy upto second decimal number.\n>\n> Let say, one simulated set is\n>\n> X1, X2, ..., X10\n>\n> Ofcourrse\n>\n> X1 < X2 < ... <X10\n>\n> I have one more constraint that the difference between any 2\n> consecutive mid-points shall be at-least 5.00.\n>\n> I wonder if there is any Statistical theory available to support this\n> kind of simulation.\n>\n> Alternately, is there any way in R to implement this?\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "If this is a real problem and not homework, can you tell us the\ncontext? It is not at all clear (to me) what you mean by \"simulate\",\ni.e. what your target distribution is, which may depend on/be defin",
+      "thread_id": "thread-48b385a70bdc",
+      "thread_depth": 0,
+      "month": "2025-05"
+    },
+    {
+      "id": "msg-c3ce60f76da8",
+      "message_id": "<FE93t9pXxzBpMFMKdRtIhqY3gIx7eBYczmY3S_p1MCMbsbvSdU9dp4zkIEOZOL3lDW0Fh4S76jW5P3kbUv85XM_cTFpsTE2K8lEdNMBf_uU=@loesl.us>",
+      "from_name": "JRG",
+      "from_email_hash": "dd7a6fa4d67e3050fe1b0fccf96fea39f0adeddabbd953c1569958648a12a38c",
+      "date": "2025-05-31T22:43:30Z",
+      "subject": "[R] Simulating mid-points from a defined range",
+      "subject_clean": "Simulating mid-points from a defined range",
+      "in_reply_to": "<CAGxFJbRVvxYtVgYdV20v6WWdKVznJSMWLYpcpnrTcOm_HJHOBw@mail.gmail.com>",
+      "references": [
+        "<CAHUBDY_GYN_g5GGPLL3vuLbxrqWfodsxcaw6Q=t7--7Rh+UXTA@mail.gmail.com>",
+        "<CAGxFJbRVvxYtVgYdV20v6WWdKVznJSMWLYpcpnrTcOm_HJHOBw@mail.gmail.com>"
+      ],
+      "body_plain": "I'll second Bert's comments, also assuming this is not homework.  In addition:\n\nYour use of \"mid-point\" is not a standard one (in my world), nor perhaps is that of \"simulate\".\n\nLet me attempt to re-state your problem:  You wish to choose 10-tuples of integers 0 <= k <= 100 satisfying\n\n1) 0 <= k_i <= 100 for i = 1:10;\n   and\n2) k_(i+1) - k_(i) >= 5 for i = 1:9.\n\nFinally, you'd like 1000 of those 10-tuples.\n[Here, \"k_(i)\" is the usual notation for order statistics.]\n\nIs that the task?\n\nIf so, are there are other requirements on the k_i ?\n\nThe word \"simulate\" suggests the k_i are supposed to be realizations of random variables.  If so, what sort of distributional assumptions did you have in mind?\n\n\n---JRG\n\n\n\nOn Saturday, May 31st, 2025 at 6:09 PM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n\n> \n> \n> If this is a real problem and not homework, can you tell us the\n> context? It is not at all clear (to me) what you mean by \"simulate\",\n> i.e. what your target distribution is, which may depend on/be defined\n> by the context.\n> \n> Bert\n> \n> \"An educated person is one who can entertain new ideas, entertain\n> others, and entertain herself.\"\n> \n> \n> On Sat, May 31, 2025 at 11:52?AM Brian Smith briansmith199312 at gmail.com wrote:\n> \n> > Hi,\n> > \n> > Let say I have a range [0, 100]\n> > \n> > Now I need to simulate 1000 10 mid-points within the range with\n> > accuracy upto second decimal number.\n> > \n> > Let say, one simulated set is\n> > \n> > X1, X2, ..., X10\n> > \n> > Ofcourrse\n> > \n> > X1 < X2 < ... <X10\n> > \n> > I have one more constraint that the difference between any 2\n> > consecutive mid-points shall be at-least 5.00.\n> > \n> > I wonder if there is any Statistical theory available to support this\n> > kind of simulation.\n> > \n> > Alternately, is there any way in R to implement this?\n> > \n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> \n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I'll second Bert's comments, also assuming this is not homework.  In addition:\n\nYour use of \"mid-point\" is not a standard one (in my world), nor perhaps is that of \"simulate\".\n\nLet me attempt to re-st",
+      "thread_id": "thread-48b385a70bdc",
+      "thread_depth": 1,
+      "month": "2025-05"
+    },
+    {
+      "id": "msg-8583aadd2710",
+      "message_id": "<CAGxFJbTSicAPqZ9EE72rx+7WgaxAOvMr0f29o9e4xfXctLUxdA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2025-05-31T16:44:36-07:00",
+      "subject": "[R] Simulating mid-points from a defined range",
+      "subject_clean": "Simulating mid-points from a defined range",
+      "in_reply_to": "<FE93t9pXxzBpMFMKdRtIhqY3gIx7eBYczmY3S_p1MCMbsbvSdU9dp4zkIEOZOL3lDW0Fh4S76jW5P3kbUv85XM_cTFpsTE2K8lEdNMBf_uU=@loesl.us>",
+      "references": [
+        "<CAHUBDY_GYN_g5GGPLL3vuLbxrqWfodsxcaw6Q=t7--7Rh+UXTA@mail.gmail.com>",
+        "<CAGxFJbRVvxYtVgYdV20v6WWdKVznJSMWLYpcpnrTcOm_HJHOBw@mail.gmail.com>",
+        "<FE93t9pXxzBpMFMKdRtIhqY3gIx7eBYczmY3S_p1MCMbsbvSdU9dp4zkIEOZOL3lDW0Fh4S76jW5P3kbUv85XM_cTFpsTE2K8lEdNMBf_uU=@loesl.us>"
+      ],
+      "body_plain": "JRG:\n\nI don't think your specification is correct -- perhaps just a thinko. I\nthink a 10-tuple of \"reals\" (scare quotes because of computer precision)\nwith your specifications is what is wanted.\n\nBert\n\n\"An educated person is one who can entertain new ideas, entertain others,\nand entertain herself.\"\n\n\n\nOn Sat, May 31, 2025 at 3:43?PM JRG <jrg at loesl.us> wrote:\n\n> I'll second Bert's comments, also assuming this is not homework.  In\n> addition:\n>\n> Your use of \"mid-point\" is not a standard one (in my world), nor perhaps\n> is that of \"simulate\".\n>\n> Let me attempt to re-state your problem:  You wish to choose 10-tuples of\n> integers 0 <= k <= 100 satisfying\n>\n> 1) 0 <= k_i <= 100 for i = 1:10;\n>    and\n> 2) k_(i+1) - k_(i) >= 5 for i = 1:9.\n>\n> Finally, you'd like 1000 of those 10-tuples.\n> [Here, \"k_(i)\" is the usual notation for order statistics.]\n>\n> Is that the task?\n>\n> If so, are there are other requirements on the k_i ?\n>\n> The word \"simulate\" suggests the k_i are supposed to be realizations of\n> random variables.  If so, what sort of distributional assumptions did you\n> have in mind?\n>\n>\n> ---JRG\n>\n>\n>\n> On Saturday, May 31st, 2025 at 6:09 PM, Bert Gunter <\n> bgunter.4567 at gmail.com> wrote:\n>\n> >\n> >\n> > If this is a real problem and not homework, can you tell us the\n> > context? It is not at all clear (to me) what you mean by \"simulate\",\n> > i.e. what your target distribution is, which may depend on/be defined\n> > by the context.\n> >\n> > Bert\n> >\n> > \"An educated person is one who can entertain new ideas, entertain\n> > others, and entertain herself.\"\n> >\n> >\n> > On Sat, May 31, 2025 at 11:52?AM Brian Smith briansmith199312 at gmail.com\n> wrote:\n> >\n> > > Hi,\n> > >\n> > > Let say I have a range [0, 100]\n> > >\n> > > Now I need to simulate 1000 10 mid-points within the range with\n> > > accuracy upto second decimal number.\n> > >\n> > > Let say, one simulated set is\n> > >\n> > > X1, X2, ..., X10\n> > >\n> > > Ofcourrse\n> > >\n> > > X1 < X2 < ... <X10\n> > >\n> > > I have one more constraint that the difference between any 2\n> > > consecutive mid-points shall be at-least 5.00.\n> > >\n> > > I wonder if there is any Statistical theory available to support this\n> > > kind of simulation.\n> > >\n> > > Alternately, is there any way in R to implement this?\n> > >\n> > > ______________________________________________\n> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> >\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "JRG:\n\nI don't think your specification is correct -- perhaps just a thinko. I\nthink a 10-tuple of \"reals\" (scare quotes because of computer precision)\nwith your specifications is what is wanted.\n\nBert",
+      "thread_id": "thread-48b385a70bdc",
+      "thread_depth": 2,
+      "month": "2025-05"
     }
   ],
   "threads": [
@@ -2416,6 +2473,18 @@
       "started": "2025-05-31T11:04:20+00:00",
       "last_reply": "2025-05-31T13:30:42-04:00",
       "root_message_id": "msg-5b182e9734ac"
+    },
+    {
+      "id": "thread-48b385a70bdc",
+      "subject": "Simulating mid-points from a defined range",
+      "message_count": 3,
+      "participants": [
+        "Bert Gunter",
+        "JRG"
+      ],
+      "started": "2025-05-31T15:08:32-07:00",
+      "last_reply": "2025-05-31T16:44:36-07:00",
+      "root_message_id": "msg-48b385a70bdc"
     },
     {
       "id": "thread-0c5856b3a9db",

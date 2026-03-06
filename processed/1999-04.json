@@ -2634,22 +2634,6 @@
       "month": "1999-04"
     },
     {
-      "id": "msg-43ba9b4e0594",
-      "message_id": "<3725B83E.59A5C93E@durham.ac.uk>",
-      "from_name": "Konstantinos Euripides Vorloou",
-      "from_email_hash": "a8e0d2671b3492825a69a0b99f557477dc179e83e5117c8d90481766e2acf118",
-      "date": "1999-04-27T14:14:38+01:00",
-      "subject": "[R] Memory management ",
-      "subject_clean": "Memory management",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI don't get it:\nFirst of all, the help doesn't say what are the memory limits of\nR. Say, what's the max heap size for instance ????\n\nSecondly,  I invoke R with the following commands each time:\n\nrgui --vsize 30M --nsize 1000K\nrgui --vsize 30M --nsize 2000K\nrgui --vsize 30M --nsize 3000K\nrgui --vsize 30M --nsize 4000K\n\nI try to open a matrix 8000x8000 by issuing\n\nx<-matrix(nrow=8000,ncol=8000)\n\nI  always get the following message:\n\nError: heap memory (20480  Kb) exhausted [needed 250000 Kb more]\n\nIt's always 250000 Kb less. Although gc() reports the memory management\nas\nexpected (correctly ?), increased every time I invoke R with greater\nvsize,nsize\nparams. My matrix should hold roughly 1 Meg of memory.\nIs this correct ?\n\nWhen I issue :\n\nrgui --vsize 30M --nsize 5000K\n\nR hangs up and have to kill the session.\n\nI am using R on a 333 Celeron Pentium PC with 128Megs of memory\nunder windows 98. I don't think I should have a problem there. Hardware\nseems ok...\n\nWould the interpreter normally use the swap disk to\ncreate a ramdrive for extra memory needs ? When I use\nlarge vsize, nsize params there is an awful lot of disk swapping...\nThis is more obvious on slower pentiums.\n\nI'd hate to recompile R to enlarge the heap. Is there another\nway out of it ? Anything undocumented ?\n\nThanks for your time and attention.\n\nBest regards,\nCostas\n\n--\n-------------------------------------------------------------------------\n\nKonstantinos E. Vorloou           | Tel: +44 (0)191 374 1821\nDepartment of Economics & Finance | Fax: +44 (0)191 374 7289\nUniversity of Durham,             | email: K.E.Vorloou at durham.ac.uk\n23/26 Old Elvet,                  | or : vorlow at rocketmail.com\nDurham DH1 3HY,                   | or : Vorlow at bigfoot.com\nUK.                               | Express:\n20595534 at pager.mirabilis.com\n                                  | ICQ number: 20595534\nhttp://www.durham.ac.uk/Economics | http://www.durham.ac.uk/~dec3kev\n-------------------------------------------------------------------------\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Dear all,\n\nI don't get it:\nFirst of all, the help doesn't say what are the memory limits of\nR. Say, what's the max heap size for instance ????\n\nSecondly,  I invoke R with the following commands each t",
-      "thread_id": "thread-43ba9b4e0594",
-      "thread_depth": 0,
-      "month": "1999-04"
-    },
-    {
       "id": "msg-e1edfe3164ef",
       "message_id": "<x21zh6faim.fsf@blueberry.kubism.ku.dk>",
       "from_name": "Peter Dalgaard BSA",
@@ -2662,24 +2646,6 @@
         "<3725B83E.59A5C93E@durham.ac.uk>"
       ],
       "body_plain": "Konstantinos Euripides Vorloou <K.E.Vorloou at durham.ac.uk> writes:\n\n> rgui --vsize 30M --nsize 1000K\n> rgui --vsize 30M --nsize 2000K\n> rgui --vsize 30M --nsize 3000K\n> rgui --vsize 30M --nsize 4000K\n> \n> I try to open a matrix 8000x8000 by issuing\n> \n> x<-matrix(nrow=8000,ncol=8000)\n> \n> I  always get the following message:\n> \n> Error: heap memory (20480  Kb) exhausted [needed 250000 Kb more]\n\nit's --vsize that controls the heap...\n\n> It's always 250000 Kb less. Although gc() reports the memory management\n> as\n> expected (correctly ?), increased every time I invoke R with greater\n> vsize,nsize\n> params. My matrix should hold roughly 1 Meg of memory.\n> Is this correct ?\n\nI get 8000*8000*8 = 512000000 bytes, alias 488Meg...\n\n\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Konstantinos Euripides Vorloou <K.E.Vorloou at durham.ac.uk> writes:\n\n> rgui --vsize 30M --nsize 1000K\n> rgui --vsize 30M --nsize 2000K\n> rgui --vsize 30M --nsize 3000K\n> rgui --vsize 30M --nsize 4000",
-      "thread_id": "thread-43ba9b4e0594",
-      "thread_depth": 1,
-      "month": "1999-04"
-    },
-    {
-      "id": "msg-e1edfe3164ef",
-      "message_id": "<x21zh6faim.fsf@blueberry.kubism.ku.dk>",
-      "from_name": "Peter Dalgaard BSA",
-      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
-      "date": "1999-04-27T15:39:13+02:00",
-      "subject": "[R] Memory management",
-      "subject_clean": "Memory management",
-      "in_reply_to": "Konstantinos Euripides Vorloou's message of \"Tue, 27 Apr 1999 14:14:38 +0100\"",
-      "references": [
-        "<3725B83E.59A5C93E@durham.ac.uk>"
-      ],
-      "body_plain": "Konstantinos Euripides Vorloou <K.E.Vorloou at durham.ac.uk> writes:\n\n> rgui --vsize 30M --nsize 1000K\n> rgui --vsize 30M --nsize 2000K\n> rgui --vsize 30M --nsize 3000K\n> rgui --vsize 30M --nsize 4000K\n> \n> I try to open a matrix 8000x8000 by issuing\n> \n> x<-matrix(nrow=8000,ncol=8000)\n> \n> I  always get the following message:\n> \n> Error: heap memory (20480  Kb) exhausted [needed 250000 Kb more]\n\nit's --vsize that controls the heap...\n\n> It's always 250000 Kb less. Although gc() reports the memory management\n> as\n> expected (correctly ?), increased every time I invoke R with greater\n> vsize,nsize\n> params. My matrix should hold roughly 1 Meg of memory.\n> Is this correct ?\n\nI get 8000*8000*8 = 512000000 bytes, alias 488Meg...\n\n\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "Konstantinos Euripides Vorloou <K.E.Vorloou at durham.ac.uk> writes:\n\n> rgui --vsize 30M --nsize 1000K\n> rgui --vsize 30M --nsize 2000K\n> rgui --vsize 30M --nsize 3000K\n> rgui --vsize 30M --nsize 4000",
       "thread_id": "thread-43ba9b4e0594",
       "thread_depth": 1,
@@ -4009,18 +3975,7 @@
     {
       "id": "thread-43ba9b4e0594",
       "subject": "Memory management",
-      "message_count": 1,
-      "participants": [
-        "Konstantinos Euripides Vorloou"
-      ],
-      "started": "1999-04-27T14:14:38+01:00",
-      "last_reply": "1999-04-27T14:14:38+01:00",
-      "root_message_id": "msg-43ba9b4e0594"
-    },
-    {
-      "id": "thread-43ba9b4e0594",
-      "subject": "Memory management",
-      "message_count": 4,
+      "message_count": 3,
       "participants": [
         "Konstantinos Euripides Vorloou",
         "Peter Dalgaard BSA",

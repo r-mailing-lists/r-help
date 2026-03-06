@@ -15871,6 +15871,78 @@
       "thread_id": "thread-7a18b2f32d20",
       "thread_depth": 0,
       "month": "2014-09"
+    },
+    {
+      "id": "msg-63721b76182d",
+      "message_id": "<F7E6D18CC2877149AB5296CE54EA276623A7F63C@WAXMXOLYMB025.WAX.wa.lcl>",
+      "from_name": "Nordlund, Dan (DSHS/RDA)",
+      "from_email_hash": "ef77364a2b891a7b8258da27cccf8377548c4cc4c2e1e0ba56746370eb611932",
+      "date": "2014-09-30T22:18:32Z",
+      "subject": "[R] Reading text file with fortran format",
+      "subject_clean": "Reading text file with fortran format",
+      "in_reply_to": "<542b1ac8.1228ec0a.1a92.23c7@mx.google.com>",
+      "references": [
+        "<542b1ac8.1228ec0a.1a92.23c7@mx.google.com>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Steven Yen\n> Sent: Tuesday, September 30, 2014 2:04 PM\n> To: r-help\n> Subject: [R] Reading text file with fortran format\n> \n> Hello\n> \n> I read data with fortran format:\n> mydata<-read.fortran('foo.txt',\n>                       c(\"4F10.4\",\"F8.3\",\"3F3.0\",\"20F2.0\"))\n> colnames(mydata)<-c(\"q1\",\"q2\",\"q3\",\"q4\",\"income\",\"hhsize\",\n>   \"weekend\",\"dietk\",\"quart1\",\"quart2\",\"quart3\",\"male\",\"age35\",\n>   \"age50\",\"age65\",\"midwest\",\"south\",\"west\",\"nonmetro\",\n>   \"suburb\",\"black\",\"asian\",\"other\",\"hispan\",\"hhtype1\",\n>   \"hhtype2\",\"hhtype3\",\"emp_stat\")\n> dstat(mydata,digits=6)\n> \n> I produced the following sample statistics for the first 4\n> variables (q1,q2,q3,q4):\n> \n>               Mean  Std.dev Min       Max  Obs\n> q1       0.000923 0.002509   0  0.035245 5649\n> q2       0.000698 0.001681   0  0.038330 5649\n> q3       0.000766 0.002138   0  0.040100 5649\n> q4       0.000373 0.001140   0  0.026374 5649\n> \n> The correct sample statistics are:\n> Variable|       Mean       Std.Dev.     Minimum      Maximum\n> --------+----------------------------------------------------\n>        Q1|     9.227632     25.09311          0.0     352.4508\n>        Q2|     6.983078     16.80984          0.0     383.2995\n>        Q3|     7.657381     21.38337          0.0     400.9950\n>        Q4|     3.727952     11.40446          0.0     263.7398\n>    INCOME|     16.01603     13.70296          0.0        100.0\n>    HHSIZE|     2.586475     1.464282          1.0         16.0\n> \n> In other words, values for q1-q4 were scaled down by a factor of\n> 10,000.\n> My raw data look like (with proper format)\n> \n>      0.0000    0.0000    0.0000    0.0000  48.108...\n>      0.0000    0.0000    0.0000    0.0000  11.640...\n>     35.3450    0.0000   95.7656    0.0000   4.667...\n>      0.0000    0.0000    0.0000    0.0000   9.000...\n>     84.0000    4.8038    0.0000    3.1886   2.923...\n>      0.0000    0.0000    0.0000    1.1636  10.000...\n>      0.0000   10.7818  109.7884    0.0000  17.000...\n>      0.0000    7.9528    0.0000    4.7829  35.000...\n> \n> True that the data here are space delimited. But I need to read data\n> elsewhere where data are not space delimited.\n> \n> Any idea/suggestion would be appreciated.\n> \n\nThe read.fortran function appears to work differently from how FORTRAN would read the data if there are already decimals points in the numbers.  If memory serves, FORTRAN ignores the decimal portion of the format if it finds a decimal in what it reads.  The read.fortran function appears to read the number 'as is' and then multiplies by 10^-d, where d is the number of decimal places in the format.  Since you have decimals specified, you should specify the format with 0 decimal places, i.e.\n\nc(\"4F10.0\",\"F8.0\",\"3F3.0\",\"20F2.0\"))\n\n\nhope this is helpful,\n\nDan\n\n\nDaniel J. Nordlund, PhD\nResearch and Data Analysis Division\nServices & Enterprise Support Administration\nWashington State Department of Social and Health Services",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> project.org] On Behalf Of Steven Yen\n> Sent: Tuesday, September 30, 2014 2:04 PM\n> To: r-help\n> Subj",
+      "thread_id": "thread-7a18b2f32d20",
+      "thread_depth": 1,
+      "month": "2014-09"
+    },
+    {
+      "id": "msg-37d4da25b516",
+      "message_id": "<542b2d2e.c832ec0a.4abf.ffffc33e@mx.google.com>",
+      "from_name": "Steven Yen",
+      "from_email_hash": "537f3cd657845ba4ae50c1c8be365e06e80b032fd3a0b5f7eba0c1b02f29a956",
+      "date": "2014-09-30T18:22:37-04:00",
+      "subject": "[R] Reading text file with fortran format",
+      "subject_clean": "Reading text file with fortran format",
+      "in_reply_to": "<F7E6D18CC2877149AB5296CE54EA276623A7F63C@WAXMXOLYMB025.WAX .wa.lcl>",
+      "references": [
+        "<542b1ac8.1228ec0a.1a92.23c7@mx.google.com>",
+        "<F7E6D18CC2877149AB5296CE54EA276623A7F63C@WAXMXOLYMB025.WAX.wa.lcl>"
+      ],
+      "body_plain": "Thanks to all.\nSteven Yen\n\nAt 06:18 PM 9/30/2014, Nordlund, Dan (DSHS/RDA) wrote:\n> > -----Original Message-----\n> > From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> > project.org] On Behalf Of Steven Yen\n> > Sent: Tuesday, September 30, 2014 2:04 PM\n> > To: r-help\n> > Subject: [R] Reading text file with fortran format\n> >\n> > Hello\n> >\n> > I read data with fortran format:\n> > mydata<-read.fortran('foo.txt',\n> >                       c(\"4F10.4\",\"F8.3\",\"3F3.0\",\"20F2.0\"))\n> > colnames(mydata)<-c(\"q1\",\"q2\",\"q3\",\"q4\",\"income\",\"hhsize\",\n> >   \"weekend\",\"dietk\",\"quart1\",\"quart2\",\"quart3\",\"male\",\"age35\",\n> >   \"age50\",\"age65\",\"midwest\",\"south\",\"west\",\"nonmetro\",\n> >   \"suburb\",\"black\",\"asian\",\"other\",\"hispan\",\"hhtype1\",\n> >   \"hhtype2\",\"hhtype3\",\"emp_stat\")\n> > dstat(mydata,digits=6)\n> >\n> > I produced the following sample statistics for the first 4\n> > variables (q1,q2,q3,q4):\n> >\n> >               Mean  Std.dev Min       Max  Obs\n> > q1       0.000923 0.002509   0  0.035245 5649\n> > q2       0.000698 0.001681   0  0.038330 5649\n> > q3       0.000766 0.002138   0  0.040100 5649\n> > q4       0.000373 0.001140   0  0.026374 5649\n> >\n> > The correct sample statistics are:\n> > Variable|       Mean       Std.Dev.     Minimum      Maximum\n> > --------+----------------------------------------------------\n> >        Q1|     9.227632     25.09311          0.0     352.4508\n> >        Q2|     6.983078     16.80984          0.0     383.2995\n> >        Q3|     7.657381     21.38337          0.0     400.9950\n> >        Q4|     3.727952     11.40446          0.0     263.7398\n> >    INCOME|     16.01603     13.70296          0.0        100.0\n> >    HHSIZE|     2.586475     1.464282          1.0         16.0\n> >\n> > In other words, values for q1-q4 were scaled down by a factor of\n> > 10,000.\n> > My raw data look like (with proper format)\n> >\n> >      0.0000    0.0000    0.0000    0.0000  48.108...\n> >      0.0000    0.0000    0.0000    0.0000  11.640...\n> >     35.3450    0.0000   95.7656    0.0000   4.667...\n> >      0.0000    0.0000    0.0000    0.0000   9.000...\n> >     84.0000    4.8038    0.0000    3.1886   2.923...\n> >      0.0000    0.0000    0.0000    1.1636  10.000...\n> >      0.0000   10.7818  109.7884    0.0000  17.000...\n> >      0.0000    7.9528    0.0000    4.7829  35.000...\n> >\n> > True that the data here are space delimited. But I need to read data\n> > elsewhere where data are not space delimited.\n> >\n> > Any idea/suggestion would be appreciated.\n> >\n>\n>The read.fortran function appears to work differently from how \n>FORTRAN would read the data if there are already decimals points in \n>the numbers.  If memory serves, FORTRAN ignores the decimal portion \n>of the format if it finds a decimal in what it reads.  The \n>read.fortran function appears to read the number 'as is' and then \n>multiplies by 10^-d, where d is the number of decimal places in the \n>format.  Since you have decimals specified, you should specify the \n>format with 0 decimal places, i.e.\n>\n>c(\"4F10.0\",\"F8.0\",\"3F3.0\",\"20F2.0\"))\n>\n>\n>hope this is helpful,\n>\n>Dan\n>\n>\n>Daniel J. Nordlund, PhD\n>Research and Data Analysis Division\n>Services & Enterprise Support Administration\n>Washington State Department of Social and Health Services",
+      "body_snippet": "Thanks to all.\nSteven Yen\n\nAt 06:18 PM 9/30/2014, Nordlund, Dan (DSHS/RDA) wrote:\n> > -----Original Message-----\n> > From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-\n> > project.org]",
+      "thread_id": "thread-7a18b2f32d20",
+      "thread_depth": 2,
+      "month": "2014-09"
+    },
+    {
+      "id": "msg-df3c26d8fcd6",
+      "message_id": "<BLU170-W1228EF5DDE7792628140F4789BB0@phx.gbl>",
+      "from_name": "eliza botto",
+      "from_email_hash": "2d0893433f81af9b01fc7530109414d82a1badffa42061edbbda159c1f6bd35d",
+      "date": "2014-09-30T22:30:41Z",
+      "subject": "[R] Best Distribution",
+      "subject_clean": "Best Distribution",
+      "in_reply_to": "<542B28F0.2040301@auckland.ac.nz>",
+      "references": [
+        "<BLU170-W1308F77900877D55E6C065B89BB0@phx.gbl>",
+        "<542B28F0.2040301@auckland.ac.nz>"
+      ],
+      "body_plain": "Dear Turner and Murphy,\nThankyou so very much for replying. It fixed the issue.\n:) \nEliza \n> Date: Wed, 1 Oct 2014 11:04:32 +1300\n> From: r.turner at auckland.ac.nz\n> To: eliza_botto at hotmail.com; r-help at r-project.org\n> Subject: Re: [R] Best Distribution\n> \n> On 01/10/14 08:50, eliza botto wrote:\n> > Dear useRs,\n> > I have this following data\n> >> dput(Prec)\n> > c(42.2, 45.2, 46, 48, 54, 54.1, 59.4, 61, 62.2, 63.5, 65.024, 71.9, 73.4, 76.6, 76.708, 77.5, 77.724, 78, 81.3, 84.7, 84.836, 85.09, 88.2, 91.4, 94, 95.8, 96, 97.3, 101, 101, 101.5, 102.3, 102.87, 108.7, 109.5, 110.5, 110.7, 112, 114.3, 118.11, 121.412, 128.1, 131, 140, 142, 143.3, 151.4, 153.7, 189.4, 214.3)\n> > I want to fit gumbel and log-normal distribution on it on the same window to see which distribution fits it the best way.\n> > Thankyou very much in advance.\n> \n> \n> If I understand you correctly the attached script should do what you want.\n> \n> cheers,\n> \n> Rolf Turner\n> \n> -- \n> Rolf Turner\n> Technical Editor ANZJS\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Turner and Murphy,\nThankyou so very much for replying. It fixed the issue.\n:) \nEliza \n> Date: Wed, 1 Oct 2014 11:04:32 +1300\n> From: r.turner at auckland.ac.nz\n> To: eliza_botto at hotmail.com; r",
+      "thread_id": "thread-df3c26d8fcd6",
+      "thread_depth": 0,
+      "month": "2014-09"
+    },
+    {
+      "id": "msg-c0c4aabbf5c0",
+      "message_id": "<CAFg2G_vteKmdGwOsddotZOGkLmtTRzhcbGe-rA9bHTp3NXfajQ@mail.gmail.com>",
+      "from_name": "Sarah Hardy",
+      "from_email_hash": "2d5c2650fd5423fb39108e3202542d30a1441371603ee56ca8e0512ba44d11de",
+      "date": "2014-09-30T19:00:56-04:00",
+      "subject": "[R] uninstalled and reinstalled R, now cannot install packages",
+      "subject_clean": "uninstalled and reinstalled R, now cannot install packages",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI have a student (running Windows 8) who ran into a problem installing the\nRcmdrPlugin.IPSUR package and, despite instructions to the contrary,\nuninstalled R and reinstalled. He uninstalled it using the Windows 8\nutility. Now he cannot install any packages.\n\nHere are the error messages he gets when he gets when he trys to use the\nmenu to install a package:\n> utils:::menuInstallPkgs()\n--- Please select a CRAN mirror for use in this session ---\nWarning: unable to access index for repository\nhttp://cran.mirrors.hoobly.com/bin/windows/contrib/3.1\nWarning: unable to access index for repository\nhttp://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.1\nError in install.packages(NULL, .libPaths()[1L], dependencies = NA, type =\ntype) :\n  no packages were specified\nIn addition: Warning message:\nIn open.connection(con, \"r\") :\n  unable to connect to 'cran.r-project.org' on port 80.\n\nHere are the messages he gets when using the install.packages command (it\ndoesn't matter what package he tries to install):\n\n> install.packages(\"rpart\")\nInstalling package into\n?C:/Users/michael.bottai/Documents/R/win-library/3.1?\n(as ?lib? is unspecified)\nWarning: unable to access index for repository\nhttp://cran.mirrors.hoobly.com/bin/windows/contrib/3.1\nWarning: unable to access index for repository\nhttp://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.1\nWarning message:\npackage ?rpart? is not available (for R version 3.1.1)\n\nAny help will be greatly appreciated!\n\nThank you,\nSarah\n\n\n-- \nSarah Hardy, PhD\nAssociate Professor of Mathematics\nUniversity of Maine Farmington\n207-778-7124    Office: Brinkman 100\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI have a student (running Windows 8) who ran into a problem installing the\nRcmdrPlugin.IPSUR package and, despite instructions to the contrary,\nuninstalled R and reinstalled. He uninstalled it",
+      "thread_id": "thread-c0c4aabbf5c0",
+      "thread_depth": 0,
+      "month": "2014-09"
     }
   ],
   "threads": [
@@ -19456,12 +19528,13 @@
     {
       "id": "thread-7a18b2f32d20",
       "subject": "Reading text file with fortran format",
-      "message_count": 1,
+      "message_count": 3,
       "participants": [
+        "Nordlund, Dan (DSHS/RDA)",
         "Steven Yen"
       ],
       "started": "2014-09-30T17:04:05-04:00",
-      "last_reply": "2014-09-30T17:04:05-04:00",
+      "last_reply": "2014-09-30T18:22:37-04:00",
       "root_message_id": "msg-7a18b2f32d20"
     },
     {
@@ -19487,6 +19560,17 @@
       "root_message_id": "msg-089b22b432be"
     },
     {
+      "id": "thread-c0c4aabbf5c0",
+      "subject": "uninstalled and reinstalled R, now cannot install packages",
+      "message_count": 1,
+      "participants": [
+        "Sarah Hardy"
+      ],
+      "started": "2014-09-30T19:00:56-04:00",
+      "last_reply": "2014-09-30T19:00:56-04:00",
+      "root_message_id": "msg-c0c4aabbf5c0"
+    },
+    {
       "id": "thread-c08b7fc3b7e6",
       "subject": "Best Distribution",
       "message_count": 1,
@@ -19496,6 +19580,17 @@
       "started": "2014-09-30T19:50:33+00:00",
       "last_reply": "2014-09-30T19:50:33+00:00",
       "root_message_id": "msg-c08b7fc3b7e6"
+    },
+    {
+      "id": "thread-df3c26d8fcd6",
+      "subject": "Best Distribution",
+      "message_count": 1,
+      "participants": [
+        "eliza botto"
+      ],
+      "started": "2014-09-30T22:30:41+00:00",
+      "last_reply": "2014-09-30T22:30:41+00:00",
+      "root_message_id": "msg-df3c26d8fcd6"
     }
   ]
 }

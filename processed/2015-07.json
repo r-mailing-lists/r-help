@@ -16688,25 +16688,6 @@
       "month": "2015-07"
     },
     {
-      "id": "msg-4623cd06166d",
-      "message_id": "<55B78255.10806@yorku.ca>",
-      "from_name": "Michael Friendly",
-      "from_email_hash": "e9b90ce73178f88f76f93dfc82689bfc2868e9a51ea9a8e011552092e2ee1ae2",
-      "date": "2015-07-28T09:23:33-04:00",
-      "subject": "[R] R wont accept my zero count values in the GLM with quasi_poisson dsitribution",
-      "subject_clean": "R wont accept my zero count values in the GLM with quasi_poisson dsitribution",
-      "in_reply_to": "<55B729C2.7050904@umu.se>",
-      "references": [
-        "<1438065205709-4710462.post@n4.nabble.com>",
-        "<55B729C2.7050904@umu.se>"
-      ],
-      "body_plain": "On 7/28/2015 3:05 AM, G?ran Brostr?m wrote:\n>\n>\n> On 28/07/15 08:33, Charlotte wrote:\n>> Hello\n>>\n>> I have count values for abundance which follow a pattern of\n>> over-dispersal with many zero values.  I have read a number of\n>> documents which suggest that I don't use data transforming methods\n>> but rather than I run the GLM with the quasi poisson distribution.\n>> So I have written my script and R is telling me that Y should be more\n>> than 0.\n>\n> No,  R  is telling you that you must have 0 <= y <= 1 (see below).\n> For count data you should not use the binomial family, but rather\n> 'poisson', or 'quasipoisson'.\n\n\nWith excess zeros, overdispersion is the symptom, but the quasipoisson\nmodel is not the cure.\nEven better than quasipoisson would be to use a ZIP (zero-inflated \npoisson) model or a hurdle model to explicitly model the\nexcess zeros.\n\nThese are handled by the countreg package, at present only\navailable on R-Forge.\n\n  install.packages(\"countreg\", repos=\"http://R-Forge.R-project.org\")\n\n\n>\n>> ______________________________________________ R-help at r-project.org\n>> mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the\n>> posting guide http://www.R-project.org/posting-guide.html and provide\n>> commented, minimal, self-contained, reproducible code.\n>>\n>",
-      "body_snippet": "On 7/28/2015 3:05 AM, G?ran Brostr?m wrote:\n>\n>\n> On 28/07/15 08:33, Charlotte wrote:\n>> Hello\n>>\n>> I have count values for abundance which follow a pattern of\n>> over-dispersal with many zero values",
-      "thread_id": "thread-a8f187cfcdb2",
-      "thread_depth": 2,
-      "month": "2015-07"
-    },
-    {
       "id": "msg-a350c6318bc3",
       "message_id": "<CAM_vju=gHAEn_yBD1wt95+ATtszX+tHaBob6kTE-w64mbDCKHw@mail.gmail.com>",
       "from_name": "Sarah Goslee",
@@ -19099,6 +19080,80 @@
       "body_snippet": "On Fri, 31 Jul 2015, Marc Schwartz wrote:\n\n> Can you run:\n>  capabilities()\n\n   FWIW, on Slackware-14.1 I've had no issues with X11().\n\n> capabilities()\n        jpeg         png        tiff       tclt",
       "thread_id": "thread-2ffa2228aad4",
       "thread_depth": 2,
+      "month": "2015-07"
+    },
+    {
+      "id": "msg-d2d2d35d6210",
+      "message_id": "<201507312322.t6VNM1t7016401@genepi.med.utah.edu>",
+      "from_name": "Steven Backus",
+      "from_email_hash": "e453f5502a5b2b8a27ade4738c9620104fcc5bdfc2f76a2ac5fcf1191864e655",
+      "date": "2015-07-31T17:22:01-06:00",
+      "subject": "[R] x11() hangs in 3.2.1",
+      "subject_clean": "x11() hangs in 3.2.1",
+      "in_reply_to": "<02D24771-4BA5-4825-9B35-88A800A77739@me.com>",
+      "references": [
+        "<201507311922.t6VJMiOl010572@whimsy.med.utah.edu>",
+        "<02D24771-4BA5-4825-9B35-88A800A77739@me.com>"
+      ],
+      "body_plain": "marc_schwartz at me.com writes:\n\n> First, just an FYI, that this would be better posted to R-SIG-Fedora:\n\n>   https://stat.ethz.ch/mailman/listinfo/r-sig-fedora\n\nThanks, I'll give it a try.\n\n> Can you run:\n>   capabilities()\n> in a terminal session and see what it shows for X11:\n\nYes, here is the output:\n\n       jpeg         png        tiff       tcltk         X11        aqua \n       TRUE        TRUE        TRUE       FALSE        TRUE       FALSE \n   http/ftp     sockets      libxml        fifo      cledit       iconv \n       TRUE        TRUE        TRUE        TRUE        TRUE        TRUE \n        NLS     profmem       cairo         ICU long.double     libcurl \n       TRUE       FALSE        TRUE       FALSE        TRUE       FALSE \n\n> Did you install R via local compilation?\n\nYes, local compilation.\n\n> Presuming local compilation, I would check your configure and build\n> logs for warnings/errors. It is possible that you are missing an\n> X11 header or lib someplace.\n\nThe config.log file has lots of errors but nothing obviously\nrelated to this problem.\n\nThanks for your help,\n  Steve\n-- \nSteven J. Backus                        Computer Systems Manager\nUniversity of Utah                      E-Mail:  steven.backus at utah.edu\nGenetic Epidemiology                    Alternate:  backus at math.utah.edu\n391 Chipeta Way -- Suite D              Office:  801.587.9308\nSalt Lake City, UT 84108-1266           http://www.math.utah.edu/~backus",
+      "body_snippet": "marc_schwartz at me.com writes:\n\n> First, just an FYI, that this would be better posted to R-SIG-Fedora:\n\n>   https://stat.ethz.ch/mailman/listinfo/r-sig-fedora\n\nThanks, I'll give it a try.\n\n> Can you",
+      "thread_id": "thread-2ffa2228aad4",
+      "thread_depth": 2,
+      "month": "2015-07"
+    },
+    {
+      "id": "msg-cd46272a61db",
+      "message_id": "<7D84FB90-661F-4257-8F63-C0054F26817D@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2015-07-31T20:32:32-07:00",
+      "subject": "[R] Clarification on Simulation and Iteration",
+      "subject_clean": "Clarification on Simulation and Iteration",
+      "in_reply_to": "<1441173417.5041893.1438392972445.JavaMail.yahoo@mail.yahoo.com>",
+      "references": [
+        "<1441173417.5041893.1438392972445.JavaMail.yahoo@mail.yahoo.com>"
+      ],
+      "body_plain": "On Jul 31, 2015, at 6:36 PM, Christopher Kelvin via R-help wrote:\n\n> Dear All,\n> I am performing some simulations for a new model. I run about 10,000 iterations with a sample of 50 datasets and this returns one set of 50 simulated data. \n> \n> Now, what I need to obtain is 10 sets of the 50 simulated data out of the 10,000 iterations and not just only 1 set.  The model is the Copas selection model for publication bias in Mete-analysis. Any one who knows this model has any suggestion for the improvement of my code is most welcome.\n> \n> Below is my code. \n> \n> \n> Kind regards\n> \n> \n> Chris Guure\n> University of Ghana\n> \n> \n> \n> \n> install.packages(\"msm\") \n> library(msm) \n> \n> \n> rho1=-0.3; tua=0.020; n=50; d=-0.2; rr=10000; a=-1.3; b=0.06 \n> si<-rtnorm(n, mean=0, sd=1, lower=0, upper=0.2)# I used this to generate standard errors for each study \n> set.seed(21111)   ## I have stored the data and the output in this seed \n> \n> for( i in 1:rr){ \n> \n> mu<-rnorm(n,d,tua^2)              # prob. of each effect estimate \n> rho<-si*rho1/sqrt(tua^2 + si^2) # estimate of the correlation coefficient \n> mu0<- a + b/si       # mean of the truncated normal model (Copas selection model) \n> y1<-rnorm(mu,si^2)            # observed effects zise \n> z<-rnorm(mu0,1)               # selection model \n> rho2<-cor(y1, z) \n> \n> select<-pnorm((mu0 + rho*(y1-mu)/sqrt(tua^2 + si^2))/sqrt(1-rho^2)) \n> probselect<-ifelse(select<z, y1, NA)# the prob that the study is selected \n> \n> probselect \n> data<-data.frame(probselect,si)    # this contains both include and exclude data \n> data \n> data1<-data[complete.cases(data),] # Contains only the included data for analysis \n> data1 \n> \n> \n> }\n> \n\nOK. The code runs without error. So .... what exactly is the problem? (I have no experience with the Copas selection model if in fact that is what is being exemplified.)\n\n-- \n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Jul 31, 2015, at 6:36 PM, Christopher Kelvin via R-help wrote:\n\n> Dear All,\n> I am performing some simulations for a new model. I run about 10,000 iterations with a sample of 50 datasets and this r",
+      "thread_id": "thread-cd46272a61db",
+      "thread_depth": 0,
+      "month": "2015-07"
+    },
+    {
+      "id": "msg-3863b21f031a",
+      "message_id": "<4C611C07-2EC7-4F9D-AD5D-99C124BF0BFB@gmail.com>",
+      "from_name": "Adam Erickson",
+      "from_email_hash": "5cd5b9494fd39bc420479e072c9f446c966759b64f9fabac353f7761772bc521",
+      "date": "2015-07-31T22:20:01-07:00",
+      "subject": "[R] vectorized sub, gsub, grep, etc.",
+      "subject_clean": "vectorized sub, gsub, grep, etc.",
+      "in_reply_to": "<1438315757.49661.YahooMailAndroidMobile@web185401.mail.gq1.yahoo.com>",
+      "references": [
+        "<1438315757.49661.YahooMailAndroidMobile@web185401.mail.gq1.yahoo.com>"
+      ],
+      "body_plain": "I'm not sure I understand your question. Both functions return \"\" \"CD\" \"\" because they perform exact string matching. The first demonstrates how string or character replacements can be vectorized, while the second merely demonstrates how Rcpp can accelerate this type of operation.\n\nCheers,\n\nAdam\n\n> On Jul 30, 2015, at 21:09, John Thaden <jjthaden at flash.net> wrote:\n> \n> \n> Can you show what is its solution for the original sample data? Why that discrepancy for you original sub2() function?\n> \n> From:\"Adam Erickson\" <adam.michael.erickson at gmail.com>\n> Date:Thu, Jul 30, 2015 at 6:11 pm\n> Subject:Re: [R] vectorized sub, gsub, grep, etc.\n> \n> Here is a Rcpp version for exact character matching (for example) written in C++ that is substantially faster. Hence, I think this is the way to go where loops may be unavoidable. However, the input vector length has to match the length of the pattern and replacement vectors, as your original code did. That can be changed though.\n> \n> #include <Rcpp.h>\n> using namespace Rcpp;\n> \n> // [[Rcpp::export]]\n> CharacterVector subCPP(CharacterVector pattern, CharacterVector replacement, CharacterVector x) {\n>   int len = x.size();\n>   CharacterVector y(len);\n>   int patlen = pattern.size();\n>   int replen = replacement.size();\n>   if (patlen != replen)\n>     Rcout<<\"Error: Pattern and replacement length do not match\";\n>   for(int i = 0; i < patlen; ++i) {\n>     if (*(char*)x[i] == *(char*)pattern[i])\n>       y[x[i] == pattern[i]] = replacement[i];\n>   }\n>   return y;\n> }\n> \n> \"\"   \"CD\" \"\"  \n> \n> system.time(for(i in 1:50000) subCPP(patt, repl, X))\n>    user  system elapsed \n>    0.16    0.00    0.16 \n> \n> Cheers,\n> \n> Adam\n> \n>> On Wednesday, July 29, 2015 at 2:42:23 PM UTC-7, Adam Erickson wrote:\n>> Further refining the vectorized (within a loop) exact string match function, I get times below 0.9 seconds while maintaining error checking. This is accomplished by removing which() and replacing 1:length() with seq_along().\n>> \n>> sub2 <- function(pattern, replacement, x) {\n>>    len    <- length(x)\n>>    y      <- character(length=len)\n>>    patlen <- length(pattern)\n>>    replen <- length(replacement)\n>>    if(patlen != replen) stop('Error: Pattern and replacement length do not match')\n>>    for(i in seq_along(pattern)) {\n>>      y[x==pattern[i]] <- replacement[i]\n>>    }\n>>    return(y)\n>>  }\n>> \n>> system.time(for(i in 1:50000) sub2(patt, repl, X))\n>>    user  system elapsed \n>>    0.86    0.00    0.86 \n>> \n>> Since the ordered vectors are perfectly aligned, might as well do an exact string match. Hence, I think this is not off-topic.\n>> \n>> Cheers,\n>> \n>> Adam\n>> \n>>> On Wednesday, July 29, 2015 at 8:15:52 AM UTC-7, Bert Gunter wrote:\n>>> There is confusion here. apply() family functions are **NOT** \n>>> vectorization -- they ARE loops (at the interpreter level), just done \n>>> in \"functionalized\" form. Please read background material (John \n>>> Chambers's books, MASS, or numerous others) to improve your \n>>> understanding and avoid posting erroneous comments. \n>>> \n>>> Cheers, \n>>> Bert \n>>> \n>>> \n>>> Bert Gunter \n>>> \n>>> \"Data is not information. Information is not knowledge. And knowledge \n>>> is certainly not wisdom.\" \n>>>    -- Clifford Stoll \n>>> \n>>> \n>>> On Tue, Jul 28, 2015 at 3:00 PM, John Thaden <jjth... at flash.net> wrote: \n>>> > Adam,    The method you propose gives a different result than the prior methods for these example vectors \n>>> > X <- c(\"ab\", \"cd\", \"ef\") \n>>> > patt <- c(\"b\", \"cd\", \"a\") \n>>> > repl <- c(\"B\", \"CD\", \"A\") \n>>> > \n>>> > Old method 1 \n>>> > \n>>> > mapply(function(p, r, x) sub(p, r, x, fixed = TRUE), p=patt, r=repl, x=X) \n>>> > gives \n>>> >   b   cd    a \n>>> > \"aB\" \"CD\" \"ef\" \n>>> > \n>>> > Old method 2 \n>>> > \n>>> > sub2 <- function(pattern, replacement, x) { \n>>> >     len <- length(x) \n>>> >     if (length(pattern) == 1) \n>>> >         pattern <- rep(pattern, len) \n>>> >     if (length(replacement) == 1) \n>>> >         replacement <- rep(replacement, len) \n>>> >     FUN <- function(i, ...) { \n>>> >         sub(pattern[i], replacement[i], x[i], fixed = TRUE) \n>>> >     } \n>>> >     idx <- 1:length(x) \n>>> >     sapply(idx, FUN) \n>>> > } \n>>> > sub2(patt, repl, X) \n>>> >  gives \n>>> > [1] \"aB\" \"CD\" \"ef\" \n>>> > \n>>> > Your method (I gave it the unique name \"sub3\") \n>>> >  sub3 <- function(pattern, replacement, x) {   len    <- length(x)  y      <- character(length=len)  patlen <- length(pattern)  replen <- length(replacement)  if(patlen != replen) stop('Error: Pattern and replacement length do not match')  for(i in 1:replen) {    y[which(x==pattern[i])] <- replacement[i]  }  return(y)}sub3(patt, repl, X) \n>>> > gives[1] \"\"   \"CD\" \"\" \n>>> > \n>>> > Granted, whatever it does, it does it faster \n>>> > #Old method 1 \n>>> > system.time(for(i in 1:50000) \n>>> > mapply(function(p,r,x) sub(p,r,x, fixed = TRUE),p=patt,r=repl,x=X)) \n>>> >    user  system elapsed \n>>> >    2.53    0.00    2.52 \n>>> > \n>>> > #Old method 2 \n>>> > system.time(for(i in 1:50000)sub2(patt, repl, X))   user  system elapsed \n>>> >    2.32    0.00    2.32 \n>>> > \n>>> > #Your proposed method \n>>> > system.time(for(i in 1:50000) sub3(patt, repl, X)) \n>>> >    user  system elapsed \n>>> >    1.02    0.00    1.01 \n>>> >  but would it still be faster if it actually solved the same problem? \n>>> > \n>>> > -John Thaden \n>>> > \n>>> > \n>>> > \n>>> > \n>>> >      On Monday, July 27, 2015 11:40 PM, Adam Erickson <adam.micha... at gmail.com> wrote: \n>>> > \n>>> > I know this is an old thread, but I wrote a simple FOR loop with vectorized pattern replacement that is much faster than either of those (it can also accept outputs differing in length from the patterns): \n>>> >   sub2  <- function(pattern, replacement, x) {     len   <- length(x)    y      <- character(length=len)    patlen <- length(pattern)    replen <- length(replacement)    if(patlen != replen) stop('Error: Pattern and replacement length do not match')    for(i in 1:replen) {      y[which(x==pattern[i])] <- replacement[i]    }    return(y)  } \n>>> > system.time(test <- sub2(patt, repl, XX))   user  system elapsed       0       0       0 \n>>> > Cheers, \n>>> > Adam \n>>> > On Wednesday, October 8, 2008 at 9:38:01 PM UTC-7, john wrote: \n>>> > Hello Christos, \n>>> >   To my surprise, vectorization actually hurt processing speed!#Example \n>>> > X <- c(\"ab\", \"cd\", \"ef\") \n>>> > patt <- c(\"b\", \"cd\", \"a\") \n>>> > repl <- c(\"B\", \"CD\", \"A\")sub2 <- function(pattern, replacement, x) { \n>>> >     len <- length(x) \n>>> >     if (length(pattern) == 1) \n>>> >         pattern <- rep(pattern, len) \n>>> >     if (length(replacement) == 1) \n>>> >         replacement <- rep(replacement, len) \n>>> >     FUN <- function(i, ...) { \n>>> >         sub(pattern[i], replacement[i], x[i], fixed = TRUE) \n>>> >     } \n>>> >     idx <- 1:length(x) \n>>> >     sapply(idx, FUN) \n>>> > } \n>>> > \n>>> > system.time(  for(i in 1:10000)  sub2(patt, repl, X)  ) \n>>> >    user  system elapsed \n>>> >    1.18    0.07    1.26 system.time(  for(i in 1:10000)  mapply(function(p, r, x) sub(p, r, x, fixed = TRUE), p=patt, r=repl, x=X)  ) \n>>> >    user  system elapsed \n>>> >    1.42    0.05    1.47 \n>>> > \n>>> > So much for avoiding loops. \n>>> > John Thaden======= At 2008-10-07, 14:58:10 Christos wrote: =======>John, \n>>> >>Try the following: \n>>> >> \n>>> >> mapply(function(p, r, x) sub(p, r, x, fixed = TRUE), p=patt, r=repl, x=X) \n>>> >>   b   cd    a \n>>> >>\"aB\" \"CD\" \"ef\" \n>>> >> \n>>> >>-Christos>> -----My Original Message----- \n>>> >>> R pattern-matching and replacement functions are \n>>> >>> vectorized: they can operate on vectors of targets. \n>>> >>> However, they can only use one pattern and replacement. \n>>> >>> Here is code to apply a different pattern and replacement for \n>>> >>> every target.  My question: can it be done better? \n>>> >>> \n>>> >>> sub2 <- function(pattern, replacement, x) { \n>>> >>>     len <- length(x) \n>>> >>>     if (length(pattern) == 1) \n>>> >>>         pattern <- rep(pattern, len) \n>>> >>>     if (length(replacement) == 1) \n>>> >>>         replacement <- rep(replacement, len) \n>>> >>>     FUN <- function(i, ...) { \n>>> >>>         sub(pattern[i], replacement[i], x[i], fixed = TRUE) \n>>> >>>     } \n>>> >>>     idx <- 1:length(x) \n>>> >>>     sapply(idx, FUN) \n>>> >>> } \n>>> >>> \n>>> >>> #Example \n>>> >>> X <- c(\"ab\", \"cd\", \"ef\") \n>>> >>> patt <- c(\"b\", \"cd\", \"a\") \n>>> >>> repl <- c(\"B\", \"CD\", \"A\") \n>>> >>> sub2(patt, repl, X) \n>>> >>> \n>>> >>> -John_________________________ _____________________ \n>>> > R-h... at r-project.org mailing list \n>>> > https://stat.ethz.ch/mailman/ listinfo/r-help \n>>> > PLEASE do read the posting guide http://www.R-project.org/ posting-guide.html \n>>> > and provide commented, minimal, self-contained, reproducible code. \n>>> > \n>>> > \n>>> > \n>>> > \n>>> >         [[alternative HTML version deleted]] \n>>> > \n>>> > ______________________________ ________________ \n>>> > R-h... at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n>>> > https://stat.ethz.ch/mailman/ listinfo/r-help \n>>> > PLEASE do read the posting guide http://www.R-project.org/ posting-guide.html \n>>> > and provide commented, minimal, self-contained, reproducible code. \n>>> \n>>> ______________________________ ________________ \n>>> R-h... at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n>>> https://stat.ethz.ch/mailman/ listinfo/r-help \n>>> PLEASE do read the posting guide http://www.R-project.org/ posting-guide.html \n>>> and provide commented, minimal, self-contained, reproducible code.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm not sure I understand your question. Both functions return \"\" \"CD\" \"\" because they perform exact string matching. The first demonstrates how string or character replacements can be vectorized, whi",
+      "thread_id": "thread-b84fb49a76aa",
+      "thread_depth": 6,
+      "month": "2015-07"
+    },
+    {
+      "id": "msg-e1ca28587f8d",
+      "message_id": "<968E872D-8F15-4178-B94C-D8A8064E9AEC@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2015-07-31T23:45:14-07:00",
+      "subject": "[R] Clarification on Simulation and Iteration",
+      "subject_clean": "Clarification on Simulation and Iteration",
+      "in_reply_to": "<1106762682.7041.1438400464554.JavaMail.yahoo@mail.yahoo.com>",
+      "references": [
+        "<7D84FB90-661F-4257-8F63-C0054F26817D@comcast.net>",
+        "<1106762682.7041.1438400464554.JavaMail.yahoo@mail.yahoo.com>"
+      ],
+      "body_plain": "On Jul 31, 2015, at 8:41 PM, Christopher Kelvin wrote:\n\n> Thanks Dave.\n> \n> What I actually want is to obtain say 10, different sets of (n=50) data for every 10,000 iterations I run. You will realise that the current code produces one set of data (n=50). I want 10 different sets of 50 observations at one run. I hope this makes sense.\n\nI would think that either `replicate(50, ...)` or `for(i in 1:50) {...}` would suffice. Unless of course the phrase \"want 10 different sets of 50 observations at one run` means something different than it appears to request.\n\n\n> \n> Chris Guure \n> \n> \n> \n> On Saturday, August 1, 2015 3:32 AM, David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> \n> On Jul 31, 2015, at 6:36 PM, Christopher Kelvin via R-help wrote:\n> \n>> Dear All,\n>> I am performing some simulations for a new model. I run about 10,000 iterations with a sample of 50 datasets and this returns one set of 50 simulated data. \n>> \n>> Now, what I need to obtain is 10 sets of the 50 simulated data out of the 10,000 iterations and not just only 1 set.  The model is the Copas selection model for publication bias in Mete-analysis. Any one who knows this model has any suggestion for the improvement of my code is most welcome.\n>> \n>> Below is my code. \n>> \n>> \n>> Kind regards\n>> \n>> \n>> Chris Guure\n>> University of Ghana\n>> \n>> \n>> \n>> \n>> install.packages(\"msm\") \n>> library(msm) \n>> \n>> \n>> rho1=-0.3; tua=0.020; n=50; d=-0.2; rr=10000; a=-1.3; b=0.06 \n>> si<-rtnorm(n, mean=0, sd=1, lower=0, upper=0.2)# I used this to generate standard errors for each study \n>> set.seed(21111)   ## I have stored the data and the output in this seed \n>> \n>> for( i in 1:rr){ \n>> \n>> mu<-rnorm(n,d,tua^2)              # prob. of each effect estimate \n>> rho<-si*rho1/sqrt(tua^2 + si^2) # estimate of the correlation coefficient \n>> mu0<- a + b/si       # mean of the truncated normal model (Copas selection model) \n>> y1<-rnorm(mu,si^2)            # observed effects zise \n>> z<-rnorm(mu0,1)               # selection model \n>> rho2<-cor(y1, z) \n>> \n>> select<-pnorm((mu0 + rho*(y1-mu)/sqrt(tua^2 + si^2))/sqrt(1-rho^2)) \n>> probselect<-ifelse(select<z, y1, NA)# the prob that the study is selected \n>> \n>> probselect \n>> data<-data.frame(probselect,si)    # this contains both include and exclude data \n>> data \n>> data1<-data[complete.cases(data),] # Contains only the included data for analysis \n>> data1 \n>> \n>> \n>> }\n>> \n> \n> OK. The code runs without error. So .... what exactly is the problem? (I have no experience with the Copas selection model if in fact that is what is being exemplified.)\n> \n> -- \n> \n> David Winsemius\n> Alameda, CA, USA\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Jul 31, 2015, at 8:41 PM, Christopher Kelvin wrote:\n\n> Thanks Dave.\n> \n> What I actually want is to obtain say 10, different sets of (n=50) data for every 10,000 iterations I run. You will realise ",
+      "thread_id": "thread-e1ca28587f8d",
+      "thread_depth": 0,
       "month": "2015-07"
     }
   ],
@@ -22835,14 +22890,14 @@
     {
       "id": "thread-b84fb49a76aa",
       "subject": "vectorized sub, gsub, grep, etc.",
-      "message_count": 7,
+      "message_count": 8,
       "participants": [
         "Adam Erickson",
         "Bert Gunter",
         "John Thaden"
       ],
       "started": "2015-07-27T21:40:22-07:00",
-      "last_reply": "2015-07-30T21:09:17-07:00",
+      "last_reply": "2015-07-31T22:20:01-07:00",
       "root_message_id": "msg-b84fb49a76aa"
     },
     {
@@ -22859,7 +22914,7 @@
     {
       "id": "thread-a8f187cfcdb2",
       "subject": "R wont accept my zero count values in the GLM with quasi_poisson dsitribution",
-      "message_count": 5,
+      "message_count": 4,
       "participants": [
         "Andrew Robinson",
         "Charlotte",
@@ -23353,14 +23408,14 @@
     {
       "id": "thread-2ffa2228aad4",
       "subject": "x11() hangs in 3.2.1",
-      "message_count": 3,
+      "message_count": 4,
       "participants": [
         "Marc Schwartz",
         "Rich Shepard",
         "Steven Backus"
       ],
       "started": "2015-07-31T13:22:44-06:00",
-      "last_reply": "2015-07-31T13:56:16-07:00",
+      "last_reply": "2015-07-31T17:22:01-06:00",
       "root_message_id": "msg-2ffa2228aad4"
     },
     {
@@ -23398,6 +23453,28 @@
       "started": "2015-07-31T15:48:27+10:00",
       "last_reply": "2015-07-31T15:48:27+10:00",
       "root_message_id": "msg-54f3da499271"
+    },
+    {
+      "id": "thread-cd46272a61db",
+      "subject": "Clarification on Simulation and Iteration",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2015-07-31T20:32:32-07:00",
+      "last_reply": "2015-07-31T20:32:32-07:00",
+      "root_message_id": "msg-cd46272a61db"
+    },
+    {
+      "id": "thread-e1ca28587f8d",
+      "subject": "Clarification on Simulation and Iteration",
+      "message_count": 1,
+      "participants": [
+        "David Winsemius"
+      ],
+      "started": "2015-07-31T23:45:14-07:00",
+      "last_reply": "2015-07-31T23:45:14-07:00",
+      "root_message_id": "msg-e1ca28587f8d"
     }
   ]
 }

@@ -4,6 +4,58 @@
   "month": "2019-05",
   "messages": [
     {
+      "id": "msg-24cf13070f36",
+      "message_id": "<CAOQWJbvY+JKy80sksmfC8tu-C+5qq-tzwAd21XbyGvJAyYjQPQ@mail.gmail.com>",
+      "from_name": "Catarina Serra Gonçalves",
+      "from_email_hash": "868c1b3cc0d77a924f126892e8fa49a678268b630207bd58481c47c8ca263536",
+      "date": "2019-05-01T00:57:43+10:00",
+      "subject": "[R] Time series (trend over time) for irregular sampling dates and multiple sites",
+      "subject_clean": "Time series (trend over time) for irregular sampling dates and multiple sites",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a dataset of marine debris items (number of items standardized per\neffort: Items/(number of volunteers*Hours*Lenght)) taken from 2 main\nlocations (WA and Queensland) in Australia (8 Sub Sites in total: 4 in WA\nand 4 in Queensland) at irregular sampling intervals over a period 15 years.\n\nI want to test if there is a change over the years on the amount of debris\nin these locations and more specifically a change after the implementation\nof a mitigation strategy (in 2013).\nHere?s the head of the data:[image: enter image description here]\n<https://i.stack.imgur.com/VNIpb.png>Description of each one of the\nvarables in the dataframe:\n\n*eventid *= each sampling (clean-up) event Location = Queensland and New\nSouth Wales Sites = all the 9 sampling beaches\n\n*Date *= specific dates for the clean-up events (day-month-year)\n\n*Date1 *= specific dates for the clean-up events (day-month-year) on the\nPOSICXT format Year= Year of sampling event (2004 to 2018)\n\n*Month*= Month of the sampling event (jan to dec)\n\n*nMonth*= a number was determined to the respective month of the sampling\nevent (1 to 12)\n\n*Day*= Day of sampling (1 to 31) Days = Days since the first date of clean\nup = just another way of using the dates\n\n*MARPOL *= before and after implementation (factor with 2 levels)\n\n*DaysC *= days between sampling events for the same sites = number of days\nsince the previous clean-up event\n\n*DaysI *= Days since intervention, all the dates before implementation are\nzero, and after we count the number of days since the implementation date\n(1 jan 2013)\n\n*DaysIa*= same as DayI but instead of zero for before the intervention we\nhave negative values (days)\n\n*Items *= number of fishing and shipping items counted in each clean-up\nevent\n\n*Hours *= hours spent by all volunteers together at each clean up event\n\n*Lenght *= Lenght of beach sampled by all volunteers together at each clean\nup event volunteers = all volunteers at each clean up event\n\n*HoursVolunteer *= hours spent bt each volunteer at each clean up event\n(Hours/volunteers)\n\n*Ieffort *= the items standarized by the effort (hours, volunteers and\nlenght)\n\n*GrossWeight & **GrossTotal are not relevant *\n------------------------------\nProblems:\n\nMy data has a few problems: (1) I think I will need to fix the effects of\nseasonal variation (Monthly) and (2) of possible spatial correlation\n(probability of finding an item is higher after finding one since they can\ncome from the same ship). (3) How do I handle the fact that the\nmeasurements were not taken at a regular interval?\n\nI was trying to use GAMs to analyse the data and see the trends over time.\nThe model I came across is the following:\n\nm4<- gamm(Ieffort ~ s(DaysIa)+MARPOL+ s(nMonth, bs = \"ps\", k = 12),\nrandom=list(Site=~1,Location=~1),data = d)\n\n*thank you in advance.*\n-\n*Catarina Serra Gon?alves *\nPhD candidate\n\nAdrift Lab  <https://adriftlab.org>\nUniversity of Tasmania <http://www.utas.edu.au/> | Institute for Marine and\nAntarctic Studies  <http://www.imas.utas.edu.au/>\nLaunceston, TAS | Australia\n\nPersonal website <https://catarinasg.wixsite.com/acserra>\n<https://catarinasg.wixsite.com/acserra>| E-mail  <acserra at utas.edu.au> |\nTwitter <https://twitter.com/CatarinaSerraG>\nResearch Gate\n<https://www.researchgate.net/profile/Catarina_Serra_Goncalves> | Google\nScholar <https://scholar.google.pt/citations?user=8nBrRFwAAAAJ&hl=en>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have a dataset of marine debris items (number of items standardized per\neffort: Items/(number of volunteers*Hours*Lenght)) taken from 2 main\nlocations (WA and Queensland) in Australia (8 Sub Sites i",
+      "thread_id": "thread-24cf13070f36",
+      "thread_depth": 0,
+      "month": "2019-05"
+    },
+    {
+      "id": "msg-6f33cdfdc35f",
+      "message_id": "<CA+8X3fUjv3APb=UcsNQAD61pmOSbvoYBFsW3caZW7p11eD7umg@mail.gmail.com>",
+      "from_name": "Jim Lemon",
+      "from_email_hash": "a481d7a83f54807159ccb5ebdf8dfd9aedd5a22401cf2632ed2c48b4c1969659",
+      "date": "2019-05-01T07:46:32+10:00",
+      "subject": "[R] transpose and split dataframe",
+      "subject_clean": "transpose and split dataframe",
+      "in_reply_to": "<0d6ac524-4291-ab03-6bcb-592b3996cc74@molbio.mgh.harvard.edu>",
+      "references": [
+        "<0d6ac524-4291-ab03-6bcb-592b3996cc74@molbio.mgh.harvard.edu>"
+      ],
+      "body_plain": "Hi Matthew,\nIs this what you are trying to do?\n\nmmdf<-read.table(text=\"Regulator    hits\nAT1G69490    AT4G31950,AT5G24110,AT1G26380,AT1G05675\nAT2G55980    AT2G85403,AT4G89223\",header=TRUE,\nstringsAsFactors=FALSE)\n# split the second column at the commas\nhitsplit<-strsplit(mmdf$hits,\",\")\n# define a function that will fill with NAs\nNAfill<-function(x,n) return(x[1:n])\n# get the maximum length of hits\nmaxlen<-max(unlist(lapply(hitsplit,length)))\n# fill the list with NAs\nhitsplit<-lapply(hitsplit,NAfill,maxlen)\n# change the names of the list\nnames(hitsplit)<-mmdf$Regulator\n# convert to a data frame\ntmmdf<-as.data.frame(hitsplit)\n\nJim\n\nOn Wed, May 1, 2019 at 5:25 AM Matthew <mccormack at molbio.mgh.harvard.edu> wrote:\n>\n> I have a data frame that is a lot bigger but for simplicity sake we can\n> say it looks like this:\n>\n> Regulator    hits\n> AT1G69490    AT4G31950,AT5G24110,AT1G26380,AT1G05675\n> AT2G55980    AT2G85403,AT4G89223\n>\n>     In other words:\n>\n> data.frame : 2 obs. of 2 variables\n> $Regulator: Factor w/ 2 levels\n> $hits         : Factor w/ 6 levels\n>\n>    I want to transpose it so that Regulator is now the column headings\n> and each of the AGI numbers now separated by commas is a row. So,\n> AT1G69490 is now the header of the first column and AT4G31950 is row 1\n> of column 1, AT5G24110 is row 2 of column 1, etc. AT2G55980 is header of\n> column 2 and AT2G85403 is row 1 of column 2, etc.\n>\n>    I have tried playing around with strsplit(TF2list[2:2]) and\n> strsplit(as.character(TF2list[2:2]), but I am getting nowhere.\n>\n> Matthew\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi Matthew,\nIs this what you are trying to do?\n\nmmdf<-read.table(text=\"Regulator    hits\nAT1G69490    AT4G31950,AT5G24110,AT1G26380,AT1G05675\nAT2G55980    AT2G85403,AT4G89223\",header=TRUE,\nstringsAsFa",
+      "thread_id": "thread-6f33cdfdc35f",
+      "thread_depth": 0,
+      "month": "2019-05"
+    },
+    {
+      "id": "msg-80972410bb0e",
+      "message_id": "<CAB8pepxHYbCXQPX5CaUQ868kMAp80z+zSXH7LHak+xDabJOjKg@mail.gmail.com>",
+      "from_name": "Abs Spurdle",
+      "from_email_hash": "5453ae8c9e5f95157e1702beefda0c211aabfa14184d6f4930303c68ee9308e9",
+      "date": "2019-05-01T09:58:34+12:00",
+      "subject": "[R]  Time series (trend over time) for irregular sampling dates and multiple sites",
+      "subject_clean": "Time series (trend over time) for irregular sampling dates and multiple sites",
+      "in_reply_to": "<CAOQWJbvY+JKy80sksmfC8tu-C+5qq-tzwAd21XbyGvJAyYjQPQ@mail.gmail.com>",
+      "references": [
+        "<CAOQWJbvY+JKy80sksmfC8tu-C+5qq-tzwAd21XbyGvJAyYjQPQ@mail.gmail.com>"
+      ],
+      "body_plain": "> My data has a few problems: (1) I think I will need to fix the effects of\n> seasonal variation (Monthly) and (2) of possible spatial correlation\n> (probability of finding an item is higher after finding one since they can\n> come from the same ship). (3) How do I handle the fact that the\n> measurements were not taken at a regular interval?\n\nCan I ask two questions:\n(1) Is the data autocorrelated (or \"Seasonal\") over time?\nIf not then this problem is a lot simpler.\n(2) Can you expand on the following statement?\n\"possible spatial correlation (probability of finding an item is higher\nafter finding one since they can come from the same ship\"\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "> My data has a few problems: (1) I think I will need to fix the effects of\n> seasonal variation (Monthly) and (2) of possible spatial correlation\n> (probability of finding an item is higher after fin",
+      "thread_id": "thread-24cf13070f36",
+      "thread_depth": 1,
+      "month": "2019-05"
+    },
+    {
       "id": "msg-e5852cbc9325",
       "message_id": "<CAB8pepxfxCBEUmR=KuJRuVsF9GPYtkqpnBQ0u_Um+RmUSRuDGg@mail.gmail.com>",
       "from_name": "Abs Spurdle",
@@ -18,8 +70,8 @@
       ],
       "body_plain": "> > My data has a few problems: (1) I think I will need to fix the effects\nof\n> > seasonal variation (Monthly) and (2) of possible spatial correlation\n> > (probability of finding an item is higher after finding one since they\ncan\n> > come from the same ship). (3) How do I handle the fact that the\n> > measurements were not taken at a regular interval?\n>\n> Can I ask two questions:\n> (1) Is the data autocorrelated (or \"Seasonal\") over time?\n> If not then this problem is a lot simpler.\n> (2) Can you expand on the following statement?\n> \"possible spatial correlation (probability of finding an item is higher\nafter finding one since they can come from the same ship\"\n\nI just had a closer look at your example.\n\nYou've tried to model nMonth (presumably in {1, 2, ..., 12}) but is there a\nlong term trend, over Year?\nAlso, I'm not an expert on mgcv, but I was wondering if you want bs=\"cp\"\nrather than bs=\"ps\"?\n\nWhen you say \"measurements were not taken at a regular interval\" are you\nreferring to the variable \"DaysIa\"?\nIn which case, my previous question about autocorrelation applies to this\nvariable.\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "> > My data has a few problems: (1) I think I will need to fix the effects\nof\n> > seasonal variation (Monthly) and (2) of possible spatial correlation\n> > (probability of finding an item is higher aft",
-      "thread_id": "thread-e5852cbc9325",
-      "thread_depth": 0,
+      "thread_id": "thread-24cf13070f36",
+      "thread_depth": 2,
       "month": "2019-05"
     },
     {
@@ -5219,6 +5271,18 @@
   ],
   "threads": [
     {
+      "id": "thread-24cf13070f36",
+      "subject": "Time series (trend over time) for irregular sampling dates and multiple sites",
+      "message_count": 3,
+      "participants": [
+        "Abs Spurdle",
+        "Catarina Serra Gonçalves"
+      ],
+      "started": "2019-05-01T00:57:43+10:00",
+      "last_reply": "2019-05-01T13:19:16+12:00",
+      "root_message_id": "msg-24cf13070f36"
+    },
+    {
       "id": "thread-bade50e6fe00",
       "subject": "Passing formula as parameter to `lm` within `sapply` causes error [BUG?]",
       "message_count": 2,
@@ -5231,15 +5295,15 @@
       "root_message_id": "msg-bade50e6fe00"
     },
     {
-      "id": "thread-e5852cbc9325",
-      "subject": "Time series (trend over time) for irregular sampling dates and multiple sites",
+      "id": "thread-6f33cdfdc35f",
+      "subject": "transpose and split dataframe",
       "message_count": 1,
       "participants": [
-        "Abs Spurdle"
+        "Jim Lemon"
       ],
-      "started": "2019-05-01T13:19:16+12:00",
-      "last_reply": "2019-05-01T13:19:16+12:00",
-      "root_message_id": "msg-e5852cbc9325"
+      "started": "2019-05-01T07:46:32+10:00",
+      "last_reply": "2019-05-01T07:46:32+10:00",
+      "root_message_id": "msg-6f33cdfdc35f"
     },
     {
       "id": "thread-1d6c3ed235c3",

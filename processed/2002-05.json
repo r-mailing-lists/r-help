@@ -5082,22 +5082,6 @@
       "month": "2002-05"
     },
     {
-      "id": "msg-730b01f56127",
-      "message_id": "<OF7ABA780E.3BD1EA04-ON88256BB3.0059E73C@rtp.epa.gov>",
-      "from_name": "White.Denis@epamail.epa.gov",
-      "from_email_hash": "16ee480d874c5ee3c0b0c97bcdbbca111811e4431c2a806cee0092c240eacedb",
-      "date": "2002-05-08T09:25:10-07:00",
-      "subject": "[R] Inputting Co-ordinates",
-      "subject_clean": "Inputting Co-ordinates",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "> Hello\n>\n> I am trying to input some co-ordinate sets into R of the form x,y by\nusing\n> lists.  The command I am using is:\n>\n> p1 <- list(x=c(3445,563,646), y=c(234,567,456))\n>\n> However the actual co-ordinate sets that I am trying to input have 305\n> points each and I think that the program will not accept a command\nthat is\n> as long as necessary.  Is this so?  If this is the case can you tell\nme how\n> to read the points in as a table but so that I can call on them as\nbeing p1,\n> later in the program?\n>\n> Many Thanks\n> Louise\n\nOne easy way is to enter the coordinates into a text file with a text\neditor so that the file looks like:\n\nx y\n3445 234\n563 567\n646 456\n...\n\nand then read into R with a statement\n\np1 <- read.table (\"file.name\", header=TRUE)\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "> Hello\n>\n> I am trying to input some co-ordinate sets into R of the form x,y by\nusing\n> lists.  The command I am using is:\n>\n> p1 <- list(x=c(3445,563,646), y=c(234,567,456))\n>\n> However the actual c",
-      "thread_id": "thread-730b01f56127",
-      "thread_depth": 0,
-      "month": "2002-05"
-    },
-    {
       "id": "msg-c82d7461e57c",
       "message_id": "<3CD95BDC.4040302@inrialpes.fr>",
       "from_name": "Olivier Martin",
@@ -7256,6 +7240,24 @@
       "month": "2002-05"
     },
     {
+      "id": "msg-5a881e6b84bb",
+      "message_id": "<20020513165619.28401.qmail@hm47.locaweb.com.br>",
+      "from_name": "Frederico Zanqueta Poleto",
+      "from_email_hash": "89019e5d15535ba700f12357e6fb39d8bb989d8bbf9850471e7826f2dc6ebe10",
+      "date": "2002-05-13T13:56:19Z",
+      "subject": "[R] Generalized Estimating Functions",
+      "subject_clean": "Generalized Estimating Functions",
+      "in_reply_to": "<Pine.A41.4.44.0205130934090.141066-100000@homer07.u.washington.edu>",
+      "references": [
+        "<Pine.A41.4.44.0205130934090.141066-100000@homer07.u.washington.edu>"
+      ],
+      "body_plain": "Hi Thomas,\n\nThank you for your help.\nYou are right. I've tried the OME example and the working correlation was \nright.\nMaybe it is a problem with Poisson, what do you think?\n\n> desreg<-gee\n(desovas~ger+pop+fec+ger*pop+ger*fec+pop*fec,id=unidade,data=desovas.ovos.in\nviaveis,family=poisson,corstr=\"exchangeable\")\n[1] \"Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27\"\n[1] \"running glm to get initial regression estimate\"\n[1]  0.93464328  0.02317831  0.29278443  0.21399704  0.11593571  \n0.05833780 -0.11513896\n> summary(desreg)\n\n GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA\n gee S-function, version 4.13 modified 98/01/27 (1998) \n\nModel:\n Link:                      Logarithm \n Variance to Mean Relation: Poisson \n Correlation Structure:     Exchangeable \n\nCall:\ngee(formula = desovas ~ ger + pop + fec + ger * pop + ger * fec + \n    pop * fec, id = unidade, data = desovas.ovos.inviaveis, family = \npoisson, \n    corstr = \"exchangeable\")\n\nSummary of Residuals:\n       Min         1Q     Median         3Q        Max \n-4.5893464 -1.5463047 -0.4124404  1.4106536  9.2329743 \n\n\nCoefficients:\n               Estimate Naive S.E.    Naive z Robust S.E.   Robust z\n(Intercept)  0.93464317 0.06012985 15.5437480  0.05954487 15.6964517\nger          0.02317832 0.07001297  0.3310576  0.06915388  0.3351702\npop          0.29278452 0.06565443  4.4594785  0.06505729  4.5004104\nfec          0.21399711 0.07252180  2.9507967  0.07150063  2.9929402\nger:pop      0.11593572 0.07355902  1.5760911  0.07318636  1.5841166\nger:fec      0.05833782 0.07000740  0.8333093  0.07054498  0.8269592\npop:fec     -0.11513904 0.07216442 -1.5955098  0.07149595 -1.6104274\n\nEstimated Scale Parameter:  1.366923\nNumber of Iterations:  1\n\nWorking Correlation\n      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]\n [1,]    1    0    0    0    0    0    0    0    0     0     0     0\n [2,]    0    0    0    0    0    0    0    0    0     0     0     0\n [3,]    0    0    0    0    0    0    0    0    0     0     0     0\n [4,]    0    0    0    0    0    0    0    0    0     0     0     0\n [5,]    0    0    0    0    0    0    0    0    0     0     0     0\n [6,]    0    0    0    0    0    0    0    0    0     0     0     0\n [7,]    0    0    0    0    0    0    0    0    0     0     0     0\n [8,]    0    0    0    0    0    0    0    0    0     0     0     0\n [9,]    0    0    0    0    0    0    0    0    0     0     0     0\n[10,]    0    0    0    0    0    0    0    0    0     0     0     0\n[11,]    0    0    0    0    0    0    0    0    0     0     0     0\n[12,]    0    0    0    0    0    0    0    0    0     0     0     0\n\n\nBest regards,\n--\nFrederico Zanqueta Poleto\nfred at poleto.com\n--\n\"It would be possible to describe everything scientifically, but it would \nmake no sense; it would be without meaning, as if you described a \nBeethoven symphony as a variation of wave pressure.\" Albert Einstein\n\n\n------------- Original message follows -------------\n\nOn Sun, 12 May 2002, Frederico Zanqueta Poleto wrote:\n\n>   Hi,\n>\n> I'm trying to fit a marginal model via GEE but I'm getting strange\n> results and few problems.\n> If I set the working correlation as exchangeable I'm getting the same\n> fitting when I set as independent. Comparing to SAS results it shouldn't\n> happen.\n> If I try to use another working correlation (like AR-M or stat_M_dep), R\n> just exits without giving any error message.\n\nWe probably need an example.  The `OME' example in help(gee) gives\ndifferent results using exchangeable and independence working\ncorrelations, so it isn't a universal problem.\n\n> Another doubt is how R estimates the scale parameter for Poisson? I get\n> 1.36 in R, 1.25 in SAS (estimation by the square root of DEVIANCE/DOF)\n> and 1.17 (estimation by the square root of Pearson's Chi-Square/DOF).\n> I'm using R 1.4.1 but all the problems apply for S-Plus 2000 too.\n\nThis is because 1.36=1.17^2, I should think.  The disperson parameter from\ngee() is a variance scale factor not a standard deviation scale factor.\n\n\t-thomas\n\nThomas Lumley\t\t\tAsst. Professor, Biostatistics\ntlumley at u.washington.edu\tUniversity of Washington, Seattle\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Hi Thomas,\n\nThank you for your help.\nYou are right. I've tried the OME example and the working correlation was \nright.\nMaybe it is a problem with Poisson, what do you think?\n\n> desreg<-gee\n(desovas~ge",
+      "thread_id": "thread-0b20b6de032d",
+      "thread_depth": 2,
+      "month": "2002-05"
+    },
+    {
       "id": "msg-cac70e7f0c2a",
       "message_id": "<D7A3CFD7825BD6119B880002A58F06C225290D@groexmb02.pfizer.com>",
       "from_name": "Warnes, Gregory R",
@@ -7381,8 +7383,8 @@
       "references": [],
       "body_plain": "On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n\n> Hi Thomas,\n>\n> Thank you for your help.\n> You are right. I've tried the OME example and the working correlation was\n> right.\n> Maybe it is a problem with Poisson, what do you think?\n\nNo, that works too in other examples.\n\nIt's most likely a problem with your use of gee, as the working\ncorrelation matrix shows, plus the fact that it only did one iteration.\nPlease check very carefully all your inputs.\n\n> > desreg<-gee\n> (desovas~ger+pop+fec+ger*pop+ger*fec+pop*fec,id=unidade,data=desovas.ovos.in\n> viaveis,family=poisson,corstr=\"exchangeable\")\n> [1] \"Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27\"\n> [1] \"running glm to get initial regression estimate\"\n> [1]  0.93464328  0.02317831  0.29278443  0.21399704  0.11593571\n> 0.05833780 -0.11513896\n> > summary(desreg)\n>\n>  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA\n>  gee S-function, version 4.13 modified 98/01/27 (1998)\n>\n> Model:\n>  Link:                      Logarithm\n>  Variance to Mean Relation: Poisson\n>  Correlation Structure:     Exchangeable\n>\n> Call:\n> gee(formula = desovas ~ ger + pop + fec + ger * pop + ger * fec +\n>     pop * fec, id = unidade, data = desovas.ovos.inviaveis, family =\n> poisson,\n>     corstr = \"exchangeable\")\n>\n> Summary of Residuals:\n>        Min         1Q     Median         3Q        Max\n> -4.5893464 -1.5463047 -0.4124404  1.4106536  9.2329743\n>\n>\n> Coefficients:\n>                Estimate Naive S.E.    Naive z Robust S.E.   Robust z\n> (Intercept)  0.93464317 0.06012985 15.5437480  0.05954487 15.6964517\n> ger          0.02317832 0.07001297  0.3310576  0.06915388  0.3351702\n> pop          0.29278452 0.06565443  4.4594785  0.06505729  4.5004104\n> fec          0.21399711 0.07252180  2.9507967  0.07150063  2.9929402\n> ger:pop      0.11593572 0.07355902  1.5760911  0.07318636  1.5841166\n> ger:fec      0.05833782 0.07000740  0.8333093  0.07054498  0.8269592\n> pop:fec     -0.11513904 0.07216442 -1.5955098  0.07149595 -1.6104274\n>\n> Estimated Scale Parameter:  1.366923\n> Number of Iterations:  1\n>\n> Working Correlation\n>       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]\n>  [1,]    1    0    0    0    0    0    0    0    0     0     0     0\n>  [2,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [3,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [4,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [5,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [6,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [7,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [8,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [9,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [10,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [11,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [12,]    0    0    0    0    0    0    0    0    0     0     0     0\n>\n>\n> Best regards,\n> --\n> Frederico Zanqueta Poleto\n> fred at poleto.com\n> --\n> \"It would be possible to describe everything scientifically, but it would\n> make no sense; it would be without meaning, as if you described a\n> Beethoven symphony as a variation of wave pressure.\" Albert Einstein\n>\n>\n> ------------- Original message follows -------------\n>\n> On Sun, 12 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> >   Hi,\n> >\n> > I'm trying to fit a marginal model via GEE but I'm getting strange\n> > results and few problems.\n> > If I set the working correlation as exchangeable I'm getting the same\n> > fitting when I set as independent. Comparing to SAS results it shouldn't\n> > happen.\n> > If I try to use another working correlation (like AR-M or stat_M_dep), R\n> > just exits without giving any error message.\n>\n> We probably need an example.  The `OME' example in help(gee) gives\n> different results using exchangeable and independence working\n> correlations, so it isn't a universal problem.\n>\n> > Another doubt is how R estimates the scale parameter for Poisson? I get\n> > 1.36 in R, 1.25 in SAS (estimation by the square root of DEVIANCE/DOF)\n> > and 1.17 (estimation by the square root of Pearson's Chi-Square/DOF).\n> > I'm using R 1.4.1 but all the problems apply for S-Plus 2000 too.\n>\n> This is because 1.36=1.17^2, I should think.  The disperson parameter from\n> gee() is a variance scale factor not a standard deviation scale factor.\n>\n> \t-thomas\n>\n> Thomas Lumley\t\t\tAsst. Professor, Biostatistics\n> tlumley at u.washington.edu\tUniversity of Washington, Seattle\n>\n>\n>\n> -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n> r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n> Send \"info\", \"help\", or \"[un]subscribe\"\n> (in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n> _._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272860 (secr)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n\n> Hi Thomas,\n>\n> Thank you for your help.\n> You are right. I've tried the OME example and the working correlation was\n> right.\n> Maybe it is a pr",
-      "thread_id": "thread-7c0255c024d6",
-      "thread_depth": 0,
+      "thread_id": "thread-0b20b6de032d",
+      "thread_depth": 3,
       "month": "2002-05"
     },
     {
@@ -7480,8 +7482,8 @@
       "references": [],
       "body_plain": "On Mon, 13 May 2002 ripley at stats.ox.ac.uk wrote:\n\n> On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> > Hi Thomas,\n> >\n> > Thank you for your help.\n> > You are right. I've tried the OME example and the working correlation was\n> > right.\n> > Maybe it is a problem with Poisson, what do you think?\n>\n> No, that works too in other examples.\n>\n> It's most likely a problem with your use of gee, as the working\n> correlation matrix shows, plus the fact that it only did one iteration.\n> Please check very carefully all your inputs.\n>\n\nIn particular check the ordering:\n\n>From help(gee)\n     id: a vector which identifies the clusters.  The length of `id'\n          should be the same as the number of observations.  Data are\n          assumed to be sorted so that observations on a cluster are\n          contiguous rows for all entities in the formula.\n\n\n\t-thomas\n\nThomas Lumley\t\t\tAsst. Professor, Biostatistics\ntlumley at u.washington.edu\tUniversity of Washington, Seattle\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Mon, 13 May 2002 ripley at stats.ox.ac.uk wrote:\n\n> On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> > Hi Thomas,\n> >\n> > Thank you for your help.\n> > You are right. I've tried the OME exa",
-      "thread_id": "thread-7c0255c024d6",
-      "thread_depth": 1,
+      "thread_id": "thread-0b20b6de032d",
+      "thread_depth": 4,
       "month": "2002-05"
     },
     {
@@ -12794,40 +12796,6 @@
       "month": "2002-05"
     },
     {
-      "id": "msg-c3fbcf6f49b9",
-      "message_id": "<E17Afch-0004TR-00@pcp-2.ihug.co.nz>",
-      "from_name": "jasont@indigoindustrial.co.nz",
-      "from_email_hash": "f4a6706f144b122ced3376316a1c231a89a7209f43987438cee43aed9fc8148c",
-      "date": "2002-05-22T23:34:27Z",
-      "subject": "[R] plotting a 1000 plots?",
-      "subject_clean": "plotting a 1000 plots?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "> > I believe you can send multiple plots to a pdf file by leaving the pdf()\n> > device open.  By default, each new plot will be put on a different page in\n> > the pdf file.  \n\n> ah-ha! had I only known. I forgot to check the other devices supported.\n> Works like a charm on windows too! Saaaweet!\n\nCareful - this will choke at 501 plots.  \n\nhelp(pdf)\n..\nThere is an internal limit of 500 pages per PDF file, which should\nbe ample.\n..\n\nIf you really want to do 1000 plots, you need a Plan B.\n\nCheers\n\nJason\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "> > I believe you can send multiple plots to a pdf file by leaving the pdf()\n> > device open.  By default, each new plot will be put on a different page in\n> > the pdf file.  \n\n> ah-ha! had I only kno",
-      "thread_id": "thread-c3fbcf6f49b9",
-      "thread_depth": 0,
-      "month": "2002-05"
-    },
-    {
-      "id": "msg-9db2607e9cf5",
-      "message_id": "<001401c201ea$1dfcb170$7c74c180@jackson>",
-      "from_name": "Jeff D. Hamann",
-      "from_email_hash": "5ac2fd50cc43af841b7a5cb5a6433c3063c970a456a93afe5075a54cd2e384ff",
-      "date": "2002-05-22T16:40:53-07:00",
-      "subject": "[R] plotting a 1000 plots?",
-      "subject_clean": "plotting a 1000 plots?",
-      "in_reply_to": null,
-      "references": [
-        "<E17Afch-0004TR-00@pcp-2.ihug.co.nz>"
-      ],
-      "body_plain": "yes. in this case a plan b might be in order...\n\nthanks.\n\n----- Original Message -----\nFrom: <jasont at indigoindustrial.co.nz>\nTo: \"Jeff D. Hamann\" <jeff_hamann at hamanndonald.com>; \"Roger Peng\"\n<rpeng at stat.ucla.edu>; <r-help at stat.math.ethz.ch>\nCc: <r-help at r-project.org>\nSent: Wednesday, May 22, 2002 4:34 PM\nSubject: Re: [R] plotting a 1000 plots?\n\n\n> > > I believe you can send multiple plots to a pdf file by leaving the\npdf()\n> > > device open.  By default, each new plot will be put on a different\npage in\n> > > the pdf file.\n>\n> > ah-ha! had I only known. I forgot to check the other devices supported.\n> > Works like a charm on windows too! Saaaweet!\n>\n> Careful - this will choke at 501 plots.\n>\n> help(pdf)\n> ..\n> There is an internal limit of 500 pages per PDF file, which should\n> be ample.\n> ..\n>\n> If you really want to do 1000 plots, you need a Plan B.\n>\n> Cheers\n>\n> Jason\n>\n>\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "yes. in this case a plan b might be in order...\n\nthanks.\n\n----- Original Message -----\nFrom: <jasont at indigoindustrial.co.nz>\nTo: \"Jeff D. Hamann\" <jeff_hamann at hamanndonald.com>; \"Roger Peng\"\n<rp",
-      "thread_id": "thread-c3fbcf6f49b9",
-      "thread_depth": 1,
-      "month": "2002-05"
-    },
-    {
       "id": "msg-9db2607e9cf5",
       "message_id": "<001401c201ea$1dfcb170$7c74c180@jackson>",
       "from_name": "Jeff D. Hamann",
@@ -17553,6 +17521,56 @@
       "thread_id": "thread-65cae954bd04",
       "thread_depth": 0,
       "month": "2002-05"
+    },
+    {
+      "id": "msg-f12c1f72535f",
+      "message_id": "<p05111702b91db9f9be66@[128.115.153.6]>",
+      "from_name": "Don MacQueen",
+      "from_email_hash": "175f4fa90b8d6445baa141105bd5754ace34836009cb94ddb056a9ce4ea7ff75",
+      "date": "2002-05-31T16:42:34-07:00",
+      "subject": "[R] error in seq.POSIXt?",
+      "subject_clean": "error in seq.POSIXt?",
+      "in_reply_to": "<Pine.GSO.4.30.0205311448220.2517-100000@box.cgd.ucar.edu>",
+      "references": [
+        "<Pine.GSO.4.30.0205311448220.2517-100000@box.cgd.ucar.edu>"
+      ],
+      "body_plain": "Nothing jumps out at me, I'm sorry to say.\n\nBut in the meantime, I am wondering if it wouldn't be easier to \nextract only the\nwinters with something like\n\n    datevec[format(datevec,'%m') %in% c('12','01','02') &\n            format(datevec,'%m-%d' != '02-29']\n\nwhere datevec is the vector of days associated with your data, as an \nobject of class POSIXct or POSIXlt.\n\nThen use something like\n   table(format(datevec,'%Y'))\nto check that you have 90 of each.\n\n-Don\n\nAt 3:27 PM -0600 5/31/02, Brandon Whitcher wrote:\n>I am trying to extract only the winters (defined to be 01-Dec through\n>28-Feb) of daily data from 1948-2002.  There are 90 days in each winter\n>season.  I wrote the following code to gather the winter dates into a\n>single vector:\n>\n>DJF <- NULL\n>for(year in 1949:1999) {\n>   temp.begin <- strptime(paste(\"01/12\", year-1, sep=\"/\"), \"%d/%m/%Y\")\n>   temp.end <- strptime(paste(\"28/02\", year, sep=\"/\"), \"%d/%m/%Y\")\n>   ## Gives wrong answer:\n>   temp.seq <- seq(temp.begin, temp.end, by=\"day\")\n>   if(is.null(DJF))\n>     DJF <- temp.seq\n>   else\n>     DJF <- c(DJF, temp.seq)\n>   cat(\"Winter:\", year, \"\\t\", length(temp.seq), \"\\n\")\n>}\n>\n>with the following output:\n>\n>Winter: 1949\t 90\n>Winter: 1950\t 90\n>Winter: 1951\t 90\n>Winter: 1952\t 90\n>Winter: 1953\t 90\n>Winter: 1954\t 90\n>Winter: 1955\t 90\n>Winter: 1956\t 90\n>Winter: 1957\t 90\n>Winter: 1958\t 90\n>Winter: 1959\t 90\n>Winter: 1960\t 90\n>Winter: 1961\t 90\n>Winter: 1962\t 90\n>Winter: 1963\t 90\n>Winter: 1964\t 90\n>Winter: 1965\t 90\n>Winter: 1966\t 90\n>Winter: 1967\t 90\n>Winter: 1968\t 90\n>Winter: 1969\t 90\n>Winter: 1970\t 90\n>Winter: 1971\t 90\n>Winter: 1972\t 90\n>Winter: 1973\t 90\n>Winter: 1974\t 89\n>Winter: 1975\t 89\n>Winter: 1976\t 90\n>Winter: 1977\t 90\n>Winter: 1978\t 90\n>Winter: 1979\t 90\n>Winter: 1980\t 90\n>Winter: 1981\t 90\n>Winter: 1982\t 90\n>Winter: 1983\t 90\n>Winter: 1984\t 90\n>Winter: 1985\t 90\n>Winter: 1986\t 90\n>Winter: 1987\t 90\n>Winter: 1988\t 90\n>Winter: 1989\t 90\n>Winter: 1990\t 90\n>Winter: 1991\t 90\n>Winter: 1992\t 90\n>Winter: 1993\t 90\n>Winter: 1994\t 90\n>Winter: 1995\t 90\n>Winter: 1996\t 90\n>Winter: 1997\t 90\n>Winter: 1998\t 90\n>Winter: 1999\t 90\n>Winter: 2000\t 90\n>Winter: 2001\t 90\n>Winter: 2002\t 90\n>\n>There are two years, 1974 and 1975, that produce only 89 days per winter.\n>I could not figure out what the cause of this was, but a workaround is two\n>rewrite the call to seq.POSIXt as:\n>\n>temp.seq <- seq(temp.begin, length.out=90, by=\"day\")\n>\n>I am unsure why one works and one does not.  Any ideas?\n>\n>Brandon\n>\n>----------------------------------------------------------------------------\n>   Geophysical Statistics Project\n>   National Center for Atmospheric Research          +1 303 497 1709  voice\n>   P.O. Box 3000, Boulder, CO  80307-3000            +1 303 497 1333  fax\n>\n>   whitcher at ucar.edu                            www.cgd.ucar.edu/~whitcher/\n>----------------------------------------------------------------------------\n>\n>\n>\n>\n>\n>-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n>r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n>Send \"info\", \"help\", or \"[un]subscribe\"\n>(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n\n-- \n--------------------------------------\nDon MacQueen\nEnvironmental Protection Department\nLawrence Livermore National Laboratory\nLivermore, CA, USA\n--------------------------------------\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Nothing jumps out at me, I'm sorry to say.\n\nBut in the meantime, I am wondering if it wouldn't be easier to \nextract only the\nwinters with something like\n\n    datevec[format(datevec,'%m') %in% c('12',",
+      "thread_id": "thread-65cae954bd04",
+      "thread_depth": 1,
+      "month": "2002-05"
+    },
+    {
+      "id": "msg-77637eb6f0ee",
+      "message_id": "<49D9473417F1234C9C86886EE8353FAA60DB03@mailman.sprintlabs.com>",
+      "from_name": "Felix Hernandez Campos",
+      "from_email_hash": "6e2d4e285c7041112940937f5922660acbb5b4b2fd059b0cfc267f39e3a487f8",
+      "date": "2002-05-31T17:34:51-07:00",
+      "subject": "[R] R beyond 2 Gb",
+      "subject_clean": "R beyond 2 Gb",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI'm working with a fairly massive data set and I need to allocate memory\nbeyond the 2GB limit. I'm using R 1.5.0 on a SunOS 5.8 machine (16 GB RAM).\nHas anyone been succesful at patching the code to get rid of the 2GB memory\nlimit? (there are quite a few places in which vsize is an int or tested\nagainst INT_MAX). I'll appreciate any guidance you can provide. Thanks.\n\nRegards,\nFelix Hernandez.\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Hi,\n\nI'm working with a fairly massive data set and I need to allocate memory\nbeyond the 2GB limit. I'm using R 1.5.0 on a SunOS 5.8 machine (16 GB RAM).\nHas anyone been succesful at patching the code",
+      "thread_id": "thread-77637eb6f0ee",
+      "thread_depth": 0,
+      "month": "2002-05"
+    },
+    {
+      "id": "msg-d06db458357a",
+      "message_id": "<Pine.GSO.4.30.0205312104340.2639-100000@box.cgd.ucar.edu>",
+      "from_name": "Brandon Whitcher",
+      "from_email_hash": "0cdb684b3e7a4a857fe34ea8ccfd44ca308eac71c530342ad37201315aaffc02",
+      "date": "2002-05-31T21:05:04-06:00",
+      "subject": "[R] error in seq.POSIXt?",
+      "subject_clean": "error in seq.POSIXt?",
+      "in_reply_to": "<p05111702b91db9f9be66@[128.115.153.6]>",
+      "references": [],
+      "body_plain": "On Fri, 31 May 2002, Don MacQueen wrote:\n\n> Nothing jumps out at me, I'm sorry to say.\n>\n> But in the meantime, I am wondering if it wouldn't be easier to\n> extract only the\n> winters with something like\n>\n>     datevec[format(datevec,'%m') %in% c('12','01','02') &\n>             format(datevec,'%m-%d' != '02-29']\n>\n> where datevec is the vector of days associated with your data, as an\n> object of class POSIXct or POSIXlt.\n>\n> Then use something like\n>    table(format(datevec,'%Y'))\n> to check that you have 90 of each.\n\nThanks for the tip.\n\nBrandon\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "On Fri, 31 May 2002, Don MacQueen wrote:\n\n> Nothing jumps out at me, I'm sorry to say.\n>\n> But in the meantime, I am wondering if it wouldn't be easier to\n> extract only the\n> winters with something l",
+      "thread_id": "thread-65cae954bd04",
+      "thread_depth": 2,
+      "month": "2002-05"
     }
   ],
   "threads": [
@@ -19192,17 +19210,6 @@
       "root_message_id": "msg-730b01f56127"
     },
     {
-      "id": "thread-730b01f56127",
-      "subject": "Inputting Co-ordinates",
-      "message_count": 1,
-      "participants": [
-        "White.Denis@epamail.epa.gov"
-      ],
-      "started": "2002-05-08T09:25:10-07:00",
-      "last_reply": "2002-05-08T09:25:10-07:00",
-      "root_message_id": "msg-730b01f56127"
-    },
-    {
       "id": "thread-ea0b1876db08",
       "subject": "R 1.5.0 terminated while plotting groupedData",
       "message_count": 1,
@@ -19914,7 +19921,7 @@
     {
       "id": "thread-0b20b6de032d",
       "subject": "Generalized Estimating Functions",
-      "message_count": 7,
+      "message_count": 10,
       "participants": [
         "Frederico Zanqueta Poleto",
         "Jonathan Baron",
@@ -19924,7 +19931,7 @@
         "ripley@stats.ox.ac.uk"
       ],
       "started": "2002-05-12T20:50:01-03:00",
-      "last_reply": "2002-05-13T09:39:18-07:00",
+      "last_reply": "2002-05-13T12:47:04-07:00",
       "root_message_id": "msg-0b20b6de032d"
     },
     {
@@ -20081,18 +20088,6 @@
       "root_message_id": "msg-76196b7f58c2"
     },
     {
-      "id": "thread-7c0255c024d6",
-      "subject": "Generalized Estimating Functions",
-      "message_count": 2,
-      "participants": [
-        "Thomas Lumley",
-        "ripley@stats.ox.ac.uk"
-      ],
-      "started": "2002-05-13T18:09:46+01:00",
-      "last_reply": "2002-05-13T12:47:04-07:00",
-      "root_message_id": "msg-7c0255c024d6"
-    },
-    {
       "id": "thread-d3ada5766caf",
       "subject": "Spatio-temporal analysis of homicide rates",
       "message_count": 1,
@@ -20140,17 +20135,6 @@
       "root_message_id": "msg-4b6e395b8329"
     },
     {
-      "id": "thread-077b02f3ee6c",
-      "subject": "installing labDSV library",
-      "message_count": 1,
-      "participants": [
-        "Graham Smith"
-      ],
-      "started": "2002-05-14T07:43:00+01:00",
-      "last_reply": "2002-05-14T07:43:00+01:00",
-      "root_message_id": "msg-077b02f3ee6c"
-    },
-    {
       "id": "thread-406e49fd1951",
       "subject": "installing labDSV library",
       "message_count": 1,
@@ -20160,6 +20144,17 @@
       "started": "2002-05-14T07:43:00+01:00",
       "last_reply": "2002-05-14T07:43:00+01:00",
       "root_message_id": "msg-406e49fd1951"
+    },
+    {
+      "id": "thread-077b02f3ee6c",
+      "subject": "installing labDSV library",
+      "message_count": 1,
+      "participants": [
+        "Graham Smith"
+      ],
+      "started": "2002-05-14T07:43:00+01:00",
+      "last_reply": "2002-05-14T07:43:00+01:00",
+      "root_message_id": "msg-077b02f3ee6c"
     },
     {
       "id": "thread-c8e5e981dc5d",
@@ -21924,7 +21919,7 @@
     {
       "id": "thread-c3fbcf6f49b9",
       "subject": "plotting a 1000 plots?",
-      "message_count": 4,
+      "message_count": 3,
       "participants": [
         "Jeff D. Hamann",
         "Prof Brian D Ripley",
@@ -21932,17 +21927,6 @@
       ],
       "started": "2002-05-22T23:34:27+00:00",
       "last_reply": "2002-05-25T08:50:26+01:00",
-      "root_message_id": "msg-c3fbcf6f49b9"
-    },
-    {
-      "id": "thread-c3fbcf6f49b9",
-      "subject": "plotting a 1000 plots?",
-      "message_count": 1,
-      "participants": [
-        "jasont@indigoindustrial.co.nz"
-      ],
-      "started": "2002-05-22T23:34:27+00:00",
-      "last_reply": "2002-05-22T23:34:27+00:00",
       "root_message_id": "msg-c3fbcf6f49b9"
     },
     {
@@ -23488,12 +23472,13 @@
     {
       "id": "thread-65cae954bd04",
       "subject": "error in seq.POSIXt?",
-      "message_count": 1,
+      "message_count": 3,
       "participants": [
-        "Brandon Whitcher"
+        "Brandon Whitcher",
+        "Don MacQueen"
       ],
       "started": "2002-05-31T15:27:23-06:00",
-      "last_reply": "2002-05-31T15:27:23-06:00",
+      "last_reply": "2002-05-31T21:05:04-06:00",
       "root_message_id": "msg-65cae954bd04"
     },
     {
@@ -23543,6 +23528,17 @@
       "started": "2002-05-31T16:37:18-04:00",
       "last_reply": "2002-05-31T16:37:18-04:00",
       "root_message_id": "msg-4b9144ae70fa"
+    },
+    {
+      "id": "thread-77637eb6f0ee",
+      "subject": "R beyond 2 Gb",
+      "message_count": 1,
+      "participants": [
+        "Felix Hernandez Campos"
+      ],
+      "started": "2002-05-31T17:34:51-07:00",
+      "last_reply": "2002-05-31T17:34:51-07:00",
+      "root_message_id": "msg-77637eb6f0ee"
     },
     {
       "id": "thread-cbce928a2301",

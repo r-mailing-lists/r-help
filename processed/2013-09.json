@@ -2103,25 +2103,6 @@
       "month": "2013-09"
     },
     {
-      "id": "msg-7fc7e26f4e5f",
-      "message_id": "<CADym=9XFP540NvvHc0BjfvC=Jkjr8DtixvH3L80QUFDsnoW5+A@mail.gmail.com>",
-      "from_name": "Siddharth Arun",
-      "from_email_hash": "f7e6bc613f55a41580a276473163add0b56217a8027000449f8d85e5982e85a9",
-      "date": "2013-09-03T19:48:02+05:30",
-      "subject": "[R] Parts of Speach Tagging",
-      "subject_clean": "Parts of Speach Tagging",
-      "in_reply_to": "<BLU170-W132F97D33FB7030F9EBD0EF480@phx.gbl>",
-      "references": [
-        "<CADym=9WqaQRb==2BAf5sgNf5KkAQHoZ4Aas1oRU+hmJcOGZsig@mail.gmail.com>",
-        "<BLU170-W132F97D33FB7030F9EBD0EF480@phx.gbl>"
-      ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130903/76fe5e7f/attachment-0001.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130903/76fe5e7f/attachment-0001.pl>",
-      "thread_id": "thread-7fc7e26f4e5f",
-      "thread_depth": 0,
-      "month": "2013-09"
-    },
-    {
       "id": "msg-7a62acfa6724",
       "message_id": "<CADym=9XmAeN1cP1H8Y5=FK2oF9RTFNo6P2MUW-FAZYH4QE4rgQ@mail.gmail.com>",
       "from_name": "Siddharth Arun",
@@ -10252,46 +10233,6 @@
       "month": "2013-09"
     },
     {
-      "id": "msg-4bb6b917a6bd",
-      "message_id": "<5230F78A.2030600@student.unimelb.edu.au>",
-      "from_name": "Ben Harrison",
-      "from_email_hash": "ea21fc04e64e67b3a4d336ee7df13bdc7569eaa13b3271de284749870ec2c311",
-      "date": "2013-09-12T09:06:50+10:00",
-      "subject": "[R] Subtracting elements of a vector from each other stepwise",
-      "subject_clean": "Subtracting elements of a vector from each other stepwise",
-      "in_reply_to": "<522FAFB4.907@gmail.com>",
-      "references": [
-        "<CANTLroGb_R4HOgG5gNk9HCPaPX2=EZ_J_KLhYmRtLfLB+W-OAw@mail.gmail.com>",
-        "<1378847199.17716.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
-        "<loom.20130910T233603-460@post.gmane.org>",
-        "<1378851844.80715.YahooMailNeo@web142602.mail.bf1.yahoo.com>",
-        "<522FAFB4.907@gmail.com>"
-      ],
-      "body_plain": "If I were Michael (OP) right now, I think my head would be spinning.\n\nAs a newbie myself, I know how hard it is to read R code for the first \ntime, so could it also be part of the newsgroup etiquette to at least \npartially explain provided code to newbies?\n\nI agree that the interactive help '?' is available and should be \nconsulted, but it would also be helpful if those of you with great \nexperience could add a little guidance for your code.\n\nExcuse me if this is out-of-place.\n\nBen\n\n\nOn 11/09/13 09:48, Ben Bolker wrote:\n> On 13-09-10 06:24 PM, arun wrote:\n>> Hi,\n>> May be this also works:\n>>\n>>   dist(x)\n>> #   1  2  3\n>> #2  2\n>> #3  6  4\n>> #4 12 10  6\n>>\n>> as.matrix(dist(x))\n>> #   1  2 3  4\n>> #1  0  2 6 12\n>> #2  2  0 4 10\n>> #3  6  4 0  6\n>> #4 12 10 6  0\n>> which(dist(x)==min(dist(x)))\n>> #[1] 1\n>> A.K.\n>\n>    Yes, but you need to set the diagonal to NA, or something -- the OP\n> doesn't want to include self-comparison. It also helps to use\n> arr.ind=TRUE in which().  You're right that dist() would be a hair more\n> efficient that outer(...), though\n>\n>>\n>>\n>>\n>> ----- Original Message -----\n>> From: Ben Bolker <bbolker at gmail.com>\n>> To: r-help at stat.math.ethz.ch\n>> Cc:\n>> Sent: Tuesday, September 10, 2013 5:39 PM\n>> Subject: Re: [R] Subtracting elements of a vector from each other stepwise\n>>\n>> arun <smartpink111 <at> yahoo.com> writes:\n>>\n>>>\n>>> Hi,\n>>> Not sure this is what you wanted:\n>>>\n>>>   sapply(seq_along(x), function(i) {x1<- x[i]; x2<- x[-i];\n>> x3<-x2[which.min(abs(x1-x2))];c(x1,x3)})\n>>> #     [,1] [,2] [,3] [,4]\n>>> #[1,]   17   19   23   29\n>>> #[2,]   19   17   19   23\n>>> A.K.\n>>\n>>\n>>    It's a little inefficient (because it constructs\n>> the distances in both directions), but how about:\n>>\n>> x = c(17,19,23,29)\n>> d <- abs(outer(x,x,\"-\"))\n>> diag(d) <- NA\n>> d[lower.tri(d)] <- NA\n>> which(d==min(d,na.rm=TRUE),arr.ind=TRUE)\n>>\n>>\n>> ?\n>>\n>>> ----- Original Message -----\n>>> From: Michael Budnick <mbudnick08 <at> snet.net>\n>>> To: r-help <at> r-project.org\n>>> Cc:\n>>> Sent: Tuesday, September 10, 2013 4:06 PM\n>>> Subject: [R] Subtracting elements of a vector from each other stepwise\n>>>\n>>> I am trying to figure out how to create a loop that will take the\n>>> difference of each member of a vector from each other and also spit out\n>>> which one has the least difference.\n>>>\n>>> I do not want the vector member to subtract from itself or it must be able\n>>> to disregard the 0 obtained from subtracting from itself.\n>>>\n>>> For example:\n>>>\n>>> x = c(17,19,23,29)\n>>\n>>\n>> [snip]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>",
-      "body_snippet": "If I were Michael (OP) right now, I think my head would be spinning.\n\nAs a newbie myself, I know how hard it is to read R code for the first \ntime, so could it also be part of the newsgroup etiquette ",
-      "thread_id": "thread-e613257065aa",
-      "thread_depth": 5,
-      "month": "2013-09"
-    },
-    {
-      "id": "msg-e7bba9b4aeeb",
-      "message_id": "<5230F863.9020309@student.unimelb.edu.au>",
-      "from_name": "Ben Harrison",
-      "from_email_hash": "ea21fc04e64e67b3a4d336ee7df13bdc7569eaa13b3271de284749870ec2c311",
-      "date": "2013-09-12T09:10:27+10:00",
-      "subject": "[R] Need to learn or get R tutor in Minneapolis",
-      "subject_clean": "Need to learn or get R tutor in Minneapolis",
-      "in_reply_to": "<Gophermail.2.0.1309091545340.10317@vs-w.tc.umn.edu>",
-      "references": [
-        "<Gophermail.2.0.1309091545340.10317@vs-w.tc.umn.edu>"
-      ],
-      "body_plain": "On 10/09/13 06:45, sewal026 at umn.edu wrote:\n> Please advise\n>\n\nCan't help you in Minneapolis, though surely your university has a \nstatistics department?\n\nTo learn R there are many online tutorials and video guides. The latest \nis a large collection from the Google developers:\nhttp://www.youtube.com/playlist?list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP\n\nIt's called Intro to R, and it currently has 21 videos.\n\nGood luck,\nBen.",
-      "body_snippet": "On 10/09/13 06:45, sewal026 at umn.edu wrote:\n> Please advise\n>\n\nCan't help you in Minneapolis, though surely your university has a \nstatistics department?\n\nTo learn R there are many online tutorials ",
-      "thread_id": "thread-1e2c69ccccfd",
-      "thread_depth": 1,
-      "month": "2013-09"
-    },
-    {
       "id": "msg-e7bba9b4aeeb",
       "message_id": "<5230F863.9020309@student.unimelb.edu.au>",
       "from_name": "Ben Harrison",
@@ -10628,22 +10569,6 @@
       "references": [],
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130912/e705d1b2/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130912/e705d1b2/attachment.pl>",
-      "thread_id": "thread-d918f98a76bc",
-      "thread_depth": 0,
-      "month": "2013-09"
-    },
-    {
-      "id": "msg-d918f98a76bc",
-      "message_id": "<20130912134022.202280@gmx.com>",
-      "from_name": "John Gonzalez",
-      "from_email_hash": "e767e169419fd781ffa609e7c83e1b0899a63e57e6748120c6f4090e62493933",
-      "date": "2013-09-12T15:40:22+02:00",
-      "subject": "[R] Privacy rights of an old user of this list",
-      "subject_clean": "Privacy rights of an old user of this list",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130912/e705d1b2/attachment-0001.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130912/e705d1b2/attachment-0001.pl>",
       "thread_id": "thread-d918f98a76bc",
       "thread_depth": 0,
       "month": "2013-09"
@@ -24411,44 +24336,6 @@
       "month": "2013-09"
     },
     {
-      "id": "msg-c05fb7dbec32",
-      "message_id": "<52451D96.1030900@student.unimelb.edu.au>",
-      "from_name": "Ben Harrison",
-      "from_email_hash": "ea21fc04e64e67b3a4d336ee7df13bdc7569eaa13b3271de284749870ec2c311",
-      "date": "2013-09-27T15:54:30+10:00",
-      "subject": "[R] table of contents link style in R's PDF docs",
-      "subject_clean": "table of contents link style in R's PDF docs",
-      "in_reply_to": "<CA+vqiLHLFRXpFvM5m=y7i-uCXv2hC49_A+nru1WWc-aub85M1Q@mail.gmail.com>",
-      "references": [
-        "<l20a7b$rsi$1@ger.gmane.org>",
-        "<CA+vqiLHLFRXpFvM5m=y7i-uCXv2hC49_A+nru1WWc-aub85M1Q@mail.gmail.com>"
-      ],
-      "body_plain": "On 27/09/13 00:03, Ista Zahn wrote:\n> Hi Ben,\n>\n>\n>\n> On Wed, Sep 25, 2013 at 11:38 PM, Ben Harrison\n> <harb at student.unimelb.edu.au> wrote:\n>> Hello,\n>\n> I agree that it would be nicer to have the whole TOC entry\n> hyperlinked. But out of curiosity, why are you using the pdf\n> documentation? I find the html much nicer.\n>\n> Best,\n> Ista\n>\n\nIt's just my ad-hoc workflow at the moment. I use RStudio, and the \n4-pane view. Help leads to the html within RStudio, but whenever I want \nto have a detailed read of a package, I seem to either search cran for \nthe docs, or click a link inside RStudio's help pane, both of which tend \nto lead to PDFs. My second monitor for example seems to have a bunch of \ndocs open at any one time (mind like a sieve) in both my browser and PDF \nviewer.",
-      "body_snippet": "On 27/09/13 00:03, Ista Zahn wrote:\n> Hi Ben,\n>\n>\n>\n> On Wed, Sep 25, 2013 at 11:38 PM, Ben Harrison\n> <harb at student.unimelb.edu.au> wrote:\n>> Hello,\n>\n> I agree that it would be nicer to have the ",
-      "thread_id": "thread-5131d046f19a",
-      "thread_depth": 2,
-      "month": "2013-09"
-    },
-    {
-      "id": "msg-c8b8f3ab3dd8",
-      "message_id": "<52452141.7000205@student.unimelb.edu.au>",
-      "from_name": "Ben Harrison",
-      "from_email_hash": "ea21fc04e64e67b3a4d336ee7df13bdc7569eaa13b3271de284749870ec2c311",
-      "date": "2013-09-27T16:10:09+10:00",
-      "subject": "[R] table of contents link style in R's PDF docs",
-      "subject_clean": "table of contents link style in R's PDF docs",
-      "in_reply_to": "<524445CB.8010205@gmail.com>",
-      "references": [
-        "<l20a7b$rsi$1@ger.gmane.org>",
-        "<524445CB.8010205@gmail.com>"
-      ],
-      "body_plain": "On 27/09/13 00:33, Duncan Murdoch wrote:\n> On 25/09/2013 11:38 PM, Ben Harrison wrote:\n>> Hello,\n\n> It's been the way it is for about 14 years, and I don't recall anyone\n> else complaining, so I'd conclude it must have been set that way with\n> you in mind.\n\nAh-hah, I knew it! I *am* special.\n\n\n> More seriously, I prefer having the page number clickable to having just\n> the text clickable.  Having both would be fine for both of us. There's a\n> partially documented option \"linktoc=all\" that does that; it was added\n> to the hyperref package in 2008, so you can hardly blame R for not using\n> it back in 1999.\n\n(Just to be clear, I didn't. I only heard of R last year. One reason I \nmake so much use of the docs :) )\n\nThe only problem I can see with using it now is that\n> some users might not have a sufficiently up-to-date LaTeX installation\n> to use it; if their hyperref package doesn't know about linktoc, they\n> won't be able to build anything at all.\n\n(Easy, tell them to upgrade!)\n\n>\n>>\n>> Can I recreate all the documentation on my system after I make a change\n>> to Rd.sty?\n>\n> Easiest would be to just do a rebuild of R, but you could also do the\n> PDF manuals one at a time using\n>\n> R CMD Rd2pdf  <pkg>\n>\n> from the directory where the package is installed, or where its source\n> lives.\n>\n> Duncan Murdoch\n\n\nWhen you say 'easiest would be to just do a rebuild of R' I have no idea \nif we are using the same language. Easy to me is like scratching my \nbeard (but only with my right hand), or looking out the window, or \nstaying in bed when the alarm goes off.\n\nI've made the change in Rd.sty, so at least all packages I install from \nnow on will have the text links (I guess). Thanks for the response Duncan.\n\nBen.",
-      "body_snippet": "On 27/09/13 00:33, Duncan Murdoch wrote:\n> On 25/09/2013 11:38 PM, Ben Harrison wrote:\n>> Hello,\n\n> It's been the way it is for about 14 years, and I don't recall anyone\n> else complaining, so I'd con",
-      "thread_id": "thread-5131d046f19a",
-      "thread_depth": 2,
-      "month": "2013-09"
-    },
-    {
       "id": "msg-c8b8f3ab3dd8",
       "message_id": "<52452141.7000205@student.unimelb.edu.au>",
       "from_name": "Ben Harrison",
@@ -27034,6 +26921,138 @@
       "thread_id": "thread-af8aa59d176d",
       "thread_depth": 3,
       "month": "2013-09"
+    },
+    {
+      "id": "msg-0f5306a33c85",
+      "message_id": "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2013-09-30T15:06:51-07:00",
+      "subject": "[R] multilevel analysis",
+      "subject_clean": "multilevel analysis",
+      "in_reply_to": "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>",
+      "references": [
+        "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>"
+      ],
+      "body_plain": "On Sep 30, 2013, at 2:50 PM, srecko joksimovic wrote:\n\n> I have an example of multilevel analysis with 3 levels, but data are\n> non-normally distributed. In case of normal distribution, I would perform\n> multilevel linear analysis using lme function, but what should I do in case\n> of non-normal distribution?\n> \n\nBut normal distribution is not a requirement for linear models. Please review your theory.\n\n> thanks,\n> Srecko\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Sep 30, 2013, at 2:50 PM, srecko joksimovic wrote:\n\n> I have an example of multilevel analysis with 3 levels, but data are\n> non-normally distributed. In case of normal distribution, I would perfor",
+      "thread_id": "thread-484e52dd3ae6",
+      "thread_depth": 1,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-5d619910a7fa",
+      "message_id": "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>",
+      "from_name": "srecko joksimovic",
+      "from_email_hash": "4245782f69f11c8d3f59b4ed61149f8439d49cee7db2f63799e90c80dbd270ad",
+      "date": "2013-09-30T15:22:18-07:00",
+      "subject": "[R] multilevel analysis",
+      "subject_clean": "multilevel analysis",
+      "in_reply_to": "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>",
+      "references": [
+        "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>",
+        "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130930/b78fcef6/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130930/b78fcef6/attachment.pl>",
+      "thread_id": "thread-484e52dd3ae6",
+      "thread_depth": 2,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-ad084489d17c",
+      "message_id": "<38C0EAD9610B4E30B2BF44F21598AF99@Aragorn>",
+      "from_name": "Daniel Nordlund",
+      "from_email_hash": "da1c342d994369e09cc2154910426353a8a03e322998f20edd0b053b1cce206c",
+      "date": "2013-09-30T17:04:28-07:00",
+      "subject": "[R] multilevel analysis",
+      "subject_clean": "multilevel analysis",
+      "in_reply_to": "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>",
+      "references": [
+        "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>",
+        "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>",
+        "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>"
+      ],
+      "body_plain": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org]\n> On Behalf Of srecko joksimovic\n> Sent: Monday, September 30, 2013 3:22 PM\n> To: David Winsemius\n> Cc: R help\n> Subject: Re: [R] multilevel analysis\n> \n> I thought so, but then I found this:\n> \"Normality\n> \n> The assumption of normality states that the error terms at every level of\n> the model are normally distributed\"\n> \n> maybe I misinterpreted something.\n> \n\nYes, error terms (i.e. residuals), not your raw data, should be normally distributed if you are going to conduct significance tests that rely on the assumption of normality.  But as David said, the assumption of normality (in any form) is not necessary for estimating linear models.\n\nDan\n\n\n> \n> On Mon, Sep 30, 2013 at 3:06 PM, David Winsemius\n> <dwinsemius at comcast.net>wrote:\n> \n> >\n> > On Sep 30, 2013, at 2:50 PM, srecko joksimovic wrote:\n> >\n> > > I have an example of multilevel analysis with 3 levels, but data are\n> > > non-normally distributed. In case of normal distribution, I would\n> perform\n> > > multilevel linear analysis using lme function, but what should I do in\n> > case\n> > > of non-normal distribution?\n> > >\n> >\n> > But normal distribution is not a requirement for linear models. Please\n> > review your theory.\n> >\n> > > thanks,\n> > > Srecko\n> > >\n> > >       [[alternative HTML version deleted]]\n> > >\n> > > ______________________________________________\n> > > R-help at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide\n> > http://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> >\n> > David Winsemius\n> > Alameda, CA, USA\n> >\n> >\n>\n\nDaniel Nordlund\nBothell, WA USA",
+      "body_snippet": "> -----Original Message-----\n> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org]\n> On Behalf Of srecko joksimovic\n> Sent: Monday, September 30, 2013 3:22 PM\n> To: David Wi",
+      "thread_id": "thread-484e52dd3ae6",
+      "thread_depth": 3,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-c245ade3143c",
+      "message_id": "<0FA8827B-0ED7-44EF-9DBA-09D3334C9A5D@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2013-09-30T17:14:15-07:00",
+      "subject": "[R] multilevel analysis",
+      "subject_clean": "multilevel analysis",
+      "in_reply_to": "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>",
+      "references": [
+        "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>",
+        "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>",
+        "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>"
+      ],
+      "body_plain": "On Sep 30, 2013, at 3:22 PM, srecko joksimovic wrote:\n\n> I thought so, but then I found this:\n> \"Normality\n> The assumption of normality states that the error terms at every level of the model are normally distributed\"\n> maybe I misinterpreted something. \n\nNotice that it is the _error_terms_ that are to be normally distributed, not the data itself. One might even infer that \"normally distrited data might be suspect because the \"correct distribution should be a mixture of normals. Since the errors never are going to fit on a straight line on a QQ plot, the real question is \"how far from Normal\" and what the impact might be on the quantities being estimated.\n\n-- \nDavid.\n> \n> \n> On Mon, Sep 30, 2013 at 3:06 PM, David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> On Sep 30, 2013, at 2:50 PM, srecko joksimovic wrote:\n> \n> > I have an example of multilevel analysis with 3 levels, but data are\n> > non-normally distributed. In case of normal distribution, I would perform\n> > multilevel linear analysis using lme function, but what should I do in case\n> > of non-normal distribution?\n> >\n> \n> But normal distribution is not a requirement for linear models. Please review your theory.\n> \n> > thanks,\n> > Srecko\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> \n> David Winsemius\n> Alameda, CA, USA\n> \n> \n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "On Sep 30, 2013, at 3:22 PM, srecko joksimovic wrote:\n\n> I thought so, but then I found this:\n> \"Normality\n> The assumption of normality states that the error terms at every level of the model are nor",
+      "thread_id": "thread-484e52dd3ae6",
+      "thread_depth": 3,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-abd9a64df1d4",
+      "message_id": "<CAM8BP_m78mNzmQv_oqivGPv_EBipScv0jdcr4AVqWO9jFbe+ug@mail.gmail.com>",
+      "from_name": "srecko joksimovic",
+      "from_email_hash": "4245782f69f11c8d3f59b4ed61149f8439d49cee7db2f63799e90c80dbd270ad",
+      "date": "2013-09-30T18:25:53-07:00",
+      "subject": "[R] multilevel analysis",
+      "subject_clean": "multilevel analysis",
+      "in_reply_to": "<0FA8827B-0ED7-44EF-9DBA-09D3334C9A5D@comcast.net>",
+      "references": [
+        "<CAM8BP_mZ5qoLL9kLtQV3K8RojsLxXdfYK=Jsf83hGcOayrKGWQ@mail.gmail.com>",
+        "<FD724C3C-0744-47BD-916C-5509B2544775@comcast.net>",
+        "<CAM8BP_=di+dSYMSq0K=wxZfx3wZ-QOgq1nz=oAE2euA9pZn4Aw@mail.gmail.com>",
+        "<0FA8827B-0ED7-44EF-9DBA-09D3334C9A5D@comcast.net>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130930/b3bfca7e/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130930/b3bfca7e/attachment.pl>",
+      "thread_id": "thread-484e52dd3ae6",
+      "thread_depth": 4,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-40adba273dc7",
+      "message_id": "<1380597627.29928.YahooMailNeo@web142605.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-09-30T20:20:27-07:00",
+      "subject": "[R] Apply function to do pairwise calculation",
+      "subject_clean": "Apply function to do pairwise calculation",
+      "in_reply_to": "<CALwvZ4Vzeex8+=W4j6D6+8GAAuOvbBXZ2X0ahPhFsDsSwENuhA@mail.gmail.com>",
+      "references": [
+        "<CALwvZ4Vzeex8+=W4j6D6+8GAAuOvbBXZ2X0ahPhFsDsSwENuhA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\nNot sure if this helps.\n\n#example dataset\nset.seed(24)\n?mat1<-matrix(sample(1:50,20*20,replace=TRUE),ncol=20)\n? set.seed(49)\n?colnames(mat1)<- sample(rep(LETTERS[1:4],5),20)\n?rownames(mat1)<- colnames(mat1)\n\nmat2<-combn(LETTERS[1:4],2)\nres<- sapply(split(mat2,col(mat2)),function(x){ x1<-mat1[rownames(mat1)%in% x[1],colnames(mat1)%in%x[1]]; x2<- mat1[rownames(mat1)%in% x[2],colnames(mat1)%in% x[2]];avecor(x1,x2)})\nnames(res)<- apply(mat2,2,paste,collapse=\"\")\nres\n#?????? AB??????? AC??????? AD??????? BC??????? BD??????? CD \n#0.4806725 0.4505996 0.6160342 0.5567617 0.3721136 0.4480448 \n\nA.K.\n\n\n\n\n----- Original Message -----\nFrom: Amanda Li <amandali at uchicago.edu>\nTo: r-help at r-project.org\nCc: \nSent: Monday, September 30, 2013 10:55 AM\nSubject: [R] Apply function to do pairwise calculation\n\nHello,\n\nI want to do pairwise calculation, but I am not sure how to do so.\n\ni.e. I have a correlation matrix M 200*200. Namely colnames(M)=rownames(M).\nIn addition, colnames(M) is one of A, B, C, D. I want to first sort the\nmatrix M into 16 modules according to colnames and rownames, and then apply:\navecor <- function(x,y) {\nz <- (sum(cor(x,y)*cor(x,y))/length(cor(x,y)))^0.5\nreturn(z)\n}\n\nSo as to calculate the average correlation between A,B; A,C; A,D; B,C; B,D;\nC,D.\n\nThanks in advance for your help!\n\nBest,\nAmanda\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\nNot sure if this helps.\n\n#example dataset\nset.seed(24)\n?mat1<-matrix(sample(1:50,20*20,replace=TRUE),ncol=20)\n? set.seed(49)\n?colnames(mat1)<- sample(rep(LETTERS[1:4],5),20)\n?rownames(mat1)<- coln",
+      "thread_id": "thread-8ba3cc43bae4",
+      "thread_depth": 1,
+      "month": "2013-09"
+    },
+    {
+      "id": "msg-d467069dd1a6",
+      "message_id": "<1380599558.8220.YahooMailNeo@web142604.mail.bf1.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2013-09-30T20:52:38-07:00",
+      "subject": "[R] Reshape problem",
+      "subject_clean": "Reshape problem",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nMay be this helps.\ndat1<- structure(list(trialnumber = 1:9, Control = c(0L, 1L, 0L, 0L, \n1L, 0L, 1L, 0L, 0L), HC = c(0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L\n), LC = c(1L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L), pleasantness = c(3L, \n3L, 2L, 2L, 3L, 4L, 3L, 3L, 2L)), .Names = c(\"trialnumber\", \"Control\", \n\"HC\", \"LC\", \"pleasantness\"), class = \"data.frame\", row.names = c(NA, \n-9L))\n\nlibrary(reshape2)\n\nres<- melt(dat1,id.vars=c(\"trialnumber\",\"pleasantness\"))\ncolnames(res)[3]<- \"type\"\n\nA.K.\n\n\nI have an experiment where people get to see a picture which is a \ncontrol, HC or LC picture. They then have to rate its pleasantness. \n\nI tried to change the data so that I would get one column (for example \"type\" with 3 groups) instead of the 3 separate columns. \n\nCan anyone help me out? \nThanks \n\ntrialnumber\t ? Control\tHC\tLC\tpleasantness \n? ? ? ? 1\t ? 0 ? ? ? ? ? ?0\t1\t3 \n? ? ? ? 2\t ? 1\t ? ? ? ?0\t0\t3 \n? ? ? ? 3\t ? 0 ? ? ? ? ? 1\t0\t2 \n? ? ? ? 4\t ? 0 ? ? ? ? ? 1\t0\t2 \n? ? ? ? 5\t ? 1\t ? ? ? ?0\t0\t3 \n? ? ? ? 6\t ? 0\t ? ? ? ?0\t1\t4 \n? ? ? ? 7\t ? 1\t ? ? ? ?0\t0\t3 \n? ? ? ? 8\t ? 0\t ? ? ? ?0\t1\t3 \n? ? ? ? 9\t ? 0\t ? ? ? ?1\t0\t2",
+      "body_snippet": "Hi,\nMay be this helps.\ndat1<- structure(list(trialnumber = 1:9, Control = c(0L, 1L, 0L, 0L, \n1L, 0L, 1L, 0L, 0L), HC = c(0L, 0L, 1L, 1L, 0L, 0L, 0L, 0L, 1L\n), LC = c(1L, 0L, 0L, 0L, 0L, 1L, 0L, 1L, 0L",
+      "thread_id": "thread-d467069dd1a6",
+      "thread_depth": 0,
+      "month": "2013-09"
     }
   ],
   "threads": [
@@ -27814,17 +27833,6 @@
       "started": "2013-09-03T19:38:15-04:00",
       "last_reply": "2013-09-04T22:00:59+09:00",
       "root_message_id": "msg-d27fd92687e7"
-    },
-    {
-      "id": "thread-7fc7e26f4e5f",
-      "subject": "Parts of Speach Tagging",
-      "message_count": 1,
-      "participants": [
-        "Siddharth Arun"
-      ],
-      "started": "2013-09-03T19:48:02+05:30",
-      "last_reply": "2013-09-03T19:48:02+05:30",
-      "root_message_id": "msg-7fc7e26f4e5f"
     },
     {
       "id": "thread-7fc7e26f4e5f",
@@ -29060,7 +29068,7 @@
     {
       "id": "thread-1e2c69ccccfd",
       "subject": "Need to learn or get R tutor in Minneapolis",
-      "message_count": 3,
+      "message_count": 2,
       "participants": [
         "Ben Harrison",
         "sewal026 at umn.edu"
@@ -29363,7 +29371,7 @@
     {
       "id": "thread-e613257065aa",
       "subject": "Subtracting elements of a vector from each other stepwise",
-      "message_count": 10,
+      "message_count": 9,
       "participants": [
         "Ben Bolker",
         "Ben Harrison",
@@ -29956,17 +29964,6 @@
       ],
       "started": "2013-09-12T15:40:22+02:00",
       "last_reply": "2013-09-12T14:22:01-05:00",
-      "root_message_id": "msg-d918f98a76bc"
-    },
-    {
-      "id": "thread-d918f98a76bc",
-      "subject": "Privacy rights of an old user of this list",
-      "message_count": 1,
-      "participants": [
-        "John Gonzalez"
-      ],
-      "started": "2013-09-12T15:40:22+02:00",
-      "last_reply": "2013-09-12T15:40:22+02:00",
       "root_message_id": "msg-d918f98a76bc"
     },
     {
@@ -32892,7 +32889,7 @@
     {
       "id": "thread-5131d046f19a",
       "subject": "table of contents link style in R's PDF docs",
-      "message_count": 8,
+      "message_count": 6,
       "participants": [
         "Ben Harrison",
         "Duncan Murdoch",
@@ -33682,12 +33679,14 @@
     {
       "id": "thread-484e52dd3ae6",
       "subject": "multilevel analysis",
-      "message_count": 1,
+      "message_count": 6,
       "participants": [
+        "Daniel Nordlund",
+        "David Winsemius",
         "srecko joksimovic"
       ],
       "started": "2013-09-30T14:50:13-07:00",
-      "last_reply": "2013-09-30T14:50:13-07:00",
+      "last_reply": "2013-09-30T18:25:53-07:00",
       "root_message_id": "msg-484e52dd3ae6"
     },
     {
@@ -33704,15 +33703,27 @@
       "root_message_id": "msg-2ca3f552b693"
     },
     {
+      "id": "thread-d467069dd1a6",
+      "subject": "Reshape problem",
+      "message_count": 1,
+      "participants": [
+        "arun"
+      ],
+      "started": "2013-09-30T20:52:38-07:00",
+      "last_reply": "2013-09-30T20:52:38-07:00",
+      "root_message_id": "msg-d467069dd1a6"
+    },
+    {
       "id": "thread-8ba3cc43bae4",
       "subject": "Apply function to do pairwise calculation",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Adams, Jean",
-        "Amanda Li"
+        "Amanda Li",
+        "arun"
       ],
       "started": "2013-09-30T22:55:31+08:00",
-      "last_reply": "2013-09-30T16:38:01-05:00",
+      "last_reply": "2013-09-30T20:20:27-07:00",
       "root_message_id": "msg-8ba3cc43bae4"
     }
   ]
