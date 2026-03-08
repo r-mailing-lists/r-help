@@ -4394,6 +4394,24 @@
       "month": "2020-07"
     },
     {
+      "id": "msg-f4fac1fb0795",
+      "message_id": "<!&!GAAAAAAAAABWob9e2JwrSqMGgmGX/wghwoAAABgAAAAAAAAAVqG/XticK0qjBoJhl/8IIWQ1XAAAAAAAEAAAALnZt8dPkC5Mp9ybol261wwjAAAAQ3JlYXRpbmcgeHRzIG9iamVjdHMgZnJvbSBjc3YgZmlsZQA=@sbcglobal.net>",
+      "from_name": "Jeff Reichman",
+      "from_email_hash": "51d6d139afe7517ba530b38dc5f31acb1006b1b4691c17357f22c59c86be7c4f",
+      "date": "2020-07-20T15:32:05-05:00",
+      "subject": "[R] Creating xts objects from csv file",
+      "subject_clean": "Creating xts objects from csv file",
+      "in_reply_to": null,
+      "references": [
+        "<!&!GAAAAAAAAABWob9e2JwrSqMGgmGX/wghwoAAABgAAAAAAAAAVqG/XticK0qjBoJhl/8IIWQ1XAAAAAAAEAAAALnZt8dPkC5Mp9ybol261wwjAAAAQ3JlYXRpbmcgeHRzIG9iamVjdHMgZnJvbSBjc3YgZmlsZQA=.ref@sbcglobal.net>"
+      ],
+      "body_plain": "R-Help Forum\n\n \n\nStarting to work with xts objects but can't figure out what I'm doing wrong\nwhen converting *.csv file with a dtg variable to a *.xts object. When I'm\nconverting to an appropriate time object all I get are NA, so that's my\nfirst issue.\n\n \n\ndtg <- c(\"1/5/2010 2:30\", \"1/5/2010 10:32\", \"1/5/2010 12:03\")\n\nseq <- c(1,2,3)\n\n \n\ndat <- data.frame(dtg, seq)\n\n \n\ndat$dtg <- as.POSIXlt(dat$dtg, format = \"%m/%d/%Y %H:%M\")\n\n \n\ndat.xts <- xts(x = dat[,-1], order.by = dat[,1])\n\n               \n\nhead(dat.xts)\n\n \n\nSincerely\n\n \n\nJeff Reichman\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "R-Help Forum\n\n \n\nStarting to work with xts objects but can't figure out what I'm doing wrong\nwhen converting *.csv file with a dtg variable to a *.xts object. When I'm\nconverting to an appropriate tim",
+      "thread_id": "thread-f4fac1fb0795",
+      "thread_depth": 0,
+      "month": "2020-07"
+    },
+    {
       "id": "msg-6e65bbfaa4bc",
       "message_id": "<a31dff6f-ab6e-50a1-287e-c1ddd5f7a95f@sapo.pt>",
       "from_name": "Rui Barradas",
@@ -9586,134 +9604,6 @@
       "thread_id": "thread-1b1170c16f2f",
       "thread_depth": 4,
       "month": "2020-07"
-    },
-    {
-      "id": "msg-360472cbe9a9",
-      "message_id": "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-      "from_name": "Ana Marija",
-      "from_email_hash": "00723fc2a993e5f0ad9b4824d6a5840e9f1571cf22ce02f7586121c5b981b138",
-      "date": "2020-07-31T21:18:06-05:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello,\n\nI have this file:\n> a=load(\"paired_example.Rdata\")\n> a\n[1] \"rawdata\"   \"treatment\" \"patient\"\n\nI can extract \"rawdata\" with:\n dat<-local(get(load(\"paired_example.Rdata\")))\n\nCan you please advise how would I extract in data frame \"treatment\"\nand \"patient\"?\n\nThanks\nAna",
-      "body_snippet": "Hello,\n\nI have this file:\n> a=load(\"paired_example.Rdata\")\n> a\n[1] \"rawdata\"   \"treatment\" \"patient\"\n\nI can extract \"rawdata\" with:\n dat<-local(get(load(\"paired_example.Rdata\")))\n\nCan you please advis",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 0,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-ff4db03b7818",
-      "message_id": "<CAGxFJbRnqAZ6nrOi-KbWA_V6W8+pdc7fH3fd7tSuhC-pQ2qNMQ@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
-      "date": "2020-07-31T19:35:05-07:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>"
-      ],
-      "body_plain": "What does\nstr(a)\n\ngive?\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along and\nsticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Fri, Jul 31, 2020 at 7:18 PM Ana Marija <sokovic.anamarija at gmail.com>\nwrote:\n\n> Hello,\n>\n> I have this file:\n> > a=load(\"paired_example.Rdata\")\n> > a\n> [1] \"rawdata\"   \"treatment\" \"patient\"\n>\n> I can extract \"rawdata\" with:\n>  dat<-local(get(load(\"paired_example.Rdata\")))\n>\n> Can you please advise how would I extract in data frame \"treatment\"\n> and \"patient\"?\n>\n> Thanks\n> Ana\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "What does\nstr(a)\n\ngive?\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along and\nsticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic s",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 1,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-1146540838e0",
-      "message_id": "<CAM_vjumi5Ds2Kkzz=24wTkNwei6Kf-r9_Ev8wRZwS92S3s2SOg@mail.gmail.com>",
-      "from_name": "Sarah Goslee",
-      "from_email_hash": "206a30c899e53993c1206379f8592cdb0ac0fb7c442c81d77309cd6f5499d14e",
-      "date": "2020-07-31T22:37:38-04:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>"
-      ],
-      "body_plain": "Hi Ana,\n\nYou are making this far too complicated.\n\nload(\"paired_example.Rdata\")\n\nls()\n\nstr(rawdata)\nstr(treatment)\nstr(patient)\n\nload() puts all of them into your current environment. If you assign\nthe result of load() to something, in your example a, that object\ncontains the names of the objects, but the objects themselves are in\nyour workspace.\n\nYou should probably try a basic R tutorial; it will help you with this\nkind of thing.\n\nSarah\n\nOn Fri, Jul 31, 2020 at 10:18 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n>\n> Hello,\n>\n> I have this file:\n> > a=load(\"paired_example.Rdata\")\n> > a\n> [1] \"rawdata\"   \"treatment\" \"patient\"\n>\n> I can extract \"rawdata\" with:\n>  dat<-local(get(load(\"paired_example.Rdata\")))\n>\n> Can you please advise how would I extract in data frame \"treatment\"\n> and \"patient\"?\n>\n> Thanks\n> Ana\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nSarah Goslee (she/her)\nhttp://www.numberwright.com",
-      "body_snippet": "Hi Ana,\n\nYou are making this far too complicated.\n\nload(\"paired_example.Rdata\")\n\nls()\n\nstr(rawdata)\nstr(treatment)\nstr(patient)\n\nload() puts all of them into your current environment. If you assign\nth",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 1,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-b54c90b74ed2",
-      "message_id": "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>",
-      "from_name": "Ana Marija",
-      "from_email_hash": "00723fc2a993e5f0ad9b4824d6a5840e9f1571cf22ce02f7586121c5b981b138",
-      "date": "2020-07-31T21:53:47-05:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>"
-      ],
-      "body_plain": "Hi Bert,\n\nit gives me this:\n\n> a=load(\"paired_example.Rdata\")\n> str(a)\n chr [1:3] \"rawdata\" \"treatment\" \"patient\"\n\nI don't know how to extract \"treatment\" for example in a data frame.\n\nI tried this but of no help.\n> b=a[[2]]\n> b\n[1] \"treatment\"\n\n> str(treatment)\n chr [1:10] \"treat\" \"treat\" \"treat\" \"treat\" \"treat\" \"control\" \"control\" ...\n\nbut this is not the format I need.\n\nOn Fri, Jul 31, 2020 at 9:18 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n>\n> Hello,\n>\n> I have this file:\n> > a=load(\"paired_example.Rdata\")\n> > a\n> [1] \"rawdata\"   \"treatment\" \"patient\"\n>\n> I can extract \"rawdata\" with:\n>  dat<-local(get(load(\"paired_example.Rdata\")))\n>\n> Can you please advise how would I extract in data frame \"treatment\"\n> and \"patient\"?\n>\n> Thanks\n> Ana",
-      "body_snippet": "Hi Bert,\n\nit gives me this:\n\n> a=load(\"paired_example.Rdata\")\n> str(a)\n chr [1:3] \"rawdata\" \"treatment\" \"patient\"\n\nI don't know how to extract \"treatment\" for example in a data frame.\n\nI tried this bu",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 1,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-a084d9434f22",
-      "message_id": "<CAF9-5jPLcdh-H7-1edD9GbeP37Xc0rJBtakA=bo0NwST7hSYEw@mail.gmail.com>",
-      "from_name": "Ana Marija",
-      "from_email_hash": "00723fc2a993e5f0ad9b4824d6a5840e9f1571cf22ce02f7586121c5b981b138",
-      "date": "2020-07-31T21:59:41-05:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-        "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>"
-      ],
-      "body_plain": "It seems that \"treatment\" and \"patient\" are just vectors.\n\n> treatment\n [1] \"treat\"   \"treat\"   \"treat\"   \"treat\"   \"treat\"   \"control\" \"control\"\n [8] \"control\" \"control\" \"control\"\n> patient\n [1] \"a\" \"b\" \"c\" \"d\" \"e\" \"a\" \"b\" \"c\" \"d\" \"e\"\n\nOn Fri, Jul 31, 2020 at 9:53 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n>\n> Hi Bert,\n>\n> it gives me this:\n>\n> > a=load(\"paired_example.Rdata\")\n> > str(a)\n>  chr [1:3] \"rawdata\" \"treatment\" \"patient\"\n>\n> I don't know how to extract \"treatment\" for example in a data frame.\n>\n> I tried this but of no help.\n> > b=a[[2]]\n> > b\n> [1] \"treatment\"\n>\n> > str(treatment)\n>  chr [1:10] \"treat\" \"treat\" \"treat\" \"treat\" \"treat\" \"control\" \"control\" ...\n>\n> but this is not the format I need.\n>\n> On Fri, Jul 31, 2020 at 9:18 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n> >\n> > Hello,\n> >\n> > I have this file:\n> > > a=load(\"paired_example.Rdata\")\n> > > a\n> > [1] \"rawdata\"   \"treatment\" \"patient\"\n> >\n> > I can extract \"rawdata\" with:\n> >  dat<-local(get(load(\"paired_example.Rdata\")))\n> >\n> > Can you please advise how would I extract in data frame \"treatment\"\n> > and \"patient\"?\n> >\n> > Thanks\n> > Ana",
-      "body_snippet": "It seems that \"treatment\" and \"patient\" are just vectors.\n\n> treatment\n [1] \"treat\"   \"treat\"   \"treat\"   \"treat\"   \"treat\"   \"control\" \"control\"\n [8] \"control\" \"control\" \"control\"\n> patient\n [1] \"a\" ",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 2,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-8e9763dc51f9",
-      "message_id": "<CAGxFJbRY84JZexukj5DQ5L-jc5r35ViswtLb3OR7XEvnm-EU+A@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
-      "date": "2020-07-31T21:05:47-07:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-        "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>"
-      ],
-      "body_plain": "Sarah has explained all.\n\nI agree with her about the need for tutorials also. This list cannot\nsubstitute for such homework on your own.\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along and\nsticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Fri, Jul 31, 2020 at 7:55 PM Ana Marija <sokovic.anamarija at gmail.com>\nwrote:\n\n> Hi Bert,\n>\n> it gives me this:\n>\n> > a=load(\"paired_example.Rdata\")\n> > str(a)\n>  chr [1:3] \"rawdata\" \"treatment\" \"patient\"\n>\n> I don't know how to extract \"treatment\" for example in a data frame.\n>\n> I tried this but of no help.\n> > b=a[[2]]\n> > b\n> [1] \"treatment\"\n>\n> > str(treatment)\n>  chr [1:10] \"treat\" \"treat\" \"treat\" \"treat\" \"treat\" \"control\" \"control\" ...\n>\n> but this is not the format I need.\n>\n> On Fri, Jul 31, 2020 at 9:18 PM Ana Marija <sokovic.anamarija at gmail.com>\n> wrote:\n> >\n> > Hello,\n> >\n> > I have this file:\n> > > a=load(\"paired_example.Rdata\")\n> > > a\n> > [1] \"rawdata\"   \"treatment\" \"patient\"\n> >\n> > I can extract \"rawdata\" with:\n> >  dat<-local(get(load(\"paired_example.Rdata\")))\n> >\n> > Can you please advise how would I extract in data frame \"treatment\"\n> > and \"patient\"?\n> >\n> > Thanks\n> > Ana\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Sarah has explained all.\n\nI agree with her about the need for tutorials also. This list cannot\nsubstitute for such homework on your own.\n\nBert Gunter\n\n\"The trouble with having an open mind is that peo",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 2,
-      "month": "2020-07"
-    },
-    {
-      "id": "msg-02abca38814c",
-      "message_id": "<CAF9-5jM01B-SAPAEifUoVLqLCYNUHH+v3stxoKZa5q1J=E=n8w@mail.gmail.com>",
-      "from_name": "Ana Marija",
-      "from_email_hash": "00723fc2a993e5f0ad9b4824d6a5840e9f1571cf22ce02f7586121c5b981b138",
-      "date": "2020-07-31T23:30:33-05:00",
-      "subject": "[R] How to extract information from .Rdata format",
-      "subject_clean": "How to extract information from .Rdata format",
-      "in_reply_to": "<CAGxFJbRY84JZexukj5DQ5L-jc5r35ViswtLb3OR7XEvnm-EU+A@mail.gmail.com>",
-      "references": [
-        "<CAF9-5jNNbP3skT0C=JLPs-EVnBRwvx0BBvuLPWFgL6OZ8wxgsQ@mail.gmail.com>",
-        "<CAF9-5jPKXR3SCh3dP7oU4dfDvxM1N3PBQ32EP4+qfrkawLgOHQ@mail.gmail.com>",
-        "<CAGxFJbRY84JZexukj5DQ5L-jc5r35ViswtLb3OR7XEvnm-EU+A@mail.gmail.com>"
-      ],
-      "body_plain": "do you think that this is useful output from Basics of R?\n> load(\"paired_example.Rdata\")\n> str(rawdata)\n num [1:4482, 1:10] 46 4 3 48 1 4 0 60 0 12 ...\n - attr(*, \"dimnames\")=List of 2\n  ..$ : chr [1:4482] \"gene1\" \"gene2\" \"gene3\" \"gene4\" ...\n  ..$ : chr [1:10] \"a.cancer\" \"b.cancer\" \"c.cancer\" \"d.cancer\" ..\n\nI think this one is better:\n> dat<-local(get(load(\"paired_example.Rdata\")))\n> head(dat)\n      a.cancer b.cancer c.cancer d.cancer e.cancer a.normal b.normal c.normal\ngene1       46        4       33        5        8       61        5       42\ngene2        4        0        2        1        5       24        1       30\ngene3        3        4        4        2        1        3        0        0\ngene4       48        2       10        0        6        9        4        3\ngene5        1        5        2        3        6        1        0        3\ngene6        4        0        0        1        1        4        0        7\n\nOn Fri, Jul 31, 2020 at 11:05 PM Bert Gunter <bgunter.4567 at gmail.com> wrote:\n>\n> Sarah has explained all.\n>\n> I agree with her about the need for tutorials also. This list cannot substitute for such homework on your own.\n>\n> Bert Gunter\n>\n> \"The trouble with having an open mind is that people keep coming along and sticking things into it.\"\n> -- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n>\n>\n> On Fri, Jul 31, 2020 at 7:55 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n>>\n>> Hi Bert,\n>>\n>> it gives me this:\n>>\n>> > a=load(\"paired_example.Rdata\")\n>> > str(a)\n>>  chr [1:3] \"rawdata\" \"treatment\" \"patient\"\n>>\n>> I don't know how to extract \"treatment\" for example in a data frame.\n>>\n>> I tried this but of no help.\n>> > b=a[[2]]\n>> > b\n>> [1] \"treatment\"\n>>\n>> > str(treatment)\n>>  chr [1:10] \"treat\" \"treat\" \"treat\" \"treat\" \"treat\" \"control\" \"control\" ...\n>>\n>> but this is not the format I need.\n>>\n>> On Fri, Jul 31, 2020 at 9:18 PM Ana Marija <sokovic.anamarija at gmail.com> wrote:\n>> >\n>> > Hello,\n>> >\n>> > I have this file:\n>> > > a=load(\"paired_example.Rdata\")\n>> > > a\n>> > [1] \"rawdata\"   \"treatment\" \"patient\"\n>> >\n>> > I can extract \"rawdata\" with:\n>> >  dat<-local(get(load(\"paired_example.Rdata\")))\n>> >\n>> > Can you please advise how would I extract in data frame \"treatment\"\n>> > and \"patient\"?\n>> >\n>> > Thanks\n>> > Ana\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "do you think that this is useful output from Basics of R?\n> load(\"paired_example.Rdata\")\n> str(rawdata)\n num [1:4482, 1:10] 46 4 3 48 1 4 0 60 0 12 ...\n - attr(*, \"dimnames\")=List of 2\n  ..$ : chr [1:",
-      "thread_id": "thread-360472cbe9a9",
-      "thread_depth": 3,
-      "month": "2020-07"
     }
   ],
   "threads": [
@@ -10558,6 +10448,17 @@
     {
       "id": "thread-f4fac1fb0795",
       "subject": "Recall: Creating xts objects from csv file",
+      "message_count": 1,
+      "participants": [
+        "Jeff Reichman"
+      ],
+      "started": "2020-07-20T15:31:55-05:00",
+      "last_reply": "2020-07-20T15:31:55-05:00",
+      "root_message_id": "msg-f4fac1fb0795"
+    },
+    {
+      "id": "thread-f4fac1fb0795",
+      "subject": "Creating xts objects from csv file",
       "message_count": 5,
       "participants": [
         "Bert Gunter",
@@ -10565,7 +10466,7 @@
         "Joshua Ulrich",
         "Rui Barradas"
       ],
-      "started": "2020-07-20T15:31:55-05:00",
+      "started": "2020-07-20T15:32:05-05:00",
       "last_reply": "2020-07-21T12:56:55-05:00",
       "root_message_id": "msg-f4fac1fb0795"
     },
@@ -11294,19 +11195,6 @@
       "started": "2020-07-30T22:16:18+02:00",
       "last_reply": "2020-07-31T18:28:47+02:00",
       "root_message_id": "msg-1b1170c16f2f"
-    },
-    {
-      "id": "thread-360472cbe9a9",
-      "subject": "How to extract information from .Rdata format",
-      "message_count": 7,
-      "participants": [
-        "Ana Marija",
-        "Bert Gunter",
-        "Sarah Goslee"
-      ],
-      "started": "2020-07-31T21:18:06-05:00",
-      "last_reply": "2020-07-31T23:30:33-05:00",
-      "root_message_id": "msg-360472cbe9a9"
     }
   ]
 }

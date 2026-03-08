@@ -10927,54 +10927,6 @@
       "thread_id": "thread-2ef2e7aeb1b0",
       "thread_depth": 3,
       "month": "2001-10"
-    },
-    {
-      "id": "msg-d5982f3051f1",
-      "message_id": "<Pine.A41.4.33.0110311543120.14686-100000@mead5.u.washington.edu>",
-      "from_name": "John Miyamoto",
-      "from_email_hash": "fdc4cbfacf03ee0b54b29212019456616a27c5a98a377b57ed01cd09363075a7",
-      "date": "2001-10-31T15:46:22-08:00",
-      "subject": "[R] Summary: t.test",
-      "subject_clean": "Summary: t.test",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R-News,\n\nI sent a query to r-help asking why t.test did not exist on my\ninstallation of R.  Thanks to Douglas Bates, Michael Camann, Kjetil\nHalvorsen, Ko-Kang Kevin Wang, Peter Dalgaard, and Jonathan Baron who\npointed out that t.test is in the package, ctest, which should be\ninstalled automatically.  I did some checking as to why I had the problem.\nFirst, ctest was not on the search path when I start up R; library(ctest)\ngave me access to ctest, thereby solving the problem at a practical level,\nbut it did not explain why I had the problem.  I found that I had defined\na .First function in the Rprofile file in rw1031\\etc.  Apparently this\nfunction masked or otherwise disabled the .First function in\nrw1031\\library\\base\\R\\Rprofile; the latter .First function loads ctest, so\nmy .First function in rw1031\\etc\\Rprofile prevented the loading of ctest.\nOnce I removed the .First function from rw1031\\etc\\Rprofile, t.test was\naccessible as were other objects in ctest.\n\nThanks,\n\nJohn\n\n--------------------------------------------------------------------\nJohn Miyamoto                           |\nDepartment of Psychology, Box 351525    |  If ignorance is bliss,\nUniversity of Washington                |  why are so many people\nSeattle, WA 98195-1525.                 |  unhappy?\nPhone: 206-543-0805, Fax: 206-685-3157  |\nEmail: jmiyamot at u.washington.edu        |\n--------------------------------------------------------------------\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Dear R-News,\n\nI sent a query to r-help asking why t.test did not exist on my\ninstallation of R.  Thanks to Douglas Bates, Michael Camann, Kjetil\nHalvorsen, Ko-Kang Kevin Wang, Peter Dalgaard, and Jona",
-      "thread_id": "thread-d5982f3051f1",
-      "thread_depth": 0,
-      "month": "2001-10"
-    },
-    {
-      "id": "msg-675271c19bd6",
-      "message_id": "<001b01c16270$71ce76e0$22312c42@freud>",
-      "from_name": "Brett Magill",
-      "from_email_hash": "18f3fa4845bec4873001e565434d09f8707680109ccd2f5efdf3aaf7f03dc80b",
-      "date": "2001-10-31T19:59:21-05:00",
-      "subject": "[R] cor.test for a correlation matrix",
-      "subject_clean": "cor.test for a correlation matrix",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Is there a simple way to run cor.test on for a matrix of correlations?\n\nOf course, cor on a data frame produces a correlation matrix, but cor.test will only take two variables at a time.  Is there a way to get behavior similar to that of cor with cor.test?\n\nI suppose the programming alternative would be to run two for loops with the number of items and cor test embedded accessing the columns of the data frame.  \n\nIs there a simpler way?\n\nThanks,\n\nBrett\n-------------- next part --------------\nAn HTML attachment was scrubbed...\nURL: https://stat.ethz.ch/pipermail/r-help/attachments/20011031/21f0f50b/attachment.html",
-      "body_snippet": "Is there a simple way to run cor.test on for a matrix of correlations?\n\nOf course, cor on a data frame produces a correlation matrix, but cor.test will only take two variables at a time.  Is there a w",
-      "thread_id": "thread-675271c19bd6",
-      "thread_depth": 0,
-      "month": "2001-10"
-    },
-    {
-      "id": "msg-5b005ee942b2",
-      "message_id": "<3BE0B6DC.3C595908@stat.berkeley.edu>",
-      "from_name": "Jane Fridlyand",
-      "from_email_hash": "25119acbf4aff6f62f7606d9979652ed9193a9f2080e3647c51d3e722352bd84",
-      "date": "2001-10-31T18:43:40-08:00",
-      "subject": "[R] image function",
-      "subject_clean": "image function",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI am trying  to use image() function in R and  for the set  of the\nx-locations I am providing, it keeps giving me an error:\n\nError in image(as.double(x), as.double(y), as.integer(zi), col) :\n        invalid x / y values or limits\n\nI have looked over the cases  which inclusion causes the message  but\ncould not identify the problem. I did notice that it does not l accept\nnon-unique x-values (the  other message was about ascending order ) and\nremoved those. I know that the error is due to \"x-values\" since when i\nsupply arbitrary equally spaces locations, the function works fine.\n\nAny ideas what the error message i get may refer to?\n\nThank you!\nJane\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Hi,\n\nI am trying  to use image() function in R and  for the set  of the\nx-locations I am providing, it keeps giving me an error:\n\nError in image(as.double(x), as.double(y), as.integer(zi), col) :\n    ",
-      "thread_id": "thread-5b005ee942b2",
-      "thread_depth": 0,
-      "month": "2001-10"
     }
   ],
   "threads": [
@@ -14474,28 +14426,6 @@
       "root_message_id": "msg-0a896b49bf53"
     },
     {
-      "id": "thread-d5982f3051f1",
-      "subject": "Summary: t.test",
-      "message_count": 1,
-      "participants": [
-        "John Miyamoto"
-      ],
-      "started": "2001-10-31T15:46:22-08:00",
-      "last_reply": "2001-10-31T15:46:22-08:00",
-      "root_message_id": "msg-d5982f3051f1"
-    },
-    {
-      "id": "thread-5b005ee942b2",
-      "subject": "image function",
-      "message_count": 1,
-      "participants": [
-        "Jane Fridlyand"
-      ],
-      "started": "2001-10-31T18:43:40-08:00",
-      "last_reply": "2001-10-31T18:43:40-08:00",
-      "root_message_id": "msg-5b005ee942b2"
-    },
-    {
       "id": "thread-fd7e348cb0e7",
       "subject": "Map data",
       "message_count": 1,
@@ -14516,17 +14446,6 @@
       "started": "2001-10-31T19:30:53+00:00",
       "last_reply": "2001-10-31T19:30:53+00:00",
       "root_message_id": "msg-c871bf2e1104"
-    },
-    {
-      "id": "thread-675271c19bd6",
-      "subject": "cor.test for a correlation matrix",
-      "message_count": 1,
-      "participants": [
-        "Brett Magill"
-      ],
-      "started": "2001-10-31T19:59:21-05:00",
-      "last_reply": "2001-10-31T19:59:21-05:00",
-      "root_message_id": "msg-675271c19bd6"
     }
   ]
 }

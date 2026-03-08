@@ -9571,115 +9571,6 @@
       "thread_id": "thread-9118639eecfd",
       "thread_depth": 2,
       "month": "2017-01"
-    },
-    {
-      "id": "msg-847838338f6f",
-      "message_id": "<BAB7A1DF-1D51-4F3A-8B2C-421E66289545@TxBiomed.org>",
-      "from_name": "Mark Sharp",
-      "from_email_hash": "f0196b983efb33d8734ac31b8c39855ff2d66d7f71803e3079675fdb620ec5ba",
-      "date": "2017-01-31T23:36:59Z",
-      "subject": "[R] Failure to understand namespaces in XML::getNodeSet",
-      "subject_clean": "Failure to understand namespaces in XML::getNodeSet",
-      "in_reply_to": "<CABdHhvHNcQBE+YLq-V6PP9AYhBAB1Wo8DbcmELpTZovFonsCgw@mail.gmail.com>",
-      "references": [
-        "<C93BCEFF-3EB2-4422-8BDF-9B305E393424@txbiomed.org>",
-        "<CABdHhvHNcQBE+YLq-V6PP9AYhBAB1Wo8DbcmELpTZovFonsCgw@mail.gmail.com>"
-      ],
-      "body_plain": "Hadley,\n\nThank you. I am able to get the xml_ns_strip() function to work with my file directly so I will likely be able to reach my immediate goal.\n\nHowever, I still have had no success with understanding the namespace problem. I am not able to use read_xml() using the object I generated for the reproducible example, which is simply a character vector of length 4 having the contents of the XML file as produce by readLines(). I then used dput() to define the structure. The resulting structure apparently is not to the liking of read_xml(). I have reproduced the necessary code here for your convenience. There error is below.\n\n##\nlibrary(xml2)\nlibrary(stringr)\nwith_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\",\n                 \"<WorkSet xmlns=\\\"http://labkey.org/etl/xml\\\">\",\n                 \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n                 \"</WorkSet>\")\n## without str_c() collapse it complain of a vector of length > 1 also.\nread_xml(str_c(with_ns_xml, collapse = TRUE))\nError in doc_parse_raw(x, encoding = encoding, base_url = base_url, as_html = as_html,  :\n  Start tag expected, '<' not found [4]\n\n## produces the following error message.\nError in doc_parse_raw(x, encoding = encoding, base_url = base_url, as_html = as_html,  :\n  Start tag expected, '<' not found [4]\n\nI have similar issues with xml2::xml_find_all\nxml_find_all(str_c(with_ns_xml, collapse = TRUE), \"/WorkSet//Description\")\n\n## Produces the following error message.\nError in UseMethod(\"xml_find_all\") :\n  no applicable method for 'xml_find_all' applied to an object of class \"character\"\n\n\n\nR. Mark Sharp, Ph.D.\nmsharp at TxBiomed.org\n\n\n\n\n\n> On Jan 31, 2017, at 4:27 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n>\n> See the last example in ?xml2::xml_find_all or use xml2::xml2::xml_ns_strip()\n>\n> Hadley\n>\n> On Tue, Jan 31, 2017 at 9:43 AM, Mark Sharp <msharp at txbiomed.org> wrote:\n>> I am trying to read a series of XML files that use a namespace and I have failed, thus far, to discover the proper syntax. I have a reproducible example below. I have two XML character strings defined: one without a namespace and one with. I show that I can successfully extract the node using the XML string without the namespace and fail when using the XML string with the namespace.\n>>\n>> Mark\n>> PS I am having the same problem with the xml2 package and am hoping understanding one with help with the other.\n>>\n>> ##\n>> library(XML)\n>> ## The first XML text (no_ns_xml) does not have a namespace defined\n>> no_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\", \"<WorkSet>\",\n>>               \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n>>               \"</WorkSet>\")\n>> l_no_ns_xml <-xmlTreeParse(no_ns_xml, asText = TRUE, getDTD = FALSE,\n>>                           useInternalNodes = TRUE)\n>> ## The node is found\n>> getNodeSet(l_no_ns_xml, \"/WorkSet//Description\")\n>>\n>> ## The second XML text (with_ns_xml) has a namespace defined\n>> with_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\",\n>>                 \"<WorkSet xmlns=\\\"http://labkey.org/etl/xml\\\">\",\n>>                 \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n>>                 \"</WorkSet>\")\n>>\n>> l_with_ns_xml <-xmlTreeParse(with_ns_xml, asText = TRUE, getDTD = FALSE,\n>>                               useInternalNodes = TRUE)\n>> ## The node is not found\n>> getNodeSet(l_with_ns_xml, \"/WorkSet//Description\")\n>> ## I attempt to provide the namespace, but fail.\n>> ns <-  \"http://labkey.org/etl/xml\"\n>> names(ns)[1] <- \"xmlns\"\n>> getNodeSet(l_with_ns_xml, \"/WorkSet//Description\", namespaces = ns)\n>>\n>> R. Mark Sharp, Ph.D.\n>> Director of Data Science Core\n>> Southwest National Primate Research Center\n>> Texas Biomedical Research Institute\n>> P.O. Box 760549\n>> San Antonio, TX 78245-0549\n>> Telephone: (210)258-9476\n>> e-mail: msharp at TxBiomed.org\n>>\n>>\n>>\n>>\n>>\n>>\n>>\n>>\n>>\n>> CONFIDENTIALITY NOTICE: This e-mail and any files and/or...{{dropped:10}}\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>\n>\n>\n> --\n> http://hadley.nz\n\nCONFIDENTIALITY NOTICE: This e-mail and any files and/or...{{dropped:10}}",
-      "body_snippet": "Hadley,\n\nThank you. I am able to get the xml_ns_strip() function to work with my file directly so I will likely be able to reach my immediate goal.\n\nHowever, I still have had no success with understan",
-      "thread_id": "thread-2edc20433c74",
-      "thread_depth": 2,
-      "month": "2017-01"
-    },
-    {
-      "id": "msg-7ae02ad1055d",
-      "message_id": "<CABdHhvFk5-pV0cdEF7mMmZDijNfFw7i9gDAOeY_N4NV0x1Nz2Q@mail.gmail.com>",
-      "from_name": "Hadley Wickham",
-      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
-      "date": "2017-01-31T17:52:16-06:00",
-      "subject": "[R] Failure to understand namespaces in XML::getNodeSet",
-      "subject_clean": "Failure to understand namespaces in XML::getNodeSet",
-      "in_reply_to": "<BAB7A1DF-1D51-4F3A-8B2C-421E66289545@TxBiomed.org>",
-      "references": [
-        "<C93BCEFF-3EB2-4422-8BDF-9B305E393424@txbiomed.org>",
-        "<CABdHhvHNcQBE+YLq-V6PP9AYhBAB1Wo8DbcmELpTZovFonsCgw@mail.gmail.com>",
-        "<BAB7A1DF-1D51-4F3A-8B2C-421E66289545@TxBiomed.org>"
-      ],
-      "body_plain": "I think you want\n\nx <- read_xml('<?xml version=\"1.0\" ?>\n  <WorkSet xmlns=\"http://labkey.org/etl/xml\">\n  <Description>MFIA 9-Plex (CharlesRiver)</Description>\n</WorkSet>')\n\nThe collapse argument do what you think it does.\n\nHadley\n\nOn Tue, Jan 31, 2017 at 5:36 PM, Mark Sharp <msharp at txbiomed.org> wrote:\n> Hadley,\n>\n> Thank you. I am able to get the xml_ns_strip() function to work with my file directly so I will likely be able to reach my immediate goal.\n>\n> However, I still have had no success with understanding the namespace problem. I am not able to use read_xml() using the object I generated for the reproducible example, which is simply a character vector of length 4 having the contents of the XML file as produce by readLines(). I then used dput() to define the structure. The resulting structure apparently is not to the liking of read_xml(). I have reproduced the necessary code here for your convenience. There error is below.\n>\n> ##\n> library(xml2)\n> library(stringr)\n> with_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\",\n>                  \"<WorkSet xmlns=\\\"http://labkey.org/etl/xml\\\">\",\n>                  \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n>                  \"</WorkSet>\")\n> ## without str_c() collapse it complain of a vector of length > 1 also.\n> read_xml(str_c(with_ns_xml, collapse = TRUE))\n> Error in doc_parse_raw(x, encoding = encoding, base_url = base_url, as_html = as_html,  :\n>   Start tag expected, '<' not found [4]\n>\n> ## produces the following error message.\n> Error in doc_parse_raw(x, encoding = encoding, base_url = base_url, as_html = as_html,  :\n>   Start tag expected, '<' not found [4]\n>\n> I have similar issues with xml2::xml_find_all\n> xml_find_all(str_c(with_ns_xml, collapse = TRUE), \"/WorkSet//Description\")\n>\n> ## Produces the following error message.\n> Error in UseMethod(\"xml_find_all\") :\n>   no applicable method for 'xml_find_all' applied to an object of class \"character\"\n>\n>\n>\n> R. Mark Sharp, Ph.D.\n> msharp at TxBiomed.org\n>\n>\n>\n>\n>\n>> On Jan 31, 2017, at 4:27 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n>>\n>> See the last example in ?xml2::xml_find_all or use xml2::xml2::xml_ns_strip()\n>>\n>> Hadley\n>>\n>> On Tue, Jan 31, 2017 at 9:43 AM, Mark Sharp <msharp at txbiomed.org> wrote:\n>>> I am trying to read a series of XML files that use a namespace and I have failed, thus far, to discover the proper syntax. I have a reproducible example below. I have two XML character strings defined: one without a namespace and one with. I show that I can successfully extract the node using the XML string without the namespace and fail when using the XML string with the namespace.\n>>>\n>>> Mark\n>>> PS I am having the same problem with the xml2 package and am hoping understanding one with help with the other.\n>>>\n>>> ##\n>>> library(XML)\n>>> ## The first XML text (no_ns_xml) does not have a namespace defined\n>>> no_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\", \"<WorkSet>\",\n>>>               \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n>>>               \"</WorkSet>\")\n>>> l_no_ns_xml <-xmlTreeParse(no_ns_xml, asText = TRUE, getDTD = FALSE,\n>>>                           useInternalNodes = TRUE)\n>>> ## The node is found\n>>> getNodeSet(l_no_ns_xml, \"/WorkSet//Description\")\n>>>\n>>> ## The second XML text (with_ns_xml) has a namespace defined\n>>> with_ns_xml <- c(\"<?xml version=\\\"1.0\\\" ?>\",\n>>>                 \"<WorkSet xmlns=\\\"http://labkey.org/etl/xml\\\">\",\n>>>                 \"<Description>MFIA 9-Plex (CharlesRiver)</Description>\",\n>>>                 \"</WorkSet>\")\n>>>\n>>> l_with_ns_xml <-xmlTreeParse(with_ns_xml, asText = TRUE, getDTD = FALSE,\n>>>                               useInternalNodes = TRUE)\n>>> ## The node is not found\n>>> getNodeSet(l_with_ns_xml, \"/WorkSet//Description\")\n>>> ## I attempt to provide the namespace, but fail.\n>>> ns <-  \"http://labkey.org/etl/xml\"\n>>> names(ns)[1] <- \"xmlns\"\n>>> getNodeSet(l_with_ns_xml, \"/WorkSet//Description\", namespaces = ns)\n>>>\n>>> R. Mark Sharp, Ph.D.\n>>> Director of Data Science Core\n>>> Southwest National Primate Research Center\n>>> Texas Biomedical Research Institute\n>>> P.O. Box 760549\n>>> San Antonio, TX 78245-0549\n>>> Telephone: (210)258-9476\n>>> e-mail: msharp at TxBiomed.org\n>>>\n>>>\n>>>\n>>>\n>>>\n>>>\n>>>\n>>>\n>>>\n>>> CONFIDENTIALITY NOTICE: This e-mail and any files and/or...{{dropped:10}}\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>>\n>>\n>> --\n>> http://hadley.nz\n>\n> CONFIDENTIALITY NOTICE: This e-mail and any files and/or attachments transmitted, may contain privileged and confidential information and is intended solely for the exclusive use of the individual or entity to whom it is addressed. If you are not the intended recipient, you are hereby notified that any review, dissemination, distribution or copying of this e-mail and/or attachments is strictly prohibited. If you have received this e-mail in error, please immediately notify the sender stating that this transmission was misdirected; return the e-mail to sender; destroy all paper copies and delete all electronic copies from your system without disclosing its contents.\n\n\n\n-- \nhttp://hadley.nz",
-      "body_snippet": "I think you want\n\nx <- read_xml('<?xml version=\"1.0\" ?>\n  <WorkSet xmlns=\"http://labkey.org/etl/xml\">\n  <Description>MFIA 9-Plex (CharlesRiver)</Description>\n</WorkSet>')\n\nThe collapse argument do wha",
-      "thread_id": "thread-2edc20433c74",
-      "thread_depth": 3,
-      "month": "2017-01"
-    },
-    {
-      "id": "msg-df907cd30ccd",
-      "message_id": "<DD177870-9EB9-408B-B6D3-A647C8CF8F03@gmail.com>",
-      "from_name": "Karen Castillioni",
-      "from_email_hash": "67fbc1194c03fa2570e4606bbfcf50a6e656e29655a76cc38514cd5220b3f231",
-      "date": "2017-01-31T20:29:39-06:00",
-      "subject": "[R] Error in mcp2matrix(model, linfct = linfct)",
-      "subject_clean": "Error in mcp2matrix(model, linfct = linfct)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Problem: Error in mcp2matrix(model, linfct = linfct)\n\nPost hoc test is not working. Does anyone know what I did wrong?\n\nmodmisto<-lme(Cobertura~Tratamento, random=~1|Parcela, data=Cover_BraquiT3) summary(modmisto)\n\ntukey<-glht(modmisto, mcp(Tratamento=\"Tukey\")) Error in mcp2matrix(model, linfct = linfct) : Variable(s) ?Tratamento? of class ?character? is/are not contained as a factor in ?model?.\nSome translations if necessary: cobertura=cover, tratamento=treatment, parcela=plot\n\nI have 4 treatments being tested.\n\nAny help with this will be very appreciated!\n\nThank you\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Problem: Error in mcp2matrix(model, linfct = linfct)\n\nPost hoc test is not working. Does anyone know what I did wrong?\n\nmodmisto<-lme(Cobertura~Tratamento, random=~1|Parcela, data=Cover_BraquiT3) summ",
-      "thread_id": "thread-df907cd30ccd",
-      "thread_depth": 0,
-      "month": "2017-01"
-    },
-    {
-      "id": "msg-f3118c8c30f0",
-      "message_id": "<147697CC-368A-4993-AB79-F797D6C244F4@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2017-01-31T21:06:48-08:00",
-      "subject": "[R] HELP with GLM",
-      "subject_clean": "HELP with GLM",
-      "in_reply_to": "<1485916541174.79517@unine.ch>",
-      "references": [
-        "<1485916541174.79517@unine.ch>"
-      ],
-      "body_plain": "> On Jan 31, 2017, at 6:35 PM, CHIRIBOGA Xavier <xavier.chiriboga at unine.ch> wrote:\n> \n> Dear colleagues,\n> \n> \n> I am trying to perform GLM ..but I got some objects masked: and an error message below\n> \n> \n> a <- read.table(file.choose(), h<-T)\n>> head(a)\n>  time treatment transinduc\n> 1    1   CHA0+Db     1,0768\n\nDo note htat transinduc came in as a factor variable, not numeric.\n\n> 2    1   CHA0+Db     1,0706\n> 3    1   CHA0+Db     1,0752\n> 4    1   CHA0+Db     1,0689\n> 5    1   CHA0+Db     1,1829\n> 6    1    PCL+Db     1,1423\n>> attach(a)\n> The following objects are masked from a (pos = 12):\n> \n>    time, transinduc, treatment\n> \n> The following objects are masked from a (pos = 13):\n> \n>    time, treatment\n> \n> The following objects are masked from a (pos = 14):\n> \n>    time, treatment\n> \n>> summary(a)\n>      time         treatment    transinduc\n> Min.   :1.000   CHA0   :10   1,0488 : 6\n> 1st Qu.:1.000   CHA0+Db: 9   1,0724 : 4\n> Median :1.000   Db     : 9   1,0752 : 3\n> Mean   :1.433   HEALTHY:15   1,0954 : 3\n> 3rd Qu.:2.000   PCL    :10   1,0001 : 2\n> Max.   :2.000   PCL+Db :14   1,0005 : 2\n>                              (Other):47\n> \n> \n> m1<-glm(transinduc~time*treatment,data=a,family=\"poisson\")\n> Error in if (any(y < 0)) stop(\"negative values not allowed for the 'Poisson' family\") :\n>  valor ausente donde TRUE/FALSE es necesario\n> Adem?s: Warning message:\n> In Ops.factor(y, 0) : '<' not meaningful for factors\n> \n> \n> I DO NOT HAVE NEGATIVE VALUES IN MY DATASET, Do you know what is going wrong?\n\n\nDO NOT USE `attach`. THAT'S PROBABLY WHAT IS WRONG.\n> \n> \n> Thank you for you help,\n> \n> \n> Xavier\n> \n> \t[[alternative HTML version deleted]]\n\n\tAnd do not post in HTML. Please read the Posting Guide.\n\n____________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
-      "body_snippet": "> On Jan 31, 2017, at 6:35 PM, CHIRIBOGA Xavier <xavier.chiriboga at unine.ch> wrote:\n> \n> Dear colleagues,\n> \n> \n> I am trying to perform GLM ..but I got some objects masked: and an error message bel",
-      "thread_id": "thread-f3118c8c30f0",
-      "thread_depth": 0,
-      "month": "2017-01"
-    },
-    {
-      "id": "msg-6fed524a35c2",
-      "message_id": "<CAGxFJbQTkKqrLUZwghiDhKORuwCm79rBesX6B6xVM-Tjga10Bg@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
-      "date": "2017-01-31T21:10:48-08:00",
-      "subject": "[R] HELP with GLM",
-      "subject_clean": "HELP with GLM",
-      "in_reply_to": "<1485916541174.79517@unine.ch>",
-      "references": [
-        "<1485916541174.79517@unine.ch>"
-      ],
-      "body_plain": "Dear Xavier:\n\nIt sounds like you have a right mess! Perhaps others cleverer and more\ndiligent than I can sort through it and diagnose the problem. However,\nit really *does* sound like you need to step back, take a deep breath,\nand spend some time with an R tutorial or two (there are many good\nones on teh web) to learn how R works before proceeding further. You\nseem to be groping around in the dark.\n\nCheers,\nBert\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Tue, Jan 31, 2017 at 6:35 PM, CHIRIBOGA Xavier\n<xavier.chiriboga at unine.ch> wrote:\n> Dear colleagues,\n>\n>\n> I am trying to perform GLM ..but I got some objects masked: and an error message below\n>\n>\n> a <- read.table(file.choose(), h<-T)\n>> head(a)\n>   time treatment transinduc\n> 1    1   CHA0+Db     1,0768\n> 2    1   CHA0+Db     1,0706\n> 3    1   CHA0+Db     1,0752\n> 4    1   CHA0+Db     1,0689\n> 5    1   CHA0+Db     1,1829\n> 6    1    PCL+Db     1,1423\n>> attach(a)\n> The following objects are masked from a (pos = 12):\n>\n>     time, transinduc, treatment\n>\n> The following objects are masked from a (pos = 13):\n>\n>     time, treatment\n>\n> The following objects are masked from a (pos = 14):\n>\n>     time, treatment\n>\n>> summary(a)\n>       time         treatment    transinduc\n>  Min.   :1.000   CHA0   :10   1,0488 : 6\n>  1st Qu.:1.000   CHA0+Db: 9   1,0724 : 4\n>  Median :1.000   Db     : 9   1,0752 : 3\n>  Mean   :1.433   HEALTHY:15   1,0954 : 3\n>  3rd Qu.:2.000   PCL    :10   1,0001 : 2\n>  Max.   :2.000   PCL+Db :14   1,0005 : 2\n>                               (Other):47\n>\n>\n> m1<-glm(transinduc~time*treatment,data=a,family=\"poisson\")\n> Error in if (any(y < 0)) stop(\"negative values not allowed for the 'Poisson' family\") :\n>   valor ausente donde TRUE/FALSE es necesario\n> Adem?s: Warning message:\n> In Ops.factor(y, 0) : '<' not meaningful for factors\n>\n>\n> I DO NOT HAVE NEGATIVE VALUES IN MY DATASET, Do you know what is going wrong?\n>\n>\n> Thank you for you help,\n>\n>\n> Xavier\n>\n>         [[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Dear Xavier:\n\nIt sounds like you have a right mess! Perhaps others cleverer and more\ndiligent than I can sort through it and diagnose the problem. However,\nit really *does* sound like you need to step",
-      "thread_id": "thread-6fed524a35c2",
-      "thread_depth": 0,
-      "month": "2017-01"
-    },
-    {
-      "id": "msg-728ccdc01f07",
-      "message_id": "<1C56FA54-76F2-4A1F-B0E5-56EB2E486A0E@dcn.davis.ca.us>",
-      "from_name": "Jeff Newmiller",
-      "from_email_hash": "ee1094c33a9a250a7334f3a1fc915e1e7bae14a1c68d3b0c50991971fd069cb2",
-      "date": "2017-01-31T23:58:29-08:00",
-      "subject": "[R] Error in mcp2matrix(model, linfct = linfct)",
-      "subject_clean": "Error in mcp2matrix(model, linfct = linfct)",
-      "in_reply_to": "<DD177870-9EB9-408B-B6D3-A647C8CF8F03@gmail.com>",
-      "references": [
-        "<DD177870-9EB9-408B-B6D3-A647C8CF8F03@gmail.com>"
-      ],
-      "body_plain": "Looks like your data are not numeric. Examine your data with the str function and troubleshoot your process for reading in data. Step through the code one line at a time and see how the data looks at each step. \n\nAlso, you really need to read the Posting Guide and follow the advice there. If you had done so, we could be more specific about how to fix your problem. \n-- \nSent from my phone. Please excuse my brevity.\n\nOn January 31, 2017 6:29:39 PM PST, Karen Castillioni <karen.castillioni at gmail.com> wrote:\n>Problem: Error in mcp2matrix(model, linfct = linfct)\n>\n>Post hoc test is not working. Does anyone know what I did wrong?\n>\n>modmisto<-lme(Cobertura~Tratamento, random=~1|Parcela,\n>data=Cover_BraquiT3) summary(modmisto)\n>\n>tukey<-glht(modmisto, mcp(Tratamento=\"Tukey\")) Error in\n>mcp2matrix(model, linfct = linfct) : Variable(s) ?Tratamento? of class\n>?character? is/are not contained as a factor in ?model?.\n>Some translations if necessary: cobertura=cover, tratamento=treatment,\n>parcela=plot\n>\n>I have 4 treatments being tested.\n>\n>Any help with this will be very appreciated!\n>\n>Thank you\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Looks like your data are not numeric. Examine your data with the str function and troubleshoot your process for reading in data. Step through the code one line at a time and see how the data looks at ",
-      "thread_id": "thread-df907cd30ccd",
-      "thread_depth": 1,
-      "month": "2017-01"
     }
   ],
   "threads": [
@@ -11891,13 +11782,13 @@
     {
       "id": "thread-2edc20433c74",
       "subject": "Failure to understand namespaces in XML::getNodeSet",
-      "message_count": 4,
+      "message_count": 2,
       "participants": [
         "Hadley Wickham",
         "Mark Sharp"
       ],
       "started": "2017-01-31T15:43:16+00:00",
-      "last_reply": "2017-01-31T17:52:16-06:00",
+      "last_reply": "2017-01-31T16:27:25-06:00",
       "root_message_id": "msg-2edc20433c74"
     },
     {
@@ -11921,40 +11812,6 @@
       "started": "2017-01-31T19:16:39+01:00",
       "last_reply": "2017-01-31T19:16:39+01:00",
       "root_message_id": "msg-558a3dbaa6be"
-    },
-    {
-      "id": "thread-df907cd30ccd",
-      "subject": "Error in mcp2matrix(model, linfct = linfct)",
-      "message_count": 2,
-      "participants": [
-        "Jeff Newmiller",
-        "Karen Castillioni"
-      ],
-      "started": "2017-01-31T20:29:39-06:00",
-      "last_reply": "2017-01-31T23:58:29-08:00",
-      "root_message_id": "msg-df907cd30ccd"
-    },
-    {
-      "id": "thread-f3118c8c30f0",
-      "subject": "HELP with GLM",
-      "message_count": 1,
-      "participants": [
-        "David Winsemius"
-      ],
-      "started": "2017-01-31T21:06:48-08:00",
-      "last_reply": "2017-01-31T21:06:48-08:00",
-      "root_message_id": "msg-f3118c8c30f0"
-    },
-    {
-      "id": "thread-6fed524a35c2",
-      "subject": "HELP with GLM",
-      "message_count": 1,
-      "participants": [
-        "Bert Gunter"
-      ],
-      "started": "2017-01-31T21:10:48-08:00",
-      "last_reply": "2017-01-31T21:10:48-08:00",
-      "root_message_id": "msg-6fed524a35c2"
     },
     {
       "id": "thread-9118639eecfd",

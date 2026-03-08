@@ -11788,6 +11788,29 @@
       "month": "2016-03"
     },
     {
+      "id": "msg-8e7e3a7455ca",
+      "message_id": "<56F3E63E.1020408@yorku.ca>",
+      "from_name": "Michael Friendly",
+      "from_email_hash": "e9b90ce73178f88f76f93dfc82689bfc2868e9a51ea9a8e011552092e2ee1ae2",
+      "date": "2016-03-24T09:06:06-04:00",
+      "subject": "[R] Is there dpois equivalent for zero-inflated Poisson?",
+      "subject_clean": "Is there dpois equivalent for zero-inflated Poisson?",
+      "in_reply_to": "<22258.46565.245172.694785@stat.math.ethz.ch>",
+      "references": [
+        "<BE4EA125-4915-47F2-A7D2-73112F086DF0@kapsi.fi>",
+        "<CAJuCY5yEhaFS+BuC+FOjBiQmh02FwZhmJCG3q=RZtNjEco7pUA@mail.gmail.com>",
+        "<D020C12B-92EE-4AE2-8E24-C6536B4B4294@kapsi.fi>",
+        "<76201BB4-76CC-4E5D-982A-2C2422A1D4A7@kapsi.fi>",
+        "<CAJuCY5zdiNY1LyteoG=gZFA14aShpeM0yKLTEurPAZun5413ZQ@mail.gmail.com>",
+        "<22258.46565.245172.694785@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Neat!\nIt would be nice to complete dzipois() with the corresponding rzipois() \nand pzipois() functions.  I would have found these useful in my new book,\nhttp://ddar.datavis.ca\n\n-Michael\n\nOn 3/23/2016 11:27 AM, Martin Maechler wrote:\n>>>>>> Thierry Onkelinx <thierry.onkelinx at inbo.be>\n>>>>>>      on Tue, 22 Mar 2016 13:58:09 +0100 writes:\n>\n>      > dpois(0, lambda) == e^(-lambda)\n>      > The wikipedia formula is\n>      > ifelse(x == 0, zero + dpois(0, lambda) * (1-zero), dpois(x, lambda) *\n>      > (1-zero))\n>\n>      > or\n>\n>      > ifelse(x == 0, zero + dpois(x, lambda) * (1-zero), dpois(x, lambda) *\n>      > (1-zero))\n>\n>      > so we can move the dpois() out of the ifelse()\n>\n>      > ifelse(x == 0, zero, 0)  + dpois(x, lambda) * (1-zero)\n>\n> Nice!  Thank you, Thierry.\n>\n> Even nicer for symmetry reasons (and much faster) is *not* to use ifelse(),\n> so we'd get\n>\n> dzipois <- function(x, lambda, zero)\n>    (x == 0) * zero +  dpois(x, lambda) * (1-zero)\n>\n> However, numerically correctly adding the  'log = FALSE'\n> argument which all good \"density\" functions have in R --\n> ((and which you *should* use as  log = TRUE  for the\n>    log-likelihood if you want to become more professional))\n> is a bit tricky.\n>\n> The x == 0 case at least needs care for large lambda and/or\n> small 'zero' (= pi).\n> All this is related on how to accurately compute  f(L) = log(1 - exp(- L))\n> which I call   log1mexp(L) in my still-not-submitted paper\n> available as one of the Rmpfr vignettes at\n> https://cloud.r-project.org/web/packages/Rmpfr/vignettes/log1mexp-note.pdf\n>\n> BTW:  There are at least 3-4 R packages which deal with zero-inflated\n>        poisson in some ways, notably the recommended  'mgcv'\n>        package which comes bundled with every R.\n>\n>\n> Martin Maechler,\n> ETH ZUrich\n>\n>      > ir. Thierry Onkelinx\n>      > Instituut voor natuur- en bosonderzoek / Research Institute for Nature and\n>      > Forest\n>      > team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>      > Kliniekstraat 25\n>      > 1070 Anderlecht\n>      > Belgium\n>\n>      > To call in the statistician after the experiment is done may be no more\n>      > than asking him to perform a post-mortem examination: he may be able to say\n>      > what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>      > The plural of anecdote is not data. ~ Roger Brinner\n>      > The combination of some data and an aching desire for an answer does not\n>      > ensure that a reasonable answer can be extracted from a given body of data.\n>      > ~ John Tukey\n>\n>      > 2016-03-22 13:50 GMT+01:00 Matti Viljamaa <mviljamaa at kapsi.fi>:\n>\n>      >> And why is the first term of ifelse(x == 0, zero, 0) + dpois(x, lambda) /\n>      >> (1 - zero)\n>      >>\n>      >> ifelse(x == 0, zero, 0)\n>      >>\n>      >> rather than something corresponding to\n>      >>\n>      >> zero+(1-zero)e^{-lambda}\n>      >>\n>      >> https://en.wikipedia.org/wiki/Zero-inflated_model#Zero-inflated_Poisson\n>      >>\n>      >> On 22 Mar 2016, at 14:25, Matti Viljamaa <mviljamaa at kapsi.fi> wrote:\n>      >>\n>      >> Could you clarify what are the parameters and why it?s formulated that way?\n>      >>\n>      >> -Matti\n>      >>\n>      >> On 22 Mar 2016, at 14:17, Thierry Onkelinx <thierry.onkelinx at inbo.be>\n>      >> wrote:\n>      >>\n>      >> Dear Matti,\n>      >>\n>      >> What about this?\n>      >>\n>      >> dzeroinflpois <- function(x, lambda, zero){\n>      >> ifelse(x == 0, zero, 0) + dpois(x, lambda) / (1 - zero)\n>      >> }\n>      >> plot(x, dzeroinflpois(x, lambda = 10, zero = 0.2), type = \"l\")\n>      >>\n>      >>\n>      >>\n>      >> ir. Thierry Onkelinx\n>      >> Instituut voor natuur- en bosonderzoek / Research Institute for Nature and\n>      >> Forest\n>      >> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>      >> Kliniekstraat 25\n>      >> 1070 Anderlecht\n>      >> Belgium\n>      >>\n>      >> To call in the statistician after the experiment is done may be no more\n>      >> than asking him to perform a post-mortem examination: he may be able to say\n>      >> what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>      >> The plural of anecdote is not data. ~ Roger Brinner\n>      >> The combination of some data and an aching desire for an answer does not\n>      >> ensure that a reasonable answer can be extracted from a given body of data.\n>      >> ~ John Tukey\n>      >>\n>      >> 2016-03-22 13:04 GMT+01:00 Matti Viljamaa <mviljamaa at kapsi.fi>:\n>      >>\n>      >>> I?m doing some optimisation that I first did with normal Poisson (only\n>      >>> parameter theta was estimated), but now I?m doing the same with a\n>      >>> zero-inflated Poisson model which\n>      >>> gives me two estimated parameters theta and p (p is also pi in some\n>      >>> notation).\n>      >>>\n>      >>> My question is, is there something equivalent to dpois that would use\n>      >>> both of the parameters (or is the p parameter possibly unnecessary)?\n>      >>>\n>      >>> I?m calculating the ?fit? of the Poisson model\n>      >>>\n>      >>> i.e. like\n>      >>>\n>      >>> x = c(0,1,2,3,4,5,6)\n>      >>> y = c(3062,587,284,103,33,4,2)\n>      >>> fit1 <- sum(y)*dpois(x, est_theta)\n>      >>>\n>      >>> and then comparing fit1 to the real observations.\n>      >>> [[alternative HTML version deleted]]\n>      >>>\n>      >>> ______________________________________________\n>      >>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>      >>> https://stat.ethz.ch/mailman/listinfo/r-help\n>      >>> PLEASE do read the posting guide\n>      >>> http://www.R-project.org/posting-guide.html\n>      >>> <http://www.r-project.org/posting-guide.html>\n>      >>> and provide commented, minimal, self-contained, reproducible code.\n>      >>\n>      >>\n>      >>\n>      >>\n>\n>      > [[alternative HTML version deleted]]\n>\n>      > ______________________________________________\n>      > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>      > https://stat.ethz.ch/mailman/listinfo/r-help\n>      > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>      > and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Neat!\nIt would be nice to complete dzipois() with the corresponding rzipois() \nand pzipois() functions.  I would have found these useful in my new book,\nhttp://ddar.datavis.ca\n\n-Michael\n\nOn 3/23/2016 ",
+      "thread_id": "thread-875ce7aa7ed0",
+      "thread_depth": 6,
+      "month": "2016-03"
+    },
+    {
       "id": "msg-550da4769a52",
       "message_id": "<0AC52DE0-B964-4A18-9106-0CF7C8B6A77D@gmail.com>",
       "from_name": "Andreu Ferrero Gmail",
@@ -14705,60 +14728,6 @@
       "thread_id": "thread-5ca838780d1e",
       "thread_depth": 0,
       "month": "2016-03"
-    },
-    {
-      "id": "msg-80c05fe5c640",
-      "message_id": "<1988600464.693834.1459463878999.JavaMail.yahoo@mail.yahoo.com>",
-      "from_name": "Farnoosh Sheikhi",
-      "from_email_hash": "e2d4c795254d5dc25ed95e77483e9b0b0aec8795669e07efdc389fe5da63f701",
-      "date": "2016-03-31T22:37:58Z",
-      "subject": "[R] Filtering based on the occurrence",
-      "subject_clean": "Filtering based on the occurrence",
-      "in_reply_to": "<CA+8X3fWcO0OL1EHgtEDEKa8Mfd851EUk=efttgkFBKwmVy4+og@mail.gmail.com>",
-      "references": [
-        "<CA+8X3fWcO0OL1EHgtEDEKa8Mfd851EUk=efttgkFBKwmVy4+og@mail.gmail.com>"
-      ],
-      "body_plain": "Hi Jim,?\nThank you tons for your help. The code worked perfectly :)?Best,Farnoosh\n\n \n\n    On Wednesday, March 30, 2016 1:13 AM, Jim Lemon <drjimlemon at gmail.com> wrote:\n \n\n Hi Farnoosh,\nDespite my deep suspicion that this answer will solve a useless\nproblem, try this:\n\nlast_subject<-0\nkeep_deps<-c(\"B\",\"D\",\"F\")\nkeep_rows<-NULL\nfor(rowindex in 1:dim(df)[1]) {\n if(df[rowindex,\"Subject\"] != last_subject) {\n? last_subject<-df[rowindex,\"Subject\"]\n? start_keeping<-0\n }\n if(df[rowindex,\"deps\"] %in% keep_deps) start_keeping<-1\n if(start_keeping) keep_rows<-c(keep_rows,rowindex)\n}\nfinal<-matrix(unlist(lapply(df[keep_rows,],as.character)),ncol=3)\n\nI find it terribly hard to ignore puzzles.\n\nJim\n\n\nOn Wed, Mar 30, 2016 at 10:52 AM, Farnoosh Sheikhi via R-help\n<r-help at r-project.org> wrote:\n> Hello,\n> I have a data set similar to below and I wanted to keep the observations after the first occurrence of these department: \"B\", \"D\", \"F\".For example for ID=2, the observation with deps=B and anything after will be kept in the data. For ID=3, observations with deps=D and anything after will be included.\n> Subject<- c(\"2\", \"2\", \"2\", \"3\", \"3\", \"3\", \"4\", \"4\", \"5\", \"5\", \"5\", \"5\")dates<-seq(as.Date('2011-01-01'),as.Date('2011-01-12'),by = 1) deps<-c(\"A\", \"B\", \"C\", \"C\", \"D\", \"A\", \"F\", \"G\", \"A\", \"F\", \"A\", \"D\")df <- data.frame(Subject, dates, deps)df\n> The final data should look like this:final<-c(\"2 2011-01-02? ? B\",\"2 2011-01-03? ? C\",\"3 2011-01-05? ? D\",\"3 2011-01-06? ? A\",\"4 2011-01-07? ? F\",\"4 2011-01-08? ? G\",\"5 2011-01-10? ? F\",\"5 2011-01-11? ? A\",\"5 2011-01-12? ? D\") Thank you tons for your help.\n> Farnoosh\n>\n>\n>? ? ? ? [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n  \n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi Jim,?\nThank you tons for your help. The code worked perfectly :)?Best,Farnoosh\n\n \n\n    On Wednesday, March 30, 2016 1:13 AM, Jim Lemon <drjimlemon at gmail.com> wrote:\n \n\n Hi Farnoosh,\nDespite my d",
-      "thread_id": "thread-b664a37f898f",
-      "thread_depth": 2,
-      "month": "2016-03"
-    },
-    {
-      "id": "msg-7ba2ca8b044d",
-      "message_id": "<CAGxFJbRGPWZv3hhDiUV4cuzg5xHoihfb+FjaZ0cJCeMVx33ATw@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
-      "date": "2016-03-31T16:22:22-07:00",
-      "subject": "[R] reduced set of alternatives in package mlogit",
-      "subject_clean": "reduced set of alternatives in package mlogit",
-      "in_reply_to": "<GRUPR80MB04443F1875EAF793C2385609E2990@GRUPR80MB0444.lamprd80.prod.outlook.com>",
-      "references": [
-        "<GRUPR80MB04443F1875EAF793C2385609E2990@GRUPR80MB0444.lamprd80.prod.outlook.com>"
-      ],
-      "body_plain": "code? example data?  We can only guess based on your vague post.\n\n\"PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.\"\n\nMoreover, this sounds like a statistical question, not a question\nabout R programming, and so might be more appropriate for a\nstatistical list like stats.stackexchange.com  .\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Thu, Mar 31, 2016 at 2:51 PM, Jose Marcos Ferraro\n<jose.ferraro at logiteng.com> wrote:\n> I'm trying to estimate a multinomial logit model  but in some choices only alternatives from a subset of all possible alternatives can be chosen.\n> At the moment I get around it by creating \"dummy\" variables to mean the alternative is not available and let it estimate this coefficient as highly negative. Is there a better way to do it?\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "code? example data?  We can only guess based on your vague post.\n\n\"PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproduc",
-      "thread_id": "thread-5ca838780d1e",
-      "thread_depth": 1,
-      "month": "2016-03"
-    },
-    {
-      "id": "msg-a3a2290ae1aa",
-      "message_id": "<E4048460-2A2F-4BBB-8716-C1CBE5F8AECB@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2016-03-31T16:26:29-07:00",
-      "subject": "[R] Ask if an object will respond to a function or method",
-      "subject_clean": "Ask if an object will respond to a function or method",
-      "in_reply_to": "<CAErODj-uQBo3MXOacFvfgd68QER2X0vgRUMDvR1JO6EsbxmwAg@mail.gmail.com>",
-      "references": [
-        "<CAErODj-uQBo3MXOacFvfgd68QER2X0vgRUMDvR1JO6EsbxmwAg@mail.gmail.com>"
-      ],
-      "body_plain": "> On Mar 31, 2016, at 1:00 PM, Paul Johnson <pauljohn32 at gmail.com> wrote:\n> \n> In the rockchalk package, I want to provide functions for regression\n> objects that are \"well behaved.\" If an object responds to the methods\n> that lm or glm objects can handle, like coef(), nobs(), and summary(),\n> I want to be able to handle the same thing.\n> \n> It is more difficult than expected to ask a given fitted model object\n> \"do you respond to these functions: coef(), nobs(), summary().\" How\n> would you do it?\n> \n> I tried this with the methods() function but learned that all methods\n> that a class can perform are not listed.  I'll demonstrate with a\n> regression \"zz\" that is created by the example in the plm package.\n> The coef() function succeeds on the zz object, but coef is not listed\n> in the list of methods that the function can carry out.\n> \n>> library(plm)\n>> example(plm)\n> \n>> class(zz)\n> [1] \"plm\"        \"panelmodel\"\n>> methods(class = \"plm\")\n> [1] ercomp          fixef           has.intercept   model.matrix\n> [5] pFtest          plmtest         plot            pmodel.response\n> [9] pooltest        predict         residuals       summary\n> [13] vcovBK          vcovDC          vcovG           vcovHC\n> [17] vcovNW          vcovSCC\n> see '?methods' for accessing help and source code\n>> methods(class = \"panelmodel\")\n> [1] deviance      df.residual   fitted        has.intercept index\n> [6] nobs          pbgtest       pbsytest      pcdtest       pdim\n> [11] pdwtest       phtest        print         pwartest      pwfdtest\n> [16] pwtest        residuals     terms         update        vcov\n> see '?methods' for accessing help and source code\n>> coef(zz)\n>   log(pcap)      log(pc)     log(emp)        unemp\n> -0.026149654  0.292006925  0.768159473 -0.005297741\n> \n> I don't understand why coef(zz) succeeds but coef is not listed as a method.\n\nThere is a coef.default method. (Also an S$  coef,ANY-method )\n\n> \n> Right now, I'm contemplating this:\n> \n> zz1 < - try(coef(zz))\n> if (inherits(zz1, \"try-error\")) stop(\"Your model has no coef method\")\n> \n> This seems like a bad workaround because I have to actually run the\n> function in order to find out if the function exists. That might be\n> time consuming for some summary() methods.\n> \n> pj\n> \n> -- \n> Paul E. Johnson\n> Professor, Political Science        Director\n> 1541 Lilac Lane, Room 504      Center for Research Methods\n> University of Kansas                 University of Kansas\n> http://pj.freefaculty.org              http://crmda.ku.edu\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
-      "body_snippet": "> On Mar 31, 2016, at 1:00 PM, Paul Johnson <pauljohn32 at gmail.com> wrote:\n> \n> In the rockchalk package, I want to provide functions for regression\n> objects that are \"well behaved.\" If an object r",
-      "thread_id": "thread-a92bb17eb694",
-      "thread_depth": 1,
-      "month": "2016-03"
     }
   ],
   "threads": [
@@ -17232,7 +17201,7 @@
     {
       "id": "thread-875ce7aa7ed0",
       "subject": "Is there dpois equivalent for zero-inflated Poisson?",
-      "message_count": 8,
+      "message_count": 9,
       "participants": [
         "Martin Maechler",
         "Matti Viljamaa",
@@ -17873,13 +17842,13 @@
     {
       "id": "thread-b664a37f898f",
       "subject": "Filtering based on the occurrence",
-      "message_count": 3,
+      "message_count": 2,
       "participants": [
         "Farnoosh Sheikhi",
         "Jim Lemon"
       ],
       "started": "2016-03-29T23:52:14+00:00",
-      "last_reply": "2016-03-31T22:37:58+00:00",
+      "last_reply": "2016-03-30T19:13:29+11:00",
       "root_message_id": "msg-b664a37f898f"
     },
     {
@@ -18073,14 +18042,13 @@
     {
       "id": "thread-a92bb17eb694",
       "subject": "Ask if an object will respond to a function or method",
-      "message_count": 3,
+      "message_count": 2,
       "participants": [
-        "David Winsemius",
         "Martin Morgan",
         "Paul Johnson"
       ],
       "started": "2016-03-31T15:00:28-05:00",
-      "last_reply": "2016-03-31T16:26:29-07:00",
+      "last_reply": "2016-03-31T16:30:57-04:00",
       "root_message_id": "msg-a92bb17eb694"
     },
     {
@@ -18131,13 +18099,12 @@
     {
       "id": "thread-5ca838780d1e",
       "subject": "reduced set of alternatives in package mlogit",
-      "message_count": 2,
+      "message_count": 1,
       "participants": [
-        "Bert Gunter",
         "Jose Marcos Ferraro"
       ],
       "started": "2016-03-31T21:51:15+00:00",
-      "last_reply": "2016-03-31T16:22:22-07:00",
+      "last_reply": "2016-03-31T21:51:15+00:00",
       "root_message_id": "msg-5ca838780d1e"
     }
   ]

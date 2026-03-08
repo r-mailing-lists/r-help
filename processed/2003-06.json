@@ -873,6 +873,22 @@
       "month": "2003-06"
     },
     {
+      "id": "msg-35f9edb7f10d",
+      "message_id": "<8D0F30FE2EB3314182D4A33F738BB19D012453@mail.internal.net>",
+      "from_name": "David S. Khabie-Zeitoune",
+      "from_email_hash": "cb53f31518dafcf73ba67dcef4808deff1fbf8ea4993acae0b91a1e5a67243f1",
+      "date": "2003-06-02T18:11:07+01:00",
+      "subject": "[R] Help with factorized argument in solve.QP",
+      "subject_clean": "Help with factorized argument in solve.QP",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Yes -- this seems to be the case; the following example works as\nexpected. Thank you!\n\nR          = matrix(rnorm(9),3,3)\nR[lower.tri(R)] = 0\nR.inv      = solve(R)\nDmat       = t(R) %*% R\n\ndvec       = c(0,5,0)\nAmat       = matrix(c(-4,-3,0,2,1,0,0,-2,1),3,3)\nbvec       = c(-8,2,0)\n\nx1 = solve.QP(Dmat=Dmat, dvec=dvec, Amat=Amat, bvec=bvec,\nfactorized=FALSE)\nx2 = solve.QP(Dmat=R.inv, dvec=dvec, Amat=Amat, bvec=bvec,\nfactorized=TRUE)\nprint(x1$solution)\nprint(x2$solution)\n\n-----Original Message-----\nFrom: Peter Dalgaard BSA [mailto:p.dalgaard at biostat.ku.dk] \nSent: 02 June 2003 18:12\nTo: David S. Khabie-Zeitoune\nCc: r-help at stat.math.ethz.ch\nSubject: Re: [R] Help with factorized argument in solve.QP\n\n\n\"David S. Khabie-Zeitoune\" <dave at mirabellafunds.com> writes:\n\n> I modified the example in the helpfile slightly to test this out:\n>  \n> R          = matrix(rnorm(9),3,3)\n> R.inv      = solve(R)\n> Dmat       = t(R) %*% R\n> dvec       = c(0,5,0)\n> Amat       = matrix(c(-4,-3,0,2,1,0,0,-2,1),3,3)\n> bvec       = c(-8,2,0)\n>  \n> x1 \t     = solve.QP(Dmat=Dmat, dvec=dvec, Amat=Amat, bvec=bvec,\n> factorized=FALSE)\n> x2 \t     = solve.QP(Dmat=R.inv, dvec=dvec, Amat=Amat, bvec=bvec,\n> factorized=TRUE)\n> print(x1$solution)\n> print(x2$solution)\n> \n> I would have expected that x1$solution and x2$solution were the same \n> (or numerically similar); however they are typically very different. \n> Where am I going wrong...?\n\nHmmm. Could it be that it is assuming a *triangular* square root of the\nmatrix?\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907",
+      "body_snippet": "Yes -- this seems to be the case; the following example works as\nexpected. Thank you!\n\nR          = matrix(rnorm(9),3,3)\nR[lower.tri(R)] = 0\nR.inv      = solve(R)\nDmat       = t(R) %*% R\n\ndvec       =",
+      "thread_id": "thread-35f9edb7f10d",
+      "thread_depth": 0,
+      "month": "2003-06"
+    },
+    {
       "id": "msg-43ea3260c320",
       "message_id": "<200306021713.45685.ltorgo@liacc.up.pt>",
       "from_name": "Luis Torgo",
@@ -21657,6 +21673,22 @@
       "month": "2003-06"
     },
     {
+      "id": "msg-a543804a67cf",
+      "message_id": "<3F0029AB.22466.A15341@localhost>",
+      "from_name": "kjetil brinchmann halvorsen",
+      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
+      "date": "2003-06-30T12:14:35-04:00",
+      "subject": "[R] if else statements in R",
+      "subject_clean": "if else statements in R",
+      "in_reply_to": "<5.1.0.14.0.20030630112404.00a79700@mail.utm.utoronto.ca>",
+      "references": [],
+      "body_plain": "On 30 Jun 2003 at 11:24, Michael Rennie wrote:\n\nHola!\n\n> \n> Hi, there\n> \n> I am a grad student struggling to get my syntax right in a model I am \n> building in R.\n> \n> I am trying to specify a variable,W, in a loop, such that on the first \n> iteration, it is equal to Wo, my starting value, which I have already \n> specified with\n> \n> Wo<-9.2\n> \n>   On any other iteration other than the first, I want W to equal the \n> previous value of W in the iteration. plus an increment from that previous \n> iteration, divided by another value.  This then becomes the value used in \n> all calculations in the iteration at hand.\n> \n> Here is my code, that does not work:\n\nThere are multiple problems with this code\n1)  You use W as a name of a function AND as a name of an array \ninside that function. Might not be a syntax error (?), but is asking \nfor problems. Use an other name for your array, and assign it first.\n2) The variable i is not given a value anywhere in your code.\n3)The condition in the if statement uses = and not ==, = is \nassignment, == is test lfor equality. Actuallt, your comp[i,1] gets \nassigned 1, that is also the value of the assignment, and in the \nlogical test the 1 will be interpreted as TRUE, so you will never get \nthe else branch!\n\n> \n> W<- function(w)\n> {\n> if (comp[i,1]=1) W[i]<-Wo else\n> W[i]<-(work[i-1,5]work[i-1,13]*/Ef)\n> }\n\nMaybe youwant something like:\n\nW <- function(w) {\n    result <- numeric(length=?)\n    if (comp[i,1]==1) result[i] <- W0 else\n          result[i] <- work[i-1,5] * work[i-1,13]/Ef\n}\n\nbut it is really impossible to tell, as your function are using \nglobal variables. Another good idea is to avoid global variables.\n\nKjetil Halvorsen\n\n\n> \n> \n> \"work\" is the dataframe that I am rbinding my interations into, and the W \n> variable is the 5th variable in that frame, and the additive to W is the \n> 13th variable in that frame.\n> \n> However, this is where the program stalls on me:\n> \n> {\n> +\n> + W<- function(w)\n> + {\n> + if (comp[i,1]=1) W[i]<-Wo else\n> Error: syntax error\n> Execution halted\n> \n> I've also attempted this variation;\n> \n> W<- function(w)\n> \n> if (comp[i,1]=1) {W[i]<-Wo} else\n> W[i]<-(work[i-1,5]work[i-1,13]*/Ef)\n> \n> Which meets with an equal lack of success, and stalls in the same spot as \n> the previous version.\n> \n> Does anyone have any hints on how to make this if else statement work to do \n> what I need?  This is my first time trying to use these statements, and the \n> S-plus manual i have is proving to be terribly unhelpful.\n> \n> What am I doing wrong?\n> \n> Mike\n> \n> Michael Rennie\n> M.Sc. Candidate\n> University of Toronto at Mississauga\n> 3359 Mississauga Rd. N.\n> Mississauga, ON  L5L 1C6\n> Ph: 905-828-5452  Fax: 905-828-3792\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "On 30 Jun 2003 at 11:24, Michael Rennie wrote:\n\nHola!\n\n> \n> Hi, there\n> \n> I am a grad student struggling to get my syntax right in a model I am \n> building in R.\n> \n> I am trying to specify a variabl",
+      "thread_id": "thread-d6464c5af335",
+      "thread_depth": 1,
+      "month": "2003-06"
+    },
+    {
       "id": "msg-2bf0cc55a0af",
       "message_id": "<3F00631C.2020606@seanet.com>",
       "from_name": "Richard A. Hinrichsen",
@@ -21962,6 +21994,22 @@
       "month": "2003-06"
     },
     {
+      "id": "msg-cab33cc8aff0",
+      "message_id": "<1057006861.3f00a50dafc9a@webmail.utm.utoronto.ca>",
+      "from_name": "Michael Rennie",
+      "from_email_hash": "21f0429dfd834f49c15a33cf25cf3a0f921c55154f7725384248108f817c0a83",
+      "date": "2003-06-30T17:01:01-04:00",
+      "subject": "[R] Constructing loops in which i+1st element depends on ith  ",
+      "subject_clean": "Constructing loops in which i+1st element depends on ith",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I feel greedy posting for help twice in one day- please forgive me, but the \nthesis can't wait.\n\nI have been trying to get an ?if\nelse? statement working in a loop I am \nwriting, in which I specify a variable value to 9.2 (Wo) on the first \niteration, but for subsequent iterations, to adopt a value as a function of \nvariables from the previous iteration.\n\nWhen I comment out the ?if\nelse? statement, let W = Wo, and adjust the rest of \nthe file so I am reading the first row of the variables specified instead of \nentire columns in my calculations, the calculations all work nicely without \nerrors - I get the numbers I ought to in one row of ?bio?.\n\nWhen I activate the loop and try to run the file with ?the if\n.else?, it looks \nlike it wants to work, but here?s where it stalls;\n\n\nError in \"[<-\"(*tmp*, i, value = ((bio[i - 1, 1] * bio[i - 1, 9])/Ef)) : \n\tnothing to replace with\nExecution halted\n\n(see complete data file below)...\n\nI guess it?s because it can?t find the alternate case because it hasn?t written \nit yet. \n\nSo, my problem is two-fold:\n\n1.\tHow can I write my loop properly so that at the end of each iteration, \nit records the row of data from ?bio? such that I can cbind it back to my ?Day? \ndata?\n\n2.\tHow can I specify the loop to use information from the i+1st element in \ncalculations for calculations in the ith? \n\nI?m pretty sure my problem is in where I create and specify files in the loop, \nbut beyond that, I don?t know.\n\nHere?s the part of my command file that?s giving me trouble.  Everything before \nthis is simply specifying variable names to numbers, which is not giving be \nproblems.\n\n\n\n#Bring in temp file\n\ntemper <- scan(\"temp2.dat\", na.strings = \".\", list(Day=0, Temp=0))\n\n#Day = day on which iteration begins, starts at day 1, ends on 366\n#Temp = temperature\n\nDay <- temper$Day ; Temp<-temper$Temp ; \n\ntemp<- cbind (Day, Temp)\n\n#temp [,2]\n\np<- 0.558626306252032\nACT <- 1.66764519286918\n\nVc<-((CTM-temp[,2])/(CTM-CTO))\nVr<-((RTM-temp[,2])/(RTM-RTO))\n\n\ncomp<- cbind (Day, Temp, Vc, Vr)\n\n\nbio<-NULL\nM<- length(Day) #number of days iterated\nfor (i in 1:M)\n{\n\nweight<- function(Day)\n{\nW<-NULL\n\tif (Day[i]==1) W[i] <- Wo\n\t{W[i] <- ((bio[i-1,1]*bio[i-1,9])/Ef)\n\t}\n\tW\n}\n\nW<-weight(Day)\n#W<-Wo\n\nC<- p*CA*(W^CB)*((comp[,3]^Xc)*(exp(Xc*(1-comp[,3]))))*Pc\n\nASMR<- (ACT*RA*(W^(RB))*((comp[,4]^Xa)*(exp(Xa*(1-comp[,4])))))\n\nSMR<- (ASMR/ACT)\n\nA<- (ASMR-SMR)\n\nF<- (FA*(comp[,2]^FB)*(exp(FG*p))*C)\n\nU<- (UA*(comp[,2]^UB)*(exp(UG*p))*(C-F))\n\nSDA<- (S*(C-F))\n\nGr<- (C-(ASMR+F+U+SDA))\n\nbio<- rbind(c(W, C, ASMR, SMR, A, F, U, SDA, Gr))\n\ndimnames (bio) <-list(NULL, c\n(\"W\", \"C\", \"ASMR\", \"SMR\", \"A\", \"F\", \"U\", \"SDA\", \"Gr\"))\n\n}\n\nbio\n\n\nI would be grateful for any suggestions people might have.\n\nThanks, \n\nMike\n\n\n\n-- \nMichael Rennie\nM.Sc. Candidate\nUniversity of Toronto at Mississauga\n3359 Mississauga Rd. N.\nMississauga ON  L5L 1C6\nPh: 905-828-5452  Fax: 905-828-3792",
+      "body_snippet": "I feel greedy posting for help twice in one day- please forgive me, but the \nthesis can't wait.\n\nI have been trying to get an ?if\nelse? statement working in a loop I am \nwriting, in which I specify a ",
+      "thread_id": "thread-cab33cc8aff0",
+      "thread_depth": 0,
+      "month": "2003-06"
+    },
+    {
       "id": "msg-85309c9c4c76",
       "message_id": "<3F0072D9.11852.1C96E8@localhost>",
       "from_name": "kjetil brinchmann halvorsen",
@@ -21980,51 +22028,21 @@
       "month": "2003-06"
     },
     {
-      "id": "msg-43165e1b3c39",
-      "message_id": "<1057025460.3f00edb46b6d9@webmail.utm.utoronto.ca>",
-      "from_name": "Michael Rennie",
-      "from_email_hash": "21f0429dfd834f49c15a33cf25cf3a0f921c55154f7725384248108f817c0a83",
-      "date": "2003-06-30T22:11:00-04:00",
-      "subject": "[R] Creating a loop that works....",
-      "subject_clean": "Creating a loop that works....",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi there,\n\nFirst off, thanks to everyone who has helped me so far.  Sorry to keep \npestering you all.\n\nI'm including my code here, and I will comment down it where it is that I am \nhaving problems figuring out how to write this damn thing.\n\n\n> temper <- scan(\"temp2.dat\", na.strings = \".\", list(Day=0, Temp=0))\nRead 366 records\n> \n> Day <- temper$Day ; Temp<-temper$Temp ; \n> \n> temp<- cbind (Day, Temp)\n> #Day = number of days modelled, Temp = daily avg. temp.\n> #temp [,2]\n> \n> p<- 0.558626306252032\n> ACT <- 1.66764519286918\n> \n> Vc<-((CTM-temp[,2])/(CTM-CTO))\n> Vr<-((RTM-temp[,2])/(RTM-RTO))\n> \n> \n> comp<- cbind (Day, Temp, Vc, Vr)\n> \n> \n> bio<-NULL\n> M<- length(Day) #number of days iterated\n> for (i in 1:M)\n+ {\n+ \n+ weight<- function(Day)\n+ {\n+ W<-NULL\n+ \tif (Day[i]==1) {W[i] <- Wo}\n+ else    if (Day[i]>1) {W[i] <- ((bio[i-1,1]*bio[i-1,9])/Ef)\n+ \t}\n+ \tW\n+ }\n+ \n+ W<-weight(Day)\n\nThe problem, as many of you have already identified, is right here. I hope I \nfinally have the syntax right, but even if the \"if else\" is coded properly, I \ndon't think R can find the values in the second condition I list. I need W in \neach step of the iteration to change slightly, based on the mess of \ncalculations below (which are using parameters that I have already specified).  \nAfter all the calculations are made, I hope to get values in bio[i,1] and bio\n[i,9] corresponding to the iteration that just occured, then return to the top \nof the loop to combine them into the value of W for the next iteration. What I \nthink is happening here is that R is looking for values in the condition before \nthey are actually there- the way I've written it, they can't be there until I \nget past the conditional step.  Which means I am coding this all wrong.  That \nsaid, I'm not sure how else to do it;  the value of W in the next iteration is \ndependent on the values of Gr and W in the previous iteration, with the \nexception of the first one (Day=1).  I've tried defining \"bio\" as \n\nbio<-matrix(NA, ncol=9, nrow=366)\n\nbut that doesn't help either.\n\nPerhaps my rbind at the end of the file is incorrect? I think maybe I'm getting \nmixed up between calculating vectors and values-- should I be specifying [i] \nfor everything below where I am now specifying vecotrs?  \n\n+ #W<-Wo\n+ \n+ C<- p*CA*(W^CB)*((comp[,3]^Xc)*(exp(Xc*(1-comp[,3]))))*Pc\n+ \n+ ASMR<- (ACT*RA*(W^(RB))*((comp[,4]^Xa)*(exp(Xa*(1-comp[,4])))))\n+ \n+ SMR<- (ASMR/ACT)\n+ \n+ A<- (ASMR-SMR)\n+ \n+ F<- (FA*(comp[,2]^FB)*(exp(FG*p))*C)\n+ \n+ U<- (UA*(comp[,2]^UB)*(exp(UG*p))*(C-F))\n+ \n+ SDA<- (S*(C-F))\n+ \n+ Gr<- (C-(ASMR+F+U+SDA))\n+ #Day, Temp, Vc, Vr, W, C, ASMR, SMR, A, F, U, SDA, Gr)\n+ \n+ bio<- rbind(c(W, C, ASMR, SMR, A, F, U, SDA, Gr))\n+ \n+ dimnames (bio) <-list(NULL, c\n(\"W\", \"C\", \"ASMR\", \"SMR\", \"A\", \"F\", \"U\", \"SDA\", \"Gr\"))\n+ \n+ }\nError: length of dimnames[2] not equal to array extent\nExecution halted\n\n\n-- \nMichael Rennie\nM.Sc. Candidate\nUniversity of Toronto at Mississauga\n3359 Mississauga Rd. N.\nMississauga ON  L5L 1C6\nPh: 905-828-5452  Fax: 905-828-3792",
-      "body_snippet": "Hi there,\n\nFirst off, thanks to everyone who has helped me so far.  Sorry to keep \npestering you all.\n\nI'm including my code here, and I will comment down it where it is that I am \nhaving problems fig",
-      "thread_id": "thread-43165e1b3c39",
-      "thread_depth": 0,
-      "month": "2003-06"
-    },
-    {
-      "id": "msg-7802df78c862",
-      "message_id": "<001101c33f7f$1d456730$73c463d8@plaza.ds.adp.com>",
-      "from_name": "M. Edward Borasky",
-      "from_email_hash": "ca56fff0cbf99ec37fdbd427b063dd6d4e45c66700ec7a65997b920b051af297",
-      "date": "2003-06-30T20:16:06-07:00",
-      "subject": "[R] Fitting inter-arrival time data",
-      "subject_clean": "Fitting inter-arrival time data",
-      "in_reply_to": "<20030630074922.3AE427CA825@tango.stat.unipd.it>",
-      "references": [],
-      "body_plain": "Unfortunately, the data are *non-negative*, not strictly positive. Zero is a\nvalid and frequent inter-arrival time. It is, IIRC, the most likely value of\na (negative) exponential distribution.\n\n-- \nM. Edward (Ed) Borasky\nmailto:znmeb at borasky-research.net\nhttp://www.borasky-research.net\n \n\"Suppose that tonight, while you sleep, a miracle happens - you wake up\ntomorrow with what you have longed for! How will you discover that a miracle\nhappened? How will your loved ones? What will be different? What will you\nnotice? What do you need to explode into tomorrow with grace, power, love,\npassion and confidence?\" -- L. Michael Hall, PhD\n\n\n> -----Original Message-----\n[snip]\n\n> if you data are positive, you could use\n> \n>   sm.density(..., positive=TRUE)",
-      "body_snippet": "Unfortunately, the data are *non-negative*, not strictly positive. Zero is a\nvalid and frequent inter-arrival time. It is, IIRC, the most likely value of\na (negative) exponential distribution.\n\n-- \nM.",
-      "thread_id": "thread-1039d084515f",
-      "thread_depth": 4,
-      "month": "2003-06"
-    },
-    {
-      "id": "msg-8560b861c36e",
-      "message_id": "<001201c33f81$87bc6df0$73c463d8@plaza.ds.adp.com>",
-      "from_name": "M. Edward Borasky",
-      "from_email_hash": "ca56fff0cbf99ec37fdbd427b063dd6d4e45c66700ec7a65997b920b051af297",
-      "date": "2003-06-30T20:33:19-07:00",
-      "subject": "[R] Fitting inter-arrival time data",
-      "subject_clean": "Fitting inter-arrival time data",
-      "in_reply_to": "<Pine.LNX.4.44.0306300756140.32578-100000@gannet.stats>",
-      "references": [],
-      "body_plain": "Thanks!! It does look like the easiest thing is direct ML; the code for a\nnormal mixture is in the book, so all I have to do is modify that for a sum\nof a hyper-exponential, for which I have an approximate mean and CV, and a\nnormal, for which I have an approximate mean and SD.\n\nI have two big peaks, one near zero which is probably hyperexponential with\na CV about 3, and the other near 600 seconds (a refresh that happens every\nten minutes) which looks Gaussian with a very small standard deviation. I\nthink what I'm going to do is fit the two peaks using ML, since I know where\nthey are, then subtract them out and look at the structure of the residuals.\nThe stuff over 600 seconds is sparse and totally uninteresting. After I'm\ndone with this, I get to look at the distribution of the network traffic.\nThe good news is that I get those inter-arrival times to the nearest\nmicrosecond. :)\n\n-- \nM. Edward (Ed) Borasky\nmailto:znmeb at borasky-research.net\nhttp://www.borasky-research.net\n \n\"Suppose that tonight, while you sleep, a miracle happens - you wake up\ntomorrow with what you have longed for! How will you discover that a miracle\nhappened? How will your loved ones? What will be different? What will you\nnotice? What do you need to explode into tomorrow with grace, power, love,\npassion and confidence?\" -- L. Michael Hall, PhD\n\n\n> -----Original Message-----\n[snip]\n\n> For all of these see MASS (the book) and its on-line complements.",
-      "body_snippet": "Thanks!! It does look like the easiest thing is direct ML; the code for a\nnormal mixture is in the book, so all I have to do is modify that for a sum\nof a hyper-exponential, for which I have an approx",
-      "thread_id": "thread-1039d084515f",
-      "thread_depth": 4,
+      "id": "msg-85309c9c4c76",
+      "message_id": "<3F0072D9.11852.1C96E8@localhost>",
+      "from_name": "kjetil brinchmann halvorsen",
+      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
+      "date": "2003-06-30T17:26:49-04:00",
+      "subject": "[R] sample from a list of names for random groups",
+      "subject_clean": "sample from a list of names for random groups",
+      "in_reply_to": "<200306301711.13400.daniele.medri@libero.it>",
+      "references": [
+        "<Pine.LNX.4.44.0306301319030.3913-100000@gannet.stats>"
+      ],
+      "body_plain": "On 30 Jun 2003 at 17:11, Daniele Medri wrote:\n\nYou should really try to specify better what you want. Lets try\n\nnames # character vector with your names\nm <- length(names)\nn1 <- 5\nn2 <- 10\nmuestra <- sample(names, m, replace=FALSE)\nmuestra1 <- muestra[1:n1]\nmuestra2 <- muestra[(n1+1):(n1+n2)]\n\nIs this what you want?\n\nKjetil Halvorsen\n\n\n\n> Dear R-users,\n> \n> I need to sample from a list of names (people) and create 2 random groups with \n> unique item. Sure sample() function is a good point to start but I can't find \n> example to solve my work.\n> \n> any tips? example?\n> \n> Thank\n> -- \n> Daniele Medri\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "On 30 Jun 2003 at 17:11, Daniele Medri wrote:\n\nYou should really try to specify better what you want. Lets try\n\nnames # character vector with your names\nm <- length(names)\nn1 <- 5\nn2 <- 10\nmuestra <- ",
+      "thread_id": "thread-81e0f186755d",
+      "thread_depth": 3,
       "month": "2003-06"
     }
   ],
@@ -22483,6 +22501,17 @@
       "started": "2003-06-02T17:47:16+03:00",
       "last_reply": "2003-06-02T17:47:16+03:00",
       "root_message_id": "msg-20b9dc31a878"
+    },
+    {
+      "id": "thread-35f9edb7f10d",
+      "subject": "Help with factorized argument in solve.QP",
+      "message_count": 1,
+      "participants": [
+        "David S. Khabie-Zeitoune"
+      ],
+      "started": "2003-06-02T18:11:07+01:00",
+      "last_reply": "2003-06-02T18:11:07+01:00",
+      "root_message_id": "msg-35f9edb7f10d"
     },
     {
       "id": "thread-f99f2fc3e78c",
@@ -28995,7 +29024,7 @@
     {
       "id": "thread-1039d084515f",
       "subject": "Returning contour co-ordinates",
-      "message_count": 10,
+      "message_count": 8,
       "participants": [
         "(Ted Harding)",
         "Adelchi Azzalini",
@@ -29006,7 +29035,7 @@
         "Prof Brian Ripley"
       ],
       "started": "2003-06-27T18:03:44+09:30",
-      "last_reply": "2003-06-30T20:33:19-07:00",
+      "last_reply": "2003-06-30T09:49:22+02:00",
       "root_message_id": "msg-1039d084515f"
     },
     {
@@ -29248,7 +29277,7 @@
     {
       "id": "thread-d6464c5af335",
       "subject": "if else statements in R",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Michael Rennie",
         "kjetil brinchmann halvorsen"
@@ -29318,7 +29347,7 @@
     {
       "id": "thread-81e0f186755d",
       "subject": "repeatedly applying function with matrix-rows as argument",
-      "message_count": 6,
+      "message_count": 7,
       "participants": [
         "Barry Rowlingson",
         "Daniele Medri",
@@ -29403,6 +29432,17 @@
       "root_message_id": "msg-cab33cc8aff0"
     },
     {
+      "id": "thread-cab33cc8aff0",
+      "subject": "Constructing loops in which i+1st element depends on ith",
+      "message_count": 1,
+      "participants": [
+        "Michael Rennie"
+      ],
+      "started": "2003-06-30T17:01:01-04:00",
+      "last_reply": "2003-06-30T17:01:01-04:00",
+      "root_message_id": "msg-cab33cc8aff0"
+    },
+    {
       "id": "thread-1dd50702011b",
       "subject": "pairs and points",
       "message_count": 1,
@@ -29424,17 +29464,6 @@
       "started": "2003-06-30T19:12:30+00:00",
       "last_reply": "2003-06-30T19:12:30+00:00",
       "root_message_id": "msg-46dd0615a977"
-    },
-    {
-      "id": "thread-43165e1b3c39",
-      "subject": "Creating a loop that works....",
-      "message_count": 1,
-      "participants": [
-        "Michael Rennie"
-      ],
-      "started": "2003-06-30T22:11:00-04:00",
-      "last_reply": "2003-06-30T22:11:00-04:00",
-      "root_message_id": "msg-43165e1b3c39"
     }
   ]
 }

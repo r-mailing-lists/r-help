@@ -1514,79 +1514,6 @@
       "thread_id": "thread-bf5daa0fdba8",
       "thread_depth": 1,
       "month": "2024-11"
-    },
-    {
-      "id": "msg-de07af7efadd",
-      "message_id": "<CABghstS905fhe3rLmbJtfBxDhzLcpqwmCD1jObsNhqVmTznkQw@mail.gmail.com>",
-      "from_name": "Ben Bolker",
-      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
-      "date": "2024-11-30T21:35:38-05:00",
-      "subject": "[R] Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "subject_clean": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "in_reply_to": "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>",
-      "references": [
-        "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>"
-      ],
-      "body_plain": "I think as.numeric(! duplicated(group)) might do this for you ...\n\nOn Sat, Nov 30, 2024, 9:27 PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> Dear R help folks,\n>\n> First my apologizes for sending several related questions to the list\n> server. I am trying to learn how to manipulate data in R . . . and am\n> having difficulty getting my program to work. I greatly appreciate the help\n> and support list member give!\n>\n> I am trying to write a program that will run through a data frame\n> organized by ID and for the first line of each new group of data lines that\n> has the same ID create a new variable first that will be 1 for the first\n> line of the group and 0 for all other lines.\n>\n> e.g. if my original data is\n>  olddata\n>    ID date\n>     1     1\n>     1     1\n>     1     2\n>     1     2\n>     1     3\n>     1     3\n>     1     4\n>     1     4\n>     1     5\n>     1     5\n>     2     5\n>     2     5\n>     2     5\n>     2     6\n>     2     6\n>     2     6\n>     3   10\n>     3   10\n>\n> the new data will be\n> newdata\n>    ID date  first\n>     1     1       1\n>     1     1       0\n>     1     2       0\n>     1     2       0\n>     1     3       0\n>     1     3       0\n>     1     4       0\n>     1     4       0\n>     1     5       0\n>     1     5       0\n>     2     5       1\n>     2     5       0\n>     2     5       0\n>     2     6       0\n>     2     6       0\n>     2     6       0\n>     3   10       1\n>     3   10       0\n>\n> When I run the program below, I receive the following error:\n> Error in df[, \"ID\"] : incorrect number of dimensions\n>\n> My code:\n> # Create data.frame\n> ID <- c(rep(1,10),rep(2,6),rep(3,2))\n> date <- c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2),\n>           rep(5,3),rep(6,3),rep(10,2))\n> olddata <- data.frame(ID=ID,date=date)\n> class(olddata)\n> cat(\"This is the original data frame\",\"\\n\")\n> print(olddata)\n>\n> # This function is supposed to identify the first row\n> # within each level of ID and, for the first row, set\n> # the variable first to 1, and for all rows other than\n> # the first row set first to 0.\n> mydoit <- function(df){\n>   value <- ifelse (first(df[,\"ID\"]),1,0)\n>   cat(\"value=\",value,\"\\n\")\n>   df[,\"first\"] <- value\n> }\n> newdata <- aggregate(olddata,list(olddata[,\"ID\"]),mydoit)\n>\n> Thank you,\n> John\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> PI Biostatistics and Informatics Core, University of Maryland School of\n> Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology and Paliative Care,\n> 10 North Greene Street\n> <https://www.google.com/maps/search/10+North+Greene+Street?entry=gmail&source=g>\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I think as.numeric(! duplicated(group)) might do this for you ...\n\nOn Sat, Nov 30, 2024, 9:27 PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> Dear R help folks,\n>\n> First my apologizes for se",
-      "thread_id": "thread-de07af7efadd",
-      "thread_depth": 0,
-      "month": "2024-11"
-    },
-    {
-      "id": "msg-12d25d1f7613",
-      "message_id": "<600b676e-9dab-8f64-e492-39ad4f4ca281@binghamton.edu>",
-      "from_name": "Christopher W. Ryan",
-      "from_email_hash": "1713305274d2c1816a07f0aa50c9577759f9e9c6829b63a608da0a2c0dd2c647",
-      "date": "2024-11-30T21:46:57-05:00",
-      "subject": "[R] Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "subject_clean": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "in_reply_to": "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>",
-      "references": [
-        "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>"
-      ],
-      "body_plain": "Personally, I'd do this in the tidyverse with dplyr and its row_number()\nfunction.\n\nolddata %>% group_by(ID) %>% mutate(first = as.integer(row_number() == 1))\n\n--Chris Ryan\n\nSorkin, John wrote:\n> ID <- c(rep(1,10),rep(2,6),rep(3,2))\n> date <- c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2),\n>           rep(5,3),rep(6,3),rep(10,2))\n> olddata <- data.frame(ID=ID,date=date)",
-      "body_snippet": "Personally, I'd do this in the tidyverse with dplyr and its row_number()\nfunction.\n\nolddata %>% group_by(ID) %>% mutate(first = as.integer(row_number() == 1))\n\n--Chris Ryan\n\nSorkin, John wrote:\n> ID <",
-      "thread_id": "thread-12d25d1f7613",
-      "thread_depth": 0,
-      "month": "2024-11"
-    },
-    {
-      "id": "msg-d8b486fb92e9",
-      "message_id": "<f2250299-b8b5-a8a5-aacb-3779e51c397c@binghamton.edu>",
-      "from_name": "Christopher W. Ryan",
-      "from_email_hash": "1713305274d2c1816a07f0aa50c9577759f9e9c6829b63a608da0a2c0dd2c647",
-      "date": "2024-11-30T21:51:48-05:00",
-      "subject": "[R] Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "subject_clean": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "in_reply_to": "<600b676e-9dab-8f64-e492-39ad4f4ca281@binghamton.edu>",
-      "references": [
-        "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>",
-        "<600b676e-9dab-8f64-e492-39ad4f4ca281@binghamton.edu>"
-      ],
-      "body_plain": "Sorry, for completeness:\n\nlibrary(dplyr)\nolddata %>% group_by(ID) %>% mutate(first = as.integer(row_number() == 1))\n\n--Chris Ryan\n\n\nChristopher W. Ryan wrote:\n> Personally, I'd do this in the tidyverse with dplyr and its row_number()\n> function.\n> \n> olddata %>% group_by(ID) %>% mutate(first = as.integer(row_number() == 1))\n> \n> --Chris Ryan\n> \n> Sorkin, John wrote:\n>> ID <- c(rep(1,10),rep(2,6),rep(3,2))\n>> date <- c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2),\n>>           rep(5,3),rep(6,3),rep(10,2))\n>> olddata <- data.frame(ID=ID,date=date)",
-      "body_snippet": "Sorry, for completeness:\n\nlibrary(dplyr)\nolddata %>% group_by(ID) %>% mutate(first = as.integer(row_number() == 1))\n\n--Chris Ryan\n\n\nChristopher W. Ryan wrote:\n> Personally, I'd do this in the tidyvers",
-      "thread_id": "thread-12d25d1f7613",
-      "thread_depth": 1,
-      "month": "2024-11"
-    },
-    {
-      "id": "msg-5237ee03ee77",
-      "message_id": "<CAGxFJbQzXRAQzgnyS7QTiN3ewCkLiMvpJb6AiEhTp4EvstesHw@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
-      "date": "2024-11-30T20:33:42-08:00",
-      "subject": "[R] Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "subject_clean": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "in_reply_to": "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>",
-      "references": [
-        "<DM6PR03MB5049ED4EE95641C693B3D7EAE2342@DM6PR03MB5049.namprd03.prod.outlook.com>"
-      ],
-      "body_plain": "May I ask *why* you want to do this?\n\nIt sounds to me like like you're using SAS-like strategies for your\ndata analysis rather than R-like.\n\n-- Bert\n\n-- Bert\n\nOn Sat, Nov 30, 2024 at 6:27?PM Sorkin, John <jsorkin at som.umaryland.edu> wrote:\n>\n> Dear R help folks,\n>\n> First my apologizes for sending several related questions to the list server. I am trying to learn how to manipulate data in R . . . and am having difficulty getting my program to work. I greatly appreciate the help and support list member give!\n>\n> I am trying to write a program that will run through a data frame organized by ID and for the first line of each new group of data lines that has the same ID create a new variable first that will be 1 for the first line of the group and 0 for all other lines.\n>\n> e.g. if my original data is\n>  olddata\n>    ID date\n>     1     1\n>     1     1\n>     1     2\n>     1     2\n>     1     3\n>     1     3\n>     1     4\n>     1     4\n>     1     5\n>     1     5\n>     2     5\n>     2     5\n>     2     5\n>     2     6\n>     2     6\n>     2     6\n>     3   10\n>     3   10\n>\n> the new data will be\n> newdata\n>    ID date  first\n>     1     1       1\n>     1     1       0\n>     1     2       0\n>     1     2       0\n>     1     3       0\n>     1     3       0\n>     1     4       0\n>     1     4       0\n>     1     5       0\n>     1     5       0\n>     2     5       1\n>     2     5       0\n>     2     5       0\n>     2     6       0\n>     2     6       0\n>     2     6       0\n>     3   10       1\n>     3   10       0\n>\n> When I run the program below, I receive the following error:\n> Error in df[, \"ID\"] : incorrect number of dimensions\n>\n> My code:\n> # Create data.frame\n> ID <- c(rep(1,10),rep(2,6),rep(3,2))\n> date <- c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2),\n>           rep(5,3),rep(6,3),rep(10,2))\n> olddata <- data.frame(ID=ID,date=date)\n> class(olddata)\n> cat(\"This is the original data frame\",\"\\n\")\n> print(olddata)\n>\n> # This function is supposed to identify the first row\n> # within each level of ID and, for the first row, set\n> # the variable first to 1, and for all rows other than\n> # the first row set first to 0.\n> mydoit <- function(df){\n>   value <- ifelse (first(df[,\"ID\"]),1,0)\n>   cat(\"value=\",value,\"\\n\")\n>   df[,\"first\"] <- value\n> }\n> newdata <- aggregate(olddata,list(olddata[,\"ID\"]),mydoit)\n>\n> Thank you,\n> John\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;\n> PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology and Paliative Care,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "May I ask *why* you want to do this?\n\nIt sounds to me like like you're using SAS-like strategies for your\ndata analysis rather than R-like.\n\n-- Bert\n\n-- Bert\n\nOn Sat, Nov 30, 2024 at 6:27?PM Sorkin, J",
-      "thread_id": "thread-5237ee03ee77",
-      "thread_depth": 0,
-      "month": "2024-11"
     }
   ],
   "threads": [
@@ -1875,39 +1802,6 @@
       "started": "2024-11-29T23:12:31-05:00",
       "last_reply": "2024-11-30T09:46:17-08:00",
       "root_message_id": "msg-a1694fd0944a"
-    },
-    {
-      "id": "thread-5237ee03ee77",
-      "subject": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "message_count": 1,
-      "participants": [
-        "Bert Gunter"
-      ],
-      "started": "2024-11-30T20:33:42-08:00",
-      "last_reply": "2024-11-30T20:33:42-08:00",
-      "root_message_id": "msg-5237ee03ee77"
-    },
-    {
-      "id": "thread-de07af7efadd",
-      "subject": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "message_count": 1,
-      "participants": [
-        "Ben Bolker"
-      ],
-      "started": "2024-11-30T21:35:38-05:00",
-      "last_reply": "2024-11-30T21:35:38-05:00",
-      "root_message_id": "msg-de07af7efadd"
-    },
-    {
-      "id": "thread-12d25d1f7613",
-      "subject": "Identify first row of each ID within a data frame, create a variable first =1 for the first row and first=0 of all other rows",
-      "message_count": 2,
-      "participants": [
-        "Christopher W. Ryan"
-      ],
-      "started": "2024-11-30T21:46:57-05:00",
-      "last_reply": "2024-11-30T21:51:48-05:00",
-      "root_message_id": "msg-12d25d1f7613"
     }
   ]
 }

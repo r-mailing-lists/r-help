@@ -970,6 +970,25 @@
       "month": "2023-10"
     },
     {
+      "id": "msg-2d147fe1438c",
+      "message_id": "<d50b7c38-f1e8-4874-ad21-037cb7e7376c@lisse.NA>",
+      "from_name": "Dr Eberhard Lisse",
+      "from_email_hash": "654b53c0ea522c1d0ee4954fe73bc98302009a746261ac5cfe44edde2a8b1d7c",
+      "date": "2023-10-07T10:45:06+02:00",
+      "subject": "[R] R Gigs",
+      "subject_clean": "R Gigs",
+      "in_reply_to": "<CAGxFJbRyWgjkkoK0yzDM58EgW4w+nbW74YJTwfSq65=vuQ7GFg@mail.gmail.com>",
+      "references": [
+        "<CAED7jgPQ7niuwH4V0XBz0J0NPjzwZGiWN7e_3_vQvYgc7QDzow@mail.gmail.com>",
+        "<CAGxFJbRyWgjkkoK0yzDM58EgW4w+nbW74YJTwfSq65=vuQ7GFg@mail.gmail.com>"
+      ],
+      "body_plain": "LinkedIn is what seems to go these days\n\nel\n\nOn 2023-10-06 22:35 , Bert Gunter wrote:\n> May be an age gap here, but I assume \"gigs\" = freelance jobs. If so,\n> https://stat.ethz.ch/mailman/listinfo/r-sig-jobs\n> might be useful. As well as an online search in all the usual places.\n> Otherwise, please excuse my out-of-date ignorance.\n[...]",
+      "body_snippet": "LinkedIn is what seems to go these days\n\nel\n\nOn 2023-10-06 22:35 , Bert Gunter wrote:\n> May be an age gap here, but I assume \"gigs\" = freelance jobs. If so,\n> https://stat.ethz.ch/mailman/listinfo/r-s",
+      "thread_id": "thread-41b8e5adcb87",
+      "thread_depth": 2,
+      "month": "2023-10"
+    },
+    {
       "id": "msg-5e92ef1cfdd3",
       "message_id": "<01806913-0cb7-0eef-6cc6-c61b535b4a12@statistik.tu-dortmund.de>",
       "from_name": "Uwe Ligges",
@@ -4243,26 +4262,6 @@
       "thread_id": "thread-948e40676965",
       "thread_depth": 1,
       "month": "2023-10"
-    },
-    {
-      "id": "msg-2b32e5885ed1",
-      "message_id": "<32DB26CD-B94E-40FF-BCC1-D85221D466A7@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "960cf691f34cc2709527dabb6de874fb0a4c64edacd6eb5108b4fb7e2aa36670",
-      "date": "2023-10-31T23:08:37-07:00",
-      "subject": "[R] running crossvalidation many times MSE for Lasso regression",
-      "subject_clean": "running crossvalidation many times MSE for Lasso regression",
-      "in_reply_to": "<CAGxFJbQ26vOFLgHbSiqObOz+amAY94xVMx0d8UUTg8OPaLLdjg@mail.gmail.com>",
-      "references": [
-        "<1823742611.1400069.1698006976815.ref@mail.yahoo.com>",
-        "<1823742611.1400069.1698006976815@mail.yahoo.com>",
-        "<CAGxFJbQ26vOFLgHbSiqObOz+amAY94xVMx0d8UUTg8OPaLLdjg@mail.gmail.com>"
-      ],
-      "body_plain": "> On Oct 22, 2023, at 4:01 PM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n> \n> No error message shown Please include the error message so that it is\n> not necessary to rerun your code. This might enable someone to see the\n> problem without running the code (e.g. downloading packages, etc.)\n> \n> -- Bert\n> \n> On Sun, Oct 22, 2023 at 1:36?PM varin sacha via R-help\n> <r-help at r-project.org> wrote:\n>> \n>> Dear R-experts,\n>> \n>> Here below my R code with an error message. Can somebody help me to fix this error?\n>> Really appreciate your help.\n>> \n>> Best,\n>> \n>> ############################################################\n>> # MSE CROSSVALIDATION Lasso regression\n>> \n>> library(glmnet)\n>> \n>> \n>> x1=c(34,35,12,13,15,37,65,45,47,67,87,45,46,39,87,98,67,51,10,30,65,34,57,68,98,86,45,65,34,78,98,123,202,231,154,21,34,26,56,78,99,83,46,58,91)\n>> x2=c(1,3,2,4,5,6,7,3,8,9,10,11,12,1,3,4,2,3,4,5,4,6,8,7,9,4,3,6,7,9,8,4,7,6,1,3,2,5,6,8,7,1,1,2,9)\n>> y=c(2,6,5,4,6,7,8,10,11,2,3,1,3,5,4,6,5,3.4,5.6,-2.4,-5.4,5,3,6,5,-3,-5,3,2,-1,-8,5,8,6,9,4,5,-3,-7,-9,-9,8,7,1,2)\n>> T=data.frame(y,x1,x2)\n>> \n>> z=matrix(c(x1,x2), ncol=2)\n>> cv_model=glmnet(z,y,alpha=1)\n>> best_lambda=cv_model$lambda.min\n>> best_lambda\n>> \n>> \n>> # Create a list to store the results\n>> lst<-list()\n>> \n>> # This statement does the repetitions (looping)\n>> for(i in 1 :1000) {\n>> \n>> n=45\n>> \n>> p=0.667\n>> \n>> sam=sample(1 :n,floor(p*n),replace=FALSE)\n>> \n>> Training =T [sam,]\n>> Testing = T [-sam,]\n>> \n>> test1=matrix(c(Testing$x1,Testing$x2),ncol=2)\n>> \n>> predictLasso=predict(cv_model, newx=test1)\n>> \n>> \n>> ypred=predict(predictLasso,newdata=test1)\n\nThe error I got was:\n\nError in UseMethod(\"predict\") : \n  no applicable method for 'predict' applied to an object of class \"c('matrix', 'array', 'double', 'numeric')\"\n\n\nI'm not sure why the name of the object was cv_model since it was not created as a cross-validation result.\n\nThe loops called predict() twice and it was the second call that produced the error since the predictLasso object was not a glmnet classed object.\n\nIf the OP had left out the second use of predict and then subtracted predictLasso from the y vector a result would have appeared\n\ny=T[-sam,]$y\nMSE = mean((y-predictLasso)^2)\n...\n> mean(unlist(lst))\n[1] 23.39621\n\nWhether this is meaningful is hard to tell. It also makes the fundamental error of overwriting the original data object `y` with another intermediate result.\n\n-- \nDavid\n>> y=T[-sam,]$y\n>> \n>> MSE = mean((y-ypred)^2)\n>> MSE\n>> lst[i]<-MSE\n>> }\n>> mean(unlist(lst))\n>> ##################################################################\n>> \n>> \n>> \n>> \n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "> On Oct 22, 2023, at 4:01 PM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n> \n> No error message shown Please include the error message so that it is\n> not necessary to rerun your code. This might ",
-      "thread_id": "thread-6f757d66fc99",
-      "thread_depth": 2,
-      "month": "2023-10"
     }
   ],
   "threads": [
@@ -4429,7 +4428,7 @@
     {
       "id": "thread-41b8e5adcb87",
       "subject": "R Gigs",
-      "message_count": 6,
+      "message_count": 7,
       "participants": [
         "Bert Gunter",
         "Dr Eberhard Lisse",
@@ -4763,11 +4762,10 @@
     {
       "id": "thread-6f757d66fc99",
       "subject": "running crossvalidation many times MSE for Lasso regression",
-      "message_count": 11,
+      "message_count": 10,
       "participants": [
         "Ben Bolker",
         "Bert Gunter",
-        "David Winsemius",
         "Duncan Murdoch",
         "Jin Li",
         "Martin Maechler",
@@ -4775,7 +4773,7 @@
         "varin sacha"
       ],
       "started": "2023-10-22T20:36:16+00:00",
-      "last_reply": "2023-10-31T23:08:37-07:00",
+      "last_reply": "2023-10-24T19:02:52+00:00",
       "root_message_id": "msg-6f757d66fc99"
     },
     {

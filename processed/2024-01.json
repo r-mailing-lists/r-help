@@ -1604,22 +1604,6 @@
       "thread_id": "thread-5413adfa491e",
       "thread_depth": 0,
       "month": "2024-01"
-    },
-    {
-      "id": "msg-301748a153b8",
-      "message_id": "<15EE349C-1593-481E-9A22-2014393B8DB9@noaa.gov>",
-      "from_name": "Roy Mendelssohn - NOAA Federal",
-      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
-      "date": "2024-01-31T15:47:18-08:00",
-      "subject": "[R] Need help testing a problem",
-      "subject_clean": "Need help testing a problem",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "HI All:\n\nWe are trying to figure out a problem that is occurring with a package,  and we need a non-NOAA person with a Windows computer with the latest R to test for us what is failing (but works on Macs and Linux from different sites).  Part of the problem is there is an Akamai service in between that we feel may be messing up things. To do this you would need to be willing to:\n\n1.  install the ?rerddap? package from CRAN,  with all dependencies - or if installed make certain it is the latest\n\n2. make certain that the packages ?curl?, ?crul? and ?http? are up to date.  \n\n3.  Run the following:\n\n# load rerddap\nlibrary(\"rerddap?)\n# delete rerddap cache just in case\ncache_delete_all()\n# get the data extract\ndat <- tabledap('FED_JSATS_detects', url = \"https://oceanview.pfeg.noaa.gov/erddap/\", 'study_id=\"RBDD_2018\"', callopts = list(verbose = TRUE), store = memory())\n\n4. If it works also do:\n\n head(dat)\n\nEither way if all the output could be sent to me it would be very helpful.  The download may take a couple of minutes,\nthe file size is about 3.5MB.\n\nIf anyone has concerns about what is being downloaded you can check the ?rerddap? docs to see these are all legitimate ?rerddap' commands,  the datasets being accessed is https://oceanview.pfeg.noaa.gov/erddap/tabledap/FED_JSATS_detects.html.  The downloaded file goes to R temp space, and its location,  if successful is given in the output.\n\nThanks to anyone willing to help.  One of my issues is I have been unable to reproduce the error,  but I also do not have ready access to a Windows machine.\n\n-ROy\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "HI All:\n\nWe are trying to figure out a problem that is occurring with a package,  and we need a non-NOAA person with a Windows computer with the latest R to test for us what is failing (but works on M",
-      "thread_id": "thread-301748a153b8",
-      "thread_depth": 0,
-      "month": "2024-01"
     }
   ],
   "threads": [
@@ -2003,17 +1987,6 @@
       "started": "2024-01-31T15:05:31+00:00",
       "last_reply": "2024-01-31T15:05:31+00:00",
       "root_message_id": "msg-5413adfa491e"
-    },
-    {
-      "id": "thread-301748a153b8",
-      "subject": "Need help testing a problem",
-      "message_count": 1,
-      "participants": [
-        "Roy Mendelssohn - NOAA Federal"
-      ],
-      "started": "2024-01-31T15:47:18-08:00",
-      "last_reply": "2024-01-31T15:47:18-08:00",
-      "root_message_id": "msg-301748a153b8"
     }
   ]
 }

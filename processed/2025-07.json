@@ -694,24 +694,6 @@
       "thread_id": "thread-7b90ebf971d7",
       "thread_depth": 0,
       "month": "2025-07"
-    },
-    {
-      "id": "msg-554da936f198",
-      "message_id": "<00c901dc028a$86916450$93b42cf0$@sbcglobal.net>",
-      "from_name": "Jeff Reichman",
-      "from_email_hash": "51d6d139afe7517ba530b38dc5f31acb1006b1b4691c17357f22c59c86be7c4f",
-      "date": "2025-07-31T21:18:09-05:00",
-      "subject": "[R] Problem with function gp in package cccp",
-      "subject_clean": "Problem with function gp in package cccp",
-      "in_reply_to": "<cab075897441a370d1d05195d0cb4430@science.iwi.ac.at>",
-      "references": [
-        "<cab075897441a370d1d05195d0cb4430@science.iwi.ac.at>"
-      ],
-      "body_plain": "In gp(F0, g0, A = A, b = b) : No restrictions provided, trying solve()\n\n\nThis likely means that while you've specified A and b, the solver doesn't\nrecognize any inequality (<=) or equality (=) restrictions - because in the\ncontext of the gp() function from the CVXR or similar geometric programming\nlibraries in R, you're expected to provide explicit inequality/equality\nmarkers or properly formatted constraint matrices.\n\nSo what's missing? Probably an argument like ineq = ... or eq = ... to\ndeclare the type of constraint.\n\nHere's how to express your constraint properly, assuming the library expects\ninequalities or equalities to be marked explicitly:\n\n# Properly declare equality constraints\ngp(F0, g0, eq=A, eq.b=b)\n\nOr possibly (depending on the package):\n\ngp(F0, g0, Aeq=A, beq=b)\n\nIf the solver expects inequality constraints:\n\ngp(F0, g0, A=A, b=b, meq=1)  # Indicating 1 equality constraint\n\nJeff Reichman\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of\nkoller at science.iwi.ac.at\nSent: Wednesday, July 30, 2025 2:32 PM\nTo: r-help at r-project.org\nSubject: [R] Problem with function gp in package cccp\n\nDear all!\n\nI tried to solve a simple test example of a geometric program:\nminimize x + y   s.t.   xy = 1\nThe solution should be (1, 1).\n\nI tried:\nF0 <- diag(2)                  #  [m * n] m = number of terms of the \nposynomial, n = number of variables\ng0 <- log(matrix(1,2,1))       #  [m * 1]\nA <-  matrix(c(1,1), 1, 2)     #  one constraint, one row\nb <-  log(matrix(1,1,1))\nRES <- gp(F0, g0, A=A, b=b)\n\nThough I received the correct solution, the function gives a warning:\nIn gp(F0, g0, A = A, b = b) : No restrictions provided, trying solve().\n\nAlso, when I try\nRES <- gp(F0, g0, A=\"A\", b=b)\nor\ngp(F0, g0)\n\nreceiving the same result, I find out, that my equality constraints are not\nconsidered at all.\n\nIn my view, the unconstraint problem should have (0, 0) as a solution, btw.\n\nAm I missing something fundamental?\n\nThanks in advance!\n\nWolfgang\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide\nhttps://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "In gp(F0, g0, A = A, b = b) : No restrictions provided, trying solve()\n\n\nThis likely means that while you've specified A and b, the solver doesn't\nrecognize any inequality (<=) or equality (=) restric",
-      "thread_id": "thread-7b90ebf971d7",
-      "thread_depth": 1,
-      "month": "2025-07"
     }
   ],
   "threads": [
@@ -823,13 +805,12 @@
     {
       "id": "thread-7b90ebf971d7",
       "subject": "Problem with function gp in package cccp",
-      "message_count": 2,
+      "message_count": 1,
       "participants": [
-        "Jeff Reichman",
         "koiier m@iii@g oii scie@ce@iwi@@c@@t"
       ],
       "started": "2025-07-30T21:31:53+02:00",
-      "last_reply": "2025-07-31T21:18:09-05:00",
+      "last_reply": "2025-07-30T21:31:53+02:00",
       "root_message_id": "msg-7b90ebf971d7"
     }
   ]

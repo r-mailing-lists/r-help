@@ -3955,40 +3955,6 @@
       "thread_id": "thread-277b23bf86f3",
       "thread_depth": 0,
       "month": "2021-05"
-    },
-    {
-      "id": "msg-4d8dab17e219",
-      "message_id": "<CANxP2S7JBVVHR0RV79u6ThYEa-4ixFbjNBi2cp6tm84tW-cz6Q@mail.gmail.com>",
-      "from_name": "Luis Fernando García",
-      "from_email_hash": "1878b9964d04236bae5049a109a99c7df137d9a7f596cd8c71cfbb94ddec85aa",
-      "date": "2021-05-31T19:10:31-03:00",
-      "subject": "[R] Plot GEE confindence interval band ggplot2",
-      "subject_clean": "Plot GEE confindence interval band ggplot2",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI want to plot a Generalized Estimating Equation (GEE) model, with\ninteractions  and the confidence interval using a similar style to ggplot2\n. I have tried several packages but all of them produce errors. My idea\n\nI wanted to know if anyone knows a graphical package which works with GEE\nor simular solution\n\nDataset in this link:\nhttps://docs.google.com/spreadsheets/d/1nXerN91Iehe9OM1VGDMS3jnbvvF1tWcuS9bGtlrj_Ss/edit?usp=sharing\n\nThanks!\n\ncode below:\n\nlibrary(geepack)\nlibrary(ggplot2)\nlibrary(visreg)\nlibrary(sjPlot)\n\n#Copy dataset before following the code\n\ndat <- read.delim(\"clipboard\", dec=\",\"); attach(dat)\nhead(dat)\nstr(dat)\nnames(dat)\nm5<- geeglm(tim~Pa*Pt,id=Esp, Gamma(link=log), corstr=\"exchangeable\")\nanova(m5,test=\"Chisq\")\nvisreg(m5, \"Pt\", by=\"Pa\",band=T, overlay=TRUE)\nplot_model(m5, type = \"pred\", terms = c(\"Pa\",\"Pt\"))\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear all,\n\nI want to plot a Generalized Estimating Equation (GEE) model, with\ninteractions  and the confidence interval using a similar style to ggplot2\n. I have tried several packages but all of them",
-      "thread_id": "thread-4d8dab17e219",
-      "thread_depth": 0,
-      "month": "2021-05"
-    },
-    {
-      "id": "msg-32d6de749b02",
-      "message_id": "<CAKZQJMA3TdThL=5+vrivSgqwrASvj2MEn+uYX63=Ow1i8+8MVw@mail.gmail.com>",
-      "from_name": "John Kane",
-      "from_email_hash": "ab7cd5dc3b77be5d02e4b88841fc4f8e5628e164ccc78cfe8437f5caabe2eef3",
-      "date": "2021-05-31T20:25:47-04:00",
-      "subject": "[R] DBDA2E-utilities.R file download",
-      "subject_clean": "DBDA2E-utilities.R file download",
-      "in_reply_to": "<CABxY9BOFo55L5unGckONr6swy7hDJUymsqCd-syjATp5Hh-tMQ@mail.gmail.com>",
-      "references": [
-        "<CABxY9BOFo55L5unGckONr6swy7hDJUymsqCd-syjATp5Hh-tMQ@mail.gmail.com>"
-      ],
-      "body_plain": "If it seems to have installed correctly try:\nlibrary(DBDA2E)\nwhich should load the DBDA at E-specific programmes.\n\n\n\nOn Mon, 31 May 2021 at 16:27, Nick Wray <nickmwray at gmail.com> wrote:\n>\n> Hello I am trying to download the file \"kyusque/DBDA2E-utilities.R\" which\n> is used in following through John Krushke's book on Bayesian stats.\n> According to the net (kyusque/DBDA2E-utilities: Packaged One for\n> DBDA2E-utilities.R in 'Kruschke, J. K. (2015). Doing Bayesian Data\n> Analysis, Second Edition' version 0.1.0 from GitHub (rdrr.io)\n> <https://rdrr.io/github/kyusque/DBDA2E-utilities/>) I needed to\n>\n> install.packages(\"remotes\")\n> remotes::install_github(\"kyusque/DBDA2E-utilities\")\n>\n> which i have done, and seem to have done successfully\n>\n> but I can't get hold of the utilities file.  Does anyone know what I\n> should now do?\n>\n> Thanks Nick Wray\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nJohn Kane\nKingston ON Canada",
-      "body_snippet": "If it seems to have installed correctly try:\nlibrary(DBDA2E)\nwhich should load the DBDA at E-specific programmes.\n\n\n\nOn Mon, 31 May 2021 at 16:27, Nick Wray <nickmwray at gmail.com> wrote:\n>\n> Hello I",
-      "thread_id": "thread-277b23bf86f3",
-      "thread_depth": 1,
-      "month": "2021-05"
     }
   ],
   "threads": [
@@ -4772,25 +4738,13 @@
     {
       "id": "thread-277b23bf86f3",
       "subject": "DBDA2E-utilities.R file download",
-      "message_count": 2,
+      "message_count": 1,
       "participants": [
-        "John Kane",
         "Nick Wray"
       ],
       "started": "2021-05-31T17:31:00+01:00",
-      "last_reply": "2021-05-31T20:25:47-04:00",
+      "last_reply": "2021-05-31T17:31:00+01:00",
       "root_message_id": "msg-277b23bf86f3"
-    },
-    {
-      "id": "thread-4d8dab17e219",
-      "subject": "Plot GEE confindence interval band ggplot2",
-      "message_count": 1,
-      "participants": [
-        "Luis Fernando García"
-      ],
-      "started": "2021-05-31T19:10:31-03:00",
-      "last_reply": "2021-05-31T19:10:31-03:00",
-      "root_message_id": "msg-4d8dab17e219"
     }
   ]
 }

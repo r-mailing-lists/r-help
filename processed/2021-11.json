@@ -7290,92 +7290,6 @@
       "thread_id": "thread-fdd2ad65f0a3",
       "thread_depth": 5,
       "month": "2021-11"
-    },
-    {
-      "id": "msg-8dda4f9b4fdf",
-      "message_id": "<f0a269ea-7bf2-3e57-70fd-88b8c2f2c562@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "960cf691f34cc2709527dabb6de874fb0a4c64edacd6eb5108b4fb7e2aa36670",
-      "date": "2021-11-30T17:22:51-08:00",
-      "subject": "[R] Degree symbol as axis label superscript [RESOLVED]",
-      "subject_clean": "Degree symbol as axis label superscript [RESOLVED]",
-      "in_reply_to": "<96f2116f-93ef-f261-9ecd-2edcd36a54@appl-ecosys.com>",
-      "references": [
-        "<7974ab4-92ad-9a75-98f6-a7914bb8e5@appl-ecosys.com>",
-        "<CAPcHnpQQU6iM8swfbK1+Zws1BurRKm13tdHNrOVBkuiK81725Q@mail.gmail.com>",
-        "<4f69214-7a32-6eb2-6476-85c164d5bbf@appl-ecosys.com>",
-        "<ce6095c5-c2cb-4bfb-f230-2667613b2dd3@appl-ecosys.com>",
-        "<472ac05b-11ac-f7bc-9e26-1cad38c3b96f@comcast.net>",
-        "<96f2116f-93ef-f261-9ecd-2edcd36a54@appl-ecosys.com>"
-      ],
-      "body_plain": "On 11/30/21 1:22 PM, Rich Shepard wrote:\n> On Tue, 30 Nov 2021, David Winsemius wrote:\n>\n>> Really? What was wrong with this?\n>> plot(1, 1, xlab=expression(32^degree) )? # the example given on \n>> ?plotmath\n>\n> David,\n>\n> Absolutely nothing. When there's no specific degree value in the label\n> because the axis represents a range of values there's no digit preceeding\n> the ^ symbol.\n>\n> The axis label is 'Temperature (oC)' with the degree symbol preceeding a\n> character, not following a specific digit.\n\n\nThere's nothing special about following a digit. You can have it follow \nanything. Since you were going to need to quote the parentheses anywa, \nthen have it superscripted above the level of the paren:\n\n\nplot(1,1, ylab = expression(Temperature~\"(\"^degree*C*\")\") ? )\n\n-- \n\nDavid.\n\n>\n> Rich\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "On 11/30/21 1:22 PM, Rich Shepard wrote:\n> On Tue, 30 Nov 2021, David Winsemius wrote:\n>\n>> Really? What was wrong with this?\n>> plot(1, 1, xlab=expression(32^degree) )? # the example given on \n>> ?pl",
-      "thread_id": "thread-65298daa41f7",
-      "thread_depth": 6,
-      "month": "2021-11"
-    },
-    {
-      "id": "msg-1f89e82094a3",
-      "message_id": "<05fe01d7e665$7afa5330$70eef990$@verizon.net>",
-      "from_name": "Avi Gross",
-      "from_email_hash": "d15d515a9b2e56b9091a72b709d627f99458fcd101f28b94c3ef620cf9b37e15",
-      "date": "2021-11-30T22:42:35-05:00",
-      "subject": "[R] Question about Rfast colMins and colMaxs",
-      "subject_clean": "Question about Rfast colMins and colMaxs",
-      "in_reply_to": "<5c27e9c9-3f7e-2d28-bbb8-566586a59c79@shdawson.com>",
-      "references": [
-        "<f6735434-7d5a-c648-c892-0fa1ccc5c774@shdawson.com>",
-        "<CAGxFJbSWcEQ6+wAHMWMbAZN8+H=-MZeAck3oswYK=bTQg9YW1w@mail.gmail.com>",
-        "<a051a615-a38a-e590-ca5d-d23f0c1e0e6c@shdawson.com>",
-        "<CAGxFJbRDXgVq5V7FRv1i+cF_3vJpt9bhfcRiezfjTqc7-YyuAg@mail.gmail.com>",
-        "<5c27e9c9-3f7e-2d28-bbb8-566586a59c79@shdawson.com>"
-      ],
-      "body_plain": "Stephen,\n\nAlthough what is in the STANDARD R distribution can vary several ways, in\ngeneral, if you need to add a line like:\n\nlibrary(something)\nor\nrequire(something)\n\nand your code does not work unless you have done that, then you can imagine\nit is not sort of built in to R as it starts.\n\nHaving said that, tons of exceptions may exist that cause R to load in\nthings on your machine for everyone or just for you without you having to\nnotice.\n\nI think this forum lately has been deluged with questions about all kinds of\nadd-on packages and in particular, lots of the ones in the tidyverse.\nClearly the purpose here is not that broad.\n\nBut since I use some packages like the tidyverse extensively, and I am far\nfrom alone, I wonder if someday the powers that be realize it is a losing\nbattle to exclude at least some of it. It would be so nice not having to\ninclude a long list of packages for some programs or somehow arrange that\npeople using something you shared had installed and loaded them. But there\nare too many packages out there of varying quality and usefulness and\npopularity with more every day being added. Worse, many are somewhat\nincompatible such as having functions with the same names that hide earlier\nones loaded.\n\nBase R doe come with functions like colSums and colMeans and similar row\nfunctions. But as mentioned, a data.frame is a list of vectors and R\nsupports certain functional programming constructs over lists using things\nlike:\n\nlapply(df, min)\nsapply(df, min)\n\nAnd actually quite a few ways depending on what info you want back and\nwhether you insist it be returned as a list or vector or other things . You\ncan even supply additional arguments that might be needed such as if you\nwant to ignore any NA values,\n\nlapply(df, min, na.rm=TRUE\n\nThe package you looked at it is trying to be fast and uses what looks like\ncompiled external code but so does lapply.\n\nIf this is too bothersome for you, consider making a one-liner function like\nthis:\n\nmycolMins <- function(df, ...) lapply(df, min, ...)\n\nOnce defined, you can use that just fine and not think about it again and I\nnote this answer (like others) is offering you something in base R that\nworks fine on data.frames and the like.\n\nYou can extend to many similar ideas like this one that calulates the min\nunless you over-ride it with max or mean or sd or a bizarre function like\n`[` so a call to:\n\nmycolCalc(df, `[`, 3)\n\nWill return exactly the third items in each row!\n\nI find it to be very common for someone these days to do a quick search for\na way to do something in a language like R and not really look to see if it\nis a standard way or something special/ Matrices in R are not quite the same\nas some other objects like a data.frame or tibble and a package written to\nbe used on one may (or may not) happen to work with another. Some packages\nare carefully written to try to detect what kind of object it gets and when\npossible convert it to another. The \"apply\" function is meant for matrices\nbut if it sees something else it looks ta the dimensionality and tries to\ncoerce it with as.matrix or as.array first. As others have noted, this mean\na data.frame containing non-numeric parts may fail or should have any other\ncolumns hidden/removed as in this df that has some non-numeric fields:\n\n> df\ni       s   f     b i2\n1 1   hello 1.2  TRUE  5\n2 2   there 2.3 FALSE  4\n3 3 goodbye 3.4  TRUE  3\n\nSo a bit more complex one-liner removes any non-numeric columns like this:\n\n> mycolMins(df[, sapply(df, is.numeric)])\n$i\n[1] 1\n\n$f\n[1] 1.2\n\n$i2\n[1] 3\n\nClearly converting that to a matrix while whole would result in everything\nbeing converted to character and a minimum may be elusive.\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Stephen H. Dawson,\nDSL via R-help\nSent: Tuesday, November 30, 2021 5:37 PM\nTo: Bert Gunter <bgunter.4567 at gmail.com>\nCc: r-help at r-project.org\nSubject: Re: [R] Question about Rfast colMins and colMaxs\n\nOh, you are segmenting standard R from the rest of R.\n\nWell, that part did not come across to me in your original reply. I am not\nclear on a standard versus non-standard list. I will look into this aspect\nand see what I can learn going forward.\n\n\nThanks,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com <http://www.shdawson.com>\n\n\nOn 11/30/21 5:26 PM, Bert Gunter wrote:\n> ... but Rfast is *not* a \"standard\" package, as the rest of the PG \n> excerpt says. So contact the maintainer and ask him/her what they \n> think the best practice should be for their package. As has been \n> pointed out already, it appears to differ from the usual \"read it in \n> as a data frame\" procedure.\n>\n> Bert\n>\n> On Tue, Nov 30, 2021 at 2:11 PM Stephen H. Dawson, DSL \n> <service at shdawson.com> wrote:\n>> Right, R Studio is not R.\n>>\n>> However, the Rfast package is part of R.\n>>\n>> https://cran.r-project.org/web/packages/Rfast/index.html\n>>\n>> So, rephrasing my question...\n>> What is the best practice to bring a csv file into R so it can be \n>> accessed by colMaxs and colMins, please?\n>>\n>> *Stephen Dawson, DSL*\n>> /Executive Strategy Consultant/\n>> Business & Technology\n>> +1 (865) 804-3454\n>> http://www.shdawson.com <http://www.shdawson.com>\n>>\n>>\n>> On 11/30/21 3:19 PM, Bert Gunter wrote:\n>>> RStudio is **not** R. In particular, the so-called TidyVerse \n>>> consists of all *non*-standard contributed packages, about which the PG\nsays:\n>>>\n>>> \"For questions about functions in standard packages distributed with \n>>> R (see the FAQ Add-on packages in R), ask questions on R-help.\n>>> [The link is:\n>>> https://cran.r-project.org/doc/FAQ/R-FAQ.html#Add-on-packages-in-R\n>>> This gives the list of current _standard_ packages]\n>>>\n>>> If the question relates to a contributed package , e.g., one \n>>> downloaded from CRAN, try contacting the package maintainer first. \n>>> You can also use find(\"functionname\") and\n>>> packageDescription(\"packagename\") to find this information. Only \n>>> send such questions to R-help or R-devel if you get no reply or need \n>>> further assistance. This applies to both requests for help and to \n>>> bug reports.\"\n>>>\n>>> Note that RStudio maintains its own help resources at:\n>>> https://community.rstudio.com/\n>>> This is where questions about the TidyVerse, ggplot, etc. should be\nposted.\n>>>\n>>>\n>>>\n>>> Bert Gunter\n>>>\n>>> \"The trouble with having an open mind is that people keep coming \n>>> along and sticking things into it.\"\n>>> -- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n>>>\n>>> On Tue, Nov 30, 2021 at 10:55 AM Stephen H. Dawson, DSL via R-help \n>>> <r-help at r-project.org> wrote:\n>>>> Hi,\n>>>>\n>>>>\n>>>> I am working to understand the Rfast functions of colMins and \n>>>> colMaxs. I worked through the example listed on page 54 of the PDF.\n>>>>\n>>>> https://cran.r-project.org/web/packages/Rfast/index.html\n>>>>\n>>>> https://cran.r-project.org/web/packages/Rfast/Rfast.pdf\n>>>>\n>>>> My data is in a CSV file. So, I bring it into R Studio using:\n>>>> Data <- read.csv(\"./input/DataSet05.csv\", header=T)\n>>>>\n>>>> However, I read the instructions listed on page 54 of the PDF \n>>>> saying I need to bring data into R using a matrix. I think read.csv \n>>>> brings the data in as a dataframe. I think colMins is failing \n>>>> because it is looking for a matrix but finds a dataframe.\n>>>>\n>>>>    > colMaxs(Data)\n>>>> Error in colMaxs(Data) :\n>>>>      Not compatible with requested type: [type=list; target=double].\n>>>>    > colMins(Data, na.rm = TRUE)\n>>>> Error in colMins(Data, na.rm = TRUE) :\n>>>>      unused argument (na.rm = TRUE)\n>>>>    > colMins(Data, value = FALSE, parallel = FALSE) Error in \n>>>> colMins(Data, value = FALSE, parallel = FALSE) :\n>>>>      Not compatible with requested type: [type=list; target=double].\n>>>>\n>>>> QUESTION\n>>>> What is the best practice to bring a csv file into R Studio so it \n>>>> can be accessed by colMaxs and colMins, please?\n>>>>\n>>>>\n>>>> Thanks,\n>>>> --\n>>>> *Stephen Dawson, DSL*\n>>>> /Executive Strategy Consultant/\n>>>> Business & Technology\n>>>> +1 (865) 804-3454\n>>>> http://www.shdawson.com <http://www.shdawson.com>\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide \n>>>> http://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Stephen,\n\nAlthough what is in the STANDARD R distribution can vary several ways, in\ngeneral, if you need to add a line like:\n\nlibrary(something)\nor\nrequire(something)\n\nand your code does not work unle",
-      "thread_id": "thread-fdd2ad65f0a3",
-      "thread_depth": 5,
-      "month": "2021-11"
-    },
-    {
-      "id": "msg-fedc9ba1a5a2",
-      "message_id": "<CAPcHnpSAYzpN5iFGQ=4mTfyHNecHszh+uv1r+C_jgW+fd=8ZMg@mail.gmail.com>",
-      "from_name": "Andrew Simmons",
-      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
-      "date": "2021-11-30T22:51:41-05:00",
-      "subject": "[R] Degree symbol as axis label superscript",
-      "subject_clean": "Degree symbol as axis label superscript",
-      "in_reply_to": "<CAGxFJbTiVwfLi2_p2Sb+uT3iWPtfUO-8HODuAcpe_tKz+wM3HA@mail.gmail.com>",
-      "references": [
-        "<7974ab4-92ad-9a75-98f6-a7914bb8e5@appl-ecosys.com>",
-        "<CAPcHnpQQU6iM8swfbK1+Zws1BurRKm13tdHNrOVBkuiK81725Q@mail.gmail.com>",
-        "<CAGxFJbTiVwfLi2_p2Sb+uT3iWPtfUO-8HODuAcpe_tKz+wM3HA@mail.gmail.com>"
-      ],
-      "body_plain": "Using the degree character seems perfectly legit to me. The reason I\nsuggest looking at plotmath is that I think plotmath is easier to read\n(that is, if you're escaping your characters with \\u), and because for\nanything more complicated like set notation, big sums, integrals, you'll\nneed to get used to plotmath to make your labels. Either way, nice\nsuggestion, both work perfectly well for this situation\n\nOn Tue, Nov 30, 2021, 16:24 Bert Gunter <bgunter.4567 at gmail.com> wrote:\n\n> True, but unnecessary with UTF-8 encodings of unicode (subject to some\n> caveats, though):\n>\n> plot(1:5, runif(5),xlab = \"Temp (?F)\", ylab = \"result\")\n>\n> should work fine, where the ? (\"degree\") symbol was inserted by the\n> symbol insertion facility on my Mac. Windows has something similar.\n> See the comments in the plotmath documentation just before the\n> examples for more details on this, along with some caveats about the\n> need for a suitable display/plot device.\n>\n> More laboriously, but perhaps more informatively, one can look up\n> \"unicode code point for degree symbol\" to find that it is decimal 176.\n> Then R's intToUtf8() function converts this to the UTF-8 encoding that\n> **should** display as a \"degree\" symbol, subject to the above\n> referenced caveats.\n> Hence:\n> > intToUtf8(176)\n> [1] \"?\"  ##degree character\n>\n> ## So, for example, you can do:\n> > degrF <-paste0(intToUtf8(176),\"F\")\n> > degrF\n> [1] \"?F\" (\"degrees F\")\n>\n> > plot(1:5, runif(5),xlab = paste0(\"Temp (\", degrF,\")\"), ylab = \"result\")\n>\n> As Andrew said, you can use plotmath to do this, too; it just isn't\n> needed for simple insertion of \"standard\" symbols.\n>\n> NOTE: As I am far from an expert on all of this, I would appreciate\n> clarification or correction of any errors or misstatements in the\n> above.\n>\n> Bert Gunter\n>\n>\n> On Tue, Nov 30, 2021 at 11:34 AM Andrew Simmons <akwsimmo at gmail.com>\n> wrote:\n> >\n> > Excuse my brevity, but take a look at ?plotmath\n> >\n> > It has tons of tips for making pretty labels\n> >\n> > On Tue, Nov 30, 2021, 14:05 Rich Shepard <rshepard at appl-ecosys.com>\n> wrote:\n> >\n> > > I want to present the temperature on the Y-axis label as 'Water\n> Temperature\n> > > (oC)' with the degree symbol as a superscript.\n> > >\n> > > My web search found a couple of methods; one put the entire example\n> string\n> > > in the axis label, the other is close, but still incorrect.\n> > >\n> > > Source example:\n> > > #define expression with superscript\n> > > x_expression <- expression(x^3 ~ variable ~ label)\n> > > # The example axis label is:\n> > > 'X3 variable label' (with the 3 as a superscript)\n> > >\n> > > My use:\n> > > # Set degree symbol as superscript in plot's y axis:\n> > > y_expression <- expression(^o ~ C)\n> > >\n> > > R's error message:\n> > > Error in source(\"../scripts/all_temp_plots.r\") :\n> > >    ../scripts/all_temp_plots.r:10:28: unexpected '^'\n> > > 9: # Set degree symbol as superscript in plot's y axis:\n> > > 10: y_expression <- expression(^\n> > >                                 ^\n> > >\n> > > What is the proper way to display a degree symbol in a plot's axis\n> label?\n> > >\n> > > Rich\n> > >\n> > > ______________________________________________\n> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide\n> > > http://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> > >\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Using the degree character seems perfectly legit to me. The reason I\nsuggest looking at plotmath is that I think plotmath is easier to read\n(that is, if you're escaping your characters with \\u), and b",
-      "thread_id": "thread-65298daa41f7",
-      "thread_depth": 3,
-      "month": "2021-11"
-    },
-    {
-      "id": "msg-c974d5b95246",
-      "message_id": "<CAGxFJbQFSP8fENiPuYLYXW++iVdB3FQg3L-kfqgvB1pN2Lui6Q@mail.gmail.com>",
-      "from_name": "Bert Gunter",
-      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
-      "date": "2021-11-30T20:58:45-08:00",
-      "subject": "[R] Degree symbol as axis label superscript",
-      "subject_clean": "Degree symbol as axis label superscript",
-      "in_reply_to": "<CAPcHnpSAYzpN5iFGQ=4mTfyHNecHszh+uv1r+C_jgW+fd=8ZMg@mail.gmail.com>",
-      "references": [
-        "<7974ab4-92ad-9a75-98f6-a7914bb8e5@appl-ecosys.com>",
-        "<CAPcHnpQQU6iM8swfbK1+Zws1BurRKm13tdHNrOVBkuiK81725Q@mail.gmail.com>",
-        "<CAGxFJbTiVwfLi2_p2Sb+uT3iWPtfUO-8HODuAcpe_tKz+wM3HA@mail.gmail.com>",
-        "<CAPcHnpSAYzpN5iFGQ=4mTfyHNecHszh+uv1r+C_jgW+fd=8ZMg@mail.gmail.com>"
-      ],
-      "body_plain": "Yes, but I should acknowledge my ignorance in not realizing that \"\\u00b0\"\n(hex 176) is a simpler way to get the character in R without the OS tool\nthan intToUtf8() .  If you need math notation beyond simple symbol\ncharacters, plotmath is certainly indispensable.\n\nBert\n\nOn Tue, Nov 30, 2021 at 7:51 PM Andrew Simmons <akwsimmo at gmail.com> wrote:\n\n> Using the degree character seems perfectly legit to me. The reason I\n> suggest looking at plotmath is that I think plotmath is easier to read\n> (that is, if you're escaping your characters with \\u), and because for\n> anything more complicated like set notation, big sums, integrals, you'll\n> need to get used to plotmath to make your labels. Either way, nice\n> suggestion, both work perfectly well for this situation\n>\n> On Tue, Nov 30, 2021, 16:24 Bert Gunter <bgunter.4567 at gmail.com> wrote:\n>\n>> True, but unnecessary with UTF-8 encodings of unicode (subject to some\n>> caveats, though):\n>>\n>> plot(1:5, runif(5),xlab = \"Temp (?F)\", ylab = \"result\")\n>>\n>> should work fine, where the ? (\"degree\") symbol was inserted by the\n>> symbol insertion facility on my Mac. Windows has something similar.\n>> See the comments in the plotmath documentation just before the\n>> examples for more details on this, along with some caveats about the\n>> need for a suitable display/plot device.\n>>\n>> More laboriously, but perhaps more informatively, one can look up\n>> \"unicode code point for degree symbol\" to find that it is decimal 176.\n>> Then R's intToUtf8() function converts this to the UTF-8 encoding that\n>> **should** display as a \"degree\" symbol, subject to the above\n>> referenced caveats.\n>> Hence:\n>> > intToUtf8(176)\n>> [1] \"?\"  ##degree character\n>>\n>> ## So, for example, you can do:\n>> > degrF <-paste0(intToUtf8(176),\"F\")\n>> > degrF\n>> [1] \"?F\" (\"degrees F\")\n>>\n>> > plot(1:5, runif(5),xlab = paste0(\"Temp (\", degrF,\")\"), ylab = \"result\")\n>>\n>> As Andrew said, you can use plotmath to do this, too; it just isn't\n>> needed for simple insertion of \"standard\" symbols.\n>>\n>> NOTE: As I am far from an expert on all of this, I would appreciate\n>> clarification or correction of any errors or misstatements in the\n>> above.\n>>\n>> Bert Gunter\n>>\n>>\n>> On Tue, Nov 30, 2021 at 11:34 AM Andrew Simmons <akwsimmo at gmail.com>\n>> wrote:\n>> >\n>> > Excuse my brevity, but take a look at ?plotmath\n>> >\n>> > It has tons of tips for making pretty labels\n>> >\n>> > On Tue, Nov 30, 2021, 14:05 Rich Shepard <rshepard at appl-ecosys.com>\n>> wrote:\n>> >\n>> > > I want to present the temperature on the Y-axis label as 'Water\n>> Temperature\n>> > > (oC)' with the degree symbol as a superscript.\n>> > >\n>> > > My web search found a couple of methods; one put the entire example\n>> string\n>> > > in the axis label, the other is close, but still incorrect.\n>> > >\n>> > > Source example:\n>> > > #define expression with superscript\n>> > > x_expression <- expression(x^3 ~ variable ~ label)\n>> > > # The example axis label is:\n>> > > 'X3 variable label' (with the 3 as a superscript)\n>> > >\n>> > > My use:\n>> > > # Set degree symbol as superscript in plot's y axis:\n>> > > y_expression <- expression(^o ~ C)\n>> > >\n>> > > R's error message:\n>> > > Error in source(\"../scripts/all_temp_plots.r\") :\n>> > >    ../scripts/all_temp_plots.r:10:28: unexpected '^'\n>> > > 9: # Set degree symbol as superscript in plot's y axis:\n>> > > 10: y_expression <- expression(^\n>> > >                                 ^\n>> > >\n>> > > What is the proper way to display a degree symbol in a plot's axis\n>> label?\n>> > >\n>> > > Rich\n>> > >\n>> > > ______________________________________________\n>> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> > > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > > PLEASE do read the posting guide\n>> > > http://www.R-project.org/posting-guide.html\n>> > > and provide commented, minimal, self-contained, reproducible code.\n>> > >\n>> >\n>> >         [[alternative HTML version deleted]]\n>> >\n>> > ______________________________________________\n>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> > and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Yes, but I should acknowledge my ignorance in not realizing that \"\\u00b0\"\n(hex 176) is a simpler way to get the character in R without the OS tool\nthan intToUtf8() .  If you need math notation beyond ",
-      "thread_id": "thread-65298daa41f7",
-      "thread_depth": 4,
-      "month": "2021-11"
     }
   ],
   "threads": [
@@ -8507,7 +8421,7 @@
     {
       "id": "thread-65298daa41f7",
       "subject": "Degree symbol as axis label superscript",
-      "message_count": 13,
+      "message_count": 10,
       "participants": [
         "Andrew Simmons",
         "Bert Gunter",
@@ -8516,22 +8430,21 @@
         "Rich Shepard"
       ],
       "started": "2021-11-30T10:57:53-08:00",
-      "last_reply": "2021-11-30T20:58:45-08:00",
+      "last_reply": "2021-11-30T13:23:52-08:00",
       "root_message_id": "msg-65298daa41f7"
     },
     {
       "id": "thread-fdd2ad65f0a3",
       "subject": "Question about Rfast colMins and colMaxs",
-      "message_count": 12,
+      "message_count": 11,
       "participants": [
-        "Avi Gross",
         "Bert Gunter",
         "Bill Dunlap",
         "Jeff Newmiller",
         "Stephen H. Dawson, DSL"
       ],
       "started": "2021-11-30T13:55:13-05:00",
-      "last_reply": "2021-11-30T22:42:35-05:00",
+      "last_reply": "2021-11-30T14:43:04-08:00",
       "root_message_id": "msg-fdd2ad65f0a3"
     }
   ]

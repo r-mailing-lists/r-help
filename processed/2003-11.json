@@ -27144,74 +27144,6 @@
       "thread_id": "thread-38e672d18323",
       "thread_depth": 1,
       "month": "2003-11"
-    },
-    {
-      "id": "msg-e3c6a702e048",
-      "message_id": "<Pine.GSO.4.53.0311301823310.25221@compserv1>",
-      "from_name": "Piyush Sharma",
-      "from_email_hash": "1a9932180759c21711a0f814ad70f62c7844965e191ac43d52f6af6464081121",
-      "date": "2003-11-30T18:27:40-05:00",
-      "subject": "[R] fitting a theoretical distribution with truncated tails",
-      "subject_clean": "fitting a theoretical distribution with truncated tails",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n  I have recently started working with R and am not really fluent in it. I\nam plotting a few graphs using the qqplot function. Is there a method for\nfitting a theoretical distribution (e.g Weibull) with truncated tails in R?\n\nThanks for any help!\nPiyush",
-      "body_snippet": "Hi,\n  I have recently started working with R and am not really fluent in it. I\nam plotting a few graphs using the qqplot function. Is there a method for\nfitting a theoretical distribution (e.g Weibull",
-      "thread_id": "thread-e3c6a702e048",
-      "thread_depth": 0,
-      "month": "2003-11"
-    },
-    {
-      "id": "msg-8c8580cbfb3c",
-      "message_id": "<3FCA8C69.905@pdf.com>",
-      "from_name": "Spencer Graves",
-      "from_email_hash": "0d1725402b5f223aa45a1714f600b741ea6c2ccb2d67d2b94ddab1ed1e80aefd",
-      "date": "2003-11-30T16:33:45-08:00",
-      "subject": "[R] fitting a theoretical distribution with truncated tails",
-      "subject_clean": "fitting a theoretical distribution with truncated tails",
-      "in_reply_to": "<Pine.GSO.4.53.0311301823310.25221@compserv1>",
-      "references": [
-        "<Pine.GSO.4.53.0311301823310.25221@compserv1>"
-      ],
-      "body_plain": "Have you considered \"fitdistr\"?  The documentation says that the \nsecond argument is \"Either a character string or a function returning a \ndensity evaluated at its first argument.\"  It should be easy enough to \nwrite something like the following: \n\ndweibull.trunc <-\nfunction(x, shape, scale=1, trunc.=Inf, log=FALSE){\n    ln.dens <- (dweibull(x, shape, scale, log=TRUE)\n        -pweibull(trunc., shape, scale = 1, lower.tail = TRUE, log.p = \nTRUE))\n    if(any(oops <- (x>trunc.)))\n        ln.dens[oops] <- (-Inf)   \n    if(log)ln.dens else exp(ln.dens)\n}\n\nx <- rweibull(100, 1)\nrange(x)\nx4 <- x[x<=4]\nfitdistr(x4, dweibull.trunc, start=list(shape=1, scale=1), trunc=4)\n\n      If you want to estimate the truncation point, that will be a more \ndifficult problem.  For that, I suggest you compute the max of your data \nand parameterize the truncated density with a parameter like \n\"log.trunc.over.max\" so \"trunc.\" in the above example is computed as \n(max+exp(log.trunc.over.max)). \n\n      hope this helps.  spencer graves\n\nPiyush Sharma wrote:\n\n>Hi,\n>  I have recently started working with R and am not really fluent in it. I\n>am plotting a few graphs using the qqplot function. Is there a method for\n>fitting a theoretical distribution (e.g Weibull) with truncated tails in R?\n>\n>Thanks for any help!\n>Piyush\n>\n>______________________________________________\n>R-help at stat.math.ethz.ch mailing list\n>https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n>  \n>",
-      "body_snippet": "Have you considered \"fitdistr\"?  The documentation says that the \nsecond argument is \"Either a character string or a function returning a \ndensity evaluated at its first argument.\"  It should be easy ",
-      "thread_id": "thread-e3c6a702e048",
-      "thread_depth": 1,
-      "month": "2003-11"
-    },
-    {
-      "id": "msg-87d8051a586f",
-      "message_id": "<20031201015549.433C5397D@mprdmxin.myway.com>",
-      "from_name": "Gabor Grothendieck",
-      "from_email_hash": "f41070d4141f8364fbc9fbb8bdca03539ba49c4bcda2ef692c89d59c36c43273",
-      "date": "2003-11-30T20:55:49-05:00",
-      "subject": "[R] Discovering methods",
-      "subject_clean": "Discovering methods",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Thanks.  I guess we have to be content to approximate this via:\n\n   apropos(\"POSIXt$|POSIXct$\")\n\nalthough this supposes we know that POSIXct inherits from POSIXt\nand its not clear that there is a reliable way to discover that\nfor S3 classes.\n\n--- \nDate: Sun, 30 Nov 2003 13:10:52 -0800 (PST) \nFrom: Thomas Lumley <tlumley at u.washington.edu>\nTo: Gabor Grothendieck <ggrothendieck at myway.com> \nCc: <kjetil at entelnet.bo>, <R-help at stat.math.ethz.ch> \nSubject: Re: [R] Discovering methods \n\n \n \nOn Fri, 28 Nov 2003, Gabor Grothendieck wrote:\n\n>\n>\n> Sure, but why are some methods found using methods(\"POSIXct\")\n> while other methods not found?\n>\n> It would be nice to have some reliable documentation-independent\n> way to discover all the methods for a class.\n\nIndeed it would, but that requires registration of methods using either\nthe S4 approach or the functions for handling S3 methods in namespaces.\n\nWithout this, it is simply not possible to decide, for example, whether\nt.test.formula is a method for t() or for t.test() or a separate function.\n\n\n     -thomas",
-      "body_snippet": "Thanks.  I guess we have to be content to approximate this via:\n\n   apropos(\"POSIXt$|POSIXct$\")\n\nalthough this supposes we know that POSIXct inherits from POSIXt\nand its not clear that there is a reli",
-      "thread_id": "thread-87d8051a586f",
-      "thread_depth": 0,
-      "month": "2003-11"
-    },
-    {
-      "id": "msg-38e15b3fda9e",
-      "message_id": "<j1elsvskn477k7a69mtssfm4vb337377e8@4ax.com>",
-      "from_name": "Duncan Murdoch",
-      "from_email_hash": "0b169dc9578e443c97ef875feba9794619f6e667997aabcb13de6d581cba9312",
-      "date": "2003-11-30T22:43:36-05:00",
-      "subject": "[R] Discovering methods",
-      "subject_clean": "Discovering methods",
-      "in_reply_to": "<20031201015549.433C5397D@mprdmxin.myway.com>",
-      "references": [
-        "<20031201015549.433C5397D@mprdmxin.myway.com>"
-      ],
-      "body_plain": "On Sun, 30 Nov 2003 20:55:49 -0500 (EST), you wrote:\n\n>\n>\n>Thanks.  I guess we have to be content to approximate this via:\n>\n>   apropos(\"POSIXt$|POSIXct$\")\n>\n>although this supposes we know that POSIXct inherits from POSIXt\n>and its not clear that there is a reliable way to discover that\n>for S3 classes.\n>\n\nI don't think there's a concept of inheritance of classes in S3.\nThat's one of the advantages of S4.\n\nDuncan Murdoch",
-      "body_snippet": "On Sun, 30 Nov 2003 20:55:49 -0500 (EST), you wrote:\n\n>\n>\n>Thanks.  I guess we have to be content to approximate this via:\n>\n>   apropos(\"POSIXt$|POSIXct$\")\n>\n>although this supposes we know that POSI",
-      "thread_id": "thread-87d8051a586f",
-      "thread_depth": 1,
-      "month": "2003-11"
     }
   ],
   "threads": [
@@ -35898,30 +35830,6 @@
       "started": "2003-11-30T10:47:59+01:00",
       "last_reply": "2003-11-30T10:27:50+00:00",
       "root_message_id": "msg-be084234d40f"
-    },
-    {
-      "id": "thread-e3c6a702e048",
-      "subject": "fitting a theoretical distribution with truncated tails",
-      "message_count": 2,
-      "participants": [
-        "Piyush Sharma",
-        "Spencer Graves"
-      ],
-      "started": "2003-11-30T18:27:40-05:00",
-      "last_reply": "2003-11-30T16:33:45-08:00",
-      "root_message_id": "msg-e3c6a702e048"
-    },
-    {
-      "id": "thread-87d8051a586f",
-      "subject": "Discovering methods",
-      "message_count": 2,
-      "participants": [
-        "Duncan Murdoch",
-        "Gabor Grothendieck"
-      ],
-      "started": "2003-11-30T20:55:49-05:00",
-      "last_reply": "2003-11-30T22:43:36-05:00",
-      "root_message_id": "msg-87d8051a586f"
     },
     {
       "id": "thread-74acc40c7770",

@@ -13559,101 +13559,6 @@
       "thread_id": "thread-ed7c02a3ef42",
       "thread_depth": 3,
       "month": "2014-11"
-    },
-    {
-      "id": "msg-8179dc91cc23",
-      "message_id": "<8725D84B-49DE-48A6-A61F-4BDB9C59EC20@dcn.davis.CA.us>",
-      "from_name": "Jeff Newmiller",
-      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
-      "date": "2014-11-30T17:52:11-08:00",
-      "subject": "[R] R dplyr solution vs. Base R solution for the slect column total",
-      "subject_clean": "R dplyr solution vs. Base R solution for the slect column total",
-      "in_reply_to": "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>",
-      "references": [
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F367@PL-EMSMB20.ees.hhs.gov>",
-        "<4D34899B-274C-430C-9D4F-21D1246DCA93@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F395@PL-EMSMB20.ees.hhs.gov>",
-        "<8C1EDBE9-35B8-47F3-912F-3E3C723243E5@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>"
-      ],
-      "body_plain": "Seems like you have what you want, unless you meant to show something different than you did show.\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn November 30, 2014 5:45:10 PM PST, \"Muhuri, Pradip (SAMHSA/CBHSQ)\" <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n>Hi Boris,\n>\n>Sorry for not being explicit when replying to your first email.   I\n>wanted to say it does not work when row-binding.  I want the following\n>output.  Thanks,  Pradip\n>\n>\n>1            1      3\n>2            2      4\n>Total              7\n>\n>################### Below is the console ##########\n>> test <- data.frame(first=c(1,2), second=c(3,4)) \n>> test\n>  first second\n>1     1      3\n>2     2      4\n>> \n>> sum(test$second)\n>[1] 7\n>> \n>> rbind(test, sum(test$second))\n>  first second\n>1     1      3\n>2     2      4\n>3     7      7\n>\n>Pradip K. Muhuri, PhD\n>SAMHSA/CBHSQ\n>1 Choke Cherry Road, Room 2-1071\n>Rockville, MD 20857\n>Tel: 240-276-1070\n>Fax: 240-276-1260\n>\n>-----Original Message-----\n>From: Boris Steipe [mailto:boris.steipe at utoronto.ca] \n>Sent: Sunday, November 30, 2014 5:51 PM\n>To: Muhuri, Pradip (SAMHSA/CBHSQ)\n>Cc: r-help at r-project.org\n>Subject: Re: [R] R dplyr solution vs. Base R solution for the slect\n>column total\n>\n>No it doesn't ...\n>consider:\n>\n>test <- data.frame(first=c(1,2), second=c(3,4)) test\n>  first second\n>1     1      3\n>2     2      4\n>\n>sum(test$second)\n>[1] 7\n>\n>\n>\n>\n>On Nov 30, 2014, at 3:48 PM, Muhuri, Pradip (SAMHSA/CBHSQ)\n><Pradip.Muhuri at samhsa.hhs.gov> wrote:\n>\n>> Hi Boris,\n>> \n>> That gives me the total for each of the 6 columns of the data frame.\n>I want the column sum just for the last column.\n>> \n>> Thanks,\n>> \n>> Pradip Muhuri\n>> \n>> \n>> \n>> -----Original Message-----\n>> From: Boris Steipe [mailto:boris.steipe at utoronto.ca]\n>> Sent: Sunday, November 30, 2014 12:50 PM\n>> To: Muhuri, Pradip (SAMHSA/CBHSQ)\n>> Cc: r-help at r-project.org\n>> Subject: Re: [R] R dplyr solution vs. Base R solution for the slect \n>> column total\n>> \n>> try:\n>> \n>> sum(test$count)\n>> \n>> \n>> B.\n>> \n>> \n>> On Nov 30, 2014, at 12:01 PM, Muhuri, Pradip (SAMHSA/CBHSQ)\n><Pradip.Muhuri at samhsa.hhs.gov> wrote:\n>> \n>>> Hello,\n>>> \n>>> I am looking for a dplyr or base R solution for the column total -\n>JUST FOR THE LAST COLUMN in the example below. The following code\n>works, giving me the total for each column - This is not exactly what I\n>want.\n>>> rbind(test, colSums(test))\n>>> \n>>> I only want the total for the very last column.  I am struggling\n>with \n>>> this part of the code: rbind(test, c(\"Total\", colSums(test, ...))) I\n>have searched for a solution on Stack Oveflow.  I found  some mutate()\n>code for the cumsum but no luck for the select column total.  Is there\n>a dplyr solution for the select column total?\n>>> \n>>> Any hints will be appreciated.\n>>> \n>>> Thanks,\n>>> \n>>> Pradip Muhuri\n>>> \n>>> \n>>> ####### The following is from the console - the R script with\n>reproducible example is also appended.\n>>> \n>>> \n>>> mrjflag cocflag inhflag halflag oidflag count\n>>> 1        0       0       0       0       0   256\n>>> 2        0       0       0       1       1   256\n>>> 3        0       0       1       0       1   256\n>>> 4        0       0       1       1       1   256\n>>> 5        0       1       0       0       1   256\n>>> 6        0       1       0       1       1   256\n>>> 7        0       1       1       0       1   256\n>>> 8        0       1       1       1       1   256\n>>> 9        1       0       0       0       1   256\n>>> 10       1       0       0       1       1   256\n>>> 11       1       0       1       0       1   256\n>>> 12       1       0       1       1       1   256\n>>> 13       1       1       0       0       1   256\n>>> 14       1       1       0       1       1   256\n>>> 15       1       1       1       0       1   256\n>>> 16       1       1       1       1       1   256\n>>> 17       8       8       8       8      15  4096\n>>> \n>>> \n>>> \n>>> #######################  below is the reproducible example \n>>> ########################\n>>> library(dplyr)\n>>> # generate data\n>>> dlist <- rep( list( 0:1 ), 4 )\n>>> data <- do.call(expand.grid, drbind)\n>>> data$id <- 1:nrow(data)\n>>> names(data) <- c('mrjflag', 'cocflag', 'inhflag', 'halflag')\n>>> \n>>> \n>>> # mutate a column and then sumamrize\n>>> test <- data %>%\n>>>      mutate(oidflag= ifelse(mrjflag==1 | cocflag==1 | inhflag==1 |\n>halflag==1, 1, 0)) %>%\n>>>      group_by(mrjflag,cocflag, inhflag, halflag, oidflag) %>%\n>>>      summarise(count=n()) %>%\n>>>      arrange(mrjflag,cocflag, inhflag, halflag, oidflag)\n>>> \n>>> \n>>> #  This works, giving me the total for each column - This is not\n>what I exactly want.\n>>>   rbind(test, colSums(test))\n>>> \n>>> # I only want the total for the very last column rbind(test, \n>>> c(\"Total\", colSums(test, ...)))\n>>> \n>>> Pradip K. Muhuri, PhD\n>>> SAMHSA/CBHSQ\n>>> 1 Choke Cherry Road, Room 2-1071\n>>> Rockville, MD 20857\n>>> Tel: 240-276-1070\n>>> Fax: 240-276-1260\n>>> \n>>> \n>>> \t[[alternative HTML version deleted]]\n>>> \n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>> \n>\n>______________________________________________\n>R-help at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Seems like you have what you want, unless you meant to show something different than you did show.\n---------------------------------------------------------------------------\nJeff Newmiller           ",
-      "thread_id": "thread-8179dc91cc23",
-      "thread_depth": 0,
-      "month": "2014-11"
-    },
-    {
-      "id": "msg-d122ce3fc4de",
-      "message_id": "<547BCF4D.6060108@gmail.com>",
-      "from_name": "Duncan Murdoch",
-      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
-      "date": "2014-11-30T21:15:41-05:00",
-      "subject": "[R] R dplyr solution vs. Base R solution for the slect column total",
-      "subject_clean": "R dplyr solution vs. Base R solution for the slect column total",
-      "in_reply_to": "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>",
-      "references": [
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F367@PL-EMSMB20.ees.hhs.gov>",
-        "<4D34899B-274C-430C-9D4F-21D1246DCA93@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F395@PL-EMSMB20.ees.hhs.gov>",
-        "<8C1EDBE9-35B8-47F3-912F-3E3C723243E5@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>"
-      ],
-      "body_plain": "On 30/11/2014, 8:45 PM, Muhuri, Pradip (SAMHSA/CBHSQ) wrote:\n> Hi Boris,\n> \n> Sorry for not being explicit when replying to your first email.   I wanted to say it does not work when row-binding.  I want the following output.  Thanks,  Pradip\n> \n> \n> 1            1      3\n> 2            2      4\n> Total              7\n\nYou are mixing up the computation of results with the presentation of\nthem.  That's the spreadsheet way of thinking, and it's okay for simple\nthings like this, but gets really bogged down when the computations get\nhard.\n\nIn R you can do it, and it's not too hard:\n\ntest <- data.frame(first=c(1,2), second=c(3,4))\ntotal <- c(\"\", sum(test$second))\nrbind(test, Total=total)\n\nbut this isn't a really sensible thing to do:  you can't work with that\nfinal result at all.  It makes more sense to leave it in the original\nform, and then think about how you want to present it, and write a\nfunction that displays the result, with nice formatting, etc.  That\nprobably won't happen in the R console, you should be using Sweave or\nknitr or some other package for presentation of the results.\n\nDuncan Murdoch\n\n\n> \n> ################### Below is the console ##########\n>> test <- data.frame(first=c(1,2), second=c(3,4)) \n>> test\n>   first second\n> 1     1      3\n> 2     2      4\n>>\n>> sum(test$second)\n> [1] 7\n>>\n>> rbind(test, sum(test$second))\n>   first second\n> 1     1      3\n> 2     2      4\n> 3     7      7\n> \n> Pradip K. Muhuri, PhD\n> SAMHSA/CBHSQ\n> 1 Choke Cherry Road, Room 2-1071\n> Rockville, MD 20857\n> Tel: 240-276-1070\n> Fax: 240-276-1260\n> \n> -----Original Message-----\n> From: Boris Steipe [mailto:boris.steipe at utoronto.ca] \n> Sent: Sunday, November 30, 2014 5:51 PM\n> To: Muhuri, Pradip (SAMHSA/CBHSQ)\n> Cc: r-help at r-project.org\n> Subject: Re: [R] R dplyr solution vs. Base R solution for the slect column total\n> \n> No it doesn't ...\n> consider:\n> \n> test <- data.frame(first=c(1,2), second=c(3,4)) test\n>   first second\n> 1     1      3\n> 2     2      4\n> \n> sum(test$second)\n> [1] 7\n> \n> \n> \n> \n> On Nov 30, 2014, at 3:48 PM, Muhuri, Pradip (SAMHSA/CBHSQ) <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n> \n>> Hi Boris,\n>>\n>> That gives me the total for each of the 6 columns of the data frame. I want the column sum just for the last column.\n>>\n>> Thanks,\n>>\n>> Pradip Muhuri\n>>\n>>\n>>\n>> -----Original Message-----\n>> From: Boris Steipe [mailto:boris.steipe at utoronto.ca]\n>> Sent: Sunday, November 30, 2014 12:50 PM\n>> To: Muhuri, Pradip (SAMHSA/CBHSQ)\n>> Cc: r-help at r-project.org\n>> Subject: Re: [R] R dplyr solution vs. Base R solution for the slect \n>> column total\n>>\n>> try:\n>>\n>> sum(test$count)\n>>\n>>\n>> B.\n>>\n>>\n>> On Nov 30, 2014, at 12:01 PM, Muhuri, Pradip (SAMHSA/CBHSQ) <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n>>\n>>> Hello,\n>>>\n>>> I am looking for a dplyr or base R solution for the column total - JUST FOR THE LAST COLUMN in the example below. The following code works, giving me the total for each column - This is not exactly what I want.\n>>> rbind(test, colSums(test))\n>>>\n>>> I only want the total for the very last column.  I am struggling with \n>>> this part of the code: rbind(test, c(\"Total\", colSums(test, ...))) I have searched for a solution on Stack Oveflow.  I found  some mutate() code for the cumsum but no luck for the select column total.  Is there a dplyr solution for the select column total?\n>>>\n>>> Any hints will be appreciated.\n>>>\n>>> Thanks,\n>>>\n>>> Pradip Muhuri\n>>>\n>>>\n>>> ####### The following is from the console - the R script with reproducible example is also appended.\n>>>\n>>>\n>>> mrjflag cocflag inhflag halflag oidflag count\n>>> 1        0       0       0       0       0   256\n>>> 2        0       0       0       1       1   256\n>>> 3        0       0       1       0       1   256\n>>> 4        0       0       1       1       1   256\n>>> 5        0       1       0       0       1   256\n>>> 6        0       1       0       1       1   256\n>>> 7        0       1       1       0       1   256\n>>> 8        0       1       1       1       1   256\n>>> 9        1       0       0       0       1   256\n>>> 10       1       0       0       1       1   256\n>>> 11       1       0       1       0       1   256\n>>> 12       1       0       1       1       1   256\n>>> 13       1       1       0       0       1   256\n>>> 14       1       1       0       1       1   256\n>>> 15       1       1       1       0       1   256\n>>> 16       1       1       1       1       1   256\n>>> 17       8       8       8       8      15  4096\n>>>\n>>>\n>>>\n>>> #######################  below is the reproducible example \n>>> ########################\n>>> library(dplyr)\n>>> # generate data\n>>> dlist <- rep( list( 0:1 ), 4 )\n>>> data <- do.call(expand.grid, drbind)\n>>> data$id <- 1:nrow(data)\n>>> names(data) <- c('mrjflag', 'cocflag', 'inhflag', 'halflag')\n>>>\n>>>\n>>> # mutate a column and then sumamrize\n>>> test <- data %>%\n>>>      mutate(oidflag= ifelse(mrjflag==1 | cocflag==1 | inhflag==1 | halflag==1, 1, 0)) %>%\n>>>      group_by(mrjflag,cocflag, inhflag, halflag, oidflag) %>%\n>>>      summarise(count=n()) %>%\n>>>      arrange(mrjflag,cocflag, inhflag, halflag, oidflag)\n>>>\n>>>\n>>> #  This works, giving me the total for each column - This is not what I exactly want.\n>>>   rbind(test, colSums(test))\n>>>\n>>> # I only want the total for the very last column rbind(test, \n>>> c(\"Total\", colSums(test, ...)))\n>>>\n>>> Pradip K. Muhuri, PhD\n>>> SAMHSA/CBHSQ\n>>> 1 Choke Cherry Road, Room 2-1071\n>>> Rockville, MD 20857\n>>> Tel: 240-276-1070\n>>> Fax: 240-276-1260\n>>>\n>>>\n>>> \t[[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
-      "body_snippet": "On 30/11/2014, 8:45 PM, Muhuri, Pradip (SAMHSA/CBHSQ) wrote:\n> Hi Boris,\n> \n> Sorry for not being explicit when replying to your first email.   I wanted to say it does not work when row-binding.  I wa",
-      "thread_id": "thread-d122ce3fc4de",
-      "thread_depth": 0,
-      "month": "2014-11"
-    },
-    {
-      "id": "msg-929cdd716ce0",
-      "message_id": "<20141130203722.1993f561c970a83d1ab8b384@inbox.com>",
-      "from_name": "Ranjan Maitra",
-      "from_email_hash": "48cf336e96c40c2dd9be544a94c707b0116bb3558247f13c74a4acb0c0786e89",
-      "date": "2014-11-30T20:37:22-06:00",
-      "subject": "[R] please please unsubscribe!!!!!!!!!!!!!!!!",
-      "subject_clean": "please please unsubscribe!!!!!!!!!!!!!!!!",
-      "in_reply_to": "<alpine.LNX.2.11.1411301224370.28168@localhost>",
-      "references": [
-        "<CAFh18f22H7bqTdC_xu6aw83ekGEdpw-V5+AgZuWY4fASNt=Rfw@mail.gmail.com>",
-        "<547A19EE020000CB0011BDF0@smtp.medicine.umaryland.edu>",
-        "<84FBE77F-A67D-496B-8325-A6B974057145@dcn.davis.CA.us>",
-        "<547A2994020000CB0011BDF6@smtp.medicine.umaryland.edu>",
-        "<547A7D73.3030107@auckland.ac.nz>",
-        "<547A87CF.2060305@gmail.com>",
-        "<20141130083055.91e407890b5ba2f95c2e8155@inbox.com>",
-        "<CAAu8QF7iZQXTExzU8Prm7eAGmMLxcSeYSJiS3mK9sszcz_y-4A@mail.gmail.com>",
-        "<547B35CE.808@gmail.com>",
-        "<CAAu8QF4ARZpcSp1MOiTehronuZhw83jwApLYqqPhYUbY=wOtdg@mail.gmail.com>",
-        "<3846A2D0-2FB4-42E2-B97C-562A0A53EF08@gmail.com>",
-        "<alpine.LNX.2.11.1411301224370.28168@localhost>"
-      ],
-      "body_plain": "Following on Rich and Peter, is it practical for the list to put it at the top then, before the R-message?\n\nSomething like:\n\nTO UNSUBSCRIBE from the list: see https://stat.ethz.ch/mailman/listinfo/r-help\n\nAnd then continue on for each R message. Because top-posting has pretty much taken over, the best efforts of puritans notwithstanding, putting stuff at the bottom is unlikely to evoke much attention, and especially so in our 140-character-3-second attention-span world.\n\nAs an aside, if I were the OP, and wanted to unsubscribe, the volume of the e-mail messages on this topic alone would have been punishment enough for the original post:-)\n\nBest wishes,\nRanjan\n\n____________________________________________________________\nFREE 3D MARINE AQUARIUM SCREENSAVER - Watch dolphins, sharks & orcas on your desktop!",
-      "body_snippet": "Following on Rich and Peter, is it practical for the list to put it at the top then, before the R-message?\n\nSomething like:\n\nTO UNSUBSCRIBE from the list: see https://stat.ethz.ch/mailman/listinfo/r-h",
-      "thread_id": "thread-77a07b4a7839",
-      "thread_depth": 12,
-      "month": "2014-11"
-    },
-    {
-      "id": "msg-d9424012303b",
-      "message_id": "<00D353B0-0B42-47E7-A909-53BCBBA21714@utoronto.ca>",
-      "from_name": "Boris Steipe",
-      "from_email_hash": "a41454b3645a140f39702275c1d4fca3b980a9fdf0861e407154805ae728380d",
-      "date": "2014-11-30T21:42:13-05:00",
-      "subject": "[R] R dplyr solution vs. Base R solution for the slect column total",
-      "subject_clean": "R dplyr solution vs. Base R solution for the slect column total",
-      "in_reply_to": "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>",
-      "references": [
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F367@PL-EMSMB20.ees.hhs.gov>",
-        "<4D34899B-274C-430C-9D4F-21D1246DCA93@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F395@PL-EMSMB20.ees.hhs.gov>",
-        "<8C1EDBE9-35B8-47F3-912F-3E3C723243E5@utoronto.ca>",
-        "<E18C153EBB81024CB60FCE9B4C34D57C3892F3BA@PL-EMSMB20.ees.hhs.gov>"
-      ],
-      "body_plain": "What do you think should be in the empty cells? Zero? NA? Empty strings? There can't just be nothing...\nHere's an example with empty strings \"\" as the filler element - but do consider carefully what Duncan wrote.\n\n\ntest <- data.frame(first=c(1,2), second=c(3,4))\ntypeof(test[1,1])  # double\n\n# rbind() a vector that repeats the \"empty\" element one-less-then-ncols() times, \n# and has the column sum as its last element.\ntest <- rbind(test, c(rep(\"\", ncol(test)-1), sum(test$second)))\ntest\n\n  first second\n1     1      3\n2     2      4\n3            7\n\n# but...!\n\ntypeof(test[1,1]) # character!\ntypeof(test[2,2]) # also character! \n\nBy adding characters to your columns, you cast all of your data into character type!\nIf you want to *do* anything with the number, you'll need to cast it back to numeric.\nOr use 0 or NA as the filler element.\n\ntest <- rbind(test, c(rep(NA, ncol(test)-1), sum(test$second)))\n\nBut anyway ... as others have said, you may want to reconsider the logic of your approach.\n\n\nB.\n\n\n\nOn Nov 30, 2014, at 8:45 PM, Muhuri, Pradip (SAMHSA/CBHSQ) <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n\n> Hi Boris,\n> \n> Sorry for not being explicit when replying to your first email.   I wanted to say it does not work when row-binding.  I want the following output.  Thanks,  Pradip\n> \n> \n> 1            1      3\n> 2            2      4\n> Total              7\n> \n> ################### Below is the console ##########\n>> test <- data.frame(first=c(1,2), second=c(3,4)) \n>> test\n>  first second\n> 1     1      3\n> 2     2      4\n>> \n>> sum(test$second)\n> [1] 7\n>> \n>> rbind(test, sum(test$second))\n>  first second\n> 1     1      3\n> 2     2      4\n> 3     7      7\n> \n> Pradip K. Muhuri, PhD\n> SAMHSA/CBHSQ\n> 1 Choke Cherry Road, Room 2-1071\n> Rockville, MD 20857\n> Tel: 240-276-1070\n> Fax: 240-276-1260\n> \n> -----Original Message-----\n> From: Boris Steipe [mailto:boris.steipe at utoronto.ca] \n> Sent: Sunday, November 30, 2014 5:51 PM\n> To: Muhuri, Pradip (SAMHSA/CBHSQ)\n> Cc: r-help at r-project.org\n> Subject: Re: [R] R dplyr solution vs. Base R solution for the slect column total\n> \n> No it doesn't ...\n> consider:\n> \n> test <- data.frame(first=c(1,2), second=c(3,4)) test\n>  first second\n> 1     1      3\n> 2     2      4\n> \n> sum(test$second)\n> [1] 7\n> \n> \n> \n> \n> On Nov 30, 2014, at 3:48 PM, Muhuri, Pradip (SAMHSA/CBHSQ) <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n> \n>> Hi Boris,\n>> \n>> That gives me the total for each of the 6 columns of the data frame. I want the column sum just for the last column.\n>> \n>> Thanks,\n>> \n>> Pradip Muhuri\n>> \n>> \n>> \n>> -----Original Message-----\n>> From: Boris Steipe [mailto:boris.steipe at utoronto.ca]\n>> Sent: Sunday, November 30, 2014 12:50 PM\n>> To: Muhuri, Pradip (SAMHSA/CBHSQ)\n>> Cc: r-help at r-project.org\n>> Subject: Re: [R] R dplyr solution vs. Base R solution for the slect \n>> column total\n>> \n>> try:\n>> \n>> sum(test$count)\n>> \n>> \n>> B.\n>> \n>> \n>> On Nov 30, 2014, at 12:01 PM, Muhuri, Pradip (SAMHSA/CBHSQ) <Pradip.Muhuri at samhsa.hhs.gov> wrote:\n>> \n>>> Hello,\n>>> \n>>> I am looking for a dplyr or base R solution for the column total - JUST FOR THE LAST COLUMN in the example below. The following code works, giving me the total for each column - This is not exactly what I want.\n>>> rbind(test, colSums(test))\n>>> \n>>> I only want the total for the very last column.  I am struggling with \n>>> this part of the code: rbind(test, c(\"Total\", colSums(test, ...))) I have searched for a solution on Stack Oveflow.  I found  some mutate() code for the cumsum but no luck for the select column total.  Is there a dplyr solution for the select column total?\n>>> \n>>> Any hints will be appreciated.\n>>> \n>>> Thanks,\n>>> \n>>> Pradip Muhuri\n>>> \n>>> \n>>> ####### The following is from the console - the R script with reproducible example is also appended.\n>>> \n>>> \n>>> mrjflag cocflag inhflag halflag oidflag count\n>>> 1        0       0       0       0       0   256\n>>> 2        0       0       0       1       1   256\n>>> 3        0       0       1       0       1   256\n>>> 4        0       0       1       1       1   256\n>>> 5        0       1       0       0       1   256\n>>> 6        0       1       0       1       1   256\n>>> 7        0       1       1       0       1   256\n>>> 8        0       1       1       1       1   256\n>>> 9        1       0       0       0       1   256\n>>> 10       1       0       0       1       1   256\n>>> 11       1       0       1       0       1   256\n>>> 12       1       0       1       1       1   256\n>>> 13       1       1       0       0       1   256\n>>> 14       1       1       0       1       1   256\n>>> 15       1       1       1       0       1   256\n>>> 16       1       1       1       1       1   256\n>>> 17       8       8       8       8      15  4096\n>>> \n>>> \n>>> \n>>> #######################  below is the reproducible example \n>>> ########################\n>>> library(dplyr)\n>>> # generate data\n>>> dlist <- rep( list( 0:1 ), 4 )\n>>> data <- do.call(expand.grid, drbind)\n>>> data$id <- 1:nrow(data)\n>>> names(data) <- c('mrjflag', 'cocflag', 'inhflag', 'halflag')\n>>> \n>>> \n>>> # mutate a column and then sumamrize\n>>> test <- data %>%\n>>>     mutate(oidflag= ifelse(mrjflag==1 | cocflag==1 | inhflag==1 | halflag==1, 1, 0)) %>%\n>>>     group_by(mrjflag,cocflag, inhflag, halflag, oidflag) %>%\n>>>     summarise(count=n()) %>%\n>>>     arrange(mrjflag,cocflag, inhflag, halflag, oidflag)\n>>> \n>>> \n>>> #  This works, giving me the total for each column - This is not what I exactly want.\n>>>  rbind(test, colSums(test))\n>>> \n>>> # I only want the total for the very last column rbind(test, \n>>> c(\"Total\", colSums(test, ...)))\n>>> \n>>> Pradip K. Muhuri, PhD\n>>> SAMHSA/CBHSQ\n>>> 1 Choke Cherry Road, Room 2-1071\n>>> Rockville, MD 20857\n>>> Tel: 240-276-1070\n>>> Fax: 240-276-1260\n>>> \n>>> \n>>> \t[[alternative HTML version deleted]]\n>>> \n>>> ______________________________________________\n>>> R-help at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>> \n>",
-      "body_snippet": "What do you think should be in the empty cells? Zero? NA? Empty strings? There can't just be nothing...\nHere's an example with empty strings \"\" as the filler element - but do consider carefully what D",
-      "thread_id": "thread-d9424012303b",
-      "thread_depth": 0,
-      "month": "2014-11"
     }
   ],
   "threads": [
@@ -16445,7 +16350,7 @@
     {
       "id": "thread-77a07b4a7839",
       "subject": "please please unsubscribe!!!!!!!!!!!!!!!!",
-      "message_count": 22,
+      "message_count": 21,
       "participants": [
         "Bert Gunter",
         "Duncan Murdoch",
@@ -16463,7 +16368,7 @@
         "peter dalgaard"
       ],
       "started": "2014-11-29T14:26:48+01:00",
-      "last_reply": "2014-11-30T20:37:22-06:00",
+      "last_reply": "2014-11-30T12:28:34-08:00",
       "root_message_id": "msg-77a07b4a7839"
     },
     {
@@ -16573,39 +16478,6 @@
       "started": "2014-11-30T17:01:32+00:00",
       "last_reply": "2014-11-30T17:50:41-05:00",
       "root_message_id": "msg-ed7c02a3ef42"
-    },
-    {
-      "id": "thread-8179dc91cc23",
-      "subject": "R dplyr solution vs. Base R solution for the slect column total",
-      "message_count": 1,
-      "participants": [
-        "Jeff Newmiller"
-      ],
-      "started": "2014-11-30T17:52:11-08:00",
-      "last_reply": "2014-11-30T17:52:11-08:00",
-      "root_message_id": "msg-8179dc91cc23"
-    },
-    {
-      "id": "thread-d122ce3fc4de",
-      "subject": "R dplyr solution vs. Base R solution for the slect column total",
-      "message_count": 1,
-      "participants": [
-        "Duncan Murdoch"
-      ],
-      "started": "2014-11-30T21:15:41-05:00",
-      "last_reply": "2014-11-30T21:15:41-05:00",
-      "root_message_id": "msg-d122ce3fc4de"
-    },
-    {
-      "id": "thread-d9424012303b",
-      "subject": "R dplyr solution vs. Base R solution for the slect column total",
-      "message_count": 1,
-      "participants": [
-        "Boris Steipe"
-      ],
-      "started": "2014-11-30T21:42:13-05:00",
-      "last_reply": "2014-11-30T21:42:13-05:00",
-      "root_message_id": "msg-d9424012303b"
     },
     {
       "id": "thread-563a49941991",

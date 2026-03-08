@@ -170,6 +170,22 @@
       "month": "1997-12"
     },
     {
+      "id": "msg-ce96aa4248fe",
+      "message_id": "<199712050830.VAA18123@stat1.stat.auckland.ac.nz>",
+      "from_name": "Ross Ihaka",
+      "from_email_hash": "04ecc52df29664f6d7d78462a431210f1fc44efa859cdf5ba96c05176d368866",
+      "date": "1997-12-05T21:30:56+13:00",
+      "subject": "R-beta: New R Version for Unix",
+      "subject_clean": "R-beta: New R Version for Unix",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Version 0.60 of R for Unix is now available.  Release of this version\nhas been delayed for a variety of reasons, but we hope that it will\nprovide a good deal more stability and functionality than previous\nversions.  However it should be regarded as of \"alpha\" quality for a\nshort shakedown period.\n\nWe would like user feedback to help us improve the quality of R.\nYou can do this by subscribing to the r-devel mailing list by sending\na message containing\n\t subscribe\n(in the \"body\", not the subject!) to:\n        r-devel-request at stat.math.ethz.ch\n\nVersion 0.60 or R may be obtained from the following sites:\n\n\tTU Wein, Austria\n\tftp://ftp.ci.tuwien.ac.at/pub/R\n\n\tIASC archive, Italy\n\thttp://www.stat.unipg.it/pub/stat/statlib/R/CRAN/contents.html\n\n\tUniversity of Aizu, Japan\n\tftp://ftp.u-aizu.ac.jp/pub/lang/R/CRAN/contents.html\n\n\tETH Zurich, Switzerland\n\tftp://ftp.stat.math.ethz.ch/R-CRAN/contents.html\n\n\tStatlib, Carnegie Mellon University, USA\n\thttp://lib.stat.cmu.edu/R/CRAN/contents.html\n\n\tUniversity of Washington, USA\n\tftp://ftp.biostat.washington.edu/mirrors/R/CRAN/contents.html\n\n\tUniversity of Wisconsin, USA\n\thttp://franz.stat.wisc.edu/pub/R/contents.html\n\nThere are some large changes to R with this version (additional large\nchanges are planned for further versions).  In particular, the\ndocumentation format has changed and the general standard of\ndocumentation improved a good deal.  Perl version 5 is now required to\nprocess the documentation, but pre-formatted versions will be\navailable.\n\nR is now being developed by a larger group than its original authors.\nIn particular, this release represents the direct efforts of the\nfollowing group:\n\n\tPeter Dalgaard, Robert Gentleman, Kurt Hornik, Ross Ihaka,\n\tThomas Lumley, Friedrich Leisch, Martin Maechler, Paul Murrell,\n\tHeiner Schwarte and Luke Tierney.\n\nIn addition, hundreds of contributions, in the form of code, patches\nand bug reports, have been made by a much larger group of indiviuals. \n\nR is now a GNU project and will be making changes to meet GNU coding\nand installation standards.\n\nA detailed list of changes follows.\n\n\nNEW FEATURES\n\n    o\tThere has been a major change in directory structure masterminded\n\tby Kurt Hornik.\n\tlibrary(.) now attaches ``package''s which are better\n\tintegrated, see \"?library\".  Packages may be available from\n\toutside the RHOME path via the .lib.loc variable.\n\n    o\tThe documentation format (of files in src/library/<package>/man/ )\n\thas changed to a more easily parsable LaTeX like format.\n\tThe doc files now all end in `.Rd'.\n\tetc/Rman2Rd  can be used to translate old-style documentation to\n\tthe new one.\n\tThe translation to *roff, LaTeX and HTML is now done using\n\tetc/Rdconv, written in Perl by Fritz Leisch.\n\n\tThe HTML online help produced has now links which work.\n\tThe manual (in doc/manual/) now includes a section on the\n\tdocumentation format and on mathematical text in graphs.\n\n\tetc/ further contains `Sd2Rd' for (partial) translation of S `.d'\n\tdocumentation to Rd, and\n\t`Rd2txt' and `Rd2dvi' for easy previewing of single Rd files.\n\n    o\tThe use of \"names\" on one dimensional arrays will now produce\n\tsensible results.  This means that for most purposes,\n\tone dimensional arrays can be treated like vectors.\n\n    o\tWe have a applied a patch from mward at wolf.hip.berkeley.edu\n\twhich should substantially improve the speed of (vector)\n\tarithmetic.\n\n    o\tThe modeling formula handler has been expanded so that it\n\taccepts y ~ 0 + x as a \"through the origin\" specification.\n\tmodels with no parameters are now acceptable.\n\n    o\t\"cov\", \"cor\" and \"var\" now produce a matrix result if either\n\tof their x or y arguments is a matrix.\tDimnames are propagated\n\tin a sensible fashion.\n\n    o   New chisq.test(.) and prop.test() from Kurt Hornik.\n\n    o   New read.fwf(.) for reading fixed width format (KH).\n\n    o   New str(.) [alternative to summary(.) for programmers] (MM).\n\n    o   New example data sets \"esoph\", \"infert\" and \"anscombe\" (TL),\n\t\"iris3\" (KH) and \"stackloss\" (MM).\n\n    o   source(.) has several new arguments, notably ``echo = FALSE''.\n\tThis is applied in the new function  demo(.) which runs all the\n\tcode in demos/ (but dynload).\n\n    o   strheight(.) is new, accompanying strwidth(.).\n\tBoth now work for mathematical expressions (Paul Murrell).\n\n    o   The LaTeX version of the manual (-> doc/manual/) now has an index.\n\n    o   EVERY *.Rd file in src/library/base/man/ has now at least one \\keyword\n\n    o\tNew package (`library(.)') \"stepfun\" for step functions, incl.\n\tempirical distributions.\n\n\nBUG FIXES\n\n    o   Regular expression matching is now done with system versions\n\tof the regexp library.  This should fix compilation problems\n\ton some platforms.\n\n    o\t\"approx\" and \"approxfun\", have had some minor adjustments.\n\twhich fix the interpretation of the rule= argument.  The\n\tcode for piecewise constant case is now internal C code\n\tthat than interpreted.\tThis should boost performance in\n\tthis case.\n\n    o\tThere has been a minor fixup of \"model.frame\" to ensure that\n\tsubsets, weights, etc are handled properly.\n\n    o\tModel fitting of the form\n\n\t\t lm(y~., data=df)\n\t\tglm(y~., data=df)\n\n\twill now work.\tThe RHS of the model will consist of an\n\tadditive model containing all (non-respose) variabels in the\n\tgiven data frame.\n\n    o\tThe following type of assignment to data frame subsets\n\n\t\tz <- data.frame(x=rnorm(10),y=rnorm(10),z=rnorm(10))\n\t\tz[,1:2] <- matrix(1:20,nc=2)\n\n\twas producing incorrect results.  The solution was to wrap\n\tan implicit \"as.data.frame\" around the RHS.\n\n    o\t\"[.data.frame\" no longer has a default drop=TRUE argument.\n\tThis means that subsetting a data frame with \"[\" will always\n\tyield a data frame.\n\n    o\tThere was a swap of coordinates internally in \"mtext\" which\n\tmeant that labels were coming out in the wrong place.  Fixed.\n\n    o\tSyntax errors in parse(text=\"...\") would cause R to terminate\n\twith a segmentation violation.\tThis no longer happens, although\n\tthe result is still not perfect (the parse() returns).\n\tThis will be fixed by a future parse rewrite.\n\n    o   rainbow, topo.colors, etc., now also work with n in {1,2};\n\tdon't return duplicate neighbor colors anymore.\n\n    o   legend has new `text.width' argument and now also works with\n\tmathematical expressions as text.\n\n    o   hist() now works better, has a `plot = TRUE' argument, and returns\n\tsomething useful.\n\n    o   barplot() improved for `names', now returns vector of midpoints.\n\n    o   lm(), lm.fit, lm.wfit (was `lm.w.fit'):  Made more compatible.\n\tDealing with (close to) collinear situations is still not flexible\n\tenough.\n\n    o   internal postcript() improved (missing lines in boxplot(.)).\n\n    o   Improvement to many (even most ?) documentation (.Rd) files.\n\n    o   Numerous other fixes of minor things ...\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Version 0.60 of R for Unix is now available.  Release of this version\nhas been delayed for a variety of reasons, but we hope that it will\nprovide a good deal more stability and functionality than prev",
+      "thread_id": "thread-ce96aa4248fe",
+      "thread_depth": 0,
+      "month": "1997-12"
+    },
+    {
       "id": "msg-878764bf4a28",
       "message_id": "<199712071913.IAA27288@stat1.stat.auckland.ac.nz>",
       "from_name": "Ross Ihaka",
@@ -247,6 +263,24 @@
       ],
       "body_plain": "Kurt Hornik <Kurt.Hornik at ci.tuwien.ac.at> writes:\n\n>   code CVS archive.  The group currently consists of Peter Dalgaard,\n>   Robert Gentleman, Kurt Hornik, Ross Ihaka, Thomas Lumley, Martin\n>   Maechler, Paul Murrell, Heiner Schwarte, and Luke Tierney.\n\naaaand Beetlebum... (old Spike Jones number)\n\nIt seem Friedrich Leisch fell off the list - again!\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "Kurt Hornik <Kurt.Hornik at ci.tuwien.ac.at> writes:\n\n>   code CVS archive.  The group currently consists of Peter Dalgaard,\n>   Robert Gentleman, Kurt Hornik, Ross Ihaka, Thomas Lumley, Martin\n>   Ma",
+      "thread_id": "thread-330bdc1ddf41",
+      "thread_depth": 1,
+      "month": "1997-12"
+    },
+    {
+      "id": "msg-7ea8d4bd64e7",
+      "message_id": "<x24t4i9yjz.fsf@blueberry.kubism.ku.dk>",
+      "from_name": "Peter Dalgaard BSA",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "1997-12-09T19:11:28+01:00",
+      "subject": "R-beta: R FAQ v0.60",
+      "subject_clean": "R-beta: R FAQ v0.60",
+      "in_reply_to": "Kurt Hornik's message of Tue, 9 Dec 1997 18:48:20 +0100",
+      "references": [
+        "<199712091748.SAA29807@aragorn.ci.tuwien.ac.at>"
+      ],
+      "body_plain": "An embedded message was scrubbed...\nFrom: unknown sender\nSubject: no subject\nDate: no date\nSize: 1003\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/19971209/0190c38f/attachment.mht",
+      "body_snippet": "An embedded message was scrubbed...\nFrom: unknown sender\nSubject: no subject\nDate: no date\nSize: 1003\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/19971209/0190c38f/attachment.mht",
       "thread_id": "thread-330bdc1ddf41",
       "thread_depth": 1,
       "month": "1997-12"
@@ -1042,6 +1076,17 @@
       "root_message_id": "msg-ce96aa4248fe"
     },
     {
+      "id": "thread-ce96aa4248fe",
+      "subject": "R-beta: New R Version for Unix",
+      "message_count": 1,
+      "participants": [
+        "Ross Ihaka"
+      ],
+      "started": "1997-12-05T21:30:56+13:00",
+      "last_reply": "1997-12-05T21:30:56+13:00",
+      "root_message_id": "msg-ce96aa4248fe"
+    },
+    {
       "id": "thread-878764bf4a28",
       "subject": "R-beta: First Patch to R-0.60 for Unix",
       "message_count": 1,
@@ -1077,7 +1122,7 @@
     {
       "id": "thread-330bdc1ddf41",
       "subject": "R-beta: R FAQ v0.60",
-      "message_count": 3,
+      "message_count": 4,
       "participants": [
         "Friedrich Leisch",
         "Kurt Hornik",

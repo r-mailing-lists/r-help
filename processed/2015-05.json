@@ -4,43 +4,6 @@
   "month": "2015-05",
   "messages": [
     {
-      "id": "msg-bce95ccfab09",
-      "message_id": "<CAD4HhLwRUW4jy2XerC4-zvYBDjA8RiPP=82t2k45++mr8jmfpA@mail.gmail.com>",
-      "from_name": "Anirudh Jayaraman",
-      "from_email_hash": "9565f2cad2b6526704630a25130296b19a91d24d16015a0338810fe86cef5c08",
-      "date": "2015-05-01T00:50:38+05:30",
-      "subject": "[R] 'Installation of package <package> had non-zero exit status' on R-3.2.0 (RStudio Version 0.98.1103) on Ubuntu 12.04 OS",
-      "subject_clean": "'Installation of package <package> had non-zero exit status' on R-3.2.0 (RStudio Version 0.98.1103) on Ubuntu 12.04 OS",
-      "in_reply_to": "<55427698.1080309@gmail.com>",
-      "references": [
-        "<CAD4HhLxw4ZFT+qjos3vF5wo7=mkBuXujLDg_ahX9H9pqbiFcBw@mail.gmail.com>",
-        "<55427698.1080309@gmail.com>"
-      ],
-      "body_plain": "In that case, it seems that *libcurl* is not available for R-3.2.0 as I get\na message for\n\n*>* *install.packages(\"libcurl\")*\n\n  package ?libcurl? is not available (for R version 3.2.0)\n\nOr if on Terminal I run\n\n*sudo apt-get install libcurl4-openssl-dev*\n\nPackage libcurl4-openssl-dev is not available, but is referred to by\nanother package.\nThis may mean that the package is missing, has been obsoleted, or\nis only available from another source\n\n\n*________________________________________________________*\n*Anirudh Jayaraman*\nM.Sc Economics (2014-16)\nIndira Gandhi Institute of Development Research (IGIDR), Mumbai\nPh No: +91 9560476729\n\n\n\n\nOn Fri, May 1, 2015 at 12:08 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 30/04/2015 2:12 PM, Anirudh Jayaraman wrote:\n>\n>> I recently upgraded to *R-3.2.0* from *R-2.14.1* on *Ubuntu 12.04 LTS.*\n>>\n>> I have been *trying to install some add-on packages* (that weren't\n>> installed in the earlier version of R) to R-3.2.0. *but to no avail*,\n>> getting repeated error messages. For example, *I tried installing swirl*.\n>> Here's my output. The problem areas are highlighted in yellow. Any\n>> solution?\n>>\n>\n> The error message looks pretty clear:  the installer couldn't find\n> curl-config.  Just install whatever package is necessary to get libcurl,\n> and make sure curl-config is on your path, and you should get past that\n> error, and on to the next one.\n>\n> Duncan Murdoch\n>\n>\n>>\n>> *> install.packages(\"swirl\")*\n>>\n>>\n>> Installing package into ?/home/anirudh/R/x86_64-pc-linux-gnu-library/3.2?\n>> (as ?lib? is unspecified)\n>> also installing the dependencies ?testthat?, ?httr?, ?yaml?, ?RCurl?\n>>\n>> trying URL 'http://cran.rstudio.com/src/contrib/testthat_0.9.1.tar.gz'\n>> Content type 'application/x-gzip' length 49533 bytes (48 KB)\n>> ==================================================\n>> downloaded 48 KB\n>>\n>> trying URL 'http://cran.rstudio.com/src/contrib/httr_0.6.1.tar.gz'\n>> Content type 'application/x-gzip' length 247531 bytes (241 KB)\n>> ==================================================\n>> downloaded 241 KB\n>>\n>> trying URL 'http://cran.rstudio.com/src/contrib/yaml_2.1.13.tar.gz'\n>> Content type 'application/x-gzip' length 81045 bytes (79 KB)\n>> ==================================================\n>> downloaded 79 KB\n>>\n>> trying URL 'http://cran.rstudio.com/src/contrib/RCurl_1.95-4.6.tar.gz'\n>> Content type 'application/x-gzip' length 878616 bytes (858 KB)\n>> ==================================================\n>> downloaded 858 KB\n>>\n>> trying URL 'http://cran.rstudio.com/src/contrib/swirl_2.2.21.tar.gz'\n>> Content type 'application/x-gzip' length 51037 bytes (49 KB)\n>> ==================================================\n>> downloaded 49 KB\n>>\n>> * installing *source* package ?testthat? ...\n>> ** package ?testthat? successfully unpacked and MD5 sums checked\n>> ** libs\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -g -O2\n>> -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c reassign.c -o\n>> reassign.o\n>> gcc -std=gnu99 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions\n>> -Wl,-z,relro -o testthat.so reassign.o -L/usr/lib/R/lib -lR\n>> installing to\n>> /home/anirudh/R/x86_64-pc-linux-gnu-library/3.2/testthat/libs\n>> ** R\n>> ** inst\n>> ** preparing package for lazy loading\n>> ** help\n>> *** installing help indices\n>> ** building package indices\n>> ** testing if installed package can be loaded\n>> * DONE (testthat)\n>> * installing *source* package ?yaml? ...\n>> ** package ?yaml? successfully unpacked and MD5 sums checked\n>> ** libs\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c api.c -o api.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c dumper.c -o dumper.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c emitter.c -o emitter.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c implicit.c -o\n>> implicit.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c loader.c -o loader.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c parser.c -o parser.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c r-ext.c -o r-ext.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c reader.c -o reader.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c scanner.c -o scanner.o\n>> gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG -I. -DNDEBUG     -fpic  -g\n>> -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security\n>> -Werror=format-security -D_FORTIFY_SOURCE=2 -g  -c writer.c -o writer.o\n>> gcc -std=gnu99 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions\n>> -Wl,-z,relro -o yaml.so api.o dumper.o emitter.o implicit.o loader.o\n>> parser.o r-ext.o reader.o scanner.o writer.o -L/usr/lib/R/lib -lR\n>> installing to /home/anirudh/R/x86_64-pc-linux-gnu-library/3.2/yaml/libs\n>> ** R\n>> ** inst\n>> ** preparing package for lazy loading\n>> ** help\n>> *** installing help indices\n>> ** building package indices\n>> ** testing if installed package can be loaded\n>> * DONE (yaml)\n>> * installing *source* package ?RCurl? ...\n>> ** package ?RCurl? successfully unpacked and MD5 sums checked\n>> checking for curl-config... no\n>> Cannot find curl-config\n>> ERROR: configuration failed for package ?RCurl?\n>> * removing ?/home/anirudh/R/x86_64-pc-linux-gnu-library/3.2/RCurl?\n>> Warning in install.packages :\n>>    installation of package ?RCurl? had non-zero exit status\n>> ERROR: dependency ?RCurl? is not available for package ?httr?\n>> * removing ?/home/anirudh/R/x86_64-pc-linux-gnu-library/3.2/httr?\n>> Warning in install.packages :\n>>    installation of package ?httr? had non-zero exit status\n>> ERROR: dependencies ?httr?, ?RCurl? are not available for package ?swirl?\n>> * removing ?/home/anirudh/R/x86_64-pc-linux-gnu-library/3.2/swirl?\n>> Warning in install.packages :\n>>    installation of package ?swirl? had non-zero exit status\n>>\n>> The downloaded source packages are in\n>>      ?/tmp/RtmpmKycFY/downloaded_packages?\n>> *________________________________________________________*\n>> *Anirudh Jayaraman*\n>> M.Sc Economics (2014-16)\n>> Indira Gandhi Institute of Development Research (IGIDR), Mumbai\n>> Ph No: +91 9560476729\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "In that case, it seems that *libcurl* is not available for R-3.2.0 as I get\na message for\n\n*>* *install.packages(\"libcurl\")*\n\n  package ?libcurl? is not available (for R version 3.2.0)\n\nOr if on Termi",
-      "thread_id": "thread-bce95ccfab09",
-      "thread_depth": 0,
-      "month": "2015-05"
-    },
-    {
-      "id": "msg-3f2cd3dff483",
-      "message_id": "<5542A2AE.1020306@auckland.ac.nz>",
-      "from_name": "Rolf Turner",
-      "from_email_hash": "904c134d5ad39093183253270ee481b35c208cc4297e137e579e32e8115e7dff",
-      "date": "2015-05-01T09:46:22+12:00",
-      "subject": "[R] Inference Syntax",
-      "subject_clean": "Inference Syntax",
-      "in_reply_to": "<1430392961881-4706637.post@n4.nabble.com>",
-      "references": [
-        "<1430392961881-4706637.post@n4.nabble.com>"
-      ],
-      "body_plain": "On 30/04/15 23:22, Shivi82 wrote:\n> Hi All,\n>\n> This is my first post in the community.\n> I am currently working on finding some inferences from my sample data and\n> the code I have used is:\n> inference(y = nc$weight, x = nc$habit, est = \"mean\", type = \"ht\", null = 0,\n> method = \"theoretical\"). While researching more on the code as I have just\n> started using R, online I found alternative also as a keyword for the syntax\n> which has option as either less, greater or two sided. I am unsure what it\n> is referring to.\n> If someone would please explain the alterative keyword. Thank you.\n\nThe word \"alternative\" refers to the alternative hypothesis in the test \nthat you are carrying out.\n\nWhere does the function inference() come from?  I can find no trace of \nit in a standard R installation, and the term is too broad to search for \neffectively.  Please do not expect the R-help list to be telepathic.\n\ncheers,\n\nRolf Turner\n\n-- \nRolf Turner\nTechnical Editor ANZJS\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276\nHome phone: +64-9-480-4619",
-      "body_snippet": "On 30/04/15 23:22, Shivi82 wrote:\n> Hi All,\n>\n> This is my first post in the community.\n> I am currently working on finding some inferences from my sample data and\n> the code I have used is:\n> inferen",
-      "thread_id": "thread-3f2cd3dff483",
-      "thread_depth": 0,
-      "month": "2015-05"
-    },
-    {
       "id": "msg-eabb7c3df3de",
       "message_id": "<CA+8X3fUgvMmzjHLktVbtV4mvetMHjEuO27bcZitHiUFW4tCbgw@mail.gmail.com>",
       "from_name": "Jim Lemon",
@@ -55,8 +18,8 @@
       ],
       "body_plain": "Hi Shiv82,\nThis doesn't look like it comes from the SharpeR, iBATGCH, inference\npackages and there are too many other packages using the term to\neasily identify it. As Rolf pointed out, alternative hypotheses are\ntypically framed as:\n\n\"two-sided\" - non-directional, only specifies that the comparison of\nstatistics shows a difference.\n\n\"less\" or \"greater\" - specifies that one particular statistic (usually\nthat of an experimental group) in the comparison must be less or\ngreater than the other (usually the reference group).\n\nJim\n\nOn Fri, May 1, 2015 at 7:46 AM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n> On 30/04/15 23:22, Shivi82 wrote:\n>>\n>> Hi All,\n>>\n>> This is my first post in the community.\n>> I am currently working on finding some inferences from my sample data and\n>> the code I have used is:\n>> inference(y = nc$weight, x = nc$habit, est = \"mean\", type = \"ht\", null =\n>> 0,\n>> method = \"theoretical\"). While researching more on the code as I have just\n>> started using R, online I found alternative also as a keyword for the\n>> syntax\n>> which has option as either less, greater or two sided. I am unsure what it\n>> is referring to.\n>> If someone would please explain the alterative keyword. Thank you.\n>\n>\n> The word \"alternative\" refers to the alternative hypothesis in the test that\n> you are carrying out.\n>\n> Where does the function inference() come from?  I can find no trace of it in\n> a standard R installation, and the term is too broad to search for\n> effectively.  Please do not expect the R-help list to be telepathic.\n>\n> cheers,\n>\n> Rolf Turner\n>\n> --\n> Rolf Turner\n> Technical Editor ANZJS\n> Department of Statistics\n> University of Auckland\n> Phone: +64-9-373-7599 ext. 88276\n> Home phone: +64-9-480-4619\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Hi Shiv82,\nThis doesn't look like it comes from the SharpeR, iBATGCH, inference\npackages and there are too many other packages using the term to\neasily identify it. As Rolf pointed out, alternative hy",
-      "thread_id": "thread-3f2cd3dff483",
-      "thread_depth": 1,
+      "thread_id": "thread-eabb7c3df3de",
+      "thread_depth": 0,
       "month": "2015-05"
     },
     {
@@ -112,8 +75,8 @@
       ],
       "body_plain": "Hi All,\nThanks for extending help on this one. I am able to understand how what it\nrefers to.\nI am using R studio as I think it comes as an inbuilt capability. \n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Inference-Syntax-tp4706637p4706677.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "Hi All,\nThanks for extending help on this one. I am able to understand how what it\nrefers to.\nI am using R studio as I think it comes as an inbuilt capability. \n\n\n\n--\nView this message in context: htt",
-      "thread_id": "thread-3f2cd3dff483",
-      "thread_depth": 2,
+      "thread_id": "thread-eabb7c3df3de",
+      "thread_depth": 1,
       "month": "2015-05"
     },
     {
@@ -16082,54 +16045,9 @@
       "thread_id": "thread-e82049c6ac0e",
       "thread_depth": 1,
       "month": "2015-05"
-    },
-    {
-      "id": "msg-6fbaefc67732",
-      "message_id": "<1433116197.2569072.283014113.14F69D8F@webmail.messagingengine.com>",
-      "from_name": "andrejfavia at ml1.net",
-      "from_email_hash": "e14c514ca23611fe814798122c926ca839b68a2058ea7e818f7fe8a41e100524",
-      "date": "2015-05-31T19:49:57-04:00",
-      "subject": "[R] How do I move the horizontal axis in a plot so that it starts at the zero of the vertical axis?",
-      "subject_clean": "How do I move the horizontal axis in a plot so that it starts at the zero of the vertical axis?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Alright but then if I include an aspect ratio, the y-axis no longer\nstarts at 0 at the bottom of the plot.\n\nx <- c(-2.5, -1.3, 0.6, 0.8, 2.1)\ny <- c(0.3, 1.9, 1.4, 0.7, 1.1)\n\nplot(x, y, ylim=c(0, 2), yaxs=\"i\", asp=1.25)",
-      "body_snippet": "Alright but then if I include an aspect ratio, the y-axis no longer\nstarts at 0 at the bottom of the plot.\n\nx <- c(-2.5, -1.3, 0.6, 0.8, 2.1)\ny <- c(0.3, 1.9, 1.4, 0.7, 1.1)\n\nplot(x, y, ylim=c(0, 2), ",
-      "thread_id": "thread-6fbaefc67732",
-      "thread_depth": 0,
-      "month": "2015-05"
-    },
-    {
-      "id": "msg-656449a96c7b",
-      "message_id": "<1080833B-5E6E-449B-BE6C-0D908C1903AF@utoronto.ca>",
-      "from_name": "Boris Steipe",
-      "from_email_hash": "a41454b3645a140f39702275c1d4fca3b980a9fdf0861e407154805ae728380d",
-      "date": "2015-05-31T23:32:26-04:00",
-      "subject": "[R] How do I move the horizontal axis in a plot so that it starts at the zero of the vertical axis?",
-      "subject_clean": "How do I move the horizontal axis in a plot so that it starts at the zero of the vertical axis?",
-      "in_reply_to": "<1433116197.2569072.283014113.14F69D8F@webmail.messagingengine.com>",
-      "references": [
-        "<1433116197.2569072.283014113.14F69D8F@webmail.messagingengine.com>"
-      ],
-      "body_plain": "Like this?\n\nx <- c(-2.5, -1.3, 0.6, 0.8, 2.1)\ny <- c(0.3, 1.9, 1.4, 0.7, 1.1)\n\nplot(x, y, ylim=c(0, 2), axes=FALSE, asp=1.25)\nbox()\nabline(h=0)\naxis(side=1, pos=0.0, lwd=0, lwd.ticks=1)\naxis(side=2, lwd=0, lwd.ticks=1)\n\nB.\n\nOn May 31, 2015, at 7:49 PM, andrejfavia at ml1.net wrote:\n\n> x <- c(-2.5, -1.3, 0.6, 0.8, 2.1)\n> y <- c(0.3, 1.9, 1.4, 0.7, 1.1)\n> \n> plot(x, y, ylim=c(0, 2), yaxs=\"i\", asp=1.25)",
-      "body_snippet": "Like this?\n\nx <- c(-2.5, -1.3, 0.6, 0.8, 2.1)\ny <- c(0.3, 1.9, 1.4, 0.7, 1.1)\n\nplot(x, y, ylim=c(0, 2), axes=FALSE, asp=1.25)\nbox()\nabline(h=0)\naxis(side=1, pos=0.0, lwd=0, lwd.ticks=1)\naxis(side=2, l",
-      "thread_id": "thread-6fbaefc67732",
-      "thread_depth": 1,
-      "month": "2015-05"
     }
   ],
   "threads": [
-    {
-      "id": "thread-bce95ccfab09",
-      "subject": "'Installation of package <package> had non-zero exit status' on R-3.2.0 (RStudio Version 0.98.1103) on Ubuntu 12.04 OS",
-      "message_count": 1,
-      "participants": [
-        "Anirudh Jayaraman"
-      ],
-      "started": "2015-05-01T00:50:38+05:30",
-      "last_reply": "2015-05-01T00:50:38+05:30",
-      "root_message_id": "msg-bce95ccfab09"
-    },
     {
       "id": "thread-fcfff3a8077c",
       "subject": "help - hoslem.test",
@@ -16178,17 +16096,16 @@
       "root_message_id": "msg-c7a85a691611"
     },
     {
-      "id": "thread-3f2cd3dff483",
+      "id": "thread-eabb7c3df3de",
       "subject": "Inference Syntax",
-      "message_count": 3,
+      "message_count": 2,
       "participants": [
         "Jim Lemon",
-        "Rolf Turner",
         "Shivi82"
       ],
-      "started": "2015-05-01T09:46:22+12:00",
+      "started": "2015-05-01T11:22:31+10:00",
       "last_reply": "2015-05-01T00:55:10-07:00",
-      "root_message_id": "msg-3f2cd3dff483"
+      "root_message_id": "msg-eabb7c3df3de"
     },
     {
       "id": "thread-c4e006f62af4",
@@ -19864,18 +19781,6 @@
       "started": "2015-05-31T14:10:06-07:00",
       "last_reply": "2015-05-31T14:47:10-07:00",
       "root_message_id": "msg-e82049c6ac0e"
-    },
-    {
-      "id": "thread-6fbaefc67732",
-      "subject": "How do I move the horizontal axis in a plot so that it starts at the zero of the vertical axis?",
-      "message_count": 2,
-      "participants": [
-        "Boris Steipe",
-        "andrejfavia at ml1.net"
-      ],
-      "started": "2015-05-31T19:49:57-04:00",
-      "last_reply": "2015-05-31T23:32:26-04:00",
-      "root_message_id": "msg-6fbaefc67732"
     }
   ]
 }

@@ -887,6 +887,22 @@
       "month": "2017-07"
     },
     {
+      "id": "msg-7d6c3cee87d1",
+      "message_id": "<1499279040187.70227@BTBOCES.ORG>",
+      "from_name": "Courtney Benjamin",
+      "from_email_hash": "f1ccdfc4192b6eca6fe79cd4aa89542a53010142807374b3438319aba3c4e030",
+      "date": "2017-07-05T18:24:21Z",
+      "subject": "[R] Svyglm Error",
+      "subject_clean": "Svyglm Error",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Greetings,\n\nI am revisiting code from several different files I have saved from the past and all used to run flawlessly; now when I run any of the svyglm related functions, I am coming up with an error:\n\nError in model.frame.default(formula = F3ATTAINB ~ F1PARED, data = data,  :\n  the ... list does not contain 4 elements\nThe following is a minimal reproducible example:\nlibrary(RCurl)\nlibrary(survey)\n\ndata <- getURL(\"https://raw.githubusercontent.com/cbenjamin1821/careertech-ed/master/elsq1adj.csv\")\nelsq1ch <- read.csv(text = data)\n\n#Specifying the svyrepdesign object which applies the BRR weights\nelsq1ch_brr<-svrepdesign(variables = elsq1ch[,1:16], repweights = elsq1ch[,18:217], weights = elsq1ch[,17], combined.weights = TRUE, type = \"BRR\")\nelsq1ch_brr\n\n##Resetting baseline levels for predictors\nelsq1ch_brr <- update( elsq1ch_brr , F1HIMATH = relevel(F1HIMATH,\"PreAlg or Less\") )\nelsq1ch_brr <- update( elsq1ch_brr , BYINCOME = relevel(BYINCOME,\"0-25K\") )\nelsq1ch_brr <- update( elsq1ch_brr , F1RACE = relevel(F1RACE,\"White\") )\nelsq1ch_brr <- update( elsq1ch_brr , F1SEX = relevel(F1SEX,\"Male\") )\nelsq1ch_brr <- update( elsq1ch_brr , F1RTRCC = relevel(F1RTRCC,\"Other\") )\n\n##Univariate testing for Other subset\nOthpared <- svyglm(formula=F3ATTAINB~F1PARED,family=\"quasibinomial\",design=subset(elsq1ch_brr,BYSCTRL==1&G10COHRT==1&F1RTRCC==\"Other\"),na.action=na.omit)\nsummary(Othpared)?\n\n\nAny help in resolving this concern would be greatly appreciated.\n\nSincerely,\n\nCourtney\n\n\nCourtney Benjamin\n\nBroome-Tioga BOCES\n\nAutomotive Technology II Teacher\n\nLocated at Gault Toyota\n\nDoctoral Candidate-Educational Theory & Practice\n\nState University of New York at Binghamton\n\ncbenjami at btboces.org<mailto:cbenjami at btboces.org>\n\n607-763-8633\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Greetings,\n\nI am revisiting code from several different files I have saved from the past and all used to run flawlessly; now when I run any of the svyglm related functions, I am coming up with an erro",
+      "thread_id": "thread-7d6c3cee87d1",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
       "id": "msg-082876d2e351",
       "message_id": "<6ddab164dc8944df9be044237ed88d20@exch-2p-mbx-w2.ads.tamu.edu>",
       "from_name": "David L Carlson",
@@ -8989,6 +9005,17 @@
       "started": "2017-07-05T18:05:47+00:00",
       "last_reply": "2017-07-05T18:05:47+00:00",
       "root_message_id": "msg-dc083976a11e"
+    },
+    {
+      "id": "thread-7d6c3cee87d1",
+      "subject": "Svyglm Error",
+      "message_count": 1,
+      "participants": [
+        "Courtney Benjamin"
+      ],
+      "started": "2017-07-05T18:24:21+00:00",
+      "last_reply": "2017-07-05T18:24:21+00:00",
+      "root_message_id": "msg-7d6c3cee87d1"
     },
     {
       "id": "thread-7d6c3cee87d1",

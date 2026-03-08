@@ -91,6 +91,24 @@
       "month": "2019-11"
     },
     {
+      "id": "msg-97ad6611edf1",
+      "message_id": "<!&!GAAAAAAAAABWob9e2JwrSqMGgmGX/wghwoAAABgAAAAAAAAAVqG/XticK0qjBoJhl/8IIUSRVAAAAAAAEAAAACxGcfCh78JKmlUTyt4088wUAAAAdHJhbnNmb3JtaW5nICBkYXRlcwA=@sbcglobal.net>",
+      "from_name": "reichm@@j m@iii@g oii sbcgiob@i@@et",
+      "from_email_hash": "8f05e5a22f5f27d1377a06fb75d663982456eefd02e4e8ccdeed27836b9358ba",
+      "date": "2019-11-02T21:40:50-05:00",
+      "subject": "[R] transforming  dates",
+      "subject_clean": "transforming  dates",
+      "in_reply_to": null,
+      "references": [
+        "<!&!GAAAAAAAAABWob9e2JwrSqMGgmGX/wghwoAAABgAAAAAAAAAVqG/XticK0qjBoJhl/8IIUSRVAAAAAAAEAAAACxGcfCh78JKmlUTyt4088wUAAAAdHJhbnNmb3JtaW5nICBkYXRlcwA=.ref@sbcglobal.net>"
+      ],
+      "body_plain": "R-Help Forum\n\n \n\nI have a data set that contains a date field but the dates are in two\nformats\n\n \n\n11/7/2016            dd/mm/yyyy\n\n14-07-16               dd-mm-yy\n\n \n\nHow would I go about correcting this problem. \n\n \n\nI'm thinking something like ..\n\n \n\nfor (i in 1:length(myDat$date)){ \n\n                    if ((myDat$date [i]) = <some sort of format> { \n\n  <format one way, <else format another way> \n\n  } \n\n}\n\n \n\nOr something like this \n\n \n\n \n\nSincerely\n\n \n\nJeff Reichman\n\n(314) 457-1966\n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "R-Help Forum\n\n \n\nI have a data set that contains a date field but the dates are in two\nformats\n\n \n\n11/7/2016            dd/mm/yyyy\n\n14-07-16               dd-mm-yy\n\n \n\nHow would I go about correcting ",
+      "thread_id": "thread-97ad6611edf1",
+      "thread_depth": 0,
+      "month": "2019-11"
+    },
+    {
       "id": "msg-81c8fbb0e91d",
       "message_id": "<CAGxFJbSrHT=YH0ya3uS+vzOBKVrsodR-gGNOcTKHdRTG3=iPHA@mail.gmail.com>",
       "from_name": "Bert Gunter",
@@ -4120,6 +4138,27 @@
       "month": "2019-11"
     },
     {
+      "id": "msg-791a61cd0901",
+      "message_id": "<002901d59fd4$2cc5a090$8650e1b0$@sbcglobal.net>",
+      "from_name": "Jeff Reichman",
+      "from_email_hash": "51d6d139afe7517ba530b38dc5f31acb1006b1b4691c17357f22c59c86be7c4f",
+      "date": "2019-11-20T12:56:09-06:00",
+      "subject": "[R] Extract lines from pdf files",
+      "subject_clean": "Extract lines from pdf files",
+      "in_reply_to": "<CAGgJW74xSWkhG8LWqvVnLG0tr4LsdOugu1E6NsXPCF4G2-0meg@mail.gmail.com>",
+      "references": [
+        "<774496205.2589227.1574203940481.ref@mail.yahoo.com>",
+        "<774496205.2589227.1574203940481@mail.yahoo.com>",
+        "<FC4FB905-880B-4F69-8776-EDC7BB6FD626@dcn.davis.ca.us>",
+        "<CAGgJW74xSWkhG8LWqvVnLG0tr4LsdOugu1E6NsXPCF4G2-0meg@mail.gmail.com>"
+      ],
+      "body_plain": "Eric\n\nI will have to give that a try. Thanks.  \nFor a \"it works\" method I used ....\n\nstart_time <- Sys.time()\n\n\tinsert code of interest\n\nend_time <- Sys.time()\nend_time - start_time\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Eric Berger\nSent: Wednesday, November 20, 2019 9:58 AM\nTo: Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\nCc: Thomas Subia <tgs77m at yahoo.com>; Thomas Subia via R-help\n<r-help at r-project.org>\nSubject: Re: [R] Extract lines from pdf files\n\nHi Thomas,\nAs Jeff wrote, your HTML email is difficult to read. This is a \"plain text\"\nforum.\nAs for \"pointers\", here is one suggestion.\nSince you write that you can do the necessary actions with a specific file,\ntry to write a function that carries out those actions for that same file.\nExcept when implementing the function, replace any specific data with the\nvalue of an argument passed into the function.\ne.g.\ntxt <- pdf_text(\"10619.pdf\")\nwould be replaced by\ntxt <- pdf_text(pdfFile)\n\nand your function would have pdfFile as an argument, as in\n\nmyfunc <- function( pdfFile )\n\nSince you can accomplish the task for this file without a function, you\nshould be able to accomplish the task with a function.\nOnce you succeed to do that you can then try passing the function arguments\nthat refer to the other files you need to process.\n\nHTH,\nEric\n\n\nOn Wed, Nov 20, 2019 at 1:09 AM Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\nwrote:\n>\n> Please don't spam the mailing list. Especially with HTML format messages.\nSee the Posting Guide.\n>\n> PDF is designed to present data graphically. It is literally possible to\nplace every character in the page in random order and still achieve this\nvisual readability while practically making it nearly impossible to read. I\nhave encountered many PDF files with the same text placed on the page\nmultiple times... again scrambling your option to read it digitally. Tools\nlike \"pdftools\" can sometimes work when the program that generated the file\ndoes so in a simple and extraction-friendly way... but there are no\nguarantees, and your description suggests that it is likely that you won't\nbe able to accomplish your goal with this file.\n>\n> On November 19, 2019 11:52:20 PM GMT+01:00, Thomas Subia via R-help\n<r-help at r-project.org> wrote:\n> >\n> >Colleagues,\n> >\n> >\n> >\n> >I can extract specific data from lines in a pdf using:\n> >\n> >\n> >\n> >library(pdftools)\n> >\n> >pdf_text(\"10619.pdf\")\n> >\n> >txt <- pdf_text(\".pdf\")\n> >\n> >write.table(txt,file=\"mydata.txt\")\n> >\n> >con <- file('mydata.txt')\n> >\n> >open(con)\n> >\n> >serial <- read.table(con,skip=5,nrow=1) #Extract[3]flatness <- \n> >read.table(con,skip=11,nrow=1)# Extract [5]\n> >\n> >parallel1 <-read.table(con,skip=2,nrow=1)# Extract [5]\n> >\n> >parallel2 <-read.table(con,skip=4,nrow=1)# Extract [5]\n> >\n> >close(con)\n> >\n> >\n> >\n> ># note here that serial has 4 variables\n> >\n> ># flatness had 6 variables\n> >\n> ># parallel1 has 5 variables\n> >\n> ># parallel2 has 5 variables\n> >\n> >\n> >\n> ># this outputs the specific data I need\n> >\n> >serial[3]\n> >\n> >flatness[5]\n> >\n> >parallel1[5] # Note here that the txt format shows 0.0007not \n> >scientific, is there a way to format this to display the original data?\n> >\n> >parallel2[5] # Note here that the txt format shows 0.0006not \n> >scientific, , is there a way to format this to display the original \n> >data?\n> >\n> >\n> >\n> >I'd like to extend this code to all of the pdf files in adirectory \n> >and to generate a table of all the serial, flatness, parallel1 \n> >andparallel2 data.\n> >\n> >I'm not having a lot of success trying to build thescript for this.\n> >Some pointers would be appreciated.\n> >All the best.\n> >\n> >Thomas Subia\n> >\n> >Statistician / Senior Quality Engineer\n> >\n> >\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> >______________________________________________\n> >R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n> >https://stat.ethz.ch/mailman/listinfo/r-help\n> >PLEASE do read the posting guide\n> >http://www.R-project.org/posting-guide.html\n> >and provide commented, minimal, self-contained, reproducible code.\n>\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see \n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Eric\n\nI will have to give that a try. Thanks.  \nFor a \"it works\" method I used ....\n\nstart_time <- Sys.time()\n\n\tinsert code of interest\n\nend_time <- Sys.time()\nend_time - start_time\n\n-----Original Mes",
+      "thread_id": "thread-dd457c43fe66",
+      "thread_depth": 3,
+      "month": "2019-11"
+    },
+    {
       "id": "msg-6ebbac446dba",
       "message_id": "<CAGxFJbQ=TMit4nX2L2pgBqFvaboM7oz-PZxiYQLZJWPi=qKYTA@mail.gmail.com>",
       "from_name": "Bert Gunter",
@@ -5889,6 +5928,17 @@
       "root_message_id": "msg-97ad6611edf1"
     },
     {
+      "id": "thread-97ad6611edf1",
+      "subject": "transforming  dates",
+      "message_count": 1,
+      "participants": [
+        "reichm@@j m@iii@g oii sbcgiob@i@@et"
+      ],
+      "started": "2019-11-02T21:40:50-05:00",
+      "last_reply": "2019-11-02T21:40:50-05:00",
+      "root_message_id": "msg-97ad6611edf1"
+    },
+    {
       "id": "thread-ff6f868209ea",
       "subject": "Train and testing in caret package",
       "message_count": 2,
@@ -6571,7 +6621,7 @@
     {
       "id": "thread-dd457c43fe66",
       "subject": "Extract lines from pdf files",
-      "message_count": 8,
+      "message_count": 9,
       "participants": [
         "Bert Gunter",
         "Eric Berger",

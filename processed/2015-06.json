@@ -8054,6 +8054,27 @@
       "month": "2015-06"
     },
     {
+      "id": "msg-66ed57062a24",
+      "message_id": "<1FA3D4D1-9DE8-4668-8F03-1F2C58AA4553@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2015-06-14T08:18:18-07:00",
+      "subject": "[R] [R-SIG-Mac]  R 3.2, Mac 10.10.3 : help.search showing error",
+      "subject_clean": "R 3.2, Mac 10.10.3 : help.search showing error",
+      "in_reply_to": "<2727AFA1-E41C-4D6E-9B1B-959A6F0A4B63@xs4all.nl>",
+      "references": [
+        "<CAMLd9E6RZ6-QZfTpdxQbvkMr+b5UQL+p_DS3kjLbnB_tbgcWcw@mail.gmail.com>",
+        "<F6F57E8C-3CCF-424C-B688-6AD25CBEE518@comcast.net>",
+        "<CAMLd9E5b0X6kVs2U2Q=km+mSAxWdhjKskvn0_+JeMRmyxHkG7w@mail.gmail.com>",
+        "<2727AFA1-E41C-4D6E-9B1B-959A6F0A4B63@xs4all.nl>"
+      ],
+      "body_plain": "On Jun 13, 2015, at 11:04 PM, Berend Hasselman wrote:\n\n> \n>> On 14-06-2015, at 06:25, Ramnik Bansal <ramnik.bansal at gmail.com> wrote:\n>> \n>> Thanks. But it seems to be an R 3.2.0 specific problem.\n>> \n> \n> I replied with the following to a similar message on R-devel.\n\nThere was no error either with using help() or using the Mac GUI package manager. Those were the reported difficulties previously reported.\n\n> \n> ????????????????????????\n> See this thread on R-SIG-Mac\n> \n> https://stat.ethz.ch/pipermail/r-sig-mac/2015-April/011420.html\n> \n> This may help.\n> Get R 3.2.0-patched or even the release candidate for R 3.2.1\n> ????????????????????????\n\n The error I am getting was from the most recent R 3.2.0 downloaded yesterday. There is no 3.2.0-Patched for Mavericks.  The release candidate, R 3.2.1 RC, is marked on the ATT Research webpage as failing Make and it indeed fails to launch. I would NOT recommend that anyone accept that advice. \n\nBut maybe it is a Mac-specific problem. When I remove the crippled R 3.2.1 RC and reinstall the R 3.2.0 and run from a Terminal window I do not get the help.search() error. So copying to R SIG Mac, and will not copy R-help on any further efforts.\n\n-- \nDavid.\n\n\n\n> \n> Berend\n> \n> \n>> On Sun, Jun 14, 2015 at 8:42 AM, David Winsemius <dwinsemius at comcast.net>\n>> wrote:\n>> \n>>> \n>>> On Jun 13, 2015, at 7:41 AM, Ramnik Bansal wrote:\n>>> \n>>>> Getting following error in using help.search\n>>>> \n>>>>> utils::help.search(\"linear models\")\n>>>> Error in help(db[i, \"topic\"], package = db[i, \"Package\"], lib.loc =\n>>> lib,  :\n>>>> 'topic' should be a name, length-one character vector or reserved word\n>>> \n>>> I first tried this in a Mac running the SL version for R 3.1.2 and did not\n>>> get this error. I updated my Mavericks laptop to R 3.2.0 and can now\n>>> reproduce this error. It does not seem to depend on having a space in the\n>>> argument. It seems to be thrown by this segment of code in the\n>>> `help()`-function:\n>>> \n>>>  ischar <- tryCatch(is.character(topic) && length(topic) ==\n>>>      1L, error = identity)\n>>>  if (inherits(ischar, \"error\"))\n>>>      ischar <- FALSE\n>>>  if (!ischar) {\n>>>      reserved <- c(\"TRUE\", \"FALSE\", \"NULL\", \"Inf\", \"NaN\",\n>>>          \"NA\", \"NA_integer_\", \"NA_real_\", \"NA_complex_\", \"NA_character_\")\n>>>      stopic <- deparse(substitute(topic))\n>>>      if (!is.name(substitute(topic)) && !stopic %in% reserved)\n>>>          stop(\"'topic' should be a name, length-one character vector or\n>>> reserved word\")\n>>> \n>>> If gone through the `help.search` function code and cannot find where the\n>>> `help` function is actually called. This seems unlikely to be a\n>>> Mac-specific problem.\n>>> \n>>>> \n>>>> \n>>>>> example(help.search)\n>>>> \n>>>> hlp.sr> help.search(\"linear models\")    # In case you forgot how to fit\n>>>> linear\n>>>> Error in help(db[i, \"topic\"], package = db[i, \"Package\"], lib.loc =\n>>> lib,  :\n>>>> 'topic' should be a name, length-one character vector or reserved word\n>>>> \n>>>> \n>>>> How to sort this?\n>>>> \n>>>>     [[alternative HTML version deleted]]\n>>> \n>>> David Winsemius\n>>> Alameda, CA, USA\n>>> \n>>> \n>> \n>> \t[[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n\nDavid Winsemius\nAlameda, CA, USA\n\n_______________________________________________\nR-SIG-Mac mailing list\nR-SIG-Mac at r-project.org\nhttps://stat.ethz.ch/mailman/listinfo/r-sig-mac",
+      "body_snippet": "On Jun 13, 2015, at 11:04 PM, Berend Hasselman wrote:\n\n> \n>> On 14-06-2015, at 06:25, Ramnik Bansal <ramnik.bansal at gmail.com> wrote:\n>> \n>> Thanks. But it seems to be an R 3.2.0 specific problem.\n>",
+      "thread_id": "thread-e4f825117e2e",
+      "thread_depth": 4,
+      "month": "2015-06"
+    },
+    {
       "id": "msg-310d24574a03",
       "message_id": "<5FAA0124-21BD-4154-BC0F-C14AAE402CC3@gmail.com>",
       "from_name": "Andrés Aragón Martínez",
@@ -15155,56 +15176,6 @@
       "thread_id": "thread-16b1f74fc9c8",
       "thread_depth": 0,
       "month": "2015-06"
-    },
-    {
-      "id": "msg-7a55462ebbf2",
-      "message_id": "<55931692020000CB0013180C@smtp.medicine.umaryland.edu>",
-      "from_name": "John Sorkin",
-      "from_email_hash": "6f24ec44f0b672836986fb2c6959e74c7df7158deedbd284a5d1e1172a85eb89",
-      "date": "2015-06-30T22:22:10-04:00",
-      "subject": "[R] mixtools? Fitting two-normal distributions to data where one of the two normal distributions (the one corresponding to lower values of x) is a left-truncated normal distribution.",
-      "subject_clean": "mixtools? Fitting two-normal distributions to data where one of the two normal distributions (the one corresponding to lower values of x) is a left-truncated normal distribution.",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I am trying to model the mixture of two normal distributions, where x values are in the range of zero to some positive value. I know about mixtools and would use it save for the fact that the the y values from the normal distribution corresponding to the lower values of x (i.e. from zero to x/n) are from what appears to be a left-truncated normal distribution (i.e. the y values are all from the upper half of a normal distribution). The y values from higher values of x (i.e. from x/n to x) all appear to come from a normal distribution. Can someone suggest how to fit two normal distributions where one of the two distributions is left-truncated? Can this be done using mixtools?\nThank you,\nJohn \n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and Geriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing) \n\n\nConfidentiality Statement:\nThis email message, including any attachments, is for the sole use of the intended recipient(s) and may contain confidential and privileged information. Any unauthorized use, disclosure or distribution is prohibited. If you are not the intended recipient, please contact the sender by reply email and destroy all copies of the original message.",
-      "body_snippet": "I am trying to model the mixture of two normal distributions, where x values are in the range of zero to some positive value. I know about mixtools and would use it save for the fact that the the y va",
-      "thread_id": "thread-7a55462ebbf2",
-      "thread_depth": 0,
-      "month": "2015-06"
-    },
-    {
-      "id": "msg-d38cc3606880",
-      "message_id": "<CA+xNL7qYJqXput4uaNW=iAdMsbi=dTxAQZMnfuNdC5=32qELDw@mail.gmail.com>",
-      "from_name": "Richard Asturia",
-      "from_email_hash": "b5c26f9830307445530fa73b05f40ee402115181bcceee26b6718e69c13f681b",
-      "date": "2015-06-30T23:25:01-03:00",
-      "subject": "[R] Is there a package for Granger causality in panel models?",
-      "subject_clean": "Is there a package for Granger causality in panel models?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear list, I have been searching without success for a package or function\nto test for Granger causality-like in panel models. Has something like that\nbeen already implemented?\n\nThanks,\n\nRichard Asturia\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear list, I have been searching without success for a package or function\nto test for Granger causality-like in panel models. Has something like that\nbeen already implemented?\n\nThanks,\n\nRichard Astur",
-      "thread_id": "thread-d38cc3606880",
-      "thread_depth": 0,
-      "month": "2015-06"
-    },
-    {
-      "id": "msg-d4e684c68c60",
-      "message_id": "<14C9062E-1815-4EC9-95F4-4126CE7CD846@dcn.davis.CA.us>",
-      "from_name": "Jeff Newmiller",
-      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
-      "date": "2015-06-30T20:55:45-07:00",
-      "subject": "[R] Is there a package for Granger causality in panel models?",
-      "subject_clean": "Is there a package for Granger causality in panel models?",
-      "in_reply_to": "<CA+xNL7qYJqXput4uaNW=iAdMsbi=dTxAQZMnfuNdC5=32qELDw@mail.gmail.com>",
-      "references": [
-        "<CA+xNL7qYJqXput4uaNW=iAdMsbi=dTxAQZMnfuNdC5=32qELDw@mail.gmail.com>"
-      ],
-      "body_plain": "I don't know, but I highly recommend the \"sos\" package so you can answer this for yourself.\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn June 30, 2015 7:25:01 PM PDT, Richard Asturia <richard.asturia at gmail.com> wrote:\n>Dear list, I have been searching without success for a package or\n>function\n>to test for Granger causality-like in panel models. Has something like\n>that\n>been already implemented?\n>\n>Thanks,\n>\n>Richard Asturia\n>\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "I don't know, but I highly recommend the \"sos\" package so you can answer this for yourself.\n---------------------------------------------------------------------------\nJeff Newmiller                  ",
-      "thread_id": "thread-d38cc3606880",
-      "thread_depth": 1,
-      "month": "2015-06"
     }
   ],
   "threads": [
@@ -16907,7 +16878,7 @@
     {
       "id": "thread-e4f825117e2e",
       "subject": "R 3.2, Mac 10.10.3 : help.search showing error",
-      "message_count": 6,
+      "message_count": 7,
       "participants": [
         "Berend Hasselman",
         "David Winsemius",
@@ -18674,29 +18645,6 @@
       "started": "2015-06-30T17:50:55+05:30",
       "last_reply": "2015-06-30T14:19:02+01:00",
       "root_message_id": "msg-4b161d0c60ba"
-    },
-    {
-      "id": "thread-7a55462ebbf2",
-      "subject": "mixtools? Fitting two-normal distributions to data where one of the two normal distributions (the one corresponding to lower values of x) is a left-truncated normal distribution.",
-      "message_count": 1,
-      "participants": [
-        "John Sorkin"
-      ],
-      "started": "2015-06-30T22:22:10-04:00",
-      "last_reply": "2015-06-30T22:22:10-04:00",
-      "root_message_id": "msg-7a55462ebbf2"
-    },
-    {
-      "id": "thread-d38cc3606880",
-      "subject": "Is there a package for Granger causality in panel models?",
-      "message_count": 2,
-      "participants": [
-        "Jeff Newmiller",
-        "Richard Asturia"
-      ],
-      "started": "2015-06-30T23:25:01-03:00",
-      "last_reply": "2015-06-30T20:55:45-07:00",
-      "root_message_id": "msg-d38cc3606880"
     }
   ]
 }

@@ -10756,6 +10756,24 @@
       "month": "2002-10"
     },
     {
+      "id": "msg-9824f27b3c5a",
+      "message_id": "<3DB19B2C.8811.1FFB91@localhost>",
+      "from_name": "John Aitchison",
+      "from_email_hash": "c15fe5c26a3a241d0d040697bc2a36c5bc92869e4956291d13249f5357c9993b",
+      "date": "2002-10-19T17:49:32+10:00",
+      "subject": "[R] RAM usage",
+      "subject_clean": "RAM usage",
+      "in_reply_to": "<Pine.LNX.4.31.0210181355400.7984-100000@gannet.stats>",
+      "references": [
+        "<3DAFE20E.50505@delfi.lt>"
+      ],
+      "body_plain": "On 18 Oct 2002, at 14:03, ripley at stats.ox.ac.uk wrote:\n\n> On Fri, 18 Oct 2002, Vaidotas Zemlys wrote:\n> \n> > I'm having problems while working with large data sets with R 1.5.1\n> > in windows 2000. Given a integer matrix size of 30 columns and \n> > 15000 rows my function should return a boolean matrix size of about\n> > 5000 rows and 15000 columns.\n\nsnip\n> \n> \n> Don't think so.  More likely that Windows is having problems managing\n> the memory requirements.  You are trying to access an object too big\n> to fit into RAM, and that going to cause severe strain.\n\nsnip\n> \n> Again, there is likely a problem with Windows allocating a contiguous\n> chunk of 300Mb of memory.  Try this sort of thing only after a fresh\n> reboot.\n> \nsnip\n\n> \n> R can. The question is `can Windows'?  If possible use a Unix-based\n> OS.\n\nWindows leaves a LOT of junk lying around in RAM (recently used \nDLL's etc)  and even after a reboot there is still some reclaimable \nRAM (from processes used in startup). \n\nI use a program called MemTurbo http://www.memturbo.com/\nwhich will do a ram scrub (releasing unused ram when free ram \nlimits are reached) and a ram defrag (so if contiguous ram is \nneeded then this might help). It has been around a while, I have \nused it since an earlier version .. I don't believe it is perfect but it \ndoes seem to do a good job of the arcane area of windows memory \nmanagement. \n\nMaybe that will help to get you \"clean ram\".\n\nThe other area that might be worth attention is the number of \nprocesses that are currently running .. you can perhaps kill some \nof these. And, of course defragging your hard disk(s) and perhaps \nmanaging the swap file yourself are old favourites, not to mention \ncleaning the registry .. none of these should in theory have \nanything to do with memory management (by R), but in practice \nthere seem to be some complex \"interactions\" in the OS, between \nthe OS and the registry and RAM and concurrent threads. \n\nI have also found that a \"lightly loaded\"  Windows machine (one \nwith very few programs installed) is much more likely to be stable \nthan one with many programs installed, and I have a glimmering of \nan idea that there is some critical size of the registry beyond which \nsomething starts to thrash (? if the registry size is greater than \navailable physical RAM) . Of course none of this registry business  \nSHOULD affect R, but then again, Windoze is a black box, so who \nknows what goes on with program loading, thread interaction etc \netc\n\n\nTo cut a long story short, it might just possibly help if you try to \nkeep your ram and your disks and swapfiles and registry as clean \nas possible.\n\n\nfwiw\n\n\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "On 18 Oct 2002, at 14:03, ripley at stats.ox.ac.uk wrote:\n\n> On Fri, 18 Oct 2002, Vaidotas Zemlys wrote:\n> \n> > I'm having problems while working with large data sets with R 1.5.1\n> > in windows 2000.",
+      "thread_id": "thread-daba16815c3c",
+      "thread_depth": 2,
+      "month": "2002-10"
+    },
+    {
       "id": "msg-e01e9b89baea",
       "message_id": "<Pine.LNX.4.31.0210190927360.14639-100000@gannet.stats>",
       "from_name": "ripley@stats.ox.ac.uk",
@@ -13067,6 +13085,24 @@
       "body_snippet": "Dear Any,\nI am trying to initialise Rjava with the objective of running ORCA within R.\n\nI am running R1.5.1 on Windows2000 and get the same problem with Sun\nJava run time jre-1.2.2_013 \nJava  j2re-1.4",
       "thread_id": "thread-6d6f5fbebef8",
       "thread_depth": 0,
+      "month": "2002-10"
+    },
+    {
+      "id": "msg-4ce1616d234e",
+      "message_id": "<3DB7A775.1922.3C8A75@localhost>",
+      "from_name": "Petr Pikal",
+      "from_email_hash": "a1dcc30be9511846d16c20dda01d75da0485d709657c8cd4e1bee538dae35c60",
+      "date": "2002-10-24T07:55:33+02:00",
+      "subject": "[R] Counting NA?",
+      "subject_clean": "Counting NA?",
+      "in_reply_to": "<20021023145249.GE737@komensky.surfbest.net>",
+      "references": [
+        "<200210231354.50052.dwartel@ulb.ac.be>"
+      ],
+      "body_plain": "On 23 Oct 2002 at 10:52, Matej Cepl wrote:\n\n> On Wed, Oct 23, 2002 at 01:54:50PM +0200, David Wartel wrote:\n> > Surely not the best method:\n> > length(which(is.na(data$S2)==TRUE))\n> \n> Hi,\n> \n> I am sorry, of course, that I have found similar solution\n> (\"==TRUE\" is unnecessary) five seconds after firing up\n> 'sendmail -q'.  Thanks for the references to z-score,\n> t-distribution, etc., though.\n> \n> One this I was really surprised what that in order to get data\n> from the same data I have to use following construct constantly:\n> \n>  sumyes <- length(data$S2[data$S2 == 1 & !is.na(data$S2)])\n> \n> Isn't there any way how to say R, that I want eliminate NA data \n> for all my following calculations?\n\n?na.rm\n?na.omit\n?na.exclude\n\ndepending what you want to do with the result.\n\n\n\n> \n> Matej\n> \n> -- \n> Matej Cepl, matej at ceplovi.cz, PGP ID# D96484AC\n> 138 Highland Ave. #10, Somerville, Ma 02143, (617) 623-1488\n> \n> The politician attempts to remedy the evil by increasing the very\n> thing that caused the evil in the first place: legal plunder.\n>     -- Frederick Bastiat\n> \n> -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.\n> -.-.-.-.- r-help mailing list -- Read\n> http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html Send \"info\", \"help\",\n> or \"[un]subscribe\" (in the \"body\", not the subject !)  To:\n> r-help-request at stat.math.ethz.ch\n> _._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._.\n> _._._._._\n\nPetr Pikal\npetr.pikal at precheza.cz\np.pik at volny.cz\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "On 23 Oct 2002 at 10:52, Matej Cepl wrote:\n\n> On Wed, Oct 23, 2002 at 01:54:50PM +0200, David Wartel wrote:\n> > Surely not the best method:\n> > length(which(is.na(data$S2)==TRUE))\n> \n> Hi,\n> \n> I am s",
+      "thread_id": "thread-92fc5832efd6",
+      "thread_depth": 3,
       "month": "2002-10"
     },
     {
@@ -16250,6 +16286,22 @@
       "month": "2002-10"
     },
     {
+      "id": "msg-c2c5be8d4d37",
+      "message_id": "<OF2CF18E51.CD349005-ONC1256C61.003443BE@tomware.it>",
+      "from_name": "AlessandroSemeria@cramont.it",
+      "from_email_hash": "5cf98f6c39f88c38e3fcf512686ae12b2baa93090a1b113ac3e38356ef493ed1",
+      "date": "2002-10-30T09:27:01+01:00",
+      "subject": "[R] distributions homogeneity2",
+      "subject_clean": "distributions homogeneity2",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello dear R-list!\n I have to test if N (non linear)  experimantal\ndistributions fit some of known one. I would proceed in this\nway:\n1. Fit with 'nlm' and e.g. power law one ( non outlier) distribution of\nmine.\n2. Perform 'chisq.test' for each pairs (power law ,distribution(i))\n\nbut I'm neither a statistician nor a skilled on R, so I ask you: ther'is\nsome other way, more telling and efficient, to perform this task?\nThanks in advance for any suggestion!\n\n--------------------------\nSincerely yours.\n\nDr. Alessandro Semeria                             Tel. +39 544 536811\nModels and Simulation Lab of                                 Fax. +39 544\n538663\nThe Environment Research Center - Montecatini (Edison Group),\nE-mail: asemeria at cramont.it\nVia Ciro Menotti 48,\n48023 Marina di Ravenna (RA), Italy\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Hello dear R-list!\n I have to test if N (non linear)  experimantal\ndistributions fit some of known one. I would proceed in this\nway:\n1. Fit with 'nlm' and e.g. power law one ( non outlier) distributio",
+      "thread_id": "thread-c2c5be8d4d37",
+      "thread_depth": 0,
+      "month": "2002-10"
+    },
+    {
       "id": "msg-dfd651da6ddf",
       "message_id": "<15807.47844.122831.475588@gargle.gargle.HOWL>",
       "from_name": "Martin Maechler",
@@ -17525,6 +17577,22 @@
       "month": "2002-10"
     },
     {
+      "id": "msg-c2c5be8d4d37",
+      "message_id": "<OF2CF18E51.CD349005-ONC1256C61.003443BE@tomware.it>",
+      "from_name": "AlessandroSemeria@cramont.it",
+      "from_email_hash": "5cf98f6c39f88c38e3fcf512686ae12b2baa93090a1b113ac3e38356ef493ed1",
+      "date": "2002-10-31T18:45:03+01:00",
+      "subject": "[R] distributions homogeneity3",
+      "subject_clean": "distributions homogeneity3",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "RE-Hello dear R-list!\n I have to test if N (non linear)  experimantal\ndistributions fit some of known one. I would proceed in this\nway:\n1. Fit with 'nlm' and e.g. power law one ( non outlier) distribution of\nmine.\n2. Perform 'chisq.test' for each pairs (power law ,distribution(i))\n\nbut I'm neither a statistician nor a skilled on R, so I ask you: ther'is\nsome other way, more telling and efficient, to perform this task?\nThanks in advance for any suggestion!\n\n--------------------------\nSincerely yours.\n\nDr. Alessandro Semeria                             Tel. +39 544 536811\nModels and Simulation Lab of                                 Fax. +39 544\n538663\nThe Environment Research Center - Montecatini (Edison Group),\nE-mail: asemeria at cramont.it\nVia Ciro Menotti 48,\n48023 Marina di Ravenna (RA), Italy\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "RE-Hello dear R-list!\n I have to test if N (non linear)  experimantal\ndistributions fit some of known one. I would proceed in this\nway:\n1. Fit with 'nlm' and e.g. power law one ( non outlier) distribu",
+      "thread_id": "thread-c2c5be8d4d37",
+      "thread_depth": 0,
+      "month": "2002-10"
+    },
+    {
       "id": "msg-bf0d4232857d",
       "message_id": "<51F9C42DA15CD311BD220008C707D81906FFC845@usrymx10.merck.com>",
       "from_name": "Liaw, Andy",
@@ -17669,88 +17737,6 @@
       "body_snippet": "> Hello, I would like to include a table (of rax data, not \n> summary statistics - \n> in case this makes any difference) alongside a plot. I know \n> how to use \n> 'layout' to divide my page into secti",
       "thread_id": "thread-8148d2a91624",
       "thread_depth": 1,
-      "month": "2002-10"
-    },
-    {
-      "id": "msg-6ff6a981367b",
-      "message_id": "<Pine.A41.4.44.0210311455540.99802-100000@homer39.u.washington.edu>",
-      "from_name": "Thomas Lumley",
-      "from_email_hash": "fd3f6e9367b335430f74a8f6feb36e5e9d187865079d5ca2018b64dfb89dd278",
-      "date": "2002-10-31T15:07:42-08:00",
-      "subject": "[R] Zero is not Zero",
-      "subject_clean": "Zero is not Zero",
-      "in_reply_to": "<3DC181CA.1060904@uclink4.berkeley.edu>",
-      "references": [],
-      "body_plain": "On Thu, 31 Oct 2002, Neil Klepeis wrote:\n\n> I have a confusing problem with getting the form `x - trunc(x)' to be\n> exactly zero when `x' is an integer. It only seems to occur inside of a\n> function.  [R-1.6.0 on Linux/Intel]\n>\n> I have a function to return the highest precision digit of values in `x':\n>\n> prec<-function(x){\n> init <- trunc(log10(max(x)))\n> y <- x - trunc(x)\n> while (any(y > 0)) {\n>    init <- init - 1\n>    x1 <- x*10^(-init)\n>    y <- x1 - trunc(x1)\n> }\n> 10^init\n> }\n>\n\nThe problem is presumably that x1 isn't really an integer.  While\ntrunc(x1) should be exactly an integer there's no guarantee that there\nexists a value of init such that x*(10^-init) is exactly an integer.\n\nThe following seems to do what you want:\nprec<-function(x){\n  init <- trunc(log10(max(x)))\n  zero<- Machine()$double.eps*max(x)\n  y <- x - trunc(x)\n  while (any(y > zero)) {\n    init <- init - 1\n    x1 <- x*10^(-init)\n    y <- x1 - trunc(x1)\n  }\n  10^init\n}\n\n\t-thomas\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "On Thu, 31 Oct 2002, Neil Klepeis wrote:\n\n> I have a confusing problem with getting the form `x - trunc(x)' to be\n> exactly zero when `x' is an integer. It only seems to occur inside of a\n> function. ",
-      "thread_id": "thread-08d909f997bb",
-      "thread_depth": 1,
-      "month": "2002-10"
-    },
-    {
-      "id": "msg-7032217bee57",
-      "message_id": "<3DC1D2A3.8030607@princeton.edu>",
-      "from_name": "Gyanendra Badgaiyan",
-      "from_email_hash": "f158d726faf74e2696bcb17a7289f2354dc6bac53abc18c3c25457bc3b9ddd45",
-      "date": "2002-10-31T20:02:27-05:00",
-      "subject": "[R] How do I save a file as .R ?",
-      "subject_clean": "How do I save a file as .R ?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I need to do this to use the source ( ) function.\n\nThanks\ngyan\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "I need to do this to use the source ( ) function.\n\nThanks\ngyan\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~",
-      "thread_id": "thread-7032217bee57",
-      "thread_depth": 0,
-      "month": "2002-10"
-    },
-    {
-      "id": "msg-cf647d398c16",
-      "message_id": "<20021101025412.31181.qmail@web12507.mail.yahoo.com>",
-      "from_name": "Peter Lambrakis",
-      "from_email_hash": "1d2baa22fb46815de8d3165aa11462b3ce7adbf96e0704bb3eb3909c07a295a3",
-      "date": "2002-10-31T18:54:12-08:00",
-      "subject": "[R] batch multiple regressions and pipe results to file",
-      "subject_clean": "batch multiple regressions and pipe results to file",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I am looking to mass batch about 1000 or so multiple linear regressions\nwith an arbitrary number of independent variables (from 2 to 10) using\nthe step function. I wrote a short perl script that queries a database\nand generates the R code to create the model/formula. \n \nHow can I: \n    1. Get R to re-run the regression for each stepped regression using\nthe \"best fitted model/formula\" it just found (AIC).\n    2. Output that model/formula and extract its regression results\n(i.e. coefficients, Rsq, p-values, etc) into a file in a consistent and\n    easy to parse/read format so that I write them back into a\ndatabase.\n \nThanks in advance.\n \nPeter Lambrakis\n\n\n__________________________________________________\n\nHotJobs - Search new jobs daily now\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "I am looking to mass batch about 1000 or so multiple linear regressions\nwith an arbitrary number of independent variables (from 2 to 10) using\nthe step function. I wrote a short perl script that queri",
-      "thread_id": "thread-cf647d398c16",
-      "thread_depth": 0,
-      "month": "2002-10"
-    },
-    {
-      "id": "msg-8501c48981cf",
-      "message_id": "<200210312139.59114.dbdahl@stat.wisc.edu>",
-      "from_name": "David B. Dahl",
-      "from_email_hash": "a1ebb3628c2ae3614d47d40105bc96a0859e202bf9c9b247dadcc40b205cb4f9",
-      "date": "2002-10-31T21:39:59-06:00",
-      "subject": "[R] Flushing the R output buffer.",
-      "subject_clean": "Flushing the R output buffer.",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Richard,\n\nI run into this problem when trying to control R from a Java program.  \nHopefully my solution can help you.\n\nAfter poking around the source code, I realized that when R starts up, it \nchoose between interactive or non-interactive mode, based on whether there is \na controlling TTY.  Specifically, line 237 of src/unix/system.c has the line \n\"R_Interactive = isatty(0);\"  My solution is to insert the following line \nimmediately after line 237:\n\"if ( getenv(\"R_FORCE_INTERACTIVE\") != NULL ) R_Interactive = TRUE;\"\nI then compile R.  (You implied that you were adverse to learning how to \ncompile from source, but it really isn't hard.  See \"R Installation and \nAdministration\" documentation from the R webpage.)\nThen, within Java, I set the environment variable \"R_FORCE_INTERACTIVE\" to \n\"true\" and launch R.  I can then write commands to R and read the response, \nall without buffering or flushing issues.\n\nI hope this helps.  I would be interest in knowing how well this works for you \nor what other solution you come up with.\n\n- - David Dahl\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Richard,\n\nI run into this problem when trying to control R from a Java program.  \nHopefully my solution can help you.\n\nAfter poking around the source code, I realized that when R starts up, it \nchoose",
-      "thread_id": "thread-8501c48981cf",
-      "thread_depth": 0,
-      "month": "2002-10"
-    },
-    {
-      "id": "msg-a980c1241dc0",
-      "message_id": "<3DC23289.5030703@uclink4.berkeley.edu>",
-      "from_name": "Neil Klepeis",
-      "from_email_hash": "997469e2e7f18ef772349ca94283277e0e6fde480b4ce220ff1cbcb05cc67071",
-      "date": "2002-10-31T23:51:37-08:00",
-      "subject": "[R] %in% not working",
-      "subject_clean": "%in% not working",
-      "in_reply_to": null,
-      "references": [
-        "<Pine.A41.4.44.0210311455540.99802-100000@homer39.u.washington.edu>"
-      ],
-      "body_plain": "I'm at a loss on this one:\n\n > c(1.253) %in% seq(1.1,1.3,by=0.001)\n[1] FALSE\n > c(1.252) %in% seq(1.1,1.3,by=0.001)\n[1] TRUE\n > c(1.254) %in% seq(1.1,1.3,by=0.001)\n[1] TRUE\n\n\n[R-1.6.0 Linux/Intel]\n\n\n\n-- \n______________________________________________________\nNeil E. Klepeis, UC Berkeley, School of Public Health,\nand Lawrence Berkeley National Laboratory,\nBerkeley, CA USA.  Voice: 831-768-9510\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "I'm at a loss on this one:\n\n > c(1.253) %in% seq(1.1,1.3,by=0.001)\n[1] FALSE\n > c(1.252) %in% seq(1.1,1.3,by=0.001)\n[1] TRUE\n > c(1.254) %in% seq(1.1,1.3,by=0.001)\n[1] TRUE\n\n\n[R-1.6.0 Linux/Intel]\n\n\n\n",
-      "thread_id": "thread-08d909f997bb",
-      "thread_depth": 2,
       "month": "2002-10"
     }
   ],
@@ -21166,7 +21152,7 @@
     {
       "id": "thread-daba16815c3c",
       "subject": "RAM usage",
-      "message_count": 9,
+      "message_count": 10,
       "participants": [
         "John Aitchison",
         "Thomas Lumley",
@@ -21980,7 +21966,7 @@
     {
       "id": "thread-92fc5832efd6",
       "subject": "Counting NA?",
-      "message_count": 8,
+      "message_count": 9,
       "participants": [
         "Ben Bolker",
         "David Wartel",
@@ -23215,6 +23201,17 @@
       "root_message_id": "msg-0c456846913a"
     },
     {
+      "id": "thread-c2c5be8d4d37",
+      "subject": "distributions homogeneity2",
+      "message_count": 1,
+      "participants": [
+        "AlessandroSemeria@cramont.it"
+      ],
+      "started": "2002-10-30T09:27:01+01:00",
+      "last_reply": "2002-10-30T09:27:01+01:00",
+      "root_message_id": "msg-c2c5be8d4d37"
+    },
+    {
       "id": "thread-a2df9525ebfc",
       "subject": "sample size in anova and regression",
       "message_count": 1,
@@ -23588,13 +23585,12 @@
     {
       "id": "thread-08d909f997bb",
       "subject": "Zero is not Zero",
-      "message_count": 3,
+      "message_count": 1,
       "participants": [
-        "Neil Klepeis",
-        "Thomas Lumley"
+        "Neil Klepeis"
       ],
       "started": "2002-10-31T11:17:30-08:00",
-      "last_reply": "2002-10-31T23:51:37-08:00",
+      "last_reply": "2002-10-31T11:17:30-08:00",
       "root_message_id": "msg-08d909f997bb"
     },
     {
@@ -23667,15 +23663,15 @@
       "root_message_id": "msg-2843c70c2d5c"
     },
     {
-      "id": "thread-cf647d398c16",
-      "subject": "batch multiple regressions and pipe results to file",
+      "id": "thread-c2c5be8d4d37",
+      "subject": "distributions homogeneity3",
       "message_count": 1,
       "participants": [
-        "Peter Lambrakis"
+        "AlessandroSemeria@cramont.it"
       ],
-      "started": "2002-10-31T18:54:12-08:00",
-      "last_reply": "2002-10-31T18:54:12-08:00",
-      "root_message_id": "msg-cf647d398c16"
+      "started": "2002-10-31T18:45:03+01:00",
+      "last_reply": "2002-10-31T18:45:03+01:00",
+      "root_message_id": "msg-c2c5be8d4d37"
     },
     {
       "id": "thread-72d7d0ffd366",
@@ -23687,28 +23683,6 @@
       "started": "2002-10-31T19:53:47+00:00",
       "last_reply": "2002-10-31T19:53:47+00:00",
       "root_message_id": "msg-72d7d0ffd366"
-    },
-    {
-      "id": "thread-7032217bee57",
-      "subject": "How do I save a file as .R ?",
-      "message_count": 1,
-      "participants": [
-        "Gyanendra Badgaiyan"
-      ],
-      "started": "2002-10-31T20:02:27-05:00",
-      "last_reply": "2002-10-31T20:02:27-05:00",
-      "root_message_id": "msg-7032217bee57"
-    },
-    {
-      "id": "thread-8501c48981cf",
-      "subject": "Flushing the R output buffer.",
-      "message_count": 1,
-      "participants": [
-        "David B. Dahl"
-      ],
-      "started": "2002-10-31T21:39:59-06:00",
-      "last_reply": "2002-10-31T21:39:59-06:00",
-      "root_message_id": "msg-8501c48981cf"
     }
   ]
 }

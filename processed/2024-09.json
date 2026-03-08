@@ -4,46 +4,6 @@
   "month": "2024-09",
   "messages": [
     {
-      "id": "msg-2c6750a85cfa",
-      "message_id": "<CA+dpOJmv4AQpo89e9Ott7b=E7OEz-CfX-09Ud9FCfjxm_ci8-g@mail.gmail.com>",
-      "from_name": "Christofer Bogaso",
-      "from_email_hash": "a9644b1ce4ffb1973d84cbcef4f2647e0d603469b526448b1e6dd7deaf97da39",
-      "date": "2024-09-01T00:07:59+05:30",
-      "subject": "[R] Prediction from Arima model",
-      "subject_clean": "Prediction from Arima model",
-      "in_reply_to": "<96181851-DAE7-43ED-BFBC-5786C6286B3A@comcast.net>",
-      "references": [
-        "<CA+dpOJ=AG4YY7vre0xTXDkt1COE4W5nrSH=HF6U=Py54d8t4SQ@mail.gmail.com>",
-        "<96181851-DAE7-43ED-BFBC-5786C6286B3A@comcast.net>"
-      ],
-      "body_plain": "I want to obtain confidence interval for a new data as well as\nestimate of SE for the new data\n\nOn Sat, Aug 31, 2024 at 11:58?PM David Winsemius <dwinsemius at comcast.net> wrote:\n>\n>\n> Sent from my iPhone\n>\n> > On Aug 31, 2024, at 10:55?AM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\n> >\n> > ?Hi,\n> >\n> > I have run following code to obtain one step ahead confidence interval\n> > from am arima model\n> >\n> > library(forecast)\n> >\n> > set.seed(100)\n> >\n> > forecast(Arima(rnorm(100), order = c(1,0,1), xreg = rt(100, 1)), h =\n> > 1, xreg = 10)\n> >\n> > However this appear to provide the Prediction interval, however I\n> > wanted to get the confidence interval for the new value.\n> >\n> > Is there any way to get the confidence interval for the new value?\n>\n> I?m not sure it makes sense to output a confidence interval when you are projecting a time series. If you wanted a confidence interval on the past data then you can just use standard descriptive methods.\n>\n> ?\n> David.\n> >\n> > I also wanted to get the estimate of SE for the new value which is\n> > used to obtain the confidence interval of the new value. Is there any\n> > method available to obtain that?\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>",
-      "body_snippet": "I want to obtain confidence interval for a new data as well as\nestimate of SE for the new data\n\nOn Sat, Aug 31, 2024 at 11:58?PM David Winsemius <dwinsemius at comcast.net> wrote:\n>\n>\n> Sent from my i",
-      "thread_id": "thread-2c6750a85cfa",
-      "thread_depth": 0,
-      "month": "2024-09"
-    },
-    {
-      "id": "msg-ef3be42c601e",
-      "message_id": "<CA+dpOJ=-scwKefCp19u-qXEg9QJoU31T7fdyEuR7U9vT=djr=w@mail.gmail.com>",
-      "from_name": "Christofer Bogaso",
-      "from_email_hash": "a9644b1ce4ffb1973d84cbcef4f2647e0d603469b526448b1e6dd7deaf97da39",
-      "date": "2024-09-01T01:58:09+05:30",
-      "subject": "[R] Prediction from Arima model",
-      "subject_clean": "Prediction from Arima model",
-      "in_reply_to": "<CAHz+bWazUW2mnb+ADqZs8HnQA+EySeFoQfbxobgULf_YGFSjeA@mail.gmail.com>",
-      "references": [
-        "<CA+dpOJ=AG4YY7vre0xTXDkt1COE4W5nrSH=HF6U=Py54d8t4SQ@mail.gmail.com>",
-        "<96181851-DAE7-43ED-BFBC-5786C6286B3A@comcast.net>",
-        "<CA+dpOJmv4AQpo89e9Ott7b=E7OEz-CfX-09Ud9FCfjxm_ci8-g@mail.gmail.com>",
-        "<CAHz+bWazUW2mnb+ADqZs8HnQA+EySeFoQfbxobgULf_YGFSjeA@mail.gmail.com>"
-      ],
-      "body_plain": "Yes, very helpful.\n\nAlso, my second question was how can I extract the prediction standard error?\n\nOn Sun, Sep 1, 2024 at 1:00?AM Mark Leeds <markleeds2 at gmail.com> wrote:\n>\n> Chris: As David mentioned, if you have \"new\" data, then the interval has to be a prediction\n> interval because the difference between a CI and a PI is that the PI is constructed for data\n> that hasn't been seen yet. The CI is constructed for data that's already there. I hope this helps.\n>\n>\n> On Sat, Aug 31, 2024 at 2:38?PM Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\n>>\n>> I want to obtain confidence interval for a new data as well as\n>> estimate of SE for the new data\n>>\n>> On Sat, Aug 31, 2024 at 11:58?PM David Winsemius <dwinsemius at comcast.net> wrote:\n>> >\n>> >\n>> > Sent from my iPhone\n>> >\n>> > > On Aug 31, 2024, at 10:55?AM, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\n>> > >\n>> > > ?Hi,\n>> > >\n>> > > I have run following code to obtain one step ahead confidence interval\n>> > > from am arima model\n>> > >\n>> > > library(forecast)\n>> > >\n>> > > set.seed(100)\n>> > >\n>> > > forecast(Arima(rnorm(100), order = c(1,0,1), xreg = rt(100, 1)), h =\n>> > > 1, xreg = 10)\n>> > >\n>> > > However this appear to provide the Prediction interval, however I\n>> > > wanted to get the confidence interval for the new value.\n>> > >\n>> > > Is there any way to get the confidence interval for the new value?\n>> >\n>> > I?m not sure it makes sense to output a confidence interval when you are projecting a time series. If you wanted a confidence interval on the past data then you can just use standard descriptive methods.\n>> >\n>> > ?\n>> > David.\n>> > >\n>> > > I also wanted to get the estimate of SE for the new value which is\n>> > > used to obtain the confidence interval of the new value. Is there any\n>> > > method available to obtain that?\n>> > >\n>> > > ______________________________________________\n>> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> > > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> > > and provide commented, minimal, self-contained, reproducible code.\n>> >\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Yes, very helpful.\n\nAlso, my second question was how can I extract the prediction standard error?\n\nOn Sun, Sep 1, 2024 at 1:00?AM Mark Leeds <markleeds2 at gmail.com> wrote:\n>\n> Chris: As David mentio",
-      "thread_id": "thread-ef3be42c601e",
-      "thread_depth": 0,
-      "month": "2024-09"
-    },
-    {
       "id": "msg-7be618f108a1",
       "message_id": "<CA+dpOJnCG=jhE=T4fdsq8F6X8JiLQmm81jX=kTGcMokywCC13w@mail.gmail.com>",
       "from_name": "Christofer Bogaso",
@@ -106,6 +66,22 @@
       "in_reply_to": null,
       "references": [],
       "body_plain": "Dear R Users,\n\nI am pleased to announce that Goodreader 0.1.1 is now available on CRAN.\n\nGoodreader offers a toolkit for scraping and analyzing book data from\nGoodreads. Users can search for books, scrape detailed information and\nreviews, perform sentiment analysis on reviews, and conduct topic modeling.\n\nHere?s a quick overview of how to use Goodreader:\n# Search for books\nAI_df <- search_goodreads(search_term = \"artificial intelligence\",\nsearch_in = \"title\", num_books = 10, sort_by = \"ratings\")\n\n# Retrieve Book IDs and save them to a text file\nget_book_ids(input_data = AI_df, file_name = \"AI_books.txt\")\n\n# Get book-related information\nscrape_books(book_ids_path = \"AI_books.txt\")\n\n# Scrape book reviews\nscrape_reviews(book_ids_path = \"AI_books.txt\", num_reviews = 10)\n\nFor more details, please visit: https://liu-chao.site/Goodreader/\n\nBest regards,\n\nChao Liu\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R Users,\n\nI am pleased to announce that Goodreader 0.1.1 is now available on CRAN.\n\nGoodreader offers a toolkit for scraping and analyzing book data from\nGoodreads. Users can search for books, sc",
+      "thread_id": "thread-a9c940df4c97",
+      "thread_depth": 0,
+      "month": "2024-09"
+    },
+    {
+      "id": "msg-a9c940df4c97",
+      "message_id": "<CACCU-vM3B95EnoYz=-wKf5r+iWm-O8iCW6h-cBo-q+kjvuRk1Q@mail.gmail.com>",
+      "from_name": "Chao Liu",
+      "from_email_hash": "eb6a7eeab677b0afb10412d3e5d340d2c2dc8daad197d1233993e95d835d02b2",
+      "date": "2024-09-03T12:30:54-04:00",
+      "subject": "[R] [R-pkgs] Goodreader: Scrape and Analyze 'Goodreads' Book Data",
+      "subject_clean": "Goodreader: Scrape and Analyze 'Goodreads' Book Data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Users,\n\nI am pleased to announce that Goodreader 0.1.1 is now available on CRAN.\n\nGoodreader offers a toolkit for scraping and analyzing book data from\nGoodreads. Users can search for books, scrape detailed information and\nreviews, perform sentiment analysis on reviews, and conduct topic modeling.\n\nHere?s a quick overview of how to use Goodreader:\n# Search for books\nAI_df <- search_goodreads(search_term = \"artificial intelligence\",\nsearch_in = \"title\", num_books = 10, sort_by = \"ratings\")\n\n# Retrieve Book IDs and save them to a text file\nget_book_ids(input_data = AI_df, file_name = \"AI_books.txt\")\n\n# Get book-related information\nscrape_books(book_ids_path = \"AI_books.txt\")\n\n# Scrape book reviews\nscrape_reviews(book_ids_path = \"AI_books.txt\", num_reviews = 10)\n\nFor more details, please visit: https://liu-chao.site/Goodreader/\n\nBest regards,\n\nChao Liu\n\n\t[[alternative HTML version deleted]]\n\n_______________________________________________\nR-packages mailing list\nR-packages at r-project.org\nhttps://stat.ethz.ch/mailman/listinfo/r-packages",
       "body_snippet": "Dear R Users,\n\nI am pleased to announce that Goodreader 0.1.1 is now available on CRAN.\n\nGoodreader offers a toolkit for scraping and analyzing book data from\nGoodreads. Users can search for books, sc",
       "thread_id": "thread-a9c940df4c97",
       "thread_depth": 0,
@@ -3218,49 +3194,9 @@
       "thread_id": "thread-848d97690b02",
       "thread_depth": 4,
       "month": "2024-09"
-    },
-    {
-      "id": "msg-963db464d9e8",
-      "message_id": "<2DF4E95A-57B3-41FC-B082-7260C7E98F34@noaa.gov>",
-      "from_name": "Roy Mendelssohn - NOAA Federal",
-      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
-      "date": "2024-09-30T16:52:18-07:00",
-      "subject": "[R] Problem with converting grib file to excel",
-      "subject_clean": "Problem with converting grib file to excel",
-      "in_reply_to": "<CANTxAmLoVGTLFum98dufmWtO6yHaBj35j6=AskUPuJALs0k6AA@mail.gmail.com>",
-      "references": [
-        "<CANTxAmLoVGTLFum98dufmWtO6yHaBj35j6=AskUPuJALs0k6AA@mail.gmail.com>"
-      ],
-      "body_plain": "I have corresponded with Javad off-line,  posting this as a follow-up, to close the issue.  There are two separate questions here.  The first is why did the posted code below fail.  The second is there an easy way to read in the values, given the oddities of his file  (more on that), and yes it turns out \"terra\" performs much better than \"raster\".\n\nFirst a little about GRIB files in general,  and this file in particular.  GRIB files were design to store grids in files with very small footprints,  usually from model output.  GRIB files have the characteristic that if I \"cat\" a bunch of  GRIB files,  I still have a valid GRIB file.  So a given GRIB file often contains multiple parameters,  and each of those through time.  To translate into terms used by R spatial packages,  each variable grid,  at each time period will be seen as a  \"band\" or a \"layer\" in the dataset.  Thus if I have 3 parameters,  say temperature,  dew point and cloud cover at  8670 time periods,  R spatial packages will see 3*8670 layers or bands.\n\nHowever this GRIB file is clearly not a raw GRIB file made by a data provider,  but rather an extract made with some tool.  In this file there are 3 underlying time series. temperature,  dew point and cloud cover,  each of dimension (1, 1, 8670),  that is because it is defined at one spatial point only.\n\nSo why did the code below fail?  raster::stack()  read the file just fine,  and the layer_names are correct,  all 3*8670 of them.  The next steps:\n\n>> # Extract layers based on layer names - adjust as necessary\n>> t2m <- raster_data[[grep(\"t2m\", layer_names)]]\n>> d2m <- raster_data[[grep(\"d2m\", layer_names)]]\n>> tcc <- raster_data[[grep(\"tcc\", layer_names)]]\n>> valid_time <- raster_data[[grep(\"valid_time\", layer_names)]]\n>> t2m\n\nwhich are aimed at subsetting the raster stack based on the variable name all fail because \"\"t2m\" , \"d2m\" and \"tcc\" are not in the layer_names. So then of course everything else fails.\n\nSo the next question is how to read the file and get a data frame.  A first pass would be:\n\nraster_stack <- raster::stack(\"Met.grib\")\nraster_data <- raster::getValues(raster_stack).\n\nbut you do not want to do that.  For whatever reason,  the raster_stack created above is enormous,  and the raster::getValues() takes forever,  I aborted after about an hour.  However,  if you use 'terra\" instead:\n\nraster_stack <-terra::rast(\"Met.grib\")\nraster_data <-terra::values(raster_stack).\n\nit finishes in a flash.  raster_data is now one long array that needs to be reshaped:\n\nraster_data <- array(raster_data, dim = c(3, 8670)\n\nnow raster_data[1, ] contains the temperature series,  raster_data[2, ] contains the dew point data,  and raster_data[3, ] contains the cloud cover data.\n\nHTH,\n\n-Roy\n\nPS - GRIB files can be a bear.  The best GRIB readers in R are just front ends for either eccodes or wgrib2,    and  while they work very well,  installation for eccodes and wgrib2 can be non-trivial,  so I didn't want to use them as a solution.  Also for quick viewing of GRIB files there is NASA's Panoply (https://www.giss.nasa.gov/tools/panoply/) but that requires a Java installation.\n\n> On Sep 23, 2024, at 11:31 PM, javad bayat <j.bayat194 at gmail.com> wrote:\n> \n> Dear R users;\n> I have downloaded a grib file format (Met.grib) and I want to export its\n> data to excel file. Also I want to do some mathematic on some columns. But\n> I got error. I would be more than happy if anyone can help me to do this. I\n> have provided the codes and the Met.grib file in this email.\n> Sincerely yours\n> \n> # Load the necessary libraries\n>> library(raster)      # For reading GRIB files\n>> library(dplyr)       # For data manipulation\n>> library(lubridate)   # For date manipulation\n>> library(openxlsx)    # For writing Excel files\n> \n> # Specify the file paths\n>> grib_file_path <- \"C:/Users/Omrab_Lab/Downloads/Met.grib\"\n>> excel_file_path <- \"C:/Users/Omrab_Lab/Downloads/Met_updated.xlsx\"\n> \n> # Open the GRIB file\n>> raster_data <- stack(grib_file_path)\n> \n> # Check the names of the layers to identify which ones to extract\n>> layer_names <- names(raster_data)\n>> print(layer_names)  # Prints\n> \n> \n>> # Extract layers based on layer names - adjust as necessary\n>> t2m <- raster_data[[grep(\"t2m\", layer_names)]]\n>> d2m <- raster_data[[grep(\"d2m\", layer_names)]]\n>> tcc <- raster_data[[grep(\"tcc\", layer_names)]]\n>> valid_time <- raster_data[[grep(\"valid_time\", layer_names)]]\n>> t2m\n> class      : RasterStack\n> nlayers    : 0\n> \n>> # Check if the raster layers are loaded correctly\n>> if (is.null(t2m) || is.null(d2m) || is.null(tcc) || is.null(valid_time))\n> {\n> +     stop(\"One or more raster layers could not be loaded. Please check the\n> layer names.\")\n> + }\n> \n>> # Convert raster values to vectors\n>> t2m_values <- values(t2m)\n> Error in dimnames(x) <- dn :\n>  length of 'dimnames' [2] not equal to array extent\n>> d2m_values <- values(d2m)\n> Error in dimnames(x) <- dn :\n>  length of 'dimnames' [2] not equal to array extent\n>> tcc_values <- values(tcc)\n> Error in dimnames(x) <- dn :\n>  length of 'dimnames' [2] not equal to array extent\n>> valid_time_values <- values(valid_time)\n> Error in dimnames(x) <- dn :\n>  length of 'dimnames' [2] not equal to array extent\n> \n> # Check for NA values and dimensions\n> if (any(is.na(t2m_values)) || any(is.na(d2m_values)) || any(is.na(tcc_values))\n> || any(is.na(valid_time_values))) {\n>  warning(\"One or more layers contain NA values. These will be removed.\")\n> }\n> \n> # Create the data frame, ensuring no NA values are included\n> df <- data.frame(\n>  t2m = t2m_values,\n>  d2m = d2m_values,\n>  tcc = tcc_values,\n>  valid_time = valid_time_values,\n>  stringsAsFactors = FALSE\n> )\n> \n> # Remove rows with NA values\n> df <- na.omit(df)\n> \n> # Convert temperatures from Kelvin to Celsius\n> df$t2m <- df$t2m - 273.15\n> df$d2m <- df$d2m - 273.15\n> \n> # Calculate relative humidity\n> calculate_relative_humidity <- function(t2m, d2m) {\n>  es <- 6.112 * exp((17.67 * t2m) / (t2m + 243.5))\n>  e <- 6.112 * exp((17.67 * d2m) / (d2m + 243.5))\n>  rh <- (e / es) * 100\n>  return(rh)\n> }\n> df$RH <- calculate_relative_humidity(df$t2m, df$d2m)\n> \n> # Convert valid_time from numeric to POSIXct assuming it's in seconds since\n> the epoch\n> df$valid_time <- as.POSIXct(df$valid_time, origin = \"1970-01-01\")\n> \n> # Extract year, month, day, and hour from valid_time\n> df$Year <- year(df$valid_time)\n> df$Month <- month(df$valid_time)\n> df$Day <- day(df$valid_time)\n> df$Hour <- hour(df$valid_time)\n> \n> # Select only the desired columns\n> df_selected <- df %>% select(Year, Month, Day, Hour, tcc, t2m, RH)\n> \n> # Save the updated DataFrame to an Excel file\n> write.xlsx(df_selected, excel_file_path, row.names = FALSE)\n> \n> \n> \n> \n> \n> \n> -- \n> Best Regards\n> Javad Bayat\n> M.Sc. Environment Engineering\n> Alternative Mail: bayat194 at yahoo.com\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: https://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\" \n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.",
-      "body_snippet": "I have corresponded with Javad off-line,  posting this as a follow-up, to close the issue.  There are two separate questions here.  The first is why did the posted code below fail.  The second is ther",
-      "thread_id": "thread-779da9be2700",
-      "thread_depth": 1,
-      "month": "2024-09"
     }
   ],
   "threads": [
-    {
-      "id": "thread-2c6750a85cfa",
-      "subject": "Prediction from Arima model",
-      "message_count": 1,
-      "participants": [
-        "Christofer Bogaso"
-      ],
-      "started": "2024-09-01T00:07:59+05:30",
-      "last_reply": "2024-09-01T00:07:59+05:30",
-      "root_message_id": "msg-2c6750a85cfa"
-    },
-    {
-      "id": "thread-ef3be42c601e",
-      "subject": "Prediction from Arima model",
-      "message_count": 1,
-      "participants": [
-        "Christofer Bogaso"
-      ],
-      "started": "2024-09-01T01:58:09+05:30",
-      "last_reply": "2024-09-01T01:58:09+05:30",
-      "root_message_id": "msg-ef3be42c601e"
-    },
     {
       "id": "thread-7be618f108a1",
       "subject": "Adding parameters for Benchmark normal distribution in shapiro.test",
@@ -3273,6 +3209,17 @@
       "started": "2024-09-03T04:56:17+05:30",
       "last_reply": "2024-09-02T20:22:08-04:00",
       "root_message_id": "msg-7be618f108a1"
+    },
+    {
+      "id": "thread-a9c940df4c97",
+      "subject": "Goodreader: Scrape and Analyze 'Goodreads' Book Data",
+      "message_count": 1,
+      "participants": [
+        "Chao Liu"
+      ],
+      "started": "2024-09-03T12:30:54-04:00",
+      "last_reply": "2024-09-03T12:30:54-04:00",
+      "root_message_id": "msg-a9c940df4c97"
     },
     {
       "id": "thread-a9c940df4c97",
@@ -3612,7 +3559,7 @@
     {
       "id": "thread-779da9be2700",
       "subject": "Problem with converting grib file to excel",
-      "message_count": 10,
+      "message_count": 9,
       "participants": [
         "Bert Gunter",
         "CALUM POLWART",
@@ -3620,7 +3567,7 @@
         "javad bayat"
       ],
       "started": "2024-09-24T10:01:22+03:30",
-      "last_reply": "2024-09-30T16:52:18-07:00",
+      "last_reply": "2024-09-26T14:56:31-07:00",
       "root_message_id": "msg-779da9be2700"
     },
     {
