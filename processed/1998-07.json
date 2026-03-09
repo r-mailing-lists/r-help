@@ -955,22 +955,6 @@
       "month": "1998-07"
     },
     {
-      "id": "msg-6ec4008725db",
-      "message_id": "<3.0.5.16.19980713124753.2e7fd3ec@deimos.tc.uaslp.mx>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "984f78ae7395adc3d2c6c1a80266c03b0056eccebb89df6b662d41c5ee9f22e9",
-      "date": "1998-07-13T12:47:53Z",
-      "subject": "R-beta: R-beta Win95 glm",
-      "subject_clean": "R-beta: R-beta Win95 glm",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "When will a new version of R for Windows 95 be available with the fixes for\nglm?\n\nPeter B.\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "When will a new version of R for Windows 95 be available with the fixes for\nglm?\n\nPeter B.\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read ",
-      "thread_id": "thread-6ec4008725db",
-      "thread_depth": 0,
-      "month": "1998-07"
-    },
-    {
       "id": "msg-a8b359ed0b29",
       "message_id": "<x2af6dcv1v.fsf@biostat.ku.dk>",
       "from_name": "Peter Dalgaard BSA",
@@ -984,8 +968,8 @@
       ],
       "body_plain": "\"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n\n> When will a new version of R for Windows 95 be available with the fixes for\n> glm?\n\nThat is not certain. There are essentially two people capable of\ngetting the act together on Win95 builds, namely Robert Gentleman and\nGuido Masarotto who have each their version on CRAN. Getting the\nversion updated requires that one of them finds the necessary free\ntime.\n\nHowever, as far as I'm aware, all of the changes re. glm are in\ninterpreted code, so you should be able to just grab that from the\nnewer Unix version. Robert's version is based on a snapshot of sources\nimmediately prior to 0.62, so should be the safest bet.\n\nI'm currently summer-vacationing in my home. If the weather keeps\nacting up, I might get myself up to speed on crosscompiling R for\nWin32 with gcc on a Unix host. This has been a long-standing wish of\nmine because it could potentially bring the versions in much better\nsync.\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "\"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n\n> When will a new version of R for Windows 95 be available with the fixes for\n> glm?\n\nThat is not certain. There are essentially two peo",
-      "thread_id": "thread-6ec4008725db",
-      "thread_depth": 1,
+      "thread_id": "thread-a8b359ed0b29",
+      "thread_depth": 0,
       "month": "1998-07"
     },
     {
@@ -1053,24 +1037,8 @@
       ],
       "body_plain": "On Mon, Jul 13, 1998 at 11:14:52PM +0200, Peter Dalgaard BSA wrote:\n> \"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n> \n> > When will a new version of R for Windows 95 be available with the fixes for\n> > glm?\n> \n> That is not certain. There are essentially two people capable of\n> getting the act together on Win95 builds, namely Robert Gentleman and\n> Guido Masarotto who have each their version on CRAN. Getting the\n> version updated requires that one of them finds the necessary free\n> time.\n  In the last 2 months, I had no time to try to update my binary\n  distribution. However, I plan to make an attempt before the end\n  of July. In the meantime, please, signal the problems that you have\n  encountered with rw0613. I cannot promise to be able to fix them but I will\n  try. At the moment, I know the following:\n  a) dyn.load doesn't work with some version of Win95 (according to\n  Brian Ripley, I have to thanks him for the extensive testing, Win95\n  with service pack 1 installed (95a); it works under older and newer\n  version; and dyn.load works under Win3.1/Win32s and WinNT). \n  This problem seems resolvable using binutils 2.9.1.\n  b) sometimes the automatic loading at startup of a previously saved\n  workspaspace fails. However, the workspace can be loaded by the \n  file menu. This is a bug that I have already fixed in the sources.\n  c) the console is slow and lack an history recall mechanism;\n  This is an indirect question for Peter D.: is the R-Tk project going on?\n  \n> I'm currently summer-vacationing in my home. If the weather keeps\n> acting up, I might get myself up to speed on crosscompiling R for\n> Win32 with gcc on a Unix host. This has been a long-standing wish of\n> mine because it could potentially bring the versions in much better\n> sync.\n  BTW, I made a similar (small) attempt. \n  On a Linux box, I installed gcc as a cross-compiler for mingw32\n  (gcc-2.8.1, g77-0.5.23, binutils-2.9.1, the 1July snapshot\n  of mingw32 and of WinApi (from the Colins Peters's site)).\n  Then I tried to recompile R.0.61.3 (my actual windows version).\n  And all seems to work. So, this seems a viable alternative.\n  Hence, I plan to modify my Makefile's so that cross-compiling\n  would be easy.\n  \n  guido masarotto\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Mon, Jul 13, 1998 at 11:14:52PM +0200, Peter Dalgaard BSA wrote:\n> \"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n> \n> > When will a new version of R for Windows 95 be available wit",
-      "thread_id": "thread-6ec4008725db",
-      "thread_depth": 2,
-      "month": "1998-07"
-    },
-    {
-      "id": "msg-af9ea1ff494f",
-      "message_id": "<3.0.5.16.19980714131128.27a74d12@deimos.tc.uaslp.mx>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "984f78ae7395adc3d2c6c1a80266c03b0056eccebb89df6b662d41c5ee9f22e9",
-      "date": "1998-07-14T13:11:28Z",
-      "subject": "R-beta: R-beta Win95 read.table",
-      "subject_clean": "R-beta: R-beta Win95 read.table",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "For \n\tdat <- read.table(\"c:\\claims.dat\",header=T)\nR version 0.62 Beta (june 9, 1998)for Windows 95 reports\n\tError: \"scan\" can't open file\nbut\n\tdat <- read.table(\"c:\\\\claims.dat\",header=T)\nworks.\n\nPeter B.\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "For \n\tdat <- read.table(\"c:\\claims.dat\",header=T)\nR version 0.62 Beta (june 9, 1998)for Windows 95 reports\n\tError: \"scan\" can't open file\nbut\n\tdat <- read.table(\"c:\\\\claims.dat\",header=T)\nworks.\n\nPete",
-      "thread_id": "thread-af9ea1ff494f",
-      "thread_depth": 0,
+      "thread_id": "thread-a8b359ed0b29",
+      "thread_depth": 1,
       "month": "1998-07"
     },
     {
@@ -1087,8 +1055,8 @@
       ],
       "body_plain": "\"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n\n> \n> For \n> \tdat <- read.table(\"c:\\claims.dat\",header=T)\n> R version 0.62 Beta (june 9, 1998)for Windows 95 reports\n> \tError: \"scan\" can't open file\n> but\n> \tdat <- read.table(\"c:\\\\claims.dat\",header=T)\n> works.\n> \n\nYes. This is a consequence of R's (C-style) string handling in\ngeneral. '\\' is an escape character, so that you e.g. can enter a\nnewline as \"\\n\". When you really need a '\\', you have to escape it\nwith another '\\'. In filenames, you can also rotate it 90 degrees\n(\"c:/claims.dat\")\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "\"Peter B. Mandeville\" <mandevip at deimos.tc.uaslp.mx> writes:\n\n> \n> For \n> \tdat <- read.table(\"c:\\claims.dat\",header=T)\n> R version 0.62 Beta (june 9, 1998)for Windows 95 reports\n> \tError: \"scan\" can",
-      "thread_id": "thread-af9ea1ff494f",
-      "thread_depth": 1,
+      "thread_id": "thread-a69ad3b1824f",
+      "thread_depth": 0,
       "month": "1998-07"
     },
     {
@@ -1103,8 +1071,8 @@
       "references": [],
       "body_plain": "Hello All,\n    I saw the previous questions about needing version 2.1 of readline.\nWhere is this for people like me who are still limping along with a 1.2.13\nkernel with a setup that was originally slackware, so I don't have the\ndebian or redhat package managers.  Sunsite only appears to have\nlibrl-2.0.3.tar.gz and libreadline-2.0.0-bin-ELF.tar.gz\nin /pub/linux/libs/ui\nShould I be looking somewhere else.\n\nThanks,\nRobert.\n----\nRobert King, || The Society for the Preservation of Tithesis commends your \nEnvironmental|| ebriated and scrutable use of \"delible\" and \"defatigable\", \nScience,     || which are gainly, sipid and couth.  We are gruntled and \nGriffith Uni,|| consolate that you have the ertia and eptitude to choose such \nAustralia    || putably pensible tithesis, which we parage. - Evan Kirshenbaum\n\n    Robert.King at ens.gu.edu.au    http://www.ens.gu.edu.au/robertk/index.htm\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "Hello All,\n    I saw the previous questions about needing version 2.1 of readline.\nWhere is this for people like me who are still limping along with a 1.2.13\nkernel with a setup that was originally sl",
-      "thread_id": "thread-af9ea1ff494f",
-      "thread_depth": 2,
+      "thread_id": "thread-a69ad3b1824f",
+      "thread_depth": 1,
       "month": "1998-07"
     },
     {
@@ -1119,8 +1087,8 @@
       "references": [],
       "body_plain": "In R 0.49 (yes, I've not been keeping up with updates) I converted an\nSplus data directory with functions I wrote to use with R by dumping them\nto a large ASCII file and then dumping this file in $RHOME/library\nWhat should I do with them for 0.62 (or is there an easier way of doing\nthis?)\n\nThanks,\nRobert.\n----\nRobert King, || The Society for the Preservation of Tithesis commends your \nEnvironmental|| ebriated and scrutable use of \"delible\" and \"defatigable\", \nScience,     || which are gainly, sipid and couth.  We are gruntled and \nGriffith Uni,|| consolate that you have the ertia and eptitude to choose such \nAustralia    || putably pensible tithesis, which we parage. - Evan Kirshenbaum\n\n    Robert.King at ens.gu.edu.au    http://www.ens.gu.edu.au/robertk/index.htm\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "In R 0.49 (yes, I've not been keeping up with updates) I converted an\nSplus data directory with functions I wrote to use with R by dumping them\nto a large ASCII file and then dumping this file in $RHO",
-      "thread_id": "thread-af9ea1ff494f",
-      "thread_depth": 3,
+      "thread_id": "thread-a69ad3b1824f",
+      "thread_depth": 2,
       "month": "1998-07"
     },
     {
@@ -1151,8 +1119,8 @@
       "references": [],
       "body_plain": "On Thu, 16 Jul 1998, Robert King wrote:\n\n> Hello All,\n>     I saw the previous questions about needing version 2.1 of readline.\n> Where is this for people like me who are still limping along with a 1.2.13\n> kernel with a setup that was originally slackware, so I don't have the\n> debian or redhat package managers.  Sunsite only appears to have\n> librl-2.0.3.tar.gz and libreadline-2.0.0-bin-ELF.tar.gz\n> in /pub/linux/libs/ui\n> Should I be looking somewhere else.\n> \n> Thanks,\n> Robert.\n\nYes, you may find readline-2.2 in any gnu site. I found my copy at\nftp://nic.funet.fi/pub/gnu/prep. Of course, you have to compile and\ninstall it yourself, but that's usually only a matter of './configure', \n'make' and 'make install'. \n\nGoran\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Thu, 16 Jul 1998, Robert King wrote:\n\n> Hello All,\n>     I saw the previous questions about needing version 2.1 of readline.\n> Where is this for people like me who are still limping along with a 1.",
-      "thread_id": "thread-af9ea1ff494f",
-      "thread_depth": 3,
+      "thread_id": "thread-a69ad3b1824f",
+      "thread_depth": 2,
       "month": "1998-07"
     },
     {
@@ -1756,8 +1724,8 @@
       "references": [],
       "body_plain": "In article <19980714105806.A5289 at sirio.stat.unipd.it>, Guido Masarotto\n<guido at sirio.stat.unipd.it> writes\n>  In the last 2 months, I had no time to try to update my binary\n>  distribution. However, I plan to make an attempt before the end\n>  of July. In the meantime, please, signal the problems that you have\n>  encountered with rw0613. I cannot promise to be able to fix them but I will\n>  try.\n\n\nThe next version of Mingw32 will be out at around that time.  It would\nbe useful if your new version of R binary had been compiled with it\nsince the next Mingw32 version *may* have the popen problem fixed...\n\nMumit Khan comment in GNU list: \"If anybody has a \"reasonable\" popen\nlookalike for win32 *and* willing to put it under GPL, please let me\nknow. Currently mingw32 windres (and other codes that uses popen/pclose)\ndoesn't work reliably on all versions of Win95 and I'd really like to\nsee this fixed. Would be nice to have it working by the time egcs-1.1\ncomes out sometime next month.  I snarfed one from Perl Win32 module,\nbut my rather limited knowledge of Win32 makes it hard to know how\nusable it is.\"\n\nI have passed on your suggestion about djgpp libc.\n\n\n-- \nDouglas Steele\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "In article <19980714105806.A5289 at sirio.stat.unipd.it>, Guido Masarotto\n<guido at sirio.stat.unipd.it> writes\n>  In the last 2 months, I had no time to try to update my binary\n>  distribution. Howev",
-      "thread_id": "thread-6ec4008725db",
-      "thread_depth": 3,
+      "thread_id": "thread-a8b359ed0b29",
+      "thread_depth": 2,
       "month": "1998-07"
     },
     {
@@ -2137,20 +2105,6 @@
       "root_message_id": "msg-50da97aebf8a"
     },
     {
-      "id": "thread-6ec4008725db",
-      "subject": "R-beta: R-beta Win95 glm",
-      "message_count": 4,
-      "participants": [
-        "Douglas Steele",
-        "Guido Masarotto",
-        "Peter B. Mandeville",
-        "Peter Dalgaard BSA"
-      ],
-      "started": "1998-07-13T12:47:53+00:00",
-      "last_reply": "1998-07-29T12:31:16+01:00",
-      "root_message_id": "msg-6ec4008725db"
-    },
-    {
       "id": "thread-217fe3ce4d16",
       "subject": "R-beta: accessing SEs from lm object",
       "message_count": 2,
@@ -2174,18 +2128,30 @@
       "root_message_id": "msg-cbd33277abc4"
     },
     {
-      "id": "thread-af9ea1ff494f",
+      "id": "thread-a8b359ed0b29",
+      "subject": "R-beta: R-beta Win95 glm",
+      "message_count": 3,
+      "participants": [
+        "Douglas Steele",
+        "Guido Masarotto",
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1998-07-13T23:14:52+02:00",
+      "last_reply": "1998-07-29T12:31:16+01:00",
+      "root_message_id": "msg-a8b359ed0b29"
+    },
+    {
+      "id": "thread-a69ad3b1824f",
       "subject": "R-beta: R-beta Win95 read.table",
-      "message_count": 5,
+      "message_count": 4,
       "participants": [
         "Goran Brostrom",
-        "Peter B. Mandeville",
         "Peter Dalgaard BSA",
         "Robert King"
       ],
-      "started": "1998-07-14T13:11:28+00:00",
+      "started": "1998-07-15T00:21:41+02:00",
       "last_reply": "1998-07-16T13:04:21+02:00",
-      "root_message_id": "msg-af9ea1ff494f"
+      "root_message_id": "msg-a69ad3b1824f"
     },
     {
       "id": "thread-8deebcd90089",

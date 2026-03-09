@@ -1,0 +1,368 @@
+From br|@n@m|th199312 @end|ng |rom gm@||@com  Sun Mar  8 12:50:35 2026
+From: br|@n@m|th199312 @end|ng |rom gm@||@com (Brian Smith)
+Date: Sun, 8 Mar 2026 17:20:35 +0530
+Subject: [R] Correct interpretation of a regression coefficient
+Message-ID: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+
+Hi,
+
+My question is not directly related to R, but rather a basic question
+about statistics. I am hoping to receive valuable insights from the
+expert statisticians in this group.
+
+In some cases, when fitting a simple OLS regression, I obtain an
+estimated beta coefficient that is very small?for example, 0.00034?yet
+it still appears statistically significant based on the p-value.
+
+I am trying to understand how to interpret such a result in practical
+terms. From a magnitude perspective, such a small coefficient would
+not be expected to meaningfully affect the predicted response value,
+but statistically it is still considered significant.
+
+I would greatly appreciate any insights or explanations regarding this
+phenomenon.
+
+Thanks for your time.
+
+
+From j@ork|n @end|ng |rom @om@um@ry|@nd@edu  Sun Mar  8 13:05:49 2026
+From: j@ork|n @end|ng |rom @om@um@ry|@nd@edu (Sorkin, John)
+Date: Sun, 8 Mar 2026 12:05:49 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+Message-ID: <DM6PR03MB504924870AF93A47194ED11BE278A@DM6PR03MB5049.namprd03.prod.outlook.com>
+
+Brian,
+Statistical significance and biological importance are two very different concepts. A finding can be statistically significant, but of no biological importance, or of biological importance but  not statistically significant.
+In the first case  I would report the finding by indicate in my discussion that the finding is of no biological importance. In the second case, I would think about the finding and as if my sample size was adequate. The path taken beyond this takes a good deal of thought. If the sample size was small, I would consider redoing the experiment with a larger sample. If the sample size is adequate I would entertain the thought that the finding represented random variation and would consider redoing the experiment in a different population.
+
+I hope this helps.
+
+John
+
+
+
+John David Sorkin M.D., Ph.D.
+Professor of Medicine, University of Maryland School of Medicine;
+Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+Senior Statistician University of Maryland Center for Vascular Research;
+
+Division of Gerontology, Geriatrics and Palliative Medicine,
+10 North Greene Street
+GRECC (BT/18/GR)
+Baltimore, MD 21201-1524
+Cell phone 443-418-5382
+
+
+
+
+
+________________________________________
+From: R-help <r-help-bounces at r-project.org> on behalf of Brian Smith <briansmith199312 at gmail.com>
+Sent: Sunday, March 8, 2026 7:50 AM
+To: Ralf Goertz via R-help <r-help at r-project.org>
+Subject: [R] Correct interpretation of a regression coefficient
+
+
+Hi,
+
+My question is not directly related to R, but rather a basic question
+about statistics. I am hoping to receive valuable insights from the
+expert statisticians in this group.
+
+In some cases, when fitting a simple OLS regression, I obtain an
+estimated beta coefficient that is very small?for example, 0.00034?yet
+it still appears statistically significant based on the p-value.
+
+I am trying to understand how to interpret such a result in practical
+terms. From a magnitude perspective, such a small coefficient would
+not be expected to meaningfully affect the predicted response value,
+but statistically it is still considered significant.
+
+I would greatly appreciate any insights or explanations regarding this
+phenomenon.
+
+Thanks for your time.
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.r-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From ||@t@ @end|ng |rom dewey@myzen@co@uk  Sun Mar  8 18:35:11 2026
+From: ||@t@ @end|ng |rom dewey@myzen@co@uk (Michael Dewey)
+Date: Sun, 8 Mar 2026 17:35:11 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+Message-ID: <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+
+Dear Brian
+
+You have not given us much to go on here but the problem is often 
+related to the scale of the variables. So if the coefficient is per year 
+tryin to re-express time in months or weeks or days.
+
+Michael
+
+On 08/03/2026 11:50, Brian Smith wrote:
+> Hi,
+> 
+> My question is not directly related to R, but rather a basic question
+> about statistics. I am hoping to receive valuable insights from the
+> expert statisticians in this group.
+> 
+> In some cases, when fitting a simple OLS regression, I obtain an
+> estimated beta coefficient that is very small?for example, 0.00034?yet
+> it still appears statistically significant based on the p-value.
+> 
+> I am trying to understand how to interpret such a result in practical
+> terms. From a magnitude perspective, such a small coefficient would
+> not be expected to meaningfully affect the predicted response value,
+> but statistically it is still considered significant.
+> 
+> I would greatly appreciate any insights or explanations regarding this
+> phenomenon.
+> 
+> Thanks for your time.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+-- 
+Michael Dewey
+
+
+From br|@n@m|th199312 @end|ng |rom gm@||@com  Sun Mar  8 19:15:54 2026
+From: br|@n@m|th199312 @end|ng |rom gm@||@com (Brian Smith)
+Date: Sun, 8 Mar 2026 23:45:54 +0530
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+Message-ID: <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+
+Hi Michael,
+
+You made an interesting point that, scale of the underlying variable
+may be vastly different as compared with other variables in the
+equation.
+
+Could I use logarithm of that variable instead of raw? Another
+possibility is that we could standardise that variable. But IMO, for
+out of sample prediction, the interpretation of standardisation is not
+straightforward.
+
+On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>
+> Dear Brian
+>
+> You have not given us much to go on here but the problem is often
+> related to the scale of the variables. So if the coefficient is per year
+> tryin to re-express time in months or weeks or days.
+>
+> Michael
+>
+> On 08/03/2026 11:50, Brian Smith wrote:
+> > Hi,
+> >
+> > My question is not directly related to R, but rather a basic question
+> > about statistics. I am hoping to receive valuable insights from the
+> > expert statisticians in this group.
+> >
+> > In some cases, when fitting a simple OLS regression, I obtain an
+> > estimated beta coefficient that is very small?for example, 0.00034?yet
+> > it still appears statistically significant based on the p-value.
+> >
+> > I am trying to understand how to interpret such a result in practical
+> > terms. From a magnitude perspective, such a small coefficient would
+> > not be expected to meaningfully affect the predicted response value,
+> > but statistically it is still considered significant.
+> >
+> > I would greatly appreciate any insights or explanations regarding this
+> > phenomenon.
+> >
+> > Thanks for your time.
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+> --
+> Michael Dewey
+>
+
+
+From pro|jcn@@h @end|ng |rom gm@||@com  Sun Mar  8 19:30:11 2026
+From: pro|jcn@@h @end|ng |rom gm@||@com (J C Nash)
+Date: Sun, 8 Mar 2026 14:30:11 -0400
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+Message-ID: <4a644233-2938-4252-80e5-ce28d0354d58@gmail.com>
+
+Scale can be quite important to success in applying algorithms.
+In various of the nlsr, optim and optimx routines, there is provision
+for scaling, and though I'm the maintainer / part creator of some
+of these, my preference is to build the scale into my (nonlinear)
+models. While not all algorithms are affected in the same way,
+my experience is that getting the model set up so the parameters
+fall in the range .1 to 10 does make things a bit easier to read
+and to gauge "strange" results.
+
+Sorry this isn't more prescriptively helpful.
+
+JN
+
+
+On 2026-03-08 14:15, Brian Smith wrote:
+> Hi Michael,
+> 
+> You made an interesting point that, scale of the underlying variable
+> may be vastly different as compared with other variables in the
+> equation.
+> 
+> Could I use logarithm of that variable instead of raw? Another
+> possibility is that we could standardise that variable. But IMO, for
+> out of sample prediction, the interpretation of standardisation is not
+> straightforward.
+> 
+> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>
+>> Dear Brian
+>>
+>> You have not given us much to go on here but the problem is often
+>> related to the scale of the variables. So if the coefficient is per year
+>> tryin to re-express time in months or weeks or days.
+>>
+>> Michael
+>>
+>> On 08/03/2026 11:50, Brian Smith wrote:
+>>> Hi,
+>>>
+>>> My question is not directly related to R, but rather a basic question
+>>> about statistics. I am hoping to receive valuable insights from the
+>>> expert statisticians in this group.
+>>>
+>>> In some cases, when fitting a simple OLS regression, I obtain an
+>>> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>> it still appears statistically significant based on the p-value.
+>>>
+>>> I am trying to understand how to interpret such a result in practical
+>>> terms. From a magnitude perspective, such a small coefficient would
+>>> not be expected to meaningfully affect the predicted response value,
+>>> but statistically it is still considered significant.
+>>>
+>>> I would greatly appreciate any insights or explanations regarding this
+>>> phenomenon.
+>>>
+>>> Thanks for your time.
+>>>
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>>
+>> --
+>> Michael Dewey
+>>
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Sun Mar  8 19:52:17 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Sun, 08 Mar 2026 11:52:17 -0700
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+Message-ID: <A17A9A68-B0ED-483E-AD6E-D54D3A1FEC08@dcn.davis.ca.us>
+
+The `predict` method for regressions typically offers estimates of the "confidence interval" and the "prediction interval" as separate calculations. The former characterizes how well your regression estimates the systematic behavior of your data, while the latter addresses how precisely the regression can predict specific values. 
+
+You should research the pitfalls of p-values... they tell you a lot about repeatability but little about significance. 
+
+You should also not just think "differences in scale->log transformation"... logarithms "straighten out" data that is intrinsically exponential.... if that is how your data behaves then logarithms will help you linearize the analysis. There are lots of data arising from non-exponential processes for which a log will probably not help.
+
+On March 8, 2026 11:15:54 AM PDT, Brian Smith <briansmith199312 at gmail.com> wrote:
+>Hi Michael,
+>
+>You made an interesting point that, scale of the underlying variable
+>may be vastly different as compared with other variables in the
+>equation.
+>
+>Could I use logarithm of that variable instead of raw? Another
+>possibility is that we could standardise that variable. But IMO, for
+>out of sample prediction, the interpretation of standardisation is not
+>straightforward.
+>
+>On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>
+>> Dear Brian
+>>
+>> You have not given us much to go on here but the problem is often
+>> related to the scale of the variables. So if the coefficient is per year
+>> tryin to re-express time in months or weeks or days.
+>>
+>> Michael
+>>
+>> On 08/03/2026 11:50, Brian Smith wrote:
+>> > Hi,
+>> >
+>> > My question is not directly related to R, but rather a basic question
+>> > about statistics. I am hoping to receive valuable insights from the
+>> > expert statisticians in this group.
+>> >
+>> > In some cases, when fitting a simple OLS regression, I obtain an
+>> > estimated beta coefficient that is very small?for example, 0.00034?yet
+>> > it still appears statistically significant based on the p-value.
+>> >
+>> > I am trying to understand how to interpret such a result in practical
+>> > terms. From a magnitude perspective, such a small coefficient would
+>> > not be expected to meaningfully affect the predicted response value,
+>> > but statistically it is still considered significant.
+>> >
+>> > I would greatly appreciate any insights or explanations regarding this
+>> > phenomenon.
+>> >
+>> > Thanks for your time.
+>> >
+>> > ______________________________________________
+>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> > and provide commented, minimal, self-contained, reproducible code.
+>>
+>> --
+>> Michael Dewey
+>>
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+

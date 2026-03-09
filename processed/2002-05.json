@@ -7256,24 +7256,6 @@
       "month": "2002-05"
     },
     {
-      "id": "msg-5a881e6b84bb",
-      "message_id": "<20020513165619.28401.qmail@hm47.locaweb.com.br>",
-      "from_name": "Frederico Zanqueta Poleto",
-      "from_email_hash": "89019e5d15535ba700f12357e6fb39d8bb989d8bbf9850471e7826f2dc6ebe10",
-      "date": "2002-05-13T13:56:19Z",
-      "subject": "[R] Generalized Estimating Functions",
-      "subject_clean": "Generalized Estimating Functions",
-      "in_reply_to": "<Pine.A41.4.44.0205130934090.141066-100000@homer07.u.washington.edu>",
-      "references": [
-        "<Pine.A41.4.44.0205130934090.141066-100000@homer07.u.washington.edu>"
-      ],
-      "body_plain": "Hi Thomas,\n\nThank you for your help.\nYou are right. I've tried the OME example and the working correlation was \nright.\nMaybe it is a problem with Poisson, what do you think?\n\n> desreg<-gee\n(desovas~ger+pop+fec+ger*pop+ger*fec+pop*fec,id=unidade,data=desovas.ovos.in\nviaveis,family=poisson,corstr=\"exchangeable\")\n[1] \"Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27\"\n[1] \"running glm to get initial regression estimate\"\n[1]  0.93464328  0.02317831  0.29278443  0.21399704  0.11593571  \n0.05833780 -0.11513896\n> summary(desreg)\n\n GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA\n gee S-function, version 4.13 modified 98/01/27 (1998) \n\nModel:\n Link:                      Logarithm \n Variance to Mean Relation: Poisson \n Correlation Structure:     Exchangeable \n\nCall:\ngee(formula = desovas ~ ger + pop + fec + ger * pop + ger * fec + \n    pop * fec, id = unidade, data = desovas.ovos.inviaveis, family = \npoisson, \n    corstr = \"exchangeable\")\n\nSummary of Residuals:\n       Min         1Q     Median         3Q        Max \n-4.5893464 -1.5463047 -0.4124404  1.4106536  9.2329743 \n\n\nCoefficients:\n               Estimate Naive S.E.    Naive z Robust S.E.   Robust z\n(Intercept)  0.93464317 0.06012985 15.5437480  0.05954487 15.6964517\nger          0.02317832 0.07001297  0.3310576  0.06915388  0.3351702\npop          0.29278452 0.06565443  4.4594785  0.06505729  4.5004104\nfec          0.21399711 0.07252180  2.9507967  0.07150063  2.9929402\nger:pop      0.11593572 0.07355902  1.5760911  0.07318636  1.5841166\nger:fec      0.05833782 0.07000740  0.8333093  0.07054498  0.8269592\npop:fec     -0.11513904 0.07216442 -1.5955098  0.07149595 -1.6104274\n\nEstimated Scale Parameter:  1.366923\nNumber of Iterations:  1\n\nWorking Correlation\n      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]\n [1,]    1    0    0    0    0    0    0    0    0     0     0     0\n [2,]    0    0    0    0    0    0    0    0    0     0     0     0\n [3,]    0    0    0    0    0    0    0    0    0     0     0     0\n [4,]    0    0    0    0    0    0    0    0    0     0     0     0\n [5,]    0    0    0    0    0    0    0    0    0     0     0     0\n [6,]    0    0    0    0    0    0    0    0    0     0     0     0\n [7,]    0    0    0    0    0    0    0    0    0     0     0     0\n [8,]    0    0    0    0    0    0    0    0    0     0     0     0\n [9,]    0    0    0    0    0    0    0    0    0     0     0     0\n[10,]    0    0    0    0    0    0    0    0    0     0     0     0\n[11,]    0    0    0    0    0    0    0    0    0     0     0     0\n[12,]    0    0    0    0    0    0    0    0    0     0     0     0\n\n\nBest regards,\n--\nFrederico Zanqueta Poleto\nfred at poleto.com\n--\n\"It would be possible to describe everything scientifically, but it would \nmake no sense; it would be without meaning, as if you described a \nBeethoven symphony as a variation of wave pressure.\" Albert Einstein\n\n\n------------- Original message follows -------------\n\nOn Sun, 12 May 2002, Frederico Zanqueta Poleto wrote:\n\n>   Hi,\n>\n> I'm trying to fit a marginal model via GEE but I'm getting strange\n> results and few problems.\n> If I set the working correlation as exchangeable I'm getting the same\n> fitting when I set as independent. Comparing to SAS results it shouldn't\n> happen.\n> If I try to use another working correlation (like AR-M or stat_M_dep), R\n> just exits without giving any error message.\n\nWe probably need an example.  The `OME' example in help(gee) gives\ndifferent results using exchangeable and independence working\ncorrelations, so it isn't a universal problem.\n\n> Another doubt is how R estimates the scale parameter for Poisson? I get\n> 1.36 in R, 1.25 in SAS (estimation by the square root of DEVIANCE/DOF)\n> and 1.17 (estimation by the square root of Pearson's Chi-Square/DOF).\n> I'm using R 1.4.1 but all the problems apply for S-Plus 2000 too.\n\nThis is because 1.36=1.17^2, I should think.  The disperson parameter from\ngee() is a variance scale factor not a standard deviation scale factor.\n\n\t-thomas\n\nThomas Lumley\t\t\tAsst. Professor, Biostatistics\ntlumley at u.washington.edu\tUniversity of Washington, Seattle\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Hi Thomas,\n\nThank you for your help.\nYou are right. I've tried the OME example and the working correlation was \nright.\nMaybe it is a problem with Poisson, what do you think?\n\n> desreg<-gee\n(desovas~ge",
-      "thread_id": "thread-0b20b6de032d",
-      "thread_depth": 2,
-      "month": "2002-05"
-    },
-    {
       "id": "msg-cac70e7f0c2a",
       "message_id": "<D7A3CFD7825BD6119B880002A58F06C225290D@groexmb02.pfizer.com>",
       "from_name": "Warnes, Gregory R",
@@ -7399,8 +7381,8 @@
       "references": [],
       "body_plain": "On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n\n> Hi Thomas,\n>\n> Thank you for your help.\n> You are right. I've tried the OME example and the working correlation was\n> right.\n> Maybe it is a problem with Poisson, what do you think?\n\nNo, that works too in other examples.\n\nIt's most likely a problem with your use of gee, as the working\ncorrelation matrix shows, plus the fact that it only did one iteration.\nPlease check very carefully all your inputs.\n\n> > desreg<-gee\n> (desovas~ger+pop+fec+ger*pop+ger*fec+pop*fec,id=unidade,data=desovas.ovos.in\n> viaveis,family=poisson,corstr=\"exchangeable\")\n> [1] \"Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27\"\n> [1] \"running glm to get initial regression estimate\"\n> [1]  0.93464328  0.02317831  0.29278443  0.21399704  0.11593571\n> 0.05833780 -0.11513896\n> > summary(desreg)\n>\n>  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA\n>  gee S-function, version 4.13 modified 98/01/27 (1998)\n>\n> Model:\n>  Link:                      Logarithm\n>  Variance to Mean Relation: Poisson\n>  Correlation Structure:     Exchangeable\n>\n> Call:\n> gee(formula = desovas ~ ger + pop + fec + ger * pop + ger * fec +\n>     pop * fec, id = unidade, data = desovas.ovos.inviaveis, family =\n> poisson,\n>     corstr = \"exchangeable\")\n>\n> Summary of Residuals:\n>        Min         1Q     Median         3Q        Max\n> -4.5893464 -1.5463047 -0.4124404  1.4106536  9.2329743\n>\n>\n> Coefficients:\n>                Estimate Naive S.E.    Naive z Robust S.E.   Robust z\n> (Intercept)  0.93464317 0.06012985 15.5437480  0.05954487 15.6964517\n> ger          0.02317832 0.07001297  0.3310576  0.06915388  0.3351702\n> pop          0.29278452 0.06565443  4.4594785  0.06505729  4.5004104\n> fec          0.21399711 0.07252180  2.9507967  0.07150063  2.9929402\n> ger:pop      0.11593572 0.07355902  1.5760911  0.07318636  1.5841166\n> ger:fec      0.05833782 0.07000740  0.8333093  0.07054498  0.8269592\n> pop:fec     -0.11513904 0.07216442 -1.5955098  0.07149595 -1.6104274\n>\n> Estimated Scale Parameter:  1.366923\n> Number of Iterations:  1\n>\n> Working Correlation\n>       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]\n>  [1,]    1    0    0    0    0    0    0    0    0     0     0     0\n>  [2,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [3,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [4,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [5,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [6,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [7,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [8,]    0    0    0    0    0    0    0    0    0     0     0     0\n>  [9,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [10,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [11,]    0    0    0    0    0    0    0    0    0     0     0     0\n> [12,]    0    0    0    0    0    0    0    0    0     0     0     0\n>\n>\n> Best regards,\n> --\n> Frederico Zanqueta Poleto\n> fred at poleto.com\n> --\n> \"It would be possible to describe everything scientifically, but it would\n> make no sense; it would be without meaning, as if you described a\n> Beethoven symphony as a variation of wave pressure.\" Albert Einstein\n>\n>\n> ------------- Original message follows -------------\n>\n> On Sun, 12 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> >   Hi,\n> >\n> > I'm trying to fit a marginal model via GEE but I'm getting strange\n> > results and few problems.\n> > If I set the working correlation as exchangeable I'm getting the same\n> > fitting when I set as independent. Comparing to SAS results it shouldn't\n> > happen.\n> > If I try to use another working correlation (like AR-M or stat_M_dep), R\n> > just exits without giving any error message.\n>\n> We probably need an example.  The `OME' example in help(gee) gives\n> different results using exchangeable and independence working\n> correlations, so it isn't a universal problem.\n>\n> > Another doubt is how R estimates the scale parameter for Poisson? I get\n> > 1.36 in R, 1.25 in SAS (estimation by the square root of DEVIANCE/DOF)\n> > and 1.17 (estimation by the square root of Pearson's Chi-Square/DOF).\n> > I'm using R 1.4.1 but all the problems apply for S-Plus 2000 too.\n>\n> This is because 1.36=1.17^2, I should think.  The disperson parameter from\n> gee() is a variance scale factor not a standard deviation scale factor.\n>\n> \t-thomas\n>\n> Thomas Lumley\t\t\tAsst. Professor, Biostatistics\n> tlumley at u.washington.edu\tUniversity of Washington, Seattle\n>\n>\n>\n> -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n> r-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n> Send \"info\", \"help\", or \"[un]subscribe\"\n> (in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n> _._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272860 (secr)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n\n> Hi Thomas,\n>\n> Thank you for your help.\n> You are right. I've tried the OME example and the working correlation was\n> right.\n> Maybe it is a pr",
-      "thread_id": "thread-0b20b6de032d",
-      "thread_depth": 3,
+      "thread_id": "thread-7c0255c024d6",
+      "thread_depth": 0,
       "month": "2002-05"
     },
     {
@@ -7498,8 +7480,8 @@
       "references": [],
       "body_plain": "On Mon, 13 May 2002 ripley at stats.ox.ac.uk wrote:\n\n> On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> > Hi Thomas,\n> >\n> > Thank you for your help.\n> > You are right. I've tried the OME example and the working correlation was\n> > right.\n> > Maybe it is a problem with Poisson, what do you think?\n>\n> No, that works too in other examples.\n>\n> It's most likely a problem with your use of gee, as the working\n> correlation matrix shows, plus the fact that it only did one iteration.\n> Please check very carefully all your inputs.\n>\n\nIn particular check the ordering:\n\n>From help(gee)\n     id: a vector which identifies the clusters.  The length of `id'\n          should be the same as the number of observations.  Data are\n          assumed to be sorted so that observations on a cluster are\n          contiguous rows for all entities in the formula.\n\n\n\t-thomas\n\nThomas Lumley\t\t\tAsst. Professor, Biostatistics\ntlumley at u.washington.edu\tUniversity of Washington, Seattle\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Mon, 13 May 2002 ripley at stats.ox.ac.uk wrote:\n\n> On Mon, 13 May 2002, Frederico Zanqueta Poleto wrote:\n>\n> > Hi Thomas,\n> >\n> > Thank you for your help.\n> > You are right. I've tried the OME exa",
-      "thread_id": "thread-0b20b6de032d",
-      "thread_depth": 4,
+      "thread_id": "thread-7c0255c024d6",
+      "thread_depth": 1,
       "month": "2002-05"
     },
     {
@@ -19932,7 +19914,7 @@
     {
       "id": "thread-0b20b6de032d",
       "subject": "Generalized Estimating Functions",
-      "message_count": 10,
+      "message_count": 7,
       "participants": [
         "Frederico Zanqueta Poleto",
         "Jonathan Baron",
@@ -19942,7 +19924,7 @@
         "ripley@stats.ox.ac.uk"
       ],
       "started": "2002-05-12T20:50:01-03:00",
-      "last_reply": "2002-05-13T12:47:04-07:00",
+      "last_reply": "2002-05-13T09:39:18-07:00",
       "root_message_id": "msg-0b20b6de032d"
     },
     {
@@ -20099,6 +20081,18 @@
       "root_message_id": "msg-76196b7f58c2"
     },
     {
+      "id": "thread-7c0255c024d6",
+      "subject": "Generalized Estimating Functions",
+      "message_count": 2,
+      "participants": [
+        "Thomas Lumley",
+        "ripley@stats.ox.ac.uk"
+      ],
+      "started": "2002-05-13T18:09:46+01:00",
+      "last_reply": "2002-05-13T12:47:04-07:00",
+      "root_message_id": "msg-7c0255c024d6"
+    },
+    {
       "id": "thread-d3ada5766caf",
       "subject": "Spatio-temporal analysis of homicide rates",
       "message_count": 1,
@@ -20146,17 +20140,6 @@
       "root_message_id": "msg-4b6e395b8329"
     },
     {
-      "id": "thread-406e49fd1951",
-      "subject": "installing labDSV library",
-      "message_count": 1,
-      "participants": [
-        "Graham Smith"
-      ],
-      "started": "2002-05-14T07:43:00+01:00",
-      "last_reply": "2002-05-14T07:43:00+01:00",
-      "root_message_id": "msg-406e49fd1951"
-    },
-    {
       "id": "thread-077b02f3ee6c",
       "subject": "installing labDSV library",
       "message_count": 1,
@@ -20166,6 +20149,17 @@
       "started": "2002-05-14T07:43:00+01:00",
       "last_reply": "2002-05-14T07:43:00+01:00",
       "root_message_id": "msg-077b02f3ee6c"
+    },
+    {
+      "id": "thread-406e49fd1951",
+      "subject": "installing labDSV library",
+      "message_count": 1,
+      "participants": [
+        "Graham Smith"
+      ],
+      "started": "2002-05-14T07:43:00+01:00",
+      "last_reply": "2002-05-14T07:43:00+01:00",
+      "root_message_id": "msg-406e49fd1951"
     },
     {
       "id": "thread-c8e5e981dc5d",
@@ -21930,17 +21924,6 @@
     {
       "id": "thread-c3fbcf6f49b9",
       "subject": "plotting a 1000 plots?",
-      "message_count": 1,
-      "participants": [
-        "jasont@indigoindustrial.co.nz"
-      ],
-      "started": "2002-05-22T23:34:27+00:00",
-      "last_reply": "2002-05-22T23:34:27+00:00",
-      "root_message_id": "msg-c3fbcf6f49b9"
-    },
-    {
-      "id": "thread-c3fbcf6f49b9",
-      "subject": "plotting a 1000 plots?",
       "message_count": 4,
       "participants": [
         "Jeff D. Hamann",
@@ -21949,6 +21932,17 @@
       ],
       "started": "2002-05-22T23:34:27+00:00",
       "last_reply": "2002-05-25T08:50:26+01:00",
+      "root_message_id": "msg-c3fbcf6f49b9"
+    },
+    {
+      "id": "thread-c3fbcf6f49b9",
+      "subject": "plotting a 1000 plots?",
+      "message_count": 1,
+      "participants": [
+        "jasont@indigoindustrial.co.nz"
+      ],
+      "started": "2002-05-22T23:34:27+00:00",
+      "last_reply": "2002-05-22T23:34:27+00:00",
       "root_message_id": "msg-c3fbcf6f49b9"
     },
     {

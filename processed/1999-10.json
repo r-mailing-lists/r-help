@@ -456,38 +456,6 @@
       "month": "1999-10"
     },
     {
-      "id": "msg-858ed7ad63a8",
-      "message_id": "<3.0.5.16.19991005040750.09173a1e@deimos.tc.uaslp.mx>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "f0af0ceebdebd202b4017269f8afb667e94dec989625b5a57201300960226e7d",
-      "date": "1999-10-05T04:07:50Z",
-      "subject": "[R] interaction.plot",
-      "subject_clean": "interaction.plot",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Has anyone programmed the S function interaction.plot in R? Thank you.\n\nPeter B.\n\n--\nPeter B. Mandeville                             mandevip at deimos.tc.uaslp.mx\nJefe del Depto. de Inform?tica y Bioestad?stica rpe1531 at pasteur.fmed.uaslp.mx \nFacultad de Medicine                            Tel: 48 26-23-45 ext. 232\nUniversidad Aut?noma de San Luis Potos?         Fax: 48 28-23-52\nAv. V. Carranza 2405\nCol. Los Filtros\nApartado Postal 145\nSan Luis Potos?, S.L.P.\n78210 M?xico\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Has anyone programmed the S function interaction.plot in R? Thank you.\n\nPeter B.\n\n--\nPeter B. Mandeville                             mandevip at deimos.tc.uaslp.mx\nJefe del Depto. de Inform?tica y Bio",
-      "thread_id": "thread-858ed7ad63a8",
-      "thread_depth": 0,
-      "month": "1999-10"
-    },
-    {
-      "id": "msg-5b056fc8e6f2",
-      "message_id": "<3.0.5.16.19991005043412.2367f834@deimos.tc.uaslp.mx>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "f0af0ceebdebd202b4017269f8afb667e94dec989625b5a57201300960226e7d",
-      "date": "1999-10-05T04:34:12Z",
-      "subject": "[R] for loops and counters",
-      "subject_clean": "for loops and counters",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I am trying to assign values to a vector (pvalue). Similar code works in C\nbut not in R. What am I doing wrong?\n\n\tr <- pvalue <- 0\n\tfor(i in (1:(k-1))){\n\t\tfor(j in (i+1):k){\n\t\t\tr <- r+1\n\t\t\ttstat <- (means[i]-means[j])/rms\n\t\t\tpvalue[r] <- 2*(1-pt(abs(tstat),df))\n\t\t}\n\t}\n\nThank you.\n\nPeter B.\n\n\n--\nPeter B. Mandeville                             mandevip at deimos.tc.uaslp.mx\nJefe del Depto. de Inform?tica y Bioestad?stica rpe1531 at pasteur.fmed.uaslp.mx \nFacultad de Medicine                            Tel: 48 26-23-45 ext. 232\nUniversidad Aut?noma de San Luis Potos?         Fax: 48 28-23-52\nAv. V. Carranza 2405\nCol. Los Filtros\nApartado Postal 145\nSan Luis Potos?, S.L.P.\n78210 M?xico\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "I am trying to assign values to a vector (pvalue). Similar code works in C\nbut not in R. What am I doing wrong?\n\n\tr <- pvalue <- 0\n\tfor(i in (1:(k-1))){\n\t\tfor(j in (i+1):k){\n\t\t\tr <- r+1\n\t\t\ttstat <- (m",
-      "thread_id": "thread-5b056fc8e6f2",
-      "thread_depth": 0,
-      "month": "1999-10"
-    },
-    {
       "id": "msg-49705e62a3c3",
       "message_id": "<Pine.GSO.4.05.9910051143470.2712-100000@atlas>",
       "from_name": "Torsten Hothorn",
@@ -583,8 +551,8 @@
       ],
       "body_plain": "\"Peter B. Mandeville\" <mandevip at uaslp.mx> writes:\n\n> I am trying to assign values to a vector (pvalue). Similar code works in C\n> but not in R. What am I doing wrong?\n> \n> \tr <- pvalue <- 0\n> \tfor(i in (1:(k-1))){\n> \t\tfor(j in (i+1):k){\n> \t\t\tr <- r+1\n> \t\t\ttstat <- (means[i]-means[j])/rms\n> \t\t\tpvalue[r] <- 2*(1-pt(abs(tstat),df))\n> \t\t}\n> \t}\n\nEr, what goes wrong? It seems to work for me (except that you've put\nnasty TAB characters at the beginning of the lines, which confuses\nreadline more than slightly!), provided that k, rms, means, and df are\ngiven sensible values first. In principle, you'd be better off with\n\npvalue <- numeric(k*(k-1)/2)\nr <- 0\nfor(etc)....\n\nwhich avoids a lot of memory allocation, but it should work as written.\n\n\n-- \n   O__  ---- Peter Dalgaard             Blegdamsvej 3  \n  c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "\"Peter B. Mandeville\" <mandevip at uaslp.mx> writes:\n\n> I am trying to assign values to a vector (pvalue). Similar code works in C\n> but not in R. What am I doing wrong?\n> \n> \tr <- pvalue <- 0\n> \tfor(",
-      "thread_id": "thread-5b056fc8e6f2",
-      "thread_depth": 1,
+      "thread_id": "thread-4ccda5eca084",
+      "thread_depth": 0,
       "month": "1999-10"
     },
     {
@@ -615,8 +583,8 @@
       "references": [],
       "body_plain": "Peter, \n\nYou didn't say what goes wrong, but you mind find this version more useful\n\ntstat <- (matrix(means, k,k, byrow=TRUE) - matrix(means, k,k,byrow=FALSE))/rms\npvalue <- 2*(1-pt(abs(tstat), df=df))\npvalue[upper.tri(pvalue)]\n\nS is designed to allow you to work with \"whole objects\", which means that\nfor loops can (and should) be avoided.\n\nMartyn\n\nOn 05-Oct-99 Peter B. Mandeville wrote:\n> I am trying to assign values to a vector (pvalue). Similar code works in C\n> but not in R. What am I doing wrong?\n> \n>       r <- pvalue <- 0\n>       for(i in (1:(k-1))){\n>               for(j in (i+1):k){\n>                       r <- r+1\n>                       tstat <- (means[i]-means[j])/rms\n>                       pvalue[r] <- 2*(1-pt(abs(tstat),df))\n>               }\n>       }\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "Peter, \n\nYou didn't say what goes wrong, but you mind find this version more useful\n\ntstat <- (matrix(means, k,k, byrow=TRUE) - matrix(means, k,k,byrow=FALSE))/rms\npvalue <- 2*(1-pt(abs(tstat), df=df)",
-      "thread_id": "thread-5b056fc8e6f2",
-      "thread_depth": 1,
+      "thread_id": "thread-916435074b00",
+      "thread_depth": 0,
       "month": "1999-10"
     },
     {
@@ -1180,22 +1148,6 @@
       "body_snippet": "The \"ts\" library is included in the base distribution when you download R\n0.65.1. It should be available just by typing:\n\nlibrary(\"ts\")\n\n\nPaul Gilbert\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.",
       "thread_id": "thread-ed1a0c046da8",
       "thread_depth": 2,
-      "month": "1999-10"
-    },
-    {
-      "id": "msg-719f0c000669",
-      "message_id": "<3.0.5.16.19991008132714.215ff0e2@deimos.tc.uaslp.mx>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "f0af0ceebdebd202b4017269f8afb667e94dec989625b5a57201300960226e7d",
-      "date": "1999-10-08T13:27:14Z",
-      "subject": "[R] Re: R-0.65.1 for WinNT/9X",
-      "subject_clean": "R-0.65.1 for WinNT/9X",
-      "in_reply_to": "<19991008103453.39839@hal.stat.unipd.it>",
-      "references": [],
-      "body_plain": "Glad your back!\n\nPeter B.\n\nAt 10:34 AM 8/10/99 +0100, you wrote:\n>\n>A binary distribution of R-0.64.2 for Windows is available at\n><CRAN>/bin/windows/windows-NT (at least at Wien).\n>\n>Enjoy it.\n>\n>guido masarotto\n>\n>                      Windows News (since R0.64.2)\n>\n>rw0651\n>======\n>\n>New function savePlot() to save plots to wmf, gif or ps.\n>\n>There is now support for help via compiled HTML files (as used by the\n>latest Microsoft products): set options(chmhelp=TRUE) to use this.\n>You will probably need Internet Explorer 4 or later installed to use\n>this, or you can install hhupd.exe from the windows/windows-NT/base/etc\n>directory on CRAN.\n>\n>There is support for building Windows help files (as in Windows 95).\n>Set options(winhelp=TRUE) to make this your preferred help system.\n>\n>Both compiled HTML files and Windows help are available for the\n>standard packages.\n>\n>The new function update.packages() is supported if you have wget.exe\n>(a copy is in the windows/windows-NT/base/etc/wget.zip on CRAN) or\n>lynx.exe, from http://www.fdisk.com/doslynx/lynxport.htm.\n>\n>On NT only, CPU times are returned by proc.time() (using a call to\n>GetProcessTimes).\n>\n>Rotated text on a windows / win.* device is placed more accurately,\n>especially for non-multiples of 90 degrees.\n>\n>A windows() device reports itself as `windows' not `X11'.\n>\n>getenv() now returns all the environmental variables.\n>\n>unlink() can now remove (empty) directories (but not using wildcard\n>specifications).\n>\n>The complex LINPACK routines which were not included in the Unix\n>versions of R are now omitted here.\n>\n>There is more support for (support of) ActiveX Automation via the\n>Rproxy.dll: see the file front-ends/readme.\n>\n>As under Unix, .Renviron is first searched for in the working directory, \n>then in the home directory. (See README for how the home directory is\n>decided.)\n>\n>The sockets code is definitely working in this version, enough to support\n>source.url and friends.\n>\n>options(pager=\"console\") is set as the default if --ess is used (as it\n>works better with Emacs).\n>\n>The rounding code has been re-written to be more accurate and to round\n>to even as documented.\n>\n>The rw-FAQ is linked into the HTML help system.\n>\n>We believe the problems with re-sizing windows (especially on Windows 9x)\n>have been solved.\n>\n>\n>\n>rw0650\n>======\n>\n>[ Because Guido Masarotto was ill for several weeks, rw0650 was only ever\n>pre-released. ]\n>\n>There are many changes `under the skin' which are not reflected in\n>user-visible changes, but either improve performance or will allow\n>future enhancements.\n>\n>The environment variables have been changed: R_HOME is now R's home\n>directory and R_USER is the HOME for the user which will be used by R\n>(and defaults to HOME, if set, then to ${HOMEDRIVE}${HOMEPATH}, if that\n>is set, then the working directory). (There are many other such\n>changes in R: for example RLIBS becomes R_LIBS, although for the time\n>being RLIBS is also recognised.)\n>\n>Saving a plot as postscript from the device menu will produce a\n>portrait plot irrespective of the setting of ps.options().\n>\n>Saving a plot as a metafile should be more reliable on machines which\n>report incorrect information on the size of the screen.\n>\n>The new flag --no-environ suppresses reading .Renviron and is implied by\n>--vanilla.\n>\n>When rterm is used non-interactively either --save or --no-save must be\n>specified: these is no longer a default of --no-save (for consistency \n>with Unix).\n>\n>More support for building R into other applications: see the examples\n>in the front-ends directory of the source distribution.\n>\n>Interrupting by Esc or Ctrl-Break is handled internally by signals, so\n>the `User Break' response will no longer appear, but in rterm ^C will\n>be echoed.\n>\n>There is limited support for `tilde-expansion': file paths such as\n>~/rest will be expanded to ${HOME}\\rest if HOME is set, or to\n>${HOMEDRIVE}${HOMEPATH}\\rest if those variables are set.\n>\n>Using rterm either interactively or with --ess will be more responsive and\n>use much less CPU time when waiting for input.  Interruptions by Ctrl-Break\n>or (under --ess, for use by ESS) Ctrl-C should happen immediately and be \n>handled correctly. [On NT: problems with Win 98 were corrected for rw0651.]\n>\n>The installer can now install correctly in a top-level directory (e.g.\n>C:\\), fixing a bug in the unzip code used.\n>\n>\n>-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n.-.-\n>r-announce mailing list -- Read\nhttp://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\n>Send \"info\", \"help\", or \"[un]subscribe\"\n>(in the \"body\", not the subject !)  To: r-announce-request at stat.math.ethz.ch\n>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n._._\n>\n>\n\n--\nPeter B. Mandeville                             mandevip at deimos.tc.uaslp.mx\nJefe del Depto. de Inform?tica y Bioestad?stica rpe1531 at pasteur.fmed.uaslp.mx \nFacultad de Medicine                            Tel: 48 26-23-45 ext. 232\nUniversidad Aut?noma de San Luis Potos?         Fax: 48 28-23-52\nAv. V. Carranza 2405\nCol. Los Filtros\nApartado Postal 145\nSan Luis Potos?, S.L.P.\n78210 M?xico\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Glad your back!\n\nPeter B.\n\nAt 10:34 AM 8/10/99 +0100, you wrote:\n>\n>A binary distribution of R-0.64.2 for Windows is available at\n><CRAN>/bin/windows/windows-NT (at least at Wien).\n>\n>Enjoy it.\n>\n>gui",
-      "thread_id": "thread-719f0c000669",
-      "thread_depth": 0,
       "month": "1999-10"
     },
     {
@@ -3840,6 +3792,17 @@
     {
       "id": "thread-932a8173274f",
       "subject": "Cluster graphs",
+      "message_count": 1,
+      "participants": [
+        "Prof Brian D Ripley"
+      ],
+      "started": "1999-10-01T07:10:22+01:00",
+      "last_reply": "1999-10-01T07:10:22+01:00",
+      "root_message_id": "msg-932a8173274f"
+    },
+    {
+      "id": "thread-932a8173274f",
+      "subject": "Cluster graphs",
       "message_count": 2,
       "participants": [
         "Jonathan Rougier",
@@ -3847,17 +3810,6 @@
       ],
       "started": "1999-10-01T07:10:22+01:00",
       "last_reply": "1999-10-01T09:20:06+01:00",
-      "root_message_id": "msg-932a8173274f"
-    },
-    {
-      "id": "thread-932a8173274f",
-      "subject": "Cluster graphs",
-      "message_count": 1,
-      "participants": [
-        "Prof Brian D Ripley"
-      ],
-      "started": "1999-10-01T07:10:22+01:00",
-      "last_reply": "1999-10-01T07:10:22+01:00",
       "root_message_id": "msg-932a8173274f"
     },
     {
@@ -3957,30 +3909,6 @@
       "root_message_id": "msg-ecaf3db98805"
     },
     {
-      "id": "thread-858ed7ad63a8",
-      "subject": "interaction.plot",
-      "message_count": 1,
-      "participants": [
-        "Peter B. Mandeville"
-      ],
-      "started": "1999-10-05T04:07:50+00:00",
-      "last_reply": "1999-10-05T04:07:50+00:00",
-      "root_message_id": "msg-858ed7ad63a8"
-    },
-    {
-      "id": "thread-5b056fc8e6f2",
-      "subject": "for loops and counters",
-      "message_count": 3,
-      "participants": [
-        "Martyn Plummer",
-        "Peter B. Mandeville",
-        "Peter Dalgaard BSA"
-      ],
-      "started": "1999-10-05T04:34:12+00:00",
-      "last_reply": "1999-10-05T15:51:13+02:00",
-      "root_message_id": "msg-5b056fc8e6f2"
-    },
-    {
       "id": "thread-846f5a8ad2b7",
       "subject": "problem with outer and image",
       "message_count": 5,
@@ -3993,6 +3921,28 @@
       "started": "1999-10-05T11:58:12+00:00",
       "last_reply": "1999-10-05T09:37:18-04:00",
       "root_message_id": "msg-846f5a8ad2b7"
+    },
+    {
+      "id": "thread-4ccda5eca084",
+      "subject": "for loops and counters",
+      "message_count": 1,
+      "participants": [
+        "Peter Dalgaard BSA"
+      ],
+      "started": "1999-10-05T15:31:15+02:00",
+      "last_reply": "1999-10-05T15:31:15+02:00",
+      "root_message_id": "msg-4ccda5eca084"
+    },
+    {
+      "id": "thread-916435074b00",
+      "subject": "for loops and counters",
+      "message_count": 1,
+      "participants": [
+        "Martyn Plummer"
+      ],
+      "started": "1999-10-05T15:51:13+02:00",
+      "last_reply": "1999-10-05T15:51:13+02:00",
+      "root_message_id": "msg-916435074b00"
     },
     {
       "id": "thread-5df019375136",
@@ -4173,17 +4123,6 @@
       "started": "1999-10-08T12:31:19+02:00",
       "last_reply": "1999-10-08T12:31:19+02:00",
       "root_message_id": "msg-a7b2ae46e148"
-    },
-    {
-      "id": "thread-719f0c000669",
-      "subject": "R-0.65.1 for WinNT/9X",
-      "message_count": 1,
-      "participants": [
-        "Peter B. Mandeville"
-      ],
-      "started": "1999-10-08T13:27:14+00:00",
-      "last_reply": "1999-10-08T13:27:14+00:00",
-      "root_message_id": "msg-719f0c000669"
     },
     {
       "id": "thread-7f4793bf0236",

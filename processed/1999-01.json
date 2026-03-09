@@ -480,22 +480,6 @@
       "month": "1999-01"
     },
     {
-      "id": "msg-d9217c12c7fb",
-      "message_id": "<3.0.5.16.19990107074248.2dcf0f00@148.224.17.2>",
-      "from_name": "Peter B. Mandeville",
-      "from_email_hash": "d85a5c578674f38f29711aa10c92f26a81fca503707c0c4862ea938627c8abc2",
-      "date": "1999-01-07T07:42:48Z",
-      "subject": "[R] errores",
-      "subject_clean": "errores",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Happy New Year to all,\n\nI am using RW0631 and WIN98.\n\n\t1. The command DATA only works for the base library. \n\n\t2. The following code on page 312 of Venables and Ripley 1997\n\nsitka.lme <-\nlme(size~treat*ordered(Time),random=~1,cluster=~tree,data=Sitka,\nserial.structure=\"ar1.continuous\",serial.covariate=~Time)\n\nproduced the following error message\n\nError in lme(size ~ treat * ordered(Time), random = ~1, cluster = ~tree, :\nunused argument to function\n\nThe example listed on the help for LME worked without problem.\n\nI don't know if my last error reports got out of Mexico or not so here they\nare again.\n\n\t3. The following code on page 236 of Venables and Ripley 1997 \n\nbirthwt.step2 <-\nstep(birthwt.glm,~.^2+I(scale(age)^2)+I(scale(lwt)^2),trace=F)\n\nproduced the following warning message 8 times\n\nWarning: ignored non function \"scale\"\n\n\t4. The following code on page 358 of Venables and Venables 1997 \n\nplot(survfit(leuk.coxs),lty=2:3,lwd=3,add=T,log=T)\n\nproduced the following warning message\n\nWarning: parameter \"add\" couldn't be set in high-level plot() function\n\nFinally, is if possible to automatically load libraries when R is started\nand if so how?\n\nThank you\n\nPeter B.\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "Happy New Year to all,\n\nI am using RW0631 and WIN98.\n\n\t1. The command DATA only works for the base library. \n\n\t2. The following code on page 312 of Venables and Ripley 1997\n\nsitka.lme <-\nlme(size~trea",
-      "thread_id": "thread-d9217c12c7fb",
-      "thread_depth": 0,
-      "month": "1999-01"
-    },
-    {
       "id": "msg-6bf8a4807ca2",
       "message_id": "<Pine.GSO.4.05.9901070728190.20117-100000@auk.stats>",
       "from_name": "Prof Brian D Ripley",
@@ -541,8 +525,8 @@
       ],
       "body_plain": ">>>>> \"PBM\" == Peter B Mandeville <mandevip at 148.224.17.2> writes:\n\n  PBM> \t2. The following code on page 312 of Venables and Ripley 1997\n\n  PBM> sitka.lme <-\n  PBM> lme(size~treat*ordered(Time),random=~1,cluster=~tree,data=Sitka,\n  PBM> serial.structure=\"ar1.continuous\",serial.covariate=~Time)\n\n  PBM> produced the following error message\n\n  PBM> Error in lme(size ~ treat * ordered(Time), random = ~1, cluster\n  PBM> = ~tree, : unused argument to function\n\n  PBM> The example listed on the help for LME worked without problem.\n\n  PBM> I don't know if my last error reports got out of Mexico or not\n  PBM> so here they are again.\n\nThe version of the lme library in R is a beta version of nlme 3.0.\nThe version that is documented in Venables and Ripley (1997) is version\n2.1, the only version that was available at the time they wrote the\nbook.\n\nJose' Pinheiro and I have made incompatible changes in the calling\nsequence of lme between the two versions of the nlme library.  We did\nthis because we felt the current version is much easier to use and to\nunderstand.  The corresponding call in the current version would be\n\nsitka.lme <-\n lme(size ~ treat*ordered(Time), data = Sitka, random = ~ 1 | tree,\n     correlation = corCAR1(form = ~ Time))\n\nThis is still going to produce a massive number of coefficients from\nthe ordered(Time) term.\n\nBy the way, it would help if you had your system administration\nreconfigure your mailer so it provides a system name in the From: line\nrather than an IP address.\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": ">>>>> \"PBM\" == Peter B Mandeville <mandevip at 148.224.17.2> writes:\n\n  PBM> \t2. The following code on page 312 of Venables and Ripley 1997\n\n  PBM> sitka.lme <-\n  PBM> lme(size~treat*ordered(Time),ran",
-      "thread_id": "thread-d9217c12c7fb",
-      "thread_depth": 1,
+      "thread_id": "thread-61ce21bea4e1",
+      "thread_depth": 0,
       "month": "1999-01"
     },
     {
@@ -573,8 +557,8 @@
       "references": [],
       "body_plain": "On Thu, 7 Jan 1999, Peter B. Mandeville wrote:\n\n> Happy New Year to all,\n> \n> I am using RW0631 and WIN98.\n> \n> \t1. The command DATA only works for the base library. \n\nNot so. It works for the MASS library, for example, in that version of R.\n\n> \t2. The following code on page 312 of Venables and Ripley 1997\n\nI really think I am wasting my time trying to help R users. In the VR\nbundle from which you got the Sitka data (even though you claim\ndata(Sitka) did not work) is a set of scripts modified to run under R,\nand there are on-line complements for `R'. PLEASE USE THEM.\n\nYou cannot reasonably expect a book about S-PLUS to work unchanged on R,\nespecially one finished in 1996 to work on R as it has become in 1999.\nThere is a fair chance that the 1999 3rd edition will work with \nminimal changes on current R.\n\n> sitka.lme <-\n> lme(size~treat*ordered(Time),random=~1,cluster=~tree,data=Sitka,\n> serial.structure=\"ar1.continuous\",serial.covariate=~Time)\n> \n> produced the following error message\n> \n> Error in lme(size ~ treat * ordered(Time), random = ~1, cluster = ~tree, :\n> unused argument to function\n\nThat example is for S-PLUS, not R. See the scripts for the changes. Doug\nBates has pointed out one way to do: this is one of those cases where\nlme-2.9 has a different interface from any S version (2.1 or 3.0). \n\n> birthwt.step2 <-\n> step(birthwt.glm,~.^2+I(scale(age)^2)+I(scale(lwt)^2),trace=F)\n> \n> produced the following warning message 8 times\n> \n> Warning: ignored non function \"scale\"\n\nYes, an R scoping problem.  The example works, though.  Current S-PLUS is\nclever enough to know that a function is required, so one never gets that\nwarning.\n\n> \t4. The following code on page 358 of Venables and Venables 1997 \nUh Oh. Try reading the cover once again.\n\n> plot(survfit(leuk.coxs),lty=2:3,lwd=3,add=T,log=T)\n\nPlease read the instructions (on page 357, or in the R version of the\nscripts): you need library(MASS) loaded after library(survival4),\nto make sure MASS is found first. \n\n> Finally, is if possible to automatically load libraries when R is started\n> and if so how?\n\nPut them in .Rprofile: see our on-line complements for one source of info.\nAs it says\n\nIf there are commands that you want to have invoked for each session\n(like \\sfn{library(MASS)}, of course), you can put these in a file\ncalled \\sfn{.Rprofile}. This searched for first in the current\ndirectory then in the user's home directory, but only the first file\nfound (if any) is read in.\n\nThat is true for rw0631 too: earlier Windows versions used Rprofile.\n\n\nPeter, we have repeated ask you for a signature, as your reply address\nis invalid. My patience at having to post replies to you is wearing \nrather thin. Please be a good net citizen and give us a valid reply\naddress.\n \n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272860 (secr)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
       "body_snippet": "On Thu, 7 Jan 1999, Peter B. Mandeville wrote:\n\n> Happy New Year to all,\n> \n> I am using RW0631 and WIN98.\n> \n> \t1. The command DATA only works for the base library. \n\nNot so. It works for the MASS li",
-      "thread_id": "thread-d9217c12c7fb",
-      "thread_depth": 1,
+      "thread_id": "thread-d9a160551143",
+      "thread_depth": 0,
       "month": "1999-01"
     },
     {
@@ -3868,19 +3852,6 @@
       "root_message_id": "msg-1492d20986eb"
     },
     {
-      "id": "thread-d9217c12c7fb",
-      "subject": "errores",
-      "message_count": 3,
-      "participants": [
-        "Douglas Bates",
-        "Peter B. Mandeville",
-        "Prof Brian Ripley"
-      ],
-      "started": "1999-01-07T07:42:48+00:00",
-      "last_reply": "1999-01-07T18:06:12+00:00",
-      "root_message_id": "msg-d9217c12c7fb"
-    },
-    {
       "id": "thread-8023583d4179",
       "subject": "Why R does not appear on GNU pages",
       "message_count": 3,
@@ -3892,6 +3863,17 @@
       "started": "1999-01-07T09:58:51+00:00",
       "last_reply": "1999-01-07T09:58:51+00:00",
       "root_message_id": "msg-8023583d4179"
+    },
+    {
+      "id": "thread-61ce21bea4e1",
+      "subject": "errores",
+      "message_count": 1,
+      "participants": [
+        "Douglas Bates"
+      ],
+      "started": "1999-01-07T10:50:01-06:00",
+      "last_reply": "1999-01-07T10:50:01-06:00",
+      "root_message_id": "msg-61ce21bea4e1"
     },
     {
       "id": "thread-74342fc7df10",
@@ -3927,6 +3909,17 @@
       "started": "1999-01-07T14:55:02+13:00",
       "last_reply": "1999-01-07T14:55:02+13:00",
       "root_message_id": "msg-145fc1f14b42"
+    },
+    {
+      "id": "thread-d9a160551143",
+      "subject": "errores",
+      "message_count": 1,
+      "participants": [
+        "Prof Brian Ripley"
+      ],
+      "started": "1999-01-07T18:06:12+00:00",
+      "last_reply": "1999-01-07T18:06:12+00:00",
+      "root_message_id": "msg-d9a160551143"
     },
     {
       "id": "thread-542b5506e6f2",
