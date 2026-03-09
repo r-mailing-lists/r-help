@@ -15629,6 +15629,24 @@
       "month": "2003-12"
     },
     {
+      "id": "msg-bb681488c886",
+      "message_id": "<3FE329B8.8010705@pdf.com>",
+      "from_name": "Spencer Graves",
+      "from_email_hash": "f000a3448d53080dd4b43f181a516721285c0b8750b52047566af53c3932ec5c",
+      "date": "2003-12-19T18:31:24Z",
+      "subject": "[R] iterative proportional fitting",
+      "subject_clean": "iterative proportional fitting",
+      "in_reply_to": "<Sea2-F62UuMSe7fpAdA0005d79c@hotmail.com>",
+      "references": [
+        "<Sea2-F62UuMSe7fpAdA0005d79c@hotmail.com>"
+      ],
+      "body_plain": "Have you considered fitting on the log scale?  It's not clear to \nme what problem you are trying to solve, but the following will estimate \nparameters in a model that looks to me like what you are describing:  \n\n      lm(z ~ (y1+y2+...+yn)^n, ...)\n\n      hope this helps. \n      spencer\n\nZhen Pang wrote:\n\n> Dear all,\n>\n> I wonder if there are some function or package in R which can do the \n> iterative proportional fitting.\n>\n> In the exponential model \n> f(y1,...yn)=exp(a'yi+b'(yi*yj)+.....+c'(y1*...*yn)+constance),\n>\n> instead of the canonical parameters, I use maginal probability instead \n> of a and log odds ratio instead of b. and for the order higher than 3, \n> I use the canonical way or even assume them to be 0.\n>\n> It is good if there is direct function or package in R to do the job, \n> which will save a lot of time of me. Thank you!\n>\n> Rgs,\n>\n> Zhen",
+      "body_snippet": "Have you considered fitting on the log scale?  It's not clear to \nme what problem you are trying to solve, but the following will estimate \nparameters in a model that looks to me like what you are des",
+      "thread_id": "thread-c6f7b40ff2ed",
+      "thread_depth": 1,
+      "month": "2003-12"
+    },
+    {
       "id": "msg-3058b6f15984",
       "message_id": "<89466355CEFE7244AC3A013E45641C18026E58F1@lsmail2.crn.nestrd.ch>",
       "from_name": "Grathwohl,Dominik,LAUSANNE,NRC/BAS",
@@ -15813,6 +15831,22 @@
       "body_snippet": "On Fri, 19 Dec 2003, Hank Stevens wrote:\n\n> R version 1.8.1, Mac OS X 10.3.2\n>\n> I have tried searching for this  problem and its fix, but to no avail.\n> -Everything seems to download and unpack fine.",
       "thread_id": "thread-93b7297c2edf",
       "thread_depth": 1,
+      "month": "2003-12"
+    },
+    {
+      "id": "msg-526fbae10712",
+      "message_id": "<20031219201450.68952.qmail@web14810.mail.yahoo.com>",
+      "from_name": "L Z",
+      "from_email_hash": "c92b1a950b100d81de9ba5e416622e848cf9bf9349870d9bb6b651bcee7a8b95",
+      "date": "2003-12-19T22:58:48Z",
+      "subject": "[R] [Mailman] question: contour plot for discrete data",
+      "subject_clean": "[Mailman] question: contour plot for discrete data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Question:\n I have matrix (n x3) that represents discrete data.\nEach row of matrix is 3-D point (x,y,z). I would like\nto get contour map (z value) at two dimension\n(x,y). How can I use related contour function to do\nthis job?\nI am not sure if I clarify this question. For example,\nwe can get point (x,y)\nat 2 dimension according to first two columns of\nmatrix. Then I want to connect\nsame value z=(x,y). Thanks!\n  zhang\n\nThe data file looks like this:\nX          y               z\n4           0.33          0.99\n4           0.5            1.2\n5           0.66          1.2\n5           0.7            1.5\n6           2               1.2\n?",
+      "body_snippet": "Question:\n I have matrix (n x3) that represents discrete data.\nEach row of matrix is 3-D point (x,y,z). I would like\nto get contour map (z value) at two dimension\n(x,y). How can I use related contour ",
+      "thread_id": "thread-526fbae10712",
+      "thread_depth": 0,
       "month": "2003-12"
     },
     {
@@ -16455,8 +16489,8 @@
       ],
       "body_plain": "Dear L Z  -\n\nBefore using  contour()  one needs to interpolate the z values\nto all points in a rectangular grid.  2D interpolation is not\ntrivial.  The package KernSmooth (case-sensitive) will do this\nfor a density estimate but not, apparently, when z values are\ngiven.  Perhaps packages splines or mclust will do this, although\nI haven't checked.  More likely, the functions  surf.ls(), surf.gls()\nfrom package spatial.\n\nOther users who are familiar with maps and geographic information\nsystems (GIS) packages for R may have much better ideas for you\nthan I know about.  I've never had occasion to use any of this.\n\n-  tom blackwell  -  u michigan medical school  -  ann arbor  -\n\nOn Fri, 19 Dec 2003, L Z wrote:\n\n> Question:\n>  I have matrix (n x3) that represents discrete data.\n> Each row of matrix is 3-D point (x,y,z). I would like\n> to get contour map (z value) at two dimension\n> (x,y). How can I use related contour function to do\n> this job?\n> I am not sure if I clarify this question. For example,\n> we can get point (x,y)\n> at 2 dimension according to first two columns of\n> matrix. Then I want to connect\n> same value z=(x,y). Thanks!\n>   zhang\n>\n> The data file looks like this:\n> X          y               z\n> 4           0.33          0.99\n> 4           0.5            1.2\n> 5           0.66          1.2\n> 5           0.7            1.5\n> 6           2               1.2\n> ?\n>",
       "body_snippet": "Dear L Z  -\n\nBefore using  contour()  one needs to interpolate the z values\nto all points in a rectangular grid.  2D interpolation is not\ntrivial.  The package KernSmooth (case-sensitive) will do this",
-      "thread_id": "thread-4a4b69ba8e78",
-      "thread_depth": 0,
+      "thread_id": "thread-526fbae10712",
+      "thread_depth": 1,
       "month": "2003-12"
     },
     {
@@ -16474,8 +16508,8 @@
       ],
       "body_plain": "Have you considered \"interp\", as in the following example: \n\nXY <- expand.grid(x=1:11, y=1:11)\nXY$z <- XY$x+XY$y\ncontour(interp(XY$x, XY$y, XY$z))\n\nhope this helps.  spencer graves\n\nThomas W Blackwell wrote:\n\n>Dear L Z  -\n>\n>Before using  contour()  one needs to interpolate the z values\n>to all points in a rectangular grid.  2D interpolation is not\n>trivial.  The package KernSmooth (case-sensitive) will do this\n>for a density estimate but not, apparently, when z values are\n>given.  Perhaps packages splines or mclust will do this, although\n>I haven't checked.  More likely, the functions  surf.ls(), surf.gls()\n>from package spatial.\n>\n>Other users who are familiar with maps and geographic information\n>systems (GIS) packages for R may have much better ideas for you\n>than I know about.  I've never had occasion to use any of this.\n>\n>-  tom blackwell  -  u michigan medical school  -  ann arbor  -\n>\n>On Fri, 19 Dec 2003, L Z wrote:\n>\n>  \n>\n>>Question:\n>> I have matrix (n x3) that represents discrete data.\n>>Each row of matrix is 3-D point (x,y,z). I would like\n>>to get contour map (z value) at two dimension\n>>(x,y). How can I use related contour function to do\n>>this job?\n>>I am not sure if I clarify this question. For example,\n>>we can get point (x,y)\n>>at 2 dimension according to first two columns of\n>>matrix. Then I want to connect\n>>same value z=(x,y). Thanks!\n>>  zhang\n>>\n>>The data file looks like this:\n>>X          y               z\n>>4           0.33          0.99\n>>4           0.5            1.2\n>>5           0.66          1.2\n>>5           0.7            1.5\n>>6           2               1.2\n>>?\n>>\n>>    \n>>\n>\n>______________________________________________\n>R-help at stat.math.ethz.ch mailing list\n>https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n>  \n>",
       "body_snippet": "Have you considered \"interp\", as in the following example: \n\nXY <- expand.grid(x=1:11, y=1:11)\nXY$z <- XY$x+XY$y\ncontour(interp(XY$x, XY$y, XY$z))\n\nhope this helps.  spencer graves\n\nThomas W Blackwell",
-      "thread_id": "thread-4a4b69ba8e78",
-      "thread_depth": 1,
+      "thread_id": "thread-526fbae10712",
+      "thread_depth": 2,
       "month": "2003-12"
     },
     {
@@ -16506,8 +16540,8 @@
       "references": [],
       "body_plain": "On Sun, 21 Dec 2003, Spencer Graves wrote:\n\n> Have you considered \"interp\", as in the following example: \n\nin the akima package, just to make this plain.\n\n> \n> XY <- expand.grid(x=1:11, y=1:11)\n> XY$z <- XY$x+XY$y\n> contour(interp(XY$x, XY$y, XY$z))\n> \n> hope this helps.  spencer graves\n> \n> Thomas W Blackwell wrote:\n> \n> >Dear L Z  -\n> >\n> >Before using  contour()  one needs to interpolate the z values\n> >to all points in a rectangular grid.  2D interpolation is not\n> >trivial.  The package KernSmooth (case-sensitive) will do this\n> >for a density estimate but not, apparently, when z values are\n> >given.  Perhaps packages splines or mclust will do this, although\n> >I haven't checked.  More likely, the functions  surf.ls(), surf.gls()\n> >from package spatial.\n> >\n> >Other users who are familiar with maps and geographic information\n> >systems (GIS) packages for R may have much better ideas for you\n> >than I know about.  I've never had occasion to use any of this.\n> >\n> >-  tom blackwell  -  u michigan medical school  -  ann arbor  -\n> >\n> >On Fri, 19 Dec 2003, L Z wrote:\n> >\n> >  \n> >\n> >>Question:\n> >> I have matrix (n x3) that represents discrete data.\n> >>Each row of matrix is 3-D point (x,y,z). I would like\n> >>to get contour map (z value) at two dimension\n> >>(x,y). How can I use related contour function to do\n> >>this job?\n> >>I am not sure if I clarify this question. For example,\n> >>we can get point (x,y)\n> >>at 2 dimension according to first two columns of\n> >>matrix. Then I want to connect\n> >>same value z=(x,y). Thanks!\n> >>  zhang\n> >>\n> >>The data file looks like this:\n> >>X          y               z\n> >>4           0.33          0.99\n> >>4           0.5            1.2\n> >>5           0.66          1.2\n> >>5           0.7            1.5\n> >>6           2               1.2\n> >>?\n> >>\n> >>    \n> >>\n> >\n> >______________________________________________\n> >R-help at stat.math.ethz.ch mailing list\n> >https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> >  \n> >\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> \n\n-- \nRoger Bivand\nEconomic Geography Section, Department of Economics, Norwegian School of\nEconomics and Business Administration, Breiviksveien 40, N-5045 Bergen,\nNorway. voice: +47 55 95 93 55; fax +47 55 95 93 93\ne-mail: Roger.Bivand at nhh.no",
       "body_snippet": "On Sun, 21 Dec 2003, Spencer Graves wrote:\n\n> Have you considered \"interp\", as in the following example: \n\nin the akima package, just to make this plain.\n\n> \n> XY <- expand.grid(x=1:11, y=1:11)\n> XY$z",
-      "thread_id": "thread-4a4b69ba8e78",
-      "thread_depth": 2,
+      "thread_id": "thread-526fbae10712",
+      "thread_depth": 3,
       "month": "2003-12"
     },
     {
@@ -16673,8 +16707,8 @@
       "references": [],
       "body_plain": "Hi\n\nlibrary(akima)\nfunction\ncontour(interp(x,y,z))\n\nis one possibility\n\nCheers\n\nPetr\n\nOn 19 Jan 2058 at 48:211, L Z wrote:\n\n> Question:\n>  I have matrix (n x3) that represents discrete data.\n> Each row of matrix is 3-D point (x,y,z). I would like\n> to get contour map (z value) at two dimension\n> (x,y). How can I use related contour function to do\n> this job?\n> I am not sure if I clarify this question. For example,\n> we can get point (x,y)\n> at 2 dimension according to first two columns of\n> matrix. Then I want to connect\n> same value z=(x,y). Thanks!\n>   zhang\n> \n> The data file looks like this:\n> X          y               z\n> 4           0.33          0.99\n> 4           0.5            1.2\n> 5           0.66          1.2\n> 5           0.7            1.5\n> 6           2               1.2\n> ?\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n\nPetr Pikal\npetr.pikal at precheza.cz",
       "body_snippet": "Hi\n\nlibrary(akima)\nfunction\ncontour(interp(x,y,z))\n\nis one possibility\n\nCheers\n\nPetr\n\nOn 19 Jan 2058 at 48:211, L Z wrote:\n\n> Question:\n>  I have matrix (n x3) that represents discrete data.\n> Each ro",
-      "thread_id": "thread-f8ebef2e2a0a",
-      "thread_depth": 0,
+      "thread_id": "thread-526fbae10712",
+      "thread_depth": 1,
       "month": "2003-12"
     },
     {
@@ -24678,13 +24712,13 @@
     {
       "id": "thread-c6f7b40ff2ed",
       "subject": "iterative proportional fitting",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Spencer Graves",
         "Zhen Pang"
       ],
       "started": "2003-12-19T14:08:16+08:00",
-      "last_reply": "2003-12-19T08:39:20-08:00",
+      "last_reply": "2003-12-19T18:31:24+00:00",
       "root_message_id": "msg-c6f7b40ff2ed"
     },
     {
@@ -24749,17 +24783,6 @@
       "root_message_id": "msg-08f290e72738"
     },
     {
-      "id": "thread-163433beda90",
-      "subject": "Forward of moderated message",
-      "message_count": 1,
-      "participants": [
-        "mailman-bounces@stat.math.ethz.ch"
-      ],
-      "started": "2003-12-19T18:22:41+01:00",
-      "last_reply": "2003-12-19T18:22:41+01:00",
-      "root_message_id": "msg-163433beda90"
-    },
-    {
       "id": "thread-ee4b1ef4b053",
       "subject": "Forward of moderated message",
       "message_count": 1,
@@ -24769,6 +24792,17 @@
       "started": "2003-12-19T18:22:41+01:00",
       "last_reply": "2003-12-19T18:22:41+01:00",
       "root_message_id": "msg-ee4b1ef4b053"
+    },
+    {
+      "id": "thread-163433beda90",
+      "subject": "Forward of moderated message",
+      "message_count": 1,
+      "participants": [
+        "mailman-bounces@stat.math.ethz.ch"
+      ],
+      "started": "2003-12-19T18:22:41+01:00",
+      "last_reply": "2003-12-19T18:22:41+01:00",
+      "root_message_id": "msg-163433beda90"
     },
     {
       "id": "thread-3058b6f15984",
@@ -24815,6 +24849,21 @@
       "started": "2003-12-19T22:55:53-07:00",
       "last_reply": "2003-12-20T11:20:58+01:00",
       "root_message_id": "msg-5a3c46866a89"
+    },
+    {
+      "id": "thread-526fbae10712",
+      "subject": "[Mailman] question: contour plot for discrete data",
+      "message_count": 5,
+      "participants": [
+        "L Z",
+        "Petr Pikal",
+        "Roger Bivand",
+        "Spencer Graves",
+        "Thomas W Blackwell"
+      ],
+      "started": "2003-12-19T22:58:48+00:00",
+      "last_reply": "2003-12-22T09:54:46+01:00",
+      "root_message_id": "msg-526fbae10712"
     },
     {
       "id": "thread-a895ae876a52",
@@ -24961,19 +25010,6 @@
       "root_message_id": "msg-0be09bf5dcb8"
     },
     {
-      "id": "thread-4a4b69ba8e78",
-      "subject": "[Mailman] question: contour plot for discrete data",
-      "message_count": 3,
-      "participants": [
-        "Roger Bivand",
-        "Spencer Graves",
-        "Thomas W Blackwell"
-      ],
-      "started": "2003-12-21T14:15:53-05:00",
-      "last_reply": "2003-12-21T20:48:10+01:00",
-      "root_message_id": "msg-4a4b69ba8e78"
-    },
-    {
       "id": "thread-2e81dee4d8e0",
       "subject": "Sweave/LaTeX Problem with EPS PDF",
       "message_count": 1,
@@ -25040,17 +25076,6 @@
       "started": "2003-12-22T09:52:30+00:00",
       "last_reply": "2003-12-22T09:52:30+00:00",
       "root_message_id": "msg-eae29b19aebb"
-    },
-    {
-      "id": "thread-f8ebef2e2a0a",
-      "subject": "[Mailman] question: contour plot for discrete data",
-      "message_count": 1,
-      "participants": [
-        "Petr Pikal"
-      ],
-      "started": "2003-12-22T09:54:46+01:00",
-      "last_reply": "2003-12-22T09:54:46+01:00",
-      "root_message_id": "msg-f8ebef2e2a0a"
     },
     {
       "id": "thread-b65a3e5cab02",

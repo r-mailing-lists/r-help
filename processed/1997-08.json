@@ -70,6 +70,22 @@
       "month": "1997-08"
     },
     {
+      "id": "msg-f3dcb14cea79",
+      "message_id": "<21004.9708050954@laplace.maths.qmw.ac.uk>",
+      "from_name": "Ian Wilson",
+      "from_email_hash": "a9c186487dc70b430252d17f667ebb1a49b30c3c89a6931fdbb6603618a7d2b7",
+      "date": "1997-08-05T10:54:36Z",
+      "subject": "R-beta: Characters in .C",
+      "subject_clean": "R-beta: Characters in .C",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am having some difficulties using dynamically loaded\nC functions on a Sparc 10 with R compiled\nusing cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \nerror message:\nError: character variables must be duplicated in .C/.Fortran,\nwith C functions which pass character variables.\n\nmy C functions look like:  anyfunc(char **filename, other variables )\n\nThis error message appears about 25% of the time.\n\nWhat is the problem ? \n\nIan\n\nDr Ian Wilson\nDept of Biological Sciences\nQueen Mary and Westfield College\nMile End Road\nLondon E1 4NS\nTel: 0171 775 3055\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
+      "body_snippet": "I am having some difficulties using dynamically loaded\nC functions on a Sparc 10 with R compiled\nusing cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \nerror message:\nError: character va",
+      "thread_id": "thread-f3dcb14cea79",
+      "thread_depth": 0,
+      "month": "1997-08"
+    },
+    {
       "id": "msg-422853f5f4c9",
       "message_id": "<56B5C15CC3@facstaff.cas.unt.edu>",
       "from_name": "Joel Allen",
@@ -133,8 +149,8 @@
       ],
       "body_plain": "Ian Wilson writes:\n > \n > I am having some difficulties using dynamically loaded\n > C functions on a Sparc 10 with R compiled\n > using cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \n > error message:\n > Error: character variables must be duplicated in .C/.Fortran,\n > with C functions which pass character variables.\n > \n > my C functions look like:  anyfunc(char **filename, other variables )\n > \n > This error message appears about 25% of the time.\n > \n > What is the problem ? \n \nThis is an uninitialized variable problem.  The fix is as follows:\n\nIn the file RHOME/src/main/dotcode.c, find the function declaration\nfor \"naoktrim\" and make the change noted below.\n\nstatic SEXP naoktrim(SEXP s, int * len, int *naok, int *dup)\n{\n        SEXP value;\n\n        if(s == R_NilValue) {\n                value = R_NilValue;\n                *naok = 0;\n                *dup = 0;\t/* !!!! Add this line !!!! */\n                *len = 0;\n        }\n\nThis will be in the next lot of patches we send out for 0.50.\nSorry 'bout that.\n\tRoss\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
       "body_snippet": "Ian Wilson writes:\n > \n > I am having some difficulties using dynamically loaded\n > C functions on a Sparc 10 with R compiled\n > using cc  (both R-0.49 and R-0.50).  I get sporadic errors with the \n >",
-      "thread_id": "thread-5f4f04d5aae1",
-      "thread_depth": 0,
+      "thread_id": "thread-f3dcb14cea79",
+      "thread_depth": 1,
       "month": "1997-08"
     },
     {
@@ -149,8 +165,8 @@
       "references": [],
       "body_plain": "The current examples of the scoping rules of R in the faq and in R&R's\nJCGS paper are clear but a bit artificial.  The following example may be\nof interest as it\na) does something useful in R\nb) doesn't work in S\nc) was written in S independently by myself and at least three of my\nfellow students over the past couple of years, causing literally hours of\nconfusion on each occasion.\n\njackknife.lm<-function (lmobj) \n{\n        n <- length(resid(lmobj))\n        jval <- t(apply(as.matrix(1:n), 1, function(i) coef(update(lmobj, \n                subset = -i))))\n        (n - 1)* (n-1) * var(jval)/n\n}\n\nIn order to make it work in S you need to explicitly pass the linear model\nobject into the function nested in apply(). If you don't and you are lucky\nyou will get  \nError: Object \"lmobj\" not found\nIf you are unlucky enough to have a linear model called lmobj in your\nglobal environment you will get the wrong answer with no warning. \n\nThis version works in S\n\njackknife.S.lm<-function (lmobj) \n{\n        n <- length(resid(lmobj))\n        jval <- t(apply(as.matrix(1:n), 1, function(i,lmobj)\n coef(update(lmobj, subset = -i)),lmobj=lmobj))\n        (n - 1)* (n-1) * var(jval)/n\n}\n\n\nThomas Lumley\n------------------------------------------------------+------\nBiostatistics\t\t: \"Never attribute to malice what  :\nUni of Washington\t:  can be adequately explained by  :\nBox 357232\t\t:  incompetence\" - Hanlon's Razor  :\nSeattle WA 98195-7232\t:\t\t\t\t   :\n------------------------------------------------------------\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
       "body_snippet": "The current examples of the scoping rules of R in the faq and in R&R's\nJCGS paper are clear but a bit artificial.  The following example may be\nof interest as it\na) does something useful in R\nb) doesn",
-      "thread_id": "thread-5f4f04d5aae1",
-      "thread_depth": 1,
+      "thread_id": "thread-f3dcb14cea79",
+      "thread_depth": 2,
       "month": "1997-08"
     },
     {
@@ -181,8 +197,8 @@
       "references": [],
       "body_plain": "Further to my message ...\n\nFirstly for some reason (possibly the time of day) x11 now appears to work\nOK with R0.50a1.  I did try it lower case but some funny stuff was\npossibly lying around in the workspace (apologies for the 1960s\nprogramming terminology).\n\nAnyway, back to funfits.\n\nPreviously, even on startup, if I loaded the .RData file, the graphics\nwouldn't work.  The possible key was that there is a plot.window function\nin funfits which is also of course a plotting primitive.  So I checked in\nall the fortran code (which could have passed the name back), found\nnothing and trusted the authors not to have used nasty fortran 66 r*4's\nfor characters, and changed the S-code to grot.window etc. \n\nI also tidied up the fortran and hey presto the graphics now appears to\nwork when the funfits objects are loaded.  However NAs are not allowed in\nxlim in plot.window so there is still a problem.  Also there is no maps\nlibrary and I couldn't find the thin plate surface fitting routine tps for\nsome reason.\n\nThe story goes on but the problem does not appear to be as fundamental as\nI  thought it was.  Welcome to hacker's heaven.\n\nJohn\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=",
       "body_snippet": "Further to my message ...\n\nFirstly for some reason (possibly the time of day) x11 now appears to work\nOK with R0.50a1.  I did try it lower case but some funny stuff was\npossibly lying around in the wo",
-      "thread_id": "thread-5f4f04d5aae1",
-      "thread_depth": 2,
+      "thread_id": "thread-f3dcb14cea79",
+      "thread_depth": 3,
       "month": "1997-08"
     },
     {
@@ -662,6 +678,20 @@
       "root_message_id": "msg-422853f5f4c9"
     },
     {
+      "id": "thread-f3dcb14cea79",
+      "subject": "R-beta: Characters in .C",
+      "message_count": 4,
+      "participants": [
+        "Ian Wilson",
+        "John Logsdon",
+        "Ross Ihaka",
+        "Thomas Lumley"
+      ],
+      "started": "1997-08-05T10:54:36+00:00",
+      "last_reply": "1997-08-07T01:30:30+01:00",
+      "root_message_id": "msg-f3dcb14cea79"
+    },
+    {
       "id": "thread-5b79ebfa50ed",
       "subject": "R-beta: q and postscript in win95",
       "message_count": 1,
@@ -671,19 +701,6 @@
       "started": "1997-08-06T08:47:08+12:00",
       "last_reply": "1997-08-06T08:47:08+12:00",
       "root_message_id": "msg-5b79ebfa50ed"
-    },
-    {
-      "id": "thread-5f4f04d5aae1",
-      "subject": "R-beta: Characters in .C",
-      "message_count": 3,
-      "participants": [
-        "John Logsdon",
-        "Ross Ihaka",
-        "Thomas Lumley"
-      ],
-      "started": "1997-08-06T15:11:40+12:00",
-      "last_reply": "1997-08-07T01:30:30+01:00",
-      "root_message_id": "msg-5f4f04d5aae1"
     },
     {
       "id": "thread-3b5f7a9dc6d6",
