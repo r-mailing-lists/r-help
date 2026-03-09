@@ -4,6 +4,29 @@
   "month": "2017-03",
   "messages": [
     {
+      "id": "msg-14eac088636e",
+      "message_id": "<CA+8X3fU+YGKhFHxj=VjS_+MEhMKnj+3aqCKW15ZEvsLAi_UPsg@mail.gmail.com>",
+      "from_name": "Jim Lemon",
+      "from_email_hash": "4fd4de8f79714fe62432d41802cdcfa3560d905c372a2f11e0e4da4166fd729b",
+      "date": "2017-03-01T08:12:21+11:00",
+      "subject": "[R] Σχετ: plotting dates in x axis",
+      "subject_clean": "Σχετ: plotting dates in x axis",
+      "in_reply_to": "<1622106255.4352257.1488284031116@mail.yahoo.com>",
+      "references": [
+        "<2026457994.3295018.1488209203201.ref@mail.yahoo.com>",
+        "<2026457994.3295018.1488209203201@mail.yahoo.com>",
+        "<CA+8X3fXRwuVT=dEdMa5ueXmLWncc=hHo9gd=-DG9eZa04tXzFw@mail.gmail.com>",
+        "<A62569FB-CA09-4FA4-A59E-5F62FED09AF1@dcn.davis.ca.us>",
+        "<2124162590.4345707.1488282782793@mail.yahoo.com>",
+        "<1622106255.4352257.1488284031116@mail.yahoo.com>"
+      ],
+      "body_plain": "Hi Maria,\nNo problem. Taking the example I used before:\n\naa<-data.frame(var1=runif(180),\n SDATE=paste(sample(1998:2012,180,TRUE),\n sample(1:12,180,TRUE),sample(1:28,180,TRUE),sep=\"-\"))\naa$sdate<-as.Date(aa$SDATE)\nplot(aa$sdate,aa$var1,xaxt=\"n\")\n# set the tick marks at the middle of every other year\naxis.dates<-as.Date(paste(seq(1998,2012,by=2),6,30,sep=\"-\"))\naxis(1,axis.dates,seq(1998,2012,by=2))\n\nIf you want to add months, the \"axis\" function will drop some of the\ndates. The \"staxlab\" function uses either multiple lines or rotates\nthe labels to fit more in:\n\nplot(aa$sdate,aa$var1,xaxt=\"n\")\nlibrary(plotrix)\nstaxlab(1,axis.dates,format(axis.dates,\"%b-%Y\"),srt=45)\n\nJim\n\n\nOn Tue, Feb 28, 2017 at 11:13 PM, Maria Lathouri <mlathouri at yahoo.gr> wrote:\n> Dear Jim\n>\n> Many thanks for this. I tried and it somehow worked. I removed the nlines=3\n> from your script so I can have the years in one line, but still the problem\n> is that while trying to show all the years, there are years in the first\n> line and then other years in a second line.\n>\n> I was wondering if I can show every two years instead. I think it would be\n> much better.\n>\n> Many thanks.\n>\n> Kind regards,\n> Maria\n>\n>\n> ???? 11:56 ?.?. ?????, 28 ??????????? 2017, ?/? Maria Lathouri via R-help\n> <r-help at r-project.org> ??????:\n>\n>\n> Dear all,\n> Sorry about that. My mistake. Here is an example of my data\n>> head(aa)       SDATE  var11 1998-01-29 0.7282 1998-02-17 1.0803 1998-03-20\n>> 0.6374 1998-05-07 1.1205 1998-05-26 0.9036 1998-06-05\n>> 1.210.........................178 2012-10-4  0.71179 2012-11-4  0.663180\n>> 2012-12-10 0.484\n>\n> I hope this helps.\n> Maria\n>\n>     ???? 10:00 ?.?. ???????, 27 ??????????? 2017, ?/? Jeff Newmiller\n> <jdnewmil at dcn.davis.ca.us> ??????:\n>\n>\n> While humorous, the term \"Mexican Wall\" is unlikely to be clear to the OP.\n> This is a reference to the mailing list anti-virus strategy of cutting out\n> attachments that don't meet a very restrictive set of requirements outlined\n> in the Posting Guide that all R-users are supposed to have read and\n> memorized, but which few even seem to know exists. You can best avoid the\n> \"Mexican Wall\" by setting your email program to send plain text instead of\n> HTML, and to embed your R code example (believe it or not, this is not the\n> Excel-To-R translation service, so show us your R code and text data, not\n> your Excel file) in the email along with your description of your problem.\n> For more help on getting help search the Internet for \"R reproducible\n> example\".\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> On February 27, 2017 1:11:05 PM PST, Jim Lemon <drjimlemon at gmail.com> wrote:\n>>Hi Maria,\n>>First, Excel files don't make it through the Mexican Wall. A CSV with\n>>the extension changed to .txt might. You can get all of the years like\n>>this:\n>>\n>>aa<-data.frame(var1=runif(180),\n>> SDATE=paste(sample(1998:2012,180,TRUE),\n>> sample(1:12,180,TRUE),sample(1:28,180,TRUE),sep=\"-\"))\n>>aa$sdate<-as.Date(aa$SDATE)\n>>plot(aa$sdate,aa$var1,xaxt=\"n\")\n>>library(plotrix)\n>># set the tick marks at the middle of each year\n>>axis.dates<-as.Date(paste(1998:2012,6,30,sep=\"-\"))\n>>staxlab(1,axis.dates,1998:2012,nlines=3)\n>>\n>>Obviously you don't want all of the months, so just add the months to\n>>the years:\n>>\n>>plot(aa$sdate,aa$var1,xaxt=\"n\")\n>>staxlab(1,axis.dates,format(axis.dates,\"%b/%Y\"),nlines=3)\n>>\n>>Jim\n>>\n>>\n>>On Tue, Feb 28, 2017 at 2:26 AM, Maria Lathouri via R-help\n>><r-help at r-project.org> wrote:\n>>> Dear all,\n>>> I have an excel file of 180 observations with dates and one variable,\n>>from 1998 to 2012 by random months (there are some years that I might\n>>not have all the months or I might have two observations in one month).\n>>I am trying to plot the dates in x axis and the variable in y axis. I\n>>have already used as.Date for the dates so I can import them into R.\n>>> Here is my script:> aa<-read.csv(\"aa.csv\")> attach(aa)>\n>>names(aa)#\"SDATE\" \"var1\"\n>>> I convert the dates into R: > sdate<-as.Date(SDATE,\n>>format=\"%Y-%m-%d\")\n>>>\n>>> I am plotting the dates with my var1:> plot(sdate, var1, type=\"l\")\n>>> Up to now, everything seems ok. However, in the x-axis I only get\n>>three years, 2000, 2005 and 2010. As I want to show all the years or at\n>>least as many as it could be, I am using the following:\n>>>> plot(sdate, var1, type=\"l\", xaxt=\"n\")\n>>>\n>>>> d1<-c((sdate[1]), (sdate[183]))> d2<-as.Date((d1[1])+365*(0:15))\n>>>> axis(side=1, at=0:15, labels=strftime(d2, format=\"%Y\"),\n>>cex.axis=0.8,las=2);  I tried also to plot the dates in a month-Year\n>>form:\n>>>\n>>>> d2<-as.Date((d1[1])+150*(0:20))\n>>>> plot(sdate, var1, type=\"l\", xaxt=\"n\")> axis(side=1, at=0:15,\n>>labels=strftime(d2, format=\"%m-%Y\"), cex.axis=0.8,las=2)\n>>>\n>>> But nothing happened. I cannot understand why it doesn't show\n>>anything.\n>>> I have attached the file as well in case you want to have a more\n>>clear picture.\n>>> I really appreciate it if you can help me on this.\n>>> Thank you very much in advance.\n>>> Kind regards,Maria\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>>______________________________________________\n>>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>https://stat.ethz.ch/mailman/listinfo/r-help\n>>PLEASE do read the posting guide\n>>http://www.R-project.org/posting-guide.html\n>>and provide commented, minimal, self-contained, reproducible code.\n>\n>\n>     [[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n>",
+      "body_snippet": "Hi Maria,\nNo problem. Taking the example I used before:\n\naa<-data.frame(var1=runif(180),\n SDATE=paste(sample(1998:2012,180,TRUE),\n sample(1:12,180,TRUE),sample(1:28,180,TRUE),sep=\"-\"))\naa$sdate<-as.Da",
+      "thread_id": "thread-14eac088636e",
+      "thread_depth": 0,
+      "month": "2017-03"
+    },
+    {
       "id": "msg-a2d2f9bf4dae",
       "message_id": "<483cba5f-0392-b721-3538-f390b5158993@ign.fr>",
       "from_name": "François Morneau",
@@ -4841,22 +4864,6 @@
       "body_snippet": "The manual is talking about the angle between the variables in p dimensional space were p is the number of variables. The angle can appear differently in 2-dimensions depending on your viewing angle (",
       "thread_id": "thread-bf461ebdf2fd",
       "thread_depth": 3,
-      "month": "2017-03"
-    },
-    {
-      "id": "msg-22693a6beb58",
-      "message_id": "<a84228ff-d4b8-5cd2-6333-f0c47ed084a1@presans.com>",
-      "from_name": "Guillaume MULLER",
-      "from_email_hash": "3c4ebfa6eec80f6344cddbc5bcdd0f794e42da2121d164e0e68fe71d41f8ac9d",
-      "date": "2017-03-13T16:51:15+01:00",
-      "subject": "[R] Error: memory exhausted (limit reached?)",
-      "subject_clean": "Error: memory exhausted (limit reached?)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello everyone,\n\nI was working on a DeepNet project at home, with an old PC with 4Gb RAM, running Ubuntu 16.04.\n\nFor efficiency reason, I stored my dataset as a csv file with write.csv and reloaded it at will with read.csv. I did it several time, everything was working fine.\n\nThis morning, at work, I wanted to use a more powerful machine with 8Gb of RAM running under Ubuntu 16.10, but I ran into a strange error:\n\n$ R\n16:05:12 R > trainSet <- read.csv(\"trainSetWhole.csv\")\nError: memory exhausted (limit reached?)\nError: C stack usage  7970548 is too close to the limit\n\n\nI read a few fora on the Internet and found a potential workaround, consisting in increasing the stack size using ulimit. Unfortunately, it doesn't work for me:\n$ ulimit -s\n8192\n$ ulimit -s $((100*$(ulimit -s)))\n$ R --vanilla\n16:05:12 R > trainSet <- read.csv(\"trainSetWhole.csv\")\nError: memory exhausted (limit reached?)\n\nHow is it possible that a machine with twice the RAM as the previous one cannot load my file? Also how is it possible that a 513MB file cannot be read on a machine with 8GB RAM?\n\nSince the only other difference is the Ubuntu version (thus R version), I assume there's a bug, but I don't know where to look for...\n\n-----------------\nFYI, my R version is:\n\n\n16:05:12 R > version\n               _\nplatform       x86_64-pc-linux-gnu\narch           x86_64\nos             linux-gnu\nsystem         x86_64, linux-gnu\nstatus\nmajor          3\nminor          3.1\nyear           2016\nmonth          06\nday            21\nsvn rev        70800\nlanguage       R\nversion.string R version 3.3.1 (2016-06-21)\nnickname       Bug in Your Hair\n\n-----------------\nFor the sake of completeness, my Trainset is available at the following link, looks perfectly correct and loads perfectly @home but not @work...\n\nhttps://mega.nz/#!1E9VHYKZ!isyoJEe6zoLdtC3efoZQreyxKP8sVJyvaiiLSEg4sBY\n\n$ ls trainSetWhole.csv\n-rw------- 1 guize guize 513M Mar  1 18:14 trainSetWhole.csv\n$ head -n2 trainSetWhole.csv\n\"\",\"i1\",\"i2\",\"i3\",\"i4\",\"i5\",\"i6\",\"i7\",\"i8\",\"i9\",\"i10\",\"i11\",\"i12\",\"i13\",\"i14\",\"i15\",\"i16\",\"i17\",\"i18\",\"i19\",\"i20\",\"i21\",\"i22\",\"i23\",\"i24\",\"i25\",\"i26\",\"i27\",\"i28\",\"i29\",\"i30\",\"i31\",\"i32\",\"i33\",\"i34\",\"i35\",\"i36\",\"i37\",\"i38\",\"i39\",\"i40\",\"i41\",\"i42\",\"i43\",\"i44\",\"i45\",\"i46\",\"i47\",\"i48\",\"i49\",\"i50\",\"i51\",\"i52\",\"i53\",\"i54\",\"i55\",\"i56\",\"i57\",\"i58\",\"i59\",\"i60\",\"i61\",\"i62\",\"i63\",\"i64\",\"i65\",\"i66\",\"i67\",\"i68\",\"i69\",\"i70\",\"i71\",\"i72\",\"i73\",\"i74\",\"i75\",\"i76\",\"i77\",\"i78\",\"i79\",\"i80\",\"i81\",\"i82\",\"i83\",\"i84\",\"i85\",\"i86\",\"i87\",\"i88\",\"i89\",\"i90\",\"i91\",\"i92\",\"i93\",\"i94\",\"i95\",\"i96\",\"i97\",\"i98\",\"i99\",\"i100\",\"i101\",\"i102\",\"i103\",\"i104\",\"i105\",\"i106\",\"i107\",\"i108\",\"i109\",\"i110\",\"i111\",\"i112\",\"i113\",\"i114\",\"i115\",\"i116\",\"i117\",\"i118\",\"i119\",\"i120\",\"i121\",\"i122\",\"i123\",\"i124\",\"i125\",\"i126\",\"i127\",\"i128\",\"i129\",\"i130\",\"i131\",\"i132\",\"i133\",\"i134\",\"i135\",\"i136\",\"i137\",\"i138\",\"i139\",\"i140\",\"c0\",\"c1\",\"c2\",\"c3\",\"c4\",\"c5\",\"c6\",\"c7\",\"c8\",\"c9\",\"cE\",\"cH\"\n\"1\",-1.37446682201354e-17,2.26278846107692e-17,-1.27974510570192e-17,0.350805746453904,0.0689877720064749,3.96782166297516e-17,8.3747934622645e-17,-3.10693828550825e-17,-6.20727662108592e-17,3.50781139850846e-17,-7.43520083579608e-18,-2.01937105782818e-17,7.90527666844222e-17,0.00144287421147209,-1.88026404914112e-17,7.50553543898089e-17,-3.1156305544842e-17,3.33522787760855e-17,-8.2365725541805e-17,5.58356055978426e-17,-1.0212113811016e-17,2.03979863594455e-17,4.09717807934463e-17,0.0216467781249343,-3.44153670483002e-17,1.63751844321319e-17,0.0370002406507207,6.07678690807364e-18,-8.21680252405594e-17,4.44832722506604e-17,6.4069604073711e-17,-2.25481427040111e-17,4.03090616886684e-17,0.0326641123208996,-7.66887661628525e-17,2.74073501177539e-19,2.16820561358683e-17,4.48746042635995e-17,-1.09133528709867e-16,7.27192988615857e-17,3.12504939940947e-17,1.00863400203073e-17,-1.16417253776312e-17,0.000827131700928926,2.15591878205102e-17,-3.55400897372337e-17,-5.31549197577629e-17,6.36151166067713e-17,-3.98986076789542e-17,8.923132020282e-17,2.25307349483604e-17,1.12105833438192e-17,6.11627660475528e-17,0.00457304914240373,-4.40071366400508e-17,-2.44832622161246e-17,0.0421621636081912,2.46626049639688e-17,-9.62286119146992e-18,-1.88510143728912e-17,-1.04308238059585e-17,-2.93643045718137e-17,2.20818728169428e-17,-4.44567220452202e-17,-8.94603852191165e-17,-9.94874448913085e-18,0.0114804462249642,-9.35428456683928e-18,-1.80861616310379e-17,3.92469708878433e-17,-4.74071809520974e-17,-9.12321682896516e-18,-3.69120306784775e-17,0.13411638484663,-1.15868506960443e-16,-7.46389966104001e-17,0.015082205973855,6.53743919930211e-18,2.67372672961429e-17,-1.91214022579557e-17,-2.63284305395001e-18,4.36662713526659e-17,-1.32415731622945e-17,0.0917760638890958,-5.1463921187737e-17,-3.06212083550592e-17,0.020354034217623,1.42110160178925e-17,8.78127934370195e-18,1.10296552176504e-17,6.04875461249026e-18,-1.12907950679241e-16,6.41934790659652e-17,0.0635906532396394,-5.80721386923163e-17,2.60888831084575e-17,0.318234894813079,-2.64405232759225e-17,-3.83483045548365e-17,6.03901669028453e-17,-8.12491526717919e-17,-2.31961766473706e-17,2.49851938854807e-17,0.0666134385177111,0.277994494373684,0.757276941042661,-6.17404037289403e-18,7.89863674358793e-17,-7.67835382820615e-17,1.02140113616298e-17,1.52661784797379e-17,-9.56651701308766e-17,-3.02020715735595e-17,0.388119618133219,0.407682070148667,2.2374985383075e-18,1.11172424441548e-16,5.834694549909e-18,-6.98992457434969e-17,2.58373931894799e-17,1.77047896799026e-17,-1.32411436947046e-17,2.48508545648632e-17,0.00261698558797486,-4.74012929746027e-18,-6.88567774177344e-18,-1.42368729782461e-17,3.86907870454172e-18,-1.18115468072844e-16,5.8232650855203e-17,-6.19221175303288e-18,1.66357706932964e-17,6.39953697342706e-17,2.06819618922065e-17,1.12542559622211e-17,1.61613122517958e-17,-8.54903096963431e-18,-2.91678323773648e-17,-1.24859483206721e-16,7.55251863839618e-18,1,0,0,0,0,0,0,0,0,0,0,0\n\n\nIf anyone has an idea...",
-      "body_snippet": "Hello everyone,\n\nI was working on a DeepNet project at home, with an old PC with 4Gb RAM, running Ubuntu 16.04.\n\nFor efficiency reason, I stored my dataset as a csv file with write.csv and reloaded it",
-      "thread_id": "thread-22693a6beb58",
-      "thread_depth": 0,
       "month": "2017-03"
     },
     {
@@ -13056,9 +13063,170 @@
       "thread_id": "thread-dede80192328",
       "thread_depth": 1,
       "month": "2017-03"
+    },
+    {
+      "id": "msg-4da49c444e42",
+      "message_id": "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>",
+      "from_name": "Evan Cooch",
+      "from_email_hash": "64626d184b0b1882b9b5a5a55e68643e7582304bda8a7591046f0c72fc6d5a56",
+      "date": "2017-03-31T19:11:09-04:00",
+      "subject": "[R] pull stat out of summary",
+      "subject_clean": "pull stat out of summary",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Continuing my learning curve after 25_ years with using SAS. Want to \npull the \"Mean\" forom the summary of something...\n\ntest <- rnorm(1000,1.5,1.25)\n\nhold <- summary(test)\n\nnames(hold)\n[1] \"Min.\"    \"1st Qu.\" \"Median\"  \"Mean\"    \"3rd Qu.\" \"Max.\"\n\nOK, so \"Mean\" is in there.\nSo, is there a short form answer for why hold$Mean throws an error, and \nhold[\"Mean\"} returns the mean (as desired)?\n\nSilly question I know,  but gotta start somewhere...\n\nThanks...",
+      "body_snippet": "Continuing my learning curve after 25_ years with using SAS. Want to \npull the \"Mean\" forom the summary of something...\n\ntest <- rnorm(1000,1.5,1.25)\n\nhold <- summary(test)\n\nnames(hold)\n[1] \"Min.\"    ",
+      "thread_id": "thread-4da49c444e42",
+      "thread_depth": 0,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-2b7b5c9070ce",
+      "message_id": "<CAM_vjunURNC80BxSb4FmqP4aazJXunCTJMzGFtPe87p44jO_Gw@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2017-03-31T19:54:13-04:00",
+      "subject": "[R] pull stat out of summary",
+      "subject_clean": "pull stat out of summary",
+      "in_reply_to": "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>",
+      "references": [
+        "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>"
+      ],
+      "body_plain": "The short answer is that hold isn't a list-like object, and $ only\nworks with list-like objects (lists and data frames, mainly).\n\nYou can get the full explanation (VERY full), at\n?Extract\nor any of its aliases, like\n?'$'\nor\n?'['\n\nSarah\n\nOn Fri, Mar 31, 2017 at 7:11 PM, Evan Cooch <evan.cooch at gmail.com> wrote:\n> Continuing my learning curve after 25_ years with using SAS. Want to pull\n> the \"Mean\" forom the summary of something...\n>\n> test <- rnorm(1000,1.5,1.25)\n>\n> hold <- summary(test)\n>\n> names(hold)\n> [1] \"Min.\"    \"1st Qu.\" \"Median\"  \"Mean\"    \"3rd Qu.\" \"Max.\"\n>\n> OK, so \"Mean\" is in there.\n> So, is there a short form answer for why hold$Mean throws an error, and\n> hold[\"Mean\"} returns the mean (as desired)?\n>\n> Silly question I know,  but gotta start somewhere...\n>\n> Thanks...\n>\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
+      "body_snippet": "The short answer is that hold isn't a list-like object, and $ only\nworks with list-like objects (lists and data frames, mainly).\n\nYou can get the full explanation (VERY full), at\n?Extract\nor any of it",
+      "thread_id": "thread-4da49c444e42",
+      "thread_depth": 1,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-79112bdf92fe",
+      "message_id": "<1491004714743.20146@tamu.edu>",
+      "from_name": "David L Carlson",
+      "from_email_hash": "1c6db2a0e5c011c43dfe903f318d9c072dd5005c8454c036c319f4e4b032fd69",
+      "date": "2017-03-31T23:58:34Z",
+      "subject": "[R] pull stat out of summary",
+      "subject_clean": "pull stat out of summary",
+      "in_reply_to": "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>",
+      "references": [
+        "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>"
+      ],
+      "body_plain": "This is your answer:\n\n> str(hold)\nClasses 'summaryDefault', 'table'  Named num [1:6] -2.602 0.636 1.514 1.54 2.369 ...\n  ..- attr(*, \"names\")= chr [1:6] \"Min.\" \"1st Qu.\" \"Median\" \"Mean\" ...\n\nhold is a table of named numbers, i.e. a vector with a names attribute. It is not a data.frame so it does not have column names. The error message sort of tells you this when it says hold is an atomic vector (i.e. not a list or a data frame which are built from other objects such as vectors).\n\nDavid Carlson\nAnthropology Department\nTexas A&M University\n________________________________________\nFrom: R-help <r-help-bounces at r-project.org> on behalf of Evan Cooch <evan.cooch at gmail.com>\nSent: Friday, March 31, 2017 6:11 PM\nTo: r-help at r-project.org\nSubject: [R] pull stat out of summary\n\nContinuing my learning curve after 25_ years with using SAS. Want to\npull the \"Mean\" forom the summary of something...\n\ntest <- rnorm(1000,1.5,1.25)\n\nhold <- summary(test)\n\nnames(hold)\n[1] \"Min.\"    \"1st Qu.\" \"Median\"  \"Mean\"    \"3rd Qu.\" \"Max.\"\n\nOK, so \"Mean\" is in there.\nSo, is there a short form answer for why hold$Mean throws an error, and\nhold[\"Mean\"} returns the mean (as desired)?\n\nSilly question I know,  but gotta start somewhere...\n\nThanks...\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "This is your answer:\n\n> str(hold)\nClasses 'summaryDefault', 'table'  Named num [1:6] -2.602 0.636 1.514 1.54 2.369 ...\n  ..- attr(*, \"names\")= chr [1:6] \"Min.\" \"1st Qu.\" \"Median\" \"Mean\" ...\n\nhold is a",
+      "thread_id": "thread-4da49c444e42",
+      "thread_depth": 1,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-fc3b835a1b4a",
+      "message_id": "<CAGxFJbSC_0iojZS2ohcBUHoEpbHfnA-NeJU34AknDxVc26YpfA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2017-03-31T16:59:14-07:00",
+      "subject": "[R] Taking the sum of only some columns of a data frame",
+      "subject_clean": "Taking the sum of only some columns of a data frame",
+      "in_reply_to": "<B3EDDFBE-C1E4-4A5B-9DB7-C2E78E680923@dcn.davis.ca.us>",
+      "references": [
+        "<CDC5E133-8B03-4126-ACFA-237B3E1F33F2@dmstat1.com>",
+        "<CAA99HCwj-qV9rbBG8xaAiUzFrw84a0jsmbQWONQdfYZNSv2vPA@mail.gmail.com>",
+        "<11fcc6a3-39ef-6d93-f1cc-3fbca3b22698@dmstat1.com>",
+        "<CAA99HCwD0oEwi5rOrGK_-rri+=mmU0wvv_wWzSVTQ9fkdtVc_A@mail.gmail.com>",
+        "<B3EDDFBE-C1E4-4A5B-9DB7-C2E78E680923@dcn.davis.ca.us>"
+      ],
+      "body_plain": "All:\n\n1. I agree wholeheartedly with prior responses.\n\n2. But let's suppose that for some reason, you *did* want to carry\naround some \"calculated values\" with the data frame. Then one way to\ndo it is to add them as attributes to the data frame. This way they\ncannot \"pollute\" the data in the way Jeff warned against; e.g.\n\nattr(your_frame,\"colsums\") <- colSums(your_frame)\n\nThis of course calculates them all, but you can of course just attach\nsome (e.g. colSums(your_frame[,c(1,3)] )\n\n3. This, of course, has the disadvantage of requiring recalculation of\nthe attribute if the data changes, which is an invitation to problems.\nA better approach might be to attach the *function* that does the\ncalculation as an attribute, which when invoked always uses the\ncurrent data:\n\nattr(your_frame,\"colsums\") <- function(x)colSums(x)\n\nFor example:\n\ndf <- data.frame(x=1:5,y=21:25)\nattr(df,\"colsums\")<- function(x)colSums(x)\n\n## then:\n> attr(df,\"colsums\")(df)\n  x   y\n 15 115\n\n## add a row\n> df[6,] <- rep(100,2)\n> attr(df,\"colsums\")(df)\n  x   y\n115 215\n\n\nThis survives changing the name of df:\n\n> dat <- df\n> attr(dat,\"colsums\")(dat)\n  x   y\n115 215\n\nAs it stands, the call: attr(df,\"colsums\")(df)  is a bit clumsy; one\ncould easily write a function that does this sort of thing more\ncleanly, as, for example, is done via the \"selfStart\" functionality\nfor nonlinear models.\n\nBut all this presupposes that the OP is familiar with R programming\nparadigms, especially the use of functions as first class objects, and\nthe language in general. While I may have missed this, his posts do\nnot seem to me to indicate such familiarity, so as others have\nsuggested, perhaps the best answer is to first spend some time with an\nR tutorial or two and *not* try to mimic bad spreadsheet practices in\nR.\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Fri, Mar 31, 2017 at 2:49 PM, Jeff Newmiller\n<jdnewmil at dcn.davis.ca.us> wrote:\n> You can also look at the knitr-RMarkdown work flow, or the knitr-latex work flow. In both of these it is reasonable to convert your data frame to a temporary character-only form purely for output purposes. However, one can usually use an existing function to push your results out without damaging your working data.\n>\n> It is important to separate your data from your output because mixing results (totals) with data makes using the data further extremely difficult. Mixing them is one of the major flaws of the spreadsheet model of computation, and it causes problems there as well as in R.\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> On March 31, 2017 1:05:09 PM PDT, William Michels via R-help <r-help at r-project.org> wrote:\n>>Again, you should always copy the R-help list on replies to your OP.\n>>\n>>The short answer is you **shouldn't** replace NAs with blanks in your\n>>matrix or dataframe.  NA is the proper designation for those cell\n>>positions. Replacing NA with a \"blank\" in a dataframe will convert\n>>that column to a \"character\" mode, precluding further numeric\n>>manipulation of those columns.\n>>\n>>Consider your workflow:  are you tying to export a table? If so, take\n>>a look at installing pander (see 'missing' argument on webpage below):\n>>\n>>https://cran.r-project.org/web/packages/pander/README.html\n>>\n>>Finally, please review the Introductory PDF, available here:\n>>\n>>https://cran.r-project.org/doc/manuals/R-intro.pdf\n>>\n>>HTH, Bill.\n>>\n>>William Michels, Ph.D.\n>>\n>>\n>>\n>>On Fri, Mar 31, 2017 at 11:21 AM, BR_email <br at dmstat1.com> wrote:\n>>> William:\n>>> How can I replace the \"NAs\" with blanks?\n>>> Bruce\n>>>\n>>> Bruce Ratner, Ph.D.\n>>> The Significant Statistician?\n>>>\n>>>\n>>> William Michels wrote:\n>>>>\n>>>> I'm sure there are more efficient ways, but this works:\n>>>>\n>>>>> test1 <- matrix(runif(50), nrow=10, ncol=5)\n>>>>> ## test1 <- as.data.frame(test1)\n>>>>> test1 <- rbind(test1, NA)\n>>>>> test1[11, c(1,3)] <- colSums(test1[1:10,c(1,3)])\n>>>>> test1\n>>>>\n>>>>\n>>>> HTH,\n>>>>\n>>>> Bill.\n>>>>\n>>>> William Michels, Ph.D.\n>>>>\n>>>>\n>>>>\n>>>> On Fri, Mar 31, 2017 at 9:20 AM, Bruce Ratner PhD <br at dmstat1.com>\n>>wrote:\n>>>>>\n>>>>> Hi R'ers:\n>>>>> Given a data.frame of five columns and ten rows.\n>>>>> I would like to take the sum of, say, the first and third columns\n>>only.\n>>>>> For the remaining columns, I do not want any calculations, thus\n>>rending\n>>>>> their \"values\" on the \"total\" row blank. The sum/total row is to be\n>>combined\n>>>>> to the original data.frame, yielding a data.frame with five columns\n>>and\n>>>>> eleven rows.\n>>>>>\n>>>>> Thanks, in advance.\n>>>>> Bruce\n>>>>>\n>>>>>\n>>>>> ______________\n>>>>> Bruce Ratner PhD\n>>>>> The Significant Statistician?\n>>>>>\n>>>>>\n>>>>>\n>>>>>\n>>>>>          [[alternative HTML version deleted]]\n>>>>>\n>>>>> ______________________________________________\n>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>>> PLEASE do read the posting guide\n>>>>> http://www.R-project.org/posting-guide.html\n>>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>\n>>>>\n>>>>\n>>>\n>>\n>>______________________________________________\n>>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>https://stat.ethz.ch/mailman/listinfo/r-help\n>>PLEASE do read the posting guide\n>>http://www.R-project.org/posting-guide.html\n>>and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "All:\n\n1. I agree wholeheartedly with prior responses.\n\n2. But let's suppose that for some reason, you *did* want to carry\naround some \"calculated values\" with the data frame. Then one way to\ndo it is ",
+      "thread_id": "thread-dede80192328",
+      "thread_depth": 2,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-bc959322f3fa",
+      "message_id": "<CAGxFJbRQoYzkM2V6rf7EO-DpQcg0uLHJ_p3hAFXzcS3cteAbdA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2017-03-31T17:14:33-07:00",
+      "subject": "[R] pull stat out of summary",
+      "subject_clean": "pull stat out of summary",
+      "in_reply_to": "<CAM_vjunURNC80BxSb4FmqP4aazJXunCTJMzGFtPe87p44jO_Gw@mail.gmail.com>",
+      "references": [
+        "<7af6d70a-5db8-5068-a50c-c62e86aa0f9b@gmail.com>",
+        "<CAM_vjunURNC80BxSb4FmqP4aazJXunCTJMzGFtPe87p44jO_Gw@mail.gmail.com>"
+      ],
+      "body_plain": "?str\n\ntells you the structure of any object. *Learn to use it!*\n\nIt may well be the that you *cannot* do what you describe. As you\nshould know by now in your \"learning curve\", invoking\n\n> obj\n\nat the console silently invokes the print method for obj, and what is\nprinted may in fact be calculated on the fly in the print method and\nnot stored in an object anywhere.\n\n?print.summary.lm\n\nis such an example:  p-values are calculated and printed, but not stored.\n\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep coming along\nand sticking things into it.\"\n-- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n\n\nOn Fri, Mar 31, 2017 at 4:54 PM, Sarah Goslee <sarah.goslee at gmail.com> wrote:\n> The short answer is that hold isn't a list-like object, and $ only\n> works with list-like objects (lists and data frames, mainly).\n>\n> You can get the full explanation (VERY full), at\n> ?Extract\n> or any of its aliases, like\n> ?'$'\n> or\n> ?'['\n>\n> Sarah\n>\n> On Fri, Mar 31, 2017 at 7:11 PM, Evan Cooch <evan.cooch at gmail.com> wrote:\n>> Continuing my learning curve after 25_ years with using SAS. Want to pull\n>> the \"Mean\" forom the summary of something...\n>>\n>> test <- rnorm(1000,1.5,1.25)\n>>\n>> hold <- summary(test)\n>>\n>> names(hold)\n>> [1] \"Min.\"    \"1st Qu.\" \"Median\"  \"Mean\"    \"3rd Qu.\" \"Max.\"\n>>\n>> OK, so \"Mean\" is in there.\n>> So, is there a short form answer for why hold$Mean throws an error, and\n>> hold[\"Mean\"} returns the mean (as desired)?\n>>\n>> Silly question I know,  but gotta start somewhere...\n>>\n>> Thanks...\n>>\n>\n> --\n> Sarah Goslee\n> http://www.functionaldiversity.org\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "?str\n\ntells you the structure of any object. *Learn to use it!*\n\nIt may well be the that you *cannot* do what you describe. As you\nshould know by now in your \"learning curve\", invoking\n\n> obj\n\nat the ",
+      "thread_id": "thread-4da49c444e42",
+      "thread_depth": 2,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-0a37220e28a5",
+      "message_id": "<4AF0AE3D-DC40-4FC4-85D6-B94A00350610@utoronto.ca>",
+      "from_name": "Boris Steipe",
+      "from_email_hash": "a41454b3645a140f39702275c1d4fca3b980a9fdf0861e407154805ae728380d",
+      "date": "2017-03-31T20:15:21-04:00",
+      "subject": "[R] Variation of bubble sort (based on divisors)",
+      "subject_clean": "Variation of bubble sort (based on divisors)",
+      "in_reply_to": "<CA+0Zh7z2fOUTb4eh=7HiVx4=YOoq=Zx=30ysZcka4Vpkr1V2-w@mail.gmail.com>",
+      "references": [
+        "<CA+0Zh7z2fOUTb4eh=7HiVx4=YOoq=Zx=30ysZcka4Vpkr1V2-w@mail.gmail.com>"
+      ],
+      "body_plain": "This looks opaque and hard to maintain.\nIt seems to me that a better strategy is to subset your vector with modulo expressions, use a normal sort on each of the subsets, and add the result to each other. 0 and 1 need to be special-cased.\n\n\nmyPrimes <- c(2, 3, 5)\nmySource <- sample(0:10)\n\n# special case 0,1\nsel <- mySource < 2  \nmyTarget <- sort(mySource[sel])\nmySource <- mySource[!sel]\n\n# Iterate over requested primes\nfor (num in myPrimes) {\n    sel <- !as.logical(mySource %% num)\n    myTarget <- c(myTarget, sort(mySource[sel]))\n    mySource <- mySource[!sel]\n}\n\n# Add remaining elements\nmyTarget <- c(myTarget, sort(mySource))  \n\n\nB.\n\n\n\n\n\n\n> On Mar 31, 2017, at 2:16 PM, Piotr Koller <pittbox33 at gmail.com> wrote:\n> \n> Hi, I'd like to create a function that will sort values of a vector on a\n> given basis:\n> \n> -zeros\n> \n> -ones\n> \n> -numbers divisible by 2\n> \n> -numbers divisible by 3 (but not by 2)\n> \n> -numbers divisible by 5 (but not by 2 and 3)\n> \n> etc.\n> \n> I also want to omit zeros in those turns. So when I have a given vector of\n> c(0:10), I want to receive 0 1 2 4 6 8 10 3 9 5 7 I think it'd be the best\n> to use some variation of bubble sort, so it'd look like that\n> \n> sort <- function(x) {\n> for (j in (length(x)-1):1) {\n>   for (i in j:(length(x)-1)) {\n>     if (x[i+1]%%divisor==0 && x[i]%%divisor!=0) {\n>      temp <- x[i]\n>      x[i] <- x[i+1]\n>      x[i+1] <- temp\n>      }\n>    }\n>  }\n> return(x)}\n> \n> This function works out well on a given divisor and incresing sequences.\n> \n> sort <- function(x) {\n>  for (j in (length(x)-1):1) {\n>     for (i in j:(length(x)-1)) {\n>       if (x[i+1]%%5==0 && x[i]%%5!=0) {\n>        temp <- x[i]\n>        x[i] <- x[i+1]\n>        x[i+1] <- temp\n>       }\n>      }\n>     }\n>  return(x)\n> }\n> \n> x <- c(1:10)\n> print(x)\n> print(bubblesort(x))\n> \n> This function does its job. It moves values divisible by 5 on the\n> beginning. The question is how to increase divisor every \"round\" ?\n> \n> Thanks for any kind of help\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "This looks opaque and hard to maintain.\nIt seems to me that a better strategy is to subset your vector with modulo expressions, use a normal sort on each of the subsets, and add the result to each oth",
+      "thread_id": "thread-4a9d75ae6913",
+      "thread_depth": 1,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-cf7df633d33a",
+      "message_id": "<CAA99HCz-cKZy80uR0Qmjd=RmTCfa7m_Jw_KotEyWUjHt1Ebq_w@mail.gmail.com>",
+      "from_name": "William Michels",
+      "from_email_hash": "27a238e61e26eff896c23425a142d2f65c2f882772a22a1c47740c9ec96e3af9",
+      "date": "2017-03-31T18:52:29-07:00",
+      "subject": "[R] Taking the sum of only some columns of a data frame",
+      "subject_clean": "Taking the sum of only some columns of a data frame",
+      "in_reply_to": "<CAGxFJbSC_0iojZS2ohcBUHoEpbHfnA-NeJU34AknDxVc26YpfA@mail.gmail.com>",
+      "references": [
+        "<CDC5E133-8B03-4126-ACFA-237B3E1F33F2@dmstat1.com>",
+        "<CAA99HCwj-qV9rbBG8xaAiUzFrw84a0jsmbQWONQdfYZNSv2vPA@mail.gmail.com>",
+        "<11fcc6a3-39ef-6d93-f1cc-3fbca3b22698@dmstat1.com>",
+        "<CAA99HCwD0oEwi5rOrGK_-rri+=mmU0wvv_wWzSVTQ9fkdtVc_A@mail.gmail.com>",
+        "<B3EDDFBE-C1E4-4A5B-9DB7-C2E78E680923@dcn.davis.ca.us>",
+        "<CAGxFJbSC_0iojZS2ohcBUHoEpbHfnA-NeJU34AknDxVc26YpfA@mail.gmail.com>"
+      ],
+      "body_plain": "Thank you Jeff for pointing out bad spreadsheet practices in R,\nseconded by Mathew and Bert.\n\nI should have considered creating a second dataframe (\"test1_summary\")\nto distinguish raw from processed data. Those who want to address\nmemory issues caused by unnecessary duplication, feel free to chime\nin.\n\nFinally, thank you Bert for your most informative post on adding\nattributes to dataframes. I really learned a lot!\n\nBest Regards,\n\nBill.\n\nWilliam Michels, Ph.D.\n\n\n\nOn Fri, Mar 31, 2017 at 4:59 PM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n> All:\n>\n> 1. I agree wholeheartedly with prior responses.\n>\n> 2. But let's suppose that for some reason, you *did* want to carry\n> around some \"calculated values\" with the data frame. Then one way to\n> do it is to add them as attributes to the data frame. This way they\n> cannot \"pollute\" the data in the way Jeff warned against; e.g.\n>\n> attr(your_frame,\"colsums\") <- colSums(your_frame)\n>\n> This of course calculates them all, but you can of course just attach\n> some (e.g. colSums(your_frame[,c(1,3)] )\n>\n> 3. This, of course, has the disadvantage of requiring recalculation of\n> the attribute if the data changes, which is an invitation to problems.\n> A better approach might be to attach the *function* that does the\n> calculation as an attribute, which when invoked always uses the\n> current data:\n>\n> attr(your_frame,\"colsums\") <- function(x)colSums(x)\n>\n> For example:\n>\n> df <- data.frame(x=1:5,y=21:25)\n> attr(df,\"colsums\")<- function(x)colSums(x)\n>\n> ## then:\n>> attr(df,\"colsums\")(df)\n>   x   y\n>  15 115\n>\n> ## add a row\n>> df[6,] <- rep(100,2)\n>> attr(df,\"colsums\")(df)\n>   x   y\n> 115 215\n>\n>\n> This survives changing the name of df:\n>\n>> dat <- df\n>> attr(dat,\"colsums\")(dat)\n>   x   y\n> 115 215\n>\n> As it stands, the call: attr(df,\"colsums\")(df)  is a bit clumsy; one\n> could easily write a function that does this sort of thing more\n> cleanly, as, for example, is done via the \"selfStart\" functionality\n> for nonlinear models.\n>\n> But all this presupposes that the OP is familiar with R programming\n> paradigms, especially the use of functions as first class objects, and\n> the language in general. While I may have missed this, his posts do\n> not seem to me to indicate such familiarity, so as others have\n> suggested, perhaps the best answer is to first spend some time with an\n> R tutorial or two and *not* try to mimic bad spreadsheet practices in\n> R.\n>\n> Cheers,\n> Bert\n>\n>\n> Bert Gunter\n>\n> \"The trouble with having an open mind is that people keep coming along\n> and sticking things into it.\"\n> -- Opus (aka Berkeley Breathed in his \"Bloom County\" comic strip )\n>\n>\n> On Fri, Mar 31, 2017 at 2:49 PM, Jeff Newmiller\n> <jdnewmil at dcn.davis.ca.us> wrote:\n>> You can also look at the knitr-RMarkdown work flow, or the knitr-latex work flow. In both of these it is reasonable to convert your data frame to a temporary character-only form purely for output purposes. However, one can usually use an existing function to push your results out without damaging your working data.\n>>\n>> It is important to separate your data from your output because mixing results (totals) with data makes using the data further extremely difficult. Mixing them is one of the major flaws of the spreadsheet model of computation, and it causes problems there as well as in R.\n>> --\n>> Sent from my phone. Please excuse my brevity.\n>>\n>> On March 31, 2017 1:05:09 PM PDT, William Michels via R-help <r-help at r-project.org> wrote:\n>>>Again, you should always copy the R-help list on replies to your OP.\n>>>\n>>>The short answer is you **shouldn't** replace NAs with blanks in your\n>>>matrix or dataframe.  NA is the proper designation for those cell\n>>>positions. Replacing NA with a \"blank\" in a dataframe will convert\n>>>that column to a \"character\" mode, precluding further numeric\n>>>manipulation of those columns.\n>>>\n>>>Consider your workflow:  are you tying to export a table? If so, take\n>>>a look at installing pander (see 'missing' argument on webpage below):\n>>>\n>>>https://cran.r-project.org/web/packages/pander/README.html\n>>>\n>>>Finally, please review the Introductory PDF, available here:\n>>>\n>>>https://cran.r-project.org/doc/manuals/R-intro.pdf\n>>>\n>>>HTH, Bill.\n>>>\n>>>William Michels, Ph.D.\n>>>\n>>>\n>>>\n>>>On Fri, Mar 31, 2017 at 11:21 AM, BR_email <br at dmstat1.com> wrote:\n>>>> William:\n>>>> How can I replace the \"NAs\" with blanks?\n>>>> Bruce\n>>>>\n>>>> Bruce Ratner, Ph.D.\n>>>> The Significant Statistician?\n>>>>\n>>>>\n>>>> William Michels wrote:\n>>>>>\n>>>>> I'm sure there are more efficient ways, but this works:\n>>>>>\n>>>>>> test1 <- matrix(runif(50), nrow=10, ncol=5)\n>>>>>> ## test1 <- as.data.frame(test1)\n>>>>>> test1 <- rbind(test1, NA)\n>>>>>> test1[11, c(1,3)] <- colSums(test1[1:10,c(1,3)])\n>>>>>> test1\n>>>>>\n>>>>>\n>>>>> HTH,\n>>>>>\n>>>>> Bill.\n>>>>>\n>>>>> William Michels, Ph.D.\n>>>>>\n>>>>>\n>>>>>\n>>>>> On Fri, Mar 31, 2017 at 9:20 AM, Bruce Ratner PhD <br at dmstat1.com>\n>>>wrote:\n>>>>>>\n>>>>>> Hi R'ers:\n>>>>>> Given a data.frame of five columns and ten rows.\n>>>>>> I would like to take the sum of, say, the first and third columns\n>>>only.\n>>>>>> For the remaining columns, I do not want any calculations, thus\n>>>rending\n>>>>>> their \"values\" on the \"total\" row blank. The sum/total row is to be\n>>>combined\n>>>>>> to the original data.frame, yielding a data.frame with five columns\n>>>and\n>>>>>> eleven rows.\n>>>>>>\n>>>>>> Thanks, in advance.\n>>>>>> Bruce\n>>>>>>\n>>>>>>\n>>>>>> ______________\n>>>>>> Bruce Ratner PhD\n>>>>>> The Significant Statistician?\n>>>>>>\n>>>>>>\n>>>>>>\n>>>>>>\n>>>>>>          [[alternative HTML version deleted]]\n>>>>>>\n>>>>>> ______________________________________________\n>>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>>>> PLEASE do read the posting guide\n>>>>>> http://www.R-project.org/posting-guide.html\n>>>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>>\n>>>>>\n>>>>>\n>>>>\n>>>\n>>>______________________________________________\n>>>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>https://stat.ethz.ch/mailman/listinfo/r-help\n>>>PLEASE do read the posting guide\n>>>http://www.R-project.org/posting-guide.html\n>>>and provide commented, minimal, self-contained, reproducible code.\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Thank you Jeff for pointing out bad spreadsheet practices in R,\nseconded by Mathew and Bert.\n\nI should have considered creating a second dataframe (\"test1_summary\")\nto distinguish raw from processed d",
+      "thread_id": "thread-dede80192328",
+      "thread_depth": 3,
+      "month": "2017-03"
+    },
+    {
+      "id": "msg-2169ac1d1e1c",
+      "message_id": "<CAKY_brGyLDvX=E-mnpTf1Minvjcx=ud8zLahXL0q0U5hUmumgg@mail.gmail.com>",
+      "from_name": "Art U",
+      "from_email_hash": "2425d81e91877f0f324695c8ab5073a74e6cb62c1c1090bf9c4cc49d56018b44",
+      "date": "2017-03-31T23:53:28-04:00",
+      "subject": "[R] Correlation between continuous and binary vectors.",
+      "subject_clean": "Correlation between continuous and binary vectors.",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nI'm trying to create number of vectors, part of them are binary and part\nare continuous. Is there a way in R to generate them with specific\ncorrelation between each pair?\nThank you in advance.\nAriel\n-- \n*I like to pretend I'm alone*. *Completely alone*. *Maybe post-apocalypse\nor plague*... *Whatever*. *No-one left to act normal for. No need to hide\nwho I really am. It would be... freeing*. *...*\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\nI'm trying to create number of vectors, part of them are binary and part\nare continuous. Is there a way in R to generate them with specific\ncorrelation between each pair?\nThank you in advance.\nAri",
+      "thread_id": "thread-2169ac1d1e1c",
+      "thread_depth": 0,
+      "month": "2017-03"
     }
   ],
   "threads": [
+    {
+      "id": "thread-14eac088636e",
+      "subject": "Σχετ: plotting dates in x axis",
+      "message_count": 1,
+      "participants": [
+        "Jim Lemon"
+      ],
+      "started": "2017-03-01T08:12:21+11:00",
+      "last_reply": "2017-03-01T08:12:21+11:00",
+      "root_message_id": "msg-14eac088636e"
+    },
     {
       "id": "thread-a2d2f9bf4dae",
       "subject": "Help with data.table",
@@ -14286,17 +14454,6 @@
       "started": "2017-03-13T11:32:09+08:00",
       "last_reply": "2017-03-13T21:20:33+11:00",
       "root_message_id": "msg-73d5d1e67882"
-    },
-    {
-      "id": "thread-22693a6beb58",
-      "subject": "Error: memory exhausted (limit reached?)",
-      "message_count": 1,
-      "participants": [
-        "Guillaume MULLER"
-      ],
-      "started": "2017-03-13T16:51:15+01:00",
-      "last_reply": "2017-03-13T16:51:15+01:00",
-      "root_message_id": "msg-22693a6beb58"
     },
     {
       "id": "thread-22693a6beb58",
@@ -16087,13 +16244,14 @@
     {
       "id": "thread-dede80192328",
       "subject": "Taking the sum of only some columns of a data frame",
-      "message_count": 2,
+      "message_count": 4,
       "participants": [
+        "Bert Gunter",
         "Jeff Newmiller",
         "William Michels"
       ],
       "started": "2017-03-31T13:05:09-07:00",
-      "last_reply": "2017-03-31T14:49:16-07:00",
+      "last_reply": "2017-03-31T18:52:29-07:00",
       "root_message_id": "msg-dede80192328"
     },
     {
@@ -16119,15 +16277,41 @@
       "root_message_id": "msg-db5aa12d7422"
     },
     {
+      "id": "thread-4da49c444e42",
+      "subject": "pull stat out of summary",
+      "message_count": 4,
+      "participants": [
+        "Bert Gunter",
+        "David L Carlson",
+        "Evan Cooch",
+        "Sarah Goslee"
+      ],
+      "started": "2017-03-31T19:11:09-04:00",
+      "last_reply": "2017-03-31T17:14:33-07:00",
+      "root_message_id": "msg-4da49c444e42"
+    },
+    {
       "id": "thread-4a9d75ae6913",
       "subject": "Variation of bubble sort (based on divisors)",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
+        "Boris Steipe",
         "Piotr Koller"
       ],
       "started": "2017-03-31T20:16:02+02:00",
-      "last_reply": "2017-03-31T20:16:02+02:00",
+      "last_reply": "2017-03-31T20:15:21-04:00",
       "root_message_id": "msg-4a9d75ae6913"
+    },
+    {
+      "id": "thread-2169ac1d1e1c",
+      "subject": "Correlation between continuous and binary vectors.",
+      "message_count": 1,
+      "participants": [
+        "Art U"
+      ],
+      "started": "2017-03-31T23:53:28-04:00",
+      "last_reply": "2017-03-31T23:53:28-04:00",
+      "root_message_id": "msg-2169ac1d1e1c"
     }
   ]
 }

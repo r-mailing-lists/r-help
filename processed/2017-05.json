@@ -1704,22 +1704,6 @@
       "month": "2017-05"
     },
     {
-      "id": "msg-86f7d9ddfd29",
-      "message_id": "<DM5PR17MB1098E7CE828DE7DE7271E695B6EA0@DM5PR17MB1098.namprd17.prod.outlook.com>",
-      "from_name": "Dominik Szewczyk",
-      "from_email_hash": "197ab6c5fc6ab875c75fa4fc8f5c266863f2cf2cfc15e2e49ad5a9d26b2a0425",
-      "date": "2017-05-04T20:08:56Z",
-      "subject": "[R] I cannot run R.EXE or RSCRIPT.EXE",
-      "subject_clean": "I cannot run R.EXE or RSCRIPT.EXE",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I cannot run R.EXE or RSCRIPT.EXE. It produces this error:\n\n\n'C:\\Program' is not recognized as an internal or external command,\noperable program or batch file.\n\n\nI have attempted to put quotes around the full path including the executable and also running the exectuable from within the path itself with the same result. The only way I can do this is to move the installation from C:\\Program Files\\R\\R-3.4.0 to C:\\R\\..\n\n\nIs this a limitation of the program itself?\n\n\n-Dom\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I cannot run R.EXE or RSCRIPT.EXE. It produces this error:\n\n\n'C:\\Program' is not recognized as an internal or external command,\noperable program or batch file.\n\n\nI have attempted to put quotes around ",
-      "thread_id": "thread-86f7d9ddfd29",
-      "thread_depth": 0,
-      "month": "2017-05"
-    },
-    {
       "id": "msg-89ae9d0bccd4",
       "message_id": "<CAGxFJbR+jogbwPeADG3+B1+=XvtgheuWWF+=GSWOWy5AAp+KcA@mail.gmail.com>",
       "from_name": "Bert Gunter",
@@ -4814,24 +4798,6 @@
       "body_plain": "On 11/05/2017 2:36 PM, Antonio Silva wrote:\n> Hello r-users\n>\n> I want to plot some barplots inside a looping with the legend placed\n> outside the plotting area.\n>\n> No matter the number of bars I want the legend to be placed centered on the\n> x-axis.\n>\n> See the example below\n>\n> for(i in 1:10) {\n> var_1 <- sample(1000:100000,sample(3:8,1))\n> ymax <- max(var_1)\n> b<-barplot(var_1,col=\"blue\")\n> var_2 <- sample(1000:ymax,length(var_1))\n> lines(rowSums(b),var_2,type=\"o\",col=\"red\",pch=16)\n> par(xpd=TRUE)\n> legend(*1.1*\n> ,ymax*-0.072,c(\"var_1\",\"var_2\"),horiz=T,cex=1.3,bty=\"n\",pch=c(15,16),col=c(\"blue\",\"red\"),lty=c(0,1),lwd=c(0,2),pt.cex=2)\n> readline(prompt=\"Press [enter] to continue\")\n> }\n>\n> What I should use as x position in legend(x,y, ...), instead of *1.1*, to\n> have the legend centered on the x-axis?\n>\n> I would love to use something like legend(x=\"center\",y=ymax*-0.072, ... but\n> it did not worked.\n>\n> I appreciate any suggestions. Best regards.\n\nInstead of \"center\", use \"top\" or \"bottom\".  See the 2nd last example in \nexamples(legend) for the possibilities.\n\nIf you want the legend outside the plotting area, set \"inset\" and \"xpd\" \narguments.  For example,\n\nplot(1,1)\nlegend(\"top\", pch = 1, legend = \"point\", inset = -0.1, xpd = TRUE)\n\n\nDuncan Murdoch",
       "body_snippet": "On 11/05/2017 2:36 PM, Antonio Silva wrote:\n> Hello r-users\n>\n> I want to plot some barplots inside a looping with the legend placed\n> outside the plotting area.\n>\n> No matter the number of bars I wan",
       "thread_id": "thread-710737311507",
-      "thread_depth": 1,
-      "month": "2017-05"
-    },
-    {
-      "id": "msg-66a66d85fb7e",
-      "message_id": "<CA+8X3fXRgQ=u7Yd22F0NahGUTVHPBYP6z-wkhhOMX3NtWTFnsw@mail.gmail.com>",
-      "from_name": "Jim Lemon",
-      "from_email_hash": "4fd4de8f79714fe62432d41802cdcfa3560d905c372a2f11e0e4da4166fd729b",
-      "date": "2017-05-12T10:53:44+10:00",
-      "subject": "[R] Design matrix for species mixture",
-      "subject_clean": "Design matrix for species mixture",
-      "in_reply_to": "<aebafc54-5235-4fd7-aff1-c4717c3b3362@Canary>",
-      "references": [
-        "<aebafc54-5235-4fd7-aff1-c4717c3b3362@Canary>"
-      ],
-      "body_plain": "Hi Margot,\nI'm not sure I understand your model, but if I make up some data in\nwhich the response variable is vegetation cover and the three species\nare:\n\nA - eats one type of plant\nB - eats another type of plant\nC - preys on herbivorous insects\n\ndf<-read.table(text=\"field,propveg,A,B,C\n 1,1,0,0,1\n 2,0.3,1,1,1\n 3,0.6,0,1,1\n 4,0.2,1,1,1\n 5,0.7,1,0,1\n 6,0.8,0,0,0\n 7,0.3,1,0,0\n 8,0.4,0,1,0\n 9,0.1,1,1,0\n 10,0.5,0,1,0\n 11,0.5,1,0,1\n 12,0.1,1,1,0\n 13,0.6,0,1,1\n 14,0,1,1,0\",\n sep=\",\",header=TRUE)\nprint(summary(lm(propveg~A+B+C+A:B+A:C+B:C,df)))\n\nIs that something like what you want?\n\nJim\n\nOn Fri, May 12, 2017 at 12:40 AM, Margot Neyret <margotneyret at gmail.com> wrote:\n> Hello,\n>\n> I have fields with species mixtures (for instance, species a, b, c, a+b, a+c, b+c), and I look at the effect of each species on a response Y. More specifically, I would like to compare the effect of individual species, either alone or in mixture.\n>\n>>Y = rnorm(18,0,1)\n>>mixture= rep(c('a','b', 'c', 'a+b', 'a+c', 'b+c'), each = 3)\n>\n> Thus I create variables A, B and C with :\n> - A = 1 when the mixture contains a (ie mixture = a or a+b or a+c); and 0 otherwise.\n> - Idem for variables C and B.\n>\n>>A = ifelse(mixture %in% c('a', 'a+b', 'a+c'), 1, 0)\n>>B = ifelse(mixture %in% c('b', 'a+b', 'b+c'), 1, 0)\n>>C = ifelse(mixture %in% c('c', 'a+c', 'b+c'), 1, 0)\n>\n> My plan was to build a design matrix from these 3 variables, that would then allow me to compare the effects of each species.\n>\n>> mm = model.matrix(~A+B+C+0)\n>> summary(lm(Y~mm))\n> Coefficients:\n> Estimate Std. Error t value Pr(>|t|)\n> (Intercept) -0.8301 0.6221 -1.334 0.203\n> mmA 1.1636 0.4819 2.415 0.030 *\n> mmB 0.8452 0.4819 1.754 0.101\n> mmC -0.1005 0.4819 -0.208 0.838\n> ---\n> Signif. codes: 0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1\n>\n> Residual standard error: 0.8347 on 14 degrees of freedom\n> Multiple R-squared: 0.4181, Adjusted R-squared: 0.2934\n> F-statistic: 3.353 on 3 and 14 DF, p-value: 0.04964\n>\n> My questions :\n> 1. Does this approach make any sense ? I have a feeling I am doing something strange but I cannot put my finger on it.\n> 1. My ddl are wrong, I should not have an intercept here, or at least my intercept should be one of my species. Should I just remove one species form the design matrix ?\n> 2. Is there any way to do post-hoc tests on my species now, as I would have done with Tukey test or lsmeans ?\n>\n> My objective afterwards is to add other explanatory variables and interactions in the model.\n>\n> Thanks in advance !\n>\n> M. N.\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Hi Margot,\nI'm not sure I understand your model, but if I make up some data in\nwhich the response variable is vegetation cover and the three species\nare:\n\nA - eats one type of plant\nB - eats another t",
-      "thread_id": "thread-89377b7dc2d1",
       "thread_depth": 1,
       "month": "2017-05"
     },
@@ -12283,6 +12249,41 @@
       "thread_id": "thread-817b8c2bc8b5",
       "thread_depth": 0,
       "month": "2017-05"
+    },
+    {
+      "id": "msg-26bb37a038e2",
+      "message_id": "<CAHLnndZ-TKNQdMaLUca-CYOUD-YKZKvYDvy==Ne8a9+aeZvpqA@mail.gmail.com>",
+      "from_name": "li li",
+      "from_email_hash": "21edef16b437074e067b9209d03abd1a132345c6ac56da3b43f215115d07d8d6",
+      "date": "2017-05-31T20:41:58-04:00",
+      "subject": "[R] Question on function \"scatterplot3d\"",
+      "subject_clean": "Question on function \"scatterplot3d\"",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n  I have a question with regard to making plots using function\n\"scatterplot3d\".\nPlease see the example below. It looks like, for y axis, the tickmark text\nwas cutoff.\nThe number \"10\" does not show up completely. I tried to work with par(mpg).\nIt does not\nseem to work. Hope to get some advice here. Thanks much!\n   Hanna\n\n\n\n\nC <- runif(30)\nB <- rep(1:3, each=10)\nA <- rep(1:10,3)\nscatterplot3d(B,A,C, type = \"h\", lwd = 1, pch = 16, color=\"red\",  main =\n\"\",\n              grid=TRUE,  col.grid=\"lightgreen\",\n              xlab=\"x\", ylab=\"y\", zlab=\"z\")\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n  I have a question with regard to making plots using function\n\"scatterplot3d\".\nPlease see the example below. It looks like, for y axis, the tickmark text\nwas cutoff.\nThe number \"10\" does not ",
+      "thread_id": "thread-26bb37a038e2",
+      "thread_depth": 0,
+      "month": "2017-05"
+    },
+    {
+      "id": "msg-8b139b321025",
+      "message_id": "<CAP+bYWBO=jjmXjBSusnfb+ZtqLuQywXaz737bqA07Zm_Sz3KUQ@mail.gmail.com>",
+      "from_name": "Hasan Diwan",
+      "from_email_hash": "b8c8a6f404dde765d01bd77a3581f540189f9fe98fae1be003d4afa7a0deaab0",
+      "date": "2017-05-31T23:04:01-07:00",
+      "subject": "[R] Post for R",
+      "subject_clean": "Post for R",
+      "in_reply_to": "<170780372.145082.1496285308297@mail.yahoo.com>",
+      "references": [
+        "<170780372.145082.1496285308297.ref@mail.yahoo.com>",
+        "<170780372.145082.1496285308297@mail.yahoo.com>"
+      ],
+      "body_plain": "Carrie,\nI would suggest a few things before posting your code here:\n- Put a dput(df)\n- Format it properly, as it stands it won't compile, because you're missing\nnewlines/semicolons between, e.g. Z <- list()*; *G <- list(); for (i in\nlength(L1)){  Z=data.frame(L1[i])*;* G <- split(Z$submax,\"0.02\")*;*\n print(G)  }\n-- H\n\nOn 31 May 2017 at 19:48, carrie wang via R-help <r-help at r-project.org>\nwrote:\n\n>\n> Hello,\n> I want to split the dataframe into 1000 groups based on two column\n> values(max value and second max value). First, I made two lists L1 and L2.\n> L1 is the list divided into 100 groups based on the range of max value and\n> L2 is divided into 10 groups based on the second max values. Now I want to\n> do the combinations based on L1 and L2. I want to do a for loop for L1 and\n> for each element in L1, I split it into 10 groups based on L2. I tried to\n> write the code, but it does not work.\n>\n> L1<-split(df,cut(df$max,seq(0,1,by=0.01)))L2<-split(df,cut(d\n> f$submax,seq(0,0.2,by=0.02)))\n> Z<-list()G<-list()for (i in length(L1)){  Z=data.frame(L1[i])  G <-\n> split(Z$submax,\"0.02\")  print(G)  }\n> Thanks so much!Carrie\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posti\n> ng-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n\n-- \nOpenPGP: https://sks-keyservers.net/pks/lookup?op=\nget&search=0xFEBAD7FFD041BBA1\nIf you wish to request my time, please do so using http://bit.ly/\nhd1ScheduleRequest.\nSi vous voudrais faire connnaisance, allez a http://bit.ly/\nhd1ScheduleRequest.\n\n<https://sks-keyservers.net/pks/lookup?op=get&search=0xFEBAD7FFD041BBA1>Sent\nfrom my mobile device\nEnvoye de mon portable\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Carrie,\nI would suggest a few things before posting your code here:\n- Put a dput(df)\n- Format it properly, as it stands it won't compile, because you're missing\nnewlines/semicolons between, e.g. Z <- ",
+      "thread_id": "thread-8b139b321025",
+      "thread_depth": 0,
+      "month": "2017-05"
     }
   ],
   "threads": [
@@ -12818,17 +12819,6 @@
       "root_message_id": "msg-86f7d9ddfd29"
     },
     {
-      "id": "thread-86f7d9ddfd29",
-      "subject": "I cannot run R.EXE or RSCRIPT.EXE",
-      "message_count": 1,
-      "participants": [
-        "Dominik Szewczyk"
-      ],
-      "started": "2017-05-04T20:08:56+00:00",
-      "last_reply": "2017-05-04T20:08:56+00:00",
-      "root_message_id": "msg-86f7d9ddfd29"
-    },
-    {
       "id": "thread-8923280315c9",
       "subject": "How to run Linear mixed model for an experiment design with species nested in an random block experiment",
       "message_count": 1,
@@ -13319,7 +13309,7 @@
     {
       "id": "thread-89377b7dc2d1",
       "subject": "Design matrix for species mixture",
-      "message_count": 6,
+      "message_count": 5,
       "participants": [
         "Bert Gunter",
         "Jim Lemon",
@@ -14836,6 +14826,28 @@
       "started": "2017-05-31T19:09:05+00:00",
       "last_reply": "2017-05-31T19:09:05+00:00",
       "root_message_id": "msg-817b8c2bc8b5"
+    },
+    {
+      "id": "thread-26bb37a038e2",
+      "subject": "Question on function \"scatterplot3d\"",
+      "message_count": 1,
+      "participants": [
+        "li li"
+      ],
+      "started": "2017-05-31T20:41:58-04:00",
+      "last_reply": "2017-05-31T20:41:58-04:00",
+      "root_message_id": "msg-26bb37a038e2"
+    },
+    {
+      "id": "thread-8b139b321025",
+      "subject": "Post for R",
+      "message_count": 1,
+      "participants": [
+        "Hasan Diwan"
+      ],
+      "started": "2017-05-31T23:04:01-07:00",
+      "last_reply": "2017-05-31T23:04:01-07:00",
+      "root_message_id": "msg-8b139b321025"
     }
   ]
 }

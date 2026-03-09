@@ -6641,6 +6641,40 @@
       "thread_id": "thread-745a40143bfd",
       "thread_depth": 4,
       "month": "2020-03"
+    },
+    {
+      "id": "msg-aa02568d8d28",
+      "message_id": "<MN2PR03MB51675A0015FC4BF1436E61BFE2C80@MN2PR03MB5167.namprd03.prod.outlook.com>",
+      "from_name": "Sorkin, John",
+      "from_email_hash": "d5c84a99bb06c78a2737b04730afa40287aa87f81ff868c07824d82d50d2d725",
+      "date": "2020-03-31T22:46:58Z",
+      "subject": "[R] Problems using predict with GEE",
+      "subject_clean": "Problems using predict with GEE",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am running gee with a an offset followed by predict to get predicted values. The GEE analysis runs without error. When I run the predict function, I get the following error message:\n\nError in seq_len(p) : argument must be coercible to non-negative integer\nIn addition: Warning messages:\n1: In predict.lm(object, newdata, se.fit, scale = 1, type = if (type ==  :\n  calling predict.lm(<fake-lm-object>) ...\n2: In seq_len(p) : first element used of 'length.out' argument\n\nThe error does not appear to be related to the offset values.\n\nI hope someone can help me correct the error. Reproducible code follows:\n\nThank you,\nJohn\n\n\ninstall.packages(\"gee\")\nlibrary(gee)\n\nmyData2 <- structure(list(HG = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,\n                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0),\n                          Group = structure(c(1L,\n                                              1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,\n                                              1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,\n                                              1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L,\n                                              2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L,\n                                              2L, 2L, 2L, 2L, 2L, 2L, 2L),\n                                            .Label = c(\"Group1\", \"Group2\"), class = \"factor\")),\n                     class = \"data.frame\", row.names = c(NA,-72L))\nmyData2\n# Define offset\nFU <- 1\n# Run GEE wiht offset\nfitGEE <- gee(HG+offset(log(FU))~Group,family=quasi,\n              data=myData2,id=AllData$\"Subject ID\",corstr=\"exchangeable\",subset=subset)\nprint(summary(fitGEE))\n\n# Create a dataframe with data used in predict.\n# FU =1\nnew.data <- data.frame(Group=c(\"Group1\",\"Group2\"),FU=1)\ncat(\"These are the data used by predict\\n\")\nprint(new.data)\n# This predict fails\nLogPtEst <- predict(fitGEE,newdata=new.data)\n\n# Create a dataframe with data used in predict.\n# FU =0\nnew.data <- data.frame(Group=c(\"Group1\",\"Group2\"),FU=0)\ncat(\"These are the data used by predict\\n\")\nprint(new.data)\n# This predict also fails\nLogPtEst <- predict(fitGEE,newdata=new.data)\n\nMany thanks,\nJohn\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology and Geriatric Medicine\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing)\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am running gee with a an offset followed by predict to get predicted values. The GEE analysis runs without error. When I run the predict function, I get the following error message:\n\nError in seq_le",
+      "thread_id": "thread-aa02568d8d28",
+      "thread_depth": 0,
+      "month": "2020-03"
+    },
+    {
+      "id": "msg-d411e9764a3d",
+      "message_id": "<36E14856-9EAC-4401-9C39-CD08059B8D7F@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2020-03-31T18:33:10-07:00",
+      "subject": "[R]  repeat rows of matrix by number (k) in one colummatrix adding column j with values 1:k",
+      "subject_clean": "repeat rows of matrix by number (k) in one colummatrix adding column j with values 1:k",
+      "in_reply_to": "<CAN9eD7=nXQP0KycwDBfoUWHUMc_Y+cPcmyRaFBWDx2ZC+OzjKQ@mail.gmail.com>",
+      "references": [
+        "<CAN9eD7=nXQP0KycwDBfoUWHUMc_Y+cPcmyRaFBWDx2ZC+OzjKQ@mail.gmail.com>"
+      ],
+      "body_plain": "False premise: rep works fine\n\nMout2 <- cbind(M[ rep(seq.int(nrow(M)),M[,\"k\"]), c(\"x\",\"y\",\"z\")],unlist(lapply(M[,\"k\"],seq.int)))\n\nOn March 31, 2020 6:18:37 PM PDT, nevil amos <nevil.amos at gmail.com> wrote:\n>Hi\n>\n>I can achieve this using two for loops but it is slow  I need to do\n>this on\n>many matrices with tens of millions of rows of x,y,z and k\n>\n>What is a faster method to achieve this, I cannot use rep as j changes\n>in\n>each row of the new matrix\n>###############################################\n>M<-matrix(c(1,2,3,4,1,2,3,4,1,2,3,4, 2, 1, 3, 2\n>), 4,4, dimnames = list(NULL, c(\"x\", \"y\", \"z\",\"k\")))\n>\n>Print(M)\n>#Create matrix (Mout) in this case 8 rows with x,y,z in each row of M\n>#repeated k times with column j numbered from 1:k\n># ! can do with nested loops but this is very slow ( example below)\n>#How do I acheive this quickly without loops?\n>Mout<-NULL\n>\n>for(i in 1:nrow(M)){\n>  a=M[i,c(\"x\",\"y\",\"z\")]\n>  for (j in 1:M[i,\"k\"]){\n>    b=c(a,j)\n>    Mout<-rbind(Mout,b)\n>    }\n>}\n>colnames(Mout)[4]<-\"j\"\n>print(Mout)\n>\n>#########################################################\n>\n>Thanks\n>\n>Nevil Amos\n>\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n-- \nSent from my phone. Please excuse my brevity.",
+      "body_snippet": "False premise: rep works fine\n\nMout2 <- cbind(M[ rep(seq.int(nrow(M)),M[,\"k\"]), c(\"x\",\"y\",\"z\")],unlist(lapply(M[,\"k\"],seq.int)))\n\nOn March 31, 2020 6:18:37 PM PDT, nevil amos <nevil.amos at gmail.com>",
+      "thread_id": "thread-d411e9764a3d",
+      "thread_depth": 0,
+      "month": "2020-03"
     }
   ],
   "threads": [
@@ -7765,6 +7799,28 @@
       "started": "2020-03-31T14:47:54+02:00",
       "last_reply": "2020-03-31T08:35:27-07:00",
       "root_message_id": "msg-d523d740a946"
+    },
+    {
+      "id": "thread-d411e9764a3d",
+      "subject": "repeat rows of matrix by number (k) in one colummatrix adding column j with values 1:k",
+      "message_count": 1,
+      "participants": [
+        "Jeff Newmiller"
+      ],
+      "started": "2020-03-31T18:33:10-07:00",
+      "last_reply": "2020-03-31T18:33:10-07:00",
+      "root_message_id": "msg-d411e9764a3d"
+    },
+    {
+      "id": "thread-aa02568d8d28",
+      "subject": "Problems using predict with GEE",
+      "message_count": 1,
+      "participants": [
+        "Sorkin, John"
+      ],
+      "started": "2020-03-31T22:46:58+00:00",
+      "last_reply": "2020-03-31T22:46:58+00:00",
+      "root_message_id": "msg-aa02568d8d28"
     }
   ]
 }

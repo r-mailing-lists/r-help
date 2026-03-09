@@ -5252,22 +5252,6 @@
       "month": "2000-06"
     },
     {
-      "id": "msg-c31494a1d86e",
-      "message_id": "<00062414102000.00795@ligarto>",
-      "from_name": "Ramon Diaz-Uriarte",
-      "from_email_hash": "560335dc9d6017c7ec7ff9d62640cb14999a9673dde5af1ac728dbbd8cb1c459",
-      "date": "2000-06-24T17:21:51+02:00",
-      "subject": "[R] Summary: # of users of R, and biological examples of the use of R: addendum",
-      "subject_clean": "Summary: # of users of R, and biological examples of the use of R: addendum",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I apologize for accidentally omitting some of the answers I got; here they are:\n\n**************\nI use R regularly in my research in the pharmaceutical industry.  I have\nused it for projects ranging from sample size and power curve estimation,\nanalysis of laboratory data with mixed effects models, to analysis of mass\nspectrometry data.  I have helped biologists here install and use it in\nlimited ways, modifying scripts that I have provided them.  I look forward\nto taking advantage of the new TCL/TK GUI scripting to facilitate that\nfurther.  In fact, R is actually named as the statistical analysis tool used\nfor a patent we are preparing.\n\nBefore leaving academia last year, I also used R.  I have written two papers\nthat had analyses partially supported with R.\n\nI also use S-Plus, depending on the task at hand.\n\nBest of luck with your paper,\n\nMatt\n\nMatthew R. Nelson, Ph.D.\nInformation Scientist\nEsperion Therapeutics, Inc.\n3621 S. State St.\n695 KMS Place\nAnn Arbor, MI 48108\n\nPhone: (734) 332-0506 x235\nFax: (734) 332-0516\nemail: mnelson at esperion.com\nweb: http://www.esperion.com\n\n\n*****************\n\nFrom: Dirk Eddelbuettel <edd at debian.org>To: Thomas Lumley\n<thomas at biostat.washington.edu> Cc: j.logsdon at lancaster.ac.uk, \nr-help at stat.math.ethz.ch\n\n\nOn Wed, Jun 21, 2000 at 08:36:23AM -0700, Thomas Lumley wrote:\n> Also cases with fewer than 1 user, ie \"Hmm. R looks like an interesting\n> package. Maybe I should install it in case I need to do some statistics\n> some time.\"\n> or\n> \"We're a math department, we want all of the mathematical packages\"\n> or even people who install everything.\n> \n> Obviously that last group will be overrepresented in the Debian popularity\n> contest.\n\nWell, popularity-contest tries to be a little smarter and uses atime and\nctime as reported by find(1) to differentiate between 'used' and 'installed\nbut not used' as well as 'recently installed' software.\n\nThe full result for r-base is 35 'recently used', 49 'installed but not\nused' and 8 'recently upgraded'. \n\nHowever, your critic might still be valid here as upon installation, the\npostinst script uses perl to adjust the R_PAPERSIZE based on paperconf(1).\nThis mightprobably triggers the atime upon package upgrade. \n\nDirk\n\n\n*******************\n\nUseful info from Dirk but this measures number of R Linux installations,\nnot users.  If 100K is an approximate number of R Linux installations,\nthen the likely number of Linux R users could be somewhat more.  In my\ncase, I have one installation and one user since only I use it but I am\nsure that there are many cases with 2, 10, 100 etc users per installation.\n\nIn addition, as Dirk says, there will be a substantial number of non-Linux\nusers on other Unix platforms as well as Windows.\n\nAnyone care to make a guess?  I would estimate that there are 1/2 million\nactual R users but this could be out by a sd */2 at least.  \n\nJohn  JohnFrom: j.logsdon at lancaster.ac.uk\n\n***********************************\n\n\n\n\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "I apologize for accidentally omitting some of the answers I got; here they are:\n\n**************\nI use R regularly in my research in the pharmaceutical industry.  I have\nused it for projects ranging fr",
-      "thread_id": "thread-c31494a1d86e",
-      "thread_depth": 0,
-      "month": "2000-06"
-    },
-    {
       "id": "msg-d0c7d4d2628f",
       "message_id": "<Pine.OSF.4.05.10006241826010.24787-100000@alnair.uio.no>",
       "from_name": "Kjetil Kjernsmo",
@@ -7004,6 +6988,22 @@
       "thread_id": "thread-5886a5170645",
       "thread_depth": 1,
       "month": "2000-06"
+    },
+    {
+      "id": "msg-b9902e12d848",
+      "message_id": "<Pine.LNX.4.04.10006301633150.20556-100000@xyzzy.dsl.speakeasy.net>",
+      "from_name": "Trent Piepho",
+      "from_email_hash": "bc33e5ea8e2184d781642ba4c7ae9adeee12f435a1af421545313a09b5c3bd5e",
+      "date": "2000-06-30T17:02:59-07:00",
+      "subject": "[R] margins with postscript device",
+      "subject_clean": "margins with postscript device",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've been having a problem when printing plots to a HP DeskJet 2500C printer. \nThis printer, like most inkjet printers, has a large minimum bottom margin. \nFor most HP inkjet printers, the bottom 1/2\" (left 1/2\" inch for landscape)\nof the page can't be printed too.  The postscript device in R has a default of\n1/4\" margins between the paper edge and the plotting area.  This means that\nbottom (or left in landscape) 1/4\" inch of the plotting area is cut off. \nTypically, the Y-axis label in landscape plots will be cut off.\n\nI couldn't find any good way to fix this using the postscript device options,\nas there is no way to set the margins.  The closest thing would be to set the\npaper width or height to 1\" less than the paper size, giving a 1/2\" margin on\nboth sides.  This means I have to figure out if I'm doing a landscape or\nportrait plot, find the size of the paper I'm using, and subtract double the\nsize of the largest margin I want.  This also forces both the top and bottom\nmargins to be the same, when I would rather have a 1/2\" bottom margin and only\na 1/8\" top margin (the printer's minimum for the top), so I don't lose so much\nof the paper's space.\n\nI think it would be useful if the postscript options were extended to let\nthe top/bottom/left/right margins be set individually.  It would also be\nconvenient if there was an \"inkjet\" switch which changed the default margins\nfrom 1/4\" on all sides to 1/2\" on the bottom (left if horizontal==T) and 1/8\"\non the top (or right).\n\nI've also made a quick hack for the postscript device that adjust the margins\nappropriately.  Maybe other users of inkjet printers who use postscript will\nfind it useful.\n\n--- devPS.c     Tue May  2 06:18:35 2000\n+++ /eolian1/R-1.1.0/src/main/devPS.c   Thu Jun 29 16:08:13 2000\n@@ -909,6 +909,13 @@\n     } else {\n        xoff = yoff = 0.0;\n     }\n+    /* HACK for DeskJet printers with 1/2\" bottom margin and 1/8\" top */\n+    if(pd->landscape) {\n+       pd->width -= 0.125; xoff += 0.25;\n+    } else {\n+       pd->height -= 0.125; yoff += 0.25;\n+    }\n+\n     pd->maxpointsize = 72.0 * ((pd->pageheight > pd->pagewidth) ?\n                               pd->pageheight : pd->pagewidth);\n     pd->pageno = 0;\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "I've been having a problem when printing plots to a HP DeskJet 2500C printer. \nThis printer, like most inkjet printers, has a large minimum bottom margin. \nFor most HP inkjet printers, the bottom 1/2\"",
+      "thread_id": "thread-b9902e12d848",
+      "thread_depth": 0,
+      "month": "2000-06"
     }
   ],
   "threads": [
@@ -8558,12 +8558,13 @@
     {
       "id": "thread-c31494a1d86e",
       "subject": "Summary: # of users of R, and biological examples of the use of R",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
-        "Ramon Diaz-Uriarte"
+        "Ramon Diaz-Uriarte",
+        "Ulrich Küsters (Hauptbenutzer)"
       ],
       "started": "2000-06-24T12:13:20+02:00",
-      "last_reply": "2000-06-24T12:13:20+02:00",
+      "last_reply": "2000-06-29T09:20:08+02:00",
       "root_message_id": "msg-c31494a1d86e"
     },
     {
@@ -8588,18 +8589,6 @@
       "started": "2000-06-24T17:20:36+02:00",
       "last_reply": "2000-06-24T20:15:54+02:00",
       "root_message_id": "msg-b1b8dafd292c"
-    },
-    {
-      "id": "thread-c31494a1d86e",
-      "subject": "Summary: # of users of R, and biological examples of the use of R: addendum",
-      "message_count": 2,
-      "participants": [
-        "Ramon Diaz-Uriarte",
-        "Ulrich Küsters (Hauptbenutzer)"
-      ],
-      "started": "2000-06-24T17:21:51+02:00",
-      "last_reply": "2000-06-29T09:20:08+02:00",
-      "root_message_id": "msg-c31494a1d86e"
     },
     {
       "id": "thread-033ee91a2648",
@@ -9086,6 +9075,17 @@
       "started": "2000-06-30T15:19:48+12:00",
       "last_reply": "2000-06-30T09:44:16-07:00",
       "root_message_id": "msg-5886a5170645"
+    },
+    {
+      "id": "thread-b9902e12d848",
+      "subject": "margins with postscript device",
+      "message_count": 1,
+      "participants": [
+        "Trent Piepho"
+      ],
+      "started": "2000-06-30T17:02:59-07:00",
+      "last_reply": "2000-06-30T17:02:59-07:00",
+      "root_message_id": "msg-b9902e12d848"
     }
   ]
 }

@@ -6175,6 +6175,27 @@
       "thread_id": "thread-e207cb1689f3",
       "thread_depth": 1,
       "month": "2021-01"
+    },
+    {
+      "id": "msg-f47e064597d9",
+      "message_id": "<c58e930a-fdd0-fb96-3b73-e9341801a2a7@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "960cf691f34cc2709527dabb6de874fb0a4c64edacd6eb5108b4fb7e2aa36670",
+      "date": "2021-01-31T22:00:55-08:00",
+      "subject": "[R] dependent nested for loops in R",
+      "subject_clean": "dependent nested for loops in R",
+      "in_reply_to": "<4937A207-12C7-4877-85D9-1F6DCDDC50B8@health.ucsd.edu>",
+      "references": [
+        "<CAGR+MS5S=KTu13mn=ze_jMS2dhA790Q07CkRL8WYtEc6ZUXeKQ@mail.gmail.com>",
+        "<faee43e7-8503-e0cc-dba1-adcf008cf1a2@comcast.net>",
+        "<CAGR+MS7bo1+PpYhk+bG2qtmO5nYx4A8c0jtmVoDhdBREA+u3rQ@mail.gmail.com>",
+        "<4937A207-12C7-4877-85D9-1F6DCDDC50B8@health.ucsd.edu>"
+      ],
+      "body_plain": "On 1/31/21 1:26 PM, Berry, Charles wrote:\n>\n>> On Jan 30, 2021, at 9:32 PM, Shaami <nzshaam at gmail.com> wrote:\n>>\n>> Hi\n>> I have made the sample code again. Could you please guide how to use\n>> vectorization for variables whose next value depends on the previous one?\n>>\n\nI agree with Charles that I suspect your results are not what you \nexpect. You should try using cat or print to output intermediate results \nto the console. I would suggest you limit your examination to a more \nmanageable length, say the first 10 results while you are working out \nyour logic. After you have the logic debugged, you can move on to long \nsequences.\n\n\nThis is my suggestion for a more compact solution (at least for the \ninner loop calculation):\n\nset.seed(123)\n\nx <- rnorm(2000)\n\nz <- Reduce( function(x,y) { sum(y+5*x) }, x, accumulate=TRUE)\n\nw<- numeric(2000)\n\nw <-? (1:2000)[ z >4 | z < 1 ]? # In your version the w values get \noverwritten and end up all being 2000\n\n\nI would also advise making a natural language statement of the problem \nand goals. I'm thinking that you may be missing certain aspects of the \nunderying problem.\n\n-- \n\nDavid.\n\n>\n> Glad to help.\n>\n> First, it could help you to trace your code.  I suspect that the results are not at all what you want and tracing would help you see that.\n>\n> I suggest running this revision and printing out x, z, and w.\n>\n> #+begin_src R\n>    w = NULL\n>    for(j in 1:2)\n>    {\n>      z = NULL\n>      x = rnorm(10)\n>      z[1] = x[1]\n>      for(i in 2:10)\n>      {\n>        z[i] = x[i]+5*z[i-1]\n>        if(z[i]>4 | z[i]<1) {\n> \tw[j]=i\n>        } else {\n> \tw[j] = 0\n>        }\n>      }\n>    }\n> #+end_src\n>\n>\n> You should be able to see that the value of w can easily be obtained outside of the `i' loop.\n>",
+      "body_snippet": "On 1/31/21 1:26 PM, Berry, Charles wrote:\n>\n>> On Jan 30, 2021, at 9:32 PM, Shaami <nzshaam at gmail.com> wrote:\n>>\n>> Hi\n>> I have made the sample code again. Could you please guide how to use\n>> vec",
+      "thread_id": "thread-085af4513efc",
+      "thread_depth": 4,
+      "month": "2021-01"
     }
   ],
   "threads": [
@@ -7303,14 +7324,14 @@
     {
       "id": "thread-085af4513efc",
       "subject": "dependent nested for loops in R",
-      "message_count": 4,
+      "message_count": 5,
       "participants": [
         "Berry, Charles",
         "David Winsemius",
         "Shaami"
       ],
       "started": "2021-01-31T09:26:21+05:00",
-      "last_reply": "2021-01-31T21:26:13+00:00",
+      "last_reply": "2021-01-31T22:00:55-08:00",
       "root_message_id": "msg-085af4513efc"
     },
     {

@@ -625,25 +625,6 @@
       "month": "2000-10"
     },
     {
-      "id": "msg-b589d57b383b",
-      "message_id": "<14809.31868.813499.212889@mithrandir.hornik.net>",
-      "from_name": "Kurt Hornik",
-      "from_email_hash": "6e49e5789d24862255bc60d8e4c5d8665b01105c5c098a9e7289a025e4708eb8",
-      "date": "2000-10-03T08:28:12+02:00",
-      "subject": "[R] This mail was found after problem with mailserver Oct 3rd - postmaster@hh.umu.se",
-      "subject_clean": "This mail was found after problem with mailserver Oct 3rd - postmaster@hh.umu.se",
-      "in_reply_to": "<Pine.GSO.4.21.0010021059340.5187-100000@atlas.biostat.washington.edu>",
-      "references": [
-        "<14808.52254.170148.815746@gargle.gargle.HOWL>",
-        "<Pine.GSO.4.21.0010021059340.5187-100000@atlas.biostat.washington.edu>"
-      ],
-      "body_plain": ">>>>> Thomas Lumley writes:\n\n> On Mon, 2 Oct 2000, Peter Holzer wrote:\n>> Dear R users\n>> \n>> I have started to use gdb for debugging dynloaded C code as described in\n>> `Writing R Extensions'. Unfortunately I have run into several problems that\n>> I haven't been able to solve:\n>> \n>> - using `n': how comes that the same line of code appears up to three times\n>> (and inbetween the next line and maybe even the second next one?)\n>> \n>> - using `print' resp. `display': How comes the variable values are\n>> different from those shown by fprintf? How comes the variable values\n>> change when actually no value is assigned to them (and I use `n', not\n>> `s')?\n\n> I think both problems are likely due to compiler optimisation.  The\n> GNU tools are unusual in letting you debug optimised code: the Sun\n> compilers, for example, won't generate debugging information if you\n> optimise, for precisely this reason.\n\n> Optimisation typically results in the machine instructions for\n> different lines of C code being interleaved.  Even worse, loops may be\n> unrolled, statements moved in or out of loops, and other complicated\n> things done to your code.\n\n> While debugging optimised code can still be useful, it is often easier\n> to recompile the code without optimisation (as long as the bug isn't\n> caused by optimisation) and debug that way.\n\n> I'm not sure of the best way to recompile without optimisation. You\n> could edit R_HOME/etc/Makeconf, or you could cut-and-paste the\n> compiler invocations that R COMPILE produces and then edit them by\n> hand.\n\nOr, if you don't want to edit this file, you can do\n\n\tMAKEFLAGS=\"CFLAGS=\" R CMD INSTALL /path/to/code\n\netc.\n\n(Not sure if all versions of make support this ... if so maybe this\nshould be an FAQ?)\n\n-k\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": ">>>>> Thomas Lumley writes:\n\n> On Mon, 2 Oct 2000, Peter Holzer wrote:\n>> Dear R users\n>> \n>> I have started to use gdb for debugging dynloaded C code as described in\n>> `Writing R Extensions'. Unfort",
-      "thread_id": "thread-1e20bd933421",
-      "thread_depth": 2,
-      "month": "2000-10"
-    },
-    {
       "id": "msg-bacbfdef1f9f",
       "message_id": "<14809.44598.141172.309288@gargle.gargle.HOWL>",
       "from_name": "Peter Holzer",
@@ -6719,22 +6700,6 @@
       "month": "2000-10"
     },
     {
-      "id": "msg-0c49212fb77d",
-      "message_id": "<200010311051.KAA25502@toucan.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2000-10-31T10:51:59Z",
-      "subject": "[R] SOM (Self-organizing map)",
-      "subject_clean": "SOM (Self-organizing map)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "> Date: Tue, 31 Oct 2000 11:34:26 +0100 (CET)\n> From: \"Uli Flenker; Raum 704\" <uli at biochem.dshs-koeln.de>\n> To: Jun Yan <jyan at stat.wisc.edu>\n> cc: r-help at stat.math.ethz.ch\n> Subject: Re: [R] SOM (Self-organizing map)\n> \n> Do I remember correctly that SOMs are \"self oraganizing maps\" and are more\n> or less identical to Kohonen networks? As far as I know there is no R\n> package for that purpose. \n> \n> A widely used - at least in Germany - neural network simulator is SNNS\n> (Stuttgarter Neuraonale Netze Simulator). Its available freely under a\n> GNU like license from a lot of german university servers. The people who\n> built it can be reached via <http://www.informatik.uni-stuttgart.de>.\n> You will find executables for several platforms as well as source code and\n> documentation.\n> \n> SNNS also is included in a number of Linux distributions. It is in SuSE\n> and it at least has been in DLD.\n> \n> I used it some years ago and did not go beyond standard backpropagation\n> (which can be done in R using the nnet library included in VR). So I can't\n> tell you about the Kohonen capabilities. But its included in the simulator\n> definetely.\n \n> \n> On Mon, 30 Oct 2000, Jun Yan wrote:\n> \n> > Does anyone know of any SOM library for R? or any stand alone freeware?\n> > A search from google returns SOM_PAK 3.1 developed at Helsinki University\n> > of Technology. Is there newer version?\n\nI would recommend using the original Kohonen's group code in SOM_PAK\n(yes, it's 3.1 AFAIK).  There's lot of variations on this theme.\nMy experience of SNNS is that it tends to include everything available,\nat the expense of quality.\n\nSomeone did send details to S-news of (slow) S code to do this, so\nyou could search the S-news archives.\n\nI did once write an R interface to SOM_PAK for a particular project,\nbut am not sure that I still have it.\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272860 (secr)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
-      "body_snippet": "> Date: Tue, 31 Oct 2000 11:34:26 +0100 (CET)\n> From: \"Uli Flenker; Raum 704\" <uli at biochem.dshs-koeln.de>\n> To: Jun Yan <jyan at stat.wisc.edu>\n> cc: r-help at stat.math.ethz.ch\n> Subject: Re: [R] ",
-      "thread_id": "thread-0c49212fb77d",
-      "thread_depth": 0,
-      "month": "2000-10"
-    },
-    {
       "id": "msg-23c668343b31",
       "message_id": "<B5DEF8EC8E9D3444A94206C3C9949FC31C8C82@mailsrv01.Fafo.No>",
       "from_name": "Khawaja Marwan",
@@ -7055,6 +7020,40 @@
       "thread_id": "thread-d85d0ca09497",
       "thread_depth": 1,
       "month": "2000-10"
+    },
+    {
+      "id": "msg-1f7ebc78baea",
+      "message_id": "<200010312307.RAA02998@goose.stat.umn.edu>",
+      "from_name": "Luke Tierney",
+      "from_email_hash": "5da9eb66ea6bfbe9b7e0e6d0b6620c790e12f84753341ef2349d51d7875d129d",
+      "date": "2000-10-31T17:07:40-06:00",
+      "subject": "[R] Compiling R in Caldera Linux",
+      "subject_clean": "Compiling R in Caldera Linux",
+      "in_reply_to": "<x2y9z4bpmd.fsf@blueberry.kubism.ku.dk> from Peter Dalgaard BSA at \"Oct 31, 2000 11:41:14 pm\"",
+      "references": [],
+      "body_plain": "Peter Dalgaard BSA wrote:\n> Chris Roed <croed at mb.sympatico.ca> writes:\n> \n> > I am new to Linux and its ways, and so I am having a bit of trouble compiling R.\n> > The system I am using is Caldera Open Linux 2.4.  I have egcs and g77 version\n> > 2.91.66 installed and they seem to work fine.  When I try to run the \n> > configure script for R, it quits at the test of g77 with an error \"Can't find\n> > -lg2c\". \n> >  Does this error mean I am missing a library, and if so, which one?\n> \n> Yes, libg2c... As far as I remember (it's been a while since we had\n> reports on Caldera) the wisest thing to do is probably to install f2c\n> and reconfigure using --with-f2c. \n> \n> I'm pretty sure that the root of the problem is that Caldera simply\n> forgot to package that library with the g77 compiler. If you really\n> want it, it might be best simply to recompile the compiler (which\n> isn't all that hard, but not completely trivial either).\n> \n> There's a remote chance that it might work to copy libf2c.a to\n> libg2c.a in whatever corresponds to RedHats\n> /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/ directory.\n> \n\nI believe they forgot the g2c library with 2.3 and fairly quickly\nposted an rpm that fixed that on their web site--you might check\nthere.\n\nluke\n\n\n-- \nLuke Tierney\nUniversity of Minnesota                      Phone:           612-625-7843\nSchool of Statistics                         Fax:             612-624-8868\n313 Ford Hall, 224 Church St. S.E.           email:      luke at stat.umn.edu\nMinneapolis, MN 55455 USA                    WWW:  http://www.stat.umn.edu\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Peter Dalgaard BSA wrote:\n> Chris Roed <croed at mb.sympatico.ca> writes:\n> \n> > I am new to Linux and its ways, and so I am having a bit of trouble compiling R.\n> > The system I am using is Caldera O",
+      "thread_id": "thread-1f7ebc78baea",
+      "thread_depth": 0,
+      "month": "2000-10"
+    },
+    {
+      "id": "msg-e07b9b5af01d",
+      "message_id": "<00103118542101.01039@elvis.nodomain.nowhere>",
+      "from_name": "Chris Roed",
+      "from_email_hash": "7209d0ef0c517a5c244ca15fdffe3e6b1d7418ca06afef11786d428227757da5",
+      "date": "2000-10-31T18:52:05-06:00",
+      "subject": "[R] Compiling R in Caldera Linux",
+      "subject_clean": "Compiling R in Caldera Linux",
+      "in_reply_to": "<200010312307.RAA02998@goose.stat.umn.edu>",
+      "references": [
+        "<200010312307.RAA02998@goose.stat.umn.edu>"
+      ],
+      "body_plain": "On Tue, 31 Oct 2000, you wrote:\n> Peter Dalgaard BSA wrote:\n> > Chris Roed <croed at mb.sympatico.ca> writes:\n> > \n> > > I am new to Linux and its ways, and so I am having a bit of trouble compiling R.\n> > > The system I am using is Caldera Open Linux 2.4.  I have egcs and g77 version\n> > > 2.91.66 installed and they seem to work fine.  When I try to run the \n> > > configure script for R, it quits at the test of g77 with an error \"Can't find\n> > > -lg2c\". \n> > >  Does this error mean I am missing a library, and if so, which one?\n> > \n> > Yes, libg2c... As far as I remember (it's been a while since we had\n> > reports on Caldera) the wisest thing to do is probably to install f2c\n> > and reconfigure using --with-f2c. \n> > \n> > I'm pretty sure that the root of the problem is that Caldera simply\n> > forgot to package that library with the g77 compiler. If you really\n> > want it, it might be best simply to recompile the compiler (which\n> > isn't all that hard, but not completely trivial either).\n> > \n> > There's a remote chance that it might work to copy libf2c.a to\n> > libg2c.a in whatever corresponds to RedHats\n> > /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/ directory.\n> > \n> \n> I believe they forgot the g2c library with 2.3 and fairly quickly\n> posted an rpm that fixed that on their web site--you might check\n> there.\n> \n> luke\n> \n> \nExactly right.  The library is still missing from 2.4, but the RPM from their\nsite fixed that.  R compiled perfectly after I updated g77.\nThanks for your help\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "On Tue, 31 Oct 2000, you wrote:\n> Peter Dalgaard BSA wrote:\n> > Chris Roed <croed at mb.sympatico.ca> writes:\n> > \n> > > I am new to Linux and its ways, and so I am having a bit of trouble compiling R",
+      "thread_id": "thread-1f7ebc78baea",
+      "thread_depth": 1,
+      "month": "2000-10"
     }
   ],
   "threads": [
@@ -7294,7 +7293,7 @@
     {
       "id": "thread-1e20bd933421",
       "subject": "Debugging dynloaded C-code with gdb",
-      "message_count": 7,
+      "message_count": 6,
       "participants": [
         "Agus Salim",
         "Kurt Hornik",
@@ -9238,17 +9237,6 @@
       "root_message_id": "msg-0c49212fb77d"
     },
     {
-      "id": "thread-0c49212fb77d",
-      "subject": "SOM (Self-organizing map)",
-      "message_count": 1,
-      "participants": [
-        "Prof Brian Ripley"
-      ],
-      "started": "2000-10-31T10:51:59+00:00",
-      "last_reply": "2000-10-31T10:51:59+00:00",
-      "root_message_id": "msg-0c49212fb77d"
-    },
-    {
       "id": "thread-d06313a091be",
       "subject": "log-linear",
       "message_count": 1,
@@ -9303,6 +9291,18 @@
       "started": "2000-10-31T15:31:29-06:00",
       "last_reply": "2000-10-31T23:41:14+01:00",
       "root_message_id": "msg-d85d0ca09497"
+    },
+    {
+      "id": "thread-1f7ebc78baea",
+      "subject": "Compiling R in Caldera Linux",
+      "message_count": 2,
+      "participants": [
+        "Chris Roed",
+        "Luke Tierney"
+      ],
+      "started": "2000-10-31T17:07:40-06:00",
+      "last_reply": "2000-10-31T18:52:05-06:00",
+      "root_message_id": "msg-1f7ebc78baea"
     },
     {
       "id": "thread-04680997e414",

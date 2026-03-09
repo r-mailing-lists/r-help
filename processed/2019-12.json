@@ -1858,26 +1858,6 @@
       "month": "2019-12"
     },
     {
-      "id": "msg-5f9ce6d94377",
-      "message_id": "<2e888ac8-32b4-34a3-0f1b-38afc85319ae@yahoo.fr>",
-      "from_name": "Marc Girondot",
-      "from_email_hash": "6d0f5817b704aaa38468a7f7ce781613d96a3d43265d4d5edac2d7c4632b6df9",
-      "date": "2019-12-09T17:25:40+01:00",
-      "subject": "[R] Where is the SD in output of glm with Gaussian distribution",
-      "subject_clean": "Where is the SD in output of glm with Gaussian distribution",
-      "in_reply_to": "<CAGxFJbQXgyVyiwgL=P0Hrn_ahxtm5UjEhAkKaOcqe33C3nskPw@mail.gmail.com>",
-      "references": [
-        "<3cf5da71-b888-8051-9550-a9bd3daefe7e.ref@yahoo.fr>",
-        "<3cf5da71-b888-8051-9550-a9bd3daefe7e@yahoo.fr>",
-        "<CAGxFJbQXgyVyiwgL=P0Hrn_ahxtm5UjEhAkKaOcqe33C3nskPw@mail.gmail.com>"
-      ],
-      "body_plain": "Le 09/12/2019 ? 16:45, Bert Gunter a ?crit?:\n> In addition, as John's included output shows, only 1 parameter, the \n> intercept, is fit. As he also said, the sd is estimated from the \n> residual deviance -- it is not a model parameter.\n>\n> Suggest you spend some time with a glm tutorial/text.\n\nI tried ! But I miss this point. I understand now this point. Thanks a? \nlot... big progress for me.\n\nBut still I don't understand why AIC calculation uses 2 parameters if \nthe SD is estimated from the residual deviance.\n\n > y=rnorm(100)\n > gnul <- glm(y ~ 1)\n > logLik(gnul)\n'log Lik.' -136.4343 (df=2)\n > AIC(gnul)\n[1] 276.8687\n > -2*logLik(gnul)+2*2\n'log Lik.' 276.8687 (df=2)\n\nThis is not intuitive when to count SD as a parameter (in AIC) or not in \ndf.resuidual !\n\n\n>\n> Bert\n>\n> On Mon, Dec 9, 2019 at 7:17 AM Marc Girondot via R-help \n> <r-help at r-project.org <mailto:r-help at r-project.org>> wrote:\n>\n>     Let do a simple glm:\n>\n>     ?> y=rnorm(100)\n>     ?> gnul <- glm(y ~ 1)\n>     ?> gnul$coefficients\n>     (Intercept)\n>     ?? 0.1399966\n>\n>     The logLik shows the fit of two parameters (DF=2) (intercept) and sd\n>\n>     ?> logLik(gnul)\n>     'log Lik.' -138.7902 (df=2)\n>\n>     But where is the sd term in the glm object?\n>\n>     If I do the same with optim, I can have its value\n>\n>     ?> dnormx <- function(x, data) {1E9*-sum(dnorm(data, mean=x[\"mean\"],\n>     sd=x[\"sd\"], log = TRUE))}\n>     ?> parg <- c(mean=0, sd=1)\n>     ?> o0 <- optim(par = parg, fn=dnormx, data=y, method=\"BFGS\")\n>     ?> o0$value/1E9\n>     [1] 138.7902\n>     ?> o0$par\n>     ????? mean??????? sd\n>\n>     0.1399966 0.9694405\n>\n>     But I would like have the value in the glm.\n>\n>     (and in the meantime, I don't understand why gnul$df.residual\n>     returned\n>     99... for me it should be 98=100 - number of observations) -1 (for\n>     mean)\n>     - 1 (for sd); but it is statistical question... I have asked it in\n>     crossvalidated [no answer still] !)\n>\n>     Thanks\n>\n>     Marc\n>\n>     ______________________________________________\n>     R-help at r-project.org <mailto:R-help at r-project.org> mailing list --\n>     To UNSUBSCRIBE and more, see\n>     https://stat.ethz.ch/mailman/listinfo/r-help\n>     PLEASE do read the posting guide\n>     http://www.R-project.org/posting-guide.html\n>     and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Le 09/12/2019 ? 16:45, Bert Gunter a ?crit?:\n> In addition, as John's included output shows, only 1 parameter, the \n> intercept, is fit. As he also said, the sd is estimated from the \n> residual devia",
-      "thread_id": "thread-57c032d2f75f",
-      "thread_depth": 2,
-      "month": "2019-12"
-    },
-    {
       "id": "msg-0b6edd6c7e8e",
       "message_id": "<CAF9-5jNQaYZyy0Gmb29phsNd3GumMeVVuz4FCPXpBQ6FSNVWNA@mail.gmail.com>",
       "from_name": "Ana Marija",
@@ -6751,7 +6731,7 @@
     {
       "id": "thread-57c032d2f75f",
       "subject": "Where is the SD in output of glm with Gaussian distribution",
-      "message_count": 5,
+      "message_count": 4,
       "participants": [
         "Bert Gunter",
         "Eric Berger",

@@ -4,6 +4,22 @@
   "month": "2015-03",
   "messages": [
     {
+      "id": "msg-f1647aeab6b2",
+      "message_id": "<54F22EBC.1070400@auckland.ac.nz>",
+      "from_name": "Rolf Turner",
+      "from_email_hash": "904c134d5ad39093183253270ee481b35c208cc4297e137e579e32e8115e7dff",
+      "date": "2015-03-01T10:10:20+13:00",
+      "subject": "[R] Firefox not showing R help.",
+      "subject_clean": "Firefox not showing R help.",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Firefox recently updated itself on my laptop.  Now when I ask for R help \n--- e.g. ?plot --- I just get my home page. And no help. If I do \"?plot\" \nagain after Firefox has opened its window, I just get yet another \nFirefox window, opened to my home page.  (I have my preferences set to\n\n     \"When Firefox starts Show my homepage\"\n\n--- as I always have had in the past.)\n\nThe Firefox that I am currently running is (according Firefox help\n--> \"About Firefox\") is version 36.0.\n\nCan anyone suggest to me how I can get my html R help back?\n\nFor what it's worth:  I am using Linux, Fedora 17.  (Yes, I know it's \nelderly, but then so am I. :-) )\n\nAlso in case it has any relevance:\n\n>> sessionInfo()\n> R version 3.1.2 (2014-10-31)\n> Platform: x86_64-unknown-linux-gnu (64-bit)\n>\n> locale:\n>  [1] LC_CTYPE=en_NZ.utf8       LC_NUMERIC=C\n>  [3] LC_TIME=en_NZ.utf8        LC_COLLATE=en_NZ.utf8\n>  [5] LC_MONETARY=en_NZ.utf8    LC_MESSAGES=en_NZ.utf8\n>  [7] LC_PAPER=en_NZ.utf8       LC_NAME=C\n>  [9] LC_ADDRESS=C              LC_TELEPHONE=C\n> [11] LC_MEASUREMENT=en_NZ.utf8 LC_IDENTIFICATION=C\n>\n> attached base packages:\n> [1] stats     graphics  grDevices utils     datasets  methods   base\n>\n> other attached packages:\n> [1] spatstat_1.40-0.064 misc_0.0-16\n>\n> loaded via a namespace (and not attached):\n>  [1] abind_1.4-0     deldir_0.1-7    goftest_1.0-2   grid_3.1.2\n>  [5] lattice_0.20-29 Matrix_1.1-4    mgcv_1.8-3      nlme_3.1-118\n>  [9] polyclip_1.3-1  tensor_1.5      tools_3.1.2\n\ncheers,\n\nRolf Turner\n\n-- \nRolf Turner\nTechnical Editor ANZJS\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276\nHome phone: +64-9-480-4619",
+      "body_snippet": "Firefox recently updated itself on my laptop.  Now when I ask for R help \n--- e.g. ?plot --- I just get my home page. And no help. If I do \"?plot\" \nagain after Firefox has opened its window, I just ge",
+      "thread_id": "thread-f1647aeab6b2",
+      "thread_depth": 0,
+      "month": "2015-03"
+    },
+    {
       "id": "msg-1d36be49e2ba",
       "message_id": "<54F2528D.9080101@auckland.ac.nz>",
       "from_name": "Rolf Turner",
@@ -4291,25 +4307,6 @@
       "body_snippet": "Sophia Kyriakou <sophia.kyriakou17 <at> gmail.com> writes:\n\n> \n> hello, I am using the optim function to maximize the log likelihood of a\n> generalized linear mixed model and I am trying to replicate ",
       "thread_id": "thread-82ace56052fa",
       "thread_depth": 1,
-      "month": "2015-03"
-    },
-    {
-      "id": "msg-00784ca5a76d",
-      "message_id": "<54FDD84F.8080703@binghamton.edu>",
-      "from_name": "Christopher W. Ryan",
-      "from_email_hash": "1b29f9cec300eaee17dfd69d1f61fa0ef3e03d1c3e99be2390ec65184340c413",
-      "date": "2015-03-09T13:28:47-04:00",
-      "subject": "[R] plotting the one-dimensional density of events in time",
-      "subject_clean": "plotting the one-dimensional density of events in time",
-      "in_reply_to": "<CAF8bMcb0Oymoe6fqBHK8zwfAhaXQ8BUpV2vOYahRmZjDEM2ZMA@mail.gmail.com>",
-      "references": [
-        "<54FA1634.3030804@binghamton.edu>",
-        "<CAF8bMcb0Oymoe6fqBHK8zwfAhaXQ8BUpV2vOYahRmZjDEM2ZMA@mail.gmail.com>"
-      ],
-      "body_plain": "Tom and Bill--\n\nThanks! Both excellent solutions.\n\n--Chris\n\nChristopher W. Ryan, MD, MS\ncryanatbinghamtondotedu\n\nEarly success is a terrible teacher. You?re essentially being rewarded\nfor a lack of preparation, so when you find yourself in a situation\nwhere you must prepare, you can?t do it. You don?t know how.\n--Chris Hadfield, An Astronaut's Guide to Life on Earth\n\nWilliam Dunlap wrote:\n> You could change the x component of density's output back into a Date object\n> and let plot choose a Date axis in its usual way.  E.g.,\n>   > den <- density(as.numeric(dd))\n>   > den$x <- as.Date(den$x, origin=as.Date(\"1970-01-01\"))\n>   > plot(den$x, den$y)\n> (You probably will also want to normalize the y component to be on a\n> specific\n> per time unit, say day or year, basis.)\n> \n> \n> \n> Bill Dunlap\n> TIBCO Software\n> wdunlap tibco.com <http://tibco.com>\n> \n> On Fri, Mar 6, 2015 at 1:03 PM, Christopher W. Ryan\n> <cryan at binghamton.edu <mailto:cryan at binghamton.edu>> wrote:\n> \n>     I have the dates of occurence of a repetitive event. I would like to\n>     plot the density of these events, as well as their specific temporal\n>     location.  This is as far as I have gotten:\n> \n>     # generate some sample data: dates in 2014\n>     random.dates <- sample(1:31, 100, replace=TRUE)\n>     random.months <- sample(1:12, 100, replace=TRUE)\n>     dd <- as.Date(as.character((paste(random.dates, random.months, \"2014\",\n>     sep=\"-\"))), format=\"%d-%m-%Y\")\n>     dd <- dd[!is.na <http://is.na>(dd)]\n> \n>     # plot density with a \"rug\".\n>     density(as.numeric(dd))\n>     plot(density(as.numeric(dd)))\n>     rug(as.numeric(dd))\n> \n>     # But horizontal axis label is not very informative\n>     # would prefer labeling the start of each month\n>     plot(density(as.numeric(dd)), axes=FALSE)\n>     library(zoo)\n>     new.axis <- as.yearmon(dd)\n> \n>     # but then what? This is where I get stuck--adding back a sensible axis\n> \n>     Grateful for any guidance.\n> \n>     Thanks.\n> \n>     --Chris\n>     --\n>     Christopher W. Ryan, MD, MS\n>     cryanatbinghamtondotedu\n> \n>     Early success is a terrible teacher. You?re essentially being rewarded\n>     for a lack of preparation, so when you find yourself in a situation\n>     where you must prepare, you can?t do it. You don?t know how.\n>     --Chris Hadfield, An Astronaut's Guide to Life on Earth\n> \n> \n>     ---\n> \n>     ______________________________________________\n>     R-help at r-project.org <mailto:R-help at r-project.org> mailing list --\n>     To UNSUBSCRIBE and more, see\n>     https://stat.ethz.ch/mailman/listinfo/r-help\n>     PLEASE do read the posting guide\n>     http://www.R-project.org/posting-guide.html\n>     and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n\n---",
-      "body_snippet": "Tom and Bill--\n\nThanks! Both excellent solutions.\n\n--Chris\n\nChristopher W. Ryan, MD, MS\ncryanatbinghamtondotedu\n\nEarly success is a terrible teacher. You?re essentially being rewarded\nfor a lack of pr",
-      "thread_id": "thread-50778a904092",
-      "thread_depth": 2,
       "month": "2015-03"
     },
     {
@@ -9153,24 +9150,6 @@
       "body_snippet": "Apologies for cross-posting\n\n\nThere are a few remaining seats on the following two (combined) courses:\n\nCourse 1 (3 days): Introduction to Bayesian statistics and MCMC\nWhen: 8-10 April 2015\nWhere: Uni",
       "thread_id": "thread-5181ed920d06",
       "thread_depth": 0,
-      "month": "2015-03"
-    },
-    {
-      "id": "msg-f97fa787f728",
-      "message_id": "<55096B48.8000608@yorku.ca>",
-      "from_name": "Michael Friendly",
-      "from_email_hash": "e9b90ce73178f88f76f93dfc82689bfc2868e9a51ea9a8e011552092e2ee1ae2",
-      "date": "2015-03-18T08:10:48-04:00",
-      "subject": "[R] Joining two datasets - recursive procedure?",
-      "subject_clean": "Joining two datasets - recursive procedure?",
-      "in_reply_to": "<CABQyo84Jm3w7-ZuFf2snJsQXJO1j1oyPDpthx9ADbqNxYm7=Fg@mail.gmail.com>",
-      "references": [
-        "<CABQyo84Jm3w7-ZuFf2snJsQXJO1j1oyPDpthx9ADbqNxYm7=Fg@mail.gmail.com>"
-      ],
-      "body_plain": "I'm not sure I understand completely what you want to do, but\nif the data were frequencies, it sounds like task for fitting a \nloglinear model with the model formula\n\n~ V1*V2 + V3\n\nOn 3/18/2015 2:17 AM, Luca Meyer wrote:\n> Hello,\n>\n> I am facing a quite challenging task (at least to me) and I was wondering\n> if someone could advise how R could assist me to speed the task up.\n>\n> I am dealing with a dataset with 3 discrete variables and one continuous\n> variable. The discrete variables are:\n>\n> V1: 8 modalities\n> V2: 13 modalities\n> V3: 13 modalities\n>\n> The continuous variable V4 is a decimal number always greater than zero in\n> the marginals of each of the 3 variables but it is sometimes equal to zero\n> (and sometimes negative) in the joint tables.\n>\n> I have got 2 files:\n>\n> => one with distribution of all possible combinations of V1xV2 (some of\n> which are zero or neagtive) and\n> => one with the marginal distribution of V3.\n>\n> I am trying to build the long and narrow dataset V1xV2xV3 in such a way\n> that each V1xV2 cell does not get modified and V3 fits as closely as\n> possible to its marginal distribution. Does it make sense?\n>\n> To be even more specific, my 2 input files look like the following.\n>\n> FILE 1\n> V1,V2,V4\n> A, A, 24.251\n> A, B, 1.065\n> (...)\n> B, C, 0.294\n> B, D, 2.731\n> (...)\n> H, L, 0.345\n> H, M, 0.000\n>\n> FILE 2\n> V3, V4\n> A, 1.575\n> B, 4.294\n> C, 10.044\n> (...)\n> L, 5.123\n> M, 3.334\n>\n> What I need to achieve is a file such as the following\n>\n> FILE 3\n> V1, V2, V3, V4\n> A, A, A, ???\n> A, A, B, ???\n> (...)\n> D, D, E, ???\n> D, D, F, ???\n> (...)\n> H, M, L, ???\n> H, M, M, ???\n>\n> Please notice that FILE 3 need to be such that if I aggregate on V1+V2 I\n> recover exactly FILE 1 and that if I aggregate on V3 I can recover a file\n> as close as possible to FILE 3 (ideally the same file).\n>\n> Can anyone suggest how I could do that with R?\n>\n> Thank you very much indeed for any assistance you are able to provide.\n>\n> Kind regards,\n>\n> Luca\n>\n> \t[[alternative HTML version deleted]]\n>",
-      "body_snippet": "I'm not sure I understand completely what you want to do, but\nif the data were frequencies, it sounds like task for fitting a \nloglinear model with the model formula\n\n~ V1*V2 + V3\n\nOn 3/18/2015 2:17 A",
-      "thread_id": "thread-04d6de9ab4bd",
-      "thread_depth": 1,
       "month": "2015-03"
     },
     {
@@ -16755,6 +16734,96 @@
       "thread_id": "thread-1adf170b098d",
       "thread_depth": 0,
       "month": "2015-03"
+    },
+    {
+      "id": "msg-f39c25991118",
+      "message_id": "<CAGx1TMAM_4T34Qeh3Jp-n--92ap67-U4PPSNNoURbR5_Dwda_A@mail.gmail.com>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2015-03-31T18:35:40-04:00",
+      "subject": "[R] idiom for constructing data frame",
+      "subject_clean": "idiom for constructing data frame",
+      "in_reply_to": "<CAHuTOvrOcVUZ41-cB_fMVE4Ja75afsuo30RyEznRpVkgh3htZQ@mail.gmail.com>",
+      "references": [
+        "<CAM_vjukgbVpGBYq5b5goCgS4RhEGDn4+Djxof9Zgm9dB2863Cg@mail.gmail.com>",
+        "<CAM_vjuk4eK5=+7QepLPiQvFBz9s-9yu+XirMFTWFyLmoeVg7gQ@mail.gmail.com>",
+        "<551AE156.8070206@gmail.com>",
+        "<CAM_vjukjkkPBbGt3n12EeJL+yiOxgjJ3VvPFEk+w5r8uAX7mKw@mail.gmail.com>",
+        "<CAF8bMcY6n+ue7jDasUW4nLTuEu4eVRJNU1zsrg8yUysNPRe6YQ@mail.gmail.com>",
+        "<CAHuTOvrOcVUZ41-cB_fMVE4Ja75afsuo30RyEznRpVkgh3htZQ@mail.gmail.com>"
+      ],
+      "body_plain": "I got rid of the extra column.\n\ndata.frame(r=seq(8), foo=NA, bar=NA, row.names=\"r\")\n\nRich\n\nOn Tue, Mar 31, 2015 at 6:18 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n> If you don't mind an extra column, you could use something similar to:\n>\n> data.frame(r=seq(8),foo=NA,bar=NA)\n>\n> If you do, here is another approach (see function body):\n>\n> empty.frame <- function (r = 1, n = 1, fill = NA_real_) {\n>   data.frame(setNames(lapply(rep(fill, length(n)), rep, times=r), n))\n> }\n> empty.frame()\n> empty.frame(, seq(3))\n> empty.frame(8, c(\"foo\", \"bar\"))\n>\n> I could not put it in one line either, without retyping at least one\n> argument (n in this case).\n> So I suggest a function is the way to go for a simplified syntax ...\n>\n> Thanks to all for the ideas!\n> Sven\n>\n> On 31 March 2015 at 20:55, William Dunlap <wdunlap at tibco.com> wrote:\n>\n>> You can use structure() to attach the names to a list that is input to\n>> data.frame.\n>> E.g.,\n>>\n>> dfNames <- c(\"First\", \"Second Name\")\n>> data.frame(lapply(structure(dfNames, names=dfNames),\n>> function(name)rep(NA_real_, 5)))\n>>\n>>\n>> Bill Dunlap\n>> TIBCO Software\n>> wdunlap tibco.com\n>>\n>> On Tue, Mar 31, 2015 at 11:37 AM, Sarah Goslee <sarah.goslee at gmail.com>\n>> wrote:\n>>\n>> > Hi,\n>> >\n>> > Duncan Murdoch suggested:\n>> >\n>> > > The matrix() function has a dimnames argument, so you could do this:\n>> > >\n>> > > names <- c(\"strat\", \"id\", \"pid\")\n>> > > data.frame(matrix(NA, nrow=10, ncol=3, dimnames=list(NULL, names)))\n>> >\n>> > That's a definite improvement, thanks. But no way to skip matrix()? It\n>> > just seems unRlike, although since it's only full of NA values there\n>> > are no coercion issues with column types or anything, so it doesn't\n>> > hurt. It's just inelegant. :)\n>> >\n>> > Sarah\n>> > --\n>> > Sarah Goslee\n>> > http://www.functionaldiversity.org\n>> >\n>> > ______________________________________________\n>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> > https://stat.ethz.ch/mailman/listinfo/r-help\n>> > PLEASE do read the posting guide\n>> > http://www.R-project.org/posting-guide.html\n>> > and provide commented, minimal, self-contained, reproducible code.\n>> >\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I got rid of the extra column.\n\ndata.frame(r=seq(8), foo=NA, bar=NA, row.names=\"r\")\n\nRich\n\nOn Tue, Mar 31, 2015 at 6:18 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n> If you don't mind an ex",
+      "thread_id": "thread-f39c25991118",
+      "thread_depth": 0,
+      "month": "2015-03"
+    },
+    {
+      "id": "msg-4b699bebc464",
+      "message_id": "<C7D7F7E4-E9C8-419C-9231-04FD4D8450D1@dcn.davis.CA.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "dfcb8635776f0b93fa3447e7f4d72fd6f085321a1eb765a7fcbd98eb12a253c0",
+      "date": "2015-03-31T16:31:50-07:00",
+      "subject": "[R] Using matlab code in R",
+      "subject_clean": "Using matlab code in R",
+      "in_reply_to": "<AEB16B1613D44C4793A7E6B6986B7A12F536C01C@EX10-LIVE-MBN2.ad.kent.ac.uk>",
+      "references": [
+        "<AEB16B1613D44C4793A7E6B6986B7A12F536C01C@EX10-LIVE-MBN2.ad.kent.ac.uk>"
+      ],
+      "body_plain": "The Posting Guide recommends searching the archives before posting. Consider [1] and learn.\n\n[1] https://stat.ethz.ch/pipermail/r-help/2007-March/127981.html\n---------------------------------------------------------------------------\nJeff Newmiller                        The     .....       .....  Go Live...\nDCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n                                      Live:   OO#.. Dead: OO#..  Playing\nResearch Engineer (Solar/Batteries            O.O#.       #.O#.  with\n/Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n--------------------------------------------------------------------------- \nSent from my phone. Please excuse my brevity.\n\nOn March 31, 2015 1:47:49 PM PDT, \"T.Riedle\" <tr206 at kent.ac.uk> wrote:\n>Hi everybody,\n>I have a matlab code which I would like to use for my empirical\n>analysis. Unfortunately, I am not familiar with matlab and it would be\n>great if there was a tool to \"translate\" the matlab code into R so that\n>I can work with the code in R.\n>Is there such a tool or package in R?\n>\n>Kind regards,\n>T.\n>\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The Posting Guide recommends searching the archives before posting. Consider [1] and learn.\n\n[1] https://stat.ethz.ch/pipermail/r-help/2007-March/127981.html\n------------------------------------------",
+      "thread_id": "thread-9fc51e2a096d",
+      "thread_depth": 1,
+      "month": "2015-03"
+    },
+    {
+      "id": "msg-d8f2a62ad782",
+      "message_id": "<CAM_vjumj2oh3UevoLnNmTir+iD_42NyPF-tpMovFQeT=kU2N+g@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2015-03-31T19:42:52-04:00",
+      "subject": "[R] idiom for constructing data frame",
+      "subject_clean": "idiom for constructing data frame",
+      "in_reply_to": "<CAGx1TMAM_4T34Qeh3Jp-n--92ap67-U4PPSNNoURbR5_Dwda_A@mail.gmail.com>",
+      "references": [
+        "<CAM_vjukgbVpGBYq5b5goCgS4RhEGDn4+Djxof9Zgm9dB2863Cg@mail.gmail.com>",
+        "<CAM_vjuk4eK5=+7QepLPiQvFBz9s-9yu+XirMFTWFyLmoeVg7gQ@mail.gmail.com>",
+        "<551AE156.8070206@gmail.com>",
+        "<CAM_vjukjkkPBbGt3n12EeJL+yiOxgjJ3VvPFEk+w5r8uAX7mKw@mail.gmail.com>",
+        "<CAF8bMcY6n+ue7jDasUW4nLTuEu4eVRJNU1zsrg8yUysNPRe6YQ@mail.gmail.com>",
+        "<CAHuTOvrOcVUZ41-cB_fMVE4Ja75afsuo30RyEznRpVkgh3htZQ@mail.gmail.com>",
+        "<CAGx1TMAM_4T34Qeh3Jp-n--92ap67-U4PPSNNoURbR5_Dwda_A@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Mar 31, 2015 at 6:35 PM, Richard M. Heiberger <rmh at temple.edu> wrote:\n> I got rid of the extra column.\n>\n> data.frame(r=seq(8), foo=NA, bar=NA, row.names=\"r\")\n\nBrilliant!\n\nAfter much fussing, including a disturbing detour into nested lapply\nstatements from which I barely emerged with my sanity (arguable, I\nsuppose), here is a one-liner that creates a data frame of arbitrary\nnumber of rows given an existing data frame as template for column\nnumber and name:\n\n\nn <- 8\ndf1 <- data.frame(A=runif(9), B=runif(9))\n\ndo.call(data.frame, setNames(c(list(seq(n), \"r\"), as.list(rep(NA,\nncol(df1)))), c(\"r\", \"row.names\", colnames(df1))))\n\nIt's not elegant, but it is fairly R-ish. I should probably stop\nhunting for an elegant solution now.\n\nThanks, everyone!\n\nSarah\n\n\n> Rich\n>\n> On Tue, Mar 31, 2015 at 6:18 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n>> If you don't mind an extra column, you could use something similar to:\n>>\n>> data.frame(r=seq(8),foo=NA,bar=NA)\n>>\n>> If you do, here is another approach (see function body):\n>>\n>> empty.frame <- function (r = 1, n = 1, fill = NA_real_) {\n>>   data.frame(setNames(lapply(rep(fill, length(n)), rep, times=r), n))\n>> }\n>> empty.frame()\n>> empty.frame(, seq(3))\n>> empty.frame(8, c(\"foo\", \"bar\"))\n>>\n>> I could not put it in one line either, without retyping at least one\n>> argument (n in this case).\n>> So I suggest a function is the way to go for a simplified syntax ...\n>>\n>> Thanks to all for the ideas!\n>> Sven\n>>\n>> On 31 March 2015 at 20:55, William Dunlap <wdunlap at tibco.com> wrote:\n>>\n>>> You can use structure() to attach the names to a list that is input to\n>>> data.frame.\n>>> E.g.,\n>>>\n>>> dfNames <- c(\"First\", \"Second Name\")\n>>> data.frame(lapply(structure(dfNames, names=dfNames),\n>>> function(name)rep(NA_real_, 5)))\n>>>\n>>>\n>>> Bill Dunlap\n>>> TIBCO Software\n>>> wdunlap tibco.com\n>>>\n>>> On Tue, Mar 31, 2015 at 11:37 AM, Sarah Goslee <sarah.goslee at gmail.com>\n>>> wrote:\n>>>\n>>> > Hi,\n>>> >\n>>> > Duncan Murdoch suggested:\n>>> >\n>>> > > The matrix() function has a dimnames argument, so you could do this:\n>>> > >\n>>> > > names <- c(\"strat\", \"id\", \"pid\")\n>>> > > data.frame(matrix(NA, nrow=10, ncol=3, dimnames=list(NULL, names)))\n>>> >\n>>> > That's a definite improvement, thanks. But no way to skip matrix()? It\n>>> > just seems unRlike, although since it's only full of NA values there\n>>> > are no coercion issues with column types or anything, so it doesn't\n>>> > hurt. It's just inelegant. :)\n>>> >\n>>> > Sarah\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
+      "body_snippet": "On Tue, Mar 31, 2015 at 6:35 PM, Richard M. Heiberger <rmh at temple.edu> wrote:\n> I got rid of the extra column.\n>\n> data.frame(r=seq(8), foo=NA, bar=NA, row.names=\"r\")\n\nBrilliant!\n\nAfter much fussin",
+      "thread_id": "thread-f39c25991118",
+      "thread_depth": 1,
+      "month": "2015-03"
+    },
+    {
+      "id": "msg-74a8e457deb7",
+      "message_id": "<CAFDcVCRvHmVO=mFVPQkRN934trssXFDnAmiH1=xttCAXRK5qMw@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "37708a6cb782f5feaf8184aa0c29ee7a2d00c5c1bcf512308a95d10fa8393e79",
+      "date": "2015-03-31T17:06:50-07:00",
+      "subject": "[R] idiom for constructing data frame",
+      "subject_clean": "idiom for constructing data frame",
+      "in_reply_to": "<CAM_vjumj2oh3UevoLnNmTir+iD_42NyPF-tpMovFQeT=kU2N+g@mail.gmail.com>",
+      "references": [
+        "<CAM_vjukgbVpGBYq5b5goCgS4RhEGDn4+Djxof9Zgm9dB2863Cg@mail.gmail.com>",
+        "<CAM_vjuk4eK5=+7QepLPiQvFBz9s-9yu+XirMFTWFyLmoeVg7gQ@mail.gmail.com>",
+        "<551AE156.8070206@gmail.com>",
+        "<CAM_vjukjkkPBbGt3n12EeJL+yiOxgjJ3VvPFEk+w5r8uAX7mKw@mail.gmail.com>",
+        "<CAF8bMcY6n+ue7jDasUW4nLTuEu4eVRJNU1zsrg8yUysNPRe6YQ@mail.gmail.com>",
+        "<CAHuTOvrOcVUZ41-cB_fMVE4Ja75afsuo30RyEznRpVkgh3htZQ@mail.gmail.com>",
+        "<CAGx1TMAM_4T34Qeh3Jp-n--92ap67-U4PPSNNoURbR5_Dwda_A@mail.gmail.com>",
+        "<CAM_vjumj2oh3UevoLnNmTir+iD_42NyPF-tpMovFQeT=kU2N+g@mail.gmail.com>"
+      ],
+      "body_plain": "I've got dataFrame() in R.utils for this purpose, e.g.\n\n> df <- dataFrame(colClasses=c(a=\"integer\", b=\"double\", c=\"character\"), nrow=10L)\n> str(df)\n'data.frame':   10 obs. of  3 variables:\n $ a: int  0 0 0 0 0 0 0 0 0 0\n $ b: num  0 0 0 0 0 0 0 0 0 0\n $ c: chr  \"\" \"\" \"\" \"\" ...\n\nRelated: You can use the colClasses() function to generate the\n'colClasses' argument \"dynamically\", e.g.\n\n> cols <- colClasses(\"idc\")\n> names(cols) <- c(\"a\", \"b\", \"c\")\n> str(cols)\n Named chr [1:3] \"integer\" \"double\" \"character\"\n - attr(*, \"names\")= chr [1:3] \"a\" \"b\" \"c\"\n\n> cols <- colClasses(sprintf(\"c2d%di\", 4))\n> df <- dataFrame(colClasses=cols, nrow=10L)\nstr(df)\n'data.frame':   10 obs. of  7 variables:\n $ : chr  \"\" \"\" \"\" \"\" ...\n $ : num  0 0 0 0 0 0 0 0 0 0\n $ : num  0 0 0 0 0 0 0 0 0 0\n $ : int  0 0 0 0 0 0 0 0 0 0\n $ : int  0 0 0 0 0 0 0 0 0 0\n $ : int  0 0 0 0 0 0 0 0 0 0\n $ : int  0 0 0 0 0 0 0 0 0 0\n\n\ndataFrame() is basically implemented as:\n\ndataFrame <- function(colClasses, nrow=1L, ...) {\n  df <- vector(\"list\", length=length(colClasses))\n  names(df) <- names(colClasses)\n  for (kk in seq(along=df)) {\n    df[[kk]] <- vector(colClasses[kk], length=nrow)\n  }\n  attr(df, \"row.names\") <- seq(length=nrow)\n  class(df) <- \"data.frame\"\n  df\n} # dataFrame()\n\n/Henrik\n\nOn Tue, Mar 31, 2015 at 4:42 PM, Sarah Goslee <sarah.goslee at gmail.com> wrote:\n> On Tue, Mar 31, 2015 at 6:35 PM, Richard M. Heiberger <rmh at temple.edu> wrote:\n>> I got rid of the extra column.\n>>\n>> data.frame(r=seq(8), foo=NA, bar=NA, row.names=\"r\")\n>\n> Brilliant!\n>\n> After much fussing, including a disturbing detour into nested lapply\n> statements from which I barely emerged with my sanity (arguable, I\n> suppose), here is a one-liner that creates a data frame of arbitrary\n> number of rows given an existing data frame as template for column\n> number and name:\n>\n>\n> n <- 8\n> df1 <- data.frame(A=runif(9), B=runif(9))\n>\n> do.call(data.frame, setNames(c(list(seq(n), \"r\"), as.list(rep(NA,\n> ncol(df1)))), c(\"r\", \"row.names\", colnames(df1))))\n>\n> It's not elegant, but it is fairly R-ish. I should probably stop\n> hunting for an elegant solution now.\n>\n> Thanks, everyone!\n>\n> Sarah\n>\n>\n>> Rich\n>>\n>> On Tue, Mar 31, 2015 at 6:18 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n>>> If you don't mind an extra column, you could use something similar to:\n>>>\n>>> data.frame(r=seq(8),foo=NA,bar=NA)\n>>>\n>>> If you do, here is another approach (see function body):\n>>>\n>>> empty.frame <- function (r = 1, n = 1, fill = NA_real_) {\n>>>   data.frame(setNames(lapply(rep(fill, length(n)), rep, times=r), n))\n>>> }\n>>> empty.frame()\n>>> empty.frame(, seq(3))\n>>> empty.frame(8, c(\"foo\", \"bar\"))\n>>>\n>>> I could not put it in one line either, without retyping at least one\n>>> argument (n in this case).\n>>> So I suggest a function is the way to go for a simplified syntax ...\n>>>\n>>> Thanks to all for the ideas!\n>>> Sven\n>>>\n>>> On 31 March 2015 at 20:55, William Dunlap <wdunlap at tibco.com> wrote:\n>>>\n>>>> You can use structure() to attach the names to a list that is input to\n>>>> data.frame.\n>>>> E.g.,\n>>>>\n>>>> dfNames <- c(\"First\", \"Second Name\")\n>>>> data.frame(lapply(structure(dfNames, names=dfNames),\n>>>> function(name)rep(NA_real_, 5)))\n>>>>\n>>>>\n>>>> Bill Dunlap\n>>>> TIBCO Software\n>>>> wdunlap tibco.com\n>>>>\n>>>> On Tue, Mar 31, 2015 at 11:37 AM, Sarah Goslee <sarah.goslee at gmail.com>\n>>>> wrote:\n>>>>\n>>>> > Hi,\n>>>> >\n>>>> > Duncan Murdoch suggested:\n>>>> >\n>>>> > > The matrix() function has a dimnames argument, so you could do this:\n>>>> > >\n>>>> > > names <- c(\"strat\", \"id\", \"pid\")\n>>>> > > data.frame(matrix(NA, nrow=10, ncol=3, dimnames=list(NULL, names)))\n>>>> >\n>>>> > That's a definite improvement, thanks. But no way to skip matrix()? It\n>>>> > just seems unRlike, although since it's only full of NA values there\n>>>> > are no coercion issues with column types or anything, so it doesn't\n>>>> > hurt. It's just inelegant. :)\n>>>> >\n>>>> > Sarah\n>\n> --\n> Sarah Goslee\n> http://www.functionaldiversity.org\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I've got dataFrame() in R.utils for this purpose, e.g.\n\n> df <- dataFrame(colClasses=c(a=\"integer\", b=\"double\", c=\"character\"), nrow=10L)\n> str(df)\n'data.frame':   10 obs. of  3 variables:\n $ a: int  ",
+      "thread_id": "thread-f39c25991118",
+      "thread_depth": 2,
+      "month": "2015-03"
     }
   ],
   "threads": [
@@ -16796,6 +16865,17 @@
       "started": "2015-03-01T09:50:04-05:00",
       "last_reply": "2015-03-01T18:39:46+00:00",
       "root_message_id": "msg-29df34f77ab5"
+    },
+    {
+      "id": "thread-f1647aeab6b2",
+      "subject": "Firefox not showing R help.",
+      "message_count": 1,
+      "participants": [
+        "Rolf Turner"
+      ],
+      "started": "2015-03-01T10:10:20+13:00",
+      "last_reply": "2015-03-01T10:10:20+13:00",
+      "root_message_id": "msg-f1647aeab6b2"
     },
     {
       "id": "thread-960543716152",
@@ -17650,7 +17730,7 @@
     {
       "id": "thread-50778a904092",
       "subject": "plotting the one-dimensional density of events in time",
-      "message_count": 5,
+      "message_count": 4,
       "participants": [
         "Christopher W. Ryan",
         "Tom Wright",
@@ -19102,7 +19182,7 @@
     {
       "id": "thread-04d6de9ab4bd",
       "subject": "Joining two datasets - recursive procedure?",
-      "message_count": 3,
+      "message_count": 2,
       "participants": [
         "Luca Meyer",
         "Michael Friendly"
@@ -20717,14 +20797,28 @@
       "root_message_id": "msg-ce5e7f6a3ed8"
     },
     {
+      "id": "thread-f39c25991118",
+      "subject": "idiom for constructing data frame",
+      "message_count": 3,
+      "participants": [
+        "Henrik Bengtsson",
+        "Richard M. Heiberger",
+        "Sarah Goslee"
+      ],
+      "started": "2015-03-31T18:35:40-04:00",
+      "last_reply": "2015-03-31T17:06:50-07:00",
+      "root_message_id": "msg-f39c25991118"
+    },
+    {
       "id": "thread-9fc51e2a096d",
       "subject": "Using matlab code in R",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
+        "Jeff Newmiller",
         "T.Riedle"
       ],
       "started": "2015-03-31T20:47:49+00:00",
-      "last_reply": "2015-03-31T20:47:49+00:00",
+      "last_reply": "2015-03-31T16:31:50-07:00",
       "root_message_id": "msg-9fc51e2a096d"
     },
     {

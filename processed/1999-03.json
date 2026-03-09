@@ -3243,6 +3243,54 @@
       "thread_id": "thread-730159fd5624",
       "thread_depth": 1,
       "month": "1999-03"
+    },
+    {
+      "id": "msg-33cdd3fa087b",
+      "message_id": "<Pine.LNX.4.04.9903311354020.14356-100000@localhost>",
+      "from_name": "Gregory R. Warnes",
+      "from_email_hash": "b6309973da3808b682ea5ff54ccf0a82b70de74c0095911e7f6f32f0a1a4df68",
+      "date": "1999-03-31T14:08:38-08:00",
+      "subject": "[R] \"dump\" Splus -> R",
+      "subject_clean": "\"dump\" Splus -> R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All,\n\nI just used \"dump\" on Splus to transfer a pile of survival objects from\nSplus 3.4 on Solaris 7 to R 0.63.3 on Intel. \n\nThe only trick is that survival objects contain an element holding the\noriginal call that generated the object.  When Splus writes these out, it\ndoesn't mark them in any way, so when R tries to read them in, it ends up\ntrying to reevaluate the call.  Not nice.  \n\nAnyway, as all but one** of the offending calls occur in statements\nthat look like\n   [...], call = func( param1, param2, [..] ), class = \"myclass\"\n\nso I wrote the following perl script to encapsulate each call in \nas.call(expression(...)) :\n\n-------begin translate.dump.pl--------\n$RS=\"<-\";\n$OS=\"<-\";\n\nwhile(<>)\n  {\n        s/call\\s*=(.*?),(\\s+?)class/call=as.call(expression($1)),$2\nclass/s;\n        print $_;\n   }\n---------end translate.dump.pl----------\n\nNow the data can be transfered by :\n\n   Splus on Unix:\n   > dump(ls())\n\nDownloading the resulting \"dumpdata\" file.\n\n   Linux shell:\n   $  translate.dump.pl < dumpdata > dumpdata.fixed\n\n   R on Linux:\n\n   > source(\"dumpdata.fixed\")\n\nJust thought this might help someone out...\n\n\n-Greg \n\n\n**The only exception was the \".Last.warning\" object, which contained\nsomething like \n  structure( \"Warning Message\" = offending(call) )\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Hi All,\n\nI just used \"dump\" on Splus to transfer a pile of survival objects from\nSplus 3.4 on Solaris 7 to R 0.63.3 on Intel. \n\nThe only trick is that survival objects contain an element holding the\no",
+      "thread_id": "thread-33cdd3fa087b",
+      "thread_depth": 0,
+      "month": "1999-03"
+    },
+    {
+      "id": "msg-8e5eba567d6b",
+      "message_id": "<Pine.LNX.4.04.9903311532340.14356-100000@localhost>",
+      "from_name": "Gregory R. Warnes",
+      "from_email_hash": "b6309973da3808b682ea5ff54ccf0a82b70de74c0095911e7f6f32f0a1a4df68",
+      "date": "1999-03-31T15:49:20-08:00",
+      "subject": "[R] \"dump\" Splus -> R",
+      "subject_clean": "\"dump\" Splus -> R",
+      "in_reply_to": "<14082.42340.393508.873639@g.ihaka.slip.auckland.ac.nz>",
+      "references": [],
+      "body_plain": "RI>> I just tried dumping and sourcing/restoring an \"lm\" object under\n  RI>> Splus-3.4, it doesn't work there either!  This is very nasty indeed.\n  RI>> \n  RI>> We can fix the problem in R by inserting quote() around call objects,\n  RI>> when we deparse, but what about Splus?\n\nI think it is a good idea to put \"substitute\" (the synonym for quote)\naround the call objects when deparsing.  Splus restores correctly with\nthe calls encapsulated in a substitute(...), as does R. \n\nI suppose I should submit a bug report to MathSoft and ask them to fix\nthier deparse as well...\n\n  RI>> \n  RI>> It seems like you may want to design your scripts to provide a\n  RI>> solution to the problem in both platforms.\n\nIf R is fixed, I can create a \"dump.correct\" for S which calls perl\ndirectly to fix things up.  Then dump/restore will work everywhere.\n\nBTW, can we have \n\n\trestore _ function(...) source(...)\n\nin base, so that the a user looking for restore doesn't have to figure out\nthat source can be used instead?\n\n\n  RI>> \n  RI>> \tRoss\n  RI>> \n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "RI>> I just tried dumping and sourcing/restoring an \"lm\" object under\n  RI>> Splus-3.4, it doesn't work there either!  This is very nasty indeed.\n  RI>> \n  RI>> We can fix the problem in R by insertin",
+      "thread_id": "thread-8e5eba567d6b",
+      "thread_depth": 0,
+      "month": "1999-03"
+    },
+    {
+      "id": "msg-91dafe37654c",
+      "message_id": "<19990401060046.692.rocketmail@web606.mail.yahoo.com>",
+      "from_name": "bill buckholz",
+      "from_email_hash": "11d18b2a5e1ec22993b58981b06af016b186f9ecfe8519b96e2b994544b56ed4",
+      "date": "1999-03-31T22:00:46-08:00",
+      "subject": "[R] Alpha C++ errors..",
+      "subject_clean": "Alpha C++ errors..",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "an old message was sent to this address in 1996 saying the following...\n\n\n\nI get the following type of message when I execute R0.14 on a DecAlpha:\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\npc=0x120080aecra=0x1200113\n04 inst=0xa4310000\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\npc=0x120080af4ra=0x1200113\n04 inst=0xb4310000\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\npc=0x120080aecra=0x1200113\n04 inst=0xa4310000\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\npc=0x120080af4ra=0x1200113\n04 inst=0xb4310000\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\npc=0x120080bdcra=0x1200113\n04 inst=0xa4310000 \nNote that R was compiled with a lot of warnings, but without\nerrormessages.\n\n\n\ni get the same type of errors when executing a program i wrote with c++\non an alpha computer.. coule you please help me get rid of theese\nmessages that appear between the lines of my program's output (which are\ncorrect) so the program looks better ?  I would appreciate any help you\ncan give. thank you very much!\n     - Bill\n\n_________________________________________________________\nDo You Yahoo!?\nGet your free @yahoo.com address at http://mail.yahoo.com\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "an old message was sent to this address in 1996 saying the following...\n\n\n\nI get the following type of message when I execute R0.14 on a DecAlpha:\nUnaligned access pid=18423 <R.binary> va=0x11ffffad4\n",
+      "thread_id": "thread-91dafe37654c",
+      "thread_depth": 0,
+      "month": "1999-03"
     }
   ],
   "threads": [
@@ -4426,6 +4474,39 @@
       "started": "1999-03-31T10:54:07+02:00",
       "last_reply": "1999-03-31T10:54:07+02:00",
       "root_message_id": "msg-2ff674d0dcf7"
+    },
+    {
+      "id": "thread-33cdd3fa087b",
+      "subject": "\"dump\" Splus -> R",
+      "message_count": 1,
+      "participants": [
+        "Gregory R. Warnes"
+      ],
+      "started": "1999-03-31T14:08:38-08:00",
+      "last_reply": "1999-03-31T14:08:38-08:00",
+      "root_message_id": "msg-33cdd3fa087b"
+    },
+    {
+      "id": "thread-8e5eba567d6b",
+      "subject": "\"dump\" Splus -> R",
+      "message_count": 1,
+      "participants": [
+        "Gregory R. Warnes"
+      ],
+      "started": "1999-03-31T15:49:20-08:00",
+      "last_reply": "1999-03-31T15:49:20-08:00",
+      "root_message_id": "msg-8e5eba567d6b"
+    },
+    {
+      "id": "thread-91dafe37654c",
+      "subject": "Alpha C++ errors..",
+      "message_count": 1,
+      "participants": [
+        "bill buckholz"
+      ],
+      "started": "1999-03-31T22:00:46-08:00",
+      "last_reply": "1999-03-31T22:00:46-08:00",
+      "root_message_id": "msg-91dafe37654c"
     }
   ]
 }

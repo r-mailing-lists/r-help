@@ -12185,6 +12185,43 @@
       "thread_id": "thread-26fa02b11b5d",
       "thread_depth": 0,
       "month": "2016-10"
+    },
+    {
+      "id": "msg-2a25c286eddd",
+      "message_id": "<95806726-F808-43B1-9AC7-5A8C59AAAF6F@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "ee1094c33a9a250a7334f3a1fc915e1e7bae14a1c68d3b0c50991971fd069cb2",
+      "date": "2016-10-31T16:34:10-07:00",
+      "subject": "[R] function ave() with seq_along returning char sequence instead of numeric",
+      "subject_clean": "function ave() with seq_along returning char sequence instead of numeric",
+      "in_reply_to": "<F7E6D18CC2877149AB5296CE54EA276635B9A7CC@WAXMXOLYMB025.WAX.wa.lcl>",
+      "references": [
+        "<F7E6D18CC2877149AB5296CE54EA276635B9A7CC@WAXMXOLYMB025.WAX.wa.lcl>"
+      ],
+      "body_plain": "The help page describes the first argument x as a numeric... it is not designed to accept character, so the fact that you get anything even close to right is just a bonus.\n\nAs the doctor says, \"if it hurts, don't do that\".\n\nave( rep( 1, length( v ), v, FUN=seq_along )\n-- \nSent from my phone. Please excuse my brevity.\n\nOn October 31, 2016 3:29:01 PM PDT, \"Nordlund, Dan (DSHS/RDA)\" <NordlDJ at dshs.wa.gov> wrote:\n>Given  the following R statements\n>\n>v <-  c('a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c')\n>ave(v, list(v), FUN=seq_along)\n> [1] \"1\" \"2\" \"3\" \"1\" \"2\" \"3\" \"1\" \"2\" \"3\" \"4\" \n>\n>I was expecting to get a numeric vector back.  I apparently have missed\n>something in the documentation.  If vector v is character, then the\n>numeric sequence is converted to character before returning.  I can\n>work around by doing something like\n>\n>ave(seq_along(v), list(v), FUN=seq_along)\n> [1] 1 2 3 1 2 3 1 2 3 4 \n>\n>Is the work around the best way to go, or have I missed an option in\n>the documentation?\n>\n>\n>Thanks,\n>\n>Dan\n>\n>Daniel Nordlund, PhD\n>Research and Data Analysis Division\n>Services & Enterprise Support Administration\n>Washington State Department of Social and Health Services\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide\n>http://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The help page describes the first argument x as a numeric... it is not designed to accept character, so the fact that you get anything even close to right is just a bonus.\n\nAs the doctor says, \"if it ",
+      "thread_id": "thread-26fa02b11b5d",
+      "thread_depth": 1,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-52b0a1a4bfac",
+      "message_id": "<D5442F74-62C9-494A-A2BE-FD57450B8120@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2016-10-31T18:44:19-07:00",
+      "subject": "[R] bzip2",
+      "subject_clean": "bzip2",
+      "in_reply_to": "<F7E6D18CC2877149AB5296CE54EA276635B9A8B2@WAXMXOLYMB025.WAX.wa.lcl>",
+      "references": [
+        "<CAFBvUatx5vUMgJeumNo1YuQ6S9rDJ+GSqRG+XGJRkTp3V4Em4g@mail.gmail.com>",
+        "<F7E6D18CC2877149AB5296CE54EA276635B9A8B2@WAXMXOLYMB025.WAX.wa.lcl>"
+      ],
+      "body_plain": "> On Oct 31, 2016, at 5:29 PM, Nordlund, Dan (DSHS/RDA) <NordlDJ at dshs.wa.gov> wrote:\n> \n> I don't know what version Linux or other OS you are using, but have you installed the bzip2 development package? It would be named something like  libbz2-dev (that is what it is in Ubuntu, I believe).\n\nThis question has been asked several times by OSX users and the answer for them has always been:\n\nhttp://r.research.att.com/libs/\n\n... although it's not immediately obvious that the bzlib functions are to be found in the xz package.\n\nInstruction for installation from a Unix console  are at the bottom of the page.\n-- \nDavid.\n\n\n\n> \n> Dan\n> \n> Daniel Nordlund, PhD\n> Research and Data Analysis Division\n> Services & Enterprise Support Administration\n> Washington State Department of Social and Health Services\n> \n> \n>> -----Original Message-----\n>> From: R-help [mailto:r-help-bounces at r-project.org] On Behalf Of Josef\n>> Eschgfaeller\n>> Sent: Monday, October 31, 2016 4:49 PM\n>> To: r-help\n>> Subject: [R] bzip2\n>> \n>> I am not able to compile R 3.3,\n>> configure halting with:\n>> --------------------------------------------------\n>> checking for BZ2_bzlibVersion in -lbz2... yes checking bzlib.h usability... yes\n>> checking bzlib.h presence... yes checking for bzlib.h... yes checking if bzip2\n>> version >= 1.0.6... no checking whether bzip2 support suffices... configure:\n>> error:\n>>                         bzip2 library and headers are required\n>> --------------------------------------------------\n>> But my bzip2 seems to be 1.0.6:\n>> \n>> bzip2 --version\n>> bzip2, a block-sorting file compressor.  Version 1.0.6, 6-Sept-2010.\n>> type bzip2\n>> bzip2 is hashed (/opt/local/bin/bzip2)\n>> type R\n>> R is hashed (/usr/bin/R)\n>> R --version\n>> R version 3.2.0 (2015-04-16) -- \"Full of Ingredients\"\n>> --------------------------------------------------\n>> Thanks for help\n>> \n>> Josef Eschgfaeller\n>> \n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-\n>> guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "> On Oct 31, 2016, at 5:29 PM, Nordlund, Dan (DSHS/RDA) <NordlDJ at dshs.wa.gov> wrote:\n> \n> I don't know what version Linux or other OS you are using, but have you installed the bzip2 development pac",
+      "thread_id": "thread-52b0a1a4bfac",
+      "thread_depth": 0,
+      "month": "2016-10"
     }
   ],
   "threads": [
@@ -14836,14 +14873,26 @@
       "root_message_id": "msg-e6e1617e8458"
     },
     {
-      "id": "thread-26fa02b11b5d",
-      "subject": "function ave() with seq_along returning char sequence instead of numeric",
+      "id": "thread-52b0a1a4bfac",
+      "subject": "bzip2",
       "message_count": 1,
       "participants": [
+        "David Winsemius"
+      ],
+      "started": "2016-10-31T18:44:19-07:00",
+      "last_reply": "2016-10-31T18:44:19-07:00",
+      "root_message_id": "msg-52b0a1a4bfac"
+    },
+    {
+      "id": "thread-26fa02b11b5d",
+      "subject": "function ave() with seq_along returning char sequence instead of numeric",
+      "message_count": 2,
+      "participants": [
+        "Jeff Newmiller",
         "Nordlund, Dan (DSHS/RDA)"
       ],
       "started": "2016-10-31T22:29:01+00:00",
-      "last_reply": "2016-10-31T22:29:01+00:00",
+      "last_reply": "2016-10-31T16:34:10-07:00",
       "root_message_id": "msg-26fa02b11b5d"
     }
   ]

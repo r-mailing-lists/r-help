@@ -4,6 +4,22 @@
   "month": "2016-05",
   "messages": [
     {
+      "id": "msg-d483378d42bf",
+      "message_id": "<CA+swpQcDfqODkt8oSwoS7Ng5-SU3GUz9JC5F8wmXYfV=Bi=3fA@mail.gmail.com>",
+      "from_name": "wenbo",
+      "from_email_hash": "80c5e440ffef74612b3561766ea49ff835a4f9d2ee9a38c3c68b6e2fe35ffccc",
+      "date": "2016-05-01T01:41:47+08:00",
+      "subject": "[R] Install R (version 3.2.5) in CentOS platform",
+      "subject_clean": "Install R (version 3.2.5) in CentOS platform",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nI want to install the latest R in CentOS. Below is the command line:\n\n./configure --prefix=/home/fino/R/3.2.5/\n--with-tcl-config=/home/fino/software/tcl8.6.1/lib/tclConfig.sh\n--with-tk-config=\n/home/fino\n/software/tk8.6.1/lib/tkConfig.sh --with-readline=yes\n--with-cairo=yes --without-x\n\nBelow is the output message when ran the above command:\n...\nchecking whether pkg-config knows about cairo and pango... no\nchecking whether pkg-config knows about cairo... yes\nchecking whether cairo is >= 1.2 and works... no\n...\n\n  C++ compiler:              g++  -g -O2\n  C++ 11 compiler:           g++  -std=c++0x -g -O2\n  Fortran 90/95 compiler:    gfortran -g -O2\n  Obj-C compiler:            gcc -g -O2 -fobjc-exceptions\n\n  Interfaces supported:      tcltk\n  External libraries:        readline, zlib, bzlib, lzma, PCRE\n  Additional capabilities:   PNG, JPEG, TIFF, NLS\n  Options enabled:           shared BLAS, R profiling\n\n  Capabilities skipped:      cairo, ICU\n  Options not enabled:       memory profiling\n\n  Recommended packages:      yes\n\nAfter I installed the R and entered R:\n> capabilities()\n       jpeg         png        tiff       tcltk         X11        aqua\n      FALSE       FALSE       FALSE        TRUE       FALSE       FALSE\n   http/ftp     sockets      libxml        fifo      cledit       iconv\n       TRUE        TRUE        TRUE        TRUE        TRUE        TRUE\n        NLS     profmem       cairo         ICU long.double     libcurl\n       TRUE       FALSE       FALSE       FALSE        TRUE       FALSE\n\nThe png doesn't work. Does anyone know how to solve this problem?\n\nBest regards!\nBo\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\nI want to install the latest R in CentOS. Below is the command line:\n\n./configure --prefix=/home/fino/R/3.2.5/\n--with-tcl-config=/home/fino/software/tcl8.6.1/lib/tclConfig.sh\n--with-tk-config=\n/ho",
+      "thread_id": "thread-d483378d42bf",
+      "thread_depth": 0,
+      "month": "2016-05"
+    },
+    {
       "id": "msg-490abe8bc234",
       "message_id": "<CAHVFrXH0xtnFnQcjUVVeCLCOnW8OLyurpb0OrAp+4t+LYND0Og@mail.gmail.com>",
       "from_name": "Preetam Pal",
@@ -8665,24 +8681,6 @@
       "month": "2016-05"
     },
     {
-      "id": "msg-34d78b3781bb",
-      "message_id": "<67975acb-cbfc-0db2-b2af-8166b0943ab4@yorku.ca>",
-      "from_name": "Michael Friendly",
-      "from_email_hash": "e9b90ce73178f88f76f93dfc82689bfc2868e9a51ea9a8e011552092e2ee1ae2",
-      "date": "2016-05-20T08:49:40-04:00",
-      "subject": "[R] Change sum of squares type for ANOVA",
-      "subject_clean": "Change sum of squares type for ANOVA",
-      "in_reply_to": "<6D5C009FB51EBD41BEE57F4C002350FD09E63F@SB00112A.adb.intra.admin.ch>",
-      "references": [
-        "<6D5C009FB51EBD41BEE57F4C002350FD09E63F@SB00112A.adb.intra.admin.ch>"
-      ],
-      "body_plain": "Use car::Anova() for type II and type III sums of squares and F-tests.\nThe sequential type I tests computed by anova() are rarely sensible\n\nOn 5/20/2016 3:11 AM, michael.eisenring at agroscope.admin.ch wrote:\n> Dear R-list members,\n>\n> I compared my statistics with my supervisor yesterday. He is using STATISTICA, I am using R. We both loaded the same data-file and did a two-way ANOVA with treatment and trial as factors; treatment means were then compared to the untreated control using Dunnett's test. Surprisingly, we got different values, especially the F values differed. In the following Dunnett's test, some treatments were significant in R, but not in STATISTICA. We checked the basic settings of the programs and found out, that STATISTICA is using \"sigma-restricted parametrization\" and \"type VI sum of squares\" for the calculations, but so far, I could not find any information about the sum of squares type, which is applied in R. Is it possible, that these settings are the reason for the different values we got? And how can I change in R these settings?\n>\n> Here the code I used:\n> bt_assay_devtime_Model <- aov(developmenttime~treatment+run+treatment*run, data=bt_assay)\n> summary(bt_assay_devtime_Model)\n> postHocs_bt_assay_devtime <- glht(bt_assay_devtime_Model, linfct=mcp(treatment=\"Dunnett\"), base=1)\n> summary(postHocs_bt_assay_devtime)\n> confint(postHocs_bt_assay_devtime)\n>\n> Thanks a lot for your help!\n> Simone\n>\n> Eisenring Michael, Msc.\n> PhD Student\n>\n> Federal Department of Economic Affairs, Education and Research\n> EAER\n> Institute of Sustainability Sciences ISS\n> Biosafety\n>\n> Reckenholzstrasse 191, CH-8046 Z?rich\n> Tel. +41 44 37 77181\n> Fax +41 44 37 77201\n> michael.eisenring at agroscope.admin.ch<mailto:michael.eisenring at agroscope.admin.ch>\n> www.agroscope.ch<http://www.agroscope.ch/>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n>",
-      "body_snippet": "Use car::Anova() for type II and type III sums of squares and F-tests.\nThe sequential type I tests computed by anova() are rarely sensible\n\nOn 5/20/2016 3:11 AM, michael.eisenring at agroscope.admin.c",
-      "thread_id": "thread-6e00c29e45d3",
-      "thread_depth": 1,
-      "month": "2016-05"
-    },
-    {
       "id": "msg-72c23c76bf9f",
       "message_id": "<BN3PR01MB123808D3C13075EB079A0802924B0@BN3PR01MB1238.prod.exchangelabs.com>",
       "from_name": "Rees, Lisa Marie (MU-Student)",
@@ -14553,9 +14551,99 @@
       "thread_id": "thread-f77fb2cea5bb",
       "thread_depth": 4,
       "month": "2016-05"
+    },
+    {
+      "id": "msg-a3ddb647a9cd",
+      "message_id": "<CAGx1TMDX3d7A3jta-uCYnER72J_g+FN8PFHh_rZqxyMaYAGT1A@mail.gmail.com>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2016-05-31T18:12:02-04:00",
+      "subject": "[R] Searching for antilog function",
+      "subject_clean": "Searching for antilog function",
+      "in_reply_to": "<BLU436-SMTP1727A2BB2DBF0627C8FA469DF460@phx.gbl>",
+      "references": [
+        "<loom.20041125T051716-875@post.gmane.org>",
+        "<BLU436-SMTP1727A2BB2DBF0627C8FA469DF460@phx.gbl>"
+      ],
+      "body_plain": "Use power\n\n> log(78,10)\n[1] 1.892095\n> 10^log(78,10)\n[1] 78\n\nOn Tue, May 31, 2016 at 4:14 PM, Carlos <arnobras at hotmail.com> wrote:\n> The following function can do the work as well\n>\n>  antilog<-function(lx,base)\n>  {\n>  lbx<-lx/log(exp(1),base=base)\n>  result<-exp(lbx)\n>  result\n>  }\n>\n> This solution is based on the change of base formula which states that :\n>\n> log (x,base=b) = log(x,base=a)/log(b,base=a)\n>\n> The original logarithm is changed into natural logarithm and then the\n> exponential function is employed\n>\n> The arguments are:\n>\n> 'lx', de logarithm we have.\n> 'base', the base what was employed to obtain lx\n>\n> For example:\n>\n> log(78,10) = 1.892095\n>\n> Then the antllog is\n>\n> antilog(1.892095,10)\n>\n> 78\n>\n> As expected.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Use power\n\n> log(78,10)\n[1] 1.892095\n> 10^log(78,10)\n[1] 78\n\nOn Tue, May 31, 2016 at 4:14 PM, Carlos <arnobras at hotmail.com> wrote:\n> The following function can do the work as well\n>\n>  antilog<-fun",
+      "thread_id": "thread-ca75382faa8e",
+      "thread_depth": 1,
+      "month": "2016-05"
+    },
+    {
+      "id": "msg-fb80a14fe121",
+      "message_id": "<CAJOiR6aC1sHOTi-_rB2CXVd2ZuqAiVNyfJw=_Khjwh8OU-rUBA@mail.gmail.com>",
+      "from_name": "Val",
+      "from_email_hash": "6abef9403e5d212696d01587233edb07160827097603f2da9c65f4ff489a6b2e",
+      "date": "2016-05-31T20:26:31-05:00",
+      "subject": "[R] Extract from a text file",
+      "subject_clean": "Extract from a text file",
+      "in_reply_to": "<alpine.BSF.2.00.1605302239170.3513@pedal.dcn.davis.ca.us>",
+      "references": [
+        "<CAJOiR6YNh5300ziX6MGCUN+i-029tX7JKdpZeKoUNs00xP1-3A@mail.gmail.com>",
+        "<alpine.BSF.2.00.1605302239170.3513@pedal.dcn.davis.ca.us>"
+      ],
+      "body_plain": "Thank you so much Jeff. It worked for this example.\n\nWhen I read it from a file (c:\\data\\test.txt) it did not work\n\nKLEM=\"c:\\data\"\nKR=paste(KLEM,\"\\test.txt\",sep=\"\")\nindta <- readLines(KR, skip=46)  # not interested in the first 46 lines)\n\npattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\nfirstlines <- grep( pattern, indta )\n# Replace the matched portion (entire string) with the first capture # string\nv1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n# Replace the matched portion (entire string) with the second capture # string\nv2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n# Convert the lines just after the first lines to numeric\nv3 <- as.numeric( indta[ firstlines + 1 ] )\n# put it all into a data frame\nresult <- data.frame( Group = v1, Mean = v2, SE = v3 )\n\nresult\n[1] Group Mean  SE\n<0 rows> (or 0-length row.names)\n\nThank you in advance\n\n\nOn Tue, May 31, 2016 at 1:12 AM, Jeff Newmiller\n<jdnewmil at dcn.davis.ca.us> wrote:\n> Please learn to post in plain text (the setting is in your email client...\n> somewhere), as HTML is \"What We See Is Not What You Saw\" on this mailing\n> list.  In conjunction with that, try reading some of the fine material\n> mentioned in the Posting Guide about making reproducible examples like this\n> one:\n>\n> # You could read in a file\n> # indta <- readLines( \"out.txt\" )\n> # but there is no \"current directory\" in an email\n> # so here I have used the dput() function to make source code\n> # that creates a self-contained R object\n>\n> indta <- c(\n> \"Mean of weight  group 1, SE of mean  :  72.289037489555276\",\n> \" 11.512956539215610\",\n> \"Average weight of group 2, SE of Mean :  83.940053900595013\",\n> \"  10.198495690144522\",\n> \"group 3 mean , SE of Mean     :                78.310441258245469\",\n> \" 13.015876679555\",\n> \"Mean of weight of group 4, SE of Mean               : 76.967516495101669\",\n> \" 12.1254882985\", \"\")\n>\n> # Regular expression patterns are discussed all over the internet\n> # in many places OTHER than R\n> # You can start with ?regex, but there are many fine tutorials also\n>\n> pattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\n> # For this task the regex has to match the whole \"first line\" of each set\n> #  ^ =match starting at the beginning of the string\n> #  .* =any character, zero or more times\n> #  \"group \" =match these characters\n> #  ( =first capture string starts here\n> #  \\\\d = any digit (first backslash for R, second backslash for regex)\n> #  + =one or more of the preceding (any digit)\n> #  ) =end of first capture string\n> #  [^:] =any non-colon character\n> #  * =zero or more of the preceding (non-colon character)\n> #  : =match a colon exactly\n> #  \" *\" =match zero or more spaces\n> #  ( =second capture string starts here\n> #  [ =start of a set of equally acceptable characters\n> #  -+ =either of these characters are acceptable\n> #  0-9 =any digit would be acceptable\n> #  . =a period is acceptable (this is inside the [])\n> #  eE =in case you get exponential notation input\n> #  ] =end of the set of acceptable characters (number)\n> #  * =number of acceptable characters can be zero or more\n> #  ) =second capture string stops here\n> #  .* =zero or more of any character (just in case)\n> #  $ =at end of pattern, requires that the match reach the end\n> #     of the string\n>\n> # identify indexes of strings that match the pattern\n> firstlines <- grep( pattern, indta )\n> # Replace the matched portion (entire string) with the first capture #\n> string\n> v1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n> # Replace the matched portion (entire string) with the second capture #\n> string\n> v2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n> # Convert the lines just after the first lines to numeric\n> v3 <- as.numeric( indta[ firstlines + 1 ] )\n> # put it all into a data frame\n> result <- data.frame( Group = v1, Mean = v2, SE = v3 )\n>\n> Figuring out how to deliver your result (output) is a separate question that\n> depends where you want it to go.\n>\n>\n> On Mon, 30 May 2016, Val wrote:\n>\n>> Hi all,\n>>\n>> I have a messy text file and from this text file I want extract some\n>> information\n>> here is the text file (out.txt).  One record has tow lines. The mean comes\n>> in the first line and the SE of the mean is on the second line. Here is\n>> the\n>> sample of the data.\n>>\n>> Mean of weight  group 1, SE of mean  :  72.289037489555276\n>> 11.512956539215610\n>> Average weight of group 2, SE of Mean :  83.940053900595013\n>>  10.198495690144522\n>> group 3 mean , SE of Mean     :                78.310441258245469\n>> 13.015876679555\n>> Mean of weight of group 4, SE of Mean               : 76.967516495101669\n>> 12.1254882985\n>>\n>> I want produce the following  table. How do i read it first and then\n>> produce a\n>>\n>>\n>> Gr1  72.289037489555276   11.512956539215610\n>> Gr2  83.940053900595013   10.198495690144522\n>> Gr3  78.310441258245469   13.015876679555\n>> Gr4  76.967516495101669   12.1254882985\n>>\n>>\n>> Thank you in advance\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n> ---------------------------------------------------------------------------\n> Jeff Newmiller                        The     .....       .....  Go Live...\n> DCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live Go...\n>                                       Live:   OO#.. Dead: OO#..  Playing\n> Research Engineer (Solar/Batteries            O.O#.       #.O#.  with\n> /Software/Embedded Controllers)               .OO#.       .OO#.  rocks...1k\n> ---------------------------------------------------------------------------",
+      "body_snippet": "Thank you so much Jeff. It worked for this example.\n\nWhen I read it from a file (c:\\data\\test.txt) it did not work\n\nKLEM=\"c:\\data\"\nKR=paste(KLEM,\"\\test.txt\",sep=\"\")\nindta <- readLines(KR, skip=46)  # ",
+      "thread_id": "thread-a0e1e408a6c1",
+      "thread_depth": 2,
+      "month": "2016-05"
+    },
+    {
+      "id": "msg-ad7251742ee4",
+      "message_id": "<D6AF5A9D-8D7D-4F60-8888-4EEA7973B0A5@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "ee1094c33a9a250a7334f3a1fc915e1e7bae14a1c68d3b0c50991971fd069cb2",
+      "date": "2016-05-31T19:05:39-07:00",
+      "subject": "[R] Extract from a text file",
+      "subject_clean": "Extract from a text file",
+      "in_reply_to": "<CAJOiR6aC1sHOTi-_rB2CXVd2ZuqAiVNyfJw=_Khjwh8OU-rUBA@mail.gmail.com>",
+      "references": [
+        "<CAJOiR6YNh5300ziX6MGCUN+i-029tX7JKdpZeKoUNs00xP1-3A@mail.gmail.com>",
+        "<alpine.BSF.2.00.1605302239170.3513@pedal.dcn.davis.ca.us>",
+        "<CAJOiR6aC1sHOTi-_rB2CXVd2ZuqAiVNyfJw=_Khjwh8OU-rUBA@mail.gmail.com>"
+      ],
+      "body_plain": "You need to go back and study how I made my solution reproducible and make your problem reproducible. \n\nYou probably also ought to spend some time comparing the regex pattern to your actual data... the point of this list is to learn how to construct these solutions yourself.\n-- \nSent from my phone. Please excuse my brevity.\n\nOn May 31, 2016 6:26:31 PM PDT, Val <valkremk at gmail.com> wrote:\n>Thank you so much Jeff. It worked for this example.\n>\n>When I read it from a file (c:\\data\\test.txt) it did not work\n>\n>KLEM=\"c:\\data\"\n>KR=paste(KLEM,\"\\test.txt\",sep=\"\")\n>indta <- readLines(KR, skip=46)  # not interested in the first 46\n>lines)\n>\n>pattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\n>firstlines <- grep( pattern, indta )\n># Replace the matched portion (entire string) with the first capture #\n>string\n>v1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n># Replace the matched portion (entire string) with the second capture #\n>string\n>v2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n># Convert the lines just after the first lines to numeric\n>v3 <- as.numeric( indta[ firstlines + 1 ] )\n># put it all into a data frame\n>result <- data.frame( Group = v1, Mean = v2, SE = v3 )\n>\n>result\n>[1] Group Mean  SE\n><0 rows> (or 0-length row.names)\n>\n>Thank you in advance\n>\n>\n>On Tue, May 31, 2016 at 1:12 AM, Jeff Newmiller\n><jdnewmil at dcn.davis.ca.us> wrote:\n>> Please learn to post in plain text (the setting is in your email\n>client...\n>> somewhere), as HTML is \"What We See Is Not What You Saw\" on this\n>mailing\n>> list.  In conjunction with that, try reading some of the fine\n>material\n>> mentioned in the Posting Guide about making reproducible examples\n>like this\n>> one:\n>>\n>> # You could read in a file\n>> # indta <- readLines( \"out.txt\" )\n>> # but there is no \"current directory\" in an email\n>> # so here I have used the dput() function to make source code\n>> # that creates a self-contained R object\n>>\n>> indta <- c(\n>> \"Mean of weight  group 1, SE of mean  :  72.289037489555276\",\n>> \" 11.512956539215610\",\n>> \"Average weight of group 2, SE of Mean :  83.940053900595013\",\n>> \"  10.198495690144522\",\n>> \"group 3 mean , SE of Mean     :                78.310441258245469\",\n>> \" 13.015876679555\",\n>> \"Mean of weight of group 4, SE of Mean               :\n>76.967516495101669\",\n>> \" 12.1254882985\", \"\")\n>>\n>> # Regular expression patterns are discussed all over the internet\n>> # in many places OTHER than R\n>> # You can start with ?regex, but there are many fine tutorials also\n>>\n>> pattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\n>> # For this task the regex has to match the whole \"first line\" of each\n>set\n>> #  ^ =match starting at the beginning of the string\n>> #  .* =any character, zero or more times\n>> #  \"group \" =match these characters\n>> #  ( =first capture string starts here\n>> #  \\\\d = any digit (first backslash for R, second backslash for\n>regex)\n>> #  + =one or more of the preceding (any digit)\n>> #  ) =end of first capture string\n>> #  [^:] =any non-colon character\n>> #  * =zero or more of the preceding (non-colon character)\n>> #  : =match a colon exactly\n>> #  \" *\" =match zero or more spaces\n>> #  ( =second capture string starts here\n>> #  [ =start of a set of equally acceptable characters\n>> #  -+ =either of these characters are acceptable\n>> #  0-9 =any digit would be acceptable\n>> #  . =a period is acceptable (this is inside the [])\n>> #  eE =in case you get exponential notation input\n>> #  ] =end of the set of acceptable characters (number)\n>> #  * =number of acceptable characters can be zero or more\n>> #  ) =second capture string stops here\n>> #  .* =zero or more of any character (just in case)\n>> #  $ =at end of pattern, requires that the match reach the end\n>> #     of the string\n>>\n>> # identify indexes of strings that match the pattern\n>> firstlines <- grep( pattern, indta )\n>> # Replace the matched portion (entire string) with the first capture\n>#\n>> string\n>> v1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n>> # Replace the matched portion (entire string) with the second capture\n>#\n>> string\n>> v2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n>> # Convert the lines just after the first lines to numeric\n>> v3 <- as.numeric( indta[ firstlines + 1 ] )\n>> # put it all into a data frame\n>> result <- data.frame( Group = v1, Mean = v2, SE = v3 )\n>>\n>> Figuring out how to deliver your result (output) is a separate\n>question that\n>> depends where you want it to go.\n>>\n>>\n>> On Mon, 30 May 2016, Val wrote:\n>>\n>>> Hi all,\n>>>\n>>> I have a messy text file and from this text file I want extract some\n>>> information\n>>> here is the text file (out.txt).  One record has tow lines. The mean\n>comes\n>>> in the first line and the SE of the mean is on the second line. Here\n>is\n>>> the\n>>> sample of the data.\n>>>\n>>> Mean of weight  group 1, SE of mean  :  72.289037489555276\n>>> 11.512956539215610\n>>> Average weight of group 2, SE of Mean :  83.940053900595013\n>>>  10.198495690144522\n>>> group 3 mean , SE of Mean     :                78.310441258245469\n>>> 13.015876679555\n>>> Mean of weight of group 4, SE of Mean               :\n>76.967516495101669\n>>> 12.1254882985\n>>>\n>>> I want produce the following  table. How do i read it first and then\n>>> produce a\n>>>\n>>>\n>>> Gr1  72.289037489555276   11.512956539215610\n>>> Gr2  83.940053900595013   10.198495690144522\n>>> Gr3  78.310441258245469   13.015876679555\n>>> Gr4  76.967516495101669   12.1254882985\n>>>\n>>>\n>>> Thank you in advance\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>\n>>\n>---------------------------------------------------------------------------\n>> Jeff Newmiller                        The     .....       .....  Go\n>Live...\n>> DCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live\n>Go...\n>>                                       Live:   OO#.. Dead: OO#.. \n>Playing\n>> Research Engineer (Solar/Batteries            O.O#.       #.O#.  with\n>> /Software/Embedded Controllers)               .OO#.       .OO#. \n>rocks...1k\n>>\n>---------------------------------------------------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "You need to go back and study how I made my solution reproducible and make your problem reproducible. \n\nYou probably also ought to spend some time comparing the regex pattern to your actual data... th",
+      "thread_id": "thread-a0e1e408a6c1",
+      "thread_depth": 3,
+      "month": "2016-05"
+    },
+    {
+      "id": "msg-25b2277094af",
+      "message_id": "<CAGxFJbTtSUiY+2shT=niGXjDC020vk8_hChwpubYMt0FBRRYTQ@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "be33e4b6b93b14487fe5706ad20c8119f12a9c16f94e8024bb998c159c7742b2",
+      "date": "2016-05-31T20:27:36-07:00",
+      "subject": "[R] Extract from a text file",
+      "subject_clean": "Extract from a text file",
+      "in_reply_to": "<D6AF5A9D-8D7D-4F60-8888-4EEA7973B0A5@dcn.davis.ca.us>",
+      "references": [
+        "<CAJOiR6YNh5300ziX6MGCUN+i-029tX7JKdpZeKoUNs00xP1-3A@mail.gmail.com>",
+        "<alpine.BSF.2.00.1605302239170.3513@pedal.dcn.davis.ca.us>",
+        "<CAJOiR6aC1sHOTi-_rB2CXVd2ZuqAiVNyfJw=_Khjwh8OU-rUBA@mail.gmail.com>",
+        "<D6AF5A9D-8D7D-4F60-8888-4EEA7973B0A5@dcn.davis.ca.us>"
+      ],
+      "body_plain": "On Tue, May 31, 2016 at 7:05 PM, Jeff Newmiller\n<jdnewmil at dcn.davis.ca.us> wrote:\n> You need to go back and study how I made my solution reproducible and make your problem reproducible.\n>\n> You probably also ought to spend some time comparing the regex pattern to your actual data... the point of this list is to learn how to construct these solutions yourself.\n\n\nAh, if only that were the case.\n\n(or is that just the grumbling of an old curmudgeon?)\n\nCheers,\nBert\n\n\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> On May 31, 2016 6:26:31 PM PDT, Val <valkremk at gmail.com> wrote:\n>>Thank you so much Jeff. It worked for this example.\n>>\n>>When I read it from a file (c:\\data\\test.txt) it did not work\n>>\n>>KLEM=\"c:\\data\"\n>>KR=paste(KLEM,\"\\test.txt\",sep=\"\")\n>>indta <- readLines(KR, skip=46)  # not interested in the first 46\n>>lines)\n>>\n>>pattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\n>>firstlines <- grep( pattern, indta )\n>># Replace the matched portion (entire string) with the first capture #\n>>string\n>>v1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n>># Replace the matched portion (entire string) with the second capture #\n>>string\n>>v2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n>># Convert the lines just after the first lines to numeric\n>>v3 <- as.numeric( indta[ firstlines + 1 ] )\n>># put it all into a data frame\n>>result <- data.frame( Group = v1, Mean = v2, SE = v3 )\n>>\n>>result\n>>[1] Group Mean  SE\n>><0 rows> (or 0-length row.names)\n>>\n>>Thank you in advance\n>>\n>>\n>>On Tue, May 31, 2016 at 1:12 AM, Jeff Newmiller\n>><jdnewmil at dcn.davis.ca.us> wrote:\n>>> Please learn to post in plain text (the setting is in your email\n>>client...\n>>> somewhere), as HTML is \"What We See Is Not What You Saw\" on this\n>>mailing\n>>> list.  In conjunction with that, try reading some of the fine\n>>material\n>>> mentioned in the Posting Guide about making reproducible examples\n>>like this\n>>> one:\n>>>\n>>> # You could read in a file\n>>> # indta <- readLines( \"out.txt\" )\n>>> # but there is no \"current directory\" in an email\n>>> # so here I have used the dput() function to make source code\n>>> # that creates a self-contained R object\n>>>\n>>> indta <- c(\n>>> \"Mean of weight  group 1, SE of mean  :  72.289037489555276\",\n>>> \" 11.512956539215610\",\n>>> \"Average weight of group 2, SE of Mean :  83.940053900595013\",\n>>> \"  10.198495690144522\",\n>>> \"group 3 mean , SE of Mean     :                78.310441258245469\",\n>>> \" 13.015876679555\",\n>>> \"Mean of weight of group 4, SE of Mean               :\n>>76.967516495101669\",\n>>> \" 12.1254882985\", \"\")\n>>>\n>>> # Regular expression patterns are discussed all over the internet\n>>> # in many places OTHER than R\n>>> # You can start with ?regex, but there are many fine tutorials also\n>>>\n>>> pattern <- \"^.*group (\\\\d+)[^:]*: *([-+0-9.eE]*).*$\"\n>>> # For this task the regex has to match the whole \"first line\" of each\n>>set\n>>> #  ^ =match starting at the beginning of the string\n>>> #  .* =any character, zero or more times\n>>> #  \"group \" =match these characters\n>>> #  ( =first capture string starts here\n>>> #  \\\\d = any digit (first backslash for R, second backslash for\n>>regex)\n>>> #  + =one or more of the preceding (any digit)\n>>> #  ) =end of first capture string\n>>> #  [^:] =any non-colon character\n>>> #  * =zero or more of the preceding (non-colon character)\n>>> #  : =match a colon exactly\n>>> #  \" *\" =match zero or more spaces\n>>> #  ( =second capture string starts here\n>>> #  [ =start of a set of equally acceptable characters\n>>> #  -+ =either of these characters are acceptable\n>>> #  0-9 =any digit would be acceptable\n>>> #  . =a period is acceptable (this is inside the [])\n>>> #  eE =in case you get exponential notation input\n>>> #  ] =end of the set of acceptable characters (number)\n>>> #  * =number of acceptable characters can be zero or more\n>>> #  ) =second capture string stops here\n>>> #  .* =zero or more of any character (just in case)\n>>> #  $ =at end of pattern, requires that the match reach the end\n>>> #     of the string\n>>>\n>>> # identify indexes of strings that match the pattern\n>>> firstlines <- grep( pattern, indta )\n>>> # Replace the matched portion (entire string) with the first capture\n>>#\n>>> string\n>>> v1 <- as.numeric( sub( pattern, \"\\\\1\", indta[ firstlines ] ) )\n>>> # Replace the matched portion (entire string) with the second capture\n>>#\n>>> string\n>>> v2 <- as.numeric( sub( pattern, \"\\\\2\", indta[ firstlines ] ) )\n>>> # Convert the lines just after the first lines to numeric\n>>> v3 <- as.numeric( indta[ firstlines + 1 ] )\n>>> # put it all into a data frame\n>>> result <- data.frame( Group = v1, Mean = v2, SE = v3 )\n>>>\n>>> Figuring out how to deliver your result (output) is a separate\n>>question that\n>>> depends where you want it to go.\n>>>\n>>>\n>>> On Mon, 30 May 2016, Val wrote:\n>>>\n>>>> Hi all,\n>>>>\n>>>> I have a messy text file and from this text file I want extract some\n>>>> information\n>>>> here is the text file (out.txt).  One record has tow lines. The mean\n>>comes\n>>>> in the first line and the SE of the mean is on the second line. Here\n>>is\n>>>> the\n>>>> sample of the data.\n>>>>\n>>>> Mean of weight  group 1, SE of mean  :  72.289037489555276\n>>>> 11.512956539215610\n>>>> Average weight of group 2, SE of Mean :  83.940053900595013\n>>>>  10.198495690144522\n>>>> group 3 mean , SE of Mean     :                78.310441258245469\n>>>> 13.015876679555\n>>>> Mean of weight of group 4, SE of Mean               :\n>>76.967516495101669\n>>>> 12.1254882985\n>>>>\n>>>> I want produce the following  table. How do i read it first and then\n>>>> produce a\n>>>>\n>>>>\n>>>> Gr1  72.289037489555276   11.512956539215610\n>>>> Gr2  83.940053900595013   10.198495690144522\n>>>> Gr3  78.310441258245469   13.015876679555\n>>>> Gr4  76.967516495101669   12.1254882985\n>>>>\n>>>>\n>>>> Thank you in advance\n>>>>\n>>>>         [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>>> http://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>\n>>>\n>>>\n>>---------------------------------------------------------------------------\n>>> Jeff Newmiller                        The     .....       .....  Go\n>>Live...\n>>> DCN:<jdnewmil at dcn.davis.ca.us>        Basics: ##.#.       ##.#.  Live\n>>Go...\n>>>                                       Live:   OO#.. Dead: OO#..\n>>Playing\n>>> Research Engineer (Solar/Batteries            O.O#.       #.O#.  with\n>>> /Software/Embedded Controllers)               .OO#.       .OO#.\n>>rocks...1k\n>>>\n>>---------------------------------------------------------------------------\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "On Tue, May 31, 2016 at 7:05 PM, Jeff Newmiller\n<jdnewmil at dcn.davis.ca.us> wrote:\n> You need to go back and study how I made my solution reproducible and make your problem reproducible.\n>\n> You pro",
+      "thread_id": "thread-a0e1e408a6c1",
+      "thread_depth": 4,
+      "month": "2016-05"
     }
   ],
   "threads": [
+    {
+      "id": "thread-d483378d42bf",
+      "subject": "Install R (version 3.2.5) in CentOS platform",
+      "message_count": 1,
+      "participants": [
+        "wenbo"
+      ],
+      "started": "2016-05-01T01:41:47+08:00",
+      "last_reply": "2016-05-01T01:41:47+08:00",
+      "root_message_id": "msg-d483378d42bf"
+    },
     {
       "id": "thread-d9ddd72752f4",
       "subject": "how to use AND in grepl",
@@ -16424,7 +16512,7 @@
     {
       "id": "thread-6e00c29e45d3",
       "subject": "Change sum of squares type for ANOVA",
-      "message_count": 5,
+      "message_count": 4,
       "participants": [
         "Fox, John",
         "Michael Dewey",
@@ -17684,14 +17772,15 @@
     {
       "id": "thread-a0e1e408a6c1",
       "subject": "Extract from a text file",
-      "message_count": 3,
+      "message_count": 6,
       "participants": [
+        "Bert Gunter",
         "Jeff Newmiller",
         "Ulrik Stervbo",
         "Val"
       ],
       "started": "2016-05-30T19:13:36-05:00",
-      "last_reply": "2016-05-30T23:12:48-07:00",
+      "last_reply": "2016-05-31T20:27:36-07:00",
       "root_message_id": "msg-a0e1e408a6c1"
     },
     {
@@ -17884,12 +17973,13 @@
     {
       "id": "thread-ca75382faa8e",
       "subject": "Searching for antilog function",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
-        "Carlos"
+        "Carlos",
+        "Richard M. Heiberger"
       ],
       "started": "2016-05-31T22:14:53+02:00",
-      "last_reply": "2016-05-31T22:14:53+02:00",
+      "last_reply": "2016-05-31T18:12:02-04:00",
       "root_message_id": "msg-ca75382faa8e"
     }
   ]

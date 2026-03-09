@@ -3151,6 +3151,47 @@
       "thread_id": "thread-94da15f8d729",
       "thread_depth": 1,
       "month": "2023-11"
+    },
+    {
+      "id": "msg-6849fe7b930a",
+      "message_id": "<84461035-4232-4112-82cf-bba5e65d03eb@atsu.edu>",
+      "from_name": "Robert Baer",
+      "from_email_hash": "e28e8125811ec68b38078bede230108e02904b581a73b633464a7e324ba7d89f",
+      "date": "2023-11-30T18:04:39-06:00",
+      "subject": "[R] back tick names with predict function",
+      "subject_clean": "back tick names with predict function",
+      "in_reply_to": "<ca3d2bde-4426-4a41-9d9f-93e60fc66a55@sapo.pt>",
+      "references": [
+        "<495ef0b7-b017-4aa2-afb0-5c2b6ab4e647@atsu.edu>",
+        "<b25f20f0-c196-4897-8ea3-2a3e5f1a48ff@sapo.pt>",
+        "<ca3d2bde-4426-4a41-9d9f-93e60fc66a55@sapo.pt>"
+      ],
+      "body_plain": "Thank you Rui.? I didn't know about the check.names = FALSE argument.? \nAnother good reminder to always read help, but I'm not sure I understood \nwhat help to read in this case.? Since your clue, I've discovered that a \ntibble-based strategy could also work.\n\nx = seq(min(cob_wt$`plant-density`), max(cob_wt$`plant-density`), length \n= 999)\nxvals = tibble(`plant-density` = x)\nCI.c = predict(mod2, newdata = xvals, interval = 'c')\nCI.p = predict(mod2,? newdata = xvals,? interval = 'p')\n\nAgain, appreciate the solution.\n\nOn 11/30/2023 12:03 PM, Rui Barradas wrote:\n> ?s 17:57 de 30/11/2023, Rui Barradas escreveu:\n>> ?s 17:38 de 30/11/2023, Robert Baer escreveu:\n>>> I am having trouble using back ticks with the R extractor function \n>>> 'predict' and an lm() model. I'm trying too construct some nice \n>>> vectors that can be used for plotting the two types of regression \n>>> intervals.? I think it works with normal column heading names but it \n>>> fails when I have \"special\" back-tick names.? Can anyone help with \n>>> how I would reference these?? Short of renaming my columns, is there \n>>> a way to accomplish this?\n>>>\n>>> Repex\n>>>\n>>> *# dataframe with dashes in column headings\n>>> cob =\n>>> ?? structure(list(`cob-wt` = c(212, 241, 215, 225, 250, 241, 237,\n>>> ???????????????????????????? 282, 206, 246, 194, 241, 196, 193, 224, \n>>> 257, 200, 190, 208, 224\n>>> ), `plant-density` = c(137, 107, 132, 135, 115, 103, 102, 65,\n>>> ??????????????????????? 149, 85, 173, 124, 157, 184, 112, 80, 165, \n>>> 160, 157, 119)),\n>>> class = c(\"tbl_df\", \"tbl\", \"data.frame\"), row.names = c(NA, -20L))\n>>>\n>>> # regression model works\n>>> mod2 = lm(`cob-wt` ~ `plant-density`, data = cob)\n>>>\n>>> # x sequence for plotting CI's\n>>> # Set up x points\n>>> x = seq(min(cob$`plant-density`), max(cob$`plant-density`), length = \n>>> 1000)\n>>>\n>>> # Use predict to get CIs for a plot\n>>> # Add CI for regression line (y-hat uses 'c')\n>>> # usual trick is to assign x to actual x-var name in middle \n>>> dataframe arguement\n>>> CI.c = predict(mod2, data.frame( `plant-density` = x), interval = \n>>> 'c') # fail\n>>>\n>>> # Add CI for prediction value (y-tilde uses 'p')\n>>> # usual trick is to assign x to actual x-var name in middle \n>>> dataframe arguement\n>>> CI.p = predict(mod2, data.frame(`plant-density`? = x), interval = \n>>> 'p')??? # fail\n>>> *\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide \n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>> Hello,\n>>\n>> When creating the new data df, the default check.names = TRUE changes \n>> the column name, it is repaired and the hyphen is replaced by a legal \n>> dot.\n>>\n>>\n>> # check.names defaults to TRUE\n>> newd <- data.frame(`plant-density` = x)\n>> # `plant-density` is not a column name\n>> head(newd)\n>>\n>> # check.names set to FALSE\n>> newd <- data.frame(`plant-density` = x, check.names = FALSE)\n>> # `plant-density` is becomes a column name\n>> head(newd)\n>>\n>>\n>> # Use predict to get CIs for a plot\n>> # Add CI for regression line (y-hat uses 'c')\n>> # usual trick is to assign x to actual x-var name in middle dataframe \n>> arguement\n>> CI.c = predict(mod2, newdata = newd, interval = 'confidence')? # fail\n>>\n>> # Add CI for prediction value (y-tilde uses 'p')\n>> # usual trick is to assign x to actual x-var name in middle dataframe \n>> arguement\n>> CI.p = predict(mod2, newdata = newd, interval = 'prediction') # fail\n>>\n>>\n>>\n>> Hope this helps,\n>>\n>> Rui Barradas\n>>\n>>\n> Hello,\n>\n> Sorry for the comments '# fail' in the last two instructions, I should \n> have changed them.\n>\n>\n> CI.c <- predict(mod2, newdata = newd, interval = 'confidence') # works\n> CI.p <- predict(mod2, newdata = newd, interval = 'prediction') # works\n>\n>\n> Hoep this helps,\n>\n> Rui Barradas\n>\n>",
+      "body_snippet": "Thank you Rui.? I didn't know about the check.names = FALSE argument.? \nAnother good reminder to always read help, but I'm not sure I understood \nwhat help to read in this case.? Since your clue, I've",
+      "thread_id": "thread-732a6fc4cd09",
+      "thread_depth": 3,
+      "month": "2023-11"
+    },
+    {
+      "id": "msg-a69d8ccb8258",
+      "message_id": "<CAGxFJbTbwg21cz+v4ooaD7BhuH8vD-Jj1fHtE-dDw+ChxZnKcg@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2023-11-30T16:47:23-08:00",
+      "subject": "[R] back tick names with predict function",
+      "subject_clean": "back tick names with predict function",
+      "in_reply_to": "<84461035-4232-4112-82cf-bba5e65d03eb@atsu.edu>",
+      "references": [
+        "<495ef0b7-b017-4aa2-afb0-5c2b6ab4e647@atsu.edu>",
+        "<b25f20f0-c196-4897-8ea3-2a3e5f1a48ff@sapo.pt>",
+        "<ca3d2bde-4426-4a41-9d9f-93e60fc66a55@sapo.pt>",
+        "<84461035-4232-4112-82cf-bba5e65d03eb@atsu.edu>"
+      ],
+      "body_plain": "\"Thank you Rui.  I didn't know about the check.names = FALSE argument.\n> Another good reminder to always read help, but I'm not sure I understood\n> what help to read in this case\"\n\n?data.frame , of course, which says:\n\n\"check.names\n\nlogical. If TRUE then the names of the variables in the data frame are\nchecked to ensure that they are syntactically valid variable names and\nare not duplicated. If necessary they are adjusted (by make.names) so\nthat they are. \"\n\n-- Bert",
+      "body_snippet": "\"Thank you Rui.  I didn't know about the check.names = FALSE argument.\n> Another good reminder to always read help, but I'm not sure I understood\n> what help to read in this case\"\n\n?data.frame , of co",
+      "thread_id": "thread-732a6fc4cd09",
+      "thread_depth": 4,
+      "month": "2023-11"
     }
   ],
   "threads": [
@@ -3691,13 +3732,14 @@
     {
       "id": "thread-732a6fc4cd09",
       "subject": "back tick names with predict function",
-      "message_count": 3,
+      "message_count": 5,
       "participants": [
+        "Bert Gunter",
         "Robert Baer",
         "Rui Barradas"
       ],
       "started": "2023-11-30T11:38:19-06:00",
-      "last_reply": "2023-11-30T18:03:39+00:00",
+      "last_reply": "2023-11-30T16:47:23-08:00",
       "root_message_id": "msg-732a6fc4cd09"
     }
   ]
