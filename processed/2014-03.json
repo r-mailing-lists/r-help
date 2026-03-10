@@ -7425,22 +7425,6 @@
       "month": "2014-03"
     },
     {
-      "id": "msg-a76b2f69841c",
-      "message_id": "<53205255.60001@imedea.uib-csic.es>",
-      "from_name": "David March Morla",
-      "from_email_hash": "8750a376d386e84beb3e1094fd75f2edfc02c3c3b9547b513e8e8719aaad72c4",
-      "date": "2014-03-12T13:25:57+01:00",
-      "subject": "[R] fit and predict binomial gbm with two offset terms",
-      "subject_clean": "fit and predict binomial gbm with two offset terms",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI am using the ?dismo? package to conduct boosted regression trees (BRT) \nfor both binary and count data. The dismo package uses ?gbm? package for \nthe implementation of BRT. I would like to incorporate two offset terms \nin the model, as well as being able to make predictions.\nFor the count data I am using a Poisson model. Based on a previous post \n(https://stat.ethz.ch/pipermail/r-help/2010-September/253647.html), I \nimplemented the following code:\n\nlibrary(gbm)\nlibrary(dismo)\n\n#define offset\noffset=(log(data$off1)+ log(data$off2)) #equivalent to \nlog(data$off1*data$off2)\n\n#fit poisson\nm.pois<-gbm.step(data=data, gbm.x=7:8, gbm.y=4, offset=offset, \nfamily=\"poisson\", tree.complexity=1, learning.rate=0.001, \nbag.fraction=0.7, n.folds=10)\n\n#predict poisson\nlink <-predict.gbm(m.pois, data, n.trees=n.trees, type=\"link\")\nlink.offset<- link + offset\npred <- exp(link.offset)\n\nMy questions is how to implement the same for a binomial model? I have \ntried to look in different forums and documentation without success. The \nonly clue that I have is the following document: \nhttps://r-forge.r-project.org/scm/viewvc.php/*checkout*/pkg/inst/doc/gbm.pdf?revision=18&root=gbm&pathrev=22 \n\n\nAny advice and/or additional references on this issue would be more than \nwelcome.\n\nThank you in advance,\n\nDavid March\n\n-- \nDavid March Morl?\nSpatial Ecologist\nEmail: david at imedea.uib-csic.es\n\nIMEDEA\nInstituto Mediterraneo de Estudios Avanzados (UIB-CSIC)\nC/Miquel Marqu?s 21, 07190 Esporles, Balearic Islands. Spain\nwww.imedea.uib.es\n\nSOCIB\nBalearic Islands Coastal Observing and Forecasting System\nStrategic Issues and Applications for Society (SIAS Division)\nParc Bit, Naorte, Bloc A 2?p. pta. 3, 07121 Palma de Mallorca. Spain\nTel: +034 971 43 97 64\nwww.socib.es\n\nSOCIAL MEDIA\nGoogle Scholar: http://scholar.google.es/citations?user=xABsDpAAAAAJ\nResearch Gate: https://www.researchgate.net/profile/David_March3/\nLinked In: http://www.linkedin.com/in/dmarch",
-      "body_snippet": "Dear all,\n\nI am using the ?dismo? package to conduct boosted regression trees (BRT) \nfor both binary and count data. The dismo package uses ?gbm? package for \nthe implementation of BRT. I would like t",
-      "thread_id": "thread-a76b2f69841c",
-      "thread_depth": 0,
-      "month": "2014-03"
-    },
-    {
       "id": "msg-219f1f2e27d8",
       "message_id": "<30411786F64EEF46856EFBA2CD9177992C2AEB16@UHEXMBSPR03.umhs.med.umich.edu>",
       "from_name": "Andrews, Chris",
@@ -7456,6 +7440,22 @@
       "body_snippet": "I get what I would expect.  The tstat and the Fstat are both undefined (0/0); as are the p-values\n\n> n=10;k=1;summary(lm(rep(k,n)~rnorm(n)))\n\nCall:\nlm(formula = rep(k, n) ~ rnorm(n))\n\nResiduals:\n   Mi",
       "thread_id": "thread-da35aa1e7769",
       "thread_depth": 1,
+      "month": "2014-03"
+    },
+    {
+      "id": "msg-a76b2f69841c",
+      "message_id": "<53205255.60001@imedea.uib-csic.es>",
+      "from_name": "David March Morla",
+      "from_email_hash": "8750a376d386e84beb3e1094fd75f2edfc02c3c3b9547b513e8e8719aaad72c4",
+      "date": "2014-03-12T13:25:57+01:00",
+      "subject": "[R] fit and predict binomial gbm with two offset terms",
+      "subject_clean": "fit and predict binomial gbm with two offset terms",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI am using the ?dismo? package to conduct boosted regression trees (BRT) \nfor both binary and count data. The dismo package uses ?gbm? package for \nthe implementation of BRT. I would like to incorporate two offset terms \nin the model, as well as being able to make predictions.\nFor the count data I am using a Poisson model. Based on a previous post \n(https://stat.ethz.ch/pipermail/r-help/2010-September/253647.html), I \nimplemented the following code:\n\nlibrary(gbm)\nlibrary(dismo)\n\n#define offset\noffset=(log(data$off1)+ log(data$off2)) #equivalent to \nlog(data$off1*data$off2)\n\n#fit poisson\nm.pois<-gbm.step(data=data, gbm.x=7:8, gbm.y=4, offset=offset, \nfamily=\"poisson\", tree.complexity=1, learning.rate=0.001, \nbag.fraction=0.7, n.folds=10)\n\n#predict poisson\nlink <-predict.gbm(m.pois, data, n.trees=n.trees, type=\"link\")\nlink.offset<- link + offset\npred <- exp(link.offset)\n\nMy questions is how to implement the same for a binomial model? I have \ntried to look in different forums and documentation without success. The \nonly clue that I have is the following document: \nhttps://r-forge.r-project.org/scm/viewvc.php/*checkout*/pkg/inst/doc/gbm.pdf?revision=18&root=gbm&pathrev=22 \n\n\nAny advice and/or additional references on this issue would be more than \nwelcome.\n\nThank you in advance,\n\nDavid March\n\n-- \nDavid March Morl?\nSpatial Ecologist\nEmail: david at imedea.uib-csic.es\n\nIMEDEA\nInstituto Mediterraneo de Estudios Avanzados (UIB-CSIC)\nC/Miquel Marqu?s 21, 07190 Esporles, Balearic Islands. Spain\nwww.imedea.uib.es\n\nSOCIB\nBalearic Islands Coastal Observing and Forecasting System\nStrategic Issues and Applications for Society (SIAS Division)\nParc Bit, Naorte, Bloc A 2?p. pta. 3, 07121 Palma de Mallorca. Spain\nTel: +034 971 43 97 64\nwww.socib.es\n\nSOCIAL MEDIA\nGoogle Scholar: http://scholar.google.es/citations?user=xABsDpAAAAAJ\nResearch Gate: https://www.researchgate.net/profile/David_March3/\nLinked In: http://www.linkedin.com/in/dmarch",
+      "body_snippet": "Dear all,\n\nI am using the ?dismo? package to conduct boosted regression trees (BRT) \nfor both binary and count data. The dismo package uses ?gbm? package for \nthe implementation of BRT. I would like t",
+      "thread_id": "thread-a76b2f69841c",
+      "thread_depth": 0,
       "month": "2014-03"
     },
     {

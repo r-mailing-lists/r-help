@@ -6603,22 +6603,6 @@
       "month": "2014-07"
     },
     {
-      "id": "msg-12e7b9570f50",
-      "message_id": "<CAAJSdjhOoE1Kg6ivOwdbJ77KzmwGWNY6F+5nrFmbPjcHSgtb5Q@mail.gmail.com>",
-      "from_name": "John McKown",
-      "from_email_hash": "23628926a48a3e42bfba3c1786ccec8404cef4f26c42a1187c9497cd30910cd1",
-      "date": "2014-07-10T09:50:58-05:00",
-      "subject": "[R] list of valid R encodings.in source(...,encoding=)",
-      "subject_clean": "list of valid R encodings.in source(...,encoding=)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "This question was spawned by another thread entitled \"R on Windows\ncrashes when source'ing UTF-8 file\".\n\nThe solution to that problem was to use the _proper_ encoding=\nparameter of the source() function. But where are they documented? Or\nhow do I find them in R itself? I ask because the proper encoding to\nsolve the problem was \"UTF-8-BOM\". I got this by reading the source\ncode to main/connnections.c . Not where I expect most people to go.\n\nI found iconvlist(). But it does not list UTF-8-BOM, only UTF8 and\nUTF-8. I got no useful response to ??BOM from the R prompt.\n\nMy normal locale is \"C\" on Linux. If I use encoding=\"UTF-8\" in the\nsource() line, it fails because the BOM at the start is intepreted as\ndata to be processed. If I use UTF-8-BOM instead, it succeeds. It also\nsucceeds if I do Sys.setlocale(\"LC_ALL\",\"en_US.utf8\").\n\nI admit that I don't understand all (or even much) of the ins-and-outs\nof i10n, or code pages. But the UTF-8-BOM is just \"weird\" to me; and\nconfusing since it is not documented anywhere I can find.\n\n-- \nThere is nothing more pleasant than traveling and meeting new people!\nGenghis Khan\n\nMaranatha! <><\nJohn McKown",
-      "body_snippet": "This question was spawned by another thread entitled \"R on Windows\ncrashes when source'ing UTF-8 file\".\n\nThe solution to that problem was to use the _proper_ encoding=\nparameter of the source() functi",
-      "thread_id": "thread-12e7b9570f50",
-      "thread_depth": 0,
-      "month": "2014-07"
-    },
-    {
       "id": "msg-05172cdb2be5",
       "message_id": "<53BEA852.80002@gmail.com>",
       "from_name": "Duncan Murdoch",
@@ -6636,6 +6620,22 @@
       "body_snippet": "On 10/07/2014 9:53 AM, Kenn Konstabel wrote:\n> Wow. Thanks a lot!\n>\n> source(\"http://psych.ut.ee/~nek/R/test-utf8.txt\", encoding=\"UTF-8-BOM\")\n> # works correctly on my Windows 7 machine\n> # (and witho",
       "thread_id": "thread-332cbcf84ef5",
       "thread_depth": 1,
+      "month": "2014-07"
+    },
+    {
+      "id": "msg-12e7b9570f50",
+      "message_id": "<CAAJSdjhOoE1Kg6ivOwdbJ77KzmwGWNY6F+5nrFmbPjcHSgtb5Q@mail.gmail.com>",
+      "from_name": "John McKown",
+      "from_email_hash": "23628926a48a3e42bfba3c1786ccec8404cef4f26c42a1187c9497cd30910cd1",
+      "date": "2014-07-10T09:50:58-05:00",
+      "subject": "[R] list of valid R encodings.in source(...,encoding=)",
+      "subject_clean": "list of valid R encodings.in source(...,encoding=)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This question was spawned by another thread entitled \"R on Windows\ncrashes when source'ing UTF-8 file\".\n\nThe solution to that problem was to use the _proper_ encoding=\nparameter of the source() function. But where are they documented? Or\nhow do I find them in R itself? I ask because the proper encoding to\nsolve the problem was \"UTF-8-BOM\". I got this by reading the source\ncode to main/connnections.c . Not where I expect most people to go.\n\nI found iconvlist(). But it does not list UTF-8-BOM, only UTF8 and\nUTF-8. I got no useful response to ??BOM from the R prompt.\n\nMy normal locale is \"C\" on Linux. If I use encoding=\"UTF-8\" in the\nsource() line, it fails because the BOM at the start is intepreted as\ndata to be processed. If I use UTF-8-BOM instead, it succeeds. It also\nsucceeds if I do Sys.setlocale(\"LC_ALL\",\"en_US.utf8\").\n\nI admit that I don't understand all (or even much) of the ins-and-outs\nof i10n, or code pages. But the UTF-8-BOM is just \"weird\" to me; and\nconfusing since it is not documented anywhere I can find.\n\n-- \nThere is nothing more pleasant than traveling and meeting new people!\nGenghis Khan\n\nMaranatha! <><\nJohn McKown",
+      "body_snippet": "This question was spawned by another thread entitled \"R on Windows\ncrashes when source'ing UTF-8 file\".\n\nThe solution to that problem was to use the _proper_ encoding=\nparameter of the source() functi",
+      "thread_id": "thread-12e7b9570f50",
+      "thread_depth": 0,
       "month": "2014-07"
     },
     {

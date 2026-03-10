@@ -1608,24 +1608,6 @@
       "month": "2016-05"
     },
     {
-      "id": "msg-1c1c93e3b7da",
-      "message_id": "<73802C04-561B-400A-9EA1-1149DA41DF79@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2016-05-03T18:48:13-07:00",
-      "subject": "[R] R column assignment fails for lists",
-      "subject_clean": "R column assignment fails for lists",
-      "in_reply_to": "<CADrG32Teg5oo+ZzjSdBSrFS6BVnH1vMgUkZDKVz25QSZD7a0Zw@mail.gmail.com>",
-      "references": [
-        "<CADrG32Teg5oo+ZzjSdBSrFS6BVnH1vMgUkZDKVz25QSZD7a0Zw@mail.gmail.com>"
-      ],
-      "body_plain": "> On May 3, 2016, at 4:13 PM, Yasir Suhail <yasir.suhail at gmail.com> wrote:\n> \n> Dear R developers and users,\n> \n> Consider the object :\n> \n>> a <- data.frame(a=c(1,2), b=c(2,3), c=c(\"a,b\",\"c,d\"), stringsAsFactors = F)\n>> a$c <- strsplit(a$c, \",\")\n\nYou are the one who should \"consider the object\". Look at what strsplit(a$c, \",\") returns and then perhaps re-consider trying to assign it to a single column.\n\n> \n> Re-assignment works fine for columns 1 and 2, but fails for column 3. If a\n> is a valid object, the assignment should work.\n> \n>> a[,1] <- a[,1]\n>> a[,2] <- a[,2]\n>> a[,3] <- a[,3]\n> Warning message:\n> In `[<-.data.frame`(`*tmp*`, , 3, value = list(c(\"a\", \"b\"), c(\"c\",  :\n>  provided 2 variables to replace 1 variables\n> \n> \t[[alternative HTML version deleted]]\n\nAnd please reconsider also the format of your postings.\n\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
-      "body_snippet": "> On May 3, 2016, at 4:13 PM, Yasir Suhail <yasir.suhail at gmail.com> wrote:\n> \n> Dear R developers and users,\n> \n> Consider the object :\n> \n>> a <- data.frame(a=c(1,2), b=c(2,3), c=c(\"a,b\",\"c,d\"), s",
-      "thread_id": "thread-f3269f1a0599",
-      "thread_depth": 1,
-      "month": "2016-05"
-    },
-    {
       "id": "msg-dadb4b97d2cf",
       "message_id": "<CA+8X3fVV2fLCJpjZ38HKiqdQBC9WU-1qs07NvPWfq+sH0-ALTA@mail.gmail.com>",
       "from_name": "Jim Lemon",
@@ -1639,6 +1621,24 @@
       ],
       "body_plain": "Hi Yasil,\nIf you look at what happens to a[,3] after the \"strsplit\" it is easy:\n\n> a[,3]\n[1] \"a,b\" \"c,d\"\n\nHere a[,3] is two strings\n\na$c <- strsplit(a$c, \",\")\n> a[,3]\n[[1]]\n[1] \"a\" \"b\"\n\n[[2]]\n[1] \"c\" \"d\"\n\nNow a[,3] is a two element list. What R probably did was to take the\nfirst component of a[,3] to replace the existing two values. Now if\nyou don't try to fool R:\n\n> a[,3]<-list(a[,3])\n> a$c\n[[1]]\n[1] \"a\" \"b\"\n\n[[2]]\n[1] \"c\" \"d\"\n\nJim\n\n\nOn Wed, May 4, 2016 at 9:13 AM, Yasir Suhail <yasir.suhail at gmail.com> wrote:\n> Dear R developers and users,\n>\n> Consider the object :\n>\n>> a <- data.frame(a=c(1,2), b=c(2,3), c=c(\"a,b\",\"c,d\"), stringsAsFactors = F)\n>> a$c <- strsplit(a$c, \",\")\n>\n> Re-assignment works fine for columns 1 and 2, but fails for column 3. If a\n> is a valid object, the assignment should work.\n>\n>> a[,1] <- a[,1]\n>> a[,2] <- a[,2]\n>> a[,3] <- a[,3]\n> Warning message:\n> In `[<-.data.frame`(`*tmp*`, , 3, value = list(c(\"a\", \"b\"), c(\"c\",  :\n>   provided 2 variables to replace 1 variables\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Hi Yasil,\nIf you look at what happens to a[,3] after the \"strsplit\" it is easy:\n\n> a[,3]\n[1] \"a,b\" \"c,d\"\n\nHere a[,3] is two strings\n\na$c <- strsplit(a$c, \",\")\n> a[,3]\n[[1]]\n[1] \"a\" \"b\"\n\n[[2]]\n[1] \"c\" ",
+      "thread_id": "thread-f3269f1a0599",
+      "thread_depth": 1,
+      "month": "2016-05"
+    },
+    {
+      "id": "msg-1c1c93e3b7da",
+      "message_id": "<73802C04-561B-400A-9EA1-1149DA41DF79@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2016-05-03T18:48:13-07:00",
+      "subject": "[R] R column assignment fails for lists",
+      "subject_clean": "R column assignment fails for lists",
+      "in_reply_to": "<CADrG32Teg5oo+ZzjSdBSrFS6BVnH1vMgUkZDKVz25QSZD7a0Zw@mail.gmail.com>",
+      "references": [
+        "<CADrG32Teg5oo+ZzjSdBSrFS6BVnH1vMgUkZDKVz25QSZD7a0Zw@mail.gmail.com>"
+      ],
+      "body_plain": "> On May 3, 2016, at 4:13 PM, Yasir Suhail <yasir.suhail at gmail.com> wrote:\n> \n> Dear R developers and users,\n> \n> Consider the object :\n> \n>> a <- data.frame(a=c(1,2), b=c(2,3), c=c(\"a,b\",\"c,d\"), stringsAsFactors = F)\n>> a$c <- strsplit(a$c, \",\")\n\nYou are the one who should \"consider the object\". Look at what strsplit(a$c, \",\") returns and then perhaps re-consider trying to assign it to a single column.\n\n> \n> Re-assignment works fine for columns 1 and 2, but fails for column 3. If a\n> is a valid object, the assignment should work.\n> \n>> a[,1] <- a[,1]\n>> a[,2] <- a[,2]\n>> a[,3] <- a[,3]\n> Warning message:\n> In `[<-.data.frame`(`*tmp*`, , 3, value = list(c(\"a\", \"b\"), c(\"c\",  :\n>  provided 2 variables to replace 1 variables\n> \n> \t[[alternative HTML version deleted]]\n\nAnd please reconsider also the format of your postings.\n\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius\nAlameda, CA, USA",
+      "body_snippet": "> On May 3, 2016, at 4:13 PM, Yasir Suhail <yasir.suhail at gmail.com> wrote:\n> \n> Dear R developers and users,\n> \n> Consider the object :\n> \n>> a <- data.frame(a=c(1,2), b=c(2,3), c=c(\"a,b\",\"c,d\"), s",
       "thread_id": "thread-f3269f1a0599",
       "thread_depth": 1,
       "month": "2016-05"

@@ -366,3 +366,607 @@ Sent from my phone. Please excuse my brevity.
 	[[alternative HTML version deleted]]
 
 
+From r@oknz @end|ng |rom gm@||@com  Mon Mar  9 08:50:32 2026
+From: r@oknz @end|ng |rom gm@||@com (Richard O'Keefe)
+Date: Mon, 9 Mar 2026 20:50:32 +1300
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+Message-ID: <CABcYAdLHZRYNppWeLS+KF3ju-CmuLAuKNMk_ufGb+EKv2UAemg@mail.gmail.com>
+
+You have run into the fact that "is it there" (statistical significance)
+and "does it matter" (practical significance) are two different things.  As
+to whether the coefficient is of practical significance, looking at its
+bigness is not the way to go.  A small coefficient multiplying a large
+variable can have a large result, just as a large coefficient multiplying a
+small variable can have a small result.
+
+One thing you can do is to fit your model and then use the ?drop1 function
+to see the effect of dropping each coefficient from the model.  You might
+even use ?step with direction="backward" for this if there are other
+coefficients you think might be unnecessary.
+
+Perhaps the
+
+On Mon, 9 Mar 2026 at 00:51, Brian Smith <briansmith199312 at gmail.com> wrote:
+
+> Hi,
+>
+> My question is not directly related to R, but rather a basic question
+> about statistics. I am hoping to receive valuable insights from the
+> expert statisticians in this group.
+>
+> In some cases, when fitting a simple OLS regression, I obtain an
+> estimated beta coefficient that is very small?for example, 0.00034?yet
+> it still appears statistically significant based on the p-value.
+>
+> I am trying to understand how to interpret such a result in practical
+> terms. From a magnitude perspective, such a small coefficient would
+> not be expected to meaningfully affect the predicted response value,
+> but statistically it is still considered significant.
+>
+> I would greatly appreciate any insights or explanations regarding this
+> phenomenon.
+>
+> Thanks for your time.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From r-p@ck@ge@ @end|ng |rom r-project@org  Sun Mar  8 01:04:47 2026
+From: r-p@ck@ge@ @end|ng |rom r-project@org (Balasubramanian Narasimhan via R-packages)
+Date: Sat, 7 Mar 2026 16:04:47 -0800
+Subject: [R] [R-pkgs] CVXR v1.8.1: A completely new rewrite for Convex
+ Programming in R
+Message-ID: <bd5d0e04-804e-459b-9d41-1f8bbb3acc6c@stanford.edu>
+
+Dear useRs,
+
+We are happy to announce the release of CVXR 1.8.1 on CRAN, unleashing 
+the full power of convex optimization for R users. Version 1.8.1 is a 
+ground-up rewrite using S7 classes and establishes parity with CVXPY 
+1.8.1, except for some esoteric atoms that are rarely needed. We support 
+four open source solvers (osqp, clarabel, scs and highs) out of the box; 
+additional solvers, open source and commercial, are also supported. CVXR 
+also supports Disciplined Parametric Programming (DPP), Disciplined 
+Geometric Programming (DGP) and DQCP (Disciplined Quasiconvex Programming).
+
+We also note that people are often surprised to hear that one can 
+formulate Integer Programming problems with CVXR.
+
+The full list of features is large, so please consult the website
+
+https://cvxr.rbind.io
+
+for what's new, migration guide, and a number of examples. A totally new 
+feature in CVXR is visualization: see `?visualize` and examples on the 
+website.
+
+A related talk regarding the development of this new version may be of 
+interest. Slides and video at
+
+https://naras.su.domains/blog/ (Slide 25 for TL;DR.)
+
+We welcome your feedback and issues on Github: 
+https://github.com/cvxgrp/CVXR
+
+Thank you.
+
+Anqi Fu and Balasubramanian Narasimhan
+
+_______________________________________________
+R-packages mailing list
+R-packages at r-project.org
+https://stat.ethz.ch/mailman/listinfo/r-packages
+
+
+From pd@|gd @end|ng |rom gm@||@com  Mon Mar  9 10:12:21 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Mon, 9 Mar 2026 10:12:21 +0100
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+Message-ID: <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+
+Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't. 
+
+(Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+
+-pd
+
+> On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+> 
+> Hi Michael,
+> 
+> You made an interesting point that, scale of the underlying variable
+> may be vastly different as compared with other variables in the
+> equation.
+> 
+> Could I use logarithm of that variable instead of raw? Another
+> possibility is that we could standardise that variable. But IMO, for
+> out of sample prediction, the interpretation of standardisation is not
+> straightforward.
+> 
+> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>> 
+>> Dear Brian
+>> 
+>> You have not given us much to go on here but the problem is often
+>> related to the scale of the variables. So if the coefficient is per year
+>> tryin to re-express time in months or weeks or days.
+>> 
+>> Michael
+>> 
+>> On 08/03/2026 11:50, Brian Smith wrote:
+>>> Hi,
+>>> 
+>>> My question is not directly related to R, but rather a basic question
+>>> about statistics. I am hoping to receive valuable insights from the
+>>> expert statisticians in this group.
+>>> 
+>>> In some cases, when fitting a simple OLS regression, I obtain an
+>>> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>> it still appears statistically significant based on the p-value.
+>>> 
+>>> I am trying to understand how to interpret such a result in practical
+>>> terms. From a magnitude perspective, such a small coefficient would
+>>> not be expected to meaningfully affect the predicted response value,
+>>> but statistically it is still considered significant.
+>>> 
+>>> I would greatly appreciate any insights or explanations regarding this
+>>> phenomenon.
+>>> 
+>>> Thanks for your time.
+>>> 
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>> 
+>> --
+>> Michael Dewey
+>> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From @pro @end|ng |rom un|me|b@edu@@u  Mon Mar  9 10:34:47 2026
+From: @pro @end|ng |rom un|me|b@edu@@u (Andrew Robinson)
+Date: Mon, 9 Mar 2026 09:34:47 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+ <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+Message-ID: <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+
+Curiously enough, scale independence is lost in models that lack Nelder?s strong heredity (eg main effects are missing for interactions).
+
+Cheers,
+
+Andrew
+
+--
+Andrew Robinson
+Director, CEBRA and Professor of Biosecurity,
+School/s of BioSciences and Mathematics & Statistics
+University of Melbourne, VIC 3010 Australia
+Tel: (+61) 0403 138 955
+Email: apro at unimelb.edu.au<mailto:apro at unimelb.edu.au>
+Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+
+I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+
+On 9 Mar 2026 at 8:13?PM +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't.
+
+(Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+
+-pd
+
+On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+
+Hi Michael,
+
+You made an interesting point that, scale of the underlying variable
+may be vastly different as compared with other variables in the
+equation.
+
+Could I use logarithm of that variable instead of raw? Another
+possibility is that we could standardise that variable. But IMO, for
+out of sample prediction, the interpretation of standardisation is not
+straightforward.
+
+On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>
+> Dear Brian
+>
+> You have not given us much to go on here but the problem is often
+> related to the scale of the variables. So if the coefficient is per year
+> tryin to re-express time in months or weeks or days.
+>
+> Michael
+>
+> On 08/03/2026 11:50, Brian Smith wrote:
+>> Hi,
+>>
+>> My question is not directly related to R, but rather a basic question
+>> about statistics. I am hoping to receive valuable insights from the
+>> expert statisticians in this group.
+>>
+>> In some cases, when fitting a simple OLS regression, I obtain an
+>> estimated beta coefficient that is very small?for example, 0.00034?yet
+>> it still appears statistically significant based on the p-value.
+>>
+>> I am trying to understand how to interpret such a result in practical
+>> terms. From a magnitude perspective, such a small coefficient would
+>> not be expected to meaningfully affect the predicted response value,
+>> but statistically it is still considered significant.
+>>
+>> I would greatly appreciate any insights or explanations regarding this
+>> phenomenon.
+>>
+>> Thanks for your time.
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>
+> --
+> Michael Dewey
+>
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+--
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+	[[alternative HTML version deleted]]
+
+
+From pd@|gd @end|ng |rom gm@||@com  Mon Mar  9 11:04:33 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Mon, 9 Mar 2026 11:04:33 +0100
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+ <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+ <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+Message-ID: <51D9B892-AFF1-490F-8D0E-4264723D795B@gmail.com>
+
+Example?
+
+Is this similar to language independence getting lost under similar circumstances because e.g. Ja/Nej in Danish sorts opposite to Yes/No?
+
+-pd
+
+> On 9 Mar 2026, at 10.34, Andrew Robinson <apro at unimelb.edu.au> wrote:
+> 
+> Curiously enough, scale independence is lost in models that lack Nelder?s strong heredity (eg main effects are missing for interactions). 
+>   Cheers,
+>   Andrew 
+> 
+> -- 
+> Andrew Robinson 
+> Director, CEBRA and Professor of Biosecurity,
+> School/s of BioSciences and Mathematics & Statistics
+> University of Melbourne, VIC 3010 Australia
+> Tel: (+61) 0403 138 955
+> Email: apro at unimelb.edu.au    
+> Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+> 
+> I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+>   On 9 Mar 2026 at 8:13?PM +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+>> Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't.
+>> 
+>> (Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+>> 
+>> -pd
+>> 
+>>> On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+>>> 
+>>> Hi Michael,
+>>> 
+>>> You made an interesting point that, scale of the underlying variable
+>>> may be vastly different as compared with other variables in the
+>>> equation.
+>>> 
+>>> Could I use logarithm of that variable instead of raw? Another
+>>> possibility is that we could standardise that variable. But IMO, for
+>>> out of sample prediction, the interpretation of standardisation is not
+>>> straightforward.
+>>> 
+>>> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>>> >
+>>>> > Dear Brian
+>>>> >
+>>>> > You have not given us much to go on here but the problem is often
+>>>> > related to the scale of the variables. So if the coefficient is per year
+>>>> > tryin to re-express time in months or weeks or days.
+>>>> >
+>>>> > Michael
+>>>> >
+>>>> > On 08/03/2026 11:50, Brian Smith wrote:
+>>>>> >> Hi,
+>>>>> >>
+>>>>> >> My question is not directly related to R, but rather a basic question
+>>>>> >> about statistics. I am hoping to receive valuable insights from the
+>>>>> >> expert statisticians in this group.
+>>>>> >>
+>>>>> >> In some cases, when fitting a simple OLS regression, I obtain an
+>>>>> >> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>>>> >> it still appears statistically significant based on the p-value.
+>>>>> >>
+>>>>> >> I am trying to understand how to interpret such a result in practical
+>>>>> >> terms. From a magnitude perspective, such a small coefficient would
+>>>>> >> not be expected to meaningfully affect the predicted response value,
+>>>>> >> but statistically it is still considered significant.
+>>>>> >>
+>>>>> >> I would greatly appreciate any insights or explanations regarding this
+>>>>> >> phenomenon.
+>>>>> >>
+>>>>> >> Thanks for your time.
+>>>>> >>
+>>>>> >> ______________________________________________
+>>>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>>> >
+>>>> > --
+>>>> > Michael Dewey
+>>>> >
+>>> 
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>> 
+>> --
+>> Peter Dalgaard, Professor,
+>> Center for Statistics, Copenhagen Business School
+>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>> Phone: (+45)38153501
+>> Office: A 4.23
+>> Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>> 
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From @pro @end|ng |rom un|me|b@edu@@u  Mon Mar  9 22:54:43 2026
+From: @pro @end|ng |rom un|me|b@edu@@u (Andrew Robinson)
+Date: Mon, 9 Mar 2026 21:54:43 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <51D9B892-AFF1-490F-8D0E-4264723D795B@gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+ <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+ <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+ <51D9B892-AFF1-490F-8D0E-4264723D795B@gmail.com>
+Message-ID: <02f943d5-5b59-4a40-a6de-779e6a8821dd@Spark>
+
+Hi Peter,
+
+hopefully this clarifies.
+
+## Here's a light-touch example
+
+set.seed(8675309)
+
+example <- data.frame(x1 = rnorm(100),
+                     x2 = rnorm(100))
+
+example$x3 <- example$x1 - 1
+example$x4 <- example$x2 - 1
+
+example$y <- with(example,
+                 2 * x1 + 4 * x2 + x1 * x2 + rnorm(100) * 2)
+
+## In the following code, the statistical information about the
+## interaction term is the same across the two scalings
+
+summary(lm(y ~ x1 * x2, data = example))
+summary(lm(y ~ x3 * x4, data = example))
+
+## In the following code, the statistical information about the
+## interaction term is the not same across the two scalings
+
+summary(lm(y ~ x1 + x1:x2, data = example))
+summary(lm(y ~ x3 + x3:x4, data = example))
+
+NB: this obscure fact was published in Robinson, A.P., Pocewicz, A.L., Gessler, P.E., 2004. A cautionary note on scaling variables that
+appear only in products in ordinary least squares. Forest Biometry, Modelling and Information Sciences 1, 83?90.  I first submitted it to Remote Sensing of the Environment (in which this failing to respect strong hierarchy is most pernicious) and R1 said it was completely obvious that failing to respect strong hierarchy was a stupid idea, reject; whereas R2 said they had never heard of this therefore it could not possibly be true, reject.
+
+I'm not sure if it's similar to language independence .... ? Interesting conjecture!  Can you unpack that a little?
+
+Cheers,
+
+Andrew
+
+--
+Andrew Robinson
+Director, CEBRA and Professor of Biosecurity,
+School/s of BioSciences and Mathematics & Statistics
+University of Melbourne, VIC 3010 Australia
+Tel: (+61) 0403 138 955
+Email: apro at unimelb.edu.au<mailto:apro at unimelb.edu.au>
+Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+
+I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+
+On Mar 9, 2026 at 21:04 +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+Example?
+
+Is this similar to language independence getting lost under similar circumstances because e.g. Ja/Nej in Danish sorts opposite to Yes/No?
+
+-pd
+
+On 9 Mar 2026, at 10.34, Andrew Robinson <apro at unimelb.edu.au> wrote:
+
+Curiously enough, scale independence is lost in models that lack Nelder?s strong heredity (eg main effects are missing for interactions).
+Cheers,
+Andrew
+
+--
+Andrew Robinson
+Director, CEBRA and Professor of Biosecurity,
+School/s of BioSciences and Mathematics & Statistics
+University of Melbourne, VIC 3010 Australia
+Tel: (+61) 0403 138 955
+Email: apro at unimelb.edu.au
+Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+
+I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+On 9 Mar 2026 at 8:13?PM +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+> Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't.
+>
+> (Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+>
+> -pd
+>
+>> On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+>>
+>> Hi Michael,
+>>
+>> You made an interesting point that, scale of the underlying variable
+>> may be vastly different as compared with other variables in the
+>> equation.
+>>
+>> Could I use logarithm of that variable instead of raw? Another
+>> possibility is that we could standardise that variable. But IMO, for
+>> out of sample prediction, the interpretation of standardisation is not
+>> straightforward.
+>>
+>> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>> >
+>>> > Dear Brian
+>>> >
+>>> > You have not given us much to go on here but the problem is often
+>>> > related to the scale of the variables. So if the coefficient is per year
+>>> > tryin to re-express time in months or weeks or days.
+>>> >
+>>> > Michael
+>>> >
+>>> > On 08/03/2026 11:50, Brian Smith wrote:
+>>>> >> Hi,
+>>>> >>
+>>>> >> My question is not directly related to R, but rather a basic question
+>>>> >> about statistics. I am hoping to receive valuable insights from the
+>>>> >> expert statisticians in this group.
+>>>> >>
+>>>> >> In some cases, when fitting a simple OLS regression, I obtain an
+>>>> >> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>>> >> it still appears statistically significant based on the p-value.
+>>>> >>
+>>>> >> I am trying to understand how to interpret such a result in practical
+>>>> >> terms. From a magnitude perspective, such a small coefficient would
+>>>> >> not be expected to meaningfully affect the predicted response value,
+>>>> >> but statistically it is still considered significant.
+>>>> >>
+>>>> >> I would greatly appreciate any insights or explanations regarding this
+>>>> >> phenomenon.
+>>>> >>
+>>>> >> Thanks for your time.
+>>>> >>
+>>>> >> ______________________________________________
+>>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>> >
+>>> > --
+>>> > Michael Dewey
+>>> >
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>
+> --
+> Peter Dalgaard, Professor,
+> Center for Statistics, Copenhagen Business School
+> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+> Phone: (+45)38153501
+> Office: A 4.23
+> Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+--
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+
+
+	[[alternative HTML version deleted]]
+
+

@@ -562,6 +562,24 @@
       "month": "2014-06"
     },
     {
+      "id": "msg-642e0d07a4a5",
+      "message_id": "<CAG_uk92nmV77NJcZupkE1yG=O=WPwd=HLpXdoQDqvqwd97-i1Q@mail.gmail.com>",
+      "from_name": "Rune Haubo",
+      "from_email_hash": "ff9308758478bd19788a62274513bc3d3afca51fd7f3216f9549df58c937212b",
+      "date": "2014-06-02T18:55:00+02:00",
+      "subject": "[R] Error clmm(){ordinal}",
+      "subject_clean": "Error clmm(){ordinal}",
+      "in_reply_to": "<1401710397402-4691592.post@n4.nabble.com>",
+      "references": [
+        "<1401710397402-4691592.post@n4.nabble.com>"
+      ],
+      "body_plain": "It's telling you that one or more of the grouping factors for the\nrandom-effect terms has less than three levels. From what you write,\nthis seems to apply to Location: you may want to treat it as a\nfixed-effect instead.\n\nHope this helps,\nRune\n\nOn 2 June 2014 14:00, adesgroux <aurore.desgroux at rennes.inra.fr> wrote:\n> Dear all,\n>\n> I am trying to run the function clmm() on a data table composed as following\n> :\n> <http://r.789695.n4.nabble.com/file/n4691592/datatable.png>\n>\n> I have 187 pea lines assessed on 4 years * 2 locations * 3 blocs * 15\n> plantes for disease resistance. Disease resistance is assessed with a 0-to-5\n> scale which made an ordinal variable.\n> Here is the script a wrote :\n>\n>>Tab.INRCh=read.csv(\"INRChamp201013.csv\",sep=\";\")\n>>Tab.INRCh$Year=as.factor(Tab.INRCh$Year)\n>>Tab.INRCh$RRI<-factor(Tab.INRCh$RRI,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>>Tab.INRCh$RRI_DHW1<-factor(Tab.INRCh$RRI_DHW1,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>>Tab.INRCh$RRI_DHW2<-factor(Tab.INRCh$RRI_DHW2,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>\n>>Modele=clmm(RRI~Line+RRI_DHW1+RRI_DHW2+(1|Year)+(1|Location)+(1|Not)+(1|Bloc)+(1|Plante),data=Tab.INRCh,na.action=na.omit)\n>\n> I want to create this modele to run function Anova() to know if disease\n> resistance is different among lines.\n>\n> When I run the script, I have an error :\n> Erreur : all(sapply(gfl, nlevels) > 2) is not TRUE\n> I can't find anything about it on the internet...\n> Can someone help me on this?\n>\n> Thanks\n> Best regards\n> Aurore\n>\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/Error-clmm-ordinal-tp4691592.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "It's telling you that one or more of the grouping factors for the\nrandom-effect terms has less than three levels. From what you write,\nthis seems to apply to Location: you may want to treat it as a\nfi",
+      "thread_id": "thread-b7ed018a9e67",
+      "thread_depth": 1,
+      "month": "2014-06"
+    },
+    {
       "id": "msg-390cfde73d0b",
       "message_id": "<003301cf7e83$66ee69f0$34cb3dd0$@gmail.com>",
       "from_name": "Bill Bentley",
@@ -578,24 +596,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20140602/05cb4404/attachment.pl>",
       "thread_id": "thread-0dcb00510a28",
       "thread_depth": 2,
-      "month": "2014-06"
-    },
-    {
-      "id": "msg-642e0d07a4a5",
-      "message_id": "<CAG_uk92nmV77NJcZupkE1yG=O=WPwd=HLpXdoQDqvqwd97-i1Q@mail.gmail.com>",
-      "from_name": "Rune Haubo",
-      "from_email_hash": "ff9308758478bd19788a62274513bc3d3afca51fd7f3216f9549df58c937212b",
-      "date": "2014-06-02T18:55:00+02:00",
-      "subject": "[R] Error clmm(){ordinal}",
-      "subject_clean": "Error clmm(){ordinal}",
-      "in_reply_to": "<1401710397402-4691592.post@n4.nabble.com>",
-      "references": [
-        "<1401710397402-4691592.post@n4.nabble.com>"
-      ],
-      "body_plain": "It's telling you that one or more of the grouping factors for the\nrandom-effect terms has less than three levels. From what you write,\nthis seems to apply to Location: you may want to treat it as a\nfixed-effect instead.\n\nHope this helps,\nRune\n\nOn 2 June 2014 14:00, adesgroux <aurore.desgroux at rennes.inra.fr> wrote:\n> Dear all,\n>\n> I am trying to run the function clmm() on a data table composed as following\n> :\n> <http://r.789695.n4.nabble.com/file/n4691592/datatable.png>\n>\n> I have 187 pea lines assessed on 4 years * 2 locations * 3 blocs * 15\n> plantes for disease resistance. Disease resistance is assessed with a 0-to-5\n> scale which made an ordinal variable.\n> Here is the script a wrote :\n>\n>>Tab.INRCh=read.csv(\"INRChamp201013.csv\",sep=\";\")\n>>Tab.INRCh$Year=as.factor(Tab.INRCh$Year)\n>>Tab.INRCh$RRI<-factor(Tab.INRCh$RRI,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>>Tab.INRCh$RRI_DHW1<-factor(Tab.INRCh$RRI_DHW1,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>>Tab.INRCh$RRI_DHW2<-factor(Tab.INRCh$RRI_DHW2,levels=c(\"5\",\"4\",\"3\",\"2\",\"1\",\"0\"),ordered=TRUE)\n>\n>>Modele=clmm(RRI~Line+RRI_DHW1+RRI_DHW2+(1|Year)+(1|Location)+(1|Not)+(1|Bloc)+(1|Plante),data=Tab.INRCh,na.action=na.omit)\n>\n> I want to create this modele to run function Anova() to know if disease\n> resistance is different among lines.\n>\n> When I run the script, I have an error :\n> Erreur : all(sapply(gfl, nlevels) > 2) is not TRUE\n> I can't find anything about it on the internet...\n> Can someone help me on this?\n>\n> Thanks\n> Best regards\n> Aurore\n>\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/Error-clmm-ordinal-tp4691592.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "It's telling you that one or more of the grouping factors for the\nrandom-effect terms has less than three levels. From what you write,\nthis seems to apply to Location: you may want to treat it as a\nfi",
-      "thread_id": "thread-b7ed018a9e67",
-      "thread_depth": 1,
       "month": "2014-06"
     },
     {
