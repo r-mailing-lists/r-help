@@ -10707,22 +10707,6 @@
       "month": "2004-09"
     },
     {
-      "id": "msg-bc61631153c1",
-      "message_id": "<88EAF3512A55DF46B06B1954AEF73F74055C1857@dc1ex2.air.org>",
-      "from_name": "Doran, Harold",
-      "from_email_hash": "92d2bc653019a2d5a0fa1618e3004819dccf7a9f65c746de6a1bc55fa1e194db",
-      "date": "2004-09-14T12:18:42-04:00",
-      "subject": "[R] repeated measures and covariance structures",
-      "subject_clean": "repeated measures and covariance structures",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Yes. Try something akin to\n\n> fm1<- lme(y~time, data, random=~time|ID)\n\n> fm2<-update(fm1, correlation=corAR1(form~time|ID) \n\nYou can then use anova(fm1,fm2) to compare.\n\nHarold\n\n-----Original Message-----\nFrom: r-help-bounces at stat.math.ethz.ch\n[mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of Chris Solomon\nSent: Tuesday, September 14, 2004 12:07 PM\nTo: R-help at stat.math.ethz.ch\nSubject: [R] repeated measures and covariance structures\n\nHello-\n\nI'm trying to do some repeated measures ANOVAs. In the past, using SAS,\nI have used the framework outlined in Littell et al.'s \"SAS System for\nMixed Models\", using the REPEATED statement in PROC MIXED to model\nvariation across time within an experimental unit. SAS allows you to\nspecify different within-unit covariance structures (e.g., compound\nsymmetric, AR(1), etc.) to determine the best model.\n\nI'm having trouble figuring out how to do a similar analysis in R. While\n'lme' will let you choose the class of correlation structure to use, it\nseems to require that you specify this structure rather than using the\ndata to estimate the covariance matrix. For example, it seems that to\nspecify 'corAR1' as the correlation structure, you have to pick a value\nfor rho, the autoregressive parameter.\n\nSo, my question: is there a way to tell 'lme' what sort of covariance\nstructure you'd like to model, and then let the function estimate the\ncovariances? Or, alternatively, is there a better way to go about this\nsort of repeated measures analysis in R? I've exhausted my available R\nresources and done a pretty good search of the help archives without\nfinding a clear answer.\n\nThanks much!\nChris\n\n\n\n*******\nChris Solomon\nCenter for Limnology\nUniv. of Wisconsin\nPhone: (608) 263-2465\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html",
-      "body_snippet": "Yes. Try something akin to\n\n> fm1<- lme(y~time, data, random=~time|ID)\n\n> fm2<-update(fm1, correlation=corAR1(form~time|ID) \n\nYou can then use anova(fm1,fm2) to compare.\n\nHarold\n\n-----Original Message",
-      "thread_id": "thread-bc61631153c1",
-      "thread_depth": 0,
-      "month": "2004-09"
-    },
-    {
       "id": "msg-7c78790f6f9a",
       "message_id": "<ce17a70f0409140918408afa9e@mail.gmail.com>",
       "from_name": "Francisco Chamu",
@@ -10738,6 +10722,22 @@
       "body_plain": "I have run this on both Windows 2000 and XP.  All I did was install\nthe binaries from CRAN so I think I am using the standard Rblas.dll.\n\nTo reproduce what I see you must run the code at the beginning of the\nR session.  After the second run, all subsequent runs give the same\nresult as the second set.\n\nThanks,\nFrancisco\n\n\nOn Tue, 14 Sep 2004 08:29:25 +0200, Uwe Ligges\n<ligges at statistik.uni-dortmund.de> wrote:\n> Prof Brian Ripley wrote:\n> > I get the second set each time, on Windows, using the build from CRAN.\n> > Which BLAS are you using?\n> \n> \n> Works also well for me with a self compiled R-1.9.1 (both with standard\n> Rblas as well as with the Rblas.dll for Athlon CPU from CRAN).\n> Is this a NT-based version of Windows (NT, 2k, XP)?\n> \n> Uwe\n> \n> \n> \n> \n> > On Tue, 14 Sep 2004, Francisco Chamu wrote:\n> >\n> >\n> >>I start a clean session of R 1.9.1 on Windows and I run the following code:\n> >>\n> >>\n> >>>library(MASS)\n> >>>data(painters)\n> >>>pca.painters <- princomp(painters[ ,1:4])\n> >>>loadings(pca.painters)\n> >>\n> >>Loadings:\n> >>            Comp.1 Comp.2 Comp.3 Comp.4\n> >>Composition  0.484 -0.376  0.784 -0.101\n> >>Drawing      0.424  0.187 -0.280 -0.841\n> >>Colour      -0.381 -0.845 -0.211 -0.310\n> >>Expression   0.664 -0.330 -0.513  0.432\n> >>\n> >>               Comp.1 Comp.2 Comp.3 Comp.4\n> >>SS loadings      1.00   1.00   1.00   1.00\n> >>Proportion Var   0.25   0.25   0.25   0.25\n> >>Cumulative Var   0.25   0.50   0.75   1.00\n> >>\n> >>However, if I rerun the same analysis, the loadings of the first\n> >>component have the opposite sign (see below), why is that?  I have\n> >>read the note\n> >>in the princomp help that says\n> >>\n> >>    \"The signs of the columns of the loadings and scores are arbitrary,\n> >>     and so may differ between different programs for PCA, and even\n> >>     between different builds of R.\"\n> >>\n> >>However, I still would expect the same signs for two runs in the same session.\n> >>\n> >>\n> >>>pca.painters <- princomp(painters[ ,1:4])\n> >>>loadings(pca.painters)\n> >>\n> >>Loadings:\n> >>            Comp.1 Comp.2 Comp.3 Comp.4\n> >>Composition -0.484 -0.376  0.784 -0.101\n> >>Drawing     -0.424  0.187 -0.280 -0.841\n> >>Colour       0.381 -0.845 -0.211 -0.310\n> >>Expression  -0.664 -0.330 -0.513  0.432\n> >>\n> >>               Comp.1 Comp.2 Comp.3 Comp.4\n> >>SS loadings      1.00   1.00   1.00   1.00\n> >>Proportion Var   0.25   0.25   0.25   0.25\n> >>Cumulative Var   0.25   0.50   0.75   1.00\n> >>\n> >>>R.version\n> >>\n> >>         _\n> >>platform i386-pc-mingw32\n> >>arch     i386\n> >>os       mingw32\n> >>system   i386, mingw32\n> >>status\n> >>major    1\n> >>minor    9.1\n> >>year     2004\n> >>month    06\n> >>day      21\n> >>language R\n> >>\n> >>BTW, I have tried the same in R 1.9.1 on Debian and I can't reproduce\n> >>what I see\n> >>on Windows.  In fact all the runs give the same as the second run on Windows.\n> >>\n> >>-Francisco\n> >>\n> >>______________________________________________\n> >>R-help at stat.math.ethz.ch mailing list\n> >>https://stat.ethz.ch/mailman/listinfo/r-help\n> >>PLEASE do read the posting guide! http://www.R-project.org/posting-guide.html\n> >>\n> >>\n> >\n> >\n> \n>",
       "body_snippet": "I have run this on both Windows 2000 and XP.  All I did was install\nthe binaries from CRAN so I think I am using the standard Rblas.dll.\n\nTo reproduce what I see you must run the code at the beginning",
       "thread_id": "thread-7c78790f6f9a",
+      "thread_depth": 0,
+      "month": "2004-09"
+    },
+    {
+      "id": "msg-bc61631153c1",
+      "message_id": "<88EAF3512A55DF46B06B1954AEF73F74055C1857@dc1ex2.air.org>",
+      "from_name": "Doran, Harold",
+      "from_email_hash": "92d2bc653019a2d5a0fa1618e3004819dccf7a9f65c746de6a1bc55fa1e194db",
+      "date": "2004-09-14T12:18:42-04:00",
+      "subject": "[R] repeated measures and covariance structures",
+      "subject_clean": "repeated measures and covariance structures",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Yes. Try something akin to\n\n> fm1<- lme(y~time, data, random=~time|ID)\n\n> fm2<-update(fm1, correlation=corAR1(form~time|ID) \n\nYou can then use anova(fm1,fm2) to compare.\n\nHarold\n\n-----Original Message-----\nFrom: r-help-bounces at stat.math.ethz.ch\n[mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of Chris Solomon\nSent: Tuesday, September 14, 2004 12:07 PM\nTo: R-help at stat.math.ethz.ch\nSubject: [R] repeated measures and covariance structures\n\nHello-\n\nI'm trying to do some repeated measures ANOVAs. In the past, using SAS,\nI have used the framework outlined in Littell et al.'s \"SAS System for\nMixed Models\", using the REPEATED statement in PROC MIXED to model\nvariation across time within an experimental unit. SAS allows you to\nspecify different within-unit covariance structures (e.g., compound\nsymmetric, AR(1), etc.) to determine the best model.\n\nI'm having trouble figuring out how to do a similar analysis in R. While\n'lme' will let you choose the class of correlation structure to use, it\nseems to require that you specify this structure rather than using the\ndata to estimate the covariance matrix. For example, it seems that to\nspecify 'corAR1' as the correlation structure, you have to pick a value\nfor rho, the autoregressive parameter.\n\nSo, my question: is there a way to tell 'lme' what sort of covariance\nstructure you'd like to model, and then let the function estimate the\ncovariances? Or, alternatively, is there a better way to go about this\nsort of repeated measures analysis in R? I've exhausted my available R\nresources and done a pretty good search of the help archives without\nfinding a clear answer.\n\nThanks much!\nChris\n\n\n\n*******\nChris Solomon\nCenter for Limnology\nUniv. of Wisconsin\nPhone: (608) 263-2465\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html",
+      "body_snippet": "Yes. Try something akin to\n\n> fm1<- lme(y~time, data, random=~time|ID)\n\n> fm2<-update(fm1, correlation=corAR1(form~time|ID) \n\nYou can then use anova(fm1,fm2) to compare.\n\nHarold\n\n-----Original Message",
+      "thread_id": "thread-bc61631153c1",
       "thread_depth": 0,
       "month": "2004-09"
     },
@@ -29460,17 +29460,6 @@
       "root_message_id": "msg-3eda80daeaf1"
     },
     {
-      "id": "thread-bc61631153c1",
-      "subject": "repeated measures and covariance structures",
-      "message_count": 1,
-      "participants": [
-        "Doran, Harold"
-      ],
-      "started": "2004-09-14T12:18:42-04:00",
-      "last_reply": "2004-09-14T12:18:42-04:00",
-      "root_message_id": "msg-bc61631153c1"
-    },
-    {
       "id": "thread-7c78790f6f9a",
       "subject": "Signs of loadings from princomp on Windows",
       "message_count": 9,
@@ -29485,6 +29474,17 @@
       "started": "2004-09-14T12:18:42-04:00",
       "last_reply": "2004-09-16T08:45:35+01:00",
       "root_message_id": "msg-7c78790f6f9a"
+    },
+    {
+      "id": "thread-bc61631153c1",
+      "subject": "repeated measures and covariance structures",
+      "message_count": 1,
+      "participants": [
+        "Doran, Harold"
+      ],
+      "started": "2004-09-14T12:18:42-04:00",
+      "last_reply": "2004-09-14T12:18:42-04:00",
+      "root_message_id": "msg-bc61631153c1"
     },
     {
       "id": "thread-4f1e1f3d41c3",

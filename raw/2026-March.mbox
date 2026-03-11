@@ -970,3 +970,685 @@ Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
 	[[alternative HTML version deleted]]
 
 
+From er|c@e|guero @end|ng |rom |rd@|r  Tue Mar 10 09:00:05 2026
+From: er|c@e|guero @end|ng |rom |rd@|r (eric elguero)
+Date: Tue, 10 Mar 2026 09:00:05 +0100
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <mailman.373547.1.1773054001.29580.r-help@r-project.org>
+References: <mailman.373547.1.1773054001.29580.r-help@r-project.org>
+Message-ID: <a6012720-844b-5256-a94a-ada4b2b9ffca@ird.fr>
+
+
+
+> From: Brian Smith <briansmith199312 at gmail.com>
+>
+> In some cases, when fitting a simple OLS regression, I obtain an
+> estimated beta coefficient that is very small?for example, 0.00034?yet
+> it still appears statistically significant based on the p-value.
+>
+>
+
+to me a statistically significant difference between
+two treatment groups is always worth reporting, if only
+because the treatments may have more than one effect.
+One biological parameter was chosen to be the
+response but maybe it is not the right one. A small
+difference is a hint that something maybe more important
+is going on.
+
+-- 
+---
+Eric Elguero
+------------
+MIVEGEC. - UMR (CNRS/IRD/UM) 5290
+900 rue Jean-Fran?ois Breton
+34090 Montpellier, France
+
+
+From @ggp@@erge| @end|ng |rom gm@||@com  Tue Mar 10 11:47:29 2026
+From: @ggp@@erge| @end|ng |rom gm@||@com (Sergei Ko)
+Date: Tue, 10 Mar 2026 10:47:29 +0000
+Subject: [R] Problems with writeClipboard while SPSS is opened
+Message-ID: <CAK2fHGeuksxFU=Re9sB8FR25rja1amcGppqgkMEEj_0PEstZ3g@mail.gmail.com>
+
+Hi All,
+
+I'm writing to report problems with writeClipboard when you have an SPSS
+running.
+I use writeClipboard to move data between R and Excel for my excel tools.
+Noticed, it transfers just a few first lines when I have SPSS opened in the
+background sometimes. My colleagues reported the same behaviour on several
+occasions. Closing SPSS solves the problem.
+Just FYI. But I'm curious if someone else has the same problem.
+Win 11
+Different versions of R
+Run R script with Rscript
+Concurrent SPSS license
+VPN on.
+
+Regards,
+Sergiy
+
+	[[alternative HTML version deleted]]
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Tue Mar 10 12:50:30 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Tue, 10 Mar 2026 12:50:30 +0100
+Subject: [R] Problems with writeClipboard while SPSS is opened
+In-Reply-To: <CAK2fHGeuksxFU=Re9sB8FR25rja1amcGppqgkMEEj_0PEstZ3g@mail.gmail.com>
+References: <CAK2fHGeuksxFU=Re9sB8FR25rja1amcGppqgkMEEj_0PEstZ3g@mail.gmail.com>
+Message-ID: <ba75b35e-fe36-4a82-bb2a-15e04497ee98@statistik.tu-dortmund.de>
+
+Please report to IBM/SPSS that SPSS changes the clipboard behaviour, 
+there is nothing we can do when SPSS causes issues.
+
+Best,
+Uwe Ligges
+
+
+On 10.03.2026 11:47, Sergei Ko wrote:
+> Hi All,
+> 
+> I'm writing to report problems with writeClipboard when you have an SPSS
+> running.
+> I use writeClipboard to move data between R and Excel for my excel tools.
+> Noticed, it transfers just a few first lines when I have SPSS opened in the
+> background sometimes. My colleagues reported the same behaviour on several
+> occasions. Closing SPSS solves the problem.
+> Just FYI. But I'm curious if someone else has the same problem.
+> Win 11
+> Different versions of R
+> Run R script with Rscript
+> Concurrent SPSS license
+> VPN on.
+> 
+> Regards,
+> Sergiy
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From pd@|gd @end|ng |rom gm@||@com  Tue Mar 10 13:21:05 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Tue, 10 Mar 2026 13:21:05 +0100
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <02f943d5-5b59-4a40-a6de-779e6a8821dd@Spark>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+ <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+ <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+ <51D9B892-AFF1-490F-8D0E-4264723D795B@gmail.com>
+ <02f943d5-5b59-4a40-a6de-779e6a8821dd@Spark>
+Message-ID: <DE7101A3-1281-42BC-AA74-C3C11C01133D@gmail.com>
+
+That's actually a shift and not a scaling, no? Just multiplying with a scalar is not going to change the result:
+
+> example$x3 <- example$x1*10
+> example$x4 <- example$x2*10
+> summary(lm(y ~ x1 + x1:x2, data = example))
+
+Call:
+lm(formula = y ~ x1 + x1:x2, data = example)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.3499  -2.8748   0.6154   3.2637  11.4331 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -0.2437     0.4548  -0.536 0.593352    
+x1            1.9654     0.4932   3.985 0.000131 ***
+x1:x2         1.5827     0.5249   3.015 0.003275 ** 
+---
+Signif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+
+Residual standard error: 4.533 on 97 degrees of freedom
+Multiple R-squared:  0.2232,	Adjusted R-squared:  0.2072 
+F-statistic: 13.94 on 2 and 97 DF,  p-value: 4.784e-06
+
+> summary(lm(y ~ x3 + x3:x4, data = example))
+
+Call:
+lm(formula = y ~ x3 + x3:x4, data = example)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.3499  -2.8748   0.6154   3.2637  11.4331 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.243674   0.454821  -0.536 0.593352    
+x3           0.196545   0.049321   3.985 0.000131 ***
+x3:x4        0.015827   0.005249   3.015 0.003275 ** 
+---
+Signif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+
+Residual standard error: 4.533 on 97 degrees of freedom
+Multiple R-squared:  0.2232,	Adjusted R-squared:  0.2072 
+F-statistic: 13.94 on 2 and 97 DF,  p-value: 4.784e-06
+------
+
+An intuitive explanation for your example is that ~ x1 + x1:x2 is bilinear, but if x1==0 there is no effect of x2. 
+With  ~ x3 + x3:x4 it is still bilinear and no effect of x4 is equivalent to no effect of x2, but now that happens when x3==0, which is when x1==1. Same thing happens if you force a regression through the origin and move the origin.
+
+---
+I tried to come up with an example showing the corresponding effect with character variables in different languages and got as far as this
+
+dd <- expand.grid(A=1:2, B=1:2, rep=1:5) 
+dd <- within(dd, {en_A <- c("F","M")[A]; en_B <- c("N","Y")[B]})
+dd <- within(dd, {da_A <- c("K","M")[A]; da_B <- c("N","J")[B]})
+dd$Y <- matrix(c(1,1,1,2),2)[cbind(dd$A,dd$B)] + rnorm(20, sd=.2)
+summary(lm(Y~en_A * en_B, dd))
+summary(lm(Y~da_A * da_B, dd))
+
+With this, you'll find that the main effect of being male depends on whether we speak English or Danish.
+
+Removing a main effect should then give similar effects to your example, but R's factor coding conventions get in the way because it  codes the interaction term with the full indicator parametrization of the other term. I suppose you could force it either by directly modifying the design matrix or by using explicit 0-1 codings.
+
+-pd
+
+> On 9 Mar 2026, at 22.54, Andrew Robinson <apro at unimelb.edu.au> wrote:
+> 
+> Hi Peter,
+>   hopefully this clarifies. 
+> 
+> ## Here's a light-touch example
+>   set.seed(8675309)
+>   example <- data.frame(x1 = rnorm(100),
+>                      x2 = rnorm(100))
+>   example$x3 <- example$x1 - 1
+> example$x4 <- example$x2 - 1
+>   example$y <- with(example,
+>                  2 * x1 + 4 * x2 + x1 * x2 + rnorm(100) * 2)
+>   ## In the following code, the statistical information about the
+> ## interaction term is the same across the two scalings
+>   summary(lm(y ~ x1 * x2, data = example))
+> summary(lm(y ~ x3 * x4, data = example))
+>   ## In the following code, the statistical information about the
+> ## interaction term is the not same across the two scalings
+>   summary(lm(y ~ x1 + x1:x2, data = example))
+> summary(lm(y ~ x3 + x3:x4, data = example))
+>   NB: this obscure fact was published in Robinson, A.P., Pocewicz, A.L., Gessler, P.E., 2004. A cautionary note on scaling variables that
+> appear only in products in ordinary least squares. Forest Biometry, Modelling and Information Sciences 1, 83?90.  I first submitted it to Remote Sensing of the Environment (in which this failing to respect strong hierarchy is most pernicious) and R1 said it was completely obvious that failing to respect strong hierarchy was a stupid idea, reject; whereas R2 said they had never heard of this therefore it could not possibly be true, reject. 
+>   I'm not sure if it's similar to language independence .... ? Interesting conjecture!  Can you unpack that a little?  
+>   Cheers,
+>   Andrew
+> 
+> -- 
+> Andrew Robinson 
+> Director, CEBRA and Professor of Biosecurity,
+> School/s of BioSciences and Mathematics & Statistics
+> University of Melbourne, VIC 3010 Australia
+> Tel: (+61) 0403 138 955
+> Email: apro at unimelb.edu.au    
+> Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+> 
+> I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+>   On Mar 9, 2026 at 21:04 +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+>> Example?
+>> 
+>> Is this similar to language independence getting lost under similar circumstances because e.g. Ja/Nej in Danish sorts opposite to Yes/No?
+>> 
+>> -pd
+>> 
+>>> On 9 Mar 2026, at 10.34, Andrew Robinson <apro at unimelb.edu.au> wrote:
+>>> 
+>>> Curiously enough, scale independence is lost in models that lack Nelder?s strong heredity (eg main effects are missing for interactions).
+>>> Cheers,
+>>> Andrew
+>>> 
+>>> --
+>>> Andrew Robinson
+>>> Director, CEBRA and Professor of Biosecurity,
+>>> School/s of BioSciences and Mathematics & Statistics
+>>> University of Melbourne, VIC 3010 Australia
+>>> Tel: (+61) 0403 138 955
+>>> Email: apro at unimelb.edu.au
+>>> Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+>>> 
+>>> I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+>>> On 9 Mar 2026 at 8:13?PM +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+>>>> > Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't.
+>>>> >
+>>>> > (Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+>>>> >
+>>>> > -pd
+>>>> >
+>>>>> >> On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+>>>>> >>
+>>>>> >> Hi Michael,
+>>>>> >>
+>>>>> >> You made an interesting point that, scale of the underlying variable
+>>>>> >> may be vastly different as compared with other variables in the
+>>>>> >> equation.
+>>>>> >>
+>>>>> >> Could I use logarithm of that variable instead of raw? Another
+>>>>> >> possibility is that we could standardise that variable. But IMO, for
+>>>>> >> out of sample prediction, the interpretation of standardisation is not
+>>>>> >> straightforward.
+>>>>> >>
+>>>>> >> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>>>>>> >>> >
+>>>>>>> >>> > Dear Brian
+>>>>>>> >>> >
+>>>>>>> >>> > You have not given us much to go on here but the problem is often
+>>>>>>> >>> > related to the scale of the variables. So if the coefficient is per year
+>>>>>>> >>> > tryin to re-express time in months or weeks or days.
+>>>>>>> >>> >
+>>>>>>> >>> > Michael
+>>>>>>> >>> >
+>>>>>>> >>> > On 08/03/2026 11:50, Brian Smith wrote:
+>>>>>>>>> >>>> >> Hi,
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> My question is not directly related to R, but rather a basic question
+>>>>>>>>> >>>> >> about statistics. I am hoping to receive valuable insights from the
+>>>>>>>>> >>>> >> expert statisticians in this group.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> In some cases, when fitting a simple OLS regression, I obtain an
+>>>>>>>>> >>>> >> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>>>>>>>> >>>> >> it still appears statistically significant based on the p-value.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> I am trying to understand how to interpret such a result in practical
+>>>>>>>>> >>>> >> terms. From a magnitude perspective, such a small coefficient would
+>>>>>>>>> >>>> >> not be expected to meaningfully affect the predicted response value,
+>>>>>>>>> >>>> >> but statistically it is still considered significant.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> I would greatly appreciate any insights or explanations regarding this
+>>>>>>>>> >>>> >> phenomenon.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> Thanks for your time.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> ______________________________________________
+>>>>>>>>> >>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>>>>>> >>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>>>>>> >>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>>>>>> >>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>>>>>> >>> >
+>>>>>>> >>> > --
+>>>>>>> >>> > Michael Dewey
+>>>>>>> >>> >
+>>>>> >>
+>>>>> >> ______________________________________________
+>>>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>>> >
+>>>> > --
+>>>> > Peter Dalgaard, Professor,
+>>>> > Center for Statistics, Copenhagen Business School
+>>>> > Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>>>> > Phone: (+45)38153501
+>>>> > Office: A 4.23
+>>>> > Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>>>> >
+>>>> > ______________________________________________
+>>>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>>>> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>> > and provide commented, minimal, self-contained, reproducible code.
+>>>> >
+>> 
+>> --
+>> Peter Dalgaard, Professor,
+>> Center for Statistics, Copenhagen Business School
+>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>> Phone: (+45)38153501
+>> Office: A 4.23
+>> Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>> 
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From pd@|gd @end|ng |rom gm@||@com  Tue Mar 10 13:21:05 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Tue, 10 Mar 2026 13:21:05 +0100
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <02f943d5-5b59-4a40-a6de-779e6a8821dd@Spark>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+ <a0d6a0a8-e6f9-4c9b-aa53-b1360f9c64e2@dewey.myzen.co.uk>
+ <CAHUBDY_oHW8865iLS=Mb7F3cbrnxvPACVZU2KYg=Xgsa8C+0pw@mail.gmail.com>
+ <9E51685A-6905-4962-A979-51097EEF9B65@gmail.com>
+ <c5636d26-df98-45c0-8716-0e8cc9149ff7@Spark>
+ <51D9B892-AFF1-490F-8D0E-4264723D795B@gmail.com>
+ <02f943d5-5b59-4a40-a6de-779e6a8821dd@Spark>
+Message-ID: <DE7101A3-1281-42BC-AA74-C3C11C01133D@gmail.com>
+
+That's actually a shift and not a scaling, no? Just multiplying with a scalar is not going to change the result:
+
+> example$x3 <- example$x1*10
+> example$x4 <- example$x2*10
+> summary(lm(y ~ x1 + x1:x2, data = example))
+
+Call:
+lm(formula = y ~ x1 + x1:x2, data = example)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.3499  -2.8748   0.6154   3.2637  11.4331 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -0.2437     0.4548  -0.536 0.593352    
+x1            1.9654     0.4932   3.985 0.000131 ***
+x1:x2         1.5827     0.5249   3.015 0.003275 ** 
+---
+Signif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+
+Residual standard error: 4.533 on 97 degrees of freedom
+Multiple R-squared:  0.2232,	Adjusted R-squared:  0.2072 
+F-statistic: 13.94 on 2 and 97 DF,  p-value: 4.784e-06
+
+> summary(lm(y ~ x3 + x3:x4, data = example))
+
+Call:
+lm(formula = y ~ x3 + x3:x4, data = example)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.3499  -2.8748   0.6154   3.2637  11.4331 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.243674   0.454821  -0.536 0.593352    
+x3           0.196545   0.049321   3.985 0.000131 ***
+x3:x4        0.015827   0.005249   3.015 0.003275 ** 
+---
+Signif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+
+Residual standard error: 4.533 on 97 degrees of freedom
+Multiple R-squared:  0.2232,	Adjusted R-squared:  0.2072 
+F-statistic: 13.94 on 2 and 97 DF,  p-value: 4.784e-06
+------
+
+An intuitive explanation for your example is that ~ x1 + x1:x2 is bilinear, but if x1==0 there is no effect of x2. 
+With  ~ x3 + x3:x4 it is still bilinear and no effect of x4 is equivalent to no effect of x2, but now that happens when x3==0, which is when x1==1. Same thing happens if you force a regression through the origin and move the origin.
+
+---
+I tried to come up with an example showing the corresponding effect with character variables in different languages and got as far as this
+
+dd <- expand.grid(A=1:2, B=1:2, rep=1:5) 
+dd <- within(dd, {en_A <- c("F","M")[A]; en_B <- c("N","Y")[B]})
+dd <- within(dd, {da_A <- c("K","M")[A]; da_B <- c("N","J")[B]})
+dd$Y <- matrix(c(1,1,1,2),2)[cbind(dd$A,dd$B)] + rnorm(20, sd=.2)
+summary(lm(Y~en_A * en_B, dd))
+summary(lm(Y~da_A * da_B, dd))
+
+With this, you'll find that the main effect of being male depends on whether we speak English or Danish.
+
+Removing a main effect should then give similar effects to your example, but R's factor coding conventions get in the way because it  codes the interaction term with the full indicator parametrization of the other term. I suppose you could force it either by directly modifying the design matrix or by using explicit 0-1 codings.
+
+-pd
+
+> On 9 Mar 2026, at 22.54, Andrew Robinson <apro at unimelb.edu.au> wrote:
+> 
+> Hi Peter,
+>   hopefully this clarifies. 
+> 
+> ## Here's a light-touch example
+>   set.seed(8675309)
+>   example <- data.frame(x1 = rnorm(100),
+>                      x2 = rnorm(100))
+>   example$x3 <- example$x1 - 1
+> example$x4 <- example$x2 - 1
+>   example$y <- with(example,
+>                  2 * x1 + 4 * x2 + x1 * x2 + rnorm(100) * 2)
+>   ## In the following code, the statistical information about the
+> ## interaction term is the same across the two scalings
+>   summary(lm(y ~ x1 * x2, data = example))
+> summary(lm(y ~ x3 * x4, data = example))
+>   ## In the following code, the statistical information about the
+> ## interaction term is the not same across the two scalings
+>   summary(lm(y ~ x1 + x1:x2, data = example))
+> summary(lm(y ~ x3 + x3:x4, data = example))
+>   NB: this obscure fact was published in Robinson, A.P., Pocewicz, A.L., Gessler, P.E., 2004. A cautionary note on scaling variables that
+> appear only in products in ordinary least squares. Forest Biometry, Modelling and Information Sciences 1, 83?90.  I first submitted it to Remote Sensing of the Environment (in which this failing to respect strong hierarchy is most pernicious) and R1 said it was completely obvious that failing to respect strong hierarchy was a stupid idea, reject; whereas R2 said they had never heard of this therefore it could not possibly be true, reject. 
+>   I'm not sure if it's similar to language independence .... ? Interesting conjecture!  Can you unpack that a little?  
+>   Cheers,
+>   Andrew
+> 
+> -- 
+> Andrew Robinson 
+> Director, CEBRA and Professor of Biosecurity,
+> School/s of BioSciences and Mathematics & Statistics
+> University of Melbourne, VIC 3010 Australia
+> Tel: (+61) 0403 138 955
+> Email: apro at unimelb.edu.au    
+> Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+> 
+> I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+>   On Mar 9, 2026 at 21:04 +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+>> Example?
+>> 
+>> Is this similar to language independence getting lost under similar circumstances because e.g. Ja/Nej in Danish sorts opposite to Yes/No?
+>> 
+>> -pd
+>> 
+>>> On 9 Mar 2026, at 10.34, Andrew Robinson <apro at unimelb.edu.au> wrote:
+>>> 
+>>> Curiously enough, scale independence is lost in models that lack Nelder?s strong heredity (eg main effects are missing for interactions).
+>>> Cheers,
+>>> Andrew
+>>> 
+>>> --
+>>> Andrew Robinson
+>>> Director, CEBRA and Professor of Biosecurity,
+>>> School/s of BioSciences and Mathematics & Statistics
+>>> University of Melbourne, VIC 3010 Australia
+>>> Tel: (+61) 0403 138 955
+>>> Email: apro at unimelb.edu.au
+>>> Website: https://researchers.ms.unimelb.edu.au/~apro at unimelb/
+>>> 
+>>> I acknowledge the Traditional Owners of the land I inhabit, and pay my respects to their Elders.
+>>> On 9 Mar 2026 at 8:13?PM +1100, Peter Dalgaard <pdalgd at gmail.com>, wrote:
+>>>> > Sometimes it is just a matter of units: If you change the predictor from millimeter to meter, then the regression coefficient automatically scales down by a factor 1000. The fit should be the same mathematically, although sometimes very extreme scale differences confuse the numerical algorithms. E.g. the design matrix can be declared singular even though it isn't.
+>>>> >
+>>>> > (Scale differences have to be pretty extreme to affect OLS, though. More common is that nonlinear methods are impacted via convergence criteria or numerical derivatives.)
+>>>> >
+>>>> > -pd
+>>>> >
+>>>>> >> On 8 Mar 2026, at 19.15, Brian Smith <briansmith199312 at gmail.com> wrote:
+>>>>> >>
+>>>>> >> Hi Michael,
+>>>>> >>
+>>>>> >> You made an interesting point that, scale of the underlying variable
+>>>>> >> may be vastly different as compared with other variables in the
+>>>>> >> equation.
+>>>>> >>
+>>>>> >> Could I use logarithm of that variable instead of raw? Another
+>>>>> >> possibility is that we could standardise that variable. But IMO, for
+>>>>> >> out of sample prediction, the interpretation of standardisation is not
+>>>>> >> straightforward.
+>>>>> >>
+>>>>> >> On Sun, 8 Mar 2026 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+>>>>>>> >>> >
+>>>>>>> >>> > Dear Brian
+>>>>>>> >>> >
+>>>>>>> >>> > You have not given us much to go on here but the problem is often
+>>>>>>> >>> > related to the scale of the variables. So if the coefficient is per year
+>>>>>>> >>> > tryin to re-express time in months or weeks or days.
+>>>>>>> >>> >
+>>>>>>> >>> > Michael
+>>>>>>> >>> >
+>>>>>>> >>> > On 08/03/2026 11:50, Brian Smith wrote:
+>>>>>>>>> >>>> >> Hi,
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> My question is not directly related to R, but rather a basic question
+>>>>>>>>> >>>> >> about statistics. I am hoping to receive valuable insights from the
+>>>>>>>>> >>>> >> expert statisticians in this group.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> In some cases, when fitting a simple OLS regression, I obtain an
+>>>>>>>>> >>>> >> estimated beta coefficient that is very small?for example, 0.00034?yet
+>>>>>>>>> >>>> >> it still appears statistically significant based on the p-value.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> I am trying to understand how to interpret such a result in practical
+>>>>>>>>> >>>> >> terms. From a magnitude perspective, such a small coefficient would
+>>>>>>>>> >>>> >> not be expected to meaningfully affect the predicted response value,
+>>>>>>>>> >>>> >> but statistically it is still considered significant.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> I would greatly appreciate any insights or explanations regarding this
+>>>>>>>>> >>>> >> phenomenon.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> Thanks for your time.
+>>>>>>>>> >>>> >>
+>>>>>>>>> >>>> >> ______________________________________________
+>>>>>>>>> >>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>>>>>> >>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>>>>>> >>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>>>>>> >>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>>>>>> >>> >
+>>>>>>> >>> > --
+>>>>>>> >>> > Michael Dewey
+>>>>>>> >>> >
+>>>>> >>
+>>>>> >> ______________________________________________
+>>>>> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>> >> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>> >> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>> >> and provide commented, minimal, self-contained, reproducible code.
+>>>> >
+>>>> > --
+>>>> > Peter Dalgaard, Professor,
+>>>> > Center for Statistics, Copenhagen Business School
+>>>> > Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>>>> > Phone: (+45)38153501
+>>>> > Office: A 4.23
+>>>> > Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>>>> >
+>>>> > ______________________________________________
+>>>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>>>> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>> > and provide commented, minimal, self-contained, reproducible code.
+>>>> >
+>> 
+>> --
+>> Peter Dalgaard, Professor,
+>> Center for Statistics, Copenhagen Business School
+>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>> Phone: (+45)38153501
+>> Office: A 4.23
+>> Email: pd.mes at cbs.dk Priv: PDalgd at gmail.com
+>> 
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From d@v|d@@teven@ @end|ng |rom u@u@edu  Tue Mar 10 14:36:41 2026
+From: d@v|d@@teven@ @end|ng |rom u@u@edu (David Stevens)
+Date: Tue, 10 Mar 2026 13:36:41 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+In-Reply-To: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+References: <CAHUBDY_FMnKWaq7TtUb=VRB+xGRDf-ti7UBs=hE+AyQtYn99og@mail.gmail.com>
+Message-ID: <3e7ad5eb-002b-434e-8ca1-cca58a3eee6c@usu.edu>
+
+Hi Brian,
+
+This phenomenon is sometimes known as 'distinction without a 
+difference', with 'distinction' referring to whether a parameter (in 
+this case the regression coefficient) is identifiable, based on the 
+experimental design. With enough observations of high precision, even 
+scientifically insignificant quantities can be distinguished 
+statistically. 'Difference' refers to the science - is this difference 
+important to the scientific process? R can't make that judgment. That's 
+the job of the domain scientist.
+
+David K Stevens, PhD, PE, Professor Emeritus
+Civil and Environmental Engineering
+Utah Water Research Laboratory
+Utah State University
+8200 Old Main Hill
+Logan, UT 84322-8200
+david.stevens at usu.edu
+(435) 797-3229 (office)
+
+On 3/8/2026 4:50 AM, Brian Smith wrote:
+> Hi,
+>
+> My question is not directly related to R, but rather a basic question
+> about statistics. I am hoping to receive valuable insights from the
+> expert statisticians in this group.
+>
+> In some cases, when fitting a simple OLS regression, I obtain an
+> estimated beta coefficient that is very small?for example, 0.00034?yet
+> it still appears statistically significant based on the p-value.
+>
+> I am trying to understand how to interpret such a result in practical
+> terms. From a magnitude perspective, such a small coefficient would
+> not be expected to meaningfully affect the predicted response value,
+> but statistically it is still considered significant.
+>
+> I would greatly appreciate any insights or explanations regarding this
+> phenomenon.
+>
+> Thanks for your time.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+From bend|x@c@r@ten@en @end|ng |rom reg|onh@dk  Tue Mar 10 12:23:51 2026
+From: bend|x@c@r@ten@en @end|ng |rom reg|onh@dk (Bendix Carstensen)
+Date: Tue, 10 Mar 2026 11:23:51 +0000
+Subject: [R] Correct interpretation of a regression coefficient
+Message-ID: <AS8PR08MB9867C4505B09BED379EA637A9D46A@AS8PR08MB9867.eurprd08.prod.outlook.com>
+
+Andrew Robinsons example merely illustrates that for numerical variables, the term x1:x2
+is the same as I(x1 * x2), and x1*x2 is different from x3*x4; try:
+
+set.seed(8675309)
+
+example <- data.frame(x1 = rnorm(100),
+                      x2 = rnorm(100))
+
+example$x3 <- example$x1 - 1
+example$x4 <- example$x2 - 1
+
+example$y <- with(example,
+                 2 * x1 + 4 * x2 + x1 * x2 + rnorm(100) * 2)
+with(example, plot(x1,x3))
+with(example, plot(x2,x4))
+
+## In the following code, the statistical information about the ## interaction term is the same across the two scalings
+summary(lm(y ~ x1 * x2, data = example))
+summary(lm(y ~ x3 * x4, data = example))
+
+## In the following code, the statistical information about the ## interaction term is the not same across the two scalings
+summary(lm(y ~ x1 + x1:x2, data = example))
+summary(lm(y ~ x3 + x3:x4, data = example))
+summary(lm(y ~ x3 + I(x3*x4), data = example))
+summary(lm(y ~ x1 + I(x3*x4), data = example))
+
+with(example, plot(x1*x2, x3*x4))
+
+________________________________
+
+
+Region Hovedstaden anvender de personoplysninger, du giver os i forbindelse med din henvendelse. Du kan laese mere om form?let med anvendelsen samt dine rettigheder p? vores hjemmeside: www.regionh.dk/persondatapolitik
+
+	[[alternative HTML version deleted]]
+
+

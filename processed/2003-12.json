@@ -7967,24 +7967,6 @@
       "month": "2003-12"
     },
     {
-      "id": "msg-b0bfc0a2b82e",
-      "message_id": "<1071050547.29191.2.camel@xena>",
-      "from_name": "Martyn Plummer",
-      "from_email_hash": "bad7df6428e60802a46077187eab20a1a370b32627a90006d8a8b1573c1a099d",
-      "date": "2003-12-10T11:02:27+01:00",
-      "subject": "[R] Error in model.frame",
-      "subject_clean": "Error in model.frame",
-      "in_reply_to": "<20031210093441.GA10352@stat.umu.se>",
-      "references": [
-        "<20031210093441.GA10352@stat.umu.se>"
-      ],
-      "body_plain": "On Wed, 2003-12-10 at 10:34, G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> > x <- c(1,2,4,3)\n> > lm(x ~ 1:length(x))\n> Error in model.frame(formula, rownames, variables, varnames, extras, extranames,  : \n>         variable lengths differ\n> \n> but\n> \n> > lm(x ~ c(1:length(x)))\n> \n> Call:\n> lm(formula = x ~ c(1:length(x)))\n> \n> Coefficients:\n>    (Intercept)  c(1:length(x))  \n>            0.5             0.8  \n> \n> and\n> \n> > identical(1:4, c(1:4))\n> [1] TRUE\n> \n> Should I report this as a bug?\n\nNo. In a formula \":\" is interpreted differently.\nIt is used to represent interactions. See help(formula).\nIt is probably good practice to generate variables outside of\nthe formula and then refer to them by name.\n\nMartyn",
-      "body_snippet": "On Wed, 2003-12-10 at 10:34, G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> > x <- c(1,2,4,3)\n> > lm(x ~ 1:length(x))\n> Error in model.frame(formula, rownames, variables, varnames, ex",
-      "thread_id": "thread-458699402f98",
-      "thread_depth": 1,
-      "month": "2003-12"
-    },
-    {
       "id": "msg-cc54cbea3044",
       "message_id": "<3FD6EF33.4040409@statistik.uni-dortmund.de>",
       "from_name": "Uwe Ligges",
@@ -7998,6 +7980,24 @@
       ],
       "body_plain": "G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> \n>>x <- c(1,2,4,3)\n>>lm(x ~ 1:length(x))\n> \n> Error in model.frame(formula, rownames, variables, varnames, extras, extranames,  : \n>         variable lengths differ\n> \n> but\n> \n> \n>>lm(x ~ c(1:length(x)))\n> \n> \n> Call:\n> lm(formula = x ~ c(1:length(x)))\n> \n> Coefficients:\n>    (Intercept)  c(1:length(x))  \n>            0.5             0.8  \n> \n> and\n> \n> \n>>identical(1:4, c(1:4))\n> \n> [1] TRUE\n> \n> Should I report this as a bug?\n\nNO!!!\nThe \":\" operator is used to model interactions in lm() and friends!\n\nUse lm(x ~ I(1:length(x))) in order to perform the analysis above.\n\nUwe Ligges\n\n\n> G?ran",
       "body_snippet": "G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> \n>>x <- c(1,2,4,3)\n>>lm(x ~ 1:length(x))\n> \n> Error in model.frame(formula, rownames, variables, varnames, extras, extranames,  : \n>    ",
+      "thread_id": "thread-458699402f98",
+      "thread_depth": 1,
+      "month": "2003-12"
+    },
+    {
+      "id": "msg-b0bfc0a2b82e",
+      "message_id": "<1071050547.29191.2.camel@xena>",
+      "from_name": "Martyn Plummer",
+      "from_email_hash": "bad7df6428e60802a46077187eab20a1a370b32627a90006d8a8b1573c1a099d",
+      "date": "2003-12-10T11:02:27+01:00",
+      "subject": "[R] Error in model.frame",
+      "subject_clean": "Error in model.frame",
+      "in_reply_to": "<20031210093441.GA10352@stat.umu.se>",
+      "references": [
+        "<20031210093441.GA10352@stat.umu.se>"
+      ],
+      "body_plain": "On Wed, 2003-12-10 at 10:34, G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> > x <- c(1,2,4,3)\n> > lm(x ~ 1:length(x))\n> Error in model.frame(formula, rownames, variables, varnames, extras, extranames,  : \n>         variable lengths differ\n> \n> but\n> \n> > lm(x ~ c(1:length(x)))\n> \n> Call:\n> lm(formula = x ~ c(1:length(x)))\n> \n> Coefficients:\n>    (Intercept)  c(1:length(x))  \n>            0.5             0.8  \n> \n> and\n> \n> > identical(1:4, c(1:4))\n> [1] TRUE\n> \n> Should I report this as a bug?\n\nNo. In a formula \":\" is interpreted differently.\nIt is used to represent interactions. See help(formula).\nIt is probably good practice to generate variables outside of\nthe formula and then refer to them by name.\n\nMartyn",
+      "body_snippet": "On Wed, 2003-12-10 at 10:34, G?ran Brostr?m wrote:\n> I recently ran into the following:\n> \n> > x <- c(1,2,4,3)\n> > lm(x ~ 1:length(x))\n> Error in model.frame(formula, rownames, variables, varnames, ex",
       "thread_id": "thread-458699402f98",
       "thread_depth": 1,
       "month": "2003-12"
@@ -24765,17 +24765,6 @@
       "root_message_id": "msg-08f290e72738"
     },
     {
-      "id": "thread-163433beda90",
-      "subject": "Forward of moderated message",
-      "message_count": 1,
-      "participants": [
-        "mailman-bounces@stat.math.ethz.ch"
-      ],
-      "started": "2003-12-19T18:22:41+01:00",
-      "last_reply": "2003-12-19T18:22:41+01:00",
-      "root_message_id": "msg-163433beda90"
-    },
-    {
       "id": "thread-ee4b1ef4b053",
       "subject": "Forward of moderated message",
       "message_count": 1,
@@ -24785,6 +24774,17 @@
       "started": "2003-12-19T18:22:41+01:00",
       "last_reply": "2003-12-19T18:22:41+01:00",
       "root_message_id": "msg-ee4b1ef4b053"
+    },
+    {
+      "id": "thread-163433beda90",
+      "subject": "Forward of moderated message",
+      "message_count": 1,
+      "participants": [
+        "mailman-bounces@stat.math.ethz.ch"
+      ],
+      "started": "2003-12-19T18:22:41+01:00",
+      "last_reply": "2003-12-19T18:22:41+01:00",
+      "root_message_id": "msg-163433beda90"
     },
     {
       "id": "thread-3058b6f15984",

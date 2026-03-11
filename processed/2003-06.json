@@ -11625,6 +11625,22 @@
       "month": "2003-06"
     },
     {
+      "id": "msg-9a7f2d46932f",
+      "message_id": "<seef1e67.028@smtp.nzcer.org.nz>",
+      "from_name": "Edith Hodgen",
+      "from_email_hash": "2ff09ec8219fab32220814c8e2c68eb0ac3f75ddceb31045007a81e6e19055cc",
+      "date": "2003-06-17T13:57:46+12:00",
+      "subject": "[R] Paste and namespace",
+      "subject_clean": "Paste and namespace",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This was discussed in \n\nDate: \t1/06/2003 06:00:32\nSubject: \tRe: [R] parse on left hand side of R assignment\n\nOn Sat, 31 May 2003, Paul E. Johnson wrote:\n\n> I keep finding myself in a situation where I want to calculate a \n> variable name and then use it on the left hand side of an assignment. \n> For example\n> \n> iteration <- 1\n> varName <- paste(\"run\",iteration,sep=\"\")\n> myList$parse(text=varName) <- aColumn\n> \n> I want to take some existing variable  \"aColumn\" and use the name \n> \"varName\" name for it and put it into a list \"myList\".  That use fails \n> with this error:\n.... Snip \n\nFor a data frame you could use\n\nmydf[paste(\"run\",iteration,sep=\"\")] <- aColumn\n\nand for a list or a data frame\n\nRobject[[paste(\"run\",iteration,sep=\"\")]] <- aColumn\n\n=================================================\nI don't remember if there was any more interesting discussion in the thread.\n\nHTH\nEdith\n\nEdith Hodgen\nStatistician and Data Manager\nNew Zealand Council for Educational Research\nPhone: +64-4-384 7939 x 812\nFax:      +64-4-384 7933\nedith.hodgen at nzcer.org.nz\n\n           Web site http://www.nzcer.org.nz\n\n>>> Fernando Henrique Ferraz Pereira da Rosa <mentus at gmx.de> 17/06/2003 13:43:42 >>>\n Hi, my doubt is very simple. I'm sure I've seen someone using something\nlike this before, but unfortunatelly my searches in the archives were useless.\n Well, I have some objects called after a name that has a number attached to\nit,\n varying. Let's say I have:\n > ls\n   poly1 poly2 poly3 poly4 poly5 poly6 ...\n \n I would like to access these objects using a for(), in which I could do\nsomething like paste(\"poly\",i,sep=''). For i = 4, for instance I get\n > paste(\"poly\",4,=sep'')\n [1] \"poly8\"\n Which is a string. What command should I use to 'access' the object named\nby this string, ir order to do some useful things, like changing its value?\n\nThank you,\n\n--\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "This was discussed in \n\nDate: \t1/06/2003 06:00:32\nSubject: \tRe: [R] parse on left hand side of R assignment\n\nOn Sat, 31 May 2003, Paul E. Johnson wrote:\n\n> I keep finding myself in a situation where I",
+      "thread_id": "thread-9a7f2d46932f",
+      "thread_depth": 0,
+      "month": "2003-06"
+    },
+    {
       "id": "msg-8bf2f8899dd4",
       "message_id": "<3EEE759A.30907@pdf.com>",
       "from_name": "Spencer Graves",
@@ -11640,22 +11656,6 @@
       "body_snippet": "Have you considered:\n\n > poly1 <- 1\n > get(\"poly1\")\n[1] 1\n >\n\nhth.  spencer graves\n\nFernando Henrique Ferraz Pereira da Rosa wrote:\n>  Hi, my doubt is very simple. I'm sure I've seen someone using som",
       "thread_id": "thread-f222a88ec5d2",
       "thread_depth": 1,
-      "month": "2003-06"
-    },
-    {
-      "id": "msg-9a7f2d46932f",
-      "message_id": "<seef1e67.028@smtp.nzcer.org.nz>",
-      "from_name": "Edith Hodgen",
-      "from_email_hash": "2ff09ec8219fab32220814c8e2c68eb0ac3f75ddceb31045007a81e6e19055cc",
-      "date": "2003-06-17T13:57:46+12:00",
-      "subject": "[R] Paste and namespace",
-      "subject_clean": "Paste and namespace",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "This was discussed in \n\nDate: \t1/06/2003 06:00:32\nSubject: \tRe: [R] parse on left hand side of R assignment\n\nOn Sat, 31 May 2003, Paul E. Johnson wrote:\n\n> I keep finding myself in a situation where I want to calculate a \n> variable name and then use it on the left hand side of an assignment. \n> For example\n> \n> iteration <- 1\n> varName <- paste(\"run\",iteration,sep=\"\")\n> myList$parse(text=varName) <- aColumn\n> \n> I want to take some existing variable  \"aColumn\" and use the name \n> \"varName\" name for it and put it into a list \"myList\".  That use fails \n> with this error:\n.... Snip \n\nFor a data frame you could use\n\nmydf[paste(\"run\",iteration,sep=\"\")] <- aColumn\n\nand for a list or a data frame\n\nRobject[[paste(\"run\",iteration,sep=\"\")]] <- aColumn\n\n=================================================\nI don't remember if there was any more interesting discussion in the thread.\n\nHTH\nEdith\n\nEdith Hodgen\nStatistician and Data Manager\nNew Zealand Council for Educational Research\nPhone: +64-4-384 7939 x 812\nFax:      +64-4-384 7933\nedith.hodgen at nzcer.org.nz\n\n           Web site http://www.nzcer.org.nz\n\n>>> Fernando Henrique Ferraz Pereira da Rosa <mentus at gmx.de> 17/06/2003 13:43:42 >>>\n Hi, my doubt is very simple. I'm sure I've seen someone using something\nlike this before, but unfortunatelly my searches in the archives were useless.\n Well, I have some objects called after a name that has a number attached to\nit,\n varying. Let's say I have:\n > ls\n   poly1 poly2 poly3 poly4 poly5 poly6 ...\n \n I would like to access these objects using a for(), in which I could do\nsomething like paste(\"poly\",i,sep=''). For i = 4, for instance I get\n > paste(\"poly\",4,=sep'')\n [1] \"poly8\"\n Which is a string. What command should I use to 'access' the object named\nby this string, ir order to do some useful things, like changing its value?\n\nThank you,\n\n--\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help",
-      "body_snippet": "This was discussed in \n\nDate: \t1/06/2003 06:00:32\nSubject: \tRe: [R] parse on left hand side of R assignment\n\nOn Sat, 31 May 2003, Paul E. Johnson wrote:\n\n> I keep finding myself in a situation where I",
-      "thread_id": "thread-9a7f2d46932f",
-      "thread_depth": 0,
       "month": "2003-06"
     },
     {
