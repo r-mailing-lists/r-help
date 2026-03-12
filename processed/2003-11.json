@@ -19973,22 +19973,6 @@
       "month": "2003-11"
     },
     {
-      "id": "msg-05801effd2a8",
-      "message_id": "<Pine.SOL.4.30.0311200823320.13122-100000@ysidro.econ.uiuc.edu>",
-      "from_name": "Roger Koenker",
-      "from_email_hash": "44a39fd15e34b44a50b44bea692517188d7c5ca92a4982a2ed8e682d8824d0fc",
-      "date": "2003-11-20T14:26:29Z",
-      "subject": "[R] Re: nlrq problem",
-      "subject_clean": "nlrq problem",
-      "in_reply_to": "<3FBC9C56.13231.57B581@localhost>",
-      "references": [],
-      "body_plain": "Johannes,\n\nYou can minimize an model expression by just putting the ~ on the left\nand everything else on the righthand side, but I don't think that this\nis really what you want.  In the NLS expression this would ignore the\njacobian of the transformation from errors to response, and in nlrq\nthere is the same problem, however you can adjust for the jacobian\nby rescaling by the geometric mean of the response.  I hope that this\nhelps.\n\nRoger\n\n\nurl:\twww.econ.uiuc.edu/~roger/my.html\tRoger Koenker\nemail\trkoenker at uiuc.edu\t\t\tDepartment of Economics\nvox: \t217-333-4558\t\t\t\tUniversity of Illinois\nfax:   \t217-244-6678\t\t\t\tChampaign, IL 61820\n\nOn Thu, 20 Nov 2003, Johannes Ludsteck wrote:\n\n> Dear Mr. Koenker,\n> sorry for bothering you. I have a probably trivial problem with\n> your nlrq procedure.\n>\n> I would like to estimate the simple box-cox tranformed model\n>\n>  nlrq(I(y^t-1)/t) ~ I(a+b*x), data=df, start = c(t=1,a=0,b=0))\n>\n> R returns with the error message\n>   Error in unique(c(\"AsIs\", oldClass(x))) : Object \"t\" not found\n>\n> Is nlrq not able to handle transformations of the left hand side\n> variable or have I maked a mistake?\n>\n> Thanks for every help and best regards,\n> \tJohannes Ludsteck\n> <><><><><><><><><><><><>\n> Johannes Ludsteck\n> Economics Department\n> University of Regensburg\n> Universitaetsstrasse 31\n> 93053 Regensburg\n> Phone +49/0941/943-2741\n>\n>",
-      "body_snippet": "Johannes,\n\nYou can minimize an model expression by just putting the ~ on the left\nand everything else on the righthand side, but I don't think that this\nis really what you want.  In the NLS expression",
-      "thread_id": "thread-05801effd2a8",
-      "thread_depth": 0,
-      "month": "2003-11"
-    },
-    {
       "id": "msg-4b9a460b070f",
       "message_id": "<OFEFDE2F05.E19E5AD2-ONC1256DE4.004CE689@notes.mckinsey.com>",
       "from_name": "Wolfgang_Lederer@mckinsey.com",
@@ -20001,6 +19985,22 @@
       "body_plain": "Dear R-Help-List,\n\ni am using the ols() function to fit a model and use the validate()\nfunction to obtain the shrinking constant for the slope. But how can i get\nthe correct shrinking constant for the Intercept? If i use the provided\nconstant to adjust the intercept, i get a serious Bias.\n\nthe code i use looks like this:\n\nf  <- ols(formula , data = data, y=T, x=T)\nfv <- validate(f)\nShrinkingGamma <- fv[\"Slope\",\"index.corrected\"]\nf$coefficients[2:(length(f$coefficients)-1)] <-\nf$coefficients[2:(length(f$coefficients)-1)] * ShrinkingGamma\nf$coefficients[1] <- (1-ShrinkingGamma) * mean(data[,1]) +\nf$coefficients[1] * (ShrinkingGamma)\npredict(f, newdata = data)\n\n\nThanks for your help\n\nWolfgang\n\n+---------------------------------------------------------+\nThis message may contain confidential and/or privileged\ninformation.  If you are not the addressee or authorized to\nreceive this for the addressee, you must not use, copy,\ndisclose or take any action based on this message or any\ninformation herein.  If you have received this message in\nerror, please advise the sender immediately by reply e-mail\nand delete this message.  Thank you for your cooperation.\n+---------------------------------------------------------+",
       "body_snippet": "Dear R-Help-List,\n\ni am using the ols() function to fit a model and use the validate()\nfunction to obtain the shrinking constant for the slope. But how can i get\nthe correct shrinking constant for the",
       "thread_id": "thread-4b9a460b070f",
+      "thread_depth": 0,
+      "month": "2003-11"
+    },
+    {
+      "id": "msg-05801effd2a8",
+      "message_id": "<Pine.SOL.4.30.0311200823320.13122-100000@ysidro.econ.uiuc.edu>",
+      "from_name": "Roger Koenker",
+      "from_email_hash": "44a39fd15e34b44a50b44bea692517188d7c5ca92a4982a2ed8e682d8824d0fc",
+      "date": "2003-11-20T14:26:29Z",
+      "subject": "[R] Re: nlrq problem",
+      "subject_clean": "nlrq problem",
+      "in_reply_to": "<3FBC9C56.13231.57B581@localhost>",
+      "references": [],
+      "body_plain": "Johannes,\n\nYou can minimize an model expression by just putting the ~ on the left\nand everything else on the righthand side, but I don't think that this\nis really what you want.  In the NLS expression this would ignore the\njacobian of the transformation from errors to response, and in nlrq\nthere is the same problem, however you can adjust for the jacobian\nby rescaling by the geometric mean of the response.  I hope that this\nhelps.\n\nRoger\n\n\nurl:\twww.econ.uiuc.edu/~roger/my.html\tRoger Koenker\nemail\trkoenker at uiuc.edu\t\t\tDepartment of Economics\nvox: \t217-333-4558\t\t\t\tUniversity of Illinois\nfax:   \t217-244-6678\t\t\t\tChampaign, IL 61820\n\nOn Thu, 20 Nov 2003, Johannes Ludsteck wrote:\n\n> Dear Mr. Koenker,\n> sorry for bothering you. I have a probably trivial problem with\n> your nlrq procedure.\n>\n> I would like to estimate the simple box-cox tranformed model\n>\n>  nlrq(I(y^t-1)/t) ~ I(a+b*x), data=df, start = c(t=1,a=0,b=0))\n>\n> R returns with the error message\n>   Error in unique(c(\"AsIs\", oldClass(x))) : Object \"t\" not found\n>\n> Is nlrq not able to handle transformations of the left hand side\n> variable or have I maked a mistake?\n>\n> Thanks for every help and best regards,\n> \tJohannes Ludsteck\n> <><><><><><><><><><><><>\n> Johannes Ludsteck\n> Economics Department\n> University of Regensburg\n> Universitaetsstrasse 31\n> 93053 Regensburg\n> Phone +49/0941/943-2741\n>\n>",
+      "body_snippet": "Johannes,\n\nYou can minimize an model expression by just putting the ~ on the left\nand everything else on the righthand side, but I don't think that this\nis really what you want.  In the NLS expression",
+      "thread_id": "thread-05801effd2a8",
       "thread_depth": 0,
       "month": "2003-11"
     },
