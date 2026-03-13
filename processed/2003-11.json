@@ -7287,22 +7287,6 @@
       "month": "2003-11"
     },
     {
-      "id": "msg-5f4b06dc6567",
-      "message_id": "<3FAD2DBA.12588.D7A51@localhost>",
-      "from_name": "kjetil@entelnet.bo",
-      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
-      "date": "2003-11-08T21:54:02Z",
-      "subject": "[R] Dealing with ...",
-      "subject_clean": "Dealing with ...",
-      "in_reply_to": "<3FAD6038.1030902@auckland.ac.nz>",
-      "references": [],
-      "body_plain": "On 9 Nov 2003 at 10:29, Hadley Wickham wrote:\n\nDoes the following help?\n\n> test <- function(...) {\n+   return( list(...) )\n+ }\n> test(a=4, b=7, test=17)\n$a\n[1] 4\n\n$b\n[1] 7\n\n$test\n[1] 17\n\nKjetil Halvorsen\n\n\n>  From within a function, how can I extract the individual arguments that \n> make up ...?\n> \n> I'm sure this has been discussed on here before but ... does not get \n> indexed.  Any suggestions as to what I should search for would be \n> equally welcome.\n> \n> Thanks,\n> \n> Hadley\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
-      "body_snippet": "On 9 Nov 2003 at 10:29, Hadley Wickham wrote:\n\nDoes the following help?\n\n> test <- function(...) {\n+   return( list(...) )\n+ }\n> test(a=4, b=7, test=17)\n$a\n[1] 4\n\n$b\n[1] 7\n\n$test\n[1] 17\n\nKjetil Halvor",
-      "thread_id": "thread-fbe5957d2f8e",
-      "thread_depth": 1,
-      "month": "2003-11"
-    },
-    {
       "id": "msg-5335e180e6c8",
       "message_id": "<3FAD2DBA.17739.D7ABE@localhost>",
       "from_name": "kjetil@entelnet.bo",
@@ -7315,6 +7299,22 @@
       "body_plain": "On 8 Nov 2003 at 13:23, ramya sundaram wrote:\n\nThe error message should be clear: you don't have sufficient\nmemory. By more RAM, or see to it that R uses virtual memory.\nAFAIK, the way to do this could depend on OS, and you did'nt tell \nwhich. Read\n?Memory\n\nBut first think about if this could possible help: in n is the number \nof observations, a dist object have length n(n-1)/2, compute this and \nsee if what you try to do make sense!\n\nIf not, try\nlibrary(cluster)\nand look at \n?clara\n\"clustering large applications\"\nThat will not work with factors, but from your code below it seems \nyou doesn't have factors.\n\nKjetil Halvorsen\n\n> I have a large excel file with data in it. I converted it to a 'csv' format.\n> I imported this dataset to R using the follownig command\n> mldata <- read.csv(\"c:\\\\temp\\\\mldata.csv\", header=T)\n>  \n> all the column names and the rows seems to be correct.\n>  \n> Now that I have this object, I need to perfrom hclust. I used the following \n> hc <- hclust(dist(mldata), method=\"single\") \n>  \n> I get the following error\n>  \n> > hc <- hclust(dist(mldata),\"ave\")\n> Error: cannot allocate vector of size 622668 Kb\n> In addition: Warning messages: \n> 1: NAs introduced by coercion \n> 2: Reached total allocation of 479Mb: see help(memory.size) \n> \n> Can anyone please point where I'm going wrong ?\n>  \n> Thank you,\n> Ramya\n> \n> \n> ---------------------------------\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
       "body_snippet": "On 8 Nov 2003 at 13:23, ramya sundaram wrote:\n\nThe error message should be clear: you don't have sufficient\nmemory. By more RAM, or see to it that R uses virtual memory.\nAFAIK, the way to do this coul",
       "thread_id": "thread-88ff8960509c",
+      "thread_depth": 1,
+      "month": "2003-11"
+    },
+    {
+      "id": "msg-5f4b06dc6567",
+      "message_id": "<3FAD2DBA.12588.D7A51@localhost>",
+      "from_name": "kjetil@entelnet.bo",
+      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
+      "date": "2003-11-08T21:54:02Z",
+      "subject": "[R] Dealing with ...",
+      "subject_clean": "Dealing with ...",
+      "in_reply_to": "<3FAD6038.1030902@auckland.ac.nz>",
+      "references": [],
+      "body_plain": "On 9 Nov 2003 at 10:29, Hadley Wickham wrote:\n\nDoes the following help?\n\n> test <- function(...) {\n+   return( list(...) )\n+ }\n> test(a=4, b=7, test=17)\n$a\n[1] 4\n\n$b\n[1] 7\n\n$test\n[1] 17\n\nKjetil Halvorsen\n\n\n>  From within a function, how can I extract the individual arguments that \n> make up ...?\n> \n> I'm sure this has been discussed on here before but ... does not get \n> indexed.  Any suggestions as to what I should search for would be \n> equally welcome.\n> \n> Thanks,\n> \n> Hadley\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "On 9 Nov 2003 at 10:29, Hadley Wickham wrote:\n\nDoes the following help?\n\n> test <- function(...) {\n+   return( list(...) )\n+ }\n> test(a=4, b=7, test=17)\n$a\n[1] 4\n\n$b\n[1] 7\n\n$test\n[1] 17\n\nKjetil Halvor",
+      "thread_id": "thread-fbe5957d2f8e",
       "thread_depth": 1,
       "month": "2003-11"
     },
@@ -8669,22 +8669,6 @@
       "month": "2003-11"
     },
     {
-      "id": "msg-c1081a2e03a4",
-      "message_id": "<3FAF9A36.30336.210F32@localhost>",
-      "from_name": "kjetil@entelnet.bo",
-      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
-      "date": "2003-11-10T18:01:26Z",
-      "subject": "[R] Finding the name ob an object",
-      "subject_clean": "Finding the name ob an object",
-      "in_reply_to": "<20031110160615.GA21156@sesame.kyb.local>",
-      "references": [],
-      "body_plain": "On 10 Nov 2003 at 17:06, Christoph Lange wrote:\n\n> test <- function(x){\n+      return(substitute(x))}\n> a <- 3\n> test(a)\na\n\n\nKjetil Halvorsen\n\n> \n> Hi, all!\n> \n> I want to give an object to a function and use the NAME of this object\n> inside the function to build new objects based on this name.\n> \n> How do I get the name of an object if I don't pass a string containing\n> the name but the object itself?\n> \n> Christoph.\n> \n> -- \n> Christoph Lange\n> MPI fuer biologische Kybernetik  |Phone: +49-7071-601-607|\n> Postfach 2169, D-72012 Tuebingen |FAX:   +49-7071-601-616|\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
-      "body_snippet": "On 10 Nov 2003 at 17:06, Christoph Lange wrote:\n\n> test <- function(x){\n+      return(substitute(x))}\n> a <- 3\n> test(a)\na\n\n\nKjetil Halvorsen\n\n> \n> Hi, all!\n> \n> I want to give an object to a function",
-      "thread_id": "thread-6f56d081436c",
-      "thread_depth": 1,
-      "month": "2003-11"
-    },
-    {
       "id": "msg-40b14db63589",
       "message_id": "<3FAF9A36.32186.210EC4@localhost>",
       "from_name": "kjetil@entelnet.bo",
@@ -8697,6 +8681,22 @@
       "body_plain": "On 10 Nov 2003 at 11:14, Rajarshi Guha wrote:\n\nThe library Hmisc has a function comment()\ndoing this.\n\nKjetil Halvorsen\n\n> Hi,\n>   is the following possible - in a given session I make a lot of objects\n> and save when exiting. Usually I note down seperately what each object\n> is about. Is it possible to attach data to any object which would\n> essentially be a short note explaining the meaning of it?\n> \n> Thanks,\n> \n> -------------------------------------------------------------------\n> Rajarshi Guha <rxg218 at psu.edu> <http://jijo.cjb.net>\n> GPG Fingerprint: 0CCA 8EE2 2EEB 25E2 AB04 06F7 1BB9 E634 9B87 56EE\n> -------------------------------------------------------------------\n> The Heineken Uncertainty Principle:\n> You can never be sure how many beers you had last night.\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
       "body_snippet": "On 10 Nov 2003 at 11:14, Rajarshi Guha wrote:\n\nThe library Hmisc has a function comment()\ndoing this.\n\nKjetil Halvorsen\n\n> Hi,\n>   is the following possible - in a given session I make a lot of object",
       "thread_id": "thread-e3464a666b00",
+      "thread_depth": 1,
+      "month": "2003-11"
+    },
+    {
+      "id": "msg-c1081a2e03a4",
+      "message_id": "<3FAF9A36.30336.210F32@localhost>",
+      "from_name": "kjetil@entelnet.bo",
+      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
+      "date": "2003-11-10T18:01:26Z",
+      "subject": "[R] Finding the name ob an object",
+      "subject_clean": "Finding the name ob an object",
+      "in_reply_to": "<20031110160615.GA21156@sesame.kyb.local>",
+      "references": [],
+      "body_plain": "On 10 Nov 2003 at 17:06, Christoph Lange wrote:\n\n> test <- function(x){\n+      return(substitute(x))}\n> a <- 3\n> test(a)\na\n\n\nKjetil Halvorsen\n\n> \n> Hi, all!\n> \n> I want to give an object to a function and use the NAME of this object\n> inside the function to build new objects based on this name.\n> \n> How do I get the name of an object if I don't pass a string containing\n> the name but the object itself?\n> \n> Christoph.\n> \n> -- \n> Christoph Lange\n> MPI fuer biologische Kybernetik  |Phone: +49-7071-601-607|\n> Postfach 2169, D-72012 Tuebingen |FAX:   +49-7071-601-616|\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "On 10 Nov 2003 at 17:06, Christoph Lange wrote:\n\n> test <- function(x){\n+      return(substitute(x))}\n> a <- 3\n> test(a)\na\n\n\nKjetil Halvorsen\n\n> \n> Hi, all!\n> \n> I want to give an object to a function",
+      "thread_id": "thread-6f56d081436c",
       "thread_depth": 1,
       "month": "2003-11"
     },
