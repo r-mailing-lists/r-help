@@ -2371,22 +2371,6 @@
       "month": "2003-08"
     },
     {
-      "id": "msg-34624b2eb1a8",
-      "message_id": "<3F2E79A1.20828.3499A3@localhost>",
-      "from_name": "kjetil brinchmann halvorsen",
-      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
-      "date": "2003-08-04T19:20:01Z",
-      "subject": "[R] Problem with data.frames",
-      "subject_clean": "Problem with data.frames",
-      "in_reply_to": "<6C8A8033ABC1E3468048ABC4F13CE572AC0D3A@synequanon01>",
-      "references": [],
-      "body_plain": "On 4 Aug 2003 at 11:09, Simon Fear wrote:\n\n> Peter is right, but there is a point here: it would be nice if\n> attach(my.dframe) would do nothing - or at least warn - if my.dframe was\n> already in the search list. Like library(). Attaching twice is almost\n> bound\n> to be an error?\n\nNot necessarily. If you changed the data --- as when debugging a data \nfile and repeatedly sourcing it in --- you need to attach repeatedly. \nOf course, you should detach() first, but that is not a requirement \ntoday.\n\nKjetil Halvorsen\n\n> Of course in many circumstances it might be better to use with() than\n> attach() - if you haven't come across with(), it works like attach()\n> with an\n> inbuilt detach() when the parentheses close.\n> \n> Aside 1: it would also be nice if ?attach pointed to ?with. Is this kind\n> of\n> suggestion best sent to r-help or r-devel?\n> \n> Aside 2: is with() efficient, or does it create a copy of the dataset? \n> \n> SF\n> \n> \n> -----Original Message-----\n> From: Peter Dalgaard BSA [mailto:p.dalgaard at biostat.ku.dk]\n> Sent: 04 August 2003 00:52\n> To: Andreas Eckner\n> Cc: r-help at stat.math.ethz.ch\n> Subject: Re: [R] Problem with data.frames\n> \n> \n> Security Warning:\n> If you are not sure an attachment is safe to open please contact \n> Andy on x234. There are 0 attachments with this message.\n> ________________________________________________________________\n> \n> Andreas Eckner <andreas.eckner at soundinvest.net> writes:\n> \n> > Hi,\n> > \n> > I just encountered a problem in R that may easily be fixed: If one\n> uses\n> > attach for a data.frame e.g. 10000 times and forgets detach, then R\n> gets\n> > incredibly slow (less then 10% of the original speed).\n> \n> R also gets incredibly slow if you create 10000 copies of your data\n> set, which is effectively the same thing! The fix is: Don't do that... \n> \n> -- \n>    O__  ---- Peter Dalgaard             Blegdamsvej 3  \n>   c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n>  (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n> ~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n>  \n> \n> Simon Fear\n> Senior Statistician\n> Syne qua non Ltd\n> Tel: +44 (0) 1379 644449\n> Fax: +44 (0) 1379 644445\n> email: Simon.Fear at synequanon.com\n> web: http://www.synequanon.com\n>  \n> Number of attachments included with this message: 0\n>  \n> This message (and any associated files) is confidential and\\...{{dropped}}\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
-      "body_snippet": "On 4 Aug 2003 at 11:09, Simon Fear wrote:\n\n> Peter is right, but there is a point here: it would be nice if\n> attach(my.dframe) would do nothing - or at least warn - if my.dframe was\n> already in the ",
-      "thread_id": "thread-2cc43514c91d",
-      "thread_depth": 1,
-      "month": "2003-08"
-    },
-    {
       "id": "msg-eeb5e79d03b5",
       "message_id": "<3F2E79A1.9493.3499D2@localhost>",
       "from_name": "kjetil brinchmann halvorsen",
@@ -2402,6 +2386,22 @@
       "body_snippet": "On 4 Aug 2003 at 10:10, Uwe Ligges wrote:\n\n> George, Charles R wrote:\n> \n> \n<snip>\n>   replace(originalMat, indexMat[,1], indexMat[,2])\n\nShouldnt that be\n    originalmat <- replace(originalMat, indexM",
       "thread_id": "thread-a25e738708ff",
       "thread_depth": 2,
+      "month": "2003-08"
+    },
+    {
+      "id": "msg-34624b2eb1a8",
+      "message_id": "<3F2E79A1.20828.3499A3@localhost>",
+      "from_name": "kjetil brinchmann halvorsen",
+      "from_email_hash": "5e81db5b83decbbc97922f4421e0852c076744e04fad10d9087e6c138bc7255b",
+      "date": "2003-08-04T19:20:01Z",
+      "subject": "[R] Problem with data.frames",
+      "subject_clean": "Problem with data.frames",
+      "in_reply_to": "<6C8A8033ABC1E3468048ABC4F13CE572AC0D3A@synequanon01>",
+      "references": [],
+      "body_plain": "On 4 Aug 2003 at 11:09, Simon Fear wrote:\n\n> Peter is right, but there is a point here: it would be nice if\n> attach(my.dframe) would do nothing - or at least warn - if my.dframe was\n> already in the search list. Like library(). Attaching twice is almost\n> bound\n> to be an error?\n\nNot necessarily. If you changed the data --- as when debugging a data \nfile and repeatedly sourcing it in --- you need to attach repeatedly. \nOf course, you should detach() first, but that is not a requirement \ntoday.\n\nKjetil Halvorsen\n\n> Of course in many circumstances it might be better to use with() than\n> attach() - if you haven't come across with(), it works like attach()\n> with an\n> inbuilt detach() when the parentheses close.\n> \n> Aside 1: it would also be nice if ?attach pointed to ?with. Is this kind\n> of\n> suggestion best sent to r-help or r-devel?\n> \n> Aside 2: is with() efficient, or does it create a copy of the dataset? \n> \n> SF\n> \n> \n> -----Original Message-----\n> From: Peter Dalgaard BSA [mailto:p.dalgaard at biostat.ku.dk]\n> Sent: 04 August 2003 00:52\n> To: Andreas Eckner\n> Cc: r-help at stat.math.ethz.ch\n> Subject: Re: [R] Problem with data.frames\n> \n> \n> Security Warning:\n> If you are not sure an attachment is safe to open please contact \n> Andy on x234. There are 0 attachments with this message.\n> ________________________________________________________________\n> \n> Andreas Eckner <andreas.eckner at soundinvest.net> writes:\n> \n> > Hi,\n> > \n> > I just encountered a problem in R that may easily be fixed: If one\n> uses\n> > attach for a data.frame e.g. 10000 times and forgets detach, then R\n> gets\n> > incredibly slow (less then 10% of the original speed).\n> \n> R also gets incredibly slow if you create 10000 copies of your data\n> set, which is effectively the same thing! The fix is: Don't do that... \n> \n> -- \n>    O__  ---- Peter Dalgaard             Blegdamsvej 3  \n>   c/ /'_ --- Dept. of Biostatistics     2200 Cph. N   \n>  (*) \\(*) -- University of Copenhagen   Denmark      Ph: (+45) 35327918\n> ~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)             FAX: (+45) 35327907\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n>  \n> \n> Simon Fear\n> Senior Statistician\n> Syne qua non Ltd\n> Tel: +44 (0) 1379 644449\n> Fax: +44 (0) 1379 644445\n> email: Simon.Fear at synequanon.com\n> web: http://www.synequanon.com\n>  \n> Number of attachments included with this message: 0\n>  \n> This message (and any associated files) is confidential and\\...{{dropped}}\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help",
+      "body_snippet": "On 4 Aug 2003 at 11:09, Simon Fear wrote:\n\n> Peter is right, but there is a point here: it would be nice if\n> attach(my.dframe) would do nothing - or at least warn - if my.dframe was\n> already in the ",
+      "thread_id": "thread-2cc43514c91d",
+      "thread_depth": 1,
       "month": "2003-08"
     },
     {
@@ -9556,22 +9556,6 @@
       "month": "2003-08"
     },
     {
-      "id": "msg-513469cfc1f9",
-      "message_id": "<3A822319EB35174CA3714066D590DCD50205C9BB@usrymx25.merck.com>",
-      "from_name": "Liaw, Andy",
-      "from_email_hash": "898c214b2bc6c21da39a883e12ded19760ce149cfa1067d738a1a4f3200f2bc0",
-      "date": "2003-08-14T17:24:18Z",
-      "subject": "[R] How to get the pseudo left inverse of a singular square m atrix?",
-      "subject_clean": "How to get the pseudo left inverse of a singular square m atrix?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I'm rusty, but not *that* rusty here, I hope.\n\nIf W (=Z*Z' in your case) is singular, it can not have inverse, which by\ndefinition also mean that nothing multiply by it will produce the identity\nmatrix (for otherwise it would have an inverse and thus nonsingular).\n\nThe definition of a generalized inverse is something like:  If A is a\nnon-null matrix, and G satisfy AGA = A, then G is called a generalized\ninverse of A.  This is not unique, but a unique one that satisfy some\nadditional properties is the Moore-Penrose inverse.  I don't know if this is\nwhat ginv() in MASS returns, as I have not used it before.\n\nAndy\n\n> -----Original Message-----\n> From: Feng Zhang [mailto:f0z6305 at labs.tamu.edu] \n> Sent: Thursday, August 14, 2003 1:02 PM\n> To: Jerome Asselin; R-Help\n> Subject: Re: [R] How to get the pseudo left inverse of a \n> singular square matrix?\n> \n> \n> Thank, Jerome\n> \n> The question is if this generalized inverse can make\n> their product to be identity matrix?\n> \n> \n> ----- Original Message -----\n> From: \"Jerome Asselin\" <jerome at hivnet.ubc.ca>\n> To: \"Feng Zhang\" <f0z6305 at labs.tamu.edu>; \"R-Help\" \n> <r-help at stat.math.ethz.ch>\n> Sent: Thursday, August 14, 2003 11:52 AM\n> Subject: Re: [R] How to get the pseudo left inverse of a \n> singular square matrix?\n> \n> \n> >\n> > Singular matrices are not invertible. However you can calculate the \n> > generalized inverse with the function ginv() from package MASS.\n> >\n> > HTH,\n> > Jerome\n> >\n> > On August 14, 2003 09:24 am, Feng Zhang wrote:\n> > > Dear R-listers,\n> > >\n> > > I have a dxr matrix Z, where d > r.\n> > > And the product Z*Z' is a singular square matrix.\n> > > The problem is how to get the left inverse U of this \n> singular matrix \n> > > Z*Z', such that\n> > > U*(Z*Z') = I?\n> > >\n> > > Is there any to figure it out using matrix decomposition method?\n> > >\n> > > Thanks a lot for your help.\n> > >\n> > > Fred\n> > >\n> > > ______________________________________________\n> > > R-help at stat.math.ethz.ch mailing list \n> > > https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list \n> https://www.stat.math.ethz.ch/mailman/listinfo> /r-help\n> \n\n------------------------------------------------------------------------------\nNotice:  This e-mail message, together with any attachments, contains\ninformation of Merck & Co., Inc. (Whitehouse Station, New Jersey, USA), and/or\nits affiliates (which may be known outside the United States as Merck Frosst,\nMerck Sharp & Dohme or MSD) that may be confidential, proprietary copyrighted\nand/or legally privileged, and is intended solely for the use of the\nindividual or entity named on this message.  If you are not the intended\nrecipient, and have received this message in error, please immediately return\nthis by e-mail and then delete it.",
-      "body_snippet": "I'm rusty, but not *that* rusty here, I hope.\n\nIf W (=Z*Z' in your case) is singular, it can not have inverse, which by\ndefinition also mean that nothing multiply by it will produce the identity\nmatri",
-      "thread_id": "thread-513469cfc1f9",
-      "thread_depth": 0,
-      "month": "2003-08"
-    },
-    {
       "id": "msg-acad5e52415f",
       "message_id": "<pchnjvkt4skm0rqpc039bd4r8ik4tq2s97@4ax.com>",
       "from_name": "Duncan Murdoch",
@@ -9589,6 +9573,22 @@
       "body_snippet": "On Thu, 14 Aug 2003 12:43:25 -0400, Duncan Murdoch <dmurdoch at pair.com>\nwrote :\n\n>Perhaps the description below of what se.fit is supposed to do should\n>be modified. \n\nI've done that now in the deve",
       "thread_id": "thread-6eddc81045be",
       "thread_depth": 3,
+      "month": "2003-08"
+    },
+    {
+      "id": "msg-513469cfc1f9",
+      "message_id": "<3A822319EB35174CA3714066D590DCD50205C9BB@usrymx25.merck.com>",
+      "from_name": "Liaw, Andy",
+      "from_email_hash": "898c214b2bc6c21da39a883e12ded19760ce149cfa1067d738a1a4f3200f2bc0",
+      "date": "2003-08-14T17:24:18Z",
+      "subject": "[R] How to get the pseudo left inverse of a singular square m atrix?",
+      "subject_clean": "How to get the pseudo left inverse of a singular square m atrix?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'm rusty, but not *that* rusty here, I hope.\n\nIf W (=Z*Z' in your case) is singular, it can not have inverse, which by\ndefinition also mean that nothing multiply by it will produce the identity\nmatrix (for otherwise it would have an inverse and thus nonsingular).\n\nThe definition of a generalized inverse is something like:  If A is a\nnon-null matrix, and G satisfy AGA = A, then G is called a generalized\ninverse of A.  This is not unique, but a unique one that satisfy some\nadditional properties is the Moore-Penrose inverse.  I don't know if this is\nwhat ginv() in MASS returns, as I have not used it before.\n\nAndy\n\n> -----Original Message-----\n> From: Feng Zhang [mailto:f0z6305 at labs.tamu.edu] \n> Sent: Thursday, August 14, 2003 1:02 PM\n> To: Jerome Asselin; R-Help\n> Subject: Re: [R] How to get the pseudo left inverse of a \n> singular square matrix?\n> \n> \n> Thank, Jerome\n> \n> The question is if this generalized inverse can make\n> their product to be identity matrix?\n> \n> \n> ----- Original Message -----\n> From: \"Jerome Asselin\" <jerome at hivnet.ubc.ca>\n> To: \"Feng Zhang\" <f0z6305 at labs.tamu.edu>; \"R-Help\" \n> <r-help at stat.math.ethz.ch>\n> Sent: Thursday, August 14, 2003 11:52 AM\n> Subject: Re: [R] How to get the pseudo left inverse of a \n> singular square matrix?\n> \n> \n> >\n> > Singular matrices are not invertible. However you can calculate the \n> > generalized inverse with the function ginv() from package MASS.\n> >\n> > HTH,\n> > Jerome\n> >\n> > On August 14, 2003 09:24 am, Feng Zhang wrote:\n> > > Dear R-listers,\n> > >\n> > > I have a dxr matrix Z, where d > r.\n> > > And the product Z*Z' is a singular square matrix.\n> > > The problem is how to get the left inverse U of this \n> singular matrix \n> > > Z*Z', such that\n> > > U*(Z*Z') = I?\n> > >\n> > > Is there any to figure it out using matrix decomposition method?\n> > >\n> > > Thanks a lot for your help.\n> > >\n> > > Fred\n> > >\n> > > ______________________________________________\n> > > R-help at stat.math.ethz.ch mailing list \n> > > https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list \n> https://www.stat.math.ethz.ch/mailman/listinfo> /r-help\n> \n\n------------------------------------------------------------------------------\nNotice:  This e-mail message, together with any attachments, contains\ninformation of Merck & Co., Inc. (Whitehouse Station, New Jersey, USA), and/or\nits affiliates (which may be known outside the United States as Merck Frosst,\nMerck Sharp & Dohme or MSD) that may be confidential, proprietary copyrighted\nand/or legally privileged, and is intended solely for the use of the\nindividual or entity named on this message.  If you are not the intended\nrecipient, and have received this message in error, please immediately return\nthis by e-mail and then delete it.",
+      "body_snippet": "I'm rusty, but not *that* rusty here, I hope.\n\nIf W (=Z*Z' in your case) is singular, it can not have inverse, which by\ndefinition also mean that nothing multiply by it will produce the identity\nmatri",
+      "thread_id": "thread-513469cfc1f9",
+      "thread_depth": 0,
       "month": "2003-08"
     },
     {
