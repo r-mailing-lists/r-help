@@ -375,6 +375,92 @@
       "thread_id": "thread-27322c3618bb",
       "thread_depth": 0,
       "month": "2026-03"
+    },
+    {
+      "id": "msg-f9fc6d35b5a3",
+      "message_id": "<82b687ec-2696-4a9f-80a9-0cd1aa6fb947@mayo.edu>",
+      "from_name": "Therneau, Terry M., Ph.D.",
+      "from_email_hash": "0df4ba795db07bfdd67dfdaa3c30ef6456663a5b0a916d95386922fedbe8ddbd",
+      "date": "2026-03-14T02:25:01Z",
+      "subject": "[R] complex values in C",
+      "subject_clean": "complex values in C",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've often used the following paradym in C code to define a list object returned to R\n\n ? ? static const char *outnames[]= {\"dvec\", \"A\", \"Ainv\",? \"P\", \"\"};\n ? ? SEXP rval, stemp;\n ? ? double *dvec, *A, *Ainv;\n ? ? int *P;\n\n\n ? ? PROTECT(rval = mkNamed(VECSXP, outnames));\n ? ? stemp=? SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));\n ? ? dvec= REAL(stemp);\n ? ? stemp = SET_VECTOR_ELT(rval, 1, allocMatrix(REALSXP, nc, nc));\n ? ? A = REAL(stemp);\n\nThen the code puts values into dvec[i] and etc. and finally returns rval.\n\nI'm missing how to do this when returning a complex value.? ?I've looked through the \n\"Writing R extension\" manual and have come up dry.? What am I missing?\n\nTerry T.\n\n\n-- \nTerry M Therneau, PhD\nDepartment of Quantitative Health Sciences\nMayo Clinic\ntherneau at mayo.edu\n\n\"TERR-ree THUR-noh\"\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I've often used the following paradym in C code to define a list object returned to R\n\n ? ? static const char *outnames[]= {\"dvec\", \"A\", \"Ainv\",? \"P\", \"\"};\n ? ? SEXP rval, stemp;\n ? ? double *dvec, *A",
+      "thread_id": "thread-f9fc6d35b5a3",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-6fe10fe6be65",
+      "message_id": "<CADNULg-7kJUaPhXj9_2Aw-KR_N7wYwOgpL-+b25_4MkoKke_Fw@mail.gmail.com>",
+      "from_name": "Iris Simmons",
+      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
+      "date": "2026-03-14T02:46:02Z",
+      "subject": "[R] complex values in C",
+      "subject_clean": "complex values in C",
+      "in_reply_to": "<82b687ec-2696-4a9f-80a9-0cd1aa6fb947@mayo.edu>",
+      "references": [
+        "<82b687ec-2696-4a9f-80a9-0cd1aa6fb947@mayo.edu>"
+      ],
+      "body_plain": "I'm not sure if I know exactly what you're saying, so sorry if this\ndoesn't answer your question.\n\nEverywhere you write double *, replace it with Rcomplex *\nReplace REALSXP with CPLXSXP\nReplace REAL() with COMPLEX()\nWhen getting / / setting the real and imaginary parts, use x.r and x.i\nand x.r = u and x.i = v\n\nOn Fri, Mar 13, 2026 at 10:25?PM Therneau, Terry M., Ph.D. via R-help\n<r-help at r-project.org> wrote:\n>\n> I've often used the following paradym in C code to define a list object returned to R\n>\n>      static const char *outnames[]= {\"dvec\", \"A\", \"Ainv\",  \"P\", \"\"};\n>      SEXP rval, stemp;\n>      double *dvec, *A, *Ainv;\n>      int *P;\n>\n>\n>      PROTECT(rval = mkNamed(VECSXP, outnames));\n>      stemp=  SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));\n>      dvec= REAL(stemp);\n>      stemp = SET_VECTOR_ELT(rval, 1, allocMatrix(REALSXP, nc, nc));\n>      A = REAL(stemp);\n>\n> Then the code puts values into dvec[i] and etc. and finally returns rval.\n>\n> I'm missing how to do this when returning a complex value.   I've looked through the\n> \"Writing R extension\" manual and have come up dry.  What am I missing?\n>\n> Terry T.\n>\n>\n> --\n> Terry M Therneau, PhD\n> Department of Quantitative Health Sciences\n> Mayo Clinic\n> therneau at mayo.edu\n>\n> \"TERR-ree THUR-noh\"\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I'm not sure if I know exactly what you're saying, so sorry if this\ndoesn't answer your question.\n\nEverywhere you write double *, replace it with Rcomplex *\nReplace REALSXP with CPLXSXP\nReplace REAL()",
+      "thread_id": "thread-f9fc6d35b5a3",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-d631df7fe1e3",
+      "message_id": "<737395cc-93f0-4d67-bab9-3a2071b6cabf@sapo.pt>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "2f69d7457b582cf482d42f0af55a9da5756f7cf941c02bc0d05592b98d36f0f5",
+      "date": "2026-03-14T07:24:27Z",
+      "subject": "[R] complex values in C",
+      "subject_clean": "complex values in C",
+      "in_reply_to": "<82b687ec-2696-4a9f-80a9-0cd1aa6fb947@mayo.edu>",
+      "references": [
+        "<82b687ec-2696-4a9f-80a9-0cd1aa6fb947@mayo.edu>"
+      ],
+      "body_plain": "?s 02:25 de 14/03/2026, Therneau, Terry M., Ph.D. via R-help escreveu:\n> I've often used the following paradym in C code to define a list object returned to R\n> \n>   ? ? static const char *outnames[]= {\"dvec\", \"A\", \"Ainv\",? \"P\", \"\"};\n>   ? ? SEXP rval, stemp;\n>   ? ? double *dvec, *A, *Ainv;\n>   ? ? int *P;\n> \n> \n>   ? ? PROTECT(rval = mkNamed(VECSXP, outnames));\n>   ? ? stemp=? SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));\n>   ? ? dvec= REAL(stemp);\n>   ? ? stemp = SET_VECTOR_ELT(rval, 1, allocMatrix(REALSXP, nc, nc));\n>   ? ? A = REAL(stemp);\n> \n> Then the code puts values into dvec[i] and etc. and finally returns rval.\n> \n> I'm missing how to do this when returning a complex value.? ?I've looked through the\n> \"Writing R extension\" manual and have come up dry.? What am I missing?\n> \n> Terry T.\n> \n> \nHello,\n\nUse CPLXSXP, COMPLEX and Rcomplex.\nThere are also Rf_asComplex, Rf_isComplex and Rf_ScalarComplex.\nSee section 5.2 [1] for a description of R type Rcomplex.\n\nMaybe this example can help.\n\n\n\n//---\n// file: test_complex.c\n#include <R.h>\n#include <Rinternals.h>\n\nSEXP complex1(const SEXP size) {\n     SEXP cval;\n     Rcomplex *cvec;\n     const R_xlen_t n = Rf_asInteger(size);\n\n     PROTECT(cval = allocVector(CPLXSXP, n));\n     cvec = COMPLEX(cval);\n     for(R_xlen_t i = 0; i < n; i++) {\n         cvec[i].r = i + 1.0;\n         cvec[i].i = 2.0 * (i + 1);\n     }\n     UNPROTECT(1);\n     return cval;\n}\n\nSEXP complex2(void) {\n     static const char *outnames[]= {\"dvec\", \"complex\", \"\"};\n     SEXP rval, stemp;\n     double *dvec;\n     Rcomplex *cvec;\n\n     const R_xlen_t nc = 2;\n\n     PROTECT(rval = mkNamed(VECSXP, outnames));\n     // reals\n     stemp = SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));\n     dvec= REAL(stemp);\n     for(R_xlen_t i = 0; i < nc; i++)\n         dvec[i] = 0.5 * (i + 1);\n     // complex\n     stemp = SET_VECTOR_ELT(rval, 1, allocVector(CPLXSXP, nc));\n     cvec = COMPLEX(stemp);\n     for(R_xlen_t i = 0; i < nc; i++) {\n         cvec[i].r = i + 1.0;\n         cvec[i].i = 2.0 * (i + 1);\n     }\n     // done\n     UNPROTECT(1);\n     return rval;\n}\n\nNow the R source to test the above\n\n#---\n# file: test_complex.R\ndynLoad <- function(dynlib) {\n   dynlib <- paste0(dynlib, .Platform$dynlib.ext)\n   dyn.load(dynlib)\n}\ndynUnload <- function(dynlib) {\n   dynlib <- paste0(dynlib, .Platform$dynlib.ext)\n   dyn.unload(dynlib)\n}\n\nargs <- c(\"CMD\", \"SHLIB\", \"test_complex.c\")\nsystem2(\"R\", args = args)\n\ndynLoad(\"test_complex\")\n\ncomplex1 <- function(size) .Call(\"complex1\", as.integer(size))\ncomplex2 <- function() .Call(\"complex2\")\n\ncomplex1(10L)\n#>  [1]  1+ 2i  2+ 4i  3+ 6i  4+ 8i  5+10i  6+12i  7+14i  8+16i  9+18i \n10+20i\ncomplex2()\n#> $dvec\n#> [1] 0.5 1.0\n#>\n#> $complex\n#> [1] 1+2i 2+4i\n\ndynUnload(\"test_complex\")\n\n\n\n\n[1] \nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#Interface-functions-_002eC-and-_002eFortran\n\nHope this helps,\n\nRui Barradas",
+      "body_snippet": "?s 02:25 de 14/03/2026, Therneau, Terry M., Ph.D. via R-help escreveu:\n> I've often used the following paradym in C code to define a list object returned to R\n> \n>   ? ? static const char *outnames[]=",
+      "thread_id": "thread-f9fc6d35b5a3",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-922cf90820d7",
+      "message_id": "<CAPZA_qL6ZAs870msuxFNqnNRdvH3VcJR=7po+LhefYTc_J0qwQ@mail.gmail.com>",
+      "from_name": "Andre Luiz Tietbohl Ramos",
+      "from_email_hash": "f1ee93083eaa5e3d9542ed0100870dcc6aa41f547a0a089c66b564f768a77107",
+      "date": "2026-03-14T18:07:21Z",
+      "subject": "[R] pdf() and OSX Big Sur v11.7 Preview issue with chartSeries()",
+      "subject_clean": "pdf() and OSX Big Sur v11.7 Preview issue with chartSeries()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI'm trying to generate a pdf file from a plot using the system above to no\navail for I receive the error: It may be damaged or use a file format that\nPreview doesn?t recognise. when trying to open an example file such\nas: ?ITUB4_em_14_03_2026_14h29m.pdf?\nwith the message: could not be opened.\n\nI don't know how to solve it for it works when using ggplot() but does not\nwhen using chartSeries(), see below.  Data downloaded via getSymbols().\n\nfull.window.color.bg <-  'gray63\n\n*Does not work:*\n\nchartSeries(\"ITUB4.SA\",\n                type = \"line\",\n                show.grid = TRUE,\n                theme = chartTheme(\"white\",\n                                   up.col = 'forestgreen',\n                                   dn.col = 'red',\n                                   bg.col = \"black\",\n                                   area = full.window.color.bg\n                                   ),\n                TA = NULL\n                 )\n\ngrafico <- paste0(gsub(\"[[:punct:]]SA\", \"\", \"ITUB4.SA\"),'_on_',\n                  as.character(format(as.Date(end), format=\"%d_%m_%Y\")),\n\"_\",\n                  as.character(hour(now())), \"h\",\nas.character(minute(now())), \"m\",\n                  \".pdf\")\nfolder <- \"/Users/andreltr/Documents/B3/\"\narquivo.grafico <- as.character(paste0(folder, plt))\n\nggsave(filename = grafico,\n             path = folder,\n             device = \"pdf\",\n             width = 25, height = 20, units = \"cm\")\ndev.off()\n\nUsing ggplot() the pdf file is generated without problems, as the example\nbelow shows. Data downloaded via tidyquant library functions.\n\ncum.portfolio <-\n    port_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +\n    theme_gray() +\n    theme(plot.background = element_rect(fill = \"gray90\")) +\n    geom_line(color = \"blue\") +\n    theme(axis.text.x = element_text(size = 5,\n                                                         angle = 50,\n                                                         hjust = 1)) +\n    labs(x = 'Data',\n         y = 'Cum Return',\n         title = paste0('Portfolio Cumulative Return of ',\nlength(num.tickers),\n                               ' stocks on ',\n                               format(as.Date(end), format=\"%d/%m/%Y\")),\n         subtitle = paste0(\"Stocks: \", toString(tickers.names), \"\\nWeights:\n\",\n                           toString(percent(wts, accuracy = 0.1)))\n         ) +\n         scale_x_date(date_breaks = '2 weeks',\n                               date_labels = '%d %b %y') +\n    scale_y_continuous(\n        limits = c(0.8, 2),\n        breaks = seq(0, 10, 0.05),\n        labels = scales::percent_format(accuracy = 1)\n    )\n\ngraph <- paste0('Cum_Returno_from_Portfolio_',\n                  gsub(\" \", \"\", toString(tickers.names)),'_on_',\n                  format(as.Date(end), format= \"%d_%m_%Y\"),'_',\n                  as.character(hour(now())), \"h\",\nas.character(minute(now())), \"m\",\n                  \".pdf\")\nfolder <- \"/Users/andreltr/Documents/B3/\"\nggsave(filename = graph,\n             path = diretorio,\n             width = 25, height = 20, units = \"cm\")\ndev.off()\n\nAny help appreciated,\n\n--\nAndr? Luiz Tietbohl Ramos, PhD\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI'm trying to generate a pdf file from a plot using the system above to no\navail for I receive the error: It may be damaged or use a file format that\nPreview doesn?t recognise. when trying to ",
+      "thread_id": "thread-922cf90820d7",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-a914217fb04a",
+      "message_id": "<CAPPM_gTGpOUqjeP7QkTzZnv9PB3XRN=hiUT9NjYv39Tra0rH0g@mail.gmail.com>",
+      "from_name": "Joshua Ulrich",
+      "from_email_hash": "23f6c30ff3bdcca471f7faac8696c097be744a921830fdf6ee417f06337a1b60",
+      "date": "2026-03-14T18:27:38Z",
+      "subject": "[R]  [R-SIG-Finance] pdf() and OSX Big Sur v11.7 Preview issue with chartSeries()",
+      "subject_clean": "pdf() and OSX Big Sur v11.7 Preview issue with chartSeries()",
+      "in_reply_to": "<CAPZA_qL6ZAs870msuxFNqnNRdvH3VcJR=7po+LhefYTc_J0qwQ@mail.gmail.com>",
+      "references": [
+        "<CAPZA_qL6ZAs870msuxFNqnNRdvH3VcJR=7po+LhefYTc_J0qwQ@mail.gmail.com>"
+      ],
+      "body_plain": "On Sat, Mar 14, 2026 at 1:07?PM Andre Luiz Tietbohl Ramos\n<andreltramos at gmail.com> wrote:\n>\n> Hello,\n>\n> I'm trying to generate a pdf file from a plot using the system above to no\n> avail for I receive the error: It may be damaged or use a file format that\n> Preview doesn?t recognise. when trying to open an example file such\n> as: ?ITUB4_em_14_03_2026_14h29m.pdf?\n> with the message: could not be opened.\n>\n> I don't know how to solve it for it works when using ggplot() but does not\n> when using chartSeries(), see below.  Data downloaded via getSymbols().\n>\n> full.window.color.bg <-  'gray63\n>\n> *Does not work:*\n>\n> chartSeries(\"ITUB4.SA\",\n>                 type = \"line\",\n>                 show.grid = TRUE,\n>                 theme = chartTheme(\"white\",\n>                                    up.col = 'forestgreen',\n>                                    dn.col = 'red',\n>                                    bg.col = \"black\",\n>                                    area = full.window.color.bg\n>                                    ),\n>                 TA = NULL\n>                  )\n>\n> grafico <- paste0(gsub(\"[[:punct:]]SA\", \"\", \"ITUB4.SA\"),'_on_',\n>                   as.character(format(as.Date(end), format=\"%d_%m_%Y\")),\n> \"_\",\n>                   as.character(hour(now())), \"h\",\n> as.character(minute(now())), \"m\",\n>                   \".pdf\")\n> folder <- \"/Users/andreltr/Documents/B3/\"\n> arquivo.grafico <- as.character(paste0(folder, plt))\n>\n> ggsave(filename = grafico,\n>              path = folder,\n>              device = \"pdf\",\n>              width = 25, height = 20, units = \"cm\")\n> dev.off()\n>\n> Using ggplot() the pdf file is generated without problems, as the example\n> below shows. Data downloaded via tidyquant library functions.\n>\nggsave() works with ggplot() because it's a ggplot2 function designed\nto save ggplot objects. The help page for ggsave says, \"Save a ggplot\n(or other grid object) with sensible defaults\". chartSeries() objects\nare not grid objects, so you shouldn't expect ggsave() to work. Use\npdf(); chartSeries(...); dev.off() instead.\n\nAs others have said more than once, please use *minimal* reproducible\nexamples. Your question is about quantmod::chartSeries(). There's no\nneed for you to use many other unnecessary packages in your example\ncode. A minimal reproducible example in this case would be:\n\nx <- quantmod::getSymbols(\"SPY\", auto.assign = TRUE)\nquantmod::chartSeries(x)\nggplot2::ggsave(\"chartseries.pdf\", device = \"pdf\")  # can't open pdf\n\nAnd this should work:\n\npdf(\"chartseries.pdf\")\nquantmod::chartSeries(x)\ndev.off()\n\nYou're much more likely to get help if you make it easier on those\nyou're asking to donate their time to helping you.\n\n\n> cum.portfolio <-\n>     port_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +\n>     theme_gray() +\n>     theme(plot.background = element_rect(fill = \"gray90\")) +\n>     geom_line(color = \"blue\") +\n>     theme(axis.text.x = element_text(size = 5,\n>                                                          angle = 50,\n>                                                          hjust = 1)) +\n>     labs(x = 'Data',\n>          y = 'Cum Return',\n>          title = paste0('Portfolio Cumulative Return of ',\n> length(num.tickers),\n>                                ' stocks on ',\n>                                format(as.Date(end), format=\"%d/%m/%Y\")),\n>          subtitle = paste0(\"Stocks: \", toString(tickers.names), \"\\nWeights:\n> \",\n>                            toString(percent(wts, accuracy = 0.1)))\n>          ) +\n>          scale_x_date(date_breaks = '2 weeks',\n>                                date_labels = '%d %b %y') +\n>     scale_y_continuous(\n>         limits = c(0.8, 2),\n>         breaks = seq(0, 10, 0.05),\n>         labels = scales::percent_format(accuracy = 1)\n>     )\n>\n> graph <- paste0('Cum_Returno_from_Portfolio_',\n>                   gsub(\" \", \"\", toString(tickers.names)),'_on_',\n>                   format(as.Date(end), format= \"%d_%m_%Y\"),'_',\n>                   as.character(hour(now())), \"h\",\n> as.character(minute(now())), \"m\",\n>                   \".pdf\")\n> folder <- \"/Users/andreltr/Documents/B3/\"\n> ggsave(filename = graph,\n>              path = diretorio,\n>              width = 25, height = 20, units = \"cm\")\n> dev.off()\n>\n> Any help appreciated,\n>\n> --\n> Andr? Luiz Tietbohl Ramos, PhD\n>\n>         [[alternative HTML version deleted]]\n>\n> _______________________________________________\n> R-SIG-Finance at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-sig-finance\n> -- Subscriber-posting only. If you want to post, subscribe first.\n> -- Also note that this is not the r-help list where general R questions should go.\n\n\n\n--\nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com",
+      "body_snippet": "On Sat, Mar 14, 2026 at 1:07?PM Andre Luiz Tietbohl Ramos\n<andreltramos at gmail.com> wrote:\n>\n> Hello,\n>\n> I'm trying to generate a pdf file from a plot using the system above to no\n> avail for I rec",
+      "thread_id": "thread-922cf90820d7",
+      "thread_depth": 1,
+      "month": "2026-03"
     }
   ],
   "threads": [
@@ -463,6 +549,31 @@
       "started": "2026-03-12T06:43:10Z",
       "last_reply": "2026-03-12T06:43:10Z",
       "root_message_id": "msg-27322c3618bb"
+    },
+    {
+      "id": "thread-f9fc6d35b5a3",
+      "subject": "complex values in C",
+      "message_count": 3,
+      "participants": [
+        "Iris Simmons",
+        "Rui Barradas",
+        "Therneau, Terry M., Ph.D."
+      ],
+      "started": "2026-03-14T02:25:01Z",
+      "last_reply": "2026-03-14T07:24:27Z",
+      "root_message_id": "msg-f9fc6d35b5a3"
+    },
+    {
+      "id": "thread-922cf90820d7",
+      "subject": "pdf() and OSX Big Sur v11.7 Preview issue with chartSeries()",
+      "message_count": 2,
+      "participants": [
+        "Andre Luiz Tietbohl Ramos",
+        "Joshua Ulrich"
+      ],
+      "started": "2026-03-14T18:07:21Z",
+      "last_reply": "2026-03-14T18:27:38Z",
+      "root_message_id": "msg-922cf90820d7"
     }
   ]
 }

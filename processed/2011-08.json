@@ -21750,24 +21750,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-9a8e12cc0655",
-      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
-      "from_name": "Deepayan Sarkar",
-      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
-      "date": "2011-08-12T07:22:41Z",
-      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
-      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
-      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
-      "references": [
-        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
-      ],
-      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
-      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
-      "thread_id": "thread-c86da3d91db1",
-      "thread_depth": 1,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-e325d89d8d4d",
       "message_id": "<4E44D4C1.5050903@knmi.nl>",
       "from_name": "Paul Hiemstra",
@@ -21786,6 +21768,24 @@
       "body_snippet": "On 08/11/2011 07:51 PM, William Dunlap wrote:\n>> -----Original Message-----\n>> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On Behalf Of R. Michael\n>> Weylandt\n>> Sen",
       "thread_id": "thread-06c94c38cae2",
       "thread_depth": 5,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-9a8e12cc0655",
+      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2011-08-12T07:22:41Z",
+      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
+      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
+      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
+      "references": [
+        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
+      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
+      "thread_id": "thread-c86da3d91db1",
+      "thread_depth": 1,
       "month": "2011-08"
     },
     {
@@ -43569,25 +43569,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-37ed9bd489df",
-      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
-      "from_name": "Sebastian Bauer",
-      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
-      "date": "2011-08-24T17:11:06Z",
-      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
-      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
-      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
-      "references": [
-        "<4E551442.4050600@charite.de>",
-        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
-      ],
-      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
-      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
-      "thread_id": "thread-324d124b9ac3",
-      "thread_depth": 2,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-0772fd69525d",
       "message_id": "<1314205866972-3766037.post@n4.nabble.com>",
       "from_name": "lowman",
@@ -43605,6 +43586,25 @@
       "body_snippet": "answered my own question, just use the call shell function in vb\n\nwoohoo\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Controling-R-from-MS-Access-tp2719751p3766037.html\nSent from ",
       "thread_id": "thread-67f8c70b1a9e",
       "thread_depth": 1,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-37ed9bd489df",
+      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
+      "from_name": "Sebastian Bauer",
+      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
+      "date": "2011-08-24T17:11:06Z",
+      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
+      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
+      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
+      "references": [
+        "<4E551442.4050600@charite.de>",
+        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
+      ],
+      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
+      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
+      "thread_id": "thread-324d124b9ac3",
+      "thread_depth": 2,
       "month": "2011-08"
     },
     {
@@ -57360,22 +57360,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-664d6bf597f5",
-      "message_id": "<1B7A6C35CDB2BD4DBABBC6FF4275FF14021C1C3F@EXCH1.central.ad.ucc.ie>",
-      "from_name": "Coghlan, Avril",
-      "from_email_hash": "06cb9a1cdb6f0945d677dbcd676c0f65ad4e4accea1e328c57ef3abcffb695c8",
-      "date": "2011-08-31T13:43:50Z",
-      "subject": "[R] booklet on principal component analysis and linear discriminant analysis",
-      "subject_clean": "booklet on principal component analysis and linear discriminant analysis",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-analysis.readthedocs.org/ \nAny comments or corrections will be very welcome.\n\nBy the way, this has a Creative Commons Attribution licence, so you you\nare welcome to use it as you wish (as long as you attribute the work).\n\nKind Regards,\nAvril\n\nAvril Coghlan\nCork, Ireland",
-      "body_snippet": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-",
-      "thread_id": "thread-664d6bf597f5",
-      "thread_depth": 0,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-a4c10c85ce2e",
       "message_id": "<4E5E3A96.7030209@gmail.com>",
       "from_name": "Duncan Murdoch",
@@ -57392,6 +57376,22 @@
       "body_snippet": "On 31/08/2011 9:41 AM, S?bastien Bihorel wrote:\n> Hi,\n>\n> I thought \"..2<- 1\" was a correct way to modify the content of the\n> 2nd level of dot-dot-dot because it did not return any error message.\n> H",
       "thread_id": "thread-05bc8583068a",
       "thread_depth": 2,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-664d6bf597f5",
+      "message_id": "<1B7A6C35CDB2BD4DBABBC6FF4275FF14021C1C3F@EXCH1.central.ad.ucc.ie>",
+      "from_name": "Coghlan, Avril",
+      "from_email_hash": "06cb9a1cdb6f0945d677dbcd676c0f65ad4e4accea1e328c57ef3abcffb695c8",
+      "date": "2011-08-31T13:43:50Z",
+      "subject": "[R] booklet on principal component analysis and linear discriminant analysis",
+      "subject_clean": "booklet on principal component analysis and linear discriminant analysis",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-analysis.readthedocs.org/ \nAny comments or corrections will be very welcome.\n\nBy the way, this has a Creative Commons Attribution licence, so you you\nare welcome to use it as you wish (as long as you attribute the work).\n\nKind Regards,\nAvril\n\nAvril Coghlan\nCork, Ireland",
+      "body_snippet": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-",
+      "thread_id": "thread-664d6bf597f5",
+      "thread_depth": 0,
       "month": "2011-08"
     },
     {
@@ -63825,6 +63825,17 @@
       "root_message_id": "msg-b64fe06d073d"
     },
     {
+      "id": "thread-143afd95e7c1",
+      "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
+      "message_count": 1,
+      "participants": [
+        "Keith Jewell"
+      ],
+      "started": "2011-08-11T16:29:01Z",
+      "last_reply": "2011-08-11T16:29:01Z",
+      "root_message_id": "msg-143afd95e7c1"
+    },
+    {
       "id": "thread-a002e148eeb4",
       "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
       "message_count": 6,
@@ -63836,17 +63847,6 @@
       "started": "2011-08-11T16:29:01Z",
       "last_reply": "2011-08-19T08:39:30Z",
       "root_message_id": "msg-a002e148eeb4"
-    },
-    {
-      "id": "thread-143afd95e7c1",
-      "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
-      "message_count": 1,
-      "participants": [
-        "Keith Jewell"
-      ],
-      "started": "2011-08-11T16:29:01Z",
-      "last_reply": "2011-08-11T16:29:01Z",
-      "root_message_id": "msg-143afd95e7c1"
     },
     {
       "id": "thread-06c94c38cae2",
