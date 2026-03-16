@@ -3056,6 +3056,22 @@
       "month": "2006-07"
     },
     {
+      "id": "msg-19d40b5e90eb",
+      "message_id": "<6E9326598B435940A0090E6B20E051BF0D9992@me-mail1.medlan.cam.ac.uk>",
+      "from_name": "Jing Hua Zhao",
+      "from_email_hash": "35084494e1db36561ca18f6c6332ced93a41f728b46f70930235d6f9a3be0420",
+      "date": "2006-07-05T12:51:02Z",
+      "subject": "[R] help with coxme",
+      "subject_clean": "help with coxme",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Many thanks. I am actually able to check for this with S-PLUS 7 for\nLinux and obtained the same error message concerning kindex in coxme. It\nis thus worthwhile to give a note to the S-PLUS author before looking\ninto the details. Best, JH\n\n-----Original Message-----\nFrom: Spencer Graves [mailto:spencer.graves at pdf.com] \nSent: 03 July 2006 17:56\nTo: Lei Liu\nCc: r-help at stat.math.ethz.ch; Jing hua Zhao\nSubject: Re: [R] help with coxme\n\n\t  When I tried it, I seemed to get inconsistent results, the\nfirst of \nwhich was irreproducible.  The first error message said that 'rats2' was\n\nnot a data.frame.  I don't know what I did to get that, but when I tried\n\nit again, I got the following:\n\nError in max(kindex) : object \"kindex\" not found\n > traceback()\n3: max(kindex)\n2: max(kindex)\n1: coxme(Surv(time, status) ~ rx + x2, data = rats2, random = ~(1 +\n        x2) | litter)\n\n\t  This sounds to me like a logic error in 'coxme';  I am\ntherefore \ncc-ing the maintainer listed in help(package='kinship').\n\n\t  If it were my problem, I might list coxme and make a local\ncopy of \nit.  It's easy to find the offending 'max(kindex)'.  It's harder to \nfigure out what kindex should be in this context.  To attempt that, I \nmight request debug(coxme), then try again the 'coxme' call that \nproduced the error message and trace through it line by line until I \nfigured it out.\n\n\t  Hope this helps.\n\t  Spencer Graves\n\nLei Liu wrote:\n> Hi there,\n> \n> I have a question on fitting data by coxme. In particular I want to\nfit a \n> random intercept and random slope cox model. Using the rats dataset as\nan \n> example, I generated another covariate x2 and want to specify a random\nslope \n> for x2. Here is my code:\n> \n> x2=matrix(rep(runif(50), 3), 50, 3)\n> x2=as.vector(t(x2))\n> \n> rats2=cbind(rats, x2)\n> \n> But when I used the coxme function as follows, it gave an error\nmessage. \n> What is the right way to do it? Thanks a lot!\n> \n>   coxme(Surv(time, status) ~ rx+x2, data=rats2, random=~ (1+x2)|litter\n)\n> \n> \n> Lei Liu\n> Assistant Professor\n> Division of Biostatistics and Epidemiology\n> Dept. of Public Health Sciences\n> School of Medicine\n> University of Virginia\n> \n> 3181 Hospital West Complex\n> Charlottesville, VA 22908-0717\n> \n> 1-434-982-3364 (o)\n> 1-434-806-8086 (c)\n> \n> liulei at virginia.edu\n> ll9f at virginia.edu\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html",
+      "body_snippet": "Many thanks. I am actually able to check for this with S-PLUS 7 for\nLinux and obtained the same error message concerning kindex in coxme. It\nis thus worthwhile to give a note to the S-PLUS author befo",
+      "thread_id": "thread-19d40b5e90eb",
+      "thread_depth": 0,
+      "month": "2006-07"
+    },
+    {
       "id": "msg-a6ea3cdcbb67",
       "message_id": "<17579.46518.812020.585297@stat.math.ethz.ch>",
       "from_name": "Martin Maechler",
@@ -3071,22 +3087,6 @@
       "body_snippet": "[Oops! Written 6 hours ago, the following was accidentally not sent.]\n\n>>>>> \"Celso\" == Celso Barros <celso.barros at gmail.com>\n>>>>>     on Wed, 5 Jul 2006 04:09:17 -0300 writes:\n\n    Celso> When I ",
       "thread_id": "thread-07d45f219fea",
       "thread_depth": 1,
-      "month": "2006-07"
-    },
-    {
-      "id": "msg-19d40b5e90eb",
-      "message_id": "<6E9326598B435940A0090E6B20E051BF0D9992@me-mail1.medlan.cam.ac.uk>",
-      "from_name": "Jing Hua Zhao",
-      "from_email_hash": "35084494e1db36561ca18f6c6332ced93a41f728b46f70930235d6f9a3be0420",
-      "date": "2006-07-05T12:51:02Z",
-      "subject": "[R] help with coxme",
-      "subject_clean": "help with coxme",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Many thanks. I am actually able to check for this with S-PLUS 7 for\nLinux and obtained the same error message concerning kindex in coxme. It\nis thus worthwhile to give a note to the S-PLUS author before looking\ninto the details. Best, JH\n\n-----Original Message-----\nFrom: Spencer Graves [mailto:spencer.graves at pdf.com] \nSent: 03 July 2006 17:56\nTo: Lei Liu\nCc: r-help at stat.math.ethz.ch; Jing hua Zhao\nSubject: Re: [R] help with coxme\n\n\t  When I tried it, I seemed to get inconsistent results, the\nfirst of \nwhich was irreproducible.  The first error message said that 'rats2' was\n\nnot a data.frame.  I don't know what I did to get that, but when I tried\n\nit again, I got the following:\n\nError in max(kindex) : object \"kindex\" not found\n > traceback()\n3: max(kindex)\n2: max(kindex)\n1: coxme(Surv(time, status) ~ rx + x2, data = rats2, random = ~(1 +\n        x2) | litter)\n\n\t  This sounds to me like a logic error in 'coxme';  I am\ntherefore \ncc-ing the maintainer listed in help(package='kinship').\n\n\t  If it were my problem, I might list coxme and make a local\ncopy of \nit.  It's easy to find the offending 'max(kindex)'.  It's harder to \nfigure out what kindex should be in this context.  To attempt that, I \nmight request debug(coxme), then try again the 'coxme' call that \nproduced the error message and trace through it line by line until I \nfigured it out.\n\n\t  Hope this helps.\n\t  Spencer Graves\n\nLei Liu wrote:\n> Hi there,\n> \n> I have a question on fitting data by coxme. In particular I want to\nfit a \n> random intercept and random slope cox model. Using the rats dataset as\nan \n> example, I generated another covariate x2 and want to specify a random\nslope \n> for x2. Here is my code:\n> \n> x2=matrix(rep(runif(50), 3), 50, 3)\n> x2=as.vector(t(x2))\n> \n> rats2=cbind(rats, x2)\n> \n> But when I used the coxme function as follows, it gave an error\nmessage. \n> What is the right way to do it? Thanks a lot!\n> \n>   coxme(Surv(time, status) ~ rx+x2, data=rats2, random=~ (1+x2)|litter\n)\n> \n> \n> Lei Liu\n> Assistant Professor\n> Division of Biostatistics and Epidemiology\n> Dept. of Public Health Sciences\n> School of Medicine\n> University of Virginia\n> \n> 3181 Hospital West Complex\n> Charlottesville, VA 22908-0717\n> \n> 1-434-982-3364 (o)\n> 1-434-806-8086 (c)\n> \n> liulei at virginia.edu\n> ll9f at virginia.edu\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html",
-      "body_snippet": "Many thanks. I am actually able to check for this with S-PLUS 7 for\nLinux and obtained the same error message concerning kindex in coxme. It\nis thus worthwhile to give a note to the S-PLUS author befo",
-      "thread_id": "thread-19d40b5e90eb",
-      "thread_depth": 0,
       "month": "2006-07"
     },
     {
