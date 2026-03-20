@@ -21750,6 +21750,24 @@
       "month": "2011-08"
     },
     {
+      "id": "msg-9a8e12cc0655",
+      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2011-08-12T07:22:41Z",
+      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
+      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
+      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
+      "references": [
+        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
+      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
+      "thread_id": "thread-c86da3d91db1",
+      "thread_depth": 1,
+      "month": "2011-08"
+    },
+    {
       "id": "msg-e325d89d8d4d",
       "message_id": "<4E44D4C1.5050903@knmi.nl>",
       "from_name": "Paul Hiemstra",
@@ -21768,24 +21786,6 @@
       "body_snippet": "On 08/11/2011 07:51 PM, William Dunlap wrote:\n>> -----Original Message-----\n>> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On Behalf Of R. Michael\n>> Weylandt\n>> Sen",
       "thread_id": "thread-06c94c38cae2",
       "thread_depth": 5,
-      "month": "2011-08"
-    },
-    {
-      "id": "msg-9a8e12cc0655",
-      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
-      "from_name": "Deepayan Sarkar",
-      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
-      "date": "2011-08-12T07:22:41Z",
-      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
-      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
-      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
-      "references": [
-        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
-      ],
-      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
-      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
-      "thread_id": "thread-c86da3d91db1",
-      "thread_depth": 1,
       "month": "2011-08"
     },
     {

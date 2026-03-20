@@ -2303,3 +2303,655 @@ Joshua Ulrich  |  about.me/joshuaulrich
 FOSS Trading  |  www.fosstrading.com
 
 
+From bog@@o@chr|@to|er @end|ng |rom gm@||@com  Thu Mar 19 13:56:41 2026
+From: bog@@o@chr|@to|er @end|ng |rom gm@||@com (Christofer Bogaso)
+Date: Thu, 19 Mar 2026 18:26:41 +0530
+Subject: [R] Regression on transformed variable
+Message-ID: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+
+Hi,
+
+In many case, we need to transform the dependent variable before
+fitting a regression equation, to make it "well-behaved" like close to
+normal curve etc.
+
+like,
+
+f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+
+Now for prediction, R will typically calculate E[f(y)] based on the
+fitted coefficients. However, in real scenario, we actually need to
+find E[y].
+
+Typically, we perform reverse transformation like on fitted E[f(y)] directly.
+
+However, I believe that in this process, we also need to make some
+additional correction for non-linearity in the f() to correctly
+calculate  E[y]. Onr possible way to do it, may be using Taylors
+approximation.
+
+My question is there any R function that would directly do that based
+on the shape of f()?
+
+Thanks for your time.
+
+
+From bbo|ker @end|ng |rom gm@||@com  Thu Mar 19 14:25:36 2026
+From: bbo|ker @end|ng |rom gm@||@com (Ben Bolker)
+Date: Thu, 19 Mar 2026 09:25:36 -0400
+Subject: [R] Regression on transformed variable
+In-Reply-To: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+References: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+Message-ID: <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+
+    There are functions in the emdbook, metafor, and car packages that
+do some version of the delta method (although people use "delta
+method" to refer both to adjusting E[f(y)] using a second-order
+correction [since the first-order term disappears] and to adjusting
+V[f(y)] using a first-order correction ...)
+
+  emmeans also has such capabilities, search the vignettes for "bias correction"
+
+   cheers
+   Ben Bolker
+
+On Thu, Mar 19, 2026 at 8:57?AM Christofer Bogaso
+<bogaso.christofer at gmail.com> wrote:
+>
+> Hi,
+>
+> In many case, we need to transform the dependent variable before
+> fitting a regression equation, to make it "well-behaved" like close to
+> normal curve etc.
+>
+> like,
+>
+> f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+>
+> Now for prediction, R will typically calculate E[f(y)] based on the
+> fitted coefficients. However, in real scenario, we actually need to
+> find E[y].
+>
+> Typically, we perform reverse transformation like on fitted E[f(y)] directly.
+>
+> However, I believe that in this process, we also need to make some
+> additional correction for non-linearity in the f() to correctly
+> calculate  E[y]. Onr possible way to do it, may be using Taylors
+> approximation.
+>
+> My question is there any R function that would directly do that based
+> on the shape of f()?
+>
+> Thanks for your time.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From |mh_u@er@-group@ @end|ng |rom mo|conn@com  Thu Mar 19 15:47:47 2026
+From: |mh_u@er@-group@ @end|ng |rom mo|conn@com (LMH)
+Date: Thu, 19 Mar 2026 10:47:47 -0400
+Subject: [R] Regression on transformed variable
+In-Reply-To: <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+References: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+ <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+Message-ID: <1c8c452e-8792-6ddf-6710-fbc68b5d84e7@molconn.com>
+
+Not to be the guy who won't answer the question, but perhaps regression is not the best modeling
+method if there is significant non-linearity in the relationship you are investigating and you are
+not sure about the nature of that non-linearity.
+
+You can generally produce a reasonable linear approximation if the range of the target variable is
+narrow enough, but such models often have very limited applications.
+
+Out of interest, what regression technique(s) are you using?
+
+LMH
+
+
+Ben Bolker wrote:
+>     There are functions in the emdbook, metafor, and car packages that
+> do some version of the delta method (although people use "delta
+> method" to refer both to adjusting E[f(y)] using a second-order
+> correction [since the first-order term disappears] and to adjusting
+> V[f(y)] using a first-order correction ...)
+> 
+>   emmeans also has such capabilities, search the vignettes for "bias correction"
+> 
+>    cheers
+>    Ben Bolker
+> 
+> On Thu, Mar 19, 2026 at 8:57?AM Christofer Bogaso
+> <bogaso.christofer at gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> In many case, we need to transform the dependent variable before
+>> fitting a regression equation, to make it "well-behaved" like close to
+>> normal curve etc.
+>>
+>> like,
+>>
+>> f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+>>
+>> Now for prediction, R will typically calculate E[f(y)] based on the
+>> fitted coefficients. However, in real scenario, we actually need to
+>> find E[y].
+>>
+>> Typically, we perform reverse transformation like on fitted E[f(y)] directly.
+>>
+>> However, I believe that in this process, we also need to make some
+>> additional correction for non-linearity in the f() to correctly
+>> calculate  E[y]. Onr possible way to do it, may be using Taylors
+>> approximation.
+>>
+>> My question is there any R function that would directly do that based
+>> on the shape of f()?
+>>
+>> Thanks for your time.
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+
+From he|en@@ong0206 @end|ng |rom gm@||@com  Thu Mar 19 15:00:00 2026
+From: he|en@@ong0206 @end|ng |rom gm@||@com (=?UTF-8?B?7Iah7IOB7J2A?=)
+Date: Thu, 19 Mar 2026 23:00:00 +0900
+Subject: [R] Query on ksmooth(): Theoretical step function vs. plotted
+ diagonal segments
+Message-ID: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+
+Dear R-help members,
+
+Hello,
+I am studying kernel regression and experimenting with the ksmooth()
+function in R.
+
+When using a box kernel, the kernel function is an indicator function
+(weight = 1 inside the bandwidth and 0 outside). Based on this definition,
+I expected the Nadaraya?Watson estimator to produce a step-like function:
+the estimate should remain constant while the set of included points is
+unchanged, and then jump when a point enters or leaves the bandwidth window.
+
+However, when I run the following code using the cars dataset:
+
+par(mfrow=c(1,1))
+with(cars, {
+plot(speed, dist)
+lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+col = "blue", lwd = 3)
+lines(ksmooth(speed, dist, "box", bandwidth = 2),
+col = "darkorange", lwd = 3)
+})
+legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+lwd = c(2,2),
+col = c("blue","darkorange"), cex = 2)
+
+the curve produced by the box kernel (dark orange) appears to contain
+diagonal line segments rather than the step-like shape I expected. I have
+attached the resulting plot for reference.
+
+My understanding is that the theoretical estimator should behave like a
+step function because the kernel weights are either 0 or 1. Therefore, I
+was wondering whether the diagonal segments arise from how ksmooth()
+evaluates the estimator on a grid of x values and then connects those
+points with straight lines for plotting, or if there is another
+implementation detail that explains this behavior.
+
+Could you please clarify whether this is expected behavior?
+
+Thank you very much for your time.
+
+Best regards,
+Sangeun Song
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: plot_ksmooth_box.png
+Type: image/png
+Size: 167309 bytes
+Desc: not available
+URL: <https://stat.ethz.ch/pipermail/r-help/attachments/20260319/d0cb1687/attachment.png>
+
+From bog@@o@chr|@to|er @end|ng |rom gm@||@com  Thu Mar 19 16:42:13 2026
+From: bog@@o@chr|@to|er @end|ng |rom gm@||@com (Christofer Bogaso)
+Date: Thu, 19 Mar 2026 21:12:13 +0530
+Subject: [R] Regression on transformed variable
+In-Reply-To: <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+References: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+ <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+Message-ID: <CA+dpOJkAZeV-3W7QP3Pab=A4jKr4Vp7CKEFEMg9BSaigKsckzA@mail.gmail.com>
+
+Thanks Ben.
+
+Could you please help pointing out names of specific functions on Bias
+correction? I searched with like ls('package:emdbook') etc. however
+failed to identify relevant functions.
+
+On Thu, Mar 19, 2026 at 6:55?PM Ben Bolker <bbolker at gmail.com> wrote:
+>
+>     There are functions in the emdbook, metafor, and car packages that
+> do some version of the delta method (although people use "delta
+> method" to refer both to adjusting E[f(y)] using a second-order
+> correction [since the first-order term disappears] and to adjusting
+> V[f(y)] using a first-order correction ...)
+>
+>   emmeans also has such capabilities, search the vignettes for "bias correction"
+>
+>    cheers
+>    Ben Bolker
+>
+> On Thu, Mar 19, 2026 at 8:57?AM Christofer Bogaso
+> <bogaso.christofer at gmail.com> wrote:
+> >
+> > Hi,
+> >
+> > In many case, we need to transform the dependent variable before
+> > fitting a regression equation, to make it "well-behaved" like close to
+> > normal curve etc.
+> >
+> > like,
+> >
+> > f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+> >
+> > Now for prediction, R will typically calculate E[f(y)] based on the
+> > fitted coefficients. However, in real scenario, we actually need to
+> > find E[y].
+> >
+> > Typically, we perform reverse transformation like on fitted E[f(y)] directly.
+> >
+> > However, I believe that in this process, we also need to make some
+> > additional correction for non-linearity in the f() to correctly
+> > calculate  E[y]. Onr possible way to do it, may be using Taylors
+> > approximation.
+> >
+> > My question is there any R function that would directly do that based
+> > on the shape of f()?
+> >
+> > Thanks for your time.
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Thu Mar 19 16:42:39 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Thu, 19 Mar 2026 08:42:39 -0700
+Subject: [R] Query on ksmooth(): Theoretical step function vs. plotted
+ diagonal segments
+In-Reply-To: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+References: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+Message-ID: <59D1EBFA-1E3C-4680-A666-8DDAC2CE2C78@dcn.davis.ca.us>
+
+You used the lines function to plot the data. Of course it is going to show straight sloped lines between points.
+
+On March 19, 2026 7:00:00 AM PDT, "???" <helen.song0206 at gmail.com> wrote:
+>Dear R-help members,
+>
+>Hello,
+>I am studying kernel regression and experimenting with the ksmooth()
+>function in R.
+>
+>When using a box kernel, the kernel function is an indicator function
+>(weight = 1 inside the bandwidth and 0 outside). Based on this definition,
+>I expected the Nadaraya?Watson estimator to produce a step-like function:
+>the estimate should remain constant while the set of included points is
+>unchanged, and then jump when a point enters or leaves the bandwidth window.
+>
+>However, when I run the following code using the cars dataset:
+>
+>par(mfrow=c(1,1))
+>with(cars, {
+>plot(speed, dist)
+>lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+>col = "blue", lwd = 3)
+>lines(ksmooth(speed, dist, "box", bandwidth = 2),
+>col = "darkorange", lwd = 3)
+>})
+>legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+>lwd = c(2,2),
+>col = c("blue","darkorange"), cex = 2)
+>
+>the curve produced by the box kernel (dark orange) appears to contain
+>diagonal line segments rather than the step-like shape I expected. I have
+>attached the resulting plot for reference.
+>
+>My understanding is that the theoretical estimator should behave like a
+>step function because the kernel weights are either 0 or 1. Therefore, I
+>was wondering whether the diagonal segments arise from how ksmooth()
+>evaluates the estimator on a grid of x values and then connects those
+>points with straight lines for plotting, or if there is another
+>implementation detail that explains this behavior.
+>
+>Could you please clarify whether this is expected behavior?
+>
+>Thank you very much for your time.
+>
+>Best regards,
+>Sangeun Song
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From bbo|ker @end|ng |rom gm@||@com  Thu Mar 19 17:06:58 2026
+From: bbo|ker @end|ng |rom gm@||@com (Ben Bolker)
+Date: Thu, 19 Mar 2026 12:06:58 -0400
+Subject: [R] Regression on transformed variable
+In-Reply-To: <CA+dpOJkAZeV-3W7QP3Pab=A4jKr4Vp7CKEFEMg9BSaigKsckzA@mail.gmail.com>
+References: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+ <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+ <CA+dpOJkAZeV-3W7QP3Pab=A4jKr4Vp7CKEFEMg9BSaigKsckzA@mail.gmail.com>
+Message-ID: <CABghstT5g3JUAL7yT_OfRm9Mrq14NpM6-kpSvPa-DSWwhw8UFQ@mail.gmail.com>
+
+https://cran.r-project.org/web/packages/emmeans/vignettes/transformations.html#bias-adj
+is probably the easiest place to start. That machinery is assuming
+that the transformation is stated *explicitly* in the model
+formulation; the example used in the vignette is
+
+pigs.lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
+
+I think it wouldn't work if the transformation was done upstream (i.e.
+if your response variable was `log_conc`), and possibly not if you had
+an unusual transformation.
+
+  Looking at the function in emdbook, I don't think it's directly
+useful for what you want. car::deltaMethod looks more useful. However,
+it's designed for specific nonlinear functions of *parameters*, I
+don't know if it can easily do bias correction on predictions.
+
+On Thu, Mar 19, 2026 at 11:42?AM Christofer Bogaso
+<bogaso.christofer at gmail.com> wrote:
+>
+> Thanks Ben.
+>
+> Could you please help pointing out names of specific functions on Bias
+> correction? I searched with like ls('package:emdbook') etc. however
+> failed to identify relevant functions.
+>
+> On Thu, Mar 19, 2026 at 6:55?PM Ben Bolker <bbolker at gmail.com> wrote:
+> >
+> >     There are functions in the emdbook, metafor, and car packages that
+> > do some version of the delta method (although people use "delta
+> > method" to refer both to adjusting E[f(y)] using a second-order
+> > correction [since the first-order term disappears] and to adjusting
+> > V[f(y)] using a first-order correction ...)
+> >
+> >   emmeans also has such capabilities, search the vignettes for "bias correction"
+> >
+> >    cheers
+> >    Ben Bolker
+> >
+> > On Thu, Mar 19, 2026 at 8:57?AM Christofer Bogaso
+> > <bogaso.christofer at gmail.com> wrote:
+> > >
+> > > Hi,
+> > >
+> > > In many case, we need to transform the dependent variable before
+> > > fitting a regression equation, to make it "well-behaved" like close to
+> > > normal curve etc.
+> > >
+> > > like,
+> > >
+> > > f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+> > >
+> > > Now for prediction, R will typically calculate E[f(y)] based on the
+> > > fitted coefficients. However, in real scenario, we actually need to
+> > > find E[y].
+> > >
+> > > Typically, we perform reverse transformation like on fitted E[f(y)] directly.
+> > >
+> > > However, I believe that in this process, we also need to make some
+> > > additional correction for non-linearity in the f() to correctly
+> > > calculate  E[y]. Onr possible way to do it, may be using Taylors
+> > > approximation.
+> > >
+> > > My question is there any R function that would directly do that based
+> > > on the shape of f()?
+> > >
+> > > Thanks for your time.
+> > >
+> > > ______________________________________________
+> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > > https://stat.ethz.ch/mailman/listinfo/r-help
+> > > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > > and provide commented, minimal, self-contained, reproducible code.
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Thu Mar 19 17:29:35 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Thu, 19 Mar 2026 16:29:35 +0000
+Subject: [R] Query on ksmooth(): Theoretical step function vs. plotted
+ diagonal segments
+In-Reply-To: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+References: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+Message-ID: <ededfe7e-2d6e-47f4-83a8-70afd23e3cd9@sapo.pt>
+
+?s 14:00 de 19/03/2026, ??? escreveu:
+> Dear R-help members,
+> 
+> Hello,
+> I am studying kernel regression and experimenting with the ksmooth()
+> function in R.
+> 
+> When using a box kernel, the kernel function is an indicator function
+> (weight = 1 inside the bandwidth and 0 outside). Based on this definition,
+> I expected the Nadaraya?Watson estimator to produce a step-like function:
+> the estimate should remain constant while the set of included points is
+> unchanged, and then jump when a point enters or leaves the bandwidth window.
+> 
+> However, when I run the following code using the cars dataset:
+> 
+> par(mfrow=c(1,1))
+> with(cars, {
+> plot(speed, dist)
+> lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+> col = "blue", lwd = 3)
+> lines(ksmooth(speed, dist, "box", bandwidth = 2),
+> col = "darkorange", lwd = 3)
+> })
+> legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+> lwd = c(2,2),
+> col = c("blue","darkorange"), cex = 2)
+> 
+> the curve produced by the box kernel (dark orange) appears to contain
+> diagonal line segments rather than the step-like shape I expected. I have
+> attached the resulting plot for reference.
+> 
+> My understanding is that the theoretical estimator should behave like a
+> step function because the kernel weights are either 0 or 1. Therefore, I
+> was wondering whether the diagonal segments arise from how ksmooth()
+> evaluates the estimator on a grid of x values and then connects those
+> points with straight lines for plotting, or if there is another
+> implementation detail that explains this behavior.
+> 
+> Could you please clarify whether this is expected behavior?
+> 
+> Thank you very much for your time.
+> 
+> Best regards,
+> Sangeun Song
+> 
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+Hello,
+
+Use type = "s", see help("plot.default") for the possible values of 
+argument type.
+You have a link to that help page in the documentation of line().
+
+?plot.default
+?line
+
+In the code below, I only use it in the 2nd line() call.
+
+
+
+# if it's the 1st time you call par(), this does nothing
+# (it changes a graphics device from rows*cols == 1*1 to 1*1)
+# anyway, save the value so that you can later reset the default
+old_par <- par(mfrow = c(1, 1))
+# see what mfrow was before
+old_par
+#> $mfrow
+#> [1] 1 1
+
+with(cars, {
+   plot(speed, dist)
+   lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+         col = "blue", lwd = 3)
+   lines(ksmooth(speed, dist, "box", bandwidth = 2),
+         type = "s",
+         col = "darkorange", lwd = 3)
+})
+legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+        lwd = c(2,2),
+        col = c("blue","darkorange"), cex = 2)
+
+# reset the default par values
+par(old_par)
+
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+From er|cjberger @end|ng |rom gm@||@com  Thu Mar 19 18:17:14 2026
+From: er|cjberger @end|ng |rom gm@||@com (Eric Berger)
+Date: Thu, 19 Mar 2026 19:17:14 +0200
+Subject: [R] Regression on transformed variable
+In-Reply-To: <CABghstT5g3JUAL7yT_OfRm9Mrq14NpM6-kpSvPa-DSWwhw8UFQ@mail.gmail.com>
+References: <CA+dpOJmaRRJHiXiEV+9Hu+Fw=X4YtNHOyABj=J9GmtZQ+V4beg@mail.gmail.com>
+ <CABghstQEkW=104JxfbCONenhh7Lb8t2+6RO_0KaC-EHZ85H0yw@mail.gmail.com>
+ <CA+dpOJkAZeV-3W7QP3Pab=A4jKr4Vp7CKEFEMg9BSaigKsckzA@mail.gmail.com>
+ <CABghstT5g3JUAL7yT_OfRm9Mrq14NpM6-kpSvPa-DSWwhw8UFQ@mail.gmail.com>
+Message-ID: <CAGgJW774OKHQ7ry7FLvBjT=mQLCEoBVBH5Jt7kVXriTs_te63w@mail.gmail.com>
+
+For Box-Cox transformations there are R tools that handle this
+automatically in the "tidyverts" packages.
+Check out the subsection "Bias adjustments" in section 5.6 "Forecasting
+Using Transformations"
+in the book: "Forecasting Principles and Practice (3rd ed)" which is freely
+available online at
+
+https://otexts.com/fpp3/
+
+HTH,
+Eric
+
+
+
+On Thu, Mar 19, 2026 at 6:07?PM Ben Bolker <bbolker at gmail.com> wrote:
+
+>
+> https://cran.r-project.org/web/packages/emmeans/vignettes/transformations.html#bias-adj
+> is probably the easiest place to start. That machinery is assuming
+> that the transformation is stated *explicitly* in the model
+> formulation; the example used in the vignette is
+>
+> pigs.lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
+>
+> I think it wouldn't work if the transformation was done upstream (i.e.
+> if your response variable was `log_conc`), and possibly not if you had
+> an unusual transformation.
+>
+>   Looking at the function in emdbook, I don't think it's directly
+> useful for what you want. car::deltaMethod looks more useful. However,
+> it's designed for specific nonlinear functions of *parameters*, I
+> don't know if it can easily do bias correction on predictions.
+>
+> On Thu, Mar 19, 2026 at 11:42?AM Christofer Bogaso
+> <bogaso.christofer at gmail.com> wrote:
+> >
+> > Thanks Ben.
+> >
+> > Could you please help pointing out names of specific functions on Bias
+> > correction? I searched with like ls('package:emdbook') etc. however
+> > failed to identify relevant functions.
+> >
+> > On Thu, Mar 19, 2026 at 6:55?PM Ben Bolker <bbolker at gmail.com> wrote:
+> > >
+> > >     There are functions in the emdbook, metafor, and car packages that
+> > > do some version of the delta method (although people use "delta
+> > > method" to refer both to adjusting E[f(y)] using a second-order
+> > > correction [since the first-order term disappears] and to adjusting
+> > > V[f(y)] using a first-order correction ...)
+> > >
+> > >   emmeans also has such capabilities, search the vignettes for "bias
+> correction"
+> > >
+> > >    cheers
+> > >    Ben Bolker
+> > >
+> > > On Thu, Mar 19, 2026 at 8:57?AM Christofer Bogaso
+> > > <bogaso.christofer at gmail.com> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > In many case, we need to transform the dependent variable before
+> > > > fitting a regression equation, to make it "well-behaved" like close
+> to
+> > > > normal curve etc.
+> > > >
+> > > > like,
+> > > >
+> > > > f(y) = alpha + beta1 X1 + beta2 X2 + ... + epsilon
+> > > >
+> > > > Now for prediction, R will typically calculate E[f(y)] based on the
+> > > > fitted coefficients. However, in real scenario, we actually need to
+> > > > find E[y].
+> > > >
+> > > > Typically, we perform reverse transformation like on fitted E[f(y)]
+> directly.
+> > > >
+> > > > However, I believe that in this process, we also need to make some
+> > > > additional correction for non-linearity in the f() to correctly
+> > > > calculate  E[y]. Onr possible way to do it, may be using Taylors
+> > > > approximation.
+> > > >
+> > > > My question is there any R function that would directly do that based
+> > > > on the shape of f()?
+> > > >
+> > > > Thanks for your time.
+> > > >
+> > > > ______________________________________________
+> > > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > > > https://stat.ethz.ch/mailman/listinfo/r-help
+> > > > PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> > > > and provide commented, minimal, self-contained, reproducible code.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
