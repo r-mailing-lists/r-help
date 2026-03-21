@@ -626,6 +626,40 @@
       "thread_id": "thread-272cf08f8e6a",
       "thread_depth": 4,
       "month": "2026-03"
+    },
+    {
+      "id": "msg-958d4df995c9",
+      "message_id": "<27069.1325.745348.694268@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "a92f4a07d4e3cad5fba985e30db2b0fff598d5ddfbadbb2e91ffe91636400c62",
+      "date": "2026-03-20T08:28:29Z",
+      "subject": "[R] Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
+      "subject_clean": "Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
+      "in_reply_to": "<fake-VM-id.74b39c69fa379d61c3aaf44f0edf1755@talos.iv>",
+      "references": [
+        "<CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> ???  \n>>>>>     on Thu, 19 Mar 2026 23:00:00 +0900 writes:\n\n    > Dear R-help members,\n    > Hello,\n    > I am studying kernel regression and experimenting with the ksmooth()\n    > function in R.\n\n    > When using a box kernel, the kernel function is an indicator function\n    > (weight = 1 inside the bandwidth and 0 outside). Based on this definition,\n    > I expected the Nadaraya?Watson estimator to produce a step-like function:\n    > the estimate should remain constant while the set of included points is\n    > unchanged, and then jump when a point enters or leaves the bandwidth window.\n\n    > However, when I run the following code using the cars dataset:\n\n    > par(mfrow=c(1,1))\n    > with(cars, {\n    > plot(speed, dist)\n    > lines(ksmooth(speed, dist, \"normal\", bandwidth = 2),\n    > col = \"blue\", lwd = 3)\n    > lines(ksmooth(speed, dist, \"box\", bandwidth = 2),\n    > col = \"darkorange\", lwd = 3)\n    > })\n    > legend(\"topleft\", c(\"Normal Kernel with h=2\", \"Box Kernel with h=2\"),\n    > lwd = c(2,2),\n    > col = c(\"blue\",\"darkorange\"), cex = 2)\n\n    > the curve produced by the box kernel (dark orange) appears to contain\n    > diagonal line segments rather than the step-like shape I expected. I have\n    > attached the resulting plot for reference.\n\n    > My understanding is that the theoretical estimator should behave like a\n    > step function because the kernel weights are either 0 or 1. Therefore, I\n    > was wondering whether the diagonal segments arise from how ksmooth()\n    > evaluates the estimator on a grid of x values and then connects those\n    > points with straight lines for plotting, or if there is another\n    > implementation detail that explains this behavior.\n\n    > Could you please clarify whether this is expected behavior?\n\nDefinitely, as Jeff and Rui explained.\n\nAs solution e.g. for teaching / illustration (otherwise the box\nkernel should *never* be used!), I recommend just to evaluate\nthe resulting function  on a finer grid, e.g.,  at 1000 instead\nof by default 100 points:\n\n\n## MM:  evaluate the curve on a much finer grid, using n.points = 1000  (default was 100)\nwith(cars, {\n    plot(speed, dist)\n    lines(ksmooth(speed, dist, \"norm\", bandwidth = 2, n.points=1000), col = \"blue\", lwd = 3)\n    lines(ksmooth(speed, dist, \"box\",  bandwidth = 2, n.points=1000), col = \"darkorange\", lwd = 3)\n})\nlegend(\"topleft\", c(\"Normal Kernel with h=2\", \"Box Kernel with h=2\"),\n       lwd = 2, col = c(\"blue\",\"darkorange\"), bty=\"n\")\n\n--\nMartin",
+      "body_snippet": ">>>>> ???  \n>>>>>     on Thu, 19 Mar 2026 23:00:00 +0900 writes:\n\n    > Dear R-help members,\n    > Hello,\n    > I am studying kernel regression and experimenting with the ksmooth()\n    > function in R",
+      "thread_id": "thread-6e31e8c70f68",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-aaa8304961ac",
+      "message_id": "<12C37C80-7487-4856-A066-C30D1D2F420D@cbs.dk>",
+      "from_name": "Peter Dalgaard via R-announce",
+      "from_email_hash": "dd1f1682b5db6b0758a21d797493fecc66663fc27a967e82923f2a05b93d68b3",
+      "date": "2026-03-20T13:40:14Z",
+      "subject": "[R] R 4.6.0 scheduled for April 24",
+      "subject_clean": "R 4.6.0 scheduled for April 24",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Full schedule is available on developer.r-project.org (pending update from SVN).\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n\n_______________________________________________\nR-announce at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-announce",
+      "body_snippet": "Full schedule is available on developer.r-project.org (pending update from SVN).\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg,",
+      "thread_id": "thread-aaa8304961ac",
+      "thread_depth": 0,
+      "month": "2026-03"
     }
   ],
   "threads": [
@@ -757,15 +791,27 @@
     {
       "id": "thread-6e31e8c70f68",
       "subject": "Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
-      "message_count": 3,
+      "message_count": 4,
       "participants": [
         "Jeff Newmiller",
+        "Martin Maechler",
         "Rui Barradas",
         "송상은"
       ],
       "started": "2026-03-19T14:00:00Z",
-      "last_reply": "2026-03-19T16:29:35Z",
+      "last_reply": "2026-03-20T08:28:29Z",
       "root_message_id": "msg-6e31e8c70f68"
+    },
+    {
+      "id": "thread-aaa8304961ac",
+      "subject": "R 4.6.0 scheduled for April 24",
+      "message_count": 1,
+      "participants": [
+        "Peter Dalgaard via R-announce"
+      ],
+      "started": "2026-03-20T13:40:14Z",
+      "last_reply": "2026-03-20T13:40:14Z",
+      "root_message_id": "msg-aaa8304961ac"
     }
   ]
 }

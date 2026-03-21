@@ -2955,3 +2955,95 @@ On Thu, Mar 19, 2026 at 6:07?PM Ben Bolker <bbolker at gmail.com> wrote:
 	[[alternative HTML version deleted]]
 
 
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Fri Mar 20 09:28:29 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Fri, 20 Mar 2026 09:28:29 +0100
+Subject: [R] Query on ksmooth(): Theoretical step function vs. plotted
+ diagonal segments
+In-Reply-To: <fake-VM-id.74b39c69fa379d61c3aaf44f0edf1755@talos.iv>
+References: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+Message-ID: <27069.1325.745348.694268@stat.math.ethz.ch>
+
+>>>>> ???  
+>>>>>     on Thu, 19 Mar 2026 23:00:00 +0900 writes:
+
+    > Dear R-help members,
+    > Hello,
+    > I am studying kernel regression and experimenting with the ksmooth()
+    > function in R.
+
+    > When using a box kernel, the kernel function is an indicator function
+    > (weight = 1 inside the bandwidth and 0 outside). Based on this definition,
+    > I expected the Nadaraya?Watson estimator to produce a step-like function:
+    > the estimate should remain constant while the set of included points is
+    > unchanged, and then jump when a point enters or leaves the bandwidth window.
+
+    > However, when I run the following code using the cars dataset:
+
+    > par(mfrow=c(1,1))
+    > with(cars, {
+    > plot(speed, dist)
+    > lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+    > col = "blue", lwd = 3)
+    > lines(ksmooth(speed, dist, "box", bandwidth = 2),
+    > col = "darkorange", lwd = 3)
+    > })
+    > legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+    > lwd = c(2,2),
+    > col = c("blue","darkorange"), cex = 2)
+
+    > the curve produced by the box kernel (dark orange) appears to contain
+    > diagonal line segments rather than the step-like shape I expected. I have
+    > attached the resulting plot for reference.
+
+    > My understanding is that the theoretical estimator should behave like a
+    > step function because the kernel weights are either 0 or 1. Therefore, I
+    > was wondering whether the diagonal segments arise from how ksmooth()
+    > evaluates the estimator on a grid of x values and then connects those
+    > points with straight lines for plotting, or if there is another
+    > implementation detail that explains this behavior.
+
+    > Could you please clarify whether this is expected behavior?
+
+Definitely, as Jeff and Rui explained.
+
+As solution e.g. for teaching / illustration (otherwise the box
+kernel should *never* be used!), I recommend just to evaluate
+the resulting function  on a finer grid, e.g.,  at 1000 instead
+of by default 100 points:
+
+
+## MM:  evaluate the curve on a much finer grid, using n.points = 1000  (default was 100)
+with(cars, {
+    plot(speed, dist)
+    lines(ksmooth(speed, dist, "norm", bandwidth = 2, n.points=1000), col = "blue", lwd = 3)
+    lines(ksmooth(speed, dist, "box",  bandwidth = 2, n.points=1000), col = "darkorange", lwd = 3)
+})
+legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+       lwd = 2, col = c("blue","darkorange"), bty="n")
+
+--
+Martin
+
+
+From r-@nnounce @end|ng |rom r-project@org  Fri Mar 20 14:40:14 2026
+From: r-@nnounce @end|ng |rom r-project@org (Peter Dalgaard via R-announce)
+Date: Fri, 20 Mar 2026 13:40:14 +0000
+Subject: [R] R 4.6.0 scheduled for April 24
+Message-ID: <12C37C80-7487-4856-A066-C30D1D2F420D@cbs.dk>
+
+Full schedule is available on developer.r-project.org (pending update from SVN).
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+_______________________________________________
+R-announce at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-announce
+
+
