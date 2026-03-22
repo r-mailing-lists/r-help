@@ -10251,22 +10251,6 @@
       "month": "2008-06"
     },
     {
-      "id": "msg-9d58e000e6f4",
-      "message_id": "<2eab3a700806061040l7febaae5ub7af3be0d622bf82@mail.gmail.com>",
-      "from_name": "Bertrand Pub Michel",
-      "from_email_hash": "6254c9107796d20d3db48756a83bef04559cd855e3a057f756ee228dd947c3bd",
-      "date": "2008-06-06T17:40:55Z",
-      "subject": "[R] Random Forest and for multivariate response data",
-      "subject_clean": "Random Forest and for multivariate response data",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information about this\nin the help pages  ...\nThank you for your help\n\nBertrand",
-      "body_snippet": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information a",
-      "thread_id": "thread-9d58e000e6f4",
-      "thread_depth": 0,
-      "month": "2008-06"
-    },
-    {
       "id": "msg-bd560340ddcf",
       "message_id": "<2eab3a700806061040g51003677l9bfaa1b7a4dfa2b2@mail.gmail.com>",
       "from_name": "Bertrand Pub Michel",
@@ -10279,6 +10263,22 @@
       "body_plain": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information about this\nin the help pages  ...\nThank you for your help\n\nBertrand",
       "body_snippet": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information a",
       "thread_id": "thread-bd560340ddcf",
+      "thread_depth": 0,
+      "month": "2008-06"
+    },
+    {
+      "id": "msg-9d58e000e6f4",
+      "message_id": "<2eab3a700806061040l7febaae5ub7af3be0d622bf82@mail.gmail.com>",
+      "from_name": "Bertrand Pub Michel",
+      "from_email_hash": "6254c9107796d20d3db48756a83bef04559cd855e3a057f756ee228dd947c3bd",
+      "date": "2008-06-06T17:40:55Z",
+      "subject": "[R] Random Forest and for multivariate response data",
+      "subject_clean": "Random Forest and for multivariate response data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information about this\nin the help pages  ...\nThank you for your help\n\nBertrand",
+      "body_snippet": "Hello\n\nIs there exists a package for multivariate random forest, namely for\nmultivariate response data ? It seems to be impossible with the\n\"randomForest\" function and I did not find any information a",
+      "thread_id": "thread-9d58e000e6f4",
       "thread_depth": 0,
       "month": "2008-06"
     },
@@ -32952,22 +32952,6 @@
       "month": "2008-06"
     },
     {
-      "id": "msg-8fdfb66077f5",
-      "message_id": "<200806192033.ADB66163@md4.mail.umd.edu>",
-      "from_name": "Daniel Malter",
-      "from_email_hash": "0d147e6ae34c7023f0bee706d2af6c2e3760b37215be7988817463cdd684a054",
-      "date": "2008-06-19T20:33:15Z",
-      "subject": "[R] PCA analysis",
-      "subject_clean": "PCA analysis",
-      "in_reply_to": "<BAY122-W182CE2AED5687BCA275D33B3A80@phx.gbl>",
-      "references": [],
-      "body_plain": "Hi Mona, I cannot get it done with the princomp and the biplot commands\neither (maybe somebody can), but there are always many ways to Rome. This is\nhow you can do it (below). However, the label=rep... below assumes that your\nvalues are in order, i.e. that you really want to plot the first fifty rows\nwith one symbol, the second with another, and so forth. If your values are\nnot ordered, you will either have to order your dataset or create a variable\nthat indicates the condition by which you want to group your data and choose\nthe symbols. Assigning this variable for your desired grouping would then\nmost likely involve a loop or a nested ifelse() statement, unless you\nalready have this variable. You then assign your grouping variable to the\n\"pch\" argument (for different symbols), the \"col\" argument (for different\ncolors), or both. \n\n##create data\nz<-sample(401:600)\ny<-sample(701:900)\nx<-sample(1:200)\ndata.frame(x,y)->df\ncbind(df, z)->df\n\n##pc analysis\npc=prcomp(df)\n\n##inspect results\npc\nsummary(pc)\npc$rotation\n\n##compute pc values for each observation\npc.data=t(t(pc$rotation)%*%t(df))\n##check\npc.data\n\n##create point labels\nlabel=rep(1:4, each=50)\n\n##plot first PC\n##versus second PC\n##with label indicated\n##by the variable label\nplot(pc.data[,1],pc.data[,2],pch=label,col=label\n,xlab=\"First principal component\",ylab=\"Second principal component\")\n\n---------------------------------------------------\nThank you for your reply. \n\npch=NA got me rid of the numbers or names of samples that I?m plotting. The\nproblem with how I can replace these with different symbols still remain. I\nknow I can use points to give additional symbols, but I can?t get the rigth\nvalues plotted from the outcome of princomp(data). The class of the object\nis princomp, and I can?t specify which columns should be plotted for the\npoints.\n\nex (my real dataframe consists multiple(hundreds) colums of data for ca 200\nsamples):\n\n z<-sample(401:600)\n> y<-sample(701:900)\n> x<-sample(1:200)\n> data.frame(x,y)->df\n> cbind(df, z)->df\n> princomp(df)->p\n> biplot(p, pch=NA)\n> row.names(df)<-1:200\n\nNow I would like for instance all the samples that have row.names under 50\nto be plotted in one symbol, the iones from 50-100 in another and so on. Do\nI need a special function for specifying these different symbols, when my\nsamples are not in a correct order?\n\nAs you realize I am quite new with R. Thank you so much for taking your time\nhelping me, I really appreciate it.\n\n\nRegards, Monna \n\n> From: daniel at umd.edu\n> To: monnire at hotmail.com; r-help at r-project.org\n> Subject: AW: [R] PCA analysis\n> Date: Tue, 17 Jun 2008 19:40:41 -0400\n> \n> I am not entirely sure after reading your email, but I thought you wanted\nto\n> do something like this:\n> \n> ###Start of example\n> \n> ###create random data for the example\n> x=rnorm(100,100,10) ##create Xs\n> e=rnorm(100,0,5) ##create Errors\n> y=x+e ##create Ys\n> \n> ###plot\n> plot(y~x,pch=NA) ##plot Ys against Xs but suppress all symbols (i.e.\n> plot invisibly)\n> text(y~x,labels=round(x),pch=NULL) ##use values of X (rounded to its\ninteger\n> value) as symbols for the X-Y plot \n> \n> ###End of example\n> \n> So you could just substitute your variable names for x and y in the plot()\n> and text() commands. Let us know whether your problem is solved.\n> \n> Cheers,\n> Daniel\n> \n> -------------------------\n> cuncta stricte discussurus\n> -------------------------\n> \n> -----Urspr?ngliche Nachricht-----\n> Von: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] Im\n> Auftrag von Monna Nyg?rd\n> Gesendet: Tuesday, June 17, 2008 5:04 AM\n> An: r-help at r-project.org\n> Betreff: [R] PCA analysis\n> \n> \n> Hi,\n> \n> I have a problem with making PCA plots that are readable. \n> I would like to set different sympols instead of the numbers of my samples\n> or their names, that I get plotted (xlabs). \n> How is this possible? With points, i don4t seem to get the right data\n> plotted onto the PCA plot, as I do not quite understand from where it is\n> taken. I dont know how to plot the correct columns of the prcomp outcome\n> (p). \n> I would really appreciate if someone could help me, I have struggled with\n> this for days now. How can I make a function that gives different symbols\n> for the points, depending on how big the number given to it as xlabs is?\n> \n> Making the plots.\n> \n> read.table(file = \"S:\\\\SEDIM\\\\TRFLP\\\\B90-700.txt\",sep=\"\\t\",\n> header=T)->boutbout <-bout[-1]p <- prcomp(bout) biplot(p, choices =\nc(2,3),\n> scale = 1, pc.biplot = FALSE, var.axes = F, ylabs = NULL,\n>\nxlabs=c(\"119\",\"175\",\"135\",\"330\",\"51\",\"422\",\"67\",\"409\",\"470\",\"70\",\"67\",\"89\",\"\n>\n135\",\"215\",\"330\",\"409\",\"470\",\"51\",\"80\",\"119\",\"175\",\"222\",\"301\",\"422\",\"280\",\"\n>\n171\",\"256\",\"243\",\"404\",\"37\",\"157\",\"28\",\"187\",\"70\",\"42\",\"283\",\"261\",\"85\",\"147\n>\n\",\"204\",\"235\",\"411\",\"514\",\"77\",\"204\",\"87\",\"366\",\"306\",\"351\",\"371\",\"38\",\"534\"\n>\n,\"199\",\"407\",\"42\",\"167\",\"480\",\"195\",\"22\",\"35\",\"80\",\"433\",\"43\",\"109\",\"214\",\"3\n>\n63\",\"292\",\"61\",\"115\",\"178\",\"273\",\"521\",\"72\",\"126\",\"253\",\"288\",\"501\",\"83\",\"11\n>\n3\",\"250\",\"359\",\"498\",\"19\",\"130\",\"389\",\"324\",\"24\",\"58\",\"124\",\"388\",\"319\",\"164\n>\n\",\"101\",\"153\",\"383\",\"345\",\"219\",\"179\",\"161\",\"375\",\"298\",\"450\",\"555\",\"439\",\"5\n>\n4\",\"54\",\"490\",\"465\",\"411\",\"18\",\"85\",\"503\",\"455\",\"394\",\"179\",\"187\",\"416\",\"447\n>\n\",\"219\",\"461\",\"164\",\"366\",\"474\",\"167\",\"236\",\"507\",\"319\",\"509\",\"467\",\"507\",\"4\n> 50\",\"359\",\"507\",\"192\",\"453\",\"101\",\"456\",\"512\",\"517\"), cex=0.67,\n> main=\"90-700bp\")\n> \n> _________________________________________________________________\n> [[elided Hotmail spam]]\n> \n> PLink\n> [[alternative HTML version deleted]]\n> \n> \n\n\n\n----------------------------------------------------------------------------\n----\nSenaste k?ndisnyheterna & hetaste skvallret! MSN K?ndisnytt",
-      "body_snippet": "Hi Mona, I cannot get it done with the princomp and the biplot commands\neither (maybe somebody can), but there are always many ways to Rome. This is\nhow you can do it (below). However, the label=rep..",
-      "thread_id": "thread-5e3d4a44e922",
-      "thread_depth": 1,
-      "month": "2008-06"
-    },
-    {
       "id": "msg-a77f78411992",
       "message_id": "<ECF21B71808ECF4F8918C57EDBEE121D02B3145B@CTSPITDCEMMVX11.cihs.ad.gov.on.ca>",
       "from_name": "Thompson, David (MNR)",
@@ -32984,6 +32968,22 @@
       "body_snippet": ">-----Original Message-----\n>From: Katharine Mullen [mailto:kate at few.vu.nl] \n>Sent: June 19, 2008 04:26 PM\n>To: Thompson, David (MNR)\n>Cc: r-help at r-project.org\n>Subject: Re: [R] YAPMQ - Yet Anot",
       "thread_id": "thread-5ad56ff24c2c",
       "thread_depth": 2,
+      "month": "2008-06"
+    },
+    {
+      "id": "msg-8fdfb66077f5",
+      "message_id": "<200806192033.ADB66163@md4.mail.umd.edu>",
+      "from_name": "Daniel Malter",
+      "from_email_hash": "0d147e6ae34c7023f0bee706d2af6c2e3760b37215be7988817463cdd684a054",
+      "date": "2008-06-19T20:33:15Z",
+      "subject": "[R] PCA analysis",
+      "subject_clean": "PCA analysis",
+      "in_reply_to": "<BAY122-W182CE2AED5687BCA275D33B3A80@phx.gbl>",
+      "references": [],
+      "body_plain": "Hi Mona, I cannot get it done with the princomp and the biplot commands\neither (maybe somebody can), but there are always many ways to Rome. This is\nhow you can do it (below). However, the label=rep... below assumes that your\nvalues are in order, i.e. that you really want to plot the first fifty rows\nwith one symbol, the second with another, and so forth. If your values are\nnot ordered, you will either have to order your dataset or create a variable\nthat indicates the condition by which you want to group your data and choose\nthe symbols. Assigning this variable for your desired grouping would then\nmost likely involve a loop or a nested ifelse() statement, unless you\nalready have this variable. You then assign your grouping variable to the\n\"pch\" argument (for different symbols), the \"col\" argument (for different\ncolors), or both. \n\n##create data\nz<-sample(401:600)\ny<-sample(701:900)\nx<-sample(1:200)\ndata.frame(x,y)->df\ncbind(df, z)->df\n\n##pc analysis\npc=prcomp(df)\n\n##inspect results\npc\nsummary(pc)\npc$rotation\n\n##compute pc values for each observation\npc.data=t(t(pc$rotation)%*%t(df))\n##check\npc.data\n\n##create point labels\nlabel=rep(1:4, each=50)\n\n##plot first PC\n##versus second PC\n##with label indicated\n##by the variable label\nplot(pc.data[,1],pc.data[,2],pch=label,col=label\n,xlab=\"First principal component\",ylab=\"Second principal component\")\n\n---------------------------------------------------\nThank you for your reply. \n\npch=NA got me rid of the numbers or names of samples that I?m plotting. The\nproblem with how I can replace these with different symbols still remain. I\nknow I can use points to give additional symbols, but I can?t get the rigth\nvalues plotted from the outcome of princomp(data). The class of the object\nis princomp, and I can?t specify which columns should be plotted for the\npoints.\n\nex (my real dataframe consists multiple(hundreds) colums of data for ca 200\nsamples):\n\n z<-sample(401:600)\n> y<-sample(701:900)\n> x<-sample(1:200)\n> data.frame(x,y)->df\n> cbind(df, z)->df\n> princomp(df)->p\n> biplot(p, pch=NA)\n> row.names(df)<-1:200\n\nNow I would like for instance all the samples that have row.names under 50\nto be plotted in one symbol, the iones from 50-100 in another and so on. Do\nI need a special function for specifying these different symbols, when my\nsamples are not in a correct order?\n\nAs you realize I am quite new with R. Thank you so much for taking your time\nhelping me, I really appreciate it.\n\n\nRegards, Monna \n\n> From: daniel at umd.edu\n> To: monnire at hotmail.com; r-help at r-project.org\n> Subject: AW: [R] PCA analysis\n> Date: Tue, 17 Jun 2008 19:40:41 -0400\n> \n> I am not entirely sure after reading your email, but I thought you wanted\nto\n> do something like this:\n> \n> ###Start of example\n> \n> ###create random data for the example\n> x=rnorm(100,100,10) ##create Xs\n> e=rnorm(100,0,5) ##create Errors\n> y=x+e ##create Ys\n> \n> ###plot\n> plot(y~x,pch=NA) ##plot Ys against Xs but suppress all symbols (i.e.\n> plot invisibly)\n> text(y~x,labels=round(x),pch=NULL) ##use values of X (rounded to its\ninteger\n> value) as symbols for the X-Y plot \n> \n> ###End of example\n> \n> So you could just substitute your variable names for x and y in the plot()\n> and text() commands. Let us know whether your problem is solved.\n> \n> Cheers,\n> Daniel\n> \n> -------------------------\n> cuncta stricte discussurus\n> -------------------------\n> \n> -----Urspr?ngliche Nachricht-----\n> Von: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] Im\n> Auftrag von Monna Nyg?rd\n> Gesendet: Tuesday, June 17, 2008 5:04 AM\n> An: r-help at r-project.org\n> Betreff: [R] PCA analysis\n> \n> \n> Hi,\n> \n> I have a problem with making PCA plots that are readable. \n> I would like to set different sympols instead of the numbers of my samples\n> or their names, that I get plotted (xlabs). \n> How is this possible? With points, i don4t seem to get the right data\n> plotted onto the PCA plot, as I do not quite understand from where it is\n> taken. I dont know how to plot the correct columns of the prcomp outcome\n> (p). \n> I would really appreciate if someone could help me, I have struggled with\n> this for days now. How can I make a function that gives different symbols\n> for the points, depending on how big the number given to it as xlabs is?\n> \n> Making the plots.\n> \n> read.table(file = \"S:\\\\SEDIM\\\\TRFLP\\\\B90-700.txt\",sep=\"\\t\",\n> header=T)->boutbout <-bout[-1]p <- prcomp(bout) biplot(p, choices =\nc(2,3),\n> scale = 1, pc.biplot = FALSE, var.axes = F, ylabs = NULL,\n>\nxlabs=c(\"119\",\"175\",\"135\",\"330\",\"51\",\"422\",\"67\",\"409\",\"470\",\"70\",\"67\",\"89\",\"\n>\n135\",\"215\",\"330\",\"409\",\"470\",\"51\",\"80\",\"119\",\"175\",\"222\",\"301\",\"422\",\"280\",\"\n>\n171\",\"256\",\"243\",\"404\",\"37\",\"157\",\"28\",\"187\",\"70\",\"42\",\"283\",\"261\",\"85\",\"147\n>\n\",\"204\",\"235\",\"411\",\"514\",\"77\",\"204\",\"87\",\"366\",\"306\",\"351\",\"371\",\"38\",\"534\"\n>\n,\"199\",\"407\",\"42\",\"167\",\"480\",\"195\",\"22\",\"35\",\"80\",\"433\",\"43\",\"109\",\"214\",\"3\n>\n63\",\"292\",\"61\",\"115\",\"178\",\"273\",\"521\",\"72\",\"126\",\"253\",\"288\",\"501\",\"83\",\"11\n>\n3\",\"250\",\"359\",\"498\",\"19\",\"130\",\"389\",\"324\",\"24\",\"58\",\"124\",\"388\",\"319\",\"164\n>\n\",\"101\",\"153\",\"383\",\"345\",\"219\",\"179\",\"161\",\"375\",\"298\",\"450\",\"555\",\"439\",\"5\n>\n4\",\"54\",\"490\",\"465\",\"411\",\"18\",\"85\",\"503\",\"455\",\"394\",\"179\",\"187\",\"416\",\"447\n>\n\",\"219\",\"461\",\"164\",\"366\",\"474\",\"167\",\"236\",\"507\",\"319\",\"509\",\"467\",\"507\",\"4\n> 50\",\"359\",\"507\",\"192\",\"453\",\"101\",\"456\",\"512\",\"517\"), cex=0.67,\n> main=\"90-700bp\")\n> \n> _________________________________________________________________\n> [[elided Hotmail spam]]\n> \n> PLink\n> [[alternative HTML version deleted]]\n> \n> \n\n\n\n----------------------------------------------------------------------------\n----\nSenaste k?ndisnyheterna & hetaste skvallret! MSN K?ndisnytt",
+      "body_snippet": "Hi Mona, I cannot get it done with the princomp and the biplot commands\neither (maybe somebody can), but there are always many ways to Rome. This is\nhow you can do it (below). However, the label=rep..",
+      "thread_id": "thread-5e3d4a44e922",
+      "thread_depth": 1,
       "month": "2008-06"
     },
     {
@@ -52108,17 +52108,6 @@
       "root_message_id": "msg-00cfc4e78374"
     },
     {
-      "id": "thread-bd560340ddcf",
-      "subject": "Random Forest",
-      "message_count": 1,
-      "participants": [
-        "Bertrand Pub Michel"
-      ],
-      "started": "2008-06-06T17:40:55Z",
-      "last_reply": "2008-06-06T17:40:55Z",
-      "root_message_id": "msg-bd560340ddcf"
-    },
-    {
       "id": "thread-9d58e000e6f4",
       "subject": "Random Forest and for multivariate response data",
       "message_count": 1,
@@ -52128,6 +52117,17 @@
       "started": "2008-06-06T17:40:55Z",
       "last_reply": "2008-06-06T17:40:55Z",
       "root_message_id": "msg-9d58e000e6f4"
+    },
+    {
+      "id": "thread-bd560340ddcf",
+      "subject": "Random Forest",
+      "message_count": 1,
+      "participants": [
+        "Bertrand Pub Michel"
+      ],
+      "started": "2008-06-06T17:40:55Z",
+      "last_reply": "2008-06-06T17:40:55Z",
+      "root_message_id": "msg-bd560340ddcf"
     },
     {
       "id": "thread-2f599b404daa",

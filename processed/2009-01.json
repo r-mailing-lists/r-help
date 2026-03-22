@@ -7047,6 +7047,22 @@
       "month": "2009-01"
     },
     {
+      "id": "msg-8be85a615bc4",
+      "message_id": "<BLU149-W36ACB44CC6D8216113D85BD8DF0@phx.gbl>",
+      "from_name": "Christos Argyropoulos",
+      "from_email_hash": "fcfb500e154d30366f50ee9f4b920d2ddc52c6b27106a6df936edab14e828f46",
+      "date": "2009-01-07T12:46:18Z",
+      "subject": "[R]  Frailty by strata interactions in coxph (or coxme)‏",
+      "subject_clean": "Frailty by strata interactions in coxph (or coxme)‏",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it possible to\na) test the model in which the covariate and the frailty appear as main terms using the penalized likelihood (for gaussian/t frailties)\nb)augment model 1) by stratifying on the variable that appers in the frailty term ?\n\nThanks in advance! I apologise for sending this as html earlier today.\n\nChris Argyropoulos\nUniversity of Pittsburgh Medical Center\n\n\nBackground\n-------------\nI am trying to fit a cox proportional hazards model tothe data from a two arm (treatment indicator is 0/1)\nmulticenter trial, adjusting for the presence of covariates and testing for the presence of a center\n(and possibly a treatment X center interaction effect).\n\nI would like to contrast the different approaches discussed in Glidden D.V. and Eric Vittinghoff. Modelling clustered survival data from multicentre clinical trials. Stat Med 2004, 23:369-388 (DOI: 10.1002/sim. 1599). in this paper the authors present a decomposition of the hazard function for the ith individual, receiving Z(k,i) treatment (0-1) in the kth center as:\n\nlambda(k,i)=lambda(0,k)*exp(b*Z(k,i)+om(k)*Z(k,i))\n\nwhere om(k) = center specific effect - mean treatment effect ~ distributed as a (log-) gamma or normal frailty.\n\n\nI coded this model in R as:\n\nr1<-coxph(Surv(d,e)~treat*frailty(center)+othercovars+strata(center))\n\ncoxph produces a table with the coefficients and standard errors for:\na) the treatment variable\nb) the covariates as well as\nc) the treatment x frailty interaction effect.\n\nbut the main effect of frailty is estimated to be zero (which I expected, since it is \"absorbed\" into the baseline hazards for the strata).\n\nAm I correct to assume that coxph can in fact fit the model from the Stat Med paper?\n\nIf coxph cannot fit such models, could I simply fit:\ncoxph(Surv(d,e)~treat*frailty(center)+othercovars),\n\nand interpret the coefficient for interaction between treatment and frailty { treat:frailty(center) }as in the first model?\nIf so, could one view the coefficient of the main effect of the frailty component, as a random intercept and the interaction term\nas a random slope in a general mixed effects Cox model?\nCan coxme be used to fit these models in a cleaner way?\n_________________________________________________________________\n[[elided Hotmail spam]]",
+      "body_snippet": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it poss",
+      "thread_id": "thread-8be85a615bc4",
+      "thread_depth": 0,
+      "month": "2009-01"
+    },
+    {
       "id": "msg-d9410a4ff44e",
       "message_id": "<4964A41A.2060409@idi.ntnu.no>",
       "from_name": "Wacek Kusnierczyk",
@@ -7063,22 +7079,6 @@
       "body_snippet": "Wacek Kusnierczyk wrote:\n> Pascal A. Niklaus wrote:\n>   \n>> Hi all,\n>>\n>> I ran into a problem in some of my code that could be traced back to 'mean' \n>> sometimes returning NA and sometimes NaN, depe",
       "thread_id": "thread-1d22c1443089",
       "thread_depth": 2,
-      "month": "2009-01"
-    },
-    {
-      "id": "msg-8be85a615bc4",
-      "message_id": "<BLU149-W36ACB44CC6D8216113D85BD8DF0@phx.gbl>",
-      "from_name": "Christos Argyropoulos",
-      "from_email_hash": "fcfb500e154d30366f50ee9f4b920d2ddc52c6b27106a6df936edab14e828f46",
-      "date": "2009-01-07T12:46:18Z",
-      "subject": "[R]  Frailty by strata interactions in coxph (or coxme)‏",
-      "subject_clean": "Frailty by strata interactions in coxph (or coxme)‏",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it possible to\na) test the model in which the covariate and the frailty appear as main terms using the penalized likelihood (for gaussian/t frailties)\nb)augment model 1) by stratifying on the variable that appers in the frailty term ?\n\nThanks in advance! I apologise for sending this as html earlier today.\n\nChris Argyropoulos\nUniversity of Pittsburgh Medical Center\n\n\nBackground\n-------------\nI am trying to fit a cox proportional hazards model tothe data from a two arm (treatment indicator is 0/1)\nmulticenter trial, adjusting for the presence of covariates and testing for the presence of a center\n(and possibly a treatment X center interaction effect).\n\nI would like to contrast the different approaches discussed in Glidden D.V. and Eric Vittinghoff. Modelling clustered survival data from multicentre clinical trials. Stat Med 2004, 23:369-388 (DOI: 10.1002/sim. 1599). in this paper the authors present a decomposition of the hazard function for the ith individual, receiving Z(k,i) treatment (0-1) in the kth center as:\n\nlambda(k,i)=lambda(0,k)*exp(b*Z(k,i)+om(k)*Z(k,i))\n\nwhere om(k) = center specific effect - mean treatment effect ~ distributed as a (log-) gamma or normal frailty.\n\n\nI coded this model in R as:\n\nr1<-coxph(Surv(d,e)~treat*frailty(center)+othercovars+strata(center))\n\ncoxph produces a table with the coefficients and standard errors for:\na) the treatment variable\nb) the covariates as well as\nc) the treatment x frailty interaction effect.\n\nbut the main effect of frailty is estimated to be zero (which I expected, since it is \"absorbed\" into the baseline hazards for the strata).\n\nAm I correct to assume that coxph can in fact fit the model from the Stat Med paper?\n\nIf coxph cannot fit such models, could I simply fit:\ncoxph(Surv(d,e)~treat*frailty(center)+othercovars),\n\nand interpret the coefficient for interaction between treatment and frailty { treat:frailty(center) }as in the first model?\nIf so, could one view the coefficient of the main effect of the frailty component, as a random intercept and the interaction term\nas a random slope in a general mixed effects Cox model?\nCan coxme be used to fit these models in a cleaner way?\n_________________________________________________________________\n[[elided Hotmail spam]]",
-      "body_snippet": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it poss",
-      "thread_id": "thread-8be85a615bc4",
-      "thread_depth": 0,
       "month": "2009-01"
     },
     {
@@ -62214,17 +62214,6 @@
       "root_message_id": "msg-910e23630b68"
     },
     {
-      "id": "thread-dc5538bba62f",
-      "subject": "Abu added you as a friend on Reunion.com!",
-      "message_count": 1,
-      "participants": [
-        "Abu Naser"
-      ],
-      "started": "2009-01-22T05:46:49Z",
-      "last_reply": "2009-01-22T05:46:49Z",
-      "root_message_id": "msg-dc5538bba62f"
-    },
-    {
       "id": "thread-02f15d5fc78d",
       "subject": "Abu added you as a friend on Reunion.com!",
       "message_count": 1,
@@ -62234,6 +62223,17 @@
       "started": "2009-01-22T05:46:49Z",
       "last_reply": "2009-01-22T05:46:49Z",
       "root_message_id": "msg-02f15d5fc78d"
+    },
+    {
+      "id": "thread-dc5538bba62f",
+      "subject": "Abu added you as a friend on Reunion.com!",
+      "message_count": 1,
+      "participants": [
+        "Abu Naser"
+      ],
+      "started": "2009-01-22T05:46:49Z",
+      "last_reply": "2009-01-22T05:46:49Z",
+      "root_message_id": "msg-dc5538bba62f"
     },
     {
       "id": "thread-e6125b9d0dd1",
