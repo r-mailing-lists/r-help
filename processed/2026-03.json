@@ -660,6 +660,40 @@
       "thread_id": "thread-aaa8304961ac",
       "thread_depth": 0,
       "month": "2026-03"
+    },
+    {
+      "id": "msg-3c9e42dabce6",
+      "message_id": "<6f775e05838e20f639845ce842bd3af0@disroot.org>",
+      "from_name": "iagogv",
+      "from_email_hash": "d5308f1d30ecf31e34e95074bc22416b10f380c4619d7768015505ed375f1370",
+      "date": "2026-03-21T11:16:29Z",
+      "subject": "[R] How to break line in column title to be (S)weaved?",
+      "subject_clean": "How to break line in column title to be (S)weaved?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to \nget the .tex file I will 'LaTeX' to .pdf.\n\nIn that document, I want to include a small data.frame, let's call \n`data`, therefore I use the xtable package and include something like\n\n<<echo=FALSE,results=tex>>=\nprint(xtable(data))\n@\n\nOne of the names of data is too long, let's say 'This column has a long \nname' and I want it to be displayed in two rows. Therefore, among other \nthings, in the tex file the two rows should be separated by '\\\\', so it \nshould appear, for example, as  'This column\\\\ has a long name'.\n\nIf in the .Rnw file I include \\\\ in the name, it is (S)weaved to \n$\\backslash$. I I include \\textbackslash, Sweave returns extbackslash.\n\nTherefore, my question is how can I do to get column name in multiple \nrows. I am open to use other packages than xtable, but I want this \nworking with Sweave (so no Rmarkdown/knitr solutions, please).\n\nThanks!\n\nIago\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to \nget the .tex file I will 'LaTeX' to .pdf.\n\nIn that document, I want to include a small data.frame, let's call \n`data`, t",
+      "thread_id": "thread-3c9e42dabce6",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-d5dbc4f809d2",
+      "message_id": "<20260322221739.53af2a6a@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-03-22T19:17:39Z",
+      "subject": "[R] How to break line in column title to be (S)weaved?",
+      "subject_clean": "How to break line in column title to be (S)weaved?",
+      "in_reply_to": "<6f775e05838e20f639845ce842bd3af0@disroot.org>",
+      "references": [
+        "<6f775e05838e20f639845ce842bd3af0@disroot.org>"
+      ],
+      "body_plain": "? Sat, 21 Mar 2026 11:16:29 +0000\niagogv via R-help <r-help at r-project.org> ?????:\n\n> If in the .Rnw file I include \\\\ in the name, it is (S)weaved to \n> $\\backslash$. I I include \\textbackslash, Sweave returns extbackslash.\n\nThe good news is that it's print.xtable escaping the column names, so\nin order to sneak LaTeX-special characters into the document, you just\nneed to print(xtable(table), sanitize.colnames.function = identity).\n\nThe bad news is that inserting a line break into a table cell will take\nsome effort:\nhttps://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell\nhttps://stackoverflow.com/questions/3068555/how-to-insert-manual-line-breaks-inside-latex-tables\n\nI think the least cumbersome solution is to specify the width of the\ncolumn in the 'align' argument and use '\\\\newline' for the line break.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sat, 21 Mar 2026 11:16:29 +0000\niagogv via R-help <r-help at r-project.org> ?????:\n\n> If in the .Rnw file I include \\\\ in the name, it is (S)weaved to \n> $\\backslash$. I I include \\textbackslash, Sw",
+      "thread_id": "thread-3c9e42dabce6",
+      "thread_depth": 1,
+      "month": "2026-03"
     }
   ],
   "threads": [
@@ -812,6 +846,18 @@
       "started": "2026-03-20T13:40:14Z",
       "last_reply": "2026-03-20T13:40:14Z",
       "root_message_id": "msg-aaa8304961ac"
+    },
+    {
+      "id": "thread-3c9e42dabce6",
+      "subject": "How to break line in column title to be (S)weaved?",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "iagogv"
+      ],
+      "started": "2026-03-21T11:16:29Z",
+      "last_reply": "2026-03-22T19:17:39Z",
+      "root_message_id": "msg-3c9e42dabce6"
     }
   ]
 }

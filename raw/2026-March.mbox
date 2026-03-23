@@ -3047,3 +3047,70 @@ R-announce at r-project.org mailing list
 https://stat.ethz.ch/mailman/listinfo/r-announce
 
 
+From |@gogv @end|ng |rom d|@root@org  Sat Mar 21 12:16:29 2026
+From: |@gogv @end|ng |rom d|@root@org (iagogv)
+Date: Sat, 21 Mar 2026 11:16:29 +0000
+Subject: [R] How to break line in column title to be (S)weaved?
+Message-ID: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+
+Hi all,
+
+I am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to 
+get the .tex file I will 'LaTeX' to .pdf.
+
+In that document, I want to include a small data.frame, let's call 
+`data`, therefore I use the xtable package and include something like
+
+<<echo=FALSE,results=tex>>=
+print(xtable(data))
+@
+
+One of the names of data is too long, let's say 'This column has a long 
+name' and I want it to be displayed in two rows. Therefore, among other 
+things, in the tex file the two rows should be separated by '\\', so it 
+should appear, for example, as  'This column\\ has a long name'.
+
+If in the .Rnw file I include \\ in the name, it is (S)weaved to 
+$\backslash$. I I include \textbackslash, Sweave returns extbackslash.
+
+Therefore, my question is how can I do to get column name in multiple 
+rows. I am open to use other packages than xtable, but I want this 
+working with Sweave (so no Rmarkdown/knitr solutions, please).
+
+Thanks!
+
+Iago
+	[[alternative HTML version deleted]]
+
+
+From |kry|ov @end|ng |rom d|@root@org  Sun Mar 22 20:17:39 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Sun, 22 Mar 2026 22:17:39 +0300
+Subject: [R] How to break line in column title to be (S)weaved?
+In-Reply-To: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+References: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+Message-ID: <20260322221739.53af2a6a@Tarkus>
+
+? Sat, 21 Mar 2026 11:16:29 +0000
+iagogv via R-help <r-help at r-project.org> ?????:
+
+> If in the .Rnw file I include \\ in the name, it is (S)weaved to 
+> $\backslash$. I I include \textbackslash, Sweave returns extbackslash.
+
+The good news is that it's print.xtable escaping the column names, so
+in order to sneak LaTeX-special characters into the document, you just
+need to print(xtable(table), sanitize.colnames.function = identity).
+
+The bad news is that inserting a line break into a table cell will take
+some effort:
+https://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+https://stackoverflow.com/questions/3068555/how-to-insert-manual-line-breaks-inside-latex-tables
+
+I think the least cumbersome solution is to specify the width of the
+column in the 'align' argument and use '\\newline' for the line break.
+
+-- 
+Best regards,
+Ivan
+
+
