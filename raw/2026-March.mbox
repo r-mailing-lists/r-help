@@ -3114,3 +3114,118 @@ Best regards,
 Ivan
 
 
+From he|en@@ong0206 @end|ng |rom gm@||@com  Tue Mar 24 13:58:29 2026
+From: he|en@@ong0206 @end|ng |rom gm@||@com (=?UTF-8?B?7Iah7IOB7J2A?=)
+Date: Tue, 24 Mar 2026 21:58:29 +0900
+Subject: [R] Query on ksmooth(): Theoretical step function vs. plotted
+ diagonal segments
+In-Reply-To: <27069.1325.745348.694268@stat.math.ethz.ch>
+References: <CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>
+ <fake-VM-id.74b39c69fa379d61c3aaf44f0edf1755@talos.iv>
+ <27069.1325.745348.694268@stat.math.ethz.ch>
+Message-ID: <CA+3fqOq6c9zxQbLApfJztDMqCFzaYQYzJ1E131AEka7DPSQesg@mail.gmail.com>
+
+Dear Jeff, Rui, and Martin,
+
+Thank you for the clear explanations. I now fully understand the behavior
+and have successfully implemented the solutions.
+
+To summarize what I've learned:
+
+   -
+
+   Cause: The default n.points = 100 in ksmooth() calculates values at
+   limited intervals, and the lines() function connects these points with
+   diagonal segments.
+   -
+
+   Solution 1: Using *type = "s"* in the lines() function forces a
+   step-like visualization.
+   -
+
+   Solution 2: Increasing to *n.points = 1000* provides a much finer grid,
+   making the transitions appear vertical.
+
+Both methods worked perfectly for my experiment. Thank you all again for
+your help!
+
+Best regards,
+Sangeun Song
+
+2026? 3? 20? (?) PM 5:28, Martin Maechler <maechler at stat.math.ethz.ch>?? ??:
+
+> >>>>> ???
+> >>>>>     on Thu, 19 Mar 2026 23:00:00 +0900 writes:
+>
+>     > Dear R-help members,
+>     > Hello,
+>     > I am studying kernel regression and experimenting with the ksmooth()
+>     > function in R.
+>
+>     > When using a box kernel, the kernel function is an indicator function
+>     > (weight = 1 inside the bandwidth and 0 outside). Based on this
+> definition,
+>     > I expected the Nadaraya?Watson estimator to produce a step-like
+> function:
+>     > the estimate should remain constant while the set of included points
+> is
+>     > unchanged, and then jump when a point enters or leaves the bandwidth
+> window.
+>
+>     > However, when I run the following code using the cars dataset:
+>
+>     > par(mfrow=c(1,1))
+>     > with(cars, {
+>     > plot(speed, dist)
+>     > lines(ksmooth(speed, dist, "normal", bandwidth = 2),
+>     > col = "blue", lwd = 3)
+>     > lines(ksmooth(speed, dist, "box", bandwidth = 2),
+>     > col = "darkorange", lwd = 3)
+>     > })
+>     > legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+>     > lwd = c(2,2),
+>     > col = c("blue","darkorange"), cex = 2)
+>
+>     > the curve produced by the box kernel (dark orange) appears to contain
+>     > diagonal line segments rather than the step-like shape I expected. I
+> have
+>     > attached the resulting plot for reference.
+>
+>     > My understanding is that the theoretical estimator should behave
+> like a
+>     > step function because the kernel weights are either 0 or 1.
+> Therefore, I
+>     > was wondering whether the diagonal segments arise from how ksmooth()
+>     > evaluates the estimator on a grid of x values and then connects those
+>     > points with straight lines for plotting, or if there is another
+>     > implementation detail that explains this behavior.
+>
+>     > Could you please clarify whether this is expected behavior?
+>
+> Definitely, as Jeff and Rui explained.
+>
+> As solution e.g. for teaching / illustration (otherwise the box
+> kernel should *never* be used!), I recommend just to evaluate
+> the resulting function  on a finer grid, e.g.,  at 1000 instead
+> of by default 100 points:
+>
+>
+> ## MM:  evaluate the curve on a much finer grid, using n.points = 1000
+> (default was 100)
+> with(cars, {
+>     plot(speed, dist)
+>     lines(ksmooth(speed, dist, "norm", bandwidth = 2, n.points=1000), col
+> = "blue", lwd = 3)
+>     lines(ksmooth(speed, dist, "box",  bandwidth = 2, n.points=1000), col
+> = "darkorange", lwd = 3)
+> })
+> legend("topleft", c("Normal Kernel with h=2", "Box Kernel with h=2"),
+>        lwd = 2, col = c("blue","darkorange"), bty="n")
+>
+> --
+> Martin
+>
+
+	[[alternative HTML version deleted]]
+
+

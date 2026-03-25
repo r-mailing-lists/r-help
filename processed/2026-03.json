@@ -694,6 +694,26 @@
       "thread_id": "thread-3c9e42dabce6",
       "thread_depth": 1,
       "month": "2026-03"
+    },
+    {
+      "id": "msg-b6c3822dc0d8",
+      "message_id": "<CA+3fqOq6c9zxQbLApfJztDMqCFzaYQYzJ1E131AEka7DPSQesg@mail.gmail.com>",
+      "from_name": "송상은",
+      "from_email_hash": "7f264b46a3162aee2655c2e791232789959191bb5df56e5cd1490c539914726c",
+      "date": "2026-03-24T12:58:29Z",
+      "subject": "[R] Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
+      "subject_clean": "Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
+      "in_reply_to": "<27069.1325.745348.694268@stat.math.ethz.ch>",
+      "references": [
+        "<CA+3fqOpX-XK4L9VyNUz9h9Eeh=3w2cFM-E3_Ue=AbL7GsdX43w@mail.gmail.com>",
+        "<fake-VM-id.74b39c69fa379d61c3aaf44f0edf1755@talos.iv>",
+        "<27069.1325.745348.694268@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Dear Jeff, Rui, and Martin,\n\nThank you for the clear explanations. I now fully understand the behavior\nand have successfully implemented the solutions.\n\nTo summarize what I've learned:\n\n   -\n\n   Cause: The default n.points = 100 in ksmooth() calculates values at\n   limited intervals, and the lines() function connects these points with\n   diagonal segments.\n   -\n\n   Solution 1: Using *type = \"s\"* in the lines() function forces a\n   step-like visualization.\n   -\n\n   Solution 2: Increasing to *n.points = 1000* provides a much finer grid,\n   making the transitions appear vertical.\n\nBoth methods worked perfectly for my experiment. Thank you all again for\nyour help!\n\nBest regards,\nSangeun Song\n\n2026? 3? 20? (?) PM 5:28, Martin Maechler <maechler at stat.math.ethz.ch>?? ??:\n\n> >>>>> ???\n> >>>>>     on Thu, 19 Mar 2026 23:00:00 +0900 writes:\n>\n>     > Dear R-help members,\n>     > Hello,\n>     > I am studying kernel regression and experimenting with the ksmooth()\n>     > function in R.\n>\n>     > When using a box kernel, the kernel function is an indicator function\n>     > (weight = 1 inside the bandwidth and 0 outside). Based on this\n> definition,\n>     > I expected the Nadaraya?Watson estimator to produce a step-like\n> function:\n>     > the estimate should remain constant while the set of included points\n> is\n>     > unchanged, and then jump when a point enters or leaves the bandwidth\n> window.\n>\n>     > However, when I run the following code using the cars dataset:\n>\n>     > par(mfrow=c(1,1))\n>     > with(cars, {\n>     > plot(speed, dist)\n>     > lines(ksmooth(speed, dist, \"normal\", bandwidth = 2),\n>     > col = \"blue\", lwd = 3)\n>     > lines(ksmooth(speed, dist, \"box\", bandwidth = 2),\n>     > col = \"darkorange\", lwd = 3)\n>     > })\n>     > legend(\"topleft\", c(\"Normal Kernel with h=2\", \"Box Kernel with h=2\"),\n>     > lwd = c(2,2),\n>     > col = c(\"blue\",\"darkorange\"), cex = 2)\n>\n>     > the curve produced by the box kernel (dark orange) appears to contain\n>     > diagonal line segments rather than the step-like shape I expected. I\n> have\n>     > attached the resulting plot for reference.\n>\n>     > My understanding is that the theoretical estimator should behave\n> like a\n>     > step function because the kernel weights are either 0 or 1.\n> Therefore, I\n>     > was wondering whether the diagonal segments arise from how ksmooth()\n>     > evaluates the estimator on a grid of x values and then connects those\n>     > points with straight lines for plotting, or if there is another\n>     > implementation detail that explains this behavior.\n>\n>     > Could you please clarify whether this is expected behavior?\n>\n> Definitely, as Jeff and Rui explained.\n>\n> As solution e.g. for teaching / illustration (otherwise the box\n> kernel should *never* be used!), I recommend just to evaluate\n> the resulting function  on a finer grid, e.g.,  at 1000 instead\n> of by default 100 points:\n>\n>\n> ## MM:  evaluate the curve on a much finer grid, using n.points = 1000\n> (default was 100)\n> with(cars, {\n>     plot(speed, dist)\n>     lines(ksmooth(speed, dist, \"norm\", bandwidth = 2, n.points=1000), col\n> = \"blue\", lwd = 3)\n>     lines(ksmooth(speed, dist, \"box\",  bandwidth = 2, n.points=1000), col\n> = \"darkorange\", lwd = 3)\n> })\n> legend(\"topleft\", c(\"Normal Kernel with h=2\", \"Box Kernel with h=2\"),\n>        lwd = 2, col = c(\"blue\",\"darkorange\"), bty=\"n\")\n>\n> --\n> Martin\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Jeff, Rui, and Martin,\n\nThank you for the clear explanations. I now fully understand the behavior\nand have successfully implemented the solutions.\n\nTo summarize what I've learned:\n\n   -\n\n   Cause",
+      "thread_id": "thread-6e31e8c70f68",
+      "thread_depth": 2,
+      "month": "2026-03"
     }
   ],
   "threads": [
@@ -825,7 +845,7 @@
     {
       "id": "thread-6e31e8c70f68",
       "subject": "Query on ksmooth(): Theoretical step function vs. plotted diagonal segments",
-      "message_count": 4,
+      "message_count": 5,
       "participants": [
         "Jeff Newmiller",
         "Martin Maechler",
@@ -833,7 +853,7 @@
         "송상은"
       ],
       "started": "2026-03-19T14:00:00Z",
-      "last_reply": "2026-03-20T08:28:29Z",
+      "last_reply": "2026-03-24T12:58:29Z",
       "root_message_id": "msg-6e31e8c70f68"
     },
     {
