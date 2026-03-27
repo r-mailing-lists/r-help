@@ -11095,22 +11095,6 @@
       "month": "2007-03"
     },
     {
-      "id": "msg-5af0bf288879",
-      "message_id": "<770E4329A79EC94CB16D24B5692BDD8FB21A2C@sar-mail1.messagerie.ve>",
-      "from_name": "BOISSON, Pascal",
-      "from_email_hash": "33df0bc30b41edc36e993382ba6e73deff37fd9e69b2c9e81fa397a62d4fb47e",
-      "date": "2007-03-08T17:34:52Z",
-      "subject": "[R] sending a vector of characters as arguments for a function",
-      "subject_clean": "sending a vector of characters as arguments for a function",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070308/ade34a6b/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070308/ade34a6b/attachment.pl",
-      "thread_id": "thread-5af0bf288879",
-      "thread_depth": 0,
-      "month": "2007-03"
-    },
-    {
       "id": "msg-a8c79585ed6e",
       "message_id": "<e8cddd580703080934l68f57b71jeaacc70e3514f952@mail.gmail.com>",
       "from_name": "ALAN SMITH",
@@ -11123,6 +11107,22 @@
       "body_plain": "Hello R-users\nThe help I received from Petr helped me created this solution to my problems.\n\nt1<-with(mydata ,aggregate(mydata$Y,\nlist(mydata$time,mydata$treatment, mydata$expREP, mydata$techREP) ,\nmedian, na.rm=T)) ### find median by factors ####\n\ncolnames(t1)<-c(\"time\",\"treatment\",\"expREP\",\"techREP\",\"Y50\") ### column name ##\n\nnewdata<-merge(mydata, t1, by.x= names(mydata)[2:5],\nby.y=names(t1)[1:4], all=T)\n\nThank you,\nAlan\n\n\n\n\n\n\n\n###############################################################\nMessage: 97\nDate: Thu, 08 Mar 2007 08:00:53 +0100\nFrom: \"Petr Pikal\" <petr.pikal at precheza.cz>\nSubject: Re: [R] how to \"apply\" functions to unbalanced data in long\n       format  by      factors......cant get \"by\" or \"aggregate\" to work\nTo: \"ALAN SMITH\" <alansmith2 at gmail.com>, r-help at stat.math.ethz.ch\nMessage-ID: <45EFC2B5.29775.2FD750 at localhost>\nContent-Type: text/plain; charset=US-ASCII\n\nHi\n\nyou can use aggregate to create table of medians\n\nwith(mydata, aggregate(Y, list(time, tratment, expRep,....), median)\n\nrepeats of unique factors\neither by rle or aggregate with length function\n\nThen you can do replication by\n\nnorep <- rep(your.median, each = your replicates)\n\nRegards\nPetr\n\n\n\nsubmitted question abrigded\n> Hello R users,\n\n\n\n> #####Example data frame######\n> mydata<-as.data.frame(structure(list(cpdID = c(7, 7, 7, 7, 7, 7, 8, 8,\n> 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 10, 10, 10, 10, 10, 10, 10, 10, 10,\n> 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,\n> 10, 10, 10, 10, 10, 10, 19, 19, 19, 19, 19, 19, 23, 23, 23, 23, 23,\n> 23, 23, 23, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,\n> 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,\n> 33, 33, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,\n> 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40,\n> 40, 40, 40, 40, 40, 40, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42,\n> 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42,\n> 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 47, 47,\n> 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47,\n> 47, 47), time = structure(as.integer(c(1, 1, 1, 1, 2, 2, 2, 1, 1, 1,\n> 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 2, 2,\n> 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2,\n> 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 1, 1,\n> 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1,\n> 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2,\n> 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,\n> 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 1,\n> 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2,\n> 2, 1, 2, 2, 1, 2)), .Label = c(\"120hr\", \"24hr\"), class = \"factor\"),\n>     treatment = structure(as.integer(c(1, 1, 1, 2, 2, 1, 1, 2,\n>     1, 1, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 2, 2, 1, 2, 1,\n>     2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 2,\n>     1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 1,\n>     1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 1, 2,\n>     2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 1, 1, 2, 1, 2, 2, 2,\n>     1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 2,\n>     2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2, 1,\n>     1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2,\n>     2, 2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1,\n>     2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 1,\n>     2, 1)), .Label = c(\"control\", \"trt\"), class = \"factor\"),\n>     expREP = structure(as.integer(c(1, 1, 1, 3, 1, 1, 1, 1, 2,\n>     2, 1, 1, 2, 2, 1, 3, 1, 3, 3, 3, 1, 2, 1, 2, 2, 2, 2, 3,\n>     3, 2, 2, 1, 2, 3, 3, 1, 1, 2, 3, 1, 3, 3, 3, 3, 1, 3, 1,\n>     1, 2, 1, 1, 2, 3, 2, 2, 1, 3, 2, 2, 2, 3, 2, 1, 2, 2, 2,\n>     2, 1, 1, 1, 3, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 2, 3, 1, 2,\n>     3, 3, 1, 1, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 3, 3, 3, 1,\n>     1, 1, 2, 3, 2, 2, 3, 2, 2, 2, 1, 1, 1, 3, 3, 2, 2, 2, 1,\n>     3, 1, 2, 3, 1, 3, 3, 1, 2, 3, 1, 2, 1, 3, 1, 3, 3, 2, 2,\n>     2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 3, 1, 1, 1,\n>     1, 3, 3, 1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 3, 1, 1, 1, 1, 3,\n>     3, 1, 1, 1, 3, 2, 1, 1, 2, 1, 3, 2, 1, 2, 1, 3, 1, 1, 2,\n>     3)), .Label = c(\"expREP1\", \"expREP2\", \"expREP3\"), class =\n>     \"factor\"), techREP = structure(as.integer(c(3, 2, 1, 1, 1, 3, 1,\n>     3, 3, 2, 2, 1, 1, 3, 2, 3, 3, 1, 2, 1, 2, 1, 3, 1, 3, 2, 2, 3, 1,\n>     1, 3, 3, 2, 3, 3, 3, 2, 2, 2, 2, 1, 1, 2, 3, 1, 2, 3, 1, 3, 2, 1,\n>     1, 2, 2, 3, 3, 3, 2, 1, 2, 1, 2, 3, 2, 3, 2, 3, 1, 3, 2, 2, 1, 2,\n>     1, 3, 2, 2, 1, 1, 3, 3, 3, 1, 3, 1, 3, 2, 2, 2, 1, 2, 1, 3, 1, 3,\n>     2, 1, 3, 1, 3, 2, 3, 1, 1, 2, 3, 1, 1, 3, 3, 2, 2, 1, 2, 3, 2, 2,\n>     3, 2, 2, 1, 2, 2, 3, 3, 3, 1, 1, 1, 3, 1, 1, 2, 3, 2, 3, 3, 1, 1,\n>     3, 2, 3, 3, 3, 3, 1, 3, 2, 1, 3, 3, 1, 3, 2, 1, 2, 2, 1, 2, 1, 2,\n>     1, 1, 1, 2, 2, 3, 3, 1, 2, 3, 2, 3, 3, 3, 1, 2, 2, 1, 3, 2, 3, 3,\n>     2, 2, 2, 3, 2, 1, 3, 1, 3, 1, 3, 1, 1, 1, 2, 2, 3)), .Label =\n>     c(\"techREP1\", \"techREP2\", \"techREP3\"), class = \"factor\"), log2Abun\n>     = c(14.4233129144089, 14.052822741429, 14.2281422686467,\n>     13.8492096005693, 14.076481601207, 14.2139395740777,\n>     14.3399195756207, 14.3625602954496, 14.0141948668145,\n>     14.0980320829605, 14.3152203363759, 14.4528846974866,\n>     13.9591869268449, 14.4064043323413, 14.0403753485321,\n>     14.2285932517829, 14.1259784261721, 13.5925738310379,\n>     13.5830827675029, 13.0280787227049, 15.0198078807043,\n>     12.8423503434138, 12.645883554519, 13.4644181177386,\n>     12.8399910705399, 12.7879025593914, 12.4978518369511,\n>     14.3949985145017, 12.8670856466168, 12.9749522735341,\n>     13.3456824481868, 13.4557125040673, 12.8989792046225,\n>     16.0609491915918, 13.6795900568273, 16.456466720182,\n>     13.6145948287653, 13.2604785448039, 14.8573006848798,\n>     13.1382718001722, 13.690761908446, 14.0557060971613,\n>     13.7495552174335, 13.6336764098923, 13.7844303674846,\n>     15.9518993688317, 13.2452555803066, 13.1930632791304,\n>     12.1919845133603, 13.8710388986595, 13.6375305515253,\n>     12.5919897676151, 17.4797250127015, 17.4014712120155,\n>     17.5948202702163, 12.6031626795344, 17.8287811089804,\n>     11.3613955331659, 15.8064741020529, 15.1007855146758,\n>     16.0553036215393, 15.7553570530353, 15.9747058600332,\n>     15.776715745005, 15.8588066550904, 16.2935434944118,\n>     16.271207673964, 16.3660489506706, 16.3273070282017,\n>     15.7632383068689, 14.6030467398838, 14.7118820283521,\n>     14.7577545959238, 14.7315311764619, 14.8250084466403,\n>     15.6652803936783, 15.8249587405285, 15.6558660906456,\n>     15.5387042614836, 14.8487696278309, 15.5477380355109,\n>     15.9451465974129, 16.196755792715, 15.9999119421954,\n>     15.8660714836595, 15.9406577104549, 15.8754613979164,\n>     16.0358944927638, 16.1785092456522, 16.1992122284106,\n>     15.8087128474547, 15.9373968104322, 16.1432636222427,\n>     16.2412011305004, 15.9488234774507, 15.7820255767261,\n>     15.7730361533934, 15.7459893802453, 20.7777738189812,\n>     21.7489122647969, 21.0374490930058, 20.9765158780184,\n>     21.0464959041766, 21.6790715518273, 21.8021013715842,\n>     20.7652083875471, 20.6663696521617, 20.3963413756589,\n>     20.7983642126234, 20.1864915044977, 20.4422216681915,\n>     20.59064186918, 20.6964531077756, 20.6822196619653,\n>     20.4532414913665, 20.8126113450884, 20.4397608946311,\n>     21.4603719009067, 21.5318145314919, 21.0400816517662,\n>     21.0466431076593, 20.7459819969019, 20.6723053403015,\n>     20.4793421418014, 20.6432035537608, 20.6831942471622,\n>     21.6913537667357, 20.6562913013787, 21.0940693071186,\n>     20.9473294479256, 20.5087271424267, 16.0871520250047,\n>     16.3816612332698, 16.998645516939, 15.7912392142223,\n>     14.5058735666446, 13.6035104425928, 14.4369066987207,\n>     14.6998435295626, 14.6818972267862, 14.1086877961546,\n>     14.3539049235617, 15.40862828087, 15.0657947671893,\n>     14.8615716011254, 14.5538692431961, 14.2397476835569,\n>     13.4381420777437, 13.4499224158638, 13.6887966810545,\n>     14.6550275257018, 13.500966330283, 14.9271297886953,\n>     14.7405186421119, 15.0047910398043, 14.7051463678038,\n>     14.8325933769599, 12.9854861991046, 13.4203550220891,\n>     15.399010832952, 15.4064707685293, 15.0953970227926,\n>     15.0712109416537, 15.7587957644032, 15.0013202225009,\n>     15.7608498673217, 14.7604080920677, 14.2478533598602,\n>     14.4140245098782, 14.7936541075062, 14.7684428120549,\n>     14.595607155062, 16.1507389488284, 16.4915712924337,\n>     14.490161446684, 14.721633263063, 14.4341721012904,\n>     15.8747652729112, 14.543333961671, 14.8633635585377,\n>     14.6696601802386, 13.3020676725265, 14.0190694293311,\n>     15.2168973938334, 12.6304946615056, 12.1972166931101,\n>     12.7960396088298, 14.4285564621952, 14.5308330346953,\n>     14.1496677436943, 14.0823985634278, 12.8407779235951,\n>     14.6543003749437, 14.3202364452416, 15.1723493709662,\n>     14.0744760007345, 14.8132801684508, 12.9183042336999,\n>     14.5225202325766, 13.742309436084)), .Names = c(\"cpdID\", \"time\",\n>     \"treatment\",\n> \"expREP\", \"techREP\", \"Y\")))",
       "body_snippet": "Hello R-users\nThe help I received from Petr helped me created this solution to my problems.\n\nt1<-with(mydata ,aggregate(mydata$Y,\nlist(mydata$time,mydata$treatment, mydata$expREP, mydata$techREP) ,\nme",
       "thread_id": "thread-a8c79585ed6e",
+      "thread_depth": 0,
+      "month": "2007-03"
+    },
+    {
+      "id": "msg-5af0bf288879",
+      "message_id": "<770E4329A79EC94CB16D24B5692BDD8FB21A2C@sar-mail1.messagerie.ve>",
+      "from_name": "BOISSON, Pascal",
+      "from_email_hash": "33df0bc30b41edc36e993382ba6e73deff37fd9e69b2c9e81fa397a62d4fb47e",
+      "date": "2007-03-08T17:34:52Z",
+      "subject": "[R] sending a vector of characters as arguments for a function",
+      "subject_clean": "sending a vector of characters as arguments for a function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070308/ade34a6b/attachment.pl",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070308/ade34a6b/attachment.pl",
+      "thread_id": "thread-5af0bf288879",
       "thread_depth": 0,
       "month": "2007-03"
     },
@@ -36868,6 +36868,22 @@
       "month": "2007-03"
     },
     {
+      "id": "msg-a4457797b2b3",
+      "message_id": "<1AD1E1A9-0AC1-435B-87CD-EB7706CCAEB8@ulb.ac.be>",
+      "from_name": "Max Manfrin",
+      "from_email_hash": "407325b107402dd6b7a85136e41b0c2af4884e78df96e020ebb6b3a9825efc00",
+      "date": "2007-03-30T14:37:52Z",
+      "subject": "[R] ANOVA and confidence intervals plot",
+      "subject_clean": "ANOVA and confidence intervals plot",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear *,\n\tI would like to obtain for each factor of my anova model the  \n\"response variable vs factor\" plot with means and 95% Tukey HSD  \nintervals.\n\n\tI would appreciate any information on how to do that.\n\n\tCheers\n--------------------------------------------------------------------\nMax MANFRIN                                 Tel.: +32 (0)2 650 3168\nIRIDIA - CoDE, CP 194/6                     Fax.: +32 (0)2 650 2715\nUniversit? Libre de Bruxelles\nAv. F. D. Roosevelt, 50\n1050 Brussels                             Email: mmanfrin at ulb.ac.be\nBELGIUM                      WWW: http://iridia.ulb.ac.be/~mmanfrin\n\ngpg DSA: 0x7E67B4C4\ngpg fingerprint: C2E9 1689 CADD 7CAE 2FAB A355 8FD9 9DD1 7E67 B4C4\n--------------------------------------------------------------------\n\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: PGP.sig\nType: application/pgp-signature\nSize: 194 bytes\nDesc: This is a digitally signed message part\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20070330/9197e006/attachment.bin",
+      "body_snippet": "Dear *,\n\tI would like to obtain for each factor of my anova model the  \n\"response variable vs factor\" plot with means and 95% Tukey HSD  \nintervals.\n\n\tI would appreciate any information on how to do t",
+      "thread_id": "thread-a4457797b2b3",
+      "thread_depth": 0,
+      "month": "2007-03"
+    },
+    {
       "id": "msg-a3dc817b18ef",
       "message_id": "<20070330143752.M85@centroin.com.br>",
       "from_name": "Alberto Monteiro",
@@ -36888,22 +36904,6 @@
       "body_snippet": "Duncan Murdoch wrote:\n>\n>> This works when there's a decent documentation for the function.\n>> The functions in the tcltk package, for example, are horribly\n>> undocumented, and asking for help only l",
       "thread_id": "thread-4a809cfeaa84",
       "thread_depth": 9,
-      "month": "2007-03"
-    },
-    {
-      "id": "msg-a4457797b2b3",
-      "message_id": "<1AD1E1A9-0AC1-435B-87CD-EB7706CCAEB8@ulb.ac.be>",
-      "from_name": "Max Manfrin",
-      "from_email_hash": "407325b107402dd6b7a85136e41b0c2af4884e78df96e020ebb6b3a9825efc00",
-      "date": "2007-03-30T14:37:52Z",
-      "subject": "[R] ANOVA and confidence intervals plot",
-      "subject_clean": "ANOVA and confidence intervals plot",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear *,\n\tI would like to obtain for each factor of my anova model the  \n\"response variable vs factor\" plot with means and 95% Tukey HSD  \nintervals.\n\n\tI would appreciate any information on how to do that.\n\n\tCheers\n--------------------------------------------------------------------\nMax MANFRIN                                 Tel.: +32 (0)2 650 3168\nIRIDIA - CoDE, CP 194/6                     Fax.: +32 (0)2 650 2715\nUniversit? Libre de Bruxelles\nAv. F. D. Roosevelt, 50\n1050 Brussels                             Email: mmanfrin at ulb.ac.be\nBELGIUM                      WWW: http://iridia.ulb.ac.be/~mmanfrin\n\ngpg DSA: 0x7E67B4C4\ngpg fingerprint: C2E9 1689 CADD 7CAE 2FAB A355 8FD9 9DD1 7E67 B4C4\n--------------------------------------------------------------------\n\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: PGP.sig\nType: application/pgp-signature\nSize: 194 bytes\nDesc: This is a digitally signed message part\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20070330/9197e006/attachment.bin",
-      "body_snippet": "Dear *,\n\tI would like to obtain for each factor of my anova model the  \n\"response variable vs factor\" plot with means and 95% Tukey HSD  \nintervals.\n\n\tI would appreciate any information on how to do t",
-      "thread_id": "thread-a4457797b2b3",
-      "thread_depth": 0,
       "month": "2007-03"
     },
     {
@@ -41663,18 +41663,6 @@
       "root_message_id": "msg-f5fbadf66857"
     },
     {
-      "id": "thread-a8c79585ed6e",
-      "subject": "how to \"apply\" functions to unbalanced data in long format by factors......cant get \"by\" or \"aggregate\" to work",
-      "message_count": 2,
-      "participants": [
-        "ALAN SMITH",
-        "hadley wickham"
-      ],
-      "started": "2007-03-08T17:34:52Z",
-      "last_reply": "2007-03-08T18:30:18Z",
-      "root_message_id": "msg-a8c79585ed6e"
-    },
-    {
       "id": "thread-5af0bf288879",
       "subject": "sending a vector of characters as arguments for a function",
       "message_count": 2,
@@ -41685,6 +41673,18 @@
       "started": "2007-03-08T17:34:52Z",
       "last_reply": "2007-03-08T19:10:38Z",
       "root_message_id": "msg-5af0bf288879"
+    },
+    {
+      "id": "thread-a8c79585ed6e",
+      "subject": "how to \"apply\" functions to unbalanced data in long format by factors......cant get \"by\" or \"aggregate\" to work",
+      "message_count": 2,
+      "participants": [
+        "ALAN SMITH",
+        "hadley wickham"
+      ],
+      "started": "2007-03-08T17:34:52Z",
+      "last_reply": "2007-03-08T18:30:18Z",
+      "root_message_id": "msg-a8c79585ed6e"
     },
     {
       "id": "thread-cd18e59c0271",

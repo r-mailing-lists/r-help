@@ -45627,29 +45627,6 @@
       "month": "2012-08"
     },
     {
-      "id": "msg-c7053fea87d3",
-      "message_id": "<87sjb6daue.fsf@pobox.com>",
-      "from_name": "Tom Roche",
-      "from_email_hash": "597184ee46921f9c4e1226fc25768224050c59312bfcb2321364468c123caf4b",
-      "date": "2012-08-28T20:23:53Z",
-      "subject": "[R] [netcdfgroup] [ncdf4] error converting GEIA data to netCDF",
-      "subject_clean": "[netcdfgroup] [ncdf4] error converting GEIA data to netCDF",
-      "in_reply_to": "<87vcg2ddkv.fsf@pobox.com>",
-      "references": [
-        "<87vcg2ddkv.fsf@pobox.com>",
-        "<CCA97F21-5F20-4BA9-A534-3F983C90AD8B@noaa.gov>",
-        "<CAL+Zad_QZ8ixAxA2HFmtA2=_tEWGvKvf31+q+XvwJ8hmY+SqUQ@mail.gmail.com>",
-        "<87d32belpw.fsf@pobox.com>",
-        "<779C51C1-17C5-4C5D-AC88-B85CC5A11906@noaa.gov>",
-        "<87a9xfdzka.fsf@pobox.com>"
-      ],
-      "body_plain": "Pascal Oettli: MERCI BEAUCOUP! (though I would have thanked you\nearlier if I hadn't had to dig through the r-help digest first :-)\n\nTom Roche Mon, 27 Aug 2012 23:31:23 -0400\n>> summary: I can successfully ncvar_put(...) data to a file, but when\n>> I try to ncvar_get(...) the same data I get\n\n>> > Error in if (nc$var[[li]]$hasAddOffset) addOffset = nc$var[[li]]$addOffset else addOffset = 0 :\n>> >   argument is of length zero\n\nhttps://stat.ethz.ch/pipermail/r-help/2012-August/322576.html\n> The following works fine for me:\n\n* > nc <- nc_open(\"~/GEIA_N2O_oceanic.nc\")\n> > emi_n2o <- ncvar_get(nc, 'emi_n2o', start=c(1,1,1), count=c(-1,-1,1))\n\nAnd that appears to have been the problem, since when I\n\n-nc_open(netcdf.fp,\n-  write=FALSE,\n-  readunlim=TRUE)\n+netcdf.file <- nc_open(netcdf.fp,\n+  write=FALSE,\n+  readunlim=TRUE)\n\nI don't get the error when I subsequently ncvar_get, and the code @\n\nhttps://github.com/TomRoche/GEIA_to_NetCDF\n\nnow works.\n\nDave Pierce: I assert that the current error is waaay too subtle:\n\n- I don't get an error when I nc_open without assigning.\n\n- I don't get an error when I ncvar_put to that file's datavar.\n\n- I only get an error when I ncvar_get from the datavar.\n\n- Nothing about the error text (IMHO) would lead one to the fix.\n\n(Note also that neither ncvar_put or nc_close appear to require\nassignment, which is probably what made me think I could nc_open\nwithout assignment.)\n\nCan ncdf4 be made to fail more helpfully? E.g., to fail immediately on\nnc_open without assignment?\n\nthanks again! Tom Roche <Tom_Roche at pobox.com>",
-      "body_snippet": "Pascal Oettli: MERCI BEAUCOUP! (though I would have thanked you\nearlier if I hadn't had to dig through the r-help digest first :-)\n\nTom Roche Mon, 27 Aug 2012 23:31:23 -0400\n>> summary: I can successf",
-      "thread_id": "thread-3f8fb8bf5984",
-      "thread_depth": 6,
-      "month": "2012-08"
-    },
-    {
       "id": "msg-e1e4f948d4e8",
       "message_id": "<CAL+Zad9SG-E2NLBO0dKSWZKU8fui2nEejb1Cm+bvey3tRwnnpA@mail.gmail.com>",
       "from_name": "David W. Pierce",
@@ -45671,6 +45648,29 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120828/94e67667/attachment.pl>",
       "thread_id": "thread-3f8fb8bf5984",
       "thread_depth": 7,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-c7053fea87d3",
+      "message_id": "<87sjb6daue.fsf@pobox.com>",
+      "from_name": "Tom Roche",
+      "from_email_hash": "597184ee46921f9c4e1226fc25768224050c59312bfcb2321364468c123caf4b",
+      "date": "2012-08-28T20:23:53Z",
+      "subject": "[R] [netcdfgroup] [ncdf4] error converting GEIA data to netCDF",
+      "subject_clean": "[netcdfgroup] [ncdf4] error converting GEIA data to netCDF",
+      "in_reply_to": "<87vcg2ddkv.fsf@pobox.com>",
+      "references": [
+        "<87vcg2ddkv.fsf@pobox.com>",
+        "<CCA97F21-5F20-4BA9-A534-3F983C90AD8B@noaa.gov>",
+        "<CAL+Zad_QZ8ixAxA2HFmtA2=_tEWGvKvf31+q+XvwJ8hmY+SqUQ@mail.gmail.com>",
+        "<87d32belpw.fsf@pobox.com>",
+        "<779C51C1-17C5-4C5D-AC88-B85CC5A11906@noaa.gov>",
+        "<87a9xfdzka.fsf@pobox.com>"
+      ],
+      "body_plain": "Pascal Oettli: MERCI BEAUCOUP! (though I would have thanked you\nearlier if I hadn't had to dig through the r-help digest first :-)\n\nTom Roche Mon, 27 Aug 2012 23:31:23 -0400\n>> summary: I can successfully ncvar_put(...) data to a file, but when\n>> I try to ncvar_get(...) the same data I get\n\n>> > Error in if (nc$var[[li]]$hasAddOffset) addOffset = nc$var[[li]]$addOffset else addOffset = 0 :\n>> >   argument is of length zero\n\nhttps://stat.ethz.ch/pipermail/r-help/2012-August/322576.html\n> The following works fine for me:\n\n* > nc <- nc_open(\"~/GEIA_N2O_oceanic.nc\")\n> > emi_n2o <- ncvar_get(nc, 'emi_n2o', start=c(1,1,1), count=c(-1,-1,1))\n\nAnd that appears to have been the problem, since when I\n\n-nc_open(netcdf.fp,\n-  write=FALSE,\n-  readunlim=TRUE)\n+netcdf.file <- nc_open(netcdf.fp,\n+  write=FALSE,\n+  readunlim=TRUE)\n\nI don't get the error when I subsequently ncvar_get, and the code @\n\nhttps://github.com/TomRoche/GEIA_to_NetCDF\n\nnow works.\n\nDave Pierce: I assert that the current error is waaay too subtle:\n\n- I don't get an error when I nc_open without assigning.\n\n- I don't get an error when I ncvar_put to that file's datavar.\n\n- I only get an error when I ncvar_get from the datavar.\n\n- Nothing about the error text (IMHO) would lead one to the fix.\n\n(Note also that neither ncvar_put or nc_close appear to require\nassignment, which is probably what made me think I could nc_open\nwithout assignment.)\n\nCan ncdf4 be made to fail more helpfully? E.g., to fail immediately on\nnc_open without assignment?\n\nthanks again! Tom Roche <Tom_Roche at pobox.com>",
+      "body_snippet": "Pascal Oettli: MERCI BEAUCOUP! (though I would have thanked you\nearlier if I hadn't had to dig through the r-help digest first :-)\n\nTom Roche Mon, 27 Aug 2012 23:31:23 -0400\n>> summary: I can successf",
+      "thread_id": "thread-3f8fb8bf5984",
+      "thread_depth": 6,
       "month": "2012-08"
     },
     {
@@ -47826,22 +47826,6 @@
       "month": "2012-08"
     },
     {
-      "id": "msg-db3e1976b65c",
-      "message_id": "<CABxs9V=vsvK-W-OKUey76M2PnG5V=RnFcAo+a9Htd61NN6UG2A@mail.gmail.com>",
-      "from_name": "Liviu Andronic",
-      "from_email_hash": "ac80690a74d8c96bf595dc6f08afe02e887e0cd6871b17eb78f91be112f8f2e3",
-      "date": "2012-08-29T18:59:59Z",
-      "subject": "[R] wind maps",
-      "subject_clean": "wind maps",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all\nI was wondering what old hacks on this list were thinking about the\nshiny new \"wind map\", which The Economist describes as \" breathtaking\nfor its elegance and rich data presentation\". [1]\n\nWhat do you think of it? And of authors' other graphs? Can something\nsimilar be done in R?\n\nRegards\nLiviu\n\n[1] http://www.economist.com/blogs/graphicdetail/2012/08/charting-wind\n\n\n-- \nDo you know how to read?\nhttp://www.alienetworks.com/srtest.cfm\nhttp://goodies.xfce.org/projects/applications/xfce4-dict#speed-reader\nDo you know how to write?\nhttp://garbl.home.comcast.net/~garbl/stylemanual/e.htm#e-mail",
-      "body_snippet": "Dear all\nI was wondering what old hacks on this list were thinking about the\nshiny new \"wind map\", which The Economist describes as \" breathtaking\nfor its elegance and rich data presentation\". [1]\n\nWh",
-      "thread_id": "thread-db3e1976b65c",
-      "thread_depth": 0,
-      "month": "2012-08"
-    },
-    {
       "id": "msg-1c09b0da4a3c",
       "message_id": "<1346266799.34969.YahooMailNeo@web142602.mail.bf1.yahoo.com>",
       "from_name": "arun",
@@ -47857,6 +47841,22 @@
       "body_snippet": "HI,\nTry this:\nwage2.dat<-read.table(text=\"\n? year person?? wage??????? lag(wage,-1)\n? 1980????? 1 -0.75843997??????????? NA\n? 1981????? 1? 0.27233048? -0.75843997\n? 1982????? 1 -1.58335767??? 0.272330",
       "thread_id": "thread-9becd5fbc9de",
       "thread_depth": 1,
+      "month": "2012-08"
+    },
+    {
+      "id": "msg-db3e1976b65c",
+      "message_id": "<CABxs9V=vsvK-W-OKUey76M2PnG5V=RnFcAo+a9Htd61NN6UG2A@mail.gmail.com>",
+      "from_name": "Liviu Andronic",
+      "from_email_hash": "ac80690a74d8c96bf595dc6f08afe02e887e0cd6871b17eb78f91be112f8f2e3",
+      "date": "2012-08-29T18:59:59Z",
+      "subject": "[R] wind maps",
+      "subject_clean": "wind maps",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all\nI was wondering what old hacks on this list were thinking about the\nshiny new \"wind map\", which The Economist describes as \" breathtaking\nfor its elegance and rich data presentation\". [1]\n\nWhat do you think of it? And of authors' other graphs? Can something\nsimilar be done in R?\n\nRegards\nLiviu\n\n[1] http://www.economist.com/blogs/graphicdetail/2012/08/charting-wind\n\n\n-- \nDo you know how to read?\nhttp://www.alienetworks.com/srtest.cfm\nhttp://goodies.xfce.org/projects/applications/xfce4-dict#speed-reader\nDo you know how to write?\nhttp://garbl.home.comcast.net/~garbl/stylemanual/e.htm#e-mail",
+      "body_snippet": "Dear all\nI was wondering what old hacks on this list were thinking about the\nshiny new \"wind map\", which The Economist describes as \" breathtaking\nfor its elegance and rich data presentation\". [1]\n\nWh",
+      "thread_id": "thread-db3e1976b65c",
+      "thread_depth": 0,
       "month": "2012-08"
     },
     {
