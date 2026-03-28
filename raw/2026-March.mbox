@@ -3229,3 +3229,189 @@ Sangeun Song
 	[[alternative HTML version deleted]]
 
 
+From rhe|p @end|ng |rom eoo@@dd@@n|  Fri Mar 27 14:56:27 2026
+From: rhe|p @end|ng |rom eoo@@dd@@n| (Jan van der Laan)
+Date: Fri, 27 Mar 2026 14:56:27 +0100
+Subject: [R] How to break line in column title to be (S)weaved?
+In-Reply-To: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+References: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+Message-ID: <f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>
+
+Haven't tried this, but you might be able to use the tabularx output 
+which supports the X column type that will stretch the column width and 
+wrap the contents. So, something like:
+
+print(xtable(iris[1:10, ], align = "rrrrrX"),
+   tabular.environment = "tabularx", width = "\\textwidth")
+
+
+HTH,
+Jan
+
+
+On 3/21/26 12:16 PM, iagogv via R-help wrote:
+> Hi all,
+> 
+> I am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to
+> get the .tex file I will 'LaTeX' to .pdf.
+> 
+> In that document, I want to include a small data.frame, let's call
+> `data`, therefore I use the xtable package and include something like
+> 
+> <<echo=FALSE,results=tex>>=
+> print(xtable(data))
+> @
+> 
+> One of the names of data is too long, let's say 'This column has a long
+> name' and I want it to be displayed in two rows. Therefore, among other
+> things, in the tex file the two rows should be separated by '\\', so it
+> should appear, for example, as  'This column\\ has a long name'.
+> 
+> If in the .Rnw file I include \\ in the name, it is (S)weaved to
+> $\backslash$. I I include \textbackslash, Sweave returns extbackslash.
+> 
+> Therefore, my question is how can I do to get column name in multiple
+> rows. I am open to use other packages than xtable, but I want this
+> working with Sweave (so no Rmarkdown/knitr solutions, please).
+> 
+> Thanks!
+> 
+> Iago
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From rhe|p @end|ng |rom eoo@@dd@@n|  Fri Mar 27 15:14:32 2026
+From: rhe|p @end|ng |rom eoo@@dd@@n| (Jan van der Laan)
+Date: Fri, 27 Mar 2026 15:14:32 +0100
+Subject: [R] How to break line in column title to be (S)weaved?
+In-Reply-To: <f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>
+References: <6f775e05838e20f639845ce842bd3af0@disroot.org>
+ <f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>
+Message-ID: <05a9abab-421a-4d90-ba38-dda4d0ccca9a@eoos.dds.nl>
+
+Another trick would be to a another row to the headers:
+
+print(xtable(iris[1:10, ]),
+   add.to.row = list(pos = list(0),
+     command = "& Second & Row & Of & Headers & Species\\\\\n" ))
+
+
+
+On 3/27/26 2:56 PM, Jan van der Laan wrote:
+> Haven't tried this, but you might be able to use the tabularx output 
+> which supports the X column type that will stretch the column width and 
+> wrap the contents. So, something like:
+> 
+> print(xtable(iris[1:10, ], align = "rrrrrX"),
+>  ? tabular.environment = "tabularx", width = "\\textwidth")
+> 
+> 
+> HTH,
+> Jan
+> 
+> 
+> On 3/21/26 12:16 PM, iagogv via R-help wrote:
+>> Hi all,
+>>
+>> I am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to
+>> get the .tex file I will 'LaTeX' to .pdf.
+>>
+>> In that document, I want to include a small data.frame, let's call
+>> `data`, therefore I use the xtable package and include something like
+>>
+>> <<echo=FALSE,results=tex>>=
+>> print(xtable(data))
+>> @
+>>
+>> One of the names of data is too long, let's say 'This column has a long
+>> name' and I want it to be displayed in two rows. Therefore, among other
+>> things, in the tex file the two rows should be separated by '\\', so it
+>> should appear, for example, as? 'This column\\ has a long name'.
+>>
+>> If in the .Rnw file I include \\ in the name, it is (S)weaved to
+>> $\backslash$. I I include \textbackslash, Sweave returns extbackslash.
+>>
+>> Therefore, my question is how can I do to get column name in multiple
+>> rows. I am open to use other packages than xtable, but I want this
+>> working with Sweave (so no Rmarkdown/knitr solutions, please).
+>>
+>> Thanks!
+>>
+>> Iago
+>> ????[[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting- 
+>> guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting- 
+> guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From @hu|@|@cheung @end|ng |rom gm@||@com  Fri Mar 27 15:13:48 2026
+From: @hu|@|@cheung @end|ng |rom gm@||@com (Shu Fai Cheung)
+Date: Fri, 27 Mar 2026 22:13:48 +0800
+Subject: [R] Using na.omit() on the output of na.omit()
+Message-ID: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+
+Hi All,
+
+I noticed a behavior of na.omit() that I am not sure is intended.
+
+This is adapted from the example of na.omit()
+
+> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+> DF_omitted <- na.omit(DF)
+> attr(DF_omitted, "na.action")
+1
+1
+attr(,"class")
+[1] "omit"
+> DF_omitted2 <- na.omit(DF_omitted)
+> attr(DF_omitted2, "na.action")
+1
+1
+attr(,"class")
+[1] "omit"
+
+In the first call to na.omit(), the output, DF_omitted, correctly has only
+two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+
+In the second call of na.omit(), no cases are removed because DF_omitted
+has no missing data. However, the attribute 'na.action' is retained,
+indicating that Row 1 was removed.
+
+To my understanding of na.omit(), this occurred because, in the second call
+of na.omit(), no rows were omitted, and so the original object was
+returned, along with the attribute 'na.action' from the first call.
+
+>From the "perspective" of the second call, no rows were omitted.
+Should 'na.action'
+be NULL (i.e., not set), as in the following example?
+
+> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+> DF2_omitted <- na.omit(DF2)
+> attr(DF2_omitted, "na.action")
+NULL
+
+Or is this behavior of na.omit() intended?
+
+Regards,
+Shu Fai
+
+	[[alternative HTML version deleted]]
+
+

@@ -714,6 +714,59 @@
       "thread_id": "thread-6e31e8c70f68",
       "thread_depth": 2,
       "month": "2026-03"
+    },
+    {
+      "id": "msg-f44aadce4f71",
+      "message_id": "<f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>",
+      "from_name": "Jan van der Laan",
+      "from_email_hash": "e88c347497c91b8e26adcf70a2e44486234f485bf8554354a0871edeafb3b2a7",
+      "date": "2026-03-27T13:56:27Z",
+      "subject": "[R] How to break line in column title to be (S)weaved?",
+      "subject_clean": "How to break line in column title to be (S)weaved?",
+      "in_reply_to": "<6f775e05838e20f639845ce842bd3af0@disroot.org>",
+      "references": [
+        "<6f775e05838e20f639845ce842bd3af0@disroot.org>"
+      ],
+      "body_plain": "Haven't tried this, but you might be able to use the tabularx output \nwhich supports the X column type that will stretch the column width and \nwrap the contents. So, something like:\n\nprint(xtable(iris[1:10, ], align = \"rrrrrX\"),\n   tabular.environment = \"tabularx\", width = \"\\\\textwidth\")\n\n\nHTH,\nJan\n\n\nOn 3/21/26 12:16 PM, iagogv via R-help wrote:\n> Hi all,\n> \n> I am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to\n> get the .tex file I will 'LaTeX' to .pdf.\n> \n> In that document, I want to include a small data.frame, let's call\n> `data`, therefore I use the xtable package and include something like\n> \n> <<echo=FALSE,results=tex>>=\n> print(xtable(data))\n> @\n> \n> One of the names of data is too long, let's say 'This column has a long\n> name' and I want it to be displayed in two rows. Therefore, among other\n> things, in the tex file the two rows should be separated by '\\\\', so it\n> should appear, for example, as  'This column\\\\ has a long name'.\n> \n> If in the .Rnw file I include \\\\ in the name, it is (S)weaved to\n> $\\backslash$. I I include \\textbackslash, Sweave returns extbackslash.\n> \n> Therefore, my question is how can I do to get column name in multiple\n> rows. I am open to use other packages than xtable, but I want this\n> working with Sweave (so no Rmarkdown/knitr solutions, please).\n> \n> Thanks!\n> \n> Iago\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Haven't tried this, but you might be able to use the tabularx output \nwhich supports the X column type that will stretch the column width and \nwrap the contents. So, something like:\n\nprint(xtable(iris",
+      "thread_id": "thread-3c9e42dabce6",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-200d892de5a9",
+      "message_id": "<CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>",
+      "from_name": "Shu Fai Cheung",
+      "from_email_hash": "0be9f3a279a4f25faa7ec4a45b7bb7a2dde4ce4b538bc86bc7317dddd44a6dc7",
+      "date": "2026-03-27T14:13:48Z",
+      "subject": "[R] Using na.omit() on the output of na.omit()",
+      "subject_clean": "Using na.omit() on the output of na.omit()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All,\n\nI noticed a behavior of na.omit() that I am not sure is intended.\n\nThis is adapted from the example of na.omit()\n\n> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))\n> DF_omitted <- na.omit(DF)\n> attr(DF_omitted, \"na.action\")\n1\n1\nattr(,\"class\")\n[1] \"omit\"\n> DF_omitted2 <- na.omit(DF_omitted)\n> attr(DF_omitted2, \"na.action\")\n1\n1\nattr(,\"class\")\n[1] \"omit\"\n\nIn the first call to na.omit(), the output, DF_omitted, correctly has only\ntwo rows, with Row 1 removed, and 'na.action' stores the removed row number.\n\nIn the second call of na.omit(), no cases are removed because DF_omitted\nhas no missing data. However, the attribute 'na.action' is retained,\nindicating that Row 1 was removed.\n\nTo my understanding of na.omit(), this occurred because, in the second call\nof na.omit(), no rows were omitted, and so the original object was\nreturned, along with the attribute 'na.action' from the first call.\n\n>From the \"perspective\" of the second call, no rows were omitted.\nShould 'na.action'\nbe NULL (i.e., not set), as in the following example?\n\n> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))\n> DF2_omitted <- na.omit(DF2)\n> attr(DF2_omitted, \"na.action\")\nNULL\n\nOr is this behavior of na.omit() intended?\n\nRegards,\nShu Fai\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi All,\n\nI noticed a behavior of na.omit() that I am not sure is intended.\n\nThis is adapted from the example of na.omit()\n\n> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))\n> DF_omitted <- na.omit(",
+      "thread_id": "thread-200d892de5a9",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-2a41150ff78f",
+      "message_id": "<05a9abab-421a-4d90-ba38-dda4d0ccca9a@eoos.dds.nl>",
+      "from_name": "Jan van der Laan",
+      "from_email_hash": "e88c347497c91b8e26adcf70a2e44486234f485bf8554354a0871edeafb3b2a7",
+      "date": "2026-03-27T14:14:32Z",
+      "subject": "[R] How to break line in column title to be (S)weaved?",
+      "subject_clean": "How to break line in column title to be (S)weaved?",
+      "in_reply_to": "<f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>",
+      "references": [
+        "<6f775e05838e20f639845ce842bd3af0@disroot.org>",
+        "<f5dbdc32-481f-45f9-b436-259df78576ed@eoos.dds.nl>"
+      ],
+      "body_plain": "Another trick would be to a another row to the headers:\n\nprint(xtable(iris[1:10, ]),\n   add.to.row = list(pos = list(0),\n     command = \"& Second & Row & Of & Headers & Species\\\\\\\\\\n\" ))\n\n\n\nOn 3/27/26 2:56 PM, Jan van der Laan wrote:\n> Haven't tried this, but you might be able to use the tabularx output \n> which supports the X column type that will stretch the column width and \n> wrap the contents. So, something like:\n> \n> print(xtable(iris[1:10, ], align = \"rrrrrX\"),\n>  ? tabular.environment = \"tabularx\", width = \"\\\\textwidth\")\n> \n> \n> HTH,\n> Jan\n> \n> \n> On 3/21/26 12:16 PM, iagogv via R-help wrote:\n>> Hi all,\n>>\n>> I am doing a LaTeX document with R, so .Rnw file, which I 'Sweave' to\n>> get the .tex file I will 'LaTeX' to .pdf.\n>>\n>> In that document, I want to include a small data.frame, let's call\n>> `data`, therefore I use the xtable package and include something like\n>>\n>> <<echo=FALSE,results=tex>>=\n>> print(xtable(data))\n>> @\n>>\n>> One of the names of data is too long, let's say 'This column has a long\n>> name' and I want it to be displayed in two rows. Therefore, among other\n>> things, in the tex file the two rows should be separated by '\\\\', so it\n>> should appear, for example, as? 'This column\\\\ has a long name'.\n>>\n>> If in the .Rnw file I include \\\\ in the name, it is (S)weaved to\n>> $\\backslash$. I I include \\textbackslash, Sweave returns extbackslash.\n>>\n>> Therefore, my question is how can I do to get column name in multiple\n>> rows. I am open to use other packages than xtable, but I want this\n>> working with Sweave (so no Rmarkdown/knitr solutions, please).\n>>\n>> Thanks!\n>>\n>> Iago\n>> ????[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting- \n>> guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting- \n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Another trick would be to a another row to the headers:\n\nprint(xtable(iris[1:10, ]),\n   add.to.row = list(pos = list(0),\n     command = \"& Second & Row & Of & Headers & Species\\\\\\\\\\n\" ))\n\n\n\nOn 3/27/26",
+      "thread_id": "thread-3c9e42dabce6",
+      "thread_depth": 2,
+      "month": "2026-03"
     }
   ],
   "threads": [
@@ -870,14 +923,26 @@
     {
       "id": "thread-3c9e42dabce6",
       "subject": "How to break line in column title to be (S)weaved?",
-      "message_count": 2,
+      "message_count": 4,
       "participants": [
         "Ivan Krylov",
+        "Jan van der Laan",
         "iagogv"
       ],
       "started": "2026-03-21T11:16:29Z",
-      "last_reply": "2026-03-22T19:17:39Z",
+      "last_reply": "2026-03-27T14:14:32Z",
       "root_message_id": "msg-3c9e42dabce6"
+    },
+    {
+      "id": "thread-200d892de5a9",
+      "subject": "Using na.omit() on the output of na.omit()",
+      "message_count": 1,
+      "participants": [
+        "Shu Fai Cheung"
+      ],
+      "started": "2026-03-27T14:13:48Z",
+      "last_reply": "2026-03-27T14:13:48Z",
+      "root_message_id": "msg-200d892de5a9"
     }
   ]
 }
