@@ -18271,24 +18271,6 @@
       "month": "2012-06"
     },
     {
-      "id": "msg-b39e6dcfc581",
-      "message_id": "<4FD7ACBB.2050309@pacificedge.co.nz>",
-      "from_name": "Mark Dalphin",
-      "from_email_hash": "a0ea36a2b4c38b9e80c9f984e0cf862b5edb866edc7966c7c63921d6e362c391",
-      "date": "2012-06-12T20:55:23Z",
-      "subject": "[R] Not able to write to PostgreSQL database using \"dbWriteTable\"",
-      "subject_clean": "Not able to write to PostgreSQL database using \"dbWriteTable\"",
-      "in_reply_to": "<CAL-rJgqivQVANM4WktJ-04h-YxT6xTqkWomvd7_Ladnjt+DEsQ@mail.gmail.com>",
-      "references": [
-        "<CAL-rJgqivQVANM4WktJ-04h-YxT6xTqkWomvd7_Ladnjt+DEsQ@mail.gmail.com>"
-      ],
-      "body_plain": "I just tested your code and I _think_ you have a misconception about \ndbWriteTable().\n\nYour code has some oddities so I am only guessing; for example, what is \n\"zz\" and why is it in this snippet?\n\nIn the absence of information on the database TABLE, it is even harder \nto guess what you are doing, but I guess you are trying to use \ndbWriteTable to add a small amount of data to an existing table since \npreviously you select from a similarly named table, \"test1\". The \ndbWriteTable function is writing to the table called \"test1.id\" not to \n\"test1, column id\". If you check your PostgreSQL schema, you will see \nthat you have created a new table called \"test1.id\" (which you will be \nrequired to quote to remove as the DOT is an operator: DROP TABLE \n\"test1.id\";).\n\nI think you are trying to add a new row to the existing database table. \nTry using (untested):\ndbGetQuery(connAE1, sprintf(\"INSERT INTO test1 (id) VALUES ( %d );\", i))\n\nand you will find things go better, assuming I grasped the problem you \nare having correctly.\n\nRegards,\nMark Dalphin\n\n\nPrakash Thomas wrote:\n> Dear R User's\n>     Please help me to debug this issue. I am trying to write some data ( i=\n> 6) to PostgreSQL database, but it not writing.\n> Is there any issue in the way I use \"dbWriteTable\"?\n>\n> ++++++++++++++++++ Source Code ++++++++++++++++++++++++\n>\n> library(\"DBI\")\n> library(\"RPostgreSQL\")\n> drv1 <- dbDriver(\"PostgreSQL\")\n> i=6\n> connAE1 <- dbConnect(drv1,host = \"xx.xxx.xxx.xxx\", port = \"6443\",\n> dbname=\"DB\",user = \"xxxxx\",password = \"xxx\")\n> as.data.frame(zz[1])\n> dbGetQuery(connAE1,'SELECT id FROM \\\"test1\\\"')\n> if(dbExistsTable(connAE1, \"test1\")){\n>     dbWriteTable(con=connAE1,name='test1.id',value=as.data.frame(i),row.names=T\n> ,overwrite=F ,append=T)\n> }\n> dbDisconnect(connAE1)\n> dbUnloadDriver(drv1)\n> ++++++++++++++++++++++++++++++++++++++++++++++++++++++\n>\n> Following is the past of the console Log for your Reference\n>\n> ++++++++++++++++++ console log ++++++++++++++++++++++++\n>   \n>> dbGetQuery(connAE1,'SELECT id FROM \\\"test1\\\"')\n>>     \n>   id\n> 1  1\n> 2  2\n>\n>   \n>> if(dbExistsTable(connAE1, \"test1\")){\n>>     \n> +     dbWriteTable(con=connAE1,name='test1.id',value=as.data.frame(i),row.names=T\n> ,overwrite=F ,append=T)\n> +    .... [TRUNCATED]\n>   id\n> 1  1\n> 2  2\n> +++++++++++++++++++++++++++++++++++++++++++++++++++\n>\n> Thanks & Regards,\n> Thomas\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>   \n\n-- \n\t\n\n\n    Mark Dalphin Ph.D.\n\nDirector of Bioinformatics\n\nmark.dalphin at pacificedge.co.nz <mailto:mark.dalphin at pacificedge.co.nz>\n*Ph:* +64-3-479-5805\n*Cell:* +64-21-156-7625\n*Skype:* mdalphin\n<http://www.facebook.com/pages/Pacific-Edge/111356775582456> \n<http://twitter.com/#%21/pacificEdgeLtd> \n<http://www.youtube.com/PacificEdgeLtd>\n\n87 St David St, PO Box 56, Dunedin, New Zealand 9016www.pacificedge.co.nz",
-      "body_snippet": "I just tested your code and I _think_ you have a misconception about \ndbWriteTable().\n\nYour code has some oddities so I am only guessing; for example, what is \n\"zz\" and why is it in this snippet?\n\nIn ",
-      "thread_id": "thread-4f7071dad749",
-      "thread_depth": 1,
-      "month": "2012-06"
-    },
-    {
       "id": "msg-d376b1a35274",
       "message_id": "<CABO6G1jnEYB993WoHd9MyjNFLxBJ_EZ0sNW_A9b_kAdLecemOQ@mail.gmail.com>",
       "from_name": "Zhenjiang Lan",
@@ -18308,6 +18290,24 @@
       "body_snippet": "Thank you, it works.\nby the way, sometime I guess *apply functions act like loop, because\nwhen I apply a complicated function, they run slowly and one by one.\n\nOn Tue, Jun 12, 2012 at 3:39 PM, Rui Bar",
       "thread_id": "thread-6805498cf6c4",
       "thread_depth": 5,
+      "month": "2012-06"
+    },
+    {
+      "id": "msg-b39e6dcfc581",
+      "message_id": "<4FD7ACBB.2050309@pacificedge.co.nz>",
+      "from_name": "Mark Dalphin",
+      "from_email_hash": "a0ea36a2b4c38b9e80c9f984e0cf862b5edb866edc7966c7c63921d6e362c391",
+      "date": "2012-06-12T20:55:23Z",
+      "subject": "[R] Not able to write to PostgreSQL database using \"dbWriteTable\"",
+      "subject_clean": "Not able to write to PostgreSQL database using \"dbWriteTable\"",
+      "in_reply_to": "<CAL-rJgqivQVANM4WktJ-04h-YxT6xTqkWomvd7_Ladnjt+DEsQ@mail.gmail.com>",
+      "references": [
+        "<CAL-rJgqivQVANM4WktJ-04h-YxT6xTqkWomvd7_Ladnjt+DEsQ@mail.gmail.com>"
+      ],
+      "body_plain": "I just tested your code and I _think_ you have a misconception about \ndbWriteTable().\n\nYour code has some oddities so I am only guessing; for example, what is \n\"zz\" and why is it in this snippet?\n\nIn the absence of information on the database TABLE, it is even harder \nto guess what you are doing, but I guess you are trying to use \ndbWriteTable to add a small amount of data to an existing table since \npreviously you select from a similarly named table, \"test1\". The \ndbWriteTable function is writing to the table called \"test1.id\" not to \n\"test1, column id\". If you check your PostgreSQL schema, you will see \nthat you have created a new table called \"test1.id\" (which you will be \nrequired to quote to remove as the DOT is an operator: DROP TABLE \n\"test1.id\";).\n\nI think you are trying to add a new row to the existing database table. \nTry using (untested):\ndbGetQuery(connAE1, sprintf(\"INSERT INTO test1 (id) VALUES ( %d );\", i))\n\nand you will find things go better, assuming I grasped the problem you \nare having correctly.\n\nRegards,\nMark Dalphin\n\n\nPrakash Thomas wrote:\n> Dear R User's\n>     Please help me to debug this issue. I am trying to write some data ( i=\n> 6) to PostgreSQL database, but it not writing.\n> Is there any issue in the way I use \"dbWriteTable\"?\n>\n> ++++++++++++++++++ Source Code ++++++++++++++++++++++++\n>\n> library(\"DBI\")\n> library(\"RPostgreSQL\")\n> drv1 <- dbDriver(\"PostgreSQL\")\n> i=6\n> connAE1 <- dbConnect(drv1,host = \"xx.xxx.xxx.xxx\", port = \"6443\",\n> dbname=\"DB\",user = \"xxxxx\",password = \"xxx\")\n> as.data.frame(zz[1])\n> dbGetQuery(connAE1,'SELECT id FROM \\\"test1\\\"')\n> if(dbExistsTable(connAE1, \"test1\")){\n>     dbWriteTable(con=connAE1,name='test1.id',value=as.data.frame(i),row.names=T\n> ,overwrite=F ,append=T)\n> }\n> dbDisconnect(connAE1)\n> dbUnloadDriver(drv1)\n> ++++++++++++++++++++++++++++++++++++++++++++++++++++++\n>\n> Following is the past of the console Log for your Reference\n>\n> ++++++++++++++++++ console log ++++++++++++++++++++++++\n>   \n>> dbGetQuery(connAE1,'SELECT id FROM \\\"test1\\\"')\n>>     \n>   id\n> 1  1\n> 2  2\n>\n>   \n>> if(dbExistsTable(connAE1, \"test1\")){\n>>     \n> +     dbWriteTable(con=connAE1,name='test1.id',value=as.data.frame(i),row.names=T\n> ,overwrite=F ,append=T)\n> +    .... [TRUNCATED]\n>   id\n> 1  1\n> 2  2\n> +++++++++++++++++++++++++++++++++++++++++++++++++++\n>\n> Thanks & Regards,\n> Thomas\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>   \n\n-- \n\t\n\n\n    Mark Dalphin Ph.D.\n\nDirector of Bioinformatics\n\nmark.dalphin at pacificedge.co.nz <mailto:mark.dalphin at pacificedge.co.nz>\n*Ph:* +64-3-479-5805\n*Cell:* +64-21-156-7625\n*Skype:* mdalphin\n<http://www.facebook.com/pages/Pacific-Edge/111356775582456> \n<http://twitter.com/#%21/pacificEdgeLtd> \n<http://www.youtube.com/PacificEdgeLtd>\n\n87 St David St, PO Box 56, Dunedin, New Zealand 9016www.pacificedge.co.nz",
+      "body_snippet": "I just tested your code and I _think_ you have a misconception about \ndbWriteTable().\n\nYour code has some oddities so I am only guessing; for example, what is \n\"zz\" and why is it in this snippet?\n\nIn ",
+      "thread_id": "thread-4f7071dad749",
+      "thread_depth": 1,
       "month": "2012-06"
     },
     {
