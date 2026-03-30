@@ -3415,3 +3415,487 @@ Shu Fai
 	[[alternative HTML version deleted]]
 
 
+From d|ju||@98 @end|ng |rom gm@||@com  Sat Mar 28 18:26:32 2026
+From: d|ju||@98 @end|ng |rom gm@||@com (Li DiJulia)
+Date: Sat, 28 Mar 2026 13:26:32 -0400
+Subject: [R] Running CSV File
+Message-ID: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+
+To whom it may concern,
+
+I am trying to save this file "cancer data," which I have attached in this
+email, into working directory and when I click on "to source file location"
+under set working directory" it says- The current active source is not
+saved so does not have a directory to change into. I even clicked on
+"choose directory" under set working directory, my file still won't show
+up.
+
+As for running data, When I downloaded the cancer data into R studio and
+ran g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+header=True, sep ',').*
+
+Note: I saved the data in my computer as "cancer data." I am not sure what
+I am doing wrong. Please advise
+
+When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+function "read.csv". I am not sure what I am doing wrong. Please advise
+
+
+Thanks.
+
+From er|cjberger @end|ng |rom gm@||@com  Sun Mar 29 11:21:28 2026
+From: er|cjberger @end|ng |rom gm@||@com (Eric Berger)
+Date: Sun, 29 Mar 2026 12:21:28 +0300
+Subject: [R] Running CSV File
+In-Reply-To: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+Message-ID: <CAGgJW778=r+cKYqc00_eQor1XwU0Ze__UBSMMwN6aMOLfMLGZw@mail.gmail.com>
+
+You seem to have some typos
+
+g <- read.csv.("cancer_data,"header=true,sep=",")
+
+1. you have a '.' between 'csv' and '('.
+2. you have flipped ',' and '"" in '_data",header'
+3. you write 'true', but R expects 'TRUE'
+
+Try copying your code and errors into an LLM which should be able to
+provide fixes.
+
+
+
+On Sun, Mar 29, 2026 at 11:34?AM Li DiJulia <dijulia98 at gmail.com> wrote:
+
+> To whom it may concern,
+>
+> I am trying to save this file "cancer data," which I have attached in this
+> email, into working directory and when I click on "to source file location"
+> under set working directory" it says- The current active source is not
+> saved so does not have a directory to change into. I even clicked on
+> "choose directory" under set working directory, my file still won't show
+> up.
+>
+> As for running data, When I downloaded the cancer data into R studio and
+> ran g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+> message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+> header=True, sep ',').*
+>
+> Note: I saved the data in my computer as "cancer data." I am not sure what
+> I am doing wrong. Please advise
+>
+> When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+> this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+> function "read.csv". I am not sure what I am doing wrong. Please advise
+>
+>
+> Thanks.
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From |r@|nj @end|ng |rom gm@||@com  Sun Mar 29 11:28:15 2026
+From: |r@|nj @end|ng |rom gm@||@com (John C Frain)
+Date: Sun, 29 Mar 2026 10:28:15 +0100
+Subject: [R] Running CSV File
+In-Reply-To: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+Message-ID: <CAHrK516fnQU2NncYTfkggpuRZEFz1rHZ6ABHg2HEcRKK5hyi_g@mail.gmail.com>
+
+Your file was not attached to your email
+
+Try
+
+g<-read. csv (" cancer_data",  header=TRUE, sep= ',')
+
+Also, you should consult the help files before posting.
+
+John C Frain
+3 Aranleigh Park
+Rathfarnham
+Dublin 14
+Ireland
+www.tcd.ie/Economics/staff/frainj/home.html
+https://jcfrain.wordpress.com/
+https://jcfraincv19.wordpress.com/
+
+mailto:frainj at tcd.ie
+mailto:frainj at gmail.com
+
+On Sun 29 Mar 2026, 09:34 Li DiJulia, <dijulia98 at gmail.com> wrote:
+
+> To whom it may concern,
+>
+> I am trying to save this file "cancer data," which I have attached in this
+> email, into working directory and when I click on "to source file location"
+> under set working directory" it says- The current active source is not
+> saved so does not have a directory to change into. I even clicked on
+> "choose directory" under set working directory, my file still won't show
+> up.
+>
+> As for running data, When I downloaded the cancer data into R studio and
+> ran g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+> message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+> header=True, sep ',').*
+>
+> Note: I saved the data in my computer as "cancer data." I am not sure what
+> I am doing wrong. Please advise
+>
+> When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+> this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+> function "read.csv". I am not sure what I am doing wrong. Please advise
+>
+>
+> Thanks.
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From po|c1410 @end|ng |rom gm@||@com  Sun Mar 29 11:49:42 2026
+From: po|c1410 @end|ng |rom gm@||@com (CALUM POLWART)
+Date: Sun, 29 Mar 2026 10:49:42 +0100
+Subject: [R] Running CSV File
+In-Reply-To: <CAHrK516fnQU2NncYTfkggpuRZEFz1rHZ6ABHg2HEcRKK5hyi_g@mail.gmail.com>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+ <CAHrK516fnQU2NncYTfkggpuRZEFz1rHZ6ABHg2HEcRKK5hyi_g@mail.gmail.com>
+Message-ID: <CA+etgPn5qEQ6E6WrO8wMTmVFZaD8b4rL9=a_AP4dwUtPo3Y3sw@mail.gmail.com>
+
+There are a couple of oddities in what's been provided. Some may be
+genuine, and others perhaps just in the email trail.
+
+read.csv should have no space in the function name
+
+" cancer_data" should be the EXACT name of the file. It's unusual to start
+a filename with a space. Also relatively unusual to not have file extension
+so this might actually be "cancer_data.csv"
+
+You can't attach files to this system. That would be a security disaster!
+
+You may actually find tidyverse easier to work with. If you are struggling
+to load data in, I suspect you will. In which case:
+
+# run this line once only
+install.packages("tidyverse")
+
+Then run this:
+
+require(tidyverse)
+g <- read_csv("cancer_data.csv")
+
+Tidyverse will *try* to sort datatypes out and defaults to coma and headers
+
+On Sun, 29 Mar 2026, 10:32 John C Frain, <frainj at gmail.com> wrote:
+
+> Your file was not attached to your email
+>
+> Try
+>
+> g<-read. csv (" cancer_data",  header=TRUE, sep= ',')
+>
+> Also, you should consult the help files before posting.
+>
+> John C Frain
+> 3 Aranleigh Park
+> Rathfarnham
+> Dublin 14
+> Ireland
+> www.tcd.ie/Economics/staff/frainj/home.html
+> https://jcfrain.wordpress.com/
+> https://jcfraincv19.wordpress.com/
+>
+> mailto:frainj at tcd.ie
+> mailto:frainj at gmail.com
+>
+> On Sun 29 Mar 2026, 09:34 Li DiJulia, <dijulia98 at gmail.com> wrote:
+>
+> > To whom it may concern,
+> >
+> > I am trying to save this file "cancer data," which I have attached in
+> this
+> > email, into working directory and when I click on "to source file
+> location"
+> > under set working directory" it says- The current active source is not
+> > saved so does not have a directory to change into. I even clicked on
+> > "choose directory" under set working directory, my file still won't show
+> > up.
+> >
+> > As for running data, When I downloaded the cancer data into R studio and
+> > ran g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+> > message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+> > header=True, sep ',').*
+> >
+> > Note: I saved the data in my computer as "cancer data." I am not sure
+> what
+> > I am doing wrong. Please advise
+> >
+> > When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I
+> got
+> > this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+> > function "read.csv". I am not sure what I am doing wrong. Please advise
+> >
+> >
+> > Thanks.
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> > https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+> >
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Sun Mar 29 16:21:40 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Sun, 29 Mar 2026 15:21:40 +0100
+Subject: [R] Running CSV File
+In-Reply-To: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+Message-ID: <3e93edc5-cfdb-44d2-b6e1-c52e2866099a@sapo.pt>
+
+?s 17:26 de 28/03/2026, Li DiJulia escreveu:
+> To whom it may concern,
+> 
+> I am trying to save this file "cancer data," which I have attached in this
+> email, into working directory and when I click on "to source file location"
+> under set working directory" it says- The current active source is not
+> saved so does not have a directory to change into. I even clicked on
+> "choose directory" under set working directory, my file still won't show
+> up.
+> 
+> As for running data, When I downloaded the cancer data into R studio and
+> ran g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+> message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+> header=True, sep ',').*
+> 
+> Note: I saved the data in my computer as "cancer data." I am not sure what
+> I am doing wrong. Please advise
+> 
+> When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+> this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+> function "read.csv". I am not sure what I am doing wrong. Please advise
+> 
+> 
+> Thanks.
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+Hello,
+
+There are many typos in your call to read.csv.
+This should be the right way to read in the data.
+
+
+g <- read.csv("cancer_data.csv", header = TRUE, sep = ',')
+
+
+Try running
+
+
+help("read.csv")
+
+
+and see the correct way of calling read.csv and other similar functions.
+You will find that read.table is the general purpose function to read 
+tabular data, read.csv is a special case with some frequent defaults 
+already set, including header=TRUE and sep=",". So, you can simply run
+
+
+g <- read.csv("cancer_data.csv")   # header=TRUE and sep="," already set
+
+
+hope this helps,
+
+Rui Barradas
+
+
+From re|chm@nj @end|ng |rom @bcg|ob@|@net  Sun Mar 29 22:27:30 2026
+From: re|chm@nj @end|ng |rom @bcg|ob@|@net (Jeff Reichman)
+Date: Sun, 29 Mar 2026 15:27:30 -0500
+Subject: [R] Running CSV File
+In-Reply-To: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+Message-ID: <003401dcbfba$77d803e0$67880ba0$@sbcglobal.net>
+
+1. Working directory message. The message ?The current active source is not
+saved so does not have a directory to change into? appears when the script
+you?re working in hasn?t been saved yet.
+Once you save the script (File ? Save As), RStudio will allow you to set
+the working directory normally.
+
+2. File not appearing in the directory. The dataset was saved on your
+computer as ?cancer data? without a file extension. RStudio won?t
+recognize it as a CSV unless it ends in .
+Renaming it to cancer_data.csv (or cancer data.csv) will make it show up
+correctly.
+
+3. Errors when running . The errors you received were caused by a few syntax
+issues:
+* 	Using  instead of
+* 	Including a trailing comma inside the filename
+* 	Using  instead of R?s required
+* 	The file not having a  extension
+After correcting these, the proper command is:
+
+This should load the dataset as long as the working directory is set to the
+folder where the file is saved
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Li DiJulia
+Sent: Saturday, March 28, 2026 12:27 PM
+To: r-help at r-project.org
+Subject: [R] Running CSV File
+
+To whom it may concern,
+
+I am trying to save this file "cancer data," which I have attached in this
+email, into working directory and when I click on "to source file location"
+under set working directory" it says- The current active source is not saved
+so does not have a directory to change into. I even clicked on "choose
+directory" under set working directory, my file still won't show up.
+
+As for running data, When I downloaded the cancer data into R studio and ran
+g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+header=True, sep ',').*
+
+Note: I saved the data in my computer as "cancer data." I am not sure what I
+am doing wrong. Please advise
+
+When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+function "read.csv". I am not sure what I am doing wrong. Please advise
+
+
+Thanks.
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide
+https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Sun Mar 29 22:55:23 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Sun, 29 Mar 2026 13:55:23 -0700
+Subject: [R] [Tagged]  Re:  Running CSV File
+In-Reply-To: <003401dcbfba$77d803e0$67880ba0$@sbcglobal.net>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+ <003401dcbfba$77d803e0$67880ba0$@sbcglobal.net>
+Message-ID: <B16EAB82-4CD8-40F8-83BC-CCEEB8AC4EEF@dcn.davis.ca.us>
+
+Re 2: While most people will prefer the hint provided by the file extension, R mostly (and particularly so in this case) ignores the file extension for data import.
+
+General point: the file.choose function is a valuable tool for translating point and click file selection into full file paths as you learn your way around... you can either put the function call into wherever you are specifying your filename and have to select the file manually every time you read it:
+
+g<-read. csv (file.choose(), header=True, sep ',')
+
+or you can do it once and make a note of the file path it returns and use that in your read.csv call:
+
+interactively: 
+> file.choose()
+[1] "some\\long\\path\\to\\cancer_data.csv"
+
+in your script (you are keeping your proven commands in an R file, right?), put:
+
+g<-read. csv ("some\\long\\path\\to\\cancer_data.csv", header=True, sep ',')
+
+On March 29, 2026 1:27:30 PM PDT, Jeff Reichman <reichmanj at sbcglobal.net> wrote:
+>1. Working directory message. The message ?The current active source is not
+>saved so does not have a directory to change into? appears when the script
+>you?re working in hasn?t been saved yet.
+>Once you save the script (File ? Save As), RStudio will allow you to set
+>the working directory normally.
+>
+>2. File not appearing in the directory. The dataset was saved on your
+>computer as ?cancer data? without a file extension. RStudio won?t
+>recognize it as a CSV unless it ends in .
+>Renaming it to cancer_data.csv (or cancer data.csv) will make it show up
+>correctly.
+>
+>3. Errors when running . The errors you received were caused by a few syntax
+>issues:
+>* 	Using  instead of
+>* 	Including a trailing comma inside the filename
+>* 	Using  instead of R?s required
+>* 	The file not having a  extension
+>After correcting these, the proper command is:
+>
+>This should load the dataset as long as the working directory is set to the
+>folder where the file is saved
+>
+>-----Original Message-----
+>From: R-help <r-help-bounces at r-project.org> On Behalf Of Li DiJulia
+>Sent: Saturday, March 28, 2026 12:27 PM
+>To: r-help at r-project.org
+>Subject: [R] Running CSV File
+>
+>To whom it may concern,
+>
+>I am trying to save this file "cancer data," which I have attached in this
+>email, into working directory and when I click on "to source file location"
+>under set working directory" it says- The current active source is not saved
+>so does not have a directory to change into. I even clicked on "choose
+>directory" under set working directory, my file still won't show up.
+>
+>As for running data, When I downloaded the cancer data into R studio and ran
+>g<-read. csv (" cancer_data," header=True, sep ','), I got this error
+>message: *unexpected string consonant in g<-read. csv. (" cancer_data,"
+>header=True, sep ',').*
+>
+>Note: I saved the data in my computer as "cancer data." I am not sure what I
+>am doing wrong. Please advise
+>
+>When I tried this g<-read.csv. ("cancer_data," header=true, sep=",") I got
+>this: in read.csv. ("cancer_data, header= true, sep=','):could not find
+>function "read.csv". I am not sure what I am doing wrong. Please advise
+>
+>
+>Thanks.
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide
+>https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
