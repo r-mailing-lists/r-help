@@ -3899,3 +3899,1443 @@ Sent from my phone. Please excuse my brevity.
 	[[alternative HTML version deleted]]
 
 
+From @hu|@|@cheung @end|ng |rom gm@||@com  Mon Mar 30 04:34:12 2026
+From: @hu|@|@cheung @end|ng |rom gm@||@com (Shu Fai Cheung)
+Date: Mon, 30 Mar 2026 10:34:12 +0800
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+Message-ID: <CAPVJd2Vnt9o9E2CU65JiP4U7dOk1ZLmcSt6DuHBZp=c-a9cqBg@mail.gmail.com>
+
+Hi All,
+
+I would like to share more about the behavior of na.omit() from my
+previous email.
+
+This is a test dataset:
+
+> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+
+One case omitted by na.omit()
+> DF_omitted <- na.omit(DF)
+> DF_omitted
+  x  y
+2 2 10
+3 3  1
+4 5 10
+> na.action(DF_omitted)
+1
+1
+attr(,"class")
+[1] "omit"
+
+Then I do regression on this DF_omitted (na.action can be omitted, but
+I included it just to show that na.omit is used)
+
+> out1 <- lm(y ~ x,
++            DF_omitted,
++            na.action = na.omit)
+> summary(out1)
+
+Call:
+lm(formula = y ~ x, data = DF_omitted, na.action = na.omit)
+
+Residuals:
+     2      3      4
+ 3.857 -5.786  1.929
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)   4.8571    11.8885   0.409    0.753
+x             0.6429     3.3404   0.192    0.879
+
+Residual standard error: 7.216 on 1 degrees of freedom
+Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+
+> na.action(out1)
+NULL
+> na.action(na.omit(DF_omitted))
+1
+1
+attr(,"class")
+[1] "omit"
+
+The output of lm() states that no cases were removed. To me, this is a
+correct message because no cases were removed when fitting the model,
+that is, in *this call* of lm(). One case was deleted, but before
+being processed by lm(). It is not done by this call of lm().
+
+If the model is fitted to the original data set, then it will report,
+again correctly, that *this call* of lm() removed one case:
+
+> out2 <- lm(y ~ x,
++            DF,
++            na.action = na.omit)
+> summary(out2)
+
+Call:
+lm(formula = y ~ x, data = DF, na.action = na.omit)
+
+Residuals:
+     2      3      4
+ 3.857 -5.786  1.929
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)   4.8571    11.8885   0.409    0.753
+x             0.6429     3.3404   0.192    0.879
+
+Residual standard error: 7.216 on 1 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+
+> na.action(out2)
+1
+1
+attr(,"class")
+[1] "omit"
+
+However, the behavior of na.omit() is different. If na.omit() is run
+again on DF_omitted, it will say that Case 1 was removed.
+
+> na.action(na.omit(DF))
+1
+1
+attr(,"class")
+[1] "omit"
+
+This behavior, to me, can be misleading because no cases were removed
+by *this call* of na.omit().
+
+Moreover, from the help page of na.omit():
+
+'If na.omit removes cases, the row numbers of the cases form the
+"na.action" attribute of the result, of class "omit".'
+
+It does not state what happens if na.omit() does not remove cases.
+>From the example of lm() above, na.omit() will report/store that no
+cases were removed, though this is actually the behavior of
+model.frame()/lm(), not of na.omit()). However, when used alone,
+na.omit() will do nothing.
+
+Changing this behavior of na.omit() may break a lot of things. If this
+behavior of na.omit(), doing nothing, is intended (though unnatural to
+me), perhaps this should be stated in the help page?
+
+Regards,
+Shu Fai
+
+On Fri, Mar 27, 2026 at 10:13?PM Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>
+> Hi All,
+>
+> I noticed a behavior of na.omit() that I am not sure is intended.
+>
+> This is adapted from the example of na.omit()
+>
+> > DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+> > DF_omitted <- na.omit(DF)
+> > attr(DF_omitted, "na.action")
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> > DF_omitted2 <- na.omit(DF_omitted)
+> > attr(DF_omitted2, "na.action")
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+>
+> In the first call to na.omit(), the output, DF_omitted, correctly has only two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>
+> In the second call of na.omit(), no cases are removed because DF_omitted has no missing data. However, the attribute 'na.action' is retained, indicating that Row 1 was removed.
+>
+> To my understanding of na.omit(), this occurred because, in the second call of na.omit(), no rows were omitted, and so the original object was returned, along with the attribute 'na.action' from the first call.
+>
+> From the "perspective" of the second call, no rows were omitted. Should 'na.action' be NULL (i.e., not set), as in the following example?
+>
+> > DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+> > DF2_omitted <- na.omit(DF2)
+> > attr(DF2_omitted, "na.action")
+> NULL
+>
+> Or is this behavior of na.omit() intended?
+>
+> Regards,
+> Shu Fai
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Mon Mar 30 10:12:47 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Mon, 30 Mar 2026 09:12:47 +0100
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <CAPVJd2Vnt9o9E2CU65JiP4U7dOk1ZLmcSt6DuHBZp=c-a9cqBg@mail.gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <CAPVJd2Vnt9o9E2CU65JiP4U7dOk1ZLmcSt6DuHBZp=c-a9cqBg@mail.gmail.com>
+Message-ID: <f79aeea1-d08d-4107-ac2a-fd402bb7f4f3@sapo.pt>
+
+Hello,
+
+Inline.
+
+?s 03:34 de 30/03/2026, Shu Fai Cheung escreveu:
+> Hi All,
+> 
+> I would like to share more about the behavior of na.omit() from my
+> previous email.
+> 
+> This is a test dataset:
+> 
+>> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+> 
+> One case omitted by na.omit()
+>> DF_omitted <- na.omit(DF)
+>> DF_omitted
+>    x  y
+> 2 2 10
+> 3 3  1
+> 4 5 10
+>> na.action(DF_omitted)
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> Then I do regression on this DF_omitted (na.action can be omitted, but
+> I included it just to show that na.omit is used)
+> 
+>> out1 <- lm(y ~ x,
+> +            DF_omitted,
+> +            na.action = na.omit)
+>> summary(out1)
+> 
+> Call:
+> lm(formula = y ~ x, data = DF_omitted, na.action = na.omit)
+> 
+> Residuals:
+>       2      3      4
+>   3.857 -5.786  1.929
+> 
+> Coefficients:
+>              Estimate Std. Error t value Pr(>|t|)
+> (Intercept)   4.8571    11.8885   0.409    0.753
+> x             0.6429     3.3404   0.192    0.879
+> 
+> Residual standard error: 7.216 on 1 degrees of freedom
+> Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+> F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+> 
+>> na.action(out1)
+> NULL
+>> na.action(na.omit(DF_omitted))
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> The output of lm() states that no cases were removed. To me, this is a
+> correct message because no cases were removed when fitting the model,
+> that is, in *this call* of lm(). One case was deleted, but before
+> being processed by lm(). It is not done by this call of lm().
+> 
+> If the model is fitted to the original data set, then it will report,
+> again correctly, that *this call* of lm() removed one case:
+> 
+>> out2 <- lm(y ~ x,
+> +            DF,
+> +            na.action = na.omit)
+>> summary(out2)
+> 
+> Call:
+> lm(formula = y ~ x, data = DF, na.action = na.omit)
+> 
+> Residuals:
+>       2      3      4
+>   3.857 -5.786  1.929
+> 
+> Coefficients:
+>              Estimate Std. Error t value Pr(>|t|)
+> (Intercept)   4.8571    11.8885   0.409    0.753
+> x             0.6429     3.3404   0.192    0.879
+> 
+> Residual standard error: 7.216 on 1 degrees of freedom
+>    (1 observation deleted due to missingness)
+> Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+> F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+> 
+>> na.action(out2)
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> However, the behavior of na.omit() is different. If na.omit() is run
+> again on DF_omitted, it will say that Case 1 was removed.
+> 
+>> na.action(na.omit(DF))
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> This behavior, to me, can be misleading because no cases were removed
+> by *this call* of na.omit().
+
+Yes, they were. You are running na.omit on the original DF and na.action 
+correctly reports one case omited.
+
+> 
+> Moreover, from the help page of na.omit():
+> 
+> 'If na.omit removes cases, the row numbers of the cases form the
+> "na.action" attribute of the result, of class "omit".'
+> 
+> It does not state what happens if na.omit() does not remove cases.
+>  From the example of lm() above, na.omit() will report/store that no
+> cases were removed, though this is actually the behavior of
+> model.frame()/lm(), not of na.omit()). However, when used alone,
+> na.omit() will do nothing.
+> 
+> Changing this behavior of na.omit() may break a lot of things. 
+
+I don't understand how it can break something. The coefs, degrees of 
+freedom, etc, of the two lm calls are identically equal. Nothing is broken.
+
+If this
+> behavior of na.omit(), doing nothing, is intended (though unnatural to
+> me), perhaps this should be stated in the help page?
+
+But it does, doesn't it?
+In section Description:
+
+ > na.omit returns the object with incomplete cases removed.
+
+Then, in Details:
+
+ > If na.omit removes cases, the row numbers of the cases form the 
+"na.action" attribute of the result, of class "omit".
+
+Note the "If". If there are no NA's then nothing is done. This is 
+already made explicit in Description.
+
+NA's are always a problem, but in this case you are wrong, you are 
+seeing too much in na.omit's intended behavior.
+
+Furthermore, if a function that is part of R since the beginning and 
+that is used countless of times by countless users was broken, someone 
+would have noticed it already. No one has because it doesn't break things.
+
+Hope this helps,
+
+Rui Barradas
+
+
+> 
+> Regards,
+> Shu Fai
+> 
+> On Fri, Mar 27, 2026 at 10:13?PM Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>>
+>> Hi All,
+>>
+>> I noticed a behavior of na.omit() that I am not sure is intended.
+>>
+>> This is adapted from the example of na.omit()
+>>
+>>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>>> DF_omitted <- na.omit(DF)
+>>> attr(DF_omitted, "na.action")
+>> 1
+>> 1
+>> attr(,"class")
+>> [1] "omit"
+>>> DF_omitted2 <- na.omit(DF_omitted)
+>>> attr(DF_omitted2, "na.action")
+>> 1
+>> 1
+>> attr(,"class")
+>> [1] "omit"
+>>
+>> In the first call to na.omit(), the output, DF_omitted, correctly has only two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>>
+>> In the second call of na.omit(), no cases are removed because DF_omitted has no missing data. However, the attribute 'na.action' is retained, indicating that Row 1 was removed.
+>>
+>> To my understanding of na.omit(), this occurred because, in the second call of na.omit(), no rows were omitted, and so the original object was returned, along with the attribute 'na.action' from the first call.
+>>
+>>  From the "perspective" of the second call, no rows were omitted. Should 'na.action' be NULL (i.e., not set), as in the following example?
+>>
+>>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>>> DF2_omitted <- na.omit(DF2)
+>>> attr(DF2_omitted, "na.action")
+>> NULL
+>>
+>> Or is this behavior of na.omit() intended?
+>>
+>> Regards,
+>> Shu Fai
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From @hu|@|@cheung @end|ng |rom gm@||@com  Mon Mar 30 11:17:53 2026
+From: @hu|@|@cheung @end|ng |rom gm@||@com (Shu Fai Cheung)
+Date: Mon, 30 Mar 2026 17:17:53 +0800
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <f79aeea1-d08d-4107-ac2a-fd402bb7f4f3@sapo.pt>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <CAPVJd2Vnt9o9E2CU65JiP4U7dOk1ZLmcSt6DuHBZp=c-a9cqBg@mail.gmail.com>
+ <f79aeea1-d08d-4107-ac2a-fd402bb7f4f3@sapo.pt>
+Message-ID: <CAPVJd2U1WqLC-KTwiTa-f00fVrnP059SHuvikX=JEq86f5zM_w@mail.gmail.com>
+
+Hi,
+
+Thanks for your comments. I will think over them.
+
+One quick correction:
+
+> Yes, they were. You are running na.omit on the original DF and na.action
+correctly reports one case omited.
+
+Sorry. My bad. I copied and pasted the wrong code. This is the correct example:
+
+> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+> DF_omitted <- na.omit(DF) # One case omitted in this call
+> na.action(DF_omitted)
+1
+1
+attr(,"class")
+[1] "omit"
+> DF_omitted2 <- na.omit(DF_omitted) # No cases removed in this call
+> na.action(DF_omitted2)
+1
+1
+attr(,"class")
+[1] "omit"
+
+I initially also thought that this was intended. However, when
+compared to the behavior of lm() in the examples, I am not sure. They
+give different messages to users.
+
+In the second sample, with the dataset being the output of na.omit(),
+lm() does not report that cases have been (further) removed.
+
+However, if the dataset is the output of na.omit(), using na.omit() on
+it again "suggests" that cases were removed by *this call*. It does
+not really "say so" because it just returns the object unchanged, as
+expected and implied in the help page. However, given the following
+from the help page, it is natural for users, at least for me, to
+assume that the results of na.action() are about the second call of
+na.omit():
+
+'If na.omit removes cases, the row numbers of the cases form the
+"na.action" attribute of the result, of class "omit".'
+
+I thought that way (incorrectly) because the na.action attribute is in
+the output of the second call. However, unless we check an object
+before calling na.omit(), or compare the input of na.omit() and its
+output, there is no way to know whether the results of na.action() are
+from this call of na.omit(), or from a previous one, if any.
+
+> > If na.omit removes cases, the row numbers of the cases form the
+"na.action" attribute of the result, of class "omit".
+
+> Note the "If". If there are no NA's then nothing is done. This is
+> already made explicit in Description.
+
+I agree. Nothing is done, including passing the na.action attribute
+from the original call unchanged. The help page is correct in this
+sense.
+
+This issue came to me because I found that, when writing a function to
+ensure that na.action() correctly tells me whether cases are removed
+from this call to na.action(), I have to remove the na.action
+attribute from the input first, if it exists. It is because users of
+that function may, for some reasons, use na.omit() first before
+passing the object to my function. I cannot rely on the na.action
+attribute for this purpose. (Maybe there are better solutions for
+this. I will check.)
+
+Again, thanks for your comments. I will use na.omit() while taking
+this behavior into account.
+
+Regards,
+Shu Fai
+
+On Mon, Mar 30, 2026 at 4:12?PM Rui Barradas <ruipbarradas at sapo.pt> wrote:
+>
+> Hello,
+>
+> Inline.
+>
+> ?s 03:34 de 30/03/2026, Shu Fai Cheung escreveu:
+> > Hi All,
+> >
+> > I would like to share more about the behavior of na.omit() from my
+> > previous email.
+> >
+> > This is a test dataset:
+> >
+> >> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+> >
+> > One case omitted by na.omit()
+> >> DF_omitted <- na.omit(DF)
+> >> DF_omitted
+> >    x  y
+> > 2 2 10
+> > 3 3  1
+> > 4 5 10
+> >> na.action(DF_omitted)
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >
+> > Then I do regression on this DF_omitted (na.action can be omitted, but
+> > I included it just to show that na.omit is used)
+> >
+> >> out1 <- lm(y ~ x,
+> > +            DF_omitted,
+> > +            na.action = na.omit)
+> >> summary(out1)
+> >
+> > Call:
+> > lm(formula = y ~ x, data = DF_omitted, na.action = na.omit)
+> >
+> > Residuals:
+> >       2      3      4
+> >   3.857 -5.786  1.929
+> >
+> > Coefficients:
+> >              Estimate Std. Error t value Pr(>|t|)
+> > (Intercept)   4.8571    11.8885   0.409    0.753
+> > x             0.6429     3.3404   0.192    0.879
+> >
+> > Residual standard error: 7.216 on 1 degrees of freedom
+> > Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+> > F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+> >
+> >> na.action(out1)
+> > NULL
+> >> na.action(na.omit(DF_omitted))
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >
+> > The output of lm() states that no cases were removed. To me, this is a
+> > correct message because no cases were removed when fitting the model,
+> > that is, in *this call* of lm(). One case was deleted, but before
+> > being processed by lm(). It is not done by this call of lm().
+> >
+> > If the model is fitted to the original data set, then it will report,
+> > again correctly, that *this call* of lm() removed one case:
+> >
+> >> out2 <- lm(y ~ x,
+> > +            DF,
+> > +            na.action = na.omit)
+> >> summary(out2)
+> >
+> > Call:
+> > lm(formula = y ~ x, data = DF, na.action = na.omit)
+> >
+> > Residuals:
+> >       2      3      4
+> >   3.857 -5.786  1.929
+> >
+> > Coefficients:
+> >              Estimate Std. Error t value Pr(>|t|)
+> > (Intercept)   4.8571    11.8885   0.409    0.753
+> > x             0.6429     3.3404   0.192    0.879
+> >
+> > Residual standard error: 7.216 on 1 degrees of freedom
+> >    (1 observation deleted due to missingness)
+> > Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+> > F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+> >
+> >> na.action(out2)
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >
+> > However, the behavior of na.omit() is different. If na.omit() is run
+> > again on DF_omitted, it will say that Case 1 was removed.
+> >
+> >> na.action(na.omit(DF))
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >
+> > This behavior, to me, can be misleading because no cases were removed
+> > by *this call* of na.omit().
+>
+> Yes, they were. You are running na.omit on the original DF and na.action
+> correctly reports one case omited.
+>
+> >
+> > Moreover, from the help page of na.omit():
+> >
+> > 'If na.omit removes cases, the row numbers of the cases form the
+> > "na.action" attribute of the result, of class "omit".'
+> >
+> > It does not state what happens if na.omit() does not remove cases.
+> >  From the example of lm() above, na.omit() will report/store that no
+> > cases were removed, though this is actually the behavior of
+> > model.frame()/lm(), not of na.omit()). However, when used alone,
+> > na.omit() will do nothing.
+> >
+> > Changing this behavior of na.omit() may break a lot of things.
+>
+> I don't understand how it can break something. The coefs, degrees of
+> freedom, etc, of the two lm calls are identically equal. Nothing is broken.
+>
+> If this
+> > behavior of na.omit(), doing nothing, is intended (though unnatural to
+> > me), perhaps this should be stated in the help page?
+>
+> But it does, doesn't it?
+> In section Description:
+>
+>  > na.omit returns the object with incomplete cases removed.
+>
+> Then, in Details:
+>
+>  > If na.omit removes cases, the row numbers of the cases form the
+> "na.action" attribute of the result, of class "omit".
+>
+> Note the "If". If there are no NA's then nothing is done. This is
+> already made explicit in Description.
+>
+> NA's are always a problem, but in this case you are wrong, you are
+> seeing too much in na.omit's intended behavior.
+>
+> Furthermore, if a function that is part of R since the beginning and
+> that is used countless of times by countless users was broken, someone
+> would have noticed it already. No one has because it doesn't break things.
+>
+> Hope this helps,
+>
+> Rui Barradas
+>
+>
+> >
+> > Regards,
+> > Shu Fai
+> >
+> > On Fri, Mar 27, 2026 at 10:13?PM Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+> >>
+> >> Hi All,
+> >>
+> >> I noticed a behavior of na.omit() that I am not sure is intended.
+> >>
+> >> This is adapted from the example of na.omit()
+> >>
+> >>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+> >>> DF_omitted <- na.omit(DF)
+> >>> attr(DF_omitted, "na.action")
+> >> 1
+> >> 1
+> >> attr(,"class")
+> >> [1] "omit"
+> >>> DF_omitted2 <- na.omit(DF_omitted)
+> >>> attr(DF_omitted2, "na.action")
+> >> 1
+> >> 1
+> >> attr(,"class")
+> >> [1] "omit"
+> >>
+> >> In the first call to na.omit(), the output, DF_omitted, correctly has only two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+> >>
+> >> In the second call of na.omit(), no cases are removed because DF_omitted has no missing data. However, the attribute 'na.action' is retained, indicating that Row 1 was removed.
+> >>
+> >> To my understanding of na.omit(), this occurred because, in the second call of na.omit(), no rows were omitted, and so the original object was returned, along with the attribute 'na.action' from the first call.
+> >>
+> >>  From the "perspective" of the second call, no rows were omitted. Should 'na.action' be NULL (i.e., not set), as in the following example?
+> >>
+> >>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+> >>> DF2_omitted <- na.omit(DF2)
+> >>> attr(DF2_omitted, "na.action")
+> >> NULL
+> >>
+> >> Or is this behavior of na.omit() intended?
+> >>
+> >> Regards,
+> >> Shu Fai
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Mon Mar 30 12:05:23 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Mon, 30 Mar 2026 11:05:23 +0100
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <CAPVJd2U1WqLC-KTwiTa-f00fVrnP059SHuvikX=JEq86f5zM_w@mail.gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <CAPVJd2Vnt9o9E2CU65JiP4U7dOk1ZLmcSt6DuHBZp=c-a9cqBg@mail.gmail.com>
+ <f79aeea1-d08d-4107-ac2a-fd402bb7f4f3@sapo.pt>
+ <CAPVJd2U1WqLC-KTwiTa-f00fVrnP059SHuvikX=JEq86f5zM_w@mail.gmail.com>
+Message-ID: <a66eca4b-f53b-4374-9e72-0f41aaa21cd7@sapo.pt>
+
+?s 10:17 de 30/03/2026, Shu Fai Cheung escreveu:
+> Hi,
+> 
+> Thanks for your comments. I will think over them.
+> 
+> One quick correction:
+> 
+>> Yes, they were. You are running na.omit on the original DF and na.action
+> correctly reports one case omited.
+> 
+> Sorry. My bad. I copied and pasted the wrong code. This is the correct example:
+> 
+>> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+>> DF_omitted <- na.omit(DF) # One case omitted in this call
+>> na.action(DF_omitted)
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+>> DF_omitted2 <- na.omit(DF_omitted) # No cases removed in this call
+>> na.action(DF_omitted2)
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> I initially also thought that this was intended. However, when
+> compared to the behavior of lm() in the examples, I am not sure. They
+> give different messages to users.
+> 
+> In the second sample, with the dataset being the output of na.omit(),
+> lm() does not report that cases have been (further) removed.
+> 
+> However, if the dataset is the output of na.omit(), using na.omit() on
+> it again "suggests" that cases were removed by *this call*. It does
+> not really "say so" because it just returns the object unchanged, as
+> expected and implied in the help page. However, given the following
+> from the help page, it is natural for users, at least for me, to
+> assume that the results of na.action() are about the second call of
+> na.omit():
+> 
+> 'If na.omit removes cases, the row numbers of the cases form the
+> "na.action" attribute of the result, of class "omit".'
+> 
+> I thought that way (incorrectly) because the na.action attribute is in
+> the output of the second call. However, unless we check an object
+> before calling na.omit(), or compare the input of na.omit() and its
+> output, there is no way to know whether the results of na.action() are
+> from this call of na.omit(), or from a previous one, if any.
+> 
+>>> If na.omit removes cases, the row numbers of the cases form the
+> "na.action" attribute of the result, of class "omit".
+> 
+>> Note the "If". If there are no NA's then nothing is done. This is
+>> already made explicit in Description.
+> 
+> I agree. Nothing is done, including passing the na.action attribute
+> from the original call unchanged. The help page is correct in this
+> sense.
+> 
+> This issue came to me because I found that, when writing a function to
+> ensure that na.action() correctly tells me whether cases are removed
+> from this call to na.action(), I have to remove the na.action
+> attribute from the input first, if it exists. It is because users of
+> that function may, for some reasons, use na.omit() first before
+> passing the object to my function. I cannot rely on the na.action
+> attribute for this purpose. (Maybe there are better solutions for
+> this. I will check.)
+> 
+> Again, thanks for your comments. I will use na.omit() while taking
+> this behavior into account.
+> 
+> Regards,
+> Shu Fai
+> 
+> On Mon, Mar 30, 2026 at 4:12?PM Rui Barradas <ruipbarradas at sapo.pt> wrote:
+>>
+>> Hello,
+>>
+>> Inline.
+>>
+>> ?s 03:34 de 30/03/2026, Shu Fai Cheung escreveu:
+>>> Hi All,
+>>>
+>>> I would like to share more about the behavior of na.omit() from my
+>>> previous email.
+>>>
+>>> This is a test dataset:
+>>>
+>>>> DF <- data.frame(x = c(1, 2, 3, 5), y = c(NA, 10, 1, 10))
+>>>
+>>> One case omitted by na.omit()
+>>>> DF_omitted <- na.omit(DF)
+>>>> DF_omitted
+>>>     x  y
+>>> 2 2 10
+>>> 3 3  1
+>>> 4 5 10
+>>>> na.action(DF_omitted)
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>>
+>>> Then I do regression on this DF_omitted (na.action can be omitted, but
+>>> I included it just to show that na.omit is used)
+>>>
+>>>> out1 <- lm(y ~ x,
+>>> +            DF_omitted,
+>>> +            na.action = na.omit)
+>>>> summary(out1)
+>>>
+>>> Call:
+>>> lm(formula = y ~ x, data = DF_omitted, na.action = na.omit)
+>>>
+>>> Residuals:
+>>>        2      3      4
+>>>    3.857 -5.786  1.929
+>>>
+>>> Coefficients:
+>>>               Estimate Std. Error t value Pr(>|t|)
+>>> (Intercept)   4.8571    11.8885   0.409    0.753
+>>> x             0.6429     3.3404   0.192    0.879
+>>>
+>>> Residual standard error: 7.216 on 1 degrees of freedom
+>>> Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+>>> F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+>>>
+>>>> na.action(out1)
+>>> NULL
+>>>> na.action(na.omit(DF_omitted))
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>>
+>>> The output of lm() states that no cases were removed. To me, this is a
+>>> correct message because no cases were removed when fitting the model,
+>>> that is, in *this call* of lm(). One case was deleted, but before
+>>> being processed by lm(). It is not done by this call of lm().
+>>>
+>>> If the model is fitted to the original data set, then it will report,
+>>> again correctly, that *this call* of lm() removed one case:
+>>>
+>>>> out2 <- lm(y ~ x,
+>>> +            DF,
+>>> +            na.action = na.omit)
+>>>> summary(out2)
+>>>
+>>> Call:
+>>> lm(formula = y ~ x, data = DF, na.action = na.omit)
+>>>
+>>> Residuals:
+>>>        2      3      4
+>>>    3.857 -5.786  1.929
+>>>
+>>> Coefficients:
+>>>               Estimate Std. Error t value Pr(>|t|)
+>>> (Intercept)   4.8571    11.8885   0.409    0.753
+>>> x             0.6429     3.3404   0.192    0.879
+>>>
+>>> Residual standard error: 7.216 on 1 degrees of freedom
+>>>     (1 observation deleted due to missingness)
+>>> Multiple R-squared:  0.03571,   Adjusted R-squared:  -0.9286
+>>> F-statistic: 0.03704 on 1 and 1 DF,  p-value: 0.879
+>>>
+>>>> na.action(out2)
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>>
+>>> However, the behavior of na.omit() is different. If na.omit() is run
+>>> again on DF_omitted, it will say that Case 1 was removed.
+>>>
+>>>> na.action(na.omit(DF))
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>>
+>>> This behavior, to me, can be misleading because no cases were removed
+>>> by *this call* of na.omit().
+>>
+>> Yes, they were. You are running na.omit on the original DF and na.action
+>> correctly reports one case omited.
+>>
+>>>
+>>> Moreover, from the help page of na.omit():
+>>>
+>>> 'If na.omit removes cases, the row numbers of the cases form the
+>>> "na.action" attribute of the result, of class "omit".'
+>>>
+>>> It does not state what happens if na.omit() does not remove cases.
+>>>   From the example of lm() above, na.omit() will report/store that no
+>>> cases were removed, though this is actually the behavior of
+>>> model.frame()/lm(), not of na.omit()). However, when used alone,
+>>> na.omit() will do nothing.
+>>>
+>>> Changing this behavior of na.omit() may break a lot of things.
+>>
+>> I don't understand how it can break something. The coefs, degrees of
+>> freedom, etc, of the two lm calls are identically equal. Nothing is broken.
+>>
+>> If this
+>>> behavior of na.omit(), doing nothing, is intended (though unnatural to
+>>> me), perhaps this should be stated in the help page?
+>>
+>> But it does, doesn't it?
+>> In section Description:
+>>
+>>   > na.omit returns the object with incomplete cases removed.
+>>
+>> Then, in Details:
+>>
+>>   > If na.omit removes cases, the row numbers of the cases form the
+>> "na.action" attribute of the result, of class "omit".
+>>
+>> Note the "If". If there are no NA's then nothing is done. This is
+>> already made explicit in Description.
+>>
+>> NA's are always a problem, but in this case you are wrong, you are
+>> seeing too much in na.omit's intended behavior.
+>>
+>> Furthermore, if a function that is part of R since the beginning and
+>> that is used countless of times by countless users was broken, someone
+>> would have noticed it already. No one has because it doesn't break things.
+>>
+>> Hope this helps,
+>>
+>> Rui Barradas
+>>
+>>
+>>>
+>>> Regards,
+>>> Shu Fai
+>>>
+>>> On Fri, Mar 27, 2026 at 10:13?PM Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>>>>
+>>>> Hi All,
+>>>>
+>>>> I noticed a behavior of na.omit() that I am not sure is intended.
+>>>>
+>>>> This is adapted from the example of na.omit()
+>>>>
+>>>>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>>>>> DF_omitted <- na.omit(DF)
+>>>>> attr(DF_omitted, "na.action")
+>>>> 1
+>>>> 1
+>>>> attr(,"class")
+>>>> [1] "omit"
+>>>>> DF_omitted2 <- na.omit(DF_omitted)
+>>>>> attr(DF_omitted2, "na.action")
+>>>> 1
+>>>> 1
+>>>> attr(,"class")
+>>>> [1] "omit"
+>>>>
+>>>> In the first call to na.omit(), the output, DF_omitted, correctly has only two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>>>>
+>>>> In the second call of na.omit(), no cases are removed because DF_omitted has no missing data. However, the attribute 'na.action' is retained, indicating that Row 1 was removed.
+>>>>
+>>>> To my understanding of na.omit(), this occurred because, in the second call of na.omit(), no rows were omitted, and so the original object was returned, along with the attribute 'na.action' from the first call.
+>>>>
+>>>>   From the "perspective" of the second call, no rows were omitted. Should 'na.action' be NULL (i.e., not set), as in the following example?
+>>>>
+>>>>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>>>>> DF2_omitted <- na.omit(DF2)
+>>>>> attr(DF2_omitted, "na.action")
+>>>> NULL
+>>>>
+>>>> Or is this behavior of na.omit() intended?
+>>>>
+>>>> Regards,
+>>>> Shu Fai
+>>>
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>>
+Hello,
+
+If this is a frequent problem, write an auxiliary function.
+
+
+
+get_NA_action <- function(object) attr(object, "na.action")
+is_NA_action_set <- function(object) !is.null(get_NA_action(object))
+# if you want only one extra function
+# is_NA_action_set <- function(object) !is.null(attr(object, "na.action"))
+
+get_NA_action(DF)
+#> NULL
+get_NA_action(DF_omitted)
+#> 1
+#> 1
+#> attr(,"class")
+#> [1] "omit"
+
+is_NA_action_set(DF)
+#> [1] FALSE
+is_NA_action_set(DF_omitted)
+#> [1] TRUE
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+From pd@|gd @end|ng |rom gm@||@com  Mon Mar 30 16:18:43 2026
+From: pd@|gd @end|ng |rom gm@||@com (peter dalgaard)
+Date: Mon, 30 Mar 2026 16:18:43 +0200
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+Message-ID: <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+
+I'm fairly sure that this is deliberate, although hardly something that I bump into every day. na.omit & friends are designed to work in connection with modeling code and there may be code down the line that wants to know about omitted cases. So na.omit cleans the original data by removing some cases and attaching a list of omitted cases; if you do it again, you still have a dataframe and some omitted cases. 
+
+If anything, I would contend that omissions should be cumulative, so if you (say) add a column with some missing values and na.omit again, then the omission list should be augmented rather than replaced.
+
+Also, from a pragmatic viewpoint, there is a chance that na.omit gets called repeatedly by coincidence in the labyrinth of interrelated lm functions.
+
+-pd
+
+> On 27 Mar 2026, at 15.13, Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+> 
+> Hi All,
+> 
+> I noticed a behavior of na.omit() that I am not sure is intended.
+> 
+> This is adapted from the example of na.omit()
+> 
+>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>> DF_omitted <- na.omit(DF)
+>> attr(DF_omitted, "na.action")
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+>> DF_omitted2 <- na.omit(DF_omitted)
+>> attr(DF_omitted2, "na.action")
+> 1
+> 1
+> attr(,"class")
+> [1] "omit"
+> 
+> In the first call to na.omit(), the output, DF_omitted, correctly has only
+> two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+> 
+> In the second call of na.omit(), no cases are removed because DF_omitted
+> has no missing data. However, the attribute 'na.action' is retained,
+> indicating that Row 1 was removed.
+> 
+> To my understanding of na.omit(), this occurred because, in the second call
+> of na.omit(), no rows were omitted, and so the original object was
+> returned, along with the attribute 'na.action' from the first call.
+> 
+> From the "perspective" of the second call, no rows were omitted.
+> Should 'na.action'
+> be NULL (i.e., not set), as in the following example?
+> 
+>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>> DF2_omitted <- na.omit(DF2)
+>> attr(DF2_omitted, "na.action")
+> NULL
+> 
+> Or is this behavior of na.omit() intended?
+> 
+> Regards,
+> Shu Fai
+> 
+> [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Mon Mar 30 16:36:50 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Mon, 30 Mar 2026 07:36:50 -0700
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+Message-ID: <5F66B87B-78A2-44C7-AFDB-E3BC712F2D77@dcn.davis.ca.us>
+
+I think this is Shu Fai's point... if lm checked whether an na.omit object were passed instead of just blindly applying na.omit again, then the information would not get lost. Having na.omit work cumulatively could also make this process flow more naturally... it doesn't feel obvious to me that repeatedly calling na.omit needs to lose the attribute.
+
+On March 30, 2026 7:18:43 AM PDT, peter dalgaard <pdalgd at gmail.com> wrote:
+>I'm fairly sure that this is deliberate, although hardly something that I bump into every day. na.omit & friends are designed to work in connection with modeling code and there may be code down the line that wants to know about omitted cases. So na.omit cleans the original data by removing some cases and attaching a list of omitted cases; if you do it again, you still have a dataframe and some omitted cases. 
+>
+>If anything, I would contend that omissions should be cumulative, so if you (say) add a column with some missing values and na.omit again, then the omission list should be augmented rather than replaced.
+>
+>Also, from a pragmatic viewpoint, there is a chance that na.omit gets called repeatedly by coincidence in the labyrinth of interrelated lm functions.
+>
+>-pd
+>
+>> On 27 Mar 2026, at 15.13, Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>> 
+>> Hi All,
+>> 
+>> I noticed a behavior of na.omit() that I am not sure is intended.
+>> 
+>> This is adapted from the example of na.omit()
+>> 
+>>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>>> DF_omitted <- na.omit(DF)
+>>> attr(DF_omitted, "na.action")
+>> 1
+>> 1
+>> attr(,"class")
+>> [1] "omit"
+>>> DF_omitted2 <- na.omit(DF_omitted)
+>>> attr(DF_omitted2, "na.action")
+>> 1
+>> 1
+>> attr(,"class")
+>> [1] "omit"
+>> 
+>> In the first call to na.omit(), the output, DF_omitted, correctly has only
+>> two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>> 
+>> In the second call of na.omit(), no cases are removed because DF_omitted
+>> has no missing data. However, the attribute 'na.action' is retained,
+>> indicating that Row 1 was removed.
+>> 
+>> To my understanding of na.omit(), this occurred because, in the second call
+>> of na.omit(), no rows were omitted, and so the original object was
+>> returned, along with the attribute 'na.action' from the first call.
+>> 
+>> From the "perspective" of the second call, no rows were omitted.
+>> Should 'na.action'
+>> be NULL (i.e., not set), as in the following example?
+>> 
+>>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>>> DF2_omitted <- na.omit(DF2)
+>>> attr(DF2_omitted, "na.action")
+>> NULL
+>> 
+>> Or is this behavior of na.omit() intended?
+>> 
+>> Regards,
+>> Shu Fai
+>> 
+>> [[alternative HTML version deleted]]
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>
+>-- 
+>Peter Dalgaard, Professor,
+>Center for Statistics, Copenhagen Business School
+>Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>Phone: (+45)38153501
+>Office: A 4.23
+>Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From pd@|gd @end|ng |rom gm@||@com  Mon Mar 30 18:23:01 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Mon, 30 Mar 2026 18:23:01 +0200
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <6ba1785f-5ccf-4ff8-9554-72a16f368808@dewey.myzen.co.uk>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+ <6ba1785f-5ccf-4ff8-9554-72a16f368808@dewey.myzen.co.uk>
+Message-ID: <D0D45C58-5E4B-46F8-8AEA-4A121D10F430@gmail.com>
+
+The *names* would refer to the original df, or a nebulous one that has the rows of the result plus undefined rows with names as in the na.action attribute. There's no issue with cumulating the process that removes rows from x and puts their names into the list of removed row names. 
+
+Notice however, that it would break rather badly if data frames were not required to have unique rownames...
+
+(Not that I think this is worth actually doing... I think the only code in (base) R that actually uses the attribute is na.print() and its na.print.omit() method.)
+
+-pd
+
+> On 30 Mar 2026, at 17.15, Michael Dewey <lists at dewey.myzen.co.uk> wrote:
+> 
+> 
+> 
+> On 30/03/2026 15:18, peter dalgaard wrote:
+>> I'm fairly sure that this is deliberate, although hardly something that I bump into every day. na.omit & friends are designed to work in connection with modeling code and there may be code down the line that wants to know about omitted cases. So na.omit cleans the original data by removing some cases and attaching a list of omitted cases; if you do it again, you still have a dataframe and some omitted cases.
+>> If anything, I would contend that omissions should be cumulative, so if you (say) add a column with some missing values and na.omit again, then the omission list should be augmented rather than replaced.
+> 
+> Cumulative seems a good idea but since na.omit() returns the row numbers which data.frame will they refer to? Or have I misunderstood?
+> 
+> Michael
+> 
+>> Also, from a pragmatic viewpoint, there is a chance that na.omit gets called repeatedly by coincidence in the labyrinth of interrelated lm functions.
+>> -pd
+>>> On 27 Mar 2026, at 15.13, Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>>> 
+>>> Hi All,
+>>> 
+>>> I noticed a behavior of na.omit() that I am not sure is intended.
+>>> 
+>>> This is adapted from the example of na.omit()
+>>> 
+>>>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>>>> DF_omitted <- na.omit(DF)
+>>>> attr(DF_omitted, "na.action")
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>>> DF_omitted2 <- na.omit(DF_omitted)
+>>>> attr(DF_omitted2, "na.action")
+>>> 1
+>>> 1
+>>> attr(,"class")
+>>> [1] "omit"
+>>> 
+>>> In the first call to na.omit(), the output, DF_omitted, correctly has only
+>>> two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>>> 
+>>> In the second call of na.omit(), no cases are removed because DF_omitted
+>>> has no missing data. However, the attribute 'na.action' is retained,
+>>> indicating that Row 1 was removed.
+>>> 
+>>> To my understanding of na.omit(), this occurred because, in the second call
+>>> of na.omit(), no rows were omitted, and so the original object was
+>>> returned, along with the attribute 'na.action' from the first call.
+>>> 
+>>> From the "perspective" of the second call, no rows were omitted.
+>>> Should 'na.action'
+>>> be NULL (i.e., not set), as in the following example?
+>>> 
+>>>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>>>> DF2_omitted <- na.omit(DF2)
+>>>> attr(DF2_omitted, "na.action")
+>>> NULL
+>>> 
+>>> Or is this behavior of na.omit() intended?
+>>> 
+>>> Regards,
+>>> Shu Fai
+>>> 
+>>> [[alternative HTML version deleted]]
+>>> 
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> -- 
+> Michael Dewey
+
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+
+From @hu|@|@cheung @end|ng |rom gm@||@com  Tue Mar 31 01:27:01 2026
+From: @hu|@|@cheung @end|ng |rom gm@||@com (Shu Fai Cheung)
+Date: Tue, 31 Mar 2026 07:27:01 +0800
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+Message-ID: <CAPVJd2V6xWva5w=QEgTdbaDwSk7J+eW2LsQ12+ZuFqnQeokVSA@mail.gmail.com>
+
+Thanks for the comment. Just to share a little bit more. I used lm()
+in another post, but I will use model.frame here because it is
+model.frame that uses the na.action argument.
+
+This is the example:
+
+dat <- data.frame(
+  x = 1:5,
+  y = 1:5,
+  z = 1:5
+)
+dat[1, "x"] <- NA
+dat[2, c("y", "z")] <- NA
+dat_omitted <- na.omit(dat)
+head(dat)
+#>    x  y  z
+#> 1 NA  1  1
+#> 2  2 NA NA
+#> 3  3  3  3
+#> 4  4  4  4
+#> 5  5  5  5
+head(dat_omitted)
+#>   x y z
+#> 3 3 3 3
+#> 4 4 4 4
+#> 5 5 5 5
+
+tmp1 <- model.frame(y ~ x + z, dat, na.action = na.omit)
+tmp2 <- model.frame(y ~ x + z, dat_omitted, na.action = na.omit)
+
+na.action(tmp1)
+#> 1 2
+#> 1 2
+#> attr(,"class")
+#> [1] "omit"
+na.action(tmp2)
+#> NULL
+
+tmp3 <- na.omit(dat)
+tmp4 <- na.omit(dat_omitted)
+
+na.action(tmp3)
+#> 1 2
+#> 1 2
+#> attr(,"class")
+#> [1] "omit"
+na.action(tmp4)
+#> 1 2
+#> 1 2
+#> attr(,"class")
+#> [1] "omit"
+
+This example has two data frames: dat with missing data, and
+dat_omitted with cases omitted by na.omit, with an na.action
+attribute.
+
+When the input is dat_omitted, model.frame, which also stores cases
+removed, if any, does not report that cases were omitted by it.
+
+For na.omit, on the the other hand, it will pass the original object
+(dat_omitted) unchanged, including the na.action attributes, if any.
+Therefore, when na.action is used on the output (tmp4), or the
+na.action attributes retrieved, there is no way to know whether the
+cases were omitted by this call of na.omit or by a previous call,
+unlike model.frame.
+
+After studying this example, what puzzled me was no longer the
+behavior of na.omit, but the difference in the behaviors of these two
+functions when processing an object with the na.action attribute.
+
+But I now think it was designed that way. I will do my work taking
+into account the current behavior of na.omit. I'm sharing this
+observation, which is new to me (and probably only me), in case it is
+useful to others.
+
+Regards,
+Shu Fai
+
+
+On Mon, Mar 30, 2026 at 10:18?PM peter dalgaard <pdalgd at gmail.com> wrote:
+>
+> I'm fairly sure that this is deliberate, although hardly something that I bump into every day. na.omit & friends are designed to work in connection with modeling code and there may be code down the line that wants to know about omitted cases. So na.omit cleans the original data by removing some cases and attaching a list of omitted cases; if you do it again, you still have a dataframe and some omitted cases.
+>
+> If anything, I would contend that omissions should be cumulative, so if you (say) add a column with some missing values and na.omit again, then the omission list should be augmented rather than replaced.
+>
+> Also, from a pragmatic viewpoint, there is a chance that na.omit gets called repeatedly by coincidence in the labyrinth of interrelated lm functions.
+>
+> -pd
+>
+> > On 27 Mar 2026, at 15.13, Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+> >
+> > Hi All,
+> >
+> > I noticed a behavior of na.omit() that I am not sure is intended.
+> >
+> > This is adapted from the example of na.omit()
+> >
+> >> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+> >> DF_omitted <- na.omit(DF)
+> >> attr(DF_omitted, "na.action")
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >> DF_omitted2 <- na.omit(DF_omitted)
+> >> attr(DF_omitted2, "na.action")
+> > 1
+> > 1
+> > attr(,"class")
+> > [1] "omit"
+> >
+> > In the first call to na.omit(), the output, DF_omitted, correctly has only
+> > two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+> >
+> > In the second call of na.omit(), no cases are removed because DF_omitted
+> > has no missing data. However, the attribute 'na.action' is retained,
+> > indicating that Row 1 was removed.
+> >
+> > To my understanding of na.omit(), this occurred because, in the second call
+> > of na.omit(), no rows were omitted, and so the original object was
+> > returned, along with the attribute 'na.action' from the first call.
+> >
+> > From the "perspective" of the second call, no rows were omitted.
+> > Should 'na.action'
+> > be NULL (i.e., not set), as in the following example?
+> >
+> >> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+> >> DF2_omitted <- na.omit(DF2)
+> >> attr(DF2_omitted, "na.action")
+> > NULL
+> >
+> > Or is this behavior of na.omit() intended?
+> >
+> > Regards,
+> > Shu Fai
+> >
+> > [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+> --
+> Peter Dalgaard, Professor,
+> Center for Statistics, Copenhagen Business School
+> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+> Phone: (+45)38153501
+> Office: A 4.23
+> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+>
+
+
