@@ -23246,22 +23246,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-5d65183bd194",
-      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
-      "from_name": "vikrant",
-      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
-      "date": "2010-02-10T09:44:57Z",
-      "subject": "[R] Problems with looping in R",
-      "subject_clean": "Problems with looping in R",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
-      "thread_id": "thread-5d65183bd194",
-      "thread_depth": 0,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-0b7be405ca0d",
       "message_id": "<4B728019.3030209@geo.uu.nl>",
       "from_name": "Paul Hiemstra",
@@ -23277,6 +23261,22 @@
       "body_snippet": "Hi,\n\nTake a look at rep(), specifically the each = parameter.\n\ncheers,\nPaul\n\nMadhavi Bhave wrote:\n> Dear R helpers\n>  \n> I have a city.csv file as given below.\n>  \n> 'city.csv'\n> city_name1        cit",
       "thread_id": "thread-2ce201131495",
       "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-5d65183bd194",
+      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
+      "from_name": "vikrant",
+      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
+      "date": "2010-02-10T09:44:57Z",
+      "subject": "[R] Problems with looping in R",
+      "subject_clean": "Problems with looping in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
+      "thread_id": "thread-5d65183bd194",
+      "thread_depth": 0,
       "month": "2010-02"
     },
     {
@@ -30495,22 +30495,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-713be79a562a",
-      "message_id": "<OFCF1BB4A4.EF95A801-ON852576C8.005DEB06-852576C8.005E7ED2@harvard.edu>",
-      "from_name": "Nynese Tinsley",
-      "from_email_hash": "405300992c610542cc4ba75f35311b841aca62928e3acd5efa7cba35fe25647c",
-      "date": "2010-02-12T17:11:37Z",
-      "subject": "[R] R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
-      "subject_clean": "R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his Fortran functions in R.  Previously, in Splus,\nhe would do the following:\n\n1. Compile via f90 the *.f program\n2. link the object file to the Fortran IMSL libraries via the 'ld' command\n3. start Splus and run dyn.load(*.o)\n4. call function\n\nIn his research on how to do the same in R, he ran across the following\nlink:\n\nhttp://www.stat.umn.edu/~charlie/rc/#load\n\nIn following those instructions both John and I were able to successfully:\n\n1. run R CMD SHLIB bar.f\n2. start R and run dyn.load(bar.so)\n3. call function - .Fortran(\"bar\", n=as.integer(5), x=as.double(rnorm(5)))\nHowever the problem comes in when the following line is added to the bar.f\nprogram file:\n\n call drnnor(1, x)  (This requires the Fortran IMSL Libraries)\n\nAlthough the program compiles with no problem (R CMD SHLIB bar.f), we get\nthe following error when running dyn.load(bar.so):.\n\n> dyn.load(\"bar3.so\")\nError in dyn.load(x, as.logical(local), as.logical(now)) :\n        unable to load shared library \"/home/tinsley/tmp/bar3.so\":\n  ld.so.1: R.bin: fatal: relocation error: file /home/tinsley/tmp/bar3.so:\nsymbol drnnor_: referenced symbol not found\n\nI have tried compiling it with f90, running ld and then running R CMD SHLIB\n*.so *.o and a few other combinations with the same results.  I'm still\ntesting but any help you can give would be greatly appreciated.  There's a\nbig difference between installing, updating and maintaining R (what I do a\nsystems/application administrator) and using R for statistical analysis.\n\nIMSL is included in our global library path. I created a copy of the R\nstartup script and added the IMSL library path to the R_LD_LIBRARY_PATH.\nRan ldd on R.bin to see if any dependencies were not found.\n\nIs there something available in R that can do what the IMSL drnnor (double\nprecision random number generator) function does?\n\nAgain, any light you can shed on this would be GREATLY appreciated!\n\n\nNynese Tinsley, BSEE, MSCIS\nUnix Systems Analyst\nHarvard University School of Public Health\nCenter for Biostatistics in AIDS Research (CBAR)\n651 Huntington Ave\nBoston, MA 02115-6009\n617-432-3244",
-      "body_snippet": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his ",
-      "thread_id": "thread-713be79a562a",
-      "thread_depth": 0,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-1be8c95b64da",
       "message_id": "<624934631002120911t6efebeafp4d30d77f63ccaab9@mail.gmail.com>",
       "from_name": "Ramon Diaz-Uriarte",
@@ -30529,6 +30513,22 @@
       "body_snippet": "Frank, let me make sure I understand:\n\n\n\nOn Fri, Feb 12, 2010 at 5:57 PM, Frank E Harrell Jr\n<f.harrell at vanderbilt.edu> wrote:\n> Ramon Diaz-Uriarte wrote:\n>>\n>> Dear Frank,\n>>\n>> Thanks a lot for y",
       "thread_id": "thread-c86b71206a4f",
       "thread_depth": 4,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-713be79a562a",
+      "message_id": "<OFCF1BB4A4.EF95A801-ON852576C8.005DEB06-852576C8.005E7ED2@harvard.edu>",
+      "from_name": "Nynese Tinsley",
+      "from_email_hash": "405300992c610542cc4ba75f35311b841aca62928e3acd5efa7cba35fe25647c",
+      "date": "2010-02-12T17:11:37Z",
+      "subject": "[R] R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
+      "subject_clean": "R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his Fortran functions in R.  Previously, in Splus,\nhe would do the following:\n\n1. Compile via f90 the *.f program\n2. link the object file to the Fortran IMSL libraries via the 'ld' command\n3. start Splus and run dyn.load(*.o)\n4. call function\n\nIn his research on how to do the same in R, he ran across the following\nlink:\n\nhttp://www.stat.umn.edu/~charlie/rc/#load\n\nIn following those instructions both John and I were able to successfully:\n\n1. run R CMD SHLIB bar.f\n2. start R and run dyn.load(bar.so)\n3. call function - .Fortran(\"bar\", n=as.integer(5), x=as.double(rnorm(5)))\nHowever the problem comes in when the following line is added to the bar.f\nprogram file:\n\n call drnnor(1, x)  (This requires the Fortran IMSL Libraries)\n\nAlthough the program compiles with no problem (R CMD SHLIB bar.f), we get\nthe following error when running dyn.load(bar.so):.\n\n> dyn.load(\"bar3.so\")\nError in dyn.load(x, as.logical(local), as.logical(now)) :\n        unable to load shared library \"/home/tinsley/tmp/bar3.so\":\n  ld.so.1: R.bin: fatal: relocation error: file /home/tinsley/tmp/bar3.so:\nsymbol drnnor_: referenced symbol not found\n\nI have tried compiling it with f90, running ld and then running R CMD SHLIB\n*.so *.o and a few other combinations with the same results.  I'm still\ntesting but any help you can give would be greatly appreciated.  There's a\nbig difference between installing, updating and maintaining R (what I do a\nsystems/application administrator) and using R for statistical analysis.\n\nIMSL is included in our global library path. I created a copy of the R\nstartup script and added the IMSL library path to the R_LD_LIBRARY_PATH.\nRan ldd on R.bin to see if any dependencies were not found.\n\nIs there something available in R that can do what the IMSL drnnor (double\nprecision random number generator) function does?\n\nAgain, any light you can shed on this would be GREATLY appreciated!\n\n\nNynese Tinsley, BSEE, MSCIS\nUnix Systems Analyst\nHarvard University School of Public Health\nCenter for Biostatistics in AIDS Research (CBAR)\n651 Huntington Ave\nBoston, MA 02115-6009\n617-432-3244",
+      "body_snippet": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his ",
+      "thread_id": "thread-713be79a562a",
+      "thread_depth": 0,
       "month": "2010-02"
     },
     {
@@ -40525,22 +40525,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-ffd0486a1004",
-      "message_id": "<6181d6961002170753u2e8b12f9ufb5f5c958db8aaca@mail.gmail.com>",
-      "from_name": "S. Few",
-      "from_email_hash": "3fbc88bcba9f37e0caa1be1d3e4feefb5325767573f0d962c9ba3d7b1a06b845",
-      "date": "2010-02-17T15:53:03Z",
-      "subject": "[R] R 64-bit memory.limit() is max of ?",
-      "subject_clean": "R 64-bit memory.limit() is max of ?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Currently using R 2.92\nWin XP\n\n\nGoal: scale up computing capacity for large datasets (1-5 million records)\n\nI realize under 32 bit versions of R the memory.limit is maxed at 4GB.\n\nQ:\n1. What are the limits under 64 bit versions of R? Are those limits OS\ndependent?\n2. Are there limits to the size of individual objects??\n3. Are there limits or problems in using functions such as lm(),\nglm(), rpart(), doBy package, MASS, etc?\n\nAny help is appreciated!\nSteve Few\nAteb, inc.\nstevefew at gmail.com",
-      "body_snippet": "Currently using R 2.92\nWin XP\n\n\nGoal: scale up computing capacity for large datasets (1-5 million records)\n\nI realize under 32 bit versions of R the memory.limit is maxed at 4GB.\n\nQ:\n1. What are the l",
-      "thread_id": "thread-ffd0486a1004",
-      "thread_depth": 0,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-dd81825c08a8",
       "message_id": "<33C13A02-F603-410A-871D-E78DDE272768@ua.ac.be>",
       "from_name": "Brandon Zicha",
@@ -40553,6 +40537,22 @@
       "body_plain": "All,\n\nI have searched the previous help boards and discovered the problem  \nwith Rdonlp2 - Specifically, its non-availability. I thought that this  \nwas my solution, but perhaps there is a better way that you all could  \nhelp me with.  I imagine that this problem is trivial to people such  \nas the experts on this mailing list.\n\nI am trying to solve this problem over and over again in a simulation:\n\nI want to find the values of x and y which minimize\nf(x,y) = sqrt((z-x)^2+(w-y)^2\n\nsubject to the constraints:\n0=< sqrt((z2-x)^2+(w2-y)^2) - d2\n0=< sqrt((z3-x)^2+(w3-y)^2) - d3\n.....\n0=< sqrt((zk-x)^2+(wk-y)^2) - dk\n\nwhere zi, wi, di are known scalars.\n\nI would appreciate any help with how to implement this in R.\n\nMany thanks,\n\nBrandon Z.\n\nUniversity of Antwerp",
       "body_snippet": "All,\n\nI have searched the previous help boards and discovered the problem  \nwith Rdonlp2 - Specifically, its non-availability. I thought that this  \nwas my solution, but perhaps there is a better way ",
       "thread_id": "thread-dd81825c08a8",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-ffd0486a1004",
+      "message_id": "<6181d6961002170753u2e8b12f9ufb5f5c958db8aaca@mail.gmail.com>",
+      "from_name": "S. Few",
+      "from_email_hash": "3fbc88bcba9f37e0caa1be1d3e4feefb5325767573f0d962c9ba3d7b1a06b845",
+      "date": "2010-02-17T15:53:03Z",
+      "subject": "[R] R 64-bit memory.limit() is max of ?",
+      "subject_clean": "R 64-bit memory.limit() is max of ?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Currently using R 2.92\nWin XP\n\n\nGoal: scale up computing capacity for large datasets (1-5 million records)\n\nI realize under 32 bit versions of R the memory.limit is maxed at 4GB.\n\nQ:\n1. What are the limits under 64 bit versions of R? Are those limits OS\ndependent?\n2. Are there limits to the size of individual objects??\n3. Are there limits or problems in using functions such as lm(),\nglm(), rpart(), doBy package, MASS, etc?\n\nAny help is appreciated!\nSteve Few\nAteb, inc.\nstevefew at gmail.com",
+      "body_snippet": "Currently using R 2.92\nWin XP\n\n\nGoal: scale up computing capacity for large datasets (1-5 million records)\n\nI realize under 32 bit versions of R the memory.limit is maxed at 4GB.\n\nQ:\n1. What are the l",
+      "thread_id": "thread-ffd0486a1004",
       "thread_depth": 0,
       "month": "2010-02"
     },
@@ -76629,18 +76629,6 @@
       "root_message_id": "msg-ed067522eec5"
     },
     {
-      "id": "thread-dd81825c08a8",
-      "subject": "non-linear contrained optimization",
-      "message_count": 2,
-      "participants": [
-        "Brandon Zicha",
-        "Ravi Varadhan"
-      ],
-      "started": "2010-02-17T15:53:03Z",
-      "last_reply": "2010-02-18T21:43:29Z",
-      "root_message_id": "msg-dd81825c08a8"
-    },
-    {
       "id": "thread-ffd0486a1004",
       "subject": "R 64-bit memory.limit() is max of ?",
       "message_count": 2,
@@ -76651,6 +76639,18 @@
       "started": "2010-02-17T15:53:03Z",
       "last_reply": "2010-02-17T16:14:52Z",
       "root_message_id": "msg-ffd0486a1004"
+    },
+    {
+      "id": "thread-dd81825c08a8",
+      "subject": "non-linear contrained optimization",
+      "message_count": 2,
+      "participants": [
+        "Brandon Zicha",
+        "Ravi Varadhan"
+      ],
+      "started": "2010-02-17T15:53:03Z",
+      "last_reply": "2010-02-18T21:43:29Z",
+      "root_message_id": "msg-dd81825c08a8"
     },
     {
       "id": "thread-e8b88f7638d3",
