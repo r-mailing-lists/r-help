@@ -454,3 +454,309 @@ separating the file name from the header=TRUE part, that it expects.
 --Chris Ryan
 
 
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Wed Apr  1 10:51:04 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Wed, 1 Apr 2026 09:51:04 +0100
+Subject: [R] Using na.omit() on the output of na.omit()
+In-Reply-To: <CAPVJd2VDDFdhHh_OEvTXOv5oS7HeNy56P+LBpJpsmKPeCcKWcw@mail.gmail.com>
+References: <CAPVJd2V317yk1Gnjhjgq2PNwJd-whiDCdL_0su7x3PZ7w1+dHQ@mail.gmail.com>
+ <FD0014F5-FBE6-4251-87B5-C322E79DB7C8@gmail.com>
+ <CAPVJd2V6xWva5w=QEgTdbaDwSk7J+eW2LsQ12+ZuFqnQeokVSA@mail.gmail.com>
+ <270ac62c-a81c-4316-a366-81e976f432e4@sapo.pt>
+ <CAPVJd2VDDFdhHh_OEvTXOv5oS7HeNy56P+LBpJpsmKPeCcKWcw@mail.gmail.com>
+Message-ID: <4c459482-00d2-4e34-bd2c-176e5586eab2@sapo.pt>
+
+Hello,
+
+Inline.
+
+?s 00:02 de 01/04/2026, Shu Fai Cheung escreveu:
+> Hi,
+> 
+> Many thanks for your detailed responses to my question and for
+> explaining how na.omit and model.frame are supposed to be used. I
+> misunderstood how na.omit is intended to be used. 
+
+No, you have not!
+Your description of what to expect from na.omit is correct.
+
+What you have misunderstood is how model.frame is intended to be used. 
+model.frame is meant to process formulas or fits, as is said in the 
+title of its help page, ?model.frame.
+
+model.frame does remove NA's, if any. And when it does so it returns an 
+object with attribute "na.action" set.
+
+But if there are no NA's then model.frame does not keep an eventual 
+"na.action" attribute because formulas and fits can be anything and the 
+data set it processes and passes on to na.omit is not the data set in 
+its argument `data` like I explained earlier.
+
+Hope this helps,
+
+Rui Barradas
+
+If it does nothing
+> (no cases removed), it should return the object unchanged, including
+> the object's attributes, even if na.action is one of them. Thanks
+> again.
+> 
+> Regards,
+> Shu Fai
+> 
+> On Wed, Apr 1, 2026 at 1:41?AM Rui Barradas <ruipbarradas at sapo.pt> wrote:
+>>
+>> ?s 00:27 de 31/03/2026, Shu Fai Cheung escreveu:
+>>> Thanks for the comment. Just to share a little bit more. I used lm()
+>>> in another post, but I will use model.frame here because it is
+>>> model.frame that uses the na.action argument.
+>>>
+>>> This is the example:
+>>>
+>>> dat <- data.frame(
+>>>     x = 1:5,
+>>>     y = 1:5,
+>>>     z = 1:5
+>>> )
+>>> dat[1, "x"] <- NA
+>>> dat[2, c("y", "z")] <- NA
+>>> dat_omitted <- na.omit(dat)
+>>> head(dat)
+>>> #>    x  y  z
+>>> #> 1 NA  1  1
+>>> #> 2  2 NA NA
+>>> #> 3  3  3  3
+>>> #> 4  4  4  4
+>>> #> 5  5  5  5
+>>> head(dat_omitted)
+>>> #>   x y z
+>>> #> 3 3 3 3
+>>> #> 4 4 4 4
+>>> #> 5 5 5 5
+>>>
+>>> tmp1 <- model.frame(y ~ x + z, dat, na.action = na.omit)
+>>> tmp2 <- model.frame(y ~ x + z, dat_omitted, na.action = na.omit)
+>>>
+>>> na.action(tmp1)
+>>> #> 1 2
+>>> #> 1 2
+>>> #> attr(,"class")
+>>> #> [1] "omit"
+>>> na.action(tmp2)
+>>> #> NULL
+>>>
+>>> tmp3 <- na.omit(dat)
+>>> tmp4 <- na.omit(dat_omitted)
+>>>
+>>> na.action(tmp3)
+>>> #> 1 2
+>>> #> 1 2
+>>> #> attr(,"class")
+>>> #> [1] "omit"
+>>> na.action(tmp4)
+>>> #> 1 2
+>>> #> 1 2
+>>> #> attr(,"class")
+>>> #> [1] "omit"
+>>>
+>>> This example has two data frames: dat with missing data, and
+>>> dat_omitted with cases omitted by na.omit, with an na.action
+>>> attribute.
+>>>
+>>> When the input is dat_omitted, model.frame, which also stores cases
+>>> removed, if any, does not report that cases were omitted by it.
+>>>
+>>> For na.omit, on the the other hand, it will pass the original object
+>>> (dat_omitted) unchanged, including the na.action attributes, if any.
+>>> Therefore, when na.action is used on the output (tmp4), or the
+>>> na.action attributes retrieved, there is no way to know whether the
+>>> cases were omitted by this call of na.omit or by a previous call,
+>>> unlike model.frame.
+>>>
+>>> After studying this example, what puzzled me was no longer the
+>>> behavior of na.omit, but the difference in the behaviors of these two
+>>> functions when processing an object with the na.action attribute.
+>>>
+>>> But I now think it was designed that way. I will do my work taking
+>>> into account the current behavior of na.omit. I'm sharing this
+>>> observation, which is new to me (and probably only me), in case it is
+>>> useful to others.
+>>>
+>>> Regards,
+>>> Shu Fai
+>>>
+>>>
+>>> On Mon, Mar 30, 2026 at 10:18?PM peter dalgaard <pdalgd at gmail.com> wrote:
+>>>>
+>>>> I'm fairly sure that this is deliberate, although hardly something that I bump into every day. na.omit & friends are designed to work in connection with modeling code and there may be code down the line that wants to know about omitted cases. So na.omit cleans the original data by removing some cases and attaching a list of omitted cases; if you do it again, you still have a dataframe and some omitted cases.
+>>>>
+>>>> If anything, I would contend that omissions should be cumulative, so if you (say) add a column with some missing values and na.omit again, then the omission list should be augmented rather than replaced.
+>>>>
+>>>> Also, from a pragmatic viewpoint, there is a chance that na.omit gets called repeatedly by coincidence in the labyrinth of interrelated lm functions.
+>>>>
+>>>> -pd
+>>>>
+>>>>> On 27 Mar 2026, at 15.13, Shu Fai Cheung <shufai.cheung at gmail.com> wrote:
+>>>>>
+>>>>> Hi All,
+>>>>>
+>>>>> I noticed a behavior of na.omit() that I am not sure is intended.
+>>>>>
+>>>>> This is adapted from the example of na.omit()
+>>>>>
+>>>>>> DF <- data.frame(x = c(1, 2, 3), y = c(NA, 10, 1))
+>>>>>> DF_omitted <- na.omit(DF)
+>>>>>> attr(DF_omitted, "na.action")
+>>>>> 1
+>>>>> 1
+>>>>> attr(,"class")
+>>>>> [1] "omit"
+>>>>>> DF_omitted2 <- na.omit(DF_omitted)
+>>>>>> attr(DF_omitted2, "na.action")
+>>>>> 1
+>>>>> 1
+>>>>> attr(,"class")
+>>>>> [1] "omit"
+>>>>>
+>>>>> In the first call to na.omit(), the output, DF_omitted, correctly has only
+>>>>> two rows, with Row 1 removed, and 'na.action' stores the removed row number.
+>>>>>
+>>>>> In the second call of na.omit(), no cases are removed because DF_omitted
+>>>>> has no missing data. However, the attribute 'na.action' is retained,
+>>>>> indicating that Row 1 was removed.
+>>>>>
+>>>>> To my understanding of na.omit(), this occurred because, in the second call
+>>>>> of na.omit(), no rows were omitted, and so the original object was
+>>>>> returned, along with the attribute 'na.action' from the first call.
+>>>>>
+>>>>>   From the "perspective" of the second call, no rows were omitted.
+>>>>> Should 'na.action'
+>>>>> be NULL (i.e., not set), as in the following example?
+>>>>>
+>>>>>> DF2 <- data.frame(x = c(1, 2, 3), y = c(3, 10, 1))
+>>>>>> DF2_omitted <- na.omit(DF2)
+>>>>>> attr(DF2_omitted, "na.action")
+>>>>> NULL
+>>>>>
+>>>>> Or is this behavior of na.omit() intended?
+>>>>>
+>>>>> Regards,
+>>>>> Shu Fai
+>>>>>
+>>>>> [[alternative HTML version deleted]]
+>>>>>
+>>>>> ______________________________________________
+>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>>>> and provide commented, minimal, self-contained, reproducible code.
+>>>>
+>>>> --
+>>>> Peter Dalgaard, Professor,
+>>>> Center for Statistics, Copenhagen Business School
+>>>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+>>>> Phone: (+45)38153501
+>>>> Office: A 4.23
+>>>> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+>>>>
+>>>
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>>
+>> Hello,
+>>
+>> Let me try to explain the way I see it.
+>>
+>> You cannot compare the output of na.omit with the output of model.frame,
+>> they are two completely different functions, with completely different
+>> use-cases and goals.
+>> Both na.omit and model.frame are generic, so what you are calling in
+>> your examples are methods, na.omit.data.frame and model.frame.default.
+>>
+>> Start with the later, model.frame.default.
+>>
+>>   From the documentation, help("model.frame"), section Arguments,
+>> argument dots:
+>>
+>> ...
+>> for model.frame methods, a mix of further arguments such as data,
+>> na.action, subset to pass to the default method. Any additional
+>> arguments (such as offset and weights or other named arguments) which
+>> reach the default method are used to create further columns in the model
+>> frame, with parenthesised names such as "(offset)".
+>>
+>>
+>>
+>> So, if you pass arguments like `offset` or `weights` they will be
+>> included in the returned data.frame with names `(offset)` or
+>> `(weights)`, respectively.
+>> This is done in C code, called by the R function in code line [1], file
+>> src/library/stats/R/models.R.
+>>
+>> The C code, file src/library/stats/src/model.c, after a preamble and
+>> some sanity checks, assembles a SEXP data and a SEXP names starting in
+>> line [2]. This `data` object includes the relevant variables in the
+>> `data` argument of R function model.frame.default plus the variables
+>> passed on to the C code in the dots argument.
+>> Note that both `data` and `names` have size equal to nvars + nactualdots.
+>>
+>> (The extra variables' names, such as `(offset)` or `(weights)` are
+>> created shortly after with snprintf in line 125.)
+>>
+>> Then, much further down the code, on line [3], R method na.omit.default
+>> is called with `data` as an argument.
+>> (This is a good example of calling R from C, btw. Another example is in
+>> Writing R Extensions, section 5.11, the lapply2 example.)
+>>
+>> The point of this already lengthy explanation is to show that the `data`
+>> passed on to na.omit.data.frame is not the `data` model.frame.default
+>> got. What na.omit.data.frame gets is the new SEXP object also named
+>> `data` assembled by the C code function modelframe.
+>> And this data set does not have a "na.action" attribute set, so when you
+>> pass `dat` na.omit will omit the NA's because they are present in the
+>> data but when you pass `dat_omitted` it will not, there is nothing to
+>> remove anymore.
+>>
+>> The C function is even careful enough to copy `data`'s attributes to
+>> `ans`, in case na.action lost (some of) them. This is done starting in
+>> line 220, near the end of the function.
+>>
+>> So if you are writing a fitting function and want to write a model.frame
+>> method, you will get a data set, for instance `dat_omitted`, possibly
+>> with a "na.action" attribute set. And you can let the C function take
+>> care of doing what it does best, then see if `dat_omitted`'s attributes
+>> are still relevant to the rest of your code.
+>>
+>> Like others have said, na.omit's behavior should be and is cumulative
+>> and I understand your surprise with model.frame's behavior, which is not
+>> cumulative. But also I believe that you are mixing two completely
+>> different things. Don't expect model.frame to keep the "na.action"
+>> attribute if there is nothing to remove. NA removal is not what
+>> model.frame is meant to do, it has provisions to remove them if
+>> necessary, that's all.
+>>
+>>
+>> [ off-topic, nitpick: in na.omit.data.frame, variable `omit` is logical
+>> and the condition in [4] could be simplified to if(any(omit)) ]
+>>
+>>
+>>
+>> [1]
+>> https://github.com/wch/r-source/blob/trunk/src/library/stats/R/models.R#L566
+>> [2]
+>> https://github.com/wch/r-source/blob/trunk/src/library/stats/src/model.c#L111
+>> [3]
+>> https://github.com/wch/r-source/blob/trunk/src/library/stats/src/model.c#L210
+>> [4]
+>> https://github.com/wch/r-source/blob/trunk/src/library/stats/R/nafns.R#L83
+>>
+>>
+>> Hope this helps,
+>>
+>> Rui Barradas
+>>
+
+
