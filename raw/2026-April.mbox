@@ -760,3 +760,201 @@ If it does nothing
 >>
 
 
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Thu Apr  2 10:03:10 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Thu, 2 Apr 2026 10:03:10 +0200
+Subject: [R] Running CSV File
+In-Reply-To: <fake-VM-id.e61944c4b43ebfdfa7693124de6ddd2b@talos.iv>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+ <CAHrK516fnQU2NncYTfkggpuRZEFz1rHZ6ABHg2HEcRKK5hyi_g@mail.gmail.com>
+ <CA+etgPn5qEQ6E6WrO8wMTmVFZaD8b4rL9=a_AP4dwUtPo3Y3sw@mail.gmail.com>
+Message-ID: <27086.8894.978791.804800@stat.math.ethz.ch>
+
+>>>>> CALUM POLWART 
+>>>>>     on Sun, 29 Mar 2026 10:49:42 +0100 writes:
+
+    > There are a couple of oddities in what's been
+    > provided. Some may be genuine, and others perhaps just in
+    > the email trail.
+
+    > read.csv should have no space in the function name
+
+    > " cancer_data" should be the EXACT name of the file. It's
+    > unusual to start a filename with a space. Also relatively
+    > unusual to not have file extension so this might actually
+    > be "cancer_data.csv"
+
+    > You can't attach files to this system. That would be a
+    > security disaster!
+
+    > You may actually find tidyverse easier to work with. 
+
+Well, really !?
+
+    > If you are struggling to load data in, I suspect you will. In
+    > which case:
+
+> # run this line once only 
+> install.packages("tidyverse")
+
+    > Then run this:
+
+> require(tidyverse) 
+> g <- read_csv("cancer_data.csv")
+
+    > Tidyverse will *try* to sort datatypes out and defaults to
+    > coma and headers
+
+I don't think this was Li DiJulia's problem.
+Finding the correct  'sep' etc. should not be *so* hard
+
+*and* I really think beginners should learn base R before
+starting to delve into using non-standard evaluation (a "feature" of the tidyverse)
+everywhere.
+
+Yes, this is just my opinion.
+Martin
+
+--
+Martin Maechler
+ETH Zurich  and  R Core team
+
+
+
+
+    > On Sun, 29 Mar 2026, 10:32 John C Frain,
+    > <frainj at gmail.com> wrote:
+
+    >> Your file was not attached to your email
+    >> 
+    >> Try
+    >> 
+    >> g<-read. csv (" cancer_data", header=TRUE, sep= ',')
+    >> 
+    >> Also, you should consult the help files before posting.
+    >> 
+    >> John C Frain 3 Aranleigh Park Rathfarnham Dublin 14
+    >> Ireland www.tcd.ie/Economics/staff/frainj/home.html
+    >> https://jcfrain.wordpress.com/
+    >> https://jcfraincv19.wordpress.com/
+    >> 
+    >> mailto:frainj at tcd.ie mailto:frainj at gmail.com
+    >> 
+    >> On Sun 29 Mar 2026, 09:34 Li DiJulia,
+    >> <dijulia98 at gmail.com> wrote:
+    >> 
+    >> > To whom it may concern,
+    >> >
+    >> > I am trying to save this file "cancer data," which I
+    >> have attached in this > email, into working directory and
+    >> when I click on "to source file location" > under set
+    >> working directory" it says- The current active source is
+    >> not > saved so does not have a directory to change
+    >> into. I even clicked on > "choose directory" under set
+    >> working directory, my file still won't show > up.
+    >> >
+    >> > As for running data, When I downloaded the cancer data
+    >> into R studio and > ran g<-read. csv (" cancer_data,"
+    >> header=True, sep ','), I got this error > message:
+    >> *unexpected string consonant in g<-read. csv. ("
+    >> cancer_data," > header=True, sep ',').*
+    >> >
+    >> > Note: I saved the data in my computer as "cancer data."
+    >> I am not sure what > I am doing wrong. Please advise
+    >> >
+    >> > When I tried this g<-read.csv. ("cancer_data,"
+    >> header=true, sep=",") I got > this: in
+    >> read.csv. ("cancer_data, header= true, sep=','):could not
+    >> find > function "read.csv". I am not sure what I am doing
+    >> wrong. Please advise
+    >> >
+    >> >
+    >> > Thanks.  >
+    >> ______________________________________________ >
+    >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and
+    >> more, see > https://stat.ethz.ch/mailman/listinfo/r-help
+    >> > PLEASE do read the posting guide >
+    >> https://www.R-project.org/posting-guide.html > and
+    >> provide commented, minimal, self-contained, reproducible
+    >> code.
+    >> >
+    >> 
+    >> [[alternative HTML version deleted]]
+    >> 
+    >> ______________________________________________
+    >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and
+    >> more, see https://stat.ethz.ch/mailman/listinfo/r-help
+    >> PLEASE do read the posting guide
+    >> https://www.R-project.org/posting-guide.html and provide
+    >> commented, minimal, self-contained, reproducible code.
+    >> 
+
+    > 	[[alternative HTML version deleted]]
+
+    > ______________________________________________
+    > R-help at r-project.org mailing list -- To UNSUBSCRIBE and
+    > more, see https://stat.ethz.ch/mailman/listinfo/r-help
+    > PLEASE do read the posting guide
+    > https://www.R-project.org/posting-guide.html and provide
+    > commented, minimal, self-contained, reproducible code.
+
+
+From po|c1410 @end|ng |rom gm@||@com  Thu Apr  2 15:46:43 2026
+From: po|c1410 @end|ng |rom gm@||@com (CALUM POLWART)
+Date: Thu, 2 Apr 2026 14:46:43 +0100
+Subject: [R] Running CSV File
+In-Reply-To: <27086.8894.978791.804800@stat.math.ethz.ch>
+References: <CAGghxKPtv3OFdmafoY1yhcDC+Cv=4z6=sMu77=EyY8_oHkrcVA@mail.gmail.com>
+ <CAHrK516fnQU2NncYTfkggpuRZEFz1rHZ6ABHg2HEcRKK5hyi_g@mail.gmail.com>
+ <CA+etgPn5qEQ6E6WrO8wMTmVFZaD8b4rL9=a_AP4dwUtPo3Y3sw@mail.gmail.com>
+ <fake-VM-id.e61944c4b43ebfdfa7693124de6ddd2b@talos.iv>
+ <27086.8894.978791.804800@stat.math.ethz.ch>
+Message-ID: <CA+etgPk4_Kd_-A=oMNze3EEQDZ5RfLS7JcvBTzaEUNOD3zebLw@mail.gmail.com>
+
+On Thu, 2 Apr 2026, 09:03 Martin Maechler, <maechler at stat.math.ethz.ch>
+wrote:
+
+> >>>>> CALUM POLWART
+> >>>>>     on Sun, 29 Mar 2026 10:49:42 +0100 writes:
+>
+>
+
+>
+>     > You may actually find tidyverse easier to work with.
+>
+> Well, really !?
+>
+>     > If you are struggling to load data in, I suspect you will.
+
+
+>     > Tidyverse will *try* to sort datatypes out and defaults to
+
+    > coma and headers
+>
+> I don't think this was Li DiJulia's problem.
+> Finding the correct  'sep' etc. should not be *so* hard
+>
+
+No. I didn't mean it will do that, I didn't check the manual for read.csv
+to know it's also defaulting the same. I was meaning it might minimise the
+code required. But what I meant it will *try* to make numbers number and
+dates dates etc. If you haven't managed to make the basic import command
+right, you almost certainly won't manage to make the data types correct.
+
+>
+> *and* I really think beginners should learn base R before
+> starting to delve into using non-standard evaluation (a "feature" of the
+> tidyverse)
+> everywhere.
+>
+> Yes, this is just my opinion.
+>
+
+And thankfully people are allowed to differ in opinions.
+
+My opinion is it very much depends what you intend to do with R if
+understanding base R is actually useful or not.
+
+	[[alternative HTML version deleted]]
+
+
