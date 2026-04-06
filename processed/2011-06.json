@@ -35733,22 +35733,6 @@
       "month": "2011-06"
     },
     {
-      "id": "msg-d55e25456ad2",
-      "message_id": "<BANLkTi=Gg92_ixXVh-iQoTqZ7WCQWLCJbw@mail.gmail.com>",
-      "from_name": "Cormac Long",
-      "from_email_hash": "b3f723bcd5c65ae1262349316476a79057d9b41e9edee41569aea00c878765b4",
-      "date": "2011-06-23T13:44:20Z",
-      "subject": "[R] problem (and solution) to rle on vector with NA values",
-      "subject_clean": "problem (and solution) to rle on vector with NA values",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello there R-help,\n\nI'm not sure if this should be posted here - so apologies if this is the case.\nI've found a problem while using rle and am proposing a solution to the issue.\n\nDescription:\nI ran into a niggle with rle today when working with vectors with NA values\n(using R 2.31.0 on Windows 7 x64). It transpires that a run of NA values\nis not encoded in the same way as a run of other values. See the following\nexample as an illustration:\n\nExample:\nThe example\n??????? rv<-c(1,1,NA,NA,3,3,3);rle(rv)\nReturns\n??????? Run Length Encoding\n??????? ? lengths: int [1:4] 2 1 1 3\n??????? ? values : num [1:4] 1 NA NA 3\nnot\n??????? Run Length Encoding\n??????? ? lengths: int [1:3] 2 2 3\n??????? ? values : num [1:3] 1 NA 3\nas I expected. This caused my code to fail later (unsurprising).\n\nAnalysis:\nThe problem stems from the test\n? ? ? ?? y <- x[-1L] != x[-n]\nin line 7 of the rle function body. In this test, NA values return logical NA\nvalues, not TRUE/FALSE (again, unsurprising).\n\nResolution:\nI modified the rle function code as included below. As far as I tested, this\nmodification appears safe. The convoluted construction of naMaskVal\nshould guarantee that the NA masking value is always different from\nany value in the vector and should be safe regardless of the input vector\nform (a raw vector is not handled since the NA values do not apply here).\n\nrle<-function (x)\n{\n??? if (!is.vector(x) && !is.list(x))\n??????? stop(\"'x' must be an atomic vector\")\n??? n <- length(x)\n??? if (n == 0L)\n??????? return(structure(list(lengths = integer(), values = x),\n??????????? class = \"rle\"))\n\n??? #### BEGIN NEW SECTION PART 1 ####\n??? naRepFlag<-F\n??? if(any(is.na(x))){\n??????? naRepFlag<-T\n??????? IS_LOGIC<-ifelse(typeof(x)==\"logical\",T,F)\n\n??????? if(typeof(x)==\"logical\"){\n??????????? x<-as.integer(x)\n??????????? naMaskVal<-2\n??????? }else if(typeof(x)==\"character\"){\n??????????? naMaskVal<-paste(sample(c(letters,LETTERS,0:9),32,replace=T),collapse=\"\")\n??????? }else{\n??????????? naMaskVal<-max(0,abs(x[!is.infinite(x)]),na.rm=T)+1\n??????? }\n\n??????? x[which(is.na(x))]<-naMaskVal\n??? }\n??? #### END NEW SECTION PART 1 ####\n\n??? y <- x[-1L] != x[-n]\n??? i <- c(which(y), n)\n\n??? #### BEGIN NEW SECTION PART 2 ####\n??? if(naRepFlag)\n??????? x[which(x==naMaskVal)]<-NA\n\n??? if(IS_LOGIC)\n??????? x<-as.logical(x)\n??? #### END NEW SECTION PART 2 ####\n\n??? structure(list(lengths = diff(c(0L, i)), values = x[i]),\n??????? class = \"rle\")\n}\n\nConclusion:\nI think that the proposed code modification is an improvement on the existing\nimplementation of rle. Is it impertinent to suggest this R-modification to the\ngurus at R?\n\nBest wishes (in flame-war trepidation),\nDr. Cormac Long.",
-      "body_snippet": "Hello there R-help,\n\nI'm not sure if this should be posted here - so apologies if this is the case.\nI've found a problem while using rle and am proposing a solution to the issue.\n\nDescription:\nI ran i",
-      "thread_id": "thread-d55e25456ad2",
-      "thread_depth": 0,
-      "month": "2011-06"
-    },
-    {
       "id": "msg-d4fc0395af1d",
       "message_id": "<BANLkTimcVjA_f2Kp=yy72Y24F_LJ9R1cgw@mail.gmail.com>",
       "from_name": "Adriana Bejarano",
@@ -35761,6 +35745,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110623/2e0c5aa1/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110623/2e0c5aa1/attachment.pl>",
       "thread_id": "thread-d4fc0395af1d",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-d55e25456ad2",
+      "message_id": "<BANLkTi=Gg92_ixXVh-iQoTqZ7WCQWLCJbw@mail.gmail.com>",
+      "from_name": "Cormac Long",
+      "from_email_hash": "b3f723bcd5c65ae1262349316476a79057d9b41e9edee41569aea00c878765b4",
+      "date": "2011-06-23T13:44:20Z",
+      "subject": "[R] problem (and solution) to rle on vector with NA values",
+      "subject_clean": "problem (and solution) to rle on vector with NA values",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello there R-help,\n\nI'm not sure if this should be posted here - so apologies if this is the case.\nI've found a problem while using rle and am proposing a solution to the issue.\n\nDescription:\nI ran into a niggle with rle today when working with vectors with NA values\n(using R 2.31.0 on Windows 7 x64). It transpires that a run of NA values\nis not encoded in the same way as a run of other values. See the following\nexample as an illustration:\n\nExample:\nThe example\n??????? rv<-c(1,1,NA,NA,3,3,3);rle(rv)\nReturns\n??????? Run Length Encoding\n??????? ? lengths: int [1:4] 2 1 1 3\n??????? ? values : num [1:4] 1 NA NA 3\nnot\n??????? Run Length Encoding\n??????? ? lengths: int [1:3] 2 2 3\n??????? ? values : num [1:3] 1 NA 3\nas I expected. This caused my code to fail later (unsurprising).\n\nAnalysis:\nThe problem stems from the test\n? ? ? ?? y <- x[-1L] != x[-n]\nin line 7 of the rle function body. In this test, NA values return logical NA\nvalues, not TRUE/FALSE (again, unsurprising).\n\nResolution:\nI modified the rle function code as included below. As far as I tested, this\nmodification appears safe. The convoluted construction of naMaskVal\nshould guarantee that the NA masking value is always different from\nany value in the vector and should be safe regardless of the input vector\nform (a raw vector is not handled since the NA values do not apply here).\n\nrle<-function (x)\n{\n??? if (!is.vector(x) && !is.list(x))\n??????? stop(\"'x' must be an atomic vector\")\n??? n <- length(x)\n??? if (n == 0L)\n??????? return(structure(list(lengths = integer(), values = x),\n??????????? class = \"rle\"))\n\n??? #### BEGIN NEW SECTION PART 1 ####\n??? naRepFlag<-F\n??? if(any(is.na(x))){\n??????? naRepFlag<-T\n??????? IS_LOGIC<-ifelse(typeof(x)==\"logical\",T,F)\n\n??????? if(typeof(x)==\"logical\"){\n??????????? x<-as.integer(x)\n??????????? naMaskVal<-2\n??????? }else if(typeof(x)==\"character\"){\n??????????? naMaskVal<-paste(sample(c(letters,LETTERS,0:9),32,replace=T),collapse=\"\")\n??????? }else{\n??????????? naMaskVal<-max(0,abs(x[!is.infinite(x)]),na.rm=T)+1\n??????? }\n\n??????? x[which(is.na(x))]<-naMaskVal\n??? }\n??? #### END NEW SECTION PART 1 ####\n\n??? y <- x[-1L] != x[-n]\n??? i <- c(which(y), n)\n\n??? #### BEGIN NEW SECTION PART 2 ####\n??? if(naRepFlag)\n??????? x[which(x==naMaskVal)]<-NA\n\n??? if(IS_LOGIC)\n??????? x<-as.logical(x)\n??? #### END NEW SECTION PART 2 ####\n\n??? structure(list(lengths = diff(c(0L, i)), values = x[i]),\n??????? class = \"rle\")\n}\n\nConclusion:\nI think that the proposed code modification is an improvement on the existing\nimplementation of rle. Is it impertinent to suggest this R-modification to the\ngurus at R?\n\nBest wishes (in flame-war trepidation),\nDr. Cormac Long.",
+      "body_snippet": "Hello there R-help,\n\nI'm not sure if this should be posted here - so apologies if this is the case.\nI've found a problem while using rle and am proposing a solution to the issue.\n\nDescription:\nI ran i",
+      "thread_id": "thread-d55e25456ad2",
       "thread_depth": 0,
       "month": "2011-06"
     },
@@ -43077,22 +43077,6 @@
       "month": "2011-06"
     },
     {
-      "id": "msg-483f2c7345da",
-      "message_id": "<BANLkTikAVnA9YXFfx2onS+cAcOEUR29Pgg@mail.gmail.com>",
-      "from_name": "Nanami 13",
-      "from_email_hash": "7b5ee916f8651a09d282f6217df9d9a88ca919251cdc4ed35adcfe5b91a8ba72",
-      "date": "2011-06-27T22:01:21Z",
-      "subject": "[R] create a new data frame after comparing two columns of the previous data frame",
-      "subject_clean": "create a new data frame after comparing two columns of the previous data frame",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/4c78d69d/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/4c78d69d/attachment.pl>",
-      "thread_id": "thread-483f2c7345da",
-      "thread_depth": 0,
-      "month": "2011-06"
-    },
-    {
       "id": "msg-1c75ff03b609",
       "message_id": "<BANLkTi=s2J-dc2tBxb1D3DWeTF5q6ZkOZA@mail.gmail.com>",
       "from_name": "Trying To learn again",
@@ -43105,6 +43089,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/284f5c26/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/284f5c26/attachment.pl>",
       "thread_id": "thread-1c75ff03b609",
+      "thread_depth": 0,
+      "month": "2011-06"
+    },
+    {
+      "id": "msg-483f2c7345da",
+      "message_id": "<BANLkTikAVnA9YXFfx2onS+cAcOEUR29Pgg@mail.gmail.com>",
+      "from_name": "Nanami 13",
+      "from_email_hash": "7b5ee916f8651a09d282f6217df9d9a88ca919251cdc4ed35adcfe5b91a8ba72",
+      "date": "2011-06-27T22:01:21Z",
+      "subject": "[R] create a new data frame after comparing two columns of the previous data frame",
+      "subject_clean": "create a new data frame after comparing two columns of the previous data frame",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/4c78d69d/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110628/4c78d69d/attachment.pl>",
+      "thread_id": "thread-483f2c7345da",
       "thread_depth": 0,
       "month": "2011-06"
     },
@@ -53985,18 +53985,6 @@
       "root_message_id": "msg-f34cca6e3b6c"
     },
     {
-      "id": "thread-770cd94373fe",
-      "subject": "Problem with a if statement inside a function",
-      "message_count": 6,
-      "participants": [
-        "Abraham Mathew",
-        "Sarah Goslee"
-      ],
-      "started": "2011-06-09T15:14:48Z",
-      "last_reply": "2011-06-09T16:33:35Z",
-      "root_message_id": "msg-770cd94373fe"
-    },
-    {
       "id": "thread-53c17a7c679b",
       "subject": "set.seed and for loop",
       "message_count": 10,
@@ -54012,6 +54000,18 @@
       "started": "2011-06-09T15:14:48Z",
       "last_reply": "2011-06-09T17:37:23Z",
       "root_message_id": "msg-53c17a7c679b"
+    },
+    {
+      "id": "thread-770cd94373fe",
+      "subject": "Problem with a if statement inside a function",
+      "message_count": 6,
+      "participants": [
+        "Abraham Mathew",
+        "Sarah Goslee"
+      ],
+      "started": "2011-06-09T15:14:48Z",
+      "last_reply": "2011-06-09T16:33:35Z",
+      "root_message_id": "msg-770cd94373fe"
     },
     {
       "id": "thread-f395cf0a35b8",
