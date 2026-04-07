@@ -1209,3 +1209,165 @@ wrote:
 	[[alternative HTML version deleted]]
 
 
+From greg @end|ng |rom ||rm@n@y@h@com  Mon Apr  6 04:45:44 2026
+From: greg @end|ng |rom ||rm@n@y@h@com (Greg Hunt)
+Date: Mon, 6 Apr 2026 12:45:44 +1000
+Subject: [R] 
+ Reading xml pdb molecular data: Expert advice for xml/R needed
+In-Reply-To: <PR3P192MB0959D311EED6777C9484576C845CA@PR3P192MB0959.EURP192.PROD.OUTLOOK.COM>
+References: <PR3P192MB0959D311EED6777C9484576C845CA@PR3P192MB0959.EURP192.PROD.OUTLOOK.COM>
+Message-ID: <CAAS8PAJKb-RFc4wvy5ObeyrryThaFAn_0gSx_KqYJWP8H9zaRA@mail.gmail.com>
+
+Leonard,
+I'd probably use a command line XSLT engine to convert the ID attributes to
+elements and then parse the result in R.  Sadly XML is a declining
+technology so support for it across the IT industry is slowly getting
+worse.
+
+Is speed really such a big issue?  How often will you need to re-parse the
+XML after its done?  What is a tolerable time and what drives that time
+limit?  I've had large data sets that I've needed  to process in the past
+where I'd kick off the load after dinner and it would be done in the
+morning, but that was a process I only ever needed to do once a month.
+Annoying?  Sure.  Not the end of the world.
+
+Greg
+
+On Mon, 6 Apr 2026 at 05:44, Leo Mada via R-help <r-help at r-project.org>
+wrote:
+
+> Dear R-Users,
+>
+> I want to extract the molecular structure from PDB XML files using R. I
+> came up with 3 variants of R code, but none is ideal. I will describe the 3
+> ways below and hope to find some expert advice how to do it best.
+>
+> Functional versions of the 3 variants of code are posted on GitHub:
+> https://github.com/discoleo/Rpdb/issues/4
+>
+> Various example files can be downloaded from:
+> https://www.rcsb.org/
+> - after searching for the PDB code (e.g. 4wrg), see button:
+> "Download File" => "PDB XML.gz format";
+>
+> Examples of various sizes are:
+>
+> # Atoms: 2485 (Smallish)
+> doc = xmlParse("4wrg.xml")
+>
+> # Atoms: 12500 (Medium)
+> doc = xmlParse("3fxi.xml")
+>
+> # Atoms: 25450 (Large)
+> # - contains 10 models of 2545 atoms each;
+> doc = xmlParse("7k3g.xml")
+>
+> # Atoms: 1,359,288 (Very Large)
+> # - contains 378 "chains" of 3596 atoms each;
+> doc = xmlParse("6x63.xml")
+> # Note: slow to open & very slow to convert to data.frame (~30 minutes);
+>
+> My 3 approaches follow now:
+>
+> 1. Using package XML
+> Unfortunately, I do not have much experience with this package. I used
+> mostly the xml2 package. However, this version works best - though still
+> NOT perfect.
+>
+> The effort to convert to a data.frame is small and it is pretty fast, too.
+> However, I did not find a way to extract a data.frame which includes one of
+> the xml attributes. The atom id is stored as an attribute in the
+> "atom_site" parent. I therefore parse first the "atom_site" subtree to add
+> the value of the id attribute as a proper child-node to each of the
+> "atom_site" nodes:
+>
+> ### Atoms:
+> at = getNodeSet(doc,
+> "/PDBx:datablock/PDBx:atom_siteCategory/PDBx:atom_site[@id]")
+>
+> tmp = lapply(seq_along(at), function(id) {
+> idN = xmlAttrs(at[[id]])[["id"]];
+> addChildren(at[[id]], kids = idN);
+> })
+>
+> # Extract now the data.frame:
+> tmp = xmlToDataFrame(nodes = tmp,
+> homogeneous = TRUE, collectNames = F)
+>
+> It works "fastesh", except for the last example, where it takes ~30
+> minutes (but ultimately did complete).
+>
+>
+> 2. Using package xml2
+> Involves explicitly reading all sub-nodes of the "atom_site" node. Much
+> more code to write (but is already done on GitHub).
+>
+> However, it has its own quirks: once I iterate over each "atom_site" node,
+> I need to convert it to text and read the small subtree as xml again.
+> Otherwise, it would take forever to process the whole tree.
+>
+> I tried as_list as well (on the "whole" xml-branch), but it is slower and
+> converting it to a data.frame is even more cumbersome (and slow).
+>
+> 3. Using package xslt
+> Seemed a reasonable approach - but I still do NOT know how to convert it
+> to a data.frame. I generate a quasi-csv, which needs some post-processing
+> to become a correct csv and then read the csv.
+>
+> The xslt stylesheet is included on the GitHub issue page - although I am a
+> little bit rusty with xslt. It may be possible to improve it.
+>
+> # - TODO: convert efficiently to data.frame;
+> style = read_xml(xs) # see GitHub;
+> tmp = xml_xslt(doc, style)
+> tmp = as.character(tmp)
+> tmp = substr(tmp, 39, nchar(tmp)) # Remove "<xml ...>"
+> tmp = gsub("[\n \r\t]+", "", tmp)
+> tmp = gsub("&gt;", "\n", tmp)
+> tmp = read.csv(text = tmp, header = FALSE)
+> head(tmp)
+>
+>
+> FINAL REMARKS
+>
+> I prefer to extract the actual "id" and not infer anything about it. These
+> ids were not continuous in the legacy pdb format. Molecular chains had
+> chain terminators with id, but those were not atoms. The next atom would
+> therefore skip 1 id.
+>
+> The legacy pdb format had fixed width fields and it ran out of pdb codes
+> some 2 years ago. The xml pdb format seems a reasonably accessible way to
+> read newer pdb files. But I struggle to find the ideal approach to read
+> these files. Some expert advice is well appreciated.
+>
+> It may be warranted to improve some of the existing xml packages as well.
+> The Protein Data Bank contains over 250,000 protein structures determined
+> experimentally and even more models. It is a large resource to explore and
+> I find the R language more versatile than traditional tools used by
+> biochemists.
+>
+> There is a newer text-based pdb format. I started to read the
+> documentation some 2 years ago - but it was like reading a horror story -
+> and this is not only a joke! E.g. it is described how to loop over the
+> atoms-rows and duplicate the header for each row: in the statistics
+> community this is commonly known as csv-style data with headers. If anyone
+> is interested, I will search for the documentation and post a link to it.
+>
+> Sincerely,
+>
+> Leonard
+>
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
