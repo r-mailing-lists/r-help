@@ -30495,6 +30495,22 @@
       "month": "2010-02"
     },
     {
+      "id": "msg-713be79a562a",
+      "message_id": "<OFCF1BB4A4.EF95A801-ON852576C8.005DEB06-852576C8.005E7ED2@harvard.edu>",
+      "from_name": "Nynese Tinsley",
+      "from_email_hash": "405300992c610542cc4ba75f35311b841aca62928e3acd5efa7cba35fe25647c",
+      "date": "2010-02-12T17:11:37Z",
+      "subject": "[R] R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
+      "subject_clean": "R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his Fortran functions in R.  Previously, in Splus,\nhe would do the following:\n\n1. Compile via f90 the *.f program\n2. link the object file to the Fortran IMSL libraries via the 'ld' command\n3. start Splus and run dyn.load(*.o)\n4. call function\n\nIn his research on how to do the same in R, he ran across the following\nlink:\n\nhttp://www.stat.umn.edu/~charlie/rc/#load\n\nIn following those instructions both John and I were able to successfully:\n\n1. run R CMD SHLIB bar.f\n2. start R and run dyn.load(bar.so)\n3. call function - .Fortran(\"bar\", n=as.integer(5), x=as.double(rnorm(5)))\nHowever the problem comes in when the following line is added to the bar.f\nprogram file:\n\n call drnnor(1, x)  (This requires the Fortran IMSL Libraries)\n\nAlthough the program compiles with no problem (R CMD SHLIB bar.f), we get\nthe following error when running dyn.load(bar.so):.\n\n> dyn.load(\"bar3.so\")\nError in dyn.load(x, as.logical(local), as.logical(now)) :\n        unable to load shared library \"/home/tinsley/tmp/bar3.so\":\n  ld.so.1: R.bin: fatal: relocation error: file /home/tinsley/tmp/bar3.so:\nsymbol drnnor_: referenced symbol not found\n\nI have tried compiling it with f90, running ld and then running R CMD SHLIB\n*.so *.o and a few other combinations with the same results.  I'm still\ntesting but any help you can give would be greatly appreciated.  There's a\nbig difference between installing, updating and maintaining R (what I do a\nsystems/application administrator) and using R for statistical analysis.\n\nIMSL is included in our global library path. I created a copy of the R\nstartup script and added the IMSL library path to the R_LD_LIBRARY_PATH.\nRan ldd on R.bin to see if any dependencies were not found.\n\nIs there something available in R that can do what the IMSL drnnor (double\nprecision random number generator) function does?\n\nAgain, any light you can shed on this would be GREATLY appreciated!\n\n\nNynese Tinsley, BSEE, MSCIS\nUnix Systems Analyst\nHarvard University School of Public Health\nCenter for Biostatistics in AIDS Research (CBAR)\n651 Huntington Ave\nBoston, MA 02115-6009\n617-432-3244",
+      "body_snippet": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his ",
+      "thread_id": "thread-713be79a562a",
+      "thread_depth": 0,
+      "month": "2010-02"
+    },
+    {
       "id": "msg-1be8c95b64da",
       "message_id": "<624934631002120911t6efebeafp4d30d77f63ccaab9@mail.gmail.com>",
       "from_name": "Ramon Diaz-Uriarte",
@@ -30513,22 +30529,6 @@
       "body_snippet": "Frank, let me make sure I understand:\n\n\n\nOn Fri, Feb 12, 2010 at 5:57 PM, Frank E Harrell Jr\n<f.harrell at vanderbilt.edu> wrote:\n> Ramon Diaz-Uriarte wrote:\n>>\n>> Dear Frank,\n>>\n>> Thanks a lot for y",
       "thread_id": "thread-c86b71206a4f",
       "thread_depth": 4,
-      "month": "2010-02"
-    },
-    {
-      "id": "msg-713be79a562a",
-      "message_id": "<OFCF1BB4A4.EF95A801-ON852576C8.005DEB06-852576C8.005E7ED2@harvard.edu>",
-      "from_name": "Nynese Tinsley",
-      "from_email_hash": "405300992c610542cc4ba75f35311b841aca62928e3acd5efa7cba35fe25647c",
-      "date": "2010-02-12T17:11:37Z",
-      "subject": "[R] R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
-      "subject_clean": "R - Compiling and calling Fortran code that uses IMSL libraries - Help!",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his Fortran functions in R.  Previously, in Splus,\nhe would do the following:\n\n1. Compile via f90 the *.f program\n2. link the object file to the Fortran IMSL libraries via the 'ld' command\n3. start Splus and run dyn.load(*.o)\n4. call function\n\nIn his research on how to do the same in R, he ran across the following\nlink:\n\nhttp://www.stat.umn.edu/~charlie/rc/#load\n\nIn following those instructions both John and I were able to successfully:\n\n1. run R CMD SHLIB bar.f\n2. start R and run dyn.load(bar.so)\n3. call function - .Fortran(\"bar\", n=as.integer(5), x=as.double(rnorm(5)))\nHowever the problem comes in when the following line is added to the bar.f\nprogram file:\n\n call drnnor(1, x)  (This requires the Fortran IMSL Libraries)\n\nAlthough the program compiles with no problem (R CMD SHLIB bar.f), we get\nthe following error when running dyn.load(bar.so):.\n\n> dyn.load(\"bar3.so\")\nError in dyn.load(x, as.logical(local), as.logical(now)) :\n        unable to load shared library \"/home/tinsley/tmp/bar3.so\":\n  ld.so.1: R.bin: fatal: relocation error: file /home/tinsley/tmp/bar3.so:\nsymbol drnnor_: referenced symbol not found\n\nI have tried compiling it with f90, running ld and then running R CMD SHLIB\n*.so *.o and a few other combinations with the same results.  I'm still\ntesting but any help you can give would be greatly appreciated.  There's a\nbig difference between installing, updating and maintaining R (what I do a\nsystems/application administrator) and using R for statistical analysis.\n\nIMSL is included in our global library path. I created a copy of the R\nstartup script and added the IMSL library path to the R_LD_LIBRARY_PATH.\nRan ldd on R.bin to see if any dependencies were not found.\n\nIs there something available in R that can do what the IMSL drnnor (double\nprecision random number generator) function does?\n\nAgain, any light you can shed on this would be GREATLY appreciated!\n\n\nNynese Tinsley, BSEE, MSCIS\nUnix Systems Analyst\nHarvard University School of Public Health\nCenter for Biostatistics in AIDS Research (CBAR)\n651 Huntington Ave\nBoston, MA 02115-6009\n617-432-3244",
-      "body_snippet": "Good Afternoon R Help!\n\n\nOn of my users is seriously thinking about moving to R from Splus.  In his\ntesting, he has already found some benefits to it.  He has, however run\ninto one issue, calling his ",
-      "thread_id": "thread-713be79a562a",
-      "thread_depth": 0,
       "month": "2010-02"
     },
     {
@@ -53175,24 +53175,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-167ea76f0052",
-      "message_id": "<1266933900842-1565920.post@n4.nabble.com>",
-      "from_name": "drlasher",
-      "from_email_hash": "300d8f823b508aae14dc94db57fd7789c2fd2da2278bf32702acd22c1ffe0f2b",
-      "date": "2010-02-23T14:05:00Z",
-      "subject": "[R] axes limits in do3d",
-      "subject_clean": "axes limits in do3d",
-      "in_reply_to": "<1266923000359-1565754.post@n4.nabble.com>",
-      "references": [
-        "<1266923000359-1565754.post@n4.nabble.com>"
-      ],
-      "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565920.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
-      "thread_id": "thread-1a364afc21c8",
-      "thread_depth": 1,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-2a3181f25218",
       "message_id": "<1266933900706-1565919.post@n4.nabble.com>",
       "from_name": "drlasher",
@@ -53205,6 +53187,24 @@
         "<1266923000359-1565754.post@n4.nabble.com>"
       ],
       "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565919.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
+      "thread_id": "thread-1a364afc21c8",
+      "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-167ea76f0052",
+      "message_id": "<1266933900842-1565920.post@n4.nabble.com>",
+      "from_name": "drlasher",
+      "from_email_hash": "300d8f823b508aae14dc94db57fd7789c2fd2da2278bf32702acd22c1ffe0f2b",
+      "date": "2010-02-23T14:05:00Z",
+      "subject": "[R] axes limits in do3d",
+      "subject_clean": "axes limits in do3d",
+      "in_reply_to": "<1266923000359-1565754.post@n4.nabble.com>",
+      "references": [
+        "<1266923000359-1565754.post@n4.nabble.com>"
+      ],
+      "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565920.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
       "thread_id": "thread-1a364afc21c8",
       "thread_depth": 1,
