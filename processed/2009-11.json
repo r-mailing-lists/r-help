@@ -31191,24 +31191,6 @@
       "month": "2009-11"
     },
     {
-      "id": "msg-1486d5bf22c9",
-      "message_id": "<26378547.post@talk.nabble.com>",
-      "from_name": "cls59",
-      "from_email_hash": "61a5157bf3b50056b8fad9b559d93b86915f2e7b847327766122b4f2cfc76e33",
-      "date": "2009-11-16T20:06:05Z",
-      "subject": "[R] Writing a data frame in an excel file",
-      "subject_clean": "Writing a data frame in an excel file",
-      "in_reply_to": "<26378240.post@talk.nabble.com>",
-      "references": [
-        "<26378240.post@talk.nabble.com>"
-      ],
-      "body_plain": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls file into a .csv file. Thanks in advance\n> \n\n\nBase R cannot write .xls files by it's self.  You should output CSV using\nwrite.csv():\n\n  write.csv( dataFrame, file = 'results.csv' )\n\nIf you are using R on windows, then the RODBC package provides a mechanism\nfor dumping data frames directly to Excel files, possibly with multiple\nsheets:\n\n  require( RODBC )\n\n  xlsFile <- odbcConnectExcel( 'results.xls', readOnly = F )\n\n  sqlSave( xlsFile, dataFrame, tablename = 'R Results', rownames = F )\n\n  odbcCloseAll()\n\n\nThe tablename argument to sqlSave allows you to assign a name to the excel\nsheet that will contain the data.frame.\n\n\n-Charlie\n\n-----\nCharlie Sharpsteen\nUndergraduate\nEnvironmental Resources Engineering\nHumboldt State University\n-- \nView this message in context: http://old.nabble.com/Writing-a-data-frame-in-an-excel-file-tp26378240p26378547.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls ",
-      "thread_id": "thread-c5da7db07397",
-      "thread_depth": 1,
-      "month": "2009-11"
-    },
-    {
       "id": "msg-8ae35801bf43",
       "message_id": "<65CC7B87-2F10-453F-8EF2-BFF9C12BAA67@comcast.net>",
       "from_name": "David Winsemius",
@@ -31226,6 +31208,24 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20091116/155e3667/attachment-0001.pl>",
       "thread_id": "thread-072b94ae2a86",
       "thread_depth": 3,
+      "month": "2009-11"
+    },
+    {
+      "id": "msg-1486d5bf22c9",
+      "message_id": "<26378547.post@talk.nabble.com>",
+      "from_name": "cls59",
+      "from_email_hash": "61a5157bf3b50056b8fad9b559d93b86915f2e7b847327766122b4f2cfc76e33",
+      "date": "2009-11-16T20:06:05Z",
+      "subject": "[R] Writing a data frame in an excel file",
+      "subject_clean": "Writing a data frame in an excel file",
+      "in_reply_to": "<26378240.post@talk.nabble.com>",
+      "references": [
+        "<26378240.post@talk.nabble.com>"
+      ],
+      "body_plain": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls file into a .csv file. Thanks in advance\n> \n\n\nBase R cannot write .xls files by it's self.  You should output CSV using\nwrite.csv():\n\n  write.csv( dataFrame, file = 'results.csv' )\n\nIf you are using R on windows, then the RODBC package provides a mechanism\nfor dumping data frames directly to Excel files, possibly with multiple\nsheets:\n\n  require( RODBC )\n\n  xlsFile <- odbcConnectExcel( 'results.xls', readOnly = F )\n\n  sqlSave( xlsFile, dataFrame, tablename = 'R Results', rownames = F )\n\n  odbcCloseAll()\n\n\nThe tablename argument to sqlSave allows you to assign a name to the excel\nsheet that will contain the data.frame.\n\n\n-Charlie\n\n-----\nCharlie Sharpsteen\nUndergraduate\nEnvironmental Resources Engineering\nHumboldt State University\n-- \nView this message in context: http://old.nabble.com/Writing-a-data-frame-in-an-excel-file-tp26378240p26378547.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls ",
+      "thread_id": "thread-c5da7db07397",
+      "thread_depth": 1,
       "month": "2009-11"
     },
     {
@@ -36391,6 +36391,22 @@
       "month": "2009-11"
     },
     {
+      "id": "msg-dfed987df7f7",
+      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
+      "from_name": "Jason Rupert",
+      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
+      "date": "2009-11-18T22:57:26Z",
+      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
+      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
+      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
+      "thread_id": "thread-dfed987df7f7",
+      "thread_depth": 0,
+      "month": "2009-11"
+    },
+    {
       "id": "msg-7924b044359a",
       "message_id": "<EC0F8FF776F3F74E9C63CE16641C962804115C43@AKLEXB02.hort.net.nz>",
       "from_name": "Peter Alspach",
@@ -36408,22 +36424,6 @@
       "body_snippet": "Tena koe Martin\n\nThis is what I get (it is unclear to me why you don't tell use\nspecifically what you get):\n\nplot(1,1, xlim=c(1,10), ylim=c(0,10000), log=\"y\", type='n')\nWarning message:\nIn plot.window",
       "thread_id": "thread-5c90582e074e",
       "thread_depth": 3,
-      "month": "2009-11"
-    },
-    {
-      "id": "msg-dfed987df7f7",
-      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
-      "from_name": "Jason Rupert",
-      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
-      "date": "2009-11-18T22:57:26Z",
-      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
-      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
-      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
-      "thread_id": "thread-dfed987df7f7",
-      "thread_depth": 0,
       "month": "2009-11"
     },
     {
@@ -73892,17 +73892,6 @@
       "root_message_id": "msg-072d4c4cb53c"
     },
     {
-      "id": "thread-a35faca75f18",
-      "subject": "Repeated measures unbalanced in a split-split design",
-      "message_count": 1,
-      "participants": [
-        "Marcelo Laia"
-      ],
-      "started": "2009-11-22T14:42:32Z",
-      "last_reply": "2009-11-22T14:42:32Z",
-      "root_message_id": "msg-a35faca75f18"
-    },
-    {
       "id": "thread-1cce62023df0",
       "subject": "How to make a matrix of a number of factors?",
       "message_count": 2,
@@ -73913,6 +73902,17 @@
       "started": "2009-11-22T14:42:32Z",
       "last_reply": "2009-11-22T14:59:21Z",
       "root_message_id": "msg-1cce62023df0"
+    },
+    {
+      "id": "thread-a35faca75f18",
+      "subject": "Repeated measures unbalanced in a split-split design",
+      "message_count": 1,
+      "participants": [
+        "Marcelo Laia"
+      ],
+      "started": "2009-11-22T14:42:32Z",
+      "last_reply": "2009-11-22T14:42:32Z",
+      "root_message_id": "msg-a35faca75f18"
     },
     {
       "id": "thread-6e0929b32f5e",
