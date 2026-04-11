@@ -13248,22 +13248,6 @@
       "month": "2012-01"
     },
     {
-      "id": "msg-59249ec6d82f",
-      "message_id": "<c36897ca3a9d2e0b37703718bcc0cc45@localhost>",
-      "from_name": "Anna Olofsson",
-      "from_email_hash": "b6cb3e2c2400b3f2bd0307acedb88a01ea95c5380ee2738c17c44f3e9cfecf7f",
-      "date": "2012-01-10T22:02:04Z",
-      "subject": "[R] help",
-      "subject_clean": "help",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5.6, 7.2, 1.0, 9.3]\nplot(x,y)\n\nthen I went to the command window in the terminal (I'm using unix) to run\nthis with source(\"name_of_file\"), but it doesn't work. Shouldn't a plot\ncome up automatically when I run it? What am I doing wrong? It knows what x\nand y is, but I don't get an error of what might be wrong.\n\n> source(\"name_of_file\")\n> x\n[1] 10.4  5.6  3.1  6.4 21.7\n\n\nBest,\nAnna",
-      "body_snippet": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5",
-      "thread_id": "thread-59249ec6d82f",
-      "thread_depth": 0,
-      "month": "2012-01"
-    },
-    {
       "id": "msg-8f6fe05b5c41",
       "message_id": "<1326232924044-4283594.post@n4.nabble.com>",
       "from_name": "iliketurtles",
@@ -13276,6 +13260,22 @@
       "body_plain": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"call1a\",\"call1a\",\"call1a\") )\n\n##then this means that this particular phone call  (the first call that's\nlogged in the data set) was transferred \n##between 3 different \"modules\" before the call was terminated.\n\n##The second column is a numerical description of the module the call\nstarted with and then got transferred to prior to ##call termination. Now,\nI'll construct a ##representative array of the type of data I'm dealing with\n(the real data set goes ##on for X00,000s of rows):\n##(Ignore how I construct the following array, it?s completely unrelated to\nhow the actual data set was constructed). \n\n\na<-sapply(1:50,function(i){paste(\"call\",i,sep=\"\",collapse=\"\")})\ndevelopment.a<-seq(1,40,3)\ndevelopment.a2<-seq(1,40,5)\na[development.a]<-a[development.a+1]\na[development.a2]<-a[development.a2+1]\na[1:2]<-\"call2a\";a[3]<-\"call3a\";a[4:5]<-\"call5a\";a[6:8]<-\"call8a\";a[9]<-\"call9a\"\nb<-c(920010,960010,820009,920010,960500,970050,930010,920010,960500,970050,930900,870010,840010,960500,920010,970050,930010,960500,920010,970050,930010,960010,920010,940010,960010,970010,960500,920010,970050,930010,960500,920010,970050,930010,960500,920010,970050,930010,920010,960500,970050,930010,920009,960500,970050,930009,940010,960500,960500,960500)\ndata<-as.data.frame(cbind(a,b))\ncolnames(data)<-c(\"phone calls\",\"modules\")\ndim(data)\nprint(data[1:10,]) #sample of 10 rows\n\n# Note that in the real data set, data[,2] ranges from 810,000 to 999,999.\nI've been tasked with the following:\n# \"For each phone call that BEGINS with the module which is denoted by 81\n(i.e. of the form 81X,XXX), what is the expected number of modules in these\ncalls?\"\n#Then it's the same question for each module beginning with 82, 83, 84.....\nall the way until 99. \n#I've created code that I think works for this, but I can't actually run it\non the whole data set. I left it for 30 minutes and it only had about #5% of\nthe task completed (I clicked \"STOP\" then checked my output to see if I did\nit properly, and it seems correct).\n#I know the apply() family specializes in vector operations, but I can't\nfigure out how to complete the above question in any way other than #loops.\n\nL<-data\n\nA<-array(0,dim=c(19,2));rownames(A)<-seq(81,99,1)\nA<-data.frame(A)\n\n for(i in 1:(nrow(L)-1))\n {\n  if(L[(i+1),1]!=L[i,1])\n  {\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]<-\n    { \n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]+length(grep(as.character(L[i+1,1]),L[,1],value=FALSE)) \n#aggregate number of modules in the calls that begin with XX (not yet\naveraged). \n    }\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]<-\n    {\n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]+1\n    }\n  }\n   \n }\n\n#If I can get this code to be more memory efficient such that I can do it on\na 400,000 row data set, I can do, for example,\n\nA[17,1]/A[17,2]\n\n#and I'll arrive at the mean number of modules per call where the call\nstarts with a module that starts with 97.\n\nA[17,1] \n#is 10, which means that, out of every single call that started with a\nmodule of 97X,XXX,\n#they went through 10 modules in total. \n\nA[17,2] \n#is 6, which means that there was 6 calls in total that began with a 97X,XXX\nmodule.\n\n#Hence,\n\n\nA[17,1]/A[17,2]\n\n#is the average number of modules that were executed in all the calls that\nbegan with a 97X,XXX module.\n\n\n-----\n----\n\nIsaac\nResearch Assistant\nQuantitative Finance Faculty, UTS\n--\nView this message in context: http://r.789695.n4.nabble.com/How-to-make-this-for-loop-memory-efficient-tp4283594p4283594.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"cal",
       "thread_id": "thread-8f6fe05b5c41",
+      "thread_depth": 0,
+      "month": "2012-01"
+    },
+    {
+      "id": "msg-59249ec6d82f",
+      "message_id": "<c36897ca3a9d2e0b37703718bcc0cc45@localhost>",
+      "from_name": "Anna Olofsson",
+      "from_email_hash": "b6cb3e2c2400b3f2bd0307acedb88a01ea95c5380ee2738c17c44f3e9cfecf7f",
+      "date": "2012-01-10T22:02:04Z",
+      "subject": "[R] help",
+      "subject_clean": "help",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5.6, 7.2, 1.0, 9.3]\nplot(x,y)\n\nthen I went to the command window in the terminal (I'm using unix) to run\nthis with source(\"name_of_file\"), but it doesn't work. Shouldn't a plot\ncome up automatically when I run it? What am I doing wrong? It knows what x\nand y is, but I don't get an error of what might be wrong.\n\n> source(\"name_of_file\")\n> x\n[1] 10.4  5.6  3.1  6.4 21.7\n\n\nBest,\nAnna",
+      "body_snippet": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5",
+      "thread_id": "thread-59249ec6d82f",
       "thread_depth": 0,
       "month": "2012-01"
     },
@@ -18579,6 +18579,25 @@
       "month": "2012-01"
     },
     {
+      "id": "msg-723fd2f9325b",
+      "message_id": "<1326449349804-4291835.post@n4.nabble.com>",
+      "from_name": "statquant2",
+      "from_email_hash": "5013a2b97e2067517346f8e11c5e8331287c9bdc839553e684fc9a648c67e7fb",
+      "date": "2012-01-13T10:09:09Z",
+      "subject": "[R] simulating stable VAR process",
+      "subject_clean": "simulating stable VAR process",
+      "in_reply_to": "<4F05D6BE.9090502@gmail.com>",
+      "references": [
+        "<1325682509502-4261177.post@n4.nabble.com>",
+        "<4F05D6BE.9090502@gmail.com>"
+      ],
+      "body_plain": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is stable.\n\nWe know a condition that assure that it is stable (see first message) but\nthis is not a condition on coefficients etc...\nWhat I want is \ngenerate say a 1000 random VAR(3) processes over say 500 time periods that\nwill be STABLE (meaning If I run stability() all will pass the test)\n\nWhen I try to do that it seems that none of the VAR I am generating pass\nthis test, so I assume that the class of stable VAR(p) is very small\ncompared to the whole VAR(p) process.\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/simulating-stable-VAR-process-tp4261177p4291835.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is ",
+      "thread_id": "thread-c136377e8886",
+      "thread_depth": 1,
+      "month": "2012-01"
+    },
+    {
       "id": "msg-17969dd986aa",
       "message_id": "<5fc5u8-er2.ln1@news.jonasstein.de>",
       "from_name": "Jonas Stein",
@@ -18597,25 +18616,6 @@
       "body_snippet": ">>>  d2y <- diff(dy)\n>>>  which(dy==0)  ## critical values\n>>>  sign(s2y)[which(dy==0)]  ## test for max/min/saddle\n>>>  which(d2y==0)   ## inflection points\n>> \n>> I would think that testing for d2y=",
       "thread_id": "thread-4a84d5e449b9",
       "thread_depth": 4,
-      "month": "2012-01"
-    },
-    {
-      "id": "msg-723fd2f9325b",
-      "message_id": "<1326449349804-4291835.post@n4.nabble.com>",
-      "from_name": "statquant2",
-      "from_email_hash": "5013a2b97e2067517346f8e11c5e8331287c9bdc839553e684fc9a648c67e7fb",
-      "date": "2012-01-13T10:09:09Z",
-      "subject": "[R] simulating stable VAR process",
-      "subject_clean": "simulating stable VAR process",
-      "in_reply_to": "<4F05D6BE.9090502@gmail.com>",
-      "references": [
-        "<1325682509502-4261177.post@n4.nabble.com>",
-        "<4F05D6BE.9090502@gmail.com>"
-      ],
-      "body_plain": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is stable.\n\nWe know a condition that assure that it is stable (see first message) but\nthis is not a condition on coefficients etc...\nWhat I want is \ngenerate say a 1000 random VAR(3) processes over say 500 time periods that\nwill be STABLE (meaning If I run stability() all will pass the test)\n\nWhen I try to do that it seems that none of the VAR I am generating pass\nthis test, so I assume that the class of stable VAR(p) is very small\ncompared to the whole VAR(p) process.\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/simulating-stable-VAR-process-tp4261177p4291835.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is ",
-      "thread_id": "thread-c136377e8886",
-      "thread_depth": 1,
       "month": "2012-01"
     },
     {
@@ -52234,20 +52234,6 @@
       "root_message_id": "msg-fc898e2abc3e"
     },
     {
-      "id": "thread-8f6fe05b5c41",
-      "subject": "How to make this for() loop memory efficient?",
-      "message_count": 9,
-      "participants": [
-        "Martin Morgan",
-        "Ray Brownrigg",
-        "Steve Lianoglou",
-        "iliketurtles"
-      ],
-      "started": "2012-01-10T22:02:04Z",
-      "last_reply": "2012-01-11T13:52:34Z",
-      "root_message_id": "msg-8f6fe05b5c41"
-    },
-    {
       "id": "thread-59249ec6d82f",
       "subject": "help",
       "message_count": 6,
@@ -52261,6 +52247,20 @@
       "started": "2012-01-10T22:02:04Z",
       "last_reply": "2012-01-11T09:06:21Z",
       "root_message_id": "msg-59249ec6d82f"
+    },
+    {
+      "id": "thread-8f6fe05b5c41",
+      "subject": "How to make this for() loop memory efficient?",
+      "message_count": 9,
+      "participants": [
+        "Martin Morgan",
+        "Ray Brownrigg",
+        "Steve Lianoglou",
+        "iliketurtles"
+      ],
+      "started": "2012-01-10T22:02:04Z",
+      "last_reply": "2012-01-11T13:52:34Z",
+      "root_message_id": "msg-8f6fe05b5c41"
     },
     {
       "id": "thread-2d477079f31a",

@@ -23246,22 +23246,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-5d65183bd194",
-      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
-      "from_name": "vikrant",
-      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
-      "date": "2010-02-10T09:44:57Z",
-      "subject": "[R] Problems with looping in R",
-      "subject_clean": "Problems with looping in R",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
-      "thread_id": "thread-5d65183bd194",
-      "thread_depth": 0,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-0b7be405ca0d",
       "message_id": "<4B728019.3030209@geo.uu.nl>",
       "from_name": "Paul Hiemstra",
@@ -23277,6 +23261,22 @@
       "body_snippet": "Hi,\n\nTake a look at rep(), specifically the each = parameter.\n\ncheers,\nPaul\n\nMadhavi Bhave wrote:\n> Dear R helpers\n>  \n> I have a city.csv file as given below.\n>  \n> 'city.csv'\n> city_name1        cit",
       "thread_id": "thread-2ce201131495",
       "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-5d65183bd194",
+      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
+      "from_name": "vikrant",
+      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
+      "date": "2010-02-10T09:44:57Z",
+      "subject": "[R] Problems with looping in R",
+      "subject_clean": "Problems with looping in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
+      "thread_id": "thread-5d65183bd194",
+      "thread_depth": 0,
       "month": "2010-02"
     },
     {
@@ -76629,18 +76629,6 @@
       "root_message_id": "msg-ed067522eec5"
     },
     {
-      "id": "thread-ffd0486a1004",
-      "subject": "R 64-bit memory.limit() is max of ?",
-      "message_count": 2,
-      "participants": [
-        "S. Few",
-        "Thomas Lumley"
-      ],
-      "started": "2010-02-17T15:53:03Z",
-      "last_reply": "2010-02-17T16:14:52Z",
-      "root_message_id": "msg-ffd0486a1004"
-    },
-    {
       "id": "thread-dd81825c08a8",
       "subject": "non-linear contrained optimization",
       "message_count": 2,
@@ -76651,6 +76639,18 @@
       "started": "2010-02-17T15:53:03Z",
       "last_reply": "2010-02-18T21:43:29Z",
       "root_message_id": "msg-dd81825c08a8"
+    },
+    {
+      "id": "thread-ffd0486a1004",
+      "subject": "R 64-bit memory.limit() is max of ?",
+      "message_count": 2,
+      "participants": [
+        "S. Few",
+        "Thomas Lumley"
+      ],
+      "started": "2010-02-17T15:53:03Z",
+      "last_reply": "2010-02-17T16:14:52Z",
+      "root_message_id": "msg-ffd0486a1004"
     },
     {
       "id": "thread-e8b88f7638d3",

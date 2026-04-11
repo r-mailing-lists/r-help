@@ -3166,6 +3166,22 @@
       "month": "2009-06"
     },
     {
+      "id": "msg-982331142f48",
+      "message_id": "<4A252AB1.6040905@pharmacy.wisc.edu>",
+      "from_name": "Paul Hutson",
+      "from_email_hash": "45e3d15f5e80cd1abd0bd716d853f9cd9c16c793e07b43717a89c221bdd19ce4",
+      "date": "2009-06-02T13:35:45Z",
+      "subject": "[R] Changing state in ODE",
+      "subject_clean": "Changing state in ODE",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expected to be fit by a \nsaturable (Michaelis-Menton) process.  I can get the ode routine to run \nwith only one, initial dose.  How can I modify the state at intermediate \ntime points to reflect additional input functions?  My script follows, \nwith the doses and times noted.\nThanks in advance.  Paul\n\n# Script for running mixed order (Michaelis-Menton) fit of data\n\nBB_sim1 <- read.table(\"BB_sim1.csv\", sep=\",\", header=TRUE, na.strings=\".\")\nTime <- BB_sim1$TIME\nMM.1dose<-function(time, state, pars)\n{\nwith(as.list(c(state,pars))\n{\ndA <- Vmax * CONC[1] /(Km + CONC)\nreturn (list(c(dA)))\n}\n    )\n}\n\nname.column(BB_sim1)\nDoses<-c(0.2, 1, 5)\n\n#if(Time==0) Dose=Doses[1]\n#if(Time==10 ) Dose=Doses[2]\n#if(Time==25) Dose=Doses[3]\n\nstate <- c(CONC=CONC+Dose/V)\nparms <- c (\n    Vmax = 20\n    Km = 2\n    V = 0.07\n    )\n\nrequire(deSolve)\nMM1.out <- as.data.frame(ode(state, Time, MM.1dose, parms))\n\nylim <- reange(c(MM1.out$Conc)\nplot(MM1.out$Time, MM1.out$Conc, xlab=\"Time\", ylab=\"Conc\", type=\"1\", \nylim=ylim\n-- \n\nPaul R. Hutson, Pharm.D.\n\nAssociate Professor\n\nUW School of Pharmacy\n\n777 Highland Avenue\n\nMadison WI 53705-2222\n\nTel  608.263.2496\n\nFax 608.265.5421\n\nPager 608.265.7000, p7856",
+      "body_snippet": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expect",
+      "thread_id": "thread-982331142f48",
+      "thread_depth": 0,
+      "month": "2009-06"
+    },
+    {
       "id": "msg-53850962a9d9",
       "message_id": "<509e0620906020635p3a96e6a3rc72358c64ec84d6d@mail.gmail.com>",
       "from_name": "Michael Lawrence",
@@ -3182,22 +3198,6 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090602/a4721622/attachment-0001.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090602/a4721622/attachment-0001.pl>",
       "thread_id": "thread-53850962a9d9",
-      "thread_depth": 0,
-      "month": "2009-06"
-    },
-    {
-      "id": "msg-982331142f48",
-      "message_id": "<4A252AB1.6040905@pharmacy.wisc.edu>",
-      "from_name": "Paul Hutson",
-      "from_email_hash": "45e3d15f5e80cd1abd0bd716d853f9cd9c16c793e07b43717a89c221bdd19ce4",
-      "date": "2009-06-02T13:35:45Z",
-      "subject": "[R] Changing state in ODE",
-      "subject_clean": "Changing state in ODE",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expected to be fit by a \nsaturable (Michaelis-Menton) process.  I can get the ode routine to run \nwith only one, initial dose.  How can I modify the state at intermediate \ntime points to reflect additional input functions?  My script follows, \nwith the doses and times noted.\nThanks in advance.  Paul\n\n# Script for running mixed order (Michaelis-Menton) fit of data\n\nBB_sim1 <- read.table(\"BB_sim1.csv\", sep=\",\", header=TRUE, na.strings=\".\")\nTime <- BB_sim1$TIME\nMM.1dose<-function(time, state, pars)\n{\nwith(as.list(c(state,pars))\n{\ndA <- Vmax * CONC[1] /(Km + CONC)\nreturn (list(c(dA)))\n}\n    )\n}\n\nname.column(BB_sim1)\nDoses<-c(0.2, 1, 5)\n\n#if(Time==0) Dose=Doses[1]\n#if(Time==10 ) Dose=Doses[2]\n#if(Time==25) Dose=Doses[3]\n\nstate <- c(CONC=CONC+Dose/V)\nparms <- c (\n    Vmax = 20\n    Km = 2\n    V = 0.07\n    )\n\nrequire(deSolve)\nMM1.out <- as.data.frame(ode(state, Time, MM.1dose, parms))\n\nylim <- reange(c(MM1.out$Conc)\nplot(MM1.out$Time, MM1.out$Conc, xlab=\"Time\", ylab=\"Conc\", type=\"1\", \nylim=ylim\n-- \n\nPaul R. Hutson, Pharm.D.\n\nAssociate Professor\n\nUW School of Pharmacy\n\n777 Highland Avenue\n\nMadison WI 53705-2222\n\nTel  608.263.2496\n\nFax 608.265.5421\n\nPager 608.265.7000, p7856",
-      "body_snippet": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expect",
-      "thread_id": "thread-982331142f48",
       "thread_depth": 0,
       "month": "2009-06"
     },
@@ -43504,24 +43504,6 @@
       "month": "2009-06"
     },
     {
-      "id": "msg-e904021c9872",
-      "message_id": "<alpine.LFD.2.00.0906250917010.28076@gannet.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2009-06-25T08:19:36Z",
-      "subject": "[R] error: compiling R package",
-      "subject_clean": "error: compiling R package",
-      "in_reply_to": "<EED18DB6E977BC4C83BD4309FAE9EE5D915E3F3266@naimuclt.wwg00m.rootdom.net>",
-      "references": [
-        "<EED18DB6E977BC4C83BD4309FAE9EE5D915E3F3266@naimuclt.wwg00m.rootdom.net>"
-      ],
-      "body_plain": "On Thu, 25 Jun 2009, Stein, Luba (AIM SE) wrote:\n\n> Hello,\n>\n> I tried to build an own R package on Windows XP but get an error which I can't solve.\n> I called my package \"pack\". It works to creat the file \"pack\" with package.skeleton().\n>\n> But when I try to compile it with Rcmd build --binary pack I obtain the following error:\n\nHmm, at least use Rcmd INSTALL first, and Rcmd build --binary is never \npreferred to Rcmd INSTALL --build on Windows.\n\n> IO::Seekable::seek missing at C:/R/R-2.9.0/share/perl/FileHandle.pm line 59.\n\nThat's an error message from Perl.\nYou need to mend your broken Perl installation.\n\n> Compilation failed in require at C:/R/R-2.9.0/share/perl/R/Dcf.pm line 49.\n> BEGIN failed--compilation aborted at C:/R/R-2.9.0/share/perl/R/Dcf.pm line 49.\n> Compilation failed in require at C:\\R\\R-2.9.0/bin/build line 28.\n> BEGIN failed--compilation aborted at C:\\R\\R-2.9.0/bin/build line 28.\n>\n> So if someone could help me on this I would be very greatful.\n>\n> Best,\n>\n> Luba Stein\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Thu, 25 Jun 2009, Stein, Luba (AIM SE) wrote:\n\n> Hello,\n>\n> I tried to build an own R package on Windows XP but get an error which I can't solve.\n> I called my package \"pack\". It works to creat the",
-      "thread_id": "thread-409913b0e877",
-      "thread_depth": 1,
-      "month": "2009-06"
-    },
-    {
       "id": "msg-a50740095e18",
       "message_id": "<4A433318.50501@exeter.ac.uk>",
       "from_name": "baptiste auguie",
@@ -43538,6 +43520,24 @@
       "body_snippet": "This will give you a greek character, see ?plotmath\n\ngrid.text(expression(mu*\"(s,t)\"), 0.5, unit(5, \"lines\"), vp=vp2)\n\nThe following works for me, it may be that you're using an outdated \nversion of R",
       "thread_id": "thread-c7f518441813",
       "thread_depth": 2,
+      "month": "2009-06"
+    },
+    {
+      "id": "msg-e904021c9872",
+      "message_id": "<alpine.LFD.2.00.0906250917010.28076@gannet.stats.ox.ac.uk>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2009-06-25T08:19:36Z",
+      "subject": "[R] error: compiling R package",
+      "subject_clean": "error: compiling R package",
+      "in_reply_to": "<EED18DB6E977BC4C83BD4309FAE9EE5D915E3F3266@naimuclt.wwg00m.rootdom.net>",
+      "references": [
+        "<EED18DB6E977BC4C83BD4309FAE9EE5D915E3F3266@naimuclt.wwg00m.rootdom.net>"
+      ],
+      "body_plain": "On Thu, 25 Jun 2009, Stein, Luba (AIM SE) wrote:\n\n> Hello,\n>\n> I tried to build an own R package on Windows XP but get an error which I can't solve.\n> I called my package \"pack\". It works to creat the file \"pack\" with package.skeleton().\n>\n> But when I try to compile it with Rcmd build --binary pack I obtain the following error:\n\nHmm, at least use Rcmd INSTALL first, and Rcmd build --binary is never \npreferred to Rcmd INSTALL --build on Windows.\n\n> IO::Seekable::seek missing at C:/R/R-2.9.0/share/perl/FileHandle.pm line 59.\n\nThat's an error message from Perl.\nYou need to mend your broken Perl installation.\n\n> Compilation failed in require at C:/R/R-2.9.0/share/perl/R/Dcf.pm line 49.\n> BEGIN failed--compilation aborted at C:/R/R-2.9.0/share/perl/R/Dcf.pm line 49.\n> Compilation failed in require at C:\\R\\R-2.9.0/bin/build line 28.\n> BEGIN failed--compilation aborted at C:\\R\\R-2.9.0/bin/build line 28.\n>\n> So if someone could help me on this I would be very greatful.\n>\n> Best,\n>\n> Luba Stein\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Thu, 25 Jun 2009, Stein, Luba (AIM SE) wrote:\n\n> Hello,\n>\n> I tried to build an own R package on Windows XP but get an error which I can't solve.\n> I called my package \"pack\". It works to creat the",
+      "thread_id": "thread-409913b0e877",
+      "thread_depth": 1,
       "month": "2009-06"
     },
     {
@@ -52374,22 +52374,6 @@
       "month": "2009-06"
     },
     {
-      "id": "msg-e6e50d820cba",
-      "message_id": "<20090630222024.8ce1qfpdzgg4so44@webmail.med.uni-marburg.de>",
-      "from_name": "ukoenig at med.uni-marburg.de",
-      "from_email_hash": "2c4529161db3b24b3a301ab75ed417bb6d083e98f89e94b66486e707ef4fdc2e",
-      "date": "2009-06-30T20:20:24Z",
-      "subject": "[R] Interaction plots (six on one page)",
-      "subject_clean": "Interaction plots (six on one page)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "#Dear R users,\n#I want six interaction plots to be on one page,\n#but the following problem occurs: the legend \"BMIakt\" appears,\n#but it is exactly on the border of the plots (too far right).\n#My seccond question is, how I can reduce the empty space in the y-direction\n#between the plots.\n\n#Please have a look at my syntax below.\n\n#Many thanks!\n#Udo\n\n\nmyData <-\n(\"id,BMIakt,time,thanaa,thalcho,thalino,ponaa,pocho,poino\n1,0,1,1.63,0.79,0.28,1.63,0.98,0.58\n2,0,2,1.7,0.72,0.37,1.83,0.97,0.42\n3,1,1,1.73,0.83,0.32,2.24,1,0.88\n4,1,2,1.87,0.76,0.49,1.78,0.68,0.61\n5,0,1,1.81,0.99,0.47,1.98,0.96,0.6\n6,0,2,1.7,0.77,0.38,1.68,0.79,0.51\n7,0,1,1.79,0.95,0.48,1.65,0.9,0.73\n8,0,2,2.5,0.79,0.56,2.09,0.81,0.64\n9,1,1,1.63,0.71,0.36,2.13,0.98,0.68\n10,1,2,1.69,0.85,0.43,2,0.94,0.59\n11,1,1,1.95,1.04,0.38,1.7,0.92,0.47\n12,1,2,2.16,0.84,0.25,2.01,0.73,0.38\n13,0,1,1.65,0.8,0.2,1.74,0.95,0.43\n14,0,2,1.83,0.96,0.59,1.88,1.2,0.73\n15,1,1,2.02,0.79,0.26,2.01,0.94,0.59\n16,1,2,1.71,0.57,0.42,1.87,0.73,0.59\n17,1,1,1.5,0.78,0.35,1.68,0.84,0.48\n18,1,2,1.4,0.66,0.43,1.87,1.02,0.39\n19,1,1,1.45,0.69,0.32,1.74,0.67,0.44\n20,1,2,1.65,0.88,0.27,1.7,0.87,0.55\n21,1,1,1.89,0.66,0.4,1.93,0.88,0.58\n22,1,2,1.71,0.81,0.34,1.87,0.8,0.53\n23,1,1,1.71,0.87,0.34,1.65,1.16,0.65\n24,1,2,1.82,1.29,0.49,1.98,1.31,0.57\n25,1,1,1.66,0.86,0.28,1.4,0.8,0.38\n26,1,2,1.82,0.82,0.45,1.4,1.1,0.68\n27,1,1,1.67,0.71,0.32,1.83,0.84,0.63\n28,1,2,2.06,0.69,0.41,1.62,0.9,0.57\n29,1,1,1.62,0.81,0.47,1.88,1.11,0.6\n30,1,2,1.76,0.77,0.71,1.74,1.2,0.55\n31,0,1,1.8,0.78,0.27,1.96,0.86,0.47\n32,0,2,1.7,0.63,0.35,2.22,0.83,0.58\n33,1,1,1.92,0.8,0.37,1.8,0.98,0.43\n34,1,2,1.94,0.84,0.48,1.92,0.86,0.61\n35,1,1,1.55,0.6,0.44,1.78,0.86,0.64\n36,1,2,1.68,0.61,0.39,1.84,0.85,0.65\n37,0,1,1.77,0.84,0.47,1.72,0.84,0.57\n38,0,2,1.79,0.85,0.55,1.89,0.85,0.54\n39,1,1,1.87,0.9,0.52,2.01,1.01,0.7\n40,1,2,1.91,0.72,0.28,1.81,0.78,0.65\")\n\ndata <- read.table(textConnection(myData),\n      header=TRUE, sep=\",\", row.names=\"id\")\n\nattach(data)\nlayout(matrix(1:6, 3, 2))\n\n\ninteraction.plot(time, BMIakt, thanaa)\ninteraction.plot(time, BMIakt, thalcho)\ninteraction.plot(time, BMIakt, thalino)\ninteraction.plot(time, BMIakt, ponaa)\ninteraction.plot(time, BMIakt, pocho)\ninteraction.plot(time, BMIakt, poino)\n\n\n#Using \"locator()\" would be an alternative, but the text \"BMIakt\" is missing,\n#doing that\ninteraction.plot(time, BMIakt175, thanaa, legend=FALSE)\nlegend(locator(1), c(\"1\", \"0\"), cex=0.8, col=c(\"black\", \"black\"), lty=1:2)",
-      "body_snippet": "#Dear R users,\n#I want six interaction plots to be on one page,\n#but the following problem occurs: the legend \"BMIakt\" appears,\n#but it is exactly on the border of the plots (too far right).\n#My secco",
-      "thread_id": "thread-e6e50d820cba",
-      "thread_depth": 0,
-      "month": "2009-06"
-    },
-    {
       "id": "msg-bca8ac990f6a",
       "message_id": "<e40d78ce0906301320g780a3e2cw754199419ebf028f@mail.gmail.com>",
       "from_name": "Mark Na",
@@ -52402,6 +52386,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090630/eedf0dd5/attachment-0001.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090630/eedf0dd5/attachment-0001.pl>",
       "thread_id": "thread-bca8ac990f6a",
+      "thread_depth": 0,
+      "month": "2009-06"
+    },
+    {
+      "id": "msg-e6e50d820cba",
+      "message_id": "<20090630222024.8ce1qfpdzgg4so44@webmail.med.uni-marburg.de>",
+      "from_name": "ukoenig at med.uni-marburg.de",
+      "from_email_hash": "2c4529161db3b24b3a301ab75ed417bb6d083e98f89e94b66486e707ef4fdc2e",
+      "date": "2009-06-30T20:20:24Z",
+      "subject": "[R] Interaction plots (six on one page)",
+      "subject_clean": "Interaction plots (six on one page)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "#Dear R users,\n#I want six interaction plots to be on one page,\n#but the following problem occurs: the legend \"BMIakt\" appears,\n#but it is exactly on the border of the plots (too far right).\n#My seccond question is, how I can reduce the empty space in the y-direction\n#between the plots.\n\n#Please have a look at my syntax below.\n\n#Many thanks!\n#Udo\n\n\nmyData <-\n(\"id,BMIakt,time,thanaa,thalcho,thalino,ponaa,pocho,poino\n1,0,1,1.63,0.79,0.28,1.63,0.98,0.58\n2,0,2,1.7,0.72,0.37,1.83,0.97,0.42\n3,1,1,1.73,0.83,0.32,2.24,1,0.88\n4,1,2,1.87,0.76,0.49,1.78,0.68,0.61\n5,0,1,1.81,0.99,0.47,1.98,0.96,0.6\n6,0,2,1.7,0.77,0.38,1.68,0.79,0.51\n7,0,1,1.79,0.95,0.48,1.65,0.9,0.73\n8,0,2,2.5,0.79,0.56,2.09,0.81,0.64\n9,1,1,1.63,0.71,0.36,2.13,0.98,0.68\n10,1,2,1.69,0.85,0.43,2,0.94,0.59\n11,1,1,1.95,1.04,0.38,1.7,0.92,0.47\n12,1,2,2.16,0.84,0.25,2.01,0.73,0.38\n13,0,1,1.65,0.8,0.2,1.74,0.95,0.43\n14,0,2,1.83,0.96,0.59,1.88,1.2,0.73\n15,1,1,2.02,0.79,0.26,2.01,0.94,0.59\n16,1,2,1.71,0.57,0.42,1.87,0.73,0.59\n17,1,1,1.5,0.78,0.35,1.68,0.84,0.48\n18,1,2,1.4,0.66,0.43,1.87,1.02,0.39\n19,1,1,1.45,0.69,0.32,1.74,0.67,0.44\n20,1,2,1.65,0.88,0.27,1.7,0.87,0.55\n21,1,1,1.89,0.66,0.4,1.93,0.88,0.58\n22,1,2,1.71,0.81,0.34,1.87,0.8,0.53\n23,1,1,1.71,0.87,0.34,1.65,1.16,0.65\n24,1,2,1.82,1.29,0.49,1.98,1.31,0.57\n25,1,1,1.66,0.86,0.28,1.4,0.8,0.38\n26,1,2,1.82,0.82,0.45,1.4,1.1,0.68\n27,1,1,1.67,0.71,0.32,1.83,0.84,0.63\n28,1,2,2.06,0.69,0.41,1.62,0.9,0.57\n29,1,1,1.62,0.81,0.47,1.88,1.11,0.6\n30,1,2,1.76,0.77,0.71,1.74,1.2,0.55\n31,0,1,1.8,0.78,0.27,1.96,0.86,0.47\n32,0,2,1.7,0.63,0.35,2.22,0.83,0.58\n33,1,1,1.92,0.8,0.37,1.8,0.98,0.43\n34,1,2,1.94,0.84,0.48,1.92,0.86,0.61\n35,1,1,1.55,0.6,0.44,1.78,0.86,0.64\n36,1,2,1.68,0.61,0.39,1.84,0.85,0.65\n37,0,1,1.77,0.84,0.47,1.72,0.84,0.57\n38,0,2,1.79,0.85,0.55,1.89,0.85,0.54\n39,1,1,1.87,0.9,0.52,2.01,1.01,0.7\n40,1,2,1.91,0.72,0.28,1.81,0.78,0.65\")\n\ndata <- read.table(textConnection(myData),\n      header=TRUE, sep=\",\", row.names=\"id\")\n\nattach(data)\nlayout(matrix(1:6, 3, 2))\n\n\ninteraction.plot(time, BMIakt, thanaa)\ninteraction.plot(time, BMIakt, thalcho)\ninteraction.plot(time, BMIakt, thalino)\ninteraction.plot(time, BMIakt, ponaa)\ninteraction.plot(time, BMIakt, pocho)\ninteraction.plot(time, BMIakt, poino)\n\n\n#Using \"locator()\" would be an alternative, but the text \"BMIakt\" is missing,\n#doing that\ninteraction.plot(time, BMIakt175, thanaa, legend=FALSE)\nlegend(locator(1), c(\"1\", \"0\"), cex=0.8, col=c(\"black\", \"black\"), lty=1:2)",
+      "body_snippet": "#Dear R users,\n#I want six interaction plots to be on one page,\n#but the following problem occurs: the legend \"BMIakt\" appears,\n#but it is exactly on the border of the plots (too far right).\n#My secco",
+      "thread_id": "thread-e6e50d820cba",
       "thread_depth": 0,
       "month": "2009-06"
     },
@@ -66582,18 +66582,6 @@
       "root_message_id": "msg-d6d3d32cd9c4"
     },
     {
-      "id": "thread-e6e50d820cba",
-      "subject": "Interaction plots (six on one page)",
-      "message_count": 2,
-      "participants": [
-        "jim holtman",
-        "ukoenig at med.uni-marburg.de"
-      ],
-      "started": "2009-06-30T20:20:24Z",
-      "last_reply": "2009-06-30T21:16:00Z",
-      "root_message_id": "msg-e6e50d820cba"
-    },
-    {
       "id": "thread-bca8ac990f6a",
       "subject": "How to wrap my (working) code in a loop or function? (loop/function newbie alert)",
       "message_count": 2,
@@ -66604,6 +66592,18 @@
       "started": "2009-06-30T20:20:24Z",
       "last_reply": "2009-06-30T20:29:47Z",
       "root_message_id": "msg-bca8ac990f6a"
+    },
+    {
+      "id": "thread-e6e50d820cba",
+      "subject": "Interaction plots (six on one page)",
+      "message_count": 2,
+      "participants": [
+        "jim holtman",
+        "ukoenig at med.uni-marburg.de"
+      ],
+      "started": "2009-06-30T20:20:24Z",
+      "last_reply": "2009-06-30T21:16:00Z",
+      "root_message_id": "msg-e6e50d820cba"
     },
     {
       "id": "thread-7fd34feda572",
