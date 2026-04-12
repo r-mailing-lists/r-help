@@ -158,6 +158,22 @@
       "thread_id": "thread-e2aefc2b1ad1",
       "thread_depth": 2,
       "month": "2026-04"
+    },
+    {
+      "id": "msg-36ca2ab5c8a4",
+      "message_id": "<DBAP192MB0956C272C5DB851AE5FDD93D84262@DBAP192MB0956.EURP192.PROD.OUTLOOK.COM>",
+      "from_name": "Leo Mada",
+      "from_email_hash": "ee1453076c377fe33932b14b4931f8b25cce3a0ba1df0e46391984bbd426ae15",
+      "date": "2026-04-11T17:51:36Z",
+      "subject": "[R] Documentation for lm with ordered factors & some Numerical issues",
+      "subject_clean": "Documentation for lm with ordered factors & some Numerical issues",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-Community,\n\nI propose to improve the documentation for lm as some important bits are missing.\n\n1. Documentation for Contrasts with Ordered Factors?\n2. Numerical Issues contr.poly: even earlier then n = 96\n\n1. Documentation\nI stumbled recently across a case of lm-fit which included an ordered factor as independent predictor.\nI remember seeing somewhere mentioned the use of polynomial contrasts, but can't find the location in the documentation right now. Does anyone know where to find this description?\n\nI use R 4.5.3. I will provide the reasoning below. Unfortunately, I am not that involved in statistics these days, anymore.\n\n1.a. Reasoning\nMedical data frequently contains ordered factors: grade of hypertension, grade of renal insufficiency, stage of disease, e.g. TNM stage in oncology, even age is frequently coded as age-groups. It makes sense to encode these as ordered factors.\n\nHowever, lm will automatically use contrasts based on contr.poly, as opposed to unordered factors, where type = \"treatment\" \"contrasts\" are used. The vast majority of users in the biomedical community are only aware of \"treatment\" and probably have never heard of contrasts anyway. But they are the most likely group to encounter ordered factors. Mentioning this in the documentation and providing a brief description of Linear/Quadratic and Cubic would be useful.\n\n1.b. Current Documentation\nI have looked into the documentation for lm, but no mention of ordered factors: just a short reference to contrasts.arg in model.matrix.default.\n\n# Example in model.matrix.default:\n# This is the only place where it pops up - but very hard to find:\noptions(\"contrasts\") # typically 'treatment' (for *unordered* factors)\n# - requires actually running the code to find the ordered factors;\n\n# Documentation for summary.lm: Nothing;\n# Documentation for coef: Nothing;\n# Documentation for: C\n- Not really informative;\n- Does NOT even provide a direct link to contr.poly (missing explicit mention in See also);\n# Documentation for: contrast\n- Does not mention ordered factors;\nDoc: \"contr.poly returns contrasts based on orthogonal polynomials\"\n- But lacks further details;\n\n1.c. References\nMany of these help pages mention the book Statistical models from 1992. While it is truly a reference book, it may be useful to add alternative links to more recent materials. This may be useful for any reference older than 2000. I find there are more of these through the documentation: many of these, if not open access/open source, may be harder to find nowadays.\n\n\n2. Numerical Issues: even earlier then n = 96\nThe limit n > 95 is hard-coded in the function contr.poly. My initial guess was that this limit can be increased (based on modern processors and Blas-libraries).\n\nBut my guess was probably wrong and I think that numerical issues start already for n = 23. Someone with expertise in this field may want to check it.\n\n# Note:\n# if(n %% 2 == 1) poly[seq(2, n, by = 2), (n+1)/2]\n#   should be probably == 0;\n#   FAILS for n = 23;\n\n# Inner function in contr.poly:\nmake.poly <- function(n, scores = seq(n)) {\n    y <- scores - mean(scores)\n    X <- outer(y, seq_len(n) - 1, '^')\n    QR <- qr(X)\n    z <- QR$qr\n    z <- z * (row(z) == col(z))\n    raw <- qr.qy(QR, z)\n    Z <- sweep(raw, 2L, apply(raw, 2L, function(x) sqrt(sum(x^2))),\n            '/', check.margin = FALSE)\n    colnames(Z) <- paste0(\"^\", 1L:n - 1L)\n    Z\n}\n\np = make.poly(23, seq(23));\np[12, c(20, 22)]\n# Only first is 0;\n# Second: should be probably 0 as well - but is NOT;\np[,22] # Is NOT \"symmetric\" either;\n\n# Idea: Convert Rounding errors to 0\n# Test Separation: Probably 0 vs Non-Zero\n# - But issues for n >= 23;\n# - See also the NOTE above, which may be true\n#   and would be then more robust and independent of tolerance;\n\nrg = sapply(seq(3, 40), \\(id, tol = 1E-9) {\n??????x = make.poly(id, seq(id));\n??????x = abs(x[x != 0]);\n??????isE = x <= tol;\n??????if(sum(isE) > 0) {\n????????????err = x[isE];\n????????????x = x[! isE]\n??????} else return(c(0, min(x)));\n??????c(max(err), min(x));\n})\ncbind(c(NA,NA), c(NA,NA), rg)\n\n# Note:\n# - lowest abs values for n = 23 is probably\n#   around 1.36E-6 / 2 = 7E-7 (and therefore larger than 4.7E-7);\n# - for n = 24: 3.5E-7;\n\nSomeone familiar in this field may want to have a closer look.\n\nSincerely,\n\nLeonard\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-Community,\n\nI propose to improve the documentation for lm as some important bits are missing.\n\n1. Documentation for Contrasts with Ordered Factors?\n2. Numerical Issues contr.poly: even earlier ",
+      "thread_id": "thread-36ca2ab5c8a4",
+      "thread_depth": 0,
+      "month": "2026-04"
     }
   ],
   "threads": [
@@ -197,6 +213,17 @@
       "started": "2026-04-05T19:44:14Z",
       "last_reply": "2026-04-07T18:43:27Z",
       "root_message_id": "msg-e2aefc2b1ad1"
+    },
+    {
+      "id": "thread-36ca2ab5c8a4",
+      "subject": "Documentation for lm with ordered factors & some Numerical issues",
+      "message_count": 1,
+      "participants": [
+        "Leo Mada"
+      ],
+      "started": "2026-04-11T17:51:36Z",
+      "last_reply": "2026-04-11T17:51:36Z",
+      "root_message_id": "msg-36ca2ab5c8a4"
     }
   ]
 }

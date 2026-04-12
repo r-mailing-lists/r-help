@@ -1529,3 +1529,112 @@ and provide commented, minimal, self-contained, reproducible code.
 	[[alternative HTML version deleted]]
 
 
+From |eo@m@d@ @end|ng |rom @yon|c@eu  Sat Apr 11 19:51:36 2026
+From: |eo@m@d@ @end|ng |rom @yon|c@eu (Leo Mada)
+Date: Sat, 11 Apr 2026 17:51:36 +0000
+Subject: [R] Documentation for lm with ordered factors & some Numerical
+ issues
+Message-ID: <DBAP192MB0956C272C5DB851AE5FDD93D84262@DBAP192MB0956.EURP192.PROD.OUTLOOK.COM>
+
+Dear R-Community,
+
+I propose to improve the documentation for lm as some important bits are missing.
+
+1. Documentation for Contrasts with Ordered Factors?
+2. Numerical Issues contr.poly: even earlier then n = 96
+
+1. Documentation
+I stumbled recently across a case of lm-fit which included an ordered factor as independent predictor.
+I remember seeing somewhere mentioned the use of polynomial contrasts, but can't find the location in the documentation right now. Does anyone know where to find this description?
+
+I use R 4.5.3. I will provide the reasoning below. Unfortunately, I am not that involved in statistics these days, anymore.
+
+1.a. Reasoning
+Medical data frequently contains ordered factors: grade of hypertension, grade of renal insufficiency, stage of disease, e.g. TNM stage in oncology, even age is frequently coded as age-groups. It makes sense to encode these as ordered factors.
+
+However, lm will automatically use contrasts based on contr.poly, as opposed to unordered factors, where type = "treatment" "contrasts" are used. The vast majority of users in the biomedical community are only aware of "treatment" and probably have never heard of contrasts anyway. But they are the most likely group to encounter ordered factors. Mentioning this in the documentation and providing a brief description of Linear/Quadratic and Cubic would be useful.
+
+1.b. Current Documentation
+I have looked into the documentation for lm, but no mention of ordered factors: just a short reference to contrasts.arg in model.matrix.default.
+
+# Example in model.matrix.default:
+# This is the only place where it pops up - but very hard to find:
+options("contrasts") # typically 'treatment' (for *unordered* factors)
+# - requires actually running the code to find the ordered factors;
+
+# Documentation for summary.lm: Nothing;
+# Documentation for coef: Nothing;
+# Documentation for: C
+- Not really informative;
+- Does NOT even provide a direct link to contr.poly (missing explicit mention in See also);
+# Documentation for: contrast
+- Does not mention ordered factors;
+Doc: "contr.poly returns contrasts based on orthogonal polynomials"
+- But lacks further details;
+
+1.c. References
+Many of these help pages mention the book Statistical models from 1992. While it is truly a reference book, it may be useful to add alternative links to more recent materials. This may be useful for any reference older than 2000. I find there are more of these through the documentation: many of these, if not open access/open source, may be harder to find nowadays.
+
+
+2. Numerical Issues: even earlier then n = 96
+The limit n > 95 is hard-coded in the function contr.poly. My initial guess was that this limit can be increased (based on modern processors and Blas-libraries).
+
+But my guess was probably wrong and I think that numerical issues start already for n = 23. Someone with expertise in this field may want to check it.
+
+# Note:
+# if(n %% 2 == 1) poly[seq(2, n, by = 2), (n+1)/2]
+#   should be probably == 0;
+#   FAILS for n = 23;
+
+# Inner function in contr.poly:
+make.poly <- function(n, scores = seq(n)) {
+    y <- scores - mean(scores)
+    X <- outer(y, seq_len(n) - 1, '^')
+    QR <- qr(X)
+    z <- QR$qr
+    z <- z * (row(z) == col(z))
+    raw <- qr.qy(QR, z)
+    Z <- sweep(raw, 2L, apply(raw, 2L, function(x) sqrt(sum(x^2))),
+            '/', check.margin = FALSE)
+    colnames(Z) <- paste0("^", 1L:n - 1L)
+    Z
+}
+
+p = make.poly(23, seq(23));
+p[12, c(20, 22)]
+# Only first is 0;
+# Second: should be probably 0 as well - but is NOT;
+p[,22] # Is NOT "symmetric" either;
+
+# Idea: Convert Rounding errors to 0
+# Test Separation: Probably 0 vs Non-Zero
+# - But issues for n >= 23;
+# - See also the NOTE above, which may be true
+#   and would be then more robust and independent of tolerance;
+
+rg = sapply(seq(3, 40), \(id, tol = 1E-9) {
+??????x = make.poly(id, seq(id));
+??????x = abs(x[x != 0]);
+??????isE = x <= tol;
+??????if(sum(isE) > 0) {
+????????????err = x[isE];
+????????????x = x[! isE]
+??????} else return(c(0, min(x)));
+??????c(max(err), min(x));
+})
+cbind(c(NA,NA), c(NA,NA), rg)
+
+# Note:
+# - lowest abs values for n = 23 is probably
+#   around 1.36E-6 / 2 = 7E-7 (and therefore larger than 4.7E-7);
+# - for n = 24: 3.5E-7;
+
+Someone familiar in this field may want to have a closer look.
+
+Sincerely,
+
+Leonard
+
+	[[alternative HTML version deleted]]
+
+
