@@ -1770,6 +1770,24 @@
       "month": "2011-08"
     },
     {
+      "id": "msg-235900dc2143",
+      "message_id": "<OF0F45F0F9.729425BE-ON862578DF.0065EC5C-862578DF.0066181F@usgs.gov>",
+      "from_name": "Jean V Adams",
+      "from_email_hash": "b0a0a120a933c9f22a721edfedacedb8be80a53ef46367c1c4d59470648f3a0b",
+      "date": "2011-08-01T18:35:01Z",
+      "subject": "[R] fill Matrix quicker",
+      "subject_clean": "fill Matrix quicker",
+      "in_reply_to": "<1312222376367-3710428.post@n4.nabble.com>",
+      "references": [
+        "<1312222376367-3710428.post@n4.nabble.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110801/97537085/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110801/97537085/attachment.pl>",
+      "thread_id": "thread-1b2ccd3eaf2a",
+      "thread_depth": 1,
+      "month": "2011-08"
+    },
+    {
       "id": "msg-233bec74c76a",
       "message_id": "<CAGdK6noO0cF3dB4gG+0SQcEjcLpKyBf6JytMQTdL0qwGYPqt5g@mail.gmail.com>",
       "from_name": "Robert Pfister",
@@ -1786,24 +1804,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110801/8761edd1/attachment.pl>",
       "thread_id": "thread-f520aee15416",
       "thread_depth": 2,
-      "month": "2011-08"
-    },
-    {
-      "id": "msg-235900dc2143",
-      "message_id": "<OF0F45F0F9.729425BE-ON862578DF.0065EC5C-862578DF.0066181F@usgs.gov>",
-      "from_name": "Jean V Adams",
-      "from_email_hash": "b0a0a120a933c9f22a721edfedacedb8be80a53ef46367c1c4d59470648f3a0b",
-      "date": "2011-08-01T18:35:01Z",
-      "subject": "[R] fill Matrix quicker",
-      "subject_clean": "fill Matrix quicker",
-      "in_reply_to": "<1312222376367-3710428.post@n4.nabble.com>",
-      "references": [
-        "<1312222376367-3710428.post@n4.nabble.com>"
-      ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110801/97537085/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110801/97537085/attachment.pl>",
-      "thread_id": "thread-1b2ccd3eaf2a",
-      "thread_depth": 1,
       "month": "2011-08"
     },
     {
@@ -29948,25 +29948,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-641692134ec8",
-      "message_id": "<4E4BA81F.7020703@knmi.nl>",
-      "from_name": "Paul Hiemstra",
-      "from_email_hash": "f031e8a96c856e1d584570f2a24c0f13a9a69b6f6942a65e82bf93845f39966b",
-      "date": "2011-08-17T11:38:07Z",
-      "subject": "[R] how to get the result in \"short cut\" manner?",
-      "subject_clean": "how to get the result in \"short cut\" manner?",
-      "in_reply_to": "<4E4A22B9.2050304@uke.uni-hamburg.de>",
-      "references": [
-        "<CANDXbiq=VO7YkbzatsVymBives6yiBUxGi1wsK=TnWU7W36XPg@mail.gmail.com>",
-        "<4E4A22B9.2050304@uke.uni-hamburg.de>"
-      ],
-      "body_plain": "On 08/16/2011 07:56 AM, Eik Vettorazzi wrote:\n> Hi Lao,\n> you tried to reinvent the wheel. Have a look at ?tapply\n>\n> tapply(sleep$extra,sleep$group,mean)\nor take a look at the plyr package:\n\nlibrary(plyr)\ndata(sleep)\nddply(sleep, .(group), summarise, m = mean(extra))\n\ncheers,\nPaul\n\n> Cheers\n>\n> Am 16.08.2011 09:41, schrieb Lao Meng:\n>> Hi all:\n>> My data:data(sleep)\n>>\n>> If I wanna calculate each group's extra,what I can do is:\n>> #method1\n>> attach(sleep)\n>> mean(extra[group==1])\n>> mean(extra[group==1])\n>>\n>>\n>> #method2\n>> result<-matrix(,0,2)\n>> g<-split(sleep,sleep$group)\n>> for(i in 1:length(g))\n>> {\n>> result<-rbind(result,data.frame(unique(g[[i]]$group),mean(g[[i]]$extra)))\n>> }\n>> colnames(result)<-c(\"name\",\"mean\")\n>>\n>> But the above 2 method is a little bit tedious.Is there a \"short cut\" manner\n>> to get the same result?\n>>\n>> Thanks a lot!\n>>\n>> My best\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nPaul Hiemstra, Ph.D.\nGlobal Climate Division\nRoyal Netherlands Meteorological Institute (KNMI)\nWilhelminalaan 10 | 3732 GK | De Bilt | Kamer B 3.39\nP.O. Box 201 | 3730 AE | De Bilt\ntel: +31 30 2206 494\n\nhttp://intamap.geo.uu.nl/~paul\nhttp://nl.linkedin.com/pub/paul-hiemstra/20/30b/770",
-      "body_snippet": "On 08/16/2011 07:56 AM, Eik Vettorazzi wrote:\n> Hi Lao,\n> you tried to reinvent the wheel. Have a look at ?tapply\n>\n> tapply(sleep$extra,sleep$group,mean)\nor take a look at the plyr package:\n\nlibrary(",
-      "thread_id": "thread-67cb17b6d1fd",
-      "thread_depth": 2,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-0e28a995deed",
       "message_id": "<CABdHhvH6H+-RDT4Qpea+9XU2iK1YuhmZfJ0js_ABrRfKcO=Upw@mail.gmail.com>",
       "from_name": "Hadley Wickham",
@@ -29983,6 +29964,25 @@
       "body_snippet": "> The following example does what you want using ddply:\n>\n> library(plyr)\n> edfPerGroup = ddply(df, .(Group), summarise, edf = edf(Value), Value =\n> Value)\n\nOr slightly more succinctly:\n\nddply(df, .(G",
       "thread_id": "thread-6913d41d96ee",
       "thread_depth": 3,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-641692134ec8",
+      "message_id": "<4E4BA81F.7020703@knmi.nl>",
+      "from_name": "Paul Hiemstra",
+      "from_email_hash": "f031e8a96c856e1d584570f2a24c0f13a9a69b6f6942a65e82bf93845f39966b",
+      "date": "2011-08-17T11:38:07Z",
+      "subject": "[R] how to get the result in \"short cut\" manner?",
+      "subject_clean": "how to get the result in \"short cut\" manner?",
+      "in_reply_to": "<4E4A22B9.2050304@uke.uni-hamburg.de>",
+      "references": [
+        "<CANDXbiq=VO7YkbzatsVymBives6yiBUxGi1wsK=TnWU7W36XPg@mail.gmail.com>",
+        "<4E4A22B9.2050304@uke.uni-hamburg.de>"
+      ],
+      "body_plain": "On 08/16/2011 07:56 AM, Eik Vettorazzi wrote:\n> Hi Lao,\n> you tried to reinvent the wheel. Have a look at ?tapply\n>\n> tapply(sleep$extra,sleep$group,mean)\nor take a look at the plyr package:\n\nlibrary(plyr)\ndata(sleep)\nddply(sleep, .(group), summarise, m = mean(extra))\n\ncheers,\nPaul\n\n> Cheers\n>\n> Am 16.08.2011 09:41, schrieb Lao Meng:\n>> Hi all:\n>> My data:data(sleep)\n>>\n>> If I wanna calculate each group's extra,what I can do is:\n>> #method1\n>> attach(sleep)\n>> mean(extra[group==1])\n>> mean(extra[group==1])\n>>\n>>\n>> #method2\n>> result<-matrix(,0,2)\n>> g<-split(sleep,sleep$group)\n>> for(i in 1:length(g))\n>> {\n>> result<-rbind(result,data.frame(unique(g[[i]]$group),mean(g[[i]]$extra)))\n>> }\n>> colnames(result)<-c(\"name\",\"mean\")\n>>\n>> But the above 2 method is a little bit tedious.Is there a \"short cut\" manner\n>> to get the same result?\n>>\n>> Thanks a lot!\n>>\n>> My best\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nPaul Hiemstra, Ph.D.\nGlobal Climate Division\nRoyal Netherlands Meteorological Institute (KNMI)\nWilhelminalaan 10 | 3732 GK | De Bilt | Kamer B 3.39\nP.O. Box 201 | 3730 AE | De Bilt\ntel: +31 30 2206 494\n\nhttp://intamap.geo.uu.nl/~paul\nhttp://nl.linkedin.com/pub/paul-hiemstra/20/30b/770",
+      "body_snippet": "On 08/16/2011 07:56 AM, Eik Vettorazzi wrote:\n> Hi Lao,\n> you tried to reinvent the wheel. Have a look at ?tapply\n>\n> tapply(sleep$extra,sleep$group,mean)\nor take a look at the plyr package:\n\nlibrary(",
+      "thread_id": "thread-67cb17b6d1fd",
+      "thread_depth": 2,
       "month": "2011-08"
     },
     {
@@ -43569,6 +43569,25 @@
       "month": "2011-08"
     },
     {
+      "id": "msg-37ed9bd489df",
+      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
+      "from_name": "Sebastian Bauer",
+      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
+      "date": "2011-08-24T17:11:06Z",
+      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
+      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
+      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
+      "references": [
+        "<4E551442.4050600@charite.de>",
+        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
+      ],
+      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
+      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
+      "thread_id": "thread-324d124b9ac3",
+      "thread_depth": 2,
+      "month": "2011-08"
+    },
+    {
       "id": "msg-0772fd69525d",
       "message_id": "<1314205866972-3766037.post@n4.nabble.com>",
       "from_name": "lowman",
@@ -43586,25 +43605,6 @@
       "body_snippet": "answered my own question, just use the call shell function in vb\n\nwoohoo\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Controling-R-from-MS-Access-tp2719751p3766037.html\nSent from ",
       "thread_id": "thread-67f8c70b1a9e",
       "thread_depth": 1,
-      "month": "2011-08"
-    },
-    {
-      "id": "msg-37ed9bd489df",
-      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
-      "from_name": "Sebastian Bauer",
-      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
-      "date": "2011-08-24T17:11:06Z",
-      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
-      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
-      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
-      "references": [
-        "<4E551442.4050600@charite.de>",
-        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
-      ],
-      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
-      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
-      "thread_id": "thread-324d124b9ac3",
-      "thread_depth": 2,
       "month": "2011-08"
     },
     {
@@ -57360,22 +57360,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-664d6bf597f5",
-      "message_id": "<1B7A6C35CDB2BD4DBABBC6FF4275FF14021C1C3F@EXCH1.central.ad.ucc.ie>",
-      "from_name": "Coghlan, Avril",
-      "from_email_hash": "06cb9a1cdb6f0945d677dbcd676c0f65ad4e4accea1e328c57ef3abcffb695c8",
-      "date": "2011-08-31T13:43:50Z",
-      "subject": "[R] booklet on principal component analysis and linear discriminant analysis",
-      "subject_clean": "booklet on principal component analysis and linear discriminant analysis",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-analysis.readthedocs.org/ \nAny comments or corrections will be very welcome.\n\nBy the way, this has a Creative Commons Attribution licence, so you you\nare welcome to use it as you wish (as long as you attribute the work).\n\nKind Regards,\nAvril\n\nAvril Coghlan\nCork, Ireland",
-      "body_snippet": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-",
-      "thread_id": "thread-664d6bf597f5",
-      "thread_depth": 0,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-a4c10c85ce2e",
       "message_id": "<4E5E3A96.7030209@gmail.com>",
       "from_name": "Duncan Murdoch",
@@ -57392,6 +57376,22 @@
       "body_snippet": "On 31/08/2011 9:41 AM, S?bastien Bihorel wrote:\n> Hi,\n>\n> I thought \"..2<- 1\" was a correct way to modify the content of the\n> 2nd level of dot-dot-dot because it did not return any error message.\n> H",
       "thread_id": "thread-05bc8583068a",
       "thread_depth": 2,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-664d6bf597f5",
+      "message_id": "<1B7A6C35CDB2BD4DBABBC6FF4275FF14021C1C3F@EXCH1.central.ad.ucc.ie>",
+      "from_name": "Coghlan, Avril",
+      "from_email_hash": "06cb9a1cdb6f0945d677dbcd676c0f65ad4e4accea1e328c57ef3abcffb695c8",
+      "date": "2011-08-31T13:43:50Z",
+      "subject": "[R] booklet on principal component analysis and linear discriminant analysis",
+      "subject_clean": "booklet on principal component analysis and linear discriminant analysis",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-analysis.readthedocs.org/ \nAny comments or corrections will be very welcome.\n\nBy the way, this has a Creative Commons Attribution licence, so you you\nare welcome to use it as you wish (as long as you attribute the work).\n\nKind Regards,\nAvril\n\nAvril Coghlan\nCork, Ireland",
+      "body_snippet": "Dear all,\n\nI've written a short booklet on how to use R for multivariate analysis,\nfocussing on principal component analysis and linear discriminant\nanalysis:\nhttp://little-book-of-r-for-multivariate-",
+      "thread_id": "thread-664d6bf597f5",
+      "thread_depth": 0,
       "month": "2011-08"
     },
     {
