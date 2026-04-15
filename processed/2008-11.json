@@ -34226,24 +34226,6 @@
       "month": "2008-11"
     },
     {
-      "id": "msg-109d146c0a8e",
-      "message_id": "<loom.20081120T143821-445@post.gmane.org>",
-      "from_name": "Ben Bolker",
-      "from_email_hash": "e939ee505cc6d7a90d0153f4adc5952232fd23faf5cf21e6fd51dcdff5d5ae73",
-      "date": "2008-11-20T14:46:01Z",
-      "subject": "[R] Need some advice on optimization",
-      "subject_clean": "Need some advice on optimization",
-      "in_reply_to": null,
-      "references": [
-        "<800F7C610D3CA74BB1250F0EE0F07BE8022E5F06@sw-gnetcw-mbx01.tcads.thomascook.com>"
-      ],
-      "body_plain": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize a function over\n> a 60-dimensional parameter space. The function itself takes about 1 to 6\n> minutes to compute. It finds an optimum after 6 tot 24 hours, depending\n> on the problem I need to solve. For me, speed is an issue and I would\n> like to reduce this to 1 hour. \n> \n> Hence my question:: are there optimization algorithms that are\n> particularly useful for settings where the evaluation of the function\n> takes a lot of time to compute?\n\n  Others may have more specific advice, but here is some\ngeneral information:\n\n * the more information from the function you can use, the\nbetter.  In this respect the derivative-based methods (BFGS,\nL-BFGS-B) will be more efficient than Nelder-Mead.  If there\nis any way you can get analytic derivatives of your function,\nthat will help a lot.\n\n * Your best bet is probably to look at your objective function\nand see if you can speed it up.  Can you vectorize or code the\ntime-consuming bits of it in C/FORTRAN?\n\n * For large-scale optimization, you can potentially get a very\nlarge improvement in speed by using automatic differentiation,\nwhich exists in R only in a rudimentary form. Depending on the\nresources you have available, I would seriously consider\nAD Model Builder from Otter Research.\n\n  * I haven't tried it, but you might take a quick look at\nhttp://www.milbo.users.sonic.net/ra/index.html, particularly\nif your code involves non-vectorizable loops.\n\n  good luck,\n   Ben Bolker",
-      "body_snippet": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize",
-      "thread_id": "thread-c50f3f64372a",
-      "thread_depth": 1,
-      "month": "2008-11"
-    },
-    {
       "id": "msg-0e2eee7b5ce3",
       "message_id": "<c502a9e10811200646s339e7fb8gb57f2a239226a44a@mail.gmail.com>",
       "from_name": "stephen sefick",
@@ -34258,6 +34240,24 @@
       "body_plain": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calculate this equation:\n>\n> Ps(t)=  (?_(r=1)^N Xtr* 1/?drs)/(?_(r=1)^N 1/?drs)\n>\n> Ps(t) ? Probability that taxon t will occur at site s (300 sites s)\n> N ? Number of sites = from 1 to 49\n> Xtr ? Value for taxon t at site r (I have this information in a table, 40\n> taxa (columns) t, 49 sites r)\n> drs ? Distance from site r to site s (this information is on a table, s\n> sites (columns))\n>\n> I thought that R would be the software to use, but I am experiencing some\n> difficulties\n>\n> Thanks to everyone,\n> P.Branco\n>\n> --\n> View this message in context: http://www.nabble.com/Calculate-an-equation-tp20600332p20600332.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nStephen Sefick\nResearch Scientist\nSoutheastern Natural Sciences Academy\n\nLet's not spend our time and resources thinking about things that are\nso little or so large that all they really do for us is puff us up and\nmake us feel like gods.  We are mammals, and have not exhausted the\nannoying little problems of being mammals.\n\n\t\t\t\t\t\t\t\t-K. Mullis",
       "body_snippet": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calcu",
       "thread_id": "thread-f2b07074397b",
+      "thread_depth": 1,
+      "month": "2008-11"
+    },
+    {
+      "id": "msg-109d146c0a8e",
+      "message_id": "<loom.20081120T143821-445@post.gmane.org>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "e939ee505cc6d7a90d0153f4adc5952232fd23faf5cf21e6fd51dcdff5d5ae73",
+      "date": "2008-11-20T14:46:01Z",
+      "subject": "[R] Need some advice on optimization",
+      "subject_clean": "Need some advice on optimization",
+      "in_reply_to": null,
+      "references": [
+        "<800F7C610D3CA74BB1250F0EE0F07BE8022E5F06@sw-gnetcw-mbx01.tcads.thomascook.com>"
+      ],
+      "body_plain": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize a function over\n> a 60-dimensional parameter space. The function itself takes about 1 to 6\n> minutes to compute. It finds an optimum after 6 tot 24 hours, depending\n> on the problem I need to solve. For me, speed is an issue and I would\n> like to reduce this to 1 hour. \n> \n> Hence my question:: are there optimization algorithms that are\n> particularly useful for settings where the evaluation of the function\n> takes a lot of time to compute?\n\n  Others may have more specific advice, but here is some\ngeneral information:\n\n * the more information from the function you can use, the\nbetter.  In this respect the derivative-based methods (BFGS,\nL-BFGS-B) will be more efficient than Nelder-Mead.  If there\nis any way you can get analytic derivatives of your function,\nthat will help a lot.\n\n * Your best bet is probably to look at your objective function\nand see if you can speed it up.  Can you vectorize or code the\ntime-consuming bits of it in C/FORTRAN?\n\n * For large-scale optimization, you can potentially get a very\nlarge improvement in speed by using automatic differentiation,\nwhich exists in R only in a rudimentary form. Depending on the\nresources you have available, I would seriously consider\nAD Model Builder from Otter Research.\n\n  * I haven't tried it, but you might take a quick look at\nhttp://www.milbo.users.sonic.net/ra/index.html, particularly\nif your code involves non-vectorizable loops.\n\n  good luck,\n   Ben Bolker",
+      "body_snippet": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize",
+      "thread_id": "thread-c50f3f64372a",
       "thread_depth": 1,
       "month": "2008-11"
     },
@@ -35597,22 +35597,6 @@
       "month": "2008-11"
     },
     {
-      "id": "msg-e9b40e04b752",
-      "message_id": "<941582.72819.qm@web32404.mail.mud.yahoo.com>",
-      "from_name": "A Ezhil",
-      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
-      "date": "2008-11-21T01:12:42Z",
-      "subject": "[R] Efficient calculation of correlation",
-      "subject_clean": "Efficient calculation of correlation",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear All,\n\nI have a matrix of size 10000 x 50. I would like to calculate all possible pair-wise correlation coefficient (5x10^7 combinations) using cor(). How can I efficiently calcualte and save the result in a matrix? \n\nThanks in advance.\n\nKind regards,\nEzhil",
-      "body_snippet": "Dear All,\n\nI have a matrix of size 10000 x 50. I would like to calculate all possible pair-wise correlation coefficient (5x10^7 combinations) using cor(). How can I efficiently calcualte and save the ",
-      "thread_id": "thread-e9b40e04b752",
-      "thread_depth": 0,
-      "month": "2008-11"
-    },
-    {
       "id": "msg-be459ee14f42",
       "message_id": "<644e1f320811201712t1f0c3003j3002045ccb28ccdd@mail.gmail.com>",
       "from_name": "jim holtman",
@@ -35628,6 +35612,22 @@
       "body_snippet": "try this:\n\n> q<-list(1, 2:3, 4:6, 7:10)\n> w<-list(0, 1:2, 3:7, 8:10)\n> result <- sapply(seq(length(q)), function(.indx) length(intersect(q[[.indx]], w[[.indx]])))\n> result\n[1] 0 1 3 3\n>\n\n\nOn Thu, Nov ",
       "thread_id": "thread-b50ff05f18b8",
       "thread_depth": 1,
+      "month": "2008-11"
+    },
+    {
+      "id": "msg-e9b40e04b752",
+      "message_id": "<941582.72819.qm@web32404.mail.mud.yahoo.com>",
+      "from_name": "A Ezhil",
+      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
+      "date": "2008-11-21T01:12:42Z",
+      "subject": "[R] Efficient calculation of correlation",
+      "subject_clean": "Efficient calculation of correlation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\n\nI have a matrix of size 10000 x 50. I would like to calculate all possible pair-wise correlation coefficient (5x10^7 combinations) using cor(). How can I efficiently calcualte and save the result in a matrix? \n\nThanks in advance.\n\nKind regards,\nEzhil",
+      "body_snippet": "Dear All,\n\nI have a matrix of size 10000 x 50. I would like to calculate all possible pair-wise correlation coefficient (5x10^7 combinations) using cor(). How can I efficiently calcualte and save the ",
+      "thread_id": "thread-e9b40e04b752",
+      "thread_depth": 0,
       "month": "2008-11"
     },
     {
@@ -36632,6 +36632,22 @@
       "month": "2008-11"
     },
     {
+      "id": "msg-dfe2a0e5e867",
+      "message_id": "<865866.5152.qm@web32403.mail.mud.yahoo.com>",
+      "from_name": "A Ezhil",
+      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
+      "date": "2008-11-21T17:05:39Z",
+      "subject": "[R] Extracting diagonal matrix",
+      "subject_clean": "Extracting diagonal matrix",
+      "in_reply_to": "<c0906bc10811210746t6d4a5035va54e1bd6cbe73bed@mail.gmail.com>",
+      "references": [],
+      "body_plain": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> From: Anup Menon <anup.nandialath at gmail.com>\n> Subject: Re: [R] Extracting diagonal matrix\n> To: ezhil02 at yahoo.com\n> Cc: r-help at r-project.org\n> Date: Friday, November 21, 2008, 9:16 PM\n> Hi Ezhil,\n> \n> Maybe this will help. There might be an easier way to do\n> this but here is\n> one solution.\n> \n> tril <- function(A)\n> {\n>  A <- as.matrix(A)\n>  cmats <- matrix(rep(1,length(A)),dim(A)[1],dim(A)[2])\n>  upper.tri(cmats,diag=T)\n>  cmats[upper.tri(cmats)] <- 0\n>  out <- A*cmats\n>  return(out)\n> }\n> \n> tril(correlation.matrix)\n> \n> will give you the output.\n> \n> HTH\n> \n> Best Regards\n> \n> Anup\n> \n> On Fri, Nov 21, 2008 at 7:28 AM, A Ezhil\n> <ezhil02 at yahoo.com> wrote:\n> \n> > Dear All,\n> >\n> > I have a correlation matrix of size 100 x 100 and\n> would like to extract the\n> > diagonal matrix from it. I have used the for loop to\n> store tha correlation\n> > values of the diagonal matrix. Is there a 'R\n> way' of doing this?\n> >\n> > Thanks in advance.\n> >\n> > Kind regards,\n> > Ezhil\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> > http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained,\n> reproducible code.\n> >",
+      "body_snippet": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> Fro",
+      "thread_id": "thread-51c51f5d95a7",
+      "thread_depth": 2,
+      "month": "2008-11"
+    },
+    {
       "id": "msg-93ba4544da72",
       "message_id": "<fb7c7e870811210905o39a5a3e8yec1abef30314cd96@mail.gmail.com>",
       "from_name": "Rainer M Krug",
@@ -36647,22 +36663,6 @@
       "body_plain": "On Fri, Nov 21, 2008 at 6:12 PM, Douglas Bates <bates at stat.wisc.edu> wrote:\n> R uses column-major ordering of multidimensional arrays, as in\n> Fortran, unlike the row-major ordering of C multidimensional arrays.\n> This is because the numerical linear algebra code used in R is from\n> the Eispack, Linpack, BLAS, Lapack family of Fortran subroutine\n> packages.  Even when implementation languages other than Fortran are\n> used, the Fortran storage conventions prevail because they affect the\n> design of algorithms.\n>\n> Matlab is based on the same code (Matlab began as an interactive\n> wrapper around Eispack and Linpack) and uses the same representation\n> of arrays.\n\nThanks a lot for your detailed explanation. This will make my life much easier.\n\nRainer\n\n>\n> On Fri, Nov 21, 2008 at 2:41 AM, Rainer M Krug <r.m.krug at gmail.com> wrote:\n>> Hi\n>>\n>> I am trying to figure out, if the matlab style of linear indexing of\n>> an array is the same as in R. i.e.\n>>\n>> when\n>>\n>> x <- array( 1:24, dim=c(2,3,4) )\n>> x[3]\n>>> 3\n>>\n>> and if the same is true in matlab, assuming that\n>> x[n1,n2,n3] in R returns the same as  y(n1,n2,n3) when  y is a matrix in matlab\n>>\n>> I found the following reference\n>> http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/matlab_prog/f1-86528.html#f1-86846\n>>\n>> And it seems to be the same, but another source says it is different.\n>> Could somebody confirm, if it is the same?\n>>\n>> Thanks,\n>>\n>> Rainer\n>>\n>>\n>> --\n>> Rainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\n>> Biology, UCT), Dipl. Phys. (Germany)\n>>\n>> Centre of Excellence for Invasion Biology\n>> Faculty of Science\n>> Natural Sciences Building\n>> Private Bag X1\n>> University of Stellenbosch\n>> Matieland 7602\n>> South Africa\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n\n\n\n-- \nRainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\nBiology, UCT), Dipl. Phys. (Germany)\n\nCentre of Excellence for Invasion Biology\nFaculty of Science\nNatural Sciences Building\nPrivate Bag X1\nUniversity of Stellenbosch\nMatieland 7602\nSouth Africa",
       "body_snippet": "On Fri, Nov 21, 2008 at 6:12 PM, Douglas Bates <bates at stat.wisc.edu> wrote:\n> R uses column-major ordering of multidimensional arrays, as in\n> Fortran, unlike the row-major ordering of C multidimen",
       "thread_id": "thread-1b9f4805025e",
-      "thread_depth": 2,
-      "month": "2008-11"
-    },
-    {
-      "id": "msg-dfe2a0e5e867",
-      "message_id": "<865866.5152.qm@web32403.mail.mud.yahoo.com>",
-      "from_name": "A Ezhil",
-      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
-      "date": "2008-11-21T17:05:39Z",
-      "subject": "[R] Extracting diagonal matrix",
-      "subject_clean": "Extracting diagonal matrix",
-      "in_reply_to": "<c0906bc10811210746t6d4a5035va54e1bd6cbe73bed@mail.gmail.com>",
-      "references": [],
-      "body_plain": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> From: Anup Menon <anup.nandialath at gmail.com>\n> Subject: Re: [R] Extracting diagonal matrix\n> To: ezhil02 at yahoo.com\n> Cc: r-help at r-project.org\n> Date: Friday, November 21, 2008, 9:16 PM\n> Hi Ezhil,\n> \n> Maybe this will help. There might be an easier way to do\n> this but here is\n> one solution.\n> \n> tril <- function(A)\n> {\n>  A <- as.matrix(A)\n>  cmats <- matrix(rep(1,length(A)),dim(A)[1],dim(A)[2])\n>  upper.tri(cmats,diag=T)\n>  cmats[upper.tri(cmats)] <- 0\n>  out <- A*cmats\n>  return(out)\n> }\n> \n> tril(correlation.matrix)\n> \n> will give you the output.\n> \n> HTH\n> \n> Best Regards\n> \n> Anup\n> \n> On Fri, Nov 21, 2008 at 7:28 AM, A Ezhil\n> <ezhil02 at yahoo.com> wrote:\n> \n> > Dear All,\n> >\n> > I have a correlation matrix of size 100 x 100 and\n> would like to extract the\n> > diagonal matrix from it. I have used the for loop to\n> store tha correlation\n> > values of the diagonal matrix. Is there a 'R\n> way' of doing this?\n> >\n> > Thanks in advance.\n> >\n> > Kind regards,\n> > Ezhil\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> > http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained,\n> reproducible code.\n> >",
-      "body_snippet": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> Fro",
-      "thread_id": "thread-51c51f5d95a7",
       "thread_depth": 2,
       "month": "2008-11"
     },
@@ -37106,22 +37106,6 @@
       "month": "2008-11"
     },
     {
-      "id": "msg-185039fc51e1",
-      "message_id": "<9A6509A94A33124187515A9901DC551F0B450A2BB0@VAIEXCH05.vai.org>",
-      "from_name": "Richardson, Patrick",
-      "from_email_hash": "0fc496143e73acd083ecf8e0547293e9f83d8fd56acc6b4c35bea158788fb09f",
-      "date": "2008-11-21T19:14:25Z",
-      "subject": "[R] Dendrogram labels",
-      "subject_clean": "Dendrogram labels",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/ecdcfedb/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/ecdcfedb/attachment.pl>",
-      "thread_id": "thread-185039fc51e1",
-      "thread_depth": 0,
-      "month": "2008-11"
-    },
-    {
       "id": "msg-d2296d9a36c1",
       "message_id": "<9A6509A94A33124187515A9901DC551F0B450A2BAF@VAIEXCH05.vai.org>",
       "from_name": "Richardson, Patrick",
@@ -37134,6 +37118,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/45afb3c7/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/45afb3c7/attachment.pl>",
       "thread_id": "thread-d2296d9a36c1",
+      "thread_depth": 0,
+      "month": "2008-11"
+    },
+    {
+      "id": "msg-185039fc51e1",
+      "message_id": "<9A6509A94A33124187515A9901DC551F0B450A2BB0@VAIEXCH05.vai.org>",
+      "from_name": "Richardson, Patrick",
+      "from_email_hash": "0fc496143e73acd083ecf8e0547293e9f83d8fd56acc6b4c35bea158788fb09f",
+      "date": "2008-11-21T19:14:25Z",
+      "subject": "[R] Dendrogram labels",
+      "subject_clean": "Dendrogram labels",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/ecdcfedb/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20081121/ecdcfedb/attachment.pl>",
+      "thread_id": "thread-185039fc51e1",
       "thread_depth": 0,
       "month": "2008-11"
     },
@@ -58121,17 +58121,6 @@
       "root_message_id": "msg-ff09a7ec3544"
     },
     {
-      "id": "thread-d2296d9a36c1",
-      "subject": "Dendrogram labels",
-      "message_count": 1,
-      "participants": [
-        "Richardson, Patrick"
-      ],
-      "started": "2008-11-21T19:14:25Z",
-      "last_reply": "2008-11-21T19:14:25Z",
-      "root_message_id": "msg-d2296d9a36c1"
-    },
-    {
       "id": "thread-185039fc51e1",
       "subject": "Dendrogram labels",
       "message_count": 2,
@@ -58142,6 +58131,17 @@
       "started": "2008-11-21T19:14:25Z",
       "last_reply": "2008-11-21T22:20:02Z",
       "root_message_id": "msg-185039fc51e1"
+    },
+    {
+      "id": "thread-d2296d9a36c1",
+      "subject": "Dendrogram labels",
+      "message_count": 1,
+      "participants": [
+        "Richardson, Patrick"
+      ],
+      "started": "2008-11-21T19:14:25Z",
+      "last_reply": "2008-11-21T19:14:25Z",
+      "root_message_id": "msg-d2296d9a36c1"
     },
     {
       "id": "thread-1353d29317d1",

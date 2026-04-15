@@ -3530,6 +3530,24 @@
       "month": "2015-05"
     },
     {
+      "id": "msg-4153b849a741",
+      "message_id": "<CAGx1TMDHuX=jCaD8LjHjeK9B-Of==c81d7cjXbQ4VjW130792Q@mail.gmail.com>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2015-05-07T21:50:46Z",
+      "subject": "[R] Getting INDIVIDUAL effects of multiple qualitative variables (ordered and unordered factors)",
+      "subject_clean": "Getting INDIVIDUAL effects of multiple qualitative variables (ordered and unordered factors)",
+      "in_reply_to": "<CAOy3Z4C2wu5uMprni1S0eRiCWoitduLvGSHfLg8xH4ucsvy=Aw@mail.gmail.com>",
+      "references": [
+        "<CAOy3Z4C2wu5uMprni1S0eRiCWoitduLvGSHfLg8xH4ucsvy=Aw@mail.gmail.com>"
+      ],
+      "body_plain": "## I think this is what you are looking for.\n## Your download host seems to want to give me software, so I am not taking it.\n\ntmp <- data.frame(y=rnorm(20), a=factor(rep(letters[1:4], each=5)))\n\ntmp.aov <- aov(y ~ a, data=tmp)\n\nsummary(tmp.aov)\n\nsummary(tmp.aov, split=list(a=list(b=1, c=2, d=3)))\n\nsummary.lm(tmp.aov)\n\nRich\n\nOn Thu, May 7, 2015 at 2:43 PM, Rafael Costa\n<rafaelcarneirocosta.rc at gmail.com> wrote:\n> Dear R users,\n>\n> I have data from a questionnaire and I want to estimate the individual\n> effect of each explanatory variable (all are qualitative) on the dependent\n> variable (continuous). However, the default is to consider the estimated\n> coefficients as the difference between the reference group (estimated value\n> of the intercept) and the coefficient of the group. Each qualitative\n> variable relates to a characteristic of a particular activity and the\n> continuous variable is the time taken to perform this activity. I emphasize\n> that the reference level of each factor relates to the case where none of\n> the options for that factor was marked. The data is in \"\n> http://www.datafilehost.com/d/c7f0d342\". I did not put them in the script,\n> because I still do not know how to do this, but I hope this is not a\n> problem (and I ask my sincere apologies). I do not put just a sample of the\n> data, since there was singular matrix problems.\n>\n>\n>\n> First (and main) issue - In order to obtain the individual effect of the\n> levels of each factor, I considered that the reference group has zero\n> effect and I did the following steps:\n>\n>\n>\n> # Since the file was not loaded in the script, it is assumed here that it\n> was downloaded from the internet and is already loaded in R.\n>\n> # I will make a quantile regression, so the package follows.\n>\n> install.packages (quantreg)\n>\n> library (quantreg)\n>\n> # Transforming factors into individual objects:\n>\n> p_1 = table (1: length (tabela1.1 $ p1), as.factor (tabela1.1 $ p1))\n>\n> p_21 = table (1: length (tabela1.1 $ p21), as.factor (tabela1.1 $ p21))\n>\n> p_22 = table (1: length (tabela1.1 $ p22), as.factor (tabela1.1 $ p22))\n>\n> p_23 = table (1: length (tabela1.1 $ p23), as.factor (tabela1.1 $ p23))\n>\n> p_24 = table (1: length (tabela1.1 $ p24), as.factor (tabela1.1 $ p24))\n>\n> p_25 = table (1: length (tabela1.1 $ p25), as.factor (tabela1.1 $ p25))\n>\n> p_34 = table (1: length (tabela1.1 $ p34), as.ordered (tabela1.1 $ p34))\n>\n> p_5 = table (1: length (tabela1.1 $ p5), as.ordered (tabela1.1 $ p5))\n>\n> p_6 = table (1: length (tabela1.1 $ p6), as.ordered (tabela1.1 $ p6))\n>\n> p_7 = table (1: length (tabela1.1 $ p7), as.ordered (tabela1.1 $ p7))\n>\n> p_8 = table (1: length (tabela1.1 $ p8), as.ordered (tabela1.1 $ p8))\n>\n> p_9 = table (1: length (tabela1.1 $ p9), as.ordered (tabela1.1 $ p9))\n>\n> # Regressing the model without intercept, but considering that the\n> reference group = 0, considering that the reference group means that none\n> of the factors has been marked (if any was marked, I believe that the time\n> taken to perform the activity is practically zero).\n>\n> qrModel=rq(data=tabela1.1, pontoefetivo ~ 0 + p_1[,-1] + p_21[,-1] +\n> p_22[,-1] + p_23[,-1] + p_24[,-1] + p_25[,-1] + p_34[,-1] + p_5[,-1] +\n> p_6[,-1] + p_7[,-1] + p_8[,-1] + p_9[,-1], tau=0.5)\n>\n> summary(qrModel)\n>\n> My idea was that since the effect of the reference group is zero, the\n> estimated coefficient of each level is precisely the individual effect of\n> the chosen variable level. My idea is right? If not, what do I do to get\n> these individual effects?\n>\n>\n>\n> Problem 2 - Assuming all is right above, ordered factors not have\n> increasing effects [See summary (qrModel)]. But should not they have? If\n> so, what do I do to ensure such an effect?\n>\n>\n>\n> Problem 3 - Again assuming that everything is correct, I hope that any\n> estimated coefficients (individual effects on the runtime of the activity)\n> are not negative values. Am I right about that? If so, what do I do to\n> ensure that all values are not negative?\n>\n>\n> I am looking forward  any help.\n>\n> Thanks in advance ,\n>\n> Rafael Costa.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "## I think this is what you are looking for.\n## Your download host seems to want to give me software, so I am not taking it.\n\ntmp <- data.frame(y=rnorm(20), a=factor(rep(letters[1:4], each=5)))\n\ntmp.a",
+      "thread_id": "thread-7055a73c9ec7",
+      "thread_depth": 1,
+      "month": "2015-05"
+    },
+    {
       "id": "msg-b7013ee1759d",
       "message_id": "<alpine.LNX.2.11.1505071448550.11430@localhost>",
       "from_name": "Rich Shepard",
@@ -3546,24 +3564,6 @@
       "body_snippet": "On Thu, 7 May 2015, Clint Bowman wrote:\n\n> as in source(\"pairwise-plots-continuous-vars.R\")\n\nClint,\n\n   I did this before converting it to a function, when I modified the\nvariables in the script. Did ",
       "thread_id": "thread-b12159ef9d51",
       "thread_depth": 2,
-      "month": "2015-05"
-    },
-    {
-      "id": "msg-4153b849a741",
-      "message_id": "<CAGx1TMDHuX=jCaD8LjHjeK9B-Of==c81d7cjXbQ4VjW130792Q@mail.gmail.com>",
-      "from_name": "Richard M. Heiberger",
-      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
-      "date": "2015-05-07T21:50:46Z",
-      "subject": "[R] Getting INDIVIDUAL effects of multiple qualitative variables (ordered and unordered factors)",
-      "subject_clean": "Getting INDIVIDUAL effects of multiple qualitative variables (ordered and unordered factors)",
-      "in_reply_to": "<CAOy3Z4C2wu5uMprni1S0eRiCWoitduLvGSHfLg8xH4ucsvy=Aw@mail.gmail.com>",
-      "references": [
-        "<CAOy3Z4C2wu5uMprni1S0eRiCWoitduLvGSHfLg8xH4ucsvy=Aw@mail.gmail.com>"
-      ],
-      "body_plain": "## I think this is what you are looking for.\n## Your download host seems to want to give me software, so I am not taking it.\n\ntmp <- data.frame(y=rnorm(20), a=factor(rep(letters[1:4], each=5)))\n\ntmp.aov <- aov(y ~ a, data=tmp)\n\nsummary(tmp.aov)\n\nsummary(tmp.aov, split=list(a=list(b=1, c=2, d=3)))\n\nsummary.lm(tmp.aov)\n\nRich\n\nOn Thu, May 7, 2015 at 2:43 PM, Rafael Costa\n<rafaelcarneirocosta.rc at gmail.com> wrote:\n> Dear R users,\n>\n> I have data from a questionnaire and I want to estimate the individual\n> effect of each explanatory variable (all are qualitative) on the dependent\n> variable (continuous). However, the default is to consider the estimated\n> coefficients as the difference between the reference group (estimated value\n> of the intercept) and the coefficient of the group. Each qualitative\n> variable relates to a characteristic of a particular activity and the\n> continuous variable is the time taken to perform this activity. I emphasize\n> that the reference level of each factor relates to the case where none of\n> the options for that factor was marked. The data is in \"\n> http://www.datafilehost.com/d/c7f0d342\". I did not put them in the script,\n> because I still do not know how to do this, but I hope this is not a\n> problem (and I ask my sincere apologies). I do not put just a sample of the\n> data, since there was singular matrix problems.\n>\n>\n>\n> First (and main) issue - In order to obtain the individual effect of the\n> levels of each factor, I considered that the reference group has zero\n> effect and I did the following steps:\n>\n>\n>\n> # Since the file was not loaded in the script, it is assumed here that it\n> was downloaded from the internet and is already loaded in R.\n>\n> # I will make a quantile regression, so the package follows.\n>\n> install.packages (quantreg)\n>\n> library (quantreg)\n>\n> # Transforming factors into individual objects:\n>\n> p_1 = table (1: length (tabela1.1 $ p1), as.factor (tabela1.1 $ p1))\n>\n> p_21 = table (1: length (tabela1.1 $ p21), as.factor (tabela1.1 $ p21))\n>\n> p_22 = table (1: length (tabela1.1 $ p22), as.factor (tabela1.1 $ p22))\n>\n> p_23 = table (1: length (tabela1.1 $ p23), as.factor (tabela1.1 $ p23))\n>\n> p_24 = table (1: length (tabela1.1 $ p24), as.factor (tabela1.1 $ p24))\n>\n> p_25 = table (1: length (tabela1.1 $ p25), as.factor (tabela1.1 $ p25))\n>\n> p_34 = table (1: length (tabela1.1 $ p34), as.ordered (tabela1.1 $ p34))\n>\n> p_5 = table (1: length (tabela1.1 $ p5), as.ordered (tabela1.1 $ p5))\n>\n> p_6 = table (1: length (tabela1.1 $ p6), as.ordered (tabela1.1 $ p6))\n>\n> p_7 = table (1: length (tabela1.1 $ p7), as.ordered (tabela1.1 $ p7))\n>\n> p_8 = table (1: length (tabela1.1 $ p8), as.ordered (tabela1.1 $ p8))\n>\n> p_9 = table (1: length (tabela1.1 $ p9), as.ordered (tabela1.1 $ p9))\n>\n> # Regressing the model without intercept, but considering that the\n> reference group = 0, considering that the reference group means that none\n> of the factors has been marked (if any was marked, I believe that the time\n> taken to perform the activity is practically zero).\n>\n> qrModel=rq(data=tabela1.1, pontoefetivo ~ 0 + p_1[,-1] + p_21[,-1] +\n> p_22[,-1] + p_23[,-1] + p_24[,-1] + p_25[,-1] + p_34[,-1] + p_5[,-1] +\n> p_6[,-1] + p_7[,-1] + p_8[,-1] + p_9[,-1], tau=0.5)\n>\n> summary(qrModel)\n>\n> My idea was that since the effect of the reference group is zero, the\n> estimated coefficient of each level is precisely the individual effect of\n> the chosen variable level. My idea is right? If not, what do I do to get\n> these individual effects?\n>\n>\n>\n> Problem 2 - Assuming all is right above, ordered factors not have\n> increasing effects [See summary (qrModel)]. But should not they have? If\n> so, what do I do to ensure such an effect?\n>\n>\n>\n> Problem 3 - Again assuming that everything is correct, I hope that any\n> estimated coefficients (individual effects on the runtime of the activity)\n> are not negative values. Am I right about that? If so, what do I do to\n> ensure that all values are not negative?\n>\n>\n> I am looking forward  any help.\n>\n> Thanks in advance ,\n>\n> Rafael Costa.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "## I think this is what you are looking for.\n## Your download host seems to want to give me software, so I am not taking it.\n\ntmp <- data.frame(y=rnorm(20), a=factor(rep(letters[1:4], each=5)))\n\ntmp.a",
-      "thread_id": "thread-7055a73c9ec7",
-      "thread_depth": 1,
       "month": "2015-05"
     },
     {
@@ -14385,24 +14385,6 @@
       "month": "2015-05"
     },
     {
-      "id": "msg-a127db9cb760",
-      "message_id": "<55682DDA.5050008@univ-reims.fr>",
-      "from_name": "Ivan Calandra",
-      "from_email_hash": "964eb5a73ffff6218493e4739415f52af0c3d29a6f625fd12ebb0e2268b1516f",
-      "date": "2015-05-29T09:14:02Z",
-      "subject": "[R] Error in CSV file",
-      "subject_clean": "Error in CSV file",
-      "in_reply_to": "<1432888889610-4707879.post@n4.nabble.com>",
-      "references": [
-        "<1432888889610-4707879.post@n4.nabble.com>"
-      ],
-      "body_plain": "Hi Shivi,\n\nR is case sensitive and the error message that the argument \"Header\" is \nunused (because unrecognized). Try with \"header\" (lower case \"h\") and it \nshould work.\n\nHTH,\nIvan\n\n--\nIvan Calandra, ATER\nUniversity of Reims Champagne-Ardenne\nGEGENAA - EA 3795\nCREA - 2 esplanade Roland Garros\n51100 Reims, France\n+33(0)3 26 77 36 89\nivan.calandra at univ-reims.fr\nhttps://www.researchgate.net/profile/Ivan_Calandra\n\nLe 29/05/15 10:41, Shivi82 a ?crit :\n> Hello All,\n> This is an easy fix but I am not able to find the root cause of the error. I\n> am trying to upload a csv file but it is throwing an error.\n> Have done a lot of research on google and some tutorial but cant find a\n> solution hence please advice:-\n> Syntax is :-   aaa<-read.csv(file =\"VehicleData.csv\",Header=TRUE)\n>\n> Error:- Error in read.table(file = file, header = header, sep = sep, quote =\n> quote,  :\n>    unused argument (Header = TRUE)\n>\n> Snapshot of the file:-\n> Weight\tHours\tPROCESS\tMonth\tWeekday\tDay\n> 6828\t         13\t        INBOUND\tMar\t              Fri\t13\n> 2504\t         16\t        INBOUND\tMar\t              Fri\t27\n> 20\t         16\t        INBOUND\tMar\t              Fri\t27\n> 10262\t 16\t        INBOUND\tMar\t              Fri\t27\n> 2500\t         17\t        INBOUND\tMar\t              Fri\t13\n>\n> Kindly help.\n>\n>\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/Error-in-CSV-file-tp4707879.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
-      "body_snippet": "Hi Shivi,\n\nR is case sensitive and the error message that the argument \"Header\" is \nunused (because unrecognized). Try with \"header\" (lower case \"h\") and it \nshould work.\n\nHTH,\nIvan\n\n--\nIvan Calandra,",
-      "thread_id": "thread-e94a45e50c2d",
-      "thread_depth": 1,
-      "month": "2015-05"
-    },
-    {
       "id": "msg-a8b6b43c4ad7",
       "message_id": "<m2mw0nvj8l.fsf@krugs.de>",
       "from_name": "Rainer M Krug",
@@ -14416,6 +14398,24 @@
       ],
       "body_plain": "Shivi82 <shivibhatia at ymail.com> writes:\n\n> Hello All,\n> This is an easy fix but I am not able to find the root cause of the error. I\n> am trying to upload a csv file but it is throwing an error.\n> Have done a lot of research on google and some tutorial but cant find a\n> solution hence please advice:-\n> Syntax is :-   aaa<-read.csv(file =\"VehicleData.csv\",Header=TRUE)\n>\n> Error:- Error in read.table(file = file, header = header, sep = sep, quote =\n> quote,  : \n>   unused argument (Header = TRUE)\n                     ^^^^^^^^^^^^^^\n\nuse \"header = TRUE\" instead of \"Header = TRUE\". R is case sensitive.\n\nCheers,\n\nRainer\n\n>\n> Snapshot of the file:-\n> Weight\tHours\tPROCESS\tMonth\tWeekday\tDay\n> 6828\t         13\t        INBOUND\tMar\t              Fri\t13\n> 2504\t         16\t        INBOUND\tMar\t              Fri\t27\n> 20\t         16\t        INBOUND\tMar\t              Fri\t27\n> 10262\t 16\t        INBOUND\tMar\t              Fri\t27\n> 2500\t         17\t        INBOUND\tMar\t              Fri\t13\n>\n> Kindly help. \n>\n>\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/Error-in-CSV-file-tp4707879.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n\n-- \nRainer M. Krug\nemail: Rainer<at>krugs<dot>de\nPGP: 0x0F52F982\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: not available\nType: application/pgp-signature\nSize: 494 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20150529/028bff49/attachment.bin>",
       "body_snippet": "Shivi82 <shivibhatia at ymail.com> writes:\n\n> Hello All,\n> This is an easy fix but I am not able to find the root cause of the error. I\n> am trying to upload a csv file but it is throwing an error.\n> ",
+      "thread_id": "thread-e94a45e50c2d",
+      "thread_depth": 1,
+      "month": "2015-05"
+    },
+    {
+      "id": "msg-a127db9cb760",
+      "message_id": "<55682DDA.5050008@univ-reims.fr>",
+      "from_name": "Ivan Calandra",
+      "from_email_hash": "964eb5a73ffff6218493e4739415f52af0c3d29a6f625fd12ebb0e2268b1516f",
+      "date": "2015-05-29T09:14:02Z",
+      "subject": "[R] Error in CSV file",
+      "subject_clean": "Error in CSV file",
+      "in_reply_to": "<1432888889610-4707879.post@n4.nabble.com>",
+      "references": [
+        "<1432888889610-4707879.post@n4.nabble.com>"
+      ],
+      "body_plain": "Hi Shivi,\n\nR is case sensitive and the error message that the argument \"Header\" is \nunused (because unrecognized). Try with \"header\" (lower case \"h\") and it \nshould work.\n\nHTH,\nIvan\n\n--\nIvan Calandra, ATER\nUniversity of Reims Champagne-Ardenne\nGEGENAA - EA 3795\nCREA - 2 esplanade Roland Garros\n51100 Reims, France\n+33(0)3 26 77 36 89\nivan.calandra at univ-reims.fr\nhttps://www.researchgate.net/profile/Ivan_Calandra\n\nLe 29/05/15 10:41, Shivi82 a ?crit :\n> Hello All,\n> This is an easy fix but I am not able to find the root cause of the error. I\n> am trying to upload a csv file but it is throwing an error.\n> Have done a lot of research on google and some tutorial but cant find a\n> solution hence please advice:-\n> Syntax is :-   aaa<-read.csv(file =\"VehicleData.csv\",Header=TRUE)\n>\n> Error:- Error in read.table(file = file, header = header, sep = sep, quote =\n> quote,  :\n>    unused argument (Header = TRUE)\n>\n> Snapshot of the file:-\n> Weight\tHours\tPROCESS\tMonth\tWeekday\tDay\n> 6828\t         13\t        INBOUND\tMar\t              Fri\t13\n> 2504\t         16\t        INBOUND\tMar\t              Fri\t27\n> 20\t         16\t        INBOUND\tMar\t              Fri\t27\n> 10262\t 16\t        INBOUND\tMar\t              Fri\t27\n> 2500\t         17\t        INBOUND\tMar\t              Fri\t13\n>\n> Kindly help.\n>\n>\n>\n>\n> --\n> View this message in context: http://r.789695.n4.nabble.com/Error-in-CSV-file-tp4707879.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Hi Shivi,\n\nR is case sensitive and the error message that the argument \"Header\" is \nunused (because unrecognized). Try with \"header\" (lower case \"h\") and it \nshould work.\n\nHTH,\nIvan\n\n--\nIvan Calandra,",
       "thread_id": "thread-e94a45e50c2d",
       "thread_depth": 1,
       "month": "2015-05"

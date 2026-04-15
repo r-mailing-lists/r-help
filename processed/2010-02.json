@@ -3832,24 +3832,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-101265498f39",
-      "message_id": "<4B685678.5040604@statistik.tu-dortmund.de>",
-      "from_name": "Uwe Ligges",
-      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
-      "date": "2010-02-02T16:44:40Z",
-      "subject": "[R] Deleting many columns of a data frame with the same name in a\trow",
-      "subject_clean": "Deleting many columns of a data frame with the same name in a\trow",
-      "in_reply_to": "<1265128558165-1460078.post@n4.nabble.com>",
-      "references": [
-        "<1265128558165-1460078.post@n4.nabble.com>"
-      ],
-      "body_plain": "datas[ , \"A\" != colnames(datas)]\n\nUwe Ligges\n\nOn 02.02.2010 17:35, anna wrote:\n>\n> Hi, I have a data frame datas with half of the columns with the same name\n> \"A\". I want to delete all those columns from the data frame so here is what\n> I did:\n> datas$A<- NULL\n> The problem is that it deleted only one column, I would have to do it as\n> many times as there are \"A\" columns. Is there a way to do it in one time?\n> thank you\n>\n> -----\n> Anna Lippel",
-      "body_snippet": "datas[ , \"A\" != colnames(datas)]\n\nUwe Ligges\n\nOn 02.02.2010 17:35, anna wrote:\n>\n> Hi, I have a data frame datas with half of the columns with the same name\n> \"A\". I want to delete all those columns f",
-      "thread_id": "thread-e85a24a7dbb8",
-      "thread_depth": 1,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-26984e670760",
       "message_id": "<4B685678.1000707@uni-hamburg.de>",
       "from_name": "Ivan Calandra",
@@ -3869,6 +3851,24 @@
       "body_snippet": "Hi David,\n\nThanks for your answer.\nBut I don't really see how I can extend it with my real data.\nThe thing is that I have more than 3 names and 1 value for each name. \nMoreover, each is different from",
       "thread_id": "thread-9c1c9477548a",
       "thread_depth": 4,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-101265498f39",
+      "message_id": "<4B685678.5040604@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2010-02-02T16:44:40Z",
+      "subject": "[R] Deleting many columns of a data frame with the same name in a\trow",
+      "subject_clean": "Deleting many columns of a data frame with the same name in a\trow",
+      "in_reply_to": "<1265128558165-1460078.post@n4.nabble.com>",
+      "references": [
+        "<1265128558165-1460078.post@n4.nabble.com>"
+      ],
+      "body_plain": "datas[ , \"A\" != colnames(datas)]\n\nUwe Ligges\n\nOn 02.02.2010 17:35, anna wrote:\n>\n> Hi, I have a data frame datas with half of the columns with the same name\n> \"A\". I want to delete all those columns from the data frame so here is what\n> I did:\n> datas$A<- NULL\n> The problem is that it deleted only one column, I would have to do it as\n> many times as there are \"A\" columns. Is there a way to do it in one time?\n> thank you\n>\n> -----\n> Anna Lippel",
+      "body_snippet": "datas[ , \"A\" != colnames(datas)]\n\nUwe Ligges\n\nOn 02.02.2010 17:35, anna wrote:\n>\n> Hi, I have a data frame datas with half of the columns with the same name\n> \"A\". I want to delete all those columns f",
+      "thread_id": "thread-e85a24a7dbb8",
+      "thread_depth": 1,
       "month": "2010-02"
     },
     {
@@ -23246,22 +23246,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-5d65183bd194",
-      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
-      "from_name": "vikrant",
-      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
-      "date": "2010-02-10T09:44:57Z",
-      "subject": "[R] Problems with looping in R",
-      "subject_clean": "Problems with looping in R",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
-      "thread_id": "thread-5d65183bd194",
-      "thread_depth": 0,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-0b7be405ca0d",
       "message_id": "<4B728019.3030209@geo.uu.nl>",
       "from_name": "Paul Hiemstra",
@@ -23277,6 +23261,22 @@
       "body_snippet": "Hi,\n\nTake a look at rep(), specifically the each = parameter.\n\ncheers,\nPaul\n\nMadhavi Bhave wrote:\n> Dear R helpers\n>  \n> I have a city.csv file as given below.\n>  \n> 'city.csv'\n> city_name1        cit",
       "thread_id": "thread-2ce201131495",
       "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-5d65183bd194",
+      "message_id": "<1265795097884-1475550.post@n4.nabble.com>",
+      "from_name": "vikrant",
+      "from_email_hash": "4496dc206a123e65f922721bddc871e5aed36f01d7d9dff2af384ce921116cd3",
+      "date": "2010-02-10T09:44:57Z",
+      "subject": "[R] Problems with looping in R",
+      "subject_clean": "Problems with looping in R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery(channel,paste(\"select * from\",dbname,\"..\",dbtable))\n \tinit_data <- subset(init_data,!is.null(init_data[,1]),)\n\tprint(dim(init_data))\n\tunique_b_vals = unique(init_data[,3])\n\tprint(unique_b_vals)\n\tfinal_set <- NULL\n\tfor(b_val in unique_b_vals)\t\n\t{\n\t\ttemp1 = subset(init_data,init_data[,3] == b_val,)\n\t\ttemp1 = temp1[sample(dim(temp1)[1], 200),]\n\t\tif (is.null(final_set))\n\t\t{\n\t\t\tfinal_set <<- temp1\n\t\t}\n\t\telse \n\t\t\tfinal_set <<- rbind(final_set,temp1)\n\t\t\n\t}\n}\n\nHere What I am doing is connecting to MS sql Server through R and extracting \nthe data and init_data contains all my data matrix. After getting all the\ndata in init_data I want to randomly select data of size say 200. when I am\ndoing this directly from the command line and not through this function the\nfor loop runs well and gives me the sample data. But when I try to put this\nin a function the loop is failing and does not contain any data.I debugged\nthe code init_data contains data but final_set does not contain any data. \nThe appending is not working when i put this in a function but the same code\nworks fine without a function\nAny solution for this? Please Help\n-- \nView this message in context: http://n4.nabble.com/Problems-with-looping-in-R-tp1475550p1475550.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Dear R Experts,\nThis is my R function. \n\n \nmy<-function(servername,dbname,dbtable){\n \tlibrary(RODBC)\n \tchannel<- odbcDriverConnect(paste(\"driver=SQL Server;server=\",servername))\n \tinit_data<- sqlQuery",
+      "thread_id": "thread-5d65183bd194",
+      "thread_depth": 0,
       "month": "2010-02"
     },
     {
@@ -53175,24 +53175,6 @@
       "month": "2010-02"
     },
     {
-      "id": "msg-2a3181f25218",
-      "message_id": "<1266933900706-1565919.post@n4.nabble.com>",
-      "from_name": "drlasher",
-      "from_email_hash": "300d8f823b508aae14dc94db57fd7789c2fd2da2278bf32702acd22c1ffe0f2b",
-      "date": "2010-02-23T14:05:00Z",
-      "subject": "[R] axes limits in do3d",
-      "subject_clean": "axes limits in do3d",
-      "in_reply_to": "<1266923000359-1565754.post@n4.nabble.com>",
-      "references": [
-        "<1266923000359-1565754.post@n4.nabble.com>"
-      ],
-      "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565919.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
-      "thread_id": "thread-1a364afc21c8",
-      "thread_depth": 1,
-      "month": "2010-02"
-    },
-    {
       "id": "msg-167ea76f0052",
       "message_id": "<1266933900842-1565920.post@n4.nabble.com>",
       "from_name": "drlasher",
@@ -53205,6 +53187,24 @@
         "<1266923000359-1565754.post@n4.nabble.com>"
       ],
       "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565920.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
+      "thread_id": "thread-1a364afc21c8",
+      "thread_depth": 1,
+      "month": "2010-02"
+    },
+    {
+      "id": "msg-2a3181f25218",
+      "message_id": "<1266933900706-1565919.post@n4.nabble.com>",
+      "from_name": "drlasher",
+      "from_email_hash": "300d8f823b508aae14dc94db57fd7789c2fd2da2278bf32702acd22c1ffe0f2b",
+      "date": "2010-02-23T14:05:00Z",
+      "subject": "[R] axes limits in do3d",
+      "subject_clean": "axes limits in do3d",
+      "in_reply_to": "<1266923000359-1565754.post@n4.nabble.com>",
+      "references": [
+        "<1266923000359-1565754.post@n4.nabble.com>"
+      ],
+      "body_plain": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp1565754p1565919.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "ALso meant to say there are no warnings when I run the code as shown here. It\njust doesn't change the scale of the axes.\n-- \nView this message in context: http://n4.nabble.com/axes-limits-in-do3d-tp15",
       "thread_id": "thread-1a364afc21c8",
       "thread_depth": 1,
@@ -76629,18 +76629,6 @@
       "root_message_id": "msg-ed067522eec5"
     },
     {
-      "id": "thread-ffd0486a1004",
-      "subject": "R 64-bit memory.limit() is max of ?",
-      "message_count": 2,
-      "participants": [
-        "S. Few",
-        "Thomas Lumley"
-      ],
-      "started": "2010-02-17T15:53:03Z",
-      "last_reply": "2010-02-17T16:14:52Z",
-      "root_message_id": "msg-ffd0486a1004"
-    },
-    {
       "id": "thread-dd81825c08a8",
       "subject": "non-linear contrained optimization",
       "message_count": 2,
@@ -76651,6 +76639,18 @@
       "started": "2010-02-17T15:53:03Z",
       "last_reply": "2010-02-18T21:43:29Z",
       "root_message_id": "msg-dd81825c08a8"
+    },
+    {
+      "id": "thread-ffd0486a1004",
+      "subject": "R 64-bit memory.limit() is max of ?",
+      "message_count": 2,
+      "participants": [
+        "S. Few",
+        "Thomas Lumley"
+      ],
+      "started": "2010-02-17T15:53:03Z",
+      "last_reply": "2010-02-17T16:14:52Z",
+      "root_message_id": "msg-ffd0486a1004"
     },
     {
       "id": "thread-e8b88f7638d3",
