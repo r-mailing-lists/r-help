@@ -1654,3 +1654,106 @@ R-announce at r-project.org mailing list
 https://stat.ethz.ch/mailman/listinfo/r-announce
 
 
+From j@n @end|ng |rom de|eeuwpdx@net  Tue Apr 14 18:37:56 2026
+From: j@n @end|ng |rom de|eeuwpdx@net (De Leeuw, Jan)
+Date: Tue, 14 Apr 2026 12:37:56 -0400
+Subject: [R] dimension reduction code
+Message-ID: <6B5E2518-61E8-4680-B059-F6D5E14278E1@deleeuwpdx.net>
+
+Over the last couple of years I have written a large number of R codes for
+matrix approximation, multidimensional scaling, and multivariate analysis.
+The general approach is to write a stand-alone R program and in addition an R driver that
+uses .C() to call a shared library, which is by itself a stand-alone
+C program. The main recent projects are C versions of the smacof MDS
+majorization (MM) method with extensions to Sammon mapping, Elastic Scaling, 
+strain, fStress, rStress -- all written in both R and C, all with both
+metric and non-metric versions.
+
+The papers/manuals/vignettes, largely unpublished and often unfinished, are at
+https://jansweb.netlify.app/publication and the corresponding C, h, R, pdf,
+qmd, tex, bib files are at https://github.com/deleeuw?tab=repositories. I am not
+interested in transforming these papers/codes to full-fledged publications,
+but the current form they may be useful to some. Everything in the repositories
+is open source with a CC0 license, so it can be used (and modified)
+without attribution. On the other hand, all suggestions for improvement
+are welcome.
+------------------------------------------------------------------
+Jan de Leeuw, Distinguished Professor Emeritus, UCLA Statistics 
+https://jansweb.netlify.app ******** https://github.com/deleeuw
+------------------------------------------------------------------
+Remember, no matter where you go, there you are. (Buckaroo Banzai)
+
+
+
+
+
+
+
+
+
+
+
+
+	[[alternative HTML version deleted]]
+
+
+From Ach|m@Ze||e|@ @end|ng |rom u|bk@@c@@t  Wed Apr 15 11:30:44 2026
+From: Ach|m@Ze||e|@ @end|ng |rom u|bk@@c@@t (Achim Zeileis)
+Date: Wed, 15 Apr 2026 11:30:44 +0200 (CEST)
+Subject: [R] dimension reduction code
+In-Reply-To: <69467f42518d42b08de1a86be5ca5573@DU0PR07MB10664.eurprd07.prod.outlook.com>
+References: <69467f42518d42b08de1a86be5ca5573@DU0PR07MB10664.eurprd07.prod.outlook.com>
+Message-ID: <ec67cce5-56a2-175c-a90b-072f0b99f049@uibk.ac.at>
+
+Jan, this is really impressive! Thank you for sharing this with the 
+community.
+
+Best wishes,
+Achim
+
+On Tue, 14 Apr 2026, De Leeuw, Jan wrote:
+
+> Over the last couple of years I have written a large number of R codes for
+> matrix approximation, multidimensional scaling, and multivariate analysis.
+> The general approach is to write a stand-alone R program and in addition an R driver that
+> uses .C() to call a shared library, which is by itself a stand-alone
+> C program. The main recent projects are C versions of the smacof MDS
+> majorization (MM) method with extensions to Sammon mapping, Elastic Scaling,
+> strain, fStress, rStress -- all written in both R and C, all with both
+> metric and non-metric versions.
+>
+> The papers/manuals/vignettes, largely unpublished and often unfinished, are at
+> https://jansweb.netlify.app/publication and the corresponding C, h, R, pdf,
+> qmd, tex, bib files are at https://github.com/deleeuw?tab=repositories. I am not
+> interested in transforming these papers/codes to full-fledged publications,
+> but the current form they may be useful to some. Everything in the repositories
+> is open source with a CC0 license, so it can be used (and modified)
+> without attribution. On the other hand, all suggestions for improvement
+> are welcome.
+> ------------------------------------------------------------------
+> Jan de Leeuw, Distinguished Professor Emeritus, UCLA Statistics
+> https://jansweb.netlify.app ******** https://github.com/deleeuw
+> ------------------------------------------------------------------
+> Remember, no matter where you go, there you are. (Buckaroo Banzai)
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+> 	[[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+
