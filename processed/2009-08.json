@@ -51967,6 +51967,24 @@
       "month": "2009-08"
     },
     {
+      "id": "msg-0f5237171472",
+      "message_id": "<6ED72D78-F831-4788-8438-11A4009BBA96@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2009-08-27T03:48:39Z",
+      "subject": "[R] set pdf.options() encoding to UTF-8",
+      "subject_clean": "set pdf.options() encoding to UTF-8",
+      "in_reply_to": "<68b1e2610908261955w2ef2ea08u2b4ecaae135b5d1c@mail.gmail.com>",
+      "references": [
+        "<68b1e2610908261955w2ef2ea08u2b4ecaae135b5d1c@mail.gmail.com>"
+      ],
+      "body_plain": "On Aug 26, 2009, at 10:55 PM, Liviu Andronic wrote:\n\n> Dear all\n> Can anyone point to a list of valid pdf.options() encodings? I checked\n> ?pdf and ?postscript, but they do not quite answer my questions. I\n> would like to try UTF-8 instead of the default \"ISOLatin1.enc\" for\n> Sweave plots (I have issues with Greek characters in labels).\n\nIt's undoubtedly installation specific. The pdf.option page refers us  \n(at least on my machine) to pdf() which in turn refers to postscript()  \nwhich says:\n\nencoding\nthe name of an encoding file. Defaults to \"default\". The latter is  \ninterpreted as ?\"ISOLatin1.enc\"? unless the locale is recognized as  \ncorresponding to a language using ISO 8859-{5,7,13,15} or KOI8-{R,U}.  \nThe file is looked for in the ?enc? directory of package grDevices if  \nthe path does not contain a path separator. An extension \".enc\" can be  \nomitted.\n\nSo I would be looking where it tells me to look:\n\n/Library/Frameworks/R.framework/Versions/2.9/Resources/library/ \ngrDevices/enc\n\nAnd I see four ISOLatin variants, including ISOLatin2.enc\n\nObviously that could be different on your machine. I suspect you will  \nthen need to look up details on the list you find. I seem to remember  \nreading that one of the CP125? encodings was similar to UTF-8 but that  \nis a very dim memory.\n\nI think that memory might have been regarding this Ripley posting from  \n2007:\nhttp://finzi.psych.upenn.edu/R/Rhelp02/archive/91924.html\n\n(... and my memory wasn't very accurate.)\n\nMy reading of the R-News article suggest that ISOLatin2.enc might be  \nan option for UTF-8 locales:\nhttp://cran.r-project.org/doc/Rnews/Rnews_2006-2.pdf\n\n-- \n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
+      "body_snippet": "On Aug 26, 2009, at 10:55 PM, Liviu Andronic wrote:\n\n> Dear all\n> Can anyone point to a list of valid pdf.options() encodings? I checked\n> ?pdf and ?postscript, but they do not quite answer my questio",
+      "thread_id": "thread-e3094d636bf0",
+      "thread_depth": 1,
+      "month": "2009-08"
+    },
+    {
       "id": "msg-d62f6f82c8d9",
       "message_id": "<4A968EB6.5860.00D0.0@commerce.nsw.gov.au>",
       "from_name": "Debabrata Midya",
@@ -51983,24 +52001,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090827/0651b66f/attachment-0001.pl>",
       "thread_id": "thread-1c46d6b63352",
       "thread_depth": 2,
-      "month": "2009-08"
-    },
-    {
-      "id": "msg-0f5237171472",
-      "message_id": "<6ED72D78-F831-4788-8438-11A4009BBA96@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2009-08-27T03:48:39Z",
-      "subject": "[R] set pdf.options() encoding to UTF-8",
-      "subject_clean": "set pdf.options() encoding to UTF-8",
-      "in_reply_to": "<68b1e2610908261955w2ef2ea08u2b4ecaae135b5d1c@mail.gmail.com>",
-      "references": [
-        "<68b1e2610908261955w2ef2ea08u2b4ecaae135b5d1c@mail.gmail.com>"
-      ],
-      "body_plain": "On Aug 26, 2009, at 10:55 PM, Liviu Andronic wrote:\n\n> Dear all\n> Can anyone point to a list of valid pdf.options() encodings? I checked\n> ?pdf and ?postscript, but they do not quite answer my questions. I\n> would like to try UTF-8 instead of the default \"ISOLatin1.enc\" for\n> Sweave plots (I have issues with Greek characters in labels).\n\nIt's undoubtedly installation specific. The pdf.option page refers us  \n(at least on my machine) to pdf() which in turn refers to postscript()  \nwhich says:\n\nencoding\nthe name of an encoding file. Defaults to \"default\". The latter is  \ninterpreted as ?\"ISOLatin1.enc\"? unless the locale is recognized as  \ncorresponding to a language using ISO 8859-{5,7,13,15} or KOI8-{R,U}.  \nThe file is looked for in the ?enc? directory of package grDevices if  \nthe path does not contain a path separator. An extension \".enc\" can be  \nomitted.\n\nSo I would be looking where it tells me to look:\n\n/Library/Frameworks/R.framework/Versions/2.9/Resources/library/ \ngrDevices/enc\n\nAnd I see four ISOLatin variants, including ISOLatin2.enc\n\nObviously that could be different on your machine. I suspect you will  \nthen need to look up details on the list you find. I seem to remember  \nreading that one of the CP125? encodings was similar to UTF-8 but that  \nis a very dim memory.\n\nI think that memory might have been regarding this Ripley posting from  \n2007:\nhttp://finzi.psych.upenn.edu/R/Rhelp02/archive/91924.html\n\n(... and my memory wasn't very accurate.)\n\nMy reading of the R-News article suggest that ISOLatin2.enc might be  \nan option for UTF-8 locales:\nhttp://cran.r-project.org/doc/Rnews/Rnews_2006-2.pdf\n\n-- \n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
-      "body_snippet": "On Aug 26, 2009, at 10:55 PM, Liviu Andronic wrote:\n\n> Dear all\n> Can anyone point to a list of valid pdf.options() encodings? I checked\n> ?pdf and ?postscript, but they do not quite answer my questio",
-      "thread_id": "thread-e3094d636bf0",
-      "thread_depth": 1,
       "month": "2009-08"
     },
     {
