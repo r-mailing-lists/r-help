@@ -1757,3 +1757,3249 @@ On Tue, 14 Apr 2026, De Leeuw, Jan wrote:
 >
 
 
+From n@@r@m@poy4 @end|ng |rom gm@||@com  Sun Apr 19 22:57:15 2026
+From: n@@r@m@poy4 @end|ng |rom gm@||@com (Nasra Mapoy)
+Date: Sun, 19 Apr 2026 23:57:15 +0300
+Subject: [R] R Inla and Balancing data set
+Message-ID: <CAMpGuXaaOz9h2N6UdxkZ50=FwHC2CEhzO2txAG_uyjJJAs+VnA@mail.gmail.com>
+
+Hi,
+My name is Nasra. I am working on my thesis using R for analysis, I have an
+objective of predicting household inequality, using R inla and machine
+learning. But my data is imbalanced (i have about 94 inadequate housing
+coded as 1) i want to balance then proceed with analysis. Unfortunately I
+got stuck each time. Please help me.
+Down is just an example of my data set
+
+head(df_analysis)# A tibble: 6 ? 40
+  H_REGION_NAME H_DISTRICT_NAME H_WARD_NAME H_VILLAGE_NAME H_LATITUDE
+  <fct>         <fct>           <fct>       <fct>               <dbl>1
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.262
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.263
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.264
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.265
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.266
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.26# ?
+35 more variables: H_LONGITUDE <dbl>, LOCATION <fct>, MEMBERS <dbl>,#
+ TENURE <fct>, LAND <fct>, ROOF <fct>, FLOOR <fct>, WALLS <fct>,#
+ROOMS <dbl>, DRINKING_WATER <fct>, COOKING <fct>, LIGHTING <fct>,#
+TOILET <fct>, SOLID_WASTE <fct>, HEAD_SEX <fct>, HEAD_AGE <dbl>,#
+HEAD_EDUCATION <fct>, HEAD_ECON_ACTV <fct>, HEAD_MARITAL <fct>,#
+HEAD_OCCUPATION <fct>, H_Education <fct>, Durability_Floor <fct>,#
+Durability_Wall <fct>, Durability_Roof <fct>, Improved_Water <fct>,
+
+these ara some of the codes which i run
+
+library(spldv)
+library(readr)
+library(spdep)
+library(spDataLarge)
+library(haven)
+library(sp)
+library(INLA)    # INLA models
+library(sf)      # spatial data
+library(ggplot2) # plotting
+library(dplyr)
+#library(DMwR)
+library(smotefamily)
+
+library(sf)
+library(sp)
+library(INLA)
+
+# 1. Read shapefile and prepare coordinates
+shp_data <- st_read("housing.shp")
+shp_data_sp <- as(shp_data, "Spatial")
+coords <- st_coordinates(shp_data)
+
+
+
+# Add coordinates to dataframe
+shp_data$X <- coords[,1]
+shp_data$Y <- coords[,2]
+
+names(shp_data)[names(shp_data) == "slum"] <- "housing_inadequacy"
+
+# Convert categorical variables to factors
+shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+shp_data$hhsize      <- as.factor(shp_data$hhsize)
+
+# Create numeric district id
+shp_data$id <- as.numeric(as.factor(shp_data$H_DISTR))
+
+# Response variable (binary 0/1)
+shp_data$y <- as.integer(shp_data$housing_inadequacy)
+
+
+coords <- st_coordinates(st_centroid(shp_data))
+
+
+# 2. Build mesh
+mesh <- inla.mesh.2d(
+  loc = coords,
+  max.edge = c(0.05, 0.2),
+  cutoff = 0.01
+)
+
+
+str(coords)
+
+# 3. Define SPDE model
+spde <- inla.spde2.pcmatern(
+  mesh = mesh,
+  alpha = 2,
+  prior.range = c(0.5, 0.01),   # P(range < 0.5) = 0.01
+  prior.sigma = c(1, 0.01)      # P(sigma > 1) = 0.01
+)
+
+# 4. Create spatial index and projector matrix
+spatial_index <- inla.spde.make.index("spatial_field", n.spde = spde$n.spde)
+
+A <- inla.spde.make.A(mesh = mesh, loc = coords)
+
+# 5. Build stack
+stack <- inla.stack(
+  data = list(y = shp_data$y),
+  A = list(1, A),
+  effects = list(
+    data.frame(
+      Intercept = 1,
+      LOCATION = shp_data$LOCATION,
+      age_grouped = shp_data$age_grouped,
+      HEAD_SEX = shp_data$HEAD_SEX,
+      HEAD_EDUCATION = shp_data$HEAD_EDUCATION,
+      hhsize = shp_data$hhsize,
+      HEAD_ECON_ACTV = shp_data$HEAD_ECON_ACTV,
+      HEAD_MARITAL = shp_data$HEAD_MARITAL,
+      id = shp_data$id
+    ),
+    spatial_index
+  ),
+  tag = "est"
+)
+
+# 6. Define formulas
+
+## Baseline (no random effects)
+formula_baseline <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+
+## Unstructured (IID only)
+formula_unstructured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(id, model = "iid")
+
+## Structured (SPDE only)
+formula_structured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(spatial_field, model = spde)
+
+## Full (SPDE + IID)
+formula_full <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(id, model = "iid") +
+  f(spatial_field, model = spde)
+
+# 7. Fit models
+
+result_baseline <- inla(formula_baseline, family = "binomial",
+                        data = inla.stack.data(stack),
+                        control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                        control.compute = list(dic = TRUE, waic = TRUE))
+
+result_unstructured <- inla(formula_unstructured, family = "binomial",
+                            data = inla.stack.data(stack),
+                            control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                            control.compute = list(dic = TRUE, waic = TRUE))
+
+result_structured <- inla(formula_structured, family = "binomial",
+                          data = inla.stack.data(stack),
+                          control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                          control.compute = list(dic = TRUE, waic = TRUE))
+
+result_full <- inla(formula_full, family = "binomial",
+                    data = inla.stack.data(stack),
+                    control.predictor = list(A = inla.stack.A(stack),
+compute = TRUE),
+                    control.compute = list(dic = TRUE, waic = TRUE))
+
+
+# 8. Compare models
+model_comparison <- data.frame(
+  Model = c("Baseline", "Unstructured", "Structured", "Full"),
+  DIC   = c(result_baseline$dic$dic,
+            result_unstructured$dic$dic,
+            result_structured$dic$dic,
+            result_full$dic$dic),
+  WAIC  = c(result_baseline$waic$waic,
+            result_unstructured$waic$waic,
+            result_structured$waic$waic,
+            result_full$waic$waic)
+)
+
+print(model_comparison)
+
+
+# Baseline model predictions
+pred_baseline <- result_baseline$summary.fitted.values
+
+# Unstructured model predictions
+pred_unstructured <- result_unstructured$summary.fitted.values
+
+# Structured model predictions
+pred_structured <- result_structured$summary.fitted.values
+
+# Full model predictions
+pred_full <- result_full$summary.fitted.values
+
+# Add posterior mean predictions
+# Extract fitted values for each model
+fv_baseline     <- result_baseline$summary.fitted.values
+fv_unstructured <- result_unstructured$summary.fitted.values
+fv_structured   <- result_structured$summary.fitted.values
+fv_full         <- result_full$summary.fitted.values
+
+# Align with estimation stack
+idx <- inla.stack.index(stack, tag = "est")$data
+
+# Posterior mean predictions
+shp_data$pred_baseline     <- fv_baseline$mean[idx]
+shp_data$pred_unstructured <- fv_unstructured$mean[idx]
+shp_data$pred_structured   <- fv_structured$mean[idx]
+shp_data$pred_full         <- fv_full$mean[idx]
+
+# Credible intervals
+shp_data$pred_baseline_lower     <- fv_baseline$`0.025quant`[idx]
+shp_data$pred_baseline_upper     <- fv_baseline$`0.975quant`[idx]
+
+shp_data$pred_unstructured_lower <- fv_unstructured$`0.025quant`[idx]
+shp_data$pred_unstructured_upper <- fv_unstructured$`0.975quant`[idx]
+
+shp_data$pred_structured_lower   <- fv_structured$`0.025quant`[idx]
+shp_data$pred_structured_upper   <- fv_structured$`0.975quant`[idx]
+
+shp_data$pred_full_lower         <- fv_full$`0.025quant`[idx]
+shp_data$pred_full_upper         <- fv_full$`0.975quant`[idx]
+
+
+##Plotting
+library(sf)
+library(ggplot2)
+library(patchwork)   # for arranging plots
+
+tanzania_boundaries <- st_read("C:/Users/Malilo/Desktop/New
+folder/PHD_2026/TPHC_10/tza_admbnda_adm1_20181019/tza_admbnda_adm1_20181019.shp")
+
+
+# Create centroids for region labels
+library(sf)
+library(ggplot2)
+library(viridis)
+library(ggspatial)   # for north arrow and scale bar
+
+
+# Create centroids for labels
+tanzania_centroids <- st_centroid(tanzania_boundaries)
+
+# Convert back to sf object
+shp_data_sf <- st_as_sf(shp_data)
+
+# Baseline model
+p_baseline <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_baseline)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Baseline Model)", color = "Probability")
+
+print(p_baseline)
+
+
+# Unstructured model
+p_unstructured <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Unstructured Model)", color = "Probability")
+
+print(p_unstructured)
+
+
+# Structured model
+p_structured <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Structured Model)", color = "Probability")
+
+print(p_structured)
+
+
+# Full model
+p_full <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Full Model)", color = "Probability")
+
+print(p_full)
+
+
+# Define mapping of coded names to descriptive labels
+label_map <- c(
+  "(Intercept)" = "(Intercept)",
+  "LOCATION2"   = "Location: Urban",
+  "HEAD_SEX2"   = "Head sex: Female",
+  "age_grouped2"= "Age group: 15?24",
+  "age_grouped3"= "Age group: 25?44",
+  "age_grouped4"= "Age group: 45?64",
+  "age_grouped5"= "Age group: 65+",
+  "hhsize2"     = "Household size: 2 - 3 persons",
+  "hhsize3"     = "Household size: 4 - 5 persons",
+  "hhsize4"     = "Household size: 6 persons or above",
+  "HEAD_MARITAL2"= "Marital Status: Married",
+  "HEAD_MARITAL3"= "Marital Status: Living together",
+  "HEAD_MARITAL4"= "Marital Status: Divorced",
+  "HEAD_MARITAL5"= "Marital Status: Separated",
+  "HEAD_MARITAL6"= "Marital Status: Widowed",
+  "HEAD_EDUCATION2"= "Education: Secondary",
+  "HEAD_EDUCATION3"= "Education: Tertiary",
+  "HEAD_ECON_ACTV2"= "Self-employed (No workers) ",
+  "HEAD_ECON_ACTV3"= "Self-employed (With workers) ",
+  "HEAD_ECON_ACTV4"= "Unskilled labour",
+  "HEAD_ECON_ACTV5"= "Unrecognized employees"
+)
+
+
+
+# Function to relabel rownames
+relabel_fixed <- function(fixed_table, map){
+  fixed_table$Predictor <- map[rownames(fixed_table)]
+  rownames(fixed_table) <- NULL
+  return(fixed_table)
+}
+
+fixed_baseline_lbl     <- relabel_fixed(result_baseline$summary.fixed,
+label_map)
+fixed_unstructured_lbl <-
+relabel_fixed(result_unstructured$summary.fixed, label_map)
+fixed_structured_lbl   <-
+relabel_fixed(result_structured$summary.fixed, label_map)
+fixed_full_lbl         <- relabel_fixed(result_full$summary.fixed, label_map)
+
+
+library(openxlsx)
+
+wb <- createWorkbook()
+addWorksheet(wb, "Baseline")
+addWorksheet(wb, "Unstructured")
+addWorksheet(wb, "Structured")
+addWorksheet(wb, "Full")
+
+writeData(wb, "Baseline",     fixed_baseline_lbl)
+writeData(wb, "Unstructured", fixed_unstructured_lbl)
+writeData(wb, "Structured",   fixed_structured_lbl)
+writeData(wb, "Full",         fixed_full_lbl)
+
+saveWorkbook(wb, "Fixed_Effects_Models_Labeled.xlsx", overwrite = TRUE)
+
+
+
+library(ggplot2)
+
+# Relabel function
+relabel_for_plot <- function(fixed_table, map){
+  df <- fixed_table
+  df$Predictor <- map[rownames(df)]
+  rownames(df) <- NULL
+  return(df)
+}
+
+# Relabel each model?s fixed effects
+fixed_baseline_lbl     <-
+relabel_for_plot(result_baseline$summary.fixed, label_map)
+fixed_unstructured_lbl <-
+relabel_for_plot(result_unstructured$summary.fixed, label_map)
+fixed_structured_lbl   <-
+relabel_for_plot(result_structured$summary.fixed, label_map)
+fixed_full_lbl         <- relabel_for_plot(result_full$summary.fixed, label_map)
+
+# Plot Baseline
+ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Baseline Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Unstructured
+ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Unstructured Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Structured
+ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Structured Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Full
+ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals (Full Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+
+library(pROC)
+
+# Example for Full model
+roc_full <- roc(response = shp_data_sf$y, predictor = shp_data_sf$pred_full)
+
+plot(roc_full, col = "blue", main = "ROC Curve - Full Model")
+auc(roc_full)   # Print AUC value
+
+# Compare across models
+roc_baseline     <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_baseline)
+roc_unstructured <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_unstructured)
+roc_structured   <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_structured)
+
+
+plot(roc_baseline, col = "red", main = "ROC Curves Comparison")
+plot(roc_unstructured, col = "green", add = TRUE)
+plot(roc_structured, col = "purple", add = TRUE)
+plot(roc_full, col = "blue", add = TRUE)
+legend("bottomright", legend = c("Baseline","Unstructured","Structured","Full"),
+       col = c("red","green","purple","blue"), lwd = 2)
+
+
+
+##Baseline Model
+# Fixed effects
+fixed_baseline_lbl <- relabel_for_plot(result_baseline$summary.fixed, label_map)
+
+ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Baseline Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_baseline <- data.frame(ID = 1:nrow(shp_data),
+                               mean = shp_data$pred_baseline)
+ggplot(pred_df_baseline, aes(x = ID, y = mean)) +
+  geom_point(color = "blue") +
+  labs(title = "Predicted Probabilities (Baseline Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram of predictions
+ggplot(pred_df_baseline, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Baseline Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# ROC curve
+roc_baseline <- roc(response = shp_data$y, predictor = shp_data$pred_baseline)
+plot(roc_baseline, col = "red", main = "ROC Curve (Baseline)")
+auc(roc_baseline)
+
+
+##Unstructured Model
+# Fixed effects
+fixed_unstructured_lbl <-
+relabel_for_plot(result_unstructured$summary.fixed, label_map)
+
+ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Unstructured Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_unstructured <- data.frame(ID = 1:nrow(shp_data),
+                                   mean = shp_data$pred_unstructured)
+ggplot(pred_df_unstructured, aes(x = ID, y = mean)) +
+  geom_point(color = "red") +
+  labs(title = "Predicted Probabilities (Unstructured Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_unstructured, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "salmon", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (IID)
+rand_df_unstructured <- as.data.frame(result_unstructured$summary.random$id)
+rand_df_unstructured$Index <- 1:nrow(rand_df_unstructured)
+
+ggplot(rand_df_unstructured, aes(x = Index, y = mean)) +
+  geom_point(color = "blue") +
+  labs(title = "Unstructured Random Effect (IID)",
+       x = "District Index", y = "Posterior Mean") +
+  theme_minimal()
+
+
+# Extract IID random effects
+# Convert shapefile data to sf object
+shp_data_sf <- st_as_sf(shp_data)
+
+# Map predicted probabilities from the Unstructured model
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+       color = "Probability")
+
+# ROC curve
+roc_unstructured <- roc(response = shp_data$y, predictor =
+shp_data$pred_unstructured)
+plot(roc_unstructured, col = "green", main = "ROC Curve (Unstructured)")
+auc(roc_unstructured)
+
+hyper_unstructured <- result_unstructured$summary.hyperpar
+print(as.data.frame(hyper_unstructured))
+
+
+
+
+##Structured Model
+# Fixed effects
+fixed_structured_lbl <-
+relabel_for_plot(result_structured$summary.fixed, label_map)
+
+ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Structured Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_structured <- data.frame(ID = 1:nrow(shp_data),
+                                 mean = shp_data$pred_structured)
+ggplot(pred_df_structured, aes(x = ID, y = mean)) +
+  geom_point(color = "green") +
+  labs(title = "Predicted Probabilities (Structured Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_structured, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "lightgreen", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Structured Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (SPDE field)
+rand_df_structured <-
+as.data.frame(result_structured$summary.random$spatial_field)
+rand_df_structured$Index <- 1:nrow(rand_df_structured)
+
+ggplot(rand_df_structured, aes(x = Index, y = mean)) +
+  geom_point(color = "darkgreen") +
+  labs(title = "Structured Random Effect (SPDE)",
+       x = "Spatial Index", y = "Posterior Mean") +
+  theme_minimal()
+# Map predicted probabilities (Structured)
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  labs(title = "Predicted Probabilities (Structured Model)", color =
+"Probability") +
+  theme_minimal()
+
+
+# ROC curve
+roc_structured <- roc(response = shp_data$y, predictor =
+shp_data$pred_structured)
+plot(roc_structured, col = "purple", main = "ROC Curve (Structured)")
+auc(roc_structured)
+
+# Extract hyperparameters for Structured model
+hyper_structured <- result_structured$summary.hyperpar
+
+# Convert to data frame
+hyper_structured_df <- as.data.frame(hyper_structured)
+
+# Add descriptive row names
+rownames(hyper_structured_df) <- c("Theta1 for spatial", "Theta2 for spatial")
+
+# Print table
+print(hyper_structured_df)
+
+# Optional: export to Excel
+library(openxlsx)
+wb <- createWorkbook()
+addWorksheet(wb, "Structured Hyperparameters")
+writeData(wb, "Structured Hyperparameters", hyper_structured_df,
+rowNames = TRUE)
+saveWorkbook(wb, "Structured_Hyperparameters.xlsx", overwrite = TRUE)
+
+
+
+
+
+##Full Model
+# Fixed effects
+fixed_full_lbl <- relabel_for_plot(result_full$summary.fixed, label_map)
+
+ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Full Model)", y = "Predictors", x
+= "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_full <- data.frame(ID = 1:nrow(shp_data),
+                           mean = shp_data$pred_full)
+ggplot(pred_df_full, aes(x = ID, y = mean)) +
+  geom_point(color = "black") +
+  labs(title = "Predicted Probabilities (Full Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_full, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "gray", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Full Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (IID)
+rand_df_full_iid <- as.data.frame(result_full$summary.random$id)
+rand_df_full_iid$Index <- 1:nrow(rand_df_full_iid)
+
+ggplot(rand_df_full_iid, aes(x = Index, y = mean)) +
+  geom_point(color = "purple") +
+  labs(title = "Full Model Random Effect (IID)",
+       x = "District Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Random effects (SPDE)
+rand_df_full_spatial <- as.data.frame(result_full$summary.random$spatial_field)
+rand_df_full_spatial$Index <- 1:nrow(rand_df_full_spatial)
+
+ggplot(rand_df_full_spatial, aes(x = Index, y = mean)) +
+  geom_point(color = "orange") +
+  labs(title = "Full Model Random Effect (SPDE)",
+       x = "Spatial Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Map predicted probabilities (Full)
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  labs(title = "Predicted Probabilities (Full Model)", color = "Probability") +
+  theme_minimal()
+
+
+# ROC curve
+roc_full <- roc(response = shp_data$y, predictor = shp_data$pred_full)
+plot(roc_full, col = "blue", main = "ROC Curve (Full)")
+auc(roc_full)
+
+hyper_full <- result_full$summary.hyperpar
+print(as.data.frame(hyper_full))
+
+
+library(pROC)
+library(yardstick)
+library(dplyr)
+
+# Function to compute metrics for any INLA model
+evaluate_inla <- function(model, stack, df_inla, model_name) {
+
+  # Prediction indices
+  index_pred <- inla.stack.index(stack, "pred")$data
+
+  # True labels
+  true_labels <- df_inla$y[index_pred]
+
+  # Posterior predicted probabilities
+  pred_probs <- model$summary.fitted.values$mean[index_pred]
+
+  # ROC + AUC
+  roc_obj <- roc(true_labels, pred_probs)
+  auc_val <- auc(roc_obj)
+
+  # Optimal threshold (Youden?s J)
+  opt_thresh <- coords(roc_obj, "best", ret = "threshold")
+
+  # Classify
+  pred_class <- ifelse(pred_probs > opt_thresh, 1, 0)
+
+  # Evaluation dataframe
+  df_eval <- data.frame(
+    truth = factor(true_labels, levels = c(0,1)),
+    pred_class = factor(pred_class, levels = c(0,1)),
+    pred_prob = pred_probs
+  )
+
+  # Metrics
+  acc  <- accuracy(df_eval, truth, pred_class)$.estimate
+  prec <- precision(df_eval, truth, pred_class)$.estimate
+  rec  <- recall(df_eval, truth, pred_class)$.estimate
+  f1   <- f_meas(df_eval, truth, pred_class, beta = 1)$.estimate
+
+  # Collect results
+  data.frame(
+    Model     = model_name,
+    Threshold = round(opt_thresh,3),
+    Accuracy  = round(acc,3),
+    Precision = round(prec,3),
+    Recall    = round(rec,3),
+    F1        = round(f1,3),
+    AUC       = round(auc_val,3)
+  )
+}
+
+results_baseline    <- evaluate_inla(result_baseline, stack,
+shp_data_sf, "INLA Baseline")
+results_unstructured<- evaluate_inla(result_unstructured, stack,
+shp_data_sf, "INLA Unstructured")
+results_structured  <- evaluate_inla(result_spatial, stack,
+shp_data_sf, "INLA Structured")
+results_full        <- evaluate_inla(result_full, stack, shp_data_sf,
+"INLA Full")
+
+# Combine into one table
+results_all <- bind_rows(results_baseline, results_unstructured,
+results_structured, results_full)
+
+print(results_all)
+
+
+
+
+
+
+#Machine Learning
+
+library(spldv)
+library(readr)
+library(spdep)
+library(spDataLarge)
+library(haven)
+library(sp)
+library(INLA)    # INLA models
+library(sf)      # spatial data
+library(ggplot2) # plotting
+library(dplyr)
+library(DMwR)
+library(smotefamily)
+library(caret)
+
+# 1. Read shapefile and prepare coordinates
+shp_data <- st_read("housing.shp")
+
+# Convert categorical variables to factors
+shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+shp_data$hhsize      <- as.factor(shp_data$hhsize)
+
+
+names(shp_data)
+
+
+table(shp_data$slum)
+table(shp_data$slum)
+
+
+
+#install.packages("remotes")
+#remotes::install_version("DMwR", version = "0.4.1", repos =
+"http://cran.us.r-project.org")
+
+set.seed(123)
+
+# 1. Drop geometry column
+shp_data_no_geom <- shp_data %>% select(-geometry)
+
+# 2. Train/test split (70/30)
+trainIndex <- createDataPartition(shp_data_no_geom$slum, p = 0.7, list = FALSE)
+train <- shp_data_no_geom[trainIndex, ]
+test  <- shp_data_no_geom[-trainIndex, ]
+
+# 3. Apply SMOTE only to training set (formula interface)
+# Auto-tune perc.over and perc.under for perfect balance
+minority_count <- sum(train$slum == 0)
+majority_count <- sum(train$slum == 1)
+
+perc.over <- ((majority_count - minority_count) / minority_count) * 100
+perc.under <- 100
+
+train_df <- as.data.frame(train)
+train_df$slum <- factor(train_df$slum, levels = c(0,1))
+
+# Convert all character columns to factors
+char_cols <- sapply(train_df, is.character)
+train_df[char_cols] <- lapply(train_df[char_cols], factor)
+
+
+list_cols <- sapply(train_df, is.list)
+train_df <- train_df[ , !list_cols]
+
+
+table(train_bal$slum)
+
+library(sf)
+library(dplyr)
+
+# Ensure slum is numeric in train_bal
+train_bal$slum <- as.numeric(as.character(train_bal$slum))
+
+# Join balanced attributes back to geometry
+train_bal_sf <- shp_data %>%
+  inner_join(train_bal, by = c("LOCATION","age_grouped","HEAD_SEX",
+                               "HEAD_EDUCATION","hhsize","HEAD_ECON_ACTV",
+                               "HEAD_MARITAL","slum"))
+
+# Save as shapefile
+st_write(train_bal_sf, "train_balanced.shp", delete_layer = TRUE)
+
+# Load the shapefile you just wrote
+train_bal_sf <- st_read("train_balanced.shp")
+
+# Inspect column names
+names(train_bal_sf)
+
+# Check balance
+table(train_bal_sf$slum)
+
+
+names(train_balanced.shp)
+
+
+###Modelling
+
+library(caret)
+library(randomForest)
+library(xgboost)
+library(pROC)
+
+set.seed(123)
+
+# Define baseline formula
+formula_baseline <- slum ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+
+# -------------------------------
+# 1. Logistic Regression (GLM)
+# -------------------------------
+logit_model <- glm(formula_baseline, data = train_bal, family = binomial)
+
+logit_pred <- predict(logit_model, newdata = test, type = "response")
+logit_class <- ifelse(logit_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(logit_class), factor(test$slum))
+roc(test$slum, logit_pred)
+
+# -------------------------------
+# 2. Random Forest
+# -------------------------------
+rf_model <- randomForest(formula_baseline, data = train_bal,
+                         ntree = 500, mtry = 3, importance = TRUE)
+
+rf_pred <- predict(rf_model, newdata = test, type = "prob")[,2]
+rf_class <- ifelse(rf_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(rf_class), factor(test$slum))
+roc(test$slum, rf_pred)
+
+# -------------------------------
+# 3. XGBoost
+# -------------------------------
+# For XGBoost we need dummy encoding
+train_X <- model.matrix(formula_baseline, data = train_bal)[, -1]
+train_y <- as.numeric(as.character(train_bal$slum))
+test_X  <- model.matrix(formula_baseline, data = test)[, -1]
+test_y  <- as.numeric(as.character(test$slum))
+
+xgb_train <- xgb.DMatrix(data = train_X, label = train_y)
+xgb_test  <- xgb.DMatrix(data = test_X, label = test_y)
+
+xgb_model <- xgboost(data = xgb_train, nrounds = 200,
+                     objective = "binary:logistic", eval_metric = "auc")
+
+xgb_pred <- predict(xgb_model, newdata = xgb_test)
+xgb_class <- ifelse(xgb_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(xgb_class), factor(test_y))
+roc(test_y, xgb_pred)
+
+
+Structure
+
+str(df_analysis)tibble [1,417,184 ? 40] (S3: tbl_df/tbl/data.frame)
+ $ H_REGION_NAME     : Factor w/ 32 levels "Kusini Pemba",..: 1 1 1 1
+1 1 1 1 1 1 ...
+ $ H_DISTRICT_NAME   : Factor w/ 151 levels "Chake Chake",..: 1 1 1 1
+1 1 1 1 1 1 ...
+ $ H_WARD_NAME       : Factor w/ 3995 levels "Chanjaani","Shungi",..:
+1 1 1 1 1 1 1 1 1 1 ...
+ $ H_VILLAGE_NAME    : Factor w/ 15570 levels "Vijijini","Muembe
+Tongwa",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ H_LATITUDE        : num [1:1417184] -5.26 -5.26 -5.26 -5.26 -5.26 ...
+ $ H_LONGITUDE       : num [1:1417184] 39.8 39.8 39.8 39.8 39.8 ...
+ $ LOCATION          : Factor w/ 2 levels "Urban","Rural": 1 1 1 1 1 1
+1 1 1 1 ...
+ $ MEMBERS           : num [1:1417184] 10 3 5 12 1 6 7 4 8 10 ...
+ $ TENURE            : Factor w/ 7 levels "Owned by household",..: 1 2
+1 1 2 2 1 2 1 1 ...
+ $ LAND              : Factor w/ 8 levels "Title deed","No legal
+right",..: 1 NA 2 3 NA NA 1 NA 3 2 ...
+ $ ROOF              : Factor w/ 8 levels "Iron sheets",..: 1 1 1 1 2
+1 1 1 1 1 ...
+ $ FLOOR             : Factor w/ 10 levels "Cement","Earth/Sand",..: 1
+1 1 1 2 1 1 1 1 1 ...
+ $ WALLS             : Factor w/ 10 levels "Cement bricks/Rock
+bricks",..: 1 1 1 1 1 1 1 2 1 1 ...
+ $ ROOMS             : num [1:1417184] 2 3 3 5 2 1 2 3 4 6 ...
+ $ DRINKING_WATER    : Factor w/ 14 levels "Public tap/standpipe",..:
+1 1 2 3 1 3 2 2 3 4 ...
+ $ COOKING           : Factor w/ 14 levels "Firewood","Charcoal",..: 1
+2 1 1 2 1 1 1 2 1 ...
+ $ LIGHTING          : Factor w/ 13 levels "Kerosene (Wick lamps)",..:
+1 2 3 2 3 2 2 1 2 2 ...
+ $ TOILET            : Factor w/ 11 levels "Flush/pour flush to
+covered pit",..: 1 1 1 1 2 1 1 3 1 1 ...
+ $ SOLID_WASTE       : Factor w/ 9 levels "Irregularly collected",..:
+1 2 3 3 3 3 2 4 4 4 ...
+ $ HEAD_SEX          : Factor w/ 2 levels "Female Headed",..: 1 2 2 2
+2 2 2 1 2 2 ...
+ $ HEAD_AGE          : num [1:1417184] 44 24 34 44 24 38 47 41 64 44 ...
+ $ HEAD_EDUCATION    : Factor w/ 29 levels "14","10","7",..: NA 1 2 2
+2 3 2 2 2 4 ...
+ $ HEAD_ECON_ACTV    : Factor w/ 5 levels "Paid employees",..: NA NA
+NA NA NA NA NA NA NA NA ...
+ $ HEAD_MARITAL      : Factor w/ 7 levels "Divorced","Married",..: 1 2
+2 2 3 2 2 2 2 2 ...
+ $ HEAD_OCCUPATION   : Factor w/ 9 levels "Technicians and associate
+professionals.",..: 1 1 2 3 NA NA 4 NA 2 3 ...
+ $ H_Education       : Factor w/ 4 levels "Secondary","Primary",..: NA
+1 1 1 1 2 1 1 1 2 ...
+ $ Durability_Floor  : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 2 1 1 1 1 1 ...
+ $ Durability_Wall   : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 1 1 1 2 1 1 ...
+ $ Durability_Roof   : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 2 1 1 1 1 1 ...
+ $ Improved_Water    : Factor w/ 2 levels "Improved","Unimproved": 1 1
+1 1 1 1 1 1 1 2 ...
+ $ Toilet_Facility   : Factor w/ 2 levels "Unimproved","Improved": 1 1
+1 1 2 1 1 2 1 1 ...
+ $ Secure_Tenure     : Factor w/ 2 levels "Not secure","Secure": 1 NA
+2 1 NA NA 1 NA 1 2 ...
+ $ age_grouped       : Factor w/ 5 levels "25-44","15-24",..: 1 2 1 1
+2 1 3 1 3 1 ...
+ $ Bed_Rooms         : num [1:1417184] 0 1 1 1 0 0 0 1 1 1 ...
+ $ hhsize            : Factor w/ 4 levels "6 and above persons",..: 1
+2 3 1 4 1 1 3 1 1 ...
+ $ Living_Area       : Factor w/ 278 levels
+"5","1","1.66666662693024",..: 1 2 3 4 5 6 7 8 9 3 ...
+ $ Living_Area1      : Factor w/ 2 levels "Overcrowding",..: 1 2 2 2 2
+1 1 2 2 2 ...
+ $ Durable_Materials : Factor w/ 2 levels "Durable","Not Durable": 1 1
+1 1 2 1 1 2 1 1 ...
+ $ housing_inadequacy: Factor w/ 2 levels "Inadequate","Adequate": 1 1
+1 1 1 1 1 1 1 1 ...
+ $ number_slum1      : num [1:1417184] 3 1 1 2 1 2 3 1 2 2 ...
+
+>
+sample data set
+source("sample_dataset.R")
+
+
+I am looking forward to get your feedback
+Regards
+Nasra
+
+	[[alternative HTML version deleted]]
+
+
+From ||@t@ @end|ng |rom dewey@myzen@co@uk  Mon Apr 20 10:39:47 2026
+From: ||@t@ @end|ng |rom dewey@myzen@co@uk (Michael Dewey)
+Date: Mon, 20 Apr 2026 09:39:47 +0100
+Subject: [R] R Inla and Balancing data set
+In-Reply-To: <CAMpGuXaaOz9h2N6UdxkZ50=FwHC2CEhzO2txAG_uyjJJAs+VnA@mail.gmail.com>
+References: <CAMpGuXaaOz9h2N6UdxkZ50=FwHC2CEhzO2txAG_uyjJJAs+VnA@mail.gmail.com>
+Message-ID: <b20e295a-9609-4f4a-9e57-9a1c3b76172e@dewey.myzen.co.uk>
+
+Dear Nasra
+
+I think it is unlikely that you are going to find anyone on this list 
+who is willing to go through pages of your code to try to help you. You 
+would stand a better chance if you could produce a minimal example of 
+the core problem. You say you want to balance your data set so you can 
+give a toy example with a small data-set and as a few packages as possible.
+
+Michael
+
+On 19/04/2026 21:57, Nasra Mapoy wrote:
+> Hi,
+> My name is Nasra. I am working on my thesis using R for analysis, I have an
+> objective of predicting household inequality, using R inla and machine
+> learning. But my data is imbalanced (i have about 94 inadequate housing
+> coded as 1) i want to balance then proceed with analysis. Unfortunately I
+> got stuck each time. Please help me.
+> Down is just an example of my data set
+> 
+> head(df_analysis)# A tibble: 6 ? 40
+>    H_REGION_NAME H_DISTRICT_NAME H_WARD_NAME H_VILLAGE_NAME H_LATITUDE
+>    <fct>         <fct>           <fct>       <fct>               <dbl>1
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.262
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.263
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.264
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.265
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.266
+> Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.26# ?
+> 35 more variables: H_LONGITUDE <dbl>, LOCATION <fct>, MEMBERS <dbl>,#
+>   TENURE <fct>, LAND <fct>, ROOF <fct>, FLOOR <fct>, WALLS <fct>,#
+> ROOMS <dbl>, DRINKING_WATER <fct>, COOKING <fct>, LIGHTING <fct>,#
+> TOILET <fct>, SOLID_WASTE <fct>, HEAD_SEX <fct>, HEAD_AGE <dbl>,#
+> HEAD_EDUCATION <fct>, HEAD_ECON_ACTV <fct>, HEAD_MARITAL <fct>,#
+> HEAD_OCCUPATION <fct>, H_Education <fct>, Durability_Floor <fct>,#
+> Durability_Wall <fct>, Durability_Roof <fct>, Improved_Water <fct>,
+> 
+> these ara some of the codes which i run
+> 
+> library(spldv)
+> library(readr)
+> library(spdep)
+> library(spDataLarge)
+> library(haven)
+> library(sp)
+> library(INLA)    # INLA models
+> library(sf)      # spatial data
+> library(ggplot2) # plotting
+> library(dplyr)
+> #library(DMwR)
+> library(smotefamily)
+> 
+> library(sf)
+> library(sp)
+> library(INLA)
+> 
+> # 1. Read shapefile and prepare coordinates
+> shp_data <- st_read("housing.shp")
+> shp_data_sp <- as(shp_data, "Spatial")
+> coords <- st_coordinates(shp_data)
+> 
+> 
+> 
+> # Add coordinates to dataframe
+> shp_data$X <- coords[,1]
+> shp_data$Y <- coords[,2]
+> 
+> names(shp_data)[names(shp_data) == "slum"] <- "housing_inadequacy"
+> 
+> # Convert categorical variables to factors
+> shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+> shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+> shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+> shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+> shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+> shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+> shp_data$hhsize      <- as.factor(shp_data$hhsize)
+> 
+> # Create numeric district id
+> shp_data$id <- as.numeric(as.factor(shp_data$H_DISTR))
+> 
+> # Response variable (binary 0/1)
+> shp_data$y <- as.integer(shp_data$housing_inadequacy)
+> 
+> 
+> coords <- st_coordinates(st_centroid(shp_data))
+> 
+> 
+> # 2. Build mesh
+> mesh <- inla.mesh.2d(
+>    loc = coords,
+>    max.edge = c(0.05, 0.2),
+>    cutoff = 0.01
+> )
+> 
+> 
+> str(coords)
+> 
+> # 3. Define SPDE model
+> spde <- inla.spde2.pcmatern(
+>    mesh = mesh,
+>    alpha = 2,
+>    prior.range = c(0.5, 0.01),   # P(range < 0.5) = 0.01
+>    prior.sigma = c(1, 0.01)      # P(sigma > 1) = 0.01
+> )
+> 
+> # 4. Create spatial index and projector matrix
+> spatial_index <- inla.spde.make.index("spatial_field", n.spde = spde$n.spde)
+> 
+> A <- inla.spde.make.A(mesh = mesh, loc = coords)
+> 
+> # 5. Build stack
+> stack <- inla.stack(
+>    data = list(y = shp_data$y),
+>    A = list(1, A),
+>    effects = list(
+>      data.frame(
+>        Intercept = 1,
+>        LOCATION = shp_data$LOCATION,
+>        age_grouped = shp_data$age_grouped,
+>        HEAD_SEX = shp_data$HEAD_SEX,
+>        HEAD_EDUCATION = shp_data$HEAD_EDUCATION,
+>        hhsize = shp_data$hhsize,
+>        HEAD_ECON_ACTV = shp_data$HEAD_ECON_ACTV,
+>        HEAD_MARITAL = shp_data$HEAD_MARITAL,
+>        id = shp_data$id
+>      ),
+>      spatial_index
+>    ),
+>    tag = "est"
+> )
+> 
+> # 6. Define formulas
+> 
+> ## Baseline (no random effects)
+> formula_baseline <- y ~ LOCATION + age_grouped + HEAD_SEX +
+>    HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+> 
+> ## Unstructured (IID only)
+> formula_unstructured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+>    HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+>    f(id, model = "iid")
+> 
+> ## Structured (SPDE only)
+> formula_structured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+>    HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+>    f(spatial_field, model = spde)
+> 
+> ## Full (SPDE + IID)
+> formula_full <- y ~ LOCATION + age_grouped + HEAD_SEX +
+>    HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+>    f(id, model = "iid") +
+>    f(spatial_field, model = spde)
+> 
+> # 7. Fit models
+> 
+> result_baseline <- inla(formula_baseline, family = "binomial",
+>                          data = inla.stack.data(stack),
+>                          control.predictor = list(A =
+> inla.stack.A(stack), compute = TRUE),
+>                          control.compute = list(dic = TRUE, waic = TRUE))
+> 
+> result_unstructured <- inla(formula_unstructured, family = "binomial",
+>                              data = inla.stack.data(stack),
+>                              control.predictor = list(A =
+> inla.stack.A(stack), compute = TRUE),
+>                              control.compute = list(dic = TRUE, waic = TRUE))
+> 
+> result_structured <- inla(formula_structured, family = "binomial",
+>                            data = inla.stack.data(stack),
+>                            control.predictor = list(A =
+> inla.stack.A(stack), compute = TRUE),
+>                            control.compute = list(dic = TRUE, waic = TRUE))
+> 
+> result_full <- inla(formula_full, family = "binomial",
+>                      data = inla.stack.data(stack),
+>                      control.predictor = list(A = inla.stack.A(stack),
+> compute = TRUE),
+>                      control.compute = list(dic = TRUE, waic = TRUE))
+> 
+> 
+> # 8. Compare models
+> model_comparison <- data.frame(
+>    Model = c("Baseline", "Unstructured", "Structured", "Full"),
+>    DIC   = c(result_baseline$dic$dic,
+>              result_unstructured$dic$dic,
+>              result_structured$dic$dic,
+>              result_full$dic$dic),
+>    WAIC  = c(result_baseline$waic$waic,
+>              result_unstructured$waic$waic,
+>              result_structured$waic$waic,
+>              result_full$waic$waic)
+> )
+> 
+> print(model_comparison)
+> 
+> 
+> # Baseline model predictions
+> pred_baseline <- result_baseline$summary.fitted.values
+> 
+> # Unstructured model predictions
+> pred_unstructured <- result_unstructured$summary.fitted.values
+> 
+> # Structured model predictions
+> pred_structured <- result_structured$summary.fitted.values
+> 
+> # Full model predictions
+> pred_full <- result_full$summary.fitted.values
+> 
+> # Add posterior mean predictions
+> # Extract fitted values for each model
+> fv_baseline     <- result_baseline$summary.fitted.values
+> fv_unstructured <- result_unstructured$summary.fitted.values
+> fv_structured   <- result_structured$summary.fitted.values
+> fv_full         <- result_full$summary.fitted.values
+> 
+> # Align with estimation stack
+> idx <- inla.stack.index(stack, tag = "est")$data
+> 
+> # Posterior mean predictions
+> shp_data$pred_baseline     <- fv_baseline$mean[idx]
+> shp_data$pred_unstructured <- fv_unstructured$mean[idx]
+> shp_data$pred_structured   <- fv_structured$mean[idx]
+> shp_data$pred_full         <- fv_full$mean[idx]
+> 
+> # Credible intervals
+> shp_data$pred_baseline_lower     <- fv_baseline$`0.025quant`[idx]
+> shp_data$pred_baseline_upper     <- fv_baseline$`0.975quant`[idx]
+> 
+> shp_data$pred_unstructured_lower <- fv_unstructured$`0.025quant`[idx]
+> shp_data$pred_unstructured_upper <- fv_unstructured$`0.975quant`[idx]
+> 
+> shp_data$pred_structured_lower   <- fv_structured$`0.025quant`[idx]
+> shp_data$pred_structured_upper   <- fv_structured$`0.975quant`[idx]
+> 
+> shp_data$pred_full_lower         <- fv_full$`0.025quant`[idx]
+> shp_data$pred_full_upper         <- fv_full$`0.975quant`[idx]
+> 
+> 
+> ##Plotting
+> library(sf)
+> library(ggplot2)
+> library(patchwork)   # for arranging plots
+> 
+> tanzania_boundaries <- st_read("C:/Users/Malilo/Desktop/New
+> folder/PHD_2026/TPHC_10/tza_admbnda_adm1_20181019/tza_admbnda_adm1_20181019.shp")
+> 
+> 
+> # Create centroids for region labels
+> library(sf)
+> library(ggplot2)
+> library(viridis)
+> library(ggspatial)   # for north arrow and scale bar
+> 
+> 
+> # Create centroids for labels
+> tanzania_centroids <- st_centroid(tanzania_boundaries)
+> 
+> # Convert back to sf object
+> shp_data_sf <- st_as_sf(shp_data)
+> 
+> # Baseline model
+> p_baseline <- ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_baseline)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    theme_minimal() +
+>    theme(
+>      panel.grid.major = element_blank(),
+>      panel.grid.minor = element_blank(),
+>      axis.text = element_blank(),
+>      axis.ticks = element_blank(),
+>      axis.title = element_blank(),
+>      panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+>    ) +
+>    labs(title = "Housing Inadequacy (Baseline Model)", color = "Probability")
+> 
+> print(p_baseline)
+> 
+> 
+> # Unstructured model
+> p_unstructured <- ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    theme_minimal() +
+>    theme(
+>      panel.grid.major = element_blank(),
+>      panel.grid.minor = element_blank(),
+>      axis.text = element_blank(),
+>      axis.ticks = element_blank(),
+>      axis.title = element_blank(),
+>      panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+>    ) +
+>    labs(title = "Housing Inadequacy (Unstructured Model)", color = "Probability")
+> 
+> print(p_unstructured)
+> 
+> 
+> # Structured model
+> p_structured <- ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    theme_minimal() +
+>    theme(
+>      panel.grid.major = element_blank(),
+>      panel.grid.minor = element_blank(),
+>      axis.text = element_blank(),
+>      axis.ticks = element_blank(),
+>      axis.title = element_blank(),
+>      panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+>    ) +
+>    labs(title = "Housing Inadequacy (Structured Model)", color = "Probability")
+> 
+> print(p_structured)
+> 
+> 
+> # Full model
+> p_full <- ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    theme_minimal() +
+>    theme(
+>      panel.grid.major = element_blank(),
+>      panel.grid.minor = element_blank(),
+>      axis.text = element_blank(),
+>      axis.ticks = element_blank(),
+>      axis.title = element_blank(),
+>      panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+>    ) +
+>    labs(title = "Housing Inadequacy (Full Model)", color = "Probability")
+> 
+> print(p_full)
+> 
+> 
+> # Define mapping of coded names to descriptive labels
+> label_map <- c(
+>    "(Intercept)" = "(Intercept)",
+>    "LOCATION2"   = "Location: Urban",
+>    "HEAD_SEX2"   = "Head sex: Female",
+>    "age_grouped2"= "Age group: 15?24",
+>    "age_grouped3"= "Age group: 25?44",
+>    "age_grouped4"= "Age group: 45?64",
+>    "age_grouped5"= "Age group: 65+",
+>    "hhsize2"     = "Household size: 2 - 3 persons",
+>    "hhsize3"     = "Household size: 4 - 5 persons",
+>    "hhsize4"     = "Household size: 6 persons or above",
+>    "HEAD_MARITAL2"= "Marital Status: Married",
+>    "HEAD_MARITAL3"= "Marital Status: Living together",
+>    "HEAD_MARITAL4"= "Marital Status: Divorced",
+>    "HEAD_MARITAL5"= "Marital Status: Separated",
+>    "HEAD_MARITAL6"= "Marital Status: Widowed",
+>    "HEAD_EDUCATION2"= "Education: Secondary",
+>    "HEAD_EDUCATION3"= "Education: Tertiary",
+>    "HEAD_ECON_ACTV2"= "Self-employed (No workers) ",
+>    "HEAD_ECON_ACTV3"= "Self-employed (With workers) ",
+>    "HEAD_ECON_ACTV4"= "Unskilled labour",
+>    "HEAD_ECON_ACTV5"= "Unrecognized employees"
+> )
+> 
+> 
+> 
+> # Function to relabel rownames
+> relabel_fixed <- function(fixed_table, map){
+>    fixed_table$Predictor <- map[rownames(fixed_table)]
+>    rownames(fixed_table) <- NULL
+>    return(fixed_table)
+> }
+> 
+> fixed_baseline_lbl     <- relabel_fixed(result_baseline$summary.fixed,
+> label_map)
+> fixed_unstructured_lbl <-
+> relabel_fixed(result_unstructured$summary.fixed, label_map)
+> fixed_structured_lbl   <-
+> relabel_fixed(result_structured$summary.fixed, label_map)
+> fixed_full_lbl         <- relabel_fixed(result_full$summary.fixed, label_map)
+> 
+> 
+> library(openxlsx)
+> 
+> wb <- createWorkbook()
+> addWorksheet(wb, "Baseline")
+> addWorksheet(wb, "Unstructured")
+> addWorksheet(wb, "Structured")
+> addWorksheet(wb, "Full")
+> 
+> writeData(wb, "Baseline",     fixed_baseline_lbl)
+> writeData(wb, "Unstructured", fixed_unstructured_lbl)
+> writeData(wb, "Structured",   fixed_structured_lbl)
+> writeData(wb, "Full",         fixed_full_lbl)
+> 
+> saveWorkbook(wb, "Fixed_Effects_Models_Labeled.xlsx", overwrite = TRUE)
+> 
+> 
+> 
+> library(ggplot2)
+> 
+> # Relabel function
+> relabel_for_plot <- function(fixed_table, map){
+>    df <- fixed_table
+>    df$Predictor <- map[rownames(df)]
+>    rownames(df) <- NULL
+>    return(df)
+> }
+> 
+> # Relabel each model?s fixed effects
+> fixed_baseline_lbl     <-
+> relabel_for_plot(result_baseline$summary.fixed, label_map)
+> fixed_unstructured_lbl <-
+> relabel_for_plot(result_unstructured$summary.fixed, label_map)
+> fixed_structured_lbl   <-
+> relabel_for_plot(result_structured$summary.fixed, label_map)
+> fixed_full_lbl         <- relabel_for_plot(result_full$summary.fixed, label_map)
+> 
+> # Plot Baseline
+> ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    theme_minimal() +
+>    labs(title = "Posterior Estimates with 95% Credible Intervals
+> (Baseline Model)",
+>         y = "Predictors", x = "Posterior Mean")
+> 
+> # Plot Unstructured
+> ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    theme_minimal() +
+>    labs(title = "Posterior Estimates with 95% Credible Intervals
+> (Unstructured Model)",
+>         y = "Predictors", x = "Posterior Mean")
+> 
+> # Plot Structured
+> ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    theme_minimal() +
+>    labs(title = "Posterior Estimates with 95% Credible Intervals
+> (Structured Model)",
+>         y = "Predictors", x = "Posterior Mean")
+> 
+> # Plot Full
+> ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    theme_minimal() +
+>    labs(title = "Posterior Estimates with 95% Credible Intervals (Full Model)",
+>         y = "Predictors", x = "Posterior Mean")
+> 
+> 
+> library(pROC)
+> 
+> # Example for Full model
+> roc_full <- roc(response = shp_data_sf$y, predictor = shp_data_sf$pred_full)
+> 
+> plot(roc_full, col = "blue", main = "ROC Curve - Full Model")
+> auc(roc_full)   # Print AUC value
+> 
+> # Compare across models
+> roc_baseline     <- roc(response = shp_data_sf$y, predictor =
+> shp_data_sf$pred_baseline)
+> roc_unstructured <- roc(response = shp_data_sf$y, predictor =
+> shp_data_sf$pred_unstructured)
+> roc_structured   <- roc(response = shp_data_sf$y, predictor =
+> shp_data_sf$pred_structured)
+> 
+> 
+> plot(roc_baseline, col = "red", main = "ROC Curves Comparison")
+> plot(roc_unstructured, col = "green", add = TRUE)
+> plot(roc_structured, col = "purple", add = TRUE)
+> plot(roc_full, col = "blue", add = TRUE)
+> legend("bottomright", legend = c("Baseline","Unstructured","Structured","Full"),
+>         col = c("red","green","purple","blue"), lwd = 2)
+> 
+> 
+> 
+> ##Baseline Model
+> # Fixed effects
+> fixed_baseline_lbl <- relabel_for_plot(result_baseline$summary.fixed, label_map)
+> 
+> ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    labs(title = "Posterior Estimates (Baseline Model)", y =
+> "Predictors", x = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Predicted probabilities (per observation)
+> pred_df_baseline <- data.frame(ID = 1:nrow(shp_data),
+>                                 mean = shp_data$pred_baseline)
+> ggplot(pred_df_baseline, aes(x = ID, y = mean)) +
+>    geom_point(color = "blue") +
+>    labs(title = "Predicted Probabilities (Baseline Model)",
+>         x = "Observation Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Histogram of predictions
+> ggplot(pred_df_baseline, aes(x = mean)) +
+>    geom_histogram(binwidth = 0.05, fill = "skyblue", color = "black") +
+>    labs(title = "Distribution of Predicted Probabilities (Baseline Model)",
+>         x = "Predicted Probability", y = "Count") +
+>    theme_minimal()
+> 
+> # ROC curve
+> roc_baseline <- roc(response = shp_data$y, predictor = shp_data$pred_baseline)
+> plot(roc_baseline, col = "red", main = "ROC Curve (Baseline)")
+> auc(roc_baseline)
+> 
+> 
+> ##Unstructured Model
+> # Fixed effects
+> fixed_unstructured_lbl <-
+> relabel_for_plot(result_unstructured$summary.fixed, label_map)
+> 
+> ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    labs(title = "Posterior Estimates (Unstructured Model)", y =
+> "Predictors", x = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Predicted probabilities (per observation)
+> pred_df_unstructured <- data.frame(ID = 1:nrow(shp_data),
+>                                     mean = shp_data$pred_unstructured)
+> ggplot(pred_df_unstructured, aes(x = ID, y = mean)) +
+>    geom_point(color = "red") +
+>    labs(title = "Predicted Probabilities (Unstructured Model)",
+>         x = "Observation Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Histogram
+> ggplot(pred_df_unstructured, aes(x = mean)) +
+>    geom_histogram(binwidth = 0.05, fill = "salmon", color = "black") +
+>    labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+>         x = "Predicted Probability", y = "Count") +
+>    theme_minimal()
+> 
+> # Random effects (IID)
+> rand_df_unstructured <- as.data.frame(result_unstructured$summary.random$id)
+> rand_df_unstructured$Index <- 1:nrow(rand_df_unstructured)
+> 
+> ggplot(rand_df_unstructured, aes(x = Index, y = mean)) +
+>    geom_point(color = "blue") +
+>    labs(title = "Unstructured Random Effect (IID)",
+>         x = "District Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> 
+> # Extract IID random effects
+> # Convert shapefile data to sf object
+> shp_data_sf <- st_as_sf(shp_data)
+> 
+> # Map predicted probabilities from the Unstructured model
+> ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    theme_minimal() +
+>    theme(
+>      panel.grid.major = element_blank(),
+>      panel.grid.minor = element_blank(),
+>      axis.text = element_blank(),
+>      axis.ticks = element_blank(),
+>      axis.title = element_blank(),
+>      panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+>    ) +
+>    labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+>         color = "Probability")
+> 
+> # ROC curve
+> roc_unstructured <- roc(response = shp_data$y, predictor =
+> shp_data$pred_unstructured)
+> plot(roc_unstructured, col = "green", main = "ROC Curve (Unstructured)")
+> auc(roc_unstructured)
+> 
+> hyper_unstructured <- result_unstructured$summary.hyperpar
+> print(as.data.frame(hyper_unstructured))
+> 
+> 
+> 
+> 
+> ##Structured Model
+> # Fixed effects
+> fixed_structured_lbl <-
+> relabel_for_plot(result_structured$summary.fixed, label_map)
+> 
+> ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    labs(title = "Posterior Estimates (Structured Model)", y =
+> "Predictors", x = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Predicted probabilities (per observation)
+> pred_df_structured <- data.frame(ID = 1:nrow(shp_data),
+>                                   mean = shp_data$pred_structured)
+> ggplot(pred_df_structured, aes(x = ID, y = mean)) +
+>    geom_point(color = "green") +
+>    labs(title = "Predicted Probabilities (Structured Model)",
+>         x = "Observation Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Histogram
+> ggplot(pred_df_structured, aes(x = mean)) +
+>    geom_histogram(binwidth = 0.05, fill = "lightgreen", color = "black") +
+>    labs(title = "Distribution of Predicted Probabilities (Structured Model)",
+>         x = "Predicted Probability", y = "Count") +
+>    theme_minimal()
+> 
+> # Random effects (SPDE field)
+> rand_df_structured <-
+> as.data.frame(result_structured$summary.random$spatial_field)
+> rand_df_structured$Index <- 1:nrow(rand_df_structured)
+> 
+> ggplot(rand_df_structured, aes(x = Index, y = mean)) +
+>    geom_point(color = "darkgreen") +
+>    labs(title = "Structured Random Effect (SPDE)",
+>         x = "Spatial Index", y = "Posterior Mean") +
+>    theme_minimal()
+> # Map predicted probabilities (Structured)
+> ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    labs(title = "Predicted Probabilities (Structured Model)", color =
+> "Probability") +
+>    theme_minimal()
+> 
+> 
+> # ROC curve
+> roc_structured <- roc(response = shp_data$y, predictor =
+> shp_data$pred_structured)
+> plot(roc_structured, col = "purple", main = "ROC Curve (Structured)")
+> auc(roc_structured)
+> 
+> # Extract hyperparameters for Structured model
+> hyper_structured <- result_structured$summary.hyperpar
+> 
+> # Convert to data frame
+> hyper_structured_df <- as.data.frame(hyper_structured)
+> 
+> # Add descriptive row names
+> rownames(hyper_structured_df) <- c("Theta1 for spatial", "Theta2 for spatial")
+> 
+> # Print table
+> print(hyper_structured_df)
+> 
+> # Optional: export to Excel
+> library(openxlsx)
+> wb <- createWorkbook()
+> addWorksheet(wb, "Structured Hyperparameters")
+> writeData(wb, "Structured Hyperparameters", hyper_structured_df,
+> rowNames = TRUE)
+> saveWorkbook(wb, "Structured_Hyperparameters.xlsx", overwrite = TRUE)
+> 
+> 
+> 
+> 
+> 
+> ##Full Model
+> # Fixed effects
+> fixed_full_lbl <- relabel_for_plot(result_full$summary.fixed, label_map)
+> 
+> ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+>    geom_point(color = "blue") +
+>    geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+>    labs(title = "Posterior Estimates (Full Model)", y = "Predictors", x
+> = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Predicted probabilities (per observation)
+> pred_df_full <- data.frame(ID = 1:nrow(shp_data),
+>                             mean = shp_data$pred_full)
+> ggplot(pred_df_full, aes(x = ID, y = mean)) +
+>    geom_point(color = "black") +
+>    labs(title = "Predicted Probabilities (Full Model)",
+>         x = "Observation Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Histogram
+> ggplot(pred_df_full, aes(x = mean)) +
+>    geom_histogram(binwidth = 0.05, fill = "gray", color = "black") +
+>    labs(title = "Distribution of Predicted Probabilities (Full Model)",
+>         x = "Predicted Probability", y = "Count") +
+>    theme_minimal()
+> 
+> # Random effects (IID)
+> rand_df_full_iid <- as.data.frame(result_full$summary.random$id)
+> rand_df_full_iid$Index <- 1:nrow(rand_df_full_iid)
+> 
+> ggplot(rand_df_full_iid, aes(x = Index, y = mean)) +
+>    geom_point(color = "purple") +
+>    labs(title = "Full Model Random Effect (IID)",
+>         x = "District Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Random effects (SPDE)
+> rand_df_full_spatial <- as.data.frame(result_full$summary.random$spatial_field)
+> rand_df_full_spatial$Index <- 1:nrow(rand_df_full_spatial)
+> 
+> ggplot(rand_df_full_spatial, aes(x = Index, y = mean)) +
+>    geom_point(color = "orange") +
+>    labs(title = "Full Model Random Effect (SPDE)",
+>         x = "Spatial Index", y = "Posterior Mean") +
+>    theme_minimal()
+> 
+> # Map predicted probabilities (Full)
+> ggplot() +
+>    geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+> linewidth = 0.6) +
+>    geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+>    geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+>                 size = 2, color = "black", check_overlap = TRUE) +
+>    scale_color_viridis_c(option = "magma") +
+>    labs(title = "Predicted Probabilities (Full Model)", color = "Probability") +
+>    theme_minimal()
+> 
+> 
+> # ROC curve
+> roc_full <- roc(response = shp_data$y, predictor = shp_data$pred_full)
+> plot(roc_full, col = "blue", main = "ROC Curve (Full)")
+> auc(roc_full)
+> 
+> hyper_full <- result_full$summary.hyperpar
+> print(as.data.frame(hyper_full))
+> 
+> 
+> library(pROC)
+> library(yardstick)
+> library(dplyr)
+> 
+> # Function to compute metrics for any INLA model
+> evaluate_inla <- function(model, stack, df_inla, model_name) {
+> 
+>    # Prediction indices
+>    index_pred <- inla.stack.index(stack, "pred")$data
+> 
+>    # True labels
+>    true_labels <- df_inla$y[index_pred]
+> 
+>    # Posterior predicted probabilities
+>    pred_probs <- model$summary.fitted.values$mean[index_pred]
+> 
+>    # ROC + AUC
+>    roc_obj <- roc(true_labels, pred_probs)
+>    auc_val <- auc(roc_obj)
+> 
+>    # Optimal threshold (Youden?s J)
+>    opt_thresh <- coords(roc_obj, "best", ret = "threshold")
+> 
+>    # Classify
+>    pred_class <- ifelse(pred_probs > opt_thresh, 1, 0)
+> 
+>    # Evaluation dataframe
+>    df_eval <- data.frame(
+>      truth = factor(true_labels, levels = c(0,1)),
+>      pred_class = factor(pred_class, levels = c(0,1)),
+>      pred_prob = pred_probs
+>    )
+> 
+>    # Metrics
+>    acc  <- accuracy(df_eval, truth, pred_class)$.estimate
+>    prec <- precision(df_eval, truth, pred_class)$.estimate
+>    rec  <- recall(df_eval, truth, pred_class)$.estimate
+>    f1   <- f_meas(df_eval, truth, pred_class, beta = 1)$.estimate
+> 
+>    # Collect results
+>    data.frame(
+>      Model     = model_name,
+>      Threshold = round(opt_thresh,3),
+>      Accuracy  = round(acc,3),
+>      Precision = round(prec,3),
+>      Recall    = round(rec,3),
+>      F1        = round(f1,3),
+>      AUC       = round(auc_val,3)
+>    )
+> }
+> 
+> results_baseline    <- evaluate_inla(result_baseline, stack,
+> shp_data_sf, "INLA Baseline")
+> results_unstructured<- evaluate_inla(result_unstructured, stack,
+> shp_data_sf, "INLA Unstructured")
+> results_structured  <- evaluate_inla(result_spatial, stack,
+> shp_data_sf, "INLA Structured")
+> results_full        <- evaluate_inla(result_full, stack, shp_data_sf,
+> "INLA Full")
+> 
+> # Combine into one table
+> results_all <- bind_rows(results_baseline, results_unstructured,
+> results_structured, results_full)
+> 
+> print(results_all)
+> 
+> 
+> 
+> 
+> 
+> 
+> #Machine Learning
+> 
+> library(spldv)
+> library(readr)
+> library(spdep)
+> library(spDataLarge)
+> library(haven)
+> library(sp)
+> library(INLA)    # INLA models
+> library(sf)      # spatial data
+> library(ggplot2) # plotting
+> library(dplyr)
+> library(DMwR)
+> library(smotefamily)
+> library(caret)
+> 
+> # 1. Read shapefile and prepare coordinates
+> shp_data <- st_read("housing.shp")
+> 
+> # Convert categorical variables to factors
+> shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+> shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+> shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+> shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+> shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+> shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+> shp_data$hhsize      <- as.factor(shp_data$hhsize)
+> 
+> 
+> names(shp_data)
+> 
+> 
+> table(shp_data$slum)
+> table(shp_data$slum)
+> 
+> 
+> 
+> #install.packages("remotes")
+> #remotes::install_version("DMwR", version = "0.4.1", repos =
+> "http://cran.us.r-project.org")
+> 
+> set.seed(123)
+> 
+> # 1. Drop geometry column
+> shp_data_no_geom <- shp_data %>% select(-geometry)
+> 
+> # 2. Train/test split (70/30)
+> trainIndex <- createDataPartition(shp_data_no_geom$slum, p = 0.7, list = FALSE)
+> train <- shp_data_no_geom[trainIndex, ]
+> test  <- shp_data_no_geom[-trainIndex, ]
+> 
+> # 3. Apply SMOTE only to training set (formula interface)
+> # Auto-tune perc.over and perc.under for perfect balance
+> minority_count <- sum(train$slum == 0)
+> majority_count <- sum(train$slum == 1)
+> 
+> perc.over <- ((majority_count - minority_count) / minority_count) * 100
+> perc.under <- 100
+> 
+> train_df <- as.data.frame(train)
+> train_df$slum <- factor(train_df$slum, levels = c(0,1))
+> 
+> # Convert all character columns to factors
+> char_cols <- sapply(train_df, is.character)
+> train_df[char_cols] <- lapply(train_df[char_cols], factor)
+> 
+> 
+> list_cols <- sapply(train_df, is.list)
+> train_df <- train_df[ , !list_cols]
+> 
+> 
+> table(train_bal$slum)
+> 
+> library(sf)
+> library(dplyr)
+> 
+> # Ensure slum is numeric in train_bal
+> train_bal$slum <- as.numeric(as.character(train_bal$slum))
+> 
+> # Join balanced attributes back to geometry
+> train_bal_sf <- shp_data %>%
+>    inner_join(train_bal, by = c("LOCATION","age_grouped","HEAD_SEX",
+>                                 "HEAD_EDUCATION","hhsize","HEAD_ECON_ACTV",
+>                                 "HEAD_MARITAL","slum"))
+> 
+> # Save as shapefile
+> st_write(train_bal_sf, "train_balanced.shp", delete_layer = TRUE)
+> 
+> # Load the shapefile you just wrote
+> train_bal_sf <- st_read("train_balanced.shp")
+> 
+> # Inspect column names
+> names(train_bal_sf)
+> 
+> # Check balance
+> table(train_bal_sf$slum)
+> 
+> 
+> names(train_balanced.shp)
+> 
+> 
+> ###Modelling
+> 
+> library(caret)
+> library(randomForest)
+> library(xgboost)
+> library(pROC)
+> 
+> set.seed(123)
+> 
+> # Define baseline formula
+> formula_baseline <- slum ~ LOCATION + age_grouped + HEAD_SEX +
+>    HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+> 
+> # -------------------------------
+> # 1. Logistic Regression (GLM)
+> # -------------------------------
+> logit_model <- glm(formula_baseline, data = train_bal, family = binomial)
+> 
+> logit_pred <- predict(logit_model, newdata = test, type = "response")
+> logit_class <- ifelse(logit_pred > 0.5, 1, 0)
+> 
+> confusionMatrix(factor(logit_class), factor(test$slum))
+> roc(test$slum, logit_pred)
+> 
+> # -------------------------------
+> # 2. Random Forest
+> # -------------------------------
+> rf_model <- randomForest(formula_baseline, data = train_bal,
+>                           ntree = 500, mtry = 3, importance = TRUE)
+> 
+> rf_pred <- predict(rf_model, newdata = test, type = "prob")[,2]
+> rf_class <- ifelse(rf_pred > 0.5, 1, 0)
+> 
+> confusionMatrix(factor(rf_class), factor(test$slum))
+> roc(test$slum, rf_pred)
+> 
+> # -------------------------------
+> # 3. XGBoost
+> # -------------------------------
+> # For XGBoost we need dummy encoding
+> train_X <- model.matrix(formula_baseline, data = train_bal)[, -1]
+> train_y <- as.numeric(as.character(train_bal$slum))
+> test_X  <- model.matrix(formula_baseline, data = test)[, -1]
+> test_y  <- as.numeric(as.character(test$slum))
+> 
+> xgb_train <- xgb.DMatrix(data = train_X, label = train_y)
+> xgb_test  <- xgb.DMatrix(data = test_X, label = test_y)
+> 
+> xgb_model <- xgboost(data = xgb_train, nrounds = 200,
+>                       objective = "binary:logistic", eval_metric = "auc")
+> 
+> xgb_pred <- predict(xgb_model, newdata = xgb_test)
+> xgb_class <- ifelse(xgb_pred > 0.5, 1, 0)
+> 
+> confusionMatrix(factor(xgb_class), factor(test_y))
+> roc(test_y, xgb_pred)
+> 
+> 
+> Structure
+> 
+> str(df_analysis)tibble [1,417,184 ? 40] (S3: tbl_df/tbl/data.frame)
+>   $ H_REGION_NAME     : Factor w/ 32 levels "Kusini Pemba",..: 1 1 1 1
+> 1 1 1 1 1 1 ...
+>   $ H_DISTRICT_NAME   : Factor w/ 151 levels "Chake Chake",..: 1 1 1 1
+> 1 1 1 1 1 1 ...
+>   $ H_WARD_NAME       : Factor w/ 3995 levels "Chanjaani","Shungi",..:
+> 1 1 1 1 1 1 1 1 1 1 ...
+>   $ H_VILLAGE_NAME    : Factor w/ 15570 levels "Vijijini","Muembe
+> Tongwa",..: 1 1 1 1 1 1 1 1 1 1 ...
+>   $ H_LATITUDE        : num [1:1417184] -5.26 -5.26 -5.26 -5.26 -5.26 ...
+>   $ H_LONGITUDE       : num [1:1417184] 39.8 39.8 39.8 39.8 39.8 ...
+>   $ LOCATION          : Factor w/ 2 levels "Urban","Rural": 1 1 1 1 1 1
+> 1 1 1 1 ...
+>   $ MEMBERS           : num [1:1417184] 10 3 5 12 1 6 7 4 8 10 ...
+>   $ TENURE            : Factor w/ 7 levels "Owned by household",..: 1 2
+> 1 1 2 2 1 2 1 1 ...
+>   $ LAND              : Factor w/ 8 levels "Title deed","No legal
+> right",..: 1 NA 2 3 NA NA 1 NA 3 2 ...
+>   $ ROOF              : Factor w/ 8 levels "Iron sheets",..: 1 1 1 1 2
+> 1 1 1 1 1 ...
+>   $ FLOOR             : Factor w/ 10 levels "Cement","Earth/Sand",..: 1
+> 1 1 1 2 1 1 1 1 1 ...
+>   $ WALLS             : Factor w/ 10 levels "Cement bricks/Rock
+> bricks",..: 1 1 1 1 1 1 1 2 1 1 ...
+>   $ ROOMS             : num [1:1417184] 2 3 3 5 2 1 2 3 4 6 ...
+>   $ DRINKING_WATER    : Factor w/ 14 levels "Public tap/standpipe",..:
+> 1 1 2 3 1 3 2 2 3 4 ...
+>   $ COOKING           : Factor w/ 14 levels "Firewood","Charcoal",..: 1
+> 2 1 1 2 1 1 1 2 1 ...
+>   $ LIGHTING          : Factor w/ 13 levels "Kerosene (Wick lamps)",..:
+> 1 2 3 2 3 2 2 1 2 2 ...
+>   $ TOILET            : Factor w/ 11 levels "Flush/pour flush to
+> covered pit",..: 1 1 1 1 2 1 1 3 1 1 ...
+>   $ SOLID_WASTE       : Factor w/ 9 levels "Irregularly collected",..:
+> 1 2 3 3 3 3 2 4 4 4 ...
+>   $ HEAD_SEX          : Factor w/ 2 levels "Female Headed",..: 1 2 2 2
+> 2 2 2 1 2 2 ...
+>   $ HEAD_AGE          : num [1:1417184] 44 24 34 44 24 38 47 41 64 44 ...
+>   $ HEAD_EDUCATION    : Factor w/ 29 levels "14","10","7",..: NA 1 2 2
+> 2 3 2 2 2 4 ...
+>   $ HEAD_ECON_ACTV    : Factor w/ 5 levels "Paid employees",..: NA NA
+> NA NA NA NA NA NA NA NA ...
+>   $ HEAD_MARITAL      : Factor w/ 7 levels "Divorced","Married",..: 1 2
+> 2 2 3 2 2 2 2 2 ...
+>   $ HEAD_OCCUPATION   : Factor w/ 9 levels "Technicians and associate
+> professionals.",..: 1 1 2 3 NA NA 4 NA 2 3 ...
+>   $ H_Education       : Factor w/ 4 levels "Secondary","Primary",..: NA
+> 1 1 1 1 2 1 1 1 2 ...
+>   $ Durability_Floor  : Factor w/ 2 levels "Durable","Not durable": 1 1
+> 1 1 2 1 1 1 1 1 ...
+>   $ Durability_Wall   : Factor w/ 2 levels "Durable","Not durable": 1 1
+> 1 1 1 1 1 2 1 1 ...
+>   $ Durability_Roof   : Factor w/ 2 levels "Durable","Not durable": 1 1
+> 1 1 2 1 1 1 1 1 ...
+>   $ Improved_Water    : Factor w/ 2 levels "Improved","Unimproved": 1 1
+> 1 1 1 1 1 1 1 2 ...
+>   $ Toilet_Facility   : Factor w/ 2 levels "Unimproved","Improved": 1 1
+> 1 1 2 1 1 2 1 1 ...
+>   $ Secure_Tenure     : Factor w/ 2 levels "Not secure","Secure": 1 NA
+> 2 1 NA NA 1 NA 1 2 ...
+>   $ age_grouped       : Factor w/ 5 levels "25-44","15-24",..: 1 2 1 1
+> 2 1 3 1 3 1 ...
+>   $ Bed_Rooms         : num [1:1417184] 0 1 1 1 0 0 0 1 1 1 ...
+>   $ hhsize            : Factor w/ 4 levels "6 and above persons",..: 1
+> 2 3 1 4 1 1 3 1 1 ...
+>   $ Living_Area       : Factor w/ 278 levels
+> "5","1","1.66666662693024",..: 1 2 3 4 5 6 7 8 9 3 ...
+>   $ Living_Area1      : Factor w/ 2 levels "Overcrowding",..: 1 2 2 2 2
+> 1 1 2 2 2 ...
+>   $ Durable_Materials : Factor w/ 2 levels "Durable","Not Durable": 1 1
+> 1 1 2 1 1 2 1 1 ...
+>   $ housing_inadequacy: Factor w/ 2 levels "Inadequate","Adequate": 1 1
+> 1 1 1 1 1 1 1 1 ...
+>   $ number_slum1      : num [1:1417184] 3 1 1 2 1 2 3 1 2 2 ...
+> 
+>>
+> sample data set
+> source("sample_dataset.R")
+> 
+> 
+> I am looking forward to get your feedback
+> Regards
+> Nasra
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+-- 
+Michael Dewey
+
+
+From @vi@e@gross m@iii@g oii gm@ii@com  Mon Apr 20 17:10:43 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Mon, 20 Apr 2026 11:10:43 -0400
+Subject: [R] R Inla and Balancing data set
+In-Reply-To: <CAMpGuXaaOz9h2N6UdxkZ50=FwHC2CEhzO2txAG_uyjJJAs+VnA@mail.gmail.com>
+References: <CAMpGuXaaOz9h2N6UdxkZ50=FwHC2CEhzO2txAG_uyjJJAs+VnA@mail.gmail.com>
+Message-ID: <00dc01dcd0d7$db9567a0$92c036e0$@gmail.com>
+
+You would need to explain what you mean in more concrete terms.
+
+What, specifically, does it mean to BALANCE data" 
+
+There are many ways people examine their data to test for things like validity of entries as in a column containing only positive values below 100. They may identify rows with required values that are missing and either fix them or remove them. 
+
+Until we know what it is you want, we are not helpful.
+
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Nasra Mapoy
+Sent: Sunday, April 19, 2026 4:57 PM
+To: r-help at r-project.org
+Subject: [R] R Inla and Balancing data set
+
+Hi,
+My name is Nasra. I am working on my thesis using R for analysis, I have an
+objective of predicting household inequality, using R inla and machine
+learning. But my data is imbalanced (i have about 94 inadequate housing
+coded as 1) i want to balance then proceed with analysis. Unfortunately I
+got stuck each time. Please help me.
+Down is just an example of my data set
+
+head(df_analysis)# A tibble: 6 ? 40
+  H_REGION_NAME H_DISTRICT_NAME H_WARD_NAME H_VILLAGE_NAME H_LATITUDE
+  <fct>         <fct>           <fct>       <fct>               <dbl>1
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.262
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.263
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.264
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.265
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.266
+Kusini Pemba  Chake Chake     Chanjaani   Vijijini            -5.26# ?
+35 more variables: H_LONGITUDE <dbl>, LOCATION <fct>, MEMBERS <dbl>,#
+ TENURE <fct>, LAND <fct>, ROOF <fct>, FLOOR <fct>, WALLS <fct>,#
+ROOMS <dbl>, DRINKING_WATER <fct>, COOKING <fct>, LIGHTING <fct>,#
+TOILET <fct>, SOLID_WASTE <fct>, HEAD_SEX <fct>, HEAD_AGE <dbl>,#
+HEAD_EDUCATION <fct>, HEAD_ECON_ACTV <fct>, HEAD_MARITAL <fct>,#
+HEAD_OCCUPATION <fct>, H_Education <fct>, Durability_Floor <fct>,#
+Durability_Wall <fct>, Durability_Roof <fct>, Improved_Water <fct>,
+
+these ara some of the codes which i run
+
+library(spldv)
+library(readr)
+library(spdep)
+library(spDataLarge)
+library(haven)
+library(sp)
+library(INLA)    # INLA models
+library(sf)      # spatial data
+library(ggplot2) # plotting
+library(dplyr)
+#library(DMwR)
+library(smotefamily)
+
+library(sf)
+library(sp)
+library(INLA)
+
+# 1. Read shapefile and prepare coordinates
+shp_data <- st_read("housing.shp")
+shp_data_sp <- as(shp_data, "Spatial")
+coords <- st_coordinates(shp_data)
+
+
+
+# Add coordinates to dataframe
+shp_data$X <- coords[,1]
+shp_data$Y <- coords[,2]
+
+names(shp_data)[names(shp_data) == "slum"] <- "housing_inadequacy"
+
+# Convert categorical variables to factors
+shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+shp_data$hhsize      <- as.factor(shp_data$hhsize)
+
+# Create numeric district id
+shp_data$id <- as.numeric(as.factor(shp_data$H_DISTR))
+
+# Response variable (binary 0/1)
+shp_data$y <- as.integer(shp_data$housing_inadequacy)
+
+
+coords <- st_coordinates(st_centroid(shp_data))
+
+
+# 2. Build mesh
+mesh <- inla.mesh.2d(
+  loc = coords,
+  max.edge = c(0.05, 0.2),
+  cutoff = 0.01
+)
+
+
+str(coords)
+
+# 3. Define SPDE model
+spde <- inla.spde2.pcmatern(
+  mesh = mesh,
+  alpha = 2,
+  prior.range = c(0.5, 0.01),   # P(range < 0.5) = 0.01
+  prior.sigma = c(1, 0.01)      # P(sigma > 1) = 0.01
+)
+
+# 4. Create spatial index and projector matrix
+spatial_index <- inla.spde.make.index("spatial_field", n.spde = spde$n.spde)
+
+A <- inla.spde.make.A(mesh = mesh, loc = coords)
+
+# 5. Build stack
+stack <- inla.stack(
+  data = list(y = shp_data$y),
+  A = list(1, A),
+  effects = list(
+    data.frame(
+      Intercept = 1,
+      LOCATION = shp_data$LOCATION,
+      age_grouped = shp_data$age_grouped,
+      HEAD_SEX = shp_data$HEAD_SEX,
+      HEAD_EDUCATION = shp_data$HEAD_EDUCATION,
+      hhsize = shp_data$hhsize,
+      HEAD_ECON_ACTV = shp_data$HEAD_ECON_ACTV,
+      HEAD_MARITAL = shp_data$HEAD_MARITAL,
+      id = shp_data$id
+    ),
+    spatial_index
+  ),
+  tag = "est"
+)
+
+# 6. Define formulas
+
+## Baseline (no random effects)
+formula_baseline <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+
+## Unstructured (IID only)
+formula_unstructured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(id, model = "iid")
+
+## Structured (SPDE only)
+formula_structured <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(spatial_field, model = spde)
+
+## Full (SPDE + IID)
+formula_full <- y ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL +
+  f(id, model = "iid") +
+  f(spatial_field, model = spde)
+
+# 7. Fit models
+
+result_baseline <- inla(formula_baseline, family = "binomial",
+                        data = inla.stack.data(stack),
+                        control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                        control.compute = list(dic = TRUE, waic = TRUE))
+
+result_unstructured <- inla(formula_unstructured, family = "binomial",
+                            data = inla.stack.data(stack),
+                            control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                            control.compute = list(dic = TRUE, waic = TRUE))
+
+result_structured <- inla(formula_structured, family = "binomial",
+                          data = inla.stack.data(stack),
+                          control.predictor = list(A =
+inla.stack.A(stack), compute = TRUE),
+                          control.compute = list(dic = TRUE, waic = TRUE))
+
+result_full <- inla(formula_full, family = "binomial",
+                    data = inla.stack.data(stack),
+                    control.predictor = list(A = inla.stack.A(stack),
+compute = TRUE),
+                    control.compute = list(dic = TRUE, waic = TRUE))
+
+
+# 8. Compare models
+model_comparison <- data.frame(
+  Model = c("Baseline", "Unstructured", "Structured", "Full"),
+  DIC   = c(result_baseline$dic$dic,
+            result_unstructured$dic$dic,
+            result_structured$dic$dic,
+            result_full$dic$dic),
+  WAIC  = c(result_baseline$waic$waic,
+            result_unstructured$waic$waic,
+            result_structured$waic$waic,
+            result_full$waic$waic)
+)
+
+print(model_comparison)
+
+
+# Baseline model predictions
+pred_baseline <- result_baseline$summary.fitted.values
+
+# Unstructured model predictions
+pred_unstructured <- result_unstructured$summary.fitted.values
+
+# Structured model predictions
+pred_structured <- result_structured$summary.fitted.values
+
+# Full model predictions
+pred_full <- result_full$summary.fitted.values
+
+# Add posterior mean predictions
+# Extract fitted values for each model
+fv_baseline     <- result_baseline$summary.fitted.values
+fv_unstructured <- result_unstructured$summary.fitted.values
+fv_structured   <- result_structured$summary.fitted.values
+fv_full         <- result_full$summary.fitted.values
+
+# Align with estimation stack
+idx <- inla.stack.index(stack, tag = "est")$data
+
+# Posterior mean predictions
+shp_data$pred_baseline     <- fv_baseline$mean[idx]
+shp_data$pred_unstructured <- fv_unstructured$mean[idx]
+shp_data$pred_structured   <- fv_structured$mean[idx]
+shp_data$pred_full         <- fv_full$mean[idx]
+
+# Credible intervals
+shp_data$pred_baseline_lower     <- fv_baseline$`0.025quant`[idx]
+shp_data$pred_baseline_upper     <- fv_baseline$`0.975quant`[idx]
+
+shp_data$pred_unstructured_lower <- fv_unstructured$`0.025quant`[idx]
+shp_data$pred_unstructured_upper <- fv_unstructured$`0.975quant`[idx]
+
+shp_data$pred_structured_lower   <- fv_structured$`0.025quant`[idx]
+shp_data$pred_structured_upper   <- fv_structured$`0.975quant`[idx]
+
+shp_data$pred_full_lower         <- fv_full$`0.025quant`[idx]
+shp_data$pred_full_upper         <- fv_full$`0.975quant`[idx]
+
+
+##Plotting
+library(sf)
+library(ggplot2)
+library(patchwork)   # for arranging plots
+
+tanzania_boundaries <- st_read("C:/Users/Malilo/Desktop/New
+folder/PHD_2026/TPHC_10/tza_admbnda_adm1_20181019/tza_admbnda_adm1_20181019.shp")
+
+
+# Create centroids for region labels
+library(sf)
+library(ggplot2)
+library(viridis)
+library(ggspatial)   # for north arrow and scale bar
+
+
+# Create centroids for labels
+tanzania_centroids <- st_centroid(tanzania_boundaries)
+
+# Convert back to sf object
+shp_data_sf <- st_as_sf(shp_data)
+
+# Baseline model
+p_baseline <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_baseline)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Baseline Model)", color = "Probability")
+
+print(p_baseline)
+
+
+# Unstructured model
+p_unstructured <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Unstructured Model)", color = "Probability")
+
+print(p_unstructured)
+
+
+# Structured model
+p_structured <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Structured Model)", color = "Probability")
+
+print(p_structured)
+
+
+# Full model
+p_full <- ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Housing Inadequacy (Full Model)", color = "Probability")
+
+print(p_full)
+
+
+# Define mapping of coded names to descriptive labels
+label_map <- c(
+  "(Intercept)" = "(Intercept)",
+  "LOCATION2"   = "Location: Urban",
+  "HEAD_SEX2"   = "Head sex: Female",
+  "age_grouped2"= "Age group: 15?24",
+  "age_grouped3"= "Age group: 25?44",
+  "age_grouped4"= "Age group: 45?64",
+  "age_grouped5"= "Age group: 65+",
+  "hhsize2"     = "Household size: 2 - 3 persons",
+  "hhsize3"     = "Household size: 4 - 5 persons",
+  "hhsize4"     = "Household size: 6 persons or above",
+  "HEAD_MARITAL2"= "Marital Status: Married",
+  "HEAD_MARITAL3"= "Marital Status: Living together",
+  "HEAD_MARITAL4"= "Marital Status: Divorced",
+  "HEAD_MARITAL5"= "Marital Status: Separated",
+  "HEAD_MARITAL6"= "Marital Status: Widowed",
+  "HEAD_EDUCATION2"= "Education: Secondary",
+  "HEAD_EDUCATION3"= "Education: Tertiary",
+  "HEAD_ECON_ACTV2"= "Self-employed (No workers) ",
+  "HEAD_ECON_ACTV3"= "Self-employed (With workers) ",
+  "HEAD_ECON_ACTV4"= "Unskilled labour",
+  "HEAD_ECON_ACTV5"= "Unrecognized employees"
+)
+
+
+
+# Function to relabel rownames
+relabel_fixed <- function(fixed_table, map){
+  fixed_table$Predictor <- map[rownames(fixed_table)]
+  rownames(fixed_table) <- NULL
+  return(fixed_table)
+}
+
+fixed_baseline_lbl     <- relabel_fixed(result_baseline$summary.fixed,
+label_map)
+fixed_unstructured_lbl <-
+relabel_fixed(result_unstructured$summary.fixed, label_map)
+fixed_structured_lbl   <-
+relabel_fixed(result_structured$summary.fixed, label_map)
+fixed_full_lbl         <- relabel_fixed(result_full$summary.fixed, label_map)
+
+
+library(openxlsx)
+
+wb <- createWorkbook()
+addWorksheet(wb, "Baseline")
+addWorksheet(wb, "Unstructured")
+addWorksheet(wb, "Structured")
+addWorksheet(wb, "Full")
+
+writeData(wb, "Baseline",     fixed_baseline_lbl)
+writeData(wb, "Unstructured", fixed_unstructured_lbl)
+writeData(wb, "Structured",   fixed_structured_lbl)
+writeData(wb, "Full",         fixed_full_lbl)
+
+saveWorkbook(wb, "Fixed_Effects_Models_Labeled.xlsx", overwrite = TRUE)
+
+
+
+library(ggplot2)
+
+# Relabel function
+relabel_for_plot <- function(fixed_table, map){
+  df <- fixed_table
+  df$Predictor <- map[rownames(df)]
+  rownames(df) <- NULL
+  return(df)
+}
+
+# Relabel each model?s fixed effects
+fixed_baseline_lbl     <-
+relabel_for_plot(result_baseline$summary.fixed, label_map)
+fixed_unstructured_lbl <-
+relabel_for_plot(result_unstructured$summary.fixed, label_map)
+fixed_structured_lbl   <-
+relabel_for_plot(result_structured$summary.fixed, label_map)
+fixed_full_lbl         <- relabel_for_plot(result_full$summary.fixed, label_map)
+
+# Plot Baseline
+ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Baseline Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Unstructured
+ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Unstructured Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Structured
+ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals
+(Structured Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+# Plot Full
+ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  theme_minimal() +
+  labs(title = "Posterior Estimates with 95% Credible Intervals (Full Model)",
+       y = "Predictors", x = "Posterior Mean")
+
+
+library(pROC)
+
+# Example for Full model
+roc_full <- roc(response = shp_data_sf$y, predictor = shp_data_sf$pred_full)
+
+plot(roc_full, col = "blue", main = "ROC Curve - Full Model")
+auc(roc_full)   # Print AUC value
+
+# Compare across models
+roc_baseline     <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_baseline)
+roc_unstructured <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_unstructured)
+roc_structured   <- roc(response = shp_data_sf$y, predictor =
+shp_data_sf$pred_structured)
+
+
+plot(roc_baseline, col = "red", main = "ROC Curves Comparison")
+plot(roc_unstructured, col = "green", add = TRUE)
+plot(roc_structured, col = "purple", add = TRUE)
+plot(roc_full, col = "blue", add = TRUE)
+legend("bottomright", legend = c("Baseline","Unstructured","Structured","Full"),
+       col = c("red","green","purple","blue"), lwd = 2)
+
+
+
+##Baseline Model
+# Fixed effects
+fixed_baseline_lbl <- relabel_for_plot(result_baseline$summary.fixed, label_map)
+
+ggplot(fixed_baseline_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Baseline Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_baseline <- data.frame(ID = 1:nrow(shp_data),
+                               mean = shp_data$pred_baseline)
+ggplot(pred_df_baseline, aes(x = ID, y = mean)) +
+  geom_point(color = "blue") +
+  labs(title = "Predicted Probabilities (Baseline Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram of predictions
+ggplot(pred_df_baseline, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Baseline Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# ROC curve
+roc_baseline <- roc(response = shp_data$y, predictor = shp_data$pred_baseline)
+plot(roc_baseline, col = "red", main = "ROC Curve (Baseline)")
+auc(roc_baseline)
+
+
+##Unstructured Model
+# Fixed effects
+fixed_unstructured_lbl <-
+relabel_for_plot(result_unstructured$summary.fixed, label_map)
+
+ggplot(fixed_unstructured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Unstructured Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_unstructured <- data.frame(ID = 1:nrow(shp_data),
+                                   mean = shp_data$pred_unstructured)
+ggplot(pred_df_unstructured, aes(x = ID, y = mean)) +
+  geom_point(color = "red") +
+  labs(title = "Predicted Probabilities (Unstructured Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_unstructured, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "salmon", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (IID)
+rand_df_unstructured <- as.data.frame(result_unstructured$summary.random$id)
+rand_df_unstructured$Index <- 1:nrow(rand_df_unstructured)
+
+ggplot(rand_df_unstructured, aes(x = Index, y = mean)) +
+  geom_point(color = "blue") +
+  labs(title = "Unstructured Random Effect (IID)",
+       x = "District Index", y = "Posterior Mean") +
+  theme_minimal()
+
+
+# Extract IID random effects
+# Convert shapefile data to sf object
+shp_data_sf <- st_as_sf(shp_data)
+
+# Map predicted probabilities from the Unstructured model
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_unstructured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  ) +
+  labs(title = "Distribution of Predicted Probabilities (Unstructured Model)",
+       color = "Probability")
+
+# ROC curve
+roc_unstructured <- roc(response = shp_data$y, predictor =
+shp_data$pred_unstructured)
+plot(roc_unstructured, col = "green", main = "ROC Curve (Unstructured)")
+auc(roc_unstructured)
+
+hyper_unstructured <- result_unstructured$summary.hyperpar
+print(as.data.frame(hyper_unstructured))
+
+
+
+
+##Structured Model
+# Fixed effects
+fixed_structured_lbl <-
+relabel_for_plot(result_structured$summary.fixed, label_map)
+
+ggplot(fixed_structured_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Structured Model)", y =
+"Predictors", x = "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_structured <- data.frame(ID = 1:nrow(shp_data),
+                                 mean = shp_data$pred_structured)
+ggplot(pred_df_structured, aes(x = ID, y = mean)) +
+  geom_point(color = "green") +
+  labs(title = "Predicted Probabilities (Structured Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_structured, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "lightgreen", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Structured Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (SPDE field)
+rand_df_structured <-
+as.data.frame(result_structured$summary.random$spatial_field)
+rand_df_structured$Index <- 1:nrow(rand_df_structured)
+
+ggplot(rand_df_structured, aes(x = Index, y = mean)) +
+  geom_point(color = "darkgreen") +
+  labs(title = "Structured Random Effect (SPDE)",
+       x = "Spatial Index", y = "Posterior Mean") +
+  theme_minimal()
+# Map predicted probabilities (Structured)
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_structured)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  labs(title = "Predicted Probabilities (Structured Model)", color =
+"Probability") +
+  theme_minimal()
+
+
+# ROC curve
+roc_structured <- roc(response = shp_data$y, predictor =
+shp_data$pred_structured)
+plot(roc_structured, col = "purple", main = "ROC Curve (Structured)")
+auc(roc_structured)
+
+# Extract hyperparameters for Structured model
+hyper_structured <- result_structured$summary.hyperpar
+
+# Convert to data frame
+hyper_structured_df <- as.data.frame(hyper_structured)
+
+# Add descriptive row names
+rownames(hyper_structured_df) <- c("Theta1 for spatial", "Theta2 for spatial")
+
+# Print table
+print(hyper_structured_df)
+
+# Optional: export to Excel
+library(openxlsx)
+wb <- createWorkbook()
+addWorksheet(wb, "Structured Hyperparameters")
+writeData(wb, "Structured Hyperparameters", hyper_structured_df,
+rowNames = TRUE)
+saveWorkbook(wb, "Structured_Hyperparameters.xlsx", overwrite = TRUE)
+
+
+
+
+
+##Full Model
+# Fixed effects
+fixed_full_lbl <- relabel_for_plot(result_full$summary.fixed, label_map)
+
+ggplot(fixed_full_lbl, aes(y = Predictor, x = mean)) +
+  geom_point(color = "blue") +
+  geom_errorbarh(aes(xmin = `0.025quant`, xmax = `0.975quant`), height = 0.2) +
+  labs(title = "Posterior Estimates (Full Model)", y = "Predictors", x
+= "Posterior Mean") +
+  theme_minimal()
+
+# Predicted probabilities (per observation)
+pred_df_full <- data.frame(ID = 1:nrow(shp_data),
+                           mean = shp_data$pred_full)
+ggplot(pred_df_full, aes(x = ID, y = mean)) +
+  geom_point(color = "black") +
+  labs(title = "Predicted Probabilities (Full Model)",
+       x = "Observation Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Histogram
+ggplot(pred_df_full, aes(x = mean)) +
+  geom_histogram(binwidth = 0.05, fill = "gray", color = "black") +
+  labs(title = "Distribution of Predicted Probabilities (Full Model)",
+       x = "Predicted Probability", y = "Count") +
+  theme_minimal()
+
+# Random effects (IID)
+rand_df_full_iid <- as.data.frame(result_full$summary.random$id)
+rand_df_full_iid$Index <- 1:nrow(rand_df_full_iid)
+
+ggplot(rand_df_full_iid, aes(x = Index, y = mean)) +
+  geom_point(color = "purple") +
+  labs(title = "Full Model Random Effect (IID)",
+       x = "District Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Random effects (SPDE)
+rand_df_full_spatial <- as.data.frame(result_full$summary.random$spatial_field)
+rand_df_full_spatial$Index <- 1:nrow(rand_df_full_spatial)
+
+ggplot(rand_df_full_spatial, aes(x = Index, y = mean)) +
+  geom_point(color = "orange") +
+  labs(title = "Full Model Random Effect (SPDE)",
+       x = "Spatial Index", y = "Posterior Mean") +
+  theme_minimal()
+
+# Map predicted probabilities (Full)
+ggplot() +
+  geom_sf(data = tanzania_boundaries, fill = NA, color = "black",
+linewidth = 0.6) +
+  geom_sf(data = shp_data_sf, aes(color = pred_full)) +
+  geom_sf_text(data = tanzania_centroids, aes(label = ADM1_EN),
+               size = 2, color = "black", check_overlap = TRUE) +
+  scale_color_viridis_c(option = "magma") +
+  labs(title = "Predicted Probabilities (Full Model)", color = "Probability") +
+  theme_minimal()
+
+
+# ROC curve
+roc_full <- roc(response = shp_data$y, predictor = shp_data$pred_full)
+plot(roc_full, col = "blue", main = "ROC Curve (Full)")
+auc(roc_full)
+
+hyper_full <- result_full$summary.hyperpar
+print(as.data.frame(hyper_full))
+
+
+library(pROC)
+library(yardstick)
+library(dplyr)
+
+# Function to compute metrics for any INLA model
+evaluate_inla <- function(model, stack, df_inla, model_name) {
+
+  # Prediction indices
+  index_pred <- inla.stack.index(stack, "pred")$data
+
+  # True labels
+  true_labels <- df_inla$y[index_pred]
+
+  # Posterior predicted probabilities
+  pred_probs <- model$summary.fitted.values$mean[index_pred]
+
+  # ROC + AUC
+  roc_obj <- roc(true_labels, pred_probs)
+  auc_val <- auc(roc_obj)
+
+  # Optimal threshold (Youden?s J)
+  opt_thresh <- coords(roc_obj, "best", ret = "threshold")
+
+  # Classify
+  pred_class <- ifelse(pred_probs > opt_thresh, 1, 0)
+
+  # Evaluation dataframe
+  df_eval <- data.frame(
+    truth = factor(true_labels, levels = c(0,1)),
+    pred_class = factor(pred_class, levels = c(0,1)),
+    pred_prob = pred_probs
+  )
+
+  # Metrics
+  acc  <- accuracy(df_eval, truth, pred_class)$.estimate
+  prec <- precision(df_eval, truth, pred_class)$.estimate
+  rec  <- recall(df_eval, truth, pred_class)$.estimate
+  f1   <- f_meas(df_eval, truth, pred_class, beta = 1)$.estimate
+
+  # Collect results
+  data.frame(
+    Model     = model_name,
+    Threshold = round(opt_thresh,3),
+    Accuracy  = round(acc,3),
+    Precision = round(prec,3),
+    Recall    = round(rec,3),
+    F1        = round(f1,3),
+    AUC       = round(auc_val,3)
+  )
+}
+
+results_baseline    <- evaluate_inla(result_baseline, stack,
+shp_data_sf, "INLA Baseline")
+results_unstructured<- evaluate_inla(result_unstructured, stack,
+shp_data_sf, "INLA Unstructured")
+results_structured  <- evaluate_inla(result_spatial, stack,
+shp_data_sf, "INLA Structured")
+results_full        <- evaluate_inla(result_full, stack, shp_data_sf,
+"INLA Full")
+
+# Combine into one table
+results_all <- bind_rows(results_baseline, results_unstructured,
+results_structured, results_full)
+
+print(results_all)
+
+
+
+
+
+
+#Machine Learning
+
+library(spldv)
+library(readr)
+library(spdep)
+library(spDataLarge)
+library(haven)
+library(sp)
+library(INLA)    # INLA models
+library(sf)      # spatial data
+library(ggplot2) # plotting
+library(dplyr)
+library(DMwR)
+library(smotefamily)
+library(caret)
+
+# 1. Read shapefile and prepare coordinates
+shp_data <- st_read("housing.shp")
+
+# Convert categorical variables to factors
+shp_data$LOCATION    <- as.factor(shp_data$LOCATIO)
+shp_data$HEAD_SEX    <- as.factor(shp_data$HEAD_SE)
+shp_data$age_grouped <- as.factor(shp_data$ag_grpd)
+shp_data$HEAD_MARITAL<- as.factor(shp_data$HEAD_MA)
+shp_data$HEAD_EDUCATION <- as.factor(shp_data$H_Edctn)
+shp_data$HEAD_ECON_ACTV <- as.factor(shp_data$HEAD_EC)
+shp_data$hhsize      <- as.factor(shp_data$hhsize)
+
+
+names(shp_data)
+
+
+table(shp_data$slum)
+table(shp_data$slum)
+
+
+
+#install.packages("remotes")
+#remotes::install_version("DMwR", version = "0.4.1", repos =
+"http://cran.us.r-project.org")
+
+set.seed(123)
+
+# 1. Drop geometry column
+shp_data_no_geom <- shp_data %>% select(-geometry)
+
+# 2. Train/test split (70/30)
+trainIndex <- createDataPartition(shp_data_no_geom$slum, p = 0.7, list = FALSE)
+train <- shp_data_no_geom[trainIndex, ]
+test  <- shp_data_no_geom[-trainIndex, ]
+
+# 3. Apply SMOTE only to training set (formula interface)
+# Auto-tune perc.over and perc.under for perfect balance
+minority_count <- sum(train$slum == 0)
+majority_count <- sum(train$slum == 1)
+
+perc.over <- ((majority_count - minority_count) / minority_count) * 100
+perc.under <- 100
+
+train_df <- as.data.frame(train)
+train_df$slum <- factor(train_df$slum, levels = c(0,1))
+
+# Convert all character columns to factors
+char_cols <- sapply(train_df, is.character)
+train_df[char_cols] <- lapply(train_df[char_cols], factor)
+
+
+list_cols <- sapply(train_df, is.list)
+train_df <- train_df[ , !list_cols]
+
+
+table(train_bal$slum)
+
+library(sf)
+library(dplyr)
+
+# Ensure slum is numeric in train_bal
+train_bal$slum <- as.numeric(as.character(train_bal$slum))
+
+# Join balanced attributes back to geometry
+train_bal_sf <- shp_data %>%
+  inner_join(train_bal, by = c("LOCATION","age_grouped","HEAD_SEX",
+                               "HEAD_EDUCATION","hhsize","HEAD_ECON_ACTV",
+                               "HEAD_MARITAL","slum"))
+
+# Save as shapefile
+st_write(train_bal_sf, "train_balanced.shp", delete_layer = TRUE)
+
+# Load the shapefile you just wrote
+train_bal_sf <- st_read("train_balanced.shp")
+
+# Inspect column names
+names(train_bal_sf)
+
+# Check balance
+table(train_bal_sf$slum)
+
+
+names(train_balanced.shp)
+
+
+###Modelling
+
+library(caret)
+library(randomForest)
+library(xgboost)
+library(pROC)
+
+set.seed(123)
+
+# Define baseline formula
+formula_baseline <- slum ~ LOCATION + age_grouped + HEAD_SEX +
+  HEAD_EDUCATION + hhsize + HEAD_ECON_ACTV + HEAD_MARITAL
+
+# -------------------------------
+# 1. Logistic Regression (GLM)
+# -------------------------------
+logit_model <- glm(formula_baseline, data = train_bal, family = binomial)
+
+logit_pred <- predict(logit_model, newdata = test, type = "response")
+logit_class <- ifelse(logit_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(logit_class), factor(test$slum))
+roc(test$slum, logit_pred)
+
+# -------------------------------
+# 2. Random Forest
+# -------------------------------
+rf_model <- randomForest(formula_baseline, data = train_bal,
+                         ntree = 500, mtry = 3, importance = TRUE)
+
+rf_pred <- predict(rf_model, newdata = test, type = "prob")[,2]
+rf_class <- ifelse(rf_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(rf_class), factor(test$slum))
+roc(test$slum, rf_pred)
+
+# -------------------------------
+# 3. XGBoost
+# -------------------------------
+# For XGBoost we need dummy encoding
+train_X <- model.matrix(formula_baseline, data = train_bal)[, -1]
+train_y <- as.numeric(as.character(train_bal$slum))
+test_X  <- model.matrix(formula_baseline, data = test)[, -1]
+test_y  <- as.numeric(as.character(test$slum))
+
+xgb_train <- xgb.DMatrix(data = train_X, label = train_y)
+xgb_test  <- xgb.DMatrix(data = test_X, label = test_y)
+
+xgb_model <- xgboost(data = xgb_train, nrounds = 200,
+                     objective = "binary:logistic", eval_metric = "auc")
+
+xgb_pred <- predict(xgb_model, newdata = xgb_test)
+xgb_class <- ifelse(xgb_pred > 0.5, 1, 0)
+
+confusionMatrix(factor(xgb_class), factor(test_y))
+roc(test_y, xgb_pred)
+
+
+Structure
+
+str(df_analysis)tibble [1,417,184 ? 40] (S3: tbl_df/tbl/data.frame)
+ $ H_REGION_NAME     : Factor w/ 32 levels "Kusini Pemba",..: 1 1 1 1
+1 1 1 1 1 1 ...
+ $ H_DISTRICT_NAME   : Factor w/ 151 levels "Chake Chake",..: 1 1 1 1
+1 1 1 1 1 1 ...
+ $ H_WARD_NAME       : Factor w/ 3995 levels "Chanjaani","Shungi",..:
+1 1 1 1 1 1 1 1 1 1 ...
+ $ H_VILLAGE_NAME    : Factor w/ 15570 levels "Vijijini","Muembe
+Tongwa",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ H_LATITUDE        : num [1:1417184] -5.26 -5.26 -5.26 -5.26 -5.26 ...
+ $ H_LONGITUDE       : num [1:1417184] 39.8 39.8 39.8 39.8 39.8 ...
+ $ LOCATION          : Factor w/ 2 levels "Urban","Rural": 1 1 1 1 1 1
+1 1 1 1 ...
+ $ MEMBERS           : num [1:1417184] 10 3 5 12 1 6 7 4 8 10 ...
+ $ TENURE            : Factor w/ 7 levels "Owned by household",..: 1 2
+1 1 2 2 1 2 1 1 ...
+ $ LAND              : Factor w/ 8 levels "Title deed","No legal
+right",..: 1 NA 2 3 NA NA 1 NA 3 2 ...
+ $ ROOF              : Factor w/ 8 levels "Iron sheets",..: 1 1 1 1 2
+1 1 1 1 1 ...
+ $ FLOOR             : Factor w/ 10 levels "Cement","Earth/Sand",..: 1
+1 1 1 2 1 1 1 1 1 ...
+ $ WALLS             : Factor w/ 10 levels "Cement bricks/Rock
+bricks",..: 1 1 1 1 1 1 1 2 1 1 ...
+ $ ROOMS             : num [1:1417184] 2 3 3 5 2 1 2 3 4 6 ...
+ $ DRINKING_WATER    : Factor w/ 14 levels "Public tap/standpipe",..:
+1 1 2 3 1 3 2 2 3 4 ...
+ $ COOKING           : Factor w/ 14 levels "Firewood","Charcoal",..: 1
+2 1 1 2 1 1 1 2 1 ...
+ $ LIGHTING          : Factor w/ 13 levels "Kerosene (Wick lamps)",..:
+1 2 3 2 3 2 2 1 2 2 ...
+ $ TOILET            : Factor w/ 11 levels "Flush/pour flush to
+covered pit",..: 1 1 1 1 2 1 1 3 1 1 ...
+ $ SOLID_WASTE       : Factor w/ 9 levels "Irregularly collected",..:
+1 2 3 3 3 3 2 4 4 4 ...
+ $ HEAD_SEX          : Factor w/ 2 levels "Female Headed",..: 1 2 2 2
+2 2 2 1 2 2 ...
+ $ HEAD_AGE          : num [1:1417184] 44 24 34 44 24 38 47 41 64 44 ...
+ $ HEAD_EDUCATION    : Factor w/ 29 levels "14","10","7",..: NA 1 2 2
+2 3 2 2 2 4 ...
+ $ HEAD_ECON_ACTV    : Factor w/ 5 levels "Paid employees",..: NA NA
+NA NA NA NA NA NA NA NA ...
+ $ HEAD_MARITAL      : Factor w/ 7 levels "Divorced","Married",..: 1 2
+2 2 3 2 2 2 2 2 ...
+ $ HEAD_OCCUPATION   : Factor w/ 9 levels "Technicians and associate
+professionals.",..: 1 1 2 3 NA NA 4 NA 2 3 ...
+ $ H_Education       : Factor w/ 4 levels "Secondary","Primary",..: NA
+1 1 1 1 2 1 1 1 2 ...
+ $ Durability_Floor  : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 2 1 1 1 1 1 ...
+ $ Durability_Wall   : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 1 1 1 2 1 1 ...
+ $ Durability_Roof   : Factor w/ 2 levels "Durable","Not durable": 1 1
+1 1 2 1 1 1 1 1 ...
+ $ Improved_Water    : Factor w/ 2 levels "Improved","Unimproved": 1 1
+1 1 1 1 1 1 1 2 ...
+ $ Toilet_Facility   : Factor w/ 2 levels "Unimproved","Improved": 1 1
+1 1 2 1 1 2 1 1 ...
+ $ Secure_Tenure     : Factor w/ 2 levels "Not secure","Secure": 1 NA
+2 1 NA NA 1 NA 1 2 ...
+ $ age_grouped       : Factor w/ 5 levels "25-44","15-24",..: 1 2 1 1
+2 1 3 1 3 1 ...
+ $ Bed_Rooms         : num [1:1417184] 0 1 1 1 0 0 0 1 1 1 ...
+ $ hhsize            : Factor w/ 4 levels "6 and above persons",..: 1
+2 3 1 4 1 1 3 1 1 ...
+ $ Living_Area       : Factor w/ 278 levels
+"5","1","1.66666662693024",..: 1 2 3 4 5 6 7 8 9 3 ...
+ $ Living_Area1      : Factor w/ 2 levels "Overcrowding",..: 1 2 2 2 2
+1 1 2 2 2 ...
+ $ Durable_Materials : Factor w/ 2 levels "Durable","Not Durable": 1 1
+1 1 2 1 1 2 1 1 ...
+ $ housing_inadequacy: Factor w/ 2 levels "Inadequate","Adequate": 1 1
+1 1 1 1 1 1 1 1 ...
+ $ number_slum1      : num [1:1417184] 3 1 1 2 1 2 3 1 2 2 ...
+
+>
+sample data set
+source("sample_dataset.R")
+
+
+I am looking forward to get your feedback
+Regards
+Nasra
+
+	[[alternative HTML version deleted]]
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From btyner @end|ng |rom gm@||@com  Mon Apr 20 23:54:55 2026
+From: btyner @end|ng |rom gm@||@com (Benjamin Tyner)
+Date: Mon, 20 Apr 2026 17:54:55 -0400
+Subject: [R] Transit directory on CRAN
+Message-ID: <c56a59c5-1e86-448f-a4e3-38543ed9f907@gmail.com>
+
+Hello,
+
+This morning I came across this directory,
+
+    https://cloud.r-project.org/src/contrib/Transit/
+
+which appears to contain the sources for five packages, albeit with a 
+"-1" suffix appended to their version identifiers. I'm curious to know 
+what is the purpose of this directory?
+
+Regards,
+
+Ben
+
+
