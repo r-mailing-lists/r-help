@@ -34226,24 +34226,6 @@
       "month": "2008-11"
     },
     {
-      "id": "msg-0e2eee7b5ce3",
-      "message_id": "<c502a9e10811200646s339e7fb8gb57f2a239226a44a@mail.gmail.com>",
-      "from_name": "stephen sefick",
-      "from_email_hash": "3749535363b9d644aa3f61b8bf07926d79589e6ccf7dd0b75c56781ee6a32e82",
-      "date": "2008-11-20T14:46:01Z",
-      "subject": "[R] Calculate an equation",
-      "subject_clean": "Calculate an equation",
-      "in_reply_to": "<20600332.post@talk.nabble.com>",
-      "references": [
-        "<20600332.post@talk.nabble.com>"
-      ],
-      "body_plain": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calculate this equation:\n>\n> Ps(t)=  (?_(r=1)^N Xtr* 1/?drs)/(?_(r=1)^N 1/?drs)\n>\n> Ps(t) ? Probability that taxon t will occur at site s (300 sites s)\n> N ? Number of sites = from 1 to 49\n> Xtr ? Value for taxon t at site r (I have this information in a table, 40\n> taxa (columns) t, 49 sites r)\n> drs ? Distance from site r to site s (this information is on a table, s\n> sites (columns))\n>\n> I thought that R would be the software to use, but I am experiencing some\n> difficulties\n>\n> Thanks to everyone,\n> P.Branco\n>\n> --\n> View this message in context: http://www.nabble.com/Calculate-an-equation-tp20600332p20600332.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nStephen Sefick\nResearch Scientist\nSoutheastern Natural Sciences Academy\n\nLet's not spend our time and resources thinking about things that are\nso little or so large that all they really do for us is puff us up and\nmake us feel like gods.  We are mammals, and have not exhausted the\nannoying little problems of being mammals.\n\n\t\t\t\t\t\t\t\t-K. Mullis",
-      "body_snippet": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calcu",
-      "thread_id": "thread-f2b07074397b",
-      "thread_depth": 1,
-      "month": "2008-11"
-    },
-    {
       "id": "msg-109d146c0a8e",
       "message_id": "<loom.20081120T143821-445@post.gmane.org>",
       "from_name": "Ben Bolker",
@@ -34258,6 +34240,24 @@
       "body_plain": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize a function over\n> a 60-dimensional parameter space. The function itself takes about 1 to 6\n> minutes to compute. It finds an optimum after 6 tot 24 hours, depending\n> on the problem I need to solve. For me, speed is an issue and I would\n> like to reduce this to 1 hour. \n> \n> Hence my question:: are there optimization algorithms that are\n> particularly useful for settings where the evaluation of the function\n> takes a lot of time to compute?\n\n  Others may have more specific advice, but here is some\ngeneral information:\n\n * the more information from the function you can use, the\nbetter.  In this respect the derivative-based methods (BFGS,\nL-BFGS-B) will be more efficient than Nelder-Mead.  If there\nis any way you can get analytic derivatives of your function,\nthat will help a lot.\n\n * Your best bet is probably to look at your objective function\nand see if you can speed it up.  Can you vectorize or code the\ntime-consuming bits of it in C/FORTRAN?\n\n * For large-scale optimization, you can potentially get a very\nlarge improvement in speed by using automatic differentiation,\nwhich exists in R only in a rudimentary form. Depending on the\nresources you have available, I would seriously consider\nAD Model Builder from Otter Research.\n\n  * I haven't tried it, but you might take a quick look at\nhttp://www.milbo.users.sonic.net/ra/index.html, particularly\nif your code involves non-vectorizable loops.\n\n  good luck,\n   Ben Bolker",
       "body_snippet": "Wijffels, Jan <jan.wijffels <at> thomascook.be> writes:\n\n> \n> Hi\n> \n> I'm quite new to optimization algorithms and I could use some advice or\n> pointers. I'm using ?optim (method L-BFGS-B) to optimize",
       "thread_id": "thread-c50f3f64372a",
+      "thread_depth": 1,
+      "month": "2008-11"
+    },
+    {
+      "id": "msg-0e2eee7b5ce3",
+      "message_id": "<c502a9e10811200646s339e7fb8gb57f2a239226a44a@mail.gmail.com>",
+      "from_name": "stephen sefick",
+      "from_email_hash": "3749535363b9d644aa3f61b8bf07926d79589e6ccf7dd0b75c56781ee6a32e82",
+      "date": "2008-11-20T14:46:01Z",
+      "subject": "[R] Calculate an equation",
+      "subject_clean": "Calculate an equation",
+      "in_reply_to": "<20600332.post@talk.nabble.com>",
+      "references": [
+        "<20600332.post@talk.nabble.com>"
+      ],
+      "body_plain": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calculate this equation:\n>\n> Ps(t)=  (?_(r=1)^N Xtr* 1/?drs)/(?_(r=1)^N 1/?drs)\n>\n> Ps(t) ? Probability that taxon t will occur at site s (300 sites s)\n> N ? Number of sites = from 1 to 49\n> Xtr ? Value for taxon t at site r (I have this information in a table, 40\n> taxa (columns) t, 49 sites r)\n> drs ? Distance from site r to site s (this information is on a table, s\n> sites (columns))\n>\n> I thought that R would be the software to use, but I am experiencing some\n> difficulties\n>\n> Thanks to everyone,\n> P.Branco\n>\n> --\n> View this message in context: http://www.nabble.com/Calculate-an-equation-tp20600332p20600332.html\n> Sent from the R help mailing list archive at Nabble.com.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nStephen Sefick\nResearch Scientist\nSoutheastern Natural Sciences Academy\n\nLet's not spend our time and resources thinking about things that are\nso little or so large that all they really do for us is puff us up and\nmake us feel like gods.  We are mammals, and have not exhausted the\nannoying little problems of being mammals.\n\n\t\t\t\t\t\t\t\t-K. Mullis",
+      "body_snippet": "What have you tried so far?\n\nOn Thu, Nov 20, 2008 at 7:40 AM, P.Branco <pjlbranco at yahoo.com> wrote:\n>\n> Dear all,\n>\n> I was wondering if you could help me with the following.\n>\n> I want to do calcu",
+      "thread_id": "thread-f2b07074397b",
       "thread_depth": 1,
       "month": "2008-11"
     },
@@ -58121,17 +58121,6 @@
       "root_message_id": "msg-ff09a7ec3544"
     },
     {
-      "id": "thread-d2296d9a36c1",
-      "subject": "Dendrogram labels",
-      "message_count": 1,
-      "participants": [
-        "Richardson, Patrick"
-      ],
-      "started": "2008-11-21T19:14:25Z",
-      "last_reply": "2008-11-21T19:14:25Z",
-      "root_message_id": "msg-d2296d9a36c1"
-    },
-    {
       "id": "thread-185039fc51e1",
       "subject": "Dendrogram labels",
       "message_count": 2,
@@ -58142,6 +58131,17 @@
       "started": "2008-11-21T19:14:25Z",
       "last_reply": "2008-11-21T22:20:02Z",
       "root_message_id": "msg-185039fc51e1"
+    },
+    {
+      "id": "thread-d2296d9a36c1",
+      "subject": "Dendrogram labels",
+      "message_count": 1,
+      "participants": [
+        "Richardson, Patrick"
+      ],
+      "started": "2008-11-21T19:14:25Z",
+      "last_reply": "2008-11-21T19:14:25Z",
+      "root_message_id": "msg-d2296d9a36c1"
     },
     {
       "id": "thread-1353d29317d1",

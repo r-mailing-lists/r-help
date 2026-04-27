@@ -1198,24 +1198,6 @@
       "month": "2007-02"
     },
     {
-      "id": "msg-3935cc020ea2",
-      "message_id": "<809DB795-782B-4C78-84F3-9CB7869D02C1@jhsph.edu>",
-      "from_name": "Benilton Carvalho",
-      "from_email_hash": "d8cff7ac2a4ccbeef33498c39f0a354aeb121d52ba3c79e0effdaca9ea990794",
-      "date": "2007-02-01T18:37:01Z",
-      "subject": "[R] Help with efficient double sum of max (X_i, Y_i) (X & Y vectors)",
-      "subject_clean": "Help with efficient double sum of max (X_i, Y_i) (X & Y vectors)",
-      "in_reply_to": "<1170353883.961.15.camel@pc-racine1.economics.mcmaster.ca>",
-      "references": [
-        "<1170353883.961.15.camel@pc-racine1.economics.mcmaster.ca>"
-      ],
-      "body_plain": "Well, a reproducible example would be nice =)\n\nnot tested:\n\nx = rnorm(10)\ny = rnorm(20)\nmymax <- function(t1, t2) apply(cbind(t1, t2), 1, max)\nsum(outer(x, y, mymax))\n\nis this sth like what you need?\n\nb\n\nOn Feb 1, 2007, at 1:18 PM, Jeffrey Racine wrote:\n\n> Greetings.\n>\n> For R gurus this may be a no brainer, but I could not find pointers to\n> efficient computation of this beast in past help files.\n>\n> Background - I wish to implement a Cramer-von Mises type test  \n> statistic\n> which involves double sums of max(X_i,Y_j) where X and Y are  \n> vectors of\n> differing length.\n>\n> I am currently using ifelse pointwise in a vector, but have a nagging\n> suspicion that there is a more efficient way to do this. Basically, I\n> require three sums:\n>\n> sum1: \\sum_i\\sum_j max(X_i,X_j)\n> sum2: \\sum_i\\sum_j max(Y_i,Y_j)\n> sum3: \\sum_i\\sum_j max(X_i,Y_j)\n>\n> Here is my current implementation - any pointers to more efficient\n> computation greatly appreciated.\n>\n>   nx <- length(x)\n>   ny <- length(y)\n>\n>   sum1 <- 0\n>   sum3 <- 0\n>\n>   for(i in 1:nx) {\n>     sum1 <- sum1 + sum(ifelse(x[i]>x,x[i],x))\n>     sum3 <- sum3 + sum(ifelse(x[i]>y,x[i],y))\n>   }\n>\n>   sum2 <- 0\n>   sum4 <- sum3 # symmetric and identical\n>\n>   for(i in 1:ny) {\n>     sum2 <- sum2 + sum(ifelse(y[i]>y,y[i],y))\n>   }\n>\n> Thanks in advance for your help.\n>\n> -- Jeff\n>\n> -- \n> Professor J. S. Racine         Phone:  (905) 525 9140 x 23825\n> Department of Economics        FAX:    (905) 521-8232\n> McMaster University            e-mail: racinej at mcmaster.ca\n> 1280 Main St. W.,Hamilton,     URL:\n> http://www.economics.mcmaster.ca/racine/\n> Ontario, Canada. L8S 4M4\n>\n> `The generation of random numbers is too important to be left to  \n> chance'\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting- \n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Well, a reproducible example would be nice =)\n\nnot tested:\n\nx = rnorm(10)\ny = rnorm(20)\nmymax <- function(t1, t2) apply(cbind(t1, t2), 1, max)\nsum(outer(x, y, mymax))\n\nis this sth like what you need?\n",
-      "thread_id": "thread-3b158b1c87cd",
-      "thread_depth": 1,
-      "month": "2007-02"
-    },
-    {
       "id": "msg-9aadc727d8ac",
       "message_id": "<000001c7462f$f6aa6d80$7c94100a@win.ad.jhu.edu>",
       "from_name": "Ravi Varadhan",
@@ -1229,6 +1211,24 @@
       ],
       "body_plain": "Jeff,\n\nHere is something which is a little faster:\n\nsum1 <- sum(outer(x, x, FUN=\"pmax\"))\nsum3 <- sum(outer(x, y, FUN=\"pmax\"))\n\nBest,\nRavi.\n\n----------------------------------------------------------------------------\n-------\n\nRavi Varadhan, Ph.D.\n\nAssistant Professor, The Center on Aging and Health\n\nDivision of Geriatric Medicine and Gerontology \n\nJohns Hopkins University\n\nPh: (410) 502-2619\n\nFax: (410) 614-9625\n\nEmail: rvaradhan at jhmi.edu\n\nWebpage:  http://www.jhsph.edu/agingandhealth/People/Faculty/Varadhan.html\n\n \n\n----------------------------------------------------------------------------\n--------\n\n-----Original Message-----\nFrom: r-help-bounces at stat.math.ethz.ch\n[mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of Jeffrey Racine\nSent: Thursday, February 01, 2007 1:18 PM\nTo: r-help at stat.math.ethz.ch\nSubject: [R] Help with efficient double sum of max (X_i, Y_i) (X & Y\nvectors)\n\nGreetings.\n\nFor R gurus this may be a no brainer, but I could not find pointers to\nefficient computation of this beast in past help files.\n\nBackground - I wish to implement a Cramer-von Mises type test statistic\nwhich involves double sums of max(X_i,Y_j) where X and Y are vectors of\ndiffering length.\n\nI am currently using ifelse pointwise in a vector, but have a nagging\nsuspicion that there is a more efficient way to do this. Basically, I\nrequire three sums:\n\nsum1: \\sum_i\\sum_j max(X_i,X_j)\nsum2: \\sum_i\\sum_j max(Y_i,Y_j)\nsum3: \\sum_i\\sum_j max(X_i,Y_j)\n\nHere is my current implementation - any pointers to more efficient\ncomputation greatly appreciated.\n\n  nx <- length(x)\n  ny <- length(y)\n\n  sum1 <- 0\n  sum3 <- 0\n    \n  for(i in 1:nx) {\n    sum1 <- sum1 + sum(ifelse(x[i]>x,x[i],x))\n    sum3 <- sum3 + sum(ifelse(x[i]>y,x[i],y))\n  }\n\n  sum2 <- 0\n  sum4 <- sum3 # symmetric and identical\n    \n  for(i in 1:ny) {\n    sum2 <- sum2 + sum(ifelse(y[i]>y,y[i],y))\n  }\n\nThanks in advance for your help.\n\n-- Jeff\n\n-- \nProfessor J. S. Racine         Phone:  (905) 525 9140 x 23825\nDepartment of Economics        FAX:    (905) 521-8232\nMcMaster University            e-mail: racinej at mcmaster.ca\n1280 Main St. W.,Hamilton,     URL:\nhttp://www.economics.mcmaster.ca/racine/\nOntario, Canada. L8S 4M4\n\n`The generation of random numbers is too important to be left to chance'\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Jeff,\n\nHere is something which is a little faster:\n\nsum1 <- sum(outer(x, x, FUN=\"pmax\"))\nsum3 <- sum(outer(x, y, FUN=\"pmax\"))\n\nBest,\nRavi.\n\n------------------------------------------------------------",
+      "thread_id": "thread-3b158b1c87cd",
+      "thread_depth": 1,
+      "month": "2007-02"
+    },
+    {
+      "id": "msg-3935cc020ea2",
+      "message_id": "<809DB795-782B-4C78-84F3-9CB7869D02C1@jhsph.edu>",
+      "from_name": "Benilton Carvalho",
+      "from_email_hash": "d8cff7ac2a4ccbeef33498c39f0a354aeb121d52ba3c79e0effdaca9ea990794",
+      "date": "2007-02-01T18:37:01Z",
+      "subject": "[R] Help with efficient double sum of max (X_i, Y_i) (X & Y vectors)",
+      "subject_clean": "Help with efficient double sum of max (X_i, Y_i) (X & Y vectors)",
+      "in_reply_to": "<1170353883.961.15.camel@pc-racine1.economics.mcmaster.ca>",
+      "references": [
+        "<1170353883.961.15.camel@pc-racine1.economics.mcmaster.ca>"
+      ],
+      "body_plain": "Well, a reproducible example would be nice =)\n\nnot tested:\n\nx = rnorm(10)\ny = rnorm(20)\nmymax <- function(t1, t2) apply(cbind(t1, t2), 1, max)\nsum(outer(x, y, mymax))\n\nis this sth like what you need?\n\nb\n\nOn Feb 1, 2007, at 1:18 PM, Jeffrey Racine wrote:\n\n> Greetings.\n>\n> For R gurus this may be a no brainer, but I could not find pointers to\n> efficient computation of this beast in past help files.\n>\n> Background - I wish to implement a Cramer-von Mises type test  \n> statistic\n> which involves double sums of max(X_i,Y_j) where X and Y are  \n> vectors of\n> differing length.\n>\n> I am currently using ifelse pointwise in a vector, but have a nagging\n> suspicion that there is a more efficient way to do this. Basically, I\n> require three sums:\n>\n> sum1: \\sum_i\\sum_j max(X_i,X_j)\n> sum2: \\sum_i\\sum_j max(Y_i,Y_j)\n> sum3: \\sum_i\\sum_j max(X_i,Y_j)\n>\n> Here is my current implementation - any pointers to more efficient\n> computation greatly appreciated.\n>\n>   nx <- length(x)\n>   ny <- length(y)\n>\n>   sum1 <- 0\n>   sum3 <- 0\n>\n>   for(i in 1:nx) {\n>     sum1 <- sum1 + sum(ifelse(x[i]>x,x[i],x))\n>     sum3 <- sum3 + sum(ifelse(x[i]>y,x[i],y))\n>   }\n>\n>   sum2 <- 0\n>   sum4 <- sum3 # symmetric and identical\n>\n>   for(i in 1:ny) {\n>     sum2 <- sum2 + sum(ifelse(y[i]>y,y[i],y))\n>   }\n>\n> Thanks in advance for your help.\n>\n> -- Jeff\n>\n> -- \n> Professor J. S. Racine         Phone:  (905) 525 9140 x 23825\n> Department of Economics        FAX:    (905) 521-8232\n> McMaster University            e-mail: racinej at mcmaster.ca\n> 1280 Main St. W.,Hamilton,     URL:\n> http://www.economics.mcmaster.ca/racine/\n> Ontario, Canada. L8S 4M4\n>\n> `The generation of random numbers is too important to be left to  \n> chance'\n>\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting- \n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Well, a reproducible example would be nice =)\n\nnot tested:\n\nx = rnorm(10)\ny = rnorm(20)\nmymax <- function(t1, t2) apply(cbind(t1, t2), 1, max)\nsum(outer(x, y, mymax))\n\nis this sth like what you need?\n",
       "thread_id": "thread-3b158b1c87cd",
       "thread_depth": 1,
       "month": "2007-02"
