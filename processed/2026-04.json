@@ -308,6 +308,59 @@
       "thread_id": "thread-8c9c1bb9617b",
       "thread_depth": 0,
       "month": "2026-04"
+    },
+    {
+      "id": "msg-cff2fa594b50",
+      "message_id": "<cd0200b3e6b145f18607cedb6caa3159@regione.marche.it>",
+      "from_name": "Stefano Sofia",
+      "from_email_hash": "a7f3517cae836d7afc0bc127b120154846e52249d4491619f4cd8abbb6abed4c",
+      "date": "2026-04-28T08:11:10Z",
+      "subject": "[R] multiple plots per page, multiple pages",
+      "subject_clean": "multiple plots per page, multiple pages",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Deer R-list users,\n\nI need to create multiple plots per page, without using ggplot.\n\nLet's say that I want two plots per page, 3 pages.\n\n\npng(file=\"test.png\", units=\"cm\", res=200, width=19, height=24)\n\npar(mfrow=c(2,1))\n\nfor(ii in 1:3){\n\nplot(ii,ii)\n\nhist(rnorm(10))\n\n}\n\ndev.off()\n\n\noverwrites the first two pages and creates only the third one.\n\n\npdf(file=\"test.pdf\")\n\n...\n\n\nworks fine, but I would like to stick to the png command. Is there a way to do it?\n\nThank you for your help\n\nStefano Sofia\n\n\n\n         (oo)\n--oOO--( )--OOo--------------------------------------\nStefano Sofia MSc, PhD\nCivil Protection Department - Marche Region - Italy\nMeteo Section\nSnow Section\nVia Colle Ameno 5\n60126 Torrette di Ancona, Ancona (AN)\nUff: +39 071 806 7743\nE-mail: stefano.sofia at regione.marche.it\n---Oo---------oO----------------------------------------\n\n________________________________\n\nAVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\nIMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Deer R-list users,\n\nI need to create multiple plots per page, without using ggplot.\n\nLet's say that I want two plots per page, 3 pages.\n\n\npng(file=\"test.png\", units=\"cm\", res=200, width=19, height=24)",
+      "thread_id": "thread-cff2fa594b50",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-2f6a337d5728",
+      "message_id": "<15b37020-12af-4406-860d-9a48a614fcf2@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-04-28T08:48:36Z",
+      "subject": "[R] multiple plots per page, multiple pages",
+      "subject_clean": "multiple plots per page, multiple pages",
+      "in_reply_to": "<cd0200b3e6b145f18607cedb6caa3159@regione.marche.it>",
+      "references": [
+        "<cd0200b3e6b145f18607cedb6caa3159@regione.marche.it>"
+      ],
+      "body_plain": "On 2026-04-28 4:11 a.m., Stefano Sofia via R-help wrote:\n> Deer R-list users,\n> \n> I need to create multiple plots per page, without using ggplot.\n> \n> Let's say that I want two plots per page, 3 pages.\n> \n> \n> png(file=\"test.png\", units=\"cm\", res=200, width=19, height=24)\n> \n> par(mfrow=c(2,1))\n> \n> for(ii in 1:3){\n> \n> plot(ii,ii)\n> \n> hist(rnorm(10))\n> \n> }\n> \n> dev.off()\n> \n> \n> overwrites the first two pages and creates only the third one.\n> \n> \n> pdf(file=\"test.pdf\")\n> \n> ...\n> \n> \n> works fine, but I would like to stick to the png command. Is there a way to do it?\n\nYou can't have multiple pages in a single .png file, but R will create \nmultiple .png files if you use a filename like \"test%03d.png\" (where the \n\"%03d\" suffix is a C-style format spec).\n\nDuncan Murdoch\n> \n> Thank you for your help\n> \n> Stefano Sofia\n> \n> \n> \n>           (oo)\n> --oOO--( )--OOo--------------------------------------\n> Stefano Sofia MSc, PhD\n> Civil Protection Department - Marche Region - Italy\n> Meteo Section\n> Snow Section\n> Via Colle Ameno 5\n> 60126 Torrette di Ancona, Ancona (AN)\n> Uff: +39 071 806 7743\n> E-mail: stefano.sofia at regione.marche.it\n> ---Oo---------oO----------------------------------------\n> \n> ________________________________\n> \n> AVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\n> IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "On 2026-04-28 4:11 a.m., Stefano Sofia via R-help wrote:\n> Deer R-list users,\n> \n> I need to create multiple plots per page, without using ggplot.\n> \n> Let's say that I want two plots per page, 3 page",
+      "thread_id": "thread-cff2fa594b50",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-ffe72f4fdda2",
+      "message_id": "<PA4PR08MB7435DD86E9E896E593CF0A658B372@PA4PR08MB7435.eurprd08.prod.outlook.com>",
+      "from_name": "Viechtbauer, Wolfgang (NP)",
+      "from_email_hash": "bfe931aadd3cb7631b70e83086a082e314918464e0b2d0cbb3f72828d9937141",
+      "date": "2026-04-28T09:32:08Z",
+      "subject": "[R] multiple plots per page, multiple pages",
+      "subject_clean": "multiple plots per page, multiple pages",
+      "in_reply_to": "<15b37020-12af-4406-860d-9a48a614fcf2@gmail.com>",
+      "references": [
+        "<cd0200b3e6b145f18607cedb6caa3159@regione.marche.it>",
+        "<15b37020-12af-4406-860d-9a48a614fcf2@gmail.com>"
+      ],
+      "body_plain": "Whoa - never realized that png() (and some other devices) have that feature. After using R for more than 25 years, it still blows my mind that I keep finding such gems in base R. Of course, when you look at help(png), it explains it right there for the filename argument (ducks in shame).\n\nBest,\nWolfgang\n\n> -----Original Message-----\n> From: R-help <r-help-bounces at r-project.org> On Behalf Of Duncan Murdoch\n> Sent: Tuesday, April 28, 2026 10:49\n> To: Stefano Sofia <stefano.sofia at regione.marche.it>; r-help at R-project.org\n> Subject: Re: [R] multiple plots per page, multiple pages\n> \n> On 2026-04-28 4:11 a.m., Stefano Sofia via R-help wrote:\n> > Deer R-list users,\n> >\n> > I need to create multiple plots per page, without using ggplot.\n> >\n> > Let's say that I want two plots per page, 3 pages.\n> >\n> > png(file=\"test.png\", units=\"cm\", res=200, width=19, height=24)\n> >\n> > par(mfrow=c(2,1))\n> >\n> > for(ii in 1:3){\n> >\n> > plot(ii,ii)\n> >\n> > hist(rnorm(10))\n> >\n> > }\n> >\n> > dev.off()\n> >\n> > overwrites the first two pages and creates only the third one.\n> >\n> > pdf(file=\"test.pdf\")\n> >\n> > ...\n> >\n> > works fine, but I would like to stick to the png command. Is there a way to do\n> it?\n> \n> You can't have multiple pages in a single .png file, but R will create\n> multiple .png files if you use a filename like \"test%03d.png\" (where the\n> \"%03d\" suffix is a C-style format spec).\n> \n> Duncan Murdoch\n> >\n> > Thank you for your help\n> >\n> > Stefano Sofia\n> >\n> >           (oo)\n> > --oOO--( )--OOo--------------------------------------\n> > Stefano Sofia MSc, PhD\n> > Civil Protection Department - Marche Region - Italy\n> > Meteo Section\n> > Snow Section\n> > Via Colle Ameno 5\n> > 60126 Torrette di Ancona, Ancona (AN)\n> > Uff: +39 071 806 7743\n> > E-mail: stefano.sofia at regione.marche.it\n> > ---Oo---------oO----------------------------------------",
+      "body_snippet": "Whoa - never realized that png() (and some other devices) have that feature. After using R for more than 25 years, it still blows my mind that I keep finding such gems in base R. Of course, when you l",
+      "thread_id": "thread-cff2fa594b50",
+      "thread_depth": 2,
+      "month": "2026-04"
     }
   ],
   "threads": [
@@ -426,6 +479,19 @@
       "started": "2026-04-24T08:40:15Z",
       "last_reply": "2026-04-24T08:40:15Z",
       "root_message_id": "msg-8c9c1bb9617b"
+    },
+    {
+      "id": "thread-cff2fa594b50",
+      "subject": "multiple plots per page, multiple pages",
+      "message_count": 3,
+      "participants": [
+        "Duncan Murdoch",
+        "Stefano Sofia",
+        "Viechtbauer, Wolfgang (NP)"
+      ],
+      "started": "2026-04-28T08:11:10Z",
+      "last_reply": "2026-04-28T09:32:08Z",
+      "root_message_id": "msg-cff2fa594b50"
     }
   ]
 }
