@@ -5768,8 +5768,8 @@
       "month": "2009-04"
     },
     {
-      "id": "msg-b7e904cb5042",
-      "message_id": "<000501c9b464$2d08f1e0$7c94100a@win.ad.jhu.edu>",
+      "id": "msg-73b197703bbe",
+      "message_id": "<003301c9b464$2b465a50$7c94100a@win.ad.jhu.edu>",
       "from_name": "Ravi Varadhan",
       "from_email_hash": "fc2fc6bda56b32f818a30c044562a06515163db643d58dbe19d25054d33be2df",
       "date": "2009-04-03T13:57:47Z",
@@ -5786,8 +5786,8 @@
       "month": "2009-04"
     },
     {
-      "id": "msg-73b197703bbe",
-      "message_id": "<003301c9b464$2b465a50$7c94100a@win.ad.jhu.edu>",
+      "id": "msg-b7e904cb5042",
+      "message_id": "<000501c9b464$2d08f1e0$7c94100a@win.ad.jhu.edu>",
       "from_name": "Ravi Varadhan",
       "from_email_hash": "fc2fc6bda56b32f818a30c044562a06515163db643d58dbe19d25054d33be2df",
       "date": "2009-04-03T13:57:47Z",
@@ -55617,6 +55617,24 @@
       "month": "2009-04"
     },
     {
+      "id": "msg-f473184c4900",
+      "message_id": "<49F8059B.7080700@info.fundp.ac.be>",
+      "from_name": "Cuvelier Etienne",
+      "from_email_hash": "d358a3afcbe526c52c31d420c9862e74b712138f904e2ba2d8fb1b0ae4645dcf",
+      "date": "2009-04-29T07:45:31Z",
+      "subject": "[R] colored PCA biplot",
+      "subject_clean": "colored PCA biplot",
+      "in_reply_to": "<891ffb290904281335n491d9aa7u936ef3baf7450817@mail.gmail.com>",
+      "references": [
+        "<891ffb290904281335n491d9aa7u936ef3baf7450817@mail.gmail.com>"
+      ],
+      "body_plain": "Hillary Cooper a ?crit :\n> Hi-\n> I'm trying to make my PCA (princomp) colored. In my csv excel sheet, I have\n> the first column numbered according to the groupings I want to assign to the\n> PCA. I've played around with trying to set this first column as the color\n> vector, but haven't had any luck.\n> Any suggestions? Thanks,\n> \n> Hillary\n\nHellor Hillary,\nHere is some modifications of my own DIY code,\nthe thing to do is to test it and compare with the original biplot and \nwith what you want.\n\nI hope it helps\n\nEtienne\n\n#my.data is your/my data\n# I create some groups just for the  test\ngroups = sample(1:3,N,replace=TRUE)\nN = nrow(my.data)\nacp=princomp(my.data,cor=TRUE)\n# The original biplot for comparison\nbiplot(acp)\n# Compute de min/max of new coordinates\nxmin = min(acp$scores[,1])\nxmax = max(acp$scores[,1])\nymin = min(acp$scores[,2])\nymax = max(acp$scores[,2])\nplot(c(xmin,xmax),c(ymin,ymax),col=\"white\", xlab=\"Comp 1\", ylab=\"Comp 2\")\n# Plot the points with colors\ntext(acp$scores[,1],acp$scores[,2],1:N,col= groups)\ntitle(\"PCA with colors\")\nabline(v=0,lty=2)\nabline(h=0, lty=2)\n# Compute and apply a re-scaling for the arrows of old components\n# xl.min for min of xloadings,...\nxl.min = min(0,min(acp$loadings[,1]))\nxl.max = max(0,max(acp$loadings[,1]))\nyl.min = min(0,min(acp$loadings[,2]))\nyl.max = max(0,max(acp$loadings[,2]))\nxl.scale = max(abs(xmax),abs(xmin))/max(abs(xl.max),abs(xl.min))*0.75\n# 0.75 factor is just for leave some place for the text\nyl.scale = max(abs(ymax),abs(ymin))/max(abs(yl.max),abs(yl.min))*0.75\n#Draw old components\narrows(rep(0,100),rep(0,100),acp$loadings[,1]*xl.scale, \nacp$loadings[,2]*yl.scale)\n# Names of old components\ntext(acp$loadings[,1]*xl.scale*1.25, acp$loadings[,2]*yl.scale*1.25 \n,colnames(my.data))\n\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Hillary Cooper a ?crit :\n> Hi-\n> I'm trying to make my PCA (princomp) colored. In my csv excel sheet, I have\n> the first column numbered according to the groupings I want to assign to the\n> PCA. I've ",
+      "thread_id": "thread-09da2f1ca05b",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
       "id": "msg-9374f9e3a782",
       "message_id": "<49F8059B.9030905@idi.ntnu.no>",
       "from_name": "Wacek Kusnierczyk",
@@ -55634,24 +55652,6 @@
       "body_snippet": "Dieter Menne wrote:\n> Tena Sakai <tsakai <at> gallo.ucsf.edu> writes:\n>\n>   \n>> I learned 3 new tricks.  (Not bad for a newbie?)\n>>\n>>   $ R --silent --no-save < barebone.R\n>>   $ R --quiet --no-save ",
       "thread_id": "thread-f429fccbebd6",
       "thread_depth": 4,
-      "month": "2009-04"
-    },
-    {
-      "id": "msg-f473184c4900",
-      "message_id": "<49F8059B.7080700@info.fundp.ac.be>",
-      "from_name": "Cuvelier Etienne",
-      "from_email_hash": "d358a3afcbe526c52c31d420c9862e74b712138f904e2ba2d8fb1b0ae4645dcf",
-      "date": "2009-04-29T07:45:31Z",
-      "subject": "[R] colored PCA biplot",
-      "subject_clean": "colored PCA biplot",
-      "in_reply_to": "<891ffb290904281335n491d9aa7u936ef3baf7450817@mail.gmail.com>",
-      "references": [
-        "<891ffb290904281335n491d9aa7u936ef3baf7450817@mail.gmail.com>"
-      ],
-      "body_plain": "Hillary Cooper a ?crit :\n> Hi-\n> I'm trying to make my PCA (princomp) colored. In my csv excel sheet, I have\n> the first column numbered according to the groupings I want to assign to the\n> PCA. I've played around with trying to set this first column as the color\n> vector, but haven't had any luck.\n> Any suggestions? Thanks,\n> \n> Hillary\n\nHellor Hillary,\nHere is some modifications of my own DIY code,\nthe thing to do is to test it and compare with the original biplot and \nwith what you want.\n\nI hope it helps\n\nEtienne\n\n#my.data is your/my data\n# I create some groups just for the  test\ngroups = sample(1:3,N,replace=TRUE)\nN = nrow(my.data)\nacp=princomp(my.data,cor=TRUE)\n# The original biplot for comparison\nbiplot(acp)\n# Compute de min/max of new coordinates\nxmin = min(acp$scores[,1])\nxmax = max(acp$scores[,1])\nymin = min(acp$scores[,2])\nymax = max(acp$scores[,2])\nplot(c(xmin,xmax),c(ymin,ymax),col=\"white\", xlab=\"Comp 1\", ylab=\"Comp 2\")\n# Plot the points with colors\ntext(acp$scores[,1],acp$scores[,2],1:N,col= groups)\ntitle(\"PCA with colors\")\nabline(v=0,lty=2)\nabline(h=0, lty=2)\n# Compute and apply a re-scaling for the arrows of old components\n# xl.min for min of xloadings,...\nxl.min = min(0,min(acp$loadings[,1]))\nxl.max = max(0,max(acp$loadings[,1]))\nyl.min = min(0,min(acp$loadings[,2]))\nyl.max = max(0,max(acp$loadings[,2]))\nxl.scale = max(abs(xmax),abs(xmin))/max(abs(xl.max),abs(xl.min))*0.75\n# 0.75 factor is just for leave some place for the text\nyl.scale = max(abs(ymax),abs(ymin))/max(abs(yl.max),abs(yl.min))*0.75\n#Draw old components\narrows(rep(0,100),rep(0,100),acp$loadings[,1]*xl.scale, \nacp$loadings[,2]*yl.scale)\n# Names of old components\ntext(acp$loadings[,1]*xl.scale*1.25, acp$loadings[,2]*yl.scale*1.25 \n,colnames(my.data))\n\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
-      "body_snippet": "Hillary Cooper a ?crit :\n> Hi-\n> I'm trying to make my PCA (princomp) colored. In my csv excel sheet, I have\n> the first column numbered according to the groupings I want to assign to the\n> PCA. I've ",
-      "thread_id": "thread-09da2f1ca05b",
-      "thread_depth": 1,
       "month": "2009-04"
     },
     {
