@@ -13248,22 +13248,6 @@
       "month": "2012-01"
     },
     {
-      "id": "msg-8f6fe05b5c41",
-      "message_id": "<1326232924044-4283594.post@n4.nabble.com>",
-      "from_name": "iliketurtles",
-      "from_email_hash": "1e2b113a1fe5c82d1a23f8736d45d3a7bc2c8098525c9e924196af7fab1694ea",
-      "date": "2012-01-10T22:02:04Z",
-      "subject": "[R] How to make this for() loop memory efficient?",
-      "subject_clean": "How to make this for() loop memory efficient?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"call1a\",\"call1a\",\"call1a\") )\n\n##then this means that this particular phone call  (the first call that's\nlogged in the data set) was transferred \n##between 3 different \"modules\" before the call was terminated.\n\n##The second column is a numerical description of the module the call\nstarted with and then got transferred to prior to ##call termination. Now,\nI'll construct a ##representative array of the type of data I'm dealing with\n(the real data set goes ##on for X00,000s of rows):\n##(Ignore how I construct the following array, it?s completely unrelated to\nhow the actual data set was constructed). \n\n\na<-sapply(1:50,function(i){paste(\"call\",i,sep=\"\",collapse=\"\")})\ndevelopment.a<-seq(1,40,3)\ndevelopment.a2<-seq(1,40,5)\na[development.a]<-a[development.a+1]\na[development.a2]<-a[development.a2+1]\na[1:2]<-\"call2a\";a[3]<-\"call3a\";a[4:5]<-\"call5a\";a[6:8]<-\"call8a\";a[9]<-\"call9a\"\nb<-c(920010,960010,820009,920010,960500,970050,930010,920010,960500,970050,930900,870010,840010,960500,920010,970050,930010,960500,920010,970050,930010,960010,920010,940010,960010,970010,960500,920010,970050,930010,960500,920010,970050,930010,960500,920010,970050,930010,920010,960500,970050,930010,920009,960500,970050,930009,940010,960500,960500,960500)\ndata<-as.data.frame(cbind(a,b))\ncolnames(data)<-c(\"phone calls\",\"modules\")\ndim(data)\nprint(data[1:10,]) #sample of 10 rows\n\n# Note that in the real data set, data[,2] ranges from 810,000 to 999,999.\nI've been tasked with the following:\n# \"For each phone call that BEGINS with the module which is denoted by 81\n(i.e. of the form 81X,XXX), what is the expected number of modules in these\ncalls?\"\n#Then it's the same question for each module beginning with 82, 83, 84.....\nall the way until 99. \n#I've created code that I think works for this, but I can't actually run it\non the whole data set. I left it for 30 minutes and it only had about #5% of\nthe task completed (I clicked \"STOP\" then checked my output to see if I did\nit properly, and it seems correct).\n#I know the apply() family specializes in vector operations, but I can't\nfigure out how to complete the above question in any way other than #loops.\n\nL<-data\n\nA<-array(0,dim=c(19,2));rownames(A)<-seq(81,99,1)\nA<-data.frame(A)\n\n for(i in 1:(nrow(L)-1))\n {\n  if(L[(i+1),1]!=L[i,1])\n  {\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]<-\n    { \n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]+length(grep(as.character(L[i+1,1]),L[,1],value=FALSE)) \n#aggregate number of modules in the calls that begin with XX (not yet\naveraged). \n    }\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]<-\n    {\n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]+1\n    }\n  }\n   \n }\n\n#If I can get this code to be more memory efficient such that I can do it on\na 400,000 row data set, I can do, for example,\n\nA[17,1]/A[17,2]\n\n#and I'll arrive at the mean number of modules per call where the call\nstarts with a module that starts with 97.\n\nA[17,1] \n#is 10, which means that, out of every single call that started with a\nmodule of 97X,XXX,\n#they went through 10 modules in total. \n\nA[17,2] \n#is 6, which means that there was 6 calls in total that began with a 97X,XXX\nmodule.\n\n#Hence,\n\n\nA[17,1]/A[17,2]\n\n#is the average number of modules that were executed in all the calls that\nbegan with a 97X,XXX module.\n\n\n-----\n----\n\nIsaac\nResearch Assistant\nQuantitative Finance Faculty, UTS\n--\nView this message in context: http://r.789695.n4.nabble.com/How-to-make-this-for-loop-memory-efficient-tp4283594p4283594.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"cal",
-      "thread_id": "thread-8f6fe05b5c41",
-      "thread_depth": 0,
-      "month": "2012-01"
-    },
-    {
       "id": "msg-59249ec6d82f",
       "message_id": "<c36897ca3a9d2e0b37703718bcc0cc45@localhost>",
       "from_name": "Anna Olofsson",
@@ -13276,6 +13260,22 @@
       "body_plain": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5.6, 7.2, 1.0, 9.3]\nplot(x,y)\n\nthen I went to the command window in the terminal (I'm using unix) to run\nthis with source(\"name_of_file\"), but it doesn't work. Shouldn't a plot\ncome up automatically when I run it? What am I doing wrong? It knows what x\nand y is, but I don't get an error of what might be wrong.\n\n> source(\"name_of_file\")\n> x\n[1] 10.4  5.6  3.1  6.4 21.7\n\n\nBest,\nAnna",
       "body_snippet": "Hi,\nI'm pretty new at programming and with the R language. I'm just trying to\nget familiar with R and wrote a script in gedit (should I use emacs\ninstead?),\n\nx <- [10.4  5.6  3.1  6.4 21.7]\ny <- [12,5",
       "thread_id": "thread-59249ec6d82f",
+      "thread_depth": 0,
+      "month": "2012-01"
+    },
+    {
+      "id": "msg-8f6fe05b5c41",
+      "message_id": "<1326232924044-4283594.post@n4.nabble.com>",
+      "from_name": "iliketurtles",
+      "from_email_hash": "1e2b113a1fe5c82d1a23f8736d45d3a7bc2c8098525c9e924196af7fab1694ea",
+      "date": "2012-01-10T22:02:04Z",
+      "subject": "[R] How to make this for() loop memory efficient?",
+      "subject_clean": "How to make this for() loop memory efficient?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"call1a\",\"call1a\",\"call1a\") )\n\n##then this means that this particular phone call  (the first call that's\nlogged in the data set) was transferred \n##between 3 different \"modules\" before the call was terminated.\n\n##The second column is a numerical description of the module the call\nstarted with and then got transferred to prior to ##call termination. Now,\nI'll construct a ##representative array of the type of data I'm dealing with\n(the real data set goes ##on for X00,000s of rows):\n##(Ignore how I construct the following array, it?s completely unrelated to\nhow the actual data set was constructed). \n\n\na<-sapply(1:50,function(i){paste(\"call\",i,sep=\"\",collapse=\"\")})\ndevelopment.a<-seq(1,40,3)\ndevelopment.a2<-seq(1,40,5)\na[development.a]<-a[development.a+1]\na[development.a2]<-a[development.a2+1]\na[1:2]<-\"call2a\";a[3]<-\"call3a\";a[4:5]<-\"call5a\";a[6:8]<-\"call8a\";a[9]<-\"call9a\"\nb<-c(920010,960010,820009,920010,960500,970050,930010,920010,960500,970050,930900,870010,840010,960500,920010,970050,930010,960500,920010,970050,930010,960010,920010,940010,960010,970010,960500,920010,970050,930010,960500,920010,970050,930010,960500,920010,970050,930010,920010,960500,970050,930010,920009,960500,970050,930009,940010,960500,960500,960500)\ndata<-as.data.frame(cbind(a,b))\ncolnames(data)<-c(\"phone calls\",\"modules\")\ndim(data)\nprint(data[1:10,]) #sample of 10 rows\n\n# Note that in the real data set, data[,2] ranges from 810,000 to 999,999.\nI've been tasked with the following:\n# \"For each phone call that BEGINS with the module which is denoted by 81\n(i.e. of the form 81X,XXX), what is the expected number of modules in these\ncalls?\"\n#Then it's the same question for each module beginning with 82, 83, 84.....\nall the way until 99. \n#I've created code that I think works for this, but I can't actually run it\non the whole data set. I left it for 30 minutes and it only had about #5% of\nthe task completed (I clicked \"STOP\" then checked my output to see if I did\nit properly, and it seems correct).\n#I know the apply() family specializes in vector operations, but I can't\nfigure out how to complete the above question in any way other than #loops.\n\nL<-data\n\nA<-array(0,dim=c(19,2));rownames(A)<-seq(81,99,1)\nA<-data.frame(A)\n\n for(i in 1:(nrow(L)-1))\n {\n  if(L[(i+1),1]!=L[i,1])\n  {\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]<-\n    { \n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),1]+length(grep(as.character(L[i+1,1]),L[,1],value=FALSE)) \n#aggregate number of modules in the calls that begin with XX (not yet\naveraged). \n    }\n   \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]<-\n    {\n     \nA[paste(strsplit(as.character(L[i+1,2]),\"\")[[1]][1:2],sep=\"\",collapse=\"\"),2]+1\n    }\n  }\n   \n }\n\n#If I can get this code to be more memory efficient such that I can do it on\na 400,000 row data set, I can do, for example,\n\nA[17,1]/A[17,2]\n\n#and I'll arrive at the mean number of modules per call where the call\nstarts with a module that starts with 97.\n\nA[17,1] \n#is 10, which means that, out of every single call that started with a\nmodule of 97X,XXX,\n#they went through 10 modules in total. \n\nA[17,2] \n#is 6, which means that there was 6 calls in total that began with a 97X,XXX\nmodule.\n\n#Hence,\n\n\nA[17,1]/A[17,2]\n\n#is the average number of modules that were executed in all the calls that\nbegan with a 97X,XXX module.\n\n\n-----\n----\n\nIsaac\nResearch Assistant\nQuantitative Finance Faculty, UTS\n--\nView this message in context: http://r.789695.n4.nabble.com/How-to-make-this-for-loop-memory-efficient-tp4283594p4283594.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "##I have 2 columns of data. The first column is unique \"event IDs\" that\nrepresent a phone call made to a customer.\n###So, if you see 3 entries together in the first column like follows:\n\nmatrix(c(\"cal",
+      "thread_id": "thread-8f6fe05b5c41",
       "thread_depth": 0,
       "month": "2012-01"
     },
@@ -18579,6 +18579,25 @@
       "month": "2012-01"
     },
     {
+      "id": "msg-723fd2f9325b",
+      "message_id": "<1326449349804-4291835.post@n4.nabble.com>",
+      "from_name": "statquant2",
+      "from_email_hash": "5013a2b97e2067517346f8e11c5e8331287c9bdc839553e684fc9a648c67e7fb",
+      "date": "2012-01-13T10:09:09Z",
+      "subject": "[R] simulating stable VAR process",
+      "subject_clean": "simulating stable VAR process",
+      "in_reply_to": "<4F05D6BE.9090502@gmail.com>",
+      "references": [
+        "<1325682509502-4261177.post@n4.nabble.com>",
+        "<4F05D6BE.9090502@gmail.com>"
+      ],
+      "body_plain": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is stable.\n\nWe know a condition that assure that it is stable (see first message) but\nthis is not a condition on coefficients etc...\nWhat I want is \ngenerate say a 1000 random VAR(3) processes over say 500 time periods that\nwill be STABLE (meaning If I run stability() all will pass the test)\n\nWhen I try to do that it seems that none of the VAR I am generating pass\nthis test, so I assume that the class of stable VAR(p) is very small\ncompared to the whole VAR(p) process.\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/simulating-stable-VAR-process-tp4261177p4291835.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is ",
+      "thread_id": "thread-c136377e8886",
+      "thread_depth": 1,
+      "month": "2012-01"
+    },
+    {
       "id": "msg-17969dd986aa",
       "message_id": "<5fc5u8-er2.ln1@news.jonasstein.de>",
       "from_name": "Jonas Stein",
@@ -18597,25 +18616,6 @@
       "body_snippet": ">>>  d2y <- diff(dy)\n>>>  which(dy==0)  ## critical values\n>>>  sign(s2y)[which(dy==0)]  ## test for max/min/saddle\n>>>  which(d2y==0)   ## inflection points\n>> \n>> I would think that testing for d2y=",
       "thread_id": "thread-4a84d5e449b9",
       "thread_depth": 4,
-      "month": "2012-01"
-    },
-    {
-      "id": "msg-723fd2f9325b",
-      "message_id": "<1326449349804-4291835.post@n4.nabble.com>",
-      "from_name": "statquant2",
-      "from_email_hash": "5013a2b97e2067517346f8e11c5e8331287c9bdc839553e684fc9a648c67e7fb",
-      "date": "2012-01-13T10:09:09Z",
-      "subject": "[R] simulating stable VAR process",
-      "subject_clean": "simulating stable VAR process",
-      "in_reply_to": "<4F05D6BE.9090502@gmail.com>",
-      "references": [
-        "<1325682509502-4261177.post@n4.nabble.com>",
-        "<4F05D6BE.9090502@gmail.com>"
-      ],
-      "body_plain": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is stable.\n\nWe know a condition that assure that it is stable (see first message) but\nthis is not a condition on coefficients etc...\nWhat I want is \ngenerate say a 1000 random VAR(3) processes over say 500 time periods that\nwill be STABLE (meaning If I run stability() all will pass the test)\n\nWhen I try to do that it seems that none of the VAR I am generating pass\nthis test, so I assume that the class of stable VAR(p) is very small\ncompared to the whole VAR(p) process.\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/simulating-stable-VAR-process-tp4261177p4291835.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hello Paul \nThanks for the answer but my point is not how to simulate a VAR(p) process\nand check that it is stable.\nMy question is more how can I generate a VAR(p) such that I already know\nthat it is ",
-      "thread_id": "thread-c136377e8886",
-      "thread_depth": 1,
       "month": "2012-01"
     },
     {
@@ -31884,22 +31884,6 @@
       "month": "2012-01"
     },
     {
-      "id": "msg-131bdd6bf79b",
-      "message_id": "<1327079572737-4313861.post@n4.nabble.com>",
-      "from_name": "cameron",
-      "from_email_hash": "52d1484a8aa44ccc7502638c2c468bf80fdf4c1061c6802260f86a1e5b63bac6",
-      "date": "2012-01-20T17:12:52Z",
-      "subject": "[R] Date seq question",
-      "subject_clean": "Date seq question",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Can anyone please help me with this?\nI have a list of business dates.  What I want is to have last day of last\nmonth and paste them on next month.\n\nWhat i have                        What i want\n5725 2011-09-22\n5726 2011-09-23\n5727 2011-09-26\n5728 2011-09-27\n5729 2011-09-28\n5730 2011-09-29\n5731 2011-09-30\n5742 2011-10-17                 2011-09-30\n5743 2011-10-18                 2011-09-30\n5744 2011-10-19                 2011-09-30\n5745 2011-10-20                 2011-09-30\n5746 2011-10-21                 2011-09-30\n5747 2011-10-24                 2011-09-30\n5748 2011-10-25                 2011-09-30\n*5749 2011-10-26*                 2011-09-30\n5765 2011-11-17                 2011-10-26\n5766 2011-11-18                 2011-10-26\n5767 2011-11-21                 2011-10-26\n5768 2011-11-22                 2011-10-26\n5769 2011-11-23                 2011-10-26\n5770 2011-11-25                 2011-10-26\n5771 2011-11-28                 2011-10-26\n5772 2011-11-29                 2011-10-26\n*5773 2011-11-30*                 2011-10-26\n5780 2011-12-09                 2011-11-30\n5781 2011-12-12                 2011-11-30\n5782 2011-12-13                 2011-11-30\n5783 2011-12-14                 2011-11-30\n5784 2011-12-15                 2011-11-30\n5785 2011-12-16                 2011-11-30\n5786 2011-12-19                 2011-11-30\n5787 2011-12-20                 2011-11-30\n5788 2011-12-21                 2011-11-30\n5789 2011-12-22                 2011-11-30\n\ndate <-\nc(\"9/22/2011\",\"9/23/2011\",\"9/26/2011\",\"9/27/2011\",\"9/28/2011\",\"9/29/2011\",\"9/30/2011\",\"10/17/2011\",\t\n\"10/18/2011\",\"10/19/2011\",\"10/20/2011\",\"10/21/2011\",\"10/24/2011\",\"10/25/2011\",\"10/26/2011\",\"11/17/2011\",\"11/18/2011\",\"11/21/2011\",\"11/22/2011\",\"11/23/2011\",\"11/25/2011\",\"11/28/2011\",\"11/29/2011\",\"11/30/2011\",\n\"12/9/2011\",\"12/12/2011\",\"12/13/2011\",\"12/14/2011\",\"12/15/2011\",\"12/16/2011\",\"12/19/2011\",\"12/20/2011\",\"12/21/2011\",\"12/22/2011\")\n\t\n\n\n\n\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Date-seq-question-tp4313861p4313861.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Can anyone please help me with this?\nI have a list of business dates.  What I want is to have last day of last\nmonth and paste them on next month.\n\nWhat i have                        What i want\n5725 ",
-      "thread_id": "thread-131bdd6bf79b",
-      "thread_depth": 0,
-      "month": "2012-01"
-    },
-    {
       "id": "msg-6265514415df",
       "message_id": "<CAHA9McMKGbv+9W-aD-S1JhNCaDaT0NuzROLx2RSJ4Ja2vYnyww@mail.gmail.com>",
       "from_name": "Steve Lianoglou",
@@ -31915,6 +31899,22 @@
       "body_snippet": "Hi Martin,\n\nOn Fri, Jan 20, 2012 at 12:04 PM, Martin Batholdy\n<batholdy at googlemail.com> wrote:\n> Hi,\n>\n>\n> I am currently trying to z-transform (that is subtracting the mean and divide by the stand",
       "thread_id": "thread-c02c0903cac5",
       "thread_depth": 1,
+      "month": "2012-01"
+    },
+    {
+      "id": "msg-131bdd6bf79b",
+      "message_id": "<1327079572737-4313861.post@n4.nabble.com>",
+      "from_name": "cameron",
+      "from_email_hash": "52d1484a8aa44ccc7502638c2c468bf80fdf4c1061c6802260f86a1e5b63bac6",
+      "date": "2012-01-20T17:12:52Z",
+      "subject": "[R] Date seq question",
+      "subject_clean": "Date seq question",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Can anyone please help me with this?\nI have a list of business dates.  What I want is to have last day of last\nmonth and paste them on next month.\n\nWhat i have                        What i want\n5725 2011-09-22\n5726 2011-09-23\n5727 2011-09-26\n5728 2011-09-27\n5729 2011-09-28\n5730 2011-09-29\n5731 2011-09-30\n5742 2011-10-17                 2011-09-30\n5743 2011-10-18                 2011-09-30\n5744 2011-10-19                 2011-09-30\n5745 2011-10-20                 2011-09-30\n5746 2011-10-21                 2011-09-30\n5747 2011-10-24                 2011-09-30\n5748 2011-10-25                 2011-09-30\n*5749 2011-10-26*                 2011-09-30\n5765 2011-11-17                 2011-10-26\n5766 2011-11-18                 2011-10-26\n5767 2011-11-21                 2011-10-26\n5768 2011-11-22                 2011-10-26\n5769 2011-11-23                 2011-10-26\n5770 2011-11-25                 2011-10-26\n5771 2011-11-28                 2011-10-26\n5772 2011-11-29                 2011-10-26\n*5773 2011-11-30*                 2011-10-26\n5780 2011-12-09                 2011-11-30\n5781 2011-12-12                 2011-11-30\n5782 2011-12-13                 2011-11-30\n5783 2011-12-14                 2011-11-30\n5784 2011-12-15                 2011-11-30\n5785 2011-12-16                 2011-11-30\n5786 2011-12-19                 2011-11-30\n5787 2011-12-20                 2011-11-30\n5788 2011-12-21                 2011-11-30\n5789 2011-12-22                 2011-11-30\n\ndate <-\nc(\"9/22/2011\",\"9/23/2011\",\"9/26/2011\",\"9/27/2011\",\"9/28/2011\",\"9/29/2011\",\"9/30/2011\",\"10/17/2011\",\t\n\"10/18/2011\",\"10/19/2011\",\"10/20/2011\",\"10/21/2011\",\"10/24/2011\",\"10/25/2011\",\"10/26/2011\",\"11/17/2011\",\"11/18/2011\",\"11/21/2011\",\"11/22/2011\",\"11/23/2011\",\"11/25/2011\",\"11/28/2011\",\"11/29/2011\",\"11/30/2011\",\n\"12/9/2011\",\"12/12/2011\",\"12/13/2011\",\"12/14/2011\",\"12/15/2011\",\"12/16/2011\",\"12/19/2011\",\"12/20/2011\",\"12/21/2011\",\"12/22/2011\")\n\t\n\n\n\n\n\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Date-seq-question-tp4313861p4313861.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Can anyone please help me with this?\nI have a list of business dates.  What I want is to have last day of last\nmonth and paste them on next month.\n\nWhat i have                        What i want\n5725 ",
+      "thread_id": "thread-131bdd6bf79b",
+      "thread_depth": 0,
       "month": "2012-01"
     },
     {
@@ -46121,6 +46121,22 @@
       "month": "2012-01"
     },
     {
+      "id": "msg-1a5602029ad0",
+      "message_id": "<002a01ccdf2c$b9f3a7d0$2ddaf770$@com>",
+      "from_name": "Petr Kurtin",
+      "from_email_hash": "e0d3f3d0900007a550374f842176960394b412d8bbcba287e0f3e61516ee9e56",
+      "date": "2012-01-30T08:54:07Z",
+      "subject": "[R] handling a lot of data",
+      "subject_clean": "handling a lot of data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have got a lot of SPSS data for years 1993-2010. I load all data into\nlists so I can easily index the values over the years. Unfortunately loaded\ndata occupy quite a lot of memory (10Gb) - so my question is, what's the\nbest approach to work with big data files? Can R get a value from the file\ndata without full loading into memory? How can a slower computer with not\nenough memory work with such data?\n\nI use the following commands:\n\ndata1993 = vector(\"list\", 4);\ndata1993[[1]] = read.spss(...)  # first trimester\ndata1993[[2]] = read.spss(...)  # second trimester\n...\ndata_all = vector(\"list\", 17);\ndata_all[[1993]] = data1993;\n...\n\nand indexing, e.g.: data_all[[1993]][[1]]$DISTRICT, etc.\n\nThanks,\nPetr Kurtin",
+      "body_snippet": "Hi,\n\nI have got a lot of SPSS data for years 1993-2010. I load all data into\nlists so I can easily index the values over the years. Unfortunately loaded\ndata occupy quite a lot of memory (10Gb) - so m",
+      "thread_id": "thread-1a5602029ad0",
+      "thread_depth": 0,
+      "month": "2012-01"
+    },
+    {
       "id": "msg-d4951d83ccb1",
       "message_id": "<1327913647.1799.24.camel@milan>",
       "from_name": "Milan Bouchet-Valat",
@@ -46136,22 +46152,6 @@
       "body_snippet": "Le lundi 30 janvier 2012 ? 08:30 +0100, David Studer a ?crit :\n> Hello,\n> I have the following question:\n> \n> when creating a data.frame\n>  a1<-c(1,2,3)\n>  a2<-c(1,2,3)\n>  c<-data.frame(a1,a2)\n> I can",
       "thread_id": "thread-f7aa3ceaa1c0",
       "thread_depth": 1,
-      "month": "2012-01"
-    },
-    {
-      "id": "msg-1a5602029ad0",
-      "message_id": "<002a01ccdf2c$b9f3a7d0$2ddaf770$@com>",
-      "from_name": "Petr Kurtin",
-      "from_email_hash": "e0d3f3d0900007a550374f842176960394b412d8bbcba287e0f3e61516ee9e56",
-      "date": "2012-01-30T08:54:07Z",
-      "subject": "[R] handling a lot of data",
-      "subject_clean": "handling a lot of data",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI have got a lot of SPSS data for years 1993-2010. I load all data into\nlists so I can easily index the values over the years. Unfortunately loaded\ndata occupy quite a lot of memory (10Gb) - so my question is, what's the\nbest approach to work with big data files? Can R get a value from the file\ndata without full loading into memory? How can a slower computer with not\nenough memory work with such data?\n\nI use the following commands:\n\ndata1993 = vector(\"list\", 4);\ndata1993[[1]] = read.spss(...)  # first trimester\ndata1993[[2]] = read.spss(...)  # second trimester\n...\ndata_all = vector(\"list\", 17);\ndata_all[[1993]] = data1993;\n...\n\nand indexing, e.g.: data_all[[1993]][[1]]$DISTRICT, etc.\n\nThanks,\nPetr Kurtin",
-      "body_snippet": "Hi,\n\nI have got a lot of SPSS data for years 1993-2010. I load all data into\nlists so I can easily index the values over the years. Unfortunately loaded\ndata occupy quite a lot of memory (10Gb) - so m",
-      "thread_id": "thread-1a5602029ad0",
-      "thread_depth": 0,
       "month": "2012-01"
     },
     {
