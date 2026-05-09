@@ -341,3 +341,564 @@ Hope this helps,
 Rui Barradas
 
 
+From r@oknz @end|ng |rom gm@||@com  Fri May  8 04:30:36 2026
+From: r@oknz @end|ng |rom gm@||@com (Richard O'Keefe)
+Date: Fri, 8 May 2026 14:30:36 +1200
+Subject: [R] how to put a single backslash into a string,
+ to make file paths usable on windows
+In-Reply-To: <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+References: <fbf21e7d-d92f-80b8-a294-d028542a3c44@agencystatistical.com>
+ <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+Message-ID: <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+
+This isn't an R thing.  The Windows system calls that accept file names
+accept both kinds of slash indifferently.  I've seen it said that this goes
+back to MS-DOS 2, but certainly it's all NT versions.  If you need to link
+C and/or Fortran with R, you can safely use / in file name strings in those
+languages too.
+
+On Fri, 8 May 2026 at 01:18, Chris Ryan <cwr at agencystatistical.com> wrote:
+
+> It had been about a year since I had worked in Windows, and apparently I
+> had gotten rusty. Forward slashes in path names, as in
+>
+> read.csv("e:/path/to/datafileOnWindows.csv")
+>
+> work just fine in R on Windows.
+>
+> Sorry for the bother.
+>
+> --Chris Ryan
+>
+>
+>
+> Chris Ryan wrote:
+> > I'm trying to generalize one of my scripts so that it will run on my
+> > Linux Mint computer at home and my client's Windows 11 computer at work.
+> >  I'm encountering trouble when setting file paths, conditional on which
+> > computer the script is running on. It's the Windows backslash issue
+> >
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org  Fri May  8 04:53:49 2026
+From: @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org (Spencer Graves)
+Date: Thu, 7 May 2026 21:53:49 -0500
+Subject: [R] how to put a single backslash into a string,
+ to make file paths usable on windows
+In-Reply-To: <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+References: <fbf21e7d-d92f-80b8-a294-d028542a3c44@agencystatistical.com>
+ <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+ <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+Message-ID: <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+
+See also:
+
+
+file.path(..., fsep = .Platform$file.sep)
+
+
+https://web.mit.edu/~r/current/lib/R/library/base/html/file.path.html
+
+
+I'm not sure, but help(".Platform") seems to support what I get from 
+Richard O'Keefe, that "you can safely use / in file name" perhaps no 
+matter which platform. At one point that was not true, but it may be the 
+case now. Sorry: I cannot easily check. Spencer Graves
+
+
+On 5/7/26 21:30, Richard O'Keefe wrote:
+> This isn't an R thing.  The Windows system calls that accept file names
+> accept both kinds of slash indifferently.  I've seen it said that this goes
+> back to MS-DOS 2, but certainly it's all NT versions.  If you need to link
+> C and/or Fortran with R, you can safely use / in file name strings in those
+> languages too.
+> 
+> On Fri, 8 May 2026 at 01:18, Chris Ryan <cwr at agencystatistical.com> wrote:
+> 
+>> It had been about a year since I had worked in Windows, and apparently I
+>> had gotten rusty. Forward slashes in path names, as in
+>>
+>> read.csv("e:/path/to/datafileOnWindows.csv")
+>>
+>> work just fine in R on Windows.
+>>
+>> Sorry for the bother.
+>>
+>> --Chris Ryan
+>>
+>>
+>>
+>> Chris Ryan wrote:
+>>> I'm trying to generalize one of my scripts so that it will run on my
+>>> Linux Mint computer at home and my client's Windows 11 computer at work.
+>>>   I'm encountering trouble when setting file paths, conditional on which
+>>> computer the script is running on. It's the Windows backslash issue
+>>>
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>>
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Fri May  8 05:57:57 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Thu, 07 May 2026 20:57:57 -0700
+Subject: [R] how to put a single backslash into a string,
+ to make file paths usable on windows
+In-Reply-To: <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+References: <fbf21e7d-d92f-80b8-a294-d028542a3c44@agencystatistical.com>
+ <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+ <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+ <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+Message-ID: <A925D2A4-6BFB-4000-AB26-40FC2C557DFA@dcn.davis.ca.us>
+
+Most "normal" interactions with filenames these days can use forward slashes. But a sampling of edge cases still won't work that way:
+
+- UNC paths like \\server\share\path can be finicky
+- Long file paths (>260 characters) like \\?\path don't go both ways
+- Device names like \\.\COM1 don't
+- Loading DLLs often won't
+- Calling the system function often won't support forward slashes... system 2 usually will (depending on what executable you are actually calling)
+
+I think the UNC, system and DLL cases are probably the ones most likely to bite an intermediate R user.
+
+On May 7, 2026 7:53:49 PM PDT, Spencer Graves <spencer.graves at effectivedefense.org> wrote:
+>See also:
+>
+>
+>file.path(..., fsep = .Platform$file.sep)
+>
+>
+>https://web.mit.edu/~r/current/lib/R/library/base/html/file.path.html
+>
+>
+>I'm not sure, but help(".Platform") seems to support what I get from Richard O'Keefe, that "you can safely use / in file name" perhaps no matter which platform. At one point that was not true, but it may be the case now. Sorry: I cannot easily check. Spencer Graves
+>
+>
+>On 5/7/26 21:30, Richard O'Keefe wrote:
+>> This isn't an R thing.  The Windows system calls that accept file names
+>> accept both kinds of slash indifferently.  I've seen it said that this goes
+>> back to MS-DOS 2, but certainly it's all NT versions.  If you need to link
+>> C and/or Fortran with R, you can safely use / in file name strings in those
+>> languages too.
+>> 
+>> On Fri, 8 May 2026 at 01:18, Chris Ryan <cwr at agencystatistical.com> wrote:
+>> 
+>>> It had been about a year since I had worked in Windows, and apparently I
+>>> had gotten rusty. Forward slashes in path names, as in
+>>> 
+>>> read.csv("e:/path/to/datafileOnWindows.csv")
+>>> 
+>>> work just fine in R on Windows.
+>>> 
+>>> Sorry for the bother.
+>>> 
+>>> --Chris Ryan
+>>> 
+>>> 
+>>> 
+>>> Chris Ryan wrote:
+>>>> I'm trying to generalize one of my scripts so that it will run on my
+>>>> Linux Mint computer at home and my client's Windows 11 computer at work.
+>>>>   I'm encountering trouble when setting file paths, conditional on which
+>>>> computer the script is running on. It's the Windows backslash issue
+>>>> 
+>>> 
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide
+>>> https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>>> 
+>> 
+>> 	[[alternative HTML version deleted]]
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Fri May  8 08:23:01 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Fri, 8 May 2026 07:23:01 +0100
+Subject: [R] how to put a single backslash into a string,
+ to make file paths usable on windows
+In-Reply-To: <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+References: <fbf21e7d-d92f-80b8-a294-d028542a3c44@agencystatistical.com>
+ <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+ <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+ <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+Message-ID: <67833f92-8bc6-4d6f-861d-edfa53d012cb@sapo.pt>
+
+Hello,
+
+Inline.
+
+?s 03:53 de 08/05/2026, Spencer Graves escreveu:
+> See also:
+> 
+> 
+> file.path(..., fsep = .Platform$file.sep)
+
+On Windows, .Platform$file.sep outputs "/".
+
+> 
+> 
+> https://web.mit.edu/~r/current/lib/R/library/base/html/file.path.html
+
+
+# on Windows 11 this outputs "/"
+.Platform$file.sep
+# [1] "/"
+
+file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep)
+# [1] "C:/PROGRA~1/R/R-4.6.0/path/to/file"
+
+# warning, file cannot be found (it doesn't exist)
+# but now fsep is "\\"
+file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep) |> 
+normalizePath()
+# [1] "C:\\PROGRA~1\\R\\R-4.6.0\\path\\to\\file"
+
+# no warning, fsep is "\\", ?shortPathName is meant for DOS/Windows 
+8-dot-3 file names
+file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep) |> 
+shortPathName()
+# [1] "C:\\PROGRA~1\\R\\R-4.6.0\\path\\to\\file"
+
+sessionInfo()
+# R version 4.6.0 (2026-04-24 ucrt)
+# Platform: x86_64-w64-mingw32/x64
+# Running under: Windows 11 x64 (build 22631)
+#
+# Matrix products: default
+#   LAPACK version 3.12.1
+#
+# locale:
+# [1] LC_COLLATE=Portuguese_Portugal.utf8 
+LC_CTYPE=Portuguese_Portugal.utf8
+# [3] LC_MONETARY=Portuguese_Portugal.utf8 LC_NUMERIC=C 
+
+# [5] LC_TIME=Portuguese_Portugal.utf8
+#
+# time zone: Europe/Lisbon
+# tzcode source: internal
+#
+# attached base packages:
+# [1] stats     graphics  grDevices utils     datasets  methods   base
+#
+# loaded via a namespace (and not attached):
+# [1] compiler_4.6.0
+#
+
+
+> 
+> 
+> I'm not sure, but help(".Platform") seems to support what I get from 
+> Richard O'Keefe, that "you can safely use / in file name" perhaps no 
+> matter which platform. At one point that was not true, but it may be the 
+> case now. 
+
+Yes, that's true for a (long) while, now.
+
+[I am not sure about DOS 2, though. I once programmed a GW-BASIC uniroot 
+type of equations solver on DOS 2.(*) and called it EQ.POLY.BAS. The 
+result was to see DIR list it as EQ<TAB>POL but GW-BASIC only accepted 
+its real name. (*) I don't remember the sub-version number.]
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+Sorry: I cannot easily check. Spencer Graves
+> 
+> 
+> On 5/7/26 21:30, Richard O'Keefe wrote:
+>> This isn't an R thing.? The Windows system calls that accept file names
+>> accept both kinds of slash indifferently.? I've seen it said that this 
+>> goes
+>> back to MS-DOS 2, but certainly it's all NT versions.? If you need to 
+>> link
+>> C and/or Fortran with R, you can safely use / in file name strings in 
+>> those
+>> languages too.
+>>
+>> On Fri, 8 May 2026 at 01:18, Chris Ryan <cwr at agencystatistical.com> 
+>> wrote:
+>>
+>>> It had been about a year since I had worked in Windows, and apparently I
+>>> had gotten rusty. Forward slashes in path names, as in
+>>>
+>>> read.csv("e:/path/to/datafileOnWindows.csv")
+>>>
+>>> work just fine in R on Windows.
+>>>
+>>> Sorry for the bother.
+>>>
+>>> --Chris Ryan
+>>>
+>>>
+>>>
+>>> Chris Ryan wrote:
+>>>> I'm trying to generalize one of my scripts so that it will run on my
+>>>> Linux Mint computer at home and my client's Windows 11 computer at 
+>>>> work.
+>>>> ? I'm encountering trouble when setting file paths, conditional on 
+>>>> which
+>>>> computer the script is running on. It's the Windows backslash issue
+>>>>
+>>>
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide
+>>> https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>>>
+>>
+>> ????[[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting- 
+>> guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting- 
+> guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From po|c1410 @end|ng |rom gm@||@com  Fri May  8 09:21:41 2026
+From: po|c1410 @end|ng |rom gm@||@com (CALUM POLWART)
+Date: Fri, 8 May 2026 08:21:41 +0100
+Subject: [R] how to put a single backslash into a string,
+ to make file paths usable on windows
+In-Reply-To: <67833f92-8bc6-4d6f-861d-edfa53d012cb@sapo.pt>
+References: <fbf21e7d-d92f-80b8-a294-d028542a3c44@agencystatistical.com>
+ <599f0e1c-6a9b-f231-eddb-c4ffb08f81a8@agencystatistical.com>
+ <CABcYAdK0BJXKXcYVniFyhvw_Ye4gQjV=xHXXKovm0J_08zQxsw@mail.gmail.com>
+ <f7c6248e-7218-4161-97de-64d2a0c67456@effectivedefense.org>
+ <67833f92-8bc6-4d6f-861d-edfa53d012cb@sapo.pt>
+Message-ID: <CA+etgPnw=7H47LTNT69e3nb+uOn8Ti_q2Ees+FHUp8X6NOk3kQ@mail.gmail.com>
+
+file.path is the normal solution. People seem to show it with the sep set,
+but I think the whole point is it knows what separator to use so:
+
+file.path("first folder" , "second_folder" , "file.name")
+
+file.path(getwd(), "subfolder", "file.name")
+
+Should both work across any platform. But it may forward slash them on
+windows, since that usually works. UNC folders are a PITA on R in general
+in my experience.
+
+Since R 4.0 you can use a raw string using r"( the string )". E.g.
+
+r"(C:\windows\system32)"
+
+And this returns - "C:\\windows\\system32"
+
+Which seems to be the question the OP asked, even if it might not have been
+the question they wanted to ask.
+
+On Fri, 8 May 2026, 07:23 Rui Barradas via R-help, <r-help at r-project.org>
+wrote:
+
+> Hello,
+>
+> Inline.
+>
+> ?s 03:53 de 08/05/2026, Spencer Graves escreveu:
+> > See also:
+> >
+> >
+> > file.path(..., fsep = .Platform$file.sep)
+>
+> On Windows, .Platform$file.sep outputs "/".
+>
+> >
+> >
+> > https://web.mit.edu/~r/current/lib/R/library/base/html/file.path.html
+>
+>
+> # on Windows 11 this outputs "/"
+> .Platform$file.sep
+> # [1] "/"
+>
+> file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep)
+> # [1] "C:/PROGRA~1/R/R-4.6.0/path/to/file"
+>
+> # warning, file cannot be found (it doesn't exist)
+> # but now fsep is "\\"
+> file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep) |>
+> normalizePath()
+> # [1] "C:\\PROGRA~1\\R\\R-4.6.0\\path\\to\\file"
+>
+> # no warning, fsep is "\\", ?shortPathName is meant for DOS/Windows
+> 8-dot-3 file names
+> file.path(R.home(), "path", "to", "file", fsep = .Platform$file.sep) |>
+> shortPathName()
+> # [1] "C:\\PROGRA~1\\R\\R-4.6.0\\path\\to\\file"
+>
+> sessionInfo()
+> # R version 4.6.0 (2026-04-24 ucrt)
+> # Platform: x86_64-w64-mingw32/x64
+> # Running under: Windows 11 x64 (build 22631)
+> #
+> # Matrix products: default
+> #   LAPACK version 3.12.1
+> #
+> # locale:
+> # [1] LC_COLLATE=Portuguese_Portugal.utf8
+> LC_CTYPE=Portuguese_Portugal.utf8
+> # [3] LC_MONETARY=Portuguese_Portugal.utf8 LC_NUMERIC=C
+>
+> # [5] LC_TIME=Portuguese_Portugal.utf8
+> #
+> # time zone: Europe/Lisbon
+> # tzcode source: internal
+> #
+> # attached base packages:
+> # [1] stats     graphics  grDevices utils     datasets  methods   base
+> #
+> # loaded via a namespace (and not attached):
+> # [1] compiler_4.6.0
+> #
+>
+>
+> >
+> >
+> > I'm not sure, but help(".Platform") seems to support what I get from
+> > Richard O'Keefe, that "you can safely use / in file name" perhaps no
+> > matter which platform. At one point that was not true, but it may be the
+> > case now.
+>
+> Yes, that's true for a (long) while, now.
+>
+> [I am not sure about DOS 2, though. I once programmed a GW-BASIC uniroot
+> type of equations solver on DOS 2.(*) and called it EQ.POLY.BAS. The
+> result was to see DIR list it as EQ<TAB>POL but GW-BASIC only accepted
+> its real name. (*) I don't remember the sub-version number.]
+>
+>
+> Hope this helps,
+>
+> Rui Barradas
+>
+>
+> Sorry: I cannot easily check. Spencer Graves
+> >
+> >
+> > On 5/7/26 21:30, Richard O'Keefe wrote:
+> >> This isn't an R thing.  The Windows system calls that accept file names
+> >> accept both kinds of slash indifferently.  I've seen it said that this
+> >> goes
+> >> back to MS-DOS 2, but certainly it's all NT versions.  If you need to
+> >> link
+> >> C and/or Fortran with R, you can safely use / in file name strings in
+> >> those
+> >> languages too.
+> >>
+> >> On Fri, 8 May 2026 at 01:18, Chris Ryan <cwr at agencystatistical.com>
+> >> wrote:
+> >>
+> >>> It had been about a year since I had worked in Windows, and apparently
+> I
+> >>> had gotten rusty. Forward slashes in path names, as in
+> >>>
+> >>> read.csv("e:/path/to/datafileOnWindows.csv")
+> >>>
+> >>> work just fine in R on Windows.
+> >>>
+> >>> Sorry for the bother.
+> >>>
+> >>> --Chris Ryan
+> >>>
+> >>>
+> >>>
+> >>> Chris Ryan wrote:
+> >>>> I'm trying to generalize one of my scripts so that it will run on my
+> >>>> Linux Mint computer at home and my client's Windows 11 computer at
+> >>>> work.
+> >>>>   I'm encountering trouble when setting file paths, conditional on
+> >>>> which
+> >>>> computer the script is running on. It's the Windows backslash issue
+> >>>>
+> >>>
+> >>> ______________________________________________
+> >>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> >>> https://stat.ethz.ch/mailman/listinfo/r-help
+> >>> PLEASE do read the posting guide
+> >>> https://www.R-project.org/posting-guide.html
+> >>> and provide commented, minimal, self-contained, reproducible code.
+> >>>
+> >>
+> >>     [[alternative HTML version deleted]]
+> >>
+> >> ______________________________________________
+> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> >> https://stat.ethz.ch/mailman/listinfo/r-help
+> >> PLEASE do read the posting guide https://www.R-project.org/posting-
+> >> guide.html
+> >> and provide commented, minimal, self-contained, reproducible code.
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-
+> > guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
