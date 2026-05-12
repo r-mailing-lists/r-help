@@ -902,3 +902,176 @@ wrote:
 	[[alternative HTML version deleted]]
 
 
+From bbo|ker @end|ng |rom gm@||@com  Mon May 11 23:59:30 2026
+From: bbo|ker @end|ng |rom gm@||@com (Ben Bolker)
+Date: Mon, 11 May 2026 17:59:30 -0400
+Subject: [R] advice on stripping environments when serializing
+Message-ID: <CABghstTqxUZaesg62R+d_e4B-XZLjhG=R9onLv61OjuTGNwhzQ@mail.gmail.com>
+
+  Hi folks,
+
+  I have an R object (a `thpr` likelihood-profile from the lme4
+package, in case that's useful) which contains formulas as attributes,
+which in turn have associated environments.  When I store the object,
+the contents of the environments get serialized as well, which
+inflates the size of the stored files enormously.
+
+   I'm not worried that stripping out the environments will break
+anything when the objects are restored/deserialized from the files.
+
+  However, attempting to strip environments from the formulas is
+having surprising and counterintuitive (to me!) effects, i.e.
+stripping the environment from one formula is messing up the structure
+of the object.
+
+  I might try adapting something from the 'butcher' package
+<https://github.com/tidymodels/butcher>, which includes functionality
+like
+
+butcher:::axe_env.terms
+
+function (x, verbose = FALSE, ...)
+{
+    old <- x
+    attr(x, ".Environment") <- rlang::base_env()
+    add_butcher_attributes(x, old, verbose = verbose)
+}
+
+
+ but if anyone has useful general ideas in the meantime I would
+appreciate them ...
+
+  cheers
+   Ben Bolker
+---
+
+
+My current [BROKEN] code looks something like this:
+
+    drop_form_env <- function(x, debug = TRUE) {
+        dir <- c("forward", "backward")
+        for (d in dir) {
+            for (i in seq(length(attr(x, d)))) {
+                if (debug) {
+                    print(attr(attr(x,d)[[i]], "formula"))
+                    cat(d, i, "\n")
+                }
+                f <- attr(attr(x, d)[[i]], "formula")
+                environment(f) <- emptyenv()
+                attr(attr(x, d)[[i]], "formula") <- f
+            }
+        }
+        x
+    }
+
+and the structure of a typical object is:
+
+str(x)
+Classes ?thpr? and 'data.frame':    876 obs. of  10 variables:
+ $ .zeta                  : num  -5 -4.44 -3.87 -3.3 -2.71 ...
+ $ sd_(Intercept)|district: num  0.154 0.186 0.218 0.252 0.287 ...
+ $ (Intercept)            : num  0.03069 0.02521 0.01932 0.01309 0.00661 ...
+ $ age                    : num  0.0771 0.0752 0.0733 0.0714 0.0697 ...
+ $ I(age^2)               : num  -1.41 -1.42 -1.42 -1.43 -1.44 ...
+ $ urban1                 : num  -0.373 -0.37 -0.367 -0.363 -0.36 ...
+ $ livch1                 : num  -0.623 -0.627 -0.632 -0.636 -0.641 ...
+ $ livch2                 : num  0.163 0.161 0.159 0.157 0.156 ...
+ $ livch3                 : num  0.248 0.249 0.25 0.251 0.252 ...
+ $ .par                   : Factor w/ 8 levels "(Intercept)",..: 7 7 7
+7 7 7 7 7 7 7 ...
+ - attr(*, "forward")=List of 8
+  ..$ sd_(Intercept)|district:List of 2
+  .. ..$ knots       : num [1:20] 0.154 0.186 0.218 0.252 0.287 ...
+  .. ..$ coefficients: num [1:20, 1:4] -5 -4.44 -3.87 -3.3 -2.71 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~
+`sd_(Intercept)|district`
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdf5180440>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+  ..$ (Intercept)            : NULL
+  ..$ age                    : NULL
+  ..$ I(age^2)               :List of 2
+  .. ..$ knots       : num [1:20] -2.68 -2.54 -2.41 -2.27 -2.13 ...
+  .. ..$ coefficients: num [1:20, 1:4] -4.93 -4.37 -3.82 -3.26 -2.7 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~ `I(age^2)`
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdefe46b20>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+  ..$ urban1                 :List of 2
+  .. ..$ knots       : num [1:20] -0.649 -0.615 -0.58 -0.546 -0.512 ...
+  .. ..$ coefficients: num [1:20, 1:4] -4.93 -4.38 -3.82 -3.26 -2.7 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~ urban1
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdeb1f72f0>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+  ..$ livch1                 :List of 2
+  .. ..$ knots       : num [1:20] -1.238 -1.171 -1.104 -1.039 -0.973 ...
+  .. ..$ coefficients: num [1:20, 1:4] -4.92 -4.36 -3.8 -3.25 -2.69 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~ livch1
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbe0d5b57b8>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+  ..$ livch2                 :List of 2
+  .. ..$ knots       : num [1:20] -0.2938 -0.2379 -0.1821 -0.1265 -0.0709 ...
+  .. ..$ coefficients: num [1:20, 1:4] -4.5 -3.95 -3.39 -2.83 -2.27 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~ livch2
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdfabc0800>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+  ..$ livch3                 :List of 2
+  .. ..$ knots       : num [1:19] -0.23013 -0.17071 -0.11142 -0.05223
+0.00687 ...
+  .. ..$ coefficients: num [1:19, 1:4] -4.59 -4.03 -3.47 -2.91 -2.36 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language .zeta ~ livch3
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbe0fdc9960>
+  .. ..- attr(*, "class")= chr [1:3] "npolySpline" "polySpline" "spline"
+ - attr(*, "backward")=List of 8
+  ..$ sd_(Intercept)|district:List of 2
+  .. ..$ knots       : num [1:20] -5 -4.44 -3.87 -3.3 -2.71 ...
+  .. ..$ coefficients: num [1:20, 1:4] 0.154 0.186 0.218 0.252 0.287 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language
+`sd_(Intercept)|district` ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbded1c2c70>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+  ..$ (Intercept)            :List of 2
+  .. ..$ message: chr "system is computationally singular: reciprocal
+condition number = 1.10309e-16"
+  .. ..$ call   : language solve.default(des, y)
+  .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
+  ..$ age                    :List of 2
+  .. ..$ message: chr "system is computationally singular: reciprocal
+condition number = 1.41653e-16"
+  .. ..$ call   : language solve.default(des, y)
+  .. ..- attr(*, "class")= chr [1:3] "simpleError" "error" "condition"
+  ..$ I(age^2)               :List of 2
+  .. ..$ knots       : num [1:20] -4.93 -4.37 -3.82 -3.26 -2.7 ...
+  .. ..$ coefficients: num [1:20, 1:4] -2.68 -2.54 -2.41 -2.27 -2.13 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language `I(age^2)` ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbded1b6e88>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+  ..$ urban1                 :List of 2
+  .. ..$ knots       : num [1:20] -4.93 -4.38 -3.82 -3.26 -2.7 ...
+  .. ..$ coefficients: num [1:20, 1:4] -0.649 -0.615 -0.58 -0.546 -0.512 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language urban1 ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdfb2db1d8>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+  ..$ livch1                 :List of 2
+  .. ..$ knots       : num [1:20] -4.92 -4.36 -3.8 -3.25 -2.69 ...
+  .. ..$ coefficients: num [1:20, 1:4] -1.238 -1.171 -1.104 -1.039 -0.973 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language livch1 ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdfb2c5fe8>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+  ..$ livch2                 :List of 2
+  .. ..$ knots       : num [1:20] -4.5 -3.95 -3.39 -2.83 -2.27 ...
+  .. ..$ coefficients: num [1:20, 1:4] -0.2938 -0.2379 -0.1821 -0.1265
+-0.0709 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language livch2 ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdf91af548>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+  ..$ livch3                 :List of 2
+  .. ..$ knots       : num [1:19] -4.59 -4.03 -3.47 -2.91 -2.36 ...
+  .. ..$ coefficients: num [1:19, 1:4] -0.23013 -0.17071 -0.11142
+-0.05223 0.00687 ...
+  .. ..- attr(*, "formula")=Class 'formula'  language livch3 ~ .zeta
+  .. .. .. ..- attr(*, ".Environment")=<environment: 0x5fbdf91ad378>
+  .. ..- attr(*, "class")= chr [1:2] "polySpline" "spline"
+ - attr(*, "lower")= num [1:8] 0 -Inf -Inf -Inf -Inf ...
+ - attr(*, "upper")= num [1:8] Inf Inf Inf Inf Inf ...
+>
+
+
