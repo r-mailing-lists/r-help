@@ -1075,3 +1075,176 @@ condition number = 1.41653e-16"
 >
 
 
+From roy@mende|@@ohn @end|ng |rom no@@@gov  Tue May 12 20:35:50 2026
+From: roy@mende|@@ohn @end|ng |rom no@@@gov (Roy Mendelssohn - NOAA Federal)
+Date: Tue, 12 May 2026 11:35:50 -0700
+Subject: [R] =?utf-8?b?RVJEREFQ4oSiIGFuZCBS?=
+Message-ID: <65080F21-6733-4653-A964-FE2897EAB9DE@noaa.gov>
+
+ERDDAP? is a web data server/middleware that is used throughout the world (there are well over 100 ERDDAP? servers) that provides easy access to petabytes of data that can be subsetted and converted into many different formats and downloaded,  including graphics.  At present there are three main CRAN packages that simplify the access and use of ERDDAP? within R.   These are ?rerddap?,  ?rerddapXtracto? and ?plotdap?.  ?rerddap? is the main package,  ?rerddapXtracto?  adds the ability to extract along a track or within a polygon, and ?plotdap? simplifies the plotting of the results of the extracts.  These packages work with any ERDDAP?  server.  All of these packages  have been updated in the last number of months and if you use these packages it is worth updating them.
+
+Besides just general information,  there are two things worth noting.  First,  ?plotdap? now can make contour plots using the ?isoband? package  (and thanks to the developers of that package),  as well as simplified procedures to make interactive plots using ?plotly?  (again thanks to the developers of that package).  
+
+Also there is a fourth R package under development,  ?rerddapUtils?, which is a collection of utility functions that work with ?rerddap?,  These include a function to make an extract only in a season defined by the user,  a function to split a very large extract into parts,  so that the request is not too large,  a function to estimate the size of an ?rerddap? request as well as a function that estimates the size of each split request, and two functions to make it easier to work with ?rerddap? requests for projected datasets.
+
+If this package interests you,  or if you are interested in testing the package,  at present it is only available on Github (or pre-built binaries are now on r-universe)  - that is because there are a few CRAN requirements I haven?t quite worked out (not a complaint about CRAN requirements,  I just have to figure out how to adequately reduce the runtime of the examples), and even when it is ready for CRAN since it is a new package it will take longer to appear, as new packages are given closer scrutiny before acceptance.  To install the package from Github:
+
+pak::pkg_install('rmendels/rerddapUtils?)
+
+and to install from r-universe:
+
+install.packages('rerddapUtils', repos = c('https://rmendels.r-universe.dev', 'https://cloud.r-project.org'))
+
+Any comments, recommendations, bug reports etc would be greatly appreciated.
+
+Thanks,
+
+-Roy
+
+
+
+
+Roy Mendelssohn
+NOAA/NMFS
+110 MCAllister Way
+Santa Cruz, CA 95060
+Phone: (831)-420-3666
+Fax: (831) 420-3980
+e-mail: Roy.Mendelssohn at noaa.gov
+
+
+From @vi@e@gross m@iii@g oii gm@ii@com  Wed May 13 02:41:08 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Tue, 12 May 2026 20:41:08 -0400
+Subject: [R] =?utf-8?b?RVJEREFQ4oSiIGFuZCBS?=
+In-Reply-To: <65080F21-6733-4653-A964-FE2897EAB9DE@noaa.gov>
+References: <65080F21-6733-4653-A964-FE2897EAB9DE@noaa.gov>
+Message-ID: <003301dce271$30bbad20$92330760$@gmail.com>
+
+Roy,
+
+Obviously the packages you mention are meant to work with what sounds like large data and would be "slow" if using such data. But a vignette for illustration may not need to use large data files just for illustration. Is there any reason you cannot create something small, perhaps a subset of a larger set of data, that would run fast enough and still illustrate how it is meant to be used? 
+
+If you wrote a package to do something like compute pi to a bazillion places, could it be illustrated by just calculating to five decimal places? How is your package different in being able to come up with reasonable results on reasonable data? R already has other packages that allow you to open databases and do SQL queries that can theoretically download more data than your machine can hold. But an example does not need to do that just to show proof of concept.
+
+If you feel the FULL treatment is useful, can you supply optional vignettes a user can deliberately ask for that will not be reviewed by CRAN, alongside any that are?
+
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Roy Mendelssohn - NOAA Federal via R-help
+Sent: Tuesday, May 12, 2026 2:36 PM
+To: r-help <r-help at r-project.org>
+Subject: [R] ERDDAP? and R
+
+ERDDAP? is a web data server/middleware that is used throughout the world (there are well over 100 ERDDAP? servers) that provides easy access to petabytes of data that can be subsetted and converted into many different formats and downloaded,  including graphics.  At present there are three main CRAN packages that simplify the access and use of ERDDAP? within R.   These are ?rerddap?,  ?rerddapXtracto? and ?plotdap?.  ?rerddap? is the main package,  ?rerddapXtracto?  adds the ability to extract along a track or within a polygon, and ?plotdap? simplifies the plotting of the results of the extracts.  These packages work with any ERDDAP?  server.  All of these packages  have been updated in the last number of months and if you use these packages it is worth updating them.
+
+Besides just general information,  there are two things worth noting.  First,  ?plotdap? now can make contour plots using the ?isoband? package  (and thanks to the developers of that package),  as well as simplified procedures to make interactive plots using ?plotly?  (again thanks to the developers of that package).  
+
+Also there is a fourth R package under development,  ?rerddapUtils?, which is a collection of utility functions that work with ?rerddap?,  These include a function to make an extract only in a season defined by the user,  a function to split a very large extract into parts,  so that the request is not too large,  a function to estimate the size of an ?rerddap? request as well as a function that estimates the size of each split request, and two functions to make it easier to work with ?rerddap? requests for projected datasets.
+
+If this package interests you,  or if you are interested in testing the package,  at present it is only available on Github (or pre-built binaries are now on r-universe)  - that is because there are a few CRAN requirements I haven?t quite worked out (not a complaint about CRAN requirements,  I just have to figure out how to adequately reduce the runtime of the examples), and even when it is ready for CRAN since it is a new package it will take longer to appear, as new packages are given closer scrutiny before acceptance.  To install the package from Github:
+
+pak::pkg_install('rmendels/rerddapUtils?)
+
+and to install from r-universe:
+
+install.packages('rerddapUtils', repos = c('https://rmendels.r-universe.dev', 'https://cloud.r-project.org'))
+
+Any comments, recommendations, bug reports etc would be greatly appreciated.
+
+Thanks,
+
+-Roy
+
+
+
+
+Roy Mendelssohn
+NOAA/NMFS
+110 MCAllister Way
+Santa Cruz, CA 95060
+Phone: (831)-420-3666
+Fax: (831) 420-3980
+e-mail: Roy.Mendelssohn at noaa.gov
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From roy@mende|@@ohn @end|ng |rom no@@@gov  Wed May 13 03:05:09 2026
+From: roy@mende|@@ohn @end|ng |rom no@@@gov (Roy Mendelssohn - NOAA Federal)
+Date: Tue, 12 May 2026 18:05:09 -0700
+Subject: [R] =?utf-8?b?RVJEREFQ4oSiIGFuZCBS?=
+In-Reply-To: <003301dce271$30bbad20$92330760$@gmail.com>
+References: <65080F21-6733-4653-A964-FE2897EAB9DE@noaa.gov>
+ <003301dce271$30bbad20$92330760$@gmail.com>
+Message-ID: <414954CB-F752-47F5-8E87-AF302BFB9AF6@noaa.gov>
+
+Thanks for the feedback.  There are vignettes for all of my packages,  and the vignettes include real examples that take awhile to calculate.   There are ways of doing the vignettes that don?t hit the CRAN time limits.  The problem is in the examples  part of the program documentation,  trying to find the balance between the time limit and a reasonable example (and I fully understand the reasons for the time limit and am very aware of them)..  Also my internal tests are not good metrics,  I find the time that it takes the different test machines for the different OSes and different versions of R differ to a reasonable degree, so it just takes me a lot of time to think I have good examples and run tests on all the different platforms and see.  Also I have had to go back and robustify my examples since they go out over the internet and things can go wrong - in fact it appears we may have blocked one the test machines so it isn?t accessing our ERDDAP?.  I am looking into that,  but I still need to robustly the examples.  And this is not the highest priority on things I need to work on,  so work can be in fits and starts.
+
+And as I said,  quite rightly new packages are given closer scrutiny,  there are only a few people who do that,  it is a thankless job for someone to do that and do it well,  so no complaints on my part. So even if I figure out good examples in the next week or so,  it could be awhile before the package hits CRAN.  And I thought it would be nice to get some feedback in the meantime.
+
+I also just wanted to announce the new features that have been added to ?plotdap? in the last 5 months or so.  Even if someone updates their package they may not have looked to see what is new. 
+
+-Roy
+
+
+
+> On May 12, 2026, at 5:41?PM, avi.e.gross at gmail.com wrote:
+> 
+> Roy,
+> 
+> Obviously the packages you mention are meant to work with what sounds like large data and would be "slow" if using such data. But a vignette for illustration may not need to use large data files just for illustration. Is there any reason you cannot create something small, perhaps a subset of a larger set of data, that would run fast enough and still illustrate how it is meant to be used? 
+> 
+> If you wrote a package to do something like compute pi to a bazillion places, could it be illustrated by just calculating to five decimal places? How is your package different in being able to come up with reasonable results on reasonable data? R already has other packages that allow you to open databases and do SQL queries that can theoretically download more data than your machine can hold. But an example does not need to do that just to show proof of concept.
+> 
+> If you feel the FULL treatment is useful, can you supply optional vignettes a user can deliberately ask for that will not be reviewed by CRAN, alongside any that are?
+> 
+> 
+> -----Original Message-----
+> From: R-help <r-help-bounces at r-project.org> On Behalf Of Roy Mendelssohn - NOAA Federal via R-help
+> Sent: Tuesday, May 12, 2026 2:36 PM
+> To: r-help <r-help at r-project.org>
+> Subject: [R] ERDDAP? and R
+> 
+> ERDDAP? is a web data server/middleware that is used throughout the world (there are well over 100 ERDDAP? servers) that provides easy access to petabytes of data that can be subsetted and converted into many different formats and downloaded,  including graphics.  At present there are three main CRAN packages that simplify the access and use of ERDDAP? within R.   These are ?rerddap?,  ?rerddapXtracto? and ?plotdap?.  ?rerddap? is the main package,  ?rerddapXtracto?  adds the ability to extract along a track or within a polygon, and ?plotdap? simplifies the plotting of the results of the extracts.  These packages work with any ERDDAP?  server.  All of these packages  have been updated in the last number of months and if you use these packages it is worth updating them.
+> 
+> Besides just general information,  there are two things worth noting.  First,  ?plotdap? now can make contour plots using the ?isoband? package  (and thanks to the developers of that package),  as well as simplified procedures to make interactive plots using ?plotly?  (again thanks to the developers of that package).  
+> 
+> Also there is a fourth R package under development,  ?rerddapUtils?, which is a collection of utility functions that work with ?rerddap?,  These include a function to make an extract only in a season defined by the user,  a function to split a very large extract into parts,  so that the request is not too large,  a function to estimate the size of an ?rerddap? request as well as a function that estimates the size of each split request, and two functions to make it easier to work with ?rerddap? requests for projected datasets.
+> 
+> If this package interests you,  or if you are interested in testing the package,  at present it is only available on Github (or pre-built binaries are now on r-universe)  - that is because there are a few CRAN requirements I haven?t quite worked out (not a complaint about CRAN requirements,  I just have to figure out how to adequately reduce the runtime of the examples), and even when it is ready for CRAN since it is a new package it will take longer to appear, as new packages are given closer scrutiny before acceptance.  To install the package from Github:
+> 
+> pak::pkg_install('rmendels/rerddapUtils?)
+> 
+> and to install from r-universe:
+> 
+> install.packages('rerddapUtils', repos = c('https://rmendels.r-universe.dev', 'https://cloud.r-project.org'))
+> 
+> Any comments, recommendations, bug reports etc would be greatly appreciated.
+> 
+> Thanks,
+> 
+> -Roy
+> 
+> 
+> 
+> 
+> Roy Mendelssohn
+> NOAA/NMFS
+> 110 MCAllister Way
+> Santa Cruz, CA 95060
+> Phone: (831)-420-3666
+> Fax: (831) 420-3980
+> e-mail: Roy.Mendelssohn at noaa.gov
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
