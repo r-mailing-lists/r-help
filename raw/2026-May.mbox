@@ -1248,3 +1248,78 @@ I also just wanted to announce the new features that have been added to ?plotdap
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From mzb@deve| @end|ng |rom gm@||@com  Tue May 12 18:17:18 2026
+From: mzb@deve| @end|ng |rom gm@||@com (Mauricio Zambrano-Bigiarini)
+Date: Tue, 12 May 2026 12:17:18 -0400
+Subject: [R] [R-pkgs] RFmerge: new version 0.3-3 is back on CRAN
+Message-ID: <CAJ44-Am2sHAFoGmCK+rJcU1_Odyu8M5BBS_2Vy-pwJiqnBydjA@mail.gmail.com>
+
+Dear all,
+
+RFmerge is an R package designed to merge gridded datasets with in situ
+observations using Random Forest as the core spatial prediction algorithm.
+The method incorporates spatial covariates such as topographic attributes
+and Euclidean distances, among others, to improve the accuracy and spatial
+consistency of the merged estimates.
+
+In February 2023, the RFmerge package was removed from CRAN because we did
+not resolve several issues related to the retirement of rgdal and rgeos (
+https://r-spatial.org/r/2022/04/12/evolution.html), which were used in
+RFmerge 0.1-6 together with the raster package.
+
+By July 2023, these issues were addressed, in time for a short technical
+course organized by SISSA (https://sissa.crc-sas.org/). Unfortunately, this
+updated version of the package (v0.2-0) was not submitted to CRAN at the
+time, due to time constraints affecting the development team.
+
+Now, a new version of RFmerge (v0.3-3) has been released on May 8, 2026,
+and is available on CRAN: https://cran.r-project.org/package=RFmerge.
+
+Key new features include:
+
+- Migration to the terra package, which supersedes raster. This represents
+a major change and results in a substantial improvement in computational
+performance.
+
+- Support for multi-core processing and distributed computing environments
+via the parallel package.
+
+- An updated vignette:
+
+  > Zambrano-Bigiarini, M., Baez-Villanueva, O. M., Giraldo-Osorio, J. D.,
+& McNamara, I. (2026). *Tutorial for merging satellite-based precipitation
+datasets with ground observations using RFmerge (>=0.3-0)*. Zenodo.
+https://doi.org/10.5281/zenodo.20061104.
+
+- A new graphical logo.
+
+- A new project website built with pkgdown: http://mzb.cl/RFmerge/.
+
+- The package DOI was updated in June 2024 from the Zotero-assigned
+identifier to the CRAN DOI: https://doi.org/10.32614/CRAN.package.RFmerge.
+
+- A complete list of changes is available at:
+https://cran.r-project.org/web/packages/RFmerge/news/news.html
+
+
+I hope you find this new version useful and enjoy it !
+
+
+Mauricio Zambrano-Bigiarini, PhD
+Associate Professor, Universidad de La Frontera
+Associate Researcher, (CR)2 FONDAP Center
+Phone: +56 45 259 2812 <+56+45+259+2812>
+e-mail: mauricio.zambrano at ufrontera.cl
+[image: webpage] <https://hzambran.github.io/> [image: ORCID]
+<https://orcid.org/0000-0002-9536-643X> [image: Github]
+<https://github.com/hzambran> [image: Linkedin]
+<http://www.linkedin.com/in/hzambran/>
+
+	[[alternative HTML version deleted]]
+
+_______________________________________________
+R-packages mailing list
+R-packages at r-project.org
+https://stat.ethz.ch/mailman/listinfo/r-packages
+
+

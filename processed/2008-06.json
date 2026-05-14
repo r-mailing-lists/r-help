@@ -39378,24 +39378,6 @@
       "month": "2008-06"
     },
     {
-      "id": "msg-ab27b505609d",
-      "message_id": "<alpine.LFD.1.10.0806241128280.8786@gannet.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2008-06-24T10:40:20Z",
-      "subject": "[R] L-BFGS-B needs finite values of 'fn'",
-      "subject_clean": "L-BFGS-B needs finite values of 'fn'",
-      "in_reply_to": "<414297237.12393@eyou.net>",
-      "references": [
-        "<414297237.12393@eyou.net>"
-      ],
-      "body_plain": "On Tue, 24 Jun 2008, Jinsong Zhao wrote:\n\n> Hi,\n>\n> When I run the following code,\n>\n> r <- c(3,4,4,3,5,4,5,9,8,11,12,13)\n> n <- rep(15,12)\n> x <- c(0, 1.1, 1.3, 2.0, 2.2, 2.8, 3.7, 3.9, 4.4, 4.8, 5.9, 6.8)\n> x <- log10(x)\n\nSo x[1] = -Inf\n\n> fr <- function(c, alpha, beta) {\n>  P <- c + (1-c) * pnorm(alpha + beta * x)\n>  P <- pmax(pmin(P,1),0)\n>  -(sum(log(choose(n,r))) + sum(r * log(P)) + sum((n -r)* log(1-P)))\n> }\n> fit <- mle((fr), start = list(c =0.2, alpha = 0, beta =0.1), method =\n> \"L-BFGS-B\")\n>\n> I got:\n>\n> Error in optim(start, f, method = method, hessian = TRUE, ...) :\n>  L-BFGS-B needs finite values of 'fn'\n>\n> When I change \"L-BFGS-B\" to \"BFGS\" or anything else that optim()\n> support, there's no any error message.\n>\n> What's wrong?\n\nWhat the message says.  Your fr() function is returning non-finite values. \nLook at what happens if P is 0 or 1 for example.  You seem to need 0 < c < \n1, and you have not imposed that constraint.  Adding a trace tp print \nc(c, alpha, beta) I got\n\n[1] 0.2 0.0 0.1\n[1] 0.201 0.000 0.100\n[1] 0.199 0.000 0.100\n[1] 0.200 0.001 0.100\n[1]  0.200 -0.001  0.100\n[1] 0.200 0.000 0.101\n[1] 0.200 0.000 0.099\n[1] -0.63692943 -0.54093515  0.01670358\nError in optim(start, f, method = method, hessian = TRUE, ...) :\n   L-BFGS-B needs finite values of 'fn'\n\nand other methods also give negative 'c' (and backtrack).  There are also \nproblems if beta < 0 (as c + (1-c) * pnorm(alpha + beta * x) = 1 for x = \n-Inf).  So\n\nfit <- mle((fr), start = list(c =0.2, alpha = 0, beta =0.1),\n            method = \"L-BFGS-B\", lower=c(0, -Inf, 0), upper = c(1, Inf, Inf))\n\nworks.\n\nThere is no point in using \"L-BFGS-B\" in a 3-parameter problem unless you \ndo impose constraints.\n\nAlso, dbinom() will give a more stable way to compute a binomial \nlog-likelihood.\n\n> Any suggestions will be appreciated.\n>\n> Jinsong\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Tue, 24 Jun 2008, Jinsong Zhao wrote:\n\n> Hi,\n>\n> When I run the following code,\n>\n> r <- c(3,4,4,3,5,4,5,9,8,11,12,13)\n> n <- rep(15,12)\n> x <- c(0, 1.1, 1.3, 2.0, 2.2, 2.8, 3.7, 3.9, 4.4, 4.8, 5.9",
-      "thread_id": "thread-f01d6508c746",
-      "thread_depth": 1,
-      "month": "2008-06"
-    },
-    {
       "id": "msg-9fa1140533ce",
       "message_id": "<4860CF14.50804@idi.ntnu.no>",
       "from_name": "Wacek Kusnierczyk",
@@ -39410,6 +39392,24 @@
       "body_plain": "Richard Pearson wrote:\n> Is it possible to temporarily suspend output? I am using a function\n> that gives lots of output using cat, that is not very informative. Is\n> it possible to turn output off, run the function, then turn output\n> back on again? I've looked at ?options and done various RSiteSearch()s\n> but couldn't find a way to do this.\n>\n\nsink(\"/dev/null\")\n\n?sink\n\nvQ",
       "body_snippet": "Richard Pearson wrote:\n> Is it possible to temporarily suspend output? I am using a function\n> that gives lots of output using cat, that is not very informative. Is\n> it possible to turn output off, r",
       "thread_id": "thread-828de90a88be",
+      "thread_depth": 1,
+      "month": "2008-06"
+    },
+    {
+      "id": "msg-ab27b505609d",
+      "message_id": "<alpine.LFD.1.10.0806241128280.8786@gannet.stats.ox.ac.uk>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2008-06-24T10:40:20Z",
+      "subject": "[R] L-BFGS-B needs finite values of 'fn'",
+      "subject_clean": "L-BFGS-B needs finite values of 'fn'",
+      "in_reply_to": "<414297237.12393@eyou.net>",
+      "references": [
+        "<414297237.12393@eyou.net>"
+      ],
+      "body_plain": "On Tue, 24 Jun 2008, Jinsong Zhao wrote:\n\n> Hi,\n>\n> When I run the following code,\n>\n> r <- c(3,4,4,3,5,4,5,9,8,11,12,13)\n> n <- rep(15,12)\n> x <- c(0, 1.1, 1.3, 2.0, 2.2, 2.8, 3.7, 3.9, 4.4, 4.8, 5.9, 6.8)\n> x <- log10(x)\n\nSo x[1] = -Inf\n\n> fr <- function(c, alpha, beta) {\n>  P <- c + (1-c) * pnorm(alpha + beta * x)\n>  P <- pmax(pmin(P,1),0)\n>  -(sum(log(choose(n,r))) + sum(r * log(P)) + sum((n -r)* log(1-P)))\n> }\n> fit <- mle((fr), start = list(c =0.2, alpha = 0, beta =0.1), method =\n> \"L-BFGS-B\")\n>\n> I got:\n>\n> Error in optim(start, f, method = method, hessian = TRUE, ...) :\n>  L-BFGS-B needs finite values of 'fn'\n>\n> When I change \"L-BFGS-B\" to \"BFGS\" or anything else that optim()\n> support, there's no any error message.\n>\n> What's wrong?\n\nWhat the message says.  Your fr() function is returning non-finite values. \nLook at what happens if P is 0 or 1 for example.  You seem to need 0 < c < \n1, and you have not imposed that constraint.  Adding a trace tp print \nc(c, alpha, beta) I got\n\n[1] 0.2 0.0 0.1\n[1] 0.201 0.000 0.100\n[1] 0.199 0.000 0.100\n[1] 0.200 0.001 0.100\n[1]  0.200 -0.001  0.100\n[1] 0.200 0.000 0.101\n[1] 0.200 0.000 0.099\n[1] -0.63692943 -0.54093515  0.01670358\nError in optim(start, f, method = method, hessian = TRUE, ...) :\n   L-BFGS-B needs finite values of 'fn'\n\nand other methods also give negative 'c' (and backtrack).  There are also \nproblems if beta < 0 (as c + (1-c) * pnorm(alpha + beta * x) = 1 for x = \n-Inf).  So\n\nfit <- mle((fr), start = list(c =0.2, alpha = 0, beta =0.1),\n            method = \"L-BFGS-B\", lower=c(0, -Inf, 0), upper = c(1, Inf, Inf))\n\nworks.\n\nThere is no point in using \"L-BFGS-B\" in a 3-parameter problem unless you \ndo impose constraints.\n\nAlso, dbinom() will give a more stable way to compute a binomial \nlog-likelihood.\n\n> Any suggestions will be appreciated.\n>\n> Jinsong\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Tue, 24 Jun 2008, Jinsong Zhao wrote:\n\n> Hi,\n>\n> When I run the following code,\n>\n> r <- c(3,4,4,3,5,4,5,9,8,11,12,13)\n> n <- rep(15,12)\n> x <- c(0, 1.1, 1.3, 2.0, 2.2, 2.8, 3.7, 3.9, 4.4, 4.8, 5.9",
+      "thread_id": "thread-f01d6508c746",
       "thread_depth": 1,
       "month": "2008-06"
     },
@@ -52108,17 +52108,6 @@
       "root_message_id": "msg-00cfc4e78374"
     },
     {
-      "id": "thread-9d58e000e6f4",
-      "subject": "Random Forest and for multivariate response data",
-      "message_count": 1,
-      "participants": [
-        "Bertrand Pub Michel"
-      ],
-      "started": "2008-06-06T17:40:55Z",
-      "last_reply": "2008-06-06T17:40:55Z",
-      "root_message_id": "msg-9d58e000e6f4"
-    },
-    {
       "id": "thread-bd560340ddcf",
       "subject": "Random Forest",
       "message_count": 1,
@@ -52128,6 +52117,17 @@
       "started": "2008-06-06T17:40:55Z",
       "last_reply": "2008-06-06T17:40:55Z",
       "root_message_id": "msg-bd560340ddcf"
+    },
+    {
+      "id": "thread-9d58e000e6f4",
+      "subject": "Random Forest and for multivariate response data",
+      "message_count": 1,
+      "participants": [
+        "Bertrand Pub Michel"
+      ],
+      "started": "2008-06-06T17:40:55Z",
+      "last_reply": "2008-06-06T17:40:55Z",
+      "root_message_id": "msg-9d58e000e6f4"
     },
     {
       "id": "thread-2f599b404daa",
