@@ -6160,26 +6160,6 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-7475f7ca1558",
-      "message_id": "<Pine.LNX.4.64.0704060619280.2452@gannet.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2007-04-06T06:38:13Z",
-      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
-      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
-      "in_reply_to": "<8EA061E48306894180DB020B0C6907A193CE72@MNMAIL02.markettools.com>",
-      "references": [
-        "<D9D0AED7B0265A4E8AC4B9715163E9069543C0@mxs02.tirol.local>",
-        "<482171.39614.qm@web32813.mail.mud.yahoo.com>",
-        "<8EA061E48306894180DB020B0C6907A193CE72@MNMAIL02.markettools.com>"
-      ],
-      "body_plain": "On Thu, 5 Apr 2007, Michael Conklin wrote:\n\n> Not being the developer I cannot answer definitively but, as a frequent \n> user of SPSS files I can give you my experience.\n>\n> 1) The unrecognized coding is perhaps due to the locale of the SPSS \n> installation. I have had success reading in files from version 15 but \n> often encounter that error when the file was created with data that \n> included some foreign language. I often receive survey files that were \n> administered in a non-English language and that is when I usually see \n> the error.\n\nThat is what is surmised in this recent R-devel thread:\n\nhttps://stat.ethz.ch/pipermail/r-devel/2007-April/045238.html\n\nalthough it may also happen in an English locale (since after all Windows \nuses codepage 1252, not ASCII, for American 'English').\n\nThe next release of package foreign will give a warning (rather than an \nerror) with an unrecognized encoding and recognize a few more.\n\n> 2) My experience with the \"Warning - unrecognized record type\" message \n> is that it has no effect whatsoever on the data file.\n>\n> 3) Others on the list have noted that you are safer exporting POR files \n> instead of SAV files from SPSS. Both are read by the read.spss function.\n\nThe R Data Import/Export manual recommends an open format such as .csv.\n(Look like John Kane has yet to read it ....)  R does have quite extensive \nfacilities for dealing with encodings in text files.\n\n>\n> Hope that helps.\n>\n>\n>\n> Michael Conklin\n> Chief Methodologist - Advanced Analytics\n> MarketTools, Inc.\n>\n>\n> -----Original Message-----\n> From: r-help-bounces at stat.math.ethz.ch [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of John Kane\n> Sent: Thursday, April 05, 2007 7:45 PM\n> To: RINNER Heinrich; r-help at stat.math.ethz.ch\n> Subject: Re: [R] read.spss (package foreign) and SPSS 15.0 files\n>\n>\n> --- RINNER Heinrich <HEINRICH.RINNER at tirol.gv.at>\n> wrote:\n>\n>> Hello,\n>>\n>> does anyone have experience with reading SPSS\n>> Version 15.0 files into R (version 2.4.1, WinXP)?\n>>\n>> I have long been sucessfully reading SPSS files with\n>> read.spss from the wonderful foreign package, but\n>> somehow after upgrading from SPSS14 to SPSS15 I seem\n>> to have problems.\n>>\n>> Trying a simple example, where test.sav is a SPSS\n>> 15.0 data file consisting of x1=c(1,2,3) and\n>> x2=c(\"a\",\"b\",\"c\"), I get this:\n>>> read.spss(file = \"C:\\\\temp\\\\test.sav\")\n>> Fehler in read.spss(file = \"C:\\\\temp\\\\test.sav\") :\n>>         error reading system-file header\n>> Zus?tzlich: Warning message:\n>> C:\\temp\\test.sav: File-indicated character\n>> representation code (Unknown) is not ASCII\n>>\n>> version infos:\n>> R version 2.4.1 (under WinXP)\n>> foreign version 0.8-18\n>>\n>> Has anyone experienced the same, and can give a\n>> solution here (possibly other than \"downgrade to\n>> SPSS14.0\" ;-))?\n>>\n>> Regards,\n>> Heinrich.\n>\n> Heck. I'd be happy to get an answer to what is\n> happening here:\n>> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> Warning message:\n> H:/ONTH/Raw.data/Follow.sav: Unrecognized record type\n> 7, subtype 16 encountered in system file\n>\n> I have taken to exporting the file to a delimited\n> format and reading it into R since I cannot trust the\n> R import.\n\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Thu, 5 Apr 2007, Michael Conklin wrote:\n\n> Not being the developer I cannot answer definitively but, as a frequent \n> user of SPSS files I can give you my experience.\n>\n> 1) The unrecognized coding",
-      "thread_id": "thread-16483d34ec34",
-      "thread_depth": 3,
-      "month": "2007-04"
-    },
-    {
       "id": "msg-86b3dd581eaf",
       "message_id": "<659987230.1176272679935.JavaMail.ServiceWAS@was5b>",
       "from_name": "Prof Brian Ripley",
@@ -6202,6 +6182,26 @@
     {
       "id": "msg-470a6d9f0e90",
       "message_id": "<1614043913.1176272839918.JavaMail.ServiceWAS@was5b>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2007-04-06T06:38:13Z",
+      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
+      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
+      "in_reply_to": "<8EA061E48306894180DB020B0C6907A193CE72@MNMAIL02.markettools.com>",
+      "references": [
+        "<D9D0AED7B0265A4E8AC4B9715163E9069543C0@mxs02.tirol.local>",
+        "<482171.39614.qm@web32813.mail.mud.yahoo.com>",
+        "<8EA061E48306894180DB020B0C6907A193CE72@MNMAIL02.markettools.com>"
+      ],
+      "body_plain": "On Thu, 5 Apr 2007, Michael Conklin wrote:\n\n> Not being the developer I cannot answer definitively but, as a frequent \n> user of SPSS files I can give you my experience.\n>\n> 1) The unrecognized coding is perhaps due to the locale of the SPSS \n> installation. I have had success reading in files from version 15 but \n> often encounter that error when the file was created with data that \n> included some foreign language. I often receive survey files that were \n> administered in a non-English language and that is when I usually see \n> the error.\n\nThat is what is surmised in this recent R-devel thread:\n\nhttps://stat.ethz.ch/pipermail/r-devel/2007-April/045238.html\n\nalthough it may also happen in an English locale (since after all Windows \nuses codepage 1252, not ASCII, for American 'English').\n\nThe next release of package foreign will give a warning (rather than an \nerror) with an unrecognized encoding and recognize a few more.\n\n> 2) My experience with the \"Warning - unrecognized record type\" message \n> is that it has no effect whatsoever on the data file.\n>\n> 3) Others on the list have noted that you are safer exporting POR files \n> instead of SAV files from SPSS. Both are read by the read.spss function.\n\nThe R Data Import/Export manual recommends an open format such as .csv.\n(Look like John Kane has yet to read it ....)  R does have quite extensive \nfacilities for dealing with encodings in text files.\n\n>\n> Hope that helps.\n>\n>\n>\n> Michael Conklin\n> Chief Methodologist - Advanced Analytics\n> MarketTools, Inc.\n>\n>\n> -----Original Message-----\n> From: r-help-bounces at stat.math.ethz.ch [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of John Kane\n> Sent: Thursday, April 05, 2007 7:45 PM\n> To: RINNER Heinrich; r-help at stat.math.ethz.ch\n> Subject: Re: [R] read.spss (package foreign) and SPSS 15.0 files\n>\n>\n> --- RINNER Heinrich <HEINRICH.RINNER at tirol.gv.at>\n> wrote:\n>\n>> Hello,\n>>\n>> does anyone have experience with reading SPSS\n>> Version 15.0 files into R (version 2.4.1, WinXP)?\n>>\n>> I have long been sucessfully reading SPSS files with\n>> read.spss from the wonderful foreign package, but\n>> somehow after upgrading from SPSS14 to SPSS15 I seem\n>> to have problems.\n>>\n>> Trying a simple example, where test.sav is a SPSS\n>> 15.0 data file consisting of x1=c(1,2,3) and\n>> x2=c(\"a\",\"b\",\"c\"), I get this:\n>>> read.spss(file = \"C:\\\\temp\\\\test.sav\")\n>> Fehler in read.spss(file = \"C:\\\\temp\\\\test.sav\") :\n>>         error reading system-file header\n>> Zus?tzlich: Warning message:\n>> C:\\temp\\test.sav: File-indicated character\n>> representation code (Unknown) is not ASCII\n>>\n>> version infos:\n>> R version 2.4.1 (under WinXP)\n>> foreign version 0.8-18\n>>\n>> Has anyone experienced the same, and can give a\n>> solution here (possibly other than \"downgrade to\n>> SPSS14.0\" ;-))?\n>>\n>> Regards,\n>> Heinrich.\n>\n> Heck. I'd be happy to get an answer to what is\n> happening here:\n>> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> Warning message:\n> H:/ONTH/Raw.data/Follow.sav: Unrecognized record type\n> 7, subtype 16 encountered in system file\n>\n> I have taken to exporting the file to a delimited\n> format and reading it into R since I cannot trust the\n> R import.\n\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Thu, 5 Apr 2007, Michael Conklin wrote:\n\n> Not being the developer I cannot answer definitively but, as a frequent \n> user of SPSS files I can give you my experience.\n>\n> 1) The unrecognized coding",
+      "thread_id": "thread-16483d34ec34",
+      "thread_depth": 3,
+      "month": "2007-04"
+    },
+    {
+      "id": "msg-7475f7ca1558",
+      "message_id": "<Pine.LNX.4.64.0704060619280.2452@gannet.stats.ox.ac.uk>",
       "from_name": "Prof Brian Ripley",
       "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
       "date": "2007-04-06T06:38:13Z",
@@ -6482,22 +6482,6 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-8772ddf1fcfc",
-      "message_id": "<2043943689.1176272839980.JavaMail.ServiceWAS@was5b>",
-      "from_name": "John Kane",
-      "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
-      "date": "2007-04-06T11:31:45Z",
-      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
-      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
-      "in_reply_to": "<Pine.LNX.4.64.0704060619280.2452@gannet.stats.ox.ac.uk>",
-      "references": [],
-      "body_plain": "--- Prof Brian Ripley <ripley at stats.ox.ac.uk> wrote:\n\n> On Thu, 5 Apr 2007, Michael Conklin wrote:\n> \n> > Not being the developer I cannot answer\n> definitively but, as a frequent \n> > user of SPSS files I can give you my experience.\n> >\n> > 1) The unrecognized coding is perhaps due to the\n> locale of the SPSS \n> > installation. I have had success reading in files\n> from version 15 but \n> > often encounter that error when the file was\n> created with data that \n> > included some foreign language. I often receive\n> survey files that were \n> > administered in a non-English language and that is\n> when I usually see \n> > the error.\n> \n> That is what is surmised in this recent R-devel\n> thread:\n> \n>\nhttps://stat.ethz.ch/pipermail/r-devel/2007-April/045238.html\n> \n> although it may also happen in an English locale\n> (since after all Windows \n> uses codepage 1252, not ASCII, for American\n> 'English').\n> \n> The next release of package foreign will give a\n> warning (rather than an \n> error) with an unrecognized encoding and recognize a\n> few more.\n> \n> > 2) My experience with the \"Warning - unrecognized\n> record type\" message \n> > is that it has no effect whatsoever on the data\n> file.\n> >\n> > 3) Others on the list have noted that you are\n> safer exporting POR files \n> > instead of SAV files from SPSS. Both are read by\n> the read.spss function.\n> \n> The R Data Import/Export manual recommends an open\n> format such as .csv.\n> (Look like John Kane has yet to read it ....)  \n\nWell, as I mentioned, I've been using a tab delimited\napproach. I suppose I could move to .csv...  \n>R\n> does have quite extensive \n> facilities for dealing with encodings in text files.\n> \n> >\n> > Hope that helps.\n> >\n> >\n> >\n> > Michael Conklin\n> > Chief Methodologist - Advanced Analytics\n> > MarketTools, Inc.\n> >\n> >\n> > -----Original Message-----\n> > From: r-help-bounces at stat.math.ethz.ch\n> [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf\n> Of John Kane\n> > Sent: Thursday, April 05, 2007 7:45 PM\n> > To: RINNER Heinrich; r-help at stat.math.ethz.ch\n> > Subject: Re: [R] read.spss (package foreign) and\n> SPSS 15.0 files\n> >\n> >\n> > --- RINNER Heinrich <HEINRICH.RINNER at tirol.gv.at>\n> > wrote:\n> >\n> >> Hello,\n> >>\n> >> does anyone have experience with reading SPSS\n> >> Version 15.0 files into R (version 2.4.1, WinXP)?\n> >>\n> >> I have long been sucessfully reading SPSS files\n> with\n> >> read.spss from the wonderful foreign package, but\n> >> somehow after upgrading from SPSS14 to SPSS15 I\n> seem\n> >> to have problems.\n> >>\n> >> Trying a simple example, where test.sav is a SPSS\n> >> 15.0 data file consisting of x1=c(1,2,3) and\n> >> x2=c(\"a\",\"b\",\"c\"), I get this:\n> >>> read.spss(file = \"C:\\\\temp\\\\test.sav\")\n> >> Fehler in read.spss(file = \"C:\\\\temp\\\\test.sav\")\n> :\n> >>         error reading system-file header\n> >> Zus?tzlich: Warning message:\n> >> C:\\temp\\test.sav: File-indicated character\n> >> representation code (Unknown) is not ASCII\n> >>\n> >> version infos:\n> >> R version 2.4.1 (under WinXP)\n> >> foreign version 0.8-18\n> >>\n> >> Has anyone experienced the same, and can give a\n> >> solution here (possibly other than \"downgrade to\n> >> SPSS14.0\" ;-))?\n> >>\n> >> Regards,\n> >> Heinrich.\n> >\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> > Warning message:\n> > H:/ONTH/Raw.data/Follow.sav: Unrecognized record\n> type\n> > 7, subtype 16 encountered in system file\n> >\n> > I have taken to exporting the file to a delimited\n> > format and reading it into R since I cannot trust\n> the\n> > R import.\n> \n> \n> -- \n> Brian D. Ripley,                 \n> ripley at stats.ox.ac.uk\n> Professor of Applied Statistics, \n> http://www.stats.ox.ac.uk/~ripley/\n> University of Oxford,             Tel:  +44 1865\n> 272861 (self)\n> 1 South Parks Road,                     +44 1865\n> 272866 (PA)\n> Oxford OX1 3TG, UK                Fax:  +44 1865\n272595",
-      "body_snippet": "--- Prof Brian Ripley <ripley at stats.ox.ac.uk> wrote:\n\n> On Thu, 5 Apr 2007, Michael Conklin wrote:\n> \n> > Not being the developer I cannot answer\n> definitively but, as a frequent \n> > user of SPSS",
-      "thread_id": "thread-16483d34ec34",
-      "thread_depth": 4,
-      "month": "2007-04"
-    },
-    {
       "id": "msg-e05e01d70bff",
       "message_id": "<727997214.1176272679982.JavaMail.ServiceWAS@was5b>",
       "from_name": "John Kane",
@@ -6516,6 +6500,22 @@
     {
       "id": "msg-144b4c519616",
       "message_id": "<170772.21644.qm@web32804.mail.mud.yahoo.com>",
+      "from_name": "John Kane",
+      "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
+      "date": "2007-04-06T11:31:45Z",
+      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
+      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
+      "in_reply_to": "<Pine.LNX.4.64.0704060619280.2452@gannet.stats.ox.ac.uk>",
+      "references": [],
+      "body_plain": "--- Prof Brian Ripley <ripley at stats.ox.ac.uk> wrote:\n\n> On Thu, 5 Apr 2007, Michael Conklin wrote:\n> \n> > Not being the developer I cannot answer\n> definitively but, as a frequent \n> > user of SPSS files I can give you my experience.\n> >\n> > 1) The unrecognized coding is perhaps due to the\n> locale of the SPSS \n> > installation. I have had success reading in files\n> from version 15 but \n> > often encounter that error when the file was\n> created with data that \n> > included some foreign language. I often receive\n> survey files that were \n> > administered in a non-English language and that is\n> when I usually see \n> > the error.\n> \n> That is what is surmised in this recent R-devel\n> thread:\n> \n>\nhttps://stat.ethz.ch/pipermail/r-devel/2007-April/045238.html\n> \n> although it may also happen in an English locale\n> (since after all Windows \n> uses codepage 1252, not ASCII, for American\n> 'English').\n> \n> The next release of package foreign will give a\n> warning (rather than an \n> error) with an unrecognized encoding and recognize a\n> few more.\n> \n> > 2) My experience with the \"Warning - unrecognized\n> record type\" message \n> > is that it has no effect whatsoever on the data\n> file.\n> >\n> > 3) Others on the list have noted that you are\n> safer exporting POR files \n> > instead of SAV files from SPSS. Both are read by\n> the read.spss function.\n> \n> The R Data Import/Export manual recommends an open\n> format such as .csv.\n> (Look like John Kane has yet to read it ....)  \n\nWell, as I mentioned, I've been using a tab delimited\napproach. I suppose I could move to .csv...  \n>R\n> does have quite extensive \n> facilities for dealing with encodings in text files.\n> \n> >\n> > Hope that helps.\n> >\n> >\n> >\n> > Michael Conklin\n> > Chief Methodologist - Advanced Analytics\n> > MarketTools, Inc.\n> >\n> >\n> > -----Original Message-----\n> > From: r-help-bounces at stat.math.ethz.ch\n> [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf\n> Of John Kane\n> > Sent: Thursday, April 05, 2007 7:45 PM\n> > To: RINNER Heinrich; r-help at stat.math.ethz.ch\n> > Subject: Re: [R] read.spss (package foreign) and\n> SPSS 15.0 files\n> >\n> >\n> > --- RINNER Heinrich <HEINRICH.RINNER at tirol.gv.at>\n> > wrote:\n> >\n> >> Hello,\n> >>\n> >> does anyone have experience with reading SPSS\n> >> Version 15.0 files into R (version 2.4.1, WinXP)?\n> >>\n> >> I have long been sucessfully reading SPSS files\n> with\n> >> read.spss from the wonderful foreign package, but\n> >> somehow after upgrading from SPSS14 to SPSS15 I\n> seem\n> >> to have problems.\n> >>\n> >> Trying a simple example, where test.sav is a SPSS\n> >> 15.0 data file consisting of x1=c(1,2,3) and\n> >> x2=c(\"a\",\"b\",\"c\"), I get this:\n> >>> read.spss(file = \"C:\\\\temp\\\\test.sav\")\n> >> Fehler in read.spss(file = \"C:\\\\temp\\\\test.sav\")\n> :\n> >>         error reading system-file header\n> >> Zus?tzlich: Warning message:\n> >> C:\\temp\\test.sav: File-indicated character\n> >> representation code (Unknown) is not ASCII\n> >>\n> >> version infos:\n> >> R version 2.4.1 (under WinXP)\n> >> foreign version 0.8-18\n> >>\n> >> Has anyone experienced the same, and can give a\n> >> solution here (possibly other than \"downgrade to\n> >> SPSS14.0\" ;-))?\n> >>\n> >> Regards,\n> >> Heinrich.\n> >\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> > Warning message:\n> > H:/ONTH/Raw.data/Follow.sav: Unrecognized record\n> type\n> > 7, subtype 16 encountered in system file\n> >\n> > I have taken to exporting the file to a delimited\n> > format and reading it into R since I cannot trust\n> the\n> > R import.\n> \n> \n> -- \n> Brian D. Ripley,                 \n> ripley at stats.ox.ac.uk\n> Professor of Applied Statistics, \n> http://www.stats.ox.ac.uk/~ripley/\n> University of Oxford,             Tel:  +44 1865\n> 272861 (self)\n> 1 South Parks Road,                     +44 1865\n> 272866 (PA)\n> Oxford OX1 3TG, UK                Fax:  +44 1865\n272595",
+      "body_snippet": "--- Prof Brian Ripley <ripley at stats.ox.ac.uk> wrote:\n\n> On Thu, 5 Apr 2007, Michael Conklin wrote:\n> \n> > Not being the developer I cannot answer\n> definitively but, as a frequent \n> > user of SPSS",
+      "thread_id": "thread-16483d34ec34",
+      "thread_depth": 4,
+      "month": "2007-04"
+    },
+    {
+      "id": "msg-8772ddf1fcfc",
+      "message_id": "<2043943689.1176272839980.JavaMail.ServiceWAS@was5b>",
       "from_name": "John Kane",
       "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
       "date": "2007-04-06T11:31:45Z",
@@ -6757,8 +6757,8 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-debd5a6735f0",
-      "message_id": "<Pine.LNX.4.64.0704060839160.22902@homer23.u.washington.edu>",
+      "id": "msg-fa5460dde970",
+      "message_id": "<1037261598.1176272680060.JavaMail.ServiceWAS@was5b>",
       "from_name": "Thomas Lumley",
       "from_email_hash": "fd3f6e9367b335430f74a8f6feb36e5e9d187865079d5ca2018b64dfb89dd278",
       "date": "2007-04-06T16:03:10Z",
@@ -6775,8 +6775,8 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-fa5460dde970",
-      "message_id": "<1037261598.1176272680060.JavaMail.ServiceWAS@was5b>",
+      "id": "msg-debd5a6735f0",
+      "message_id": "<Pine.LNX.4.64.0704060839160.22902@homer23.u.washington.edu>",
       "from_name": "Thomas Lumley",
       "from_email_hash": "fd3f6e9367b335430f74a8f6feb36e5e9d187865079d5ca2018b64dfb89dd278",
       "date": "2007-04-06T16:03:10Z",
@@ -6811,22 +6811,6 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-59866599cc81",
-      "message_id": "<1122786078.1176272680092.JavaMail.ServiceWAS@was5b>",
-      "from_name": "John Kane",
-      "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
-      "date": "2007-04-06T16:32:53Z",
-      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
-      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
-      "in_reply_to": "<Pine.LNX.4.64.0704060839160.22902@homer23.u.washington.edu>",
-      "references": [],
-      "body_plain": "--- Thomas Lumley <tlumley at u.washington.edu> wrote:\n\n> On Thu, 5 Apr 2007, John Kane wrote:\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> > Warning message:\n> > H:/ONTH/Raw.data/Follow.sav: Unrecognized record\n> type\n> > 7, subtype 16 encountered in system file\n> >\n> \n> It means that your file had a record of type 7,\n> subtype 16 in it, and \n> read.spss doesn't know how to handle these.\n> \n> You would have to ask SPSS what record type 7 and\n> subtype 16 represent -- \n> their software put them there, and it's their\n> terminology.\n> \n> People's experience with unrecognised record types\n> is that they usually \n> don't matter, which would make sense from a\n> backwards-compatibility point \n> of view, but in the absence of documentation or\n> psychic powers it is hard \n> to be sure.  \n\n\nYes, that actually was what I meant.  I have had no\nproblems with SPSS 12 but 14 seems a bit nasty. \n\n\n Sometime I may get a change to build a couple of test\nfiles in SPSS that I can check. \n\n>Avoiding read.spss is a perfectly\n> reasonable strategy, and is \n> in fact what we have always recommended in the Data\n> Import-Export manual.\n\nI have simply moved to exporting the SPSS file to a\ndelimited file and loading it. Unfortunately I'm\nlosing all the labelling which can be time-consuming\nto redo.    Some of the data has something like 10\ncategories for a variable.\n\n> \n> AFAIK the only commercial statistical software\n> vendor that does provide \n> complete, public documentation of their file formats\n> is Stata, and this \n> is one reason why there are fewer complaints about\n> read.dta and write.dta. \n> It also probably helps that the code was written by\n> someone who uses Stata \n> -- there hasn't been much contribution of code or\n> patches for the \n> foreign package from SPSS users.\n> \n> \n>  \t-thomas\n>",
-      "body_snippet": "--- Thomas Lumley <tlumley at u.washington.edu> wrote:\n\n> On Thu, 5 Apr 2007, John Kane wrote:\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.",
-      "thread_id": "thread-16483d34ec34",
-      "thread_depth": 3,
-      "month": "2007-04"
-    },
-    {
       "id": "msg-ec1607a80087",
       "message_id": "<652600.72237.qm@web32810.mail.mud.yahoo.com>",
       "from_name": "John Kane",
@@ -6845,6 +6829,22 @@
     {
       "id": "msg-54143075fd4f",
       "message_id": "<739121929.1176272840027.JavaMail.ServiceWAS@was5b>",
+      "from_name": "John Kane",
+      "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
+      "date": "2007-04-06T16:32:53Z",
+      "subject": "[R] read.spss (package foreign) and SPSS 15.0 files",
+      "subject_clean": "read.spss (package foreign) and SPSS 15.0 files",
+      "in_reply_to": "<Pine.LNX.4.64.0704060839160.22902@homer23.u.washington.edu>",
+      "references": [],
+      "body_plain": "--- Thomas Lumley <tlumley at u.washington.edu> wrote:\n\n> On Thu, 5 Apr 2007, John Kane wrote:\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.data/Follow.sav\")\n> > Warning message:\n> > H:/ONTH/Raw.data/Follow.sav: Unrecognized record\n> type\n> > 7, subtype 16 encountered in system file\n> >\n> \n> It means that your file had a record of type 7,\n> subtype 16 in it, and \n> read.spss doesn't know how to handle these.\n> \n> You would have to ask SPSS what record type 7 and\n> subtype 16 represent -- \n> their software put them there, and it's their\n> terminology.\n> \n> People's experience with unrecognised record types\n> is that they usually \n> don't matter, which would make sense from a\n> backwards-compatibility point \n> of view, but in the absence of documentation or\n> psychic powers it is hard \n> to be sure.  \n\n\nYes, that actually was what I meant.  I have had no\nproblems with SPSS 12 but 14 seems a bit nasty. \n\n\n Sometime I may get a change to build a couple of test\nfiles in SPSS that I can check. \n\n>Avoiding read.spss is a perfectly\n> reasonable strategy, and is \n> in fact what we have always recommended in the Data\n> Import-Export manual.\n\nI have simply moved to exporting the SPSS file to a\ndelimited file and loading it. Unfortunately I'm\nlosing all the labelling which can be time-consuming\nto redo.    Some of the data has something like 10\ncategories for a variable.\n\n> \n> AFAIK the only commercial statistical software\n> vendor that does provide \n> complete, public documentation of their file formats\n> is Stata, and this \n> is one reason why there are fewer complaints about\n> read.dta and write.dta. \n> It also probably helps that the code was written by\n> someone who uses Stata \n> -- there hasn't been much contribution of code or\n> patches for the \n> foreign package from SPSS users.\n> \n> \n>  \t-thomas\n>",
+      "body_snippet": "--- Thomas Lumley <tlumley at u.washington.edu> wrote:\n\n> On Thu, 5 Apr 2007, John Kane wrote:\n> > Heck. I'd be happy to get an answer to what is\n> > happening here:\n> >> mac <- spss.get(\"H:/ONTH/Raw.",
+      "thread_id": "thread-16483d34ec34",
+      "thread_depth": 3,
+      "month": "2007-04"
+    },
+    {
+      "id": "msg-59866599cc81",
+      "message_id": "<1122786078.1176272680092.JavaMail.ServiceWAS@was5b>",
       "from_name": "John Kane",
       "from_email_hash": "84ead1d776c99d7a335ae769028105481cb3cd1fd410d2ee3a9fc3b5dfb5ae72",
       "date": "2007-04-06T16:32:53Z",
@@ -22722,22 +22722,6 @@
       "month": "2007-04"
     },
     {
-      "id": "msg-fde251d5bf8b",
-      "message_id": "<46280906.5030402@cis.upenn.edu>",
-      "from_name": "Mark Liberman",
-      "from_email_hash": "0f1a331e9be79055da0eb649bf7304323aec700557719fc54439d5f9e6c3c1c1",
-      "date": "2007-04-20T00:27:50Z",
-      "subject": "[R] R in cron job: X problems",
-      "subject_clean": "R in cron job: X problems",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I'd like to use an R CMD BATCH script as part of a chron job that is set\nup to run every hour.\n\nThe trouble is that the script creates a graphical output in a file via\npng(), and apparently this in turn works through X.\n\nWhen cron invokes the job, no X server is available -- I suppose that\nthe DISPLAY variable is not set -- and so R exits with an error message\nin the output file. (If I run the same script in an environment where an\nX server is properly available, it works as I want it to.)\n\nI tried setting DISPLAY to thecomputername:0.0 (where \"thecomputername\"\nis the X.Y.Z form of the computer's name as names it for ssh etc.), but\nthat didn't work.\n\nAny advice about how to persuade the graphics subsystem to bypass X, or\nhow to set DISPLAY in a safe way to run in a cron job?\n\nThis is a linux system (a recent RedHat server system) with R 2.2.1.\n\n    Thanks,\n\n    Mark Liberman",
-      "body_snippet": "I'd like to use an R CMD BATCH script as part of a chron job that is set\nup to run every hour.\n\nThe trouble is that the script creates a graphical output in a file via\npng(), and apparently this in tu",
-      "thread_id": "thread-fde251d5bf8b",
-      "thread_depth": 0,
-      "month": "2007-04"
-    },
-    {
       "id": "msg-4f9cadc1d52a",
       "message_id": "<9B47349C-9E4A-43A8-B9F6-8DB29EE2717C@pobox.com>",
       "from_name": "Saptarshi Guha",
@@ -22750,6 +22734,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070419/a24b5a10/attachment.pl",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070419/a24b5a10/attachment.pl",
       "thread_id": "thread-4f9cadc1d52a",
+      "thread_depth": 0,
+      "month": "2007-04"
+    },
+    {
+      "id": "msg-fde251d5bf8b",
+      "message_id": "<46280906.5030402@cis.upenn.edu>",
+      "from_name": "Mark Liberman",
+      "from_email_hash": "0f1a331e9be79055da0eb649bf7304323aec700557719fc54439d5f9e6c3c1c1",
+      "date": "2007-04-20T00:27:50Z",
+      "subject": "[R] R in cron job: X problems",
+      "subject_clean": "R in cron job: X problems",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'd like to use an R CMD BATCH script as part of a chron job that is set\nup to run every hour.\n\nThe trouble is that the script creates a graphical output in a file via\npng(), and apparently this in turn works through X.\n\nWhen cron invokes the job, no X server is available -- I suppose that\nthe DISPLAY variable is not set -- and so R exits with an error message\nin the output file. (If I run the same script in an environment where an\nX server is properly available, it works as I want it to.)\n\nI tried setting DISPLAY to thecomputername:0.0 (where \"thecomputername\"\nis the X.Y.Z form of the computer's name as names it for ssh etc.), but\nthat didn't work.\n\nAny advice about how to persuade the graphics subsystem to bypass X, or\nhow to set DISPLAY in a safe way to run in a cron job?\n\nThis is a linux system (a recent RedHat server system) with R 2.2.1.\n\n    Thanks,\n\n    Mark Liberman",
+      "body_snippet": "I'd like to use an R CMD BATCH script as part of a chron job that is set\nup to run every hour.\n\nThe trouble is that the script creates a graphical output in a file via\npng(), and apparently this in tu",
+      "thread_id": "thread-fde251d5bf8b",
       "thread_depth": 0,
       "month": "2007-04"
     },
@@ -43383,17 +43383,6 @@
       "root_message_id": "msg-e5c23340e3f6"
     },
     {
-      "id": "thread-4f9cadc1d52a",
-      "subject": "Loading Dynamic Libraries on OS X",
-      "message_count": 1,
-      "participants": [
-        "Saptarshi Guha"
-      ],
-      "started": "2007-04-20T00:27:50Z",
-      "last_reply": "2007-04-20T00:27:50Z",
-      "root_message_id": "msg-4f9cadc1d52a"
-    },
-    {
       "id": "thread-fde251d5bf8b",
       "subject": "R in cron job: X problems",
       "message_count": 3,
@@ -43405,6 +43394,17 @@
       "started": "2007-04-20T00:27:50Z",
       "last_reply": "2007-04-20T01:12:33Z",
       "root_message_id": "msg-fde251d5bf8b"
+    },
+    {
+      "id": "thread-4f9cadc1d52a",
+      "subject": "Loading Dynamic Libraries on OS X",
+      "message_count": 1,
+      "participants": [
+        "Saptarshi Guha"
+      ],
+      "started": "2007-04-20T00:27:50Z",
+      "last_reply": "2007-04-20T00:27:50Z",
+      "root_message_id": "msg-4f9cadc1d52a"
     },
     {
       "id": "thread-7ee7b90de492",

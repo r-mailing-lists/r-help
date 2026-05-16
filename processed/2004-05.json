@@ -8654,22 +8654,6 @@
       "month": "2004-05"
     },
     {
-      "id": "msg-0b387410c36b",
-      "message_id": "<BAY12-F116oo9tjxqxP0000daaf@hotmail.com>",
-      "from_name": "may nongmay",
-      "from_email_hash": "134aea9852bafe76b057d758f5fcc5f8d5629943bbf7f5cd282201d8acb6877d",
-      "date": "2004-05-11T09:06:26Z",
-      "subject": "[R] How to import file from excle?",
-      "subject_clean": "How to import file from excle?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\nI learn R program from The Basics of S and S-plus book because it's basic,\nand then when I use command is attact(geyser) [follow from book] but I can't \n.\nBecause it's command only S (i think some command can't use in R???)\n\nThanks\n\nBest regards\nMathinee",
-      "body_snippet": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\n",
-      "thread_id": "thread-0b387410c36b",
-      "thread_depth": 0,
-      "month": "2004-05"
-    },
-    {
       "id": "msg-15deb5344c3b",
       "message_id": "<BAY12-F1116rXtU3xZo0000db53@hotmail.com>",
       "from_name": "may nongmay",
@@ -8682,6 +8666,22 @@
       "body_plain": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\nI learn R program from The Basics of S and S-plus book because it's basic,\nand then when I use command is attact(geyser) [follow from book] but I can't \n.\nBecause it's command only S (i think some command can't use in R???)\n\nThanks\n\nBest regards\nMathinee",
       "body_snippet": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\n",
       "thread_id": "thread-15deb5344c3b",
+      "thread_depth": 0,
+      "month": "2004-05"
+    },
+    {
+      "id": "msg-0b387410c36b",
+      "message_id": "<BAY12-F116oo9tjxqxP0000daaf@hotmail.com>",
+      "from_name": "may nongmay",
+      "from_email_hash": "134aea9852bafe76b057d758f5fcc5f8d5629943bbf7f5cd282201d8acb6877d",
+      "date": "2004-05-11T09:06:26Z",
+      "subject": "[R] How to import file from excle?",
+      "subject_clean": "How to import file from excle?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\nI learn R program from The Basics of S and S-plus book because it's basic,\nand then when I use command is attact(geyser) [follow from book] but I can't \n.\nBecause it's command only S (i think some command can't use in R???)\n\nThanks\n\nBest regards\nMathinee",
+      "body_snippet": "Hi R-help\n\nI have some question.\nFirst I have data in Excle ,then I would like to fit distribution\nfrom this data, how to import this data from excle? What's command?\n\nThaks for first answer\n\nSecond\n\n",
+      "thread_id": "thread-0b387410c36b",
       "thread_depth": 0,
       "month": "2004-05"
     },
@@ -12351,22 +12351,6 @@
       "month": "2004-05"
     },
     {
-      "id": "msg-0dff7efe864d",
-      "message_id": "<40A48401.301.3F85D16@localhost>",
-      "from_name": "kjetil@acelerate.com",
-      "from_email_hash": "a9ad9586a72d31663c33aa3d5538e30f797e1d593f8afe792a73b3f03242c589",
-      "date": "2004-05-14T12:32:01Z",
-      "subject": "[R] NLME model question",
-      "subject_clean": "NLME model question",
-      "in_reply_to": "<5.1.0.14.2.20040514110535.00b80c70@staffmail.ed.ac.uk>",
-      "references": [],
-      "body_plain": "On 14 May 2004 at 11:11, Darren Shaw wrote:\n\n> Dear R-helpers\n> \n> I have a problem related to the use of NLME\n> \n> I think is simply a matter of getting the nlme coding correct, but i\n> cannot get my brain around it\n> \n> I am analysing some 24 growth curves of some cells , and i wanted to\n> say that there are significant differences between the curves in two\n> parameters that describe the pattern of growth.  these parameters are\n> from a logistic (r & k) .\n> \n> i have attempted to construct a self starting routine for nlme ie:\n> \n> SSGrowth_function(x, r, k)\n> {\n>          .expr2 <- (k - 100000)/100000\n>          .expr5 <- exp(((r * -1) * x))\n>          .expr7 <- 1 + (.expr2 * .expr5)\n>          .expr13 <- .expr7^2\n>          .value <- k/.expr7\n>          .actualArgs <- match.call()[c(\"r\", \"k\")]\n>          if(all(unlist(lapply(as.list(.actualArgs), is.name)))) {\n>                  .grad <- array(0, c(length(.value), 2), list(NULL,\n>                  c(\"r\", \n> \"k\")))\n>                  .grad[, \"r\"] <-  - ((k * (.expr2 * (.expr5 * (-1 *\n> x))))/.expr13)\n>                  .grad[, \"k\"] <- (1/.expr7) - ((k * (1e-005 *\n>                  .expr5))/.expr13) dimnames(.grad) <- list(NULL,\n>                  .actualArgs) attr(.value, \"gradient\") <- .grad\n>          }\n>          .value\n> }\n> \n> where x = time, 100000 = known starting conditions, r = growth and k =\n> carrying capacity\n> \n>   i guessed i should then write\n> \n> nlme(NoofCells~SSGrowth(Time,r,k),fixed=r+k~1,data=CellData,random=r+k\n> ~1)\n> \n> \n> This runs and tells me that r & k's do differ\n> \n> BUT.  The \"CellData\" actually consists of replicates - ie there are 4\n> cell types, but they are done 6 times each.  Therefore, I do not want\n> to ask if there are significant differences in r & k between 24 sets\n> of data (\"Runs\")- rather I want to be able to say that there are\n> differences between the four cell types occurring 6 times each.  So\n> how do i  incorporate \"CellType\" explicitly into my model structure??\n\nSomething like\n nlme(NoofCells~SSGrowth(Time,r,k),fixed=r+k~1,data=CellData,random=r+k\n ~1 | CellType)\n?\n\nKjetil Halvorsen\n\n> \n> i.e. If i was lust looking at say linear growth and was using lme I\n> would have written something like\n> \n> lme(NoofCells~Time*CellType,random=~1|Runs,data=CellData)\n> \n> Any thoughts/suggestions gratefully received\n> \n> Darren Shaw\n> \n> ----------------------------------------------------------------- Dr\n> Darren J Shaw Centre for Tropical Veterinary Medicine (CTVM) Royal\n> School of Veterinary Studies The University of Edinburgh Scotland\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide!\n> http://www.R-project.org/posting-guide.html\n>",
-      "body_snippet": "On 14 May 2004 at 11:11, Darren Shaw wrote:\n\n> Dear R-helpers\n> \n> I have a problem related to the use of NLME\n> \n> I think is simply a matter of getting the nlme coding correct, but i\n> cannot get my",
-      "thread_id": "thread-d36f41f2b5a0",
-      "thread_depth": 1,
-      "month": "2004-05"
-    },
-    {
       "id": "msg-d5272bb812a3",
       "message_id": "<40A48401.23981.3F85D83@localhost>",
       "from_name": "kjetil@acelerate.com",
@@ -12379,6 +12363,22 @@
       "body_plain": "On 14 May 2004 at 11:45, Karla Meurk wrote:\n\n> Hi, I would like to plot a graph which sits in the background as a\n> watermark with other plots in the foreground - on top.  I have looked\n> through the threads on the r-project website but they seem to concern\n> background colours rather than actual background plots.  I have also\n> searched through the demo's and pars but can't find any eg's\n> \n> any ideas - I only want to plot a simple graph using pie.chart()\n> \n\nYou can do this with the pixmap package. \nlibrary(pixmap) and so\n?pixmap\nAn example based on ?pixmap:\n\n> ## Another example that math can be beautiful\n>  x <- seq(-3,3,length=100)\n>  z1 <- outer(x,x,function(x,y) abs(sin(x)*sin(y)))\n>  z2 <- outer(x,x,function(x,y) abs(sin(2*x)*sin(y)))\n>  z3 <- outer(x,x,function(x,y) abs(sin(x)*sin(2*y)))\n> \n>  ## Notice that we specify a bounding box to get the correct\n>  ## coordinates on the axes. z1, z2 and z3 are used as red,\n>  ## green and blue channel, respectively.\n>  z <- pixmapRGB(c(z1,z2,z3), 100, 100, bbox=c(-1,-1,1,1))\n>  plot(z, axes=TRUE)\n> par(new=TRUE)\n> plot( (-20:20)/20, (-20:20)/20, xaxt=\"n\", yaxt=\"n\", ann=FALSE)\n> \n\n\nKjetil Halvorsen\n\n> Thanks\n> \n> Carla\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide!\n> http://www.R-project.org/posting-guide.html\n>",
       "body_snippet": "On 14 May 2004 at 11:45, Karla Meurk wrote:\n\n> Hi, I would like to plot a graph which sits in the background as a\n> watermark with other plots in the foreground - on top.  I have looked\n> through the ",
       "thread_id": "thread-cab70b5d09ad",
+      "thread_depth": 1,
+      "month": "2004-05"
+    },
+    {
+      "id": "msg-0dff7efe864d",
+      "message_id": "<40A48401.301.3F85D16@localhost>",
+      "from_name": "kjetil@acelerate.com",
+      "from_email_hash": "a9ad9586a72d31663c33aa3d5538e30f797e1d593f8afe792a73b3f03242c589",
+      "date": "2004-05-14T12:32:01Z",
+      "subject": "[R] NLME model question",
+      "subject_clean": "NLME model question",
+      "in_reply_to": "<5.1.0.14.2.20040514110535.00b80c70@staffmail.ed.ac.uk>",
+      "references": [],
+      "body_plain": "On 14 May 2004 at 11:11, Darren Shaw wrote:\n\n> Dear R-helpers\n> \n> I have a problem related to the use of NLME\n> \n> I think is simply a matter of getting the nlme coding correct, but i\n> cannot get my brain around it\n> \n> I am analysing some 24 growth curves of some cells , and i wanted to\n> say that there are significant differences between the curves in two\n> parameters that describe the pattern of growth.  these parameters are\n> from a logistic (r & k) .\n> \n> i have attempted to construct a self starting routine for nlme ie:\n> \n> SSGrowth_function(x, r, k)\n> {\n>          .expr2 <- (k - 100000)/100000\n>          .expr5 <- exp(((r * -1) * x))\n>          .expr7 <- 1 + (.expr2 * .expr5)\n>          .expr13 <- .expr7^2\n>          .value <- k/.expr7\n>          .actualArgs <- match.call()[c(\"r\", \"k\")]\n>          if(all(unlist(lapply(as.list(.actualArgs), is.name)))) {\n>                  .grad <- array(0, c(length(.value), 2), list(NULL,\n>                  c(\"r\", \n> \"k\")))\n>                  .grad[, \"r\"] <-  - ((k * (.expr2 * (.expr5 * (-1 *\n> x))))/.expr13)\n>                  .grad[, \"k\"] <- (1/.expr7) - ((k * (1e-005 *\n>                  .expr5))/.expr13) dimnames(.grad) <- list(NULL,\n>                  .actualArgs) attr(.value, \"gradient\") <- .grad\n>          }\n>          .value\n> }\n> \n> where x = time, 100000 = known starting conditions, r = growth and k =\n> carrying capacity\n> \n>   i guessed i should then write\n> \n> nlme(NoofCells~SSGrowth(Time,r,k),fixed=r+k~1,data=CellData,random=r+k\n> ~1)\n> \n> \n> This runs and tells me that r & k's do differ\n> \n> BUT.  The \"CellData\" actually consists of replicates - ie there are 4\n> cell types, but they are done 6 times each.  Therefore, I do not want\n> to ask if there are significant differences in r & k between 24 sets\n> of data (\"Runs\")- rather I want to be able to say that there are\n> differences between the four cell types occurring 6 times each.  So\n> how do i  incorporate \"CellType\" explicitly into my model structure??\n\nSomething like\n nlme(NoofCells~SSGrowth(Time,r,k),fixed=r+k~1,data=CellData,random=r+k\n ~1 | CellType)\n?\n\nKjetil Halvorsen\n\n> \n> i.e. If i was lust looking at say linear growth and was using lme I\n> would have written something like\n> \n> lme(NoofCells~Time*CellType,random=~1|Runs,data=CellData)\n> \n> Any thoughts/suggestions gratefully received\n> \n> Darren Shaw\n> \n> ----------------------------------------------------------------- Dr\n> Darren J Shaw Centre for Tropical Veterinary Medicine (CTVM) Royal\n> School of Veterinary Studies The University of Edinburgh Scotland\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide!\n> http://www.R-project.org/posting-guide.html\n>",
+      "body_snippet": "On 14 May 2004 at 11:11, Darren Shaw wrote:\n\n> Dear R-helpers\n> \n> I have a problem related to the use of NLME\n> \n> I think is simply a matter of getting the nlme coding correct, but i\n> cannot get my",
+      "thread_id": "thread-d36f41f2b5a0",
       "thread_depth": 1,
       "month": "2004-05"
     },
@@ -29447,18 +29447,6 @@
       "root_message_id": "msg-28886e4f45d6"
     },
     {
-      "id": "thread-0b387410c36b",
-      "subject": "How to import file from excle?",
-      "message_count": 2,
-      "participants": [
-        "Uwe Ligges",
-        "may nongmay"
-      ],
-      "started": "2004-05-11T09:06:26Z",
-      "last_reply": "2004-05-11T09:27:29Z",
-      "root_message_id": "msg-0b387410c36b"
-    },
-    {
       "id": "thread-15deb5344c3b",
       "subject": "How to import file from excle?",
       "message_count": 2,
@@ -29469,6 +29457,18 @@
       "started": "2004-05-11T09:06:26Z",
       "last_reply": "2004-05-11T09:22:26Z",
       "root_message_id": "msg-15deb5344c3b"
+    },
+    {
+      "id": "thread-0b387410c36b",
+      "subject": "How to import file from excle?",
+      "message_count": 2,
+      "participants": [
+        "Uwe Ligges",
+        "may nongmay"
+      ],
+      "started": "2004-05-11T09:06:26Z",
+      "last_reply": "2004-05-11T09:27:29Z",
+      "root_message_id": "msg-0b387410c36b"
     },
     {
       "id": "thread-0c84bfdfd9fc",
