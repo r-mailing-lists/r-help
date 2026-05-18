@@ -3593,6 +3593,25 @@
       "month": "2008-03"
     },
     {
+      "id": "msg-d76de6974ccf",
+      "message_id": "<008c01c87d29$ddf3c250$0e40210a@www.domain>",
+      "from_name": "Dimitris Rizopoulos",
+      "from_email_hash": "255e70445195f93351001d553d560dab56dbee2dac8cb6c7029fa1bd536c406c",
+      "date": "2008-03-03T12:26:54Z",
+      "subject": "[R] R function to convert a number to text",
+      "subject_clean": "R function to convert a number to text",
+      "in_reply_to": null,
+      "references": [
+        "<55511.40027.qm@web35513.mail.mud.yahoo.com>",
+        "<47CBD514.1010003@bitwrit.com.au>"
+      ],
+      "body_plain": "check also the article by John Fox in Rnews volume 5/1, May 2005, \nProgrammer's Niche 51-55:\n\nhttp://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf\n\nBest,\nDimitris\n\n----\nDimitris Rizopoulos\nBiostatistical Centre\nSchool of Public Health\nCatholic University of Leuven\n\nAddress: Kapucijnenvoer 35, Leuven, Belgium\nTel: +32/(0)16/336899\nFax: +32/(0)16/337015\nWeb: http://med.kuleuven.be/biostat/\n     http://www.student.kuleuven.be/~m0390867/dimitris.htm\n\n\n----- Original Message ----- \nFrom: \"Jim Lemon\" <jim at bitwrit.com.au>\nTo: \"lin tang\" <lynnatsd at yahoo.com>\nCc: <r-help at r-project.org>\nSent: Monday, March 03, 2008 11:38 AM\nSubject: Re: [R] R function to convert a number to text\n\n\n> lin tang wrote:\n>> hi, Dear R users -\n>>\n>> I wonder is there a written R function to convert a number to a \n>> text, say convert 1 to \"one\" , 100  to \"one hundred\". I know in \n>> xls. has such a function BAHTTEXT, does anybody know is there a \n>> similar function in R ? Thanks.\n>>\n> Hi Lin,\n> I got bored after the millions, but this should handle the smaller\n> numbers, and you can always extend it.\n>\n> digits2text<-function(x,mult=\"\") {\n>  units<-c(\"one\",\"two\",\"three\",\"four\",\"five\",\n>   \"six\",\"seven\",\"eight\",\"nine\")\n>  teens<-c(\"ten\",\"eleven\",\"twelve\",\"thirteen\",\"fourteen\",\n>   \"fifteen\",\"sixteen\",\"seventeen\",\"eighteen\",\"nineteen\")\n>  tens<-c(\"ten\",\"twenty\",\"thirty\",\"forty\",\"fifty\",\n>   \"sixty\",\"seventy\",\"eighty\",\"ninety\")\n>  digits<-rev(as.numeric(strsplit(as.character(x),\"\")[[1]]))\n>  digilen<-length(digits)\n>  if(digilen == 2 && digits[2] == 1) return(teens[digits[1]+1])\n>  digitext<-units[digits[1]]\n>  if(digilen > 1) digitext<-c(digitext,tens[digits[2]])\n>  if(digilen > 2) digitext<-c(digitext,\"hundred\",units[digits[3]])\n>  if(digilen > 3) digitext<-\n>   c(digitext,digits2text(floor(x/1000),\"thousand\"))\n>  if(digilen > 6) digitext<-\n>   c(digitext,digits2text(floor(x/1000000),\"million\"))\n>  return(paste(c(rev(digitext),mult),sep=\"\",collapse=\" \"))\n> }\n>\n> Jim\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\n\nDisclaimer: http://www.kuleuven.be/cwis/email_disclaimer.htm",
+      "body_snippet": "check also the article by John Fox in Rnews volume 5/1, May 2005, \nProgrammer's Niche 51-55:\n\nhttp://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf\n\nBest,\nDimitris\n\n----\nDimitris Rizopoulos\nBiostatisti",
+      "thread_id": "thread-3bc725603f43",
+      "thread_depth": 2,
+      "month": "2008-03"
+    },
+    {
       "id": "msg-3195ea04df0f",
       "message_id": "<59d7961d0803030426r5fbd329w7c665f75d8daecd8@mail.gmail.com>",
       "from_name": "Henrik Bengtsson",
@@ -3610,25 +3629,6 @@
       "body_snippet": "On Mon, Mar 3, 2008 at 1:25 AM, Ng Stanley <stanleyngkl at gmail.com> wrote:\n> Hi,\n>\n>  I consulted ?png, and it uses X11. is there any way to save plots into png,\n>  without using X11 ?\n\nSee \"See als",
       "thread_id": "thread-81697684af47",
       "thread_depth": 3,
-      "month": "2008-03"
-    },
-    {
-      "id": "msg-d76de6974ccf",
-      "message_id": "<008c01c87d29$ddf3c250$0e40210a@www.domain>",
-      "from_name": "Dimitris Rizopoulos",
-      "from_email_hash": "255e70445195f93351001d553d560dab56dbee2dac8cb6c7029fa1bd536c406c",
-      "date": "2008-03-03T12:26:54Z",
-      "subject": "[R] R function to convert a number to text",
-      "subject_clean": "R function to convert a number to text",
-      "in_reply_to": null,
-      "references": [
-        "<55511.40027.qm@web35513.mail.mud.yahoo.com>",
-        "<47CBD514.1010003@bitwrit.com.au>"
-      ],
-      "body_plain": "check also the article by John Fox in Rnews volume 5/1, May 2005, \nProgrammer's Niche 51-55:\n\nhttp://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf\n\nBest,\nDimitris\n\n----\nDimitris Rizopoulos\nBiostatistical Centre\nSchool of Public Health\nCatholic University of Leuven\n\nAddress: Kapucijnenvoer 35, Leuven, Belgium\nTel: +32/(0)16/336899\nFax: +32/(0)16/337015\nWeb: http://med.kuleuven.be/biostat/\n     http://www.student.kuleuven.be/~m0390867/dimitris.htm\n\n\n----- Original Message ----- \nFrom: \"Jim Lemon\" <jim at bitwrit.com.au>\nTo: \"lin tang\" <lynnatsd at yahoo.com>\nCc: <r-help at r-project.org>\nSent: Monday, March 03, 2008 11:38 AM\nSubject: Re: [R] R function to convert a number to text\n\n\n> lin tang wrote:\n>> hi, Dear R users -\n>>\n>> I wonder is there a written R function to convert a number to a \n>> text, say convert 1 to \"one\" , 100  to \"one hundred\". I know in \n>> xls. has such a function BAHTTEXT, does anybody know is there a \n>> similar function in R ? Thanks.\n>>\n> Hi Lin,\n> I got bored after the millions, but this should handle the smaller\n> numbers, and you can always extend it.\n>\n> digits2text<-function(x,mult=\"\") {\n>  units<-c(\"one\",\"two\",\"three\",\"four\",\"five\",\n>   \"six\",\"seven\",\"eight\",\"nine\")\n>  teens<-c(\"ten\",\"eleven\",\"twelve\",\"thirteen\",\"fourteen\",\n>   \"fifteen\",\"sixteen\",\"seventeen\",\"eighteen\",\"nineteen\")\n>  tens<-c(\"ten\",\"twenty\",\"thirty\",\"forty\",\"fifty\",\n>   \"sixty\",\"seventy\",\"eighty\",\"ninety\")\n>  digits<-rev(as.numeric(strsplit(as.character(x),\"\")[[1]]))\n>  digilen<-length(digits)\n>  if(digilen == 2 && digits[2] == 1) return(teens[digits[1]+1])\n>  digitext<-units[digits[1]]\n>  if(digilen > 1) digitext<-c(digitext,tens[digits[2]])\n>  if(digilen > 2) digitext<-c(digitext,\"hundred\",units[digits[3]])\n>  if(digilen > 3) digitext<-\n>   c(digitext,digits2text(floor(x/1000),\"thousand\"))\n>  if(digilen > 6) digitext<-\n>   c(digitext,digits2text(floor(x/1000000),\"million\"))\n>  return(paste(c(rev(digitext),mult),sep=\"\",collapse=\" \"))\n> }\n>\n> Jim\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide \n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n\n\nDisclaimer: http://www.kuleuven.be/cwis/email_disclaimer.htm",
-      "body_snippet": "check also the article by John Fox in Rnews volume 5/1, May 2005, \nProgrammer's Niche 51-55:\n\nhttp://cran.r-project.org/doc/Rnews/Rnews_2005-1.pdf\n\nBest,\nDimitris\n\n----\nDimitris Rizopoulos\nBiostatisti",
-      "thread_id": "thread-3bc725603f43",
-      "thread_depth": 2,
       "month": "2008-03"
     },
     {
@@ -17874,6 +17874,22 @@
       "month": "2008-03"
     },
     {
+      "id": "msg-198bf235f8ba",
+      "message_id": "<37af89ad0803100354x65e84645n2681d74ad827c8e6@mail.gmail.com>",
+      "from_name": "guillaume chaumet",
+      "from_email_hash": "bdc44da8d9b2567c1227fce55c529c7380e8fd11bd7de8278ea93cafb747c2fc",
+      "date": "2008-03-10T10:54:16Z",
+      "subject": "[R]  aov within subject and contrasts",
+      "subject_clean": "aov within subject and contrasts",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Un texte encapsul? et encod? dans un jeu de caract?res inconnu a ?t? nettoy?...\nNom : non disponible\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20080310/a09e9b94/attachment.pl",
+      "body_snippet": "Un texte encapsul? et encod? dans un jeu de caract?res inconnu a ?t? nettoy?...\nNom : non disponible\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20080310/a09e9b94/attachment.pl",
+      "thread_id": "thread-198bf235f8ba",
+      "thread_depth": 0,
+      "month": "2008-03"
+    },
+    {
       "id": "msg-69c480e0f496",
       "message_id": "<47D51358.9060703@bitwrit.com.au>",
       "from_name": "Jim Lemon",
@@ -17890,22 +17906,6 @@
       "body_snippet": "Petr PIKAL wrote:\n> \n>hello\n>\n>I want to compare the values of two columns of a dataset on a graph. \n>Which graphic do you recommend ?\n> \nHi Petr,\n\"barp\" will compare the two columns displaying the va",
       "thread_id": "thread-b6ddc31ee375",
       "thread_depth": 2,
-      "month": "2008-03"
-    },
-    {
-      "id": "msg-198bf235f8ba",
-      "message_id": "<37af89ad0803100354x65e84645n2681d74ad827c8e6@mail.gmail.com>",
-      "from_name": "guillaume chaumet",
-      "from_email_hash": "bdc44da8d9b2567c1227fce55c529c7380e8fd11bd7de8278ea93cafb747c2fc",
-      "date": "2008-03-10T10:54:16Z",
-      "subject": "[R]  aov within subject and contrasts",
-      "subject_clean": "aov within subject and contrasts",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Un texte encapsul? et encod? dans un jeu de caract?res inconnu a ?t? nettoy?...\nNom : non disponible\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20080310/a09e9b94/attachment.pl",
-      "body_snippet": "Un texte encapsul? et encod? dans un jeu de caract?res inconnu a ?t? nettoy?...\nNom : non disponible\nUrl : https://stat.ethz.ch/pipermail/r-help/attachments/20080310/a09e9b94/attachment.pl",
-      "thread_id": "thread-198bf235f8ba",
-      "thread_depth": 0,
       "month": "2008-03"
     },
     {

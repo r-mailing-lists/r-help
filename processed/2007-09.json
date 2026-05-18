@@ -35648,22 +35648,6 @@
       "month": "2007-09"
     },
     {
-      "id": "msg-8cd49539f424",
-      "message_id": "<495150.60133.qm@web32215.mail.mud.yahoo.com>",
-      "from_name": "Moshe Olshansky",
-      "from_email_hash": "71ccb545861bcc65a314f45eefa55065a3ee17931ebda47d89c205a151ee1b59",
-      "date": "2007-10-01T02:51:46Z",
-      "subject": "[R] non-linear model parameterization",
-      "subject_clean": "non-linear model parameterization",
-      "in_reply_to": "<68E7981938EAF54F987AD3848A0A6416E58310@ka-mail01.dfu.local>",
-      "references": [],
-      "body_plain": "Hi Irene,\n\nIn this case the computer is right - your gradient is\nreally singular!\nIf you scale all you parameters (g,a and b) by any\nnonzero constant c nothing changes, meaning that there\nis a \"degree of freedom\" and this causes the gradient\nto be singular.\nYou can check whether g = 0 (and then y = 0) is good.\nIf not, assume that g != 0 and divide both numerator\nand denominator by g to get y = x/(A + B*x) where A =\na/g, B = b/g.\nNow your gradient should not be singular.\nFormally, if y = x/(A + B*x) then 1/y = A/x + B or \ny' = B + A*x' where y' = 1/y and x' = 1/x, and this is\na linear model! You certainly can not use it to\nestimate A and B, but you can try to use the values\nfor A and B you get as an initial estimate for nls for\nthe original model (if you do not have a better\nstarting point).\n\nRegards,\n\nMoshe.\n\n--- Irene Mantzouni <ima at difres.dk> wrote:\n\n> Dear all,\n>  \n> I would like to fit a non-linear model of the form:\n> y=g*x/(a+b*x)\n> with nls().\n> However this model is somehow overparameterized and\n> I get the error message about\n> singular gradient matrix at initial parameter\n> estimates.\n> What I am interested in is to make inference about\n> parameters b and g, so this has to be taken into\n> account in the model formulation. \n> What options do I have?\n> Also, how is it possible to fit a partially linear\n> model? \n>  \n> Thank you!!\n>  \n> Irene Mantzouni\n> ----------------\n> PhD student\n> DIFRES\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained,\n> reproducible code.\n>",
-      "body_snippet": "Hi Irene,\n\nIn this case the computer is right - your gradient is\nreally singular!\nIf you scale all you parameters (g,a and b) by any\nnonzero constant c nothing changes, meaning that there\nis a \"degree",
-      "thread_id": "thread-8cd49539f424",
-      "thread_depth": 0,
-      "month": "2007-09"
-    },
-    {
       "id": "msg-d0a770db28f7",
       "message_id": "<4700285A.A712.00CB.0@grecc.umaryland.edu>",
       "from_name": "John Sorkin",
@@ -35676,6 +35660,22 @@
       "body_plain": "Widows XP\nR 2.3.1\n\nI have been trying to make a data structure that will contain both the coefficients from a linear regression along with column and row titles AND the call, i.e.\nmyreg<-lm(y~x+y+z)\nwhatIwant<-cbind(c(summary(myreg)$call,\"\",\"\"),summary(myreg)$coefficients)\n\nNeither the statement above, nor any one of twenty variations I have tried work. I would appreciate any advice.\nThanks,\nJohn\n\n\n\n\nJohn Sorkin M.D., Ph.D.\nChief, Biostatistics and Informatics\nUniversity of Maryland School of Medicine Division of Gerontology\nBaltimore VA Medical Center\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\n(Phone) 410-605-7119\n(Fax) 410-605-7913 (Please call phone number above prior to faxing)\n\nConfidentiality Statement:\nThis email message, including any attachments, is for the so...{{dropped}}",
       "body_snippet": "Widows XP\nR 2.3.1\n\nI have been trying to make a data structure that will contain both the coefficients from a linear regression along with column and row titles AND the call, i.e.\nmyreg<-lm(y~x+y+z)\nw",
       "thread_id": "thread-d0a770db28f7",
+      "thread_depth": 0,
+      "month": "2007-09"
+    },
+    {
+      "id": "msg-8cd49539f424",
+      "message_id": "<495150.60133.qm@web32215.mail.mud.yahoo.com>",
+      "from_name": "Moshe Olshansky",
+      "from_email_hash": "71ccb545861bcc65a314f45eefa55065a3ee17931ebda47d89c205a151ee1b59",
+      "date": "2007-10-01T02:51:46Z",
+      "subject": "[R] non-linear model parameterization",
+      "subject_clean": "non-linear model parameterization",
+      "in_reply_to": "<68E7981938EAF54F987AD3848A0A6416E58310@ka-mail01.dfu.local>",
+      "references": [],
+      "body_plain": "Hi Irene,\n\nIn this case the computer is right - your gradient is\nreally singular!\nIf you scale all you parameters (g,a and b) by any\nnonzero constant c nothing changes, meaning that there\nis a \"degree of freedom\" and this causes the gradient\nto be singular.\nYou can check whether g = 0 (and then y = 0) is good.\nIf not, assume that g != 0 and divide both numerator\nand denominator by g to get y = x/(A + B*x) where A =\na/g, B = b/g.\nNow your gradient should not be singular.\nFormally, if y = x/(A + B*x) then 1/y = A/x + B or \ny' = B + A*x' where y' = 1/y and x' = 1/x, and this is\na linear model! You certainly can not use it to\nestimate A and B, but you can try to use the values\nfor A and B you get as an initial estimate for nls for\nthe original model (if you do not have a better\nstarting point).\n\nRegards,\n\nMoshe.\n\n--- Irene Mantzouni <ima at difres.dk> wrote:\n\n> Dear all,\n>  \n> I would like to fit a non-linear model of the form:\n> y=g*x/(a+b*x)\n> with nls().\n> However this model is somehow overparameterized and\n> I get the error message about\n> singular gradient matrix at initial parameter\n> estimates.\n> What I am interested in is to make inference about\n> parameters b and g, so this has to be taken into\n> account in the model formulation. \n> What options do I have?\n> Also, how is it possible to fit a partially linear\n> model? \n>  \n> Thank you!!\n>  \n> Irene Mantzouni\n> ----------------\n> PhD student\n> DIFRES\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained,\n> reproducible code.\n>",
+      "body_snippet": "Hi Irene,\n\nIn this case the computer is right - your gradient is\nreally singular!\nIf you scale all you parameters (g,a and b) by any\nnonzero constant c nothing changes, meaning that there\nis a \"degree",
+      "thread_id": "thread-8cd49539f424",
       "thread_depth": 0,
       "month": "2007-09"
     },
@@ -45562,17 +45562,6 @@
       "root_message_id": "msg-9c49de4646ee"
     },
     {
-      "id": "thread-8cd49539f424",
-      "subject": "non-linear model parameterization",
-      "message_count": 1,
-      "participants": [
-        "Moshe Olshansky"
-      ],
-      "started": "2007-10-01T02:51:46Z",
-      "last_reply": "2007-10-01T02:51:46Z",
-      "root_message_id": "msg-8cd49539f424"
-    },
-    {
       "id": "thread-d0a770db28f7",
       "subject": "data structure with coefficients, and call from lm()",
       "message_count": 2,
@@ -45583,6 +45572,17 @@
       "started": "2007-10-01T02:51:46Z",
       "last_reply": "2007-10-01T03:00:28Z",
       "root_message_id": "msg-d0a770db28f7"
+    },
+    {
+      "id": "thread-8cd49539f424",
+      "subject": "non-linear model parameterization",
+      "message_count": 1,
+      "participants": [
+        "Moshe Olshansky"
+      ],
+      "started": "2007-10-01T02:51:46Z",
+      "last_reply": "2007-10-01T02:51:46Z",
+      "root_message_id": "msg-8cd49539f424"
     },
     {
       "id": "thread-c4d03faf7ee3",
