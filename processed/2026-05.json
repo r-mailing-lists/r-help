@@ -328,6 +328,95 @@
       "thread_id": "thread-21bb54b6b113",
       "thread_depth": 1,
       "month": "2026-05"
+    },
+    {
+      "id": "msg-4c57fc006840",
+      "message_id": "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>",
+      "from_name": "Naresh Gurbuxani",
+      "from_email_hash": "df5d90539e2666ddc66f8b815f804e76e9cbe0b9fbf72e62a714b1e3536d5dae",
+      "date": "2026-05-19T10:48:56Z",
+      "subject": "[R] From object name strings to objects",
+      "subject_clean": "From object name strings to objects",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I want to stack several dataframes using their names as strings.\n\ndf1 <- data.frame(name = \"normal\", x = rnorm(5))\ndf2 <- data.frame(name = \"uniform\", x = runif(5))\ndf3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\nmynames <- c(\"df1\", \"df2\", \"df3\")\n\nnewdf <- some_function(mynames)\n\n# Desired result\nnewdf <- do.call(rbind, list(df1, df2, df3))\n\nHow can this be done?\n\nThanks,\nNaresh",
+      "body_snippet": "I want to stack several dataframes using their names as strings.\n\ndf1 <- data.frame(name = \"normal\", x = rnorm(5))\ndf2 <- data.frame(name = \"uniform\", x = runif(5))\ndf3 <- data.frame(name = \"binomial\"",
+      "thread_id": "thread-4c57fc006840",
+      "thread_depth": 0,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-deb1f88a32bf",
+      "message_id": "<CABghstR0fJQB4CgV4cXhBDX0XNsuBqjUZmCncxT0uQL4wo+OzQ@mail.gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
+      "date": "2026-05-19T10:54:25Z",
+      "subject": "[R] From object name strings to objects",
+      "subject_clean": "From object name strings to objects",
+      "in_reply_to": "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>",
+      "references": [
+        "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>"
+      ],
+      "body_plain": "See ?mget\n\nOn Tue, May 19, 2026, 6:49 AM Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>\nwrote:\n\n>\n> I want to stack several dataframes using their names as strings.\n>\n> df1 <- data.frame(name = \"normal\", x = rnorm(5))\n> df2 <- data.frame(name = \"uniform\", x = runif(5))\n> df3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\n> mynames <- c(\"df1\", \"df2\", \"df3\")\n>\n> newdf <- some_function(mynames)\n>\n> # Desired result\n> newdf <- do.call(rbind, list(df1, df2, df3))\n>\n> How can this be done?\n>\n> Thanks,\n> Naresh\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "See ?mget\n\nOn Tue, May 19, 2026, 6:49 AM Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>\nwrote:\n\n>\n> I want to stack several dataframes using their names as strings.\n>\n> df1 <- data.frame(name = \"n",
+      "thread_id": "thread-4c57fc006840",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-ddaa91e7c231",
+      "message_id": "<184760c5-41d2-42c8-8c4f-1b2369b17689@sapo.pt>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "2f69d7457b582cf482d42f0af55a9da5756f7cf941c02bc0d05592b98d36f0f5",
+      "date": "2026-05-19T15:34:30Z",
+      "subject": "[R] From object name strings to objects",
+      "subject_clean": "From object name strings to objects",
+      "in_reply_to": "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>",
+      "references": [
+        "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>"
+      ],
+      "body_plain": "?s 11:48 de 19/05/2026, Naresh Gurbuxani escreveu:\n> \n> I want to stack several dataframes using their names as strings.\n> \n> df1 <- data.frame(name = \"normal\", x = rnorm(5))\n> df2 <- data.frame(name = \"uniform\", x = runif(5))\n> df3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\n> mynames <- c(\"df1\", \"df2\", \"df3\")\n> \n> newdf <- some_function(mynames)\n> \n> # Desired result\n> newdf <- do.call(rbind, list(df1, df2, df3))\n> \n> How can this be done?\n> \n> Thanks,\n> Naresh\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nSomething like this?\n\n\n\nfun <- function(df_names, pattern, envir = .GlobalEnv) {\n   if(missing(df_names)) {\n     if(missing(pattern)) {\n       obj_names <- ls(envir = envir)\n       df_list <- Filter(\\(x) is(x, \"data.frame\"), mget(obj_names, envir \n= envir))\n     } else {\n       df_names <- ls(pattern = pattern, envir = envir)\n       df_list <- mget(df_names, envir = envir)\n     }\n   } else df_list <- mget(df_names, envir = envir)\n   res <- do.call(rbind, df_list)\n   row.names(res) <- NULL\n   res\n}\n\ndf1 <- data.frame(name = \"normal\", x = rnorm(5))\ndf2 <- data.frame(name = \"uniform\", x = runif(5))\ndf3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\nmynames <- c(\"df1\", \"df2\", \"df3\")\n\nfun()\nfun(mynames)\nfun(pattern = \"df\")\n\n\nHope this helps,\n\nRui Barradas",
+      "body_snippet": "?s 11:48 de 19/05/2026, Naresh Gurbuxani escreveu:\n> \n> I want to stack several dataframes using their names as strings.\n> \n> df1 <- data.frame(name = \"normal\", x = rnorm(5))\n> df2 <- data.frame(name ",
+      "thread_id": "thread-4c57fc006840",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-eb56c0b338e9",
+      "message_id": "<2CAA3B3F-E361-426D-8523-2405C1417C04@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-05-19T17:14:22Z",
+      "subject": "[R] From object name strings to objects",
+      "subject_clean": "From object name strings to objects",
+      "in_reply_to": "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>",
+      "references": [
+        "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>"
+      ],
+      "body_plain": "This goal is flawed and excessively complicated to accomplish... what if someone does this:\n\nx <- 5\nmynames <- c(\"df1\", \"df2\", \"x\")\n\nthen they try rbinding a scalar with the data frames.\n\nJust re-frame your question to pull source data frames from a dedicated list of possible distributions instead and it becomes simple to implement and easy to re-use:\n\ndists <- list()\ndists [[\"normal\"]] <- data.frame(name = \"normal\", x = rnorm(5))\ndists [[\"uniform\"]]  <- data.frame(name = \"uniform\", x = runif(5))\ndists [[\"binomial\"]]  <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\nmynames <- c(\"normal\", \"binomial\")\n\nsome_function <- function(pool, nms) {\n  do.call(rbind, pool[nms])\n}\n\nnewdf <- some_function(dists, mynames)\n\nnewdf\n\n\nOn May 19, 2026 3:48:56 AM PDT, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com> wrote:\n>\n>I want to stack several dataframes using their names as strings.\n>\n>df1 <- data.frame(name = \"normal\", x = rnorm(5))\n>df2 <- data.frame(name = \"uniform\", x = runif(5))\n>df3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\n>mynames <- c(\"df1\", \"df2\", \"df3\")\n>\n>newdf <- some_function(mynames)\n>\n># Desired result\n>newdf <- do.call(rbind, list(df1, df2, df3))\n>\n>How can this be done?\n>\n>Thanks,\n>Naresh\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This goal is flawed and excessively complicated to accomplish... what if someone does this:\n\nx <- 5\nmynames <- c(\"df1\", \"df2\", \"x\")\n\nthen they try rbinding a scalar with the data frames.\n\nJust re-fram",
+      "thread_id": "thread-4c57fc006840",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-341af461e572",
+      "message_id": "<DM3PPF9A5B544E0351BA20FA71B849E4F54FA012@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>",
+      "from_name": "Naresh Gurbuxani",
+      "from_email_hash": "df5d90539e2666ddc66f8b815f804e76e9cbe0b9fbf72e62a714b1e3536d5dae",
+      "date": "2026-05-20T00:21:36Z",
+      "subject": "[R] From object name strings to objects",
+      "subject_clean": "From object name strings to objects",
+      "in_reply_to": "<184760c5-41d2-42c8-8c4f-1b2369b17689@sapo.pt>",
+      "references": [
+        "<2467FD06-CD85-474E-8200-ACEED93EB3DE@hotmail.com>",
+        "<184760c5-41d2-42c8-8c4f-1b2369b17689@sapo.pt>"
+      ],
+      "body_plain": "Very helpful\n\nThanks,\nNaresh\n\nSent from my iPhone\n\n> On May 19, 2026, at 11:34?AM, Rui Barradas <ruipbarradas at sapo.pt> wrote:\n> \n> ??s 11:48 de 19/05/2026, Naresh Gurbuxani escreveu:\n>> I want to stack several dataframes using their names as strings.\n>> df1 <- data.frame(name = \"normal\", x = rnorm(5))\n>> df2 <- data.frame(name = \"uniform\", x = runif(5))\n>> df3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\n>> mynames <- c(\"df1\", \"df2\", \"df3\")\n>> newdf <- some_function(mynames)\n>> # Desired result\n>> newdf <- do.call(rbind, list(df1, df2, df3))\n>> How can this be done?\n>> Thanks,\n>> Naresh\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n> \n> Something like this?\n> \n> \n> \n> fun <- function(df_names, pattern, envir = .GlobalEnv) {\n>  if(missing(df_names)) {\n>    if(missing(pattern)) {\n>      obj_names <- ls(envir = envir)\n>      df_list <- Filter(\\(x) is(x, \"data.frame\"), mget(obj_names, envir = envir))\n>    } else {\n>      df_names <- ls(pattern = pattern, envir = envir)\n>      df_list <- mget(df_names, envir = envir)\n>    }\n>  } else df_list <- mget(df_names, envir = envir)\n>  res <- do.call(rbind, df_list)\n>  row.names(res) <- NULL\n>  res\n> }\n> \n> df1 <- data.frame(name = \"normal\", x = rnorm(5))\n> df2 <- data.frame(name = \"uniform\", x = runif(5))\n> df3 <- data.frame(name = \"binomial\", x = rbinom(5, 2, 0.5))\n> mynames <- c(\"df1\", \"df2\", \"df3\")\n> \n> fun()\n> fun(mynames)\n> fun(pattern = \"df\")\n> \n> \n> Hope this helps,\n> \n> Rui Barradas\n>",
+      "body_snippet": "Very helpful\n\nThanks,\nNaresh\n\nSent from my iPhone\n\n> On May 19, 2026, at 11:34?AM, Rui Barradas <ruipbarradas at sapo.pt> wrote:\n> \n> ??s 11:48 de 19/05/2026, Naresh Gurbuxani escreveu:\n>> I want to s",
+      "thread_id": "thread-4c57fc006840",
+      "thread_depth": 2,
+      "month": "2026-05"
     }
   ],
   "threads": [
@@ -425,6 +514,20 @@
       "started": "2026-05-16T16:53:20Z",
       "last_reply": "2026-05-16T17:11:11Z",
       "root_message_id": "msg-21bb54b6b113"
+    },
+    {
+      "id": "thread-4c57fc006840",
+      "subject": "From object name strings to objects",
+      "message_count": 5,
+      "participants": [
+        "Ben Bolker",
+        "Jeff Newmiller",
+        "Naresh Gurbuxani",
+        "Rui Barradas"
+      ],
+      "started": "2026-05-19T10:48:56Z",
+      "last_reply": "2026-05-20T00:21:36Z",
+      "root_message_id": "msg-4c57fc006840"
     }
   ]
 }
