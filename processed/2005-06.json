@@ -6816,22 +6816,6 @@
       "month": "2005-06"
     },
     {
-      "id": "msg-6f29f7323b09",
-      "message_id": "<BF8E83A574F8FF40BD5C0266B2A4DF880153C1E1@canna.proton.intra.irsn.fr>",
-      "from_name": "PANTERA Laurent",
-      "from_email_hash": "da1e9b781383a13b8cc8a3bff2155edc8e03b51fb0b23d29e1516a9b9a0e6631",
-      "date": "2005-06-06T13:54:58Z",
-      "subject": "[R] How to vectorize",
-      "subject_clean": "How to vectorize",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)),\n                                expression(italic(phantom(0)^{137}*Cs)),\n                                expression(italic(phantom(0)^{129*m}*Te))),\n     cex=3\n     )\n\nBut, since I have a lot of isotopes to write on the plot, I would like\nto construct automatically the labels. So I wrote the code below which\nworks fine.\n\nlistenoms <- list(nom=c(\"Ge\",\"Cs\",\"Te\"),num=c(\"78\",\"137\",\"129*m\"))\nn <- length(listenoms$nom)\nresu <- \"c(\"\nfor( i in 1:(n-1))\n  {\n    resu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[i],\"}*\",\n                         listenoms$nom[i],\")),\",sep=\"\"))\n}\nresu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[n],\"}*\",\n                         listenoms$nom[n],\")))\",sep=\"\"))\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=eval(parse(text=resu)),cex=2)\n\nI assume there is a better way to do that using vectorization.\nMay you help me to find it ?\n\nThanks\nLaurent",
-      "body_snippet": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)",
-      "thread_id": "thread-6f29f7323b09",
-      "thread_depth": 0,
-      "month": "2005-06"
-    },
-    {
       "id": "msg-2c2d4224cea6",
       "message_id": "<Pine.LNX.4.61.0506061453060.24586@gannet.stats>",
       "from_name": "Prof Brian Ripley",
@@ -6847,6 +6831,22 @@
       "body_snippet": "On Mon, 6 Jun 2005, Andy Bunn wrote:\n\n>>>\n>>> R > w <- list(rnorm(10), rnorm(10))\n>>> R > x <- ts(w, start = 1980)\n>>\n>> Even though you don't get an error message this statement is\n>> erroneous.  ?ts",
       "thread_id": "thread-eb60022c0b28",
       "thread_depth": 7,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-6f29f7323b09",
+      "message_id": "<BF8E83A574F8FF40BD5C0266B2A4DF880153C1E1@canna.proton.intra.irsn.fr>",
+      "from_name": "PANTERA Laurent",
+      "from_email_hash": "da1e9b781383a13b8cc8a3bff2155edc8e03b51fb0b23d29e1516a9b9a0e6631",
+      "date": "2005-06-06T13:54:58Z",
+      "subject": "[R] How to vectorize",
+      "subject_clean": "How to vectorize",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)),\n                                expression(italic(phantom(0)^{137}*Cs)),\n                                expression(italic(phantom(0)^{129*m}*Te))),\n     cex=3\n     )\n\nBut, since I have a lot of isotopes to write on the plot, I would like\nto construct automatically the labels. So I wrote the code below which\nworks fine.\n\nlistenoms <- list(nom=c(\"Ge\",\"Cs\",\"Te\"),num=c(\"78\",\"137\",\"129*m\"))\nn <- length(listenoms$nom)\nresu <- \"c(\"\nfor( i in 1:(n-1))\n  {\n    resu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[i],\"}*\",\n                         listenoms$nom[i],\")),\",sep=\"\"))\n}\nresu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[n],\"}*\",\n                         listenoms$nom[n],\")))\",sep=\"\"))\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=eval(parse(text=resu)),cex=2)\n\nI assume there is a better way to do that using vectorization.\nMay you help me to find it ?\n\nThanks\nLaurent",
+      "body_snippet": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)",
+      "thread_id": "thread-6f29f7323b09",
+      "thread_depth": 0,
       "month": "2005-06"
     },
     {
