@@ -24209,24 +24209,6 @@
       "month": "2009-11"
     },
     {
-      "id": "msg-20a39975f205",
-      "message_id": "<644e1f320911121553h6c42da32y1d85e10f4fa89e57@mail.gmail.com>",
-      "from_name": "jim holtman",
-      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
-      "date": "2009-11-12T23:53:34Z",
-      "subject": "[R] How can this code be improved?",
-      "subject_clean": "How can this code be improved?",
-      "in_reply_to": "<98D53644-7445-4130-8FDB-00E710AD5439@pueo-owl.ch>",
-      "references": [
-        "<98D53644-7445-4130-8FDB-00E710AD5439@pueo-owl.ch>"
-      ],
-      "body_plain": "Run the script on a small subset of the data and use Rprof to profile\nthe code.  This will give you an idea of where time is being spent and\nwhere to focus for improvement.  I would suggest that you do not\nconvert the output of the 'table(t)' do a dataframe.  You can just\nextract the 'names' to get the words.  You might be spending some of\nthe time in the accessing the information in the dataframe, which is\nreally not necessary for your code.\n\nOn Thu, Nov 12, 2009 at 2:12 AM, Richard R. Liu <richard.liu at pueo-owl.ch> wrote:\n> I am running the following code on a MacBook Pro 17\" Unibody early 2009 with\n> 8GB RAM, OS X 10.5.8, R 2.10.0 Patch from Nov. 2, 2009, in 64-bit mode.\n>\n> freq.stopwords <- numeric(0)\n> freq.nonstopwords <- numeric(0)\n> token.tables <- list(0)\n> i.ss <- c(0)\n> cat(\"Beginning at \", date(), \".\\n\")\n> for (i.d in 1:length(tokens)) {\n> ? ? ? ?tt <- list(0)\n> ? ? ? ?for (i.s in 1:length(tokens[[i.d]])) {\n> ? ? ? ? ? ? ? ?t <- tolower(tokens[[i.d]][[i.s]])\n> ? ? ? ? ? ? ? ?t <- sub(\"^[[:punct:]]*\", \"\", t)\n> ? ? ? ? ? ? ? ?t <- sub(\"[[:punct:]]*$\", \"\", t)\n> ? ? ? ? ? ? ? ?t <- as.data.frame(table(t))\n> ? ? ? ? ? ? ? ?i.m <- match(t$t, stopwords)\n> ? ? ? ? ? ? ? ?i.m.is.na <- is.na(i.m)\n> ? ? ? ? ? ? ? ?i.ss <- i.ss + 1\n> ? ? ? ? ? ? ? ?freq.stopwords[i.ss] <- sum(t$Freq * !i.m.is.na)\n> ? ? ? ? ? ? ? ?freq.nonstopwords[i.ss] <- sum(t$Freq * i.m.is.na)\n> ? ? ? ? ? ? ? ?tt[[i.s]] <- data.frame(token = t$t, freq = t$Freq,\n> matches.stopword = i.m)\n> ? ? ? ?}\n> ? ? ? ?token.tables[[i.d]] <- tt\n> ? ? ? ?if (i.d %% 5 == 0) cat(i.d, \"reports completed at \", date(), \".\\n\")\n> }\n> cat(\"Terminating at \", date(), \".\\n\")\n>\n> The object in the innermost loop are:\n> * tokens: ?a list of lists. ?In the expression tokens[[i.d]][[i.s]], the\n> first index runs over 1697 reports, the second over the sentences in the\n> report, each of which consists of a vector of tokens, i.e., the character\n> strings between the white spaces in the sentence. ?One of the largest\n> reports takes up 58MB on the harddisk. ?Thus, the number of sentences can be\n> quite large, and some of the sentences are quite long (measure in tokens as\n> well as in characters).\n> * stopwords: ?is a vector of 571 words that occur very often in written\n> English.\n>\n> The code operates on sentences, converting each token in the sentence to\n> lowercase, removing punctuation at the beginning and end of the token,\n> tabulating the frequency of the unique tokens, and generating an array that\n> indicates which tokens correspond to stopwords. ?It also sums the\n> frequencies of the stopwords and that of the non-stopwords. ?The result is a\n> list of list of dataframes.\n>\n> I began running on Thursday Nov. 12, 2009 at 01:56:36. ?As of 7:52:00 510\n> reports had been processed. ?The Activity Monitor indicates no memory\n> bottleneck. ?R is using 4.31 GB of real memory, 7.23 GB of virtual memory,\n> and 1.67 GB of real memory are free.\n>\n> I admit that I am an R newbie. ?From my understanding of the \"apply\"\n> functions (e.g., lapply), I see no way to use them to simplify the loops. ?I\n> would appreciate any suggestions about making the code more \"R-like\" and,\n> above all, much faster.\n>\n> Regards,\n> Richard\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n>\n\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem that you are trying to solve?",
-      "body_snippet": "Run the script on a small subset of the data and use Rprof to profile\nthe code.  This will give you an idea of where time is being spent and\nwhere to focus for improvement.  I would suggest that you d",
-      "thread_id": "thread-83596e5deb32",
-      "thread_depth": 1,
-      "month": "2009-11"
-    },
-    {
       "id": "msg-140e1758f91e",
       "message_id": "<4AFC9FFE.6020709@stats.uwo.ca>",
       "from_name": "Duncan Murdoch",
@@ -24241,6 +24223,24 @@
       "body_plain": "On 12/11/2009 6:45 PM, Hao Cen wrote:\n> Hi,\n> \n> I have C code to produce a lot of matrices to be analyzed. As these\n> matrices are large (> 1000*10000) and are a lot (> 1000), I am thinking\n> about how to pass them from C to R effectively.\n> \n> Would you think about the following solution? In R, I create a wrapper\n> function\n> \n> passDataFromCToR = function(row, col) {\n>          mat = matrix(0, row, col)\n> \t.C(\"passDataFromCToR\",mat)[[1]]\n\nThat .C call doesn't match the header of the function below:  you didn't \npass row and col.\n\n> }\n> \n> It wraps the following C function\n> void passDataFromCToR (double *m, int *row, int* col){\n>    mymat = f() // my c function to produce a matrix\n>    // then I copy mymat to m element by element via a loop\n> \n> }\n> \n> Then to use these functions, I would write in R\n> mat = passDataFromCToR(1000, 10000)\n> \n> Two issues with this approach are that 1) I have to copy the data once and\n> 2)to the worse, in R I have to know the dimension of the matrices to be\n> passed from C. This information is not always available.\n\nWhy would you have to copy the data?  Just tell your C function to use \nthe memory that R sent to it, instead of copying entries into it.  (R \nmay be doing a copy when you extract the results, though.)\n\nIf your C code can't use memory provided to it, then there are no simple \nways to avoid copying.  The complicated way is to use the .Call \ninterface instead of .C.  There are examples in Writing R Extensions. \nThey *will* require modifications to your code if it can't take a \npointer to the memory to use.\n\nFor the question of the dimensions being unknown in advance:  Just write \ntwo functions.  The first does the calculations up to the point where it \nneeds the memory, the second works on an appropriately sized array, that \nyour R code allocated based on the first result.  Or use the .Call() \ninterface.\n\nDuncan Murdoch\n\n> \n> I would appreciate if you share with me your thoughts on how to solve this\n> problem better.\n> \n> thanks\n> \n> Jeff\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "On 12/11/2009 6:45 PM, Hao Cen wrote:\n> Hi,\n> \n> I have C code to produce a lot of matrices to be analyzed. As these\n> matrices are large (> 1000*10000) and are a lot (> 1000), I am thinking\n> about h",
       "thread_id": "thread-32d3888b28de",
+      "thread_depth": 1,
+      "month": "2009-11"
+    },
+    {
+      "id": "msg-20a39975f205",
+      "message_id": "<644e1f320911121553h6c42da32y1d85e10f4fa89e57@mail.gmail.com>",
+      "from_name": "jim holtman",
+      "from_email_hash": "46f979d1a5bf6fa8b5559d3a049add9a0eb45fffc6a219e7401d97ba07ef9a0f",
+      "date": "2009-11-12T23:53:34Z",
+      "subject": "[R] How can this code be improved?",
+      "subject_clean": "How can this code be improved?",
+      "in_reply_to": "<98D53644-7445-4130-8FDB-00E710AD5439@pueo-owl.ch>",
+      "references": [
+        "<98D53644-7445-4130-8FDB-00E710AD5439@pueo-owl.ch>"
+      ],
+      "body_plain": "Run the script on a small subset of the data and use Rprof to profile\nthe code.  This will give you an idea of where time is being spent and\nwhere to focus for improvement.  I would suggest that you do not\nconvert the output of the 'table(t)' do a dataframe.  You can just\nextract the 'names' to get the words.  You might be spending some of\nthe time in the accessing the information in the dataframe, which is\nreally not necessary for your code.\n\nOn Thu, Nov 12, 2009 at 2:12 AM, Richard R. Liu <richard.liu at pueo-owl.ch> wrote:\n> I am running the following code on a MacBook Pro 17\" Unibody early 2009 with\n> 8GB RAM, OS X 10.5.8, R 2.10.0 Patch from Nov. 2, 2009, in 64-bit mode.\n>\n> freq.stopwords <- numeric(0)\n> freq.nonstopwords <- numeric(0)\n> token.tables <- list(0)\n> i.ss <- c(0)\n> cat(\"Beginning at \", date(), \".\\n\")\n> for (i.d in 1:length(tokens)) {\n> ? ? ? ?tt <- list(0)\n> ? ? ? ?for (i.s in 1:length(tokens[[i.d]])) {\n> ? ? ? ? ? ? ? ?t <- tolower(tokens[[i.d]][[i.s]])\n> ? ? ? ? ? ? ? ?t <- sub(\"^[[:punct:]]*\", \"\", t)\n> ? ? ? ? ? ? ? ?t <- sub(\"[[:punct:]]*$\", \"\", t)\n> ? ? ? ? ? ? ? ?t <- as.data.frame(table(t))\n> ? ? ? ? ? ? ? ?i.m <- match(t$t, stopwords)\n> ? ? ? ? ? ? ? ?i.m.is.na <- is.na(i.m)\n> ? ? ? ? ? ? ? ?i.ss <- i.ss + 1\n> ? ? ? ? ? ? ? ?freq.stopwords[i.ss] <- sum(t$Freq * !i.m.is.na)\n> ? ? ? ? ? ? ? ?freq.nonstopwords[i.ss] <- sum(t$Freq * i.m.is.na)\n> ? ? ? ? ? ? ? ?tt[[i.s]] <- data.frame(token = t$t, freq = t$Freq,\n> matches.stopword = i.m)\n> ? ? ? ?}\n> ? ? ? ?token.tables[[i.d]] <- tt\n> ? ? ? ?if (i.d %% 5 == 0) cat(i.d, \"reports completed at \", date(), \".\\n\")\n> }\n> cat(\"Terminating at \", date(), \".\\n\")\n>\n> The object in the innermost loop are:\n> * tokens: ?a list of lists. ?In the expression tokens[[i.d]][[i.s]], the\n> first index runs over 1697 reports, the second over the sentences in the\n> report, each of which consists of a vector of tokens, i.e., the character\n> strings between the white spaces in the sentence. ?One of the largest\n> reports takes up 58MB on the harddisk. ?Thus, the number of sentences can be\n> quite large, and some of the sentences are quite long (measure in tokens as\n> well as in characters).\n> * stopwords: ?is a vector of 571 words that occur very often in written\n> English.\n>\n> The code operates on sentences, converting each token in the sentence to\n> lowercase, removing punctuation at the beginning and end of the token,\n> tabulating the frequency of the unique tokens, and generating an array that\n> indicates which tokens correspond to stopwords. ?It also sums the\n> frequencies of the stopwords and that of the non-stopwords. ?The result is a\n> list of list of dataframes.\n>\n> I began running on Thursday Nov. 12, 2009 at 01:56:36. ?As of 7:52:00 510\n> reports had been processed. ?The Activity Monitor indicates no memory\n> bottleneck. ?R is using 4.31 GB of real memory, 7.23 GB of virtual memory,\n> and 1.67 GB of real memory are free.\n>\n> I admit that I am an R newbie. ?From my understanding of the \"apply\"\n> functions (e.g., lapply), I see no way to use them to simplify the loops. ?I\n> would appreciate any suggestions about making the code more \"R-like\" and,\n> above all, much faster.\n>\n> Regards,\n> Richard\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n>\n\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem that you are trying to solve?",
+      "body_snippet": "Run the script on a small subset of the data and use Rprof to profile\nthe code.  This will give you an idea of where time is being spent and\nwhere to focus for improvement.  I would suggest that you d",
+      "thread_id": "thread-83596e5deb32",
       "thread_depth": 1,
       "month": "2009-11"
     },
@@ -31191,6 +31191,24 @@
       "month": "2009-11"
     },
     {
+      "id": "msg-1486d5bf22c9",
+      "message_id": "<26378547.post@talk.nabble.com>",
+      "from_name": "cls59",
+      "from_email_hash": "61a5157bf3b50056b8fad9b559d93b86915f2e7b847327766122b4f2cfc76e33",
+      "date": "2009-11-16T20:06:05Z",
+      "subject": "[R] Writing a data frame in an excel file",
+      "subject_clean": "Writing a data frame in an excel file",
+      "in_reply_to": "<26378240.post@talk.nabble.com>",
+      "references": [
+        "<26378240.post@talk.nabble.com>"
+      ],
+      "body_plain": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls file into a .csv file. Thanks in advance\n> \n\n\nBase R cannot write .xls files by it's self.  You should output CSV using\nwrite.csv():\n\n  write.csv( dataFrame, file = 'results.csv' )\n\nIf you are using R on windows, then the RODBC package provides a mechanism\nfor dumping data frames directly to Excel files, possibly with multiple\nsheets:\n\n  require( RODBC )\n\n  xlsFile <- odbcConnectExcel( 'results.xls', readOnly = F )\n\n  sqlSave( xlsFile, dataFrame, tablename = 'R Results', rownames = F )\n\n  odbcCloseAll()\n\n\nThe tablename argument to sqlSave allows you to assign a name to the excel\nsheet that will contain the data.frame.\n\n\n-Charlie\n\n-----\nCharlie Sharpsteen\nUndergraduate\nEnvironmental Resources Engineering\nHumboldt State University\n-- \nView this message in context: http://old.nabble.com/Writing-a-data-frame-in-an-excel-file-tp26378240p26378547.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls ",
+      "thread_id": "thread-c5da7db07397",
+      "thread_depth": 1,
+      "month": "2009-11"
+    },
+    {
       "id": "msg-8ae35801bf43",
       "message_id": "<65CC7B87-2F10-453F-8EF2-BFF9C12BAA67@comcast.net>",
       "from_name": "David Winsemius",
@@ -31208,24 +31226,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20091116/155e3667/attachment-0001.pl>",
       "thread_id": "thread-072b94ae2a86",
       "thread_depth": 3,
-      "month": "2009-11"
-    },
-    {
-      "id": "msg-1486d5bf22c9",
-      "message_id": "<26378547.post@talk.nabble.com>",
-      "from_name": "cls59",
-      "from_email_hash": "61a5157bf3b50056b8fad9b559d93b86915f2e7b847327766122b4f2cfc76e33",
-      "date": "2009-11-16T20:06:05Z",
-      "subject": "[R] Writing a data frame in an excel file",
-      "subject_clean": "Writing a data frame in an excel file",
-      "in_reply_to": "<26378240.post@talk.nabble.com>",
-      "references": [
-        "<26378240.post@talk.nabble.com>"
-      ],
-      "body_plain": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls file into a .csv file. Thanks in advance\n> \n\n\nBase R cannot write .xls files by it's self.  You should output CSV using\nwrite.csv():\n\n  write.csv( dataFrame, file = 'results.csv' )\n\nIf you are using R on windows, then the RODBC package provides a mechanism\nfor dumping data frames directly to Excel files, possibly with multiple\nsheets:\n\n  require( RODBC )\n\n  xlsFile <- odbcConnectExcel( 'results.xls', readOnly = F )\n\n  sqlSave( xlsFile, dataFrame, tablename = 'R Results', rownames = F )\n\n  odbcCloseAll()\n\n\nThe tablename argument to sqlSave allows you to assign a name to the excel\nsheet that will contain the data.frame.\n\n\n-Charlie\n\n-----\nCharlie Sharpsteen\nUndergraduate\nEnvironmental Resources Engineering\nHumboldt State University\n-- \nView this message in context: http://old.nabble.com/Writing-a-data-frame-in-an-excel-file-tp26378240p26378547.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "anna_l wrote:\n> \n> Hello, I am having trouble by using the write.table function to write a\n> data frame of 4 columns and 7530 rows. I don?t  know if I should just use\n> a sep=\"\\n\" and change the .xls ",
-      "thread_id": "thread-c5da7db07397",
-      "thread_depth": 1,
       "month": "2009-11"
     },
     {
@@ -36391,6 +36391,22 @@
       "month": "2009-11"
     },
     {
+      "id": "msg-dfed987df7f7",
+      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
+      "from_name": "Jason Rupert",
+      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
+      "date": "2009-11-18T22:57:26Z",
+      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
+      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
+      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
+      "thread_id": "thread-dfed987df7f7",
+      "thread_depth": 0,
+      "month": "2009-11"
+    },
+    {
       "id": "msg-7924b044359a",
       "message_id": "<EC0F8FF776F3F74E9C63CE16641C962804115C43@AKLEXB02.hort.net.nz>",
       "from_name": "Peter Alspach",
@@ -36408,22 +36424,6 @@
       "body_snippet": "Tena koe Martin\n\nThis is what I get (it is unclear to me why you don't tell use\nspecifically what you get):\n\nplot(1,1, xlim=c(1,10), ylim=c(0,10000), log=\"y\", type='n')\nWarning message:\nIn plot.window",
       "thread_id": "thread-5c90582e074e",
       "thread_depth": 3,
-      "month": "2009-11"
-    },
-    {
-      "id": "msg-dfed987df7f7",
-      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
-      "from_name": "Jason Rupert",
-      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
-      "date": "2009-11-18T22:57:26Z",
-      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
-      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
-      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
-      "thread_id": "thread-dfed987df7f7",
-      "thread_depth": 0,
       "month": "2009-11"
     },
     {
@@ -73892,6 +73892,17 @@
       "root_message_id": "msg-072d4c4cb53c"
     },
     {
+      "id": "thread-a35faca75f18",
+      "subject": "Repeated measures unbalanced in a split-split design",
+      "message_count": 1,
+      "participants": [
+        "Marcelo Laia"
+      ],
+      "started": "2009-11-22T14:42:32Z",
+      "last_reply": "2009-11-22T14:42:32Z",
+      "root_message_id": "msg-a35faca75f18"
+    },
+    {
       "id": "thread-1cce62023df0",
       "subject": "How to make a matrix of a number of factors?",
       "message_count": 2,
@@ -73902,17 +73913,6 @@
       "started": "2009-11-22T14:42:32Z",
       "last_reply": "2009-11-22T14:59:21Z",
       "root_message_id": "msg-1cce62023df0"
-    },
-    {
-      "id": "thread-a35faca75f18",
-      "subject": "Repeated measures unbalanced in a split-split design",
-      "message_count": 1,
-      "participants": [
-        "Marcelo Laia"
-      ],
-      "started": "2009-11-22T14:42:32Z",
-      "last_reply": "2009-11-22T14:42:32Z",
-      "root_message_id": "msg-a35faca75f18"
     },
     {
       "id": "thread-6e0929b32f5e",
