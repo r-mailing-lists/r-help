@@ -298,22 +298,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-8ad8c0598787",
-      "message_id": "<8CAC1CC2E94D16F-940-17C8@webmail-mf04.sysops.aol.com>",
-      "from_name": "Thomas P C Chu",
-      "from_email_hash": "a5a903d88aefdb83decb5bef603f2533cdebf8463314bdfde8c6babd0a425f4f",
-      "date": "2008-08-01T09:00:29Z",
-      "subject": "[R] drop1() seems to give unexpected results compare to anova()",
-      "subject_clean": "drop1() seems to give unexpected results compare to anova()",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear all,\n\nI have been trying to investigate the behaviour of different weights in \nweighted regression for a dataset with lots of missing data. As a start \nI simulated some data using the following:\n\nlibrary(MASS)\nN <- 200\nsigma <- matrix(c(1, .5, .5, 1), nrow = 2)\nsim.set <- as.data.frame(mvrnorm(N, c(0, 0), sigma))\ncolnames(sim.set) <- c('x1', 'x2') # x1 & x2 are correlated\nsim.set$x3 <- rnorm(N, 0, 1) # x3 is independent\nsim.set$x4 <- rnorm(N, 0, 1) # x4 is red herring\nsim.set$y = 4 * sim.set$x1 + 5 * sim.set$x2 + 6 * sim.set$x3 # y is \noutcome\n\nI then checked the correlation of my simulated data and fitted a linear \nregression to check if y = 4 * x1 + 5 * x2 + 6 * x3 indeed.\n\nround(cor(sim.set), 2)\nsummary(model <- lm(y ~ ., data = sim.set))\n\nCoefficients:\n Estimate Std. Error t value Pr(>|t|)\n(Intercept) -5.423e-17 1.256e-16 -4.320e-01 0.666\nx1 4.000e+00 1.388e-16 2.881e+16 <2e-16 ***\nx2 5.000e+00 1.441e-16 3.470e+16 <2e-16 ***\nx3 6.000e+00 1.188e-16 5.051e+16 <2e-16 ***\nx4 -8.150e-18 1.165e-16 -7.000e-02 0.944\n\nanova(model)\n\n Df Sum Sq Mean Sq F value Pr(>F)\nx1 1 8686.1 8686.1 2.8218e+33 <2e-16 ***\nx2 1 5568.7 5568.7 1.8091e+33 <2e-16 ***\nx3 1 7852.1 7852.1 2.5509e+33 <2e-16 ***\nx4 1 1.507e-32 1.507e-32 4.9000e-03 0.9443\nResiduals 195 6.002e-28 3.078e-30\n\nAll was well so far, as x4 was identified as not significant and its \ncoeff was almost 0 (because I made it so in the first place). Now I \nexpected it to be dropped in stepwise:\n\nstep(model, direction = 'both', test = 'F')\ndrop1(model, test = 'F')\ndropterm(model, test = 'F')\n\n Df Sum of Sq RSS AIC F value Pr(F)\n<none> 6.002e-28 -13585.7\nx1 1 2555.1 2555.1 517.5 8.3006e+32 < 2.2e-16 ***\nx2 1 3707.0 3707.0 591.9 1.2043e+33 < 2.2e-16 ***\nx3 1 7851.9 7851.9 742.0 2.5508e+33 < 2.2e-16 ***\nx4 1 2.118e-27 2.718e-27 -13285.6 6.8806e+02 < 2.2e-16 ***\n\nNeither of those 3 lines of commands managed to drop x4 and its P value \nmagically decreased from 0.94 to almost 0! I am also baffled by how R \ncalculated those RSS. However, if I fitted the smaller model and \ncompared it with the original one by hand, I got the expected answer:\n\nsummary(model2 <- lm(y ~ x1 + x2 + x3, data = sim.set))\nanova(model, model2, test = 'F')\n\nModel 1: y ~ x1 + x2 + x3 + x4\nModel 2: y ~ x1 + x2 + x3\n Res.Df RSS Df Sum of Sq F Pr(>F)\n1 195 6.0025e-28\n2 196 6.0026e-28 -1 -2.0000e-32 0.0049 0.9443\n\nInterestingly, if I had started from a null model I ended up with y = 4 \n* x1 + 5 * x2 + 6 * x3 and R did not add x4 into the model as expected.\n\nsummary(model1 <- lm(y ~ 1, data = sim.set))\nstep(model1, direction = 'both', scope = .~. + x1 + x2 + x3 + x4, test \n= 'F')\nadd1(model1, scope = .~. + x1 + x2 + x3 + x4, test = 'F')\naddterm(model1, scope = .~. + x1 + x2 + x3 + x4, test = 'F')\n\n Df Sum of Sq RSS AIC F value Pr(F)\n<none> 22107.0 943.1\nx1 1 8686.1 13420.8 845.2 128.1478 <2e-16 ***\nx2 1 11658.7 10448.3 795.2 220.9377 <2e-16 ***\nx3 1 11045.4 11061.6 806.6 197.7096 <2e-16 ***\nx4 1 13.4 22093.6 944.9 0.1199 0.7295\n\nI'm not sure what is going on. I am running R 2.7.1 on Ubuntu Linux, \nwith all components up to date. Thank you in advance for all your \nthoughts and replies.\n\nYours sincerely,\nThomas P C Chu\n\nUniversity of Leicester\nLE1 7RH\nUK\n\n________________________________________________________________________\nAOL Email goes Mobile! You can now read your AOL Emails whilst on the \nmove. Sign up for a free AOL Email account with unlimited storage today.\n\n\n\n**************************************\nSee what's new at http://www.aol.com",
-      "body_snippet": "Dear all,\n\nI have been trying to investigate the behaviour of different weights in \nweighted regression for a dataset with lots of missing data. As a start \nI simulated some data using the following:\n",
-      "thread_id": "thread-8ad8c0598787",
-      "thread_depth": 0,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-da883e4d681e",
       "message_id": "<alpine.LFD.1.10.0808010958050.13739@gannet.stats.ox.ac.uk>",
       "from_name": "Prof Brian Ripley",
@@ -329,6 +313,22 @@
       "body_snippet": "Please do read ?apply (see the posting guide)\n\n      If 'X' is not an array but has a dimension attribute, 'apply'\n      attempts to coerce it to an array via 'as.matrix' if it is\n      two-dimensiona",
       "thread_id": "thread-5f25ff4ede13",
       "thread_depth": 1,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-8ad8c0598787",
+      "message_id": "<8CAC1CC2E94D16F-940-17C8@webmail-mf04.sysops.aol.com>",
+      "from_name": "Thomas P C Chu",
+      "from_email_hash": "a5a903d88aefdb83decb5bef603f2533cdebf8463314bdfde8c6babd0a425f4f",
+      "date": "2008-08-01T09:00:29Z",
+      "subject": "[R] drop1() seems to give unexpected results compare to anova()",
+      "subject_clean": "drop1() seems to give unexpected results compare to anova()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI have been trying to investigate the behaviour of different weights in \nweighted regression for a dataset with lots of missing data. As a start \nI simulated some data using the following:\n\nlibrary(MASS)\nN <- 200\nsigma <- matrix(c(1, .5, .5, 1), nrow = 2)\nsim.set <- as.data.frame(mvrnorm(N, c(0, 0), sigma))\ncolnames(sim.set) <- c('x1', 'x2') # x1 & x2 are correlated\nsim.set$x3 <- rnorm(N, 0, 1) # x3 is independent\nsim.set$x4 <- rnorm(N, 0, 1) # x4 is red herring\nsim.set$y = 4 * sim.set$x1 + 5 * sim.set$x2 + 6 * sim.set$x3 # y is \noutcome\n\nI then checked the correlation of my simulated data and fitted a linear \nregression to check if y = 4 * x1 + 5 * x2 + 6 * x3 indeed.\n\nround(cor(sim.set), 2)\nsummary(model <- lm(y ~ ., data = sim.set))\n\nCoefficients:\n Estimate Std. Error t value Pr(>|t|)\n(Intercept) -5.423e-17 1.256e-16 -4.320e-01 0.666\nx1 4.000e+00 1.388e-16 2.881e+16 <2e-16 ***\nx2 5.000e+00 1.441e-16 3.470e+16 <2e-16 ***\nx3 6.000e+00 1.188e-16 5.051e+16 <2e-16 ***\nx4 -8.150e-18 1.165e-16 -7.000e-02 0.944\n\nanova(model)\n\n Df Sum Sq Mean Sq F value Pr(>F)\nx1 1 8686.1 8686.1 2.8218e+33 <2e-16 ***\nx2 1 5568.7 5568.7 1.8091e+33 <2e-16 ***\nx3 1 7852.1 7852.1 2.5509e+33 <2e-16 ***\nx4 1 1.507e-32 1.507e-32 4.9000e-03 0.9443\nResiduals 195 6.002e-28 3.078e-30\n\nAll was well so far, as x4 was identified as not significant and its \ncoeff was almost 0 (because I made it so in the first place). Now I \nexpected it to be dropped in stepwise:\n\nstep(model, direction = 'both', test = 'F')\ndrop1(model, test = 'F')\ndropterm(model, test = 'F')\n\n Df Sum of Sq RSS AIC F value Pr(F)\n<none> 6.002e-28 -13585.7\nx1 1 2555.1 2555.1 517.5 8.3006e+32 < 2.2e-16 ***\nx2 1 3707.0 3707.0 591.9 1.2043e+33 < 2.2e-16 ***\nx3 1 7851.9 7851.9 742.0 2.5508e+33 < 2.2e-16 ***\nx4 1 2.118e-27 2.718e-27 -13285.6 6.8806e+02 < 2.2e-16 ***\n\nNeither of those 3 lines of commands managed to drop x4 and its P value \nmagically decreased from 0.94 to almost 0! I am also baffled by how R \ncalculated those RSS. However, if I fitted the smaller model and \ncompared it with the original one by hand, I got the expected answer:\n\nsummary(model2 <- lm(y ~ x1 + x2 + x3, data = sim.set))\nanova(model, model2, test = 'F')\n\nModel 1: y ~ x1 + x2 + x3 + x4\nModel 2: y ~ x1 + x2 + x3\n Res.Df RSS Df Sum of Sq F Pr(>F)\n1 195 6.0025e-28\n2 196 6.0026e-28 -1 -2.0000e-32 0.0049 0.9443\n\nInterestingly, if I had started from a null model I ended up with y = 4 \n* x1 + 5 * x2 + 6 * x3 and R did not add x4 into the model as expected.\n\nsummary(model1 <- lm(y ~ 1, data = sim.set))\nstep(model1, direction = 'both', scope = .~. + x1 + x2 + x3 + x4, test \n= 'F')\nadd1(model1, scope = .~. + x1 + x2 + x3 + x4, test = 'F')\naddterm(model1, scope = .~. + x1 + x2 + x3 + x4, test = 'F')\n\n Df Sum of Sq RSS AIC F value Pr(F)\n<none> 22107.0 943.1\nx1 1 8686.1 13420.8 845.2 128.1478 <2e-16 ***\nx2 1 11658.7 10448.3 795.2 220.9377 <2e-16 ***\nx3 1 11045.4 11061.6 806.6 197.7096 <2e-16 ***\nx4 1 13.4 22093.6 944.9 0.1199 0.7295\n\nI'm not sure what is going on. I am running R 2.7.1 on Ubuntu Linux, \nwith all components up to date. Thank you in advance for all your \nthoughts and replies.\n\nYours sincerely,\nThomas P C Chu\n\nUniversity of Leicester\nLE1 7RH\nUK\n\n________________________________________________________________________\nAOL Email goes Mobile! You can now read your AOL Emails whilst on the \nmove. Sign up for a free AOL Email account with unlimited storage today.\n\n\n\n**************************************\nSee what's new at http://www.aol.com",
+      "body_snippet": "Dear all,\n\nI have been trying to investigate the behaviour of different weights in \nweighted regression for a dataset with lots of missing data. As a start \nI simulated some data using the following:\n",
+      "thread_id": "thread-8ad8c0598787",
+      "thread_depth": 0,
       "month": "2008-08"
     },
     {
@@ -12807,22 +12807,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-d1dda2981c91",
-      "message_id": "<18893669.post@talk.nabble.com>",
-      "from_name": "Rajasekaramya",
-      "from_email_hash": "13846d08be8fe81d42fd729315e26256dec89e95917743adde20ef934763bca7",
-      "date": "2008-08-08T15:11:34Z",
-      "subject": "[R]  PDF help",
-      "subject_clean": "PDF help",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "hi there\n\nIs there any way to create automatic bookmarks for the pdf while writing the\nplots in the pdf.\n\nRamya \n-- \nView this message in context: http://www.nabble.com/PDF-help-tp18893669p18893669.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "hi there\n\nIs there any way to create automatic bookmarks for the pdf while writing the\nplots in the pdf.\n\nRamya \n-- \nView this message in context: http://www.nabble.com/PDF-help-tp18893669p18893669.ht",
-      "thread_id": "thread-d1dda2981c91",
-      "thread_depth": 0,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-e1a9e52d9d91",
       "message_id": "<alpine.LFD.1.10.0808081608400.1613@auk.stats.ox.ac.uk>",
       "from_name": "Prof Brian Ripley",
@@ -12838,6 +12822,22 @@
       "body_snippet": "Is your RGtk2 up to date?  That is where gladeXMLNew comes from, and it is \nin my copy (2.12.5-3).  Specifically I get\n\n> sessionInfo()\nR version 2.7.1 (2008-06-20)\nx86_64-unknown-linux-gnu\n...\nother ",
       "thread_id": "thread-a0bce623492b",
       "thread_depth": 1,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-d1dda2981c91",
+      "message_id": "<18893669.post@talk.nabble.com>",
+      "from_name": "Rajasekaramya",
+      "from_email_hash": "13846d08be8fe81d42fd729315e26256dec89e95917743adde20ef934763bca7",
+      "date": "2008-08-08T15:11:34Z",
+      "subject": "[R]  PDF help",
+      "subject_clean": "PDF help",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "hi there\n\nIs there any way to create automatic bookmarks for the pdf while writing the\nplots in the pdf.\n\nRamya \n-- \nView this message in context: http://www.nabble.com/PDF-help-tp18893669p18893669.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "hi there\n\nIs there any way to create automatic bookmarks for the pdf while writing the\nplots in the pdf.\n\nRamya \n-- \nView this message in context: http://www.nabble.com/PDF-help-tp18893669p18893669.ht",
+      "thread_id": "thread-d1dda2981c91",
+      "thread_depth": 0,
       "month": "2008-08"
     },
     {
@@ -37265,25 +37265,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-a80291de248b",
-      "message_id": "<000401c90493$1c3c0950$54b41bf0$@edu>",
-      "from_name": "Richard M. Heiberger",
-      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
-      "date": "2008-08-22T20:10:02Z",
-      "subject": "[R] History pruning",
-      "subject_clean": "History pruning",
-      "in_reply_to": "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>",
-      "references": [
-        "<000a01c8f402$46039150$d20ab3f0$@edu>",
-        "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>"
-      ],
-      "body_plain": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent to the *R* buffer by C-c\nC-n are\nexplicitly excluded from history.  Lines picked up from a saved transcript\nfile aren't in history.  Will your program handle this correctly:\n\naa <- bb +\ncc\n\n?  It is valid code.  Suppressing the line with cc will make it not valid\ncode.\n\n\nRich",
-      "body_snippet": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent t",
-      "thread_id": "thread-b0eab93b76f1",
-      "thread_depth": 4,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-ad37993c247e",
       "message_id": "<000301c90493$1beb0320$53c10960$@edu>",
       "from_name": "Richard M. Heiberger",
@@ -37301,6 +37282,25 @@
       "body_snippet": "Bernhard and Irina, \n\nWhile tailoring the Rcmdr menu directly does work, I strongly do not\nrecommend it.  It will lead to mass confusion, most likely for the author,\nseveral\nmonths from now when it is",
       "thread_id": "thread-4328d81f8674",
       "thread_depth": 3,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-a80291de248b",
+      "message_id": "<000401c90493$1c3c0950$54b41bf0$@edu>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2008-08-22T20:10:02Z",
+      "subject": "[R] History pruning",
+      "subject_clean": "History pruning",
+      "in_reply_to": "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>",
+      "references": [
+        "<000a01c8f402$46039150$d20ab3f0$@edu>",
+        "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>"
+      ],
+      "body_plain": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent to the *R* buffer by C-c\nC-n are\nexplicitly excluded from history.  Lines picked up from a saved transcript\nfile aren't in history.  Will your program handle this correctly:\n\naa <- bb +\ncc\n\n?  It is valid code.  Suppressing the line with cc will make it not valid\ncode.\n\n\nRich",
+      "body_snippet": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent t",
+      "thread_id": "thread-b0eab93b76f1",
+      "thread_depth": 4,
       "month": "2008-08"
     },
     {
@@ -49088,22 +49088,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-6471231f21da",
-      "message_id": "<463336.484.qm@web46402.mail.sp1.yahoo.com>",
-      "from_name": "Yuan Jian",
-      "from_email_hash": "48f4d665a503f9a4caa462fbf633b7f07a73443ab1a3b0039d0491b6fd1599ba",
-      "date": "2008-08-31T11:06:54Z",
-      "subject": "[R] give all combinations",
-      "subject_clean": "give all combinations",
-      "in_reply_to": "<loom.20080831T083409-869@post.gmane.org>",
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/a2fbb9ac/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/a2fbb9ac/attachment.pl>",
-      "thread_id": "thread-ef8bef8d5922",
-      "thread_depth": 2,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-cb9648035b67",
       "message_id": "<159317.37190.qm@web46405.mail.sp1.yahoo.com>",
       "from_name": "Yuan Jian",
@@ -49115,6 +49099,22 @@
       "references": [],
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/ef772b4e/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/ef772b4e/attachment.pl>",
+      "thread_id": "thread-ef8bef8d5922",
+      "thread_depth": 2,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-6471231f21da",
+      "message_id": "<463336.484.qm@web46402.mail.sp1.yahoo.com>",
+      "from_name": "Yuan Jian",
+      "from_email_hash": "48f4d665a503f9a4caa462fbf633b7f07a73443ab1a3b0039d0491b6fd1599ba",
+      "date": "2008-08-31T11:06:54Z",
+      "subject": "[R] give all combinations",
+      "subject_clean": "give all combinations",
+      "in_reply_to": "<loom.20080831T083409-869@post.gmane.org>",
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/a2fbb9ac/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/a2fbb9ac/attachment.pl>",
       "thread_id": "thread-ef8bef8d5922",
       "thread_depth": 2,
       "month": "2008-08"
@@ -50206,6 +50206,17 @@
       "root_message_id": "msg-3ec7750f2ca2"
     },
     {
+      "id": "thread-f392b0061873",
+      "subject": "Distance measure for large sparse matrix",
+      "message_count": 1,
+      "participants": [
+        "Messing, Solomon O."
+      ],
+      "started": "2008-08-01T18:45:09Z",
+      "last_reply": "2008-08-01T18:45:09Z",
+      "root_message_id": "msg-f392b0061873"
+    },
+    {
       "id": "thread-b6532bfe339a",
       "subject": "correlation between rows of data.frame",
       "message_count": 3,
@@ -50217,17 +50228,6 @@
       "started": "2008-08-01T18:45:09Z",
       "last_reply": "2008-08-02T09:17:49Z",
       "root_message_id": "msg-b6532bfe339a"
-    },
-    {
-      "id": "thread-f392b0061873",
-      "subject": "Distance measure for large sparse matrix",
-      "message_count": 1,
-      "participants": [
-        "Messing, Solomon O."
-      ],
-      "started": "2008-08-01T18:45:09Z",
-      "last_reply": "2008-08-01T18:45:09Z",
-      "root_message_id": "msg-f392b0061873"
     },
     {
       "id": "thread-629d9368029a",
