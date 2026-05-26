@@ -2539,3 +2539,666 @@ Sent from my phone. Please excuse my brevity.
 	[[alternative HTML version deleted]]
 
 
+From @vi@e@gross m@iii@g oii gm@ii@com  Mon May 25 03:52:02 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Sun, 24 May 2026 21:52:02 -0400
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <DM3PPF9A5B544E0305FC987F9B8743EBC24FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+References: <7A0FCCBC-34FD-47BE-9FAC-34756CB764D5@hotmail.com>
+ <CAKZQJMCgyTBHyagpJ5TTmx-QAuYB0xg++PdB_qDA+Mhrra1kag@mail.gmail.com>
+ <DM3PPF9A5B544E0305FC987F9B8743EBC24FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+Message-ID: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+
+John,
+
+200 GB is indeed a big amount of data as many machines have much less working memory albeit they may be able to save some virtual memory on disk if properly configured.
+
+I have not used the tools you mention but wonder if your underlying data files change or are stable?
+
+If they mostly do not change, one possible approach is to have your program save the list of filenames as well as the last changed date. When the program runs again, it can check for the existence of new files or absence of old files fairly quickly in memory. Perhaps it can then only deal with changed or new files and try to update their data to the DB carefully (avoiding duplicates) and thus speed up one part of your effort. Of course, this may not handle what to do with data that is gone or if your data allows redundant lines.
+
+Ideally, whatever generates data should not be saving the files at all but deal directly with the DB. Or, if the CSV files contained a column specifying the date the data was added, you could use that to determine updates.
+
+You said: 
+
+" If all the data were in a few files, then in memory duckdb would work.  "
+
+I wonder about that as 200GB is a huge amount. Do thousands of files take up more space than a few big ones?
+
+Obviously, opening and closing lots of files is slower. Some operations do take a long time or use extra space so how you concatenate the data matters. On something like a LINUX system, there are fairly efficient ways to concatenate lots of files such as issuing a command within some folder that looks like:
+
+   cat *.csv >subfolder/bigfile.csv
+
+Again, if all share the same columns but have no header, this can run fairly quickly outside of R and then you read in bigfile.csv and later delete it. I note when not in use, files like that can be kept compressed and some methods even allow reading them in a compressed format, at some expense. If all you need is a random sample, I can imagine ways to read in less data.
+
+And, ask yourself if the data in memory can be compressed in another way. As an example, R supports a data structure called factors for some kinds of data. If you have a column that stores something like the name of the US State, making it a factor as it is read in may require storing North Carolina as number 22 and so on. TRUE/FALSE in a column might be replaced with a Boolean value of 0/1.  There are other such techniques. This could be done carefully so the final in-memory data structure is smaller, and I noted earlier what happens if you simply remove many columns, and perhaps rows, as you read the data in, and remove temporary variables as soon as possible. Lots of people end up with many variations on their data remaining in memory and overwhelming any machine.
+
+I am no expert, but perhaps any future such work would do better being designed up-front in ways that place the burden more on a data-base designed to handle large amounts of data rather than files on your machine. Going forward, many projects involve constantly adding data to the point where it has to be distributed across a cloud of machines in order to work at all.
+
+
+
+-----Original Message-----
+From: R-help <r-help-bounces at r-project.org> On Behalf Of Naresh Gurbuxani
+Sent: Sunday, May 24, 2026 8:20 PM
+To: John Kane <jrkrideau at gmail.com>
+Cc: r-help at r-project.org
+Subject: Re: [R] duckdb table from multiple csv files
+
+Files are on a local network drive.
+
+I ended up creating a duckdb database and writing all the data into a couple of tables.  Database is approximately 200 GB.
+
+Initially I was directly reading these files one at a time, doing the analysis, keeping analysis results, then moving to next file.  Going through all the files took a few hours.  Then, if I wanted to tweak the analysis, I needed to start over.
+
+I am looking for tools to get faster access to data files, preferably without resaving data.  Some analysis requires a small subset of data.  If all the data were in a few files, then in memory duckdb would work.  There would be no need to resave data.  But with so many files, writing data into duckdb database was needed.
+
+My analysis is mostly complete.  For next time, I want to see if arrow + duckdb will help avoid resaving data in another format.
+
+Sent from my iPhone
+
+On May 24, 2026, at 5:41?PM, John Kane <jrkrideau at gmail.com> wrote:
+
+?
+I am not really sure what you are doing here.
+
+Where are the files stored? Are they in one place?
+What size are they?
+
+On Sun, 24 May 2026 at 09:35, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com<mailto:naresh_gurbuxani at hotmail.com>> wrote:
+
+I have approximately ten thousand csv files with identical columns and
+formats.  I want to run some SQL queries on a virtual database, where all
+of these files are treated as one table.  While it is possible to run
+SQL query, dbListTables() does not show this table.  Is it possible to
+list all tables including those created from arrow FileSystem?
+
+Is it possible to achieve this result without arrow package?
+
+# Create example data
+library(data.table)
+data("flights", package = "nycflights13")
+fwrite(flights[(origin == "EWR")], "data/flights/ewr_flights.csv")
+fwrite(flights[(origin == "JFK")], "data/flights/jfk_flights.csv")
+fwrite(flights[(origin == "LGA")], "data/flights/lga_flights.csv")
+
+data("airports", package = "nycflights13")
+fwrite(airports, "data/airports.csv")
+
+# Verify data saved as intended
+dir("data")
+[1] "airports.csv" "flights"
+dir("data/flights/")
+[1] "ewr_flights.csv" "jfk_flights.csv" "lga_flights.csv"
+
+# Create virtual database with two tables
+library(arrow)
+library(duckdb)
+
+# csv file successfully registed as a table
+con <- dbConnect(duckdb())
+duckdb_read_csv(con, "airports", "data/airports.csv")
+dbListTables(con)
+[1] "airports"
+
+# flights_arrow does not show up as a table
+flights_arrow <- open_csv_dataset("data/flights")
+duckdb_register_arrow(con, "flights", flights_arrow)
+dbListTables(con)
+[1] "airports"
+dbGetQuery(con, "SELECT table_name FROM information_schema.tables;")
+  table_name
+1   airports
+
+# SQL queries can be run on flights table
+dbGetQuery(con, "SELECT * FROM flights LIMIT 2;")
+  year month day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+1 2013     1   1      517            515         2      830            819        11      UA
+2 2013     1   1      554            558        -4      740            728        12      UA
+  flight tailnum origin dest air_time distance hour minute           time_hour
+1   1545  N14228    EWR  IAH      227     1400    5     15 2013-01-01 10:00:00
+2   1696  N39463    EWR  ORD      150      719    5     58 2013-01-01 10:00:00
+
+______________________________________________
+R-help at r-project.org<mailto:R-help at r-project.org> mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+--
+John Kane
+Kingston ON Canada
+
+	[[alternative HTML version deleted]]
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+
+
+From @vi@e@gross m@iii@g oii gm@ii@com  Mon May 25 04:06:15 2026
+From: @vi@e@gross m@iii@g oii gm@ii@com (@vi@e@gross m@iii@g oii gm@ii@com)
+Date: Sun, 24 May 2026 22:06:15 -0400
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <DM3PPF9A5B544E0A5D467CC61EA47D21A84FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+References: <7A0FCCBC-34FD-47BE-9FAC-34756CB764D5@hotmail.com>
+ <CAKZQJMCgyTBHyagpJ5TTmx-QAuYB0xg++PdB_qDA+Mhrra1kag@mail.gmail.com>
+ <04b301dcebcd$53c27c30$fb477490$@gmail.com>
+ <DM3PPF9A5B544E0A5D467CC61EA47D21A84FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+Message-ID: <053701dcebeb$119bb010$34d31030$@gmail.com>
+
+Naresh,
+
+There are times the choice of tools constrains you.
+
+Consider what would happen if you chose a language with features readily and cheaply available that allow some kinds of concurrent programming. Python allows some of that in a somewhat interpreted way and plenty of more compiled languages may do it even more efficiently. I am talking about the ability to have a program hand out work to multiple other threads on the same machine or even distribute the work across a network of machines.
+
+In your case, consider how some search engines do a search across a wide swath of the internet. Loosely, a master program sends requests to many others and gets back results and in some sense merges them. Another example is a merge sort where at every step, one function hands half of the remaining data to each of two others to sort  then waits for a result and merges the two returned streams together. This may happen using thousands of processes eventually and may return a fasgter result than many other sort methods.
+
+In your case, you could have a queue of N simultaneous threads that each process one file for you and return results. As soon as one finishes, another thread starts to do the next file. The threads will likely interweave when they are doing slow things like I/O and may run on different processors and the interleaving can be substantially faster than one process running and spending much of the time waiting for I/O and so on. 
+
+I don't know if R currently supports some of this well. I have seen Python used this way and many modules are available that support things like this. Of course, you might have a learning process involved as you might need to use add-on modules like numpy and pandas rather than what is largely built-in using R and its many packages. R does have some packages that may let you do this, such as "parallel" but, again, I suspect a learning curve to get it right.
+
+I think I can sign off now as I suspect much of my thoughts may not be of help. ?
+
+Avi
+
+
+-----Original Message-----
+From: Naresh Gurbuxani <naresh_gurbuxani at hotmail.com> 
+Sent: Sunday, May 24, 2026 8:26 PM
+To: avi.e.gross at gmail.com
+Cc: John Kane <jrkrideau at gmail.com>; r-help at r-project.org
+Subject: Re: [R] duckdb table from multiple csv files
+
+I have done most of the analysis using tools in base R: read one file, do analysis, keep results, move to next file.  Each cycle is several hours.  Making small changes in analysis is costly.
+
+I want to explore methods that will provide faster access to data, but do not require resaving data.
+
+
+Sent from my iPhone
+
+> On May 24, 2026, at 6:33?PM, avi.e.gross at gmail.com wrote:
+> 
+> ?Although there is some code there, we may want to step back and ask what the
+> person wants to do.
+> 
+> Assuming you have thousands of files in CSV format and you can easily access
+> them one by one, then there are two major methods that seem interesting if
+> you want to evaluate them in some way.
+> 
+> You can open all the files and combine them into one entity you can query.
+> 
+> Alternatively, you can create a query that you then do repeatedly on as many
+> (or all) of the files till you get a (combined) result.
+> 
+> The query can use native R mechanisms, or a package that does SQL if you put
+> the data into a database, or another package such as in the tidyverse using
+> dplyr and so on.
+> 
+> In real life, you have to ask if the many CSV files contain valid data
+> without duplications or missing data and so on. If it ios not guaranteed to
+> be exactly what you want, then consolidating the data and running multiple
+> functions on it to make it what you want may be important. Removing (or
+> maybe fixing) some rows may make sense. It may make sense to remove columns
+> not needed for the query or rows that fail some condition that simplifies
+> later queries. It may make sense to choose subsets, remove duplicates on the
+> columns remaining and much more. As one of many examples, you might
+> determine info about some column and then remove outliers above and below a
+> threshold.
+> 
+> If you insist on using SQL, as the final query, you could push all the
+> remaining data into a database.    
+> 
+> If your data is too large when combined, there are packages that can help
+> you work with them albeit this is an example where pushing it all into a
+> database first makes sense, albeit it can be slow.
+> 
+> And note, your solution can include work outside of R such as copying all
+> the files (assuming n o header in each) into one file and then continuing
+> from R.
+> 
+> Good luck.
+> 
+> 
+> -----Original Message-----
+> From: R-help <r-help-bounces at r-project.org> On Behalf Of John Kane
+> Sent: Sunday, May 24, 2026 5:41 PM
+> To: Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>
+> Cc: r-help at r-project.org
+> Subject: Re: [R] duckdb table from multiple csv files
+> 
+> I am not really sure what you are doing here.
+> 
+> Where are the files stored? Are they in one place?
+> What size are they?
+> 
+>> On Sun, 24 May 2026 at 09:35, Naresh Gurbuxani
+>> <naresh_gurbuxani at hotmail.com>
+>> wrote:
+>> 
+>> 
+>> I have approximately ten thousand csv files with identical columns and
+>> formats.  I want to run some SQL queries on a virtual database, where all
+>> of these files are treated as one table.  While it is possible to run
+>> SQL query, dbListTables() does not show this table.  Is it possible to
+>> list all tables including those created from arrow FileSystem?
+>> 
+>> Is it possible to achieve this result without arrow package?
+>> 
+>> # Create example data
+>> library(data.table)
+>> data("flights", package = "nycflights13")
+>> fwrite(flights[(origin == "EWR")], "data/flights/ewr_flights.csv")
+>> fwrite(flights[(origin == "JFK")], "data/flights/jfk_flights.csv")
+>> fwrite(flights[(origin == "LGA")], "data/flights/lga_flights.csv")
+>> 
+>> data("airports", package = "nycflights13")
+>> fwrite(airports, "data/airports.csv")
+>> 
+>> # Verify data saved as intended
+>> dir("data")
+>> [1] "airports.csv" "flights"
+>> dir("data/flights/")
+>> [1] "ewr_flights.csv" "jfk_flights.csv" "lga_flights.csv"
+>> 
+>> # Create virtual database with two tables
+>> library(arrow)
+>> library(duckdb)
+>> 
+>> # csv file successfully registed as a table
+>> con <- dbConnect(duckdb())
+>> duckdb_read_csv(con, "airports", "data/airports.csv")
+>> dbListTables(con)
+>> [1] "airports"
+>> 
+>> # flights_arrow does not show up as a table
+>> flights_arrow <- open_csv_dataset("data/flights")
+>> duckdb_register_arrow(con, "flights", flights_arrow)
+>> dbListTables(con)
+>> [1] "airports"
+>> dbGetQuery(con, "SELECT table_name FROM information_schema.tables;")
+>>  table_name
+>> 1   airports
+>> 
+>> # SQL queries can be run on flights table
+>> dbGetQuery(con, "SELECT * FROM flights LIMIT 2;")
+>>  year month day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+>> arr_delay carrier
+>> 1 2013     1   1      517            515         2      830
+>> 819        11      UA
+>> 2 2013     1   1      554            558        -4      740
+>> 728        12      UA
+>>  flight tailnum origin dest air_time distance hour minute
+>> time_hour
+>> 1   1545  N14228    EWR  IAH      227     1400    5     15 2013-01-01
+>> 10:00:00
+>> 2   1696  N39463    EWR  ORD      150      719    5     58 2013-01-01
+>> 10:00:00
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide
+>> https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>> 
+> 
+> 
+> --
+> John Kane
+> Kingston ON Canada
+> 
+>    [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+> 
+
+
+From n@re@h_gurbux@n| @end|ng |rom hotm@||@com  Mon May 25 04:46:54 2026
+From: n@re@h_gurbux@n| @end|ng |rom hotm@||@com (Naresh Gurbuxani)
+Date: Mon, 25 May 2026 02:46:54 +0000
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+References: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+Message-ID: <DM3PPF9A5B544E0D34FEEFCBF4C5A0A1E37FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+
+
+Sent from my iPhone
+
+> On May 24, 2026, at 9:52?PM, avi.e.gross at gmail.com wrote:
+> 
+> ?John,
+> 
+> 200 GB is indeed a big amount of data as many machines have much less working memory albeit they may be able to save some virtual memory on disk if properly configured.
+> 
+> I have not used the tools you mention but wonder if your underlying data files change or are stable?
+> 
+> If they mostly do not change, one possible approach is to have your program save the list of filenames as well as the last changed date. When the program runs again, it can check for the existence of new files or absence of old files fairly quickly in memory. Perhaps it can then only deal with changed or new files and try to update their data to the DB carefully (avoiding duplicates) and thus speed up one part of your effort. Of course, this may not handle what to do with data that is gone or if your data allows redundant lines.
+> 
+> Ideally, whatever generates data should not be saving the files at all but deal directly with the DB. Or, if the CSV files contained a column specifying the date the data was added, you could use that to determine updates.
+> 
+> You said:
+> 
+> " If all the data were in a few files, then in memory duckdb would work.  "
+> 
+I only need a subset of data at any time.  Duckdb allows a virtual table for each file.  This not practical with thousands of files.  With a few large files, this can work.  Here the goal is to establish a connection, not to load all data at once.  
+
+With arrow, it is possible to designate a directory as virtual table.  
+> I wonder about that as 200GB is a huge amount. Do thousands of files take up more space than a few big ones?
+> 
+> Obviously, opening and closing lots of files is slower. Some operations do take a long time or use extra space so how you concatenate the data matters. On something like a LINUX system, there are fairly efficient ways to concatenate lots of files such as issuing a command within some folder that looks like:
+> 
+>   cat *.csv >subfolder/bigfile.csv
+> 
+> Again, if all share the same columns but have no header, this can run fairly quickly outside of R and then you read in bigfile.csv and later delete it. I note when not in use, files like that can be kept compressed and some methods even allow reading them in a compressed format, at some expense. If all you need is a random sample, I can imagine ways to read in less data.
+> 
+> And, ask yourself if the data in memory can be compressed in another way. As an example, R supports a data structure called factors for some kinds of data. If you have a column that stores something like the name of the US State, making it a factor as it is read in may require storing North Carolina as number 22 and so on. TRUE/FALSE in a column might be replaced with a Boolean value of 0/1.  There are other such techniques. This could be done carefully so the final in-memory data structure is smaller, and I noted earlier what happens if you simply remove many columns, and perhaps rows, as you read the data in, and remove temporary variables as soon as possible. Lots of people end up with many variations on their data remaining in memory and overwhelming any machine.
+> 
+> I am no expert, but perhaps any future such work would do better being designed up-front in ways that place the burden more on a data-base designed to handle large amounts of data rather than files on your machine. Going forward, many projects involve constantly adding data to the point where it has to be distributed across a cloud of machines in order to work at all.
+> 
+> 
+> 
+> -----Original Message-----
+> From: R-help <r-help-bounces at r-project.org> On Behalf Of Naresh Gurbuxani
+> Sent: Sunday, May 24, 2026 8:20 PM
+> To: John Kane <jrkrideau at gmail.com>
+> Cc: r-help at r-project.org
+> Subject: Re: [R] duckdb table from multiple csv files
+> 
+> Files are on a local network drive.
+> 
+> I ended up creating a duckdb database and writing all the data into a couple of tables.  Database is approximately 200 GB.
+> 
+> Initially I was directly reading these files one at a time, doing the analysis, keeping analysis results, then moving to next file.  Going through all the files took a few hours.  Then, if I wanted to tweak the analysis, I needed to start over.
+> 
+> I am looking for tools to get faster access to data files, preferably without resaving data.  Some analysis requires a small subset of data.  If all the data were in a few files, then in memory duckdb would work.  There would be no need to resave data.  But with so many files, writing data into duckdb database was needed.
+> 
+> My analysis is mostly complete.  For next time, I want to see if arrow + duckdb will help avoid resaving data in another format.
+> 
+> Sent from my iPhone
+> 
+> On May 24, 2026, at 5:41?PM, John Kane <jrkrideau at gmail.com> wrote:
+> 
+> ?
+> I am not really sure what you are doing here.
+> 
+> Where are the files stored? Are they in one place?
+> What size are they?
+> 
+> On Sun, 24 May 2026 at 09:35, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com<mailto:naresh_gurbuxani at hotmail.com>> wrote:
+> 
+> I have approximately ten thousand csv files with identical columns and
+> formats.  I want to run some SQL queries on a virtual database, where all
+> of these files are treated as one table.  While it is possible to run
+> SQL query, dbListTables() does not show this table.  Is it possible to
+> list all tables including those created from arrow FileSystem?
+> 
+> Is it possible to achieve this result without arrow package?
+> 
+> # Create example data
+> library(data.table)
+> data("flights", package = "nycflights13")
+> fwrite(flights[(origin == "EWR")], "data/flights/ewr_flights.csv")
+> fwrite(flights[(origin == "JFK")], "data/flights/jfk_flights.csv")
+> fwrite(flights[(origin == "LGA")], "data/flights/lga_flights.csv")
+> 
+> data("airports", package = "nycflights13")
+> fwrite(airports, "data/airports.csv")
+> 
+> # Verify data saved as intended
+> dir("data")
+> [1] "airports.csv" "flights"
+> dir("data/flights/")
+> [1] "ewr_flights.csv" "jfk_flights.csv" "lga_flights.csv"
+> 
+> # Create virtual database with two tables
+> library(arrow)
+> library(duckdb)
+> 
+> # csv file successfully registed as a table
+> con <- dbConnect(duckdb())
+> duckdb_read_csv(con, "airports", "data/airports.csv")
+> dbListTables(con)
+> [1] "airports"
+> 
+> # flights_arrow does not show up as a table
+> flights_arrow <- open_csv_dataset("data/flights")
+> duckdb_register_arrow(con, "flights", flights_arrow)
+> dbListTables(con)
+> [1] "airports"
+> dbGetQuery(con, "SELECT table_name FROM information_schema.tables;")
+>  table_name
+> 1   airports
+> 
+> # SQL queries can be run on flights table
+> dbGetQuery(con, "SELECT * FROM flights LIMIT 2;")
+>  year month day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+> 1 2013     1   1      517            515         2      830            819        11      UA
+> 2 2013     1   1      554            558        -4      740            728        12      UA
+>  flight tailnum origin dest air_time distance hour minute           time_hour
+> 1   1545  N14228    EWR  IAH      227     1400    5     15 2013-01-01 10:00:00
+> 2   1696  N39463    EWR  ORD      150      719    5     58 2013-01-01 10:00:00
+> 
+> ______________________________________________
+> R-help at r-project.org<mailto:R-help at r-project.org> mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+> 
+> 
+> --
+> John Kane
+> Kingston ON Canada
+> 
+>    [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+> 
+
+From rhe|p @end|ng |rom eoo@@dd@@n|  Mon May 25 13:46:10 2026
+From: rhe|p @end|ng |rom eoo@@dd@@n| (Jan van der Laan)
+Date: Mon, 25 May 2026 13:46:10 +0200
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <DM3PPF9A5B544E0D34FEEFCBF4C5A0A1E37FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+References: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+ <DM3PPF9A5B544E0D34FEEFCBF4C5A0A1E37FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+Message-ID: <3328be4e-4afa-479e-a3b4-f6ad23731d70@eoos.dds.nl>
+
+
+
+
+On 5/25/26 04:46, Naresh Gurbuxani wrote:
+
+>>
+>> " If all the data were in a few files, then in memory duckdb would work."
+>>
+> I only need a subset of data at any time.  Duckdb allows a virtual table for each file.  This not practical with thousands of files.  With a few large files, this can work.  Here the goal is to establish a connection, not to load all data at once.
+
+It the files have the same columns, you can also also open all files 
+into one virtual database using duckdb. The code below creates a virtual 
+table view called 'flights' with the data from all csv files in data/.
+
+con <- duckdb::dbConnect(duckdb::duckdb())
+
+sql <- paste0("CREATE OR REPLACE VIEW flights AS "
+   "SELECT * FROM read_csv('data/**/*.csv');")
+DBI::dbExecute(con, sql)
+
+dbListTables(con)
+
+dbGetQuery(con, "SELECT * FROM flights;")
+
+
+duckdb is fast and will do things in parallel, but for every query it 
+will have to go through all files. Going through 200GB of data will take 
+time. So, if you have to query the data repeatedly it is probably going 
+to speed up your code significantly if you resave your data in another 
+format.
+
+HTH,
+
+Jan
+
+
+From ggrothend|eck @end|ng |rom gm@||@com  Mon May 25 15:26:29 2026
+From: ggrothend|eck @end|ng |rom gm@||@com (Gabor Grothendieck)
+Date: Mon, 25 May 2026 09:26:29 -0400
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <3328be4e-4afa-479e-a3b4-f6ad23731d70@eoos.dds.nl>
+References: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+ <DM3PPF9A5B544E0D34FEEFCBF4C5A0A1E37FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+ <3328be4e-4afa-479e-a3b4-f6ad23731d70@eoos.dds.nl>
+Message-ID: <CAP01uR=ymesnvLXKEVi4GGv8GC7ZxSbS9BOjqre-t8A1HYAUuw@mail.gmail.com>
+
+Here is something to try.  This does use a feature of xan
+(https://github.com/medialab/xan)
+in the development version so you will need to build it using cargo.
+
+  cat("cat rows --paths - | filter 'origin eq `JFK`'", file = "jfk.xan")
+  dat <- fread(cmd = "ls *_flights.csv | xan run -f jfk.xan -")
+
+On Mon, May 25, 2026 at 7:46?AM Jan van der Laan <rhelp at eoos.dds.nl> wrote:
+>
+>
+>
+>
+> On 5/25/26 04:46, Naresh Gurbuxani wrote:
+>
+> >>
+> >> " If all the data were in a few files, then in memory duckdb would work."
+> >>
+> > I only need a subset of data at any time.  Duckdb allows a virtual table for each file.  This not practical with thousands of files.  With a few large files, this can work.  Here the goal is to establish a connection, not to load all data at once.
+>
+> It the files have the same columns, you can also also open all files
+> into one virtual database using duckdb. The code below creates a virtual
+> table view called 'flights' with the data from all csv files in data/.
+>
+> con <- duckdb::dbConnect(duckdb::duckdb())
+>
+> sql <- paste0("CREATE OR REPLACE VIEW flights AS "
+>    "SELECT * FROM read_csv('data/**/*.csv');")
+> DBI::dbExecute(con, sql)
+>
+> dbListTables(con)
+>
+> dbGetQuery(con, "SELECT * FROM flights;")
+>
+>
+> duckdb is fast and will do things in parallel, but for every query it
+> will have to go through all files. Going through 200GB of data will take
+> time. So, if you have to query the data repeatedly it is probably going
+> to speed up your code significantly if you resave your data in another
+> format.
+>
+> HTH,
+>
+> Jan
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+
+-- 
+Statistics & Software Consulting
+GKX Group, GKX Associates Inc.
+tel: 1-877-GKX-GROUP
+email: ggrothendieck at gmail.com
+
+
+From jrkr|de@u @end|ng |rom gm@||@com  Mon May 25 15:45:46 2026
+From: jrkr|de@u @end|ng |rom gm@||@com (John Kane)
+Date: Mon, 25 May 2026 09:45:46 -0400
+Subject: [R] duckdb table from multiple csv files
+In-Reply-To: <3328be4e-4afa-479e-a3b4-f6ad23731d70@eoos.dds.nl>
+References: <053401dcebe9$14f77020$3ee65060$@gmail.com>
+ <DM3PPF9A5B544E0D34FEEFCBF4C5A0A1E37FA0A2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>
+ <3328be4e-4afa-479e-a3b4-f6ad23731d70@eoos.dds.nl>
+Message-ID: <CAKZQJMCoFdyf7J5c96YEjM40MMqYdP_XdeRxwdgV9E4=+z-=6A@mail.gmail.com>
+
+If Naresh only need to work with a few files at a time it is possible to
+load (concatenate) them by substituting
+
+read_csv('data/**/file1.csv', 'data/**/file2.csv', 'data/**/file3.csv') and
+so on.
+for
+read_csv('data/**/*.csv')
+
+It seems a bit unreasonable with ~10,000 files and it looks likely to be
+error-prone but if only a fairly small number of subsets of those 10,000
+files are needed, it should work.
+
+There is nothing like brute force and a larger hammer.
+
+On Mon, 25 May 2026 at 07:45, Jan van der Laan <rhelp at eoos.dds.nl> wrote:
+
+>
+>
+>
+> On 5/25/26 04:46, Naresh Gurbuxani wrote:
+>
+> >>
+> >> " If all the data were in a few files, then in memory duckdb would
+> work."
+> >>
+> > I only need a subset of data at any time.  Duckdb allows a virtual table
+> for each file.  This not practical with thousands of files.  With a few
+> large files, this can work.  Here the goal is to establish a connection,
+> not to load all data at once.
+>
+> It the files have the same columns, you can also also open all files
+> into one virtual database using duckdb. The code below creates a virtual
+> table view called 'flights' with the data from all csv files in data/.
+>
+> con <- duckdb::dbConnect(duckdb::duckdb())
+>
+> sql <- paste0("CREATE OR REPLACE VIEW flights AS "
+>    "SELECT * FROM read_csv('data/**/*.csv');")
+> DBI::dbExecute(con, sql)
+>
+> dbListTables(con)
+>
+> dbGetQuery(con, "SELECT * FROM flights;")
+>
+>
+> duckdb is fast and will do things in parallel, but for every query it
+> will have to go through all files. Going through 200GB of data will take
+> time. So, if you have to query the data repeatedly it is probably going
+> to speed up your code significantly if you resave your data in another
+> format.
+>
+> HTH,
+>
+> Jan
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+
+-- 
+John Kane
+Kingston ON Canada
+
+	[[alternative HTML version deleted]]
+
+
