@@ -39466,6 +39466,24 @@
       "month": "2010-03"
     },
     {
+      "id": "msg-c0ad14e0a6ce",
+      "message_id": "<bbdc7ed01003171357m42ac3548i39b39fdd7f555ab@mail.gmail.com>",
+      "from_name": "Steve Lianoglou",
+      "from_email_hash": "65bbed6d3f5a5c67840e1a8d8d82a54afcd8e5cfa80563594de1bbc0121bb2f0",
+      "date": "2010-03-17T20:57:27Z",
+      "subject": "[R] mmap error on macbook pro",
+      "subject_clean": "mmap error on macbook pro",
+      "in_reply_to": "<7D890B3196D6F84AADA87B844393BA0201B57E599702@MAILBOX.staff.aber.ac.uk>",
+      "references": [
+        "<7D890B3196D6F84AADA87B844393BA0201B57E599702@MAILBOX.staff.aber.ac.uk>"
+      ],
+      "body_plain": "Hi,\n\nOn Wed, Mar 17, 2010 at 8:14 AM, Shyamasree Saha [shs] <shs at aber.ac.uk> wrote:\n> Dear List,\n>\n> I am trying to read some files using read.csv and total size of those files are 3.99 GB. I am using MacBook Pro with 4GB RAM(snow leopard). I also tried to run a chunk from those files and altogether the size was 1.33 GB. But every time I was getting the following error\n>\n> R(1200) malloc: *** mmap(size=16777216) failed (error code=12)\n> *** error: can't allocate region\n> *** set a breakpoint in malloc_error_break to debug\n>\n> I managed to run smaller chunks (400MB) and I also saved the object. But problem is when I try to load some of those objects(which is not more than 1.5 GB altogether), I get same error again. Can someone please help? why am I getting this error? does R need more space than the actual file size? I may buy new machine if its something related to RAM size. but if it is some R problem then it will be very useless to buy new machine. So, I really need to know why this is happening.\n\nMost like it's a \"RAM problem,\" as you say.\n\nI believe read.csv has better RAM characteristics if you set its\n\"colClasses\" parameter ... so if you know that some columns in your\ndata are numeric, instead of strings, then tell it.\n\nIf I'm not mistaken, read.csv will assume everything is a string\nfirst, and store it like that.\n\n-steve\n\n-- \nSteve Lianoglou\nGraduate Student: Computational Systems Biology\n | Memorial Sloan-Kettering Cancer Center\n | Weill Medical College of Cornell University\nContact Info: http://cbio.mskcc.org/~lianos/contact",
+      "body_snippet": "Hi,\n\nOn Wed, Mar 17, 2010 at 8:14 AM, Shyamasree Saha [shs] <shs at aber.ac.uk> wrote:\n> Dear List,\n>\n> I am trying to read some files using read.csv and total size of those files are 3.99 GB. I am us",
+      "thread_id": "thread-f07ab68e9b8a",
+      "thread_depth": 1,
+      "month": "2010-03"
+    },
+    {
       "id": "msg-5b27f5266463",
       "message_id": "<B37C0A15B8FB3C468B5BC7EBC7DA14CC62FD9E61EA@LP-EXMBVS10.CO.IHC.COM>",
       "from_name": "Greg Snow",
@@ -39482,24 +39500,6 @@
       "body_snippet": "For future reference you may want to look at the plyr package, or even the sapply and aggregate functions and possibly simpler ways to do what you did below.\n\n-- \nGregory (Greg) L. Snow Ph.D.\nStatisti",
       "thread_id": "thread-37091bf6ad1c",
       "thread_depth": 2,
-      "month": "2010-03"
-    },
-    {
-      "id": "msg-c0ad14e0a6ce",
-      "message_id": "<bbdc7ed01003171357m42ac3548i39b39fdd7f555ab@mail.gmail.com>",
-      "from_name": "Steve Lianoglou",
-      "from_email_hash": "65bbed6d3f5a5c67840e1a8d8d82a54afcd8e5cfa80563594de1bbc0121bb2f0",
-      "date": "2010-03-17T20:57:27Z",
-      "subject": "[R] mmap error on macbook pro",
-      "subject_clean": "mmap error on macbook pro",
-      "in_reply_to": "<7D890B3196D6F84AADA87B844393BA0201B57E599702@MAILBOX.staff.aber.ac.uk>",
-      "references": [
-        "<7D890B3196D6F84AADA87B844393BA0201B57E599702@MAILBOX.staff.aber.ac.uk>"
-      ],
-      "body_plain": "Hi,\n\nOn Wed, Mar 17, 2010 at 8:14 AM, Shyamasree Saha [shs] <shs at aber.ac.uk> wrote:\n> Dear List,\n>\n> I am trying to read some files using read.csv and total size of those files are 3.99 GB. I am using MacBook Pro with 4GB RAM(snow leopard). I also tried to run a chunk from those files and altogether the size was 1.33 GB. But every time I was getting the following error\n>\n> R(1200) malloc: *** mmap(size=16777216) failed (error code=12)\n> *** error: can't allocate region\n> *** set a breakpoint in malloc_error_break to debug\n>\n> I managed to run smaller chunks (400MB) and I also saved the object. But problem is when I try to load some of those objects(which is not more than 1.5 GB altogether), I get same error again. Can someone please help? why am I getting this error? does R need more space than the actual file size? I may buy new machine if its something related to RAM size. but if it is some R problem then it will be very useless to buy new machine. So, I really need to know why this is happening.\n\nMost like it's a \"RAM problem,\" as you say.\n\nI believe read.csv has better RAM characteristics if you set its\n\"colClasses\" parameter ... so if you know that some columns in your\ndata are numeric, instead of strings, then tell it.\n\nIf I'm not mistaken, read.csv will assume everything is a string\nfirst, and store it like that.\n\n-steve\n\n-- \nSteve Lianoglou\nGraduate Student: Computational Systems Biology\n | Memorial Sloan-Kettering Cancer Center\n | Weill Medical College of Cornell University\nContact Info: http://cbio.mskcc.org/~lianos/contact",
-      "body_snippet": "Hi,\n\nOn Wed, Mar 17, 2010 at 8:14 AM, Shyamasree Saha [shs] <shs at aber.ac.uk> wrote:\n> Dear List,\n>\n> I am trying to read some files using read.csv and total size of those files are 3.99 GB. I am us",
-      "thread_id": "thread-f07ab68e9b8a",
-      "thread_depth": 1,
       "month": "2010-03"
     },
     {
@@ -44513,22 +44513,6 @@
       "month": "2010-03"
     },
     {
-      "id": "msg-82a4d22ca45e",
-      "message_id": "<816b5ce41003191444l7e1a12f6sa69806c86e117d3f@mail.gmail.com>",
-      "from_name": "Santosh",
-      "from_email_hash": "f6d2b55cc32befb842b9a650a3a073f21fda58d0b6e4db9107de255529cd1162",
-      "date": "2010-03-19T21:44:56Z",
-      "subject": "[R] sapply, lattice functions",
-      "subject_clean": "sapply, lattice functions",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100319/a0772a15/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100319/a0772a15/attachment.pl>",
-      "thread_id": "thread-82a4d22ca45e",
-      "thread_depth": 0,
-      "month": "2010-03"
-    },
-    {
       "id": "msg-729796c9e7fa",
       "message_id": "<f55e7cf51003191444n2b89af0v6aff104e287b9807@mail.gmail.com>",
       "from_name": "Ista Zahn",
@@ -44544,6 +44528,22 @@
       "body_snippet": "Hi Jose,\nIf you give us a reproducible example we can test it out and try to\nhelp you find the problem.\n\n-Ista\n\nOn Fri, Mar 19, 2010 at 5:38 PM, jose romero <jlaurentum at yahoo.com> wrote:\n> Hello fo",
       "thread_id": "thread-78c8bc3e28bb",
       "thread_depth": 1,
+      "month": "2010-03"
+    },
+    {
+      "id": "msg-82a4d22ca45e",
+      "message_id": "<816b5ce41003191444l7e1a12f6sa69806c86e117d3f@mail.gmail.com>",
+      "from_name": "Santosh",
+      "from_email_hash": "f6d2b55cc32befb842b9a650a3a073f21fda58d0b6e4db9107de255529cd1162",
+      "date": "2010-03-19T21:44:56Z",
+      "subject": "[R] sapply, lattice functions",
+      "subject_clean": "sapply, lattice functions",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100319/a0772a15/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100319/a0772a15/attachment.pl>",
+      "thread_id": "thread-82a4d22ca45e",
+      "thread_depth": 0,
       "month": "2010-03"
     },
     {
