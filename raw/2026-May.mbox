@@ -3599,3 +3599,401 @@ Uwe Ligges
 > Sent from my phone. Please excuse my brevity.
 
 
+From k@r|@@ch||||ng @end|ng |rom un|-bonn@de  Thu May 28 11:36:58 2026
+From: k@r|@@ch||||ng @end|ng |rom un|-bonn@de (Karl Schilling)
+Date: Thu, 28 May 2026 11:36:58 +0200
+Subject: [R] Problem with updating packages - SOLVED
+In-Reply-To: <097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>
+References: <5ac924bb-0bf7-4696-8c51-9c28947705cd@uni-bonn.de>
+ <93048597-0225-42cd-8d78-8a52108dee12@statistik.tu-dortmund.de>
+ <481DEE7C-A102-480F-87C6-1DA0148F8890@dcn.davis.ca.us>
+ <097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>
+Message-ID: <1c700a71-4d4f-4c9c-9d2f-ff953975058e@uni-bonn.de>
+
+Thank you everybody so much for your help.
+
+I adjusted my CRAN mirror in my etc/Profile.site file as suggested by 
+Rui Barradas - that solved the issue with the twice repeated question of 
+which repository to use. It did not resolve, however, the issue that all 
+packages were flagged as? not actual.
+
+So I followed the advice of Jeff Newmiller - actually I went one step 
+further and completely de-installed my R version, re-installed it, and 
+then downloaded the packages I need. That solved the problem.
+
+
+One point that I still do not understand is why AFTER updating my 
+original R 4.5 packages to 4.6, those were still identified as not up-to 
+date. So why I was in this "ndless" loop of ineffective (?) updating. 
+But maybe I should be pragmatic and be satisfied that it now works again.
+
+Again, thank you all for your help.
+
+Best,
+
+Karl Schillng
+
+On 28.05.2026 00:33, Uwe Ligges wrote:
+>
+>
+> On 28.05.2026 00:02, Jeff Newmiller wrote:
+>> So can we interpret this to mean that update.packages() will fix 
+>> (replace) old packages that were copied into the new library? What if 
+>> one or more packages were dropped/archived or pulled from 
+>> non-standard package sources?
+>
+> No, not if a package is archived from CRAN or downloaded from a 
+> repository that is not declared. update.packages() won't find that the 
+> update is needed in such a case
+> I talked about active CRAN packages.
+>
+> Best,
+> Uwe Ligges
+>
+>
+>>
+>>
+>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- 
+>> dortmund.de> wrote:
+>>
+>>
+>>
+>> ??? On 27.05.2026 18:01, Karl Schilling wrote:
+>>
+>> ??????? I am running R under Windows 11. recently updated R to the
+>> ??????? 4.6patchhed version. I then copied my packages from my previous
+>> ??????? version (4.5) to the library of 4.6. Then I updated all 
+>> packages.
+>>
+>> ??????? Since then, I see the following behavior:
+>>
+>> ??????? Each time I run
+>> ??????? "update.packages(ask='graphics',checkBuilt=TRUE)" I am asked 
+>> TWICE
+>>
+>> ??????? "--- Please select a CRAN mirror for use in this session ---".
+>>
+>> ??????? And, more embarrassingly, all my Cran and Bioconductor are said
+>> ??????? to require an update. That also happens when I run
+>> ??????? "update.packages", say, one hour after my last update.
+>>
+>> ??????? And when I run "old.packages()", it seems that all my packages
+>> ??????? are identified as being old.
+>>
+>> ??????? Any suggestions what might be going on?
+>>
+>>
+>> ??? For a major version change (as from 4.5.x to 4.6.y) we do not
+>> ??? guarantee API compatibility, hence we cannot guarantee that a
+>> ??? package built for 4.5.x will work under 4.6.y. As a consequence,
+>> ??? update.packages() knows that everything has to be reinstalled.
+>>
+>> ??? Best,
+>> ??? Uwe Ligges
+>>
+>>
+>>
+>>
+>>
+>>
+>> ??????? Thank you so much in advance,
+>>
+>> ??????? Karl Schilling
+>> ------------------------------------------------------------------------
+>> ??????? R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, 
+>> see
+>> ??????? https://stat.ethz.ch/mailman/listinfo/r-help <https://
+>> ??????? stat.ethz.ch/mailman/listinfo/r-help>
+>> ??????? PLEASE do read the posting guide https://www.R-project.org/
+>> ??????? posting- <https://www.R-project.org/posting-> guide.html
+>> ??????? and provide commented, minimal, self-contained, reproducible 
+>> code.
+>>
+>>
+>> -- 
+>> Sent from my phone. Please excuse my brevity.
+>
+
+
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Thu May 28 13:33:08 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Thu, 28 May 2026 12:33:08 +0100
+Subject: [R] Problem with updating packages - SOLVED
+In-Reply-To: <1c700a71-4d4f-4c9c-9d2f-ff953975058e@uni-bonn.de>
+References: <5ac924bb-0bf7-4696-8c51-9c28947705cd@uni-bonn.de>
+ <93048597-0225-42cd-8d78-8a52108dee12@statistik.tu-dortmund.de>
+ <481DEE7C-A102-480F-87C6-1DA0148F8890@dcn.davis.ca.us>
+ <097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>
+ <1c700a71-4d4f-4c9c-9d2f-ff953975058e@uni-bonn.de>
+Message-ID: <4fc11f05-2c82-4586-8bad-b3a1d839c8b0@sapo.pt>
+
+Hello,
+
+Inline.
+
+?s 10:36 de 28/05/2026, Karl Schilling escreveu:
+> Thank you everybody so much for your help.
+> 
+> I adjusted my CRAN mirror in my etc/Profile.site file as suggested by 
+> Rui Barradas - that solved the issue with the twice repeated question of 
+> which repository to use. 
+
+I'm glad it was helpful.
+
+Whenever I have problems with update.packages() the following script 
+usually works. No guarantees, though.
+
+
+inst_pack <- function(pkgs, lib = .libPaths()[1],
+                       repos = "https://cloud.r-project.org",
+                       Ncpus = 1L){
+   utils::install.packages(
+     pkgs = pkgs,
+     lib = lib,
+     repos = repos,
+     Ncpus = Ncpus
+   )
+}
+
+repo_default <- "https://cran.r-project.org"
+repo_cloud <- "https://cloud.r-project.org"
+
+## set repo, use default if you prefer it
+local({r <- getOption("repos")
+   r["CRAN"] <- repo_cloud
+   options(repos=r)
+})
+
+#
+inst_pkgs <- installed.packages(priority = NA_character_)
+inst_pkgname <- inst_pkgs[, "Package"]
+inst_version <- inst_pkgs[, "Version"]
+#
+avail_pkgs <- available.packages(repos = repo_cloud)
+avail_pkgname <- avail_pkgs[, "Package"]
+avail_version <- avail_pkgs[, "Version"]
+
+i <- which(avail_pkgname %in% inst_pkgname)
+j <- which(inst_pkgname %in% avail_pkgname)
+
+any(avail_pkgname[i] != inst_pkgname[j])
+# FALSE
+
+# coerce the version strings to real version numbers
+avail_version <- package_version(avail_version)
+inst_version <- package_version(inst_version)
+
+# which packages to update
+i_update <- which(avail_version[i] > inst_version[j])
+length(i_update)
+
+ncores <- 1L
+# ncores <- max(1L, parallel::detectCores() - 4L)
+to_update <- avail_pkgname[i][i_update]
+inst_pack(to_update, Ncpus = ncores)
+
+
+
+Hope this helps,
+
+Rui Barradas
+
+It did not resolve, however, the issue that all
+> packages were flagged as? not actual.
+> 
+> So I followed the advice of Jeff Newmiller - actually I went one step 
+> further and completely de-installed my R version, re-installed it, and 
+> then downloaded the packages I need. That solved the problem.
+> 
+> 
+> One point that I still do not understand is why AFTER updating my 
+> original R 4.5 packages to 4.6, those were still identified as not up-to 
+> date. So why I was in this "ndless" loop of ineffective (?) updating. 
+> But maybe I should be pragmatic and be satisfied that it now works again.
+> 
+> Again, thank you all for your help.
+> 
+> Best,
+> 
+> Karl Schillng
+> 
+> On 28.05.2026 00:33, Uwe Ligges wrote:
+>>
+>>
+>> On 28.05.2026 00:02, Jeff Newmiller wrote:
+>>> So can we interpret this to mean that update.packages() will fix 
+>>> (replace) old packages that were copied into the new library? What if 
+>>> one or more packages were dropped/archived or pulled from non- 
+>>> standard package sources?
+>>
+>> No, not if a package is archived from CRAN or downloaded from a 
+>> repository that is not declared. update.packages() won't find that the 
+>> update is needed in such a case
+>> I talked about active CRAN packages.
+>>
+>> Best,
+>> Uwe Ligges
+>>
+>>
+>>>
+>>>
+>>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- 
+>>> dortmund.de> wrote:
+>>>
+>>>
+>>>
+>>> ??? On 27.05.2026 18:01, Karl Schilling wrote:
+>>>
+>>> ??????? I am running R under Windows 11. recently updated R to the
+>>> ??????? 4.6patchhed version. I then copied my packages from my previous
+>>> ??????? version (4.5) to the library of 4.6. Then I updated all 
+>>> packages.
+>>>
+>>> ??????? Since then, I see the following behavior:
+>>>
+>>> ??????? Each time I run
+>>> ??????? "update.packages(ask='graphics',checkBuilt=TRUE)" I am asked 
+>>> TWICE
+>>>
+>>> ??????? "--- Please select a CRAN mirror for use in this session ---".
+>>>
+>>> ??????? And, more embarrassingly, all my Cran and Bioconductor are said
+>>> ??????? to require an update. That also happens when I run
+>>> ??????? "update.packages", say, one hour after my last update.
+>>>
+>>> ??????? And when I run "old.packages()", it seems that all my packages
+>>> ??????? are identified as being old.
+>>>
+>>> ??????? Any suggestions what might be going on?
+>>>
+>>>
+>>> ??? For a major version change (as from 4.5.x to 4.6.y) we do not
+>>> ??? guarantee API compatibility, hence we cannot guarantee that a
+>>> ??? package built for 4.5.x will work under 4.6.y. As a consequence,
+>>> ??? update.packages() knows that everything has to be reinstalled.
+>>>
+>>> ??? Best,
+>>> ??? Uwe Ligges
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> ??????? Thank you so much in advance,
+>>>
+>>> ??????? Karl Schilling
+>>> ------------------------------------------------------------------------
+>>> ??????? R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, 
+>>> see
+>>> ??????? https://stat.ethz.ch/mailman/listinfo/r-help <https://
+>>> ??????? stat.ethz.ch/mailman/listinfo/r-help>
+>>> ??????? PLEASE do read the posting guide https://www.R-project.org/
+>>> ??????? posting- <https://www.R-project.org/posting-> guide.html
+>>> ??????? and provide commented, minimal, self-contained, reproducible 
+>>> code.
+>>>
+>>>
+>>> -- 
+>>> Sent from my phone. Please excuse my brevity.
+>>
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Thu May 28 18:31:53 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Thu, 28 May 2026 12:31:53 -0400
+Subject: [R] Problem with updating packages
+In-Reply-To: <5ac924bb-0bf7-4696-8c51-9c28947705cd@uni-bonn.de>
+References: <5ac924bb-0bf7-4696-8c51-9c28947705cd@uni-bonn.de>
+Message-ID: <a69f158a-4d74-4cd2-9c8c-790eee556150@gmail.com>
+
+On 2026-05-27 12:01 p.m., Karl Schilling wrote:
+> I am running R under Windows 11. recently updated R to the 4.6patchhed
+> version. I then copied my packages from my previous version (4.5) to the
+> library of 4.6. Then I updated all packages.
+
+You don't say exactly what you mean by "my packages".  If you copy *all* 
+R 4.5 packages to the default R 4.6 library directory, you will probably 
+damage R beyond repair.  You need to remember that packages with 
+priority "base" contain code that implements R internals.  Trying to use 
+R 4.5 internals in R 4.6 will cause a lot of problems.
+
+If you only copy contributed packages (i.e. ones that you installed 
+which get priority NA, or recommended packages) then what you did might 
+work, but it's safest to just save the names of all contributed 
+packages, and reinstall those.>
+> Since then, I see the following behavior:
+> 
+> Each time I run "update.packages(ask='graphics',checkBuilt=TRUE)" I am
+> asked TWICE
+> 
+> "--- Please select a CRAN mirror for use in this session ---".
+> 
+> And, more embarrassingly, all my Cran and Bioconductor are said to
+> require an update. That also happens when I run "update.packages", say,
+> one hour after my last update.
+
+I think others have pointed out that every contributed package *does* 
+need an update when going from R 4.5.* to R 4.6.*.  You can only get 
+away with keeping installed copies of packages when you stay within the 
+same minor version number, e.g. 4.6.1 to 4.6.2.
+
+Duncan Murdoch
+
+
+From k@r|@@ch||||ng @end|ng |rom un|-bonn@de  Thu May 28 20:20:55 2026
+From: k@r|@@ch||||ng @end|ng |rom un|-bonn@de (Karl Schilling)
+Date: Thu, 28 May 2026 20:20:55 +0200
+Subject: [R] Problem with updating packages
+In-Reply-To: <a69f158a-4d74-4cd2-9c8c-790eee556150@gmail.com>
+References: <5ac924bb-0bf7-4696-8c51-9c28947705cd@uni-bonn.de>
+ <a69f158a-4d74-4cd2-9c8c-790eee556150@gmail.com>
+Message-ID: <b8b785ae-7562-4f14-81ee-a3939c4c9234@uni-bonn.de>
+
+Thank you for these comments, which indeed do clarify what I had done 
+wrong. "my packages" indeed should read "all packages".? So the next 
+tome I certainly will t save the names of all contributed packages, and 
+reinstall those.
+
+I really appreciate the support and patience? that helped me to fix what 
+I messed up by bein? too naive.
+
+Best,
+
+Karl Schilling
+
+On 28.05.2026 18:31, Duncan Murdoch wrote:
+> On 2026-05-27 12:01 p.m., Karl Schilling wrote:
+>> I am running R under Windows 11. recently updated R to the 4.6patchhed
+>> version. I then copied my packages from my previous version (4.5) to the
+>> library of 4.6. Then I updated all packages.
+>
+> You don't say exactly what you mean by "my packages".? If you copy 
+> *all* R 4.5 packages to the default R 4.6 library directory, you will 
+> probably damage R beyond repair.? You need to remember that packages 
+> with priority "base" contain code that implements R internals.? Trying 
+> to use R 4.5 internals in R 4.6 will cause a lot of problems.
+>
+> If you only copy contributed packages (i.e. ones that you installed 
+> which get priority NA, or recommended packages) then what you did 
+> might work, but it's safest to just save the names of all contributed 
+> packages, and reinstall those.>
+>> Since then, I see the following behavior:
+>>
+>> Each time I run "update.packages(ask='graphics',checkBuilt=TRUE)" I am
+>> asked TWICE
+>>
+>> "--- Please select a CRAN mirror for use in this session ---".
+>>
+>> And, more embarrassingly, all my Cran and Bioconductor are said to
+>> require an update. That also happens when I run "update.packages", say,
+>> one hour after my last update.
+>
+> I think others have pointed out that every contributed package *does* 
+> need an update when going from R 4.5.* to R 4.6.*.? You can only get 
+> away with keeping installed copies of packages when you stay within 
+> the same minor version number, e.g. 4.6.1 to 4.6.2.
+>
+> Duncan Murdoch
+
+
