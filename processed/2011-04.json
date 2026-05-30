@@ -5408,24 +5408,6 @@
       "month": "2011-04"
     },
     {
-      "id": "msg-0202b61c0ca1",
-      "message_id": "<4D99F020.8020508@statistik.tu-dortmund.de>",
-      "from_name": "Uwe Ligges",
-      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
-      "date": "2011-04-04T16:21:52Z",
-      "subject": "[R] merging data list in to single data frame",
-      "subject_clean": "merging data list in to single data frame",
-      "in_reply_to": "<002701cbf2d6$65405870$2fc10950$@edu>",
-      "references": [
-        "<002701cbf2d6$65405870$2fc10950$@edu>"
-      ],
-      "body_plain": "On 04.04.2011 16:41, Umesh Rosyara wrote:\n> Dear R community members\n>\n>\n>\n> I did find a good way to merge my 200 text data files in to a single data\n> file with one column added will show indicator for that file.\n>\n>\n>\n> filelist = list.files(pattern = \"K*cd.txt\")\n\n\nI doubt you meant \"K*cd.txt\" but \"^K[[:digit:]]*cd\\\\.txt$\".\n\n\n\n# the file names are K1cd.txt\n> .................to K200cd.txt\n>\n> data_list<-lapply(filelist, read.table, header=T, comment=\";\", fill=T)\n\n\nReplace by:\n\ndata_list <- lapply(filelist, function(x)\n    cbind(Filename = x, read.table(x, header=T, comment=\";\", fill=TRUE))\n\n\nAnd then:\n\nresult <- do.call(\"rbind\", data_list)\n\nUwe Ligges\n\n\n>\n>\n>\n> This will create list, but this is not what I want.\n>\n>\n>\n> I want a single dataframe (all separate dataframes have same variable\n> headings) with additional row for example\n>\n>\n>\n> ; just for example, two small datasets are created by my component datasets\n> are huge, need automation\n>\n> ;read from file K1cd.txt\n>\n> var1  var2  var3    var4\n>\n> 1           6         0.3         8\n>\n> 3          4         0.4         9\n>\n> 2          3         0.4         6\n>\n> 1           0.4    0.9          3\n>\n>\n>\n> ;read from file K2cd.txt\n>\n> var1  var2  var3    var4\n>\n> 1           16         0.6        7\n>\n> 3          14         0.4         6\n>\n> 2         1 3         0.4         5\n>\n> 1          0.6    0.9          2\n>\n>\n>\n> the output dataframe should look like\n>\n>\n>\n> Fileno  var1  var2  var3    var4\n>\n> 1              1           6         0.3        8\n>\n> 1              3          4         0.4         9\n>\n> 1              2          3         0.4         6\n>\n> 1              1           0.4      0.9        3\n>\n> 2              1           16       0.6        7\n>\n> 2              3          14         0.4        6\n>\n> 2              2         1 3         0.4        5\n>\n> 2              1          0.6         0.9       2\n>\n>\n>\n> Please note that new file no column is added\n>\n>\n>\n> Thank you for the help.\n>\n>\n>\n> Umesh R\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "On 04.04.2011 16:41, Umesh Rosyara wrote:\n> Dear R community members\n>\n>\n>\n> I did find a good way to merge my 200 text data files in to a single data\n> file with one column added will show indicator ",
-      "thread_id": "thread-0fb99715221e",
-      "thread_depth": 1,
-      "month": "2011-04"
-    },
-    {
       "id": "msg-aeb0cac8d79a",
       "message_id": "<8BC2E7AD-5B2F-4861-837A-A67932E1CD58@mpipsykl.mpg.de>",
       "from_name": "Benno Pütz",
@@ -5440,6 +5422,24 @@
       "body_plain": "How about\n\n\tas.matrix(p.adjust(as.dist(pmat)))\n\n\nBenno\n\nOn 4.Apr.2011, at 17:02, January Weiner wrote:\n\n> Dear all,\n> \n> I have an n x n matrix of p-values. The matrix is symmetrical, as it\n> describes the \"each against each\" p values of correlation\n> coefficients.\n> \n> How can I best correct the p values of the matrix? Notably, the total\n> number of the tests performed is n(n-1)/2, since I do not test the\n> correlation of each variable with itself. That means, I only want to\n> correct one half of the matrix, not including the diagonal. Therefore,\n> simply writing\n> \n> pmat <- p.adjust( pmat, method= \"fdr\" )\n> # where pmat is an n x n matrix\n> \n> ...doesn't cut it.\n> \n> Of course, I can turn the matrix in to a three column data frame with\n> n(n-1)/2 rows, but that is slow and not elegant.\n> \n> regards,\n> j.\n> \n> -- \n> -------- Dr. January Weiner 3 --------------------------------------\n> Max Planck Institute for Infection Biology\n> Charit?platz 1\n> D-10117 Berlin, Germany\n> Web   : www.mpiib-berlin.mpg.de\n> Tel     : +49-30-28460514\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
       "body_snippet": "How about\n\n\tas.matrix(p.adjust(as.dist(pmat)))\n\n\nBenno\n\nOn 4.Apr.2011, at 17:02, January Weiner wrote:\n\n> Dear all,\n> \n> I have an n x n matrix of p-values. The matrix is symmetrical, as it\n> describe",
       "thread_id": "thread-4f1b48fac5e6",
+      "thread_depth": 1,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-0202b61c0ca1",
+      "message_id": "<4D99F020.8020508@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2011-04-04T16:21:52Z",
+      "subject": "[R] merging data list in to single data frame",
+      "subject_clean": "merging data list in to single data frame",
+      "in_reply_to": "<002701cbf2d6$65405870$2fc10950$@edu>",
+      "references": [
+        "<002701cbf2d6$65405870$2fc10950$@edu>"
+      ],
+      "body_plain": "On 04.04.2011 16:41, Umesh Rosyara wrote:\n> Dear R community members\n>\n>\n>\n> I did find a good way to merge my 200 text data files in to a single data\n> file with one column added will show indicator for that file.\n>\n>\n>\n> filelist = list.files(pattern = \"K*cd.txt\")\n\n\nI doubt you meant \"K*cd.txt\" but \"^K[[:digit:]]*cd\\\\.txt$\".\n\n\n\n# the file names are K1cd.txt\n> .................to K200cd.txt\n>\n> data_list<-lapply(filelist, read.table, header=T, comment=\";\", fill=T)\n\n\nReplace by:\n\ndata_list <- lapply(filelist, function(x)\n    cbind(Filename = x, read.table(x, header=T, comment=\";\", fill=TRUE))\n\n\nAnd then:\n\nresult <- do.call(\"rbind\", data_list)\n\nUwe Ligges\n\n\n>\n>\n>\n> This will create list, but this is not what I want.\n>\n>\n>\n> I want a single dataframe (all separate dataframes have same variable\n> headings) with additional row for example\n>\n>\n>\n> ; just for example, two small datasets are created by my component datasets\n> are huge, need automation\n>\n> ;read from file K1cd.txt\n>\n> var1  var2  var3    var4\n>\n> 1           6         0.3         8\n>\n> 3          4         0.4         9\n>\n> 2          3         0.4         6\n>\n> 1           0.4    0.9          3\n>\n>\n>\n> ;read from file K2cd.txt\n>\n> var1  var2  var3    var4\n>\n> 1           16         0.6        7\n>\n> 3          14         0.4         6\n>\n> 2         1 3         0.4         5\n>\n> 1          0.6    0.9          2\n>\n>\n>\n> the output dataframe should look like\n>\n>\n>\n> Fileno  var1  var2  var3    var4\n>\n> 1              1           6         0.3        8\n>\n> 1              3          4         0.4         9\n>\n> 1              2          3         0.4         6\n>\n> 1              1           0.4      0.9        3\n>\n> 2              1           16       0.6        7\n>\n> 2              3          14         0.4        6\n>\n> 2              2         1 3         0.4        5\n>\n> 2              1          0.6         0.9       2\n>\n>\n>\n> Please note that new file no column is added\n>\n>\n>\n> Thank you for the help.\n>\n>\n>\n> Umesh R\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "On 04.04.2011 16:41, Umesh Rosyara wrote:\n> Dear R community members\n>\n>\n>\n> I did find a good way to merge my 200 text data files in to a single data\n> file with one column added will show indicator ",
+      "thread_id": "thread-0fb99715221e",
       "thread_depth": 1,
       "month": "2011-04"
     },
@@ -10138,6 +10138,24 @@
       "month": "2011-04"
     },
     {
+      "id": "msg-f0c6a234a14b",
+      "message_id": "<BANLkTi=TiXLM-Sb5dRj8=YnZL871+zSPTg@mail.gmail.com>",
+      "from_name": "Peter Langfelder",
+      "from_email_hash": "3744676ae29cb7c74d1e451fd4074c638de7249507d66700c3663b4b8db6be68",
+      "date": "2011-04-06T22:32:06Z",
+      "subject": "[R] problem with all/all.equal",
+      "subject_clean": "problem with all/all.equal",
+      "in_reply_to": "<BANLkTim9PfFYU6iy7_wL6=auyX6424a9GA@mail.gmail.com>",
+      "references": [
+        "<BANLkTim9PfFYU6iy7_wL6=auyX6424a9GA@mail.gmail.com>"
+      ],
+      "body_plain": "On Wed, Apr 6, 2011 at 3:09 PM, Laura Smith <smithlaura937 at gmail.com> wrote:\n> Hi!\n>\n> In a function, I may have an instance in which all elements are equal.\n>\n>> x <- rep(1,5)\n>>\n>> x\n> [1] 1 1 1 1 1\n>> identical(x)\n> Error in .Internal(identical(x, y, num.eq, single.NA, attrib.as.set)) :\n> ?'y' is missing\n>> all.equal(x)\n> Error in is.expression(x) : 'x' is missing\n>>\n\nall looks at a logical vector (or two), and all.equal compares two\nobjects. For your purposes, you can ask whether\n\nall (x==x[1])\n\nfor example.\n\nPeter",
+      "body_snippet": "On Wed, Apr 6, 2011 at 3:09 PM, Laura Smith <smithlaura937 at gmail.com> wrote:\n> Hi!\n>\n> In a function, I may have an instance in which all elements are equal.\n>\n>> x <- rep(1,5)\n>>\n>> x\n> [1] 1 1 1 ",
+      "thread_id": "thread-8808034ef857",
+      "thread_depth": 1,
+      "month": "2011-04"
+    },
+    {
       "id": "msg-91824b36402e",
       "message_id": "<BANLkTi=BzD=gYYf5X-2FnEYfP7JgAdh_bQ@mail.gmail.com>",
       "from_name": "raji sankaran",
@@ -10154,24 +10172,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110407/4132c01b/attachment.pl>",
       "thread_id": "thread-f027e0b24ba7",
       "thread_depth": 2,
-      "month": "2011-04"
-    },
-    {
-      "id": "msg-f0c6a234a14b",
-      "message_id": "<BANLkTi=TiXLM-Sb5dRj8=YnZL871+zSPTg@mail.gmail.com>",
-      "from_name": "Peter Langfelder",
-      "from_email_hash": "3744676ae29cb7c74d1e451fd4074c638de7249507d66700c3663b4b8db6be68",
-      "date": "2011-04-06T22:32:06Z",
-      "subject": "[R] problem with all/all.equal",
-      "subject_clean": "problem with all/all.equal",
-      "in_reply_to": "<BANLkTim9PfFYU6iy7_wL6=auyX6424a9GA@mail.gmail.com>",
-      "references": [
-        "<BANLkTim9PfFYU6iy7_wL6=auyX6424a9GA@mail.gmail.com>"
-      ],
-      "body_plain": "On Wed, Apr 6, 2011 at 3:09 PM, Laura Smith <smithlaura937 at gmail.com> wrote:\n> Hi!\n>\n> In a function, I may have an instance in which all elements are equal.\n>\n>> x <- rep(1,5)\n>>\n>> x\n> [1] 1 1 1 1 1\n>> identical(x)\n> Error in .Internal(identical(x, y, num.eq, single.NA, attrib.as.set)) :\n> ?'y' is missing\n>> all.equal(x)\n> Error in is.expression(x) : 'x' is missing\n>>\n\nall looks at a logical vector (or two), and all.equal compares two\nobjects. For your purposes, you can ask whether\n\nall (x==x[1])\n\nfor example.\n\nPeter",
-      "body_snippet": "On Wed, Apr 6, 2011 at 3:09 PM, Laura Smith <smithlaura937 at gmail.com> wrote:\n> Hi!\n>\n> In a function, I may have an instance in which all elements are equal.\n>\n>> x <- rep(1,5)\n>>\n>> x\n> [1] 1 1 1 ",
-      "thread_id": "thread-8808034ef857",
-      "thread_depth": 1,
       "month": "2011-04"
     },
     {
@@ -11646,24 +11646,6 @@
       "month": "2011-04"
     },
     {
-      "id": "msg-6a888afab425",
-      "message_id": "<F7571AEC-B989-4DE9-BD43-273091B20006@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2011-04-07T14:12:23Z",
-      "subject": "[R] transform() on selective names. Is it possible?",
-      "subject_clean": "transform() on selective names. Is it possible?",
-      "in_reply_to": "<BANLkTikXcVF8hJx+QXkDm+5_sPoVzuPdCA@mail.gmail.com>",
-      "references": [
-        "<BANLkTikXcVF8hJx+QXkDm+5_sPoVzuPdCA@mail.gmail.com>"
-      ],
-      "body_plain": "On Apr 7, 2011, at 9:56 AM, Juan Carlos Borr?s wrote:\n\n> Hi all,\n> I am whitening my data:\n>\n> # code begins\n> N <- 300\n> M <- 2\n> x <- matrix(data=rnorm(N*M, 0, 3)-10, ncol=M, nrow=N)\n> y <- matrix(c(1,-2,-2,1), ncol=M, nrow=M)\n> z <- data.frame(x %*% y)\n> colnames(z) <- c('x','y')\n> par(mfrow=c(1,3))\n> plot(z, pch=5, col=\"blue\")\n>\n> whiten <- function(x) { (x-mean(x))/sd(x) }\n\nConsider:\n\n  whiten <- scale  # no need to re-invent the wheel\n  fc <- function(dfrm, coln) transform(dfrm, coln=whiten(dfrm[coln]))\n  colxy <- \"x\"\n  z <- fc(z, colxy)  # the \"[\" function will interpret colxy\n  z\n\n>\n> zz <- transform(z, x=whiten(x), y=whiten(y))\n> plot(zz, pch=3, col=\"red\")\n>\n> #code ends\n>\n> And everything looks fine enough.\n> But now I want to withen just one of the columns and I won't know\n> which one until my script is running, hence I can't hard code it in\n> the script.\n> Then I though, well maybe if I define some convenient f...\n>\n> #begin code\n>\n> f <- function(a) { paste(a,\"=withen(\",a,\")\", sep='') }\n> a <- 'x' # or a <- 'y' depending on user input.....\n> f(a)\n>> [1] \"x=withen(x)\"\n> # so I could try....\n> zzz <- transform(z, eval(f('x')))\n> # which of course doesn't work\n> plot(zz, pch=3, col=\"green\")\n>\n> head(z, n=2)\n>>         x         y\n>> 1 17.167380  6.884402\n>> 2  8.234507 13.940932\n> head(zzz, n=2)\n>>         x         y\n>> 1 17.167380  6.884402\n>> 2  8.234507 13.940932\n>\n> #end code\n>\n> Could someone provide me with some hint on whether the attempted trick\n> above is possible and how to proceed further?\n> Thanks in advance.\n> jcb!\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nWest Hartford, CT",
-      "body_snippet": "On Apr 7, 2011, at 9:56 AM, Juan Carlos Borr?s wrote:\n\n> Hi all,\n> I am whitening my data:\n>\n> # code begins\n> N <- 300\n> M <- 2\n> x <- matrix(data=rnorm(N*M, 0, 3)-10, ncol=M, nrow=N)\n> y <- matrix(c",
-      "thread_id": "thread-2f84757b75bf",
-      "thread_depth": 1,
-      "month": "2011-04"
-    },
-    {
       "id": "msg-342e17c9194c",
       "message_id": "<fb9ff02673d7.4d9d7ff7@une.net.co>",
       "from_name": "KENNETH R CABRERA",
@@ -11680,6 +11662,24 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20110407/18e88811/attachment.pl>",
       "thread_id": "thread-10997be3e918",
       "thread_depth": 2,
+      "month": "2011-04"
+    },
+    {
+      "id": "msg-6a888afab425",
+      "message_id": "<F7571AEC-B989-4DE9-BD43-273091B20006@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2011-04-07T14:12:23Z",
+      "subject": "[R] transform() on selective names. Is it possible?",
+      "subject_clean": "transform() on selective names. Is it possible?",
+      "in_reply_to": "<BANLkTikXcVF8hJx+QXkDm+5_sPoVzuPdCA@mail.gmail.com>",
+      "references": [
+        "<BANLkTikXcVF8hJx+QXkDm+5_sPoVzuPdCA@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 7, 2011, at 9:56 AM, Juan Carlos Borr?s wrote:\n\n> Hi all,\n> I am whitening my data:\n>\n> # code begins\n> N <- 300\n> M <- 2\n> x <- matrix(data=rnorm(N*M, 0, 3)-10, ncol=M, nrow=N)\n> y <- matrix(c(1,-2,-2,1), ncol=M, nrow=M)\n> z <- data.frame(x %*% y)\n> colnames(z) <- c('x','y')\n> par(mfrow=c(1,3))\n> plot(z, pch=5, col=\"blue\")\n>\n> whiten <- function(x) { (x-mean(x))/sd(x) }\n\nConsider:\n\n  whiten <- scale  # no need to re-invent the wheel\n  fc <- function(dfrm, coln) transform(dfrm, coln=whiten(dfrm[coln]))\n  colxy <- \"x\"\n  z <- fc(z, colxy)  # the \"[\" function will interpret colxy\n  z\n\n>\n> zz <- transform(z, x=whiten(x), y=whiten(y))\n> plot(zz, pch=3, col=\"red\")\n>\n> #code ends\n>\n> And everything looks fine enough.\n> But now I want to withen just one of the columns and I won't know\n> which one until my script is running, hence I can't hard code it in\n> the script.\n> Then I though, well maybe if I define some convenient f...\n>\n> #begin code\n>\n> f <- function(a) { paste(a,\"=withen(\",a,\")\", sep='') }\n> a <- 'x' # or a <- 'y' depending on user input.....\n> f(a)\n>> [1] \"x=withen(x)\"\n> # so I could try....\n> zzz <- transform(z, eval(f('x')))\n> # which of course doesn't work\n> plot(zz, pch=3, col=\"green\")\n>\n> head(z, n=2)\n>>         x         y\n>> 1 17.167380  6.884402\n>> 2  8.234507 13.940932\n> head(zzz, n=2)\n>>         x         y\n>> 1 17.167380  6.884402\n>> 2  8.234507 13.940932\n>\n> #end code\n>\n> Could someone provide me with some hint on whether the attempted trick\n> above is possible and how to proceed further?\n> Thanks in advance.\n> jcb!\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Apr 7, 2011, at 9:56 AM, Juan Carlos Borr?s wrote:\n\n> Hi all,\n> I am whitening my data:\n>\n> # code begins\n> N <- 300\n> M <- 2\n> x <- matrix(data=rnorm(N*M, 0, 3)-10, ncol=M, nrow=N)\n> y <- matrix(c",
+      "thread_id": "thread-2f84757b75bf",
+      "thread_depth": 1,
       "month": "2011-04"
     },
     {
@@ -51296,6 +51296,24 @@
       "month": "2011-04"
     },
     {
+      "id": "msg-403dcb9c682a",
+      "message_id": "<0A4B99A4-E301-46DC-BF72-B159A5988FA4@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2011-04-28T16:36:39Z",
+      "subject": "[R] Help ave() function",
+      "subject_clean": "Help ave() function",
+      "in_reply_to": "<BANLkTim-+pUz-mViopydm-QCdPvSiWCKCg@mail.gmail.com>",
+      "references": [
+        "<BANLkTim-+pUz-mViopydm-QCdPvSiWCKCg@mail.gmail.com>"
+      ],
+      "body_plain": "On Apr 28, 2011, at 12:30 PM, ???????? wrote:\n\n> Hello again.\n>\n> Following a great idea from Jim and Dennis, I began to use the  \n> function\n> ave() in my big data.\n> I proved to use this command in my data with FUN=max(x,na.rm=T),\n\nTry instead:\n\n  look at the 3rd example of help(ave)\n\n\n> and I\n> received a Warning that translated looks like\n>\n> Warning in max (x, na.rm = T):\n> no arguments to max; returning -Inf\n>\n> Is this happening 'cause I?m using a big table : 254417 rows   9  \n> columns?\n>\n> \t[[alternative HTML version deleted]]\n\n  ... and it is trivial to send plain text from gmail, so please do so.\n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On Apr 28, 2011, at 12:30 PM, ???????? wrote:\n\n> Hello again.\n>\n> Following a great idea from Jim and Dennis, I began to use the  \n> function\n> ave() in my big data.\n> I proved to use this command in ",
+      "thread_id": "thread-eeae37301d00",
+      "thread_depth": 1,
+      "month": "2011-04"
+    },
+    {
       "id": "msg-1f96e66155a4",
       "message_id": "<alpine.DEB.2.02.1104281834530.2487@paninaro.uibk.ac.at>",
       "from_name": "Achim Zeileis",
@@ -51313,24 +51331,6 @@
       "body_snippet": "On Thu, 28 Apr 2011, moleps wrote:\n\n> sessionInfo yields the following:\n\nOK, the \"Design\" package causes the problem here. When you load the Design \npackage, it provides a new Surv() and related metho",
       "thread_id": "thread-984e757fc00c",
       "thread_depth": 3,
-      "month": "2011-04"
-    },
-    {
-      "id": "msg-403dcb9c682a",
-      "message_id": "<0A4B99A4-E301-46DC-BF72-B159A5988FA4@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2011-04-28T16:36:39Z",
-      "subject": "[R] Help ave() function",
-      "subject_clean": "Help ave() function",
-      "in_reply_to": "<BANLkTim-+pUz-mViopydm-QCdPvSiWCKCg@mail.gmail.com>",
-      "references": [
-        "<BANLkTim-+pUz-mViopydm-QCdPvSiWCKCg@mail.gmail.com>"
-      ],
-      "body_plain": "On Apr 28, 2011, at 12:30 PM, ???????? wrote:\n\n> Hello again.\n>\n> Following a great idea from Jim and Dennis, I began to use the  \n> function\n> ave() in my big data.\n> I proved to use this command in my data with FUN=max(x,na.rm=T),\n\nTry instead:\n\n  look at the 3rd example of help(ave)\n\n\n> and I\n> received a Warning that translated looks like\n>\n> Warning in max (x, na.rm = T):\n> no arguments to max; returning -Inf\n>\n> Is this happening 'cause I?m using a big table : 254417 rows   9  \n> columns?\n>\n> \t[[alternative HTML version deleted]]\n\n  ... and it is trivial to send plain text from gmail, so please do so.\n\nDavid Winsemius, MD\nWest Hartford, CT",
-      "body_snippet": "On Apr 28, 2011, at 12:30 PM, ???????? wrote:\n\n> Hello again.\n>\n> Following a great idea from Jim and Dennis, I began to use the  \n> function\n> ave() in my big data.\n> I proved to use this command in ",
-      "thread_id": "thread-eeae37301d00",
-      "thread_depth": 1,
       "month": "2011-04"
     },
     {

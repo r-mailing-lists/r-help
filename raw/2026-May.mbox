@@ -3997,3 +3997,169 @@ On 28.05.2026 18:31, Duncan Murdoch wrote:
 > Duncan Murdoch
 
 
+From pd@|gd @end|ng |rom gm@||@com  Fri May 29 07:12:15 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Fri, 29 May 2026 07:12:15 +0200
+Subject: [R] Problem with updating packages
+In-Reply-To: <097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>
+References: <097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>
+Message-ID: <46A75D5C-7471-4608-970A-99E507892D61@gmail.com>
+
+Also, it is WRONG to copy and then update.packages(). This _will_ overwrite packages from your freshly installed R with old ones which 1: might not work and 2: are not CRAN packages. I.e., you get stuck with a 4.6 install that contain pieces of 4.5, possibly broken ones. The only way out is to reinstall. 
+
+Sendt fra min iPhone
+
+> Den 28. maj 2026 kl. 00.34 skrev Uwe Ligges <ligges at statistik.tu-dortmund.de>:
+> 
+> ?
+> 
+>> On 28.05.2026 00:02, Jeff Newmiller wrote:
+>> So can we interpret this to mean that update.packages() will fix (replace) old packages that were copied into the new library? What if one or more packages were dropped/archived or pulled from non-standard package sources?
+> 
+> No, not if a package is archived from CRAN or downloaded from a repository that is not declared. update.packages() won't find that the update is needed in such a case
+> I talked about active CRAN packages.
+> 
+> Best,
+> Uwe Ligges
+> 
+> 
+>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- dortmund.de> wrote:
+>>    On 27.05.2026 18:01, Karl Schilling wrote:
+>>        I am running R under Windows 11. recently updated R to the
+>>        4.6patchhed version. I then copied my packages from my previous
+>>        version (4.5) to the library of 4.6. Then I updated all packages.
+>>        Since then, I see the following behavior:
+>>        Each time I run
+>>        "update.packages(ask='graphics',checkBuilt=TRUE)" I am asked TWICE
+>>        "--- Please select a CRAN mirror for use in this session ---".
+>>        And, more embarrassingly, all my Cran and Bioconductor are said
+>>        to require an update. That also happens when I run
+>>        "update.packages", say, one hour after my last update.
+>>        And when I run "old.packages()", it seems that all my packages
+>>        are identified as being old.
+>>        Any suggestions what might be going on?
+>>    For a major version change (as from 4.5.x to 4.6.y) we do not
+>>    guarantee API compatibility, hence we cannot guarantee that a
+>>    package built for 4.5.x will work under 4.6.y. As a consequence,
+>>    update.packages() knows that everything has to be reinstalled.
+>>    Best,
+>>    Uwe Ligges
+>>        Thank you so much in advance,
+>>        Karl Schilling
+>>        ------------------------------------------------------------------------
+>>        R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>        https://stat.ethz.ch/mailman/listinfo/r-help <https://
+>>        stat.ethz.ch/mailman/listinfo/r-help>
+>>        PLEASE do read the posting guide https://www.R-project.org/
+>>        posting- <https://www.R-project.org/posting-> guide.html
+>>        and provide commented, minimal, self-contained, reproducible code.
+>> --
+>> Sent from my phone. Please excuse my brevity.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From pd@|gd @end|ng |rom gm@||@com  Fri May 29 07:32:49 2026
+From: pd@|gd @end|ng |rom gm@||@com (Peter Dalgaard)
+Date: Fri, 29 May 2026 07:32:49 +0200
+Subject: [R] Problem with updating packages
+In-Reply-To: <46A75D5C-7471-4608-970A-99E507892D61@gmail.com>
+References: <46A75D5C-7471-4608-970A-99E507892D61@gmail.com>
+Message-ID: <64866086-BBEF-496A-9087-A812EDF806EF@gmail.com>
+
+... as already explained by Duncan M. Oh well. 
+
+Sendt fra min iPhone
+
+> Den 29. maj 2026 kl. 07.12 skrev Peter Dalgaard <pdalgd at gmail.com>:
+> 
+> ?Also, it is WRONG to copy and then update.packages(). This _will_ overwrite packages from your freshly installed R with old ones which 1: might not work and 2: are not CRAN packages. I.e., you get stuck with a 4.6 install that contain pieces of 4.5, possibly broken ones. The only way out is to reinstall. 
+> 
+> Sendt fra min iPhone
+> 
+>> Den 28. maj 2026 kl. 00.34 skrev Uwe Ligges <ligges at statistik.tu-dortmund.de>:
+>> 
+>> ?
+>> 
+>>>> On 28.05.2026 00:02, Jeff Newmiller wrote:
+>>> So can we interpret this to mean that update.packages() will fix (replace) old packages that were copied into the new library? What if one or more packages were dropped/archived or pulled from non-standard package sources?
+>> 
+>> No, not if a package is archived from CRAN or downloaded from a repository that is not declared. update.packages() won't find that the update is needed in such a case
+>> I talked about active CRAN packages.
+>> 
+>> Best,
+>> Uwe Ligges
+>> 
+>> 
+>>>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- dortmund.de> wrote:
+>>>>   On 27.05.2026 18:01, Karl Schilling wrote:
+>>>       I am running R under Windows 11. recently updated R to the
+>>>       4.6patchhed version. I then copied my packages from my previous
+>>>       version (4.5) to the library of 4.6. Then I updated all packages.
+>>>       Since then, I see the following behavior:
+>>>       Each time I run
+>>>       "update.packages(ask='graphics',checkBuilt=TRUE)" I am asked TWICE
+>>>       "--- Please select a CRAN mirror for use in this session ---".
+>>>       And, more embarrassingly, all my Cran and Bioconductor are said
+>>>       to require an update. That also happens when I run
+>>>       "update.packages", say, one hour after my last update.
+>>>       And when I run "old.packages()", it seems that all my packages
+>>>       are identified as being old.
+>>>       Any suggestions what might be going on?
+>>>   For a major version change (as from 4.5.x to 4.6.y) we do not
+>>>   guarantee API compatibility, hence we cannot guarantee that a
+>>>   package built for 4.5.x will work under 4.6.y. As a consequence,
+>>>   update.packages() knows that everything has to be reinstalled.
+>>>   Best,
+>>>   Uwe Ligges
+>>>       Thank you so much in advance,
+>>>       Karl Schilling
+>>>       ------------------------------------------------------------------------
+>>>       R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>>       https://stat.ethz.ch/mailman/listinfo/r-help <https://
+>>>       stat.ethz.ch/mailman/listinfo/r-help>
+>>>       PLEASE do read the posting guide https://www.R-project.org/
+>>>       posting- <https://www.R-project.org/posting-> guide.html
+>>>       and provide commented, minimal, self-contained, reproducible code.
+>>> --
+>>> Sent from my phone. Please excuse my brevity.
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+
+
+From bgunter@4567 @end|ng |rom gm@||@com  Fri May 29 17:14:50 2026
+From: bgunter@4567 @end|ng |rom gm@||@com (Bert Gunter)
+Date: Fri, 29 May 2026 08:14:50 -0700
+Subject: [R] OFF-TOPIC: Registered Reports in Nature
+Message-ID: <CAGxFJbTRNWvkpzVeX4RyQwX6QaFbGsqZ4U66R=d8FwSzueKXNg@mail.gmail.com>
+
+All:
+
+Again, this is off topic. Probably of interest only to R users who are
+involved in research or those who follow the "irreproducibility" in
+scientific research controversy.
+
+The Nature suite of publications has expanded its "registered research"
+publication policies to all fields in which they publish:
+https://www.nature.com/articles/d41586-026-01629-y
+
+Given Nature's preeminence in science research publication -- and also a
+few interesting comments in this announcement -- I thought that readers of
+this list might be interested. As always, my apologies if I have
+overstepped, and please do not reply (except to criticize me), as I have
+nothing further to add.
+
+Best to all,
+Bert
+
+	[[alternative HTML version deleted]]
+
+

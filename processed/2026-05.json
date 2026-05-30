@@ -891,6 +891,58 @@
       "thread_id": "thread-c17f6cad7d3e",
       "thread_depth": 2,
       "month": "2026-05"
+    },
+    {
+      "id": "msg-07a56eda0d86",
+      "message_id": "<46A75D5C-7471-4608-970A-99E507892D61@gmail.com>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "5d0f61ffffc9a67fd86f4b9a1ea3fac7d731c19e1d8679b6ae315232b22874e8",
+      "date": "2026-05-29T05:12:15Z",
+      "subject": "[R] Problem with updating packages",
+      "subject_clean": "Problem with updating packages",
+      "in_reply_to": "<097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>",
+      "references": [
+        "<097d78e8-025a-44b0-b294-4a9c2839963d@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Also, it is WRONG to copy and then update.packages(). This _will_ overwrite packages from your freshly installed R with old ones which 1: might not work and 2: are not CRAN packages. I.e., you get stuck with a 4.6 install that contain pieces of 4.5, possibly broken ones. The only way out is to reinstall. \n\nSendt fra min iPhone\n\n> Den 28. maj 2026 kl. 00.34 skrev Uwe Ligges <ligges at statistik.tu-dortmund.de>:\n> \n> ?\n> \n>> On 28.05.2026 00:02, Jeff Newmiller wrote:\n>> So can we interpret this to mean that update.packages() will fix (replace) old packages that were copied into the new library? What if one or more packages were dropped/archived or pulled from non-standard package sources?\n> \n> No, not if a package is archived from CRAN or downloaded from a repository that is not declared. update.packages() won't find that the update is needed in such a case\n> I talked about active CRAN packages.\n> \n> Best,\n> Uwe Ligges\n> \n> \n>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- dortmund.de> wrote:\n>>    On 27.05.2026 18:01, Karl Schilling wrote:\n>>        I am running R under Windows 11. recently updated R to the\n>>        4.6patchhed version. I then copied my packages from my previous\n>>        version (4.5) to the library of 4.6. Then I updated all packages.\n>>        Since then, I see the following behavior:\n>>        Each time I run\n>>        \"update.packages(ask='graphics',checkBuilt=TRUE)\" I am asked TWICE\n>>        \"--- Please select a CRAN mirror for use in this session ---\".\n>>        And, more embarrassingly, all my Cran and Bioconductor are said\n>>        to require an update. That also happens when I run\n>>        \"update.packages\", say, one hour after my last update.\n>>        And when I run \"old.packages()\", it seems that all my packages\n>>        are identified as being old.\n>>        Any suggestions what might be going on?\n>>    For a major version change (as from 4.5.x to 4.6.y) we do not\n>>    guarantee API compatibility, hence we cannot guarantee that a\n>>    package built for 4.5.x will work under 4.6.y. As a consequence,\n>>    update.packages() knows that everything has to be reinstalled.\n>>    Best,\n>>    Uwe Ligges\n>>        Thank you so much in advance,\n>>        Karl Schilling\n>>        ------------------------------------------------------------------------\n>>        R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>        https://stat.ethz.ch/mailman/listinfo/r-help <https://\n>>        stat.ethz.ch/mailman/listinfo/r-help>\n>>        PLEASE do read the posting guide https://www.R-project.org/\n>>        posting- <https://www.R-project.org/posting-> guide.html\n>>        and provide commented, minimal, self-contained, reproducible code.\n>> --\n>> Sent from my phone. Please excuse my brevity.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Also, it is WRONG to copy and then update.packages(). This _will_ overwrite packages from your freshly installed R with old ones which 1: might not work and 2: are not CRAN packages. I.e., you get stu",
+      "thread_id": "thread-c17f6cad7d3e",
+      "thread_depth": 4,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-f9af99626c36",
+      "message_id": "<64866086-BBEF-496A-9087-A812EDF806EF@gmail.com>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "5d0f61ffffc9a67fd86f4b9a1ea3fac7d731c19e1d8679b6ae315232b22874e8",
+      "date": "2026-05-29T05:32:49Z",
+      "subject": "[R] Problem with updating packages",
+      "subject_clean": "Problem with updating packages",
+      "in_reply_to": "<46A75D5C-7471-4608-970A-99E507892D61@gmail.com>",
+      "references": [
+        "<46A75D5C-7471-4608-970A-99E507892D61@gmail.com>"
+      ],
+      "body_plain": "... as already explained by Duncan M. Oh well. \n\nSendt fra min iPhone\n\n> Den 29. maj 2026 kl. 07.12 skrev Peter Dalgaard <pdalgd at gmail.com>:\n> \n> ?Also, it is WRONG to copy and then update.packages(). This _will_ overwrite packages from your freshly installed R with old ones which 1: might not work and 2: are not CRAN packages. I.e., you get stuck with a 4.6 install that contain pieces of 4.5, possibly broken ones. The only way out is to reinstall. \n> \n> Sendt fra min iPhone\n> \n>> Den 28. maj 2026 kl. 00.34 skrev Uwe Ligges <ligges at statistik.tu-dortmund.de>:\n>> \n>> ?\n>> \n>>>> On 28.05.2026 00:02, Jeff Newmiller wrote:\n>>> So can we interpret this to mean that update.packages() will fix (replace) old packages that were copied into the new library? What if one or more packages were dropped/archived or pulled from non-standard package sources?\n>> \n>> No, not if a package is archived from CRAN or downloaded from a repository that is not declared. update.packages() won't find that the update is needed in such a case\n>> I talked about active CRAN packages.\n>> \n>> Best,\n>> Uwe Ligges\n>> \n>> \n>>>> On May 27, 2026 2:06:12 PM PDT, Uwe Ligges <ligges at statistik.tu- dortmund.de> wrote:\n>>>>   On 27.05.2026 18:01, Karl Schilling wrote:\n>>>       I am running R under Windows 11. recently updated R to the\n>>>       4.6patchhed version. I then copied my packages from my previous\n>>>       version (4.5) to the library of 4.6. Then I updated all packages.\n>>>       Since then, I see the following behavior:\n>>>       Each time I run\n>>>       \"update.packages(ask='graphics',checkBuilt=TRUE)\" I am asked TWICE\n>>>       \"--- Please select a CRAN mirror for use in this session ---\".\n>>>       And, more embarrassingly, all my Cran and Bioconductor are said\n>>>       to require an update. That also happens when I run\n>>>       \"update.packages\", say, one hour after my last update.\n>>>       And when I run \"old.packages()\", it seems that all my packages\n>>>       are identified as being old.\n>>>       Any suggestions what might be going on?\n>>>   For a major version change (as from 4.5.x to 4.6.y) we do not\n>>>   guarantee API compatibility, hence we cannot guarantee that a\n>>>   package built for 4.5.x will work under 4.6.y. As a consequence,\n>>>   update.packages() knows that everything has to be reinstalled.\n>>>   Best,\n>>>   Uwe Ligges\n>>>       Thank you so much in advance,\n>>>       Karl Schilling\n>>>       ------------------------------------------------------------------------\n>>>       R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>       https://stat.ethz.ch/mailman/listinfo/r-help <https://\n>>>       stat.ethz.ch/mailman/listinfo/r-help>\n>>>       PLEASE do read the posting guide https://www.R-project.org/\n>>>       posting- <https://www.R-project.org/posting-> guide.html\n>>>       and provide commented, minimal, self-contained, reproducible code.\n>>> --\n>>> Sent from my phone. Please excuse my brevity.\n>> \n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "... as already explained by Duncan M. Oh well. \n\nSendt fra min iPhone\n\n> Den 29. maj 2026 kl. 07.12 skrev Peter Dalgaard <pdalgd at gmail.com>:\n> \n> ?Also, it is WRONG to copy and then update.packages",
+      "thread_id": "thread-c17f6cad7d3e",
+      "thread_depth": 5,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-000627b7a9c0",
+      "message_id": "<CAGxFJbTRNWvkpzVeX4RyQwX6QaFbGsqZ4U66R=d8FwSzueKXNg@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-05-29T15:14:50Z",
+      "subject": "[R] OFF-TOPIC: Registered Reports in Nature",
+      "subject_clean": "OFF-TOPIC: Registered Reports in Nature",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All:\n\nAgain, this is off topic. Probably of interest only to R users who are\ninvolved in research or those who follow the \"irreproducibility\" in\nscientific research controversy.\n\nThe Nature suite of publications has expanded its \"registered research\"\npublication policies to all fields in which they publish:\nhttps://www.nature.com/articles/d41586-026-01629-y\n\nGiven Nature's preeminence in science research publication -- and also a\nfew interesting comments in this announcement -- I thought that readers of\nthis list might be interested. As always, my apologies if I have\noverstepped, and please do not reply (except to criticize me), as I have\nnothing further to add.\n\nBest to all,\nBert\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "All:\n\nAgain, this is off topic. Probably of interest only to R users who are\ninvolved in research or those who follow the \"irreproducibility\" in\nscientific research controversy.\n\nThe Nature suite of p",
+      "thread_id": "thread-000627b7a9c0",
+      "thread_depth": 0,
+      "month": "2026-05"
     }
   ],
   "threads": [
@@ -1025,17 +1077,29 @@
     {
       "id": "thread-c17f6cad7d3e",
       "subject": "Problem with updating packages",
-      "message_count": 10,
+      "message_count": 12,
       "participants": [
         "Duncan Murdoch",
         "Jeff Newmiller",
         "Karl Schilling",
+        "Peter Dalgaard",
         "Rui Barradas",
         "Uwe Ligges"
       ],
       "started": "2026-05-27T16:01:09Z",
-      "last_reply": "2026-05-28T18:20:55Z",
+      "last_reply": "2026-05-29T05:32:49Z",
       "root_message_id": "msg-c17f6cad7d3e"
+    },
+    {
+      "id": "thread-000627b7a9c0",
+      "subject": "OFF-TOPIC: Registered Reports in Nature",
+      "message_count": 1,
+      "participants": [
+        "Bert Gunter"
+      ],
+      "started": "2026-05-29T15:14:50Z",
+      "last_reply": "2026-05-29T15:14:50Z",
+      "root_message_id": "msg-000627b7a9c0"
     }
   ]
 }
