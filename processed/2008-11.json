@@ -36632,6 +36632,22 @@
       "month": "2008-11"
     },
     {
+      "id": "msg-dfe2a0e5e867",
+      "message_id": "<865866.5152.qm@web32403.mail.mud.yahoo.com>",
+      "from_name": "A Ezhil",
+      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
+      "date": "2008-11-21T17:05:39Z",
+      "subject": "[R] Extracting diagonal matrix",
+      "subject_clean": "Extracting diagonal matrix",
+      "in_reply_to": "<c0906bc10811210746t6d4a5035va54e1bd6cbe73bed@mail.gmail.com>",
+      "references": [],
+      "body_plain": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> From: Anup Menon <anup.nandialath at gmail.com>\n> Subject: Re: [R] Extracting diagonal matrix\n> To: ezhil02 at yahoo.com\n> Cc: r-help at r-project.org\n> Date: Friday, November 21, 2008, 9:16 PM\n> Hi Ezhil,\n> \n> Maybe this will help. There might be an easier way to do\n> this but here is\n> one solution.\n> \n> tril <- function(A)\n> {\n>  A <- as.matrix(A)\n>  cmats <- matrix(rep(1,length(A)),dim(A)[1],dim(A)[2])\n>  upper.tri(cmats,diag=T)\n>  cmats[upper.tri(cmats)] <- 0\n>  out <- A*cmats\n>  return(out)\n> }\n> \n> tril(correlation.matrix)\n> \n> will give you the output.\n> \n> HTH\n> \n> Best Regards\n> \n> Anup\n> \n> On Fri, Nov 21, 2008 at 7:28 AM, A Ezhil\n> <ezhil02 at yahoo.com> wrote:\n> \n> > Dear All,\n> >\n> > I have a correlation matrix of size 100 x 100 and\n> would like to extract the\n> > diagonal matrix from it. I have used the for loop to\n> store tha correlation\n> > values of the diagonal matrix. Is there a 'R\n> way' of doing this?\n> >\n> > Thanks in advance.\n> >\n> > Kind regards,\n> > Ezhil\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> > http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained,\n> reproducible code.\n> >",
+      "body_snippet": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> Fro",
+      "thread_id": "thread-51c51f5d95a7",
+      "thread_depth": 2,
+      "month": "2008-11"
+    },
+    {
       "id": "msg-93ba4544da72",
       "message_id": "<fb7c7e870811210905o39a5a3e8yec1abef30314cd96@mail.gmail.com>",
       "from_name": "Rainer M Krug",
@@ -36647,22 +36663,6 @@
       "body_plain": "On Fri, Nov 21, 2008 at 6:12 PM, Douglas Bates <bates at stat.wisc.edu> wrote:\n> R uses column-major ordering of multidimensional arrays, as in\n> Fortran, unlike the row-major ordering of C multidimensional arrays.\n> This is because the numerical linear algebra code used in R is from\n> the Eispack, Linpack, BLAS, Lapack family of Fortran subroutine\n> packages.  Even when implementation languages other than Fortran are\n> used, the Fortran storage conventions prevail because they affect the\n> design of algorithms.\n>\n> Matlab is based on the same code (Matlab began as an interactive\n> wrapper around Eispack and Linpack) and uses the same representation\n> of arrays.\n\nThanks a lot for your detailed explanation. This will make my life much easier.\n\nRainer\n\n>\n> On Fri, Nov 21, 2008 at 2:41 AM, Rainer M Krug <r.m.krug at gmail.com> wrote:\n>> Hi\n>>\n>> I am trying to figure out, if the matlab style of linear indexing of\n>> an array is the same as in R. i.e.\n>>\n>> when\n>>\n>> x <- array( 1:24, dim=c(2,3,4) )\n>> x[3]\n>>> 3\n>>\n>> and if the same is true in matlab, assuming that\n>> x[n1,n2,n3] in R returns the same as  y(n1,n2,n3) when  y is a matrix in matlab\n>>\n>> I found the following reference\n>> http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/matlab_prog/f1-86528.html#f1-86846\n>>\n>> And it seems to be the same, but another source says it is different.\n>> Could somebody confirm, if it is the same?\n>>\n>> Thanks,\n>>\n>> Rainer\n>>\n>>\n>> --\n>> Rainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\n>> Biology, UCT), Dipl. Phys. (Germany)\n>>\n>> Centre of Excellence for Invasion Biology\n>> Faculty of Science\n>> Natural Sciences Building\n>> Private Bag X1\n>> University of Stellenbosch\n>> Matieland 7602\n>> South Africa\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>\n\n\n\n-- \nRainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\nBiology, UCT), Dipl. Phys. (Germany)\n\nCentre of Excellence for Invasion Biology\nFaculty of Science\nNatural Sciences Building\nPrivate Bag X1\nUniversity of Stellenbosch\nMatieland 7602\nSouth Africa",
       "body_snippet": "On Fri, Nov 21, 2008 at 6:12 PM, Douglas Bates <bates at stat.wisc.edu> wrote:\n> R uses column-major ordering of multidimensional arrays, as in\n> Fortran, unlike the row-major ordering of C multidimen",
       "thread_id": "thread-1b9f4805025e",
-      "thread_depth": 2,
-      "month": "2008-11"
-    },
-    {
-      "id": "msg-dfe2a0e5e867",
-      "message_id": "<865866.5152.qm@web32403.mail.mud.yahoo.com>",
-      "from_name": "A Ezhil",
-      "from_email_hash": "58f08b5677bceb5ab5a801f796acf264ae3669b1b6322e4679dfa30b8998c57e",
-      "date": "2008-11-21T17:05:39Z",
-      "subject": "[R] Extracting diagonal matrix",
-      "subject_clean": "Extracting diagonal matrix",
-      "in_reply_to": "<c0906bc10811210746t6d4a5035va54e1bd6cbe73bed@mail.gmail.com>",
-      "references": [],
-      "body_plain": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> From: Anup Menon <anup.nandialath at gmail.com>\n> Subject: Re: [R] Extracting diagonal matrix\n> To: ezhil02 at yahoo.com\n> Cc: r-help at r-project.org\n> Date: Friday, November 21, 2008, 9:16 PM\n> Hi Ezhil,\n> \n> Maybe this will help. There might be an easier way to do\n> this but here is\n> one solution.\n> \n> tril <- function(A)\n> {\n>  A <- as.matrix(A)\n>  cmats <- matrix(rep(1,length(A)),dim(A)[1],dim(A)[2])\n>  upper.tri(cmats,diag=T)\n>  cmats[upper.tri(cmats)] <- 0\n>  out <- A*cmats\n>  return(out)\n> }\n> \n> tril(correlation.matrix)\n> \n> will give you the output.\n> \n> HTH\n> \n> Best Regards\n> \n> Anup\n> \n> On Fri, Nov 21, 2008 at 7:28 AM, A Ezhil\n> <ezhil02 at yahoo.com> wrote:\n> \n> > Dear All,\n> >\n> > I have a correlation matrix of size 100 x 100 and\n> would like to extract the\n> > diagonal matrix from it. I have used the for loop to\n> store tha correlation\n> > values of the diagonal matrix. Is there a 'R\n> way' of doing this?\n> >\n> > Thanks in advance.\n> >\n> > Kind regards,\n> > Ezhil\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> > http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained,\n> reproducible code.\n> >",
-      "body_snippet": "Hi,\n\nThank you very much for the help. c[lower.tri(c,diag=FALSE)] works fine for me. \n\nThanks again.\n\nKind regards,\nEzhil\n\n--- On Fri, 11/21/08, Anup Menon <anup.nandialath at gmail.com> wrote:\n\n> Fro",
-      "thread_id": "thread-51c51f5d95a7",
       "thread_depth": 2,
       "month": "2008-11"
     },
@@ -38833,6 +38833,22 @@
       "month": "2008-11"
     },
     {
+      "id": "msg-9f339810a20a",
+      "message_id": "<fb7c7e870811230837m54b62c5agd42a2cacc69eabf9@mail.gmail.com>",
+      "from_name": "Rainer M Krug",
+      "from_email_hash": "e11b90edace280d0de30dfc4fa9de87a9a079d3f2c2f179123fa9e4ae628223d",
+      "date": "2008-11-23T16:37:31Z",
+      "subject": "[R] Latin Hypercube with condition sum = 1",
+      "subject_clean": "Latin Hypercube with condition sum = 1",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi\n\nI want to du a sensitivity analysis using Latin Hypercubes. But my\nparameters have to fulfill two conditions:\n\n1) ranging from 0 to 1\n2) have to sum up to 1\n\nSo far I am using the lhs package and am doing the following:\n\nlibrary(lhs)\nws <- improvedLHS(1000, 7)\nwsSums <- rowSums(ws)\nwss <- ws / wsSums\n\nbut I think I can't do that, as after the normalization\n\n> min(wss)\n[1] 0.0001113015\n> max(wss)\n[1] 0.5095729\n\nTherefore my question: how can I create a Latin Hypercube whicgh\nfulfills the conditions 1) and 2)?\n\nThanks a lot\n\nRainer\n\n\n-- \nRainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\nBiology, UCT), Dipl. Phys. (Germany)\n\nCentre of Excellence for Invasion Biology\nFaculty of Science\nNatural Sciences Building\nPrivate Bag X1\nUniversity of Stellenbosch\nMatieland 7602\nSouth Africa",
+      "body_snippet": "Hi\n\nI want to du a sensitivity analysis using Latin Hypercubes. But my\nparameters have to fulfill two conditions:\n\n1) ranging from 0 to 1\n2) have to sum up to 1\n\nSo far I am using the lhs package and ",
+      "thread_id": "thread-9f339810a20a",
+      "thread_depth": 0,
+      "month": "2008-11"
+    },
+    {
       "id": "msg-466652666451",
       "message_id": "<20647978.post@talk.nabble.com>",
       "from_name": "zerfetzen",
@@ -38848,22 +38864,6 @@
       "body_snippet": "Thanks for the help, I've a few more functions to get familiar with.  Those\nare definitely concise ways to do this! :)\n-- \nView this message in context: http://www.nabble.com/What%27s-the-BEST-way-in-",
       "thread_id": "thread-0e533c65a913",
       "thread_depth": 1,
-      "month": "2008-11"
-    },
-    {
-      "id": "msg-9f339810a20a",
-      "message_id": "<fb7c7e870811230837m54b62c5agd42a2cacc69eabf9@mail.gmail.com>",
-      "from_name": "Rainer M Krug",
-      "from_email_hash": "e11b90edace280d0de30dfc4fa9de87a9a079d3f2c2f179123fa9e4ae628223d",
-      "date": "2008-11-23T16:37:31Z",
-      "subject": "[R] Latin Hypercube with condition sum = 1",
-      "subject_clean": "Latin Hypercube with condition sum = 1",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi\n\nI want to du a sensitivity analysis using Latin Hypercubes. But my\nparameters have to fulfill two conditions:\n\n1) ranging from 0 to 1\n2) have to sum up to 1\n\nSo far I am using the lhs package and am doing the following:\n\nlibrary(lhs)\nws <- improvedLHS(1000, 7)\nwsSums <- rowSums(ws)\nwss <- ws / wsSums\n\nbut I think I can't do that, as after the normalization\n\n> min(wss)\n[1] 0.0001113015\n> max(wss)\n[1] 0.5095729\n\nTherefore my question: how can I create a Latin Hypercube whicgh\nfulfills the conditions 1) and 2)?\n\nThanks a lot\n\nRainer\n\n\n-- \nRainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation\nBiology, UCT), Dipl. Phys. (Germany)\n\nCentre of Excellence for Invasion Biology\nFaculty of Science\nNatural Sciences Building\nPrivate Bag X1\nUniversity of Stellenbosch\nMatieland 7602\nSouth Africa",
-      "body_snippet": "Hi\n\nI want to du a sensitivity analysis using Latin Hypercubes. But my\nparameters have to fulfill two conditions:\n\n1) ranging from 0 to 1\n2) have to sum up to 1\n\nSo far I am using the lhs package and ",
-      "thread_id": "thread-9f339810a20a",
-      "thread_depth": 0,
       "month": "2008-11"
     },
     {
