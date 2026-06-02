@@ -7331,22 +7331,6 @@
       "month": "2014-12"
     },
     {
-      "id": "msg-afe4b5e89ac0",
-      "message_id": "<CAMSabZShR-R1FYNn+bCHzjESO+fMHQajPF8tNx_Z0Pp9__HE3w@mail.gmail.com>",
-      "from_name": "Chandrasekhar Rudrappa",
-      "from_email_hash": "561532815dfa157eadf8bc6f371d918bc0ee4b1f4725ed5002d187df766c0c38",
-      "date": "2014-12-16T14:26:30Z",
-      "subject": "[R] Help specifying a non-linear model in nlsLM()",
-      "subject_clean": "Help specifying a non-linear model in nlsLM()",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear All,\n\nI am trying to fit the following model in nlsLM():\n\nfn5 <- function(x, T, t1, w_inf, Lt0){\nS<-function(x, T, t1){\nx+(1-T)/(2*pi)*sin(2*pi*(x-t1)/(1-T))\n}\nF <- function(x, T, t1){\nt2 <- t1 + (1-T)/2\nt3 <- t1 + (1+T)/2\nt.factorial <- x%%1\nfloor(x)*(1-T) + S(t.factorial, T, t1)*(0<=t.factorial & t.factorial<t2) +\nS(t2, T, t1)*(t2<=t.factorial & t.factorial<t3) +\nS(t.factorial-T, T, t1)*(t3<=t.factorial & t.factorial<1)\n}\nreturn(w_inf - (w_inf - Lt0)*exp(-(2/30)*(F(x,T,t1)-F(7,T,t1))))\n}\nfn6<- y~fn5(x, T, t1, w_inf, Lt0)\nstartval<-c(x=x, T=0.035, t1=0.359, w_inf=135, Lt0=47)\n(nlsktm1 <- nlsLM(fn6, start=startval, lower=c(x=x, T=0.0135, t1=0.259,\nw_inf=131, Lt0=41), jac=NULL, trace=T, data=ktm,\ncontrol=nls.control(maxiter=10)))\n\nWhen I run the above script, the following error is displayed:\n\nError in nlsModel(formula, mf, start, wts) :\n  singular gradient matrix at initial parameter estimates\nIn addition: Warning message:\nIn nls.lm(par = start, fn = FCT, jac = jac, control = control, lower =\nlower,  :\n  lmdif: info = 0. Improper input parameters.\n\nSuitable help is requested.\n-- \nDr. TR Chandrasekhar, M.Sc., M. Tech., Ph. D.,\nSr. Scientist\nRubber Research Institute of India\nHevea Breeding Sub Station\nKadaba - 574 221\nDK Dt., Karnataka\nPhone-Land: 08251-214336\nMobile: 9448780118\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear All,\n\nI am trying to fit the following model in nlsLM():\n\nfn5 <- function(x, T, t1, w_inf, Lt0){\nS<-function(x, T, t1){\nx+(1-T)/(2*pi)*sin(2*pi*(x-t1)/(1-T))\n}\nF <- function(x, T, t1){\nt2 <- t1 +",
-      "thread_id": "thread-afe4b5e89ac0",
-      "thread_depth": 0,
-      "month": "2014-12"
-    },
-    {
       "id": "msg-47f4414ac990",
       "message_id": "<21648.16662.859007.156817@stat.math.ethz.ch>",
       "from_name": "Martin Maechler",
@@ -7359,6 +7343,22 @@
       "body_plain": "Dear R lovers and other useRs,\nnotably benefactors, donors, supporting members and institutions\nof the R foundation \n       http://www.r-project.org/foundation/\n\nAbout 11.7 years ago, in April 2003, the R Foundation was\nannounced by Fritz Leisch, \n  https://stat.ethz.ch/pipermail/r-announce/2003/000385.html\nshortly after its foundation, and since then, its board has\nlead the foundation during years of phenomenal growth and success.\n\nOur thanks go to the *past* board members\n\n   Presidents:\t      \t Robert Gentleman, Ross Ihaka \n   Secretary General:    Friedrich Leisch \n   Treasurer:\t      \t Kurt Hornik \n   Member at Large:      John Chambers \n\nIn addition, Peter Dalgaard and Martin M?chler had acted as auditors.\n\nAfter Summer meetings of the R Core and the R Foundation,\nwe, i.e., Robert Gentleman, on Sep. 15 announced\nthe new (\"ordinary\") memberships and the fact that the\nmembership of the foundation has grown to 29 persons:\n    https://stat.ethz.ch/pipermail/r-announce/2014/000577.html\n\nSubsequently (after a careful nomination and voting process),\nthe election of a new *board* finalized on December 1, and the\nnew board has started acting since.\nIt consists of\n\nPresidents:        Duncan Murdoch, Martyn Plummer \nSecretary General: Martin M?chler \nTreasurer:         Kurt Hornik \nMembers at Large:  John Chambers \n                   Brian Ripley\n                   Dirk Eddelbuettel \n\nand the two auditors Peter Dalgaard and Roger Bivand.\nThis is very soon to be reflected on\n    http://www.r-project.org/foundation/board.html\n\n\nThe foundation and its board aim to become considerably more\nactive in the future.  Details about this will be announced here\nin due time. \n\nThank you all for supporting the R project, a Free Software\n(hence Open source) endeavor only made possible by the dedicated\nwork of many thousands of volunteers and their contributions in several ways, \nincluding to become supporting (or ++) members of the R foundation!\n\nMartin Maechler\n\n_______________________________________________\nR-announce at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-announce",
       "body_snippet": "Dear R lovers and other useRs,\nnotably benefactors, donors, supporting members and institutions\nof the R foundation \n       http://www.r-project.org/foundation/\n\nAbout 11.7 years ago, in April 2003, t",
       "thread_id": "thread-47f4414ac990",
+      "thread_depth": 0,
+      "month": "2014-12"
+    },
+    {
+      "id": "msg-afe4b5e89ac0",
+      "message_id": "<CAMSabZShR-R1FYNn+bCHzjESO+fMHQajPF8tNx_Z0Pp9__HE3w@mail.gmail.com>",
+      "from_name": "Chandrasekhar Rudrappa",
+      "from_email_hash": "561532815dfa157eadf8bc6f371d918bc0ee4b1f4725ed5002d187df766c0c38",
+      "date": "2014-12-16T14:26:30Z",
+      "subject": "[R] Help specifying a non-linear model in nlsLM()",
+      "subject_clean": "Help specifying a non-linear model in nlsLM()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\n\nI am trying to fit the following model in nlsLM():\n\nfn5 <- function(x, T, t1, w_inf, Lt0){\nS<-function(x, T, t1){\nx+(1-T)/(2*pi)*sin(2*pi*(x-t1)/(1-T))\n}\nF <- function(x, T, t1){\nt2 <- t1 + (1-T)/2\nt3 <- t1 + (1+T)/2\nt.factorial <- x%%1\nfloor(x)*(1-T) + S(t.factorial, T, t1)*(0<=t.factorial & t.factorial<t2) +\nS(t2, T, t1)*(t2<=t.factorial & t.factorial<t3) +\nS(t.factorial-T, T, t1)*(t3<=t.factorial & t.factorial<1)\n}\nreturn(w_inf - (w_inf - Lt0)*exp(-(2/30)*(F(x,T,t1)-F(7,T,t1))))\n}\nfn6<- y~fn5(x, T, t1, w_inf, Lt0)\nstartval<-c(x=x, T=0.035, t1=0.359, w_inf=135, Lt0=47)\n(nlsktm1 <- nlsLM(fn6, start=startval, lower=c(x=x, T=0.0135, t1=0.259,\nw_inf=131, Lt0=41), jac=NULL, trace=T, data=ktm,\ncontrol=nls.control(maxiter=10)))\n\nWhen I run the above script, the following error is displayed:\n\nError in nlsModel(formula, mf, start, wts) :\n  singular gradient matrix at initial parameter estimates\nIn addition: Warning message:\nIn nls.lm(par = start, fn = FCT, jac = jac, control = control, lower =\nlower,  :\n  lmdif: info = 0. Improper input parameters.\n\nSuitable help is requested.\n-- \nDr. TR Chandrasekhar, M.Sc., M. Tech., Ph. D.,\nSr. Scientist\nRubber Research Institute of India\nHevea Breeding Sub Station\nKadaba - 574 221\nDK Dt., Karnataka\nPhone-Land: 08251-214336\nMobile: 9448780118\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All,\n\nI am trying to fit the following model in nlsLM():\n\nfn5 <- function(x, T, t1, w_inf, Lt0){\nS<-function(x, T, t1){\nx+(1-T)/(2*pi)*sin(2*pi*(x-t1)/(1-T))\n}\nF <- function(x, T, t1){\nt2 <- t1 +",
+      "thread_id": "thread-afe4b5e89ac0",
       "thread_depth": 0,
       "month": "2014-12"
     },
