@@ -16981,6 +16981,22 @@
       "month": "2005-06"
     },
     {
+      "id": "msg-f6f2fee5b8c6",
+      "message_id": "<01c701c570ef$21579610$6e8b6882@didacdom.stat.ucl.ac.be>",
+      "from_name": "Eric Lecoutre",
+      "from_email_hash": "8fa2348fb1c15ba0453cc647aa6644879770c76ceeb98d5db135f1b4dd3c7cf3",
+      "date": "2005-06-14T14:41:20Z",
+      "subject": "[R] c(recursive=TRUE)",
+      "subject_clean": "c(recursive=TRUE)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = names(c(l1,recursive=TRUE)))\n[1] \"level1\"      \"level2.sub1\" \"level2.sub2\"\n\nThen, one can use:\n> (l1names = sapply(l1names,FUN=function(element)\nstrsplit(element,\"\\\\.\")))\n$level1\n[1] \"level1\"\n\n$level2.sub1\n[1] \"level2\" \"sub1\"  \n\n$level2.sub2\n[1] \"level2\" \"sub2\"  \n\n\nWhich allows to access to individuals terminal nodes of list using\nindexing, as \nl1[[c(\"level2\",\"sub2\")]] nicely works in R.\n\nFor my very specific uses, it unfortunatelt happens that some elements\nof my list do have names that contains a dot (for example:\ndecimal.mark). This is very frustating as a consequence is that my\nfunction does not work in that case...\n\nOne workaround would be to add an argument to c(), as delimitor='.' by\ndefault, allowing to put a less usual delimitor (say \"??\"). But this\nwould mean changing in C (feature request?). Same for \"unlist\".\n\nIs there any other easy way to get the structure of a list?\n\nEric\n\n\n\n\nEric Lecoutre\nUCL /  Institut de Statistique\nVoie du Roman Pays, 20\n1348 Louvain-la-Neuve\nBelgium\n\ntel: (+32)(0)10473050\nlecoutre at stat.ucl.ac.be\nhttp://www.stat.ucl.ac.be/ISpersonnel/lecoutre\n\nIf the statistics are boring, then you've got the wrong numbers. -Edward\nTufte",
+      "body_snippet": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = n",
+      "thread_id": "thread-f6f2fee5b8c6",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
       "id": "msg-c2c7c13ae1fd",
       "message_id": "<Pine.A41.4.61b.0506140735160.92116@homer03.u.washington.edu>",
       "from_name": "Thomas Lumley",
@@ -16996,22 +17012,6 @@
       "body_snippet": "On Tue, 14 Jun 2005, Abatih E. wrote:\n> Dear R-Users, I wish to create a new family object based on the Binomial \n> family. The only difference will be with the link function. Thus instead \n> if using",
       "thread_id": "thread-ea5137da0d52",
       "thread_depth": 1,
-      "month": "2005-06"
-    },
-    {
-      "id": "msg-f6f2fee5b8c6",
-      "message_id": "<01c701c570ef$21579610$6e8b6882@didacdom.stat.ucl.ac.be>",
-      "from_name": "Eric Lecoutre",
-      "from_email_hash": "8fa2348fb1c15ba0453cc647aa6644879770c76ceeb98d5db135f1b4dd3c7cf3",
-      "date": "2005-06-14T14:41:20Z",
-      "subject": "[R] c(recursive=TRUE)",
-      "subject_clean": "c(recursive=TRUE)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = names(c(l1,recursive=TRUE)))\n[1] \"level1\"      \"level2.sub1\" \"level2.sub2\"\n\nThen, one can use:\n> (l1names = sapply(l1names,FUN=function(element)\nstrsplit(element,\"\\\\.\")))\n$level1\n[1] \"level1\"\n\n$level2.sub1\n[1] \"level2\" \"sub1\"  \n\n$level2.sub2\n[1] \"level2\" \"sub2\"  \n\n\nWhich allows to access to individuals terminal nodes of list using\nindexing, as \nl1[[c(\"level2\",\"sub2\")]] nicely works in R.\n\nFor my very specific uses, it unfortunatelt happens that some elements\nof my list do have names that contains a dot (for example:\ndecimal.mark). This is very frustating as a consequence is that my\nfunction does not work in that case...\n\nOne workaround would be to add an argument to c(), as delimitor='.' by\ndefault, allowing to put a less usual delimitor (say \"??\"). But this\nwould mean changing in C (feature request?). Same for \"unlist\".\n\nIs there any other easy way to get the structure of a list?\n\nEric\n\n\n\n\nEric Lecoutre\nUCL /  Institut de Statistique\nVoie du Roman Pays, 20\n1348 Louvain-la-Neuve\nBelgium\n\ntel: (+32)(0)10473050\nlecoutre at stat.ucl.ac.be\nhttp://www.stat.ucl.ac.be/ISpersonnel/lecoutre\n\nIf the statistics are boring, then you've got the wrong numbers. -Edward\nTufte",
-      "body_snippet": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = n",
-      "thread_id": "thread-f6f2fee5b8c6",
-      "thread_depth": 0,
       "month": "2005-06"
     },
     {
@@ -18851,6 +18851,22 @@
       "month": "2005-06"
     },
     {
+      "id": "msg-d247d2f8569d",
+      "message_id": "<0II400HBAV1H3M@mail.fudan.edu.cn>",
+      "from_name": "ronggui",
+      "from_email_hash": "85d06a634b6ef7416e3ca412736b71827f317496e67d406a07fbae5efed5e956",
+      "date": "2005-06-15T16:09:05Z",
+      "subject": "[R] a question about frame",
+      "subject_clean": "a question about frame",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "gg <- function(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n         if(y > 0) gg(y-1) else ggg()\n     }\n\n\n>  gg(3)\ncurrent frame is 5 \nparents are 0 1 2 3 4 \nfunction() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n<environment: 071C62FC>\nfunction(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n         if(y > 0) gg(y-1) else ggg()\n     }\n\n\nmy question is ,why the current frame is 5?why the sys.function is ggg.i am quite confused.\nanyone can give me some clue?i have read the ?sys.parent,but i still can not get the point exactly.\n \t\t\t\t\n\n\n2005-06-16\n\n------\nDeparment of Sociology\nFudan University\n\nBlog:www.sociology.yculblog.com",
+      "body_snippet": "gg <- function(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg",
+      "thread_id": "thread-d247d2f8569d",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
       "id": "msg-2dedf3698f16",
       "message_id": "<Pine.LNX.4.61.0506151704001.6611@gannet.stats>",
       "from_name": "Prof Brian Ripley",
@@ -18866,22 +18882,6 @@
       "body_snippet": "On Wed, 15 Jun 2005, Halldor Bj?rnsson wrote:\n\n> Hi R-gurus,\n>\n> In python one can do\n> >>> import string\n> >>> print string.letters\n>\n> and get the characters in the local character set.\n>\n> This fea",
       "thread_id": "thread-95b99f9ee121",
       "thread_depth": 1,
-      "month": "2005-06"
-    },
-    {
-      "id": "msg-d247d2f8569d",
-      "message_id": "<0II400HBAV1H3M@mail.fudan.edu.cn>",
-      "from_name": "ronggui",
-      "from_email_hash": "85d06a634b6ef7416e3ca412736b71827f317496e67d406a07fbae5efed5e956",
-      "date": "2005-06-15T16:09:05Z",
-      "subject": "[R] a question about frame",
-      "subject_clean": "a question about frame",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "gg <- function(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n         if(y > 0) gg(y-1) else ggg()\n     }\n\n\n>  gg(3)\ncurrent frame is 5 \nparents are 0 1 2 3 4 \nfunction() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n<environment: 071C62FC>\nfunction(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg\n             print(sys.function(2)) # gg\n         }\n         if(y > 0) gg(y-1) else ggg()\n     }\n\n\nmy question is ,why the current frame is 5?why the sys.function is ggg.i am quite confused.\nanyone can give me some clue?i have read the ?sys.parent,but i still can not get the point exactly.\n \t\t\t\t\n\n\n2005-06-16\n\n------\nDeparment of Sociology\nFudan University\n\nBlog:www.sociology.yculblog.com",
-      "body_snippet": "gg <- function(y) {\n         ggg <- function() {\n             cat(\"current frame is\", sys.nframe(), \"\\n\")\n             cat(\"parents are\", sys.parents(), \"\\n\")\n             print(sys.function(0)) # ggg",
-      "thread_id": "thread-d247d2f8569d",
-      "thread_depth": 0,
       "month": "2005-06"
     },
     {
