@@ -3166,6 +3166,22 @@
       "month": "2009-06"
     },
     {
+      "id": "msg-982331142f48",
+      "message_id": "<4A252AB1.6040905@pharmacy.wisc.edu>",
+      "from_name": "Paul Hutson",
+      "from_email_hash": "45e3d15f5e80cd1abd0bd716d853f9cd9c16c793e07b43717a89c221bdd19ce4",
+      "date": "2009-06-02T13:35:45Z",
+      "subject": "[R] Changing state in ODE",
+      "subject_clean": "Changing state in ODE",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expected to be fit by a \nsaturable (Michaelis-Menton) process.  I can get the ode routine to run \nwith only one, initial dose.  How can I modify the state at intermediate \ntime points to reflect additional input functions?  My script follows, \nwith the doses and times noted.\nThanks in advance.  Paul\n\n# Script for running mixed order (Michaelis-Menton) fit of data\n\nBB_sim1 <- read.table(\"BB_sim1.csv\", sep=\",\", header=TRUE, na.strings=\".\")\nTime <- BB_sim1$TIME\nMM.1dose<-function(time, state, pars)\n{\nwith(as.list(c(state,pars))\n{\ndA <- Vmax * CONC[1] /(Km + CONC)\nreturn (list(c(dA)))\n}\n    )\n}\n\nname.column(BB_sim1)\nDoses<-c(0.2, 1, 5)\n\n#if(Time==0) Dose=Doses[1]\n#if(Time==10 ) Dose=Doses[2]\n#if(Time==25) Dose=Doses[3]\n\nstate <- c(CONC=CONC+Dose/V)\nparms <- c (\n    Vmax = 20\n    Km = 2\n    V = 0.07\n    )\n\nrequire(deSolve)\nMM1.out <- as.data.frame(ode(state, Time, MM.1dose, parms))\n\nylim <- reange(c(MM1.out$Conc)\nplot(MM1.out$Time, MM1.out$Conc, xlab=\"Time\", ylab=\"Conc\", type=\"1\", \nylim=ylim\n-- \n\nPaul R. Hutson, Pharm.D.\n\nAssociate Professor\n\nUW School of Pharmacy\n\n777 Highland Avenue\n\nMadison WI 53705-2222\n\nTel  608.263.2496\n\nFax 608.265.5421\n\nPager 608.265.7000, p7856",
+      "body_snippet": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expect",
+      "thread_id": "thread-982331142f48",
+      "thread_depth": 0,
+      "month": "2009-06"
+    },
+    {
       "id": "msg-53850962a9d9",
       "message_id": "<509e0620906020635p3a96e6a3rc72358c64ec84d6d@mail.gmail.com>",
       "from_name": "Michael Lawrence",
@@ -3182,22 +3198,6 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090602/a4721622/attachment-0001.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090602/a4721622/attachment-0001.pl>",
       "thread_id": "thread-53850962a9d9",
-      "thread_depth": 0,
-      "month": "2009-06"
-    },
-    {
-      "id": "msg-982331142f48",
-      "message_id": "<4A252AB1.6040905@pharmacy.wisc.edu>",
-      "from_name": "Paul Hutson",
-      "from_email_hash": "45e3d15f5e80cd1abd0bd716d853f9cd9c16c793e07b43717a89c221bdd19ce4",
-      "date": "2009-06-02T13:35:45Z",
-      "subject": "[R] Changing state in ODE",
-      "subject_clean": "Changing state in ODE",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expected to be fit by a \nsaturable (Michaelis-Menton) process.  I can get the ode routine to run \nwith only one, initial dose.  How can I modify the state at intermediate \ntime points to reflect additional input functions?  My script follows, \nwith the doses and times noted.\nThanks in advance.  Paul\n\n# Script for running mixed order (Michaelis-Menton) fit of data\n\nBB_sim1 <- read.table(\"BB_sim1.csv\", sep=\",\", header=TRUE, na.strings=\".\")\nTime <- BB_sim1$TIME\nMM.1dose<-function(time, state, pars)\n{\nwith(as.list(c(state,pars))\n{\ndA <- Vmax * CONC[1] /(Km + CONC)\nreturn (list(c(dA)))\n}\n    )\n}\n\nname.column(BB_sim1)\nDoses<-c(0.2, 1, 5)\n\n#if(Time==0) Dose=Doses[1]\n#if(Time==10 ) Dose=Doses[2]\n#if(Time==25) Dose=Doses[3]\n\nstate <- c(CONC=CONC+Dose/V)\nparms <- c (\n    Vmax = 20\n    Km = 2\n    V = 0.07\n    )\n\nrequire(deSolve)\nMM1.out <- as.data.frame(ode(state, Time, MM.1dose, parms))\n\nylim <- reange(c(MM1.out$Conc)\nplot(MM1.out$Time, MM1.out$Conc, xlab=\"Time\", ylab=\"Conc\", type=\"1\", \nylim=ylim\n-- \n\nPaul R. Hutson, Pharm.D.\n\nAssociate Professor\n\nUW School of Pharmacy\n\n777 Highland Avenue\n\nMadison WI 53705-2222\n\nTel  608.263.2496\n\nFax 608.265.5421\n\nPager 608.265.7000, p7856",
-      "body_snippet": "I am trying to fit data from human and animal pharmacokinetic studies in \nwhich drug concentrations have been determined over time over the course \nof several doses.  In this case, the data are expect",
-      "thread_id": "thread-982331142f48",
       "thread_depth": 0,
       "month": "2009-06"
     },
@@ -26148,6 +26148,24 @@
       "month": "2009-06"
     },
     {
+      "id": "msg-351327c8e104",
+      "message_id": "<38b9f0350906160812s5fecd04akfc33b9e63f494e32@mail.gmail.com>",
+      "from_name": "Ronggui Huang",
+      "from_email_hash": "6846f5c272f8850077470247e7e6a025c83f8d7387bcf22387269b3b25a06522",
+      "date": "2009-06-16T15:12:07Z",
+      "subject": "[R] The most straightfoward way to write a function that sums over the rows of a matrix",
+      "subject_clean": "The most straightfoward way to write a function that sums over the rows of a matrix",
+      "in_reply_to": "<002f01c9ee94$5256f1d0$f704d570$@com>",
+      "references": [
+        "<002f01c9ee94$5256f1d0$f704d570$@com>"
+      ],
+      "body_plain": "Why not just use rowSums?\n\nRonggui\n\n2009/6/16 Stu @ AGS <stu at agstechnet.com>:\n> Hello!\n>\n>\n>\n> I am trying to write a function with vector and data.frame parameters that\n> uses the sum() function and values from the rows of the data.frame.\n>\n> I need to pass this function as a parameter to optim().\n>\n>\n>\n> My starting point is:\n>\n> observs <- data.frame(y, x1, x2, x3)\n>\n>\n>\n> Fn <- function(par, observs) {\n>\n> ? ? ? ? ? ? ? ?sum( (y - (par[1] * (x1 + 1) * x2^(-par[2]) * x3^par[3])^2 )\n>\n> }\n>\n>\n>\n> y, x1, x2, x3 are all vectors.\n>\n>\n>\n> I am a bit new to R and I have not been able to find a good description of\n> how to iterate over rows in a data.frame.\n>\n>\n>\n> What is a straightforward way to do this?\n>\n> What am I missing?\n>\n>\n>\n> Thanks\n>\n> Stu\n>\n>\n>\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nHUANG Ronggui, Wincent\nPhD Candidate\nDept of Public and Social Administration\nCity University of Hong Kong\nHome page: http://asrr.r-forge.r-project.org/rghuang.html",
+      "body_snippet": "Why not just use rowSums?\n\nRonggui\n\n2009/6/16 Stu @ AGS <stu at agstechnet.com>:\n> Hello!\n>\n>\n>\n> I am trying to write a function with vector and data.frame parameters that\n> uses the sum() function a",
+      "thread_id": "thread-d65edb39ec26",
+      "thread_depth": 1,
+      "month": "2009-06"
+    },
+    {
       "id": "msg-e6ba6c5ef07a",
       "message_id": "<c502a9e10906160812g39922ae1u732ae926b3737ffc@mail.gmail.com>",
       "from_name": "stephen sefick",
@@ -26164,24 +26182,6 @@
       "body_snippet": "plot(as.numeric(asdf[,1:7]))\n\nOn Tue, Jun 16, 2009 at 11:10 AM, stephen sefick<ssefick at gmail.com> wrote:\n> plot(asdf[,1:7])\n>\n> On Tue, Jun 16, 2009 at 10:58 AM, njhuang86<njhuang86 at yahoo.com> w",
       "thread_id": "thread-b96af309463d",
       "thread_depth": 2,
-      "month": "2009-06"
-    },
-    {
-      "id": "msg-351327c8e104",
-      "message_id": "<38b9f0350906160812s5fecd04akfc33b9e63f494e32@mail.gmail.com>",
-      "from_name": "Ronggui Huang",
-      "from_email_hash": "6846f5c272f8850077470247e7e6a025c83f8d7387bcf22387269b3b25a06522",
-      "date": "2009-06-16T15:12:07Z",
-      "subject": "[R] The most straightfoward way to write a function that sums over the rows of a matrix",
-      "subject_clean": "The most straightfoward way to write a function that sums over the rows of a matrix",
-      "in_reply_to": "<002f01c9ee94$5256f1d0$f704d570$@com>",
-      "references": [
-        "<002f01c9ee94$5256f1d0$f704d570$@com>"
-      ],
-      "body_plain": "Why not just use rowSums?\n\nRonggui\n\n2009/6/16 Stu @ AGS <stu at agstechnet.com>:\n> Hello!\n>\n>\n>\n> I am trying to write a function with vector and data.frame parameters that\n> uses the sum() function and values from the rows of the data.frame.\n>\n> I need to pass this function as a parameter to optim().\n>\n>\n>\n> My starting point is:\n>\n> observs <- data.frame(y, x1, x2, x3)\n>\n>\n>\n> Fn <- function(par, observs) {\n>\n> ? ? ? ? ? ? ? ?sum( (y - (par[1] * (x1 + 1) * x2^(-par[2]) * x3^par[3])^2 )\n>\n> }\n>\n>\n>\n> y, x1, x2, x3 are all vectors.\n>\n>\n>\n> I am a bit new to R and I have not been able to find a good description of\n> how to iterate over rows in a data.frame.\n>\n>\n>\n> What is a straightforward way to do this?\n>\n> What am I missing?\n>\n>\n>\n> Thanks\n>\n> Stu\n>\n>\n>\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nHUANG Ronggui, Wincent\nPhD Candidate\nDept of Public and Social Administration\nCity University of Hong Kong\nHome page: http://asrr.r-forge.r-project.org/rghuang.html",
-      "body_snippet": "Why not just use rowSums?\n\nRonggui\n\n2009/6/16 Stu @ AGS <stu at agstechnet.com>:\n> Hello!\n>\n>\n>\n> I am trying to write a function with vector and data.frame parameters that\n> uses the sum() function a",
-      "thread_id": "thread-d65edb39ec26",
-      "thread_depth": 1,
       "month": "2009-06"
     },
     {
@@ -34769,8 +34769,8 @@
       "month": "2009-06"
     },
     {
-      "id": "msg-fb422ba697dd",
-      "message_id": "<F09C4B86E5E.00000358bearmarketsrule@inbox.com>",
+      "id": "msg-4cbd3b4cc944",
+      "message_id": "<F09C4E0F658.00000359bearmarketsrule@inbox.com>",
       "from_name": "Rob Denniker",
       "from_email_hash": "1b2d6e907fd20852c4f1f6132515795e3dd655f419a5f6794e9a8d34ff388498",
       "date": "2009-06-19T23:28:45Z",
@@ -34785,8 +34785,8 @@
       "month": "2009-06"
     },
     {
-      "id": "msg-4cbd3b4cc944",
-      "message_id": "<F09C4E0F658.00000359bearmarketsrule@inbox.com>",
+      "id": "msg-fb422ba697dd",
+      "message_id": "<F09C4B86E5E.00000358bearmarketsrule@inbox.com>",
       "from_name": "Rob Denniker",
       "from_email_hash": "1b2d6e907fd20852c4f1f6132515795e3dd655f419a5f6794e9a8d34ff388498",
       "date": "2009-06-19T23:28:45Z",

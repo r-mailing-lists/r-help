@@ -2308,3 +2308,502 @@ https://www.r-project.org/posting-guide.html
 and provide commented, minimal, self-contained, reproducible code.
 
 
+From ru|pb@rr@d@@ @end|ng |rom @@po@pt  Fri Jun  5 07:56:46 2026
+From: ru|pb@rr@d@@ @end|ng |rom @@po@pt (Rui Barradas)
+Date: Fri, 5 Jun 2026 06:56:46 +0100
+Subject: [R] Convert R object to a data frame
+In-Reply-To: <DM6PR03MB50492DE4EB05D0CB1AE4049AE2102@DM6PR03MB5049.namprd03.prod.outlook.com>
+References: <DM6PR03MB50495796B4548FCBFF20686FE2102@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <dec22250-015b-4586-942c-4f253436f3b8@sapo.pt>
+ <DM6PR03MB50492DE4EB05D0CB1AE4049AE2102@DM6PR03MB5049.namprd03.prod.outlook.com>
+Message-ID: <33f9f12e-d2f0-4699-8af4-9e191c45e43d@sapo.pt>
+
+?s 00:39 de 05/06/2026, Sorkin, John escreveu:
+> Rui,
+> Thank you for helping me convert my R object into a dataframe. You wanted to see the output of dput(results_by_date[1:2]). The data structure dput produced follows:
+> 
+> structure(list(`2020-08-14` = list(list(criticalvalue = 0.1,
+>      NumPeopleExposed = 0L), list(criticalvalue = 0.2, NumPeopleExposed = 0L),
+>      list(criticalvalue = 0.3, NumPeopleExposed = 0L), list(criticalvalue = 0.4,
+>          NumPeopleExposed = 0L)), `2020-08-15` = list(list(criticalvalue = 0.1,
+>      NumPeopleExposed = 1L), list(criticalvalue = 0.2, NumPeopleExposed = 0L),
+>      list(criticalvalue = 0.3, NumPeopleExposed = 0L), list(criticalvalue = 0.4,
+>          NumPeopleExposed = 0L)), `2020-08-16` = list(list(criticalvalue = 0.1,
+>      NumPeopleExposed = 15L), list(criticalvalue = 0.2, NumPeopleExposed = 6L),
+>      list(criticalvalue = 0.3, NumPeopleExposed = 6L), list(criticalvalue = 0.4,
+>          NumPeopleExposed = 6L)), `2020-08-17` = list(list(criticalvalue = 0.1,
+>      NumPeopleExposed = 60L), list(criticalvalue = 0.2, NumPeopleExposed = 26L),
+>      list(criticalvalue = 0.3, NumPeopleExposed = 9L), list(criticalvalue = 0.4,
+>          NumPeopleExposed = 3L))), dim = 4L, dimnames = list(`data[, "Date"]` = c("2020-08-14",
+> "2020-08-15", "2020-08-16", "2020-08-17")))
+> $`2020-08-14`
+> $`2020-08-14`[[1]]
+> $`2020-08-14`[[1]]$criticalvalue
+> [1] 0.1
+> 
+> $`2020-08-14`[[1]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> $`2020-08-14`[[2]]
+> $`2020-08-14`[[2]]$criticalvalue
+> [1] 0.2
+> 
+> $`2020-08-14`[[2]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> $`2020-08-14`[[3]]
+> $`2020-08-14`[[3]]$criticalvalue
+> [1] 0.3
+> 
+> $`2020-08-14`[[3]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> $`2020-08-14`[[4]]
+> $`2020-08-14`[[4]]$criticalvalue
+> [1] 0.4
+> 
+> $`2020-08-14`[[4]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> 
+> $`2020-08-15`
+> $`2020-08-15`[[1]]
+> $`2020-08-15`[[1]]$criticalvalue
+> [1] 0.1
+> 
+> $`2020-08-15`[[1]]$NumPeopleExposed
+> [1] 1
+> 
+> 
+> $`2020-08-15`[[2]]
+> $`2020-08-15`[[2]]$criticalvalue
+> [1] 0.2
+> 
+> $`2020-08-15`[[2]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> $`2020-08-15`[[3]]
+> $`2020-08-15`[[3]]$criticalvalue
+> [1] 0.3
+> 
+> $`2020-08-15`[[3]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> $`2020-08-15`[[4]]
+> $`2020-08-15`[[4]]$criticalvalue
+> [1] 0.4
+> 
+> $`2020-08-15`[[4]]$NumPeopleExposed
+> [1] 0
+> 
+> 
+> 
+> $`2020-08-16`
+> $`2020-08-16`[[1]]
+> $`2020-08-16`[[1]]$criticalvalue
+> [1] 0.1
+> 
+> $`2020-08-16`[[1]]$NumPeopleExposed
+> [1] 15
+> 
+> 
+> $`2020-08-16`[[2]]
+> $`2020-08-16`[[2]]$criticalvalue
+> [1] 0.2
+> 
+> $`2020-08-16`[[2]]$NumPeopleExposed
+> [1] 6
+> 
+> 
+> $`2020-08-16`[[3]]
+> $`2020-08-16`[[3]]$criticalvalue
+> [1] 0.3
+> 
+> $`2020-08-16`[[3]]$NumPeopleExposed
+> [1] 6
+> 
+> 
+> $`2020-08-16`[[4]]
+> $`2020-08-16`[[4]]$criticalvalue
+> [1] 0.4
+> 
+> $`2020-08-16`[[4]]$NumPeopleExposed
+> [1] 6
+> 
+> 
+> 
+> $`2020-08-17`
+> $`2020-08-17`[[1]]
+> $`2020-08-17`[[1]]$criticalvalue
+> [1] 0.1
+> 
+> $`2020-08-17`[[1]]$NumPeopleExposed
+> [1] 60
+> 
+> 
+> $`2020-08-17`[[2]]
+> $`2020-08-17`[[2]]$criticalvalue
+> [1] 0.2
+> 
+> $`2020-08-17`[[2]]$NumPeopleExposed
+> [1] 26
+> 
+> 
+> $`2020-08-17`[[3]]
+> $`2020-08-17`[[3]]$criticalvalue
+> [1] 0.3
+> 
+> $`2020-08-17`[[3]]$NumPeopleExposed
+> [1] 9
+> 
+> 
+> $`2020-08-17`[[4]]
+> $`2020-08-17`[[4]]$criticalvalue
+> [1] 0.4
+> 
+> $`2020-08-17`[[4]]$NumPeopleExposed
+> [1] 3
+> 
+> 
+> THANK YOU
+> John
+> 
+> John David Sorkin M.D., Ph.D.
+> Professor of Medicine, University of Maryland School of Medicine;
+> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+> Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+> Senior Statistician University of Maryland Center for Vascular Research;
+> 
+> Division of Gerontology, Geriatrics and Palliative Medicine,
+> 10 North Greene Street
+> GRECC (BT/18/GR)
+> Baltimore, MD 21201-1524
+> Cell phone 443-418-5382
+> 
+> 
+> 
+> 
+> 
+> ________________________________________
+> From: Rui Barradas <ruipbarradas at sapo.pt>
+> Sent: Thursday, June 4, 2026 5:19 PM
+> To: Sorkin, John <jsorkin at som.umaryland.edu>; R-help <r-help at r-project.org>
+> Subject: Re: [R] Convert R object to a data frame
+> 
+> 
+> ?s 21:57 de 04/06/2026, Sorkin, John escreveu:
+>> I have an R object created lapply function within a by a by function
+>>
+>>        results_by_date <- by(
+>>          data,
+>>           data[,"Date"],
+>>           function(subdata) {
+>>             lapply(
+>>             alertlevels,
+>>             check_cutpoints2,
+>>             data=subdata,
+>>             mycolumn=column
+>>             )
+>>           }
+>>        )
+>>
+>> which has the following structure
+>>
+>> $ 2020-08-14:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 0
+>>    $ 2020-08-15:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 1
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 0
+>>    $ 2020-08-16:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 15
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 6
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 6
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 6
+>>    $ 2020-08-17:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 58
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 20
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 7
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 2
+>>    $ 2020-08-18:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 79
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 45
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 16
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 6
+>>    $ 2020-08-19:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 187
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 100
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 61
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 38
+>>    $ 2020-08-20:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 121
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 31
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 13
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 4
+>>    $ 2020-08-21:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 17
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 8
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 5
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 3
+>>    $ 2020-08-22:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 35
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 12
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 6
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 2
+>>    $ 2020-08-23:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 32
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 15
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 8
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 4
+>>    $ 2020-08-24:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 15
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 5
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 1
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 0
+>>    $ 2020-08-25:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 43
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 26
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 13
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 5
+>>    $ 2020-08-26:List of 4
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.1
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.2
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.3
+>>     .. ..$ NumPeopleExposed: int 0
+>>     ..$ :List of 2
+>>     .. ..$ criticalvalue   : num 0.4
+>>     .. ..$ NumPeopleExposed: int 0
+>>    - attr(*, "dim")= int 13
+>>    - attr(*, "dimnames")=List of 1
+>>     ..$ data[, "Date"]: chr [1:13] "2020-08-14" "2020-08-15" "2020-08-16" "2020-08-17" ...
+>>    - attr(*, "call")= language by.data.frame(data = data, INDICES = data[, "Date"], FUN = function(subdata) {     lapply(alertlevels, check_cutp| __truncated__ ...
+>>    - attr(*, "class")= chr "by"
+>> NULL
+>>
+>> I would like to convert the object to a dataframe. Can anyone suggest how I might accomplish this task?
+>>
+>> Thank you,
+>> John
+>>
+>> John David Sorkin M.D., Ph.D.
+>> Professor of Medicine, University of Maryland School of Medicine;
+>> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;
+>> Former PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;
+>> Senior Statistician University of Maryland Center for Vascular Research;
+>>
+>> Division of Gerontology, Geriatrics and Palliative Medicine,
+>> 10 North Greene Street
+>> GRECC (BT/18/GR)
+>> Baltimore, MD 21201-1524
+>> Cell phone 443-418-5382
+>>
+>>
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.r-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> Hello,
+> 
+> The problem is that you have a lapply() nested in by(), so you will have
+> to rbind twice.
+> It seems that
+> 
+> 
+> results_by_date <- by(
+>     data,
+>     data[,"Date"],
+>     function(subdata) {
+>       lapply(
+>         alertlevels,
+>         check_cutpoints2,
+>         data=subdata,
+>         mycolumn=column
+>       ) |> do.call(rbind, args = _)
+>     }
+> ) |> do.call(rbind, args = _)
+> 
+> 
+> can solve it.
+> Can you post the output of dput(results_by_date[1:2]) ?
+> 
+> Hope this helps,
+> 
+> Rui Barradas
+> 
+> 
+> 
+Hello,
+
+Here is a way to convert results_by_date into a df.
+
+
+
+res1 <- lapply(results_by_date, \(x) {
+   lapply(x, as.data.frame) |> do.call(rbind, args = _)
+}) |> do.call(rbind, args = _)
+
+# extract date and num the rownames
+dt <- row.names(res1)
+num <- sub("[^\\.]*(\\.(\\d+))", "\\2", dt) |> as.numeric()
+dt <- sub("([^\\.]*)\\.\\d+", "\\1", dt) |> as.Date()
+
+result <- cbind(res1, Date = dt, Record = num)
+rm(res1, dt, num)
+
+result
+#>              criticalvalue NumPeopleExposed       Date Record
+#> 2020-08-14.1           0.1                0 2020-08-14      1
+#> 2020-08-14.2           0.2                0 2020-08-14      2
+#> 2020-08-14.3           0.3                0 2020-08-14      3
+#> 2020-08-14.4           0.4                0 2020-08-14      4
+#> 2020-08-15.1           0.1                1 2020-08-15      1
+#> 2020-08-15.2           0.2                0 2020-08-15      2
+#> 2020-08-15.3           0.3                0 2020-08-15      3
+#> 2020-08-15.4           0.4                0 2020-08-15      4
+#> 2020-08-16.1           0.1               15 2020-08-16      1
+#> 2020-08-16.2           0.2                6 2020-08-16      2
+#> 2020-08-16.3           0.3                6 2020-08-16      3
+#> 2020-08-16.4           0.4                6 2020-08-16      4
+#> 2020-08-17.1           0.1               60 2020-08-17      1
+#> 2020-08-17.2           0.2               26 2020-08-17      2
+#> 2020-08-17.3           0.3                9 2020-08-17      3
+#> 2020-08-17.4           0.4                3 2020-08-17      4
+
+
+
+But I think there is something going on upstream. You have nested loops 
+by/lapply and it is probably possible to avoid further processing.
+It might be useful to run a couple of iterations of the lapply loop and 
+post the output of that in dput format (before by()).
+
+Hope this helps,
+
+Rui Barradas
+
+
+From r@c|nej @end|ng |rom mcm@@ter@c@  Thu Jun  4 14:24:11 2026
+From: r@c|nej @end|ng |rom mcm@@ter@c@ (Racine, Jeffrey)
+Date: Thu, 4 Jun 2026 12:24:11 +0000
+Subject: [R] [R-pkgs] np 0.70-3 and npRmpi 0.70-3 now on CRAN
+Message-ID: <YQBPR0101MB8815C7D9C6389288123F6E8BBC102@YQBPR0101MB8815.CANPRD01.PROD.OUTLOOK.COM>
+
+
+_______________________________________________
+R-packages mailing list
+R-packages at r-project.org
+https://stat.ethz.ch/mailman/listinfo/r-packages
+
+
