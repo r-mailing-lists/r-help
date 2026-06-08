@@ -2807,3 +2807,126 @@ R-packages at r-project.org
 https://stat.ethz.ch/mailman/listinfo/r-packages
 
 
+From k@r|@@ch||||ng @end|ng |rom un|-bonn@de  Sun Jun  7 16:30:34 2026
+From: k@r|@@ch||||ng @end|ng |rom un|-bonn@de (Karl Schilling)
+Date: Sun, 7 Jun 2026 16:30:34 +0200
+Subject: [R] issue with update.packages(), library 'utils'
+In-Reply-To: <PA6PR01MB120927EF4EB06FEA78C14AED7E2102@PA6PR01MB12092.eurprd01.prod.exchangelabs.com>
+References: <PA6PR01MB120927EF4EB06FEA78C14AED7E2102@PA6PR01MB12092.eurprd01.prod.exchangelabs.com>
+Message-ID: <240738c2-9935-40a9-b461-c82776cd1a77@uni-bonn.de>
+
+I have exactly the same problem as reported by Guido Hooiveld.
+
+I had previously attributed my problem with an inappropriate way of 
+updating my packages when I updated from R 4.5 to 4.6. I then completely 
+reinstalled R4.6 and all packages, which "solved" the problem - at least 
+when I run "update.packages2 the same day I reinstalled everything (see 
+my postings and related answers from May27-29.
+Alas, the next day the problem was back again, and ALL my packages 
+updated the day before were now identified as outdated.
+
+I have no idea about the background of this problem. But a cue may be 
+possibly come from the observation that when I use RStudio to check for 
+packages that need to be updated (RStudie >Tools > Check for Package 
+Updates ...), this does not happen.
+
+Karl Schilling
+
+
+On 04.06.2026 13:49, Hooiveld, Guido via R-help wrote:
+> Hi, I got confused by the recent behavior of update.packages() from 
+> the library utils. Since a while it reports that updates of ALL 
+> installed packages are available at the CRAN repository but turns out 
+> that this is not the case for MOST packages. In other words, most of 
+> the installed packages on my computer are of the same version as on 
+> the repository, yet it still is reported that an update for these 
+> packages is available. Of course I can re-install these (current) 
+> packages, but that is IMHO a waste of time/bandwidth. I had a look at 
+> it, and to me it seems this also somehow relates to the function 
+> old.packages(). That is, old.packages() identifies also packages as 
+> outdated, whereas they are clearly not... ?? See code below. Any 
+> suggestion on what may be causing this, and how to avoid it? Thanks, 
+> Guido
+>> ## update.packages() identifies that updates for e.g. ## 
+>> 'ActivePathways' and 'alphavantager' are available for my 
+>> installation. ## Yet, the installed version is the same as on the 
+>> repository. ## (Note that after these 2 notifications I cancelled 
+>> update.packages() update.packages(repos=https://cloud.r-project.org)
+> ActivePathways : Version 2.0.6 installed in C:/Program 
+> Files/R/R-4.6.0/library Version 2.0.6 available at 
+> https://cloud.r-project.org/bin/windows/contrib/4.6 alphavantager : 
+> Version 0.1.3 installed in C:/Program Files/R/R-4.6.0/library Version 
+> 0.1.3 available at https://cloud.r-project.org/bin/windows/contrib/4.6 
+> cancelled by user Warning message: In .available.both(repos, method, 
+> ...) : Some listed binary packages have no source
+>> ## check and compare the output of old.packages() old.pkgs <- 
+>> old.packages(repos=https://cloud.r-project.org)
+> Warning message: In .available.both(repos, method, ...) : Some listed 
+> binary packages have no source
+>> head(old.pkgs)
+> Package LibPath Installed ActivePathways "ActivePathways" "C:/Program 
+> Files/R/R-4.6.0/library" "2.0.6" alphavantager "alphavantager" 
+> "C:/Program Files/R/R-4.6.0/library" "0.1.3" anytime "anytime" 
+> "C:/Program Files/R/R-4.6.0/library" "0.3.13" aod "aod" "C:/Program 
+> Files/R/R-4.6.0/library" "1.3.3" ape "ape" "C:/Program 
+> Files/R/R-4.6.0/library" "5.8-1" aplot "aplot" "C:/Program 
+> Files/R/R-4.6.0/library" "0.2.9" Built ActivePathways "R 4.6.0; ; 
+> 2026-05-30 02:41:50 UTC; windows" alphavantager "R 4.6.0; ; 2026-05-30 
+> 03:56:11 UTC; windows" anytime "R 4.6.0; x86_64-w64-mingw32; 
+> 2026-05-30 01:03:29 UTC; windows" aod "R 4.6.0; ; 2026-05-30 01:07:09 
+> UTC; windows" ape "R 4.6.0; x86_64-w64-mingw32; 2026-05-30 02:11:50 
+> UTC; windows" aplot "R 4.6.0; ; 2026-05-30 03:14:45 UTC; windows" 
+> ReposVer Repository ActivePathways "2.0.6" 
+> https://cloud.r-project.org/bin/windows/contrib/4.6 alphavantager 
+> "0.1.3" https://cloud.r-project.org/bin/windows/contrib/4.6 anytime 
+> "0.3.13" https://cloud.r-project.org/bin/windows/contrib/4.6 aod 
+> "1.3.3" https://cloud.r-project.org/bin/windows/contrib/4.6 ape 
+> "5.8-1" https://cloud.r-project.org/bin/windows/contrib/4.6 aplot 
+> "0.2.9" https://cloud.r-project.org/bin/windows/contrib/4.6
+>> ## Of the 519 packages on my system, only 3 are really outdated. ## 
+>> Note that these are NOT ActivePathways' and 'alphavantager' that were 
+>> identified ## by update.packages() above. length( 
+>> old.pkgs[,"Installed"] == old.pkgs[,"ReposVer"] )
+> [1] 519
+>> sum( old.pkgs[,"Installed"] == old.pkgs[,"ReposVer"] )
+> [1] 516
+>> sum( old.pkgs[,"Installed"] != old.pkgs[,"ReposVer"] )
+> [1] 3
+>> old.pkgs[ old.pkgs[,"Installed"] != old.pkgs[,"ReposVer"] ,]
+> Package LibPath Installed limSolve "limSolve" "C:/Program 
+> Files/R/R-4.6.0/library" "2.0.1" RCurl "RCurl" "C:/Program 
+> Files/R/R-4.6.0/library" "1.98-1.18" rjsoncons "rjsoncons" "C:/Program 
+> Files/R/R-4.6.0/library" "1.3.2" Built limSolve "R 4.6.0; 
+> x86_64-w64-mingw32; 2026-05-30 01:01:26 UTC; windows" RCurl "R 4.6.0; 
+> x86_64-w64-mingw32; 2026-04-21 00:45:50 UTC; windows" rjsoncons "R 
+> 4.6.0; x86_64-w64-mingw32; 2026-05-30 03:10:49 UTC; windows" ReposVer 
+> Repository limSolve "2.0.2" 
+> https://cloud.r-project.org/bin/windows/contrib/4.6 RCurl "1.98-1.19" 
+> https://cloud.r-project.org/bin/windows/contrib/4.6 rjsoncons "1.3.3" 
+> https://cloud.r-project.org/bin/windows/contrib/4.6
+>> ## sessionInfo() sessionInfo()
+> R version 4.6.0 (2026-04-24 ucrt) Platform: x86_64-w64-mingw32/x64 
+> Running under: Windows 11 x64 (build 22631) Matrix products: default 
+> LAPACK version 3.12.1 locale: [1] LC_COLLATE=English_United 
+> States.utf8 [2] LC_CTYPE=English_United States.utf8 [3] 
+> LC_MONETARY=English_United States.utf8 [4] LC_NUMERIC=C [5] 
+> LC_TIME=English_United States.utf8 time zone: Europe/Amsterdam tzcode 
+> source: internal attached base packages: [1] stats graphics grDevices 
+> utils datasets methods base loaded via a namespace (and not attached): 
+> [1] compiler_4.6.0 tools_4.6.0
+> --------------------------------------------------------- Guido 
+> Hooiveld, PhD Nutrition, Metabolism & Genomics Group Division of Human 
+> Nutrition & Health Wageningen University the Netherlands Visiting 
+> address: Mail address: HELIX (Building 124), room 2048 Stippeneng 4 PO 
+> Box 17 6708 WE Wageningen 6700 AA Wageningen the Netherlands the 
+> Netherlands tel: (+) 31 317 485788 fax: (+) 31 317 483342 email: 
+> guido.hooiveld at wur.nl internet: http://www.humannutrition.nl 
+> http://scholar.google.com/citations?user=qFHaMnoAAAAJ 
+> http://www.scopus.com/authid/detail.url?authorId=6603101814 
+> ______________________________________________ R-help at r-project.org 
+> mailing list -- To UNSUBSCRIBE and more, see 
+> https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the 
+> posting guide https://www.R-project.org/posting-guide.html and provide 
+> commented, minimal, self-contained, reproducible code.
+
+
