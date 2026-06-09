@@ -13792,22 +13792,6 @@
       "month": "2007-08"
     },
     {
-      "id": "msg-ae09d6f61f4e",
-      "message_id": "<FC9BF53B-B4E5-498C-95F9-6364F9193799@virginia.edu>",
-      "from_name": "Michael Kubovy",
-      "from_email_hash": "0b15dcc4e4b904d416328a67647d112f774ed7d978d8a8b1619fc1530daca2f6",
-      "date": "2007-08-11T20:31:23Z",
-      "subject": "[R] Artifacts in pdf() of image() (w/o comments)",
-      "subject_clean": "Artifacts in pdf() of image() (w/o comments)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear r-helpers,\n\nIn my previous message there were comments in the code that may have  \nmade cutting and pasting awkward. Here it is w/o them.\n\nI have two questions:\n\n(1) The following produces a pdf with artifacts. How do I prevent them?\n\nrequire(grDevices)\nimSize <- 200\nlambda <- 10\ntheta <- 15\nsigma <- 40\nx <- 1:imSize\nx0 <- x / imSize -.5\nfreq = imSize/lambda\nxf = x0 * freq * 2 * pi\nf <- function(x, y){r <- -((x^2 + y^2)/(sigma ^2)); exp(r)}\nz <- outer(xf, xf, f)\nf1 <- function(x, y){cos(.1 * x)}\nz1 <- outer(xf, xf, f1)\npdf('gabor.pdf')\nimage(xf, xf, z * z1, col = gray(250:1000/1000),\nxlab = '', ylab =  '', bty = 'n', axes = FALSE, asp = 1)\ndev.off()\n\n(2) I would like the output to be clipped to a circle, i.e., anything\noutside the circle tangent to the sides of the square should be\ntransparent. How can I do that?\n\n_____________________________\nProfessor Michael Kubovy\nUniversity of Virginia\nDepartment of Psychology\nUSPS:     P.O.Box 400400    Charlottesville, VA 22904-4400\nParcels:    Room 102        Gilmer Hall\n          McCormick Road    Charlottesville, VA 22903\nOffice:    B011    +1-434-982-4729\nLab:        B019    +1-434-982-4751\nFax:        +1-434-982-4766\nWWW:    http://www.people.virginia.edu/~mk9y/\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting- \nguide.html\nand provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Dear r-helpers,\n\nIn my previous message there were comments in the code that may have  \nmade cutting and pasting awkward. Here it is w/o them.\n\nI have two questions:\n\n(1) The following produces a pdf ",
-      "thread_id": "thread-ae09d6f61f4e",
-      "thread_depth": 0,
-      "month": "2007-08"
-    },
-    {
       "id": "msg-955fbb036fa1",
       "message_id": "<DA03270F-ACFE-4FD4-BDA4-DAA7519D3DDA@virginia.edu>",
       "from_name": "Michael Kubovy",
@@ -13820,6 +13804,22 @@
       "body_plain": "Dear r-helpers,\n\nI have two questions:\n\n(1) The following produces a pdf with artifacts. How do I prevent them?\n\nrequire(grDevices)\nimSize <- 200\nlambda <- 10\ntheta <- 15\nsigma <- 40\nx <- 1:imSize\nx0 <- x / imSize -.5\nfreq = imSize/lambda                    # compute frequency from  \nwavelength\nxf = x0 * freq * 2 * pi                  # convert X to radians: 0 ->  \n( 2*pi * frequency)\nf <- function(x, y){r <- -((x^2 + y^2)/(sigma ^2)); exp(r)}\nz <- outer(xf, xf, f)\nf1 <- function(x, y){cos(.1 * x)}\nz1 <- outer(xf, xf, f1)\npdf('gabor.pdf')\nimage(xf, xf, z * z1, col = gray(250:1000/1000), xlab = '', ylab =  \n'', bty = 'n',\n     axes = FALSE, asp = 1)\ndev.off()\n\n(2) I would like the output to be clipped to a circle, i.e., anything  \noutside the circle tangent to the sides of the square should be  \ntransparent. How can I do that?\n\n_____________________________\nProfessor Michael Kubovy\nUniversity of Virginia\nDepartment of Psychology\nUSPS:     P.O.Box 400400    Charlottesville, VA 22904-4400\nParcels:    Room 102        Gilmer Hall\n         McCormick Road    Charlottesville, VA 22903\nOffice:    B011    +1-434-982-4729\nLab:        B019    +1-434-982-4751\nFax:        +1-434-982-4766\nWWW:    http://www.people.virginia.edu/~mk9y/",
       "body_snippet": "Dear r-helpers,\n\nI have two questions:\n\n(1) The following produces a pdf with artifacts. How do I prevent them?\n\nrequire(grDevices)\nimSize <- 200\nlambda <- 10\ntheta <- 15\nsigma <- 40\nx <- 1:imSize\nx0 ",
       "thread_id": "thread-955fbb036fa1",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
+      "id": "msg-ae09d6f61f4e",
+      "message_id": "<FC9BF53B-B4E5-498C-95F9-6364F9193799@virginia.edu>",
+      "from_name": "Michael Kubovy",
+      "from_email_hash": "0b15dcc4e4b904d416328a67647d112f774ed7d978d8a8b1619fc1530daca2f6",
+      "date": "2007-08-11T20:31:23Z",
+      "subject": "[R] Artifacts in pdf() of image() (w/o comments)",
+      "subject_clean": "Artifacts in pdf() of image() (w/o comments)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear r-helpers,\n\nIn my previous message there were comments in the code that may have  \nmade cutting and pasting awkward. Here it is w/o them.\n\nI have two questions:\n\n(1) The following produces a pdf with artifacts. How do I prevent them?\n\nrequire(grDevices)\nimSize <- 200\nlambda <- 10\ntheta <- 15\nsigma <- 40\nx <- 1:imSize\nx0 <- x / imSize -.5\nfreq = imSize/lambda\nxf = x0 * freq * 2 * pi\nf <- function(x, y){r <- -((x^2 + y^2)/(sigma ^2)); exp(r)}\nz <- outer(xf, xf, f)\nf1 <- function(x, y){cos(.1 * x)}\nz1 <- outer(xf, xf, f1)\npdf('gabor.pdf')\nimage(xf, xf, z * z1, col = gray(250:1000/1000),\nxlab = '', ylab =  '', bty = 'n', axes = FALSE, asp = 1)\ndev.off()\n\n(2) I would like the output to be clipped to a circle, i.e., anything\noutside the circle tangent to the sides of the square should be\ntransparent. How can I do that?\n\n_____________________________\nProfessor Michael Kubovy\nUniversity of Virginia\nDepartment of Psychology\nUSPS:     P.O.Box 400400    Charlottesville, VA 22904-4400\nParcels:    Room 102        Gilmer Hall\n          McCormick Road    Charlottesville, VA 22903\nOffice:    B011    +1-434-982-4729\nLab:        B019    +1-434-982-4751\nFax:        +1-434-982-4766\nWWW:    http://www.people.virginia.edu/~mk9y/\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting- \nguide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Dear r-helpers,\n\nIn my previous message there were comments in the code that may have  \nmade cutting and pasting awkward. Here it is w/o them.\n\nI have two questions:\n\n(1) The following produces a pdf ",
+      "thread_id": "thread-ae09d6f61f4e",
       "thread_depth": 0,
       "month": "2007-08"
     },
@@ -37448,6 +37448,22 @@
       "month": "2007-08"
     },
     {
+      "id": "msg-439efa25beeb",
+      "message_id": "<395641.54075.qm@web58114.mail.re3.yahoo.com>",
+      "from_name": "Megh Dal",
+      "from_email_hash": "ac75a705f36baba80297fe074c4d6f2bea70f2e9278e0c34cda34238862562ef",
+      "date": "2007-08-31T08:17:00Z",
+      "subject": "[R] Choosing the optimum lag order of ARIMA model",
+      "subject_clean": "Choosing the optimum lag order of ARIMA model",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/7875edd2/attachment.pl",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/7875edd2/attachment.pl",
+      "thread_id": "thread-439efa25beeb",
+      "thread_depth": 0,
+      "month": "2007-08"
+    },
+    {
       "id": "msg-db1bd4495ca8",
       "message_id": "<46D7CE7C.50605@univie.ac.at>",
       "from_name": "Erich Neuwirth",
@@ -37466,22 +37482,6 @@
       "body_snippet": "There is a hack to get around the problem.\nIt is definitely not a good solution, just a hack.\n\nOpen the .csv file in a text editor and select everything.\nPaste it into an empty Excel sheet.\nThen use D",
       "thread_id": "thread-4380b4666add",
       "thread_depth": 4,
-      "month": "2007-08"
-    },
-    {
-      "id": "msg-439efa25beeb",
-      "message_id": "<395641.54075.qm@web58114.mail.re3.yahoo.com>",
-      "from_name": "Megh Dal",
-      "from_email_hash": "ac75a705f36baba80297fe074c4d6f2bea70f2e9278e0c34cda34238862562ef",
-      "date": "2007-08-31T08:17:00Z",
-      "subject": "[R] Choosing the optimum lag order of ARIMA model",
-      "subject_clean": "Choosing the optimum lag order of ARIMA model",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/7875edd2/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070831/7875edd2/attachment.pl",
-      "thread_id": "thread-439efa25beeb",
-      "thread_depth": 0,
       "month": "2007-08"
     },
     {
@@ -42948,18 +42948,6 @@
       "root_message_id": "msg-2368ee4c620a"
     },
     {
-      "id": "thread-955fbb036fa1",
-      "subject": "Artifacts in pdf() of image()",
-      "message_count": 2,
-      "participants": [
-        "Ben Bolker",
-        "Michael Kubovy"
-      ],
-      "started": "2007-08-11T20:31:23Z",
-      "last_reply": "2007-08-11T23:31:05Z",
-      "root_message_id": "msg-955fbb036fa1"
-    },
-    {
       "id": "thread-ae09d6f61f4e",
       "subject": "Artifacts in pdf() of image() (w/o comments)",
       "message_count": 12,
@@ -42972,6 +42960,18 @@
       "started": "2007-08-11T20:31:23Z",
       "last_reply": "2007-08-13T22:46:31Z",
       "root_message_id": "msg-ae09d6f61f4e"
+    },
+    {
+      "id": "thread-955fbb036fa1",
+      "subject": "Artifacts in pdf() of image()",
+      "message_count": 2,
+      "participants": [
+        "Ben Bolker",
+        "Michael Kubovy"
+      ],
+      "started": "2007-08-11T20:31:23Z",
+      "last_reply": "2007-08-11T23:31:05Z",
+      "root_message_id": "msg-955fbb036fa1"
     },
     {
       "id": "thread-af0614a2a48b",
