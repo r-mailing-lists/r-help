@@ -382,6 +382,179 @@
       "thread_id": "thread-a1c6c43dd7cf",
       "thread_depth": 0,
       "month": "2026-06"
+    },
+    {
+      "id": "msg-3f5cc6ee3131",
+      "message_id": "<e774f87a-5e20-4997-bc1e-7229d4ec14c6@uni-bonn.de>",
+      "from_name": "Karl Schilling",
+      "from_email_hash": "9f4d86479d7b223cf0e3bc1c652806a7a1617591cb33ee73e0f0d98e3c1d4a35",
+      "date": "2026-06-09T09:27:10Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<df90c7aa-fc57-4e69-9218-d5f3de2536b4@yeah.net>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<fed90ef9-1b3a-4184-8fe9-f5288e54c202@uni-bonn.de>",
+        "<56ea26b7-cab2-4f14-b782-1d56744c828e@gmail.com>",
+        "<e27ece8d-c8c3-4034-819e-9db19eabe943@yeah.net>",
+        "<d485beaf-427f-4a43-9dfd-4ee8c0485901@gmail.com>",
+        "<df90c7aa-fc57-4e69-9218-d5f3de2536b4@yeah.net>"
+      ],
+      "body_plain": "Interestingly, this issue does not exist for BioConductor packages.\n\n\nKS\n\nOn 09.06.2026 03:14, Jinsong Zhao wrote:\n> On 6/9/2026 12:16 AM, Duncan Murdoch wrote:\n>> There's one other possibility I can see:? maybe\n>>\n>> ?? .builtDate(repo[\"Built\"]) >? .builtDate(inst[\"Built\"]))\n>>\n>> in the needs.install() function in old.packages(), even just after a \n>> reinstall.? This could be due to time zone differences or some other \n>> bug.? Someone who is experiencing this would have to debug something \n>> like that.\n>>\n>\n> Yes, the comparison between the build date of a repository and \n> installed packages makes sense. However, my concern is whether it is \n> necessary for CRAN to build packages so frequently. For example, \n> consider the boot package, which was shipped with R 4.6 and built on \n> April 21. I reinstalled R on June 4 and updated all packages \n> afterward. The updated boot package was built on June 2. Today, I \n> checked again, and the boot package in the CRAN repository was built \n> on June 6. This means that if I run update.packages(), it will \n> reinstall the boot package at the same version, 1.3-32.\n>\n> > a <- utils:::.available.both(repos)\n> Warning message:\n> In utils:::.available.both(repos) :\n> ? Some listed binary packages have no source\n> > b <- installed.packages()\n> > subset(as.data.frame(a), Package == \"boot\")[,c(2,18)]\n> ???? Version?????????????????????????????????????? Built\n> boot? 1.3-32 R 4.6.0; ; 2026-06-06 01:01:20 UTC; windows\n> > subset(as.data.frame(b), Package == \"boot\")[,c(3,16)]\n> ?????? Version?????????????????????????????????????? Built\n> boot??? 1.3-32 R 4.6.0; ; 2026-06-02 01:42:34 UTC; windows\n> boot.1? 1.3-32 R 4.6.0; ; 2026-04-24 08:16:13 UTC; windows\n>\n>\n> Best,\n> Jinsong\n>\n>\n>> Duncan Murdoch\n>>\n>> On 2026-06-08 9:47 a.m., Jinsong Zhao wrote:\n>>> On 6/8/2026 9:09 PM, Duncan Murdoch wrote:\n>>>> On 2026-06-08 8:54 a.m., Karl Schilling wrote:\n>>>>> Dear Duncan Murdoch:\n>>>>>\n>>>>> I did just what you recommended. I have only one library.\n>>>>> ?? > lp <- .libPaths()\n>>>>> ?? > lp\n>>>>> [1] \"C:/Program Files/R/R-4.6.0patched/library\"\n>>>>> ?? > length(lp)\n>>>>> [1] 1\n>>>>\n>>>> That looks suspicious to me.? I haven't used Windows in a long time,\n>>>> but when I did, that directory would have been write protected.? When\n>>>> I would try to install a package there it would fail, and R would add\n>>>> a user library and install there instead. The .libPaths() vector would\n>>>> be changed for the rest of that session, but could revert to just one\n>>>> entry if I started a new session.\n>>>>\n>>>>>\n>>>>> But maybe the post by Jinsong ZZhao is relevent here:\n>>>>\n>>>> Yes, that could explain everything.? If the date when a binary package\n>>>> is built changes, that could mean that different C libraries were\n>>>> linked into it, and you should use the newer one. Or it might just\n>>>> mean that CRAN rebuilt it unnecessarily, but there's no way for R to\n>>>> know that.\n>>>>\n>>> I think that CRAN rebuilt the package unnecessarily is the root of the\n>>> problem. As I know, for a major version, such as 4.6.x, the tool chains\n>>> will keep unchanging for a long time, so it is not necessary to rebuilt\n>>> the package with same version nearly every day.\n>>>\n>>> Best,\n>>>\n>>> Jinsong\n>>>\n>>>> Duncan Murdoch\n>>>>\n>>>>\n>>>>\n>>>>>\n>>>>>> The root of the problem is that old.packages have updated the \n>>>>>> internal\n>>>>>> function needs.install, which compares the built date of repo and \n>>>>>> the\n>>>>>> installed packages. And it seems that repo packages have newer built\n>>>>>> date, though I do not know why.\n>>>>>>\n>>>>>> So reinstallation R and all packages could not solve the problem.\n>>>>>>\n>>>>>> Best,\n>>>>>> Jinsong\n>>>>>>\n>>>>>> PS: the internal function need.install:\n>>>>>>\n>>>>>> ????? .ts <- function(x) if (isTRUE(!is.na(x)))\n>>>>>> ????????? as.POSIXlt(x, optional = TRUE, tz = \"UTC\")\n>>>>>> ????? else NA\n>>>>>> ????? needs.install <- function(repo, inst)\n>>>>>> ((package_version(repo[\"Version\"]) >\n>>>>>> ????????? package_version(inst[\"Version\"])) ||\n>>>>>> (package_version(repo[\"Version\"]) ==\n>>>>>> ????????? package_version(inst[\"Version\"]) &&\n>>>>>> (isTRUE(.builtDate(repo[\"Built\"]) >\n>>>>>> ????????? .builtDate(inst[\"Built\"])) || \n>>>>>> isTRUE(.ts(repo[\"Published\"]) >\n>>>>>> ????????? .ts(inst[\"Published\"])))))\n>>>>>\n>>>>>\n>>>>> I reinstalled r 4.6patched and all packages on May 28. Later that \n>>>>> day,\n>>>>> then, \"update.packages\" did? result in only three packages \n>>>>> highlighted\n>>>>> for updating. A couple of days later, ALL my packages were again \n>>>>> in the\n>>>>> list to be updated. And just as documented in the post by\n>>>>> guido.hooiveld at wur.nl, my installed packages had the same version\n>>>>> numbers as those in the repository.\n>>>>> Looking at the repository\n>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6, I realized \n>>>>> that the\n>>>>> \"Last modified\" date was more recent (mostly June 7) - though the\n>>>>> version numbers of my installed packages were identical to those \n>>>>> in the\n>>>>> repository.\n>>>>>\n>>>>> So does \"Last modified\" reflect / affect the .builtDate in the above\n>>>>> function? And do different dates for \"Last modified\" imply changes \n>>>>> even\n>>>>> if the version numbers are unchanged?\n>>>>>\n>>>>> Thank you so much for your help,\n>>>>>\n>>>>> Karl Schilling\n>>>>>\n>>>>>\n>>>>> On 08.06.2026 14:01, Duncan Murdoch wrote:\n>>>>>> I think what needs to happen here is that someone who is \n>>>>>> experiencing\n>>>>>> this needs to debug it.? It sounds as though old.packages() is\n>>>>>> identifying packages that you think don't need replacing.? You \n>>>>>> need to\n>>>>>> figure out why this is happening.\n>>>>>>\n>>>>>> A guess:\n>>>>>>\n>>>>>> ???- Your .libPaths() vector (which is used as the default for \n>>>>>> lib.loc)\n>>>>>> contains two or more library paths.? You have old packages in one of\n>>>>>> those paths, and when you install new ones, they go into the other\n>>>>>> path.\n>>>>>>\n>>>>>> You can diagnose this as follows:\n>>>>>>\n>>>>>> ???1.? Print .libPaths().? How many entries does it have?\n>>>>>> ???2.? If it has two (or more) entries, run the following:\n>>>>>>\n>>>>>> ???????? lp <- .libPaths()\n>>>>>> ???????? both <- intersect(list.files(lp[1]), list.files(lp[2]))\n>>>>>> ???????? print(both)\n>>>>>>\n>>>>>> ?????? (If you have more than two entries, do this for all pairs.)\n>>>>>>\n>>>>>> ?????? This will list all the packages that you have installed in \n>>>>>> both\n>>>>>> places.? On my system, the first entry is my user library, the \n>>>>>> second\n>>>>>> is the system library.? You generally need admin permissions to \n>>>>>> modify\n>>>>>> the system library, so if you sometimes run with admin \n>>>>>> permissions and\n>>>>>> sometimes don't, you can end up with different versions in those two\n>>>>>> places.\n>>>>>>\n>>>>>> 3.?? To find out if you have different versions, run\n>>>>>> packageVersion(pkgname, lp[1]) and compare to \n>>>>>> packageVersion(pkgname,\n>>>>>> lp[2]).? For example, I see that I have \"bslib\" installed in both\n>>>>>> places, and I see\n>>>>>>\n>>>>>> ??? > packageVersion(\"bslib\", lp[1])\n>>>>>> ??? [1] ?0.11.0?\n>>>>>> ??? > packageVersion(\"bslib\", lp[2])\n>>>>>> ??? [1] ?0.10.0?\n>>>>>>\n>>>>>> So it looks as though my system library has an obsolete version\n>>>>>> installed.? I should delete it.\n>>>>>>\n>>>>>> Duncan Murdoch\n>>>>>>\n>>>>>>\n>>>>>>\n>>>>>>\n>>>>>> On 2026-06-08 7:40 a.m., Paulo Barata wrote:\n>>>>>>> To the R-Help list,\n>>>>>>>\n>>>>>>> I have also the same problem here. Most often when I attempt to\n>>>>>>> update my packages, it seems that most of them, maybe all of them,\n>>>>>>> are flagged as needing update, even when they were updated just the\n>>>>>>> previous day.\n>>>>>>>\n>>>>>>> I do not use RStudio, I only use R directly. Currently, I am \n>>>>>>> using R\n>>>>>>> version 4.6.0 Patched (2026-05-29 r90087 ucrt), on Windows 10\n>>>>>>> Professional.\n>>>>>>>\n>>>>>>> Paulo Barata\n>>>>>>>\n>>>>>>> Rio de Janeiro - Brazil\n>>>>>>>\n>>>>>>> -------------------------------------------------\n>>>>>>>\n>>>>>>>>\n>>>>>>>> Message: 1\n>>>>>>>> Date: Sun, 7 Jun 2026 16:30:34 +0200\n>>>>>>>> From: Karl Schilling <karl.schilling at uni-bonn.de>\n>>>>>>>> To: r-help at r-project.org\n>>>>>>>> Subject: Re: [R] issue with update.packages(), library 'utils'\n>>>>>>>> Message-ID: <240738c2-9935-40a9-b461-c82776cd1a77 at uni-bonn.de>\n>>>>>>>> Content-Type: text/plain; charset=\"utf-8\"; Format=\"flowed\"\n>>>>>>>>\n>>>>>>>> I have exactly the same problem as reported by Guido Hooiveld.\n>>>>>>>>\n>>>>>>>> I had previously attributed my problem with an inappropriate \n>>>>>>>> way of\n>>>>>>>> updating my packages when I updated from R 4.5 to 4.6. I then\n>>>>>>>> completely\n>>>>>>>> reinstalled R4.6 and all packages, which \"solved\" the problem - at\n>>>>>>>> least\n>>>>>>>> when I run \"update.packages2 the same day I reinstalled everything\n>>>>>>>> (see\n>>>>>>>> my postings and related answers from May27-29.\n>>>>>>>> Alas, the next day the problem was back again, and ALL my packages\n>>>>>>>> updated the day before were now identified as outdated.\n>>>>>>>>\n>>>>>>>> I have no idea about the background of this problem. But a cue \n>>>>>>>> may be\n>>>>>>>> possibly come from the observation that when I use RStudio to\n>>>>>>>> check for\n>>>>>>>> packages that need to be updated (RStudie >Tools > Check for \n>>>>>>>> Package\n>>>>>>>> Updates ...), this does not happen.\n>>>>>>>>\n>>>>>>>> Karl Schilling\n>>>>>>>>\n>>>>>>>>\n>>>>>>>> On 04.06.2026 13:49, Hooiveld, Guido via R-help wrote:\n>>>>>>>>> Hi, I got confused by the recent behavior of update.packages() \n>>>>>>>>> from\n>>>>>>>>> the library utils. Since a while it reports that updates of ALL\n>>>>>>>>> installed packages are available at the CRAN repository but turns\n>>>>>>>>> out\n>>>>>>>>> that this is not the case for MOST packages. In other words, \n>>>>>>>>> most of\n>>>>>>>>> the installed packages on my computer are of the same version \n>>>>>>>>> as on\n>>>>>>>>> the repository, yet it still is reported that an update for these\n>>>>>>>>> packages is available. Of course I can re-install these (current)\n>>>>>>>>> packages, but that is IMHO a waste of time/bandwidth. I had a\n>>>>>>>>> look at\n>>>>>>>>> it, and to me it seems this also somehow relates to the function\n>>>>>>>>> old.packages(). That is, old.packages() identifies also \n>>>>>>>>> packages as\n>>>>>>>>> outdated, whereas they are clearly not... ?? See code below. Any\n>>>>>>>>> suggestion on what may be causing this, and how to avoid it? \n>>>>>>>>> Thanks,\n>>>>>>>>> Guido\n>>>>>>>>>> ## update.packages() identifies that updates for e.g. ##\n>>>>>>>>>> 'ActivePathways' and 'alphavantager' are available for my\n>>>>>>>>>> installation. ## Yet, the installed version is the same as on \n>>>>>>>>>> the\n>>>>>>>>>> repository. ## (Note that after these 2 notifications I \n>>>>>>>>>> cancelled\n>>>>>>>>>> update.packages()\n>>>>>>>>>> update.packages(repos=https://cloud.r-project.org)\n>>>>>>>>> ActivePathways : Version 2.0.6 installed in C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library Version 2.0.6 available at\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6 \n>>>>>>>>> alphavantager :\n>>>>>>>>> Version 0.1.3 installed in C:/Program Files/R/R-4.6.0/library\n>>>>>>>>> Version\n>>>>>>>>> 0.1.3 available at\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6\n>>>>>>>>> cancelled by user Warning message: In .available.both(repos, \n>>>>>>>>> method,\n>>>>>>>>> ...) : Some listed binary packages have no source\n>>>>>>>>>> ## check and compare the output of old.packages() old.pkgs <-\n>>>>>>>>>> old.packages(repos=https://cloud.r-project.org)\n>>>>>>>>> Warning message: In .available.both(repos, method, ...) : Some\n>>>>>>>>> listed\n>>>>>>>>> binary packages have no source\n>>>>>>>>>> head(old.pkgs)\n>>>>>>>>> Package LibPath Installed ActivePathways \"ActivePathways\"\n>>>>>>>>> \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"2.0.6\" alphavantager \"alphavantager\"\n>>>>>>>>> \"C:/Program Files/R/R-4.6.0/library\" \"0.1.3\" anytime \"anytime\"\n>>>>>>>>> \"C:/Program Files/R/R-4.6.0/library\" \"0.3.13\" aod \"aod\" \n>>>>>>>>> \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"1.3.3\" ape \"ape\" \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"5.8-1\" aplot \"aplot\" \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"0.2.9\" Built ActivePathways \"R 4.6.0; ;\n>>>>>>>>> 2026-05-30 02:41:50 UTC; windows\" alphavantager \"R 4.6.0; ;\n>>>>>>>>> 2026-05-30\n>>>>>>>>> 03:56:11 UTC; windows\" anytime \"R 4.6.0; x86_64-w64-mingw32;\n>>>>>>>>> 2026-05-30 01:03:29 UTC; windows\" aod \"R 4.6.0; ; 2026-05-30\n>>>>>>>>> 01:07:09\n>>>>>>>>> UTC; windows\" ape \"R 4.6.0; x86_64-w64-mingw32; 2026-05-30 \n>>>>>>>>> 02:11:50\n>>>>>>>>> UTC; windows\" aplot \"R 4.6.0; ; 2026-05-30 03:14:45 UTC; windows\"\n>>>>>>>>> ReposVer Repository ActivePathways \"2.0.6\"\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6 alphavantager\n>>>>>>>>> \"0.1.3\" https://cloud.r-project.org/bin/windows/contrib/4.6 \n>>>>>>>>> anytime\n>>>>>>>>> \"0.3.13\" https://cloud.r-project.org/bin/windows/contrib/4.6 aod\n>>>>>>>>> \"1.3.3\" https://cloud.r-project.org/bin/windows/contrib/4.6 ape\n>>>>>>>>> \"5.8-1\" https://cloud.r-project.org/bin/windows/contrib/4.6 aplot\n>>>>>>>>> \"0.2.9\" https://cloud.r-project.org/bin/windows/contrib/4.6\n>>>>>>>>>> ## Of the 519 packages on my system, only 3 are really \n>>>>>>>>>> outdated. ##\n>>>>>>>>>> Note that these are NOT ActivePathways' and 'alphavantager' that\n>>>>>>>>>> were\n>>>>>>>>>> identified ## by update.packages() above. length(\n>>>>>>>>>> old.pkgs[,\"Installed\"] == old.pkgs[,\"ReposVer\"] )\n>>>>>>>>> [1] 519\n>>>>>>>>>> sum( old.pkgs[,\"Installed\"] == old.pkgs[,\"ReposVer\"] )\n>>>>>>>>> [1] 516\n>>>>>>>>>> sum( old.pkgs[,\"Installed\"] != old.pkgs[,\"ReposVer\"] )\n>>>>>>>>> [1] 3\n>>>>>>>>>> old.pkgs[ old.pkgs[,\"Installed\"] != old.pkgs[,\"ReposVer\"] ,]\n>>>>>>>>> Package LibPath Installed limSolve \"limSolve\" \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"2.0.1\" RCurl \"RCurl\" \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"1.98-1.18\" rjsoncons \"rjsoncons\"\n>>>>>>>>> \"C:/Program\n>>>>>>>>> Files/R/R-4.6.0/library\" \"1.3.2\" Built limSolve \"R 4.6.0;\n>>>>>>>>> x86_64-w64-mingw32; 2026-05-30 01:01:26 UTC; windows\" RCurl \"R\n>>>>>>>>> 4.6.0;\n>>>>>>>>> x86_64-w64-mingw32; 2026-04-21 00:45:50 UTC; windows\" \n>>>>>>>>> rjsoncons \"R\n>>>>>>>>> 4.6.0; x86_64-w64-mingw32; 2026-05-30 03:10:49 UTC; windows\"\n>>>>>>>>> ReposVer\n>>>>>>>>> Repository limSolve \"2.0.2\"\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6 RCurl\n>>>>>>>>> \"1.98-1.19\"\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6 rjsoncons\n>>>>>>>>> \"1.3.3\"\n>>>>>>>>> https://cloud.r-project.org/bin/windows/contrib/4.6\n>>>>>>>>>> ## sessionInfo() sessionInfo()\n>>>>>>>>> R version 4.6.0 (2026-04-24 ucrt) Platform: \n>>>>>>>>> x86_64-w64-mingw32/x64\n>>>>>>>>> Running under: Windows 11 x64 (build 22631) Matrix products: \n>>>>>>>>> default\n>>>>>>>>> LAPACK version 3.12.1 locale: [1] LC_COLLATE=English_United\n>>>>>>>>> States.utf8 [2] LC_CTYPE=English_United States.utf8 [3]\n>>>>>>>>> LC_MONETARY=English_United States.utf8 [4] LC_NUMERIC=C [5]\n>>>>>>>>> LC_TIME=English_United States.utf8 time zone: Europe/Amsterdam\n>>>>>>>>> tzcode\n>>>>>>>>> source: internal attached base packages: [1] stats graphics\n>>>>>>>>> grDevices\n>>>>>>>>> utils datasets methods base loaded via a namespace (and not\n>>>>>>>>> attached):\n>>>>>>>>> [1] compiler_4.6.0 tools_4.6.0\n>>>>>>>>> --------------------------------------------------------- Guido\n>>>>>>>>> Hooiveld, PhD Nutrition, Metabolism & Genomics Group Division of\n>>>>>>>>> Human\n>>>>>>>>> Nutrition & Health Wageningen University the Netherlands Visiting\n>>>>>>>>> address: Mail address: HELIX (Building 124), room 2048 Stippeneng\n>>>>>>>>> 4 PO\n>>>>>>>>> Box 17 6708 WE Wageningen 6700 AA Wageningen the Netherlands the\n>>>>>>>>> Netherlands tel: (+) 31 317 485788 fax: (+) 31 317 483342 email:\n>>>>>>>>> guido.hooiveld at wur.nl internet: http://www.humannutrition.nl\n>>>>>>>>> http://scholar.google.com/citations?user=qFHaMnoAAAAJ\n>>>>>>>>> http://www.scopus.com/authid/detail.url?authorId=6603101814\n>>>>>>>>> ______________________________________________ \n>>>>>>>>> R-help at r-project.org\n>>>>>>>>> mailing list -- To UNSUBSCRIBE and more, see\n>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the\n>>>>>>>>> posting guide https://www.R-project.org/posting-guide.html and\n>>>>>>>>> provide\n>>>>>>>>> commented, minimal, self-contained, reproducible code.\n>>>>>>>>\n>>>>>>>> ------------------------------\n>>>>>>>>\n>>>>>>>> Message: 2\n>>>>>>>> Date: Sun, 7 Jun 2026 23:23:43 +0200\n>>>>>>>> From: Iago <iagogv at disroot.org>\n>>>>>>>> To: r-help at r-project.org\n>>>>>>>> Subject: Re: [R] issue with update.packages(), library 'utils'\n>>>>>>>> Message-ID: <bf1dc0c5-3a67-42c9-b5e9-05fada44e91f at disroot.org>\n>>>>>>>> Content-Type: text/plain; charset=\"utf-8\"\n>>>>>>>>\n>>>>>>>> I had this problem too and I don?t use RStudio, so this is/was \n>>>>>>>> an R\n>>>>>>>> issue. Regarding the previous discussion on this issue, the \n>>>>>>>> curious\n>>>>>>>> thing is that it had never occurred before when updating from \n>>>>>>>> 4.4 to\n>>>>>>>> 4.5, from 4.3 to 4.4, etc., at least to me.\n>>>>>>>>\n>>>>>>>> Iago\n>>>>>>>>\n>>>>>>>\n>>>>>>> ______________________________________________\n>>>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>>>>> PLEASE do read the posting guide\n>>>>>>> https://www.R-project.org/posting-guide.html\n>>>>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>>>\n>>>>>> ______________________________________________\n>>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>>>> PLEASE do read the posting guide\n>>>>>> https://www.R-project.org/posting-guide.html\n>>>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>>> https://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>",
+      "body_snippet": "Interestingly, this issue does not exist for BioConductor packages.\n\n\nKS\n\nOn 09.06.2026 03:14, Jinsong Zhao wrote:\n> On 6/9/2026 12:16 AM, Duncan Murdoch wrote:\n>> There's one other possibility I can ",
+      "thread_id": "thread-3f5cc6ee3131",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-a47a0ab6d130",
+      "message_id": "<27175.60489.50526.268092@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-09T10:34:49Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<e774f87a-5e20-4997-bc1e-7229d4ec14c6@uni-bonn.de>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<fed90ef9-1b3a-4184-8fe9-f5288e54c202@uni-bonn.de>",
+        "<56ea26b7-cab2-4f14-b782-1d56744c828e@gmail.com>",
+        "<e27ece8d-c8c3-4034-819e-9db19eabe943@yeah.net>",
+        "<d485beaf-427f-4a43-9dfd-4ee8c0485901@gmail.com>",
+        "<df90c7aa-fc57-4e69-9218-d5f3de2536b4@yeah.net>",
+        "<e774f87a-5e20-4997-bc1e-7229d4ec14c6@uni-bonn.de>"
+      ],
+      "body_plain": "On 9 June 2026 at 11:27, Karl Schilling wrote:\n| Interestingly, this issue does not exist for BioConductor packages.\n\nThe issue (basing a comparison on a version and the filedate) that was\nhighlighted by Jinsong is specific to CRAN and how it now thinks it can\ncombine versioning and rebuilds.\n\nOther (non-R) repositories rely strictly on version numbers and secondary\nsets of versions (for things such as partial archive rebuilds) as trusting\nthe timestamps can indeed be \"tricky\".\n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 9 June 2026 at 11:27, Karl Schilling wrote:\n| Interestingly, this issue does not exist for BioConductor packages.\n\nThe issue (basing a comparison on a version and the filedate) that was\nhighlighted",
+      "thread_id": "thread-3f5cc6ee3131",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-2b80c946c0b2",
+      "message_id": "<PA6PR01MB12092F0A603C19C642F243C42E21D2@PA6PR01MB12092.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Hooiveld, Guido",
+      "from_email_hash": "5da3428d2248d35f6787f123fe3c103d92a8a83435f643f670bcb33558ee541e",
+      "date": "2026-06-09T11:24:44Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<mailman.373696.1.1780999201.58463.r-help@r-project.org>",
+      "references": [
+        "<mailman.373696.1.1780999201.58463.r-help@r-project.org>"
+      ],
+      "body_plain": "Dear all,\n\nThanks for all responses and recommendations!\n\nMy installation returns the same as reported by Karl Schilling; that is only 1 library path on \"C:/Program Files/...\"\nhttps://www.mail-archive.com/r-help at r-project.org/msg271486.html\n\nBased on everything I have read I believe the behavior I reported is due to the 'Last modified' / .builtData that apparently changes on the repository every day, although the version numbers of packages are not changed (as reported by Jinsong and Dirk).\nhttps://www.mail-archive.com/r-help at r-project.org/msg271493.html\n\nObviously, this is something that I cannot solve, but I am happy I understand the root of the cause.\n\nThanks,\nGuido\n\nPS: since I only receive the 'Daily Digest' of the R mailing list, I hope my mail will be properly placed in the archive. And this also the reason I above included URLs to earlier responses.",
+      "body_snippet": "Dear all,\n\nThanks for all responses and recommendations!\n\nMy installation returns the same as reported by Karl Schilling; that is only 1 library path on \"C:/Program Files/...\"\nhttps://www.mail-archive",
+      "thread_id": "thread-2b80c946c0b2",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-f8e559a1514b",
+      "message_id": "<27176.1530.806506.50864@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-09T12:24:26Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<3DCD6582-058E-4963-AC3B-F0E537D03FCA@dcn.davis.ca.us>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<3DCD6582-058E-4963-AC3B-F0E537D03FCA@dcn.davis.ca.us>"
+      ],
+      "body_plain": "On 8 June 2026 at 06:26, Jeff Newmiller via R-help wrote:\n| Don't upgrade packages just because upgrade.packages says there are new packages every day... that way leads to obsessive-compulsive disorder (OCD).\n\nAs a general rule, this is objectively questionable advice.\n\nCRAN _excels_ at being _always being buildable / installable_.\n\nTo use a software analogy, we could call this 'build at @HEAD' as one would\nat a large mono-repo.  Which is what CRAN essentially is.  I have updated\nmore or less daily / multiple times per week since CRAN started, and I have\ndone so mostly on Linux where it is \"even more expensive\" as one generally\ninstals from source (unless newer services like r2u or cran2copr are used).\n\nBut if you know what you are doing, and design you deployments well with\npackages you trust, and maybe avoid some others you trust less / have shown a\ntendency to change abruptly then this is as stable as it gets. I sometimes\nreference some examples for that: CRANberries has been running more-or-less\nunalted since 2007, on a machine that gets the daily (or close to daily)\nupdates and has stayed alive near-constantly. Same for some things I run that\nare less visible to the outside.  So ... \"your mileage may vary\".  CRAN\nsupports \"continuous\" updates just fine. It does it to itself too.\n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 8 June 2026 at 06:26, Jeff Newmiller via R-help wrote:\n| Don't upgrade packages just because upgrade.packages says there are new packages every day... that way leads to obsessive-compulsive disorde",
+      "thread_id": "thread-14757d24348c",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-9fad25e691d9",
+      "message_id": "<CAPZA_qLuxkOnt4Kxef-oCv2u0+1gGBV=2J_FUdKeJLqEs+N=0w@mail.gmail.com>",
+      "from_name": "Andre Luiz Tietbohl Ramos",
+      "from_email_hash": "f1ee93083eaa5e3d9542ed0100870dcc6aa41f547a0a089c66b564f768a77107",
+      "date": "2026-06-09T13:53:44Z",
+      "subject": "[R] ggplot's subtitle with table",
+      "subject_clean": "ggplot's subtitle with table",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nIs there a way to put a custom 2 rows table with its columns alignment as a\nsubtitle in ggplot? As an example I'm using the code below but it is not\naligned as I want,\n\ntickers.clean <- paste(str_replace_all(tickers,'.SA$', ''))\ntickers.subtitle  <- paste(tickers.clean, sep = ' ', collapse = '    ')\nticker.subtitle.weights  <- paste(percent(wts, accuracy = 0.1), sep = ' ',\ncollapse = '    ')\n\nggplot(aes(x = date, y = cum_ret)) +\nlabs(x = 'Date',\n        y = 'Cummulative Return',\n         title = paste0('Portfolio Return ', length(tickers.clean), ' on ',\n                        limite_data_final,\n                        ' since ',\n                        limite_data_inicial),\n         subtitle = paste('Ativos: ', tickers.subtitle,\n                          '\\nPesos: ', ticker.subtitle.weights)\n         )\n)\n\nTIA,\n\n--\nAndr? Luiz Tietbohl Ramos, PhD\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nIs there a way to put a custom 2 rows table with its columns alignment as a\nsubtitle in ggplot? As an example I'm using the code below but it is not\naligned as I want,\n\ntickers.clean <- paste(",
+      "thread_id": "thread-9fad25e691d9",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-44ef41048fe3",
+      "message_id": "<F059D8C5-E6FE-4F60-B38D-4E1492B15337@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-06-09T14:37:30Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<27176.1530.806506.50864@paul.eddelbuettel.com>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<3DCD6582-058E-4963-AC3B-F0E537D03FCA@dcn.davis.ca.us>",
+        "<27176.1530.806506.50864@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "You claim that this position is \"objectively questionable advice\" ... but Stack Overflow moderators concluded that this was an opinion-based argument and shut it down. [1]\n\nWhile CRAN is remarkably robust at ensuring that packages compile and pass checks together, user-facing API changes and behavioral shifts still happen frequently.\n\nFor an active research project, updating daily introduces unnecessary moving targets. CRAN's strength as a monorepo is excellent for developers, but for end-users running data pipelines, code stability and isolated lockfiles usually trump tracking the bleeding edge. The very stability that you rely on also means that you can also afford to delay updates until you have time to consider the implications of api shifts and algorithm missions that package authors inject on their own schedule.\n\nI will take the SO lead and not respond further on this topic.\n\n\nOn June 9, 2026 5:24:26 AM PDT, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>On 8 June 2026 at 06:26, Jeff Newmiller via R-help wrote:\n>| Don't upgrade packages just because upgrade.packages says there are new packages every day... that way leads to obsessive-compulsive disorder (OCD).\n>\n>As a general rule, this is objectively questionable advice.\n>\n>CRAN _excels_ at being _always being buildable / installable_.\n>\n>To use a software analogy, we could call this 'build at @HEAD' as one would\n>at a large mono-repo.  Which is what CRAN essentially is.  I have updated\n>more or less daily / multiple times per week since CRAN started, and I have\n>done so mostly on Linux where it is \"even more expensive\" as one generally\n>instals from source (unless newer services like r2u or cran2copr are used).\n>\n>But if you know what you are doing, and design you deployments well with\n>packages you trust, and maybe avoid some others you trust less / have shown a\n>tendency to change abruptly then this is as stable as it gets. I sometimes\n>reference some examples for that: CRANberries has been running more-or-less\n>unalted since 2007, on a machine that gets the daily (or close to daily)\n>updates and has stayed alive near-constantly. Same for some things I run that\n>are less visible to the outside.  So ... \"your mileage may vary\".  CRAN\n>supports \"continuous\" updates just fine. It does it to itself too.\n>\n>Dirk\n>\n>-- \n>Dirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n>\n>Support my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\n>https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "You claim that this position is \"objectively questionable advice\" ... but Stack Overflow moderators concluded that this was an opinion-based argument and shut it down. [1]\n\nWhile CRAN is remarkably ro",
+      "thread_id": "thread-14757d24348c",
+      "thread_depth": 4,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-bd0e6757a1d4",
+      "message_id": "<d2c97124-e772-4712-a24a-dab9a158c45e@infolink.com.br>",
+      "from_name": "Paulo Barata",
+      "from_email_hash": "56c45d96e8f1a8eefcdbd61db09276c2c321609e1cbb297647b641ab0084fa27",
+      "date": "2026-06-09T14:50:23Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<27176.1530.806506.50864@paul.eddelbuettel.com>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<3DCD6582-058E-4963-AC3B-F0E537D03FCA@dcn.davis.ca.us>",
+        "<27176.1530.806506.50864@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Dr. Eddelbuettel,\n\nThank you for your message, quite reassuring for me. I agree with you, I see no problem in updating frequently the packages I use here. On system, Windows 10, with a good Internet connection, this takes just about one or two minutes, depending on the number of packages, and by that way I know I am using the most recent and corrected versions of the packages.\n\nBest regards,\n\nPaulo Barata\n\nRio de Janeiro - Brazil\n\n-------------------------------------------------------\n\nOn 09-Jun-26 9:24, Dirk Eddelbuettel wrote:\n> \n> On 8 June 2026 at 06:26, Jeff Newmiller via R-help wrote:\n> | Don't upgrade packages just because upgrade.packages says there are new packages every day... that way leads to obsessive-compulsive disorder (OCD).\n> \n> As a general rule, this is objectively questionable advice.\n> \n> CRAN _excels_ at being _always being buildable / installable_.\n> \n> To use a software analogy, we could call this 'build at @HEAD' as one would\n> at a large mono-repo.  Which is what CRAN essentially is.  I have updated\n> more or less daily / multiple times per week since CRAN started, and I have\n> done so mostly on Linux where it is \"even more expensive\" as one generally\n> instals from source (unless newer services like r2u or cran2copr are used).\n> \n> But if you know what you are doing, and design you deployments well with\n> packages you trust, and maybe avoid some others you trust less / have shown a\n> tendency to change abruptly then this is as stable as it gets. I sometimes\n> reference some examples for that: CRANberries has been running more-or-less\n> unalted since 2007, on a machine that gets the daily (or close to daily)\n> updates and has stayed alive near-constantly. Same for some things I run that\n> are less visible to the outside.  So ... \"your mileage may vary\".  CRAN\n> supports \"continuous\" updates just fine. It does it to itself too.\n> \n> Dirk\n>",
+      "body_snippet": "Dr. Eddelbuettel,\n\nThank you for your message, quite reassuring for me. I agree with you, I see no problem in updating frequently the packages I use here. On system, Windows 10, with a good Internet c",
+      "thread_id": "thread-14757d24348c",
+      "thread_depth": 4,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-15e19a086e3e",
+      "message_id": "<EEE080BC-B2E3-413F-857D-B4C4A44C89E2@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-06-09T15:33:59Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<F059D8C5-E6FE-4F60-B38D-4E1492B15337@dcn.davis.ca.us>",
+      "references": [
+        "<mailman.373687.1.1780912801.12811.r-help@r-project.org>",
+        "<6d48bca1-2e87-45d2-b3de-6b8d63f5b41d@infolink.com.br>",
+        "<8887e410-4c85-49d3-b36c-8138d9a91282@gmail.com>",
+        "<3DCD6582-058E-4963-AC3B-F0E537D03FCA@dcn.davis.ca.us>",
+        "<27176.1530.806506.50864@paul.eddelbuettel.com>",
+        "<F059D8C5-E6FE-4F60-B38D-4E1492B15337@dcn.davis.ca.us>"
+      ],
+      "body_plain": "sigh... the missing reference.\n\n[1] https://stackoverflow.com/questions/3463837/is-it-good-practice-to-update-r-packages-often\n\nOn June 9, 2026 7:37:30 AM PDT, Jeff Newmiller via R-help <r-help at r-project.org> wrote:\n>You claim that this position is \"objectively questionable advice\" ... but Stack Overflow moderators concluded that this was an opinion-based argument and shut it down. [1]\n>\n>While CRAN is remarkably robust at ensuring that packages compile and pass checks together, user-facing API changes and behavioral shifts still happen frequently.\n>\n>For an active research project, updating daily introduces unnecessary moving targets. CRAN's strength as a monorepo is excellent for developers, but for end-users running data pipelines, code stability and isolated lockfiles usually trump tracking the bleeding edge. The very stability that you rely on also means that you can also afford to delay updates until you have time to consider the implications of api shifts and algorithm missions that package authors inject on their own schedule.\n>\n>I will take the SO lead and not respond further on this topic.\n>\n>\n>On June 9, 2026 5:24:26 AM PDT, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>>On 8 June 2026 at 06:26, Jeff Newmiller via R-help wrote:\n>>| Don't upgrade packages just because upgrade.packages says there are new packages every day... that way leads to obsessive-compulsive disorder (OCD).\n>>\n>>As a general rule, this is objectively questionable advice.\n>>\n>>CRAN _excels_ at being _always being buildable / installable_.\n>>\n>>To use a software analogy, we could call this 'build at @HEAD' as one would\n>>at a large mono-repo.  Which is what CRAN essentially is.  I have updated\n>>more or less daily / multiple times per week since CRAN started, and I have\n>>done so mostly on Linux where it is \"even more expensive\" as one generally\n>>instals from source (unless newer services like r2u or cran2copr are used).\n>>\n>>But if you know what you are doing, and design you deployments well with\n>>packages you trust, and maybe avoid some others you trust less / have shown a\n>>tendency to change abruptly then this is as stable as it gets. I sometimes\n>>reference some examples for that: CRANberries has been running more-or-less\n>>unalted since 2007, on a machine that gets the daily (or close to daily)\n>>updates and has stayed alive near-constantly. Same for some things I run that\n>>are less visible to the outside.  So ... \"your mileage may vary\".  CRAN\n>>supports \"continuous\" updates just fine. It does it to itself too.\n>>\n>>Dirk\n>>\n>>-- \n>>Dirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n>>\n>>Support my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\n>>https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n>\n>--\n>Sent from my phone. Please excuse my brevity.\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "sigh... the missing reference.\n\n[1] https://stackoverflow.com/questions/3463837/is-it-good-practice-to-update-r-packages-often\n\nOn June 9, 2026 7:37:30 AM PDT, Jeff Newmiller via R-help <r-help at r-p",
+      "thread_id": "thread-14757d24348c",
+      "thread_depth": 5,
+      "month": "2026-06"
     }
   ],
   "threads": [
@@ -436,15 +609,16 @@
     {
       "id": "thread-14757d24348c",
       "subject": "issue with update.packages(), library 'utils'",
-      "message_count": 7,
+      "message_count": 11,
       "participants": [
+        "Dirk Eddelbuettel",
         "Duncan Murdoch",
         "Jeff Newmiller",
         "Karl Schilling",
         "Paulo Barata"
       ],
       "started": "2026-06-08T11:40:42Z",
-      "last_reply": "2026-06-08T14:39:04Z",
+      "last_reply": "2026-06-09T15:33:59Z",
       "root_message_id": "msg-14757d24348c"
     },
     {
@@ -457,6 +631,40 @@
       "started": "2026-06-08T16:16:26Z",
       "last_reply": "2026-06-08T16:16:26Z",
       "root_message_id": "msg-a1c6c43dd7cf"
+    },
+    {
+      "id": "thread-3f5cc6ee3131",
+      "subject": "issue with update.packages(), library 'utils'",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Karl Schilling"
+      ],
+      "started": "2026-06-09T09:27:10Z",
+      "last_reply": "2026-06-09T10:34:49Z",
+      "root_message_id": "msg-3f5cc6ee3131"
+    },
+    {
+      "id": "thread-2b80c946c0b2",
+      "subject": "issue with update.packages(), library 'utils'",
+      "message_count": 1,
+      "participants": [
+        "Hooiveld, Guido"
+      ],
+      "started": "2026-06-09T11:24:44Z",
+      "last_reply": "2026-06-09T11:24:44Z",
+      "root_message_id": "msg-2b80c946c0b2"
+    },
+    {
+      "id": "thread-9fad25e691d9",
+      "subject": "ggplot's subtitle with table",
+      "message_count": 1,
+      "participants": [
+        "Andre Luiz Tietbohl Ramos"
+      ],
+      "started": "2026-06-09T13:53:44Z",
+      "last_reply": "2026-06-09T13:53:44Z",
+      "root_message_id": "msg-9fad25e691d9"
     }
   ]
 }
