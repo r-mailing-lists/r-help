@@ -555,6 +555,40 @@
       "thread_id": "thread-14757d24348c",
       "thread_depth": 5,
       "month": "2026-06"
+    },
+    {
+      "id": "msg-ebf5dda9c55b",
+      "message_id": "<C58309A7-3E48-478B-A72A-75605270E6F7@plessthan.com>",
+      "from_name": "Dennis Fisher",
+      "from_email_hash": "c64f7088de55343836d760501b04ec8532f47c6f36f47cd0a885818bf5422e43",
+      "date": "2026-06-10T19:23:28Z",
+      "subject": "[R] Converting numerics to date format",
+      "subject_clean": "Converting numerics to date format",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "R 4.6.2\nOS X\n\nColleagues,\n\nI am having a problem with conversion of a numeric to date format.  In the example shown below, the first column is the original date value.\n\nThe second column is the conversion to numeric.\n\nIn the third column, I add 0.5 to the second column.\n\nThe fourth column converts the third column back to a date format using the following code:\nFORMAT                          <- \"%d-%b-%Y %H:%M\"\nSECPERDAY                       <- 24 * 60 * 60\nSUBSUB <- structure(list(PKDOSDTC_PM_RAW = c(\"06-Apr-2025 10:30\", \"10-Dec-2025 07:15\",  \"11-May-2025 07:30\", \"16-Mar-2025 08:00\", \"11-May-2025 08:00\",  \"16-Mar-2025 08:00\", \"22-Sep-2024 09:00\", \"11-Aug-2025 09:00\",  \"20-Oct-2024 08:00\", \"14-Jan-2026 10:00\", \"03-Nov-2025 08:00\"\n), PM.ELAPSED = c(20184.438, 20432.302, 20219.312, 20163.333,  20219.333, 20163.333, 19988.375, 20311.375, 20016.333, 20467.417,  20395.333), FIX.PM.ELAPSED = c(20184.938, 20432.802, 20219.812,  20163.833, 20219.833, 20163.833, 19988.875, 20311.875, 20016.833,  20467.917, 20395.833), FIX.PM.RAW = c(\"06-Apr-2025 15:30\", \"10-Dec-2025 11:15\",  \"11-May-2025 12:30\", \"16-Mar-2025 13:00\", \"11-May-2025 13:00\",  \"16-Mar-2025 13:00\", \"22-Sep-2024 14:00\", \"11-Aug-2025 14:00\",  \"20-Oct-2024 13:00\", \"14-Jan-2026 14:00\", \"03-Nov-2025 12:00\"\n)), row.names = c(36L, 71L, 120L, 183L, 253L, 288L, 316L, 400L,  414L, 505L, 519L), class = \"data.frame\")\nSUBSUB$REVISED                  <- format.Date(SUBSUB$nREVISED * SECPERDAY, format=FORMAT)\n\nNote the following:\n\t1.  nREVISED is 0.5 larger than nORIGINAL, i.e., 12 hours\n\t2.  the difference between REVISED and ORIGINAL is either 4 or 5 hours -- I intended it to be 12 hours.\n\nThe discrepancy of 8 or 7 hours (12 - [4 or 5]) suggests to me that the problem involves time times; the occurrence of 4 vs. 5 is presumably due to daylight savings time (PST vs. PDT).\n\nI suspect that the problem can be solved by adding TZ to the code and possibly origin.  But various attempts to do this all fail.\n\nAny suggestions?\n\nDennis\n\nDennis Fisher MD\nP < (The \"P Less Than\" Company)\nPhone: 415 307-4791\nwww.PLessThan.com\n\n             ORIGINAL nORIGINAL nREVISED           REVISED\n36  06-Apr-2025 10:30  20184.44 20184.94 06-Apr-2025 15:30\n71  10-Dec-2025 07:15  20432.30 20432.80 10-Dec-2025 11:15\n120 11-May-2025 07:30  20219.31 20219.81 11-May-2025 12:30\n183 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00\n253 11-May-2025 08:00  20219.33 20219.83 11-May-2025 13:00\n288 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00\n316 22-Sep-2024 09:00  19988.38 19988.88 22-Sep-2024 14:00\n400 11-Aug-2025 09:00  20311.38 20311.88 11-Aug-2025 14:00\n414 20-Oct-2024 08:00  20016.33 20016.83 20-Oct-2024 13:00\n505 14-Jan-2026 10:00  20467.42 20467.92 14-Jan-2026 14:00\n519 03-Nov-2025 08:00  20395.33 20395.83 03-Nov-2025 12:00",
+      "body_snippet": "R 4.6.2\nOS X\n\nColleagues,\n\nI am having a problem with conversion of a numeric to date format.  In the example shown below, the first column is the original date value.\n\nThe second column is the conver",
+      "thread_id": "thread-ebf5dda9c55b",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-0d77b838f19a",
+      "message_id": "<CADsG8gM_Bkj-TryEiaKreB8z2YH2ZPG+j5v7cAiHe6uPaU+OAw@mail.gmail.com>",
+      "from_name": "Huzefa Khalil",
+      "from_email_hash": "7447293f691817fdbcb3554791cb7ddddbbd63eec16a936e088fc1463960bea9",
+      "date": "2026-06-10T19:53:10Z",
+      "subject": "[R] Converting numerics to date format",
+      "subject_clean": "Converting numerics to date format",
+      "in_reply_to": "<C58309A7-3E48-478B-A72A-75605270E6F7@plessthan.com>",
+      "references": [
+        "<C58309A7-3E48-478B-A72A-75605270E6F7@plessthan.com>"
+      ],
+      "body_plain": "Perhaps something like this?\n\nas.POSIXct(SUBSUB$PKDOSDTC_PM_RAW, format = \"%d-%b-%Y %H:%M\") + 12 * 60 * 60\n\nOn Wed, Jun 10, 2026 at 3:24?PM Dennis Fisher <fisher at plessthan.com> wrote:\n>\n> R 4.6.2\n> OS X\n>\n> Colleagues,\n>\n> I am having a problem with conversion of a numeric to date format.  In the example shown below, the first column is the original date value.\n>\n> The second column is the conversion to numeric.\n>\n> In the third column, I add 0.5 to the second column.\n>\n> The fourth column converts the third column back to a date format using the following code:\n> FORMAT                          <- \"%d-%b-%Y %H:%M\"\n> SECPERDAY                       <- 24 * 60 * 60\n> SUBSUB <- structure(list(PKDOSDTC_PM_RAW = c(\"06-Apr-2025 10:30\", \"10-Dec-2025 07:15\",  \"11-May-2025 07:30\", \"16-Mar-2025 08:00\", \"11-May-2025 08:00\",  \"16-Mar-2025 08:00\", \"22-Sep-2024 09:00\", \"11-Aug-2025 09:00\",  \"20-Oct-2024 08:00\", \"14-Jan-2026 10:00\", \"03-Nov-2025 08:00\"\n> ), PM.ELAPSED = c(20184.438, 20432.302, 20219.312, 20163.333,  20219.333, 20163.333, 19988.375, 20311.375, 20016.333, 20467.417,  20395.333), FIX.PM.ELAPSED = c(20184.938, 20432.802, 20219.812,  20163.833, 20219.833, 20163.833, 19988.875, 20311.875, 20016.833,  20467.917, 20395.833), FIX.PM.RAW = c(\"06-Apr-2025 15:30\", \"10-Dec-2025 11:15\",  \"11-May-2025 12:30\", \"16-Mar-2025 13:00\", \"11-May-2025 13:00\",  \"16-Mar-2025 13:00\", \"22-Sep-2024 14:00\", \"11-Aug-2025 14:00\",  \"20-Oct-2024 13:00\", \"14-Jan-2026 14:00\", \"03-Nov-2025 12:00\"\n> )), row.names = c(36L, 71L, 120L, 183L, 253L, 288L, 316L, 400L,  414L, 505L, 519L), class = \"data.frame\")\n> SUBSUB$REVISED                  <- format.Date(SUBSUB$nREVISED * SECPERDAY, format=FORMAT)\n>\n> Note the following:\n>         1.  nREVISED is 0.5 larger than nORIGINAL, i.e., 12 hours\n>         2.  the difference between REVISED and ORIGINAL is either 4 or 5 hours -- I intended it to be 12 hours.\n>\n> The discrepancy of 8 or 7 hours (12 - [4 or 5]) suggests to me that the problem involves time times; the occurrence of 4 vs. 5 is presumably due to daylight savings time (PST vs. PDT).\n>\n> I suspect that the problem can be solved by adding TZ to the code and possibly origin.  But various attempts to do this all fail.\n>\n> Any suggestions?\n>\n> Dennis\n>\n> Dennis Fisher MD\n> P < (The \"P Less Than\" Company)\n> Phone: 415 307-4791\n> www.PLessThan.com\n>\n>              ORIGINAL nORIGINAL nREVISED           REVISED\n> 36  06-Apr-2025 10:30  20184.44 20184.94 06-Apr-2025 15:30\n> 71  10-Dec-2025 07:15  20432.30 20432.80 10-Dec-2025 11:15\n> 120 11-May-2025 07:30  20219.31 20219.81 11-May-2025 12:30\n> 183 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00\n> 253 11-May-2025 08:00  20219.33 20219.83 11-May-2025 13:00\n> 288 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00\n> 316 22-Sep-2024 09:00  19988.38 19988.88 22-Sep-2024 14:00\n> 400 11-Aug-2025 09:00  20311.38 20311.88 11-Aug-2025 14:00\n> 414 20-Oct-2024 08:00  20016.33 20016.83 20-Oct-2024 13:00\n> 505 14-Jan-2026 10:00  20467.42 20467.92 14-Jan-2026 14:00\n> 519 03-Nov-2025 08:00  20395.33 20395.83 03-Nov-2025 12:00\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Perhaps something like this?\n\nas.POSIXct(SUBSUB$PKDOSDTC_PM_RAW, format = \"%d-%b-%Y %H:%M\") + 12 * 60 * 60\n\nOn Wed, Jun 10, 2026 at 3:24?PM Dennis Fisher <fisher at plessthan.com> wrote:\n>\n> R 4.6.2\n>",
+      "thread_id": "thread-ebf5dda9c55b",
+      "thread_depth": 1,
+      "month": "2026-06"
     }
   ],
   "threads": [
@@ -665,6 +699,18 @@
       "started": "2026-06-09T13:53:44Z",
       "last_reply": "2026-06-09T13:53:44Z",
       "root_message_id": "msg-9fad25e691d9"
+    },
+    {
+      "id": "thread-ebf5dda9c55b",
+      "subject": "Converting numerics to date format",
+      "message_count": 2,
+      "participants": [
+        "Dennis Fisher",
+        "Huzefa Khalil"
+      ],
+      "started": "2026-06-10T19:23:28Z",
+      "last_reply": "2026-06-10T19:53:10Z",
+      "root_message_id": "msg-ebf5dda9c55b"
     }
   ]
 }
