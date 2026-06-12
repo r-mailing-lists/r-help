@@ -5973,3 +5973,104 @@ On Wed, Jun 10, 2026 at 3:24?PM Dennis Fisher <fisher at plessthan.com> wrote:
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From r-@nnounce @end|ng |rom r-project@org  Thu Jun 11 15:32:14 2026
+From: r-@nnounce @end|ng |rom r-project@org (Peter Dalgaard via R-announce)
+Date: Thu, 11 Jun 2026 13:32:14 +0000
+Subject: [R] [Rd] R 4.6.1 scheduled for June 24
+Message-ID: <044F49BC-5016-4DE5-AFDF-B3EA55145371@cbs.dk>
+
+Full schedule is available on developer.r-project.org (pending update from SVN).
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+_______________________________________________
+R-announce at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-announce
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Thu Jun 11 16:54:36 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Thu, 11 Jun 2026 07:54:36 -0700
+Subject: [R] Converting numerics to date format
+In-Reply-To: <C58309A7-3E48-478B-A72A-75605270E6F7@plessthan.com>
+References: <C58309A7-3E48-478B-A72A-75605270E6F7@plessthan.com>
+Message-ID: <A36E9B65-02E9-4E21-B415-A17830CF9FDB@dcn.davis.ca.us>
+
+You have not communicated why you are dealing with numeric values at all, which makes coming up with a robust solution difficult.
+
+POSIXc always assumes a representation of time internally as UTC seconds since 1970-01-01 and relies on the time zone library to handle presentation in other time zones.
+
+Julian date is an astronomical time convention of fractional days that puts the integers at local noon to avoid confusion as to the "date" when reporting events in the night sky. I have no idea if this is related to your problem, since traditional JD values use an epoch a few thousand years ago by "convention" but there are various "convenience" variations that use more recent epochs so the numbers are smaller. 
+
+If you are starting in a local time representation and ending in that same local time representation then you can reference "UTC" purely because R will then not adjust the displayed time representation.
+
+Here is a template for doing this conversion... if this is not what you are looking for then we would need to know more about your actual data source and intended usage.
+
+SUBSUB$REVISED <- format( as.POSIXct(SUBSUB$FIX.PM.ELAPSED * SECPERDAY, origin = "1970-01-01", tz = "UTC"), format = FORMAT )
+
+On June 10, 2026 12:23:28 PM PDT, Dennis Fisher <fisher at plessthan.com> wrote:
+>R 4.6.2
+>OS X
+>
+>Colleagues,
+>
+>I am having a problem with conversion of a numeric to date format.  In the example shown below, the first column is the original date value.
+>
+>The second column is the conversion to numeric.
+>
+>In the third column, I add 0.5 to the second column.
+>
+>The fourth column converts the third column back to a date format using the following code:
+>FORMAT                          <- "%d-%b-%Y %H:%M"
+>SECPERDAY                       <- 24 * 60 * 60
+>SUBSUB <- structure(list(PKDOSDTC_PM_RAW = c("06-Apr-2025 10:30", "10-Dec-2025 07:15",  "11-May-2025 07:30", "16-Mar-2025 08:00", "11-May-2025 08:00",  "16-Mar-2025 08:00", "22-Sep-2024 09:00", "11-Aug-2025 09:00",  "20-Oct-2024 08:00", "14-Jan-2026 10:00", "03-Nov-2025 08:00"
+>), PM.ELAPSED = c(20184.438, 20432.302, 20219.312, 20163.333,  20219.333, 20163.333, 19988.375, 20311.375, 20016.333, 20467.417,  20395.333), FIX.PM.ELAPSED = c(20184.938, 20432.802, 20219.812,  20163.833, 20219.833, 20163.833, 19988.875, 20311.875, 20016.833,  20467.917, 20395.833), FIX.PM.RAW = c("06-Apr-2025 15:30", "10-Dec-2025 11:15",  "11-May-2025 12:30", "16-Mar-2025 13:00", "11-May-2025 13:00",  "16-Mar-2025 13:00", "22-Sep-2024 14:00", "11-Aug-2025 14:00",  "20-Oct-2024 13:00", "14-Jan-2026 14:00", "03-Nov-2025 12:00"
+>)), row.names = c(36L, 71L, 120L, 183L, 253L, 288L, 316L, 400L,  414L, 505L, 519L), class = "data.frame")
+>SUBSUB$REVISED                  <- format.Date(SUBSUB$nREVISED * SECPERDAY, format=FORMAT)
+>
+>Note the following:
+>	1.  nREVISED is 0.5 larger than nORIGINAL, i.e., 12 hours
+>	2.  the difference between REVISED and ORIGINAL is either 4 or 5 hours -- I intended it to be 12 hours.
+>
+>The discrepancy of 8 or 7 hours (12 - [4 or 5]) suggests to me that the problem involves time times; the occurrence of 4 vs. 5 is presumably due to daylight savings time (PST vs. PDT).
+>
+>I suspect that the problem can be solved by adding TZ to the code and possibly origin.  But various attempts to do this all fail.
+>
+>Any suggestions?
+>
+>Dennis
+>
+>Dennis Fisher MD
+>P < (The "P Less Than" Company)
+>Phone: 415 307-4791
+>www.PLessThan.com
+>
+>             ORIGINAL nORIGINAL nREVISED           REVISED
+>36  06-Apr-2025 10:30  20184.44 20184.94 06-Apr-2025 15:30
+>71  10-Dec-2025 07:15  20432.30 20432.80 10-Dec-2025 11:15
+>120 11-May-2025 07:30  20219.31 20219.81 11-May-2025 12:30
+>183 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00
+>253 11-May-2025 08:00  20219.33 20219.83 11-May-2025 13:00
+>288 16-Mar-2025 08:00  20163.33 20163.83 16-Mar-2025 13:00
+>316 22-Sep-2024 09:00  19988.38 19988.88 22-Sep-2024 14:00
+>400 11-Aug-2025 09:00  20311.38 20311.88 11-Aug-2025 14:00
+>414 20-Oct-2024 08:00  20016.33 20016.83 20-Oct-2024 13:00
+>505 14-Jan-2026 10:00  20467.42 20467.92 14-Jan-2026 14:00
+>519 03-Nov-2025 08:00  20395.33 20395.83 03-Nov-2025 12:00
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
