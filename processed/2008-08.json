@@ -1756,22 +1756,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-b6532bfe339a",
-      "message_id": "<1217616309.489359b571609@webmail.cryst.bbk.ac.uk>",
-      "from_name": "Eleni Rapsomaniki",
-      "from_email_hash": "7f7f741fc266ddf025ed82668ea3722b35b5be969774b92990ee62b52d7c2dbf",
-      "date": "2008-08-01T18:45:09Z",
-      "subject": "[R] correlation between rows of data.frame",
-      "subject_clean": "correlation between rows of data.frame",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 columns). The pairs of rows between which I want to\nfind the correlation share a common value in one of the columns. So for\nexample,\nin the following \n x=data.frame(id=rep(sample(1:100000,size=10000),2),a=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),b=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),c=sample(c(NA,rnorm(10,0,1)),size=10000, replace=T))\nx$id=factor(x$id)\n\nI would want to compute the correlation between the two rows (for cols a,b,c)\nthat share the same\nid. Using a for loop and dist() works but takes a long time (>1 hour, my RAM is\n1Gb):\np=NULL\n for(i in levels(x$id)){p[[i]]=dist(x[x$id==i, -1])}\n\nIs there a more efficient way? I thought about apply/sapply etc but I don't\nthink they'll work for rows and can't think of an intelligent way to make them\nwork!\nThe second problem is that I also need to know how many degrees of freedom (ie\nnon missing pairs of values) were used in each correlation. Is there a way to\nalso do this efficiently?\n\nI hope this makes sense! Thank you all very much in advance!\n\nEleni",
-      "body_snippet": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 co",
-      "thread_id": "thread-b6532bfe339a",
-      "thread_depth": 0,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-f392b0061873",
       "message_id": "<C910044E427B6C43A2C7E3103436D69206EEF60E@0015-its-exmb02.us.saic.com>",
       "from_name": "Messing, Solomon O.",
@@ -1784,6 +1768,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080801/a5f85af2/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080801/a5f85af2/attachment.pl>",
       "thread_id": "thread-f392b0061873",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-b6532bfe339a",
+      "message_id": "<1217616309.489359b571609@webmail.cryst.bbk.ac.uk>",
+      "from_name": "Eleni Rapsomaniki",
+      "from_email_hash": "7f7f741fc266ddf025ed82668ea3722b35b5be969774b92990ee62b52d7c2dbf",
+      "date": "2008-08-01T18:45:09Z",
+      "subject": "[R] correlation between rows of data.frame",
+      "subject_clean": "correlation between rows of data.frame",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 columns). The pairs of rows between which I want to\nfind the correlation share a common value in one of the columns. So for\nexample,\nin the following \n x=data.frame(id=rep(sample(1:100000,size=10000),2),a=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),b=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),c=sample(c(NA,rnorm(10,0,1)),size=10000, replace=T))\nx$id=factor(x$id)\n\nI would want to compute the correlation between the two rows (for cols a,b,c)\nthat share the same\nid. Using a for loop and dist() works but takes a long time (>1 hour, my RAM is\n1Gb):\np=NULL\n for(i in levels(x$id)){p[[i]]=dist(x[x$id==i, -1])}\n\nIs there a more efficient way? I thought about apply/sapply etc but I don't\nthink they'll work for rows and can't think of an intelligent way to make them\nwork!\nThe second problem is that I also need to know how many degrees of freedom (ie\nnon missing pairs of values) were used in each correlation. Is there a way to\nalso do this efficiently?\n\nI hope this makes sense! Thank you all very much in advance!\n\nEleni",
+      "body_snippet": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 co",
+      "thread_id": "thread-b6532bfe339a",
       "thread_depth": 0,
       "month": "2008-08"
     },
