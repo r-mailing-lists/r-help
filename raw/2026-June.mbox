@@ -6098,3 +6098,148 @@ R-announce at r-project.org mailing list
 https://stat.ethz.ch/mailman/listinfo/r-announce
 
 
+From r-@nnounce @end|ng |rom r-project@org  Wed Jun 24 10:04:34 2026
+From: r-@nnounce @end|ng |rom r-project@org (Peter Dalgaard via R-announce)
+Date: Wed, 24 Jun 2026 08:04:34 +0000
+Subject: [R] [Rd] R 4.6.1 is released
+Message-ID: <DD90B633-6326-451C-9E9F-37281945970D@cbs.dk>
+
+The build system rolled up R-4.6.1.tar.gz and .xz (codename ?Happy Hop") this morning.
+
+This is a patch release with a handful of minor changes and fixups.
+
+The list below details the changes in this release. 
+
+You can get the source code from
+
+https://cran.r-project.org/src/base/R-4/R-4.6.1.tar.gz
+https://cran.r-project.org/src/base/R-4/R-4.6.1.tar.xz
+
+or wait for it to be mirrored at a CRAN site nearer to you.
+
+Binaries for various platforms will appear in due course. 
+
+
+For the R Core Team,
+
+Peter Dalgaard
+
+
+These are the checksums (md5 and SHA-256) for the freshly created files, in case you wish
+to check that they are uncorrupted:
+
+MD5 (AUTHORS) = 7ab0813e28f062830cc05a0eedfb3ac8
+MD5 (build-dist.log) = 602f94fa300248879a0480ae2f2e6965
+MD5 (COPYING) = eb723b61539feef013de476e68b5c50a
+MD5 (COPYING.LIB) = a6f89e2100d9b6cdffcea4f398e37343
+MD5 (FAQ) = 2413e1c0656ff5ca4350f976342b19ef
+MD5 (INSTALL) = 7893f754308ca31f1ccf62055090ad7b
+MD5 (NEWS) = cb257a7286f3628b743f4ed9c7aa6a97
+MD5 (NEWS.0) = bfcd7c147251b5474d96848c6f57e5a8
+MD5 (NEWS.1) = d7b8f0e6f33da0b7a494754d6e57c758
+MD5 (NEWS.2) = 5dde8d18a120467629fbe83cc6e3b78a
+MD5 (NEWS.3) = eda6ceb67e7ada03d7d9b76368083845
+MD5 (R-latest.tar.gz) = 3e7d73c7259bdfb9cfe4c42c0a12edb5
+MD5 (R-latest.tar.xz) = 80aff37b823ea76453e3d334ca9caf0d
+MD5 (README) = e8e5ee38544d34409177cd479025fe66
+MD5 (RESOURCES) = 5949c86e75c813f8f6ebc420aae46881
+MD5 (THANKS) = 61d146aa6a2cf5999295b2fb340991c1
+MD5 (VERSION-INFO.dcf) = aec22ecae2c9901dc6b5cb6dc0336ef7
+MD5 (R-4/R-4.6.1.tar.gz) = 3e7d73c7259bdfb9cfe4c42c0a12edb5
+MD5 (R-4/R-4.6.1.tar.xz) = 80aff37b823ea76453e3d334ca9caf0d
+
+49a1f2d203a02bd290c177c0c5653835c654e500a6178f1cb87d514d7f68f013  AUTHORS
+448b41cf98847e9af79f2130681729a333819a0baba4af2e80998be3d87aacb2  build-dist.log
+e6d6a009505e345fe949e1310334fcb0747f28dae2856759de102ab66b722cb4  COPYING
+6095e9ffa777dd22839f7801aa845b31c9ed07f3d6bf8a26dc5d2dec8ccc0ef3  COPYING.LIB
+5b4c9ea177b7a31f9d196daebc98816a71265d5fe0f7e718722cd690fb4bffee  FAQ
+f87461be6cbaecc4dce44ac58e5bd52364b0491ccdadaf846cb9b452e9550f31  INSTALL
+da302af97ff6915af428ad289caa868a975553c77ec65cac3d925453c51b4de0  NEWS
+4e21b62f515b749f80997063fceab626d7258c7d650e81a662ba8e0640f12f62  NEWS.0
+a82ce6553df1b9ea757b392c1252c53a8bba96c8226cf9654fe785173b843860  NEWS.1
+9ff6f9977b29d4930b7e4c41ab480acdfa3dc40fa89f2dea9e13b73ecc6a49f8  NEWS.2
+ae435e8d76ceae278e4cce5243933ade35825f870e0365675a641a6dfc745ace  NEWS.3
+4da6e61d2c0aac5f14a2e7e432cb5fcc269efe83da4293050ba7f03dff4e2cf4  R-latest.tar.gz
+e4149581e151f3f1bc5edd6475e24ca1e2f452c08b6a22c29b570ce8abfe5783  R-latest.tar.xz
+f5aa875c23185cbfc3a50739d7295b0caba2cf0e38ba082850be338cc9541154  README
+5e7ddf7349ada12c8142c42bac955835efd1768978cb476b61a3b53255442b24  RESOURCES
+1d5064c86b6813865a033763f43212064c0a67ef05f5af13b13c4feb08264a33  THANKS
+36977395675edcc679115b3535a5e3305a54d0717b63114422cb264b4e764913  VERSION-INFO.dcf
+4da6e61d2c0aac5f14a2e7e432cb5fcc269efe83da4293050ba7f03dff4e2cf4  R-4/R-4.6.1.tar.gz
+e4149581e151f3f1bc5edd6475e24ca1e2f452c08b6a22c29b570ce8abfe5783  R-4/R-4.6.1.tar.xz
+
+This is the relevant part of the NEWS file
+
+Changes in R 4.6.1:
+
+  New Features:
+
+    ? The LaTeX class jss bundled in share/texmf/tex/latex/jss.cls has
+      been updated to work with hyperref version 7.01q (2026/04/24).
+
+    ? Plain-text (and legacy HTML) conversion for a simple Rd \eqn{}
+      now handles \geq, \leq, \neq and \ne in addition to \ge and \le
+      (PR#19070).
+
+  Bug Fixes:
+
+    ? abbreviate(<non-ASCII>) now works better, using iswlower() and
+      *upper() to treat ?wide? characters, thanks to Kevin's PR#19058.
+
+    ? cut(1:11, {}) now signals an error for the invalid breaks, fixing
+      PR#19057, thanks to Kevin Ushey.
+
+    ? all(<symbol>) signals an error now, as some similar coercions;
+      previously, the coercion of the symbol resulted in NULL
+      internally, raised a warning, and could access illegal memory;
+      thanks to Kevin Ushey's PR#19054.
+
+    ? stl() now checks its 3 x 3 tuning parameters on the R level;
+      stl(*, s.window = 0) now ?works? instead dumping core, stl(*,
+      s.window = 1) ?works? correctly, too.  Also, the summary() method
+      mentions the robustness weights only if any robustness iterations
+      happened.
+
+      Further, stl() is now based on C code, translated from previous
+      Fortran, triggered by a flang 22 compiler optimization bug (-O2).
+
+    ? The border case zapsmall(x, digits=Inf) where x contains an Inf
+      entry no longer returns all NaN but rather x.  The improved help
+      page now has more non-default examples.
+
+    ? wilcox.test(x, exact=FALSE, correct = k)'s p-value computation
+      got a missing dnorm(z) factor, and so did the 2-sample case, in
+      addition to more fixes.
+
+    ? The data part of getGenerics() listed package names for generic
+      functions defined in more than one package.  Now it lists generic
+      function names, as intended.  Thanks to Michael Chirico for
+      report and patch proposal (PR#19080).
+
+    ? Overly long dyn.load() error messages (C level dlerror()), should
+      no longer corrupt its state, thanks to Ivan Krylov's PR#19029
+      report and patch.
+
+    ? as.matrix(<POSIXlt>) again produces a _numeric_ matrix, and the
+      c() and subassignment methods for POSIXlt objects work correctly
+      more often, e.g., without a "tzone" attribute, back porting a few
+      of the PR#18989 fixes from R-devel, both thanks to Suharto
+      Anggono.
+
+    ? In methods, as() now correctly coerces S4 objects to S4
+      superclasses extending old-style classes, instead of returning
+      only the S3 part.
+
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+_______________________________________________
+R-announce at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-announce
+

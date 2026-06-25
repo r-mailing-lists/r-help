@@ -1632,24 +1632,6 @@
       "month": "2012-07"
     },
     {
-      "id": "msg-84b3de20e1f0",
-      "message_id": "<OFE2817B48.4D3D81D7-ON86257A2F.0048CEFE-86257A2F.00493AE4@usgs.gov>",
-      "from_name": "Jean V Adams",
-      "from_email_hash": "b0a0a120a933c9f22a721edfedacedb8be80a53ef46367c1c4d59470648f3a0b",
-      "date": "2012-07-02T13:19:40Z",
-      "subject": "[R] apply with multiple conditions",
-      "subject_clean": "apply with multiple conditions",
-      "in_reply_to": "<1341228313673-4635098.post@n4.nabble.com>",
-      "references": [
-        "<1341228313673-4635098.post@n4.nabble.com>"
-      ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120702/0050823d/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120702/0050823d/attachment.pl>",
-      "thread_id": "thread-8abf0c155c48",
-      "thread_depth": 1,
-      "month": "2012-07"
-    },
-    {
       "id": "msg-47a55c103db5",
       "message_id": "<CAAxdm-48brS-KtCPqvzdmw9uMELXWz+CVr3Gco3mgXk+QM=5NQ@mail.gmail.com>",
       "from_name": "jim holtman",
@@ -1667,6 +1649,24 @@
       "body_snippet": "In order to do any conversion, you have to know the format of the data\nthat is being input.  So which is it:  does 52 represent the day of\nthe year, or the week of the year?  Does make a big differenc",
       "thread_id": "thread-6d605ab071b5",
       "thread_depth": 3,
+      "month": "2012-07"
+    },
+    {
+      "id": "msg-84b3de20e1f0",
+      "message_id": "<OFE2817B48.4D3D81D7-ON86257A2F.0048CEFE-86257A2F.00493AE4@usgs.gov>",
+      "from_name": "Jean V Adams",
+      "from_email_hash": "b0a0a120a933c9f22a721edfedacedb8be80a53ef46367c1c4d59470648f3a0b",
+      "date": "2012-07-02T13:19:40Z",
+      "subject": "[R] apply with multiple conditions",
+      "subject_clean": "apply with multiple conditions",
+      "in_reply_to": "<1341228313673-4635098.post@n4.nabble.com>",
+      "references": [
+        "<1341228313673-4635098.post@n4.nabble.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120702/0050823d/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120702/0050823d/attachment.pl>",
+      "thread_id": "thread-8abf0c155c48",
+      "thread_depth": 1,
       "month": "2012-07"
     },
     {
@@ -4325,6 +4325,22 @@
       "month": "2012-07"
     },
     {
+      "id": "msg-3cf5358fc1a0",
+      "message_id": "<1341331470144-4635298.post@n4.nabble.com>",
+      "from_name": "Filoche",
+      "from_email_hash": "9379ca17f5910e538d91b7eea5a7a67f4bc5d68c45cbb8c94854935713ddf5db",
+      "date": "2012-07-03T16:04:30Z",
+      "subject": "[R] Data manipulation with aggregate",
+      "subject_clean": "Data manipulation with aggregate",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone.\n\nI have these data :\n\nmyData = data.frame(Name = c('a', 'a', 'b', 'b'), length = c(1,2,3,4), type\n= c('x','x','y','z'))\n\nwhich gives me:\n\n  Name length type\n1    a      1    x\n2    a      2    x\n3    b      3    y\n4    b      4   z\n\nI would group (mean) this DF using 'Name' as grouping factor. However, I\nhave a field ('type') which is a string. I would like to use the unique\nvalue of this field when possible (i.e. when all the 'type' values are the\nsame for each group) or replace with NA when 'type' has multiple values.\n\nIn fact, I would like to obtain this:\n\n  Name length type\n1    a      1.5    x\n2    b      3.5    NA\n\nFor instance, I was using this command:\n\naggregate(list(myData$length, myData$type), list(myData$Name), FUN = mean)\n\nBut it can't deal with string data.\n\nI hope I have been clear enough.\n\nWith regards,\nPhil\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Data-manipulation-with-aggregate-tp4635298.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi everyone.\n\nI have these data :\n\nmyData = data.frame(Name = c('a', 'a', 'b', 'b'), length = c(1,2,3,4), type\n= c('x','x','y','z'))\n\nwhich gives me:\n\n  Name length type\n1    a      1    x\n2    a     ",
+      "thread_id": "thread-3cf5358fc1a0",
+      "thread_depth": 0,
+      "month": "2012-07"
+    },
+    {
       "id": "msg-b57f8541eadb",
       "message_id": "<4FF3180E.3070305@sapo.pt>",
       "from_name": "Rui Barradas",
@@ -4340,22 +4356,6 @@
       "body_snippet": "Hello,\n\nThe trick is to use seq() for date classes.\nFirst of all, when creating data.frames use stringsAsFactors=FALSE, in \norder not to convert them to factors. I've added this option to your \ndata.f",
       "thread_id": "thread-10635df13dba",
       "thread_depth": 1,
-      "month": "2012-07"
-    },
-    {
-      "id": "msg-3cf5358fc1a0",
-      "message_id": "<1341331470144-4635298.post@n4.nabble.com>",
-      "from_name": "Filoche",
-      "from_email_hash": "9379ca17f5910e538d91b7eea5a7a67f4bc5d68c45cbb8c94854935713ddf5db",
-      "date": "2012-07-03T16:04:30Z",
-      "subject": "[R] Data manipulation with aggregate",
-      "subject_clean": "Data manipulation with aggregate",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi everyone.\n\nI have these data :\n\nmyData = data.frame(Name = c('a', 'a', 'b', 'b'), length = c(1,2,3,4), type\n= c('x','x','y','z'))\n\nwhich gives me:\n\n  Name length type\n1    a      1    x\n2    a      2    x\n3    b      3    y\n4    b      4   z\n\nI would group (mean) this DF using 'Name' as grouping factor. However, I\nhave a field ('type') which is a string. I would like to use the unique\nvalue of this field when possible (i.e. when all the 'type' values are the\nsame for each group) or replace with NA when 'type' has multiple values.\n\nIn fact, I would like to obtain this:\n\n  Name length type\n1    a      1.5    x\n2    b      3.5    NA\n\nFor instance, I was using this command:\n\naggregate(list(myData$length, myData$type), list(myData$Name), FUN = mean)\n\nBut it can't deal with string data.\n\nI hope I have been clear enough.\n\nWith regards,\nPhil\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Data-manipulation-with-aggregate-tp4635298.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi everyone.\n\nI have these data :\n\nmyData = data.frame(Name = c('a', 'a', 'b', 'b'), length = c(1,2,3,4), type\n= c('x','x','y','z'))\n\nwhich gives me:\n\n  Name length type\n1    a      1    x\n2    a     ",
-      "thread_id": "thread-3cf5358fc1a0",
-      "thread_depth": 0,
       "month": "2012-07"
     },
     {
@@ -16430,6 +16430,24 @@
       "month": "2012-07"
     },
     {
+      "id": "msg-6e455bdb0c0c",
+      "message_id": "<1341942761.33498.YahooMailNeo@web39401.mail.mud.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-07-10T17:52:41Z",
+      "subject": "[R] calculating the difference between days?",
+      "subject_clean": "calculating the difference between days?",
+      "in_reply_to": "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>",
+      "references": [
+        "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000????? 02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n\",sep=\"\",header=TRUE)\n\ndat3$Begin_date<-strptime(dat3[,1],format=\"%d%b%Y:%H:%M:%S\")\ndat3$End_date<-strptime(dat3[,2],format=\"%d%b%Y:%H:%M:%S\")\n\n?difftime(dat3[,1],dat3[,2])\nTime differences in days\n[1] -763.0000? -55.0000 -124.0417? -32.0000? -32.0000\nattr(,\"tzone\")\n[1] \"\"\n\nA.K.\n\n----- Original Message -----\nFrom: C W <tmrsg11 at gmail.com>\nTo: r-help <r-help at r-project.org>\nCc: \nSent: Tuesday, July 10, 2012 1:22 PM\nSubject: [R] calculating the difference between days?\n\nHi List,\n\nI have one column of beginning dates and one column of ending dates, I want\nto find their difference.? And I want to ignore the trailing zeros,\nbasically everything after the first colon mark.\n\nBegin_date? ? ? ? ? ? ? ? ? ? ? ? ?  End_date\n01JAN2000:00:00:00:000? ? ?  02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000? ? ?  18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000? ? ?  02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n\nThanks,\n\nMike\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:",
+      "thread_id": "thread-8d6eddd0d653",
+      "thread_depth": 1,
+      "month": "2012-07"
+    },
+    {
       "id": "msg-259f080aa9a5",
       "message_id": "<BLU150-W35F3EA41100B1496ED057289D20@phx.gbl>",
       "from_name": "eliza botto",
@@ -16446,24 +16464,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120710/23bf97e5/attachment.pl>",
       "thread_id": "thread-ae39cab81d7f",
       "thread_depth": 2,
-      "month": "2012-07"
-    },
-    {
-      "id": "msg-6e455bdb0c0c",
-      "message_id": "<1341942761.33498.YahooMailNeo@web39401.mail.mud.yahoo.com>",
-      "from_name": "arun",
-      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
-      "date": "2012-07-10T17:52:41Z",
-      "subject": "[R] calculating the difference between days?",
-      "subject_clean": "calculating the difference between days?",
-      "in_reply_to": "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>",
-      "references": [
-        "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>"
-      ],
-      "body_plain": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000????? 02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n\",sep=\"\",header=TRUE)\n\ndat3$Begin_date<-strptime(dat3[,1],format=\"%d%b%Y:%H:%M:%S\")\ndat3$End_date<-strptime(dat3[,2],format=\"%d%b%Y:%H:%M:%S\")\n\n?difftime(dat3[,1],dat3[,2])\nTime differences in days\n[1] -763.0000? -55.0000 -124.0417? -32.0000? -32.0000\nattr(,\"tzone\")\n[1] \"\"\n\nA.K.\n\n----- Original Message -----\nFrom: C W <tmrsg11 at gmail.com>\nTo: r-help <r-help at r-project.org>\nCc: \nSent: Tuesday, July 10, 2012 1:22 PM\nSubject: [R] calculating the difference between days?\n\nHi List,\n\nI have one column of beginning dates and one column of ending dates, I want\nto find their difference.? And I want to ignore the trailing zeros,\nbasically everything after the first colon mark.\n\nBegin_date? ? ? ? ? ? ? ? ? ? ? ? ?  End_date\n01JAN2000:00:00:00:000? ? ?  02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000? ? ?  18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000? ? ?  02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n\nThanks,\n\nMike\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:",
-      "thread_id": "thread-8d6eddd0d653",
-      "thread_depth": 1,
       "month": "2012-07"
     },
     {
