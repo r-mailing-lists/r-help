@@ -7047,22 +7047,6 @@
       "month": "2009-01"
     },
     {
-      "id": "msg-8be85a615bc4",
-      "message_id": "<BLU149-W36ACB44CC6D8216113D85BD8DF0@phx.gbl>",
-      "from_name": "Christos Argyropoulos",
-      "from_email_hash": "fcfb500e154d30366f50ee9f4b920d2ddc52c6b27106a6df936edab14e828f46",
-      "date": "2009-01-07T12:46:18Z",
-      "subject": "[R]  Frailty by strata interactions in coxph (or coxme)‏",
-      "subject_clean": "Frailty by strata interactions in coxph (or coxme)‏",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it possible to\na) test the model in which the covariate and the frailty appear as main terms using the penalized likelihood (for gaussian/t frailties)\nb)augment model 1) by stratifying on the variable that appers in the frailty term ?\n\nThanks in advance! I apologise for sending this as html earlier today.\n\nChris Argyropoulos\nUniversity of Pittsburgh Medical Center\n\n\nBackground\n-------------\nI am trying to fit a cox proportional hazards model tothe data from a two arm (treatment indicator is 0/1)\nmulticenter trial, adjusting for the presence of covariates and testing for the presence of a center\n(and possibly a treatment X center interaction effect).\n\nI would like to contrast the different approaches discussed in Glidden D.V. and Eric Vittinghoff. Modelling clustered survival data from multicentre clinical trials. Stat Med 2004, 23:369-388 (DOI: 10.1002/sim. 1599). in this paper the authors present a decomposition of the hazard function for the ith individual, receiving Z(k,i) treatment (0-1) in the kth center as:\n\nlambda(k,i)=lambda(0,k)*exp(b*Z(k,i)+om(k)*Z(k,i))\n\nwhere om(k) = center specific effect - mean treatment effect ~ distributed as a (log-) gamma or normal frailty.\n\n\nI coded this model in R as:\n\nr1<-coxph(Surv(d,e)~treat*frailty(center)+othercovars+strata(center))\n\ncoxph produces a table with the coefficients and standard errors for:\na) the treatment variable\nb) the covariates as well as\nc) the treatment x frailty interaction effect.\n\nbut the main effect of frailty is estimated to be zero (which I expected, since it is \"absorbed\" into the baseline hazards for the strata).\n\nAm I correct to assume that coxph can in fact fit the model from the Stat Med paper?\n\nIf coxph cannot fit such models, could I simply fit:\ncoxph(Surv(d,e)~treat*frailty(center)+othercovars),\n\nand interpret the coefficient for interaction between treatment and frailty { treat:frailty(center) }as in the first model?\nIf so, could one view the coefficient of the main effect of the frailty component, as a random intercept and the interaction term\nas a random slope in a general mixed effects Cox model?\nCan coxme be used to fit these models in a cleaner way?\n_________________________________________________________________\n[[elided Hotmail spam]]",
-      "body_snippet": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it poss",
-      "thread_id": "thread-8be85a615bc4",
-      "thread_depth": 0,
-      "month": "2009-01"
-    },
-    {
       "id": "msg-d9410a4ff44e",
       "message_id": "<4964A41A.2060409@idi.ntnu.no>",
       "from_name": "Wacek Kusnierczyk",
@@ -7079,6 +7063,22 @@
       "body_snippet": "Wacek Kusnierczyk wrote:\n> Pascal A. Niklaus wrote:\n>   \n>> Hi all,\n>>\n>> I ran into a problem in some of my code that could be traced back to 'mean' \n>> sometimes returning NA and sometimes NaN, depe",
       "thread_id": "thread-1d22c1443089",
       "thread_depth": 2,
+      "month": "2009-01"
+    },
+    {
+      "id": "msg-8be85a615bc4",
+      "message_id": "<BLU149-W36ACB44CC6D8216113D85BD8DF0@phx.gbl>",
+      "from_name": "Christos Argyropoulos",
+      "from_email_hash": "fcfb500e154d30366f50ee9f4b920d2ddc52c6b27106a6df936edab14e828f46",
+      "date": "2009-01-07T12:46:18Z",
+      "subject": "[R]  Frailty by strata interactions in coxph (or coxme)‏",
+      "subject_clean": "Frailty by strata interactions in coxph (or coxme)‏",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it possible to\na) test the model in which the covariate and the frailty appear as main terms using the penalized likelihood (for gaussian/t frailties)\nb)augment model 1) by stratifying on the variable that appers in the frailty term ?\n\nThanks in advance! I apologise for sending this as html earlier today.\n\nChris Argyropoulos\nUniversity of Pittsburgh Medical Center\n\n\nBackground\n-------------\nI am trying to fit a cox proportional hazards model tothe data from a two arm (treatment indicator is 0/1)\nmulticenter trial, adjusting for the presence of covariates and testing for the presence of a center\n(and possibly a treatment X center interaction effect).\n\nI would like to contrast the different approaches discussed in Glidden D.V. and Eric Vittinghoff. Modelling clustered survival data from multicentre clinical trials. Stat Med 2004, 23:369-388 (DOI: 10.1002/sim. 1599). in this paper the authors present a decomposition of the hazard function for the ith individual, receiving Z(k,i) treatment (0-1) in the kth center as:\n\nlambda(k,i)=lambda(0,k)*exp(b*Z(k,i)+om(k)*Z(k,i))\n\nwhere om(k) = center specific effect - mean treatment effect ~ distributed as a (log-) gamma or normal frailty.\n\n\nI coded this model in R as:\n\nr1<-coxph(Surv(d,e)~treat*frailty(center)+othercovars+strata(center))\n\ncoxph produces a table with the coefficients and standard errors for:\na) the treatment variable\nb) the covariates as well as\nc) the treatment x frailty interaction effect.\n\nbut the main effect of frailty is estimated to be zero (which I expected, since it is \"absorbed\" into the baseline hazards for the strata).\n\nAm I correct to assume that coxph can in fact fit the model from the Stat Med paper?\n\nIf coxph cannot fit such models, could I simply fit:\ncoxph(Surv(d,e)~treat*frailty(center)+othercovars),\n\nand interpret the coefficient for interaction between treatment and frailty { treat:frailty(center) }as in the first model?\nIf so, could one view the coefficient of the main effect of the frailty component, as a random intercept and the interaction term\nas a random slope in a general mixed effects Cox model?\nCan coxme be used to fit these models in a cleaner way?\n_________________________________________________________________\n[[elided Hotmail spam]]",
+      "body_snippet": "Hello,\nI was hoping that someone could answer a few questions for me (the background is given below):\n1) Can the coxph accept an interaction between a covariate and a frailty term\n2) If so, is it poss",
+      "thread_id": "thread-8be85a615bc4",
+      "thread_depth": 0,
       "month": "2009-01"
     },
     {
@@ -35899,22 +35899,6 @@
       "month": "2009-01"
     },
     {
-      "id": "msg-dc5538bba62f",
-      "message_id": "<1228209698.155762@hotmail.com>",
-      "from_name": "Abu Naser",
-      "from_email_hash": "2a5ba5764b772901b95636a7cbd45aec5b51a2cb8330941c1a548f6624df9335",
-      "date": "2009-01-22T05:46:49Z",
-      "subject": "[R] Abu added you as a friend on Reunion.com!",
-      "subject_clean": "Abu added you as a friend on Reunion.com!",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/5017e88b/attachment-0001.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/5017e88b/attachment-0001.pl>",
-      "thread_id": "thread-dc5538bba62f",
-      "thread_depth": 0,
-      "month": "2009-01"
-    },
-    {
       "id": "msg-02f15d5fc78d",
       "message_id": "<1228209698.155763@hotmail.com>",
       "from_name": "Abu Naser",
@@ -35927,6 +35911,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/d84056a8/attachment-0001.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/d84056a8/attachment-0001.pl>",
       "thread_id": "thread-02f15d5fc78d",
+      "thread_depth": 0,
+      "month": "2009-01"
+    },
+    {
+      "id": "msg-dc5538bba62f",
+      "message_id": "<1228209698.155762@hotmail.com>",
+      "from_name": "Abu Naser",
+      "from_email_hash": "2a5ba5764b772901b95636a7cbd45aec5b51a2cb8330941c1a548f6624df9335",
+      "date": "2009-01-22T05:46:49Z",
+      "subject": "[R] Abu added you as a friend on Reunion.com!",
+      "subject_clean": "Abu added you as a friend on Reunion.com!",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/5017e88b/attachment-0001.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20090121/5017e88b/attachment-0001.pl>",
+      "thread_id": "thread-dc5538bba62f",
       "thread_depth": 0,
       "month": "2009-01"
     },
@@ -41224,6 +41224,24 @@
       "month": "2009-01"
     },
     {
+      "id": "msg-be4dc8778e29",
+      "message_id": "<497AE510.10306@biostat.ku.dk>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
+      "date": "2009-01-24T09:53:20Z",
+      "subject": "[R] The Quality & Accuracy of R",
+      "subject_clean": "The Quality & Accuracy of R",
+      "in_reply_to": "<8C5F8DF18B90FA43BB9B356227F812D54512F1@KFSVS6.utk.tennessee.edu>",
+      "references": [
+        "<8C5F8DF18B90FA43BB9B356227F812D54512F1@KFSVS6.utk.tennessee.edu>"
+      ],
+      "body_plain": "Bob,\n\nYour point is well taken, but it also raises a number of issues \n(post-install testing to name one) for which the R-devel list would be \nmore suitable. Could we move the discussion there?\n\n\t-Peter\n\n\nMuenchen, Robert A (Bob) wrote:\n> Hi All,\n> \n>  \n> \n> We have all had to face skeptical colleagues asking if software made by\n> volunteers could match the quality and accuracy of commercially written\n> software. Thanks to the prompting of a recent R-help thread, I read, \"R:\n> Regulatory Compliance and Validation Issues, A Guidance Document for the\n> Use of R in Regulated Clinical Trial Environments\n> (http://www.r-project.org/doc/R-FDA.pdf). This is an important document,\n> of interest to the general R community. The question of R's accuracy is\n> such a frequent one, it would be beneficial to increase the visibility\n> of the non-clinical  information it contains. A document aimed at a\n> general audience, entitled something like, \"R: Controlling Quality and\n> Assuring Accuracy\" could be compiled from the these sections:\n> \n>  \n> \n> 1.      What is R? (section 4)\n> \n> 2.      The R Foundation for Statistical Computing (section  3)\n> \n> 3.      The Scope of this Guidance Document (section 2)\n> \n> 4.      Software Development Life Cycle (section 6)\n> \n>  \n> \n> Marc Schwartz, Frank Harrell, Anthony Rossini, Ian Francis and others\n> did such a great job that very few words would need to change. The only\n> addition I suggest is to mention how well R did in, Keeling & Parvur's\n> \"A comparative study of the reliability to nine statistical software\n> packages, May 1, 2007 Computational Statistics & Data Analysis, Vol.51,\n> pp 3811-3831. \n> \n>  \n> \n> Given the importance of this issue, I would like to see such a document\n> added to the PDF manuals in R's Help.\n> \n>  \n> \n> The document mentions (Sect. 6.3) that a set of validation tests, data\n> and known results are available. It would be useful to have an option to\n> run that test suite in every R installation, providing clear progress,\n> \"Validating accuracy of t-tests...Validating accuracy of linear\n> regression....\" Whether or not people chose to run the tests, they would\n> at least know that such tests are available. Back in my mainframe\n> installation days, this step was part of many software installations and\n> it certainly gave the impression that those were the companies that took\n> accuracy seriously. Of course the other companies probably just ran\n> their validation suite before shipping, but seeing it happen had a\n> tremendous impact.  I don't know how much this would add to download,\n> but if it was too much, perhaps it could be implemented as a separate\n> download. \n> \n>  \n> \n> I hope these suggestions can help mitigate the concerns so many non-R\n> users have.\n> \n>  \n> \n> Cheers,\n> \n> Bob\n> \n>  \n> \n> =========================================================\n> \n> Bob Muenchen (pronounced Min'-chen), \n> \n> Manager, Research Computing Support \n> \n> U of TN Office of Information Technology\n> \n> Stokely Management Center, Suite 200\n> \n> 916 Volunteer Blvd., Knoxville, TN 37996-0520\n> \n> Voice: (865) 974-5230\n> \n> FAX: (865) 974-4810\n> \n> Email: muenchen at utk.edu\n> \n> Web: http://oit.utk.edu/research <http://oit.utk.edu/scc> \n> \n> Map to Office: http://www.utk.edu/maps    \n> \n> Newsletter: http://listserv.utk.edu/archives/rcnews.html\n> <http://listserv.utk.edu/archives/statnews.html> \n> \n> =========================================================\n> \n>  \n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \n    O__  ---- Peter Dalgaard             ?ster Farimagsgade 5, Entr.B\n   c/ /'_ --- Dept. of Biostatistics     PO Box 2099, 1014 Cph. K\n  (*) \\(*) -- University of Copenhagen   Denmark      Ph:  (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)              FAX: (+45) 35327907",
+      "body_snippet": "Bob,\n\nYour point is well taken, but it also raises a number of issues \n(post-install testing to name one) for which the R-devel list would be \nmore suitable. Could we move the discussion there?\n\n\t-Pet",
+      "thread_id": "thread-9bb8cca4ef2d",
+      "thread_depth": 1,
+      "month": "2009-01"
+    },
+    {
       "id": "msg-cfc3a05af3aa",
       "message_id": "<497AE510.5040904@bitwrit.com.au>",
       "from_name": "Jim Lemon",
@@ -41240,24 +41258,6 @@
       "body_snippet": "Jim Lemon wrote:\n> stats787 wrote:\n>> Hi,\n>>\n>> I am trying to plot the following data such that both variable y and \n>> z vs x.\n>> (ie two lines on a single plot). As the x variable is not numeric, \n",
       "thread_id": "thread-b9ac3cbabee6",
       "thread_depth": 2,
-      "month": "2009-01"
-    },
-    {
-      "id": "msg-be4dc8778e29",
-      "message_id": "<497AE510.10306@biostat.ku.dk>",
-      "from_name": "Peter Dalgaard",
-      "from_email_hash": "409845b1de856be3139032f02f06e223e8f42c55644c877caf44ca15af9ebff1",
-      "date": "2009-01-24T09:53:20Z",
-      "subject": "[R] The Quality & Accuracy of R",
-      "subject_clean": "The Quality & Accuracy of R",
-      "in_reply_to": "<8C5F8DF18B90FA43BB9B356227F812D54512F1@KFSVS6.utk.tennessee.edu>",
-      "references": [
-        "<8C5F8DF18B90FA43BB9B356227F812D54512F1@KFSVS6.utk.tennessee.edu>"
-      ],
-      "body_plain": "Bob,\n\nYour point is well taken, but it also raises a number of issues \n(post-install testing to name one) for which the R-devel list would be \nmore suitable. Could we move the discussion there?\n\n\t-Peter\n\n\nMuenchen, Robert A (Bob) wrote:\n> Hi All,\n> \n>  \n> \n> We have all had to face skeptical colleagues asking if software made by\n> volunteers could match the quality and accuracy of commercially written\n> software. Thanks to the prompting of a recent R-help thread, I read, \"R:\n> Regulatory Compliance and Validation Issues, A Guidance Document for the\n> Use of R in Regulated Clinical Trial Environments\n> (http://www.r-project.org/doc/R-FDA.pdf). This is an important document,\n> of interest to the general R community. The question of R's accuracy is\n> such a frequent one, it would be beneficial to increase the visibility\n> of the non-clinical  information it contains. A document aimed at a\n> general audience, entitled something like, \"R: Controlling Quality and\n> Assuring Accuracy\" could be compiled from the these sections:\n> \n>  \n> \n> 1.      What is R? (section 4)\n> \n> 2.      The R Foundation for Statistical Computing (section  3)\n> \n> 3.      The Scope of this Guidance Document (section 2)\n> \n> 4.      Software Development Life Cycle (section 6)\n> \n>  \n> \n> Marc Schwartz, Frank Harrell, Anthony Rossini, Ian Francis and others\n> did such a great job that very few words would need to change. The only\n> addition I suggest is to mention how well R did in, Keeling & Parvur's\n> \"A comparative study of the reliability to nine statistical software\n> packages, May 1, 2007 Computational Statistics & Data Analysis, Vol.51,\n> pp 3811-3831. \n> \n>  \n> \n> Given the importance of this issue, I would like to see such a document\n> added to the PDF manuals in R's Help.\n> \n>  \n> \n> The document mentions (Sect. 6.3) that a set of validation tests, data\n> and known results are available. It would be useful to have an option to\n> run that test suite in every R installation, providing clear progress,\n> \"Validating accuracy of t-tests...Validating accuracy of linear\n> regression....\" Whether or not people chose to run the tests, they would\n> at least know that such tests are available. Back in my mainframe\n> installation days, this step was part of many software installations and\n> it certainly gave the impression that those were the companies that took\n> accuracy seriously. Of course the other companies probably just ran\n> their validation suite before shipping, but seeing it happen had a\n> tremendous impact.  I don't know how much this would add to download,\n> but if it was too much, perhaps it could be implemented as a separate\n> download. \n> \n>  \n> \n> I hope these suggestions can help mitigate the concerns so many non-R\n> users have.\n> \n>  \n> \n> Cheers,\n> \n> Bob\n> \n>  \n> \n> =========================================================\n> \n> Bob Muenchen (pronounced Min'-chen), \n> \n> Manager, Research Computing Support \n> \n> U of TN Office of Information Technology\n> \n> Stokely Management Center, Suite 200\n> \n> 916 Volunteer Blvd., Knoxville, TN 37996-0520\n> \n> Voice: (865) 974-5230\n> \n> FAX: (865) 974-4810\n> \n> Email: muenchen at utk.edu\n> \n> Web: http://oit.utk.edu/research <http://oit.utk.edu/scc> \n> \n> Map to Office: http://www.utk.edu/maps    \n> \n> Newsletter: http://listserv.utk.edu/archives/rcnews.html\n> <http://listserv.utk.edu/archives/statnews.html> \n> \n> =========================================================\n> \n>  \n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \n    O__  ---- Peter Dalgaard             ?ster Farimagsgade 5, Entr.B\n   c/ /'_ --- Dept. of Biostatistics     PO Box 2099, 1014 Cph. K\n  (*) \\(*) -- University of Copenhagen   Denmark      Ph:  (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk)              FAX: (+45) 35327907",
-      "body_snippet": "Bob,\n\nYour point is well taken, but it also raises a number of issues \n(post-install testing to name one) for which the R-devel list would be \nmore suitable. Could we move the discussion there?\n\n\t-Pet",
-      "thread_id": "thread-9bb8cca4ef2d",
-      "thread_depth": 1,
       "month": "2009-01"
     },
     {
