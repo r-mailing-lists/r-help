@@ -1,0 +1,33 @@
+From roy@mende|@@ohn @end|ng |rom no@@@gov  Mon Jul  6 19:55:28 2026
+From: roy@mende|@@ohn @end|ng |rom no@@@gov (Roy Mendelssohn - NOAA Federal)
+Date: Mon, 6 Jul 2026 10:55:28 -0700
+Subject: [R] =?utf-8?q?ERDDAP=E2=84=A2_related_R_packages_-_an_update?=
+Message-ID: <0D12D802-4522-414D-AD68-A54969D66175@noaa.gov>
+
+ERDDAP? is a web data service that is deployed at locations throughout the world,  providing easy access to petabytes of  mostly satellite data,  ocean observations,  fisheries data, and atmospheric data.  There are now four packages on CRAN  for accessing and using data from ERDDAP? servers and this is just to cover some recent changes in the packages.
+
+?rerddap? - this is the main package for accessing data from ERDDAP? servers.  Among the changes in the last six months or so:
+
+   - both ?griddap()? and ?tabledap()? now have the option to return data in parquet files.
+   - A new function which estimates the size of a ?griddap()? download without having to make the request.
+   - Improvements to the vignette,  including a table of contents.
+   - Interactive map example added to vignette  (see plotdap)
+
+?plotdap? - makes for easy mapping of ?rerddap? extracts
+  
+    -  Contour plots using the R package ?isoband?
+    -  Improved version of ?bbox_set? to create interactive plots using ?plotly:ggplotly()?
+
+?rerddapXtracto? - uses ?rerddap::griddap()? to make extracts along tracks and within polygons (though time)
+
+    - refactoring of ?rxtracto()? for speed improvements
+
+?rerddapUtils? - A new package with an olio of utilities to be used with  ?rerddap?
+
+    - a function that restricts the download to a specified season in each year
+    - a function that splits very large and out-of-memory requests.
+    - functions that estimate the size of a ?griddap()? download as well as that of a  split request  without having to make the request.
+    - functions to deal with requests and responses for datasets on projected coordinates systems
+
+-Roy
+
