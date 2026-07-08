@@ -18,6 +18,58 @@
       "thread_id": "thread-2e78417c1e7f",
       "thread_depth": 0,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-c73431dbea6f",
+      "message_id": "<3c3f382a346b873fd4594b1b02a14760@disroot.org>",
+      "from_name": "iagogv",
+      "from_email_hash": "d5308f1d30ecf31e34e95074bc22416b10f380c4619d7768015505ed375f1370",
+      "date": "2026-07-07T11:01:47Z",
+      "subject": "[R] Build POSIXlt object from its internal representation list",
+      "subject_clean": "Build POSIXlt object from its internal representation list",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\n From DateTimeClasses help:\n\nClass \"POSIXlt\" is internally a list [1] of vectors with components \nnamed sec, min, hour for the time, mday, mon, and year, for the date, \nwday, yday for the day of the week and day of the year, isdst, a \nDaylight Saving Time flag, and sometimes (both _optional_) zone, a \nstring for the time zone, and gmtoff, offset in seconds from GMT\n\nIf I unlist(x), where x is a POSIXlt object, I get that list, internal \nrepresentation of x.\n\nIs there an inverse function returning the POSIXlt object from that \nlist?\n\nThank you!\n\nBest,\n\nIago\n\nLinks:\n------\n[1] http://127.0.0.1:25406/library/base/help/list\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\n From DateTimeClasses help:\n\nClass \"POSIXlt\" is internally a list [1] of vectors with components \nnamed sec, min, hour for the time, mday, mon, and year, for the date, \nwday, yday for the day",
+      "thread_id": "thread-c73431dbea6f",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-0350a3162f83",
+      "message_id": "<f2c3d058-c10d-463b-ade4-9d96bcf0a1d3@gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
+      "date": "2026-07-07T16:14:35Z",
+      "subject": "[R] Build POSIXlt object from its internal representation list",
+      "subject_clean": "Build POSIXlt object from its internal representation list",
+      "in_reply_to": "<3c3f382a346b873fd4594b1b02a14760@disroot.org>",
+      "references": [
+        "<3c3f382a346b873fd4594b1b02a14760@disroot.org>"
+      ],
+      "body_plain": "p <- as.POSIXlt(Sys.Date())\n\n\nDo you mean unclass(p)?\n\n\nx <- unclass(p)\n\nstr(x)\n## List of 11\n##  $ sec   : num 0\n##  $ min   : int 0\n\n\nclass(x) <- c(\"POSIXlt\", \"POSIXt\")\nidentical(x,p)  ## TRUE\n\n\n   If you actually use unlist() then everything gets a bit harder, \nbecause all the elements get coerced to character, and we have to undo \nthat ...\n\nxx <- unlist(p)\nstr(xx)\n##  Named chr [1:11]\n\n\nxx <- as.list(xx)\nnot_zone <- names(xx) != \"zone\"\nxx[not_zone] <- as.integer(xx[not_zone])\nclass(xx) <- c(\"POSIXlt\", \"POSIXt\")\n\nThis is not quite identical to the original object, because the sec \ncomponent is numeric (not integer), and because the time zone is \noriginally an attribute (but gets made into an element of the list); you \ncould reverse-engineer that with some more work.\n\n\n\nOn 2026-07-07 7:01 a.m., iagogv via R-help wrote:\n> Hi all,\n> \n>   From DateTimeClasses help:\n> \n> Class \"POSIXlt\" is internally a list [1] of vectors with components\n> named sec, min, hour for the time, mday, mon, and year, for the date,\n> wday, yday for the day of the week and day of the year, isdst, a\n> Daylight Saving Time flag, and sometimes (both _optional_) zone, a\n> string for the time zone, and gmtoff, offset in seconds from GMT\n> \n> If I unlist(x), where x is a POSIXlt object, I get that list, internal\n> representation of x.\n> \n> Is there an inverse function returning the POSIXlt object from that\n> list?\n> \n> Thank you!\n> \n> Best,\n> \n> Iago\n> \n> Links:\n> ------\n> [1] http://127.0.0.1:25406/library/base/help/list\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nAssociate Chair (Graduate), Department of Mathematics & Statistics\nDirector, School of Computational Science and Engineering\n> E-mail is sent at my convenience; I don't expect replies outside of working hours.",
+      "body_snippet": "p <- as.POSIXlt(Sys.Date())\n\n\nDo you mean unclass(p)?\n\n\nx <- unclass(p)\n\nstr(x)\n## List of 11\n##  $ sec   : num 0\n##  $ min   : int 0\n\n\nclass(x) <- c(\"POSIXlt\", \"POSIXt\")\nidentical(x,p)  ## TRUE\n\n\n   ",
+      "thread_id": "thread-c73431dbea6f",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-953545af0c36",
+      "message_id": "<553465577.2067157.1783441633039@mail.yahoo.com>",
+      "from_name": "Ian Worthington",
+      "from_email_hash": "013bcd35eb853c9cea5a731a223b74f6053f565f8be995a63337f15a6c5ae84f",
+      "date": "2026-07-07T16:27:13Z",
+      "subject": "[R] Build POSIXlt object from its internal representation list",
+      "subject_clean": "Build POSIXlt object from its internal representation list",
+      "in_reply_to": "<3c3f382a346b873fd4594b1b02a14760@disroot.org>",
+      "references": [
+        "<3c3f382a346b873fd4594b1b02a14760@disroot.org>"
+      ],
+      "body_plain": "Do you have to use list?? If not, take a look at dput, maybe?\n\n\nBest wishes / Mejores deseos /??Meilleurs v?ux\n\nIan?... \n\n    On Tuesday, July 7, 2026 at 11:03:50 AM GMT-5, iagogv via R-help <r-help at r-project.org> wrote:  \n \n Hi all,\n\n From DateTimeClasses help:\n\nClass \"POSIXlt\" is internally a list [1] of vectors with components \nnamed sec, min, hour for the time, mday, mon, and year, for the date, \nwday, yday for the day of the week and day of the year, isdst, a \nDaylight Saving Time flag, and sometimes (both _optional_) zone, a \nstring for the time zone, and gmtoff, offset in seconds from GMT\n\nIf I unlist(x), where x is a POSIXlt object, I get that list, internal \nrepresentation of x.\n\nIs there an inverse function returning the POSIXlt object from that \nlist?\n\nThank you!\n\nBest,\n\nIago\n\nLinks:\n------\n[1] http://127.0.0.1:25406/library/base/help/list\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.\n  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Do you have to use list?? If not, take a look at dput, maybe?\n\n\nBest wishes / Mejores deseos /??Meilleurs v?ux\n\nIan?... \n\n    On Tuesday, July 7, 2026 at 11:03:50 AM GMT-5, iagogv via R-help <r-help a",
+      "thread_id": "thread-c73431dbea6f",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -31,6 +83,19 @@
       "started": "2026-07-06T17:55:28Z",
       "last_reply": "2026-07-06T17:55:28Z",
       "root_message_id": "msg-2e78417c1e7f"
+    },
+    {
+      "id": "thread-c73431dbea6f",
+      "subject": "Build POSIXlt object from its internal representation list",
+      "message_count": 3,
+      "participants": [
+        "Ben Bolker",
+        "Ian Worthington",
+        "iagogv"
+      ],
+      "started": "2026-07-07T11:01:47Z",
+      "last_reply": "2026-07-07T16:27:13Z",
+      "root_message_id": "msg-c73431dbea6f"
     }
   ]
 }
