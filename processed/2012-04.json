@@ -3627,24 +3627,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-20c05bf3d292",
-      "message_id": "<1333458836.31226.189.camel@definetti>",
-      "from_name": "Giovanni Petris",
-      "from_email_hash": "3f086d74575a31afb2f43fe1593e9228571595566fd61cdc1445c7727255b2dd",
-      "date": "2012-04-03T13:13:56Z",
-      "subject": "[R] grouping",
-      "subject_clean": "grouping",
-      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
-      "references": [
-        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
-      ],
-      "body_plain": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_along(sorted) - 1) %/% 3, FUN = mean)\n        0         1         2         3 \n 42.33333  89.66667 214.66667 297.00000 \n\nHope this helps,\nGiovanni\n\nOn Tue, 2012-04-03 at 08:47 -0400, Val wrote:\n> Hi all,\n> \n> Assume that I have the following 10 data points.\n>  x=c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> \n> sort x  and get the following\n>   y= (36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> \n> I want to  group the sorted  data point (y)  into  equal number of\n> observation per group. In this case there will be three groups.  The first\n> two groups  will have three observation  and the third will have four\n> observations\n> \n> group 1  = 34, 45, 46\n> group 2  = 66, 78, 125\n> group 3  = 193, 209, 242,297\n> \n> Finally I want to calculate the group mean\n> \n> group 1  =  42\n> group 2  =  87\n> group 3  =  234\n> \n> Can anyone help me out?\n> \n> In SAS I used to do it using proc rank.\n> \n> thanks in advance\n> \n> Val\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n\nGiovanni Petris  <GPetris at uark.edu>\nAssociate Professor\nDepartment of Mathematical Sciences\nUniversity of Arkansas - Fayetteville, AR 72701\nPh: (479) 575-6324, 575-8630 (fax)\nhttp://definetti.uark.edu/~gpetris/",
-      "body_snippet": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_al",
-      "thread_id": "thread-933c1916838c",
-      "thread_depth": 1,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-dc67c07b1063",
       "message_id": "<CAAmySGMexY+7OuGY6T_Az5rz1v=NnPUF5gOZPai5mdZHhY-kVQ@mail.gmail.com>",
       "from_name": "R. Michael Weylandt",
@@ -3658,6 +3640,24 @@
       ],
       "body_plain": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can assign each y to a group\niii) then ave() or tapply() will do group-wise means\n\nSomething like:\n\ny <- c(36, 45, 46, 66, 78, 125, 193, 209, 242, 297) # You need a \"c\" here.\nave(y, findInterval(y, quantile(y, c(0.33, 0.66))))\ntapply(y, findInterval(y, quantile(y, c(0.33, 0.66))), mean)\n\nYou could also use cut2 from the Hmisc package to combine findInterval\nand quantile into a single step.\n\nDepending on your desired output.\n\nHope that helps,\nMichael\n\nOn Tue, Apr 3, 2012 at 8:47 AM, Val <valkremk at gmail.com> wrote:\n> Hi all,\n>\n> Assume that I have the following 10 data points.\n> ?x=c( ?46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n>\n> sort x ?and get the following\n> ?y= (36 , 45 , 46, ?66, 78, ?125,193, 209, 242, 297)\n>\n> I want to ?group the sorted ?data point (y) ?into ?equal number of\n> observation per group. In this case there will be three groups. ?The first\n> two groups ?will have three observation ?and the third will have four\n> observations\n>\n> group 1 ?= 34, 45, 46\n> group 2 ?= 66, 78, 125\n> group 3 ?= 193, 209, 242,297\n>\n> Finally I want to calculate the group mean\n>\n> group 1 ?= ?42\n> group 2 ?= ?87\n> group 3 ?= ?234\n>\n> Can anyone help me out?\n>\n> In SAS I used to do it using proc rank.\n>\n> thanks in advance\n>\n> Val\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can as",
+      "thread_id": "thread-933c1916838c",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-20c05bf3d292",
+      "message_id": "<1333458836.31226.189.camel@definetti>",
+      "from_name": "Giovanni Petris",
+      "from_email_hash": "3f086d74575a31afb2f43fe1593e9228571595566fd61cdc1445c7727255b2dd",
+      "date": "2012-04-03T13:13:56Z",
+      "subject": "[R] grouping",
+      "subject_clean": "grouping",
+      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
+      "references": [
+        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
+      ],
+      "body_plain": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_along(sorted) - 1) %/% 3, FUN = mean)\n        0         1         2         3 \n 42.33333  89.66667 214.66667 297.00000 \n\nHope this helps,\nGiovanni\n\nOn Tue, 2012-04-03 at 08:47 -0400, Val wrote:\n> Hi all,\n> \n> Assume that I have the following 10 data points.\n>  x=c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> \n> sort x  and get the following\n>   y= (36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> \n> I want to  group the sorted  data point (y)  into  equal number of\n> observation per group. In this case there will be three groups.  The first\n> two groups  will have three observation  and the third will have four\n> observations\n> \n> group 1  = 34, 45, 46\n> group 2  = 66, 78, 125\n> group 3  = 193, 209, 242,297\n> \n> Finally I want to calculate the group mean\n> \n> group 1  =  42\n> group 2  =  87\n> group 3  =  234\n> \n> Can anyone help me out?\n> \n> In SAS I used to do it using proc rank.\n> \n> thanks in advance\n> \n> Val\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n\nGiovanni Petris  <GPetris at uark.edu>\nAssociate Professor\nDepartment of Mathematical Sciences\nUniversity of Arkansas - Fayetteville, AR 72701\nPh: (479) 575-6324, 575-8630 (fax)\nhttp://definetti.uark.edu/~gpetris/",
+      "body_snippet": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_al",
       "thread_id": "thread-933c1916838c",
       "thread_depth": 1,
       "month": "2012-04"
@@ -47963,22 +47963,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-1ad0d27e38d5",
-      "message_id": "<CAFkmApO8ffoc5Qh=13cYLNW+r8Ne6+OehZBTACgwi3BkP-Lkmg@mail.gmail.com>",
-      "from_name": "cassie jones",
-      "from_email_hash": "e73ca71069521b8ce40ae43a9536050194076439912b1519258ec268ea3f3056",
-      "date": "2012-04-26T19:30:09Z",
-      "subject": "[R] problem with break command",
-      "subject_clean": "problem with break command",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
-      "thread_id": "thread-1ad0d27e38d5",
-      "thread_depth": 0,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-3ac26314bea9",
       "message_id": "<00505A65-F248-4EE1-B63B-99979B6B55A3@me.com>",
       "from_name": "Marc Schwartz",
@@ -47996,6 +47980,22 @@
       "body_snippet": "On Apr 26, 2012, at 12:49 PM, Greg Snow wrote:\n\n> The phrase \"does not work\" is not very helpful, it can mean quit a few\n> things including:\n> \n> * Your computer exploded.\n> * No explosion, but smoke ",
       "thread_id": "thread-29317e9bd244",
       "thread_depth": 3,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-1ad0d27e38d5",
+      "message_id": "<CAFkmApO8ffoc5Qh=13cYLNW+r8Ne6+OehZBTACgwi3BkP-Lkmg@mail.gmail.com>",
+      "from_name": "cassie jones",
+      "from_email_hash": "e73ca71069521b8ce40ae43a9536050194076439912b1519258ec268ea3f3056",
+      "date": "2012-04-26T19:30:09Z",
+      "subject": "[R] problem with break command",
+      "subject_clean": "problem with break command",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
+      "thread_id": "thread-1ad0d27e38d5",
+      "thread_depth": 0,
       "month": "2012-04"
     },
     {
@@ -50109,29 +50109,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-b967baa6f224",
-      "message_id": "<1335550956247-4593401.post@n4.nabble.com>",
-      "from_name": "Jonsson",
-      "from_email_hash": "513084e61591b869b178f6d01a4dc75689a67f53e1a2e565513c59fff9599292",
-      "date": "2012-04-27T18:22:36Z",
-      "subject": "[R] Min , Max",
-      "subject_clean": "Min , Max",
-      "in_reply_to": "<CAAmySGODzhEMROvg3yitxaqo1j9wkPgAUpSGzDbD256s5uCj+w@mail.gmail.com>",
-      "references": [
-        "<1335541619091-4593065.post@n4.nabble.com>",
-        "<1335543280284-4593118.post@n4.nabble.com>",
-        "<1335544302199-4593159.post@n4.nabble.com>",
-        "<1335546919805-4593253.post@n4.nabble.com>",
-        "<1335547705724-4593279.post@n4.nabble.com>",
-        "<CAAmySGODzhEMROvg3yitxaqo1j9wkPgAUpSGzDbD256s5uCj+w@mail.gmail.com>"
-      ],
-      "body_plain": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.nabble.com/Min-Max-tp4593065p4593401.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.n",
-      "thread_id": "thread-99f33f7b560a",
-      "thread_depth": 6,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-bfc0dcc6d9f1",
       "message_id": "<1335550956801-4593402.post@n4.nabble.com>",
       "from_name": "Jonsson",
@@ -50149,6 +50126,29 @@
         "<CAAmySGODzhEMROvg3yitxaqo1j9wkPgAUpSGzDbD256s5uCj+w@mail.gmail.com>"
       ],
       "body_plain": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.nabble.com/Min-Max-tp4593065p4593402.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.n",
+      "thread_id": "thread-99f33f7b560a",
+      "thread_depth": 6,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-b967baa6f224",
+      "message_id": "<1335550956247-4593401.post@n4.nabble.com>",
+      "from_name": "Jonsson",
+      "from_email_hash": "513084e61591b869b178f6d01a4dc75689a67f53e1a2e565513c59fff9599292",
+      "date": "2012-04-27T18:22:36Z",
+      "subject": "[R] Min , Max",
+      "subject_clean": "Min , Max",
+      "in_reply_to": "<CAAmySGODzhEMROvg3yitxaqo1j9wkPgAUpSGzDbD256s5uCj+w@mail.gmail.com>",
+      "references": [
+        "<1335541619091-4593065.post@n4.nabble.com>",
+        "<1335543280284-4593118.post@n4.nabble.com>",
+        "<1335544302199-4593159.post@n4.nabble.com>",
+        "<1335546919805-4593253.post@n4.nabble.com>",
+        "<1335547705724-4593279.post@n4.nabble.com>",
+        "<CAAmySGODzhEMROvg3yitxaqo1j9wkPgAUpSGzDbD256s5uCj+w@mail.gmail.com>"
+      ],
+      "body_plain": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.nabble.com/Min-Max-tp4593065p4593401.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "this is what happened with me:that when I get to the second element h[n]\nbecomes h[2] which \ndoesn't exist (h[1] obviously did).\nAny suggestions \n\n--\nView this message in context: http://r.789695.n4.n",
       "thread_id": "thread-99f33f7b560a",
       "thread_depth": 6,
