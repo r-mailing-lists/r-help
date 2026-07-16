@@ -1808,3 +1808,232 @@ Rui Barradas
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From @@d@mod@r @end|ng |rom |@nc@@ter@@c@uk  Wed Jul 15 15:22:15 2026
+From: @@d@mod@r @end|ng |rom |@nc@@ter@@c@uk (Damodar, Shilpa (Postgraduate Student))
+Date: Wed, 15 Jul 2026 13:22:15 +0000
+Subject: [R] Error - "cannot connect to URL"
+Message-ID: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+
+Hello,
+
+I am a student in the UK and use RStudio for my coursework and research projects. I have been using RStudio on my personal laptop for over nine months without any issues.
+Recently, I was provided with an NHS organisation laptop for my project, and I installed RStudio on that device as well. However, I am now encountering a problem where I am unable to install any packages. RStudio consistently returns the error message: "cannot connect to URL."
+Both the IT team and I have been trying to identify and resolve the issue, but we have not yet been able to determine the cause.
+I would greatly appreciate any guidance or assistance you can provide in resolving this issue. Thank you for your time and support.
+Thanks  and regards,
+Shilpa
+
+	[[alternative HTML version deleted]]
+
+
+From roy@mende|@@ohn @end|ng |rom no@@@gov  Wed Jul 15 18:58:00 2026
+From: roy@mende|@@ohn @end|ng |rom no@@@gov (Roy Mendelssohn - NOAA Federal)
+Date: Wed, 15 Jul 2026 09:58:00 -0700
+Subject: [R] Error - "cannot connect to URL"
+In-Reply-To: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+References: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+Message-ID: <A0E8E3DD-C114-43F6-8C51-3CEAD2CA723B@noaa.gov>
+
+Hi Shilpa:
+
+I think it would help if you can provide a little more information.  First would be which OS and what version,  the R version you have installed and the RStudio version,  which repo you have RStudio set to use and have you tried setting to another one,  and also have you tried to install packages outside of RStudio, to make certain it is not an RStudio problem.  Also are you running your personal laptop and the NHS laptop from the same place.
+
+If I had to guess I would guess you are seeing a proxying issue but there is not enough information to know for certain.
+
+HTH,
+
+-Roy
+
+> On Jul 15, 2026, at 6:22?AM, Damodar, Shilpa (Postgraduate Student) <s.damodar at lancaster.ac.uk> wrote:
+> 
+> Hello,
+> 
+> I am a student in the UK and use RStudio for my coursework and research projects. I have been using RStudio on my personal laptop for over nine months without any issues.
+> Recently, I was provided with an NHS organisation laptop for my project, and I installed RStudio on that device as well. However, I am now encountering a problem where I am unable to install any packages. RStudio consistently returns the error message: "cannot connect to URL."
+> Both the IT team and I have been trying to identify and resolve the issue, but we have not yet been able to determine the cause.
+> I would greatly appreciate any guidance or assistance you can provide in resolving this issue. Thank you for your time and support.
+> Thanks  and regards,
+> Shilpa
+> 
+> [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From ru|pb@rr@d@@463 @end|ng |rom gm@||@com  Wed Jul 15 19:09:52 2026
+From: ru|pb@rr@d@@463 @end|ng |rom gm@||@com (Rui Barradas)
+Date: Wed, 15 Jul 2026 18:09:52 +0100
+Subject: [R] Error - "cannot connect to URL"
+In-Reply-To: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+References: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+Message-ID: <281731b8-5ecf-4a2c-b9f3-38c636ea1a60@gmail.com>
+
+?s 14:22 de 15/07/2026, Damodar, Shilpa (Postgraduate Student) escreveu:
+> Hello,
+>
+> I am a student in the UK and use RStudio for my coursework and research projects. I have been using RStudio on my personal laptop for over nine months without any issues.
+> Recently, I was provided with an NHS organisation laptop for my project, and I installed RStudio on that device as well. However, I am now encountering a problem where I am unable to install any packages. RStudio consistently returns the error message: "cannot connect to URL."
+> Both the IT team and I have been trying to identify and resolve the issue, but we have not yet been able to determine the cause.
+> I would greatly appreciate any guidance or assistance you can provide in resolving this issue. Thank you for your time and support.
+> Thanks  and regards,
+> Shilpa
+>
+> 	[[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+Hello,
+
+It's difficult to say what is going on but if you open a Terminal window 
+(or cmd in Windows) and run
+
+
+Rscript -e "install.packages('pkg_name', repos = 
+'https://cloud.r-project.org/')"
+
+
+does it work?
+
+Can you run
+
+
+sessionInfo()
+
+
+and?post its output?
+
+Hope this helps,
+
+Rui Barradas
+
+
+From t|m@how@rd @end|ng |rom dec@ny@gov  Thu Jul 16 01:25:56 2026
+From: t|m@how@rd @end|ng |rom dec@ny@gov (Howard, Tim G (DEC))
+Date: Wed, 15 Jul 2026 23:25:56 +0000
+Subject: [R] Error - "cannot connect to URL"
+In-Reply-To: <A0E8E3DD-C114-43F6-8C51-3CEAD2CA723B@noaa.gov>
+References: <LO4P265MB64166F5436548879FFD88D24BAF82@LO4P265MB6416.GBRP265.PROD.OUTLOOK.COM>
+ <A0E8E3DD-C114-43F6-8C51-3CEAD2CA723B@noaa.gov>
+Message-ID: <PH8PR09MB97906C193BC24506DB6B932DA8F82@PH8PR09MB9790.namprd09.prod.outlook.com>
+
+Shilpa,
+I agree with Roy that it could be a proxy issue. One of the possibilities if you are using Windows: A few years ago the update to R 4.2.1 introduced a little more security and many folks behind organization firewalls were blocked. This was noted in this bug report
+
+https://bugs.r-project.org/show_bug.cgi?id=18379
+
+and the solution was to add this new environment variable. You can add it live, in R, with:
+
+Sys.setenv("R_LIBCURL_SSL_REVOKE_BEST_EFFORT"=TRUE)
+
+# and check it with
+
+Sys.getenv("R_LIBCURL_SSL_REVOKE_BEST_EFFORT")
+
+# If it returns "TRUE", then you should be able to install packages.
+
+Other ways to set env vars are described here:
+https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-set-environment-variables_003f
+
+hope that helps.
+Tim
+
+
+> -----Original Message-----
+> From: R-help <r-help-bounces at r-project.org> On Behalf Of Roy Mendelssohn
+> - NOAA Federal via R-help
+> Sent: Wednesday, July 15, 2026 12:58 PM
+> To: Damodar, Shilpa (Postgraduate Student) <s.damodar at lancaster.ac.uk>
+> Cc: r-help <r-help at r-project.org>
+> Subject: Re: [R] Error - "cannot connect to URL"
+>
+> Attention: This email came from an external source. Do not open attachments
+> or click on links from unknown senders or unexpected emails.
+>
+> Hi Shilpa:
+>
+> I think it would help if you can provide a little more information.  First would
+> be which OS and what version,  the R version you have installed and the
+> RStudio version,  which repo you have RStudio set to use and have you tried
+> setting to another one,  and also have you tried to install packages outside of
+> RStudio, to make certain it is not an RStudio problem.  Also are you running
+> your personal laptop and the NHS laptop from the same place.
+>
+> If I had to guess I would guess you are seeing a proxying issue but there is not
+> enough information to know for certain.
+>
+> HTH,
+>
+> -Roy
+>
+> > On Jul 15, 2026, at 6:22?AM, Damodar, Shilpa (Postgraduate Student)
+> <s.damodar at lancaster.ac.uk> wrote:
+> >
+> > Hello,
+> >
+> > I am a student in the UK and use RStudio for my coursework and research
+> projects. I have been using RStudio on my personal laptop for over nine
+> months without any issues.
+> > Recently, I was provided with an NHS organisation laptop for my project, and
+> I installed RStudio on that device as well. However, I am now encountering a
+> problem where I am unable to install any packages. RStudio consistently
+> returns the error message: "cannot connect to URL."
+> > Both the IT team and I have been trying to identify and resolve the issue, but
+> we have not yet been able to determine the cause.
+> > I would greatly appreciate any guidance or assistance you can provide in
+> resolving this issue. Thank you for your time and support.
+> > Thanks  and regards,
+> > Shilpa
+> >
+> > [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> >
+> https://stat.e/
+> thz.ch%2Fmailman%2Flistinfo%2Fr-
+> help&data=05%7C02%7Ctim.howard%40dec.ny.gov%7C6273c77f9ffa45934
+> 4e208dee2924e97%7Cf46cb8ea79004d108ceb80e8c1c81ee7%7C0%7C0%
+> 7C639197315176106597%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc
+> GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIld
+> UIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=Qec0%2BBh9L1Cl3jdeuxrjbhfKD
+> EafihdBaU%2FmKmkRYEc%3D&reserved=0
+> > PLEASE do read the posting guide
+> https://www/.
+> r-project.org%2Fposting-
+> guide.html&data=05%7C02%7Ctim.howard%40dec.ny.gov%7C6273c77f9ffa
+> 459344e208dee2924e97%7Cf46cb8ea79004d108ceb80e8c1c81ee7%7C0%
+> 7C0%7C639197315176139691%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0
+> eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpb
+> CIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=RJWTRqzpwRZhwG5uh6vU
+> aUPggqkIS0xK%2BVteUYiFFa0%3D&reserved=0
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.e/
+> thz.ch%2Fmailman%2Flistinfo%2Fr-
+> help&data=05%7C02%7Ctim.howard%40dec.ny.gov%7C6273c77f9ffa45934
+> 4e208dee2924e97%7Cf46cb8ea79004d108ceb80e8c1c81ee7%7C0%7C0%
+> 7C639197315176159815%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc
+> GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIld
+> UIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=mPzqJODoarCOMa17Qt%2BlwlA
+> dQtGzRDVeBZOnw42OLJc%3D&reserved=0
+> PLEASE do read the posting guide
+> https://www/.
+> r-project.org%2Fposting-
+> guide.html&data=05%7C02%7Ctim.howard%40dec.ny.gov%7C6273c77f9ffa
+> 459344e208dee2924e97%7Cf46cb8ea79004d108ceb80e8c1c81ee7%7C0%
+> 7C0%7C639197315176177987%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0
+> eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpb
+> CIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=7%2FyHfNZDZkcUujycTb3s
+> 8oIOmTecpDdK9iH%2BqGSqZAM%3D&reserved=0
+> and provide commented, minimal, self-contained, reproducible code.
+
