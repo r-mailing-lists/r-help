@@ -468,6 +468,26 @@
       "thread_id": "thread-53be89463df2",
       "thread_depth": 0,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-2fbecbd80d70",
+      "message_id": "<20260717233046.4624ac87@parabola>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-07-17T20:30:46Z",
+      "subject": "[R] issue with update.packages(), library 'utils'",
+      "subject_clean": "issue with update.packages(), library 'utils'",
+      "in_reply_to": "<baf4f5c9-de71-4f7a-b549-b181bd4ccc34@disroot.org>",
+      "references": [
+        "<mailman.373696.1.1780999201.58463.r-help@r-project.org>",
+        "<PA6PR01MB12092F0A603C19C642F243C42E21D2@PA6PR01MB12092.eurprd01.prod.exchangelabs.com>",
+        "<baf4f5c9-de71-4f7a-b549-b181bd4ccc34@disroot.org>"
+      ],
+      "body_plain": "? Fri, 17 Jul 2026 00:42:47 +0200\nIago via R-help <r-help at r-project.org> ?????:\n\n> If the issue is due\n> \n> |to the 'Last modified' / .builtData that apparently changes on the \n> repository every day, although the version numbers of packages are\n> not changed |\n> \n> should then be solved on CRAN side?\n\nThe build date is used as a proxy for all the binary-level dependencies\nthat the built packages may have separately from the source-level\ndependencies [*]. Sometimes it's an unnecessary precaution and the\nbinary packages can be freely interchanged, ignoring the build dates.\nOther times not reinstalling everything will lead to very confusing,\nhard-to-debug errors. Maybe some day we'll have a different system that\ndoesn't reinstall packages out of abundance of caution, but it's not\neasy to design properly.\n\n-- \nBest regards,\nIvan\n\n[*] https://stat.ethz.ch/pipermail/r-package-devel/2026q2/012419.html",
+      "body_snippet": "? Fri, 17 Jul 2026 00:42:47 +0200\nIago via R-help <r-help at r-project.org> ?????:\n\n> If the issue is due\n> \n> |to the 'Last modified' / .builtData that apparently changes on the \n> repository every d",
+      "thread_id": "thread-53be89463df2",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -544,12 +564,13 @@
     {
       "id": "thread-53be89463df2",
       "subject": "issue with update.packages(), library 'utils'",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
-        "Iago"
+        "Iago",
+        "Ivan Krylov"
       ],
       "started": "2026-07-16T22:42:47Z",
-      "last_reply": "2026-07-16T22:42:47Z",
+      "last_reply": "2026-07-17T20:30:46Z",
       "root_message_id": "msg-53be89463df2"
     }
   ]

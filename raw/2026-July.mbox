@@ -2092,3 +2092,40 @@ On 09/06/2026 13:24, Hooiveld, Guido via R-help wrote:
 	[[alternative HTML version deleted]]
 
 
+From |kry|ov @end|ng |rom d|@root@org  Fri Jul 17 22:30:46 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Fri, 17 Jul 2026 23:30:46 +0300
+Subject: [R] issue with update.packages(), library 'utils'
+In-Reply-To: <baf4f5c9-de71-4f7a-b549-b181bd4ccc34@disroot.org>
+References: <mailman.373696.1.1780999201.58463.r-help@r-project.org>
+ <PA6PR01MB12092F0A603C19C642F243C42E21D2@PA6PR01MB12092.eurprd01.prod.exchangelabs.com>
+ <baf4f5c9-de71-4f7a-b549-b181bd4ccc34@disroot.org>
+Message-ID: <20260717233046.4624ac87@parabola>
+
+? Fri, 17 Jul 2026 00:42:47 +0200
+Iago via R-help <r-help at r-project.org> ?????:
+
+> If the issue is due
+> 
+> |to the 'Last modified' / .builtData that apparently changes on the 
+> repository every day, although the version numbers of packages are
+> not changed |
+> 
+> should then be solved on CRAN side?
+
+The build date is used as a proxy for all the binary-level dependencies
+that the built packages may have separately from the source-level
+dependencies [*]. Sometimes it's an unnecessary precaution and the
+binary packages can be freely interchanged, ignoring the build dates.
+Other times not reinstalling everything will lead to very confusing,
+hard-to-debug errors. Maybe some day we'll have a different system that
+doesn't reinstall packages out of abundance of caution, but it's not
+easy to design properly.
+
+-- 
+Best regards,
+Ivan
+
+[*] https://stat.ethz.ch/pipermail/r-package-devel/2026q2/012419.html
+
+
