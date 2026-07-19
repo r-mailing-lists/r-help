@@ -488,6 +488,93 @@
       "thread_id": "thread-53be89463df2",
       "thread_depth": 1,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-0ac9002867fa",
+      "message_id": "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>",
+      "from_name": "Andre Luiz Tietbohl Ramos",
+      "from_email_hash": "f1ee93083eaa5e3d9542ed0100870dcc6aa41f547a0a089c66b564f768a77107",
+      "date": "2026-07-18T15:05:07Z",
+      "subject": "[R] Multiline subtitle",
+      "subject_clean": "Multiline subtitle",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nSuppose I want to have a multiline subtitle using ggplot() with aligned\nstrings between first line and second line like a table.  I'm using the\napproach below to no avail,\n\ntickers.subtitle <- c(\"CPFE3.SA\",  \"CXSE3.SA\", \" ALUP11.SA\",  \"BBAS3.SA\",  \"\nCMIG4.SA\",  \"VALE3.SA\", \" LEVE3.SA\", \"VIVT3.SA\", \"TAEE4.SA\", \"RANI3.SA\", \"\nBRSR6.SA\", \"SAPR4.SA\")\nticker.subtitle.weights <- c(\"20.0%\",   \"15.0%\",  \"15.0%\",  \"5.0%\", \"5.0%\",\n\"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\")\n\nport_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +\n...\nlabs(\n...\nsubtitle = paste('Ativos: ', tickers.subtitle,\n                          '\\nPesos: ', ticker.subtitle.weights)\n)\n\nAny suggestions?\n\nTIA,\n\n--\nAndr? Luiz Tietbohl Ramos, PhD\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nSuppose I want to have a multiline subtitle using ggplot() with aligned\nstrings between first line and second line like a table.  I'm using the\napproach below to no avail,\n\ntickers.subtitle <-",
+      "thread_id": "thread-0ac9002867fa",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-c2ba6f829d3f",
+      "message_id": "<27227.39062.697069.762556@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-07-18T15:15:34Z",
+      "subject": "[R] [R-SIG-Finance] Multiline subtitle",
+      "subject_clean": "Multiline subtitle",
+      "in_reply_to": "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>",
+      "references": [
+        "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>"
+      ],
+      "body_plain": "Posting to two lists at once is considered rude. Please don't do it. I\nremoved r-sig-finance for this reply as there is nothing finance-specific\nhere. \n\nWhen I want subtitles in a ggplot I rely on the existing features, for\nexample arguments 'label' and 'subtitle' to sub-function ggttitle(). That\nsaid I do not think vertical alignment is offered by default by a theme.\n\nDirk\n\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Posting to two lists at once is considered rude. Please don't do it. I\nremoved r-sig-finance for this reply as there is nothing finance-specific\nhere. \n\nWhen I want subtitles in a ggplot I rely on the",
+      "thread_id": "thread-0ac9002867fa",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-e1da1bfd5458",
+      "message_id": "<CA+hbrhUPBek6XtkaOQXn87C97zd1Nr=xxLsS-gs=FHqU2TG_LA@mail.gmail.com>",
+      "from_name": "Peter Langfelder",
+      "from_email_hash": "452832397217a6c78113e7dfafde5ae5401620d433eb2fdb9ba99fc9b57db26f",
+      "date": "2026-07-18T15:55:14Z",
+      "subject": "[R] [R-SIG-Finance] Multiline subtitle",
+      "subject_clean": "Multiline subtitle",
+      "in_reply_to": "<27227.39062.697069.762556@paul.eddelbuettel.com>",
+      "references": [
+        "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>",
+        "<27227.39062.697069.762556@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "On Sat, Jul 18, 2026 at 11:25?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>\n> Posting to two lists at once is considered rude. Please don't do it. I\n> removed r-sig-finance for this reply as there is nothing finance-specific\n> here.\n>\n> When I want subtitles in a ggplot I rely on the existing features, for\n> example arguments 'label' and 'subtitle' to sub-function ggttitle(). That\n> said I do not think vertical alignment is offered by default by a theme.\n\nI unfortunately cannot comment on ggplot directly, but if I were asked\nto do the same using standard R plotting, I would use legend instead\nof subtitle. The legend function has argument ncol which allows you to\nspecify number of columns as well as position and justification. A\nsimple example with a \"subtitle\" centered below the actual plot could\ngo like this:\n\npar(mar = c(5, 3.1, 2, 1));\npar(mgp = c(2, 0.7, 0));\nplot(1:10, xlab = \"\", ylab = \"x\")\nbox = par(\"usr\");\nlegend((box[1]+box[2])/2, box[3] - 2.5*strheight(\"M\"),\n   legend = c(matrix(c(\"A\", \"B\", \"C\", \"1\", \"2\", \"3\"), 2, 3, byrow = TRUE)),\n   pch = 1, col = rep(0, 6), ncol = 3, xpd = TRUE, bty = \"n\", xjust = 0.5);\n\nI would be surprised if ggplot's legend functionality did not have a\nsimilar level of flexibility. Or, if you don't insist on using ggplot,\nyou could adapt the code above. Anyway, hope this helps at least a\nlittle.\n\nPeter",
+      "body_snippet": "On Sat, Jul 18, 2026 at 11:25?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>\n> Posting to two lists at once is considered rude. Please don't do it. I\n> removed r-sig-finance for this reply as the",
+      "thread_id": "thread-0ac9002867fa",
+      "thread_depth": 2,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-b10691a6ac5b",
+      "message_id": "<0196adc0-041e-4af5-93ac-a3a5e7d6d7e4@gmail.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "a4adc0dbbb884730ac1f9626468de48fdf2c67b863a86697ed3baad16d5bb209",
+      "date": "2026-07-18T16:30:16Z",
+      "subject": "[R] Multiline subtitle",
+      "subject_clean": "Multiline subtitle",
+      "in_reply_to": "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>",
+      "references": [
+        "<CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>"
+      ],
+      "body_plain": "?s 16:05 de 18/07/2026, Andre Luiz Tietbohl Ramos escreveu:\n> Hello,\n>\n> Suppose I want to have a multiline subtitle using ggplot() with aligned\n> strings between first line and second line like a table.  I'm using the\n> approach below to no avail,\n>\n> tickers.subtitle <- c(\"CPFE3.SA\",  \"CXSE3.SA\", \" ALUP11.SA\",  \"BBAS3.SA\",  \"\n> CMIG4.SA\",  \"VALE3.SA\", \" LEVE3.SA\", \"VIVT3.SA\", \"TAEE4.SA\", \"RANI3.SA\", \"\n> BRSR6.SA\", \"SAPR4.SA\")\n> ticker.subtitle.weights <- c(\"20.0%\",   \"15.0%\",  \"15.0%\",  \"5.0%\", \"5.0%\",\n> \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\")\n>\n> port_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +\n> ...\n> labs(\n> ...\n> subtitle = paste('Ativos: ', tickers.subtitle,\n>                            '\\nPesos: ', ticker.subtitle.weights)\n> )\n>\n> Any suggestions?\n>\n> TIA,\n>\n> --\n> Andr? Luiz Tietbohl Ramos, PhD\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nHello,\n\n\nHere is a solution from this StackOverflow post [1]\n\n\n# sample data\nport_cumulative_ret <- data.frame(\n ? date = Sys.Date() - (10:1),\n ? cum_ret = cumsum(rnorm(10))\n)\n\ntickers.subtitle <- c(\"CPFE3.SA\",? \"CXSE3.SA\", \"ALUP11.SA\", \"BBAS3.SA\",\n ? ? ? ? ? ? ? ? ? ? ? \"CMIG4.SA\",? \"VALE3.SA\", \"LEVE3.SA\", \"VIVT3.SA\",\n ? ? ? ? ? ? ? ? ? ? ? \"TAEE4.SA\", \"RANI3.SA\", \"BRSR6.SA\", \"SAPR4.SA\")\nticker.subtitle.weights <- c(\"20.0%\",? ?\"15.0%\",? \"15.0%\", \"5.0%\",\n ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?\"5.0%\", \"5.7%\", \"5.7%\", \"5.7%\", \"5.7%\",\n ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?\"5.7%\", \"5.7%\", \"5.7%\")\n\n### Load the needed libraries\nlibrary(ggplot2)\nlibrary(scales)\nlibrary(grid)\nlibrary(gridExtra)\n\n# prepare the tickers data\ndf1 <- data.frame(ticker.subtitle.weights)\ndf1 <- as.data.frame(t(df1))\nnames(df1) <- tickers.subtitle\nrow.names(df1) <- NULL\n\n# the cumulative returns plot\nplot1 <- port_cumulative_ret |>\n ? ggplot(aes(x = date, y = cum_ret)) +\n ? geom_line()\n\n# tickers table\ntbl <- tableGrob(df1, rows = NULL)\n\n# put table below the plot\ngrid.arrange(plot1, tbl, nrow = 2, heights = c(8, 2))\n\n\n[1] https://stackoverflow.com/q/41164675/8245406\n\n\nHope this helps,\n\nRui Barradas",
+      "body_snippet": "?s 16:05 de 18/07/2026, Andre Luiz Tietbohl Ramos escreveu:\n> Hello,\n>\n> Suppose I want to have a multiline subtitle using ggplot() with aligned\n> strings between first line and second line like a tab",
+      "thread_id": "thread-0ac9002867fa",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-e2d46cbd01f0",
+      "message_id": "<f71c685b-9d46-4479-b7d1-ded4f14e3742@yeah.net>",
+      "from_name": "Jinsong Zhao",
+      "from_email_hash": "fa59c780d79254f01106f40cecbad06a9c9689427386ee75ee32092605de77ba",
+      "date": "2026-07-19T01:06:21Z",
+      "subject": "[R] Anova() in car not works after loading piecewiseSEM package",
+      "subject_clean": "Anova() in car not works after loading piecewiseSEM package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi there,\n\nIn the code below, you may notice that the Anova() function from the \n*car*package does not behave as expected after loading the \npiecewiseSEMpackage. I haven't been able to identify the cause of this \nissue or find a working solution. Any suggestions or insights would be \ngreatly appreciated.\n\nBest,\n\nJinsong\n\n > library(nlme)\n > fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)\n > library(car)\nLoading required package: carData\n > Anova(fm2)\nAnalysis of Deviance Table (Type II tests)\n\nResponse: distance\n ? ? ? ?Chisq Df Pr(>Chisq)\nage 114.8383? 1? < 2.2e-16 ***\nSex? ?9.2921? 1? ?0.002301 **\n---\nSignif. codes:? 0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1\n > library(piecewiseSEM)\nRegistered S3 method overwritten by 'lme4':\n ? method? ? ? ? ? ?from\n ? na.action.merMod car\n\n ? This is piecewiseSEM version 2.3.0.2.\n\n\n ? Questions or bugs can be addressed to <jslefche at gmail.com>.\n > Anova(fm2)\nError in if (random) { : the condition has length > 1\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi there,\n\nIn the code below, you may notice that the Anova() function from the \n*car*package does not behave as expected after loading the \npiecewiseSEMpackage. I haven't been able to identify the ca",
+      "thread_id": "thread-e2d46cbd01f0",
+      "thread_depth": 0,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -572,6 +659,31 @@
       "started": "2026-07-16T22:42:47Z",
       "last_reply": "2026-07-17T20:30:46Z",
       "root_message_id": "msg-53be89463df2"
+    },
+    {
+      "id": "thread-0ac9002867fa",
+      "subject": "Multiline subtitle",
+      "message_count": 4,
+      "participants": [
+        "Andre Luiz Tietbohl Ramos",
+        "Dirk Eddelbuettel",
+        "Peter Langfelder",
+        "Rui Barradas"
+      ],
+      "started": "2026-07-18T15:05:07Z",
+      "last_reply": "2026-07-18T16:30:16Z",
+      "root_message_id": "msg-0ac9002867fa"
+    },
+    {
+      "id": "thread-e2d46cbd01f0",
+      "subject": "Anova() in car not works after loading piecewiseSEM package",
+      "message_count": 1,
+      "participants": [
+        "Jinsong Zhao"
+      ],
+      "started": "2026-07-19T01:06:21Z",
+      "last_reply": "2026-07-19T01:06:21Z",
+      "root_message_id": "msg-e2d46cbd01f0"
     }
   ]
 }

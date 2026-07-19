@@ -2129,3 +2129,247 @@ Ivan
 [*] https://stat.ethz.ch/pipermail/r-package-devel/2026q2/012419.html
 
 
+From @ndre|tr@mo@ @end|ng |rom gm@||@com  Sat Jul 18 17:05:07 2026
+From: @ndre|tr@mo@ @end|ng |rom gm@||@com (Andre Luiz Tietbohl Ramos)
+Date: Sat, 18 Jul 2026 12:05:07 -0300
+Subject: [R] Multiline subtitle
+Message-ID: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+
+Hello,
+
+Suppose I want to have a multiline subtitle using ggplot() with aligned
+strings between first line and second line like a table.  I'm using the
+approach below to no avail,
+
+tickers.subtitle <- c("CPFE3.SA",  "CXSE3.SA", " ALUP11.SA",  "BBAS3.SA",  "
+CMIG4.SA",  "VALE3.SA", " LEVE3.SA", "VIVT3.SA", "TAEE4.SA", "RANI3.SA", "
+BRSR6.SA", "SAPR4.SA")
+ticker.subtitle.weights <- c("20.0%",   "15.0%",  "15.0%",  "5.0%", "5.0%",
+"5.7%", "5.7%", "5.7%", "5.7%", "5.7%", "5.7%", "5.7%")
+
+port_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +
+...
+labs(
+...
+subtitle = paste('Ativos: ', tickers.subtitle,
+                          '\nPesos: ', ticker.subtitle.weights)
+)
+
+Any suggestions?
+
+TIA,
+
+--
+Andr? Luiz Tietbohl Ramos, PhD
+
+	[[alternative HTML version deleted]]
+
+
+From edd @end|ng |rom deb|@n@org  Sat Jul 18 17:15:34 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Sat, 18 Jul 2026 10:15:34 -0500
+Subject: [R] [R-SIG-Finance] Multiline subtitle
+In-Reply-To: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+References: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+Message-ID: <27227.39062.697069.762556@paul.eddelbuettel.com>
+
+
+Posting to two lists at once is considered rude. Please don't do it. I
+removed r-sig-finance for this reply as there is nothing finance-specific
+here. 
+
+When I want subtitles in a ggplot I rely on the existing features, for
+example arguments 'label' and 'subtitle' to sub-function ggttitle(). That
+said I do not think vertical alignment is offered by default by a theme.
+
+Dirk
+
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From peter@|@ng|e|der @end|ng |rom gm@||@com  Sat Jul 18 17:55:14 2026
+From: peter@|@ng|e|der @end|ng |rom gm@||@com (Peter Langfelder)
+Date: Sat, 18 Jul 2026 23:55:14 +0800
+Subject: [R] [R-SIG-Finance] Multiline subtitle
+In-Reply-To: <27227.39062.697069.762556@paul.eddelbuettel.com>
+References: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+ <27227.39062.697069.762556@paul.eddelbuettel.com>
+Message-ID: <CA+hbrhUPBek6XtkaOQXn87C97zd1Nr=xxLsS-gs=FHqU2TG_LA@mail.gmail.com>
+
+On Sat, Jul 18, 2026 at 11:25?PM Dirk Eddelbuettel <edd at debian.org> wrote:
+>
+>
+> Posting to two lists at once is considered rude. Please don't do it. I
+> removed r-sig-finance for this reply as there is nothing finance-specific
+> here.
+>
+> When I want subtitles in a ggplot I rely on the existing features, for
+> example arguments 'label' and 'subtitle' to sub-function ggttitle(). That
+> said I do not think vertical alignment is offered by default by a theme.
+
+I unfortunately cannot comment on ggplot directly, but if I were asked
+to do the same using standard R plotting, I would use legend instead
+of subtitle. The legend function has argument ncol which allows you to
+specify number of columns as well as position and justification. A
+simple example with a "subtitle" centered below the actual plot could
+go like this:
+
+par(mar = c(5, 3.1, 2, 1));
+par(mgp = c(2, 0.7, 0));
+plot(1:10, xlab = "", ylab = "x")
+box = par("usr");
+legend((box[1]+box[2])/2, box[3] - 2.5*strheight("M"),
+   legend = c(matrix(c("A", "B", "C", "1", "2", "3"), 2, 3, byrow = TRUE)),
+   pch = 1, col = rep(0, 6), ncol = 3, xpd = TRUE, bty = "n", xjust = 0.5);
+
+I would be surprised if ggplot's legend functionality did not have a
+similar level of flexibility. Or, if you don't insist on using ggplot,
+you could adapt the code above. Anyway, hope this helps at least a
+little.
+
+Peter
+
+
+From ru|pb@rr@d@@463 @end|ng |rom gm@||@com  Sat Jul 18 18:30:16 2026
+From: ru|pb@rr@d@@463 @end|ng |rom gm@||@com (Rui Barradas)
+Date: Sat, 18 Jul 2026 17:30:16 +0100
+Subject: [R] Multiline subtitle
+In-Reply-To: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+References: <CAPZA_qJ=--_jXtw6ERzHhamCFP85SZdXHUf1irJVps=hqE=D3A@mail.gmail.com>
+Message-ID: <0196adc0-041e-4af5-93ac-a3a5e7d6d7e4@gmail.com>
+
+?s 16:05 de 18/07/2026, Andre Luiz Tietbohl Ramos escreveu:
+> Hello,
+>
+> Suppose I want to have a multiline subtitle using ggplot() with aligned
+> strings between first line and second line like a table.  I'm using the
+> approach below to no avail,
+>
+> tickers.subtitle <- c("CPFE3.SA",  "CXSE3.SA", " ALUP11.SA",  "BBAS3.SA",  "
+> CMIG4.SA",  "VALE3.SA", " LEVE3.SA", "VIVT3.SA", "TAEE4.SA", "RANI3.SA", "
+> BRSR6.SA", "SAPR4.SA")
+> ticker.subtitle.weights <- c("20.0%",   "15.0%",  "15.0%",  "5.0%", "5.0%",
+> "5.7%", "5.7%", "5.7%", "5.7%", "5.7%", "5.7%", "5.7%")
+>
+> port_cumulative_ret %>% ggplot(aes(x = date, y = cum_ret)) +
+> ...
+> labs(
+> ...
+> subtitle = paste('Ativos: ', tickers.subtitle,
+>                            '\nPesos: ', ticker.subtitle.weights)
+> )
+>
+> Any suggestions?
+>
+> TIA,
+>
+> --
+> Andr? Luiz Tietbohl Ramos, PhD
+>
+> 	[[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+Hello,
+
+
+Here is a solution from this StackOverflow post [1]
+
+
+# sample data
+port_cumulative_ret <- data.frame(
+ ? date = Sys.Date() - (10:1),
+ ? cum_ret = cumsum(rnorm(10))
+)
+
+tickers.subtitle <- c("CPFE3.SA",? "CXSE3.SA", "ALUP11.SA", "BBAS3.SA",
+ ? ? ? ? ? ? ? ? ? ? ? "CMIG4.SA",? "VALE3.SA", "LEVE3.SA", "VIVT3.SA",
+ ? ? ? ? ? ? ? ? ? ? ? "TAEE4.SA", "RANI3.SA", "BRSR6.SA", "SAPR4.SA")
+ticker.subtitle.weights <- c("20.0%",? ?"15.0%",? "15.0%", "5.0%",
+ ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?"5.0%", "5.7%", "5.7%", "5.7%", "5.7%",
+ ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?"5.7%", "5.7%", "5.7%")
+
+### Load the needed libraries
+library(ggplot2)
+library(scales)
+library(grid)
+library(gridExtra)
+
+# prepare the tickers data
+df1 <- data.frame(ticker.subtitle.weights)
+df1 <- as.data.frame(t(df1))
+names(df1) <- tickers.subtitle
+row.names(df1) <- NULL
+
+# the cumulative returns plot
+plot1 <- port_cumulative_ret |>
+ ? ggplot(aes(x = date, y = cum_ret)) +
+ ? geom_line()
+
+# tickers table
+tbl <- tableGrob(df1, rows = NULL)
+
+# put table below the plot
+grid.arrange(plot1, tbl, nrow = 2, heights = c(8, 2))
+
+
+[1] https://stackoverflow.com/q/41164675/8245406
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+From j@zh@o @end|ng |rom ye@h@net  Sun Jul 19 03:06:21 2026
+From: j@zh@o @end|ng |rom ye@h@net (Jinsong Zhao)
+Date: Sun, 19 Jul 2026 09:06:21 +0800
+Subject: [R] Anova() in car not works after loading piecewiseSEM package
+Message-ID: <f71c685b-9d46-4479-b7d1-ded4f14e3742@yeah.net>
+
+Hi there,
+
+In the code below, you may notice that the Anova() function from the 
+*car*package does not behave as expected after loading the 
+piecewiseSEMpackage. I haven't been able to identify the cause of this 
+issue or find a working solution. Any suggestions or insights would be 
+greatly appreciated.
+
+Best,
+
+Jinsong
+
+ > library(nlme)
+ > fm2 <- lme(distance ~ age + Sex, data = Orthodont, random = ~ 1)
+ > library(car)
+Loading required package: carData
+ > Anova(fm2)
+Analysis of Deviance Table (Type II tests)
+
+Response: distance
+ ? ? ? ?Chisq Df Pr(>Chisq)
+age 114.8383? 1? < 2.2e-16 ***
+Sex? ?9.2921? 1? ?0.002301 **
+---
+Signif. codes:? 0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+ > library(piecewiseSEM)
+Registered S3 method overwritten by 'lme4':
+ ? method? ? ? ? ? ?from
+ ? na.action.merMod car
+
+ ? This is piecewiseSEM version 2.3.0.2.
+
+
+ ? Questions or bugs can be addressed to <jslefche at gmail.com>.
+ > Anova(fm2)
+Error in if (random) { : the condition has length > 1
+
+	[[alternative HTML version deleted]]
+
+
