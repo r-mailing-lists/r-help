@@ -9549,3 +9549,126 @@ Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From nnov|c@ @end|ng |rom gm@||@com  Tue Jul 21 10:33:51 2026
+From: nnov|c@ @end|ng |rom gm@||@com (Novica Nakov)
+Date: Tue, 21 Jul 2026 10:33:51 +0200
+Subject: [R] Running open source shiny server on Debian
+In-Reply-To: <9ae70825-8244-4f25-bb03-b03701d86523@psyctc.org>
+References: <9ae70825-8244-4f25-bb03-b03701d86523@psyctc.org>
+Message-ID: <CAEXeAob65+2XMJNg+VYJ6QdSNJcZ25QBtxXuuVoTnBHJR+WpMQ@mail.gmail.com>
+
+Hi,
+There are two separate issues here:
+
+> Posit say that their OS shiny server is only
+> installable on:
+>    Red Hat Enterprise Linux 8 and higher
+>    Ubuntu 22.04 and higher (LTS releases only)
+>    SUSE Linux Enterprise Server 15 SP7
+> (from https://docs.posit.co/shiny-server/)
+
+You are linking here to Shiny Server Pro Admin Guide which is their
+paid offering and for that they support the above distributions.
+
+
+> They did do the upgrade of the server to bookworm and the shiny server
+> is now on R 4.2.2.  The apps are all runnning OK (and they are mostly
+> very simple) but this is clearly not good to be using a version of R
+> that is four years old.
+
+This has nothing to do with Shiny Server, as the default R in bookworm
+is 4.2.2 (https://packages.debian.org/bookworm/r-base). So you need to
+see how to update R on bookworm if that is the distribution of choice.
+
+The open source shiny server (https://github.com/rstudio/shiny-server)
+has this in the README:
+
+"""At this time, Shiny Server can be run on Linux servers with
+explicit support for Ubuntu 14.04 or greater (64 bit) and CentOS/RHEL
+6 (64 bit) or greater. If you are using one of these distributions,
+please download the pre-packaged installers from RStudio:"""
+
+You may also want to check out shinyproxy (https://www.shinyproxy.io/).
+
+
+From chr|@ho|d @end|ng |rom p@yctc@org  Tue Jul 21 12:49:42 2026
+From: chr|@ho|d @end|ng |rom p@yctc@org (Chris Evans)
+Date: Tue, 21 Jul 2026 11:49:42 +0100
+Subject: [R] Running open source shiny server on Debian
+In-Reply-To: <CAEXeAob65+2XMJNg+VYJ6QdSNJcZ25QBtxXuuVoTnBHJR+WpMQ@mail.gmail.com>
+References: <9ae70825-8244-4f25-bb03-b03701d86523@psyctc.org>
+ <CAEXeAob65+2XMJNg+VYJ6QdSNJcZ25QBtxXuuVoTnBHJR+WpMQ@mail.gmail.com>
+Message-ID: <74be688b-b857-4cd1-9e56-3c5e4569e25d@psyctc.org>
+
+On 21/07/2026 09:33, Novica Nakov wrote:
+> Hi,
+> There are two separate issues here:
+>
+>> Posit say that their OS shiny server is only
+>> installable on:
+>>     Red Hat Enterprise Linux 8 and higher
+>>     Ubuntu 22.04 and higher (LTS releases only)
+>>     SUSE Linux Enterprise Server 15 SP7
+>> (from https://docs.posit.co/shiny-server/)
+> You are linking here to Shiny Server Pro Admin Guide which is their
+> paid offering and for that they support the above distributions.
+Yes.? Apologies.? Oddly enough I think the link that took me to that was 
+from their open source shiny server pages.? Thanks.
+>> They did do the upgrade of the server to bookworm and the shiny server
+>> is now on R 4.2.2.  The apps are all runnning OK (and they are mostly
+>> very simple) but this is clearly not good to be using a version of R
+>> that is four years old.
+> This has nothing to do with Shiny Server, as the default R in bookworm
+> is 4.2.2 (https://packages.debian.org/bookworm/r-base). So you need to
+> see how to update R on bookworm if that is the distribution of choice.
+
+Sorry.? I did try but clearly I wasn't clear!? I understand that, the 
+issue I have is that my ISP are under the impression that for the shiny 
+server to continue to work R has to be kept? at 4.2.2. I think that is 
+not correct and that I could do the usual with /etc/apt/sources.list to 
+bring R to the current version as per the advice about trixie in 
+https://cran.r-project.org/bin/linux/debian/
+
+I suppose there is a theoretical risk that the 4.6.1 version might have 
+a change in the shiny package (or, even less likely i think) any other 
+package that I use in my apps that the shiny-server installation can't 
+handle.? I don't believe that is at all likely but perhaps someone here 
+is running open source shiny server (on any OS really) with R 4.6.1 and 
+can confirm that there are no such nasty issues?
+
+> The open source shiny server (https://github.com/rstudio/shiny-server)
+> has this in the README:
+>
+> """At this time, Shiny Server can be run on Linux servers with
+> explicit support for Ubuntu 14.04 or greater (64 bit) and CentOS/RHEL
+> 6 (64 bit) or greater. If you are using one of these distributions,
+> please download the pre-packaged installers from RStudio:"""
+
+Thanks.? I really should have managed to find that. Apologies.
+
+Interesting ... I know my ISP prefer to run servers on Debian but I know 
+they provide images of other Linux OSs if one is renting a machine or VM 
+from them so perhaps they might be happy to run Ubuntu for the shiny 
+server.? ?I know that one can also compile the shiny server from source 
+and that could presumably be done in bookworm or trixie.? However, some 
+years back when i tried to do that for a pi machine I lost a lot of time 
+and eventually had to give up as incompatibilities in the various 
+components that shiny-server uses as then implemented on the pi were 
+beyond me (and beyond some knowledgeable internet help) to overcome.
+
+Again, perhaps there is someone on the list who has gone that route and 
+compiled the shiny server from source on bookworm or trixie and can 
+confirm it worked (relatively easily!)
+
+> You may also want to check out shinyproxy (https://www.shinyproxy.io/).
+
+Thanks again.? That looks impressive and is clearly very powerful. 
+However, it takes me into things like docker that I have so far not 
+learned and quite a lot of what is written there about how it works was 
+language I just don't know!
+
+Many thanks,
+
+Chris
+
+
