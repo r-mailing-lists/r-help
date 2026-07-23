@@ -1140,6 +1140,58 @@
       "thread_id": "thread-093535804df5",
       "thread_depth": 2,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-671038b7fe10",
+      "message_id": "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "from_name": "Sorkin, John",
+      "from_email_hash": "d5c84a99bb06c78a2737b04730afa40287aa87f81ff868c07824d82d50d2d725",
+      "date": "2026-07-22T19:58:11Z",
+      "subject": "[R] Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am not showing code, because I don't know how to write the code. I know that MatchIt performs propensity score matching, but I don't know how to use the function to perform the match I want to conduct.\n\nI have two files\nFile 1: a list of n  records, 1 record/subject. Each record has a subject number and a date\nFile 2: a list of m records m>>n with multiple records/subject but each record has a distinct date. All records for a given subject in file 2 have the same subject number, but each record has a different date.\n\nI want to match each record from file 1 with a single record from file 2 based on date. Once a record from file 2 is matched with a record from file 1, I want to remove all records from file 2 for the subject who was used in the match with the subject from file 1 so that the subject from file 2 will not be used in any future match.\n\n\nExample\nfile 1                                          file 2\nsubject   date                              subject   date\n1              01/01/2020                  100   01/01/2020\n2              01/01/2021                  100   01/10/2021\n3                                                   101  02/01/2021\n  \nSubject 1 from file 1 is a perfect match for subject 100 from file2. The subjects are matched.\nAll data from file 2 is removed for subject 100.\nSubject 2 from file 1 is then matched with subject 101 from file 2.\nIf all records from subject 100 had not been removed from file2, subject 2 would have been matched to subject 100 date 01/10/2021. I don't want this to happen. Once subject 100 is used to match subject 1, I don't want any other person from file 1 to be matched with subject 100.\n\nI hope you can help me with this, I suspect, not uncommon matching problem!\n\nThank you,\nJohn\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?\nFormer PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology, Geriatrics and Palliative Medicine,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
+      "body_snippet": "I am not showing code, because I don't know how to write the code. I know that MatchIt performs propensity score matching, but I don't know how to use the function to perform the match I want to condu",
+      "thread_id": "thread-671038b7fe10",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-fbc043d03d82",
+      "message_id": "<CAGxFJbRDns51uPo6TtvsDeC7wwL8O-mOnOKy8U9E-XLTjEzGsQ@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-07-22T20:25:47Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "\" I am not showing code, because I don't know how to write the code.\" (John\nSorkin)\n\nFortune!?\n\n(not sure if this is legit, as it's about R-Help and not R).\n\nCheers,\nBert\n\n\nOn Wed, Jul 22, 2026 at 12:58?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am not showing code, because I don't know how to write the code. I know\n> that MatchIt performs propensity score matching, but I don't know how to\n> use the function to perform the match I want to conduct.\n>\n> I have two files\n> File 1: a list of n  records, 1 record/subject. Each record has a subject\n> number and a date\n> File 2: a list of m records m>>n with multiple records/subject but each\n> record has a distinct date. All records for a given subject in file 2 have\n> the same subject number, but each record has a different date.\n>\n> I want to match each record from file 1 with a single record from file 2\n> based on date. Once a record from file 2 is matched with a record from file\n> 1, I want to remove all records from file 2 for the subject who was used in\n> the match with the subject from file 1 so that the subject from file 2 will\n> not be used in any future match.\n>\n>\n> Example\n> file 1                                          file 2\n> subject   date                              subject   date\n> 1              01/01/2020                  100   01/01/2020\n> 2              01/01/2021                  100   01/10/2021\n> 3                                                   101  02/01/2021\n>\n> Subject 1 from file 1 is a perfect match for subject 100 from file2. The\n> subjects are matched.\n> All data from file 2 is removed for subject 100.\n> Subject 2 from file 1 is then matched with subject 101 from file 2.\n> If all records from subject 100 had not been removed from file2, subject 2\n> would have been matched to subject 100 date 01/10/2021. I don't want this\n> to happen. Once subject 100 is used to match subject 1, I don't want any\n> other person from file 1 to be matched with subject 100.\n>\n> I hope you can help me with this, I suspect, not uncommon matching problem!\n>\n> Thank you,\n> John\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core, University of Maryland\n> School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "\" I am not showing code, because I don't know how to write the code.\" (John\nSorkin)\n\nFortune!?\n\n(not sure if this is legit, as it's about R-Help and not R).\n\nCheers,\nBert\n\n\nOn Wed, Jul 22, 2026 at 12:",
+      "thread_id": "thread-671038b7fe10",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-f6df7bf5c84e",
+      "message_id": "<90a6c858-941a-452e-8208-d2f0a9ebef82@psyctc.org>",
+      "from_name": "Chris Evans",
+      "from_email_hash": "4ef4e45d3d9591b90dfc62b942f72b4b0b88b9e930dadd5cdbd897fc0cfabb65",
+      "date": "2026-07-22T21:29:50Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "Perhaps I am misunderstanding but in tidyverse dialect I think this works:\n\nlibrary(tidyverse)\ntibble(subject1 = 1:3,\n ? ? ? ?date = as.Date(c(\"01/01/2020\", \"01/01/2021\", NA_Date_),\n ? ? ? ? ? ? ? ? ? ? ? format = \"%d/%m/%Y\")) %>%\n ? mutate(rowN1 = row_number()) -> tmpTib1\n\ntibble(subject2 = c(100, 100, 101),\n ? ? ? ?date = as.Date(c(\"01/01/2020\", \"01/01/2021\", \"02/01/2021\"),\n ? ? ? ? ? ? ? ? ? ? ? format = \"%d/%m/%Y\")) %>%\n ? mutate(rowN2 = row_number()) -> tmpTib2\n\ntmpTib1\n### gives\n# A tibble: 3 ? 3\n#  subject1 date       rowN1\n#     <int> <date>     <int>\n#1        1 2020-01-01     1\n#2        2 2021-01-01     2\n#3        3 NA             3\n\ntmpTib2\n### gives\n# A tibble: 3 ? 3\n#  subject2 date       rowN2\n#     <dbl> <date>     <int>\n#1      100 2020-01-01     1\n#2      100 2021-01-01     2\n#3      101 2021-01-02     3\n\n\ntmpTib2 %>%\n ? left_join(tmpTib1, by = \"date\") %>%\n ? group_by(subject2) %>%\n ? ungroup() %>%\n ? filter(row_number() == 1)\n### gives\n# A tibble: 1 ? 5\n#  subject2 date       rowN2 subject1 rowN1\n#     <dbl> <date>     <int>    <int> <int>\n#1      100 2020-01-01     1        1     1\n\nI think this would be highly inefficient if file 2 is huge with many records with the same date (matching a date from file1).\nI have also assumed that you just want the first match in the default file sort order but you could rearrange the files to get the\norder you want before doing the above.\nMy rowN variables are not needed!\n\nBut I suspect I am misunderstanding and I am sure there are other ways to do this without tidyverse.\n\nVery best all,\n\nChris\n\nOn 22/07/2026 20:58, Sorkin, John wrote:\n> I am not showing code, because I don't know how to write the code. I know that MatchIt performs propensity score matching, but I don't know how to use the function to perform the match I want to conduct.\n>\n> I have two files\n> File 1: a list of n  records, 1 record/subject. Each record has a subject number and a date\n> File 2: a list of m records m>>n with multiple records/subject but each record has a distinct date. All records for a given subject in file 2 have the same subject number, but each record has a different date.\n>\n> I want to match each record from file 1 with a single record from file 2 based on date. Once a record from file 2 is matched with a record from file 1, I want to remove all records from file 2 for the subject who was used in the match with the subject from file 1 so that the subject from file 2 will not be used in any future match.\n>\n>\n> Example\n> file 1                                          file 2\n> subject   date                              subject   date\n> 1              01/01/2020                  100   01/01/2020\n> 2              01/01/2021                  100   01/10/2021\n> 3                                                   101  02/01/2021\n>    \n> Subject 1 from file 1 is a perfect match for subject 100 from file2. The subjects are matched.\n> All data from file 2 is removed for subject 100.\n> Subject 2 from file 1 is then matched with subject 101 from file 2.\n> If all records from subject 100 had not been removed from file2, subject 2 would have been matched to subject 100 date 01/10/2021. I don't want this to happen. Once subject 100 is used to match subject 1, I don't want any other person from file 1 to be matched with subject 100.\n>\n> I hope you can help me with this, I suspect, not uncommon matching problem!\n>\n> Thank you,\n> John\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Perhaps I am misunderstanding but in tidyverse dialect I think this works:\n\nlibrary(tidyverse)\ntibble(subject1 = 1:3,\n ? ? ? ?date = as.Date(c(\"01/01/2020\", \"01/01/2021\", NA_Date_),\n ? ? ? ? ? ? ? ? ?",
+      "thread_id": "thread-671038b7fe10",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -1280,6 +1332,19 @@
       "started": "2026-07-20T16:07:11Z",
       "last_reply": "2026-07-21T10:49:42Z",
       "root_message_id": "msg-093535804df5"
+    },
+    {
+      "id": "thread-671038b7fe10",
+      "subject": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "message_count": 3,
+      "participants": [
+        "Bert Gunter",
+        "Chris Evans",
+        "Sorkin, John"
+      ],
+      "started": "2026-07-22T19:58:11Z",
+      "last_reply": "2026-07-22T21:29:50Z",
+      "root_message_id": "msg-671038b7fe10"
     }
   ]
 }
