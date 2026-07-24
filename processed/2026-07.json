@@ -1192,6 +1192,130 @@
       "thread_id": "thread-671038b7fe10",
       "thread_depth": 1,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-58085e4cad1c",
+      "message_id": "<DS4PR01MB9434471A8AC7D6257988C9BEF2C02@DS4PR01MB9434.prod.exchangelabs.com>",
+      "from_name": "Ravi Varadhan",
+      "from_email_hash": "e29065f0ed01d24d142abdfc5db43f0fbc0a52a9d70244c81382700b6ce4b7f2",
+      "date": "2026-07-23T15:01:29Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "This is a classic matching problem, I believe.  Based on your description, you are looking for a 1-to-1 nearest-neighbor match based on the absolute difference in dates, with the constraint that once a subject in File 2 is used, all of their records are discarded.\n\nCorrect?\n\nThere are two classical approaches: greedy matching and global optimal matching.  While the greedy approach is simple to implement and often works, it can sometimes get into trouble (i.e., run out of good matches). The optimal approach would use the Hungarian algorithm (e.g., LSAP function in the clue package) to find the combination of matches that results in the lowest total date difference across the entire dataset.\n\nRavi\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This is a classic matching problem, I believe.  Based on your description, you are looking for a 1-to-1 nearest-neighbor match based on the absolute difference in dates, with the constraint that once ",
+      "thread_id": "thread-58085e4cad1c",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-ecf340850b41",
+      "message_id": "<CAGxFJbR5fg8nXHQ5riT9RJ782o7_C-kzq9k1qz+ZkhqTvY7LJQ@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-07-23T17:32:25Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "If you have not found any of the responses (including Ravi's) sufficiently\nhelpful, I would suggest that you provide a reprex (which does *not*\nrequire code for a solution).\n\nIssues that seemed to me to require further clarification are:\n\n1. After a subject's date in file 1 is matched to a date in file 2 and all\nthe records in file 2 for the matched subject of that date removed, do you\ncontinue to seek matches for that file 1 date and remove further subjects\nfrom file 2, or do you go on to the next record in file 1?\n\n2. Can there be many identical dates in file 1 (this is related to point 1)\nabove)? Same question for file 2?\n\nApologies if this is just my stupidity and these points are obvious or\nirrelevant.\n\nCheers,\nBert\n\nOn Wed, Jul 22, 2026 at 12:58?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am not showing code, because I don't know how to write the code. I know\n> that MatchIt performs propensity score matching, but I don't know how to\n> use the function to perform the match I want to conduct.\n>\n> I have two files\n> File 1: a list of n  records, 1 record/subject. Each record has a subject\n> number and a date\n> File 2: a list of m records m>>n with multiple records/subject but each\n> record has a distinct date. All records for a given subject in file 2 have\n> the same subject number, but each record has a different date.\n>\n> I want to match each record from file 1 with a single record from file 2\n> based on date. Once a record from file 2 is matched with a record from file\n> 1, I want to remove all records from file 2 for the subject who was used in\n> the match with the subject from file 1 so that the subject from file 2 will\n> not be used in any future match.\n>\n>\n> Example\n> file 1                                          file 2\n> subject   date                              subject   date\n> 1              01/01/2020                  100   01/01/2020\n> 2              01/01/2021                  100   01/10/2021\n> 3                                                   101  02/01/2021\n>\n> Subject 1 from file 1 is a perfect match for subject 100 from file2. The\n> subjects are matched.\n> All data from file 2 is removed for subject 100.\n> Subject 2 from file 1 is then matched with subject 101 from file 2.\n> If all records from subject 100 had not been removed from file2, subject 2\n> would have been matched to subject 100 date 01/10/2021. I don't want this\n> to happen. Once subject 100 is used to match subject 1, I don't want any\n> other person from file 1 to be matched with subject 100.\n>\n> I hope you can help me with this, I suspect, not uncommon matching problem!\n>\n> Thank you,\n> John\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core, University of Maryland\n> School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If you have not found any of the responses (including Ravi's) sufficiently\nhelpful, I would suggest that you provide a reprex (which does *not*\nrequire code for a solution).\n\nIssues that seemed to me ",
+      "thread_id": "thread-671038b7fe10",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-def097e0c495",
+      "message_id": "<CAGxFJbR5AMLeH2oQNEYaezcOCHU1A9j7t5mvCyAf=oP9SaCmYA@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-07-23T18:10:22Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<DS4PR01MB9434471A8AC7D6257988C9BEF2C02@DS4PR01MB9434.prod.exchangelabs.com>",
+      "references": [
+        "<DS4PR01MB9434471A8AC7D6257988C9BEF2C02@DS4PR01MB9434.prod.exchangelabs.com>"
+      ],
+      "body_plain": "... and related to Ravi's post, will there always be at least one date in\nfile 2 that matches every date in file 1?  And if there isn't, what action\nshould be taken?\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at 9:36?AM Ravi Varadhan via R-help <\nr-help at r-project.org> wrote:\n\n> This is a classic matching problem, I believe.  Based on your description,\n> you are looking for a 1-to-1 nearest-neighbor match based on the absolute\n> difference in dates, with the constraint that once a subject in File 2 is\n> used, all of their records are discarded.\n>\n> Correct?\n>\n> There are two classical approaches: greedy matching and global optimal\n> matching.  While the greedy approach is simple to implement and often\n> works, it can sometimes get into trouble (i.e., run out of good matches).\n> The optimal approach would use the Hungarian algorithm (e.g., LSAP function\n> in the clue package) to find the combination of matches that results in the\n> lowest total date difference across the entire dataset.\n>\n> Ravi\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "... and related to Ravi's post, will there always be at least one date in\nfile 2 that matches every date in file 1?  And if there isn't, what action\nshould be taken?\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at ",
+      "thread_id": "thread-58085e4cad1c",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-75bd7b74d3b9",
+      "message_id": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "from_name": "Sorkin, John",
+      "from_email_hash": "d5c84a99bb06c78a2737b04730afa40287aa87f81ff868c07824d82d50d2d725",
+      "date": "2026-07-23T20:18:38Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am running R in RStudio. I am creating a graph, which I see in the plot window, and I use ggsave() to save a copy of the graph in a file. \n\nWhen I use look at the graph is RStudio's Plots window, the graph looks fine. When I click on the Plot window's export button, copy the plot to the clipboard and paste the graph into MS word, the graph looks fine. Please see first figure on attached MS word document.\n\nWhen I copy and paste the .tiff file saved by ggsave, the graph looks bad. Second figure on the attached MS word document. I think the graphs is being exported improperly by ggsave. I would appreciate any suggestions for improving the quality of the graph produced by ggsave. \n\nPlease see code below and attached MS word document\n\n\n\n\n# Code to produce graph\n ## Plot\n  zz <- ggplot(\n    df.long,\n    aes(\n      x = Date,\n      y = NumPeopleExposed,\n      color = factor(criticalvalue),\n      linetype = factor(criticalvalue),\n      group = factor(criticalvalue)\n    )\n  ) +\n    geom_point(size = 3) +\n    geom_line(linewidth = 1.5) +\n    \n    scale_linetype_manual(\n      values = c(\n        \"solid\",\n        \"dashed\",\n        \"dotted\",\n        \"dotdash\",\n        \"longdash\",\n        \"twodash\"\n      )\n    ) +\n    \n    labs(\n      title = species,\n      x = \"Date\",\n      y = \"Number of People Exposed to Toxic Concentration\",\n      color = \"Critical Value\",\n      linetype = \"Critical Value\"\n    ) +\n    \n    ## Show every date on x-axis\n    scale_x_date(\n      breaks = sort(unique(df.long$Date)),\n      date_labels = \"%Y-%m-%d\"\n    ) +\n    \n    theme_bw() +\n    \n    theme(\n      axis.text.x = element_text(\n        angle = 45,\n        hjust = 1,\n        vjust = 1\n      )\n    )\n    print(zz)\n\nCode to save the graph\n current_time <- Sys.time()\n  current_time\n  # Convert colons to dashes, remove spaces\n  formatted_time <- gsub(\":\", \"-\", format(current_time, \"%Y-%m-%d_%H-%M-%S\"))\n  formatted_time\n  \n  #species=\"JDS\"\n  # Save graph\n  mypath <- file.path(\"C:\",\"Users\",\"JSorkin\",\"OneDrive - University of Maryland School of Medicine\",\"HalemMilton\",\"PaperAndAbstract\")\n  mypath\n  \n  myfilename <- paste0(species2,formatted_time,\".tiff\")\n  myfilename\n  \n  ggsave(plot=zz,\n         path=mypath,\n         filename=myfilename,\n         device=\"tiff\",\n         width=4,height=3,\n         units=\"in\",\n         dpi=600)\n\n  cat(\"Ending (12) Plot Fraction Exposed\\n\")\n  }\n\n\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?\nFormer PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology, Geriatrics and Palliative Medicine,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
+      "body_snippet": "I am running R in RStudio. I am creating a graph, which I see in the plot window, and I use ggsave() to save a copy of the graph in a file. \n\nWhen I use look at the graph is RStudio's Plots window, th",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-0dec0c27f795",
+      "message_id": "<00e701dd1af3$4c8172f0$e58458d0$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2026-07-23T22:33:35Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<CAGxFJbR5fg8nXHQ5riT9RJ782o7_C-kzq9k1qz+ZkhqTvY7LJQ@mail.gmail.com>",
+      "references": [
+        "<DM6PR03MB50493674C99B92FA76A68CF3E2C12@DM6PR03MB5049.namprd03.prod.outlook.com>",
+        "<CAGxFJbR5fg8nXHQ5riT9RJ782o7_C-kzq9k1qz+ZkhqTvY7LJQ@mail.gmail.com>"
+      ],
+      "body_plain": "As with so many explanations of requirements, they are incomplete enough to make us guess.\n\nAnd, if the goal is to use various packages, fine. Each should have enough documentation to see what it needs to work properly.\n\nThere is a straightforward solution to many problems like these ONCE YOU UNDERSTAND them. I don't.\n\nBut, sketching it out, you can probably do this in a loop of loops which might suffice even if not fast or elegant.\n\nIt looks like reading in the files to df1 and df2\n\nFor all unique ID in df1\n    For all unique ID in df2 (adjusted each time through the loop as it shrinks)\n            Compare the current ID's using all relevant rows and generate a score. Keep the best.\n    Save info on the match chosen. Remove the relevant rows from both df1 and df2 as needed or mark them some way as done.\n\nThe catch here is the inner loop should not examine previously selected items. One simple solution is to add a column (initially FALSE) to mark if a row has already been used. Adjust the conditions to only match ones set to FALSE. Once any row is used, set it to TRUE.\n\nAs for how you determine if a match is to be used, it was not explained. Someone speculated it was based on the nearest date but who knows besides John?\n\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Bert Gunter\nSent: Thursday, July 23, 2026 1:32 PM\nTo: Sorkin, John <jsorkin at som.umaryland.edu>\nCc: r-help <r-help at r-project.org>\nSubject: Re: [R] Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect\n\nIf you have not found any of the responses (including Ravi's) sufficiently\nhelpful, I would suggest that you provide a reprex (which does *not*\nrequire code for a solution).\n\nIssues that seemed to me to require further clarification are:\n\n1. After a subject's date in file 1 is matched to a date in file 2 and all\nthe records in file 2 for the matched subject of that date removed, do you\ncontinue to seek matches for that file 1 date and remove further subjects\nfrom file 2, or do you go on to the next record in file 1?\n\n2. Can there be many identical dates in file 1 (this is related to point 1)\nabove)? Same question for file 2?\n\nApologies if this is just my stupidity and these points are obvious or\nirrelevant.\n\nCheers,\nBert\n\nOn Wed, Jul 22, 2026 at 12:58?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am not showing code, because I don't know how to write the code. I know\n> that MatchIt performs propensity score matching, but I don't know how to\n> use the function to perform the match I want to conduct.\n>\n> I have two files\n> File 1: a list of n  records, 1 record/subject. Each record has a subject\n> number and a date\n> File 2: a list of m records m>>n with multiple records/subject but each\n> record has a distinct date. All records for a given subject in file 2 have\n> the same subject number, but each record has a different date.\n>\n> I want to match each record from file 1 with a single record from file 2\n> based on date. Once a record from file 2 is matched with a record from file\n> 1, I want to remove all records from file 2 for the subject who was used in\n> the match with the subject from file 1 so that the subject from file 2 will\n> not be used in any future match.\n>\n>\n> Example\n> file 1                                          file 2\n> subject   date                              subject   date\n> 1              01/01/2020                  100   01/01/2020\n> 2              01/01/2021                  100   01/10/2021\n> 3                                                   101  02/01/2021\n>\n> Subject 1 from file 1 is a perfect match for subject 100 from file2. The\n> subjects are matched.\n> All data from file 2 is removed for subject 100.\n> Subject 2 from file 1 is then matched with subject 101 from file 2.\n> If all records from subject 100 had not been removed from file2, subject 2\n> would have been matched to subject 100 date 01/10/2021. I don't want this\n> to happen. Once subject 100 is used to match subject 1, I don't want any\n> other person from file 1 to be matched with subject 100.\n>\n> I hope you can help me with this, I suspect, not uncommon matching problem!\n>\n> Thank you,\n> John\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core, University of Maryland\n> School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "As with so many explanations of requirements, they are incomplete enough to make us guess.\n\nAnd, if the goal is to use various packages, fine. Each should have enough documentation to see what it need",
+      "thread_id": "thread-671038b7fe10",
+      "thread_depth": 2,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-53aa06beb793",
+      "message_id": "<CAGxFJbSc4cYisAyyE5MYfj2zrXkspAmcWBAHTnUZ4EUtd6ch5w@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-07-23T22:54:40Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "Due to server security policies, all attachments were excised.\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at 3:45?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am running R in RStudio. I am creating a graph, which I see in the plot\n> window, and I use ggsave() to save a copy of the graph in a file.\n>\n> When I use look at the graph is RStudio's Plots window, the graph looks\n> fine. When I click on the Plot window's export button, copy the plot to the\n> clipboard and paste the graph into MS word, the graph looks fine. Please\n> see first figure on attached MS word document.\n>\n> When I copy and paste the .tiff file saved by ggsave, the graph looks bad.\n> Second figure on the attached MS word document. I think the graphs is being\n> exported improperly by ggsave. I would appreciate any suggestions for\n> improving the quality of the graph produced by ggsave.\n>\n> Please see code below and attached MS word document\n>\n>\n>\n>\n> # Code to produce graph\n>  ## Plot\n>   zz <- ggplot(\n>     df.long,\n>     aes(\n>       x = Date,\n>       y = NumPeopleExposed,\n>       color = factor(criticalvalue),\n>       linetype = factor(criticalvalue),\n>       group = factor(criticalvalue)\n>     )\n>   ) +\n>     geom_point(size = 3) +\n>     geom_line(linewidth = 1.5) +\n>\n>     scale_linetype_manual(\n>       values = c(\n>         \"solid\",\n>         \"dashed\",\n>         \"dotted\",\n>         \"dotdash\",\n>         \"longdash\",\n>         \"twodash\"\n>       )\n>     ) +\n>\n>     labs(\n>       title = species,\n>       x = \"Date\",\n>       y = \"Number of People Exposed to Toxic Concentration\",\n>       color = \"Critical Value\",\n>       linetype = \"Critical Value\"\n>     ) +\n>\n>     ## Show every date on x-axis\n>     scale_x_date(\n>       breaks = sort(unique(df.long$Date)),\n>       date_labels = \"%Y-%m-%d\"\n>     ) +\n>\n>     theme_bw() +\n>\n>     theme(\n>       axis.text.x = element_text(\n>         angle = 45,\n>         hjust = 1,\n>         vjust = 1\n>       )\n>     )\n>     print(zz)\n>\n> Code to save the graph\n>  current_time <- Sys.time()\n>   current_time\n>   # Convert colons to dashes, remove spaces\n>   formatted_time <- gsub(\":\", \"-\", format(current_time,\n> \"%Y-%m-%d_%H-%M-%S\"))\n>   formatted_time\n>\n>   #species=\"JDS\"\n>   # Save graph\n>   mypath <- file.path(\"C:\",\"Users\",\"JSorkin\",\"OneDrive - University of\n> Maryland School of Medicine\",\"HalemMilton\",\"PaperAndAbstract\")\n>   mypath\n>\n>   myfilename <- paste0(species2,formatted_time,\".tiff\")\n>   myfilename\n>\n>   ggsave(plot=zz,\n>          path=mypath,\n>          filename=myfilename,\n>          device=\"tiff\",\n>          width=4,height=3,\n>          units=\"in\",\n>          dpi=600)\n>\n>   cat(\"Ending (12) Plot Fraction Exposed\\n\")\n>   }\n>\n>\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core, University of Maryland\n> School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Due to server security policies, all attachments were excised.\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at 3:45?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am running R in RStudio. I am creating ",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-57c284a5e4b4",
+      "message_id": "<00fb01dd1af9$f514e8b0$df3eba10$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2026-07-23T23:21:14Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": "<CAGxFJbSc4cYisAyyE5MYfj2zrXkspAmcWBAHTnUZ4EUtd6ch5w@mail.gmail.com>",
+      "references": [
+        "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+        "<CAGxFJbSc4cYisAyyE5MYfj2zrXkspAmcWBAHTnUZ4EUtd6ch5w@mail.gmail.com>"
+      ],
+      "body_plain": "I would guess you might want to read the manual page for ggsave() and see if the default for what it does for your output format can be tweaked for your needs. \n\nHere is one such manpage:\n\nhttps://ggplot2.tidyverse.org/reference/ggsave.html\n\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Bert Gunter\nSent: Thursday, July 23, 2026 6:55 PM\nTo: Sorkin, John <jsorkin at som.umaryland.edu>\nCc: r-help <r-help at r-project.org>\nSubject: Re: [R] GGSAVE does not save a good version of my graph\n\nDue to server security policies, all attachments were excised.\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at 3:45?PM Sorkin, John <jsorkin at som.umaryland.edu>\nwrote:\n\n> I am running R in RStudio. I am creating a graph, which I see in the plot\n> window, and I use ggsave() to save a copy of the graph in a file.\n>\n> When I use look at the graph is RStudio's Plots window, the graph looks\n> fine. When I click on the Plot window's export button, copy the plot to the\n> clipboard and paste the graph into MS word, the graph looks fine. Please\n> see first figure on attached MS word document.\n>\n> When I copy and paste the .tiff file saved by ggsave, the graph looks bad.\n> Second figure on the attached MS word document. I think the graphs is being\n> exported improperly by ggsave. I would appreciate any suggestions for\n> improving the quality of the graph produced by ggsave.\n>\n> Please see code below and attached MS word document\n>\n>\n>\n>\n> # Code to produce graph\n>  ## Plot\n>   zz <- ggplot(\n>     df.long,\n>     aes(\n>       x = Date,\n>       y = NumPeopleExposed,\n>       color = factor(criticalvalue),\n>       linetype = factor(criticalvalue),\n>       group = factor(criticalvalue)\n>     )\n>   ) +\n>     geom_point(size = 3) +\n>     geom_line(linewidth = 1.5) +\n>\n>     scale_linetype_manual(\n>       values = c(\n>         \"solid\",\n>         \"dashed\",\n>         \"dotted\",\n>         \"dotdash\",\n>         \"longdash\",\n>         \"twodash\"\n>       )\n>     ) +\n>\n>     labs(\n>       title = species,\n>       x = \"Date\",\n>       y = \"Number of People Exposed to Toxic Concentration\",\n>       color = \"Critical Value\",\n>       linetype = \"Critical Value\"\n>     ) +\n>\n>     ## Show every date on x-axis\n>     scale_x_date(\n>       breaks = sort(unique(df.long$Date)),\n>       date_labels = \"%Y-%m-%d\"\n>     ) +\n>\n>     theme_bw() +\n>\n>     theme(\n>       axis.text.x = element_text(\n>         angle = 45,\n>         hjust = 1,\n>         vjust = 1\n>       )\n>     )\n>     print(zz)\n>\n> Code to save the graph\n>  current_time <- Sys.time()\n>   current_time\n>   # Convert colons to dashes, remove spaces\n>   formatted_time <- gsub(\":\", \"-\", format(current_time,\n> \"%Y-%m-%d_%H-%M-%S\"))\n>   formatted_time\n>\n>   #species=\"JDS\"\n>   # Save graph\n>   mypath <- file.path(\"C:\",\"Users\",\"JSorkin\",\"OneDrive - University of\n> Maryland School of Medicine\",\"HalemMilton\",\"PaperAndAbstract\")\n>   mypath\n>\n>   myfilename <- paste0(species2,formatted_time,\".tiff\")\n>   myfilename\n>\n>   ggsave(plot=zz,\n>          path=mypath,\n>          filename=myfilename,\n>          device=\"tiff\",\n>          width=4,height=3,\n>          units=\"in\",\n>          dpi=600)\n>\n>   cat(\"Ending (12) Plot Fraction Exposed\\n\")\n>   }\n>\n>\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical\n> Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core, University of Maryland\n> School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "I would guess you might want to read the manual page for ggsave() and see if the default for what it does for your output format can be tweaked for your needs. \n\nHere is one such manpage:\n\nhttps://ggp",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 2,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -1336,15 +1460,41 @@
     {
       "id": "thread-671038b7fe10",
       "subject": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
-      "message_count": 3,
+      "message_count": 5,
       "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com",
         "Bert Gunter",
         "Chris Evans",
         "Sorkin, John"
       ],
       "started": "2026-07-22T19:58:11Z",
-      "last_reply": "2026-07-22T21:29:50Z",
+      "last_reply": "2026-07-23T22:33:35Z",
       "root_message_id": "msg-671038b7fe10"
+    },
+    {
+      "id": "thread-58085e4cad1c",
+      "subject": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "message_count": 2,
+      "participants": [
+        "Bert Gunter",
+        "Ravi Varadhan"
+      ],
+      "started": "2026-07-23T15:01:29Z",
+      "last_reply": "2026-07-23T18:10:22Z",
+      "root_message_id": "msg-58085e4cad1c"
+    },
+    {
+      "id": "thread-75bd7b74d3b9",
+      "subject": "GGSAVE does not save a good version of my graph",
+      "message_count": 3,
+      "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com",
+        "Bert Gunter",
+        "Sorkin, John"
+      ],
+      "started": "2026-07-23T20:18:38Z",
+      "last_reply": "2026-07-23T23:21:14Z",
+      "root_message_id": "msg-75bd7b74d3b9"
     }
   ]
 }
