@@ -1246,6 +1246,25 @@
       "month": "2026-07"
     },
     {
+      "id": "msg-97e139babbea",
+      "message_id": "<DS4PR01MB943490F47FFC58C8C83E5856F2C02@DS4PR01MB9434.prod.exchangelabs.com>",
+      "from_name": "Ravi Varadhan",
+      "from_email_hash": "e29065f0ed01d24d142abdfc5db43f0fbc0a52a9d70244c81382700b6ce4b7f2",
+      "date": "2026-07-23T18:48:45Z",
+      "subject": "[R]  Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "subject_clean": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
+      "in_reply_to": "<CAGxFJbR5AMLeH2oQNEYaezcOCHU1A9j7t5mvCyAf=oP9SaCmYA@mail.gmail.com>",
+      "references": [
+        "<DS4PR01MB9434471A8AC7D6257988C9BEF2C02@DS4PR01MB9434.prod.exchangelabs.com>",
+        "<CAGxFJbR5AMLeH2oQNEYaezcOCHU1A9j7t5mvCyAf=oP9SaCmYA@mail.gmail.com>"
+      ],
+      "body_plain": "Here is a toy example I created many years ago on how to use the Hungarian algorithm in the \"clue\" package. In this example, the match will be exact since the two vectors are simply permuted, but they need not match exactly.  This answers Bert's concern.  An exact date match is not required. The algorithm will perform a nearest-neighbor match based on the absolute difference in days.\n\n# Ravi Varadhan\n# An example demonstrating the use of Hungarian algorithm for solving optimal matching\n#\n require(clue)\n\n n <- 10\n x <- rt(n, df=3) + 1i * rt(n, df=3)  # this is set A\n# y <- x[sample(n)]  # this is the vector to be permuted\n y <- rt(n, df=3) + 1i * rt(n, df=3)  # this is set B\n\n Cmat <- outer(x, y, FUN=function(x,y) Mod(x - y))  # Cost or Distance matrix between an element of A and B\n\n ans <- solve_LSAP(Cmat, maximum=FALSE)  # We are minimizing the linear sum\n\n dist <- function(x, y) sqrt(sum(Mod(x - y)^2))\n dist(x, y[c(ans)])\n\n________________________________\nFrom: Bert Gunter <bgunter.4567 at gmail.com>\nSent: Thursday, July 23, 2026 14:10\nTo: Ravi Varadhan <ravi.varadhan at jhu.edu>; R-help <R-help at r-project.org>; Sorkin, John <jsorkin at som.umaryland.edu>\nSubject: Re: [R] Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect\n\nYou don't often get email from bgunter.4567 at gmail.com. Learn why this is important<https://aka.ms/LearnAboutSenderIdentification>\n\n      External Email - Use Caution\n\n\n\n... and related to Ravi's post, will there always be at least one date in file 2 that matches every date in file 1?  And if there isn't, what action should be taken?\n\n-- Bert\n\nOn Thu, Jul 23, 2026 at 9:36?AM Ravi Varadhan via R-help <r-help at r-project.org<mailto:r-help at r-project.org>> wrote:\nThis is a classic matching problem, I believe.  Based on your description, you are looking for a 1-to-1 nearest-neighbor match based on the absolute difference in dates, with the constraint that once a subject in File 2 is used, all of their records are discarded.\n\nCorrect?\n\nThere are two classical approaches: greedy matching and global optimal matching.  While the greedy approach is simple to implement and often works, it can sometimes get into trouble (i.e., run out of good matches). The optimal approach would use the Hungarian algorithm (e.g., LSAP function in the clue package) to find the combination of matches that results in the lowest total date difference across the entire dataset.\n\nRavi\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org<mailto:R-help at r-project.org> mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>\nand provide commented, minimal, self-contained, reproducible code.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Here is a toy example I created many years ago on how to use the Hungarian algorithm in the \"clue\" package. In this example, the match will be exact since the two vectors are simply permuted, but they",
+      "thread_id": "thread-58085e4cad1c",
+      "thread_depth": 2,
+      "month": "2026-07"
+    },
+    {
       "id": "msg-75bd7b74d3b9",
       "message_id": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
       "from_name": "Sorkin, John",
@@ -1315,6 +1334,60 @@
       "body_snippet": "I would guess you might want to read the manual page for ggsave() and see if the default for what it does for your output format can be tweaked for your needs. \n\nHere is one such manpage:\n\nhttps://ggp",
       "thread_id": "thread-75bd7b74d3b9",
       "thread_depth": 2,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-8d2e09c7ac8d",
+      "message_id": "<20260724100203.148d81a7@delli.fritz.box>",
+      "from_name": "Ralf Goertz",
+      "from_email_hash": "8bf1cac3b79a4ead8e624a2364231bab786d3e2306e96d4a682b41f49bc1d44c",
+      "date": "2026-07-24T08:02:03Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "Am Thu, 23 Jul 2026 20:18:38 +0000\nschrieb \"Sorkin, John\" <jsorkin at som.umaryland.edu>:\n\n> I am running R in RStudio. I am creating a graph, which I see in the\n> plot window, and I use ggsave() to save a copy of the graph in a\n> file. \n> \n> When I use look at the graph is RStudio's Plots window, the graph\n> looks fine. When I click on the Plot window's export button, copy the\n> plot to the clipboard and paste the graph into MS word, the graph\n> looks fine. Please see first figure on attached MS word document.\n> \n> When I copy and paste the .tiff file saved by ggsave, the graph looks\n> bad. Second figure on the attached MS word document. I think the\n> graphs is being exported improperly by ggsave. I would appreciate any\n> suggestions for improving the quality of the graph produced by\n> ggsave. \n\nI have found it to be better to use a device directly with ggsave (e.g,\ndevice=svg). When saving to svg with device=NULL (the default) and\nfilename=\"plot.svg\" the result is poor as letter spacing is often\nincorrect because the fontpaths will not be saved. With device=svg it\nlooks perfect. So something similar may happen with tiff (although of\ncourse that is not a vector format). Since you embedded the figure in\nWord why not use svg anyway? It finally is a supported format (it hasn't\nalways been). I hope that some day also pdf will be supported by Word.\n(No, what I actually hope is that soon I won't have to use Word\nanymore. ?)",
+      "body_snippet": "Am Thu, 23 Jul 2026 20:18:38 +0000\nschrieb \"Sorkin, John\" <jsorkin at som.umaryland.edu>:\n\n> I am running R in RStudio. I am creating a graph, which I see in the\n> plot window, and I use ggsave() to s",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-2d0907565538",
+      "message_id": "<20260724150823.7dadc3b4@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-07-24T12:08:23Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "? Thu, 23 Jul 2026 20:18:38 +0000\n\"Sorkin, John\" <jsorkin at som.umaryland.edu> ?????:\n\n>   ggsave(plot=zz,\n>          path=mypath,\n>          filename=myfilename,\n>          device=\"tiff\",\n>          width=4,height=3,\n>          units=\"in\",\n>          dpi=600)\n\nHard to give a better answer without seeing the plot, but since you're\non Windows, try giving the additional argument type=\"cairo\" to\nggsave(...). Otherwise tiff() uses the old GDI code that doesn't\nperform anti-aliasing. The RStudio graphical device is distinct from\ntiff() and performs anti-aliasing as well.\n\n(Is is a requirement of your publisher to submit TIFF plots? It may be\npossible to preserve them in higher quality as PDF files.)\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 23 Jul 2026 20:18:38 +0000\n\"Sorkin, John\" <jsorkin at som.umaryland.edu> ?????:\n\n>   ggsave(plot=zz,\n>          path=mypath,\n>          filename=myfilename,\n>          device=\"tiff\",\n>         ",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-85f6eeb1c6d4",
+      "message_id": "<daff20b0-8717-444c-b6b3-78d46a34244f@atsu.edu>",
+      "from_name": "Robert Baer",
+      "from_email_hash": "e28e8125811ec68b38078bede230108e02904b581a73b633464a7e324ba7d89f",
+      "date": "2026-07-25T00:03:37Z",
+      "subject": "[R] GGSAVE does not save a good version of my graph",
+      "subject_clean": "GGSAVE does not save a good version of my graph",
+      "in_reply_to": "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>",
+      "references": [
+        "<DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": "You might consider using the ragg package for you screen renders (and \nthe agg_tiff function).? I think these replace grDevice with something \nthat may render to produce something closer to what the ggsave() render \nwill look like.\n\n\nOn 7/23/2026 3:18 PM, Sorkin, John wrote:\n> I am running R in RStudio. I am creating a graph, which I see in the plot window, and I use ggsave() to save a copy of the graph in a file.\n>\n> When I use look at the graph is RStudio's Plots window, the graph looks fine. When I click on the Plot window's export button, copy the plot to the clipboard and paste the graph into MS word, the graph looks fine. Please see first figure on attached MS word document.\n>\n> When I copy and paste the .tiff file saved by ggsave, the graph looks bad. Second figure on the attached MS word document. I think the graphs is being exported improperly by ggsave. I would appreciate any suggestions for improving the quality of the graph produced by ggsave.\n>\n> Please see code below and attached MS word document\n>\n>\n>\n>\n> # Code to produce graph\n>   ## Plot\n>    zz <- ggplot(\n>      df.long,\n>      aes(\n>        x = Date,\n>        y = NumPeopleExposed,\n>        color = factor(criticalvalue),\n>        linetype = factor(criticalvalue),\n>        group = factor(criticalvalue)\n>      )\n>    ) +\n>      geom_point(size = 3) +\n>      geom_line(linewidth = 1.5) +\n>      \n>      scale_linetype_manual(\n>        values = c(\n>          \"solid\",\n>          \"dashed\",\n>          \"dotted\",\n>          \"dotdash\",\n>          \"longdash\",\n>          \"twodash\"\n>        )\n>      ) +\n>      \n>      labs(\n>        title = species,\n>        x = \"Date\",\n>        y = \"Number of People Exposed to Toxic Concentration\",\n>        color = \"Critical Value\",\n>        linetype = \"Critical Value\"\n>      ) +\n>      \n>      ## Show every date on x-axis\n>      scale_x_date(\n>        breaks = sort(unique(df.long$Date)),\n>        date_labels = \"%Y-%m-%d\"\n>      ) +\n>      \n>      theme_bw() +\n>      \n>      theme(\n>        axis.text.x = element_text(\n>          angle = 45,\n>          hjust = 1,\n>          vjust = 1\n>        )\n>      )\n>      print(zz)\n>\n> Code to save the graph\n>   current_time <- Sys.time()\n>    current_time\n>    # Convert colons to dashes, remove spaces\n>    formatted_time <- gsub(\":\", \"-\", format(current_time, \"%Y-%m-%d_%H-%M-%S\"))\n>    formatted_time\n>    \n>    #species=\"JDS\"\n>    # Save graph\n>    mypath <- file.path(\"C:\",\"Users\",\"JSorkin\",\"OneDrive - University of Maryland School of Medicine\",\"HalemMilton\",\"PaperAndAbstract\")\n>    mypath\n>    \n>    myfilename <- paste0(species2,formatted_time,\".tiff\")\n>    myfilename\n>    \n>    ggsave(plot=zz,\n>           path=mypath,\n>           filename=myfilename,\n>           device=\"tiff\",\n>           width=4,height=3,\n>           units=\"in\",\n>           dpi=600)\n>\n>    cat(\"Ending (12) Plot Fraction Exposed\\n\")\n>    }\n>\n>\n>\n>\n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;\n> Former PI Biostatistics and Informatics Core,?University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n> Senior Statistician University of Maryland Center for Vascular Research;\n>\n> Division of Gerontology, Geriatrics and Palliative Medicine,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n>\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n-- \n---\nRobert W. Baer, Ph.D.\nProfessor of Physiology\nKirksville College of Osteopathic Medicine\nA.T. Still Univerisity of Health Sciences\n800 W. Jefferson St.\nKirksville, MO 63501",
+      "body_snippet": "You might consider using the ragg package for you screen renders (and \nthe agg_tiff function).? I think these replace grDevice with something \nthat may render to produce something closer to what the g",
+      "thread_id": "thread-75bd7b74d3b9",
+      "thread_depth": 1,
       "month": "2026-07"
     }
   ],
@@ -1474,26 +1547,29 @@
     {
       "id": "thread-58085e4cad1c",
       "subject": "Matching where the source file has one record/ subject and the to-be-matched file has multiple records/subect",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Bert Gunter",
         "Ravi Varadhan"
       ],
       "started": "2026-07-23T15:01:29Z",
-      "last_reply": "2026-07-23T18:10:22Z",
+      "last_reply": "2026-07-23T18:48:45Z",
       "root_message_id": "msg-58085e4cad1c"
     },
     {
       "id": "thread-75bd7b74d3b9",
       "subject": "GGSAVE does not save a good version of my graph",
-      "message_count": 3,
+      "message_count": 6,
       "participants": [
         "@vi@e@gross m@iii@g oii gm@ii@com",
         "Bert Gunter",
+        "Ivan Krylov",
+        "Ralf Goertz",
+        "Robert Baer",
         "Sorkin, John"
       ],
       "started": "2026-07-23T20:18:38Z",
-      "last_reply": "2026-07-23T23:21:14Z",
+      "last_reply": "2026-07-25T00:03:37Z",
       "root_message_id": "msg-75bd7b74d3b9"
     }
   ]
