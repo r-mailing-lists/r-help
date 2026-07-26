@@ -10909,3 +10909,392 @@ A.T. Still Univerisity of Health Sciences
 Kirksville, MO 63501
 
 
+From |@nworth|ngton @end|ng |rom y@hoo@com  Sat Jul 25 04:34:39 2026
+From: |@nworth|ngton @end|ng |rom y@hoo@com (Ian Worthington)
+Date: Sat, 25 Jul 2026 02:34:39 +0000 (UTC)
+Subject: [R] GGSAVE does not save a good version of my graph
+In-Reply-To: <20260724150823.7dadc3b4@arachnoid>
+References: <DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <20260724150823.7dadc3b4@arachnoid>
+Message-ID: <1282179273.2158731.1784946879738@mail.yahoo.com>
+
+Ican --
+Is there any documentation as to the best /type/ to use with a particular /device/?? ? I'm outputting to PNG on Windows, for instance: should I be using a specific type???
+
+Best wishes / Mejores deseos /??Meilleurs v?ux
+
+Ian?... 
+
+    On Friday, July 24, 2026 at 07:08:45 AM GMT-5, Ivan Krylov via R-help <r-help at r-project.org> wrote:  
+ 
+ ? Thu, 23 Jul 2026 20:18:38 +0000
+"Sorkin, John" <jsorkin at som.umaryland.edu> ?????:
+
+>? ggsave(plot=zz,
+>? ? ? ? ? path=mypath,
+>? ? ? ? ? filename=myfilename,
+>? ? ? ? ? device="tiff",
+>? ? ? ? ? width=4,height=3,
+>? ? ? ? ? units="in",
+>? ? ? ? ? dpi=600)
+
+Hard to give a better answer without seeing the plot, but since you're
+on Windows, try giving the additional argument type="cairo" to
+ggsave(...). Otherwise tiff() uses the old GDI code that doesn't
+perform anti-aliasing. The RStudio graphical device is distinct from
+tiff() and performs anti-aliasing as well.
+
+(Is is a requirement of your publisher to submit TIFF plots? It may be
+possible to preserve them in higher quality as PDF files.)
+
+-- 
+Best regards,
+Ivan
+
+______________________________________________
+R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+https://stat.ethz.ch/mailman/listinfo/r-help
+PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+and provide commented, minimal, self-contained, reproducible code.
+  
+	[[alternative HTML version deleted]]
+
+
+From jo@ec|@ud|o@|@r|@ @end|ng |rom gm@||@com  Sat Jul 25 06:48:49 2026
+From: jo@ec|@ud|o@|@r|@ @end|ng |rom gm@||@com (J. C. Faria_Gmail)
+Date: Sat, 25 Jul 2026 04:48:49 +0000
+Subject: [R] =?utf-8?q?Subject=3A_Rghost_=E2=80=94_minimal_clipboard_?=
+ =?utf-8?q?=E2=86=92_local_R_=28text_+_plots=29?=
+Message-ID: <em1c06d483-e53b-4fc2-956d-ab8396b093ea@gmail.com>
+
+Hi everyone,
+
+I'd like to share a small open-source project I've been working on: 
+Rghost.
+
+It's a minimal desktop "sniper" app: when armed, it watches Ctrl+C, 
+sends the clipboard text to a local R session, and shows text + plot in 
+a small panel ? no IDE and no editor. When disarmed, the clipboard 
+behaves normally.
+
+The goal is something light and offline, useful on modest school/lab 
+PCs, without trying to replace RStudio or similar tools. It is 
+cross-platform (Lazarus/FPC); the current binary release is Win64, with 
+Linux and macOS builds planned next.
+
+Repo:
+https://github.com/jcfaria/rghost
+
+Win64 binary (v0.3.1) ? unzip and run (needs a local R install):
+https://github.com/jcfaria/rghost/releases/tag/v0.3.1
+
+It's still early. The project is meant to grow collectively ? forks, 
+issues, and pull requests are welcome. It's also a learning lab for 
+AI-assisted development (as little human coding intervention as 
+possible).
+
+Motto: Keep this project as simple and effective as possible.
+
+If you'd like to try it, comment, or contribute, you're very welcome.
+
+Best regards,
+Jos? Cl?udio Faria
+UESC / DCEX ? Ilh?us, Bahia, Brazil
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+Jos? Cl?udio Faria
+UESC/DCEX/Brasil
+joseclaudio.faria at gmail.com
+Telefones:
+55(73)3680.5545 - UESC
+55(73)99966.9100 - VIVO
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+If you have software to deal with statistics, you have arms,
+if you have good software, you have arms and legs,
+if you have software like R, you have arms, legs and wings...
+the height of your flight depends only on you.
+
+	[[alternative HTML version deleted]]
+
+
+From po|c1410 @end|ng |rom gm@||@com  Sat Jul 25 06:56:08 2026
+From: po|c1410 @end|ng |rom gm@||@com (CALUM POLWART)
+Date: Sat, 25 Jul 2026 05:56:08 +0100
+Subject: [R] GGSAVE does not save a good version of my graph
+In-Reply-To: <00fb01dd1af9$f514e8b0$df3eba10$@gmail.com>
+References: <DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <CAGxFJbSc4cYisAyyE5MYfj2zrXkspAmcWBAHTnUZ4EUtd6ch5w@mail.gmail.com>
+ <00fb01dd1af9$f514e8b0$df3eba10$@gmail.com>
+Message-ID: <CA+etgPmtdBmTa7vSXN9=Y_bjjc6zdpWsJSeMMWWGkS6TUMEAtg@mail.gmail.com>
+
+I'm late to the party, and as others have said - we can't see your Word
+document as attachments aren't allowed.
+
+That means the easiest way for us to test something is to reproduce an
+equivalent graph with data we can access (mtcars, penguins etc).  I often
+find building a demo case with as much trimmed out actually helps me find
+the issue (or at least that it's not reproducible and so I find the big in
+my code). Not sure that would apply here.
+
+Studio's little render window and ggsave never match in my experience.
+Different image sizes being the cause. But that might not be what you
+experiencing. But you may want to check out this SO page if it is -
+https://stackoverflow.com/questions/77188670/ggplot2-fix-absolute-size-of-ggplot-on-onscreen-device-rstudio-plots-pane
+
+Tiff, png and jpg are all raster formats. I'm dubious if a journal wants
+that. Double check their requirements. Do they offer a vector format - EPS,
+SVG, PDF?  Your ggplot is lines - which are vectors.   Vectors scale
+better.  If a journal says they want tiff I think they are expecting
+photographs etc rather than graphs...  There is often a further section for
+vectors.
+
+If I recall svg needs the svglite package installed and ggplot throws an
+error if it's not found (just run install.packages("svglite") once )
+
+Without the difference reproducible to me I can't answer your Q. But I just
+thought I'd comment on some of your code:
+
+current_time <- Sys.time()
+current_time
+# Convert colons to dashes, remove spaces
+formatted_time <- gsub(":", "-", format(current_time, "%Y-%m-%d_%H-%M-%S"))
+formatted_time
+
+I'm not sure you need the gsub at all.
+
+format(current_time, "%Y-%m-%d_%H-%M-%S")
+
+That piece of code is rendering the date/time without colons anyway
+
+And I would have either wrapped it up like this-
+
+format(
+    Sys.time(),
+    "%Y-%m-%d_%H-%M-%S"
+    )
+ Or in the modern pipe world like this -
+
+
+    Sys.time() |>
+    format ("%Y-%m-%d_%H-%M-%S")
+
+Obviously neither of those capture the result to an object for reuse so
+actually
+
+
+Sys.time() |>
+    format ("%Y-%m-%d_%H-%M-%S") -> formatted_time
+
+Your code of course works fine, just had a lot of redundancy.
+
+
+>
+>
+>
+>
+> On Thu, Jul 23, 2026 at 3:45?PM Sorkin, John <jsorkin at som.umaryland.edu>
+> wrote:
+>
+> > I am running R in RStudio. I am creating a graph, which I see in the plot
+> > window, and I use ggsave() to save a copy of the graph in a file.
+> >
+> > When I use look at the graph is RStudio's Plots window, the graph looks
+> > fine. When I click on the Plot window's export button, copy the plot to
+> the
+> > clipboard and paste the graph into MS word, the graph looks fine. Please
+> > see first figure on attached MS word document.
+> >
+> > When I copy and paste the .tiff file saved by ggsave, the graph looks
+> bad.
+> > Second figure on the attached MS word document. I think the graphs is
+> being
+> > exported improperly by ggsave. I would appreciate any suggestions for
+> > improving the quality of the graph produced by ggsave.
+> >
+> > Please see code below and attached MS word document
+> >
+> >
+> >
+> >
+> > # Code to produce graph
+> >  ## Plot
+> >   zz <- ggplot(
+> >     df.long,
+> >     aes(
+> >       x = Date,
+> >       y = NumPeopleExposed,
+> >       color = factor(criticalvalue),
+> >       linetype = factor(criticalvalue),
+> >       group = factor(criticalvalue)
+> >     )
+> >   ) +
+> >     geom_point(size = 3) +
+> >     geom_line(linewidth = 1.5) +
+> >
+> >     scale_linetype_manual(
+> >       values = c(
+> >         "solid",
+> >         "dashed",
+> >         "dotted",
+> >         "dotdash",
+> >         "longdash",
+> >         "twodash"
+> >       )
+> >     ) +
+> >
+> >     labs(
+> >       title = species,
+> >       x = "Date",
+> >       y = "Number of People Exposed to Toxic Concentration",
+> >       color = "Critical Value",
+> >       linetype = "Critical Value"
+> >     ) +
+> >
+> >     ## Show every date on x-axis
+> >     scale_x_date(
+> >       breaks = sort(unique(df.long$Date)),
+> >       date_labels = "%Y-%m-%d"
+> >     ) +
+> >
+> >     theme_bw() +
+> >
+> >     theme(
+> >       axis.text.x = element_text(
+> >         angle = 45,
+> >         hjust = 1,
+> >         vjust = 1
+> >       )
+> >     )
+> >     print(zz)
+> >
+> > Code to save the graph
+> >  current_time <- Sys.time()
+> >   current_time
+> >   # Convert colons to dashes, remove spaces
+> >   formatted_time <- gsub(":", "-", format(current_time,
+> > "%Y-%m-%d_%H-%M-%S"))
+> >   formatted_time
+> >
+> >   #species="JDS"
+> >   # Save graph
+> >   mypath <- file.path("C:","Users","JSorkin","OneDrive - University of
+> > Maryland School of Medicine","HalemMilton","PaperAndAbstract")
+> >   mypath
+> >
+> >   myfilename <- paste0(species2,formatted_time,".tiff")
+> >   myfilename
+> >
+> >   ggsave(plot=zz,
+> >          path=mypath,
+> >          filename=myfilename,
+> >          device="tiff",
+> >          width=4,height=3,
+> >          units="in",
+> >          dpi=600)
+> >
+> >   cat("Ending (12) Plot Fraction Exposed\n")
+> >   }
+> >
+> >
+> >
+> >
+> > John David Sorkin M.D., Ph.D.
+> > Professor of Medicine, Univer
+> <https://www.google.com/maps/search/or+of+Medicine,+Univer?entry=gmail&source=g>sity
+> of Maryland School of Medicine;
+> > Associate Director for Biostatistics and Informatics, Baltimore VA
+> Medical
+> > Center Geriatrics Research, Education, and Clinical Center;
+> > Former PI Biostatistics and Informatics Core, University of Maryland
+> > School of Medicine Claude D. Pepper Older Americans Independence Center;
+> > Senior Statistician University of Maryland Center for Vascular Research;
+> >
+> > Division of Gerontology, Geriatrics and Palliative Medicine,
+> > 10 North Greene Street
+> > GRECC (BT/18/GR)
+> > Baltimore, MD 21201-1524
+> > Cell phone 443-418-5382
+> >
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> > https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+> >
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From jrkr|de@u @end|ng |rom gm@||@com  Sat Jul 25 14:28:40 2026
+From: jrkr|de@u @end|ng |rom gm@||@com (John Kane)
+Date: Sat, 25 Jul 2026 08:28:40 -0400
+Subject: [R] GGSAVE does not save a good version of my graph
+In-Reply-To: <20260724150823.7dadc3b4@arachnoid>
+References: <DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <20260724150823.7dadc3b4@arachnoid>
+Message-ID: <CAKZQJMDE7Z4DxzFcQQwpFa0r=EUtEK-ZCqL2CLD9m3OStjvzGg@mail.gmail.com>
+
+Maybe go to base R?
+See "?png"  for various choices.
+
+On Fri, 24 Jul 2026 at 08:08, Ivan Krylov via R-help <r-help at r-project.org>
+wrote:
+
+> ? Thu, 23 Jul 2026 20:18:38 +0000
+> "Sorkin, John" <jsorkin at som.umaryland.edu> ?????:
+>
+> >   ggsave(plot=zz,
+> >          path=mypath,
+> >          filename=myfilename,
+> >          device="tiff",
+> >          width=4,height=3,
+> >          units="in",
+> >          dpi=600)
+>
+> Hard to give a better answer without seeing the plot, but since you're
+> on Windows, try giving the additional argument type="cairo" to
+> ggsave(...). Otherwise tiff() uses the old GDI code that doesn't
+> perform anti-aliasing. The RStudio graphical device is distinct from
+> tiff() and performs anti-aliasing as well.
+>
+> (Is is a requirement of your publisher to submit TIFF plots? It may be
+> possible to preserve them in higher quality as PDF files.)
+>
+> --
+> Best regards,
+> Ivan
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+
+-- 
+John Kane
+Kingston ON Canada
+
+	[[alternative HTML version deleted]]
+
+
