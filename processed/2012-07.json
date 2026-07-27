@@ -16430,6 +16430,24 @@
       "month": "2012-07"
     },
     {
+      "id": "msg-6e455bdb0c0c",
+      "message_id": "<1341942761.33498.YahooMailNeo@web39401.mail.mud.yahoo.com>",
+      "from_name": "arun",
+      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
+      "date": "2012-07-10T17:52:41Z",
+      "subject": "[R] calculating the difference between days?",
+      "subject_clean": "calculating the difference between days?",
+      "in_reply_to": "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>",
+      "references": [
+        "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000????? 02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n\",sep=\"\",header=TRUE)\n\ndat3$Begin_date<-strptime(dat3[,1],format=\"%d%b%Y:%H:%M:%S\")\ndat3$End_date<-strptime(dat3[,2],format=\"%d%b%Y:%H:%M:%S\")\n\n?difftime(dat3[,1],dat3[,2])\nTime differences in days\n[1] -763.0000? -55.0000 -124.0417? -32.0000? -32.0000\nattr(,\"tzone\")\n[1] \"\"\n\nA.K.\n\n----- Original Message -----\nFrom: C W <tmrsg11 at gmail.com>\nTo: r-help <r-help at r-project.org>\nCc: \nSent: Tuesday, July 10, 2012 1:22 PM\nSubject: [R] calculating the difference between days?\n\nHi List,\n\nI have one column of beginning dates and one column of ending dates, I want\nto find their difference.? And I want to ignore the trailing zeros,\nbasically everything after the first colon mark.\n\nBegin_date? ? ? ? ? ? ? ? ? ? ? ? ?  End_date\n01JAN2000:00:00:00:000? ? ?  02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000? ? ?  18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000? ? ?  02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n\nThanks,\n\nMike\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:",
+      "thread_id": "thread-8d6eddd0d653",
+      "thread_depth": 1,
+      "month": "2012-07"
+    },
+    {
       "id": "msg-259f080aa9a5",
       "message_id": "<BLU150-W35F3EA41100B1496ED057289D20@phx.gbl>",
       "from_name": "eliza botto",
@@ -16446,24 +16464,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120710/23bf97e5/attachment.pl>",
       "thread_id": "thread-ae39cab81d7f",
       "thread_depth": 2,
-      "month": "2012-07"
-    },
-    {
-      "id": "msg-6e455bdb0c0c",
-      "message_id": "<1341942761.33498.YahooMailNeo@web39401.mail.mud.yahoo.com>",
-      "from_name": "arun",
-      "from_email_hash": "0abce8ed6a04ea3c74ceeb74dd3d760d253fae6194900ee20ff0da4841d7ad8a",
-      "date": "2012-07-10T17:52:41Z",
-      "subject": "[R] calculating the difference between days?",
-      "subject_clean": "calculating the difference between days?",
-      "in_reply_to": "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>",
-      "references": [
-        "<CAE2FW2m_03kg50EDU25+21nHw3eRsmGgJeC=QLanMO0LZkmXNQ@mail.gmail.com>"
-      ],
-      "body_plain": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000????? 02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000????? 02FEB2000:00:00:00:000\n\",sep=\"\",header=TRUE)\n\ndat3$Begin_date<-strptime(dat3[,1],format=\"%d%b%Y:%H:%M:%S\")\ndat3$End_date<-strptime(dat3[,2],format=\"%d%b%Y:%H:%M:%S\")\n\n?difftime(dat3[,1],dat3[,2])\nTime differences in days\n[1] -763.0000? -55.0000 -124.0417? -32.0000? -32.0000\nattr(,\"tzone\")\n[1] \"\"\n\nA.K.\n\n----- Original Message -----\nFrom: C W <tmrsg11 at gmail.com>\nTo: r-help <r-help at r-project.org>\nCc: \nSent: Tuesday, July 10, 2012 1:22 PM\nSubject: [R] calculating the difference between days?\n\nHi List,\n\nI have one column of beginning dates and one column of ending dates, I want\nto find their difference.? And I want to ignore the trailing zeros,\nbasically everything after the first colon mark.\n\nBegin_date? ? ? ? ? ? ? ? ? ? ? ? ?  End_date\n01JAN2000:00:00:00:000? ? ?  02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000? ? ?  18MAY2012:00:00:00:000\n01OCT2003:00:00:00:000? ? ?  02FEB2004:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n01JAN2000:00:00:00:000? ? ?  02FEB2000:00:00:00:000\n\nThanks,\n\nMike\n\n??? [[alternative HTML version deleted]]\n\n______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide http://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Hi,\n\nTry this:\n\ndat3<-read.table(text=\"\nBegin_date????????????????????????? End_date\n01JAN2000:00:00:00:000????? 02FEB2002:00:00:00:000\n24MAR2012:00:00:00:000????? 18MAY2012:00:00:00:000\n01OCT2003:00:",
-      "thread_id": "thread-8d6eddd0d653",
-      "thread_depth": 1,
       "month": "2012-07"
     },
     {
@@ -55896,24 +55896,6 @@
       "month": "2012-07"
     },
     {
-      "id": "msg-99001e0de521",
-      "message_id": "<5017DADF.6050805@sapo.pt>",
-      "from_name": "Rui Barradas",
-      "from_email_hash": "46b93819287d062cad8c235168128396704d16cef6015fa4ff365e8f816de22f",
-      "date": "2012-07-31T13:17:19Z",
-      "subject": "[R] TimeStamps to seconds",
-      "subject_clean": "TimeStamps to seconds",
-      "in_reply_to": "<1343739514.40797.YahooMailNeo@web120104.mail.ne1.yahoo.com>",
-      "references": [
-        "<1343739514.40797.YahooMailNeo@web120104.mail.ne1.yahoo.com>"
-      ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120731/12bc389b/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120731/12bc389b/attachment.pl>",
-      "thread_id": "thread-bbdfbc029ab6",
-      "thread_depth": 1,
-      "month": "2012-07"
-    },
-    {
       "id": "msg-df9fbcc0a5fd",
       "message_id": "<F644A9B1-61DD-438A-8098-76CC13869656@gmail.com>",
       "from_name": "peter dalgaard",
@@ -55930,6 +55912,24 @@
       "body_snippet": "On Jul 31, 2012, at 02:58 , Jeff Newmiller wrote:\n\n> Amazingly, RTFM.\n\nRTFWP, I think you mean. Sounds like you are referring to this one:\n\nhttp://cran.r-project.org/bin/linux/ubuntu/\n\n> Linux typical",
       "thread_id": "thread-94607adc1b9e",
       "thread_depth": 2,
+      "month": "2012-07"
+    },
+    {
+      "id": "msg-99001e0de521",
+      "message_id": "<5017DADF.6050805@sapo.pt>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "46b93819287d062cad8c235168128396704d16cef6015fa4ff365e8f816de22f",
+      "date": "2012-07-31T13:17:19Z",
+      "subject": "[R] TimeStamps to seconds",
+      "subject_clean": "TimeStamps to seconds",
+      "in_reply_to": "<1343739514.40797.YahooMailNeo@web120104.mail.ne1.yahoo.com>",
+      "references": [
+        "<1343739514.40797.YahooMailNeo@web120104.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120731/12bc389b/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120731/12bc389b/attachment.pl>",
+      "thread_id": "thread-bbdfbc029ab6",
+      "thread_depth": 1,
       "month": "2012-07"
     },
     {
