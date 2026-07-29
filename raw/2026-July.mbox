@@ -11298,3 +11298,273 @@ Kingston ON Canada
 	[[alternative HTML version deleted]]
 
 
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Tue Jul 28 07:53:27 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Tue, 28 Jul 2026 07:53:27 +0200
+Subject: [R] ran into ambiguous code (bug?)
+In-Reply-To: <fake-VM-id.135223a340183fe532d20ac4d3659aa3@talos.iv>
+References: <CAJTz4dWXcp-JnHEM6T7+0N4qUASZDHC7kxoiXQmc0Vf6GtDm9g@mail.gmail.com>
+Message-ID: <27240.17367.625804.652672@stat.math.ethz.ch>
+
+Dear Ben,
+
+As this may be instructive for some in the R-help audience,
+I'm replying here in public (and Bcc to you):
+
+>>>>> Ben H....  on Mon, 27 Jul 2026 16:50:20 -0700 writes:
+
+    > Hi,
+    > I would like to submit a bug report or at least get some help.  I've used R
+    > for about 10 years and not reported a bug before.  Today I ran into
+    > ambiguous R code, the code is reading non-existent columns.  A reproducible
+    > example of the bug along with the R version report is below.  'Age' does
+    > not exist among the column names of the data frame (df), but 'Age2' does.
+    > When you run df$Age, it is equivalent to df$Age2. I have reproduced this
+    > issue after removing all packages.
+
+    > 1. What should I do to use R without this issue?
+    > 2. Can/should I submit this?
+
+    > R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+    > Copyright (C) 2025 The R Foundation for Statistical Computing
+    > Platform: aarch64-apple-darwin20
+
+    ......
+
+    >> df <- data.frame(people = c('Susan', 'Mike', 'Gary', 'Wayne'), 
+    >                   Age2 = c(2,24,35,1))
+    >> 
+    >> df$Age2
+    > [1]  2 24 35  1
+    >> df$Age
+    > [1]  2 24 35  1
+    >> 
+    >> "Age2" %in% colnames(df)
+    > [1] TRUE
+    >> "Age" %in% colnames(df)
+    > [1] FALSE
+    >> 
+
+    > -- 
+    > Ben H....., PhD
+
+Dear Ben,
+
+You are reporting a problem you have with R, but not at all bug:
+
+This is how R has worked forever (and S & S-plus before that).
+
+Note:
+ - column names can be abbreviated when using `$` (hence you can
+   use `$Age` equivalently to `$Age2`
+ - Since this maybe confusing to some, you can make it to a warning  via
+
+         options(warnPartialMatchDollar = TRUE)   
+
+Historical reason:
+In earlier times, before people had IDEs such as Rstudio etc,
+VScode, or Emacs(ESS) to do data analysis in R, writing long
+variable names was cumbersome and hence allowed to be abbreviated.
+
+In your example :
+
+> options(warnPartialMatchDollar = TRUE)   
+> df$Age
+[1]  2 24 35  1
+Warning message:
+In df$Age : partial match of 'Age' to 'Age2'
+
+
+Note that I recommend using   df[,"Age2"]   (which works in your
+example) whereas  df[,"Age"] gives an error :
+
+> df[,"Age"]
+Error in `[.data.frame`(df, , "Age") : undefined columns selected
+
+
+We have looked into this (and related  "partial matching"), and
+found that it would "break" too much old R code, if the warning
+was turned on unconditionally.
+
+You may be interested in reading  help(options)  and search for
+other 'warnPartialMatch*' ..
+e.g., only at
+  https://cran.r-project.org/doc/manuals/r-release/packages/base/refman/base.html#options
+
+Best regards,
+Martin
+
+
+--
+Martin Maechler
+R Core team  and  ETH Zurich
+
+
+From ru|pb@rr@d@@463 @end|ng |rom gm@||@com  Tue Jul 28 10:22:56 2026
+From: ru|pb@rr@d@@463 @end|ng |rom gm@||@com (Rui Barradas)
+Date: Tue, 28 Jul 2026 09:22:56 +0100
+Subject: [R] ran into ambiguous code (bug?)
+In-Reply-To: <27240.17367.625804.652672@stat.math.ethz.ch>
+References: <CAJTz4dWXcp-JnHEM6T7+0N4qUASZDHC7kxoiXQmc0Vf6GtDm9g@mail.gmail.com>
+ <27240.17367.625804.652672@stat.math.ethz.ch>
+Message-ID: <4eceaeb5-3b14-4143-a92b-c424283c2bcb@gmail.com>
+
+Hello,
+
+Inline.
+
+?s 06:53 de 28/07/2026, Martin Maechler escreveu:
+> Dear Ben,
+>
+> As this may be instructive for some in the R-help audience,
+> I'm replying here in public (and Bcc to you):
+>
+>>>>>> Ben H....  on Mon, 27 Jul 2026 16:50:20 -0700 writes:
+>      > Hi,
+>      > I would like to submit a bug report or at least get some help.  I've used R
+>      > for about 10 years and not reported a bug before.  Today I ran into
+>      > ambiguous R code, the code is reading non-existent columns.  A reproducible
+>      > example of the bug along with the R version report is below.  'Age' does
+>      > not exist among the column names of the data frame (df), but 'Age2' does.
+>      > When you run df$Age, it is equivalent to df$Age2. I have reproduced this
+>      > issue after removing all packages.
+>
+>      > 1. What should I do to use R without this issue?
+>      > 2. Can/should I submit this?
+>
+>      > R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+>      > Copyright (C) 2025 The R Foundation for Statistical Computing
+>      > Platform: aarch64-apple-darwin20
+>
+>      ......
+>
+>      >> df <- data.frame(people = c('Susan', 'Mike', 'Gary', 'Wayne'),
+>      >                   Age2 = c(2,24,35,1))
+>      >>
+>      >> df$Age2
+>      > [1]  2 24 35  1
+>      >> df$Age
+>      > [1]  2 24 35  1
+>      >>
+>      >> "Age2" %in% colnames(df)
+>      > [1] TRUE
+>      >> "Age" %in% colnames(df)
+>      > [1] FALSE
+>      >>
+>
+>      > --
+>      > Ben H....., PhD
+>
+> Dear Ben,
+>
+> You are reporting a problem you have with R, but not at all bug:
+>
+> This is how R has worked forever (and S & S-plus before that).
+>
+> Note:
+>   - column names can be abbreviated when using `$` (hence you can
+>     use `$Age` equivalently to `$Age2`
+>   - Since this maybe confusing to some, you can make it to a warning  via
+>
+>           options(warnPartialMatchDollar = TRUE)
+>
+> Historical reason:
+> In earlier times, before people had IDEs such as Rstudio etc,
+> VScode, or Emacs(ESS) to do data analysis in R, writing long
+> variable names was cumbersome and hence allowed to be abbreviated.
+>
+> In your example :
+>
+>> options(warnPartialMatchDollar = TRUE)
+>> df$Age
+> [1]  2 24 35  1
+> Warning message:
+> In df$Age : partial match of 'Age' to 'Age2'
+>
+>
+> Note that I recommend using   df[,"Age2"]   (which works in your
+> example) whereas  df[,"Age"] gives an error :
+>
+>> df[,"Age"]
+> Error in `[.data.frame`(df, , "Age") : undefined columns selected
+
+
+Or df[["Age"]], with a different result.
+
+
+df <- data.frame(people = c('Susan', 'Mike', 'Gary', 'Wayne'),
+ ? ? ? ? ? ? ? ? ?Age2 = c(2,24,35,1))
+
+df[, "Age"]? ?# error
+#> Error in `[.data.frame`:
+#> ! undefined columns selected
+df[, "Age2"]
+#> [1]? 2 24 35? 1
+
+df[["Age"]]? ?# no error
+#> NULL
+df[["Age2"]]
+#> [1]? 2 24 35? 1
+
+fun <- function(data, col_name) {
+ ? x <- data[[col_name]]? ? # if a warning is OK
+ ? # x <- data[, col_name]? # if you want to get an error
+ ? if(is.null(x)) {
+ ? ? msg <- sprintf("column %s not found, returning NULL", sQuote(col_name))
+ ? ? warning(msg)
+ ? }
+ ? x
+}
+
+fun(df, "Age")
+#> Warning in fun(df, "Age"): column 'Age' not found, returning NULL
+#> NULL
+fun(df, "Age2")
+#> [1]? 2 24 35? 1
+
+The rule of thumb is to use `$` in interactive sessions but `[` or `[[` 
+when programming, like in the function above.
+
+
+These two StackOverflow posts may be relevant [1] and [2].
+
+
+[1] 
+https://stackoverflow.com/questions/18222286/dynamically-select-data-frame-columns-using-and-a-character-value
+
+[2] 
+https://stackoverflow.com/questions/1169456/the-difference-between-bracket-and-double-bracket-for-accessing-the-el
+
+
+Hope this helps,
+
+Rui Barradas
+
+
+
+>
+>
+> We have looked into this (and related  "partial matching"), and
+> found that it would "break" too much old R code, if the warning
+> was turned on unconditionally.
+>
+> You may be interested in reading  help(options)  and search for
+> other 'warnPartialMatch*' ..
+> e.g., only at
+>    https://cran.r-project.org/doc/manuals/r-release/packages/base/refman/base.html#options
+>
+> Best regards,
+> Martin
+>
+>
+> --
+> Martin Maechler
+> R Core team  and  ETH Zurich
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
