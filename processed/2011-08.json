@@ -20582,22 +20582,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-a002e148eeb4",
-      "message_id": "<j2104i$49l$1@dough.gmane.org>",
-      "from_name": "Keith Jewell",
-      "from_email_hash": "5f415888401525978b60d58447b1aca3d0acdd47dbe48554abde6043f3242fef",
-      "date": "2011-08-11T16:29:01Z",
-      "subject": "[R] UNC windows path beginning with backslashes: normalizePath bug??",
-      "subject_clean": "UNC windows path beginning with backslashes: normalizePath bug??",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:\nUnder Windows, some parts of R don't handle UNC paths beginning with \nbackslashes. Specifically\na) Sys.glob() fails to find some files breaking (e.g.) Rcmdr plugins\n       Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n   fails to find files which are there\n\nb) update.packages(ask='graphics') fails when copying the updates into the \ndestination folders\n\nIn Renviron.site I define the site library with forward slashes, not \nbackslashes thus...\n   R_LIBS_SITE=//campden/shares/workgroup/stats/R/library/%v\n... but the startup process seems to replace them with forward slashes.\nI guess because  .libPaths with a 'new' argument calls normalizePath which \nchanges leading slashes to backslashes, even with winslash=\"/\"\n> normalizePath(\"//campden/shares/workgroup/stats/R/library\", winslash=\"/\")\n[1] \"\\\\\\\\campden/shares/workgroup/Stats/R/library\"\n\nI've corrected (??) this by inserting a line into Rprofile.site\n  assign(\".lib.loc\", gsub(\"\\\\\", \"/\", .libPaths(), fixed=TRUE), \nenv=environment(.libPaths))\nThat seems to fix problem (a) above, which was affecting a number of users.\nBut have I broken anything else?\n\nI'm still experiencing problem (b).\nI'm the only person on site who updates packages so I've mapped a drive \nletter (L:) and in my own .Rprofile I have a line\n   assign(\".lib.loc\", sub(\"//campden/shares/workgroup/Stats\", \"L:\", \n.libPaths(), ignore.case = TRUE), env=environment(.libPaths))\n\nSo that's OK as far as it goes, but it's all a bit messy!\nIf .libPaths is called with a 'new' argument it will breaks things again.\nnormalizePath seems to produce paths that don't work with Sys.glob.\n\nI have the feeling I'm being silly and making hard work of all this.\n\nAny comments? Suggestions?\n\nBest regards, and thanks in advance/\n\nKeith Jewell\n\n\"Keith Jewell\" <k.jewell at campden.co.uk> wrote in message news:...\n> Hi,\n>\n> Back in 2010 I had a problem with 'update.packages()', which I worked \n> around by mapping a drive letter to a UNC path [described in \n> <http://finzi.psych.upenn.edu/Rhelp10/2010-February/229820.html> but my \n> current workaround is\n> assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))].\n>\n> More recently a colleague had problems using the 'FactoMineR' plug in for \n> the Rcmdr package;\n> a) directly loading 'RcmdrPlugin.FactoMineR' opened and \"crashed\" R \n> Commander;\n> b) opening R Commander without FactoMiner, the Tools option 'Load Rcmdr \n> plug-in(s)...' was greyed out.\n>\n> It transpired that in .libPaths() the path to the library holding \n> 'RcmdrPlugin.FactoMineR' was specified as a UNC address: \n> \\\\\\\\Server02/stats/R/library/2.13>. Mapping a virtual drive letter (e.g. \n> L:) and specifying the path in .libPaths() as a 'local file system' (LFS) \n> address <L:/R/library/2.13> fixed the problem.\n>\n> I contacted Professor Fox (maintainer of Rcmdr) who told me that Rcmdr \n> finds plug-in packages via the command\n>  plugins <- unlist(lapply(.libPaths(), function(x) Sys.glob(file.path(x, \n> \"*/etc/menus.txt\"))))\n> Because file.path and Sys.glob are both vectorised I think (but am not \n> certain) that this could be simplified to:\n>  plugins <- Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n> but that's by the way, the problem seems to lie in Sys.glob under Windows \n> operating systems.\n>\n> I note that 'help(Sys.glob)' on my Windows system  differs from \n> <http://finzi.psych.upenn.edu/R/library/base/html/Sys.glob.html>.\n> The latter says \"For precise details, see your system's documentation on \n> the glob system call.  There is a POSIX 1003.2 standard  <snip> The rest \n> of these details are indicative (and based on the POSIX standard)\".\n> On Windows \"The glob system call is not part of Windows, and we supply a \n> partial emulation. <snip> An attempt is made to handle UNC paths starting \n> with a double backslash\" which doesn't really inspire confidence.\n>\n> This was discussed in a 2009 R-devel thread starting here \n> <https://stat.ethz.ch/pipermail/r-devel/2009-June/053879.html>, but the \n> patch proposed in that thread seems not to have been implemented (??).\n>\n> Trying to avoid Sys.glob in the Rcmdr application I came up with this:\n>      list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> It seems to give identical results to Sys.glob for mapped drives, works \n> with UNC paths in Windows, and seems quite fast.\n>\n> So my questions relate to diagnosis, prognosis, and prescription (cure?).\n>\n> 1) Diagnosis: Am I correct that my problem(s) originate in the \"partial \n> emulation\" of glob in Windows.\n>\n> 2) Prognosis: If so, is there any likelihood that the emulation will \n> improve in the near future?\n>\n> 3) Prescription: If not:\n>\n> a) is assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))\n> a reasonable workaround in a specific case?\n>\n> b) is list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> a reasonable replacement for the Sys.glob() construction in Rcmdr? I don't \n> want to suggest to Prof. Fox an amendment which fixes my problem but \n> 'breaks' it for others!\n>\n> Thanks in advance,\n>\n> Keith Jewell\n>\n> R version 2.13.0 (2011-04-13)\n> Platform: i386-pc-mingw32/i386 (32-bit)\n>\n> locale:\n> [1] LC_COLLATE=English_United Kingdom.1252\n> [2] LC_CTYPE=English_United Kingdom.1252\n> [3] LC_MONETARY=English_United Kingdom.1252\n> [4] LC_NUMERIC=C\n> [5] LC_TIME=English_United Kingdom.1252\n>\n> attached base packages:\n> [1] datasets  grDevices splines   graphics  stats     utils     tcltk\n> [8] tools     methods   base\n>\n>\n>",
-      "body_snippet": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:",
-      "thread_id": "thread-a002e148eeb4",
-      "thread_depth": 0,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-143afd95e7c1",
       "message_id": "<j22m3l$ill$1@dough.gmane.org>",
       "from_name": "Keith Jewell",
@@ -20610,6 +20594,22 @@
       "body_plain": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:\nUnder Windows, some parts of R don't handle UNC paths beginning with \nbackslashes. Specifically\na) Sys.glob() fails to find some files breaking (e.g.) Rcmdr plugins\n       Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n   fails to find files which are there\n\nb) update.packages(ask='graphics') fails when copying the updates into the \ndestination folders\n\nIn Renviron.site I define the site library with forward slashes, not \nbackslashes thus...\n   R_LIBS_SITE=//campden/shares/workgroup/stats/R/library/%v\n... but the startup process seems to replace them with forward slashes.\nI guess because  .libPaths with a 'new' argument calls normalizePath which \nchanges leading slashes to backslashes, even with winslash=\"/\"\n> normalizePath(\"//campden/shares/workgroup/stats/R/library\", winslash=\"/\")\n[1] \"\\\\\\\\campden/shares/workgroup/Stats/R/library\"\n\nI've corrected (??) this by inserting a line into Rprofile.site\n  assign(\".lib.loc\", gsub(\"\\\\\", \"/\", .libPaths(), fixed=TRUE), \nenv=environment(.libPaths))\nThat seems to fix problem (a) above, which was affecting a number of users.\nBut have I broken anything else?\n\nI'm still experiencing problem (b).\nI'm the only person on site who updates packages so I've mapped a drive \nletter (L:) and in my own .Rprofile I have a line\n   assign(\".lib.loc\", sub(\"//campden/shares/workgroup/Stats\", \"L:\", \n.libPaths(), ignore.case = TRUE), env=environment(.libPaths))\n\nSo that's OK as far as it goes, but it's all a bit messy!\nIf .libPaths is called with a 'new' argument it will breaks things again.\nnormalizePath seems to produce paths that don't work with Sys.glob.\n\nI have the feeling I'm being silly and making hard work of all this.\n\nAny comments? Suggestions?\n\nBest regards, and thanks in advance/\n\nKeith Jewell\n\n\"Keith Jewell\" <k.jewell at campden.co.uk> wrote in message news:...\n> Hi,\n>\n> Back in 2010 I had a problem with 'update.packages()', which I worked \n> around by mapping a drive letter to a UNC path [described in \n> <http://finzi.psych.upenn.edu/Rhelp10/2010-February/229820.html> but my \n> current workaround is\n> assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))].\n>\n> More recently a colleague had problems using the 'FactoMineR' plug in for \n> the Rcmdr package;\n> a) directly loading 'RcmdrPlugin.FactoMineR' opened and \"crashed\" R \n> Commander;\n> b) opening R Commander without FactoMiner, the Tools option 'Load Rcmdr \n> plug-in(s)...' was greyed out.\n>\n> It transpired that in .libPaths() the path to the library holding \n> 'RcmdrPlugin.FactoMineR' was specified as a UNC address: \n> \\\\\\\\Server02/stats/R/library/2.13>. Mapping a virtual drive letter (e.g. \n> L:) and specifying the path in .libPaths() as a 'local file system' (LFS) \n> address <L:/R/library/2.13> fixed the problem.\n>\n> I contacted Professor Fox (maintainer of Rcmdr) who told me that Rcmdr \n> finds plug-in packages via the command\n>  plugins <- unlist(lapply(.libPaths(), function(x) Sys.glob(file.path(x, \n> \"*/etc/menus.txt\"))))\n> Because file.path and Sys.glob are both vectorised I think (but am not \n> certain) that this could be simplified to:\n>  plugins <- Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n> but that's by the way, the problem seems to lie in Sys.glob under Windows \n> operating systems.\n>\n> I note that 'help(Sys.glob)' on my Windows system  differs from \n> <http://finzi.psych.upenn.edu/R/library/base/html/Sys.glob.html>.\n> The latter says \"For precise details, see your system's documentation on \n> the glob system call.  There is a POSIX 1003.2 standard  <snip> The rest \n> of these details are indicative (and based on the POSIX standard)\".\n> On Windows \"The glob system call is not part of Windows, and we supply a \n> partial emulation. <snip> An attempt is made to handle UNC paths starting \n> with a double backslash\" which doesn't really inspire confidence.\n>\n> This was discussed in a 2009 R-devel thread starting here \n> <https://stat.ethz.ch/pipermail/r-devel/2009-June/053879.html>, but the \n> patch proposed in that thread seems not to have been implemented (??).\n>\n> Trying to avoid Sys.glob in the Rcmdr application I came up with this:\n>      list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> It seems to give identical results to Sys.glob for mapped drives, works \n> with UNC paths in Windows, and seems quite fast.\n>\n> So my questions relate to diagnosis, prognosis, and prescription (cure?).\n>\n> 1) Diagnosis: Am I correct that my problem(s) originate in the \"partial \n> emulation\" of glob in Windows.\n>\n> 2) Prognosis: If so, is there any likelihood that the emulation will \n> improve in the near future?\n>\n> 3) Prescription: If not:\n>\n> a) is assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))\n> a reasonable workaround in a specific case?\n>\n> b) is list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> a reasonable replacement for the Sys.glob() construction in Rcmdr? I don't \n> want to suggest to Prof. Fox an amendment which fixes my problem but \n> 'breaks' it for others!\n>\n> Thanks in advance,\n>\n> Keith Jewell\n>\n> R version 2.13.0 (2011-04-13)\n> Platform: i386-pc-mingw32/i386 (32-bit)\n>\n> locale:\n> [1] LC_COLLATE=English_United Kingdom.1252\n> [2] LC_CTYPE=English_United Kingdom.1252\n> [3] LC_MONETARY=English_United Kingdom.1252\n> [4] LC_NUMERIC=C\n> [5] LC_TIME=English_United Kingdom.1252\n>\n> attached base packages:\n> [1] datasets  grDevices splines   graphics  stats     utils     tcltk\n> [8] tools     methods   base\n>\n>\n>",
       "body_snippet": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:",
       "thread_id": "thread-143afd95e7c1",
+      "thread_depth": 0,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-a002e148eeb4",
+      "message_id": "<j2104i$49l$1@dough.gmane.org>",
+      "from_name": "Keith Jewell",
+      "from_email_hash": "5f415888401525978b60d58447b1aca3d0acdd47dbe48554abde6043f3242fef",
+      "date": "2011-08-11T16:29:01Z",
+      "subject": "[R] UNC windows path beginning with backslashes: normalizePath bug??",
+      "subject_clean": "UNC windows path beginning with backslashes: normalizePath bug??",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:\nUnder Windows, some parts of R don't handle UNC paths beginning with \nbackslashes. Specifically\na) Sys.glob() fails to find some files breaking (e.g.) Rcmdr plugins\n       Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n   fails to find files which are there\n\nb) update.packages(ask='graphics') fails when copying the updates into the \ndestination folders\n\nIn Renviron.site I define the site library with forward slashes, not \nbackslashes thus...\n   R_LIBS_SITE=//campden/shares/workgroup/stats/R/library/%v\n... but the startup process seems to replace them with forward slashes.\nI guess because  .libPaths with a 'new' argument calls normalizePath which \nchanges leading slashes to backslashes, even with winslash=\"/\"\n> normalizePath(\"//campden/shares/workgroup/stats/R/library\", winslash=\"/\")\n[1] \"\\\\\\\\campden/shares/workgroup/Stats/R/library\"\n\nI've corrected (??) this by inserting a line into Rprofile.site\n  assign(\".lib.loc\", gsub(\"\\\\\", \"/\", .libPaths(), fixed=TRUE), \nenv=environment(.libPaths))\nThat seems to fix problem (a) above, which was affecting a number of users.\nBut have I broken anything else?\n\nI'm still experiencing problem (b).\nI'm the only person on site who updates packages so I've mapped a drive \nletter (L:) and in my own .Rprofile I have a line\n   assign(\".lib.loc\", sub(\"//campden/shares/workgroup/Stats\", \"L:\", \n.libPaths(), ignore.case = TRUE), env=environment(.libPaths))\n\nSo that's OK as far as it goes, but it's all a bit messy!\nIf .libPaths is called with a 'new' argument it will breaks things again.\nnormalizePath seems to produce paths that don't work with Sys.glob.\n\nI have the feeling I'm being silly and making hard work of all this.\n\nAny comments? Suggestions?\n\nBest regards, and thanks in advance/\n\nKeith Jewell\n\n\"Keith Jewell\" <k.jewell at campden.co.uk> wrote in message news:...\n> Hi,\n>\n> Back in 2010 I had a problem with 'update.packages()', which I worked \n> around by mapping a drive letter to a UNC path [described in \n> <http://finzi.psych.upenn.edu/Rhelp10/2010-February/229820.html> but my \n> current workaround is\n> assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))].\n>\n> More recently a colleague had problems using the 'FactoMineR' plug in for \n> the Rcmdr package;\n> a) directly loading 'RcmdrPlugin.FactoMineR' opened and \"crashed\" R \n> Commander;\n> b) opening R Commander without FactoMiner, the Tools option 'Load Rcmdr \n> plug-in(s)...' was greyed out.\n>\n> It transpired that in .libPaths() the path to the library holding \n> 'RcmdrPlugin.FactoMineR' was specified as a UNC address: \n> \\\\\\\\Server02/stats/R/library/2.13>. Mapping a virtual drive letter (e.g. \n> L:) and specifying the path in .libPaths() as a 'local file system' (LFS) \n> address <L:/R/library/2.13> fixed the problem.\n>\n> I contacted Professor Fox (maintainer of Rcmdr) who told me that Rcmdr \n> finds plug-in packages via the command\n>  plugins <- unlist(lapply(.libPaths(), function(x) Sys.glob(file.path(x, \n> \"*/etc/menus.txt\"))))\n> Because file.path and Sys.glob are both vectorised I think (but am not \n> certain) that this could be simplified to:\n>  plugins <- Sys.glob(file.path(.libPaths(), \"*/etc/menus.txt\"))\n> but that's by the way, the problem seems to lie in Sys.glob under Windows \n> operating systems.\n>\n> I note that 'help(Sys.glob)' on my Windows system  differs from \n> <http://finzi.psych.upenn.edu/R/library/base/html/Sys.glob.html>.\n> The latter says \"For precise details, see your system's documentation on \n> the glob system call.  There is a POSIX 1003.2 standard  <snip> The rest \n> of these details are indicative (and based on the POSIX standard)\".\n> On Windows \"The glob system call is not part of Windows, and we supply a \n> partial emulation. <snip> An attempt is made to handle UNC paths starting \n> with a double backslash\" which doesn't really inspire confidence.\n>\n> This was discussed in a 2009 R-devel thread starting here \n> <https://stat.ethz.ch/pipermail/r-devel/2009-June/053879.html>, but the \n> patch proposed in that thread seems not to have been implemented (??).\n>\n> Trying to avoid Sys.glob in the Rcmdr application I came up with this:\n>      list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> It seems to give identical results to Sys.glob for mapped drives, works \n> with UNC paths in Windows, and seems quite fast.\n>\n> So my questions relate to diagnosis, prognosis, and prescription (cure?).\n>\n> 1) Diagnosis: Am I correct that my problem(s) originate in the \"partial \n> emulation\" of glob in Windows.\n>\n> 2) Prognosis: If so, is there any likelihood that the emulation will \n> improve in the near future?\n>\n> 3) Prescription: If not:\n>\n> a) is assign(\".lib.loc\", sub(\"\\\\\\\\\\\\\\\\Server02/stats\", \"L:\", .libPaths(), \n> ignore.case = TRUE), env=environment(.libPaths))\n> a reasonable workaround in a specific case?\n>\n> b) is list.files(path=file.path(list.files(path=.libPaths(), \n> full.names=TRUE), \"etc\"), pattern=\"^menus\\\\.txt$\", full.names=TRUE)\n> a reasonable replacement for the Sys.glob() construction in Rcmdr? I don't \n> want to suggest to Prof. Fox an amendment which fixes my problem but \n> 'breaks' it for others!\n>\n> Thanks in advance,\n>\n> Keith Jewell\n>\n> R version 2.13.0 (2011-04-13)\n> Platform: i386-pc-mingw32/i386 (32-bit)\n>\n> locale:\n> [1] LC_COLLATE=English_United Kingdom.1252\n> [2] LC_CTYPE=English_United Kingdom.1252\n> [3] LC_MONETARY=English_United Kingdom.1252\n> [4] LC_NUMERIC=C\n> [5] LC_TIME=English_United Kingdom.1252\n>\n> attached base packages:\n> [1] datasets  grDevices splines   graphics  stats     utils     tcltk\n> [8] tools     methods   base\n>\n>\n>",
+      "body_snippet": "Hi,\n\nBack in June I posted the message below, but had no replies. I've made a \nlittle progress since then so this is to update anyone interested (!) and to \nask for comments.\n\nBrief problem statement:",
+      "thread_id": "thread-a002e148eeb4",
       "thread_depth": 0,
       "month": "2011-08"
     },
@@ -21750,6 +21750,24 @@
       "month": "2011-08"
     },
     {
+      "id": "msg-9a8e12cc0655",
+      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
+      "date": "2011-08-12T07:22:41Z",
+      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
+      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
+      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
+      "references": [
+        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
+      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
+      "thread_id": "thread-c86da3d91db1",
+      "thread_depth": 1,
+      "month": "2011-08"
+    },
+    {
       "id": "msg-e325d89d8d4d",
       "message_id": "<4E44D4C1.5050903@knmi.nl>",
       "from_name": "Paul Hiemstra",
@@ -21768,24 +21786,6 @@
       "body_snippet": "On 08/11/2011 07:51 PM, William Dunlap wrote:\n>> -----Original Message-----\n>> From: r-help-bounces at r-project.org [mailto:r-help-bounces at r-project.org] On Behalf Of R. Michael\n>> Weylandt\n>> Sen",
       "thread_id": "thread-06c94c38cae2",
       "thread_depth": 5,
-      "month": "2011-08"
-    },
-    {
-      "id": "msg-9a8e12cc0655",
-      "message_id": "<CADfFDC5W0ENTS1otQqYrJkuAoH4DFi+uApePS3OP5w962aS6rg@mail.gmail.com>",
-      "from_name": "Deepayan Sarkar",
-      "from_email_hash": "e2f6c1c06815045681b456968d2e109321e5194ba71ca82f1f6f312db1508e36",
-      "date": "2011-08-12T07:22:41Z",
-      "subject": "[R] current.panel.limits() of lattice returning NaN limits - why?",
-      "subject_clean": "current.panel.limits() of lattice returning NaN limits - why?",
-      "in_reply_to": "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>",
-      "references": [
-        "<CANO=ohJ=c696jS3ZQFwucsS9TNX0=kdyLtFEHPJ5vXt0cWiZhg@mail.gmail.com>"
-      ],
-      "body_plain": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN limits for the plot, which\n> it much harder to calculate anything sensible.\n> An illustration:\n>\n> Given this axis function:\n>\n>\n> vs.axis <- function(...){\n> ? xlim <- current.panel.limits()$xlim\n> ? ylim <- current.panel.limits()$ylim\n>\n> ? # Debug code\n> ? print(list(ylim=ylim,xlim=xlim))\n>\n> ? xat <- pretty(seq(xlim[1],xlim[2],100),n=5)\n> ? yat <- pretty(seq(ylim[1],ylim[2],100),n=4)\n> ? xlab <- sub(\"-\",\"\",as.character(xat))\n> ? ylab <- sub(\"-\",\"\",as.character(yat))\n> ? panel.axis(side=\"top\",at=xat,labels=xlab)\n> ? panel.axis(side=\"right\",at=yat,labels=ylab)\n> }\n>\n> and the attached data set, I get this output:\n\n(The attachment didn't come through.)\n\n>> xyplot(F1 ~F2,data=pb,axis=vs.axis)\n> $ylim\n> [1] NaN NaN\n>\n> $xlim\n> [1] ?346.5 3823.5\n>\n> Error in if (del == 0 && to == 0) return(to) :\n> ?missing value where TRUE/FALSE needed\n>\n> What's wrong? Is there a more robust way of getting the x- and y- limits?\n\nYou are doing the equivalent of\n\nlibrary(grid)\npushViewport(viewport(0.5, 0.5, width = 0.8, height = 0, xscale = c(0, 10)))\ncurrent.panel.limits()\n\n(Note the height=0).\n\nThe axis function is called four times, once for each side. On the top\nand left sides, it is actually called with the strip viewports active,\nbecause the axis annotation goes outside the strip, not the panel. In\nyour case there are no strips, which basically mean a 0-height strip.\nYour code will work (although will not give what you want) if you try\nsomething like\n\nxyplot(rnorm(10) ~ 1:10 | gl(1, 10), axis=vs.axis,\n       strip = TRUE, strip.left = TRUE)\n\nIn real applications of custom axis functions, one usually writes code\nconditioned on the value of the 'side' argument.\n\n-Deepayan",
-      "body_snippet": "On Fri, Aug 12, 2011 at 12:15 PM, Fredrik Karlsson <dargosch at gmail.com> wrote:\n> Hi,\n>\n> I need a custom axis function for a plot, but it seems\n> that current.panel.limits() sometimes returns NaN l",
-      "thread_id": "thread-c86da3d91db1",
-      "thread_depth": 1,
       "month": "2011-08"
     },
     {
@@ -29948,25 +29948,6 @@
       "month": "2011-08"
     },
     {
-      "id": "msg-0e28a995deed",
-      "message_id": "<CABdHhvH6H+-RDT4Qpea+9XU2iK1YuhmZfJ0js_ABrRfKcO=Upw@mail.gmail.com>",
-      "from_name": "Hadley Wickham",
-      "from_email_hash": "120ce28c6315dd0de419ddf6ddfe63d332d6337a253745ec7f27d22f63f0b7c5",
-      "date": "2011-08-17T11:38:07Z",
-      "subject": "[R] How to apply a function to subsets of a data frame *and* obtain a data frame again?",
-      "subject_clean": "How to apply a function to subsets of a data frame *and* obtain a data frame again?",
-      "in_reply_to": "<4E4BA73B.1080703@knmi.nl>",
-      "references": [
-        "<DD753FA2-6322-45BA-BBE0-E45D12FBB887@web.de>",
-        "<4E4BA73B.1080703@knmi.nl>"
-      ],
-      "body_plain": "> The following example does what you want using ddply:\n>\n> library(plyr)\n> edfPerGroup = ddply(df, .(Group), summarise, edf = edf(Value), Value =\n> Value)\n\nOr slightly more succinctly:\n\nddply(df, .(Group), mutate, edf = edf(Value))\n\nHadley\n\n-- \nAssistant Professor / Dobelman Family Junior Chair\nDepartment of Statistics / Rice University\nhttp://had.co.nz/",
-      "body_snippet": "> The following example does what you want using ddply:\n>\n> library(plyr)\n> edfPerGroup = ddply(df, .(Group), summarise, edf = edf(Value), Value =\n> Value)\n\nOr slightly more succinctly:\n\nddply(df, .(G",
-      "thread_id": "thread-6913d41d96ee",
-      "thread_depth": 3,
-      "month": "2011-08"
-    },
-    {
       "id": "msg-641692134ec8",
       "message_id": "<4E4BA81F.7020703@knmi.nl>",
       "from_name": "Paul Hiemstra",
@@ -29983,6 +29964,25 @@
       "body_snippet": "On 08/16/2011 07:56 AM, Eik Vettorazzi wrote:\n> Hi Lao,\n> you tried to reinvent the wheel. Have a look at ?tapply\n>\n> tapply(sleep$extra,sleep$group,mean)\nor take a look at the plyr package:\n\nlibrary(",
       "thread_id": "thread-67cb17b6d1fd",
       "thread_depth": 2,
+      "month": "2011-08"
+    },
+    {
+      "id": "msg-0e28a995deed",
+      "message_id": "<CABdHhvH6H+-RDT4Qpea+9XU2iK1YuhmZfJ0js_ABrRfKcO=Upw@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "120ce28c6315dd0de419ddf6ddfe63d332d6337a253745ec7f27d22f63f0b7c5",
+      "date": "2011-08-17T11:38:07Z",
+      "subject": "[R] How to apply a function to subsets of a data frame *and* obtain a data frame again?",
+      "subject_clean": "How to apply a function to subsets of a data frame *and* obtain a data frame again?",
+      "in_reply_to": "<4E4BA73B.1080703@knmi.nl>",
+      "references": [
+        "<DD753FA2-6322-45BA-BBE0-E45D12FBB887@web.de>",
+        "<4E4BA73B.1080703@knmi.nl>"
+      ],
+      "body_plain": "> The following example does what you want using ddply:\n>\n> library(plyr)\n> edfPerGroup = ddply(df, .(Group), summarise, edf = edf(Value), Value =\n> Value)\n\nOr slightly more succinctly:\n\nddply(df, .(Group), mutate, edf = edf(Value))\n\nHadley\n\n-- \nAssistant Professor / Dobelman Family Junior Chair\nDepartment of Statistics / Rice University\nhttp://had.co.nz/",
+      "body_snippet": "> The following example does what you want using ddply:\n>\n> library(plyr)\n> edfPerGroup = ddply(df, .(Group), summarise, edf = edf(Value), Value =\n> Value)\n\nOr slightly more succinctly:\n\nddply(df, .(G",
+      "thread_id": "thread-6913d41d96ee",
+      "thread_depth": 3,
       "month": "2011-08"
     },
     {
@@ -43569,6 +43569,25 @@
       "month": "2011-08"
     },
     {
+      "id": "msg-37ed9bd489df",
+      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
+      "from_name": "Sebastian Bauer",
+      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
+      "date": "2011-08-24T17:11:06Z",
+      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
+      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
+      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
+      "references": [
+        "<4E551442.4050600@charite.de>",
+        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
+      ],
+      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
+      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
+      "thread_id": "thread-324d124b9ac3",
+      "thread_depth": 2,
+      "month": "2011-08"
+    },
+    {
       "id": "msg-0772fd69525d",
       "message_id": "<1314205866972-3766037.post@n4.nabble.com>",
       "from_name": "lowman",
@@ -43586,25 +43605,6 @@
       "body_snippet": "answered my own question, just use the call shell function in vb\n\nwoohoo\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Controling-R-from-MS-Access-tp2719751p3766037.html\nSent from ",
       "thread_id": "thread-67f8c70b1a9e",
       "thread_depth": 1,
-      "month": "2011-08"
-    },
-    {
-      "id": "msg-37ed9bd489df",
-      "message_id": "<82fc539dadc3b793cfed7dd09b376124.squirrel@webmail.charite.de>",
-      "from_name": "Sebastian Bauer",
-      "from_email_hash": "6c8045cba97f6c55aa7094b8255b697dda4fcb5d51e212ace040ef10538cf8c0",
-      "date": "2011-08-24T17:11:06Z",
-      "subject": "[R] Function rank() for data frames (or multiple vectors)?",
-      "subject_clean": "Function rank() for data frames (or multiple vectors)?",
-      "in_reply_to": "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>",
-      "references": [
-        "<4E551442.4050600@charite.de>",
-        "<9903CAEB-511E-4707-9162-6C5F3B65EDC1@comcast.net>"
-      ],
-      "body_plain": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because the row data\n>> is essentially the same), I'd like to have the same flexibility that\n>> rank() offers. Is there an elegant solution to this simple problem\n>> in R? Basically, what I need is a mixture of order() and rank().\n>> While the former allows to specify multiple vectors, it doesn't\n>> provide the flexibility of rank() such that I can specify what\n>> happens if ties can not be broken.\n> An example of this \"simple problem\" would clarify this greatly. I\n> cannot tell what \"flexibility\" in 'rank' is missing in 'order'.\n\nThanks for your answer. For instance, if I have two vectors such as\n\n1 1\n1 2\n1 2\n1 3\n2 1\n\nthat I want combinedly ranked. I'd like to get an output\n\n1\n2\n2\n4\n5\n\nor (ties.method=average)\n\n1\n2.5\n2.5\n4\n5\n\nBasically, I need a function similar to the rank() function that accepts\nmore than one vector (as order() does).\n\nBest,\nSebastian",
-      "body_snippet": "Hi!\n\n>> I'd like to rank rows of a data frame similar to what rank() does\n>> for vectors. However, ties should be broken by columns that I\n>> specify. If it is not possible to break a ties (because th",
-      "thread_id": "thread-324d124b9ac3",
-      "thread_depth": 2,
       "month": "2011-08"
     },
     {
@@ -63825,17 +63825,6 @@
       "root_message_id": "msg-b64fe06d073d"
     },
     {
-      "id": "thread-143afd95e7c1",
-      "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
-      "message_count": 1,
-      "participants": [
-        "Keith Jewell"
-      ],
-      "started": "2011-08-11T16:29:01Z",
-      "last_reply": "2011-08-11T16:29:01Z",
-      "root_message_id": "msg-143afd95e7c1"
-    },
-    {
       "id": "thread-a002e148eeb4",
       "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
       "message_count": 6,
@@ -63847,6 +63836,17 @@
       "started": "2011-08-11T16:29:01Z",
       "last_reply": "2011-08-19T08:39:30Z",
       "root_message_id": "msg-a002e148eeb4"
+    },
+    {
+      "id": "thread-143afd95e7c1",
+      "subject": "UNC windows path beginning with backslashes: normalizePath bug??",
+      "message_count": 1,
+      "participants": [
+        "Keith Jewell"
+      ],
+      "started": "2011-08-11T16:29:01Z",
+      "last_reply": "2011-08-11T16:29:01Z",
+      "root_message_id": "msg-143afd95e7c1"
     },
     {
       "id": "thread-06c94c38cae2",

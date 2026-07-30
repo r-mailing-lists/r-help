@@ -24163,24 +24163,6 @@
       "month": "2012-02"
     },
     {
-      "id": "msg-d388134e7836",
-      "message_id": "<05EFF149-9776-4E26-90EB-77154CFC26B6@gmail.com>",
-      "from_name": "michael.weylandt at gmail.com (R. Michael Weylandt",
-      "from_email_hash": "302378f35d16399c7239457e040a11ee7483a70b012a7a6bc3d0de49cf0a2b8a",
-      "date": "2012-02-13T22:46:39Z",
-      "subject": "[R] matrix subsetting",
-      "subject_clean": "matrix subsetting",
-      "in_reply_to": "<87hayuickx.fsf@gnu.org>",
-      "references": [
-        "<87hayuickx.fsf@gnu.org>"
-      ],
-      "body_plain": "which(x>0)\n\nor \n\nwhich(x>0, arr.ind=TRUE)\n\ndepending on your application. \n\nMichael\n\nOn Feb 13, 2012, at 5:38 PM, Sam Steingold <sds at gnu.org> wrote:\n\n> if I have a vector, I can find the indexes which satisfy a condition:\n> x <- rnorm(10)\n> [1]  0.4751132 -0.5442322 -0.1979854 -0.2455521  0.8349336 -0.4283345\n> [7]  0.6108130  2.0576160  1.1251716 -1.3933637\n> x[x>0]\n> [1] 0.4751132 0.8349336 0.6108130 2.0576160 1.1251716\n> (1:10)[x>0]\n> [1] 1 5 7 8 9\n> \n> how about a matrix?\n> \n>       00000G      00000Q      00002O       000035       000037       00003A\n> 00000G     NA 0.008226002 0.005631718 0.0002625585 0.0010673235 0.0045310915\n> 00000Q     NA          NA 0.003714951 0.0002007877 0.0016983426 0.0011083925\n> 00002O     NA          NA          NA 0.0024233691 0.0069849678 0.0024510792\n> 000035     NA          NA          NA           NA 0.0006499707 0.0008420414\n> 000037     NA          NA          NA           NA           NA 0.0005448872\n> 00003A     NA          NA          NA           NA           NA           NA\n> 00003B     NA          NA          NA           NA           NA           NA\n> 00003G     NA          NA          NA           NA           NA           NA\n> 00003H     NA          NA          NA           NA           NA           NA\n> 00003I     NA          NA          NA           NA           NA           NA\n>             00003B       00003G       00003H      00003I\n> 00000G 0.0007254316 0.0093954826 3.420231e-04 0.003974556\n> 00000Q 0.0013883606 0.0019778247 3.609791e-05 0.001552725\n> 00002O 0.0027340806 0.0082790646 2.561862e-03 0.012297821\n> 000035 0.0006025767 0.0004534397 1.053946e-03 0.001681780\n> 000037 0.0005501974 0.0021137871 1.733880e-03 0.003712675\n> 00003A 0.0008969849 0.0043855527 2.786194e-06 0.002492954\n> 00003B           NA 0.0019791290 8.301787e-04 0.002816774\n> 00003G           NA           NA 3.181892e-07 0.010608717\n> 00003H           NA           NA           NA 0.001066141\n> 00003I           NA           NA           NA          NA\n> \n> how do I find the cells whose values are, e.g., > 0.01 ??\n> \n> thanks!\n> \n> -- \n> Sam Steingold (http://sds.podval.org/) on Ubuntu 11.10 (oneiric) X 11.0.11004000\n> http://www.childpsy.net/ http://pmw.org.il http://americancensorship.org\n> http://ffii.org http://iris.org.il http://truepeace.org http://dhimmi.com\n> The difference between genius and stupidity is that genius has its limits.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "which(x>0)\n\nor \n\nwhich(x>0, arr.ind=TRUE)\n\ndepending on your application. \n\nMichael\n\nOn Feb 13, 2012, at 5:38 PM, Sam Steingold <sds at gnu.org> wrote:\n\n> if I have a vector, I can find the indexes wh",
-      "thread_id": "thread-0a87c17503f1",
-      "thread_depth": 1,
-      "month": "2012-02"
-    },
-    {
       "id": "msg-7a530f9c65ff",
       "message_id": "<CAK4FJ1DAwqfVBU6evA8JXfBGp2Udepw7f0p0V6zSa1vXJrpqBA@mail.gmail.com>",
       "from_name": "ilai",
@@ -24195,6 +24177,24 @@
       "body_plain": "The function you posted runs without error (on these 6 lines), but\ndoes not return anything that looks remotely like a sum, or cumsum of\nanything. Can you clarify what you are trying to do? I assume by \"sum\nof every other row\" you don't mean summing Time, X and Y for rows\n1,3,5,..., ?\n\nFor the sum of sens2[c(1,3,5,...),] for every column (assuming no NA's\nin the data) you could\n\n (1:nrow(sens2) %% 2) %*% as.matrix(sens2)\n\n           Time       Y         X rownumber\n[1,] 3985695201 0.56826 0.1369527         9\n\nHope this helps\n\n\nOn Mon, Feb 13, 2012 at 11:56 AM, Hasan Diwan <hasan.diwan at gmail.com> wrote:\n> I'd like to get the sum of every other row in a data.frame. When I\n> actually set about doing this, I get the error in the subject line of\n> this message. A sample of my data is below, followed by the function\n> call that should give me the results I want:\n>\n>> dput(head(sens2))\n> structure(list(Time = c(1328565067, 1328565067.05, 1328565067.1,\n> 1328565067.15, 1328565067.2, 1328565067.25), Y = c(0.0963890795246276,\n> 0.227296347215609, 0.240972698811569, 0.221208948983498, 0.230898231782485,\n> 0.203282153087549), X = c(0.0245045248243853, 0.0835679411703579,\n> 0.0612613120609633, 0.058568910563872, 0.0511868450318788, 0.0557714205674231\n> ), rownumber = 1:6), .Names = c(\"Time\", \"Y\", \"X\", \"rownumber\"\n> ), row.names = c(NA, 6L), class = \"data.frame\")\n>> speedX <- sapply(sens2[sens2$rownumber %% 2 == 0,], function(row) { cumsum(c(sens2[row+1,3], sens2[row,3]))}, simplify=TRUE)\n> Error in xj[i] : only 0's may be mixed with negative subscripts\n> Help?\n> --\n> Sent from my mobile device\n> Envoyait de mon portable\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "The function you posted runs without error (on these 6 lines), but\ndoes not return anything that looks remotely like a sum, or cumsum of\nanything. Can you clarify what you are trying to do? I assume b",
       "thread_id": "thread-3bd3dbaeedf5",
+      "thread_depth": 1,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-d388134e7836",
+      "message_id": "<05EFF149-9776-4E26-90EB-77154CFC26B6@gmail.com>",
+      "from_name": "michael.weylandt at gmail.com (R. Michael Weylandt",
+      "from_email_hash": "302378f35d16399c7239457e040a11ee7483a70b012a7a6bc3d0de49cf0a2b8a",
+      "date": "2012-02-13T22:46:39Z",
+      "subject": "[R] matrix subsetting",
+      "subject_clean": "matrix subsetting",
+      "in_reply_to": "<87hayuickx.fsf@gnu.org>",
+      "references": [
+        "<87hayuickx.fsf@gnu.org>"
+      ],
+      "body_plain": "which(x>0)\n\nor \n\nwhich(x>0, arr.ind=TRUE)\n\ndepending on your application. \n\nMichael\n\nOn Feb 13, 2012, at 5:38 PM, Sam Steingold <sds at gnu.org> wrote:\n\n> if I have a vector, I can find the indexes which satisfy a condition:\n> x <- rnorm(10)\n> [1]  0.4751132 -0.5442322 -0.1979854 -0.2455521  0.8349336 -0.4283345\n> [7]  0.6108130  2.0576160  1.1251716 -1.3933637\n> x[x>0]\n> [1] 0.4751132 0.8349336 0.6108130 2.0576160 1.1251716\n> (1:10)[x>0]\n> [1] 1 5 7 8 9\n> \n> how about a matrix?\n> \n>       00000G      00000Q      00002O       000035       000037       00003A\n> 00000G     NA 0.008226002 0.005631718 0.0002625585 0.0010673235 0.0045310915\n> 00000Q     NA          NA 0.003714951 0.0002007877 0.0016983426 0.0011083925\n> 00002O     NA          NA          NA 0.0024233691 0.0069849678 0.0024510792\n> 000035     NA          NA          NA           NA 0.0006499707 0.0008420414\n> 000037     NA          NA          NA           NA           NA 0.0005448872\n> 00003A     NA          NA          NA           NA           NA           NA\n> 00003B     NA          NA          NA           NA           NA           NA\n> 00003G     NA          NA          NA           NA           NA           NA\n> 00003H     NA          NA          NA           NA           NA           NA\n> 00003I     NA          NA          NA           NA           NA           NA\n>             00003B       00003G       00003H      00003I\n> 00000G 0.0007254316 0.0093954826 3.420231e-04 0.003974556\n> 00000Q 0.0013883606 0.0019778247 3.609791e-05 0.001552725\n> 00002O 0.0027340806 0.0082790646 2.561862e-03 0.012297821\n> 000035 0.0006025767 0.0004534397 1.053946e-03 0.001681780\n> 000037 0.0005501974 0.0021137871 1.733880e-03 0.003712675\n> 00003A 0.0008969849 0.0043855527 2.786194e-06 0.002492954\n> 00003B           NA 0.0019791290 8.301787e-04 0.002816774\n> 00003G           NA           NA 3.181892e-07 0.010608717\n> 00003H           NA           NA           NA 0.001066141\n> 00003I           NA           NA           NA          NA\n> \n> how do I find the cells whose values are, e.g., > 0.01 ??\n> \n> thanks!\n> \n> -- \n> Sam Steingold (http://sds.podval.org/) on Ubuntu 11.10 (oneiric) X 11.0.11004000\n> http://www.childpsy.net/ http://pmw.org.il http://americancensorship.org\n> http://ffii.org http://iris.org.il http://truepeace.org http://dhimmi.com\n> The difference between genius and stupidity is that genius has its limits.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "which(x>0)\n\nor \n\nwhich(x>0, arr.ind=TRUE)\n\ndepending on your application. \n\nMichael\n\nOn Feb 13, 2012, at 5:38 PM, Sam Steingold <sds at gnu.org> wrote:\n\n> if I have a vector, I can find the indexes wh",
+      "thread_id": "thread-0a87c17503f1",
       "thread_depth": 1,
       "month": "2012-02"
     },
@@ -40322,26 +40322,6 @@
       "month": "2012-02"
     },
     {
-      "id": "msg-b8d40db53b86",
-      "message_id": "<20120222164910.Horde.HjNgHGEwhY5PRQ52idElKxA@webmailnew.dds.nl>",
-      "from_name": "Jan van der Laan",
-      "from_email_hash": "63cc54c6a7b9a139af2f52d4150a543d48e44d9d6b3c8845ba9345d059bfb2cf",
-      "date": "2012-02-22T15:49:10Z",
-      "subject": "[R] Week number from a date",
-      "subject_clean": "Week number from a date",
-      "in_reply_to": "<4F44F3E4.90409@uky.edu>",
-      "references": [
-        "<1329916196382-4410223.post@n4.nabble.com>",
-        "<CABmqZHP5rVQgiyzGZSQ7+OquD4Swzdu-nHVzDasL0dxoUXP1uQ@mail.gmail.com>",
-        "<4F44F3E4.90409@uky.edu>"
-      ],
-      "body_plain": "The suggestion below gives you week numbers with week 1 being the week  \ncontaining the first monday of the year and weeks going from monday to  \nsunday. There are other conventions. The ISO convention is that week 1  \nis the first week containing at least 4 days in the new year (week 1  \nof 2012 starts on 2nd januari; week 1 of 2008 starts on december 29th  \n2008).\n\nhttp://www.r-bloggers.com/iso-week/\n\ngives a function for that type of week numbers (not tested by me).\n\nJan\n\n\n\nPatrick Breheny <patrick.breheny at uky.edu> schreef:\n\n> To give a little more detail, you can convert your character strings  \n> into POSIX objects, then extract from it virtually anything you  \n> would want using strftime.  In particular, %W is how you get the  \n> week number:\n>\n>> dateRange <- c(\"2008-10-01\",\"2008-12-01\")\n>> x <- as.POSIXlt(dateRange)\n>> strftime(x,format=\"%W\")\n> [1] \"39\" \"48\"\n>\n> --Patrick\n>\n> On 02/22/2012 08:37 AM, Ingmar Visser wrote:\n>> ?strptime is a good place to start\n>> hth, Ingmar\n>>\n>> On Wed, Feb 22, 2012 at 2:09 PM, arunkumar1111<akpbond007 at gmail.com>  wrote:\n>>\n>>> Hi\n>>>\n>>> My data looks like this\n>>>\n>>> startDate=\"2008-06-01\"\n>>>\n>>> dateRange =c( \"2008-10-01\",\"2008-12-01\")\n>>> Is there any method to find the week number from the startDate range\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "The suggestion below gives you week numbers with week 1 being the week  \ncontaining the first monday of the year and weeks going from monday to  \nsunday. There are other conventions. The ISO conventio",
-      "thread_id": "thread-a75aaecd8166",
-      "thread_depth": 3,
-      "month": "2012-02"
-    },
-    {
       "id": "msg-0bdd4f2b0980",
       "message_id": "<2AE0D39F-1728-423D-ACAB-3D4479DC4DEA@comcast.net>",
       "from_name": "David Winsemius",
@@ -40358,6 +40338,26 @@
       "body_plain": "On Feb 22, 2012, at 9:13 AM, josh rosen wrote:\n\n> thank you very much David! Can I follow up with a slight  \n> complication of this?\n> A 2 by 2 case, where the abline is different in each plot.\n>\n> A relevant input code would be\n>\n> thedataA1 <- data.frame(x1=rnorm(100,1,1),x2=rnorm(100,3,1)) #create  \n> data\n> thedataB1 <- data.frame(x1=rnorm(100,2,1),x2=rnorm(100,4,1)) #create  \n> data\n> thedataA2 <- data.frame(x1=rnorm(100,1,1),x2=rnorm(100,3,1)) #create  \n> data\n> thedataB2 <- data.frame(x1=rnorm(100,2,1),x2=rnorm(100,4,1)) #create  \n> data\n> #four different abline\n> v1<-mean(thedataA1$x1)\n> v2<-mean(thedataB1$x1)\n> v3<-mean(thedataA2$x1)\n> v4<-mean(thedataB2$x1)\n>\n> thedataB1.m<-melt(thedataB1)\n> thedataA1.m<-melt(thedataA1)\n> thedataA2.m<-melt(thedataA2)\n> thedataB2.m<-melt(thedataB2)\n\n\nErrr ..... You failed to take the lesson that you need to create one  \ndata.frame with categorical variables. That's a pretty basic lesson  \nfor both lattice (and ggplot) graphics as well as regression  \napplications.\n>\n> # creating one density plot\n> densityplot(~value, thedataA1.m, groups=variable,\n\nUnfortunately there is now no \"variable\" variable in your new data.\n\n> auto.key=list(columns=2),\n> \t\tpanel = function(x, y, ...) {\n> \t\t\tpanel.densityplot(x, ...)\n> \t\t\tpanel.abline(v=mean(thedataA1$x1), lty=\"dashed\", col=\"red\")\n\nAfter going back and constructing a proper dataset, you should be  \npassing 'groups' into the panel function and picking it up inside  \npanel.abline. You can also recover the 'panel.number()' and then use  \nthem both to recover the means from the global environment when inside  \npanel.abline. I probably would have used tapply to create a table with  \nan index (in the enclosing enviroment) rather than creating 4 separate  \nvalues to choose That way you could use one object name but construct  \nthe 4 indices. But for that to work you would have needed to follow my  \nexample about binding the 4 datasets into one.\n\n\nOne way to find previous worked examples in the rhelp Archives is to  \nsearch with your favorite engine on strategies like \"panel.number  \ngroups Sarkar\" or \"panel.number groups Andrews\"\n\nDeepayan Sarkar and Felix Andrews are the two persons from whom I have  \nlearned the most regarding the fine points of lattice plots.\n\nAnd will you please learn to post in plain text?\n\n-- \ndavid\n\n\n> \t\t}\n> )\n>\n>\n>\n>\n>\n>\n> On 22 February 2012 13:48, David Winsemius <dwinsemius at comcast.net>  \n> wrote:\n>\n> On Feb 22, 2012, at 5:28 AM, josh rosen wrote:\n>\n> Hi,\n>\n> I have created two separate overlapping density plots- see example  \n> code\n> below.\n> What I wish now to do is combine them into one figure where they sit  \n> side\n> by side.\n> Any help would be great!\n>\n> many thanks in advance, josh.\n>\n> #####################\n> thedataA <- data.frame(x1=rnorm(100,1,1),x2=rnorm(100,3,1)) #create  \n> data\n> thedataA.m<-melt(thedataA)\n>\n> densityplot(~value, thedataA.m,  \n> groups=variable,auto.key=list(columns=2),\n>      panel = function(x, y, ...) {\n>              panel.densityplot(x, ...)\n>              panel.abline(v=0)\n>      }\n> )\n>\n>\n> The syntax for grouping (which gives theoverlaid but different  \n> colors as default output) and \"separation\" is fairly simple. Use the  \n> \"|\" operator for separated plots and the \" .., groups= <var>, ..\"   \n> parameter for overlaying results. It's only going to work easily if  \n> they are all in the same dataset.\n>\n> Try:\n>\n>  bigset <- cbind( rbind(thedataA.m, thedataB.m), ABgrp=rep(c(\"datA\",  \n> \"datB\"), each=200) )\n>  densityplot(~value|ABgrp, data=bigset, groups=variable,  \n> auto.key=list(columns=2),\n>\n>       panel = function(x, y, ...) {\n>               panel.densityplot(x, ...)\n>               panel.abline(v=0)   } )\n>\n>\n> And please work on whatever practice is producing duplicate postings.\n>\n> -- \n> David.\n>\n>\n>\n>\n> thedataB <- data.frame(x1=rnorm(100,2,1),x2=rnorm(100,4,1)) #create  \n> data\n> thedataB.m<-melt(thedataA)\n>\n> I assume that is a copy-paste-fail-to-correct error.\n>\n>\n> densityplot(~value, thedataB.m,  \n> groups=variable,auto.key=list(columns=2),\n>      panel = function(x, y, ...) {\n>              panel.densityplot(x, ...)\n>              panel.abline(v=0)\n>      }\n> )\n> ######################\n>\n>        [[alternative HTML version deleted]]\n\n\nDavid Winsemius, MD\nWest Hartford, CT",
       "body_snippet": "On Feb 22, 2012, at 9:13 AM, josh rosen wrote:\n\n> thank you very much David! Can I follow up with a slight  \n> complication of this?\n> A 2 by 2 case, where the abline is different in each plot.\n>\n> A ",
       "thread_id": "thread-c5fce9ba5da2",
+      "thread_depth": 3,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-b8d40db53b86",
+      "message_id": "<20120222164910.Horde.HjNgHGEwhY5PRQ52idElKxA@webmailnew.dds.nl>",
+      "from_name": "Jan van der Laan",
+      "from_email_hash": "63cc54c6a7b9a139af2f52d4150a543d48e44d9d6b3c8845ba9345d059bfb2cf",
+      "date": "2012-02-22T15:49:10Z",
+      "subject": "[R] Week number from a date",
+      "subject_clean": "Week number from a date",
+      "in_reply_to": "<4F44F3E4.90409@uky.edu>",
+      "references": [
+        "<1329916196382-4410223.post@n4.nabble.com>",
+        "<CABmqZHP5rVQgiyzGZSQ7+OquD4Swzdu-nHVzDasL0dxoUXP1uQ@mail.gmail.com>",
+        "<4F44F3E4.90409@uky.edu>"
+      ],
+      "body_plain": "The suggestion below gives you week numbers with week 1 being the week  \ncontaining the first monday of the year and weeks going from monday to  \nsunday. There are other conventions. The ISO convention is that week 1  \nis the first week containing at least 4 days in the new year (week 1  \nof 2012 starts on 2nd januari; week 1 of 2008 starts on december 29th  \n2008).\n\nhttp://www.r-bloggers.com/iso-week/\n\ngives a function for that type of week numbers (not tested by me).\n\nJan\n\n\n\nPatrick Breheny <patrick.breheny at uky.edu> schreef:\n\n> To give a little more detail, you can convert your character strings  \n> into POSIX objects, then extract from it virtually anything you  \n> would want using strftime.  In particular, %W is how you get the  \n> week number:\n>\n>> dateRange <- c(\"2008-10-01\",\"2008-12-01\")\n>> x <- as.POSIXlt(dateRange)\n>> strftime(x,format=\"%W\")\n> [1] \"39\" \"48\"\n>\n> --Patrick\n>\n> On 02/22/2012 08:37 AM, Ingmar Visser wrote:\n>> ?strptime is a good place to start\n>> hth, Ingmar\n>>\n>> On Wed, Feb 22, 2012 at 2:09 PM, arunkumar1111<akpbond007 at gmail.com>  wrote:\n>>\n>>> Hi\n>>>\n>>> My data looks like this\n>>>\n>>> startDate=\"2008-06-01\"\n>>>\n>>> dateRange =c( \"2008-10-01\",\"2008-12-01\")\n>>> Is there any method to find the week number from the startDate range\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The suggestion below gives you week numbers with week 1 being the week  \ncontaining the first monday of the year and weeks going from monday to  \nsunday. There are other conventions. The ISO conventio",
+      "thread_id": "thread-a75aaecd8166",
       "thread_depth": 3,
       "month": "2012-02"
     },
@@ -40698,26 +40698,6 @@
       "month": "2012-02"
     },
     {
-      "id": "msg-7c70b5ec6e24",
-      "message_id": "<CAM_vjun-vG4gFDyb7wRN7hmkoUH6FD4vu8eJ9UUyY0-k2ZyX6w@mail.gmail.com>",
-      "from_name": "Sarah Goslee",
-      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
-      "date": "2012-02-22T19:28:19Z",
-      "subject": "[R] removing particular row from matrix",
-      "subject_clean": "removing particular row from matrix",
-      "in_reply_to": "<1329936600012-4411348.post@n4.nabble.com>",
-      "references": [
-        "<1329839540800-4407401.post@n4.nabble.com>",
-        "<20120221174625.GA23006@cs.cas.cz>",
-        "<1329936600012-4411348.post@n4.nabble.com>"
-      ],
-      "body_plain": "Is this not what you want:\n\na[a[,2] != -999.99,]\n\nI didn't see the earlier message so I'm not sure how rowSums\nwas involved.\n\nSarah\n\nOn Wed, Feb 22, 2012 at 1:50 PM, uday <uday_143_4u at hotmail.com> wrote:\n> Hi Petr,\n> Thanks for reply\n>\n> sorry for late message there was typo error the both values are -999.99\n> ?a[rowSums(a == ?-999.99) == 0, ], this solution works only if we have to\n> remove certain value from matrix.\n>\n> but if\n> a<-matrix(c(1,2,3,5,-999.99,5,-999.99,6,1,5,9,1),nrow=4)\n>\n> a\n> ? ? [,1] ? ?[,2] [,3]\n> [1,] ? ?1 -999.99 ? ?1\n> [2,] ? ?2 ? ?5.00 ? ?5\n> [3,] ? ?3 -999.99 ? ?9\n> [4,] ? ?5 ? ?6.00 ? ?1\n>\n> and I would like to remove whole row those have value -999.99 , this\n> particular function does not work\n> I got error\n>\n> Error in rowSums(a[, 2] == -999.99) :\n> ?'x' must be an array of at least two dimensions\n>\n> ?it need matrix, so is there any way to deal with this kind of problem.\n>\n>\n> Cheers\n> Uday\n>\n\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
-      "body_snippet": "Is this not what you want:\n\na[a[,2] != -999.99,]\n\nI didn't see the earlier message so I'm not sure how rowSums\nwas involved.\n\nSarah\n\nOn Wed, Feb 22, 2012 at 1:50 PM, uday <uday_143_4u at hotmail.com> ",
-      "thread_id": "thread-f4739a99c4a8",
-      "thread_depth": 3,
-      "month": "2012-02"
-    },
-    {
       "id": "msg-b956eefbf32b",
       "message_id": "<1329938899.16649.67.camel@milan>",
       "from_name": "Milan Bouchet-Valat",
@@ -40738,6 +40718,26 @@
       "body_snippet": "Le mercredi 22 f?vrier 2012 ? 14:00 -0500, R. Michael Weylandt a ?crit :\n> I haven't been following this thread so I may be off base, but are you\n> sure you don't mean plot(ca(table))?\n> \n> ca is a fu",
       "thread_id": "thread-159cec017a34",
       "thread_depth": 5,
+      "month": "2012-02"
+    },
+    {
+      "id": "msg-7c70b5ec6e24",
+      "message_id": "<CAM_vjun-vG4gFDyb7wRN7hmkoUH6FD4vu8eJ9UUyY0-k2ZyX6w@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2012-02-22T19:28:19Z",
+      "subject": "[R] removing particular row from matrix",
+      "subject_clean": "removing particular row from matrix",
+      "in_reply_to": "<1329936600012-4411348.post@n4.nabble.com>",
+      "references": [
+        "<1329839540800-4407401.post@n4.nabble.com>",
+        "<20120221174625.GA23006@cs.cas.cz>",
+        "<1329936600012-4411348.post@n4.nabble.com>"
+      ],
+      "body_plain": "Is this not what you want:\n\na[a[,2] != -999.99,]\n\nI didn't see the earlier message so I'm not sure how rowSums\nwas involved.\n\nSarah\n\nOn Wed, Feb 22, 2012 at 1:50 PM, uday <uday_143_4u at hotmail.com> wrote:\n> Hi Petr,\n> Thanks for reply\n>\n> sorry for late message there was typo error the both values are -999.99\n> ?a[rowSums(a == ?-999.99) == 0, ], this solution works only if we have to\n> remove certain value from matrix.\n>\n> but if\n> a<-matrix(c(1,2,3,5,-999.99,5,-999.99,6,1,5,9,1),nrow=4)\n>\n> a\n> ? ? [,1] ? ?[,2] [,3]\n> [1,] ? ?1 -999.99 ? ?1\n> [2,] ? ?2 ? ?5.00 ? ?5\n> [3,] ? ?3 -999.99 ? ?9\n> [4,] ? ?5 ? ?6.00 ? ?1\n>\n> and I would like to remove whole row those have value -999.99 , this\n> particular function does not work\n> I got error\n>\n> Error in rowSums(a[, 2] == -999.99) :\n> ?'x' must be an array of at least two dimensions\n>\n> ?it need matrix, so is there any way to deal with this kind of problem.\n>\n>\n> Cheers\n> Uday\n>\n\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
+      "body_snippet": "Is this not what you want:\n\na[a[,2] != -999.99,]\n\nI didn't see the earlier message so I'm not sure how rowSums\nwas involved.\n\nSarah\n\nOn Wed, Feb 22, 2012 at 1:50 PM, uday <uday_143_4u at hotmail.com> ",
+      "thread_id": "thread-f4739a99c4a8",
+      "thread_depth": 3,
       "month": "2012-02"
     },
     {
@@ -58969,6 +58969,18 @@
       "root_message_id": "msg-4789d47786c4"
     },
     {
+      "id": "thread-5951191fac37",
+      "subject": "Getting codebook data into R",
+      "message_count": 2,
+      "participants": [
+        "Richard M. Heiberger",
+        "barny"
+      ],
+      "started": "2012-02-09T20:51:30Z",
+      "last_reply": "2012-02-09T21:30:33Z",
+      "root_message_id": "msg-5951191fac37"
+    },
+    {
       "id": "thread-978e1806de01",
       "subject": "Getting codebook data into R",
       "message_count": 11,
@@ -58985,18 +58997,6 @@
       "started": "2012-02-09T20:51:30Z",
       "last_reply": "2012-02-14T04:05:46Z",
       "root_message_id": "msg-978e1806de01"
-    },
-    {
-      "id": "thread-5951191fac37",
-      "subject": "Getting codebook data into R",
-      "message_count": 2,
-      "participants": [
-        "Richard M. Heiberger",
-        "barny"
-      ],
-      "started": "2012-02-09T20:51:30Z",
-      "last_reply": "2012-02-09T21:30:33Z",
-      "root_message_id": "msg-5951191fac37"
     },
     {
       "id": "thread-87fcf593b7fc",

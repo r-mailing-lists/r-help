@@ -11568,3 +11568,33 @@ Rui Barradas
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From |kry|ov @end|ng |rom d|@root@org  Wed Jul 29 11:20:34 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Wed, 29 Jul 2026 12:20:34 +0300
+Subject: [R] GGSAVE does not save a good version of my graph
+In-Reply-To: <1282179273.2158731.1784946879738@mail.yahoo.com>
+References: <DM6PR03MB5049EEF0F51126A173C37A5AE2C02@DM6PR03MB5049.namprd03.prod.outlook.com>
+ <20260724150823.7dadc3b4@arachnoid>
+ <1282179273.2158731.1784946879738@mail.yahoo.com>
+Message-ID: <20260729122034.217aed92@parabola>
+
+On Sat, 25 Jul 2026 02:34:39 +0000 (UTC)
+Ian Worthington <ianworthington at yahoo.com> wrote:
+
+> Is there any documentation as to the best /type/ to use with a
+> particular /device/?? ? I'm outputting to PNG on Windows, for
+> instance: should I be using a specific type???
+
+On Windows, all bitmap devices (bmp(), jpeg(), png(), tiff()) will give
+better-looking (anti-aliased) pictures with type = "cairo" instead of
+type = "windows".
+
+On Linux, type = "cairo" also produces better-looking bitmaps than type
+= "Xlib". On macOS, type = "cairo" and type = "quartz" should produce
+bitmaps of similar (good) quality.
+
+-- 
+Best regards,
+Ivan
+
+
