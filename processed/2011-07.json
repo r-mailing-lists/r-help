@@ -18383,24 +18383,6 @@
       "month": "2011-07"
     },
     {
-      "id": "msg-c50cd670bcbc",
-      "message_id": "<CAP01uR=seNDp76QqTh0X7pXFqiGX6WJmsGW9zr_Az9ED685pFQ@mail.gmail.com>",
-      "from_name": "Gabor Grothendieck",
-      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
-      "date": "2011-07-12T21:07:27Z",
-      "subject": "[R] apply (or similar preferred) for multiple columns",
-      "subject_clean": "apply (or similar preferred) for multiple columns",
-      "in_reply_to": "<1310462860515-3661835.post@n4.nabble.com>",
-      "references": [
-        "<1310462860515-3661835.post@n4.nabble.com>"
-      ],
-      "body_plain": "On Tue, Jul 12, 2011 at 5:27 AM, Dimitris.Kapetanakis\n<dimitrios.kapetanakis at gmail.com> wrote:\n> Dear all,\n>\n> I would like to use the apply or a similar function belonging to this\n> family, but applying for each column (or row) but let say for each q\n> columns. For example I would like to apply a function FUN for the first q\n> columns of matrix X then for q+1:2*q and so on. If I do apply (X, 2, FUN) it\n> applies for each column and not for every q columns. Is that possible with\n> any similar function?\n>\n> Thank you\n>\n> Dimitris\n\nHere is an example of using rollapply to sum all elements in the first\n4 columns, then the next 4 columns, etc.   anscombe is a data set that\ncomes with R.  Be sure you are using zoo 1.7-0 which was just released\ntoday.\n\n> library(zoo)\n> packageVersion(\"zoo\")\n[1] '1.7.0'\n> rollapply(t(anscombe), 4, by = 4, sum, by.column = FALSE)\n[1] 396.00 330.03\n> c(sum(anscombe[, 1:4]), sum(anscombe[, 5:8]))\n[1] 396.00 330.03\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
-      "body_snippet": "On Tue, Jul 12, 2011 at 5:27 AM, Dimitris.Kapetanakis\n<dimitrios.kapetanakis at gmail.com> wrote:\n> Dear all,\n>\n> I would like to use the apply or a similar function belonging to this\n> family, but ap",
-      "thread_id": "thread-9362c22d3a90",
-      "thread_depth": 1,
-      "month": "2011-07"
-    },
-    {
       "id": "msg-9c40ed527316",
       "message_id": "<CANz9Z_+PHC1=+yS5v4FSt0hdLEBPMVDxv11Jw2csEEcNwvSMRQ@mail.gmail.com>",
       "from_name": "Joshua Wiley",
@@ -18416,6 +18398,24 @@
       "body_snippet": "On Tue, Jul 12, 2011 at 2:01 PM, Reith, William [USA]\n<reith_william at bah.com> wrote:\n> Do I need to define x in any way before I do the loop?\n\nNo, you should not need to define x explicitly.  Just ",
       "thread_id": "thread-9c40ed527316",
       "thread_depth": 0,
+      "month": "2011-07"
+    },
+    {
+      "id": "msg-c50cd670bcbc",
+      "message_id": "<CAP01uR=seNDp76QqTh0X7pXFqiGX6WJmsGW9zr_Az9ED685pFQ@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2011-07-12T21:07:27Z",
+      "subject": "[R] apply (or similar preferred) for multiple columns",
+      "subject_clean": "apply (or similar preferred) for multiple columns",
+      "in_reply_to": "<1310462860515-3661835.post@n4.nabble.com>",
+      "references": [
+        "<1310462860515-3661835.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Tue, Jul 12, 2011 at 5:27 AM, Dimitris.Kapetanakis\n<dimitrios.kapetanakis at gmail.com> wrote:\n> Dear all,\n>\n> I would like to use the apply or a similar function belonging to this\n> family, but applying for each column (or row) but let say for each q\n> columns. For example I would like to apply a function FUN for the first q\n> columns of matrix X then for q+1:2*q and so on. If I do apply (X, 2, FUN) it\n> applies for each column and not for every q columns. Is that possible with\n> any similar function?\n>\n> Thank you\n>\n> Dimitris\n\nHere is an example of using rollapply to sum all elements in the first\n4 columns, then the next 4 columns, etc.   anscombe is a data set that\ncomes with R.  Be sure you are using zoo 1.7-0 which was just released\ntoday.\n\n> library(zoo)\n> packageVersion(\"zoo\")\n[1] '1.7.0'\n> rollapply(t(anscombe), 4, by = 4, sum, by.column = FALSE)\n[1] 396.00 330.03\n> c(sum(anscombe[, 1:4]), sum(anscombe[, 5:8]))\n[1] 396.00 330.03\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Tue, Jul 12, 2011 at 5:27 AM, Dimitris.Kapetanakis\n<dimitrios.kapetanakis at gmail.com> wrote:\n> Dear all,\n>\n> I would like to use the apply or a similar function belonging to this\n> family, but ap",
+      "thread_id": "thread-9362c22d3a90",
+      "thread_depth": 1,
       "month": "2011-07"
     },
     {
