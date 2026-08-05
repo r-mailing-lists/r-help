@@ -1756,22 +1756,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-b6532bfe339a",
-      "message_id": "<1217616309.489359b571609@webmail.cryst.bbk.ac.uk>",
-      "from_name": "Eleni Rapsomaniki",
-      "from_email_hash": "7f7f741fc266ddf025ed82668ea3722b35b5be969774b92990ee62b52d7c2dbf",
-      "date": "2008-08-01T18:45:09Z",
-      "subject": "[R] correlation between rows of data.frame",
-      "subject_clean": "correlation between rows of data.frame",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 columns). The pairs of rows between which I want to\nfind the correlation share a common value in one of the columns. So for\nexample,\nin the following \n x=data.frame(id=rep(sample(1:100000,size=10000),2),a=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),b=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),c=sample(c(NA,rnorm(10,0,1)),size=10000, replace=T))\nx$id=factor(x$id)\n\nI would want to compute the correlation between the two rows (for cols a,b,c)\nthat share the same\nid. Using a for loop and dist() works but takes a long time (>1 hour, my RAM is\n1Gb):\np=NULL\n for(i in levels(x$id)){p[[i]]=dist(x[x$id==i, -1])}\n\nIs there a more efficient way? I thought about apply/sapply etc but I don't\nthink they'll work for rows and can't think of an intelligent way to make them\nwork!\nThe second problem is that I also need to know how many degrees of freedom (ie\nnon missing pairs of values) were used in each correlation. Is there a way to\nalso do this efficiently?\n\nI hope this makes sense! Thank you all very much in advance!\n\nEleni",
-      "body_snippet": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 co",
-      "thread_id": "thread-b6532bfe339a",
-      "thread_depth": 0,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-f392b0061873",
       "message_id": "<C910044E427B6C43A2C7E3103436D69206EEF60E@0015-its-exmb02.us.saic.com>",
       "from_name": "Messing, Solomon O.",
@@ -1784,6 +1768,22 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080801/a5f85af2/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080801/a5f85af2/attachment.pl>",
       "thread_id": "thread-f392b0061873",
+      "thread_depth": 0,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-b6532bfe339a",
+      "message_id": "<1217616309.489359b571609@webmail.cryst.bbk.ac.uk>",
+      "from_name": "Eleni Rapsomaniki",
+      "from_email_hash": "7f7f741fc266ddf025ed82668ea3722b35b5be969774b92990ee62b52d7c2dbf",
+      "date": "2008-08-01T18:45:09Z",
+      "subject": "[R] correlation between rows of data.frame",
+      "subject_clean": "correlation between rows of data.frame",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 columns). The pairs of rows between which I want to\nfind the correlation share a common value in one of the columns. So for\nexample,\nin the following \n x=data.frame(id=rep(sample(1:100000,size=10000),2),a=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),b=sample(c(NA,rnorm(10,0,1)),size=10000,\nreplace=T),c=sample(c(NA,rnorm(10,0,1)),size=10000, replace=T))\nx$id=factor(x$id)\n\nI would want to compute the correlation between the two rows (for cols a,b,c)\nthat share the same\nid. Using a for loop and dist() works but takes a long time (>1 hour, my RAM is\n1Gb):\np=NULL\n for(i in levels(x$id)){p[[i]]=dist(x[x$id==i, -1])}\n\nIs there a more efficient way? I thought about apply/sapply etc but I don't\nthink they'll work for rows and can't think of an intelligent way to make them\nwork!\nThe second problem is that I also need to know how many degrees of freedom (ie\nnon missing pairs of values) were used in each correlation. Is there a way to\nalso do this efficiently?\n\nI hope this makes sense! Thank you all very much in advance!\n\nEleni",
+      "body_snippet": "Dear R users,\n\nI need to come up with an efficient method to compute the correlation (or at\nleast, the euclidean distance if that's easier) between specific rows in a data\nframe (46,232 rows,    29 co",
+      "thread_id": "thread-b6532bfe339a",
       "thread_depth": 0,
       "month": "2008-08"
     },
@@ -17442,25 +17442,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-5d9d806d8d30",
-      "message_id": "<18930532.post@talk.nabble.com>",
-      "from_name": "dott",
-      "from_email_hash": "76ce0a0dd845c45447653999a5c2b070a6a7d2f0d5c37141cd96129ea818d887",
-      "date": "2008-08-11T18:18:46Z",
-      "subject": "[R] R-help? how to take difference in next two elements",
-      "subject_clean": "R-help? how to take difference in next two elements",
-      "in_reply_to": "<971536df0808110913r4aa10a62l46ca92d5a9d835af@mail.gmail.com>",
-      "references": [
-        "<18927968.post@talk.nabble.com>",
-        "<971536df0808110913r4aa10a62l46ca92d5a9d835af@mail.gmail.com>"
-      ],
-      "body_plain": "Thanks all for the help, that is done.\n\n\nGabor Grothendieck wrote:\n> \n> Here are a couple of ways:\n> \n>> tail(a, -2) - head(a, -2)\n> [1]  2  5 -3\n>> c(ts(a) - lag(ts(a), -2))\n> [1]  2  5 -3\n> \n> \n> On Mon, Aug 11, 2008 at 11:26 AM, dott <dorothy99 at gmail.com> wrote:\n>>\n>> Hi,\n>>\n>> I'd like to take difference for a sequence a between a_i and a_i-2, for\n>> instance,\n>> a<-c(2,3,4,8,1)\n>> I need (2, 5, -3) as a result. If not using a for loop, can anyone help\n>> me?\n>> Thanks a lot.\n>>\n>> Dot\n>> --\n>> View this message in context:\n>> http://www.nabble.com/R-help--how-to-take-difference-in-next-two-elements-tp18927968p18927968.html\n>> Sent from the R help mailing list archive at Nabble.com.\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/R-help--how-to-take-difference-in-next-two-elements-tp18927968p18930532.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Thanks all for the help, that is done.\n\n\nGabor Grothendieck wrote:\n> \n> Here are a couple of ways:\n> \n>> tail(a, -2) - head(a, -2)\n> [1]  2  5 -3\n>> c(ts(a) - lag(ts(a), -2))\n> [1]  2  5 -3\n> \n> \n> On",
-      "thread_id": "thread-5a9db412a843",
-      "thread_depth": 2,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-5c0c7cc7b0df",
       "message_id": "<48A08286.2090109@ufl.edu>",
       "from_name": "Ben Bolker",
@@ -17480,6 +17461,25 @@
       "body_snippet": "There was a spurious tilde in the code coming\nfrom my digital signature -- oops.  ignore the\ntilde in the function:\n\nlibrary(odesolve)\n\n## in general x, b are state and parameter VECTORS\ne1B <- functi",
       "thread_id": "thread-74474420046c",
       "thread_depth": 5,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-5d9d806d8d30",
+      "message_id": "<18930532.post@talk.nabble.com>",
+      "from_name": "dott",
+      "from_email_hash": "76ce0a0dd845c45447653999a5c2b070a6a7d2f0d5c37141cd96129ea818d887",
+      "date": "2008-08-11T18:18:46Z",
+      "subject": "[R] R-help? how to take difference in next two elements",
+      "subject_clean": "R-help? how to take difference in next two elements",
+      "in_reply_to": "<971536df0808110913r4aa10a62l46ca92d5a9d835af@mail.gmail.com>",
+      "references": [
+        "<18927968.post@talk.nabble.com>",
+        "<971536df0808110913r4aa10a62l46ca92d5a9d835af@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks all for the help, that is done.\n\n\nGabor Grothendieck wrote:\n> \n> Here are a couple of ways:\n> \n>> tail(a, -2) - head(a, -2)\n> [1]  2  5 -3\n>> c(ts(a) - lag(ts(a), -2))\n> [1]  2  5 -3\n> \n> \n> On Mon, Aug 11, 2008 at 11:26 AM, dott <dorothy99 at gmail.com> wrote:\n>>\n>> Hi,\n>>\n>> I'd like to take difference for a sequence a between a_i and a_i-2, for\n>> instance,\n>> a<-c(2,3,4,8,1)\n>> I need (2, 5, -3) as a result. If not using a for loop, can anyone help\n>> me?\n>> Thanks a lot.\n>>\n>> Dot\n>> --\n>> View this message in context:\n>> http://www.nabble.com/R-help--how-to-take-difference-in-next-two-elements-tp18927968p18927968.html\n>> Sent from the R help mailing list archive at Nabble.com.\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide\n>> http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n> \n> \n\n-- \nView this message in context: http://www.nabble.com/R-help--how-to-take-difference-in-next-two-elements-tp18927968p18930532.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks all for the help, that is done.\n\n\nGabor Grothendieck wrote:\n> \n> Here are a couple of ways:\n> \n>> tail(a, -2) - head(a, -2)\n> [1]  2  5 -3\n>> c(ts(a) - lag(ts(a), -2))\n> [1]  2  5 -3\n> \n> \n> On",
+      "thread_id": "thread-5a9db412a843",
+      "thread_depth": 2,
       "month": "2008-08"
     },
     {
@@ -37265,6 +37265,25 @@
       "month": "2008-08"
     },
     {
+      "id": "msg-a80291de248b",
+      "message_id": "<000401c90493$1c3c0950$54b41bf0$@edu>",
+      "from_name": "Richard M. Heiberger",
+      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
+      "date": "2008-08-22T20:10:02Z",
+      "subject": "[R] History pruning",
+      "subject_clean": "History pruning",
+      "in_reply_to": "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>",
+      "references": [
+        "<000a01c8f402$46039150$d20ab3f0$@edu>",
+        "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>"
+      ],
+      "body_plain": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent to the *R* buffer by C-c\nC-n are\nexplicitly excluded from history.  Lines picked up from a saved transcript\nfile aren't in history.  Will your program handle this correctly:\n\naa <- bb +\ncc\n\n?  It is valid code.  Suppressing the line with cc will make it not valid\ncode.\n\n\nRich",
+      "body_snippet": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent t",
+      "thread_id": "thread-b0eab93b76f1",
+      "thread_depth": 4,
+      "month": "2008-08"
+    },
+    {
       "id": "msg-ad37993c247e",
       "message_id": "<000301c90493$1beb0320$53c10960$@edu>",
       "from_name": "Richard M. Heiberger",
@@ -37282,25 +37301,6 @@
       "body_snippet": "Bernhard and Irina, \n\nWhile tailoring the Rcmdr menu directly does work, I strongly do not\nrecommend it.  It will lead to mass confusion, most likely for the author,\nseveral\nmonths from now when it is",
       "thread_id": "thread-4328d81f8674",
       "thread_depth": 3,
-      "month": "2008-08"
-    },
-    {
-      "id": "msg-a80291de248b",
-      "message_id": "<000401c90493$1c3c0950$54b41bf0$@edu>",
-      "from_name": "Richard M. Heiberger",
-      "from_email_hash": "4ce810eab8587777db353ea9d997b9e94d9e73af018121f9a3424238038952df",
-      "date": "2008-08-22T20:10:02Z",
-      "subject": "[R] History pruning",
-      "subject_clean": "History pruning",
-      "in_reply_to": "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>",
-      "references": [
-        "<000a01c8f402$46039150$d20ab3f0$@edu>",
-        "<C4BC793C.1AEE8%ken.williams@thomsonreuters.com>"
-      ],
-      "body_plain": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent to the *R* buffer by C-c\nC-n are\nexplicitly excluded from history.  Lines picked up from a saved transcript\nfile aren't in history.  Will your program handle this correctly:\n\naa <- bb +\ncc\n\n?  It is valid code.  Suppressing the line with cc will make it not valid\ncode.\n\n\nRich",
-      "body_snippet": "We have different starting points.  Please be sure that your modularity\nallows a cleaned region as well as a history log to be the input to your\nnext\nstep.  The history log is incomplete; lines sent t",
-      "thread_id": "thread-b0eab93b76f1",
-      "thread_depth": 4,
       "month": "2008-08"
     },
     {
@@ -49024,22 +49024,6 @@
       "month": "2008-08"
     },
     {
-      "id": "msg-4add6f565733",
-      "message_id": "<204957.43411.qm@web46409.mail.sp1.yahoo.com>",
-      "from_name": "Yuan Jian",
-      "from_email_hash": "48f4d665a503f9a4caa462fbf633b7f07a73443ab1a3b0039d0491b6fd1599ba",
-      "date": "2008-08-31T11:05:37Z",
-      "subject": "[R] give all combinations",
-      "subject_clean": "give all combinations",
-      "in_reply_to": "<loom.20080831T083409-869@post.gmane.org>",
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/03ffaf7b/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/03ffaf7b/attachment.pl>",
-      "thread_id": "thread-ef8bef8d5922",
-      "thread_depth": 2,
-      "month": "2008-08"
-    },
-    {
       "id": "msg-45b9604ab1c3",
       "message_id": "<748132.50395.qm@web46412.mail.sp1.yahoo.com>",
       "from_name": "Yuan Jian",
@@ -49051,6 +49035,22 @@
       "references": [],
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/d1cdd847/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/d1cdd847/attachment.pl>",
+      "thread_id": "thread-ef8bef8d5922",
+      "thread_depth": 2,
+      "month": "2008-08"
+    },
+    {
+      "id": "msg-4add6f565733",
+      "message_id": "<204957.43411.qm@web46409.mail.sp1.yahoo.com>",
+      "from_name": "Yuan Jian",
+      "from_email_hash": "48f4d665a503f9a4caa462fbf633b7f07a73443ab1a3b0039d0491b6fd1599ba",
+      "date": "2008-08-31T11:05:37Z",
+      "subject": "[R] give all combinations",
+      "subject_clean": "give all combinations",
+      "in_reply_to": "<loom.20080831T083409-869@post.gmane.org>",
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/03ffaf7b/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080831/03ffaf7b/attachment.pl>",
       "thread_id": "thread-ef8bef8d5922",
       "thread_depth": 2,
       "month": "2008-08"
