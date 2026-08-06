@@ -6816,6 +6816,22 @@
       "month": "2005-06"
     },
     {
+      "id": "msg-6f29f7323b09",
+      "message_id": "<BF8E83A574F8FF40BD5C0266B2A4DF880153C1E1@canna.proton.intra.irsn.fr>",
+      "from_name": "PANTERA Laurent",
+      "from_email_hash": "da1e9b781383a13b8cc8a3bff2155edc8e03b51fb0b23d29e1516a9b9a0e6631",
+      "date": "2005-06-06T13:54:58Z",
+      "subject": "[R] How to vectorize",
+      "subject_clean": "How to vectorize",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)),\n                                expression(italic(phantom(0)^{137}*Cs)),\n                                expression(italic(phantom(0)^{129*m}*Te))),\n     cex=3\n     )\n\nBut, since I have a lot of isotopes to write on the plot, I would like\nto construct automatically the labels. So I wrote the code below which\nworks fine.\n\nlistenoms <- list(nom=c(\"Ge\",\"Cs\",\"Te\"),num=c(\"78\",\"137\",\"129*m\"))\nn <- length(listenoms$nom)\nresu <- \"c(\"\nfor( i in 1:(n-1))\n  {\n    resu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[i],\"}*\",\n                         listenoms$nom[i],\")),\",sep=\"\"))\n}\nresu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[n],\"}*\",\n                         listenoms$nom[n],\")))\",sep=\"\"))\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=eval(parse(text=resu)),cex=2)\n\nI assume there is a better way to do that using vectorization.\nMay you help me to find it ?\n\nThanks\nLaurent",
+      "body_snippet": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)",
+      "thread_id": "thread-6f29f7323b09",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
       "id": "msg-2c2d4224cea6",
       "message_id": "<Pine.LNX.4.61.0506061453060.24586@gannet.stats>",
       "from_name": "Prof Brian Ripley",
@@ -6831,22 +6847,6 @@
       "body_snippet": "On Mon, 6 Jun 2005, Andy Bunn wrote:\n\n>>>\n>>> R > w <- list(rnorm(10), rnorm(10))\n>>> R > x <- ts(w, start = 1980)\n>>\n>> Even though you don't get an error message this statement is\n>> erroneous.  ?ts",
       "thread_id": "thread-eb60022c0b28",
       "thread_depth": 7,
-      "month": "2005-06"
-    },
-    {
-      "id": "msg-6f29f7323b09",
-      "message_id": "<BF8E83A574F8FF40BD5C0266B2A4DF880153C1E1@canna.proton.intra.irsn.fr>",
-      "from_name": "PANTERA Laurent",
-      "from_email_hash": "da1e9b781383a13b8cc8a3bff2155edc8e03b51fb0b23d29e1516a9b9a0e6631",
-      "date": "2005-06-06T13:54:58Z",
-      "subject": "[R] How to vectorize",
-      "subject_clean": "How to vectorize",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)),\n                                expression(italic(phantom(0)^{137}*Cs)),\n                                expression(italic(phantom(0)^{129*m}*Te))),\n     cex=3\n     )\n\nBut, since I have a lot of isotopes to write on the plot, I would like\nto construct automatically the labels. So I wrote the code below which\nworks fine.\n\nlistenoms <- list(nom=c(\"Ge\",\"Cs\",\"Te\"),num=c(\"78\",\"137\",\"129*m\"))\nn <- length(listenoms$nom)\nresu <- \"c(\"\nfor( i in 1:(n-1))\n  {\n    resu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[i],\"}*\",\n                         listenoms$nom[i],\")),\",sep=\"\"))\n}\nresu <- paste(resu,paste(\"expression(italic(phantom(0)^{\",\n                         listenoms$num[n],\"}*\",\n                         listenoms$nom[n],\")))\",sep=\"\"))\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=eval(parse(text=resu)),cex=2)\n\nI assume there is a better way to do that using vectorization.\nMay you help me to find it ?\n\nThanks\nLaurent",
-      "body_snippet": "Dear R-List,\n\n     I would like to write nicely the names of some isotopes on a plot. The\ncode bellow works fine.\n\nplot(1:10,1:10)\ntext(c(2,4,8),c(2,4,8),labels=c(expression(italic(phantom(0)^{78}*Ge)",
-      "thread_id": "thread-6f29f7323b09",
-      "thread_depth": 0,
       "month": "2005-06"
     },
     {
@@ -16981,22 +16981,6 @@
       "month": "2005-06"
     },
     {
-      "id": "msg-f6f2fee5b8c6",
-      "message_id": "<01c701c570ef$21579610$6e8b6882@didacdom.stat.ucl.ac.be>",
-      "from_name": "Eric Lecoutre",
-      "from_email_hash": "8fa2348fb1c15ba0453cc647aa6644879770c76ceeb98d5db135f1b4dd3c7cf3",
-      "date": "2005-06-14T14:41:20Z",
-      "subject": "[R] c(recursive=TRUE)",
-      "subject_clean": "c(recursive=TRUE)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = names(c(l1,recursive=TRUE)))\n[1] \"level1\"      \"level2.sub1\" \"level2.sub2\"\n\nThen, one can use:\n> (l1names = sapply(l1names,FUN=function(element)\nstrsplit(element,\"\\\\.\")))\n$level1\n[1] \"level1\"\n\n$level2.sub1\n[1] \"level2\" \"sub1\"  \n\n$level2.sub2\n[1] \"level2\" \"sub2\"  \n\n\nWhich allows to access to individuals terminal nodes of list using\nindexing, as \nl1[[c(\"level2\",\"sub2\")]] nicely works in R.\n\nFor my very specific uses, it unfortunatelt happens that some elements\nof my list do have names that contains a dot (for example:\ndecimal.mark). This is very frustating as a consequence is that my\nfunction does not work in that case...\n\nOne workaround would be to add an argument to c(), as delimitor='.' by\ndefault, allowing to put a less usual delimitor (say \"??\"). But this\nwould mean changing in C (feature request?). Same for \"unlist\".\n\nIs there any other easy way to get the structure of a list?\n\nEric\n\n\n\n\nEric Lecoutre\nUCL /  Institut de Statistique\nVoie du Roman Pays, 20\n1348 Louvain-la-Neuve\nBelgium\n\ntel: (+32)(0)10473050\nlecoutre at stat.ucl.ac.be\nhttp://www.stat.ucl.ac.be/ISpersonnel/lecoutre\n\nIf the statistics are boring, then you've got the wrong numbers. -Edward\nTufte",
-      "body_snippet": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = n",
-      "thread_id": "thread-f6f2fee5b8c6",
-      "thread_depth": 0,
-      "month": "2005-06"
-    },
-    {
       "id": "msg-c2c7c13ae1fd",
       "message_id": "<Pine.A41.4.61b.0506140735160.92116@homer03.u.washington.edu>",
       "from_name": "Thomas Lumley",
@@ -17012,6 +16996,22 @@
       "body_snippet": "On Tue, 14 Jun 2005, Abatih E. wrote:\n> Dear R-Users, I wish to create a new family object based on the Binomial \n> family. The only difference will be with the link function. Thus instead \n> if using",
       "thread_id": "thread-ea5137da0d52",
       "thread_depth": 1,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-f6f2fee5b8c6",
+      "message_id": "<01c701c570ef$21579610$6e8b6882@didacdom.stat.ucl.ac.be>",
+      "from_name": "Eric Lecoutre",
+      "from_email_hash": "8fa2348fb1c15ba0453cc647aa6644879770c76ceeb98d5db135f1b4dd3c7cf3",
+      "date": "2005-06-14T14:41:20Z",
+      "subject": "[R] c(recursive=TRUE)",
+      "subject_clean": "c(recursive=TRUE)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = names(c(l1,recursive=TRUE)))\n[1] \"level1\"      \"level2.sub1\" \"level2.sub2\"\n\nThen, one can use:\n> (l1names = sapply(l1names,FUN=function(element)\nstrsplit(element,\"\\\\.\")))\n$level1\n[1] \"level1\"\n\n$level2.sub1\n[1] \"level2\" \"sub1\"  \n\n$level2.sub2\n[1] \"level2\" \"sub2\"  \n\n\nWhich allows to access to individuals terminal nodes of list using\nindexing, as \nl1[[c(\"level2\",\"sub2\")]] nicely works in R.\n\nFor my very specific uses, it unfortunatelt happens that some elements\nof my list do have names that contains a dot (for example:\ndecimal.mark). This is very frustating as a consequence is that my\nfunction does not work in that case...\n\nOne workaround would be to add an argument to c(), as delimitor='.' by\ndefault, allowing to put a less usual delimitor (say \"??\"). But this\nwould mean changing in C (feature request?). Same for \"unlist\".\n\nIs there any other easy way to get the structure of a list?\n\nEric\n\n\n\n\nEric Lecoutre\nUCL /  Institut de Statistique\nVoie du Roman Pays, 20\n1348 Louvain-la-Neuve\nBelgium\n\ntel: (+32)(0)10473050\nlecoutre at stat.ucl.ac.be\nhttp://www.stat.ucl.ac.be/ISpersonnel/lecoutre\n\nIf the statistics are boring, then you've got the wrong numbers. -Edward\nTufte",
+      "body_snippet": "Hi R users,\n\nI am currently using c(...,recursive=TRUE) to handle list-structured\nobjects.\nThis allows to represent something like:\n\n> l1 = list(level1=1,level2=list(sub1=1,sub2=2))\nas:\n> (l1names = n",
+      "thread_id": "thread-f6f2fee5b8c6",
+      "thread_depth": 0,
       "month": "2005-06"
     },
     {
@@ -21886,22 +21886,6 @@
       "month": "2005-06"
     },
     {
-      "id": "msg-ad3bcacd4a0a",
-      "message_id": "<BAY103-F48E302A37234BCA104F78A6F40@phx.gbl>",
-      "from_name": "Francisco J. Zagmutt",
-      "from_email_hash": "e809e7003031b289f014fa3452fbb038c2e07d17f897c97f892648b9b6e3c35f",
-      "date": "2005-06-17T18:47:37Z",
-      "subject": "[R] trim a string",
-      "subject_clean": "trim a string",
-      "in_reply_to": "<3f87cc6d05061710347b4164ff@mail.gmail.com>",
-      "references": [],
-      "body_plain": "RSiteSearch(\"trim\") will give you a lot of answers.  You cal also use the \nhigher level function trim{R.oo} i.e.:\n\nlibrary(R.oo)\nx=\"    e  \"\ntrim(x)\n[1] \"e\"\n\n\n>From: Omar Lakkis <uofiowa at gmail.com>\n>Reply-To: Omar Lakkis <uofiowa at gmail.com>\n>To: r-help at stat.math.ethz.ch\n>Subject: [R] trim a string\n>Date: Fri, 17 Jun 2005 13:34:36 -0400\n>\n>How to trim the leading and trailing white space off of a string?\n>\n>  If the variable is \"  E              \" I need to convert it to \"E\".\n>\n>______________________________________________\n>R-help at stat.math.ethz.ch mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide! \n>http://www.R-project.org/posting-guide.html",
-      "body_snippet": "RSiteSearch(\"trim\") will give you a lot of answers.  You cal also use the \nhigher level function trim{R.oo} i.e.:\n\nlibrary(R.oo)\nx=\"    e  \"\ntrim(x)\n[1] \"e\"\n\n\n>From: Omar Lakkis <uofiowa at gmail.com>",
-      "thread_id": "thread-e6d47e7d921e",
-      "thread_depth": 1,
-      "month": "2005-06"
-    },
-    {
       "id": "msg-4373d675102b",
       "message_id": "<Pine.LNX.4.61.0506171945280.17897@gannet.stats>",
       "from_name": "Prof Brian Ripley",
@@ -21916,6 +21900,22 @@
       "body_plain": "Better code for this purpose is in example(grep).\n\n`white space' and `a blank' are not necessarily the same thing.\n\nOn Fri, 17 Jun 2005, Liaw, Andy wrote:\n\n> http://finzi.psych.upenn.edu/R/Rhelp02a/archive/14493.html\n>\n> Andy\n>\n>> From: Omar Lakkis\n>>\n>> How to trim the leading and trailing white space off of a string?\n>>\n>>  If the variable is \"  E              \" I need to convert it to \"E\".\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
       "body_snippet": "Better code for this purpose is in example(grep).\n\n`white space' and `a blank' are not necessarily the same thing.\n\nOn Fri, 17 Jun 2005, Liaw, Andy wrote:\n\n> http://finzi.psych.upenn.edu/R/Rhelp02a/ar",
       "thread_id": "thread-522ad6d431cd",
+      "thread_depth": 1,
+      "month": "2005-06"
+    },
+    {
+      "id": "msg-ad3bcacd4a0a",
+      "message_id": "<BAY103-F48E302A37234BCA104F78A6F40@phx.gbl>",
+      "from_name": "Francisco J. Zagmutt",
+      "from_email_hash": "e809e7003031b289f014fa3452fbb038c2e07d17f897c97f892648b9b6e3c35f",
+      "date": "2005-06-17T18:47:37Z",
+      "subject": "[R] trim a string",
+      "subject_clean": "trim a string",
+      "in_reply_to": "<3f87cc6d05061710347b4164ff@mail.gmail.com>",
+      "references": [],
+      "body_plain": "RSiteSearch(\"trim\") will give you a lot of answers.  You cal also use the \nhigher level function trim{R.oo} i.e.:\n\nlibrary(R.oo)\nx=\"    e  \"\ntrim(x)\n[1] \"e\"\n\n\n>From: Omar Lakkis <uofiowa at gmail.com>\n>Reply-To: Omar Lakkis <uofiowa at gmail.com>\n>To: r-help at stat.math.ethz.ch\n>Subject: [R] trim a string\n>Date: Fri, 17 Jun 2005 13:34:36 -0400\n>\n>How to trim the leading and trailing white space off of a string?\n>\n>  If the variable is \"  E              \" I need to convert it to \"E\".\n>\n>______________________________________________\n>R-help at stat.math.ethz.ch mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide! \n>http://www.R-project.org/posting-guide.html",
+      "body_snippet": "RSiteSearch(\"trim\") will give you a lot of answers.  You cal also use the \nhigher level function trim{R.oo} i.e.:\n\nlibrary(R.oo)\nx=\"    e  \"\ntrim(x)\n[1] \"e\"\n\n\n>From: Omar Lakkis <uofiowa at gmail.com>",
+      "thread_id": "thread-e6d47e7d921e",
       "thread_depth": 1,
       "month": "2005-06"
     },
@@ -32192,6 +32192,22 @@
       "month": "2005-06"
     },
     {
+      "id": "msg-1d27c59b2a64",
+      "message_id": "<20050628205544.07e2c645@localhost.localdomain>",
+      "from_name": "ronggui",
+      "from_email_hash": "85d06a634b6ef7416e3ca412736b71827f317496e67d406a07fbae5efed5e956",
+      "date": "2005-06-28T12:55:44Z",
+      "subject": "[R] where can i download the metrics package?",
+      "subject_clean": "where can i download the metrics package?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "i learn it from \"metrics: Towards a package for doing econometrics in R\"but i can not find it in cran.\n\n\n-- \nDepartment of Sociology\nFudan University,Shanghai\nBlog:http://sociology.yculblog.com",
+      "body_snippet": "i learn it from \"metrics: Towards a package for doing econometrics in R\"but i can not find it in cran.\n\n\n-- \nDepartment of Sociology\nFudan University,Shanghai\nBlog:http://sociology.yculblog.com",
+      "thread_id": "thread-1d27c59b2a64",
+      "thread_depth": 0,
+      "month": "2005-06"
+    },
+    {
       "id": "msg-5dc323ee3fca",
       "message_id": "<42C148D0.90305@statistik.uni-dortmund.de>",
       "from_name": "Uwe Ligges",
@@ -32207,22 +32223,6 @@
       "body_snippet": "Philip Bermingham wrote:\n\n> I am about to embark on the writing of a program for R and I wanted to \n> know a good reference book that would be useful.  There has been some \n> talk about S programming ",
       "thread_id": "thread-e299ef186b93",
       "thread_depth": 1,
-      "month": "2005-06"
-    },
-    {
-      "id": "msg-1d27c59b2a64",
-      "message_id": "<20050628205544.07e2c645@localhost.localdomain>",
-      "from_name": "ronggui",
-      "from_email_hash": "85d06a634b6ef7416e3ca412736b71827f317496e67d406a07fbae5efed5e956",
-      "date": "2005-06-28T12:55:44Z",
-      "subject": "[R] where can i download the metrics package?",
-      "subject_clean": "where can i download the metrics package?",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "i learn it from \"metrics: Towards a package for doing econometrics in R\"but i can not find it in cran.\n\n\n-- \nDepartment of Sociology\nFudan University,Shanghai\nBlog:http://sociology.yculblog.com",
-      "body_snippet": "i learn it from \"metrics: Towards a package for doing econometrics in R\"but i can not find it in cran.\n\n\n-- \nDepartment of Sociology\nFudan University,Shanghai\nBlog:http://sociology.yculblog.com",
-      "thread_id": "thread-1d27c59b2a64",
-      "thread_depth": 0,
       "month": "2005-06"
     },
     {
