@@ -3627,24 +3627,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-dc67c07b1063",
-      "message_id": "<CAAmySGMexY+7OuGY6T_Az5rz1v=NnPUF5gOZPai5mdZHhY-kVQ@mail.gmail.com>",
-      "from_name": "R. Michael Weylandt",
-      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
-      "date": "2012-04-03T13:13:56Z",
-      "subject": "[R] grouping",
-      "subject_clean": "grouping",
-      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
-      "references": [
-        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
-      ],
-      "body_plain": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can assign each y to a group\niii) then ave() or tapply() will do group-wise means\n\nSomething like:\n\ny <- c(36, 45, 46, 66, 78, 125, 193, 209, 242, 297) # You need a \"c\" here.\nave(y, findInterval(y, quantile(y, c(0.33, 0.66))))\ntapply(y, findInterval(y, quantile(y, c(0.33, 0.66))), mean)\n\nYou could also use cut2 from the Hmisc package to combine findInterval\nand quantile into a single step.\n\nDepending on your desired output.\n\nHope that helps,\nMichael\n\nOn Tue, Apr 3, 2012 at 8:47 AM, Val <valkremk at gmail.com> wrote:\n> Hi all,\n>\n> Assume that I have the following 10 data points.\n> ?x=c( ?46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n>\n> sort x ?and get the following\n> ?y= (36 , 45 , 46, ?66, 78, ?125,193, 209, 242, 297)\n>\n> I want to ?group the sorted ?data point (y) ?into ?equal number of\n> observation per group. In this case there will be three groups. ?The first\n> two groups ?will have three observation ?and the third will have four\n> observations\n>\n> group 1 ?= 34, 45, 46\n> group 2 ?= 66, 78, 125\n> group 3 ?= 193, 209, 242,297\n>\n> Finally I want to calculate the group mean\n>\n> group 1 ?= ?42\n> group 2 ?= ?87\n> group 3 ?= ?234\n>\n> Can anyone help me out?\n>\n> In SAS I used to do it using proc rank.\n>\n> thanks in advance\n>\n> Val\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can as",
-      "thread_id": "thread-933c1916838c",
-      "thread_depth": 1,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-20c05bf3d292",
       "message_id": "<1333458836.31226.189.camel@definetti>",
       "from_name": "Giovanni Petris",
@@ -3658,6 +3640,24 @@
       ],
       "body_plain": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_along(sorted) - 1) %/% 3, FUN = mean)\n        0         1         2         3 \n 42.33333  89.66667 214.66667 297.00000 \n\nHope this helps,\nGiovanni\n\nOn Tue, 2012-04-03 at 08:47 -0400, Val wrote:\n> Hi all,\n> \n> Assume that I have the following 10 data points.\n>  x=c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> \n> sort x  and get the following\n>   y= (36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> \n> I want to  group the sorted  data point (y)  into  equal number of\n> observation per group. In this case there will be three groups.  The first\n> two groups  will have three observation  and the third will have four\n> observations\n> \n> group 1  = 34, 45, 46\n> group 2  = 66, 78, 125\n> group 3  = 193, 209, 242,297\n> \n> Finally I want to calculate the group mean\n> \n> group 1  =  42\n> group 2  =  87\n> group 3  =  234\n> \n> Can anyone help me out?\n> \n> In SAS I used to do it using proc rank.\n> \n> thanks in advance\n> \n> Val\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n\nGiovanni Petris  <GPetris at uark.edu>\nAssociate Professor\nDepartment of Mathematical Sciences\nUniversity of Arkansas - Fayetteville, AR 72701\nPh: (479) 575-6324, 575-8630 (fax)\nhttp://definetti.uark.edu/~gpetris/",
       "body_snippet": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_al",
+      "thread_id": "thread-933c1916838c",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-dc67c07b1063",
+      "message_id": "<CAAmySGMexY+7OuGY6T_Az5rz1v=NnPUF5gOZPai5mdZHhY-kVQ@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-04-03T13:13:56Z",
+      "subject": "[R] grouping",
+      "subject_clean": "grouping",
+      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
+      "references": [
+        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
+      ],
+      "body_plain": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can assign each y to a group\niii) then ave() or tapply() will do group-wise means\n\nSomething like:\n\ny <- c(36, 45, 46, 66, 78, 125, 193, 209, 242, 297) # You need a \"c\" here.\nave(y, findInterval(y, quantile(y, c(0.33, 0.66))))\ntapply(y, findInterval(y, quantile(y, c(0.33, 0.66))), mean)\n\nYou could also use cut2 from the Hmisc package to combine findInterval\nand quantile into a single step.\n\nDepending on your desired output.\n\nHope that helps,\nMichael\n\nOn Tue, Apr 3, 2012 at 8:47 AM, Val <valkremk at gmail.com> wrote:\n> Hi all,\n>\n> Assume that I have the following 10 data points.\n> ?x=c( ?46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n>\n> sort x ?and get the following\n> ?y= (36 , 45 , 46, ?66, 78, ?125,193, 209, 242, 297)\n>\n> I want to ?group the sorted ?data point (y) ?into ?equal number of\n> observation per group. In this case there will be three groups. ?The first\n> two groups ?will have three observation ?and the third will have four\n> observations\n>\n> group 1 ?= 34, 45, 46\n> group 2 ?= 66, 78, 125\n> group 3 ?= 193, 209, 242,297\n>\n> Finally I want to calculate the group mean\n>\n> group 1 ?= ?42\n> group 2 ?= ?87\n> group 3 ?= ?234\n>\n> Can anyone help me out?\n>\n> In SAS I used to do it using proc rank.\n>\n> thanks in advance\n>\n> Val\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can as",
       "thread_id": "thread-933c1916838c",
       "thread_depth": 1,
       "month": "2012-04"
@@ -34806,24 +34806,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-63f7e1681796",
-      "message_id": "<CAFEqCdzkhq_-ymqLvN8pZ0guNcRUgPaW+cTV10MiEf=T0sV+Sg@mail.gmail.com>",
-      "from_name": "Greg Snow",
-      "from_email_hash": "7e8b90198d8dda6d8bbc636598f3105b18d65713fa78fc3e88cbec77163d50cf",
-      "date": "2012-04-19T20:12:43Z",
-      "subject": "[R] Pierce's criterion",
-      "subject_clean": "Pierce's criterion",
-      "in_reply_to": "<CACcGgJZ5fqs0BfU=JVBPEj_T1AdW8wJw5SnbeUodzDQ1H4B5tQ@mail.gmail.com>",
-      "references": [
-        "<CACcGgJZ5fqs0BfU=JVBPEj_T1AdW8wJw5SnbeUodzDQ1H4B5tQ@mail.gmail.com>"
-      ],
-      "body_plain": "Determining what is an outlier is complicated regardless of the tools\nused (this is a philosophical issue rather than an R issue).  You need\nto make some assumptions and definitions based on the science that\nproduces the data rather than the data itself before even approaching\nthe question of outliers.  What is an outlier for a normal\ndistribution may be reasonable from a gamma distribution and\ncompletely expected from a cauchy distribution.\n\nSee the 'outliers' dataset in the TeachingDemos package, and more\nimportantly the examples in the help page for it, for a demonstration\nof the perils of automatic outlier deletion.\n\nOn Wed, Apr 18, 2012 at 4:11 PM, Ryan Murphy <rmurphy4 at u.rochester.edu> wrote:\n> Hello all,\n>\n> I would like to rigorously test whether observations in my dataset are\n> outliers. ?I guess all the main tests in R (Grubbs) impose the assumption\n> of normality. ?My data is surely not normal, so I would like to use\n> something else. ?As far as I can tell from wikipedia, Peirce's criterion is\n> just that.\n>\n> The data I am interested in testing is: 1) Continuous on the unit interval\n> 2) Discrete 3) Ordinal on 0 6. ?If you need more specifics, (1) refers to\n> the gini index of inequality, (2) refers to measures for the number of\n> assasinations, strikes, etc in a country, (3) refers to ranking data of how\n> politically free a country is.\n>\n> Does R do this test?\n>\n> Thanks a lot, and PS I unlike many economists prefer R over Stata R >>>>>\n> Stata!\n>\n> Sincerely,\n> Ryan Murphy\n>\n> --\n> Ryan Murphy\n> 2012\n> B.A. Economics and Mathematics\n> 339-223-4181\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\n538280 at gmail.com",
-      "body_snippet": "Determining what is an outlier is complicated regardless of the tools\nused (this is a philosophical issue rather than an R issue).  You need\nto make some assumptions and definitions based on the scien",
-      "thread_id": "thread-d464bf0b9be7",
-      "thread_depth": 1,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-1b6c7ea1a7f7",
       "message_id": "<alpine.LRH.2.02.1204191310290.10317@aeolus.ecy.wa.gov>",
       "from_name": "Clint Bowman",
@@ -34838,6 +34820,24 @@
       "body_plain": "I was able to get the plot by converting the dates in the \"date\" column to \ndates, e.g.,\n\nmytable<-read.csv(\"MCNP-pH.csv\")\nnewdate<-with(mytable,strptime(date,\"%m/%d/%Y\"))\nmytable$date<-newdate\nsmoothTrend(mytable, pollutant = \"pH\")\n\nClint Bowman\t\t\tINTERNET:\tclint at ecy.wa.gov\nAir Quality Modeler\t\tINTERNET:\tclint at math.utah.edu\nDepartment of Ecology\t\tVOICE:\t\t(360) 407-6815\nPO Box 47600\t\t\tFAX:\t\t(360) 407-7534\nOlympia, WA 98504-7600\n\n         USPS:           PO Box 47600, Olympia, WA 98504-7600\n         Parcels:        300 Desmond Drive, Lacey, WA 98503-1274\n\nOn Thu, 19 Apr 2012, David Doyle wrote:\n\n> I'm trying to plot smooth trend using smoothTrend in OpenAir but I'm having\n> problems.\n>\n> I used the following code.\n> ---------------------------------------------------------------------------------\n> #Set my working dir to the dir with my files\n> setwd(\"c:/R\")\n>\n> #Load the openair library\n> library(openair)\n>\n> #Load the data\n> mydata <- read.table(\"MCNP-pH.csv\", header=TRUE, sep=\",\",)\n>\n> #Plot the data\n> smoothTrend(mydata, pollutant = \"pH\")\n> ---------------------------------------------------------------------------------\n>\n>\n> I get the following error:\n> Error in seq.int(0, to0 - from, by) : 'to' must be finite\n> In addition: Warning messages:\n> 1: In min.default(c(NA_real_, NA_real_, NA_real_, NA_real_, NA_real_,  :\n>  no non-missing arguments to min; returning Inf\n> 2: In max.default(c(NA_real_, NA_real_, NA_real_, NA_real_, NA_real_,  :\n>  no non-missing arguments to max; returning -Inf\n>>\n>\n> A copy of the data can be found at\n> www.doylesdartden.com/e/MCNP-pH.csv\n>\n> Any suggestions??\n>\n> Thank you\n> David\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
       "body_snippet": "I was able to get the plot by converting the dates in the \"date\" column to \ndates, e.g.,\n\nmytable<-read.csv(\"MCNP-pH.csv\")\nnewdate<-with(mytable,strptime(date,\"%m/%d/%Y\"))\nmytable$date<-newdate\nsmooth",
       "thread_id": "thread-011c33936a3f",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-63f7e1681796",
+      "message_id": "<CAFEqCdzkhq_-ymqLvN8pZ0guNcRUgPaW+cTV10MiEf=T0sV+Sg@mail.gmail.com>",
+      "from_name": "Greg Snow",
+      "from_email_hash": "7e8b90198d8dda6d8bbc636598f3105b18d65713fa78fc3e88cbec77163d50cf",
+      "date": "2012-04-19T20:12:43Z",
+      "subject": "[R] Pierce's criterion",
+      "subject_clean": "Pierce's criterion",
+      "in_reply_to": "<CACcGgJZ5fqs0BfU=JVBPEj_T1AdW8wJw5SnbeUodzDQ1H4B5tQ@mail.gmail.com>",
+      "references": [
+        "<CACcGgJZ5fqs0BfU=JVBPEj_T1AdW8wJw5SnbeUodzDQ1H4B5tQ@mail.gmail.com>"
+      ],
+      "body_plain": "Determining what is an outlier is complicated regardless of the tools\nused (this is a philosophical issue rather than an R issue).  You need\nto make some assumptions and definitions based on the science that\nproduces the data rather than the data itself before even approaching\nthe question of outliers.  What is an outlier for a normal\ndistribution may be reasonable from a gamma distribution and\ncompletely expected from a cauchy distribution.\n\nSee the 'outliers' dataset in the TeachingDemos package, and more\nimportantly the examples in the help page for it, for a demonstration\nof the perils of automatic outlier deletion.\n\nOn Wed, Apr 18, 2012 at 4:11 PM, Ryan Murphy <rmurphy4 at u.rochester.edu> wrote:\n> Hello all,\n>\n> I would like to rigorously test whether observations in my dataset are\n> outliers. ?I guess all the main tests in R (Grubbs) impose the assumption\n> of normality. ?My data is surely not normal, so I would like to use\n> something else. ?As far as I can tell from wikipedia, Peirce's criterion is\n> just that.\n>\n> The data I am interested in testing is: 1) Continuous on the unit interval\n> 2) Discrete 3) Ordinal on 0 6. ?If you need more specifics, (1) refers to\n> the gini index of inequality, (2) refers to measures for the number of\n> assasinations, strikes, etc in a country, (3) refers to ranking data of how\n> politically free a country is.\n>\n> Does R do this test?\n>\n> Thanks a lot, and PS I unlike many economists prefer R over Stata R >>>>>\n> Stata!\n>\n> Sincerely,\n> Ryan Murphy\n>\n> --\n> Ryan Murphy\n> 2012\n> B.A. Economics and Mathematics\n> 339-223-4181\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nGregory (Greg) L. Snow Ph.D.\n538280 at gmail.com",
+      "body_snippet": "Determining what is an outlier is complicated regardless of the tools\nused (this is a philosophical issue rather than an R issue).  You need\nto make some assumptions and definitions based on the scien",
+      "thread_id": "thread-d464bf0b9be7",
       "thread_depth": 1,
       "month": "2012-04"
     },
@@ -47963,6 +47963,22 @@
       "month": "2012-04"
     },
     {
+      "id": "msg-1ad0d27e38d5",
+      "message_id": "<CAFkmApO8ffoc5Qh=13cYLNW+r8Ne6+OehZBTACgwi3BkP-Lkmg@mail.gmail.com>",
+      "from_name": "cassie jones",
+      "from_email_hash": "e73ca71069521b8ce40ae43a9536050194076439912b1519258ec268ea3f3056",
+      "date": "2012-04-26T19:30:09Z",
+      "subject": "[R] problem with break command",
+      "subject_clean": "problem with break command",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
+      "thread_id": "thread-1ad0d27e38d5",
+      "thread_depth": 0,
+      "month": "2012-04"
+    },
+    {
       "id": "msg-3ac26314bea9",
       "message_id": "<00505A65-F248-4EE1-B63B-99979B6B55A3@me.com>",
       "from_name": "Marc Schwartz",
@@ -47980,22 +47996,6 @@
       "body_snippet": "On Apr 26, 2012, at 12:49 PM, Greg Snow wrote:\n\n> The phrase \"does not work\" is not very helpful, it can mean quit a few\n> things including:\n> \n> * Your computer exploded.\n> * No explosion, but smoke ",
       "thread_id": "thread-29317e9bd244",
       "thread_depth": 3,
-      "month": "2012-04"
-    },
-    {
-      "id": "msg-1ad0d27e38d5",
-      "message_id": "<CAFkmApO8ffoc5Qh=13cYLNW+r8Ne6+OehZBTACgwi3BkP-Lkmg@mail.gmail.com>",
-      "from_name": "cassie jones",
-      "from_email_hash": "e73ca71069521b8ce40ae43a9536050194076439912b1519258ec268ea3f3056",
-      "date": "2012-04-26T19:30:09Z",
-      "subject": "[R] problem with break command",
-      "subject_clean": "problem with break command",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120426/76d16a8f/attachment.pl>",
-      "thread_id": "thread-1ad0d27e38d5",
-      "thread_depth": 0,
       "month": "2012-04"
     },
     {

@@ -35680,24 +35680,6 @@
       "month": "2010-01"
     },
     {
-      "id": "msg-30e3ef6fbb00",
-      "message_id": "<B62F7D01-B74D-43A7-98F2-B302C6B38453@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2010-01-21T04:23:28Z",
-      "subject": "[R] concatenate 2 column vectors",
-      "subject_clean": "concatenate 2 column vectors",
-      "in_reply_to": "<346402.25899.qm@web24503.mail.ird.yahoo.com>",
-      "references": [
-        "<346402.25899.qm@web24503.mail.ird.yahoo.com>"
-      ],
-      "body_plain": "On Jan 20, 2010, at 11:14 PM, teurlai magali wrote:\n\n> Sorry I forgot the subject in my previous post\n>\n> Here is an example of data : province and district code of 4 locations\n>\n> datatry=matrix(c(8,12,3,3,1,1,16,1),4,2)\n> colnames(datatry)<-c(\"PROCODE\",\"DISCODE\")\n\n >  cbind( datatry, paste(datatry[, \"PROCODE\"], datatry[, \"DISCODE\"],  \nsep=\".\") )\n      PROCODE DISCODE\n[1,] \"8\"     \"1\"     \"8.1\"\n[2,] \"12\"    \"1\"     \"12.1\"\n[3,] \"3\"     \"16\"    \"3.16\"\n[4,] \"3\"     \"1\"     \"3.1\"\n\n>\n> DISCODE is not unique for each location (there is a distrcit nb 1 in  \n> each province)\n> I want to create a third column (DIS) which would contain a unique  \n> district code for each location that would be the appended values of  \n> the province code and the district code, and that would be a numeric  \n> value (not a character)\n>\n> here is my try (thanks to Henrique Dallazuanna!)\n>\n> DIS=rep(0,nrow(datatry))\n> datatry=cbind(datatry,DIS)\n> datatry2=transform(datatry,DIS=paste(datatry[,1],datatry[,2]));\n>\n> However it creates a string, and the 2 codes are separated by an  \n> empty space, which I didn't manage to supress using different values  \n> for arguments \"sep\" and \"collapse\".\n>\n> i'll try to see other options to concatenate 2 numeric values into a  \n> third one.\n>\n> Thanks\n>\n>\n> --- En date de : Jeu 21.1.10, Henrique Dallazuanna  \n> <wwwhsd at gmail.com> a ?crit :\n>\n> De: Henrique Dallazuanna <wwwhsd at gmail.com>\n> Objet: Re: [R] (no subject)\n> ?: \"teurlai magali\" <teurlaimag at yahoo.fr>\n> Cc: r-help at r-project.org\n> Date: Jeudi 21 Janvier 2010, 3h41\n>\n> transform(DF, District_Unique = paste(Province, District, collapse =  \n> ''))\n>\n> On Thu, Jan 21, 2010 at 12:34 AM, teurlai magali  \n> <teurlaimag at yahoo.fr> wrote:\n>> Hi\n>>\n>> is there a way in R to create a new column vector with the numbers  \n>> of 2 others columns simply appended?\n>>\n>> Example : I have a column with provinces codes (1 to 19)\n>> I have a second column with districts codes (1 to ##, depending on  \n>> the province)\n>> I want to create a third column with a code that would be unique  \n>> for each district:\n>>\n>> Province  District   District_Unique\n>> 1             1            11\n>> 1             2            12\n>> 13           2            132\n>>\n>> I can create a loop, but it becomes complicated with numerous data\n>>\n>> Thanks for your help\n>>\n>>\n>>\n>>\n>>\n>>        [[alternative HTML version deleted]]\n>>\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>>\n>\n>\n>\n> -- \n> Henrique Dallazuanna\n> Curitiba-Paran?-Brasil\n> 25? 25' 40\" S 49? 16' 22\" O\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
-      "body_snippet": "On Jan 20, 2010, at 11:14 PM, teurlai magali wrote:\n\n> Sorry I forgot the subject in my previous post\n>\n> Here is an example of data : province and district code of 4 locations\n>\n> datatry=matrix(c(8,",
-      "thread_id": "thread-87371190d98a",
-      "thread_depth": 3,
-      "month": "2010-01"
-    },
-    {
       "id": "msg-839732bfeaea",
       "message_id": "<3aaf1a031001202023j2bfb0290k75bc5f9c50a0e27b@mail.gmail.com>",
       "from_name": "milton ruser",
@@ -35712,6 +35694,24 @@
       ],
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100120/6e595819/attachment.pl>",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20100120/6e595819/attachment.pl>",
+      "thread_id": "thread-87371190d98a",
+      "thread_depth": 3,
+      "month": "2010-01"
+    },
+    {
+      "id": "msg-30e3ef6fbb00",
+      "message_id": "<B62F7D01-B74D-43A7-98F2-B302C6B38453@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2010-01-21T04:23:28Z",
+      "subject": "[R] concatenate 2 column vectors",
+      "subject_clean": "concatenate 2 column vectors",
+      "in_reply_to": "<346402.25899.qm@web24503.mail.ird.yahoo.com>",
+      "references": [
+        "<346402.25899.qm@web24503.mail.ird.yahoo.com>"
+      ],
+      "body_plain": "On Jan 20, 2010, at 11:14 PM, teurlai magali wrote:\n\n> Sorry I forgot the subject in my previous post\n>\n> Here is an example of data : province and district code of 4 locations\n>\n> datatry=matrix(c(8,12,3,3,1,1,16,1),4,2)\n> colnames(datatry)<-c(\"PROCODE\",\"DISCODE\")\n\n >  cbind( datatry, paste(datatry[, \"PROCODE\"], datatry[, \"DISCODE\"],  \nsep=\".\") )\n      PROCODE DISCODE\n[1,] \"8\"     \"1\"     \"8.1\"\n[2,] \"12\"    \"1\"     \"12.1\"\n[3,] \"3\"     \"16\"    \"3.16\"\n[4,] \"3\"     \"1\"     \"3.1\"\n\n>\n> DISCODE is not unique for each location (there is a distrcit nb 1 in  \n> each province)\n> I want to create a third column (DIS) which would contain a unique  \n> district code for each location that would be the appended values of  \n> the province code and the district code, and that would be a numeric  \n> value (not a character)\n>\n> here is my try (thanks to Henrique Dallazuanna!)\n>\n> DIS=rep(0,nrow(datatry))\n> datatry=cbind(datatry,DIS)\n> datatry2=transform(datatry,DIS=paste(datatry[,1],datatry[,2]));\n>\n> However it creates a string, and the 2 codes are separated by an  \n> empty space, which I didn't manage to supress using different values  \n> for arguments \"sep\" and \"collapse\".\n>\n> i'll try to see other options to concatenate 2 numeric values into a  \n> third one.\n>\n> Thanks\n>\n>\n> --- En date de : Jeu 21.1.10, Henrique Dallazuanna  \n> <wwwhsd at gmail.com> a ?crit :\n>\n> De: Henrique Dallazuanna <wwwhsd at gmail.com>\n> Objet: Re: [R] (no subject)\n> ?: \"teurlai magali\" <teurlaimag at yahoo.fr>\n> Cc: r-help at r-project.org\n> Date: Jeudi 21 Janvier 2010, 3h41\n>\n> transform(DF, District_Unique = paste(Province, District, collapse =  \n> ''))\n>\n> On Thu, Jan 21, 2010 at 12:34 AM, teurlai magali  \n> <teurlaimag at yahoo.fr> wrote:\n>> Hi\n>>\n>> is there a way in R to create a new column vector with the numbers  \n>> of 2 others columns simply appended?\n>>\n>> Example : I have a column with provinces codes (1 to 19)\n>> I have a second column with districts codes (1 to ##, depending on  \n>> the province)\n>> I want to create a third column with a code that would be unique  \n>> for each district:\n>>\n>> Province  District   District_Unique\n>> 1             1            11\n>> 1             2            12\n>> 13           2            132\n>>\n>> I can create a loop, but it becomes complicated with numerous data\n>>\n>> Thanks for your help\n>>\n>>\n>>\n>>\n>>\n>>        [[alternative HTML version deleted]]\n>>\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n>>\n>\n>\n>\n> -- \n> Henrique Dallazuanna\n> Curitiba-Paran?-Brasil\n> 25? 25' 40\" S 49? 16' 22\" O\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\nDavid Winsemius, MD\nHeritage Laboratories\nWest Hartford, CT",
+      "body_snippet": "On Jan 20, 2010, at 11:14 PM, teurlai magali wrote:\n\n> Sorry I forgot the subject in my previous post\n>\n> Here is an example of data : province and district code of 4 locations\n>\n> datatry=matrix(c(8,",
       "thread_id": "thread-87371190d98a",
       "thread_depth": 3,
       "month": "2010-01"
@@ -37719,6 +37719,24 @@
       "month": "2010-01"
     },
     {
+      "id": "msg-227928d03b3a",
+      "message_id": "<d8ad40b51001211538k2685bc51mb46772cbeb096fe2@mail.gmail.com>",
+      "from_name": "Barry Rowlingson",
+      "from_email_hash": "94f5c718996fafe3dcf7003ba82c6656414e43b8d3f2b04af298250f493ba5eb",
+      "date": "2010-01-21T23:38:02Z",
+      "subject": "[R] use R from python",
+      "subject_clean": "use R from python",
+      "in_reply_to": "<11B13BB4-D66E-4D85-8416-ED2A3F078747@yahoo.it>",
+      "references": [
+        "<11B13BB4-D66E-4D85-8416-ED2A3F078747@yahoo.it>"
+      ],
+      "body_plain": "On Thu, Jan 21, 2010 at 8:35 PM, Massimo Di Stefano\n<massimodisasha at yahoo.it> wrote:\n> Hi All,\n>\n> please aplogize me if my qustion is a bit OT here,\n> but maybe is there someone that uses R from inside python\n> using rpy or rpy2 interface.\n\n> In [54]: x = rdiv( ( rdiff( x, rmin(x) ) ) , ( rdiff( rmax(x) , rmin(x) ) ) )\n>\n> In [55]: y = rdiv( ( rdiff( r_sorted, rmin(r_sorted) ) ) , ( rdiff( rmax(r_sorted) , rmin(r_sorted) ) ) )\n> Errore in .Primitive(\"-\")(\"mymap at data$elevation.dem\", \"mymap at data$elevation.dem\") :\n> ?argomento non numerico trasformato in operatore binario\n> ------------------------------------------------------------\n> Traceback (most recent call last):\n> ?File \"<ipython console>\", line 1, in <module>\n> ?File \"build/bdist.macosx-10.6-universal/egg/rpy2/robjects/__init__.py\", line 423, in __call__\n> RRuntimeError: Errore in .Primitive(\"-\")(\"mymap at data$elevation.dem\", \"mymap at data$elevation.dem\") :\n> ?argomento non numerico trasformato in operatore binario\n\n My non-existent Italian is telling me this is non-numeric argument in\nbinary operator. Something like:\n\n> \"hello\" - \"goodbye\"\nError in \"hello\" - \"goodbye\" : non-numeric argument to binary operator\n\n - because you are subtracting the strings \"mymap at data$elevation.dem\".\n\n Tracking back, those strings come from:\n\nr_sorted = rsort('mymap at data$elevation.dem', decreasing=True)\n\n - which is sorting the string vector! Like this:\n\n> sort('mymap at data$elevation.dem', decreasing=TRUE)\n[1] \"mymap at data$elevation.dem\"\n\n You want to sort the *value* of that object.  You want to sort the\n$elevation.dem column of the @data slot of the python R object mymap.\n\n In a functional form which will translate to your style of rpy2 would\nbe this in R:\n\nget(\"$\")(slot(mymap,\"data\"),\"elevation.dem\")\n\n You may need to get 'get' and 'slot' from r.robjects in the way you\ndo other functions. This looks a bit weird to me, but I'm used to\nrpy-1 - maybe rpy 2 is like this!\n\n Hope that points you in the right direction.\n\nBarry\n\n-- \nblog: http://geospaced.blogspot.com/\nweb: http://www.maths.lancs.ac.uk/~rowlings\nweb: http://www.rowlingson.com/\ntwitter: http://twitter.com/geospacedman\npics: http://www.flickr.com/photos/spacedman",
+      "body_snippet": "On Thu, Jan 21, 2010 at 8:35 PM, Massimo Di Stefano\n<massimodisasha at yahoo.it> wrote:\n> Hi All,\n>\n> please aplogize me if my qustion is a bit OT here,\n> but maybe is there someone that uses R from i",
+      "thread_id": "thread-3c5ddb6494ab",
+      "thread_depth": 1,
+      "month": "2010-01"
+    },
+    {
       "id": "msg-d81b37dfb9f3",
       "message_id": "<366c6f341001211538s4a233bd3o2a24e49dd476372e@mail.gmail.com>",
       "from_name": "Peng Yu",
@@ -37735,24 +37753,6 @@
       "body_snippet": "On Thu, Jan 21, 2010 at 5:32 PM, milton ruser <milton.ruser at gmail.com> wrote:\n> Hi Peng,\n>\n> May be write.table(...,quote=F)\n>\n> bests\n>\n> milton\n\nWould this cause some trouble when filed is missin",
       "thread_id": "thread-011a69ef4de1",
       "thread_depth": 2,
-      "month": "2010-01"
-    },
-    {
-      "id": "msg-227928d03b3a",
-      "message_id": "<d8ad40b51001211538k2685bc51mb46772cbeb096fe2@mail.gmail.com>",
-      "from_name": "Barry Rowlingson",
-      "from_email_hash": "94f5c718996fafe3dcf7003ba82c6656414e43b8d3f2b04af298250f493ba5eb",
-      "date": "2010-01-21T23:38:02Z",
-      "subject": "[R] use R from python",
-      "subject_clean": "use R from python",
-      "in_reply_to": "<11B13BB4-D66E-4D85-8416-ED2A3F078747@yahoo.it>",
-      "references": [
-        "<11B13BB4-D66E-4D85-8416-ED2A3F078747@yahoo.it>"
-      ],
-      "body_plain": "On Thu, Jan 21, 2010 at 8:35 PM, Massimo Di Stefano\n<massimodisasha at yahoo.it> wrote:\n> Hi All,\n>\n> please aplogize me if my qustion is a bit OT here,\n> but maybe is there someone that uses R from inside python\n> using rpy or rpy2 interface.\n\n> In [54]: x = rdiv( ( rdiff( x, rmin(x) ) ) , ( rdiff( rmax(x) , rmin(x) ) ) )\n>\n> In [55]: y = rdiv( ( rdiff( r_sorted, rmin(r_sorted) ) ) , ( rdiff( rmax(r_sorted) , rmin(r_sorted) ) ) )\n> Errore in .Primitive(\"-\")(\"mymap at data$elevation.dem\", \"mymap at data$elevation.dem\") :\n> ?argomento non numerico trasformato in operatore binario\n> ------------------------------------------------------------\n> Traceback (most recent call last):\n> ?File \"<ipython console>\", line 1, in <module>\n> ?File \"build/bdist.macosx-10.6-universal/egg/rpy2/robjects/__init__.py\", line 423, in __call__\n> RRuntimeError: Errore in .Primitive(\"-\")(\"mymap at data$elevation.dem\", \"mymap at data$elevation.dem\") :\n> ?argomento non numerico trasformato in operatore binario\n\n My non-existent Italian is telling me this is non-numeric argument in\nbinary operator. Something like:\n\n> \"hello\" - \"goodbye\"\nError in \"hello\" - \"goodbye\" : non-numeric argument to binary operator\n\n - because you are subtracting the strings \"mymap at data$elevation.dem\".\n\n Tracking back, those strings come from:\n\nr_sorted = rsort('mymap at data$elevation.dem', decreasing=True)\n\n - which is sorting the string vector! Like this:\n\n> sort('mymap at data$elevation.dem', decreasing=TRUE)\n[1] \"mymap at data$elevation.dem\"\n\n You want to sort the *value* of that object.  You want to sort the\n$elevation.dem column of the @data slot of the python R object mymap.\n\n In a functional form which will translate to your style of rpy2 would\nbe this in R:\n\nget(\"$\")(slot(mymap,\"data\"),\"elevation.dem\")\n\n You may need to get 'get' and 'slot' from r.robjects in the way you\ndo other functions. This looks a bit weird to me, but I'm used to\nrpy-1 - maybe rpy 2 is like this!\n\n Hope that points you in the right direction.\n\nBarry\n\n-- \nblog: http://geospaced.blogspot.com/\nweb: http://www.maths.lancs.ac.uk/~rowlings\nweb: http://www.rowlingson.com/\ntwitter: http://twitter.com/geospacedman\npics: http://www.flickr.com/photos/spacedman",
-      "body_snippet": "On Thu, Jan 21, 2010 at 8:35 PM, Massimo Di Stefano\n<massimodisasha at yahoo.it> wrote:\n> Hi All,\n>\n> please aplogize me if my qustion is a bit OT here,\n> but maybe is there someone that uses R from i",
-      "thread_id": "thread-3c5ddb6494ab",
-      "thread_depth": 1,
       "month": "2010-01"
     },
     {
