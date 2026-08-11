@@ -36391,6 +36391,22 @@
       "month": "2009-11"
     },
     {
+      "id": "msg-dfed987df7f7",
+      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
+      "from_name": "Jason Rupert",
+      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
+      "date": "2009-11-18T22:57:26Z",
+      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
+      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
+      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
+      "thread_id": "thread-dfed987df7f7",
+      "thread_depth": 0,
+      "month": "2009-11"
+    },
+    {
       "id": "msg-7924b044359a",
       "message_id": "<EC0F8FF776F3F74E9C63CE16641C962804115C43@AKLEXB02.hort.net.nz>",
       "from_name": "Peter Alspach",
@@ -36408,22 +36424,6 @@
       "body_snippet": "Tena koe Martin\n\nThis is what I get (it is unclear to me why you don't tell use\nspecifically what you get):\n\nplot(1,1, xlim=c(1,10), ylim=c(0,10000), log=\"y\", type='n')\nWarning message:\nIn plot.window",
       "thread_id": "thread-5c90582e074e",
       "thread_depth": 3,
-      "month": "2009-11"
-    },
-    {
-      "id": "msg-dfed987df7f7",
-      "message_id": "<926343.51852.qm@web56002.mail.re3.yahoo.com>",
-      "from_name": "Jason Rupert",
-      "from_email_hash": "ad36759717b4990e02b31c8b80ff4a80035b6acafe82959bae1958e2a57bac94",
-      "date": "2009-11-18T22:57:26Z",
-      "subject": "[R] Preferred Method for Reading in and Processing Access Database",
-      "subject_clean": "Preferred Method for Reading in and Processing Access Database",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working with csv file. \n\nThanks again.",
-      "body_snippet": "By any chance is there a preferred way to allow R to read in data from an Access Database and then also process that data?   \n\nThanks for any hints and tips since I have traditionally been working wit",
-      "thread_id": "thread-dfed987df7f7",
-      "thread_depth": 0,
       "month": "2009-11"
     },
     {
@@ -43683,22 +43683,6 @@
       "month": "2009-11"
     },
     {
-      "id": "msg-a35faca75f18",
-      "message_id": "<a35fc1810911220642r38861416s1e148f3ca82339e1@mail.gmail.com>",
-      "from_name": "Marcelo Laia",
-      "from_email_hash": "3e56683f13d30145fd0e101a5cdd081cc46ad30001510b9b462ff8ca527f3c17",
-      "date": "2009-11-22T14:42:32Z",
-      "subject": "[R] Repeated measures unbalanced in a split-split design",
-      "subject_clean": "Repeated measures unbalanced in a split-split design",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI have a experiment with block, plots, sub-plots, and sub-sub-plots\nwith repeated measures and 3 factors (factorial design) when we have\nbeen observed diameter (mm), high (cm) and leaves number (count).\nHowever, we don't have one treatment in one factor, so, my design is\nunbalanced.\n\nOn a previous message here, a friend tell me that \"It appears to me\nthat your design is a split-split plot with repeated measures at the\nsplit-split plot level. Because you have multiple sizes of\nexperimental unit (blocks, plots and sub-plots), you have a different\nrandom error term at each size of unit, so you have to analyze it as a\nmixed-effects model. For the diameter and height measurements, you can\nprobably get away with using normal errors, but for the counts, you\nmay well have to use a generalized linear mixed model.\"\n\nSo, I am trying to analyze my data with car package.\n\nI have:\ntime (days after germination) -> 4 levels (38, 53, 73, 85)\nHormone -> 2 levels (SH, CH) on sub-plots\nBlock -> 4 blocks\nTreatment -> 6 levels (1, 2, 3, 4, 5, and 6) on sub-sub-plots\nPlant -> subjects\n\nI measured Diameter (mm), Height (cm), HD (height/diameter), and\nNumber of Leaves (count) at each time point. But, plant can be died\nand I got NAs.\n\nHowever, Treatment 6 (control) is only present on SH sub-plots. It\nisn't present on CH sub-plots.\n\nI try this model:\n\nidata.Cana <- data.frame(Time=factor(c(38,53,73,85)))\nidata.Cana\n\nmod.Cana <- lm(cbind(Diameter.38, Diameter.53, Diameter.73, Diameter.85)\n                ~  Treatment*Hormone, data=marcelo.subset)\nmod.Cana\n\nCall:\nlm(formula = cbind(Diameter.38, Diameter.53, Diameter.73, Diameter.85)\n~     Treatment * Hormone, data = marcelo.subset)\n\nCoefficients:\n                      Diameter.38  Diameter.53  Diameter.73  Diameter.85\n(Intercept)            1.24000      1.35750      1.99375      2.31000\nTreatment2            -0.31625     -0.14250      0.07500     -0.13875\nTreatment3            -0.19250     -0.01500     -0.20875     -0.36875\nTreatment4            -0.35375     -0.08500     -0.22750     -0.27125\nTreatment5            -0.29125      0.04875     -0.14375     -0.26375\nTreatment6            -0.00125     -0.25750     -0.81125     -0.77750\nHormoneSH             -0.30875     -0.08875      0.31500      0.07000\nTreatment2:HormoneSH   0.19875      0.11250     -0.44500     -0.24875\nTreatment3:HormoneSH   0.15375      0.01875     -0.12125      0.07000\nTreatment4:HormoneSH   0.28000     -0.04250     -0.41750     -0.38750\nTreatment5:HormoneSH   0.40875     -0.11125     -0.17750     -0.05125\nTreatment6:HormoneSH        NA           NA           NA           NA\n\nav.Cana <- Anova(mod.Cana, idata=idata.Cana, idesign= ~ as.factor(Idade))\nErro em solve.default(crossprod(model.matrix(mod))) :\n  rotina Lapack dgesv: sistema ? exatamente singular\n\nHow I model my data to analyze it with this unbalanced design?\n\nHow I could use the block factor on model? Or it is not necessary? And\nsub-plots?\n\nPlease, here you could find my design\nhttp://www.divshare.com/download/9431636-e0c\n\nand here you could find a subset of my data\nhttp://www.divshare.com/download/9456640-fd7\n\nThank you very much!\n\n-- \nMarcelo Luiz de Laia\nUniversidade do Estado de Santa Catarina\nUDESC - www.cav.udesc.br\nLages - SC - Brazil\nLinux user number 487797",
-      "body_snippet": "Hi,\n\nI have a experiment with block, plots, sub-plots, and sub-sub-plots\nwith repeated measures and 3 factors (factorial design) when we have\nbeen observed diameter (mm), high (cm) and leaves number (",
-      "thread_id": "thread-a35faca75f18",
-      "thread_depth": 0,
-      "month": "2009-11"
-    },
-    {
       "id": "msg-1cce62023df0",
       "message_id": "<366c6f340911220642o540c3db9v4dd7e5fc30e817cd@mail.gmail.com>",
       "from_name": "Peng Yu",
@@ -43711,6 +43695,22 @@
       "body_plain": "I use the following code to generate a matrix of factors. I'm\nwondering if there is a way to make it more general so that I can have\nany number of factors (not necessarily 5).\n\na=3\nb=4\nc=5\nd=6\ne=7\n\nA=1:a\nB=1:b\nC=1:c\nD=1:d\nE=1:e\n\nX=matrix(nr=a*b*c*d*e,nc=5)\n\nfor(i_a in 1:a-1) {\n  for(i_b in 1:b-1) {\n    for(i_c in 1:c-1) {\n      for(i_d in 1:d-1) {\n        for(i_e in 1:e-1) {\n          X[(((i_a * b + i_b) * c + i_c) * d + i_d) * e + i_e + 1, ] =\nc(i_a+1, i_b+1, i_c+1, i_d+1, i_e+1)\n        }\n      }\n    }\n  }\n}\nprint(X)",
       "body_snippet": "I use the following code to generate a matrix of factors. I'm\nwondering if there is a way to make it more general so that I can have\nany number of factors (not necessarily 5).\n\na=3\nb=4\nc=5\nd=6\ne=7\n\nA=",
       "thread_id": "thread-1cce62023df0",
+      "thread_depth": 0,
+      "month": "2009-11"
+    },
+    {
+      "id": "msg-a35faca75f18",
+      "message_id": "<a35fc1810911220642r38861416s1e148f3ca82339e1@mail.gmail.com>",
+      "from_name": "Marcelo Laia",
+      "from_email_hash": "3e56683f13d30145fd0e101a5cdd081cc46ad30001510b9b462ff8ca527f3c17",
+      "date": "2009-11-22T14:42:32Z",
+      "subject": "[R] Repeated measures unbalanced in a split-split design",
+      "subject_clean": "Repeated measures unbalanced in a split-split design",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have a experiment with block, plots, sub-plots, and sub-sub-plots\nwith repeated measures and 3 factors (factorial design) when we have\nbeen observed diameter (mm), high (cm) and leaves number (count).\nHowever, we don't have one treatment in one factor, so, my design is\nunbalanced.\n\nOn a previous message here, a friend tell me that \"It appears to me\nthat your design is a split-split plot with repeated measures at the\nsplit-split plot level. Because you have multiple sizes of\nexperimental unit (blocks, plots and sub-plots), you have a different\nrandom error term at each size of unit, so you have to analyze it as a\nmixed-effects model. For the diameter and height measurements, you can\nprobably get away with using normal errors, but for the counts, you\nmay well have to use a generalized linear mixed model.\"\n\nSo, I am trying to analyze my data with car package.\n\nI have:\ntime (days after germination) -> 4 levels (38, 53, 73, 85)\nHormone -> 2 levels (SH, CH) on sub-plots\nBlock -> 4 blocks\nTreatment -> 6 levels (1, 2, 3, 4, 5, and 6) on sub-sub-plots\nPlant -> subjects\n\nI measured Diameter (mm), Height (cm), HD (height/diameter), and\nNumber of Leaves (count) at each time point. But, plant can be died\nand I got NAs.\n\nHowever, Treatment 6 (control) is only present on SH sub-plots. It\nisn't present on CH sub-plots.\n\nI try this model:\n\nidata.Cana <- data.frame(Time=factor(c(38,53,73,85)))\nidata.Cana\n\nmod.Cana <- lm(cbind(Diameter.38, Diameter.53, Diameter.73, Diameter.85)\n                ~  Treatment*Hormone, data=marcelo.subset)\nmod.Cana\n\nCall:\nlm(formula = cbind(Diameter.38, Diameter.53, Diameter.73, Diameter.85)\n~     Treatment * Hormone, data = marcelo.subset)\n\nCoefficients:\n                      Diameter.38  Diameter.53  Diameter.73  Diameter.85\n(Intercept)            1.24000      1.35750      1.99375      2.31000\nTreatment2            -0.31625     -0.14250      0.07500     -0.13875\nTreatment3            -0.19250     -0.01500     -0.20875     -0.36875\nTreatment4            -0.35375     -0.08500     -0.22750     -0.27125\nTreatment5            -0.29125      0.04875     -0.14375     -0.26375\nTreatment6            -0.00125     -0.25750     -0.81125     -0.77750\nHormoneSH             -0.30875     -0.08875      0.31500      0.07000\nTreatment2:HormoneSH   0.19875      0.11250     -0.44500     -0.24875\nTreatment3:HormoneSH   0.15375      0.01875     -0.12125      0.07000\nTreatment4:HormoneSH   0.28000     -0.04250     -0.41750     -0.38750\nTreatment5:HormoneSH   0.40875     -0.11125     -0.17750     -0.05125\nTreatment6:HormoneSH        NA           NA           NA           NA\n\nav.Cana <- Anova(mod.Cana, idata=idata.Cana, idesign= ~ as.factor(Idade))\nErro em solve.default(crossprod(model.matrix(mod))) :\n  rotina Lapack dgesv: sistema ? exatamente singular\n\nHow I model my data to analyze it with this unbalanced design?\n\nHow I could use the block factor on model? Or it is not necessary? And\nsub-plots?\n\nPlease, here you could find my design\nhttp://www.divshare.com/download/9431636-e0c\n\nand here you could find a subset of my data\nhttp://www.divshare.com/download/9456640-fd7\n\nThank you very much!\n\n-- \nMarcelo Luiz de Laia\nUniversidade do Estado de Santa Catarina\nUDESC - www.cav.udesc.br\nLages - SC - Brazil\nLinux user number 487797",
+      "body_snippet": "Hi,\n\nI have a experiment with block, plots, sub-plots, and sub-sub-plots\nwith repeated measures and 3 factors (factorial design) when we have\nbeen observed diameter (mm), high (cm) and leaves number (",
+      "thread_id": "thread-a35faca75f18",
       "thread_depth": 0,
       "month": "2009-11"
     },
@@ -73892,17 +73892,6 @@
       "root_message_id": "msg-072d4c4cb53c"
     },
     {
-      "id": "thread-a35faca75f18",
-      "subject": "Repeated measures unbalanced in a split-split design",
-      "message_count": 1,
-      "participants": [
-        "Marcelo Laia"
-      ],
-      "started": "2009-11-22T14:42:32Z",
-      "last_reply": "2009-11-22T14:42:32Z",
-      "root_message_id": "msg-a35faca75f18"
-    },
-    {
       "id": "thread-1cce62023df0",
       "subject": "How to make a matrix of a number of factors?",
       "message_count": 2,
@@ -73913,6 +73902,17 @@
       "started": "2009-11-22T14:42:32Z",
       "last_reply": "2009-11-22T14:59:21Z",
       "root_message_id": "msg-1cce62023df0"
+    },
+    {
+      "id": "thread-a35faca75f18",
+      "subject": "Repeated measures unbalanced in a split-split design",
+      "message_count": 1,
+      "participants": [
+        "Marcelo Laia"
+      ],
+      "started": "2009-11-22T14:42:32Z",
+      "last_reply": "2009-11-22T14:42:32Z",
+      "root_message_id": "msg-a35faca75f18"
     },
     {
       "id": "thread-6e0929b32f5e",
