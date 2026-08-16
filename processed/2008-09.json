@@ -28579,6 +28579,22 @@
       "month": "2008-09"
     },
     {
+      "id": "msg-b4b78ecf4bfd",
+      "message_id": "<OFB4212EEB.E1D2B272-ON802574C7.0054D64D-802574C7.0054FED5@hsl.gov.uk>",
+      "from_name": "Richard.Cotton at hsl.gov.uk",
+      "from_email_hash": "c905596ee0812452176d79b13b1e1646cad404fdbcecc84f842b20db432ae6e1",
+      "date": "2008-09-17T15:31:05Z",
+      "subject": "[R] Question about panel.points",
+      "subject_clean": "Question about panel.points",
+      "in_reply_to": "<19528504.post@hsl.gov.uk>",
+      "references": [],
+      "body_plain": "> I'm trying to plot graphs using lattice with this script :\n> \n> xyplot(Y ~ X | factmod,\n> panel = function(x, y) {\n>                 panel.grid(h=-1, v=-1, col=\"gray\")\n>                 panel.xyplot(x, y, type=\"p\", pch=20)\n>                 panel.points(50,Idata, data=devdata, col=\"red\")   ----->\n> this doesn't work\n>                 },\n>                  xlab=\"X\", ylab=\"Y\")\n> \n> factmod is a factor with 18 labels corresponding to the 18 names of my\n> devices.\n> devdata is a data.frame of 2 columns and 18 rows : name of the devices /\n> value of Idata for each device\n> For example (smaller one):\n> devdata<-data.frame(c(\"a\",\"b\",\"c\",\"d\"), c(1,5,9,7))\n> \n> And I would like to add the point (50, Idata) per graph that is \n> points(50,1) on the first graph\n> points(50,5) on the second graph, ...\n> \n> At the moment, it plots all the points on every graph (or with another\n> command, only (50,Idata[1]) on all the graphs).\n\nYou can use panel.number() or packet.number to specify code specific to \ndifferent panels, e.g.\n\nextrapoints <- seq(25,50,5)\npanelfn <- function(...)\n{\n   panel.xyplot(...)\n   panel.points(1, extrapoints[panel.number()], col=\"red\", pch=15)\n}\nxyplot(yield~year|site, data=barley, panel=panelfn)\n\nRegards,\nRichie.\n\nMathematical Sciences Unit\nHSL\n\n\n------------------------------------------------------------------------\nATTENTION:\n\nThis message contains privileged and confidential inform...{{dropped:20}}",
+      "body_snippet": "> I'm trying to plot graphs using lattice with this script :\n> \n> xyplot(Y ~ X | factmod,\n> panel = function(x, y) {\n>                 panel.grid(h=-1, v=-1, col=\"gray\")\n>                 panel.xyplot",
+      "thread_id": "thread-b4b78ecf4bfd",
+      "thread_depth": 0,
+      "month": "2008-09"
+    },
+    {
       "id": "msg-f215e8ba33fb",
       "message_id": "<21621972.1221665493284.JavaMail.SVC_SecMsg@WPSCV6GZ>",
       "from_name": "Tom Fletcher",
@@ -28596,22 +28612,6 @@
       "body_snippet": "Is there a setting change (or other minor fix) that can be done without\nan install of either the patched or development versions to address the\nprinting issue described below. It is my understanding t",
       "thread_id": "thread-8396efdf318f",
       "thread_depth": 3,
-      "month": "2008-09"
-    },
-    {
-      "id": "msg-b4b78ecf4bfd",
-      "message_id": "<OFB4212EEB.E1D2B272-ON802574C7.0054D64D-802574C7.0054FED5@hsl.gov.uk>",
-      "from_name": "Richard.Cotton at hsl.gov.uk",
-      "from_email_hash": "c905596ee0812452176d79b13b1e1646cad404fdbcecc84f842b20db432ae6e1",
-      "date": "2008-09-17T15:31:05Z",
-      "subject": "[R] Question about panel.points",
-      "subject_clean": "Question about panel.points",
-      "in_reply_to": "<19528504.post@hsl.gov.uk>",
-      "references": [],
-      "body_plain": "> I'm trying to plot graphs using lattice with this script :\n> \n> xyplot(Y ~ X | factmod,\n> panel = function(x, y) {\n>                 panel.grid(h=-1, v=-1, col=\"gray\")\n>                 panel.xyplot(x, y, type=\"p\", pch=20)\n>                 panel.points(50,Idata, data=devdata, col=\"red\")   ----->\n> this doesn't work\n>                 },\n>                  xlab=\"X\", ylab=\"Y\")\n> \n> factmod is a factor with 18 labels corresponding to the 18 names of my\n> devices.\n> devdata is a data.frame of 2 columns and 18 rows : name of the devices /\n> value of Idata for each device\n> For example (smaller one):\n> devdata<-data.frame(c(\"a\",\"b\",\"c\",\"d\"), c(1,5,9,7))\n> \n> And I would like to add the point (50, Idata) per graph that is \n> points(50,1) on the first graph\n> points(50,5) on the second graph, ...\n> \n> At the moment, it plots all the points on every graph (or with another\n> command, only (50,Idata[1]) on all the graphs).\n\nYou can use panel.number() or packet.number to specify code specific to \ndifferent panels, e.g.\n\nextrapoints <- seq(25,50,5)\npanelfn <- function(...)\n{\n   panel.xyplot(...)\n   panel.points(1, extrapoints[panel.number()], col=\"red\", pch=15)\n}\nxyplot(yield~year|site, data=barley, panel=panelfn)\n\nRegards,\nRichie.\n\nMathematical Sciences Unit\nHSL\n\n\n------------------------------------------------------------------------\nATTENTION:\n\nThis message contains privileged and confidential inform...{{dropped:20}}",
-      "body_snippet": "> I'm trying to plot graphs using lattice with this script :\n> \n> xyplot(Y ~ X | factmod,\n> panel = function(x, y) {\n>                 panel.grid(h=-1, v=-1, col=\"gray\")\n>                 panel.xyplot",
-      "thread_id": "thread-b4b78ecf4bfd",
-      "thread_depth": 0,
       "month": "2008-09"
     },
     {
@@ -41640,6 +41640,22 @@
       "month": "2008-09"
     },
     {
+      "id": "msg-38f59ffddaee",
+      "message_id": "<1222265548.9580067cg.humphreys.1@research.gla.ac.uk>",
+      "from_name": "Georgina Sarah Humphreys",
+      "from_email_hash": "72e368f2c4a21600834d2cb35e20a7692df9df06308263f39b04eba3b2304378",
+      "date": "2008-09-24T14:12:28Z",
+      "subject": "[R] t tests/ANOVA",
+      "subject_clean": "t tests/ANOVA",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a set of data that comprises genome numbers in single eggs from three different parasite clones - 3D7, HB3, and MIX.  I can draw a boxplot of the genome numbers for each clonefed but how do I carry out a t test or ANOVA to compare if the means are signifcantly different? (Data is listed below)\n\nMany thanks,\nGeorgina Humphreys\n\nclonefed\tgenomes\nHB3\t21.3\nHB3\t23.5\nHB3\t25.9\n3D7\t27.2\nHB3\t28.1\nMIX\t35.1\nMIX\t37.9\nMIX\t42.1\nMIX\t42.4\nHB3\t46.3\nHB3\t46.3\nMIX\t48.4\nMIX\t52.1\nHB3\t54.6\nMIX\t55.4\n3D7\t57.6\nHB3\t58.4\n3D7\t62.1\nMIX\t63.6\nMIX\t66.5\n3D7\t69.1\n3D7\t76.2\nMIX\t77.5\nMIX\t80.4\nMIX\t85.5\nMIX\t85.9\nHB3\t96\nHB3\t106.3\n3D7\t108.1\nMIX\t113.8\nMIX\t117.4\nMIX\t118\n3D7\t122.8\n3D7\t131.4\nMIX\t138.7\nMIX\t142.6\nMIX\t143\n3D7\t144\nMIX\t151.6\nMIX\t155.2\nMIX\t162.4\nMIX\t168.4\nMIX\t169.3\n3D7\t172.3\nHB3\t173\nHB3\t191.9\nMIX\t192.7\nHB3\t200\nMIX\t206.3\n3D7\t210.2\nHB3\t223.7\nHB3\t223.9\n3D7\t232.1\nHB3\t238.6\nMIX\t240.8\n3D7\t254.3\n3D7\t257.6\n3D7\t261.8\n3D7\t269.9\nHB3\t277\nMIX\t289.1\nMIX\t293.2\nMIX\t295.2\nMIX\t295.7\nMIX\t310.4\n3D7\t311.9\n3D7\t311.9\nMIX\t313.1\nMIX\t317.8\nMIX\t332.2\n3D7\t334.9\n3D7\t338.2\nMIX\t340\nMIX\t360.5\n3D7\t372.8\n3D7\t376.6\nHB3\t390.3\nMIX\t419.1\n3D7\t420\nMIX\t427.4\nMIX\t443\nMIX\t449.7\nMIX\t452.8\nMIX\t501.4\n3D7\t502.9\n3D7\t505.5\n3D7\t506.3\n3D7\t529\nMIX\t534.4\nMIX\t540.6\nMIX\t542\n3D7\t545.2\nMIX\t547.2\nMIX\t554.2\nMIX\t556.5\n3D7\t564.9\n3D7\t575.1\n3D7\t580.6\nMIX\t591.5\n3D7\t655.5\n3D7\t666.1\n3D7\t667.2\n3D7\t699\n3D7\t741.2\n3D7\t744.8\n3D7\t752.2\nMIX\t795.9\n3D7\t810.9\nHB3\t816.4\nMIX\t849.2\n3D7\t852.9\n3D7\t875.4\n3D7\t891.3\nMIX\t906.5\nMIX\t922.3\nMIX\t949.6\nMIX\t986.1\nMIX\t994.3\nMIX\t1005.3\nMIX\t1061.3\nMIX\t1159.5\n3D7\t1163.2\nMIX\t1177.5\n3D7\t1211.3\n3D7\t1249.7\n3D7\t1318.3\nMIX\t1579.3\nMIX\t1585.2\nMIX\t1590.3\nMIX\t1788.7\nMIX\t2012.9\n3D7\t2067.4\n\nPhD Student\nDivision of Infection and Immunity\nB5-29, GBRC\n120 University Place\nGlasgow\nG12 8TA\nTel: 0141 330 5650",
+      "body_snippet": "I have a set of data that comprises genome numbers in single eggs from three different parasite clones - 3D7, HB3, and MIX.  I can draw a boxplot of the genome numbers for each clonefed but how do I c",
+      "thread_id": "thread-38f59ffddaee",
+      "thread_depth": 0,
+      "month": "2008-09"
+    },
+    {
       "id": "msg-11fc4e70245a",
       "message_id": "<loom.20080924T140933-539@post.gmane.org>",
       "from_name": "Ben Bolker",
@@ -41655,22 +41671,6 @@
       "body_snippet": "R Help <rhelp.stats <at> gmail.com> writes:\n\n> \n> Hello list,\n> \n> I've been working on this problem for a while and I haven't been able\n> to come up with a solution.\n> \n> I have a couple of functions",
       "thread_id": "thread-aea7db88e644",
       "thread_depth": 1,
-      "month": "2008-09"
-    },
-    {
-      "id": "msg-38f59ffddaee",
-      "message_id": "<1222265548.9580067cg.humphreys.1@research.gla.ac.uk>",
-      "from_name": "Georgina Sarah Humphreys",
-      "from_email_hash": "72e368f2c4a21600834d2cb35e20a7692df9df06308263f39b04eba3b2304378",
-      "date": "2008-09-24T14:12:28Z",
-      "subject": "[R] t tests/ANOVA",
-      "subject_clean": "t tests/ANOVA",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I have a set of data that comprises genome numbers in single eggs from three different parasite clones - 3D7, HB3, and MIX.  I can draw a boxplot of the genome numbers for each clonefed but how do I carry out a t test or ANOVA to compare if the means are signifcantly different? (Data is listed below)\n\nMany thanks,\nGeorgina Humphreys\n\nclonefed\tgenomes\nHB3\t21.3\nHB3\t23.5\nHB3\t25.9\n3D7\t27.2\nHB3\t28.1\nMIX\t35.1\nMIX\t37.9\nMIX\t42.1\nMIX\t42.4\nHB3\t46.3\nHB3\t46.3\nMIX\t48.4\nMIX\t52.1\nHB3\t54.6\nMIX\t55.4\n3D7\t57.6\nHB3\t58.4\n3D7\t62.1\nMIX\t63.6\nMIX\t66.5\n3D7\t69.1\n3D7\t76.2\nMIX\t77.5\nMIX\t80.4\nMIX\t85.5\nMIX\t85.9\nHB3\t96\nHB3\t106.3\n3D7\t108.1\nMIX\t113.8\nMIX\t117.4\nMIX\t118\n3D7\t122.8\n3D7\t131.4\nMIX\t138.7\nMIX\t142.6\nMIX\t143\n3D7\t144\nMIX\t151.6\nMIX\t155.2\nMIX\t162.4\nMIX\t168.4\nMIX\t169.3\n3D7\t172.3\nHB3\t173\nHB3\t191.9\nMIX\t192.7\nHB3\t200\nMIX\t206.3\n3D7\t210.2\nHB3\t223.7\nHB3\t223.9\n3D7\t232.1\nHB3\t238.6\nMIX\t240.8\n3D7\t254.3\n3D7\t257.6\n3D7\t261.8\n3D7\t269.9\nHB3\t277\nMIX\t289.1\nMIX\t293.2\nMIX\t295.2\nMIX\t295.7\nMIX\t310.4\n3D7\t311.9\n3D7\t311.9\nMIX\t313.1\nMIX\t317.8\nMIX\t332.2\n3D7\t334.9\n3D7\t338.2\nMIX\t340\nMIX\t360.5\n3D7\t372.8\n3D7\t376.6\nHB3\t390.3\nMIX\t419.1\n3D7\t420\nMIX\t427.4\nMIX\t443\nMIX\t449.7\nMIX\t452.8\nMIX\t501.4\n3D7\t502.9\n3D7\t505.5\n3D7\t506.3\n3D7\t529\nMIX\t534.4\nMIX\t540.6\nMIX\t542\n3D7\t545.2\nMIX\t547.2\nMIX\t554.2\nMIX\t556.5\n3D7\t564.9\n3D7\t575.1\n3D7\t580.6\nMIX\t591.5\n3D7\t655.5\n3D7\t666.1\n3D7\t667.2\n3D7\t699\n3D7\t741.2\n3D7\t744.8\n3D7\t752.2\nMIX\t795.9\n3D7\t810.9\nHB3\t816.4\nMIX\t849.2\n3D7\t852.9\n3D7\t875.4\n3D7\t891.3\nMIX\t906.5\nMIX\t922.3\nMIX\t949.6\nMIX\t986.1\nMIX\t994.3\nMIX\t1005.3\nMIX\t1061.3\nMIX\t1159.5\n3D7\t1163.2\nMIX\t1177.5\n3D7\t1211.3\n3D7\t1249.7\n3D7\t1318.3\nMIX\t1579.3\nMIX\t1585.2\nMIX\t1590.3\nMIX\t1788.7\nMIX\t2012.9\n3D7\t2067.4\n\nPhD Student\nDivision of Infection and Immunity\nB5-29, GBRC\n120 University Place\nGlasgow\nG12 8TA\nTel: 0141 330 5650",
-      "body_snippet": "I have a set of data that comprises genome numbers in single eggs from three different parasite clones - 3D7, HB3, and MIX.  I can draw a boxplot of the genome numbers for each clonefed but how do I c",
-      "thread_id": "thread-38f59ffddaee",
-      "thread_depth": 0,
       "month": "2008-09"
     },
     {
@@ -45076,6 +45076,22 @@
       "month": "2008-09"
     },
     {
+      "id": "msg-b0ab068de17f",
+      "message_id": "<e0576310-73fd-4610-a0d5-5f960ae3eec5@c65g2000hsa.googlegroups.com>",
+      "from_name": "milicic.marko",
+      "from_email_hash": "85029a8442a675fc4b66d5b9bfd33e094f36d8b3e60a9514bf363195930733f7",
+      "date": "2008-09-25T21:23:57Z",
+      "subject": "[R] Inverting data frame...row wise",
+      "subject_clean": "Inverting data frame...row wise",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have the data.frame with 4 columns. I simply want to invert dataset\nso that last row becomes first...\n\nI tried with rev(my_data-frame) but I got my columns inverted... not\nmy rows\n\n\nThanks",
+      "body_snippet": "Hi,\n\nI have the data.frame with 4 columns. I simply want to invert dataset\nso that last row becomes first...\n\nI tried with rev(my_data-frame) but I got my columns inverted... not\nmy rows\n\n\nThanks",
+      "thread_id": "thread-b0ab068de17f",
+      "thread_depth": 0,
+      "month": "2008-09"
+    },
+    {
       "id": "msg-9daec8560e02",
       "message_id": "<48DC016D.7000603@idi.ntnu.no>",
       "from_name": "Wacek Kusnierczyk",
@@ -45100,22 +45116,6 @@
       "body_snippet": "Rolf Turner wrote:\n>\n> On 26/09/2008, at 1:27 AM, Petr PIKAL wrote:\n>\n>> Hi\n>>\n>> Sorry but I can not agree. If you measure something and your values in a\n>> vector are\n>>\n>> c(5.1, 5.4, 4.8, 5.0)\n>>\n",
       "thread_id": "thread-16cd0840b781",
       "thread_depth": 10,
-      "month": "2008-09"
-    },
-    {
-      "id": "msg-b0ab068de17f",
-      "message_id": "<e0576310-73fd-4610-a0d5-5f960ae3eec5@c65g2000hsa.googlegroups.com>",
-      "from_name": "milicic.marko",
-      "from_email_hash": "85029a8442a675fc4b66d5b9bfd33e094f36d8b3e60a9514bf363195930733f7",
-      "date": "2008-09-25T21:23:57Z",
-      "subject": "[R] Inverting data frame...row wise",
-      "subject_clean": "Inverting data frame...row wise",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI have the data.frame with 4 columns. I simply want to invert dataset\nso that last row becomes first...\n\nI tried with rev(my_data-frame) but I got my columns inverted... not\nmy rows\n\n\nThanks",
-      "body_snippet": "Hi,\n\nI have the data.frame with 4 columns. I simply want to invert dataset\nso that last row becomes first...\n\nI tried with rev(my_data-frame) but I got my columns inverted... not\nmy rows\n\n\nThanks",
-      "thread_id": "thread-b0ab068de17f",
-      "thread_depth": 0,
       "month": "2008-09"
     },
     {
