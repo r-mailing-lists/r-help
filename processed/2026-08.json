@@ -165,6 +165,128 @@
       "thread_id": "thread-64f67411a351",
       "thread_depth": 3,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-e6ea2b27ffde",
+      "message_id": "<15fca7e36128374222c8307bebf36c1e@disroot.org>",
+      "from_name": "iagogv",
+      "from_email_hash": "d5308f1d30ecf31e34e95074bc22416b10f380c4619d7768015505ed375f1370",
+      "date": "2026-08-21T08:21:14Z",
+      "subject": "[R] How to compute an exact Poisson model with R?",
+      "subject_clean": "How to compute an exact Poisson model with R?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nCan an exact Poisson regression be computed with R, instead of using the \nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduce his \nmethod, if not his results. He uses Stata, particularly the expoisson \nfunction (https://www.stata.com/help.cgi?expoisson) in order to compute \nthe exact Poisson regression, relevant for small samples.\n\nexpoisson fits an exact Poisson regression model, which produces more \naccurate inference in small samples than standard \nmaximum-likelihood-based Poisson regression\n\nI know about exact Poisson tests \n(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html), \nbut it does not allow to include offset.\n\nSo, is there some way to reproduce exact Poisson regression with R?\n\nThanks!\n\nBest,\n\n-- \nIago\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nCan an exact Poisson regression be computed with R, instead of using the \nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduc",
+      "thread_id": "thread-e6ea2b27ffde",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-6149fc8c76b3",
+      "message_id": "<DS4PR01MB9434F6350AD1BC6E0A9BF550F2A32@DS4PR01MB9434.prod.exchangelabs.com>",
+      "from_name": "Ravi Varadhan",
+      "from_email_hash": "e29065f0ed01d24d142abdfc5db43f0fbc0a52a9d70244c81382700b6ce4b7f2",
+      "date": "2026-08-21T13:18:23Z",
+      "subject": "[R] R-help Digest, Vol 282, Issue 3",
+      "subject_clean": "R-help Digest, Vol 282, Issue 3",
+      "in_reply_to": "<mailman.373800.1.1787306402.8526.r-help@r-project.org>",
+      "references": [
+        "<mailman.373800.1.1787306402.8526.r-help@r-project.org>"
+      ],
+      "body_plain": "To my knowledge, there is no built?in function in R that exactly replicates Stata?s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (conditional MLE).  It can only be practical in small samples. We should be able to get similar estimates using Firth's bias correction, for example, although I myself have not tested this claim.   The brglm2 package implements Firth's bias reduction for GLMs.\nRavi\n________________________________\nFrom: R-help <r-help-bounces at r-project.org> on behalf of r-help-request at r-project.org <r-help-request at r-project.org>\nSent: Friday, August 21, 2026 06:00\nTo: r-help at r-project.org <r-help at r-project.org>\nSubject: R-help Digest, Vol 282, Issue 3\n\n\n      External Email - Use Caution\n\n\n\nSend R-help mailing list submissions to\n        r-help at r-project.org\n\nTo subscribe or unsubscribe via the World Wide Web, visit\n        https://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nor, via email, send a message with subject or body 'help' to\n        r-help-request at r-project.org\n\nYou can reach the person managing the list at\n        r-help-owner at r-project.org\n\nWhen replying, please edit your Subject line so it is more specific\nthan \"Re: Contents of R-help digest...\"\n\n\nToday's Topics:\n\n   1. How to compute an exact Poisson model with R? (iagogv)\n\n----------------------------------------------------------------------\n\nMessage: 1\nDate: Fri, 21 Aug 2026 10:21:14 +0200\nFrom: iagogv <iagogv at disroot.org>\nTo: R Help <r-help at r-project.org>\nSubject: [R] How to compute an exact Poisson model with R?\nMessage-ID: <15fca7e36128374222c8307bebf36c1e at disroot.org>\nContent-Type: text/plain; charset=\"utf-8\"\n\nHi all,\n\nCan an exact Poisson regression be computed with R, instead of using the\nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduce his\nmethod, if not his results. He uses Stata, particularly the expoisson\nfunction (https://www.stata.com/help.cgi?expoisson<https://www.stata.com/help.cgi?expoisson>) in order to compute\nthe exact Poisson regression, relevant for small samples.\n\nexpoisson fits an exact Poisson regression model, which produces more\naccurate inference in small samples than standard\nmaximum-likelihood-based Poisson regression\n\nI know about exact Poisson tests\n(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html<https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html>),\nbut it does not allow to include offset.\n\nSo, is there some way to reproduce exact Poisson regression with R?\n\nThanks!\n\nBest,\n\n--\nIago\n        [[alternative HTML version deleted]]\n\n\n\n\n------------------------------\n\nSubject: Digest Footer\n\n_______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nPLEASE do read the posting guide https://www.r-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>\nand provide commented, minimal, self-contained, reproducible code.\n\n\n------------------------------\n\nEnd of R-help Digest, Vol 282, Issue 3\n**************************************\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "To my knowledge, there is no built?in function in R that exactly replicates Stata?s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (co",
+      "thread_id": "thread-6149fc8c76b3",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-d706b73d3bc9",
+      "message_id": "<CAP01uRk_D-ZaiVw8-FeQgPA=gBCjbG=23iU2aqP-0EJjVjH_BA@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2470cc61688c301322ff3a85f3fd51ddba9f1112f88f535ec93c41ab610332d1",
+      "date": "2026-08-21T14:19:57Z",
+      "subject": "[R] How to compute an exact Poisson model with R?",
+      "subject_clean": "How to compute an exact Poisson model with R?",
+      "in_reply_to": "<15fca7e36128374222c8307bebf36c1e@disroot.org>",
+      "references": [
+        "<15fca7e36128374222c8307bebf36c1e@disroot.org>"
+      ],
+      "body_plain": "The offset is just the log of the exposure (I assume -- I have never\nused Stata)\nso if you can express your model in terms of exposure\nyou can also express it in terms of offset.\n\nOn Fri, Aug 21, 2026 at 4:21?AM iagogv via R-help <r-help at r-project.org> wrote:\n>\n> Hi all,\n>\n> Can an exact Poisson regression be computed with R, instead of using the\n> standard (glm) Poisson using maximum likelihood?\n>\n> I am working with a collegue in a project, and I'd like to reproduce his\n> method, if not his results. He uses Stata, particularly the expoisson\n> function (https://www.stata.com/help.cgi?expoisson) in order to compute\n> the exact Poisson regression, relevant for small samples.\n>\n> expoisson fits an exact Poisson regression model, which produces more\n> accurate inference in small samples than standard\n> maximum-likelihood-based Poisson regression\n>\n> I know about exact Poisson tests\n> (https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html),\n> but it does not allow to include offset.\n>\n> So, is there some way to reproduce exact Poisson regression with R?\n>\n> Thanks!\n>\n> Best,\n>\n> --\n> Iago\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "The offset is just the log of the exposure (I assume -- I have never\nused Stata)\nso if you can express your model in terms of exposure\nyou can also express it in terms of offset.\n\nOn Fri, Aug 21, 2026",
+      "thread_id": "thread-e6ea2b27ffde",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-935c4dd4112a",
+      "message_id": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "from_name": "Peter Langfelder",
+      "from_email_hash": "452832397217a6c78113e7dfafde5ae5401620d433eb2fdb9ba99fc9b57db26f",
+      "date": "2026-08-21T16:01:30Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nwhen calling data.frame on other data frames and naming arguments, the\nway the 'names' of the result are formed seems to depend on whether\nthe argument data frames have one or more columns. Specifically,\nconsider this:\n\n> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n  A B\n1 1 1\n\n\nHere the column names are simply copied from column names of the arguments.\nIn contrast, if the argument data frames have two (or more) columns,\nhere's what happens:\n\n> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n  a.A a.C b.B b.D\n1   1   1   1   1\n\n\nThe 'names' of the result are now <name of the argument>.<column name\nof the argument value>\n\nIs this behavior intended?\n\nThanks,\n\nPeter",
+      "body_snippet": "Hi all,\n\nwhen calling data.frame on other data frames and naming arguments, the\nway the 'names' of the result are formed seems to depend on whether\nthe argument data frames have one or more columns. S",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-aed3b6aafc3a",
+      "message_id": "<CAGxFJbRPdSQteao8oDDN80UgvsA46kG=-+jrge96YZ0=Li3UYQ@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-08-21T16:37:35Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>"
+      ],
+      "body_plain": "Don't know about \"intended\", but if the man pages do not satisfy, this\nseems like the sort of infelicity that has already been reported and/or\nthat on which an internet query should yield info. As you are well aware\nI'm sure, one can see what a developer who designed this behavior was\nthinking; and also the possible negative consequences that the\ninconsistency might entail.\n\nCheers,\nBert\n\nOn Fri, Aug 21, 2026 at 9:01?AM Peter Langfelder <peter.langfelder at gmail.com>\nwrote:\n\n> Hi all,\n>\n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on whether\n> the argument data frames have one or more columns. Specifically,\n> consider this:\n>\n> > data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n>   A B\n> 1 1 1\n>\n>\n> Here the column names are simply copied from column names of the arguments.\n> In contrast, if the argument data frames have two (or more) columns,\n> here's what happens:\n>\n> > data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n>   a.A a.C b.B b.D\n> 1   1   1   1   1\n>\n>\n> The 'names' of the result are now <name of the argument>.<column name\n> of the argument value>\n>\n> Is this behavior intended?\n>\n> Thanks,\n>\n> Peter\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Don't know about \"intended\", but if the man pages do not satisfy, this\nseems like the sort of infelicity that has already been reported and/or\nthat on which an internet query should yield info. As you",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-03b887ffde65",
+      "message_id": "<8E7E0B84-5B93-4CB4-89AF-3D08A142630B@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-08-21T16:57:38Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>"
+      ],
+      "body_plain": "Passing data frames as arguments to data.frame is not intended to work the way you seem to think it should. \n\nTry using cbind?\n\na <- data.frame( A = 1, C = 1 )\nb <- data.frame(B = 1, D = 1)\ncbind( a, b )\n\n\nOn August 21, 2026 9:01:30 AM PDT, Peter Langfelder <peter.langfelder at gmail.com> wrote:\n>Hi all,\n>\n>when calling data.frame on other data frames and naming arguments, the\n>way the 'names' of the result are formed seems to depend on whether\n>the argument data frames have one or more columns. Specifically,\n>consider this:\n>\n>> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n>  A B\n>1 1 1\n>\n>\n>Here the column names are simply copied from column names of the arguments.\n>In contrast, if the argument data frames have two (or more) columns,\n>here's what happens:\n>\n>> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n>  a.A a.C b.B b.D\n>1   1   1   1   1\n>\n>\n>The 'names' of the result are now <name of the argument>.<column name\n>of the argument value>\n>\n>Is this behavior intended?\n>\n>Thanks,\n>\n>Peter\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Passing data frames as arguments to data.frame is not intended to work the way you seem to think it should. \n\nTry using cbind?\n\na <- data.frame( A = 1, C = 1 )\nb <- data.frame(B = 1, D = 1)\ncbind( a, ",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-9f310ffc4121",
+      "message_id": "<6d63368a-3411-4cc3-ad08-96211fe2c3b6@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-08-21T17:39:02Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>"
+      ],
+      "body_plain": "On 2026-08-21 12:01 p.m., Peter Langfelder wrote:\n> Hi all,\n> \n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on whether\n> the argument data frames have one or more columns. Specifically,\n> consider this:\n> \n>> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n>    A B\n> 1 1 1\n> \n> \n> Here the column names are simply copied from column names of the arguments.\n> In contrast, if the argument data frames have two (or more) columns,\n> here's what happens:\n> \n>> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n>    a.A a.C b.B b.D\n> 1   1   1   1   1\n> \n> \n> The 'names' of the result are now <name of the argument>.<column name\n> of the argument value>\n> \n> Is this behavior intended?\nIt looks like it.  From the help page:  \"For a named or unnamed \nmatrix/list/data frame argument that contains a single column, the \ncolumn name in the result is the column name in the argument.\"\n\nHowever, also note how that paragraph started:  \"How the names of the \ndata frame are created is complex, and the rest of this paragraph is \nonly the basic story.\"\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-08-21 12:01 p.m., Peter Langfelder wrote:\n> Hi all,\n> \n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on wh",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 1,
+      "month": "2026-08"
     }
   ],
   "threads": [
@@ -194,6 +316,43 @@
       "started": "2026-08-10T10:07:17Z",
       "last_reply": "2026-08-10T12:25:20Z",
       "root_message_id": "msg-8f91eaf8aef4"
+    },
+    {
+      "id": "thread-e6ea2b27ffde",
+      "subject": "How to compute an exact Poisson model with R?",
+      "message_count": 2,
+      "participants": [
+        "Gabor Grothendieck",
+        "iagogv"
+      ],
+      "started": "2026-08-21T08:21:14Z",
+      "last_reply": "2026-08-21T14:19:57Z",
+      "root_message_id": "msg-e6ea2b27ffde"
+    },
+    {
+      "id": "thread-6149fc8c76b3",
+      "subject": "R-help Digest, Vol 282, Issue 3",
+      "message_count": 1,
+      "participants": [
+        "Ravi Varadhan"
+      ],
+      "started": "2026-08-21T13:18:23Z",
+      "last_reply": "2026-08-21T13:18:23Z",
+      "root_message_id": "msg-6149fc8c76b3"
+    },
+    {
+      "id": "thread-935c4dd4112a",
+      "subject": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "message_count": 4,
+      "participants": [
+        "Bert Gunter",
+        "Duncan Murdoch",
+        "Jeff Newmiller",
+        "Peter Langfelder"
+      ],
+      "started": "2026-08-21T16:01:30Z",
+      "last_reply": "2026-08-21T17:39:02Z",
+      "root_message_id": "msg-935c4dd4112a"
     }
   ]
 }

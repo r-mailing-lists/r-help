@@ -787,3 +787,403 @@ On 2026-08-11 12:27, J C Nash wrote:
 >> and provide commented, minimal, self-contained, reproducible code.
 
 
+From |@gogv @end|ng |rom d|@root@org  Fri Aug 21 10:21:14 2026
+From: |@gogv @end|ng |rom d|@root@org (iagogv)
+Date: Fri, 21 Aug 2026 10:21:14 +0200
+Subject: [R] How to compute an exact Poisson model with R?
+Message-ID: <15fca7e36128374222c8307bebf36c1e@disroot.org>
+
+Hi all,
+
+Can an exact Poisson regression be computed with R, instead of using the 
+standard (glm) Poisson using maximum likelihood?
+
+I am working with a collegue in a project, and I'd like to reproduce his 
+method, if not his results. He uses Stata, particularly the expoisson 
+function (https://www.stata.com/help.cgi?expoisson) in order to compute 
+the exact Poisson regression, relevant for small samples.
+
+expoisson fits an exact Poisson regression model, which produces more 
+accurate inference in small samples than standard 
+maximum-likelihood-based Poisson regression
+
+I know about exact Poisson tests 
+(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html), 
+but it does not allow to include offset.
+
+So, is there some way to reproduce exact Poisson regression with R?
+
+Thanks!
+
+Best,
+
+-- 
+Iago
+	[[alternative HTML version deleted]]
+
+
+From r@v|@v@r@dh@n @end|ng |rom jhu@edu  Fri Aug 21 15:18:23 2026
+From: r@v|@v@r@dh@n @end|ng |rom jhu@edu (Ravi Varadhan)
+Date: Fri, 21 Aug 2026 13:18:23 +0000
+Subject: [R] R-help Digest, Vol 282, Issue 3
+In-Reply-To: <mailman.373800.1.1787306402.8526.r-help@r-project.org>
+References: <mailman.373800.1.1787306402.8526.r-help@r-project.org>
+Message-ID: <DS4PR01MB9434F6350AD1BC6E0A9BF550F2A32@DS4PR01MB9434.prod.exchangelabs.com>
+
+To my knowledge, there is no built?in function in R that exactly replicates Stata?s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (conditional MLE).  It can only be practical in small samples. We should be able to get similar estimates using Firth's bias correction, for example, although I myself have not tested this claim.   The brglm2 package implements Firth's bias reduction for GLMs.
+Ravi
+________________________________
+From: R-help <r-help-bounces at r-project.org> on behalf of r-help-request at r-project.org <r-help-request at r-project.org>
+Sent: Friday, August 21, 2026 06:00
+To: r-help at r-project.org <r-help at r-project.org>
+Subject: R-help Digest, Vol 282, Issue 3
+
+
+      External Email - Use Caution
+
+
+
+Send R-help mailing list submissions to
+        r-help at r-project.org
+
+To subscribe or unsubscribe via the World Wide Web, visit
+        https://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>
+or, via email, send a message with subject or body 'help' to
+        r-help-request at r-project.org
+
+You can reach the person managing the list at
+        r-help-owner at r-project.org
+
+When replying, please edit your Subject line so it is more specific
+than "Re: Contents of R-help digest..."
+
+
+Today's Topics:
+
+   1. How to compute an exact Poisson model with R? (iagogv)
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Fri, 21 Aug 2026 10:21:14 +0200
+From: iagogv <iagogv at disroot.org>
+To: R Help <r-help at r-project.org>
+Subject: [R] How to compute an exact Poisson model with R?
+Message-ID: <15fca7e36128374222c8307bebf36c1e at disroot.org>
+Content-Type: text/plain; charset="utf-8"
+
+Hi all,
+
+Can an exact Poisson regression be computed with R, instead of using the
+standard (glm) Poisson using maximum likelihood?
+
+I am working with a collegue in a project, and I'd like to reproduce his
+method, if not his results. He uses Stata, particularly the expoisson
+function (https://www.stata.com/help.cgi?expoisson<https://www.stata.com/help.cgi?expoisson>) in order to compute
+the exact Poisson regression, relevant for small samples.
+
+expoisson fits an exact Poisson regression model, which produces more
+accurate inference in small samples than standard
+maximum-likelihood-based Poisson regression
+
+I know about exact Poisson tests
+(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html<https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html>),
+but it does not allow to include offset.
+
+So, is there some way to reproduce exact Poisson regression with R?
+
+Thanks!
+
+Best,
+
+--
+Iago
+        [[alternative HTML version deleted]]
+
+
+
+
+------------------------------
+
+Subject: Digest Footer
+
+_______________________________________________
+R-help at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>
+PLEASE do read the posting guide https://www.r-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>
+and provide commented, minimal, self-contained, reproducible code.
+
+
+------------------------------
+
+End of R-help Digest, Vol 282, Issue 3
+**************************************
+
+	[[alternative HTML version deleted]]
+
+
+From ggrothend|eck @end|ng |rom gm@||@com  Fri Aug 21 16:19:57 2026
+From: ggrothend|eck @end|ng |rom gm@||@com (Gabor Grothendieck)
+Date: Fri, 21 Aug 2026 10:19:57 -0400
+Subject: [R] How to compute an exact Poisson model with R?
+In-Reply-To: <15fca7e36128374222c8307bebf36c1e@disroot.org>
+References: <15fca7e36128374222c8307bebf36c1e@disroot.org>
+Message-ID: <CAP01uRk_D-ZaiVw8-FeQgPA=gBCjbG=23iU2aqP-0EJjVjH_BA@mail.gmail.com>
+
+The offset is just the log of the exposure (I assume -- I have never
+used Stata)
+so if you can express your model in terms of exposure
+you can also express it in terms of offset.
+
+On Fri, Aug 21, 2026 at 4:21?AM iagogv via R-help <r-help at r-project.org> wrote:
+>
+> Hi all,
+>
+> Can an exact Poisson regression be computed with R, instead of using the
+> standard (glm) Poisson using maximum likelihood?
+>
+> I am working with a collegue in a project, and I'd like to reproduce his
+> method, if not his results. He uses Stata, particularly the expoisson
+> function (https://www.stata.com/help.cgi?expoisson) in order to compute
+> the exact Poisson regression, relevant for small samples.
+>
+> expoisson fits an exact Poisson regression model, which produces more
+> accurate inference in small samples than standard
+> maximum-likelihood-based Poisson regression
+>
+> I know about exact Poisson tests
+> (https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html),
+> but it does not allow to include offset.
+>
+> So, is there some way to reproduce exact Poisson regression with R?
+>
+> Thanks!
+>
+> Best,
+>
+> --
+> Iago
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+
+-- 
+Statistics & Software Consulting
+GKX Group, GKX Associates Inc.
+tel: 1-877-GKX-GROUP
+email: ggrothendieck at gmail.com
+
+
+From peter@|@ng|e|der @end|ng |rom gm@||@com  Fri Aug 21 18:01:30 2026
+From: peter@|@ng|e|der @end|ng |rom gm@||@com (Peter Langfelder)
+Date: Sat, 22 Aug 2026 00:01:30 +0800
+Subject: [R] Inconsistency in 'names' when calling data.frame on other
+ data.frames
+Message-ID: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+
+Hi all,
+
+when calling data.frame on other data frames and naming arguments, the
+way the 'names' of the result are formed seems to depend on whether
+the argument data frames have one or more columns. Specifically,
+consider this:
+
+> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))
+  A B
+1 1 1
+
+
+Here the column names are simply copied from column names of the arguments.
+In contrast, if the argument data frames have two (or more) columns,
+here's what happens:
+
+> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))
+  a.A a.C b.B b.D
+1   1   1   1   1
+
+
+The 'names' of the result are now <name of the argument>.<column name
+of the argument value>
+
+Is this behavior intended?
+
+Thanks,
+
+Peter
+
+
+From bgunter@4567 @end|ng |rom gm@||@com  Fri Aug 21 18:37:35 2026
+From: bgunter@4567 @end|ng |rom gm@||@com (Bert Gunter)
+Date: Fri, 21 Aug 2026 09:37:35 -0700
+Subject: [R] Inconsistency in 'names' when calling data.frame on other
+ data.frames
+In-Reply-To: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+References: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+Message-ID: <CAGxFJbRPdSQteao8oDDN80UgvsA46kG=-+jrge96YZ0=Li3UYQ@mail.gmail.com>
+
+Don't know about "intended", but if the man pages do not satisfy, this
+seems like the sort of infelicity that has already been reported and/or
+that on which an internet query should yield info. As you are well aware
+I'm sure, one can see what a developer who designed this behavior was
+thinking; and also the possible negative consequences that the
+inconsistency might entail.
+
+Cheers,
+Bert
+
+On Fri, Aug 21, 2026 at 9:01?AM Peter Langfelder <peter.langfelder at gmail.com>
+wrote:
+
+> Hi all,
+>
+> when calling data.frame on other data frames and naming arguments, the
+> way the 'names' of the result are formed seems to depend on whether
+> the argument data frames have one or more columns. Specifically,
+> consider this:
+>
+> > data.frame(a = data.frame(A = 1), b = data.frame(B = 1))
+>   A B
+> 1 1 1
+>
+>
+> Here the column names are simply copied from column names of the arguments.
+> In contrast, if the argument data frames have two (or more) columns,
+> here's what happens:
+>
+> > data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))
+>   a.A a.C b.B b.D
+> 1   1   1   1   1
+>
+>
+> The 'names' of the result are now <name of the argument>.<column name
+> of the argument value>
+>
+> Is this behavior intended?
+>
+> Thanks,
+>
+> Peter
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Fri Aug 21 18:57:38 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Fri, 21 Aug 2026 09:57:38 -0700
+Subject: [R] Inconsistency in 'names' when calling data.frame on other
+ data.frames
+In-Reply-To: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+References: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+Message-ID: <8E7E0B84-5B93-4CB4-89AF-3D08A142630B@dcn.davis.ca.us>
+
+Passing data frames as arguments to data.frame is not intended to work the way you seem to think it should. 
+
+Try using cbind?
+
+a <- data.frame( A = 1, C = 1 )
+b <- data.frame(B = 1, D = 1)
+cbind( a, b )
+
+
+On August 21, 2026 9:01:30 AM PDT, Peter Langfelder <peter.langfelder at gmail.com> wrote:
+>Hi all,
+>
+>when calling data.frame on other data frames and naming arguments, the
+>way the 'names' of the result are formed seems to depend on whether
+>the argument data frames have one or more columns. Specifically,
+>consider this:
+>
+>> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))
+>  A B
+>1 1 1
+>
+>
+>Here the column names are simply copied from column names of the arguments.
+>In contrast, if the argument data frames have two (or more) columns,
+>here's what happens:
+>
+>> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))
+>  a.A a.C b.B b.D
+>1   1   1   1   1
+>
+>
+>The 'names' of the result are now <name of the argument>.<column name
+>of the argument value>
+>
+>Is this behavior intended?
+>
+>Thanks,
+>
+>Peter
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Fri Aug 21 19:39:02 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Fri, 21 Aug 2026 13:39:02 -0400
+Subject: [R] Inconsistency in 'names' when calling data.frame on other
+ data.frames
+In-Reply-To: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+References: <CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>
+Message-ID: <6d63368a-3411-4cc3-ad08-96211fe2c3b6@gmail.com>
+
+On 2026-08-21 12:01 p.m., Peter Langfelder wrote:
+> Hi all,
+> 
+> when calling data.frame on other data frames and naming arguments, the
+> way the 'names' of the result are formed seems to depend on whether
+> the argument data frames have one or more columns. Specifically,
+> consider this:
+> 
+>> data.frame(a = data.frame(A = 1), b = data.frame(B = 1))
+>    A B
+> 1 1 1
+> 
+> 
+> Here the column names are simply copied from column names of the arguments.
+> In contrast, if the argument data frames have two (or more) columns,
+> here's what happens:
+> 
+>> data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))
+>    a.A a.C b.B b.D
+> 1   1   1   1   1
+> 
+> 
+> The 'names' of the result are now <name of the argument>.<column name
+> of the argument value>
+> 
+> Is this behavior intended?
+It looks like it.  From the help page:  "For a named or unnamed 
+matrix/list/data frame argument that contains a single column, the 
+column name in the result is the column name in the argument."
+
+However, also note how that paragraph started:  "How the names of the 
+data frame are created is complex, and the rest of this paragraph is 
+only the basic story."
+
+Duncan Murdoch
+
+
