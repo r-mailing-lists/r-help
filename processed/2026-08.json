@@ -287,6 +287,79 @@
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-b4c1cbae4f98",
+      "message_id": "<CAG1OV1QVzu9DHpLUxTAg=QwyvwtsSmt47H+Z=vum9-ddt3BtUg@mail.gmail.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "a4adc0dbbb884730ac1f9626468de48fdf2c67b863a86697ed3baad16d5bb209",
+      "date": "2026-08-22T07:06:58Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>"
+      ],
+      "body_plain": "Hello,\n\nYes, this is documented. From ?data.frame, section Value\n\nHow the names of the data frame are created is complex, and the rest\nof this paragraph is only the basic story. [...]\nFor a named matrix/list/data frame argument with more than one named\ncolumn, the names of the columns are the name of the argument followed\nby a dot and the column name inside the argument: if the argument is\nunnamed, the argument's column names are used.\n[...]\n\n\nYou can protect data.frame's arguments with I(). Compare the two calls below.\n\n\ndf1 <- data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\nstr(df1)\n#> 'data.frame':    1 obs. of  4 variables:\n#>  $ a.A: num 1\n#>  $ a.C: num 1\n#>  $ b.B: num 1\n#>  $ b.D: num 1\nnames(df1)\n#> [1] \"a.A\" \"a.C\" \"b.B\" \"b.D\"\n\ndf2 <- data.frame(a = I(data.frame(A = 1, C = 1)), b = I(data.frame(B\n= 1, D = 1)))\nstr(df2)\n#> 'data.frame':    1 obs. of  2 variables:\n#>  $ a:Classes 'AsIs' and 'data.frame':    1 obs. of  2 variables:\n#>   ..$ A: num 1\n#>   ..$ C: num 1\n#>  $ b:Classes 'AsIs' and 'data.frame':    1 obs. of  2 variables:\n#>   ..$ B: num 1\n#>   ..$ D: num 1\nnames(df2)\n#> [1] \"a\" \"b\"\ndf2  # the names come from the print method\n#>   a.A a.C b.B b.D\n#> 1   1   1   1   1\n\n\nHope this helps,\n\nRui Barradas\n\n\n\nPeter Langfelder <peter.langfelder at gmail.com> escreveu (sexta,\n21/08/2026 ?(s) 17:01):\n>\n> Hi all,\n>\n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on whether\n> the argument data frames have one or more columns. Specifically,\n> consider this:\n>\n> > data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n>   A B\n> 1 1 1\n>\n>\n> Here the column names are simply copied from column names of the arguments.\n> In contrast, if the argument data frames have two (or more) columns,\n> here's what happens:\n>\n> > data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n>   a.A a.C b.B b.D\n> 1   1   1   1   1\n>\n>\n> The 'names' of the result are now <name of the argument>.<column name\n> of the argument value>\n>\n> Is this behavior intended?\n>\n> Thanks,\n>\n> Peter\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hello,\n\nYes, this is documented. From ?data.frame, section Value\n\nHow the names of the data frame are created is complex, and the rest\nof this paragraph is only the basic story. [...]\nFor a named matr",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-e8355699646d",
+      "message_id": "<CAP01uR=-PMQZc3c-pP2yS_yG9cRWS39n-71M2KNOqXMUqEEUCw@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2470cc61688c301322ff3a85f3fd51ddba9f1112f88f535ec93c41ab610332d1",
+      "date": "2026-08-22T11:22:27Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>"
+      ],
+      "body_plain": "That does seem odd although I gather from the other answers that it is intended.\nNote that we can avoid this by simply not naming the arguments in the\nfirst place.\n\n> data.frame(data.frame(A = 1), data.frame(B = 1))\n  A B\n1 1 1\n> data.frame(data.frame(A = 1, C = 1), data.frame(B = 1, D = 1))\n  A C B D\n1 1 1 1 1\n\nOn Fri, Aug 21, 2026 at 12:01?PM Peter Langfelder\n<peter.langfelder at gmail.com> wrote:\n>\n> Hi all,\n>\n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on whether\n> the argument data frames have one or more columns. Specifically,\n> consider this:\n>\n> > data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n>   A B\n> 1 1 1\n>\n>\n> Here the column names are simply copied from column names of the arguments.\n> In contrast, if the argument data frames have two (or more) columns,\n> here's what happens:\n>\n> > data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n>   a.A a.C b.B b.D\n> 1   1   1   1   1\n>\n>\n> The 'names' of the result are now <name of the argument>.<column name\n> of the argument value>\n>\n> Is this behavior intended?\n>\n> Thanks,\n>\n> Peter\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "That does seem odd although I gather from the other answers that it is intended.\nNote that we can avoid this by simply not naming the arguments in the\nfirst place.\n\n> data.frame(data.frame(A = 1), dat",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-6a040d2346e9",
+      "message_id": "<CA+hbrhXF==fxNzsnTUcUrB1zyOVZ5Q0YVxbtT9t+86UzgesBUg@mail.gmail.com>",
+      "from_name": "Peter Langfelder",
+      "from_email_hash": "452832397217a6c78113e7dfafde5ae5401620d433eb2fdb9ba99fc9b57db26f",
+      "date": "2026-08-22T14:41:51Z",
+      "subject": "[R] Inconsistency in 'names' when calling data.frame on other data.frames",
+      "subject_clean": "Inconsistency in 'names' when calling data.frame on other data.frames",
+      "in_reply_to": "<CAP01uR=-PMQZc3c-pP2yS_yG9cRWS39n-71M2KNOqXMUqEEUCw@mail.gmail.com>",
+      "references": [
+        "<CA+hbrhX3Dqtp=m2NA-oFa9OzNMo+kZEXqDwqnHwq1RpRwuXxTg@mail.gmail.com>",
+        "<CAP01uR=-PMQZc3c-pP2yS_yG9cRWS39n-71M2KNOqXMUqEEUCw@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks all for pointing me to the help which I missed and it indeed\nexplains it. It would be useful for my work if the data.frame function\ncontained an additional argument allowing the user to force or disable\nthe addition of the argument name. As a suggestion of what that might\nlook like, I modified the dataframe.R source file in base package in\nthat I added an argument composite.names with default value NULL which\nretains the current behavior; the user could also specify FALSE and\nTRUE to disable/enable the addition of the prefix irrespective of the\nnumber of columns in each argument. The diff result is below. Is that\nsomething the R core team would consider? (No big deal if not, I can\nalways use my version of the data.frame function if needed, and\napologies if this should be moved to the R-devel list...)\n\nThe diff follows.\n\ndiff dataframe.R dataframe.PL.R\n424a425\n>              composite.names = NULL,\n478a480,484\n>     if (!is.null(composite.names)) {\n>       if (!is.logical(composite.names)) stop(\"'composite.names' must be logical.\");\n>       if (is.na(composite.names)) composite.names <- NULL;\n>     }\n>     doCompositeNames <- if (is.null(composite.names)) -1L else as.integer(0 + composite.names);\n489c495\n< if(ncols[i] > 1L) {\n---\n> if ((ncols[i] > 1L && doCompositeNames!= 0L) || doCompositeNames==1) {\n\nPeter\n\nOn Sat, Aug 22, 2026 at 7:23?PM Gabor Grothendieck\n<ggrothendieck at gmail.com> wrote:\n>\n> That does seem odd although I gather from the other answers that it is intended.\n> Note that we can avoid this by simply not naming the arguments in the\n> first place.\n>\n> > data.frame(data.frame(A = 1), data.frame(B = 1))\n>   A B\n> 1 1 1\n> > data.frame(data.frame(A = 1, C = 1), data.frame(B = 1, D = 1))\n>   A C B D\n> 1 1 1 1 1\n>\n> On Fri, Aug 21, 2026 at 12:01?PM Peter Langfelder\n> <peter.langfelder at gmail.com> wrote:\n> >\n> > Hi all,\n> >\n> > when calling data.frame on other data frames and naming arguments, the\n> > way the 'names' of the result are formed seems to depend on whether\n> > the argument data frames have one or more columns. Specifically,\n> > consider this:\n> >\n> > > data.frame(a = data.frame(A = 1), b = data.frame(B = 1))\n> >   A B\n> > 1 1 1\n> >\n> >\n> > Here the column names are simply copied from column names of the arguments.\n> > In contrast, if the argument data frames have two (or more) columns,\n> > here's what happens:\n> >\n> > > data.frame(a = data.frame(A = 1, C = 1), b = data.frame(B = 1, D = 1))\n> >   a.A a.C b.B b.D\n> > 1   1   1   1   1\n> >\n> >\n> > The 'names' of the result are now <name of the argument>.<column name\n> > of the argument value>\n> >\n> > Is this behavior intended?\n> >\n> > Thanks,\n> >\n> > Peter\n>\n> --\n> Statistics & Software Consulting\n> GKX Group, GKX Associates Inc.\n> tel: 1-877-GKX-GROUP\n> email: ggrothendieck at gmail.com",
+      "body_snippet": "Thanks all for pointing me to the help which I missed and it indeed\nexplains it. It would be useful for my work if the data.frame function\ncontained an additional argument allowing the user to force o",
+      "thread_id": "thread-935c4dd4112a",
+      "thread_depth": 2,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-420a6da33656",
+      "message_id": "<A65FC7B3-47AF-45E2-AF3E-E76EA439E861@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "960cf691f34cc2709527dabb6de874fb0a4c64edacd6eb5108b4fb7e2aa36670",
+      "date": "2026-08-22T23:35:47Z",
+      "subject": "[R] How to compute an exact Poisson model with R?",
+      "subject_clean": "How to compute an exact Poisson model with R?",
+      "in_reply_to": "<15fca7e36128374222c8307bebf36c1e@disroot.org>",
+      "references": [
+        "<15fca7e36128374222c8307bebf36c1e@disroot.org>"
+      ],
+      "body_plain": "The point estimates for regression should be the same although the CI's for the MCMC methods might be wider (more conservative if that is what you mean by \"more accurate\"). I \n\nI was able to install Brian Caffo's archived 'exactLoglinTest' package for my MacOS system with R 4.6.1 after adding:\n\n\nCPPFLAGS += -I/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/include\n\nto my .R/Makevars file. That allows the compilation step to find PrtUtil.h from an earlier version of R since it has been folded into R 4.6.x rather than currently being exposed.\n\nThe Notes that Caffo chose not to fix did not cause any errors, at least to my minimal testing with the package's examples.\n\nBest;\n\nDavid Winsemius, MD, MPH\n\n> On Aug 21, 2026, at 1:21?AM, iagogv via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> Can an exact Poisson regression be computed with R, instead of using the \n> standard (glm) Poisson using maximum likelihood?\n> \n> I am working with a collegue in a project, and I'd like to reproduce his \n> method, if not his results. He uses Stata, particularly the expoisson \n> function (https://www.stata.com/help.cgi?expoisson) in order to compute \n> the exact Poisson regression, relevant for small samples.\n> \n> expoisson fits an exact Poisson regression model, which produces more \n> accurate inference in small samples than standard \n> maximum-likelihood-based Poisson regression\n> \n> I know about exact Poisson tests \n> (https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html), \n> but it does not allow to include offset.\n> \n> So, is there some way to reproduce exact Poisson regression with R?\n> \n> Thanks!\n> \n> Best,\n> \n> -- \n> Iago\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "The point estimates for regression should be the same although the CI's for the MCMC methods might be wider (more conservative if that is what you mean by \"more accurate\"). I \n\nI was able to install B",
+      "thread_id": "thread-e6ea2b27ffde",
+      "thread_depth": 1,
+      "month": "2026-08"
     }
   ],
   "threads": [
@@ -320,13 +393,14 @@
     {
       "id": "thread-e6ea2b27ffde",
       "subject": "How to compute an exact Poisson model with R?",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
+        "David Winsemius",
         "Gabor Grothendieck",
         "iagogv"
       ],
       "started": "2026-08-21T08:21:14Z",
-      "last_reply": "2026-08-21T14:19:57Z",
+      "last_reply": "2026-08-22T23:35:47Z",
       "root_message_id": "msg-e6ea2b27ffde"
     },
     {
@@ -343,15 +417,17 @@
     {
       "id": "thread-935c4dd4112a",
       "subject": "Inconsistency in 'names' when calling data.frame on other data.frames",
-      "message_count": 4,
+      "message_count": 7,
       "participants": [
         "Bert Gunter",
         "Duncan Murdoch",
+        "Gabor Grothendieck",
         "Jeff Newmiller",
-        "Peter Langfelder"
+        "Peter Langfelder",
+        "Rui Barradas"
       ],
       "started": "2026-08-21T16:01:30Z",
-      "last_reply": "2026-08-21T17:39:02Z",
+      "last_reply": "2026-08-22T14:41:51Z",
       "root_message_id": "msg-935c4dd4112a"
     }
   ]

@@ -3627,24 +3627,6 @@
       "month": "2012-04"
     },
     {
-      "id": "msg-dc67c07b1063",
-      "message_id": "<CAAmySGMexY+7OuGY6T_Az5rz1v=NnPUF5gOZPai5mdZHhY-kVQ@mail.gmail.com>",
-      "from_name": "R. Michael Weylandt",
-      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
-      "date": "2012-04-03T13:13:56Z",
-      "subject": "[R] grouping",
-      "subject_clean": "grouping",
-      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
-      "references": [
-        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
-      ],
-      "body_plain": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can assign each y to a group\niii) then ave() or tapply() will do group-wise means\n\nSomething like:\n\ny <- c(36, 45, 46, 66, 78, 125, 193, 209, 242, 297) # You need a \"c\" here.\nave(y, findInterval(y, quantile(y, c(0.33, 0.66))))\ntapply(y, findInterval(y, quantile(y, c(0.33, 0.66))), mean)\n\nYou could also use cut2 from the Hmisc package to combine findInterval\nand quantile into a single step.\n\nDepending on your desired output.\n\nHope that helps,\nMichael\n\nOn Tue, Apr 3, 2012 at 8:47 AM, Val <valkremk at gmail.com> wrote:\n> Hi all,\n>\n> Assume that I have the following 10 data points.\n> ?x=c( ?46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n>\n> sort x ?and get the following\n> ?y= (36 , 45 , 46, ?66, 78, ?125,193, 209, 242, 297)\n>\n> I want to ?group the sorted ?data point (y) ?into ?equal number of\n> observation per group. In this case there will be three groups. ?The first\n> two groups ?will have three observation ?and the third will have four\n> observations\n>\n> group 1 ?= 34, 45, 46\n> group 2 ?= 66, 78, 125\n> group 3 ?= 193, 209, 242,297\n>\n> Finally I want to calculate the group mean\n>\n> group 1 ?= ?42\n> group 2 ?= ?87\n> group 3 ?= ?234\n>\n> Can anyone help me out?\n>\n> In SAS I used to do it using proc rank.\n>\n> thanks in advance\n>\n> Val\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can as",
-      "thread_id": "thread-933c1916838c",
-      "thread_depth": 1,
-      "month": "2012-04"
-    },
-    {
       "id": "msg-20c05bf3d292",
       "message_id": "<1333458836.31226.189.camel@definetti>",
       "from_name": "Giovanni Petris",
@@ -3658,6 +3640,24 @@
       ],
       "body_plain": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_along(sorted) - 1) %/% 3, FUN = mean)\n        0         1         2         3 \n 42.33333  89.66667 214.66667 297.00000 \n\nHope this helps,\nGiovanni\n\nOn Tue, 2012-04-03 at 08:47 -0400, Val wrote:\n> Hi all,\n> \n> Assume that I have the following 10 data points.\n>  x=c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> \n> sort x  and get the following\n>   y= (36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> \n> I want to  group the sorted  data point (y)  into  equal number of\n> observation per group. In this case there will be three groups.  The first\n> two groups  will have three observation  and the third will have four\n> observations\n> \n> group 1  = 34, 45, 46\n> group 2  = 66, 78, 125\n> group 3  = 193, 209, 242,297\n> \n> Finally I want to calculate the group mean\n> \n> group 1  =  42\n> group 2  =  87\n> group 3  =  234\n> \n> Can anyone help me out?\n> \n> In SAS I used to do it using proc rank.\n> \n> thanks in advance\n> \n> Val\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n\nGiovanni Petris  <GPetris at uark.edu>\nAssociate Professor\nDepartment of Mathematical Sciences\nUniversity of Arkansas - Fayetteville, AR 72701\nPh: (479) 575-6324, 575-8630 (fax)\nhttp://definetti.uark.edu/~gpetris/",
       "body_snippet": "Probably something along the following lines:\n\n> x <- c(  46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n> sorted <- c(36 , 45 , 46,  66, 78,  125,193, 209, 242, 297)\n> tapply(sorted, INDEX = (seq_al",
+      "thread_id": "thread-933c1916838c",
+      "thread_depth": 1,
+      "month": "2012-04"
+    },
+    {
+      "id": "msg-dc67c07b1063",
+      "message_id": "<CAAmySGMexY+7OuGY6T_Az5rz1v=NnPUF5gOZPai5mdZHhY-kVQ@mail.gmail.com>",
+      "from_name": "R. Michael Weylandt",
+      "from_email_hash": "44e8775a589b9ef81880469e200f3cce307c7180b4289ca1696a578afb772b3a",
+      "date": "2012-04-03T13:13:56Z",
+      "subject": "[R] grouping",
+      "subject_clean": "grouping",
+      "in_reply_to": "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>",
+      "references": [
+        "<CAJOiR6YhELTchQd0_fMpwxpj-_GiZ2hfg8WCkRfgVJzsqQ0QbA@mail.gmail.com>"
+      ],
+      "body_plain": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can assign each y to a group\niii) then ave() or tapply() will do group-wise means\n\nSomething like:\n\ny <- c(36, 45, 46, 66, 78, 125, 193, 209, 242, 297) # You need a \"c\" here.\nave(y, findInterval(y, quantile(y, c(0.33, 0.66))))\ntapply(y, findInterval(y, quantile(y, c(0.33, 0.66))), mean)\n\nYou could also use cut2 from the Hmisc package to combine findInterval\nand quantile into a single step.\n\nDepending on your desired output.\n\nHope that helps,\nMichael\n\nOn Tue, Apr 3, 2012 at 8:47 AM, Val <valkremk at gmail.com> wrote:\n> Hi all,\n>\n> Assume that I have the following 10 data points.\n> ?x=c( ?46, 125 , 36 ,193, 209, 78, 66, 242 , 297 , 45)\n>\n> sort x ?and get the following\n> ?y= (36 , 45 , 46, ?66, 78, ?125,193, 209, 242, 297)\n>\n> I want to ?group the sorted ?data point (y) ?into ?equal number of\n> observation per group. In this case there will be three groups. ?The first\n> two groups ?will have three observation ?and the third will have four\n> observations\n>\n> group 1 ?= 34, 45, 46\n> group 2 ?= 66, 78, 125\n> group 3 ?= 193, 209, 242,297\n>\n> Finally I want to calculate the group mean\n>\n> group 1 ?= ?42\n> group 2 ?= ?87\n> group 3 ?= ?234\n>\n> Can anyone help me out?\n>\n> In SAS I used to do it using proc rank.\n>\n> thanks in advance\n>\n> Val\n>\n> ? ? ? ?[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Ignoring the fact your desired answers are wrong, I'd split the\nseparating part and the group means parts into three steps:\n\ni) quantile() can help you get the split points,\nii)  findInterval() can as",
       "thread_id": "thread-933c1916838c",
       "thread_depth": 1,
       "month": "2012-04"
