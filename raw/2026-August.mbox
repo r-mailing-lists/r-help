@@ -1500,3 +1500,80 @@ David Winsemius, MD, MPH
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From dw|n@em|u@ @end|ng |rom comc@@t@net  Sun Aug 23 04:37:06 2026
+From: dw|n@em|u@ @end|ng |rom comc@@t@net (David Winsemius)
+Date: Sat, 22 Aug 2026 19:37:06 -0700
+Subject: [R] How to compute an exact Poisson model with R?
+In-Reply-To: <A65FC7B3-47AF-45E2-AF3E-E76EA439E861@comcast.net>
+References: <A65FC7B3-47AF-45E2-AF3E-E76EA439E861@comcast.net>
+Message-ID: <F1D1A3D6-1ECB-4D80-8182-DDCAF018DCAD@comcast.net>
+
+
+Sent from my iPhone
+
+> On Aug 22, 2026, at 4:38?PM, David Winsemius <dwinsemius at comcast.net> wrote:
+> 
+> ?The point estimates for regression should be the same although the CI's for the MCMC methods might be wider (more conservative if that is what you mean by "more accurate"). I
+
+I was misinterpreting the summary output of mcexact. The glm coefficients are not supposed to be estimates. The function is only doing a gof test. 
+
+David Winsemius
+
+
+> 
+> I was able to install Brian Caffo's archived 'exactLoglinTest' package for my MacOS system with R 4.6.1 after adding:
+> 
+> 
+> CPPFLAGS += -I/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/include
+> 
+> to my .R/Makevars file. That allows the compilation step to find PrtUtil.h from an earlier version of R since it has been folded into R 4.6.x rather than currently being exposed.
+> 
+> The Notes that Caffo chose not to fix did not cause any errors, at least to my minimal testing with the package's examples.
+> 
+> Best;
+> 
+> David Winsemius, MD, MPH
+> 
+>> On Aug 21, 2026, at 1:21?AM, iagogv via R-help <r-help at r-project.org> wrote:
+>> 
+>> Hi all,
+>> 
+>> Can an exact Poisson regression be computed with R, instead of using the
+>> standard (glm) Poisson using maximum likelihood?
+>> 
+>> I am working with a collegue in a project, and I'd like to reproduce his
+>> method, if not his results. He uses Stata, particularly the expoisson
+>> function (https://www.stata.com/help.cgi?expoisson) in order to compute
+>> the exact Poisson regression, relevant for small samples.
+>> 
+>> expoisson fits an exact Poisson regression model, which produces more
+>> accurate inference in small samples than standard
+>> maximum-likelihood-based Poisson regression
+>> 
+>> I know about exact Poisson tests
+>> (https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html),
+>> but it does not allow to include offset.
+>> 
+>> So, is there some way to reproduce exact Poisson regression with R?
+>> 
+>> Thanks!
+>> 
+>> Best,
+>> 
+>> --
+>> Iago
+>> [[alternative HTML version deleted]]
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
