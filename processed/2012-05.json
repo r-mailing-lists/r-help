@@ -38658,24 +38658,6 @@
       "month": "2012-05"
     },
     {
-      "id": "msg-a3fb6042169b",
-      "message_id": "<7C2A0F3D-CEC4-4D62-A9CB-30664E5AB6AD@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2012-05-22T15:08:20Z",
-      "subject": "[R] Creating functions with a loop.",
-      "subject_clean": "Creating functions with a loop.",
-      "in_reply_to": "<7375FB3B53851F4DA6F2285131365A6B4E42D3AE4B@EXCH-MBX-B.ulaval.ca>",
-      "references": [
-        "<7375FB3B53851F4DA6F2285131365A6B4E42D3AE4B@EXCH-MBX-B.ulaval.ca>"
-      ],
-      "body_plain": "On May 22, 2012, at 10:06 AM, Etienne Larriv?e-Hardy wrote:\n\n> Hi\n>\n> I am trying to create n functions where each function is defined in  \n> function one step before, i.e. something like\n>\n> ff.k(x) = ff.j(x) - sum(1:j),      for j=k-1\n\nThere is a cumsum function:\n\n > cumsum(1:10)\n  [1]  1  3  6 10 15 21 28 36 45 55\n\nDid you mean something like?:\n\n  ff.k[j] <- ff.j[j] - sum(1:j),      for j=k-1\n\nIn R the paren, \"(\", indicates that you are calling a function whereas  \nyou appear interested in making an indexed assignment to a vector.\n\n>\n> Is it possible? If it isn't and I manually create each function then  \n> is their a way to call them through a loop?  My objective is to  \n> calculate something like\n>\n> result.k = ff.k(x1)/ff.k(x2)      for k in 2:n\n\nYou may have clear idea about which k-indices should go where in that  \nexpression, but I surely do not. What are 'x1' and 'x2'?\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
-      "body_snippet": "On May 22, 2012, at 10:06 AM, Etienne Larriv?e-Hardy wrote:\n\n> Hi\n>\n> I am trying to create n functions where each function is defined in  \n> function one step before, i.e. something like\n>\n> ff.k(x) ",
-      "thread_id": "thread-200515e6e78c",
-      "thread_depth": 1,
-      "month": "2012-05"
-    },
-    {
       "id": "msg-8e55edd4ea69",
       "message_id": "<CAAmySGNxjy66Um2KezGHzuqU3ozd2dg3kBvCGSSn1Vp95wEcZg@mail.gmail.com>",
       "from_name": "R. Michael Weylandt",
@@ -38694,6 +38676,24 @@
       "body_snippet": "\"The presence of these numbers in square brackets is reporting error.\"\n\nYou mean the square brackets that show up on the left hand side when\nyou do something like\n\nx <- 1:100\nprint(x)\n\n?\n\nDon't worry ",
       "thread_id": "thread-5457eff07e3f",
       "thread_depth": 4,
+      "month": "2012-05"
+    },
+    {
+      "id": "msg-a3fb6042169b",
+      "message_id": "<7C2A0F3D-CEC4-4D62-A9CB-30664E5AB6AD@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-05-22T15:08:20Z",
+      "subject": "[R] Creating functions with a loop.",
+      "subject_clean": "Creating functions with a loop.",
+      "in_reply_to": "<7375FB3B53851F4DA6F2285131365A6B4E42D3AE4B@EXCH-MBX-B.ulaval.ca>",
+      "references": [
+        "<7375FB3B53851F4DA6F2285131365A6B4E42D3AE4B@EXCH-MBX-B.ulaval.ca>"
+      ],
+      "body_plain": "On May 22, 2012, at 10:06 AM, Etienne Larriv?e-Hardy wrote:\n\n> Hi\n>\n> I am trying to create n functions where each function is defined in  \n> function one step before, i.e. something like\n>\n> ff.k(x) = ff.j(x) - sum(1:j),      for j=k-1\n\nThere is a cumsum function:\n\n > cumsum(1:10)\n  [1]  1  3  6 10 15 21 28 36 45 55\n\nDid you mean something like?:\n\n  ff.k[j] <- ff.j[j] - sum(1:j),      for j=k-1\n\nIn R the paren, \"(\", indicates that you are calling a function whereas  \nyou appear interested in making an indexed assignment to a vector.\n\n>\n> Is it possible? If it isn't and I manually create each function then  \n> is their a way to call them through a loop?  My objective is to  \n> calculate something like\n>\n> result.k = ff.k(x1)/ff.k(x2)      for k in 2:n\n\nYou may have clear idea about which k-indices should go where in that  \nexpression, but I surely do not. What are 'x1' and 'x2'?\n\n-- \n\nDavid Winsemius, MD\nWest Hartford, CT",
+      "body_snippet": "On May 22, 2012, at 10:06 AM, Etienne Larriv?e-Hardy wrote:\n\n> Hi\n>\n> I am trying to create n functions where each function is defined in  \n> function one step before, i.e. something like\n>\n> ff.k(x) ",
+      "thread_id": "thread-200515e6e78c",
+      "thread_depth": 1,
       "month": "2012-05"
     },
     {
