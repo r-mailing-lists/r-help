@@ -89,19 +89,108 @@
       "thread_id": "thread-849e3f8f74a5",
       "thread_depth": 2,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-e21c44c86a2a",
+      "message_id": "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2026-09-04T12:32:30Z",
+      "subject": "[R] Problem in loading packages",
+      "subject_clean": "Problem in loading packages",
+      "in_reply_to": "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>",
+      "references": [
+        "<CAMuehFgFffhaWGqey1TSr0PY8-zZgeJQYN_ANvWCwvD6LYyXBw@mail.gmail.com>",
+        "<23cefe88-db1f-4674-b8f0-78e5b1be553d@gmail.com>",
+        "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>"
+      ],
+      "body_plain": "I think we need more information here.\n\nTry running R outside RStudio and then issue\n\ninstall.packages(\"insert a package name here\")\n\nthen run sessionInfo()\n\nand then post all the output here.\n\nIt would also help to know which CRAN mirror you use.\n\nMichael\n\nOn 03/09/2026 17:45, Halilu Rahaman Alhassan wrote:\n> Thank you for the response.\n> \n> I tried using pacman to load the packages I need, but it was not working\n> for me. So I decided to download those packages on CRAN . Even though it\n> was installed successfully, yet, when I try loading each package I get the\n> response mentioned earlier\n> \n> On Thu, 3 Sept 2026, 11:57 Duncan Murdoch, <murdoch.duncan at gmail.com> wrote:\n> \n>> On 2026-09-02 7:42 a.m., Halilu Rahaman Alhassan wrote:\n>>> Dear sir/madam,\n>>>\n>>> I guess my message finds you well. Please I am having the supposed\n>> current\n>>> R version 4.6.1 for windows. But after downloading the packages, I find\n>> it\n>>> difficult loading them on R studio, even though they can be seen under\n>>> packages. When ever I tried loading them, it tells me that those packages\n>>> were created under R version 4.7.0. Please I need your help to be able to\n>>> deal with such problem.\n>>>\n>>> Kind regards,\n>>> Halilu Rahaman Alhassan\n>>>\n>>>        [[alternative HTML version deleted]]\n>> It sounds as though you downloaded the wrong files, but you don't give\n>> details about how you did the downloads or installed them into R, so I\n>> can't guess how that happened.\n>>\n>> The standard safe way to install packages is to run R and then in R run\n>> \"install.packages(\"packagename\")\".  It might ask you to specify a\n>> mirror; generally the first one in the list is safe.  On my system, that\n>> is displayed as \"0-Cloud\".\n>>\n>> If you are running RStudio, then you will get somewhat different\n>> behaviour because it inserts its own install.packages() function, but it\n>> should still work.  If not, try it in a plain R session.\n>>\n>> Duncan Murdoch\n>>\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nMichael Dewey",
+      "body_snippet": "I think we need more information here.\n\nTry running R outside RStudio and then issue\n\ninstall.packages(\"insert a package name here\")\n\nthen run sessionInfo()\n\nand then post all the output here.\n\nIt wou",
+      "thread_id": "thread-849e3f8f74a5",
+      "thread_depth": 3,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-c630af17bba1",
+      "message_id": "<CA+etgPmBn3BkTmq2NXxJKEDBppKUpx0Q15uMgA8DPTFc80qO7A@mail.gmail.com>",
+      "from_name": "CALUM POLWART",
+      "from_email_hash": "cca9c72b7878c59677b676e9eb08e604e4d5d0d8d75def26d6b549f54f969cdf",
+      "date": "2026-09-04T15:52:23Z",
+      "subject": "[R] Problem in loading packages",
+      "subject_clean": "Problem in loading packages",
+      "in_reply_to": "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>",
+      "references": [
+        "<CAMuehFgFffhaWGqey1TSr0PY8-zZgeJQYN_ANvWCwvD6LYyXBw@mail.gmail.com>",
+        "<23cefe88-db1f-4674-b8f0-78e5b1be553d@gmail.com>",
+        "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>",
+        "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "Is this an *Error* or a *Warning* that is produced.\n\nI think it is \"normal\" that if you install a package and it was produced\nfor a different version of R you get a warning. Warnings are just that, not\nerrors.\n\nI think your options to make that go away are:\n\nUpgrade your R to 4.7\nInstall a specific version of the package (that's hard work) - it needs you\nto know which package version was built from your current R\nSuppress the warning (fixes nothing but you just don't see it) use\nlibrary(packagename, quietly= T)\n\nOn Fri, 4 Sept 2026, 13:32 Michael Dewey via R-help, <r-help at r-project.org>\nwrote:\n\n> I think we need more information here.\n>\n> Try running R outside RStudio and then issue\n>\n> install.packages(\"insert a package name here\")\n>\n> then run sessionInfo()\n>\n> and then post all the output here.\n>\n> It would also help to know which CRAN mirror you use.\n>\n> Michael\n>\n> On 03/09/2026 17:45, Halilu Rahaman Alhassan wrote:\n> > Thank you for the response.\n> >\n> > I tried using pacman to load the packages I need, but it was not working\n> > for me. So I decided to download those packages on CRAN . Even though it\n> > was installed successfully, yet, when I try loading each package I get\n> the\n> > response mentioned earlier\n> >\n> > On Thu, 3 Sept 2026, 11:57 Duncan Murdoch, <murdoch.duncan at gmail.com>\n> wrote:\n> >\n> >> On 2026-09-02 7:42 a.m., Halilu Rahaman Alhassan wrote:\n> >>> Dear sir/madam,\n> >>>\n> >>> I guess my message finds you well. Please I am having the supposed\n> >> current\n> >>> R version 4.6.1 for windows. But after downloading the packages, I find\n> >> it\n> >>> difficult loading them on R studio, even though they can be seen under\n> >>> packages. When ever I tried loading them, it tells me that those\n> packages\n> >>> were created under R version 4.7.0. Please I need your help to be able\n> to\n> >>> deal with such problem.\n> >>>\n> >>> Kind regards,\n> >>> Halilu Rahaman Alhassan\n> >>>\n> >>>        [[alternative HTML version deleted]]\n> >> It sounds as though you downloaded the wrong files, but you don't give\n> >> details about how you did the downloads or installed them into R, so I\n> >> can't guess how that happened.\n> >>\n> >> The standard safe way to install packages is to run R and then in R run\n> >> \"install.packages(\"packagename\")\".  It might ask you to specify a\n> >> mirror; generally the first one in the list is safe.  On my system, that\n> >> is displayed as \"0-Cloud\".\n> >>\n> >> If you are running RStudio, then you will get somewhat different\n> >> behaviour because it inserts its own install.packages() function, but it\n> >> should still work.  If not, try it in a plain R session.\n> >>\n> >> Duncan Murdoch\n> >>\n> >>\n> >>\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n> --\n> Michael Dewey\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Is this an *Error* or a *Warning* that is produced.\n\nI think it is \"normal\" that if you install a package and it was produced\nfor a different version of R you get a warning. Warnings are just that, no",
+      "thread_id": "thread-849e3f8f74a5",
+      "thread_depth": 4,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-25f8c3dc0f06",
+      "message_id": "<CAG1OV1Q0F2Me-a4P0zerade4Ud6mtoaEr9e7JhgmGGAbroK+MA@mail.gmail.com>",
+      "from_name": "Rui Barradas",
+      "from_email_hash": "a4adc0dbbb884730ac1f9626468de48fdf2c67b863a86697ed3baad16d5bb209",
+      "date": "2026-09-04T16:34:52Z",
+      "subject": "[R] Problem in loading packages",
+      "subject_clean": "Problem in loading packages",
+      "in_reply_to": "<CA+etgPmBn3BkTmq2NXxJKEDBppKUpx0Q15uMgA8DPTFc80qO7A@mail.gmail.com>",
+      "references": [
+        "<CAMuehFgFffhaWGqey1TSr0PY8-zZgeJQYN_ANvWCwvD6LYyXBw@mail.gmail.com>",
+        "<23cefe88-db1f-4674-b8f0-78e5b1be553d@gmail.com>",
+        "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>",
+        "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>",
+        "<CA+etgPmBn3BkTmq2NXxJKEDBppKUpx0Q15uMgA8DPTFc80qO7A@mail.gmail.com>"
+      ],
+      "body_plain": "Hello,\n\nI have been following this thread and it seems that the OP is running\nR 4.6.1 on Windows, which is the most up-to-date R version on CRAN.\nOn Windows, binary packages are always available so I think the\n(obvious?) solution is to install the binary packages from CRAN with a\nqualified command:\n\n\nutils::install.packages(\"pkgname\", repos = \"https://cloud.r-project.org/\")\n\n\nThe repository \"https://cloud.r-project.org/\" is CRAN's repo.\nThe OP can also avoid having to set the repo by editing the file\nR-4.6.1/etc/Rprofile.site. Add the following\n\n\n# set a CRAN mirror\nlocal({r <- getOption(\"repos\")\n      r[\"CRAN\"] <- \"https://cloud.r-project.org/\"\n      options(repos=r)})\n\n\n\nThe comment line '# set a CRAN mirror' should already be there, edit\nthe 'local' instruction as above, save and restart R.\n\nHope this helps,\nRui Barradas\n\nCALUM POLWART <polc1410 at gmail.com> escreveu (sexta, 4/09/2026 ?(s) 16:52):\n>\n> Is this an *Error* or a *Warning* that is produced.\n>\n> I think it is \"normal\" that if you install a package and it was produced\n> for a different version of R you get a warning. Warnings are just that, not\n> errors.\n>\n> I think your options to make that go away are:\n>\n> Upgrade your R to 4.7\n> Install a specific version of the package (that's hard work) - it needs you\n> to know which package version was built from your current R\n> Suppress the warning (fixes nothing but you just don't see it) use\n> library(packagename, quietly= T)\n>\n> On Fri, 4 Sept 2026, 13:32 Michael Dewey via R-help, <r-help at r-project.org>\n> wrote:\n>\n> > I think we need more information here.\n> >\n> > Try running R outside RStudio and then issue\n> >\n> > install.packages(\"insert a package name here\")\n> >\n> > then run sessionInfo()\n> >\n> > and then post all the output here.\n> >\n> > It would also help to know which CRAN mirror you use.\n> >\n> > Michael\n> >\n> > On 03/09/2026 17:45, Halilu Rahaman Alhassan wrote:\n> > > Thank you for the response.\n> > >\n> > > I tried using pacman to load the packages I need, but it was not working\n> > > for me. So I decided to download those packages on CRAN . Even though it\n> > > was installed successfully, yet, when I try loading each package I get\n> > the\n> > > response mentioned earlier\n> > >\n> > > On Thu, 3 Sept 2026, 11:57 Duncan Murdoch, <murdoch.duncan at gmail.com>\n> > wrote:\n> > >\n> > >> On 2026-09-02 7:42 a.m., Halilu Rahaman Alhassan wrote:\n> > >>> Dear sir/madam,\n> > >>>\n> > >>> I guess my message finds you well. Please I am having the supposed\n> > >> current\n> > >>> R version 4.6.1 for windows. But after downloading the packages, I find\n> > >> it\n> > >>> difficult loading them on R studio, even though they can be seen under\n> > >>> packages. When ever I tried loading them, it tells me that those\n> > packages\n> > >>> were created under R version 4.7.0. Please I need your help to be able\n> > to\n> > >>> deal with such problem.\n> > >>>\n> > >>> Kind regards,\n> > >>> Halilu Rahaman Alhassan\n> > >>>\n> > >>>        [[alternative HTML version deleted]]\n> > >> It sounds as though you downloaded the wrong files, but you don't give\n> > >> details about how you did the downloads or installed them into R, so I\n> > >> can't guess how that happened.\n> > >>\n> > >> The standard safe way to install packages is to run R and then in R run\n> > >> \"install.packages(\"packagename\")\".  It might ask you to specify a\n> > >> mirror; generally the first one in the list is safe.  On my system, that\n> > >> is displayed as \"0-Cloud\".\n> > >>\n> > >> If you are running RStudio, then you will get somewhat different\n> > >> behaviour because it inserts its own install.packages() function, but it\n> > >> should still work.  If not, try it in a plain R session.\n> > >>\n> > >> Duncan Murdoch\n> > >>\n> > >>\n> > >>\n> > >\n> > >       [[alternative HTML version deleted]]\n> > >\n> > > ______________________________________________\n> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > > https://stat.ethz.ch/mailman/listinfo/r-help\n> > > PLEASE do read the posting guide\n> > https://www.R-project.org/posting-guide.html\n> > > and provide commented, minimal, self-contained, reproducible code.\n> >\n> > --\n> > Michael Dewey\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> > https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> >\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Hello,\n\nI have been following this thread and it seems that the OP is running\nR 4.6.1 on Windows, which is the most up-to-date R version on CRAN.\nOn Windows, binary packages are always available so I ",
+      "thread_id": "thread-849e3f8f74a5",
+      "thread_depth": 5,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-448909396c33",
+      "message_id": "<63ac3f35-a785-4c8a-a88a-71a4505155cf@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-09-04T17:05:14Z",
+      "subject": "[R] Problem in loading packages",
+      "subject_clean": "Problem in loading packages",
+      "in_reply_to": "<CAG1OV1Q0F2Me-a4P0zerade4Ud6mtoaEr9e7JhgmGGAbroK+MA@mail.gmail.com>",
+      "references": [
+        "<CAMuehFgFffhaWGqey1TSr0PY8-zZgeJQYN_ANvWCwvD6LYyXBw@mail.gmail.com>",
+        "<23cefe88-db1f-4674-b8f0-78e5b1be553d@gmail.com>",
+        "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>",
+        "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>",
+        "<CA+etgPmBn3BkTmq2NXxJKEDBppKUpx0Q15uMgA8DPTFc80qO7A@mail.gmail.com>",
+        "<CAG1OV1Q0F2Me-a4P0zerade4Ud6mtoaEr9e7JhgmGGAbroK+MA@mail.gmail.com>"
+      ],
+      "body_plain": "A minor correction inline...\n\nOn 2026-09-04 12:34 p.m., Rui Barradas wrote:\n> Hello,\n> \n> I have been following this thread and it seems that the OP is running\n> R 4.6.1 on Windows, which is the most up-to-date R version on CRAN.\n> On Windows, binary packages are always available so I think the\n> (obvious?) solution is to install the binary packages from CRAN with a\n> qualified command:\n> \n> \n> utils::install.packages(\"pkgname\", repos = \"https://cloud.r-project.org/\")\n> \n> \n> The repository \"https://cloud.r-project.org/\" is CRAN's repo.\n\nThat's not quite right.  cloud.r-project.org redirects to mirrors of the \nmaster CRAN repository.  It is currently sponsored and maintained by \nPosit, and both it and cran.rstudio.com lead to the same place(s).\n\nDuncan Murdoch\n\n> The OP can also avoid having to set the repo by editing the file\n> R-4.6.1/etc/Rprofile.site. Add the following\n> \n> \n> # set a CRAN mirror\n> local({r <- getOption(\"repos\")\n>        r[\"CRAN\"] <- \"https://cloud.r-project.org/\"\n>        options(repos=r)})\n> \n> \n> \n> The comment line '# set a CRAN mirror' should already be there, edit\n> the 'local' instruction as above, save and restart R.\n> \n> Hope this helps,\n> Rui Barradas\n> \n> CALUM POLWART <polc1410 at gmail.com> escreveu (sexta, 4/09/2026 ?(s) 16:52):\n>>\n>> Is this an *Error* or a *Warning* that is produced.\n>>\n>> I think it is \"normal\" that if you install a package and it was produced\n>> for a different version of R you get a warning. Warnings are just that, not\n>> errors.\n>>\n>> I think your options to make that go away are:\n>>\n>> Upgrade your R to 4.7\n>> Install a specific version of the package (that's hard work) - it needs you\n>> to know which package version was built from your current R\n>> Suppress the warning (fixes nothing but you just don't see it) use\n>> library(packagename, quietly= T)\n>>\n>> On Fri, 4 Sept 2026, 13:32 Michael Dewey via R-help, <r-help at r-project.org>\n>> wrote:\n>>\n>>> I think we need more information here.\n>>>\n>>> Try running R outside RStudio and then issue\n>>>\n>>> install.packages(\"insert a package name here\")\n>>>\n>>> then run sessionInfo()\n>>>\n>>> and then post all the output here.\n>>>\n>>> It would also help to know which CRAN mirror you use.\n>>>\n>>> Michael\n>>>\n>>> On 03/09/2026 17:45, Halilu Rahaman Alhassan wrote:\n>>>> Thank you for the response.\n>>>>\n>>>> I tried using pacman to load the packages I need, but it was not working\n>>>> for me. So I decided to download those packages on CRAN . Even though it\n>>>> was installed successfully, yet, when I try loading each package I get\n>>> the\n>>>> response mentioned earlier\n>>>>\n>>>> On Thu, 3 Sept 2026, 11:57 Duncan Murdoch, <murdoch.duncan at gmail.com>\n>>> wrote:\n>>>>\n>>>>> On 2026-09-02 7:42 a.m., Halilu Rahaman Alhassan wrote:\n>>>>>> Dear sir/madam,\n>>>>>>\n>>>>>> I guess my message finds you well. Please I am having the supposed\n>>>>> current\n>>>>>> R version 4.6.1 for windows. But after downloading the packages, I find\n>>>>> it\n>>>>>> difficult loading them on R studio, even though they can be seen under\n>>>>>> packages. When ever I tried loading them, it tells me that those\n>>> packages\n>>>>>> were created under R version 4.7.0. Please I need your help to be able\n>>> to\n>>>>>> deal with such problem.\n>>>>>>\n>>>>>> Kind regards,\n>>>>>> Halilu Rahaman Alhassan\n>>>>>>\n>>>>>>         [[alternative HTML version deleted]]\n>>>>> It sounds as though you downloaded the wrong files, but you don't give\n>>>>> details about how you did the downloads or installed them into R, so I\n>>>>> can't guess how that happened.\n>>>>>\n>>>>> The standard safe way to install packages is to run R and then in R run\n>>>>> \"install.packages(\"packagename\")\".  It might ask you to specify a\n>>>>> mirror; generally the first one in the list is safe.  On my system, that\n>>>>> is displayed as \"0-Cloud\".\n>>>>>\n>>>>> If you are running RStudio, then you will get somewhat different\n>>>>> behaviour because it inserts its own install.packages() function, but it\n>>>>> should still work.  If not, try it in a plain R session.\n>>>>>\n>>>>> Duncan Murdoch\n>>>>>\n>>>>>\n>>>>>\n>>>>\n>>>>        [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>> https://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>> --\n>>> Michael Dewey\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> https://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "A minor correction inline...\n\nOn 2026-09-04 12:34 p.m., Rui Barradas wrote:\n> Hello,\n> \n> I have been following this thread and it seems that the OP is running\n> R 4.6.1 on Windows, which is the most ",
+      "thread_id": "thread-849e3f8f74a5",
+      "thread_depth": 6,
+      "month": "2026-09"
     }
   ],
   "threads": [
     {
       "id": "thread-849e3f8f74a5",
       "subject": "Problem in loading packages",
-      "message_count": 3,
+      "message_count": 7,
       "participants": [
+        "CALUM POLWART",
         "Duncan Murdoch",
-        "Halilu Rahaman Alhassan"
+        "Halilu Rahaman Alhassan",
+        "Michael Dewey",
+        "Rui Barradas"
       ],
       "started": "2026-09-02T11:42:07Z",
-      "last_reply": "2026-09-03T16:45:15Z",
+      "last_reply": "2026-09-04T17:05:14Z",
       "root_message_id": "msg-849e3f8f74a5"
     },
     {
