@@ -714,3 +714,121 @@ Duncan Murdoch
 > and provide commented, minimal, self-contained, reproducible code.
 
 
+From n@re@h_gurbux@n| @end|ng |rom hotm@||@com  Sat Sep  5 16:28:23 2026
+From: n@re@h_gurbux@n| @end|ng |rom hotm@||@com (Naresh Gurbuxani)
+Date: Sat, 5 Sep 2026 14:28:23 +0000
+Subject: [R] Combine two lattice plots including both plot keys
+Message-ID: <60401729-6698-48BC-A9F0-317688941D01@hotmail.com>
+
+
+When I combine two lattice plots, only the first plot keys are
+displayed.  Is it possible to show both keys?
+
+Thanks,
+Naresh
+
+library(data.table)
+library(lattice)
+library(latticeExtra)
+
+mydt <- data.table(year = rep(2020:2025, 2), bird = rep(c("duck",
+"goose"), c(6, 6)))
+mydt[, let(popstart = 100 + sample(-10:10, 12, replace = TRUE), popend =
+120 + sample(-10:10, 12, replace = TRUE))]
+mydt[, let(flights = rep(seq(200, by = 10, length.out = 6), 2) +
+sample(-20:20, 12, replace = TRUE))]
+mydt1 <- copy(mydt)[, let(obspot = "lake")]
+mydt2 <- copy(mydt)[, let(obspot = "river")]
+mydt <- rbindlist(list(mydt1, mydt2))
+mydtmelt <- melt(mydt, id.vars = c("year", "bird", "obspot"),
+measure.vars = c("popstart", "flights"))
+popbar <- mydtmelt[, barchart(value ~ as.character(year) | bird +
+obspot, groups = variable, horizontal = FALSE, stack = TRUE, auto.key =
+list(columns = 2, space = "bottom")) |> useOuterStrips()]
+popdot <-  mydt[, dotplot(popend ~ as.character(year) | bird + obspot,
+type = "o", panel = function(x, y, ...){panel.dotplot(x, y, ...,
+col.line = "transparent")}, key = simpleKey("popend", space = "top",
+lines = TRUE, points = TRUE)) |> useOuterStrips()]
+
+popbar # shows key at the bottom
+popdot # shows key at the top
+
+popbar + popdot # bottom key only
+
+
+From deep@y@n@@@rk@r @end|ng |rom gm@||@com  Sat Sep  5 16:59:23 2026
+From: deep@y@n@@@rk@r @end|ng |rom gm@||@com (Deepayan Sarkar)
+Date: Sat, 5 Sep 2026 20:29:23 +0530
+Subject: [R] Combine two lattice plots including both plot keys
+In-Reply-To: <60401729-6698-48BC-A9F0-317688941D01@hotmail.com>
+References: <60401729-6698-48BC-A9F0-317688941D01@hotmail.com>
+Message-ID: <CADfFDC7=2eobrsKMXdKSLmq7-OE4iw3uafhm79vXXu2mPjuxCQ@mail.gmail.com>
+
+On Sat, 5 Sept 2026 at 19:58, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>
+wrote:
+
+>
+> When I combine two lattice plots, only the first plot keys are
+> displayed.  Is it possible to show both keys?
+>
+
+In principle yes, but clearly +.trellis doesn't try hard enough.
+
+You could do
+
+p = popbar + popdot
+p$legend = c(popbar$legend, popdot$legend)
+p
+
+or more succintly
+
+update(popbar + popdot, legend = c(popbar$legend, popdot$legend))
+
+Best,
+-Deepayan
+
+
+
+>
+> Thanks,
+> Naresh
+>
+> library(data.table)
+> library(lattice)
+> library(latticeExtra)
+>
+> mydt <- data.table(year = rep(2020:2025, 2), bird = rep(c("duck",
+> "goose"), c(6, 6)))
+> mydt[, let(popstart = 100 + sample(-10:10, 12, replace = TRUE), popend =
+> 120 + sample(-10:10, 12, replace = TRUE))]
+> mydt[, let(flights = rep(seq(200, by = 10, length.out = 6), 2) +
+> sample(-20:20, 12, replace = TRUE))]
+> mydt1 <- copy(mydt)[, let(obspot = "lake")]
+> mydt2 <- copy(mydt)[, let(obspot = "river")]
+> mydt <- rbindlist(list(mydt1, mydt2))
+> mydtmelt <- melt(mydt, id.vars = c("year", "bird", "obspot"),
+> measure.vars = c("popstart", "flights"))
+> popbar <- mydtmelt[, barchart(value ~ as.character(year) | bird +
+> obspot, groups = variable, horizontal = FALSE, stack = TRUE, auto.key =
+> list(columns = 2, space = "bottom")) |> useOuterStrips()]
+> popdot <-  mydt[, dotplot(popend ~ as.character(year) | bird + obspot,
+> type = "o", panel = function(x, y, ...){panel.dotplot(x, y, ...,
+> col.line = "transparent")}, key = simpleKey("popend", space = "top",
+> lines = TRUE, points = TRUE)) |> useOuterStrips()]
+>
+> popbar # shows key at the bottom
+> popdot # shows key at the top
+>
+> popbar + popdot # bottom key only
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+

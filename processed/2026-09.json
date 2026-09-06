@@ -175,6 +175,40 @@
       "thread_id": "thread-849e3f8f74a5",
       "thread_depth": 6,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-8e7b1f9059b0",
+      "message_id": "<60401729-6698-48BC-A9F0-317688941D01@hotmail.com>",
+      "from_name": "Naresh Gurbuxani",
+      "from_email_hash": "df5d90539e2666ddc66f8b815f804e76e9cbe0b9fbf72e62a714b1e3536d5dae",
+      "date": "2026-09-05T14:28:23Z",
+      "subject": "[R] Combine two lattice plots including both plot keys",
+      "subject_clean": "Combine two lattice plots including both plot keys",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "When I combine two lattice plots, only the first plot keys are\ndisplayed.  Is it possible to show both keys?\n\nThanks,\nNaresh\n\nlibrary(data.table)\nlibrary(lattice)\nlibrary(latticeExtra)\n\nmydt <- data.table(year = rep(2020:2025, 2), bird = rep(c(\"duck\",\n\"goose\"), c(6, 6)))\nmydt[, let(popstart = 100 + sample(-10:10, 12, replace = TRUE), popend =\n120 + sample(-10:10, 12, replace = TRUE))]\nmydt[, let(flights = rep(seq(200, by = 10, length.out = 6), 2) +\nsample(-20:20, 12, replace = TRUE))]\nmydt1 <- copy(mydt)[, let(obspot = \"lake\")]\nmydt2 <- copy(mydt)[, let(obspot = \"river\")]\nmydt <- rbindlist(list(mydt1, mydt2))\nmydtmelt <- melt(mydt, id.vars = c(\"year\", \"bird\", \"obspot\"),\nmeasure.vars = c(\"popstart\", \"flights\"))\npopbar <- mydtmelt[, barchart(value ~ as.character(year) | bird +\nobspot, groups = variable, horizontal = FALSE, stack = TRUE, auto.key =\nlist(columns = 2, space = \"bottom\")) |> useOuterStrips()]\npopdot <-  mydt[, dotplot(popend ~ as.character(year) | bird + obspot,\ntype = \"o\", panel = function(x, y, ...){panel.dotplot(x, y, ...,\ncol.line = \"transparent\")}, key = simpleKey(\"popend\", space = \"top\",\nlines = TRUE, points = TRUE)) |> useOuterStrips()]\n\npopbar # shows key at the bottom\npopdot # shows key at the top\n\npopbar + popdot # bottom key only",
+      "body_snippet": "When I combine two lattice plots, only the first plot keys are\ndisplayed.  Is it possible to show both keys?\n\nThanks,\nNaresh\n\nlibrary(data.table)\nlibrary(lattice)\nlibrary(latticeExtra)\n\nmydt <- data.t",
+      "thread_id": "thread-8e7b1f9059b0",
+      "thread_depth": 0,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-dd275973fa3c",
+      "message_id": "<CADfFDC7=2eobrsKMXdKSLmq7-OE4iw3uafhm79vXXu2mPjuxCQ@mail.gmail.com>",
+      "from_name": "Deepayan Sarkar",
+      "from_email_hash": "8ea9be97512ee2f8cd96b2e3a0e69e2462fbf028237cd674ccf6924bb378bdda",
+      "date": "2026-09-05T14:59:23Z",
+      "subject": "[R] Combine two lattice plots including both plot keys",
+      "subject_clean": "Combine two lattice plots including both plot keys",
+      "in_reply_to": "<60401729-6698-48BC-A9F0-317688941D01@hotmail.com>",
+      "references": [
+        "<60401729-6698-48BC-A9F0-317688941D01@hotmail.com>"
+      ],
+      "body_plain": "On Sat, 5 Sept 2026 at 19:58, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>\nwrote:\n\n>\n> When I combine two lattice plots, only the first plot keys are\n> displayed.  Is it possible to show both keys?\n>\n\nIn principle yes, but clearly +.trellis doesn't try hard enough.\n\nYou could do\n\np = popbar + popdot\np$legend = c(popbar$legend, popdot$legend)\np\n\nor more succintly\n\nupdate(popbar + popdot, legend = c(popbar$legend, popdot$legend))\n\nBest,\n-Deepayan\n\n\n\n>\n> Thanks,\n> Naresh\n>\n> library(data.table)\n> library(lattice)\n> library(latticeExtra)\n>\n> mydt <- data.table(year = rep(2020:2025, 2), bird = rep(c(\"duck\",\n> \"goose\"), c(6, 6)))\n> mydt[, let(popstart = 100 + sample(-10:10, 12, replace = TRUE), popend =\n> 120 + sample(-10:10, 12, replace = TRUE))]\n> mydt[, let(flights = rep(seq(200, by = 10, length.out = 6), 2) +\n> sample(-20:20, 12, replace = TRUE))]\n> mydt1 <- copy(mydt)[, let(obspot = \"lake\")]\n> mydt2 <- copy(mydt)[, let(obspot = \"river\")]\n> mydt <- rbindlist(list(mydt1, mydt2))\n> mydtmelt <- melt(mydt, id.vars = c(\"year\", \"bird\", \"obspot\"),\n> measure.vars = c(\"popstart\", \"flights\"))\n> popbar <- mydtmelt[, barchart(value ~ as.character(year) | bird +\n> obspot, groups = variable, horizontal = FALSE, stack = TRUE, auto.key =\n> list(columns = 2, space = \"bottom\")) |> useOuterStrips()]\n> popdot <-  mydt[, dotplot(popend ~ as.character(year) | bird + obspot,\n> type = \"o\", panel = function(x, y, ...){panel.dotplot(x, y, ...,\n> col.line = \"transparent\")}, key = simpleKey(\"popend\", space = \"top\",\n> lines = TRUE, points = TRUE)) |> useOuterStrips()]\n>\n> popbar # shows key at the bottom\n> popdot # shows key at the top\n>\n> popbar + popdot # bottom key only\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "On Sat, 5 Sept 2026 at 19:58, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com>\nwrote:\n\n>\n> When I combine two lattice plots, only the first plot keys are\n> displayed.  Is it possible to show both ke",
+      "thread_id": "thread-8e7b1f9059b0",
+      "thread_depth": 1,
+      "month": "2026-09"
     }
   ],
   "threads": [
@@ -204,6 +238,18 @@
       "started": "2026-09-02T19:37:13Z",
       "last_reply": "2026-09-03T12:22:23Z",
       "root_message_id": "msg-8a6e9f134ec8"
+    },
+    {
+      "id": "thread-8e7b1f9059b0",
+      "subject": "Combine two lattice plots including both plot keys",
+      "message_count": 2,
+      "participants": [
+        "Deepayan Sarkar",
+        "Naresh Gurbuxani"
+      ],
+      "started": "2026-09-05T14:28:23Z",
+      "last_reply": "2026-09-05T14:59:23Z",
+      "root_message_id": "msg-8e7b1f9059b0"
     }
   ]
 }

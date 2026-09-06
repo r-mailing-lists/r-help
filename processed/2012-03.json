@@ -13080,24 +13080,6 @@
       "month": "2012-03"
     },
     {
-      "id": "msg-7a8d837468db",
-      "message_id": "<1331147499170-4454264.post@n4.nabble.com>",
-      "from_name": "beltrand",
-      "from_email_hash": "b5eb0bd6d711d362f186bb5cb3a09ae1f16381b278c33ed214e5aaa86209a729",
-      "date": "2012-03-07T19:11:39Z",
-      "subject": "[R] Apt-get",
-      "subject_clean": "Apt-get",
-      "in_reply_to": "<1331139823.6497.YahooMailNeo@web120601.mail.ne1.yahoo.com>",
-      "references": [
-        "<1331139823.6497.YahooMailNeo@web120601.mail.ne1.yahoo.com>"
-      ],
-      "body_plain": "You can install R 2.14 from this ppa\n\nhttps://launchpad.net/~marutter/+archive/rrutter\n\nIn the terminal type:\n\nsudo add-apt-repository ppa:marutter/rrutter\n\nsudo apt-get update\n\n\nAnd then choose the packages you want to install. \n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Apt-get-tp4453839p4454264.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "You can install R 2.14 from this ppa\n\nhttps://launchpad.net/~marutter/+archive/rrutter\n\nIn the terminal type:\n\nsudo add-apt-repository ppa:marutter/rrutter\n\nsudo apt-get update\n\n\nAnd then choose the p",
-      "thread_id": "thread-2d239f59b5f7",
-      "thread_depth": 1,
-      "month": "2012-03"
-    },
-    {
       "id": "msg-d386c63c6f2b",
       "message_id": "<CACk-te3M0pMxHFS6bPcX+LqOVXA4E32hpLR3CLHiVRVwU--MPw@mail.gmail.com>",
       "from_name": "Bert Gunter",
@@ -13114,6 +13096,24 @@
       "body_snippet": "I would certainly agree that given the post below, it is almost\nimpossible to offer much more than vague suggestions: simple, short,\nreproducible examples per the posting guide rather than lengthy\ncom",
       "thread_id": "thread-377a14b01afb",
       "thread_depth": 2,
+      "month": "2012-03"
+    },
+    {
+      "id": "msg-7a8d837468db",
+      "message_id": "<1331147499170-4454264.post@n4.nabble.com>",
+      "from_name": "beltrand",
+      "from_email_hash": "b5eb0bd6d711d362f186bb5cb3a09ae1f16381b278c33ed214e5aaa86209a729",
+      "date": "2012-03-07T19:11:39Z",
+      "subject": "[R] Apt-get",
+      "subject_clean": "Apt-get",
+      "in_reply_to": "<1331139823.6497.YahooMailNeo@web120601.mail.ne1.yahoo.com>",
+      "references": [
+        "<1331139823.6497.YahooMailNeo@web120601.mail.ne1.yahoo.com>"
+      ],
+      "body_plain": "You can install R 2.14 from this ppa\n\nhttps://launchpad.net/~marutter/+archive/rrutter\n\nIn the terminal type:\n\nsudo add-apt-repository ppa:marutter/rrutter\n\nsudo apt-get update\n\n\nAnd then choose the packages you want to install. \n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Apt-get-tp4453839p4454264.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "You can install R 2.14 from this ppa\n\nhttps://launchpad.net/~marutter/+archive/rrutter\n\nIn the terminal type:\n\nsudo add-apt-repository ppa:marutter/rrutter\n\nsudo apt-get update\n\n\nAnd then choose the p",
+      "thread_id": "thread-2d239f59b5f7",
+      "thread_depth": 1,
       "month": "2012-03"
     },
     {
@@ -37476,28 +37476,6 @@
       "month": "2012-03"
     },
     {
-      "id": "msg-2a264478be64",
-      "message_id": "<ECE06690-7AA2-414E-A3C7-1A17A6C8C040@xs4all.nl>",
-      "from_name": "Berend Hasselman",
-      "from_email_hash": "997bb787abf80042157dc28e91db13eb5e5c0f433207dba7fcb5331fa2e472af",
-      "date": "2012-03-19T21:21:54Z",
-      "subject": "[R] Filling matrices",
-      "subject_clean": "Filling matrices",
-      "in_reply_to": "<4F67A006.4080008@usu.edu>",
-      "references": [
-        "<1331631952707-4468642.post@n4.nabble.com>",
-        "<CAAxdm-6nSKLgToDNHm8tHmNY1VB7hHVBcKM6iuuJsQuJ0-Pj=w@mail.gmail.com>",
-        "<1331649603559-4469239.post@n4.nabble.com>",
-        "<4F65ED54.4040101@statistik.tu-dortmund.de>",
-        "<4F67A006.4080008@usu.edu>"
-      ],
-      "body_plain": "On 19-03-2012, at 22:07, David Stevens wrote:\n\n> I'm a bit clumsy about many things in R. Here's my problem. I'm trying to build a square sparse matrix and populate it without looping (bad practice, right). I have vectors of matched row/column pairs for which the matrix entries have common characteristics and am look for a way to fill the entries. So, if the matrix is A[20 by 20], and I might have rows\n> \n> iRows <- c(2,3,4,6,7,8,10,11,12,14,15,16,18,19)\n> \n> and columns\n> \n> iCols <- c(1,2,3,5,6,7,9,10,11,13,14,15,17,18)\n> \n> and you see these are most of the subdiagonal terms in A from rows 2-19. They are all calculated in a similar way using values from a data frame in which the terms are generally in iRows and iCols.\n> \n> I could loop through each pair and all's well, but my question is whether there's an R-certified alternative, that will speed things up when the matrix is much larger (it will be - this is a prototype).\n> \n> Any thoughts?\n\npIndex <- cbind(iRows,iCols)\n\nA <- matrix(0,nrow=20,ncol=20)\n\nA[pIndex] <- 9\nA\n\nBerend",
-      "body_snippet": "On 19-03-2012, at 22:07, David Stevens wrote:\n\n> I'm a bit clumsy about many things in R. Here's my problem. I'm trying to build a square sparse matrix and populate it without looping (bad practice, r",
-      "thread_id": "thread-4482bf489a3d",
-      "thread_depth": 5,
-      "month": "2012-03"
-    },
-    {
       "id": "msg-247b3f54b616",
       "message_id": "<CAM_vjump-iO2Ss9924FgL7b+eyfft15sUKt8Txbb8trZXvKbwA@mail.gmail.com>",
       "from_name": "Sarah Goslee",
@@ -37515,6 +37493,28 @@
       ],
       "body_plain": "I suspect I'm misinterpreting what you are trying to do, because it\nseems unlikely that the solution is as simple as:\n\nA <- matrix(0, 20, 20)\niRows <- c(2,3,4,6,7,8,10,11,12,14,15,16,18,19)\niCols <- c(1,2,3,5,6,7,9,10,11,13,14,15,17,18)\nA[iRows, iCols] <- 1 # or a vector of the same length in the same order\n\nSo if that's not it, can you expand a bit on what your desired result\nlooks like?\n\nSarah\n\nOn Mon, Mar 19, 2012 at 5:07 PM, David Stevens <david.stevens at usu.edu> wrote:\n> I'm a bit clumsy about many things in R. Here's my problem. I'm trying to\n> build a square sparse matrix and populate it without looping (bad practice,\n> right). I have vectors of matched row/column pairs for which the matrix\n> entries have common characteristics and am look for a way to fill the\n> entries. So, if the matrix is A[20 by 20], and I might have rows\n>\n> ?iRows <- c(2,3,4,6,7,8,10,11,12,14,15,16,18,19)\n>\n> and columns\n>\n> ?iCols <- c(1,2,3,5,6,7,9,10,11,13,14,15,17,18)\n>\n> and you see these are most of the subdiagonal terms in A from rows 2-19.\n> They are all calculated in a similar way using values from a data frame in\n> which the terms are generally in iRows and iCols.\n>\n> I could loop through each pair and all's well, but my question is whether\n> there's an R-certified alternative, that will speed things up when the\n> matrix is much larger (it will be - this is a prototype).\n>\n> Any thoughts?\n>\n> David S\n>\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
       "body_snippet": "I suspect I'm misinterpreting what you are trying to do, because it\nseems unlikely that the solution is as simple as:\n\nA <- matrix(0, 20, 20)\niRows <- c(2,3,4,6,7,8,10,11,12,14,15,16,18,19)\niCols <- c",
+      "thread_id": "thread-4482bf489a3d",
+      "thread_depth": 5,
+      "month": "2012-03"
+    },
+    {
+      "id": "msg-2a264478be64",
+      "message_id": "<ECE06690-7AA2-414E-A3C7-1A17A6C8C040@xs4all.nl>",
+      "from_name": "Berend Hasselman",
+      "from_email_hash": "997bb787abf80042157dc28e91db13eb5e5c0f433207dba7fcb5331fa2e472af",
+      "date": "2012-03-19T21:21:54Z",
+      "subject": "[R] Filling matrices",
+      "subject_clean": "Filling matrices",
+      "in_reply_to": "<4F67A006.4080008@usu.edu>",
+      "references": [
+        "<1331631952707-4468642.post@n4.nabble.com>",
+        "<CAAxdm-6nSKLgToDNHm8tHmNY1VB7hHVBcKM6iuuJsQuJ0-Pj=w@mail.gmail.com>",
+        "<1331649603559-4469239.post@n4.nabble.com>",
+        "<4F65ED54.4040101@statistik.tu-dortmund.de>",
+        "<4F67A006.4080008@usu.edu>"
+      ],
+      "body_plain": "On 19-03-2012, at 22:07, David Stevens wrote:\n\n> I'm a bit clumsy about many things in R. Here's my problem. I'm trying to build a square sparse matrix and populate it without looping (bad practice, right). I have vectors of matched row/column pairs for which the matrix entries have common characteristics and am look for a way to fill the entries. So, if the matrix is A[20 by 20], and I might have rows\n> \n> iRows <- c(2,3,4,6,7,8,10,11,12,14,15,16,18,19)\n> \n> and columns\n> \n> iCols <- c(1,2,3,5,6,7,9,10,11,13,14,15,17,18)\n> \n> and you see these are most of the subdiagonal terms in A from rows 2-19. They are all calculated in a similar way using values from a data frame in which the terms are generally in iRows and iCols.\n> \n> I could loop through each pair and all's well, but my question is whether there's an R-certified alternative, that will speed things up when the matrix is much larger (it will be - this is a prototype).\n> \n> Any thoughts?\n\npIndex <- cbind(iRows,iCols)\n\nA <- matrix(0,nrow=20,ncol=20)\n\nA[pIndex] <- 9\nA\n\nBerend",
+      "body_snippet": "On 19-03-2012, at 22:07, David Stevens wrote:\n\n> I'm a bit clumsy about many things in R. Here's my problem. I'm trying to build a square sparse matrix and populate it without looping (bad practice, r",
       "thread_id": "thread-4482bf489a3d",
       "thread_depth": 5,
       "month": "2012-03"
