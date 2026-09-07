@@ -209,22 +209,66 @@
       "thread_id": "thread-8e7b1f9059b0",
       "thread_depth": 1,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-6bbd552651e2",
+      "message_id": "<0121F43A-82D7-474D-A628-4ECBDD09708D@gmail.com>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "5d0f61ffffc9a67fd86f4b9a1ea3fac7d731c19e1d8679b6ae315232b22874e8",
+      "date": "2026-09-06T08:19:52Z",
+      "subject": "[R] Problem in loading packages",
+      "subject_clean": "Problem in loading packages",
+      "in_reply_to": "<63ac3f35-a785-4c8a-a88a-71a4505155cf@gmail.com>",
+      "references": [
+        "<CAMuehFgFffhaWGqey1TSr0PY8-zZgeJQYN_ANvWCwvD6LYyXBw@mail.gmail.com>",
+        "<23cefe88-db1f-4674-b8f0-78e5b1be553d@gmail.com>",
+        "<CAMuehFg080pq83FtAVbQOS7Ogv2HnqOuSOhrrjxAFQXONr-Sbg@mail.gmail.com>",
+        "<9ed9e9ed-ef42-46d8-b5c9-a72aa7449b8e@dewey.myzen.co.uk>",
+        "<CA+etgPmBn3BkTmq2NXxJKEDBppKUpx0Q15uMgA8DPTFc80qO7A@mail.gmail.com>",
+        "<CAG1OV1Q0F2Me-a4P0zerade4Ud6mtoaEr9e7JhgmGGAbroK+MA@mail.gmail.com>",
+        "<63ac3f35-a785-4c8a-a88a-71a4505155cf@gmail.com>"
+      ],
+      "body_plain": "At any rate, I suspect that the real issue here is that the OP has been downloading packages directly from CRAN, i.e. from the links that look like this:\n\n----\nDownloads:\n\nPackage source:\tbetaselectr_0.2.4.tar.gz\nWindows binaries:\tr-devel: betaselectr_0.2.3.zip, r-release: betaselectr_0.2.3.zip, r-oldrel: betaselectr_0.2.3.zip\nmacOS binaries:\tr-release (arm64): betaselectr_0.2.3.tgz, r-oldrel (arm64): betaselectr_0.2.3.tgz, r-release (x86_64): betaselectr_0.2.3.tgz, r-oldrel (x86_64): betaselectr_0.2.3.tgz\nOld sources:\tbetaselectr archive\n??\n\nHardly anyone does that these days (they use install.packages() etc.), but if you do, choose the one that matches your R installation, which would generally be \"r-release? (currently 4.6.x) and not ?r-devel? (proto-4.7.0). \n\nIf you expand the links, you will see that they expand to e.g.\nhttps://cran.r-project.org/bin/windows/contrib/4.7/betaselectr_0.2.3.zip, so they are different files even if the name is the same.\n\nThis is (or can be) important because we only try to maintain binary compatibility between x.y.z versions for fixed values of x and y\n\n-pd\n\n> On 4 Sep 2026, at 19.05, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n> A minor correction inline...\n> \n> On 2026-09-04 12:34 p.m., Rui Barradas wrote:\n>> Hello,\n>> I have been following this thread and it seems that the OP is running\n>> R 4.6.1 on Windows, which is the most up-to-date R version on CRAN.\n>> On Windows, binary packages are always available so I think the\n>> (obvious?) solution is to install the binary packages from CRAN with a\n>> qualified command:\n>> utils::install.packages(\"pkgname\", repos = \"https://cloud.r-project.org/\")\n>> The repository \"https://cloud.r-project.org/\" is CRAN's repo.\n> \n> That's not quite right.  cloud.r-project.org redirects to mirrors of the master CRAN repository.  It is currently sponsored and maintained by Posit, and both it and cran.rstudio.com lead to the same place(s).\n> \n> Duncan Murdoch\n> \n>> The OP can also avoid having to set the repo by editing the file\n>> R-4.6.1/etc/Rprofile.site. Add the following\n>> # set a CRAN mirror\n>> local({r <- getOption(\"repos\")\n>>       r[\"CRAN\"] <- \"https://cloud.r-project.org/\"\n>>       options(repos=r)})\n>> The comment line '# set a CRAN mirror' should already be there, edit\n>> the 'local' instruction as above, save and restart R.\n>> Hope this helps,\n>> Rui Barradas\n>> CALUM POLWART <polc1410 at gmail.com> escreveu (sexta, 4/09/2026 ?(s) 16:52):\n>>> \n>>> Is this an *Error* or a *Warning* that is produced.\n>>> \n>>> I think it is \"normal\" that if you install a package and it was produced\n>>> for a different version of R you get a warning. Warnings are just that, not\n>>> errors.\n>>> \n>>> I think your options to make that go away are:\n>>> \n>>> Upgrade your R to 4.7\n>>> Install a specific version of the package (that's hard work) - it needs you\n>>> to know which package version was built from your current R\n>>> Suppress the warning (fixes nothing but you just don't see it) use\n>>> library(packagename, quietly= T)\n>>> \n>>> On Fri, 4 Sept 2026, 13:32 Michael Dewey via R-help, <r-help at r-project.org>\n>>> wrote:\n>>> \n>>>> I think we need more information here.\n>>>> \n>>>> Try running R outside RStudio and then issue\n>>>> \n>>>> install.packages(\"insert a package name here\")\n>>>> \n>>>> then run sessionInfo()\n>>>> \n>>>> and then post all the output here.\n>>>> \n>>>> It would also help to know which CRAN mirror you use.\n>>>> \n>>>> Michael\n>>>> \n>>>> On 03/09/2026 17:45, Halilu Rahaman Alhassan wrote:\n>>>>> Thank you for the response.\n>>>>> \n>>>>> I tried using pacman to load the packages I need, but it was not working\n>>>>> for me. So I decided to download those packages on CRAN . Even though it\n>>>>> was installed successfully, yet, when I try loading each package I get\n>>>> the\n>>>>> response mentioned earlier\n>>>>> \n>>>>> On Thu, 3 Sept 2026, 11:57 Duncan Murdoch, <murdoch.duncan at gmail.com>\n>>>> wrote:\n>>>>> \n>>>>>> On 2026-09-02 7:42 a.m., Halilu Rahaman Alhassan wrote:\n>>>>>>> Dear sir/madam,\n>>>>>>> \n>>>>>>> I guess my message finds you well. Please I am having the supposed\n>>>>>> current\n>>>>>>> R version 4.6.1 for windows. But after downloading the packages, I find\n>>>>>> it\n>>>>>>> difficult loading them on R studio, even though they can be seen under\n>>>>>>> packages. When ever I tried loading them, it tells me that those\n>>>> packages\n>>>>>>> were created under R version 4.7.0. Please I need your help to be able\n>>>> to\n>>>>>>> deal with such problem.\n>>>>>>> \n>>>>>>> Kind regards,\n>>>>>>> Halilu Rahaman Alhassan\n>>>>>>> \n>>>>>>>        [[alternative HTML version deleted]]\n>>>>>> It sounds as though you downloaded the wrong files, but you don't give\n>>>>>> details about how you did the downloads or installed them into R, so I\n>>>>>> can't guess how that happened.\n>>>>>> \n>>>>>> The standard safe way to install packages is to run R and then in R run\n>>>>>> \"install.packages(\"packagename\")\".  It might ask you to specify a\n>>>>>> mirror; generally the first one in the list is safe.  On my system, that\n>>>>>> is displayed as \"0-Cloud\".\n>>>>>> \n>>>>>> If you are running RStudio, then you will get somewhat different\n>>>>>> behaviour because it inserts its own install.packages() function, but it\n>>>>>> should still work.  If not, try it in a plain R session.\n>>>>>> \n>>>>>> Duncan Murdoch\n>>>>>> \n>>>>>> \n>>>>>> \n>>>>> \n>>>>>       [[alternative HTML version deleted]]\n>>>>> \n>>>>> ______________________________________________\n>>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>>> PLEASE do read the posting guide\n>>>> https://www.R-project.org/posting-guide.html\n>>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>> \n>>>> --\n>>>> Michael Dewey\n>>>> \n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>>> https://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>> \n>>> \n>>>         [[alternative HTML version deleted]]\n>>> \n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "At any rate, I suspect that the real issue here is that the OP has been downloading packages directly from CRAN, i.e. from the links that look like this:\n\n----\nDownloads:\n\nPackage source:\tbetaselectr_",
+      "thread_id": "thread-849e3f8f74a5",
+      "thread_depth": 7,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-b44151bb84cf",
+      "message_id": "<A7732020-0837-457C-B3EA-EBD0D8086303@hotmail.com>",
+      "from_name": "Naresh Gurbuxani",
+      "from_email_hash": "df5d90539e2666ddc66f8b815f804e76e9cbe0b9fbf72e62a714b1e3536d5dae",
+      "date": "2026-09-06T13:14:55Z",
+      "subject": "[R] Combine two lattice plots including both plot keys",
+      "subject_clean": "Combine two lattice plots including both plot keys",
+      "in_reply_to": "<CADfFDC7=2eobrsKMXdKSLmq7-OE4iw3uafhm79vXXu2mPjuxCQ@mail.gmail.com>",
+      "references": [
+        "<60401729-6698-48BC-A9F0-317688941D01@hotmail.com>",
+        "<CADfFDC7=2eobrsKMXdKSLmq7-OE4iw3uafhm79vXXu2mPjuxCQ@mail.gmail.com>"
+      ],
+      "body_plain": "This solves my problem.\n\nNow a features request.  The legend at the top shows plot character separately from line.  Is it possible to show plot character superimposed on line?  This feature is already available in some other lattice functions.  For example:\n\nmydt[, xyplot(popstart + popend ~ year, type = c(\"o\", \"g\"), auto.key = (list(columns = 2, space = \"bottom\")))]  # key shows plot points superimposed on plot lines\n\nThanks again,\nNaresh\n\n\nOn Sep 5, 2026, at 10:59?AM, Deepayan Sarkar <deepayan.sarkar at gmail.com> wrote:\n\n\n\nOn Sat, 5 Sept 2026 at 19:58, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com<mailto:naresh_gurbuxani at hotmail.com>> wrote:\n\nWhen I combine two lattice plots, only the first plot keys are\ndisplayed.  Is it possible to show both keys?\n\nIn principle yes, but clearly +.trellis doesn't try hard enough.\n\nYou could do\n\np = popbar + popdot\np$legend = c(popbar$legend, popdot$legend)\np\n\nor more succintly\n\nupdate(popbar + popdot, legend = c(popbar$legend, popdot$legend))\n\nBest,\n-Deepayan\n\n\n\nThanks,\nNaresh\n\nlibrary(data.table)\nlibrary(lattice)\nlibrary(latticeExtra)\n\nmydt <- data.table(year = rep(2020:2025, 2), bird = rep(c(\"duck\",\n\"goose\"), c(6, 6)))\nmydt[, let(popstart = 100 + sample(-10:10, 12, replace = TRUE), popend =\n120 + sample(-10:10, 12, replace = TRUE))]\nmydt[, let(flights = rep(seq(200, by = 10, length.out = 6), 2) +\nsample(-20:20, 12, replace = TRUE))]\nmydt1 <- copy(mydt)[, let(obspot = \"lake\")]\nmydt2 <- copy(mydt)[, let(obspot = \"river\")]\nmydt <- rbindlist(list(mydt1, mydt2))\nmydtmelt <- melt(mydt, id.vars = c(\"year\", \"bird\", \"obspot\"),\nmeasure.vars = c(\"popstart\", \"flights\"))\npopbar <- mydtmelt[, barchart(value ~ as.character(year) | bird +\nobspot, groups = variable, horizontal = FALSE, stack = TRUE, auto.key =\nlist(columns = 2, space = \"bottom\")) |> useOuterStrips()]\npopdot <-  mydt[, dotplot(popend ~ as.character(year) | bird + obspot,\ntype = \"o\", panel = function(x, y, ...){panel.dotplot(x, y, ...,\ncol.line = \"transparent\")}, key = simpleKey(\"popend\", space = \"top\",\nlines = TRUE, points = TRUE)) |> useOuterStrips()]\n\npopbar # shows key at the bottom\npopdot # shows key at the top\n\npopbar + popdot # bottom key only\n\n______________________________________________\nR-help at r-project.org<mailto:R-help at r-project.org> mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>\nand provide commented, minimal, self-contained, reproducible code.\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This solves my problem.\n\nNow a features request.  The legend at the top shows plot character separately from line.  Is it possible to show plot character superimposed on line?  This feature is already",
+      "thread_id": "thread-8e7b1f9059b0",
+      "thread_depth": 2,
+      "month": "2026-09"
     }
   ],
   "threads": [
     {
       "id": "thread-849e3f8f74a5",
       "subject": "Problem in loading packages",
-      "message_count": 7,
+      "message_count": 8,
       "participants": [
         "CALUM POLWART",
         "Duncan Murdoch",
         "Halilu Rahaman Alhassan",
         "Michael Dewey",
+        "Peter Dalgaard",
         "Rui Barradas"
       ],
       "started": "2026-09-02T11:42:07Z",
-      "last_reply": "2026-09-04T17:05:14Z",
+      "last_reply": "2026-09-06T08:19:52Z",
       "root_message_id": "msg-849e3f8f74a5"
     },
     {
@@ -242,13 +286,13 @@
     {
       "id": "thread-8e7b1f9059b0",
       "subject": "Combine two lattice plots including both plot keys",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Deepayan Sarkar",
         "Naresh Gurbuxani"
       ],
       "started": "2026-09-05T14:28:23Z",
-      "last_reply": "2026-09-05T14:59:23Z",
+      "last_reply": "2026-09-06T13:14:55Z",
       "root_message_id": "msg-8e7b1f9059b0"
     }
   ]

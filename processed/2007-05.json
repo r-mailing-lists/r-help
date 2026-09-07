@@ -18151,6 +18151,22 @@
       "month": "2007-05"
     },
     {
+      "id": "msg-40a303a50327",
+      "message_id": "<10624007.post@talk.nabble.com>",
+      "from_name": "CrazyJoe",
+      "from_email_hash": "a4217c202ab5a4f5b411831d6e9ee2ae25ae1012a2e6cb2f7790764c129a96ae",
+      "date": "2007-05-15T14:39:20Z",
+      "subject": "[R] Anova Test",
+      "subject_clean": "Anova Test",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am very new to R. I am trying to perform an Anova Test and see if it\ndiffers or not.\n\nBasically, i have 4 tests and 1 control.\n\nTester\nTest1 Test2  Test3  Test4  Control\n20       25      15        10       17\n\nThe inference is at alpha=0.05. they are all independent. I am trying to\nfind if they differ or the same.\n\n\n> test1<-c(20)\n> test2<-c(25)\n> test3<-c(15)\n> test4<-c(17)\n> test4<-c(10)\n> control<-c(17)\n> tester<-data.frame(test1,test2,test3,test4,control)\n> tester\n  test1 test2 test3 test4 control\n1    20    25    15    10      17\n> anova(lm(tester))\nAnalysis of Variance Table\n\nResponse: test1\n          Df Sum Sq Mean Sq F value Pr(>F)\nResiduals  0      0  \n\nI think i did something wrong. I need to find the correct F statistic test.\n\nany help.\n\nthanks.\n\n\n-- \nView this message in context: http://www.nabble.com/Anova-Test-tf3758829.html#a10624007\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi,\n\nI am very new to R. I am trying to perform an Anova Test and see if it\ndiffers or not.\n\nBasically, i have 4 tests and 1 control.\n\nTester\nTest1 Test2  Test3  Test4  Control\n20       25      15    ",
+      "thread_id": "thread-40a303a50327",
+      "thread_depth": 0,
+      "month": "2007-05"
+    },
+    {
       "id": "msg-552e97001af0",
       "message_id": "<4649C618.2020703@gmx.net>",
       "from_name": "Stefan Grosse",
@@ -18166,22 +18182,6 @@
       "body_snippet": "the lme4 function you want is probably lmer()\ntype\n?lmer\n\nbtw. your R is very old we are at 2.5.0 ...\n\nStefan\n\nAmelie LESCROEL wrote:\n> Hi - I'm having a problem trying to use the function GLMM() from",
       "thread_id": "thread-28ad525fbf46",
       "thread_depth": 1,
-      "month": "2007-05"
-    },
-    {
-      "id": "msg-40a303a50327",
-      "message_id": "<10624007.post@talk.nabble.com>",
-      "from_name": "CrazyJoe",
-      "from_email_hash": "a4217c202ab5a4f5b411831d6e9ee2ae25ae1012a2e6cb2f7790764c129a96ae",
-      "date": "2007-05-15T14:39:20Z",
-      "subject": "[R] Anova Test",
-      "subject_clean": "Anova Test",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI am very new to R. I am trying to perform an Anova Test and see if it\ndiffers or not.\n\nBasically, i have 4 tests and 1 control.\n\nTester\nTest1 Test2  Test3  Test4  Control\n20       25      15        10       17\n\nThe inference is at alpha=0.05. they are all independent. I am trying to\nfind if they differ or the same.\n\n\n> test1<-c(20)\n> test2<-c(25)\n> test3<-c(15)\n> test4<-c(17)\n> test4<-c(10)\n> control<-c(17)\n> tester<-data.frame(test1,test2,test3,test4,control)\n> tester\n  test1 test2 test3 test4 control\n1    20    25    15    10      17\n> anova(lm(tester))\nAnalysis of Variance Table\n\nResponse: test1\n          Df Sum Sq Mean Sq F value Pr(>F)\nResiduals  0      0  \n\nI think i did something wrong. I need to find the correct F statistic test.\n\nany help.\n\nthanks.\n\n\n-- \nView this message in context: http://www.nabble.com/Anova-Test-tf3758829.html#a10624007\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi,\n\nI am very new to R. I am trying to perform an Anova Test and see if it\ndiffers or not.\n\nBasically, i have 4 tests and 1 control.\n\nTester\nTest1 Test2  Test3  Test4  Control\n20       25      15    ",
-      "thread_id": "thread-40a303a50327",
-      "thread_depth": 0,
       "month": "2007-05"
     },
     {
@@ -28980,22 +28980,6 @@
       "month": "2007-05"
     },
     {
-      "id": "msg-b226ce14fe25",
-      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
-      "from_name": "Leeds, Mark (IED)",
-      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
-      "date": "2007-05-23T21:05:56Z",
-      "subject": "[R] Changing sequential regression code to call systemfit",
-      "subject_clean": "Changing sequential regression code to call systemfit",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
-      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
-      "thread_id": "thread-b226ce14fe25",
-      "thread_depth": 0,
-      "month": "2007-05"
-    },
-    {
       "id": "msg-95926f9fa9ed",
       "message_id": "<105608.33782.qm@web32815.mail.mud.yahoo.com>",
       "from_name": "John Kane",
@@ -29009,6 +28993,22 @@
       "body_snippet": "I am not completely clear on the duplicate problem but\nhave you had a look at ?unique as an approach to\ndealing with this and at ?merge to handle the actual\ndata merging?\n\n\n--- \"Marshall L. Mdoka\" <mm",
       "thread_id": "thread-7dd64a530637",
       "thread_depth": 1,
+      "month": "2007-05"
+    },
+    {
+      "id": "msg-b226ce14fe25",
+      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
+      "from_name": "Leeds, Mark (IED)",
+      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
+      "date": "2007-05-23T21:05:56Z",
+      "subject": "[R] Changing sequential regression code to call systemfit",
+      "subject_clean": "Changing sequential regression code to call systemfit",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
+      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
+      "thread_id": "thread-b226ce14fe25",
+      "thread_depth": 0,
       "month": "2007-05"
     },
     {
