@@ -32293,24 +32293,6 @@
       "month": "2008-07"
     },
     {
-      "id": "msg-68b7fbbef85d",
-      "message_id": "<c502a9e10807190936t3efb5ae3h3afdc3f389b0c53@mail.gmail.com>",
-      "from_name": "stephen sefick",
-      "from_email_hash": "3749535363b9d644aa3f61b8bf07926d79589e6ccf7dd0b75c56781ee6a32e82",
-      "date": "2008-07-19T16:36:06Z",
-      "subject": "[R] extracting colnames to label plots in a function",
-      "subject_clean": "extracting colnames to label plots in a function",
-      "in_reply_to": "<c502a9e10807190904h77a942bdh5467894974dcac1d@mail.gmail.com>",
-      "references": [
-        "<c502a9e10807190904h77a942bdh5467894974dcac1d@mail.gmail.com>"
-      ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080719/a3dd7c66/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080719/a3dd7c66/attachment.pl>",
-      "thread_id": "thread-6549d2abd15a",
-      "thread_depth": 1,
-      "month": "2008-07"
-    },
-    {
       "id": "msg-1ed4fdf9188c",
       "message_id": "<971536df0807190936w59a0b99fw7239c4c9ad9ea6d1@mail.gmail.com>",
       "from_name": "Gabor Grothendieck",
@@ -32324,6 +32306,24 @@
       ],
       "body_plain": "See ?paste and the collapse argument, in particular:\n\n   plot(d, main = paste(paste(colnames(x), collapse = \" \"),\n\tpaste(colnames(y), collapse = \" \"), sep = \" - \"))\n\nAlso your function sets na.method but never uses it and leaves the par settings\nchanged afterwards.  See ?par.  It could also benefit from the use of ?match.arg\n\nAlso please include drivers that call the posted function so one can\nrun them in\na reproducible manner.\n\n\nOn Sat, Jul 19, 2008 at 12:04 PM, stephen sefick <ssefick at gmail.com> wrote:\n> #this is my little function that I would like to use the column names of the\n> x and y arguments in the function.  I would like it to read\n> #            site1-site2 how would I do this\n> diff.temp <- function(x, y ,use=\"pairwise.complete.obs\")\n> {\n>    na.method <- pmatch(use, c(\"all.obs\", \"complete.obs\",\n>    \"pairwise.complete.obs\"))\n>    par(mfrow=c(2,1))\n>    d <- (x-y)\n>    plot(d, main=\"paste(colnames(x))-paste(colnames(y))\")\n>    plot(density(na.omit(coredata(d))))\n> }\n>\n> --\n> Let's not spend our time and resources thinking about things that are so\n> little or so large that all they really do for us is puff us up and make us\n> feel like gods. We are mammals, and have not exhausted the annoying little\n> problems of being mammals.\n>\n> -K. Mullis\n>\n>        [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
       "body_snippet": "See ?paste and the collapse argument, in particular:\n\n   plot(d, main = paste(paste(colnames(x), collapse = \" \"),\n\tpaste(colnames(y), collapse = \" \"), sep = \" - \"))\n\nAlso your function sets na.method ",
+      "thread_id": "thread-6549d2abd15a",
+      "thread_depth": 1,
+      "month": "2008-07"
+    },
+    {
+      "id": "msg-68b7fbbef85d",
+      "message_id": "<c502a9e10807190936t3efb5ae3h3afdc3f389b0c53@mail.gmail.com>",
+      "from_name": "stephen sefick",
+      "from_email_hash": "3749535363b9d644aa3f61b8bf07926d79589e6ccf7dd0b75c56781ee6a32e82",
+      "date": "2008-07-19T16:36:06Z",
+      "subject": "[R] extracting colnames to label plots in a function",
+      "subject_clean": "extracting colnames to label plots in a function",
+      "in_reply_to": "<c502a9e10807190904h77a942bdh5467894974dcac1d@mail.gmail.com>",
+      "references": [
+        "<c502a9e10807190904h77a942bdh5467894974dcac1d@mail.gmail.com>"
+      ],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080719/a3dd7c66/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20080719/a3dd7c66/attachment.pl>",
       "thread_id": "thread-6549d2abd15a",
       "thread_depth": 1,
       "month": "2008-07"
