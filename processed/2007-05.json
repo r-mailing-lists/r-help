@@ -28980,22 +28980,6 @@
       "month": "2007-05"
     },
     {
-      "id": "msg-b226ce14fe25",
-      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
-      "from_name": "Leeds, Mark (IED)",
-      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
-      "date": "2007-05-23T21:05:56Z",
-      "subject": "[R] Changing sequential regression code to call systemfit",
-      "subject_clean": "Changing sequential regression code to call systemfit",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
-      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
-      "thread_id": "thread-b226ce14fe25",
-      "thread_depth": 0,
-      "month": "2007-05"
-    },
-    {
       "id": "msg-95926f9fa9ed",
       "message_id": "<105608.33782.qm@web32815.mail.mud.yahoo.com>",
       "from_name": "John Kane",
@@ -29009,6 +28993,22 @@
       "body_snippet": "I am not completely clear on the duplicate problem but\nhave you had a look at ?unique as an approach to\ndealing with this and at ?merge to handle the actual\ndata merging?\n\n\n--- \"Marshall L. Mdoka\" <mm",
       "thread_id": "thread-7dd64a530637",
       "thread_depth": 1,
+      "month": "2007-05"
+    },
+    {
+      "id": "msg-b226ce14fe25",
+      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
+      "from_name": "Leeds, Mark (IED)",
+      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
+      "date": "2007-05-23T21:05:56Z",
+      "subject": "[R] Changing sequential regression code to call systemfit",
+      "subject_clean": "Changing sequential regression code to call systemfit",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
+      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
+      "thread_id": "thread-b226ce14fe25",
+      "thread_depth": 0,
       "month": "2007-05"
     },
     {
