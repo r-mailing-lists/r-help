@@ -4357,22 +4357,6 @@
       "month": "2004-07"
     },
     {
-      "id": "msg-4e9ebf537766",
-      "message_id": "<14A8E742-D044-11D8-BD00-000A9577009E@pcbi.upenn.edu>",
-      "from_name": "Aaron J. Mackey",
-      "from_email_hash": "d8912bdb09acdf7ad60595c3a33671deb3fa1cdd3e7b6d4e5c8f6804f6d51f96",
-      "date": "2004-07-06T12:17:55Z",
-      "subject": "[R] vectorizing sapply() code (Modified by Aaron J. Mackey)",
-      "subject_clean": "vectorizing sapply() code (Modified by Aaron J. Mackey)",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "[ Not sure why, but the first two times I sent this it never seemed to \ngo through; apologies if you're seeing this thrice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbetter/quicker with some savvy R vector tricks; any help to make this \nrun a bit faster would be greatly appreciated; I'm particularly stuck \non how to calculate using \"row-wise\" vectors without iterating \nexplicitly over the dataframe or table ...\n\nlibrary(stats4);\nd <- data.frame( ix=c(0,1,2,3,4,5,6,7),\n                  ct=c(253987,  9596, 18680,  2630,  8224,  3590,  5534, \n18937),\n                  A=c(      0,     1,     0,     1,     0,     1,     0, \n     1),\n                  B=c(      0,     0,     1,     1,     0,     0,     1, \n     1),\n                  C=c(      0,     0,     0,     0,     1,     1,     1, \n     1)\n                );\nct <- round(logb(length(d$ix), 2))\nll <- function( th=0.5,\n                 a1=log(0.5), a2=log(0.5), a3=log(0.5),\n                 b1=log(0.5), b2=log(0.5), b3=log(0.5)\n               ) {\n   a <- exp(sapply(1:ct, function (x) { get(paste(\"a\", x, sep=\"\")) }));\n   b <- exp(sapply(1:ct, function (x) { get(paste(\"b\", x, sep=\"\")) }));\n   -sum( d$ct * log( sapply( d$ix,\n                             function (ix, th, a, b) {\n                               x <- d[ix+1,3:(ct+2)]\n                               (th     * prod((b ^ (1-x)) * ((1-b) ^ x   \n  ))) +\n                               ((1-th) * prod((a ^ x    ) * ((1-a) ^ \n(1-x))))\n                             },\n                             th, a, b\n                           )\n                   )\n   );\n}\n\nml <- mle(ll,\n           lower=c(0+1e-5, rep(log(0+1e-8), 2*ct)),\n           upper=c(1-1e-5, rep(log(1-1e-8), 2*ct)),\n           method=\"L-BFGS-B\"\n          );\n\nFor those interested in the math, this is the MLE procedure to estimate \nthe false positive/false negative rates (a and b) of three diagnostic \n(A, B and C) tests that have the observed performance recapitulated in \ndataframe \"d\", but no \"gold standard\" (sometimes called \"latent class \nanalysis\", or LCA).\n\nThanks for any help,\n\n-Aaron",
-      "body_snippet": "[ Not sure why, but the first two times I sent this it never seemed to \ngo through; apologies if you're seeing this thrice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbette",
-      "thread_id": "thread-4e9ebf537766",
-      "thread_depth": 0,
-      "month": "2004-07"
-    },
-    {
       "id": "msg-fdf018391486",
       "message_id": "<53CCF276-D00C-11D8-BD00-000A9577009E@pcbi.upenn.edu>",
       "from_name": "Aaron J. Mackey",
@@ -4385,6 +4369,22 @@
       "body_plain": "[ Not sure why, but the first time I sent this it never seemed to go \nthrough; apologies if you're seeing this twice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbetter/quicker with some savvy R vector tricks; any help to make this \nrun a bit faster would be greatly appreciated; I'm particularly stuck \non how to calculate using \"row-wise\" vectors without iterating \nexplicitly over the dataframe or table ...\n\nlibrary(stats4);\nd <- data.frame( ix=c(0,1,2,3,4,5,6,7),\n                  ct=c(253987,  9596, 18680,  2630,  8224,  3590,  5534, \n18937),\n                  A=c(      0,     1,     0,     1,     0,     1,     0, \n     1),\n                  B=c(      0,     0,     1,     1,     0,     0,     1, \n     1),\n                  C=c(      0,     0,     0,     0,     1,     1,     1, \n     1)\n                );\nct <- round(logb(length(d$ix), 2))\nll <- function( th=0.5,\n                 a1=log(0.5), a2=log(0.5), a3=log(0.5),\n                 b1=log(0.5), b2=log(0.5), b3=log(0.5)\n               ) {\n   a <- exp(sapply(1:ct, function (x) { get(paste(\"a\", x, sep=\"\")) }));\n   b <- exp(sapply(1:ct, function (x) { get(paste(\"b\", x, sep=\"\")) }));\n   -sum( d$ct * log( sapply( d$ix,\n                             function (ix, th, a, b) {\n                               x <- d[ix+1,3:(ct+2)]\n                               (th     * prod((b ^ (1-x)) * ((1-b) ^ x   \n  ))) +\n                               ((1-th) * prod((a ^ x    ) * ((1-a) ^ \n(1-x))))\n                             },\n                             th, a, b\n                           )\n                   )\n   );\n}\n\nml <- mle(ll,\n           lower=c(0+1e-5, rep(log(0+1e-8), 2*ct)),\n           upper=c(1-1e-5, rep(log(1-1e-8), 2*ct)),\n           method=\"L-BFGS-B\"\n          );\n\nFor those interested in the math, this is the MLE procedure to estimate \nthe false positive/false negative rates (a and b) of three diagnostic \n(A, B and C) tests that have the observed performance recapitulated in \ndataframe \"d\", but no \"gold standard\" (sometimes called \"latent class \nanalysis\", or LCA).\n\nThanks for any help,\n\n-Aaron",
       "body_snippet": "[ Not sure why, but the first time I sent this it never seemed to go \nthrough; apologies if you're seeing this twice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbetter/quic",
       "thread_id": "thread-fdf018391486",
+      "thread_depth": 0,
+      "month": "2004-07"
+    },
+    {
+      "id": "msg-4e9ebf537766",
+      "message_id": "<14A8E742-D044-11D8-BD00-000A9577009E@pcbi.upenn.edu>",
+      "from_name": "Aaron J. Mackey",
+      "from_email_hash": "d8912bdb09acdf7ad60595c3a33671deb3fa1cdd3e7b6d4e5c8f6804f6d51f96",
+      "date": "2004-07-06T12:17:55Z",
+      "subject": "[R] vectorizing sapply() code (Modified by Aaron J. Mackey)",
+      "subject_clean": "vectorizing sapply() code (Modified by Aaron J. Mackey)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "[ Not sure why, but the first two times I sent this it never seemed to \ngo through; apologies if you're seeing this thrice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbetter/quicker with some savvy R vector tricks; any help to make this \nrun a bit faster would be greatly appreciated; I'm particularly stuck \non how to calculate using \"row-wise\" vectors without iterating \nexplicitly over the dataframe or table ...\n\nlibrary(stats4);\nd <- data.frame( ix=c(0,1,2,3,4,5,6,7),\n                  ct=c(253987,  9596, 18680,  2630,  8224,  3590,  5534, \n18937),\n                  A=c(      0,     1,     0,     1,     0,     1,     0, \n     1),\n                  B=c(      0,     0,     1,     1,     0,     0,     1, \n     1),\n                  C=c(      0,     0,     0,     0,     1,     1,     1, \n     1)\n                );\nct <- round(logb(length(d$ix), 2))\nll <- function( th=0.5,\n                 a1=log(0.5), a2=log(0.5), a3=log(0.5),\n                 b1=log(0.5), b2=log(0.5), b3=log(0.5)\n               ) {\n   a <- exp(sapply(1:ct, function (x) { get(paste(\"a\", x, sep=\"\")) }));\n   b <- exp(sapply(1:ct, function (x) { get(paste(\"b\", x, sep=\"\")) }));\n   -sum( d$ct * log( sapply( d$ix,\n                             function (ix, th, a, b) {\n                               x <- d[ix+1,3:(ct+2)]\n                               (th     * prod((b ^ (1-x)) * ((1-b) ^ x   \n  ))) +\n                               ((1-th) * prod((a ^ x    ) * ((1-a) ^ \n(1-x))))\n                             },\n                             th, a, b\n                           )\n                   )\n   );\n}\n\nml <- mle(ll,\n           lower=c(0+1e-5, rep(log(0+1e-8), 2*ct)),\n           upper=c(1-1e-5, rep(log(1-1e-8), 2*ct)),\n           method=\"L-BFGS-B\"\n          );\n\nFor those interested in the math, this is the MLE procedure to estimate \nthe false positive/false negative rates (a and b) of three diagnostic \n(A, B and C) tests that have the observed performance recapitulated in \ndataframe \"d\", but no \"gold standard\" (sometimes called \"latent class \nanalysis\", or LCA).\n\nThanks for any help,\n\n-Aaron",
+      "body_snippet": "[ Not sure why, but the first two times I sent this it never seemed to \ngo through; apologies if you're seeing this thrice ... ]\n\nI have some fully functional code that I'm guessing can be done \nbette",
+      "thread_id": "thread-4e9ebf537766",
       "thread_depth": 0,
       "month": "2004-07"
     },

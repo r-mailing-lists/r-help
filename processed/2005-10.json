@@ -29246,6 +29246,22 @@
       "month": "2005-10"
     },
     {
+      "id": "msg-fe99f977b6c3",
+      "message_id": "<43624B4A.5020107@unibas.ch>",
+      "from_name": "Florent Baty",
+      "from_email_hash": "5eabf2ef653a0856c1e096f6e2d4308efb7447c7aeb12567fb56ce31325c7a2f",
+      "date": "2005-10-28T16:01:14Z",
+      "subject": "[R] Calling R functions from C",
+      "subject_clean": "Calling R functions from C",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R users,\n\nI read on the \"Introduction to the .C Interface to R\" by Peng & Leeuw \n(http://www.biostat.jhsph.edu/~rpeng/docs/interface.pdf) that it is \npossible to use a few R functions (such as \"dnorm\") within C by \nincluding the \"Rmath.h\" header file in your C code:\ne.g.\n\n#include <R.h>\n#include <Rmath.h>\nvoid kernel_smooth(double *x, int *n, double *xpts, int *nxpts,\ndouble *h, double *result)\n{\nint i, j;\ndouble d, ksum;\nfor(i=0; i < *nxpts; i++) {\nksum = 0;\nfor(j=0; j < *n; j++) {\nd = xpts[i] - x[j];\nksum += dnorm(d / *h, 0, 1, 0);\n}\nresult[i] = ksum / ((*n) * (*h));\n}\n}\n\n\nIn the manual \"Writing R extensions\" there is also a list of special \nfunctions which can be called in C.\n\nI was wondering whether there is a way to call any other R functions \nsimilarly. Is there any documented exemple available somewhere?\n\nThanks a lot for your help,\n\nFlorent",
+      "body_snippet": "Dear R users,\n\nI read on the \"Introduction to the .C Interface to R\" by Peng & Leeuw \n(http://www.biostat.jhsph.edu/~rpeng/docs/interface.pdf) that it is \npossible to use a few R functions (such as \"d",
+      "thread_id": "thread-fe99f977b6c3",
+      "thread_depth": 0,
+      "month": "2005-10"
+    },
+    {
       "id": "msg-d164cf8b104a",
       "message_id": "<43624B4A.2020406@montana.edu>",
       "from_name": "Dave Roberts",
@@ -29261,22 +29277,6 @@
       "body_snippet": "Federico,\n\n     There doesn't appear to be an instance of the value you want to \nchange in your example, so I had to improvise.  Part of the problem may \nbe that the dataframe is composed of factors, ",
       "thread_id": "thread-e60876a39041",
       "thread_depth": 1,
-      "month": "2005-10"
-    },
-    {
-      "id": "msg-fe99f977b6c3",
-      "message_id": "<43624B4A.5020107@unibas.ch>",
-      "from_name": "Florent Baty",
-      "from_email_hash": "5eabf2ef653a0856c1e096f6e2d4308efb7447c7aeb12567fb56ce31325c7a2f",
-      "date": "2005-10-28T16:01:14Z",
-      "subject": "[R] Calling R functions from C",
-      "subject_clean": "Calling R functions from C",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear R users,\n\nI read on the \"Introduction to the .C Interface to R\" by Peng & Leeuw \n(http://www.biostat.jhsph.edu/~rpeng/docs/interface.pdf) that it is \npossible to use a few R functions (such as \"dnorm\") within C by \nincluding the \"Rmath.h\" header file in your C code:\ne.g.\n\n#include <R.h>\n#include <Rmath.h>\nvoid kernel_smooth(double *x, int *n, double *xpts, int *nxpts,\ndouble *h, double *result)\n{\nint i, j;\ndouble d, ksum;\nfor(i=0; i < *nxpts; i++) {\nksum = 0;\nfor(j=0; j < *n; j++) {\nd = xpts[i] - x[j];\nksum += dnorm(d / *h, 0, 1, 0);\n}\nresult[i] = ksum / ((*n) * (*h));\n}\n}\n\n\nIn the manual \"Writing R extensions\" there is also a list of special \nfunctions which can be called in C.\n\nI was wondering whether there is a way to call any other R functions \nsimilarly. Is there any documented exemple available somewhere?\n\nThanks a lot for your help,\n\nFlorent",
-      "body_snippet": "Dear R users,\n\nI read on the \"Introduction to the .C Interface to R\" by Peng & Leeuw \n(http://www.biostat.jhsph.edu/~rpeng/docs/interface.pdf) that it is \npossible to use a few R functions (such as \"d",
-      "thread_id": "thread-fe99f977b6c3",
-      "thread_depth": 0,
       "month": "2005-10"
     },
     {
