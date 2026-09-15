@@ -4389,24 +4389,6 @@
       "month": "2005-05"
     },
     {
-      "id": "msg-101747ba69ff",
-      "message_id": "<Pine.LNX.4.61.0505041704550.7964@gannet.stats>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2005-05-04T16:06:25Z",
-      "subject": "[R] stratified bootstrap with boot",
-      "subject_clean": "stratified bootstrap with boot",
-      "in_reply_to": "<1115219771.4278e73be0dff@mail-www2.oit.umass.edu>",
-      "references": [
-        "<1115219771.4278e73be0dff@mail-www2.oit.umass.edu>"
-      ],
-      "body_plain": "You asked for a stratified bootstrap, not a stratified estimator.  This is \nexplained in the reference (Davison & Hinkley).\n\nOn Wed, 4 May 2005, Richard Chandler wrote:\n\n> Hello,\n>\n> I am new to R, and am having trouble getting the output I want from a\n> stratified bootstrap. I didn't recieve a reply the first time I posted\n> this question so I have tried to make it more clear. My data frame\n> (denboot) is set up as follows:\n>\n>        SITE cswa parea treat\n> 1      BeanA    3  1.20     m\n> 2     BeanBC    3  1.05     m\n> 3      BeanD    1  0.93     m\n> 4     BlackB    1  1.01     m\n> 5     Brooks    3  4.00     b\n> 6      BullL    3  1.32     b\n> 7      BullM    1  0.20     m\n> 8      BullU    4  2.06     b\n> ...\n>\n> #Here is my code:\n>\n> cswafun <- function(denboot, i) sum(cswa[i])/(sum(parea[i])\n> attach(denboot)\n> cswa.boot <- boot(denboot, cswafun, R = 10000, strata = treat)\n>\n> #Here is the output\n>\n> Call:\n> boot(data = denboot, statistic = cswafun, R = 10000, strata = treat)\n>\n>\n> Bootstrap Statistics :\n>    original     bias    std. error\n> t1* 1.109612 0.02641786   0.2032927\n>\n> #Can anyone tell me why I'm not getting two estimates of\n> sum(cswa)/sum(parea), one for each #strata ('b' and 'm')? Any help\n> would be appreciated. Thanks\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "You asked for a stratified bootstrap, not a stratified estimator.  This is \nexplained in the reference (Davison & Hinkley).\n\nOn Wed, 4 May 2005, Richard Chandler wrote:\n\n> Hello,\n>\n> I am new to R, an",
-      "thread_id": "thread-3547e217bd7d",
-      "thread_depth": 1,
-      "month": "2005-05"
-    },
-    {
       "id": "msg-f9079d3de28e",
       "message_id": "<1115222785.1613.47.camel@localhost>",
       "from_name": "Paul DeBruicker",
@@ -4423,6 +4405,24 @@
       "body_snippet": "Hi Walmir,\n\nHere is the long version of Frank Harrell's answer.  \n\nhttp://www.pitt.edu/~wpilib/statfaq/regrfaq.html\n\n\nPaul\n\n\nOn Tue, 2005-05-03 at 08:21 -0500, Frank E Harrell Jr wrote:\n> walmir-rodri",
       "thread_id": "thread-8453d546aeb1",
       "thread_depth": 2,
+      "month": "2005-05"
+    },
+    {
+      "id": "msg-101747ba69ff",
+      "message_id": "<Pine.LNX.4.61.0505041704550.7964@gannet.stats>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2005-05-04T16:06:25Z",
+      "subject": "[R] stratified bootstrap with boot",
+      "subject_clean": "stratified bootstrap with boot",
+      "in_reply_to": "<1115219771.4278e73be0dff@mail-www2.oit.umass.edu>",
+      "references": [
+        "<1115219771.4278e73be0dff@mail-www2.oit.umass.edu>"
+      ],
+      "body_plain": "You asked for a stratified bootstrap, not a stratified estimator.  This is \nexplained in the reference (Davison & Hinkley).\n\nOn Wed, 4 May 2005, Richard Chandler wrote:\n\n> Hello,\n>\n> I am new to R, and am having trouble getting the output I want from a\n> stratified bootstrap. I didn't recieve a reply the first time I posted\n> this question so I have tried to make it more clear. My data frame\n> (denboot) is set up as follows:\n>\n>        SITE cswa parea treat\n> 1      BeanA    3  1.20     m\n> 2     BeanBC    3  1.05     m\n> 3      BeanD    1  0.93     m\n> 4     BlackB    1  1.01     m\n> 5     Brooks    3  4.00     b\n> 6      BullL    3  1.32     b\n> 7      BullM    1  0.20     m\n> 8      BullU    4  2.06     b\n> ...\n>\n> #Here is my code:\n>\n> cswafun <- function(denboot, i) sum(cswa[i])/(sum(parea[i])\n> attach(denboot)\n> cswa.boot <- boot(denboot, cswafun, R = 10000, strata = treat)\n>\n> #Here is the output\n>\n> Call:\n> boot(data = denboot, statistic = cswafun, R = 10000, strata = treat)\n>\n>\n> Bootstrap Statistics :\n>    original     bias    std. error\n> t1* 1.109612 0.02641786   0.2032927\n>\n> #Can anyone tell me why I'm not getting two estimates of\n> sum(cswa)/sum(parea), one for each #strata ('b' and 'm')? Any help\n> would be appreciated. Thanks\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "You asked for a stratified bootstrap, not a stratified estimator.  This is \nexplained in the reference (Davison & Hinkley).\n\nOn Wed, 4 May 2005, Richard Chandler wrote:\n\n> Hello,\n>\n> I am new to R, an",
+      "thread_id": "thread-3547e217bd7d",
+      "thread_depth": 1,
       "month": "2005-05"
     },
     {
