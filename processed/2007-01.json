@@ -363,6 +363,24 @@
       "month": "2007-01"
     },
     {
+      "id": "msg-1c867d205c48",
+      "message_id": "<loom.20070101T200956-783@post.gmane.org>",
+      "from_name": "Dieter Menne",
+      "from_email_hash": "c7274b9bd46c9b3353bed705ed75d56d9deb9cf175a43e7f3c56be62d1d3d880",
+      "date": "2007-01-01T19:13:07Z",
+      "subject": "[R] Help with filled.contour()",
+      "subject_clean": "Help with filled.contour()",
+      "in_reply_to": null,
+      "references": [
+        "<758246BF-9625-4F20-948A-CFC120689A83@virginia.edu>"
+      ],
+      "body_plain": "Michael Kubovy <kubovy <at> virginia.edu> writes:\n\n> \n> The following plot is a first approximation to what I need:\n.. see below \n\n> ***********************************\n> It has four drawbacks. I would like:\n> (1) to remove the white grid;\n> (2) to remove the white contours;\n> (3) its appearance to be smooth;\n> (4) to remove the key.\n\n\nIn partial fulfillment of your requirements, increasing the levels gives a nice\nsmooth plot.\n\nmu1 <- 0\nmu2 <- 5\ns <- 1\nx <- seq(-2.5, 7.5, length = 41)\ny <- seq(-2.5, 2.5, length = 41)\nf <- function(x,y){\nterm1 <- 1/(2*pi*sqrt(s*s))\nterm2 <- -1/2\nterm3 <- (x - mu1)^2/s\nterm4 <- (y - mu1)^2/s\nterm5 <- (x - mu2)^2/s\nterm1*(.5 * exp(term2*(term3 + term4)) + .5 * exp(term2*(term5 +  \nterm4)))\n}\n\nz <- outer(x, y, f)\npersp(x, y, z)\nrequire(grDevices)\nfilled.contour(x, y, z, axes = F, frame.plot = F, asp = 1,\n     col = palette(gray(seq(0, 0.9, len = 500))), nlevels = 500)\n\nI thought that lattice would be more flexible, and getting rid of the keys was\neasy, only I could not get the smooth plot. Deepayan, are we missing something?\n\nlibrary(lattice)\ndt <- expand.grid(x=x,y=y)\ndt$z <- apply(dt, 1,function(xy)  f(xy[1],xy[2]))\ncol.regions = palette(gray(seq(0, 0.9, len = 500)))\ncontourplot(z~x*y,data=dt,cuts=20,col.regions=col.regions,colorkey=FALSE,\n  contour=TRUE,region=TRUE)\n\n\nDieter",
+      "body_snippet": "Michael Kubovy <kubovy <at> virginia.edu> writes:\n\n> \n> The following plot is a first approximation to what I need:\n.. see below \n\n> ***********************************\n> It has four drawbacks. I woul",
+      "thread_id": "thread-24684a355112",
+      "thread_depth": 1,
+      "month": "2007-01"
+    },
+    {
       "id": "msg-c4956854e841",
       "message_id": "<3f2154540701011113o5cae928en6927ce6b38da5fb0@mail.gmail.com>",
       "from_name": "Raymond Balise",
@@ -378,24 +396,6 @@
       "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070101/9d0716a2/attachment.pl",
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20070101/9d0716a2/attachment.pl",
       "thread_id": "thread-a2a4189644fb",
-      "thread_depth": 1,
-      "month": "2007-01"
-    },
-    {
-      "id": "msg-1c867d205c48",
-      "message_id": "<loom.20070101T200956-783@post.gmane.org>",
-      "from_name": "Dieter Menne",
-      "from_email_hash": "c7274b9bd46c9b3353bed705ed75d56d9deb9cf175a43e7f3c56be62d1d3d880",
-      "date": "2007-01-01T19:13:07Z",
-      "subject": "[R] Help with filled.contour()",
-      "subject_clean": "Help with filled.contour()",
-      "in_reply_to": null,
-      "references": [
-        "<758246BF-9625-4F20-948A-CFC120689A83@virginia.edu>"
-      ],
-      "body_plain": "Michael Kubovy <kubovy <at> virginia.edu> writes:\n\n> \n> The following plot is a first approximation to what I need:\n.. see below \n\n> ***********************************\n> It has four drawbacks. I would like:\n> (1) to remove the white grid;\n> (2) to remove the white contours;\n> (3) its appearance to be smooth;\n> (4) to remove the key.\n\n\nIn partial fulfillment of your requirements, increasing the levels gives a nice\nsmooth plot.\n\nmu1 <- 0\nmu2 <- 5\ns <- 1\nx <- seq(-2.5, 7.5, length = 41)\ny <- seq(-2.5, 2.5, length = 41)\nf <- function(x,y){\nterm1 <- 1/(2*pi*sqrt(s*s))\nterm2 <- -1/2\nterm3 <- (x - mu1)^2/s\nterm4 <- (y - mu1)^2/s\nterm5 <- (x - mu2)^2/s\nterm1*(.5 * exp(term2*(term3 + term4)) + .5 * exp(term2*(term5 +  \nterm4)))\n}\n\nz <- outer(x, y, f)\npersp(x, y, z)\nrequire(grDevices)\nfilled.contour(x, y, z, axes = F, frame.plot = F, asp = 1,\n     col = palette(gray(seq(0, 0.9, len = 500))), nlevels = 500)\n\nI thought that lattice would be more flexible, and getting rid of the keys was\neasy, only I could not get the smooth plot. Deepayan, are we missing something?\n\nlibrary(lattice)\ndt <- expand.grid(x=x,y=y)\ndt$z <- apply(dt, 1,function(xy)  f(xy[1],xy[2]))\ncol.regions = palette(gray(seq(0, 0.9, len = 500)))\ncontourplot(z~x*y,data=dt,cuts=20,col.regions=col.regions,colorkey=FALSE,\n  contour=TRUE,region=TRUE)\n\n\nDieter",
-      "body_snippet": "Michael Kubovy <kubovy <at> virginia.edu> writes:\n\n> \n> The following plot is a first approximation to what I need:\n.. see below \n\n> ***********************************\n> It has four drawbacks. I woul",
-      "thread_id": "thread-24684a355112",
       "thread_depth": 1,
       "month": "2007-01"
     },
