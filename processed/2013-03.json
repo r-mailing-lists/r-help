@@ -2212,22 +2212,6 @@
       "month": "2013-03"
     },
     {
-      "id": "msg-2a486e4c2080",
-      "message_id": "<D18FEA87-9609-4FD9-BB22-74D1BF91613A@uni-ulm.de>",
-      "from_name": "Markus Kösters",
-      "from_email_hash": "f5447e4ddef9c6e78a1caf948bab299d11e06bcb39c7d97c59ec6900625b625f",
-      "date": "2013-03-02T22:31:17Z",
-      "subject": "[R] Metafor \"SMCR\" Pre-Post Effect sizes",
-      "subject_clean": "Metafor \"SMCR\" Pre-Post Effect sizes",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130302/cdcec6e3/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130302/cdcec6e3/attachment.pl>",
-      "thread_id": "thread-2a486e4c2080",
-      "thread_depth": 0,
-      "month": "2013-03"
-    },
-    {
       "id": "msg-eaf943ec3a52",
       "message_id": "<CAAmySGPLiqJPGh2Dx5kXN6_gD0_VVMfcEkdYBCV350Udy9GPdg@mail.gmail.com>",
       "from_name": "R. Michael Weylandt",
@@ -2245,6 +2229,22 @@
       "body_snippet": "Based on your comments in the (not-a-)bug report, I *think* this might help:\n\nquanttrader.info/public/betterHedgeRatios.pdf\n\nor more generally, the idea of total least squares regression.\n\nCheers,\nMW\n",
       "thread_id": "thread-00978bb4b953",
       "thread_depth": 3,
+      "month": "2013-03"
+    },
+    {
+      "id": "msg-2a486e4c2080",
+      "message_id": "<D18FEA87-9609-4FD9-BB22-74D1BF91613A@uni-ulm.de>",
+      "from_name": "Markus Kösters",
+      "from_email_hash": "f5447e4ddef9c6e78a1caf948bab299d11e06bcb39c7d97c59ec6900625b625f",
+      "date": "2013-03-02T22:31:17Z",
+      "subject": "[R] Metafor \"SMCR\" Pre-Post Effect sizes",
+      "subject_clean": "Metafor \"SMCR\" Pre-Post Effect sizes",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130302/cdcec6e3/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130302/cdcec6e3/attachment.pl>",
+      "thread_id": "thread-2a486e4c2080",
+      "thread_depth": 0,
       "month": "2013-03"
     },
     {
@@ -34946,6 +34946,24 @@
       "month": "2013-03"
     },
     {
+      "id": "msg-d45422c98f6f",
+      "message_id": "<1364400452257-4662619.post@n4.nabble.com>",
+      "from_name": "rm",
+      "from_email_hash": "7c7836e3af4126b94059a12fd675ef15b6556802ad1558c9ce66ee3a0fdd6492",
+      "date": "2013-03-27T16:07:32Z",
+      "subject": "[R] Weighted Kaplan-Meier estimates with R",
+      "subject_clean": "Weighted Kaplan-Meier estimates with R",
+      "in_reply_to": "<51519C07.3070404@mayo.edu>",
+      "references": [
+        "<51519C07.3070404@mayo.edu>"
+      ],
+      "body_plain": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package survival, I encountered the issue of how to draw survival\ncurves.  Apparently the implementations in the two packages differ, as I\nshow below.\n\nI would very much welcome your views, since the tail of the survival curve\nhas a major impact on the interpretation of my results. In my data, the last\n?death? occurs at 2094 days, while the last censoring time is 3297 days.  If\npossible, I would like to say something about the probability between 2100\ndays and 3300 days.\n\nSo, my question is that after the last observed death, in the very simple\nexample below at 883 days, how should one draw the survival curve? The graph\nproduced by svykm (package survey) ends at 883 days, whereas survfit\n(package survival) continues the graph all the way to the last censoring\ntime, which is at 1022 days.\n\nPlease run the code below to see my point. There are no weights. With\nweights, I face the same issue.\n\nrequire(survival)\nlungSubSet <- lung\nS <- Surv(lung$time,lung$status)\nsKm <- survfit(S~1)\n##\nrequire(survey)\nsvyDesignObject<- svydesign(id=~1,weights=~1,data=lungSubSet)\nsvyKm <- svykm(S~1,design=svyDesignObject,se=T)\n##\nplot(svyKm,xlim=c(0,1200))\nlines(sKm,conf.int=T,mark.time=F,col='green')\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Re-Weighted-Kaplan-Meier-estimates-with-R-tp4662494p4662619.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package surviva",
+      "thread_id": "thread-91f3b371f147",
+      "thread_depth": 1,
+      "month": "2013-03"
+    },
+    {
       "id": "msg-f4cb8cd849c3",
       "message_id": "<CAGxgkWhpjp24gS7yU2Xb9yBi5CCO3D-E0erKprOY3e66k0ee3w@mail.gmail.com>",
       "from_name": "Thomas Adams",
@@ -34962,24 +34980,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130327/214b992e/attachment.pl>",
       "thread_id": "thread-a7dd6f4bc28d",
       "thread_depth": 2,
-      "month": "2013-03"
-    },
-    {
-      "id": "msg-d45422c98f6f",
-      "message_id": "<1364400452257-4662619.post@n4.nabble.com>",
-      "from_name": "rm",
-      "from_email_hash": "7c7836e3af4126b94059a12fd675ef15b6556802ad1558c9ce66ee3a0fdd6492",
-      "date": "2013-03-27T16:07:32Z",
-      "subject": "[R] Weighted Kaplan-Meier estimates with R",
-      "subject_clean": "Weighted Kaplan-Meier estimates with R",
-      "in_reply_to": "<51519C07.3070404@mayo.edu>",
-      "references": [
-        "<51519C07.3070404@mayo.edu>"
-      ],
-      "body_plain": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package survival, I encountered the issue of how to draw survival\ncurves.  Apparently the implementations in the two packages differ, as I\nshow below.\n\nI would very much welcome your views, since the tail of the survival curve\nhas a major impact on the interpretation of my results. In my data, the last\n?death? occurs at 2094 days, while the last censoring time is 3297 days.  If\npossible, I would like to say something about the probability between 2100\ndays and 3300 days.\n\nSo, my question is that after the last observed death, in the very simple\nexample below at 883 days, how should one draw the survival curve? The graph\nproduced by svykm (package survey) ends at 883 days, whereas survfit\n(package survival) continues the graph all the way to the last censoring\ntime, which is at 1022 days.\n\nPlease run the code below to see my point. There are no weights. With\nweights, I face the same issue.\n\nrequire(survival)\nlungSubSet <- lung\nS <- Surv(lung$time,lung$status)\nsKm <- survfit(S~1)\n##\nrequire(survey)\nsvyDesignObject<- svydesign(id=~1,weights=~1,data=lungSubSet)\nsvyKm <- svykm(S~1,design=svyDesignObject,se=T)\n##\nplot(svyKm,xlim=c(0,1200))\nlines(sKm,conf.int=T,mark.time=F,col='green')\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Re-Weighted-Kaplan-Meier-estimates-with-R-tp4662494p4662619.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package surviva",
-      "thread_id": "thread-91f3b371f147",
-      "thread_depth": 1,
       "month": "2013-03"
     },
     {

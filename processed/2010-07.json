@@ -38638,22 +38638,6 @@
       "month": "2010-07"
     },
     {
-      "id": "msg-4a173466371e",
-      "message_id": "<1279636842731-2295593.post@n4.nabble.com>",
-      "from_name": "syrvn",
-      "from_email_hash": "bdb4ad676a30184156fada36d5124499f707dcf55f2515b5dd6bb0aa8b5fe690",
-      "date": "2010-07-20T14:40:42Z",
-      "subject": "[R] p-values pvclust maximum distance measure",
-      "subject_clean": "p-values pvclust maximum distance measure",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect. I\nuploaded a PDF showing the results\n\n\nHere is the code which produces the PDF file:\n\n-------------------------------------------------------------------------------------\ns <- matrix(runif(1600,0,1000), nrow=20)\n\na.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\na.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\na.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\na.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\na.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\na.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\na.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\na.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\na.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\ns <- matrix(runif(1600,0,2), nrow=20)\n\nb.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\nb.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\nb.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\nb.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\nb.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\nb.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\nb.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\nb.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\nb.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\npdf(\"YOUR PATH/Res.pdf\", width=10, height=15)\n\npar(mfrow=c(6,3))\nplot(a.res1)\nplot(a.res2)\nplot(a.res3)\nplot(a.res4)\nplot(a.res5)\nplot(a.res6)\nplot(a.res7)\nplot(a.res8)\nplot(a.res9)\n\nplot(b.res1)\nplot(b.res2)\nplot(b.res3)\nplot(b.res4)\nplot(b.res5)\nplot(b.res6)\nplot(b.res7)\nplot(b.res8)\nplot(b.res9)\n\ndev.off()\n--------------------------------------------------------------\n\n\nWhy is that???\nCheers syrvn\n\n\nhttp://r.789695.n4.nabble.com/file/n2295593/Res.pdf Res.pdf \n\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/p-values-pvclust-maximum-distance-measure-tp2295593p2295593.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect.",
-      "thread_id": "thread-4a173466371e",
-      "thread_depth": 0,
-      "month": "2010-07"
-    },
-    {
       "id": "msg-8452daa65274",
       "message_id": "<1279636842824-2295594.post@n4.nabble.com>",
       "from_name": "syrvn",
@@ -38666,6 +38650,22 @@
       "body_plain": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect. I\nuploaded a PDF showing the results\n\n\nHere is the code which produces the PDF file:\n\n-------------------------------------------------------------------------------------\ns <- matrix(runif(1600,0,1000), nrow=20)\n\na.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\na.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\na.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\na.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\na.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\na.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\na.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\na.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\na.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\ns <- matrix(runif(1600,0,2), nrow=20)\n\nb.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\nb.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\nb.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\nb.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\nb.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\nb.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\nb.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\nb.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\nb.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\npdf(\"YOUR PATH/Res.pdf\", width=10, height=15)\n\npar(mfrow=c(6,3))\nplot(a.res1)\nplot(a.res2)\nplot(a.res3)\nplot(a.res4)\nplot(a.res5)\nplot(a.res6)\nplot(a.res7)\nplot(a.res8)\nplot(a.res9)\n\nplot(b.res1)\nplot(b.res2)\nplot(b.res3)\nplot(b.res4)\nplot(b.res5)\nplot(b.res6)\nplot(b.res7)\nplot(b.res8)\nplot(b.res9)\n\ndev.off()\n--------------------------------------------------------------\n\n\nWhy is that???\nCheers syrvn\n\n\nhttp://r.789695.n4.nabble.com/file/n2295594/Res.pdf Res.pdf \n\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/p-values-pvclust-maximum-distance-measure-tp2295594p2295594.html\nSent from the R help mailing list archive at Nabble.com.",
       "body_snippet": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect.",
       "thread_id": "thread-8452daa65274",
+      "thread_depth": 0,
+      "month": "2010-07"
+    },
+    {
+      "id": "msg-4a173466371e",
+      "message_id": "<1279636842731-2295593.post@n4.nabble.com>",
+      "from_name": "syrvn",
+      "from_email_hash": "bdb4ad676a30184156fada36d5124499f707dcf55f2515b5dd6bb0aa8b5fe690",
+      "date": "2010-07-20T14:40:42Z",
+      "subject": "[R] p-values pvclust maximum distance measure",
+      "subject_clean": "p-values pvclust maximum distance measure",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect. I\nuploaded a PDF showing the results\n\n\nHere is the code which produces the PDF file:\n\n-------------------------------------------------------------------------------------\ns <- matrix(runif(1600,0,1000), nrow=20)\n\na.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\na.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\na.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\na.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\na.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\na.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\na.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\na.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\na.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\ns <- matrix(runif(1600,0,2), nrow=20)\n\nb.res1 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"euclidian\",\nnboot=500)\nb.res2 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"maximum\",\nnboot=500)\nb.res3 <- pvclust(t(s), method.hclust=\"complete\", method.dist=\"canberra\",\nnboot=500)\nb.res4 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"euclidian\",\nnboot=500)\nb.res5 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"maximum\",\nnboot=500)\nb.res6 <- pvclust(t(s), method.hclust=\"ward\", method.dist=\"canberra\",\nnboot=500)\nb.res7 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"euclidian\",\nnboot=500)\nb.res8 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"maximum\",\nnboot=500)\nb.res9 <- pvclust(t(s), method.hclust=\"average\", method.dist=\"canberra\",\nnboot=500)\n\npdf(\"YOUR PATH/Res.pdf\", width=10, height=15)\n\npar(mfrow=c(6,3))\nplot(a.res1)\nplot(a.res2)\nplot(a.res3)\nplot(a.res4)\nplot(a.res5)\nplot(a.res6)\nplot(a.res7)\nplot(a.res8)\nplot(a.res9)\n\nplot(b.res1)\nplot(b.res2)\nplot(b.res3)\nplot(b.res4)\nplot(b.res5)\nplot(b.res6)\nplot(b.res7)\nplot(b.res8)\nplot(b.res9)\n\ndev.off()\n--------------------------------------------------------------\n\n\nWhy is that???\nCheers syrvn\n\n\nhttp://r.789695.n4.nabble.com/file/n2295593/Res.pdf Res.pdf \n\n\n-- \nView this message in context: http://r.789695.n4.nabble.com/p-values-pvclust-maximum-distance-measure-tp2295593p2295593.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi,\n\nI am new to clustering and was wondering why pvclust using \"maximum\"\nas distance measure nearly always results in p-values above 95%.\n\nI wrote an example programme which demonstrates this effect.",
+      "thread_id": "thread-4a173466371e",
       "thread_depth": 0,
       "month": "2010-07"
     },
@@ -45378,22 +45378,6 @@
       "month": "2010-07"
     },
     {
-      "id": "msg-7e9ecdbb6993",
-      "message_id": "<1279886911366-2300072.post@n4.nabble.com>",
-      "from_name": "alaios",
-      "from_email_hash": "161c5786d2e3df8b2df3bcbcb069835e54e9f694eb0e79da1c1c2355ccf5194c",
-      "date": "2010-07-23T12:08:31Z",
-      "subject": "[R] Syntax Highlightning and Editor for Linux",
-      "subject_clean": "Syntax Highlightning and Editor for Linux",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hello to the community .\nFirst post :)\nI would like to ask you which text editor do you use in Linux and how did\nyou setup the syntax highlightning?\none more question is it possible to debug any program in R by inserting\nbreakpoints?\n\nI would like to thank you in advance for your help\nBest Regards\nAlex\n-- \nView this message in context: http://r.789695.n4.nabble.com/Syntax-Highlightning-and-Editor-for-Linux-tp2300072p2300072.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hello to the community .\nFirst post :)\nI would like to ask you which text editor do you use in Linux and how did\nyou setup the syntax highlightning?\none more question is it possible to debug any progr",
-      "thread_id": "thread-7e9ecdbb6993",
-      "thread_depth": 0,
-      "month": "2010-07"
-    },
-    {
       "id": "msg-0ea61a028889",
       "message_id": "<1279886911083-2300071.post@n4.nabble.com>",
       "from_name": "Corey Sparks",
@@ -45409,6 +45393,22 @@
       "body_snippet": "check out the coxme and the kinship packages, both have the capability to fit\nthe Cox proportional hazard model in a multi-level setting, or you could use\nglmer in lme4 to fit discrete-time (logistic)",
       "thread_id": "thread-02912eac29ae",
       "thread_depth": 1,
+      "month": "2010-07"
+    },
+    {
+      "id": "msg-7e9ecdbb6993",
+      "message_id": "<1279886911366-2300072.post@n4.nabble.com>",
+      "from_name": "alaios",
+      "from_email_hash": "161c5786d2e3df8b2df3bcbcb069835e54e9f694eb0e79da1c1c2355ccf5194c",
+      "date": "2010-07-23T12:08:31Z",
+      "subject": "[R] Syntax Highlightning and Editor for Linux",
+      "subject_clean": "Syntax Highlightning and Editor for Linux",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello to the community .\nFirst post :)\nI would like to ask you which text editor do you use in Linux and how did\nyou setup the syntax highlightning?\none more question is it possible to debug any program in R by inserting\nbreakpoints?\n\nI would like to thank you in advance for your help\nBest Regards\nAlex\n-- \nView this message in context: http://r.789695.n4.nabble.com/Syntax-Highlightning-and-Editor-for-Linux-tp2300072p2300072.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hello to the community .\nFirst post :)\nI would like to ask you which text editor do you use in Linux and how did\nyou setup the syntax highlightning?\none more question is it possible to debug any progr",
+      "thread_id": "thread-7e9ecdbb6993",
+      "thread_depth": 0,
       "month": "2010-07"
     },
     {
@@ -69909,17 +69909,6 @@
       "root_message_id": "msg-917f3018320d"
     },
     {
-      "id": "thread-4a173466371e",
-      "subject": "p-values pvclust maximum distance measure",
-      "message_count": 1,
-      "participants": [
-        "syrvn"
-      ],
-      "started": "2010-07-20T14:40:42Z",
-      "last_reply": "2010-07-20T14:40:42Z",
-      "root_message_id": "msg-4a173466371e"
-    },
-    {
       "id": "thread-8452daa65274",
       "subject": "p-values pvclust maximum distance measure",
       "message_count": 1,
@@ -69929,6 +69918,17 @@
       "started": "2010-07-20T14:40:42Z",
       "last_reply": "2010-07-20T14:40:42Z",
       "root_message_id": "msg-8452daa65274"
+    },
+    {
+      "id": "thread-4a173466371e",
+      "subject": "p-values pvclust maximum distance measure",
+      "message_count": 1,
+      "participants": [
+        "syrvn"
+      ],
+      "started": "2010-07-20T14:40:42Z",
+      "last_reply": "2010-07-20T14:40:42Z",
+      "root_message_id": "msg-4a173466371e"
     },
     {
       "id": "thread-f0858d28efae",
