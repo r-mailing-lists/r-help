@@ -32882,6 +32882,24 @@
       "month": "2011-12"
     },
     {
+      "id": "msg-d5f334bc8d68",
+      "message_id": "<87vcp8ifsg.fsf@tajo.ucsd.edu>",
+      "from_name": "cberry at tajo.ucsd.edu",
+      "from_email_hash": "2e60b7324e5cc583defcedd7a675a324250ffb84da081638c31baf739e5c08e2",
+      "date": "2011-12-22T19:10:07Z",
+      "subject": "[R] qqnorm & huge datasets",
+      "subject_clean": "qqnorm & huge datasets",
+      "in_reply_to": null,
+      "references": [
+        "<87bor1h8zm.fsf@gnu.org>"
+      ],
+      "body_plain": "Sam Steingold <sds at gnu.org> writes:\n\n> Hi,\n> When qqnorm on a vector of length 10M+ I get a huge pdf file which\n> cannot be loaded by acroread or evince.\n> Any suggestions? (apart from sampling the data).\n> Thanks.\n\nFollowing the other suggestions, I did not notice mention of another\ntrick for slimming down graphs of many points. viz.\n\nDo not plot points that substantially overlap:\n\n> xx <- rexp(1e05)\n> qq.results <- qqnorm(xx, plot.it=FALSE)\n> qq.slim <- unique(round(as.data.frame(qq.results),3))\n> dim(qq.slim)\n[1] 10233     2\n> plot(qq.slim)\n> \n\nChoose the digits arg in round to be large enough to allow for points that do not overlap\nto be seen and small enough to slim down the number of plotted\npoints. In the example above, 10233 vs 100000.\n\nHTH,\n\nChuck\n\n-- \nCharles C. Berry                            Dept of Family/Preventive Medicine\ncberry at ucsd edu\t\t\t    UC San Diego\nhttp://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901",
+      "body_snippet": "Sam Steingold <sds at gnu.org> writes:\n\n> Hi,\n> When qqnorm on a vector of length 10M+ I get a huge pdf file which\n> cannot be loaded by acroread or evince.\n> Any suggestions? (apart from sampling the",
+      "thread_id": "thread-210e2a17d39b",
+      "thread_depth": 1,
+      "month": "2011-12"
+    },
+    {
       "id": "msg-ad73bd130e31",
       "message_id": "<CANdJ3dX3ruHB3i5v5K7uAvf5gwTAWq56P0U=naSrQqT2C6RHng@mail.gmail.com>",
       "from_name": "Tal Galili",
@@ -32899,24 +32917,6 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20111222/5d3b287c/attachment.pl>",
       "thread_id": "thread-fc414462348b",
       "thread_depth": 3,
-      "month": "2011-12"
-    },
-    {
-      "id": "msg-d5f334bc8d68",
-      "message_id": "<87vcp8ifsg.fsf@tajo.ucsd.edu>",
-      "from_name": "cberry at tajo.ucsd.edu",
-      "from_email_hash": "2e60b7324e5cc583defcedd7a675a324250ffb84da081638c31baf739e5c08e2",
-      "date": "2011-12-22T19:10:07Z",
-      "subject": "[R] qqnorm & huge datasets",
-      "subject_clean": "qqnorm & huge datasets",
-      "in_reply_to": null,
-      "references": [
-        "<87bor1h8zm.fsf@gnu.org>"
-      ],
-      "body_plain": "Sam Steingold <sds at gnu.org> writes:\n\n> Hi,\n> When qqnorm on a vector of length 10M+ I get a huge pdf file which\n> cannot be loaded by acroread or evince.\n> Any suggestions? (apart from sampling the data).\n> Thanks.\n\nFollowing the other suggestions, I did not notice mention of another\ntrick for slimming down graphs of many points. viz.\n\nDo not plot points that substantially overlap:\n\n> xx <- rexp(1e05)\n> qq.results <- qqnorm(xx, plot.it=FALSE)\n> qq.slim <- unique(round(as.data.frame(qq.results),3))\n> dim(qq.slim)\n[1] 10233     2\n> plot(qq.slim)\n> \n\nChoose the digits arg in round to be large enough to allow for points that do not overlap\nto be seen and small enough to slim down the number of plotted\npoints. In the example above, 10233 vs 100000.\n\nHTH,\n\nChuck\n\n-- \nCharles C. Berry                            Dept of Family/Preventive Medicine\ncberry at ucsd edu\t\t\t    UC San Diego\nhttp://famprevmed.ucsd.edu/faculty/cberry/  La Jolla, San Diego 92093-0901",
-      "body_snippet": "Sam Steingold <sds at gnu.org> writes:\n\n> Hi,\n> When qqnorm on a vector of length 10M+ I get a huge pdf file which\n> cannot be loaded by acroread or evince.\n> Any suggestions? (apart from sampling the",
-      "thread_id": "thread-210e2a17d39b",
-      "thread_depth": 1,
       "month": "2011-12"
     },
     {
