@@ -9514,24 +9514,6 @@
       "month": "2010-10"
     },
     {
-      "id": "msg-13645dcbd514",
-      "message_id": "<AANLkTimC42p-XD46=XcgnkkvBZQJ8YSUXxOe9Wpnj-6i@mail.gmail.com>",
-      "from_name": "Gabor Grothendieck",
-      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
-      "date": "2010-10-06T03:17:00Z",
-      "subject": "[R] read columns of quoted numbers as factors",
-      "subject_clean": "read columns of quoted numbers as factors",
-      "in_reply_to": "<423980.73462.qm@web112313.mail.gq1.yahoo.com>",
-      "references": [
-        "<423980.73462.qm@web112313.mail.gq1.yahoo.com>"
-      ],
-      "body_plain": "On Mon, Oct 4, 2010 at 12:39 PM, james hirschorn <j_hirschorn at yahoo.com> wrote:\n> Suppose I have a data file (possibly with a huge number of columns), where the\n> columns with factors are coded as \"1\", \"2\", \"3\", etc ... The default behavior of\n> read.table is to convert these columns to integer vectors.\n>\n> Is there a way to get read.table to recognize that columns of quoted numbers\n> represent factors (while unquoted numbers are interpreted as integers), without\n> explicitly setting them with colClasses ?\n\nAlthough its a bit messy its nevertheless only a few lines of code to\ntransform the quote-and-digit columns to non-numeric, read them in and\ntransform back. For example, if ! does not appear in the file we could\ninsert ! characters into the quote-and-digit columns and remove them\nafterwards:\n\nL <- readLines(\"myfile.dat\")\nL2 <- gsub('\"(\\\\d+)\"', \"!\\\\1\", L) # insert !\nDF <- read.table(textConnection(L2), header = TRUE)\n\n# remove !\nix <- sapply(DF, is.factor)\nDF[ix] <- lapply(DF[ix], function(x) factor(gsub(\"!\", \"\", x)))\n\nstr(DF)\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
-      "body_snippet": "On Mon, Oct 4, 2010 at 12:39 PM, james hirschorn <j_hirschorn at yahoo.com> wrote:\n> Suppose I have a data file (possibly with a huge number of columns), where the\n> columns with factors are coded as ",
-      "thread_id": "thread-4ca4064b389d",
-      "thread_depth": 1,
-      "month": "2010-10"
-    },
-    {
       "id": "msg-5125fca31b24",
       "message_id": "<AANLkTim7B7OJL2CzhRhnRN0devs_jSCCFtNJzFhQ-owo@mail.gmail.com>",
       "from_name": "Carrie Li",
@@ -9550,6 +9532,24 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20101005/a751c00f/attachment.pl>",
       "thread_id": "thread-0d4e6ba33d13",
       "thread_depth": 4,
+      "month": "2010-10"
+    },
+    {
+      "id": "msg-13645dcbd514",
+      "message_id": "<AANLkTimC42p-XD46=XcgnkkvBZQJ8YSUXxOe9Wpnj-6i@mail.gmail.com>",
+      "from_name": "Gabor Grothendieck",
+      "from_email_hash": "2252aad0894f89a900da56345b1c4e0414e3b441d448c40b473f7149e06e5a05",
+      "date": "2010-10-06T03:17:00Z",
+      "subject": "[R] read columns of quoted numbers as factors",
+      "subject_clean": "read columns of quoted numbers as factors",
+      "in_reply_to": "<423980.73462.qm@web112313.mail.gq1.yahoo.com>",
+      "references": [
+        "<423980.73462.qm@web112313.mail.gq1.yahoo.com>"
+      ],
+      "body_plain": "On Mon, Oct 4, 2010 at 12:39 PM, james hirschorn <j_hirschorn at yahoo.com> wrote:\n> Suppose I have a data file (possibly with a huge number of columns), where the\n> columns with factors are coded as \"1\", \"2\", \"3\", etc ... The default behavior of\n> read.table is to convert these columns to integer vectors.\n>\n> Is there a way to get read.table to recognize that columns of quoted numbers\n> represent factors (while unquoted numbers are interpreted as integers), without\n> explicitly setting them with colClasses ?\n\nAlthough its a bit messy its nevertheless only a few lines of code to\ntransform the quote-and-digit columns to non-numeric, read them in and\ntransform back. For example, if ! does not appear in the file we could\ninsert ! characters into the quote-and-digit columns and remove them\nafterwards:\n\nL <- readLines(\"myfile.dat\")\nL2 <- gsub('\"(\\\\d+)\"', \"!\\\\1\", L) # insert !\nDF <- read.table(textConnection(L2), header = TRUE)\n\n# remove !\nix <- sapply(DF, is.factor)\nDF[ix] <- lapply(DF[ix], function(x) factor(gsub(\"!\", \"\", x)))\n\nstr(DF)\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "On Mon, Oct 4, 2010 at 12:39 PM, james hirschorn <j_hirschorn at yahoo.com> wrote:\n> Suppose I have a data file (possibly with a huge number of columns), where the\n> columns with factors are coded as ",
+      "thread_id": "thread-4ca4064b389d",
+      "thread_depth": 1,
       "month": "2010-10"
     },
     {

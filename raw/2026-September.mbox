@@ -1125,3 +1125,35 @@ R-packages at r-project.org
 https://stat.ethz.ch/mailman/listinfo/r-packages
 
 
+From tg@77m @end|ng |rom y@hoo@com  Sun Sep 20 09:48:19 2026
+From: tg@77m @end|ng |rom y@hoo@com (Thomas Subia)
+Date: Sun, 20 Sep 2026 07:48:19 +0000 (UTC)
+Subject: [R] Subject: Suggestion regarding default MAD constant
+References: <746104366.1430323.1789890499994.ref@mail.yahoo.com>
+Message-ID: <746104366.1430323.1789890499994@mail.yahoo.com>
+
+Hi all,
+
+While working with signed-error distributions that are often skewed, I noticed
+that using `mad(x)` with the default constant (1.4826) can unintentionally widen?
+the dispersion estimate enough to mask important structure in the data.
+
+For diagnostic and tolerance-testing workflows, especially when symmetry cannot
+be assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?
+interval because it reflects the raw median absolute deviation without scaling
+to a normal model.
+
+Before applying any parametric center/spread metrics, I?ve found it helpful to
+plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,
+`constant = 1` behaves more robustly.
+
+Is there any interest in discussing whether `constant = 1` might be a more
+appropriate default for nonparametric workflows, or whether a note in the
+documentation might help users choose the right constant for their context?
+
+Thanks,
+Thomas
+
+	[[alternative HTML version deleted]]
+
+

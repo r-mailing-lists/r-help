@@ -8299,22 +8299,6 @@
       "month": "2012-06"
     },
     {
-      "id": "msg-9302276e98fc",
-      "message_id": "<1338994280001-4632535.post@n4.nabble.com>",
-      "from_name": "and_mue",
-      "from_email_hash": "86599e57516a29f06c7c885c6a389f7606bae0224093b8b303087f91e54b5fcb",
-      "date": "2012-06-06T14:51:20Z",
-      "subject": "[R] ARCH modelling/MA process",
-      "subject_clean": "ARCH modelling/MA process",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi all\n\nARCH modelling\n\n\nI have a problem now on how to proceed with further steps in my analysis. I\ndid a linear OLS regression with my daily data of stock and index returns.\nThere is now the problem of arch in my error terms. Thus I used the\nfollowing r command:\n\ngarch(resid_desn, order=c(0,2)) ## This ARCH(2) process seems to fit the\nbest after trial and error. Consequently,  I get there three a's.\n(resid_desn are the residuals of the ols regression of the company desn)\n\nThe problem is now that I want to analyse the excess return for a given\nperiod. I don't know how I should include these a's in my linear regression\nto address this problem and get new alphas and betas... \n/(FOR INFORMATION: excess return without ammendements for ARCH effects is\ngiven as: ?t=Ri,t-alpha(from regression)-beta(from regression)*Rm,t)/\n\nThere is a paper which does this in a simple manner (see page 12 and 13 of \nhttp://papers.ssrn.com/sol3/papers.cfm?abstract_id=1100573\nhttp://papers.ssrn.com/sol3/papers.cfm?abstract_id=1100573 ). It is\ndescribed as follows:\n\nRi=alpha(arch)+beta(arch)*Rm,i+et\net=thetat*sqrt(h)\nh=lamda(0)+lamda(1)*e(t-1)^2  ##e are the residuals of the ols regression\n\nThus my question is now: How can I regress this?\n\nRi=alpha(arch)+beta(arch)*Rm,i+thetat*sqrt(h) ## This seems not to work as\nit calculates an additional errorterm. Also the parameter theta changes over\ntime. Thus the problem is on how I should estimate this one.... I hope there\nis a solution for this problem or some hints on how I can use the output of\nthe garch model for my linear regression and the estimation of new alphas\nand beta (with consideration of ARCH effects).\n\nMA Process:\n\nI have for example an MA(1) process. This mean that ut=et+theta*et-1\nThus the linear regression gets (also excess return on the left hand side):\net=Ri,t-alpha-beta*Rm,i-theta*et-1\nThe problem is now that et depends on et-1. I want to start with et-1=0,\nthus I cant do this with one formula. And typing this in for 180 days is\nsimply to time consuming. \n\nAny suggestions on that Problem? One solution would be to do this with\nexcel.\n\nThanks and kind regards\nAndi\n\n\nKind regards\nAndi\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/ARCH-modelling-MA-process-tp4632535.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi all\n\nARCH modelling\n\n\nI have a problem now on how to proceed with further steps in my analysis. I\ndid a linear OLS regression with my daily data of stock and index returns.\nThere is now the problem",
-      "thread_id": "thread-9302276e98fc",
-      "thread_depth": 0,
-      "month": "2012-06"
-    },
-    {
       "id": "msg-b9384603eb62",
       "message_id": "<b898618cb2c5c7eb7b1144287b5aedd0@mail.gmail.com>",
       "from_name": "Shilpi Harpavat (PDF)",
@@ -8331,6 +8315,22 @@
       "body_snippet": "Hi ,\n\nI want to implement a simple forward stepwise regression in java which\nfits a linear model with no  term and then add terms one by one .What\nwould be the best algorithm to use along with Criteri",
       "thread_id": "thread-7d463e163221",
       "thread_depth": 2,
+      "month": "2012-06"
+    },
+    {
+      "id": "msg-9302276e98fc",
+      "message_id": "<1338994280001-4632535.post@n4.nabble.com>",
+      "from_name": "and_mue",
+      "from_email_hash": "86599e57516a29f06c7c885c6a389f7606bae0224093b8b303087f91e54b5fcb",
+      "date": "2012-06-06T14:51:20Z",
+      "subject": "[R] ARCH modelling/MA process",
+      "subject_clean": "ARCH modelling/MA process",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all\n\nARCH modelling\n\n\nI have a problem now on how to proceed with further steps in my analysis. I\ndid a linear OLS regression with my daily data of stock and index returns.\nThere is now the problem of arch in my error terms. Thus I used the\nfollowing r command:\n\ngarch(resid_desn, order=c(0,2)) ## This ARCH(2) process seems to fit the\nbest after trial and error. Consequently,  I get there three a's.\n(resid_desn are the residuals of the ols regression of the company desn)\n\nThe problem is now that I want to analyse the excess return for a given\nperiod. I don't know how I should include these a's in my linear regression\nto address this problem and get new alphas and betas... \n/(FOR INFORMATION: excess return without ammendements for ARCH effects is\ngiven as: ?t=Ri,t-alpha(from regression)-beta(from regression)*Rm,t)/\n\nThere is a paper which does this in a simple manner (see page 12 and 13 of \nhttp://papers.ssrn.com/sol3/papers.cfm?abstract_id=1100573\nhttp://papers.ssrn.com/sol3/papers.cfm?abstract_id=1100573 ). It is\ndescribed as follows:\n\nRi=alpha(arch)+beta(arch)*Rm,i+et\net=thetat*sqrt(h)\nh=lamda(0)+lamda(1)*e(t-1)^2  ##e are the residuals of the ols regression\n\nThus my question is now: How can I regress this?\n\nRi=alpha(arch)+beta(arch)*Rm,i+thetat*sqrt(h) ## This seems not to work as\nit calculates an additional errorterm. Also the parameter theta changes over\ntime. Thus the problem is on how I should estimate this one.... I hope there\nis a solution for this problem or some hints on how I can use the output of\nthe garch model for my linear regression and the estimation of new alphas\nand beta (with consideration of ARCH effects).\n\nMA Process:\n\nI have for example an MA(1) process. This mean that ut=et+theta*et-1\nThus the linear regression gets (also excess return on the left hand side):\net=Ri,t-alpha-beta*Rm,i-theta*et-1\nThe problem is now that et depends on et-1. I want to start with et-1=0,\nthus I cant do this with one formula. And typing this in for 180 days is\nsimply to time consuming. \n\nAny suggestions on that Problem? One solution would be to do this with\nexcel.\n\nThanks and kind regards\nAndi\n\n\nKind regards\nAndi\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/ARCH-modelling-MA-process-tp4632535.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi all\n\nARCH modelling\n\n\nI have a problem now on how to proceed with further steps in my analysis. I\ndid a linear OLS regression with my daily data of stock and index returns.\nThere is now the problem",
+      "thread_id": "thread-9302276e98fc",
+      "thread_depth": 0,
       "month": "2012-06"
     },
     {

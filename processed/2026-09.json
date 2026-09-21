@@ -268,6 +268,24 @@
       "thread_id": "thread-4c16d3aca34c",
       "thread_depth": 0,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-69a315e2368e",
+      "message_id": "<746104366.1430323.1789890499994@mail.yahoo.com>",
+      "from_name": "Thomas Subia",
+      "from_email_hash": "b05c07223694f63e2e256e749472c0da274c10c0e0dbb9916f733855b70d0a6c",
+      "date": "2026-09-20T07:48:19Z",
+      "subject": "[R] Subject: Suggestion regarding default MAD constant",
+      "subject_clean": "Subject: Suggestion regarding default MAD constant",
+      "in_reply_to": null,
+      "references": [
+        "<746104366.1430323.1789890499994.ref@mail.yahoo.com>"
+      ],
+      "body_plain": "Hi all,\n\nWhile working with signed-error distributions that are often skewed, I noticed\nthat using `mad(x)` with the default constant (1.4826) can unintentionally widen?\nthe dispersion estimate enough to mask important structure in the data.\n\nFor diagnostic and tolerance-testing workflows, especially when symmetry cannot\nbe assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?\ninterval because it reflects the raw median absolute deviation without scaling\nto a normal model.\n\nBefore applying any parametric center/spread metrics, I?ve found it helpful to\nplot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n`constant = 1` behaves more robustly.\n\nIs there any interest in discussing whether `constant = 1` might be a more\nappropriate default for nonparametric workflows, or whether a note in the\ndocumentation might help users choose the right constant for their context?\n\nThanks,\nThomas\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nWhile working with signed-error distributions that are often skewed, I noticed\nthat using `mad(x)` with the default constant (1.4826) can unintentionally widen?\nthe dispersion estimate enough",
+      "thread_id": "thread-69a315e2368e",
+      "thread_depth": 0,
+      "month": "2026-09"
     }
   ],
   "threads": [
@@ -321,6 +339,17 @@
       "started": "2026-09-11T19:24:30Z",
       "last_reply": "2026-09-11T19:24:30Z",
       "root_message_id": "msg-4c16d3aca34c"
+    },
+    {
+      "id": "thread-69a315e2368e",
+      "subject": "Subject: Suggestion regarding default MAD constant",
+      "message_count": 1,
+      "participants": [
+        "Thomas Subia"
+      ],
+      "started": "2026-09-20T07:48:19Z",
+      "last_reply": "2026-09-20T07:48:19Z",
+      "root_message_id": "msg-69a315e2368e"
     }
   ]
 }
