@@ -5451,22 +5451,6 @@
       "month": "2013-03"
     },
     {
-      "id": "msg-fd314be6608f",
-      "message_id": "<CAFuKrREP+b389LkYAEXo_i6Qj7EEn8y+i1tLMFtYfvf5SyM0qQ@mail.gmail.com>",
-      "from_name": "Benjamin Caldwell",
-      "from_email_hash": "f35f4d246078326cae21a81e6629956c825a7808054a98f6d6d384be55975530",
-      "date": "2013-03-05T21:18:25Z",
-      "subject": "[R] Function completely locks up my computer if the input is too big",
-      "subject_clean": "Function completely locks up my computer if the input is too big",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Dear r-help,\n\n\nSomewhere in my innocuous function to rotate an object in Cartesian space\nI've created a monster that completely locks up my computer (requires a\nhard reset every time). I don't know if this is useful description to\nanyone - the mouse still responds, but not the keyboard and not windows\nexplorer.\n\nThe script only does this when the input matrix is large, and so my initial\nruns didn't catch it as I used a smaller matrix to speed up the test runs.\nWhen I tried an input matrix with a number of dimensions in the same order\nof magnitude as the data I want to read in, R and my computer choked. This\nwas a surprise for me, as I've always been able to break execution in the\npast or do other tasks. So i tried it again, and still no dice.\n\nNow I need the function to work as subsequent functions/functionality are\ndependent, and I can't see anything on the face of it that would likely\ncause the issue.\n\nAny insight on why this happens in general or specifically in my case are\nappreciated. Running R 15.2, Platform: x86_64-w64-mingw32/x64 (64-bit) on a\nwindows 7 machine with 4 mb RAM. In the meantime I suppose I'll write a\nloop to do this function piece-wise for larger data and see if that helps.\n\nScript is attached and appended below.\n\nThanks\n\nBen Caldwell\n\n\n\n#compass to polar coordinates\n\ncompass2polar <- function(x) {-x+90}\n\n\n\n#degrees (polar) to radians\n\nDeg2Rad <- function(x) {(x*pi)/180}\n\n\n\n# radians to degrees\n\nRad2Deg <- function (rad) (rad/pi)*180\n\n\n\n# polar to cartesian coordinates - assumes degrees those from a compass.\noutput is a list, x & y of equal length\n\nPol2Car <- function(distance,deg) {\n\n\nrad <- Deg2Rad(compass2polar(deg))\n\nrad <- rep(rad, length(distance))\n\n\nx <- ifelse(is.na(distance), NA, distance * cos(rad))\n\ny <- ifelse(is.na(distance), NA, distance * sin(rad))\n\n\nx<-round(x,2)\n\ny<-round(y,2)\n\n\ncartes<- list(x,y)\n\nname<-c('x','y')\n\nnames(cartes)<-name\n\ncartes\n\n}\n\n\n\n\n\n#rotate an object, with assumed origin at 0,0, in any number of degrees\n\nrotate <- function(x,y,tilt){ 8\n\n\nd2 <- x^2+y^2\n\nrotate.dis<-sqrt(d2)\n\nor.rad <- atan(x/y)\n\nor.deg <- Rad2Deg(or.rad)\n\n\nn <- length(or.deg)\n\nfor(i in 1:n){\n\nif(is.na(or.deg[i])==TRUE) {or.deg[i] <- 0}\n\n}\n\n# browser()\n\ntilt.in <- tilt + or.deg\n\n\nxy<-Pol2Car (distance=rotate.dis, deg=tilt.in)\n\n # if(abs(tilt) >= 0) {\n\n # shift.frame <- cbind(xy$x, xy$y)\n\n# shift.frame.val <- shift.frame[shift.frame[,2]==min(shift.frame[,2]),]\n\n# shift.x<- shift.frame.val[1] * -1\n\n# shift.y<- shift.frame.val[2] * -1\n\n# x<-xy$x + shift.x\n\n# y<-xy$y + shift.y\n\n# }\n\n# name <- c('x', 'y')\n\n# xy<-list(x,y)\n\n# names(xy)<-name\n\n xy\n\n}\n\n\nx <- seq(0,5, .5)\n\ny <- seq(0,5, .5)\n\nz <- seq(0,5, .5)\n\ndquad<-expand.grid(x,y,z)\n\nname<-c(\"y\",\"x\",\"z\")\n\nnames(dquad)<-name\n\n\nplot(dquad$x, dquad$y, xlim=c(-25,25), ylim=c(-25,25))\n\n\n#this works fine\n\nrotated<-rotate(dquad$x, dquad$y, 45)\n\n\n\npoints(rotated$x, rotated$y, col='green')\n\n\n# profiling of both time and memory\n\nRprof(?myFunction.out?, memory.profiling=T)\n\ny <- myFunction(x)\n\nRprof(NULL)\n\nsummaryRprof(?myFunction.out?, memory=?both?)\n\n\n\n#############\n\nx <- seq(0,5, .1)\n\ny <- seq(0,5, .1)\n\nz <- seq(0,5, .1)\n\ndquad<-expand.grid(x,y,z)\n\nname<-c(\"y\",\"x\",\"z\")\n\nnames(dquad)<-name\n\n# running the below locks up my machine (commented out to avoid accidental\nrun)\n\n# rotated<-rotate(dquad$x, dquad$y, 45)",
-      "body_snippet": "Dear r-help,\n\n\nSomewhere in my innocuous function to rotate an object in Cartesian space\nI've created a monster that completely locks up my computer (requires a\nhard reset every time). I don't know if",
-      "thread_id": "thread-fd314be6608f",
-      "thread_depth": 0,
-      "month": "2013-03"
-    },
-    {
       "id": "msg-8ca263bf0c78",
       "message_id": "<1362518305901-4660380.post@n4.nabble.com>",
       "from_name": "Marbles",
@@ -5483,6 +5467,22 @@
       "body_snippet": "Thank you for your response!\n\nI know that it is not enough to uniquely specify the correlation. That is\nwhy i would like to simulate it so that i can see how the resulting\ncorrelations between A and C",
       "thread_id": "thread-8ce3b96749a5",
       "thread_depth": 2,
+      "month": "2013-03"
+    },
+    {
+      "id": "msg-fd314be6608f",
+      "message_id": "<CAFuKrREP+b389LkYAEXo_i6Qj7EEn8y+i1tLMFtYfvf5SyM0qQ@mail.gmail.com>",
+      "from_name": "Benjamin Caldwell",
+      "from_email_hash": "f35f4d246078326cae21a81e6629956c825a7808054a98f6d6d384be55975530",
+      "date": "2013-03-05T21:18:25Z",
+      "subject": "[R] Function completely locks up my computer if the input is too big",
+      "subject_clean": "Function completely locks up my computer if the input is too big",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear r-help,\n\n\nSomewhere in my innocuous function to rotate an object in Cartesian space\nI've created a monster that completely locks up my computer (requires a\nhard reset every time). I don't know if this is useful description to\nanyone - the mouse still responds, but not the keyboard and not windows\nexplorer.\n\nThe script only does this when the input matrix is large, and so my initial\nruns didn't catch it as I used a smaller matrix to speed up the test runs.\nWhen I tried an input matrix with a number of dimensions in the same order\nof magnitude as the data I want to read in, R and my computer choked. This\nwas a surprise for me, as I've always been able to break execution in the\npast or do other tasks. So i tried it again, and still no dice.\n\nNow I need the function to work as subsequent functions/functionality are\ndependent, and I can't see anything on the face of it that would likely\ncause the issue.\n\nAny insight on why this happens in general or specifically in my case are\nappreciated. Running R 15.2, Platform: x86_64-w64-mingw32/x64 (64-bit) on a\nwindows 7 machine with 4 mb RAM. In the meantime I suppose I'll write a\nloop to do this function piece-wise for larger data and see if that helps.\n\nScript is attached and appended below.\n\nThanks\n\nBen Caldwell\n\n\n\n#compass to polar coordinates\n\ncompass2polar <- function(x) {-x+90}\n\n\n\n#degrees (polar) to radians\n\nDeg2Rad <- function(x) {(x*pi)/180}\n\n\n\n# radians to degrees\n\nRad2Deg <- function (rad) (rad/pi)*180\n\n\n\n# polar to cartesian coordinates - assumes degrees those from a compass.\noutput is a list, x & y of equal length\n\nPol2Car <- function(distance,deg) {\n\n\nrad <- Deg2Rad(compass2polar(deg))\n\nrad <- rep(rad, length(distance))\n\n\nx <- ifelse(is.na(distance), NA, distance * cos(rad))\n\ny <- ifelse(is.na(distance), NA, distance * sin(rad))\n\n\nx<-round(x,2)\n\ny<-round(y,2)\n\n\ncartes<- list(x,y)\n\nname<-c('x','y')\n\nnames(cartes)<-name\n\ncartes\n\n}\n\n\n\n\n\n#rotate an object, with assumed origin at 0,0, in any number of degrees\n\nrotate <- function(x,y,tilt){ 8\n\n\nd2 <- x^2+y^2\n\nrotate.dis<-sqrt(d2)\n\nor.rad <- atan(x/y)\n\nor.deg <- Rad2Deg(or.rad)\n\n\nn <- length(or.deg)\n\nfor(i in 1:n){\n\nif(is.na(or.deg[i])==TRUE) {or.deg[i] <- 0}\n\n}\n\n# browser()\n\ntilt.in <- tilt + or.deg\n\n\nxy<-Pol2Car (distance=rotate.dis, deg=tilt.in)\n\n # if(abs(tilt) >= 0) {\n\n # shift.frame <- cbind(xy$x, xy$y)\n\n# shift.frame.val <- shift.frame[shift.frame[,2]==min(shift.frame[,2]),]\n\n# shift.x<- shift.frame.val[1] * -1\n\n# shift.y<- shift.frame.val[2] * -1\n\n# x<-xy$x + shift.x\n\n# y<-xy$y + shift.y\n\n# }\n\n# name <- c('x', 'y')\n\n# xy<-list(x,y)\n\n# names(xy)<-name\n\n xy\n\n}\n\n\nx <- seq(0,5, .5)\n\ny <- seq(0,5, .5)\n\nz <- seq(0,5, .5)\n\ndquad<-expand.grid(x,y,z)\n\nname<-c(\"y\",\"x\",\"z\")\n\nnames(dquad)<-name\n\n\nplot(dquad$x, dquad$y, xlim=c(-25,25), ylim=c(-25,25))\n\n\n#this works fine\n\nrotated<-rotate(dquad$x, dquad$y, 45)\n\n\n\npoints(rotated$x, rotated$y, col='green')\n\n\n# profiling of both time and memory\n\nRprof(?myFunction.out?, memory.profiling=T)\n\ny <- myFunction(x)\n\nRprof(NULL)\n\nsummaryRprof(?myFunction.out?, memory=?both?)\n\n\n\n#############\n\nx <- seq(0,5, .1)\n\ny <- seq(0,5, .1)\n\nz <- seq(0,5, .1)\n\ndquad<-expand.grid(x,y,z)\n\nname<-c(\"y\",\"x\",\"z\")\n\nnames(dquad)<-name\n\n# running the below locks up my machine (commented out to avoid accidental\nrun)\n\n# rotated<-rotate(dquad$x, dquad$y, 45)",
+      "body_snippet": "Dear r-help,\n\n\nSomewhere in my innocuous function to rotate an object in Cartesian space\nI've created a monster that completely locks up my computer (requires a\nhard reset every time). I don't know if",
+      "thread_id": "thread-fd314be6608f",
+      "thread_depth": 0,
       "month": "2013-03"
     },
     {
@@ -34946,24 +34946,6 @@
       "month": "2013-03"
     },
     {
-      "id": "msg-d45422c98f6f",
-      "message_id": "<1364400452257-4662619.post@n4.nabble.com>",
-      "from_name": "rm",
-      "from_email_hash": "7c7836e3af4126b94059a12fd675ef15b6556802ad1558c9ce66ee3a0fdd6492",
-      "date": "2013-03-27T16:07:32Z",
-      "subject": "[R] Weighted Kaplan-Meier estimates with R",
-      "subject_clean": "Weighted Kaplan-Meier estimates with R",
-      "in_reply_to": "<51519C07.3070404@mayo.edu>",
-      "references": [
-        "<51519C07.3070404@mayo.edu>"
-      ],
-      "body_plain": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package survival, I encountered the issue of how to draw survival\ncurves.  Apparently the implementations in the two packages differ, as I\nshow below.\n\nI would very much welcome your views, since the tail of the survival curve\nhas a major impact on the interpretation of my results. In my data, the last\n?death? occurs at 2094 days, while the last censoring time is 3297 days.  If\npossible, I would like to say something about the probability between 2100\ndays and 3300 days.\n\nSo, my question is that after the last observed death, in the very simple\nexample below at 883 days, how should one draw the survival curve? The graph\nproduced by svykm (package survey) ends at 883 days, whereas survfit\n(package survival) continues the graph all the way to the last censoring\ntime, which is at 1022 days.\n\nPlease run the code below to see my point. There are no weights. With\nweights, I face the same issue.\n\nrequire(survival)\nlungSubSet <- lung\nS <- Surv(lung$time,lung$status)\nsKm <- survfit(S~1)\n##\nrequire(survey)\nsvyDesignObject<- svydesign(id=~1,weights=~1,data=lungSubSet)\nsvyKm <- svykm(S~1,design=svyDesignObject,se=T)\n##\nplot(svyKm,xlim=c(0,1200))\nlines(sKm,conf.int=T,mark.time=F,col='green')\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Re-Weighted-Kaplan-Meier-estimates-with-R-tp4662494p4662619.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package surviva",
-      "thread_id": "thread-91f3b371f147",
-      "thread_depth": 1,
-      "month": "2013-03"
-    },
-    {
       "id": "msg-f4cb8cd849c3",
       "message_id": "<CAGxgkWhpjp24gS7yU2Xb9yBi5CCO3D-E0erKprOY3e66k0ee3w@mail.gmail.com>",
       "from_name": "Thomas Adams",
@@ -34980,6 +34962,24 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20130327/214b992e/attachment.pl>",
       "thread_id": "thread-a7dd6f4bc28d",
       "thread_depth": 2,
+      "month": "2013-03"
+    },
+    {
+      "id": "msg-d45422c98f6f",
+      "message_id": "<1364400452257-4662619.post@n4.nabble.com>",
+      "from_name": "rm",
+      "from_email_hash": "7c7836e3af4126b94059a12fd675ef15b6556802ad1558c9ce66ee3a0fdd6492",
+      "date": "2013-03-27T16:07:32Z",
+      "subject": "[R] Weighted Kaplan-Meier estimates with R",
+      "subject_clean": "Weighted Kaplan-Meier estimates with R",
+      "in_reply_to": "<51519C07.3070404@mayo.edu>",
+      "references": [
+        "<51519C07.3070404@mayo.edu>"
+      ],
+      "body_plain": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package survival, I encountered the issue of how to draw survival\ncurves.  Apparently the implementations in the two packages differ, as I\nshow below.\n\nI would very much welcome your views, since the tail of the survival curve\nhas a major impact on the interpretation of my results. In my data, the last\n?death? occurs at 2094 days, while the last censoring time is 3297 days.  If\npossible, I would like to say something about the probability between 2100\ndays and 3300 days.\n\nSo, my question is that after the last observed death, in the very simple\nexample below at 883 days, how should one draw the survival curve? The graph\nproduced by svykm (package survey) ends at 883 days, whereas survfit\n(package survival) continues the graph all the way to the last censoring\ntime, which is at 1022 days.\n\nPlease run the code below to see my point. There are no weights. With\nweights, I face the same issue.\n\nrequire(survival)\nlungSubSet <- lung\nS <- Surv(lung$time,lung$status)\nsKm <- survfit(S~1)\n##\nrequire(survey)\nsvyDesignObject<- svydesign(id=~1,weights=~1,data=lungSubSet)\nsvyKm <- svykm(S~1,design=svyDesignObject,se=T)\n##\nplot(svyKm,xlim=c(0,1200))\nlines(sKm,conf.int=T,mark.time=F,col='green')\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Re-Weighted-Kaplan-Meier-estimates-with-R-tp4662494p4662619.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Thanks to all of you for your very helpful comments! As Terry suggested,\nsvykm is what I was looking for.\n\nWhile testing that I get the same results with the package survey as with\nthe package surviva",
+      "thread_id": "thread-91f3b371f147",
+      "thread_depth": 1,
       "month": "2013-03"
     },
     {

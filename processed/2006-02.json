@@ -10373,24 +10373,6 @@
       "month": "2006-02"
     },
     {
-      "id": "msg-eb1e4c0d14bf",
-      "message_id": "<Pine.LNX.4.64.0602091317200.5967@gannet.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2006-02-09T13:24:02Z",
-      "subject": "[R] logLik == -Inf in gls",
-      "subject_clean": "logLik == -Inf in gls",
-      "in_reply_to": "<1415.139.133.94.35.1139489777.squirrel@www.abdn.ac.uk>",
-      "references": [
-        "<1415.139.133.94.35.1139489777.squirrel@www.abdn.ac.uk>"
-      ],
-      "body_plain": "Please do not repeatedly post the same thing.  This is the same as\n\nhttps://stat.ethz.ch/pipermail/r-help/2006-February/086381.html\n\n(except you remembered to sign that one).\n\nYou are fitting a weighted not a generalised least squares model: lm() \nwill do that.\n\nOn Thu, 9 Feb 2006, nhy303 at abdn.ac.uk wrote:\n\n> I am trying to fit a generalised least squares model using gls in the nlme\n> package.\n>\n> The model seems to fit very well when I plot the fitted values against the\n> original values, and the model parameters have quite narrow confidence\n> intervals (all are significant at p<5%).\n>\n> The problem is that the log likelihood is always given as -Inf.  This\n> doesn't seem to make sense because the model seems to fit my data so well.\n> I have checked that the residuals are stationary using an adf test.  I\n> can't work out whether\n>  - the model really doesn't fit at all\n>  - there is something in my data that stops the implementation of logLik\n> working correctly (the -Inf value says the calculation hasn't worked)\n>\n> Possible causes are:\n>  - There are lots of NAs in my data (model and response variables)\n>  - There is some autocorrelation in the data that is not accounted for by\n> the model (most is accounted for).\n>\n> But, I've tried recreating the problem using a simpler data set, and have\n> never found the same problem.\n\nWell, how then do you expect us to be able to recreate it?\n\nAs a pure guess, look at your weights.  Are any numob4150 zero?\n\n\n> The command I use to fit the model is...\n>\n>\n>\n> result2 <- gls(lci4150 ~ propCapInStomachs +\n>                        temperature +\n>                        as.factor(monthNumber) +\n>                        lagLci1 +\n>                        lagcap1 +\n>                        lagcap2,\n>              data = monthly,\n>              subset = subset1985,\n>              na.action = na.approx,\n>              weights = varFixed( ~ 1/numob4150)\n>             )\n>\n>\n>\n> The output I get is...\n>\n>\n>\n> Generalized least squares fit by REML\n>  Model: lci4150 ~ propCapInStomachs + temperature +\n> as.factor(monthNumber) +      lagLci1 + lagcap1 + lagcap2\n>  Data: monthly\n>  Subset: subset1985\n>  AIC BIC logLik\n>  Inf Inf   -Inf\n>\n> Variance function:\n> Structure: fixed weights\n> Formula: ~1/numob4150\n>\n> Coefficients:\n>                              Value Std.Error   t-value p-value\n> (Intercept)              -0.3282412 0.5795665 -0.566356  0.5717\n> propCapInStomachs         0.0093283 0.0039863  2.340107  0.0202\n> temperature               0.4342514 0.1526104  2.845490  0.0048\n> as.factor(monthNumber)2   0.3990717 0.3869991  1.031195  0.3036\n> as.factor(monthNumber)3   1.3788334 0.3675690  3.751223  0.0002\n> as.factor(monthNumber)4   1.4037195 0.3857764  3.638686  0.0003\n> as.factor(monthNumber)5   0.9903316 0.3436177  2.882074  0.0043\n> as.factor(monthNumber)6   0.3453741 0.3043698  1.134719  0.2577\n> as.factor(monthNumber)7   0.3948442 0.3035142  1.300909  0.1946\n> as.factor(monthNumber)8   0.5021812 0.3532413  1.421638  0.1565\n> as.factor(monthNumber)9  -0.0794319 0.3598981 -0.220707  0.8255\n> as.factor(monthNumber)10  0.3536805 0.3790538  0.933061  0.3518\n> as.factor(monthNumber)11  0.7874834 0.3557116  2.213826  0.0278\n> as.factor(monthNumber)12  0.1854279 0.3178320  0.583415  0.5602\n> lagLci1                   0.5488437 0.0576144  9.526151  0.0000\n> lagcap1                   0.0110994 0.0043669  2.541714  0.0117\n> lagcap2                  -0.0088080 0.0041099 -2.143127  0.0332\n>\n>\n>\n> Does anyone have any suggestions of how I can get a meaningful value for\n> logLik?  Or some other way that I can compare models.\n>\n> Thankyou,\n>\n> Lillian.\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "Please do not repeatedly post the same thing.  This is the same as\n\nhttps://stat.ethz.ch/pipermail/r-help/2006-February/086381.html\n\n(except you remembered to sign that one).\n\nYou are fitting a weight",
-      "thread_id": "thread-3ccbf73f5ded",
-      "thread_depth": 1,
-      "month": "2006-02"
-    },
-    {
       "id": "msg-a17190387493",
       "message_id": "<1139491442.13270.16.camel@aion.regionemarche.intra>",
       "from_name": "Stefano Sofia",
@@ -10407,6 +10389,24 @@
       "body_snippet": "Paulo, \nthank you for the straightforward hint. \nBut then, I should use the Box-Cox transformation to a set of data,\nwhose class at the moment is data.frame. \nThe help says only lm and aov objects can",
       "thread_id": "thread-a17190387493",
       "thread_depth": 0,
+      "month": "2006-02"
+    },
+    {
+      "id": "msg-eb1e4c0d14bf",
+      "message_id": "<Pine.LNX.4.64.0602091317200.5967@gannet.stats.ox.ac.uk>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2006-02-09T13:24:02Z",
+      "subject": "[R] logLik == -Inf in gls",
+      "subject_clean": "logLik == -Inf in gls",
+      "in_reply_to": "<1415.139.133.94.35.1139489777.squirrel@www.abdn.ac.uk>",
+      "references": [
+        "<1415.139.133.94.35.1139489777.squirrel@www.abdn.ac.uk>"
+      ],
+      "body_plain": "Please do not repeatedly post the same thing.  This is the same as\n\nhttps://stat.ethz.ch/pipermail/r-help/2006-February/086381.html\n\n(except you remembered to sign that one).\n\nYou are fitting a weighted not a generalised least squares model: lm() \nwill do that.\n\nOn Thu, 9 Feb 2006, nhy303 at abdn.ac.uk wrote:\n\n> I am trying to fit a generalised least squares model using gls in the nlme\n> package.\n>\n> The model seems to fit very well when I plot the fitted values against the\n> original values, and the model parameters have quite narrow confidence\n> intervals (all are significant at p<5%).\n>\n> The problem is that the log likelihood is always given as -Inf.  This\n> doesn't seem to make sense because the model seems to fit my data so well.\n> I have checked that the residuals are stationary using an adf test.  I\n> can't work out whether\n>  - the model really doesn't fit at all\n>  - there is something in my data that stops the implementation of logLik\n> working correctly (the -Inf value says the calculation hasn't worked)\n>\n> Possible causes are:\n>  - There are lots of NAs in my data (model and response variables)\n>  - There is some autocorrelation in the data that is not accounted for by\n> the model (most is accounted for).\n>\n> But, I've tried recreating the problem using a simpler data set, and have\n> never found the same problem.\n\nWell, how then do you expect us to be able to recreate it?\n\nAs a pure guess, look at your weights.  Are any numob4150 zero?\n\n\n> The command I use to fit the model is...\n>\n>\n>\n> result2 <- gls(lci4150 ~ propCapInStomachs +\n>                        temperature +\n>                        as.factor(monthNumber) +\n>                        lagLci1 +\n>                        lagcap1 +\n>                        lagcap2,\n>              data = monthly,\n>              subset = subset1985,\n>              na.action = na.approx,\n>              weights = varFixed( ~ 1/numob4150)\n>             )\n>\n>\n>\n> The output I get is...\n>\n>\n>\n> Generalized least squares fit by REML\n>  Model: lci4150 ~ propCapInStomachs + temperature +\n> as.factor(monthNumber) +      lagLci1 + lagcap1 + lagcap2\n>  Data: monthly\n>  Subset: subset1985\n>  AIC BIC logLik\n>  Inf Inf   -Inf\n>\n> Variance function:\n> Structure: fixed weights\n> Formula: ~1/numob4150\n>\n> Coefficients:\n>                              Value Std.Error   t-value p-value\n> (Intercept)              -0.3282412 0.5795665 -0.566356  0.5717\n> propCapInStomachs         0.0093283 0.0039863  2.340107  0.0202\n> temperature               0.4342514 0.1526104  2.845490  0.0048\n> as.factor(monthNumber)2   0.3990717 0.3869991  1.031195  0.3036\n> as.factor(monthNumber)3   1.3788334 0.3675690  3.751223  0.0002\n> as.factor(monthNumber)4   1.4037195 0.3857764  3.638686  0.0003\n> as.factor(monthNumber)5   0.9903316 0.3436177  2.882074  0.0043\n> as.factor(monthNumber)6   0.3453741 0.3043698  1.134719  0.2577\n> as.factor(monthNumber)7   0.3948442 0.3035142  1.300909  0.1946\n> as.factor(monthNumber)8   0.5021812 0.3532413  1.421638  0.1565\n> as.factor(monthNumber)9  -0.0794319 0.3598981 -0.220707  0.8255\n> as.factor(monthNumber)10  0.3536805 0.3790538  0.933061  0.3518\n> as.factor(monthNumber)11  0.7874834 0.3557116  2.213826  0.0278\n> as.factor(monthNumber)12  0.1854279 0.3178320  0.583415  0.5602\n> lagLci1                   0.5488437 0.0576144  9.526151  0.0000\n> lagcap1                   0.0110994 0.0043669  2.541714  0.0117\n> lagcap2                  -0.0088080 0.0041099 -2.143127  0.0332\n>\n>\n>\n> Does anyone have any suggestions of how I can get a meaningful value for\n> logLik?  Or some other way that I can compare models.\n>\n> Thankyou,\n>\n> Lillian.\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "Please do not repeatedly post the same thing.  This is the same as\n\nhttps://stat.ethz.ch/pipermail/r-help/2006-February/086381.html\n\n(except you remembered to sign that one).\n\nYou are fitting a weight",
+      "thread_id": "thread-3ccbf73f5ded",
+      "thread_depth": 1,
       "month": "2006-02"
     },
     {
@@ -35492,17 +35492,6 @@
       "root_message_id": "msg-49c26e70c7ab"
     },
     {
-      "id": "thread-1bf690c8c42c",
-      "subject": "Antigen forwarded attachment",
-      "message_count": 1,
-      "participants": [
-        "Antigen_PEGASUS@cug1.umt.edu"
-      ],
-      "started": "2006-02-07T15:07:34Z",
-      "last_reply": "2006-02-07T15:07:34Z",
-      "root_message_id": "msg-1bf690c8c42c"
-    },
-    {
       "id": "thread-a9af89e2e91d",
       "subject": "Antigen forwarded attachment",
       "message_count": 1,
@@ -35512,6 +35501,17 @@
       "started": "2006-02-07T15:07:34Z",
       "last_reply": "2006-02-07T15:07:34Z",
       "root_message_id": "msg-a9af89e2e91d"
+    },
+    {
+      "id": "thread-1bf690c8c42c",
+      "subject": "Antigen forwarded attachment",
+      "message_count": 1,
+      "participants": [
+        "Antigen_PEGASUS@cug1.umt.edu"
+      ],
+      "started": "2006-02-07T15:07:34Z",
+      "last_reply": "2006-02-07T15:07:34Z",
+      "root_message_id": "msg-1bf690c8c42c"
     },
     {
       "id": "thread-f5cc8e07a84a",
