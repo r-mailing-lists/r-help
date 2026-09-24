@@ -17356,6 +17356,24 @@
       "month": "2012-09"
     },
     {
+      "id": "msg-3d90e69e6088",
+      "message_id": "<DB11A7D9-B558-47CC-B025-AE712291128F@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
+      "date": "2012-09-16T21:36:26Z",
+      "subject": "[R] Count based on 2 conditions [Beginner Question]",
+      "subject_clean": "Count based on 2 conditions [Beginner Question]",
+      "in_reply_to": "<1347792105574-4643282.post@n4.nabble.com>",
+      "references": [
+        "<1347792105574-4643282.post@n4.nabble.com>"
+      ],
+      "body_plain": "On Sep 16, 2012, at 3:41 AM, SirRon wrote:\n\n> Hello,\n> I'm working with a dataset that has 2 columns and 1000 entries. Column 1 has\n> either value 0 or 1, column 2 has values between 0 and 10. I would like to\n> count how often Column 1 has the value 1, while Column 2 has a value greater\n> 5.\n> \n> This is my attempt, which works but doesn't seem to be very efficient,\n> especially when testing different values or columns.\n> \n> count=0\n> for (i in 1:1000) { if(dataset[i,2]>5 && ind[i,1]==1) { count=count+1}}\n> \n> I'm looking for a more efficient/elegant way to do this!\n> \n\nI see others have given you a solution using the vectorized sum function. I would have reached for 'table' and done it thusly:\n\ntable( one=dataset[,1], GT5=dataset[ , 2] > 5 )\n\n-- \n\nDavid Winsemius, MD\nAlameda, CA, USA",
+      "body_snippet": "On Sep 16, 2012, at 3:41 AM, SirRon wrote:\n\n> Hello,\n> I'm working with a dataset that has 2 columns and 1000 entries. Column 1 has\n> either value 0 or 1, column 2 has values between 0 and 10. I would",
+      "thread_id": "thread-67e21f30d5c5",
+      "thread_depth": 1,
+      "month": "2012-09"
+    },
+    {
       "id": "msg-3095da07f7eb",
       "message_id": "<5056465A.8010408@ucalgary.ca>",
       "from_name": "Peter Ehlers",
@@ -17372,24 +17390,6 @@
       "body_snippet": "On 2012-09-16 05:04, Rui Barradas wrote:\n> Hello,\n>\n> Since logical values F/T are coded as integers 0/1, you can use this:\n>\n>\n> set.seed(5712)  # make it reproducible\n> n <- 1e3\n> x <- data.frame(A ",
       "thread_id": "thread-67e21f30d5c5",
       "thread_depth": 2,
-      "month": "2012-09"
-    },
-    {
-      "id": "msg-3d90e69e6088",
-      "message_id": "<DB11A7D9-B558-47CC-B025-AE712291128F@comcast.net>",
-      "from_name": "David Winsemius",
-      "from_email_hash": "e3a7b8eb6067ea7800bca3bfc3867dc752c8c60a378f21755e53d6893a6080bc",
-      "date": "2012-09-16T21:36:26Z",
-      "subject": "[R] Count based on 2 conditions [Beginner Question]",
-      "subject_clean": "Count based on 2 conditions [Beginner Question]",
-      "in_reply_to": "<1347792105574-4643282.post@n4.nabble.com>",
-      "references": [
-        "<1347792105574-4643282.post@n4.nabble.com>"
-      ],
-      "body_plain": "On Sep 16, 2012, at 3:41 AM, SirRon wrote:\n\n> Hello,\n> I'm working with a dataset that has 2 columns and 1000 entries. Column 1 has\n> either value 0 or 1, column 2 has values between 0 and 10. I would like to\n> count how often Column 1 has the value 1, while Column 2 has a value greater\n> 5.\n> \n> This is my attempt, which works but doesn't seem to be very efficient,\n> especially when testing different values or columns.\n> \n> count=0\n> for (i in 1:1000) { if(dataset[i,2]>5 && ind[i,1]==1) { count=count+1}}\n> \n> I'm looking for a more efficient/elegant way to do this!\n> \n\nI see others have given you a solution using the vectorized sum function. I would have reached for 'table' and done it thusly:\n\ntable( one=dataset[,1], GT5=dataset[ , 2] > 5 )\n\n-- \n\nDavid Winsemius, MD\nAlameda, CA, USA",
-      "body_snippet": "On Sep 16, 2012, at 3:41 AM, SirRon wrote:\n\n> Hello,\n> I'm working with a dataset that has 2 columns and 1000 entries. Column 1 has\n> either value 0 or 1, column 2 has values between 0 and 10. I would",
-      "thread_id": "thread-67e21f30d5c5",
-      "thread_depth": 1,
       "month": "2012-09"
     },
     {
