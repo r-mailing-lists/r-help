@@ -864,24 +864,6 @@
       "month": "2021-09"
     },
     {
-      "id": "msg-eea88ca85b6d",
-      "message_id": "<87lf4ezzua.fsf@enricoschumann.net>",
-      "from_name": "Enrico Schumann",
-      "from_email_hash": "42e3fbcaa04e968726f4c1d1a69e34143bdbc62b403d112ba1d3712256bacb88",
-      "date": "2021-09-02T16:43:22Z",
-      "subject": "[R] read.csv() error",
-      "subject_clean": "read.csv() error",
-      "in_reply_to": "<alpine.LNX.2.20.2109020931350.18288@salmo.appl-ecosys.com> (Rich Shepard's message of \"Thu, 2 Sep 2021 09:32:24 -0700 (PDT)\")",
-      "references": [
-        "<alpine.LNX.2.20.2109020931350.18288@salmo.appl-ecosys.com>"
-      ],
-      "body_plain": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage$sampdate <- as.Date(stage$sampdate)\n> stage$ht <- as.numeric(stage$ht, length = 6)\n>\n> Running the script produces this error:\n>> source('stage.R')\n> Error in `$<-.data.frame`(`*tmp*`, ht, value = numeric(0)) :\n>   replacement has 0 rows, data has 486336\n>\n> Sample lines from the data file:\n> sampdate,samptime,elev\n> 2007-10-01,01:00,2.80\n> 2007-10-01,01:15,2.71\n> 2007-10-01,01:30,2.63\n> 2007-10-01,01:45,2.53\n> 2007-10-01,02:00,2.45\n> 2007-10-01,02:15,2.36\n> 2007-10-01,02:30,2.27\n> 2007-10-01,02:45,2.17\n> 2007-10-01,03:00,2.07\n>\n> Maximum value for elev is about 11.00, 5 digits.\n>\n> I don't understand this error because the equivalent commands for another\n> data source file completes without error.\n>\n> What is that error message telling me?\n>\n> TIA,\n>\n> Rich\n>\n\n(Sorry, sent too early.)\n\nThere is no column 'ht'.\n\n    df <- data.frame(a = 1:5)\n    df$b <- as.numeric(df$b)\n    ## Error in `$<-.data.frame`(`*tmp*`, b, value = numeric(0)) : \n    ##   replacement has 0 rows, data has 5\n\n-- \nEnrico Schumann\nLucerne, Switzerland\nhttp://enricoschumann.net",
-      "body_snippet": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage",
-      "thread_id": "thread-1d3f6fadf414",
-      "thread_depth": 1,
-      "month": "2021-09"
-    },
-    {
       "id": "msg-41adffea625d",
       "message_id": "<87sfynyllh.fsf@enricoschumann.net>",
       "from_name": "Enrico Schumann",
@@ -894,6 +876,24 @@
         "<alpine.LNX.2.20.2109020931350.18288@salmo.appl-ecosys.com>"
       ],
       "body_plain": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage$sampdate <- as.Date(stage$sampdate)\n> stage$ht <- as.numeric(stage$ht, length = 6)\n>\n> Running the script produces this error:\n>> source('stage.R')\n> Error in `$<-.data.frame`(`*tmp*`, ht, value = numeric(0)) :\n>   replacement has 0 rows, data has 486336\n>\n> Sample lines from the data file:\n> sampdate,samptime,elev\n> 2007-10-01,01:00,2.80\n> 2007-10-01,01:15,2.71\n> 2007-10-01,01:30,2.63\n> 2007-10-01,01:45,2.53\n> 2007-10-01,02:00,2.45\n> 2007-10-01,02:15,2.36\n> 2007-10-01,02:30,2.27\n> 2007-10-01,02:45,2.17\n> 2007-10-01,03:00,2.07\n>\n> Maximum value for elev is about 11.00, 5 digits.\n>\n> I don't understand this error because the equivalent commands for another\n> data source file completes without error.\n>\n> What is that error message telling me?\n>\n> TIA,\n>\n> Rich\n>\n\nThere is no column 'ht'.\n\n-- \nEnrico Schumann\nLucerne, Switzerland\nhttp://enricoschumann.net",
+      "body_snippet": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage",
+      "thread_id": "thread-1d3f6fadf414",
+      "thread_depth": 1,
+      "month": "2021-09"
+    },
+    {
+      "id": "msg-eea88ca85b6d",
+      "message_id": "<87lf4ezzua.fsf@enricoschumann.net>",
+      "from_name": "Enrico Schumann",
+      "from_email_hash": "42e3fbcaa04e968726f4c1d1a69e34143bdbc62b403d112ba1d3712256bacb88",
+      "date": "2021-09-02T16:43:22Z",
+      "subject": "[R] read.csv() error",
+      "subject_clean": "read.csv() error",
+      "in_reply_to": "<alpine.LNX.2.20.2109020931350.18288@salmo.appl-ecosys.com> (Rich Shepard's message of \"Thu, 2 Sep 2021 09:32:24 -0700 (PDT)\")",
+      "references": [
+        "<alpine.LNX.2.20.2109020931350.18288@salmo.appl-ecosys.com>"
+      ],
+      "body_plain": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage$sampdate <- as.Date(stage$sampdate)\n> stage$ht <- as.numeric(stage$ht, length = 6)\n>\n> Running the script produces this error:\n>> source('stage.R')\n> Error in `$<-.data.frame`(`*tmp*`, ht, value = numeric(0)) :\n>   replacement has 0 rows, data has 486336\n>\n> Sample lines from the data file:\n> sampdate,samptime,elev\n> 2007-10-01,01:00,2.80\n> 2007-10-01,01:15,2.71\n> 2007-10-01,01:30,2.63\n> 2007-10-01,01:45,2.53\n> 2007-10-01,02:00,2.45\n> 2007-10-01,02:15,2.36\n> 2007-10-01,02:30,2.27\n> 2007-10-01,02:45,2.17\n> 2007-10-01,03:00,2.07\n>\n> Maximum value for elev is about 11.00, 5 digits.\n>\n> I don't understand this error because the equivalent commands for another\n> data source file completes without error.\n>\n> What is that error message telling me?\n>\n> TIA,\n>\n> Rich\n>\n\n(Sorry, sent too early.)\n\nThere is no column 'ht'.\n\n    df <- data.frame(a = 1:5)\n    df$b <- as.numeric(df$b)\n    ## Error in `$<-.data.frame`(`*tmp*`, b, value = numeric(0)) : \n    ##   replacement has 0 rows, data has 5\n\n-- \nEnrico Schumann\nLucerne, Switzerland\nhttp://enricoschumann.net",
       "body_snippet": "On Thu, 02 Sep 2021, Rich Shepard writes:\n\n> The first three commands in the script are:\n> stage <- read.csv('../data/water/gauge-ht.dat', header\n> = TRUE, sep = ',', stringsAsFactors = FALSE)\n> stage",
       "thread_id": "thread-1d3f6fadf414",
       "thread_depth": 1,
