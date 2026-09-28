@@ -44396,22 +44396,6 @@
       "month": "2009-02"
     },
     {
-      "id": "msg-51424431985a",
-      "message_id": "<22130812.post@talk.nabble.com>",
-      "from_name": "MarcioRibeiro",
-      "from_email_hash": "b4b74ac12a1f093004c1b63eaa21cc8f6d53fea2b8a21a43604f889b3c0eb15f",
-      "date": "2009-02-20T23:55:09Z",
-      "subject": "[R]  Matrix multiplication multivariate",
-      "subject_clean": "Matrix multiplication multivariate",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi listers...\nI am trying to do a matrix multiplication...\nSuppose my data has 100 obs and 2 variables...\nI calculated the estimateurs of location and dispersion...\nSo now I would like to do the following...\nt(Xi-location)%*%solve(dispersion)%*%(Xi-location)\nMy code is...\nZ<-rep(2,200)\nZ<-matrix(Z,nrow=100,ncol=2,byrow=TRUE)\np<-ncol(Z)\nN<-nrow(Z)\npoids<-rep(1/N,N)\nresults<-cov.wt(Z, wt=poids, method=\"ML\")\nloc<-t(as.matrix(results$center))\ndisp<-as.matrix(results$cov)\nloc1<-rep(2.678117,100)#SUPPOSE THAT THE LOCATION HAS THIS VALUE...\nloc2<-rep(4.824589,100)#EVEN THAT I STILL NEED TO FIND OUT TO DO THIS PART\nMORE EFFICIENTLY...\nloc<-cbind(loc1,loc2)\n\nniter<-100\nx1<-rep(0,niter)\nx2<-rep(0,niter)\nfor (i in 1:niter){\nx1[i]<-(Z[i,1]-loc[i,1])\nx2[i]<-(Z[i,2]-loc[i,2])\n}\nx<-cbind(x1,x2)\n\nSo, I calculated (Xi-location=xi)\nBut now I am having a hard time to calculate\n(t(xi)%*%solve(dispersion)%*%(xi))\nI am trying something like this...\n\nfor (i in 1:niter){\nw[i]<-t(x[i,])%*%idisp%*%(x[i,])\n}\n\nBut there is something wrong with the dimensions... I am continuing to find\nout a way...\nBut appreciate any suggestions!\nThanks in advance,\nMarcio\n\n-- \nView this message in context: http://www.nabble.com/Matrix-multiplication-multivariate-tp22130812p22130812.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi listers...\nI am trying to do a matrix multiplication...\nSuppose my data has 100 obs and 2 variables...\nI calculated the estimateurs of location and dispersion...\nSo now I would like to do the follo",
-      "thread_id": "thread-51424431985a",
-      "thread_depth": 0,
-      "month": "2009-02"
-    },
-    {
       "id": "msg-b64131986df1",
       "message_id": "<499F42DD.4010009@gmail.com>",
       "from_name": "Esmail Bonakdarian",
@@ -44428,6 +44412,22 @@
       "body_snippet": "Hi David,\n\nThis was useful, thanks.\n\nThe example was just that, there are no \"a\"s, \"b\",s etc I was\njust trying to show what I was trying to do.\n\n\nUsing m[v,]\n\nwhere m was the matrix in my example and ",
       "thread_id": "thread-b7cdcdb16ed7",
       "thread_depth": 2,
+      "month": "2009-02"
+    },
+    {
+      "id": "msg-51424431985a",
+      "message_id": "<22130812.post@talk.nabble.com>",
+      "from_name": "MarcioRibeiro",
+      "from_email_hash": "b4b74ac12a1f093004c1b63eaa21cc8f6d53fea2b8a21a43604f889b3c0eb15f",
+      "date": "2009-02-20T23:55:09Z",
+      "subject": "[R]  Matrix multiplication multivariate",
+      "subject_clean": "Matrix multiplication multivariate",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi listers...\nI am trying to do a matrix multiplication...\nSuppose my data has 100 obs and 2 variables...\nI calculated the estimateurs of location and dispersion...\nSo now I would like to do the following...\nt(Xi-location)%*%solve(dispersion)%*%(Xi-location)\nMy code is...\nZ<-rep(2,200)\nZ<-matrix(Z,nrow=100,ncol=2,byrow=TRUE)\np<-ncol(Z)\nN<-nrow(Z)\npoids<-rep(1/N,N)\nresults<-cov.wt(Z, wt=poids, method=\"ML\")\nloc<-t(as.matrix(results$center))\ndisp<-as.matrix(results$cov)\nloc1<-rep(2.678117,100)#SUPPOSE THAT THE LOCATION HAS THIS VALUE...\nloc2<-rep(4.824589,100)#EVEN THAT I STILL NEED TO FIND OUT TO DO THIS PART\nMORE EFFICIENTLY...\nloc<-cbind(loc1,loc2)\n\nniter<-100\nx1<-rep(0,niter)\nx2<-rep(0,niter)\nfor (i in 1:niter){\nx1[i]<-(Z[i,1]-loc[i,1])\nx2[i]<-(Z[i,2]-loc[i,2])\n}\nx<-cbind(x1,x2)\n\nSo, I calculated (Xi-location=xi)\nBut now I am having a hard time to calculate\n(t(xi)%*%solve(dispersion)%*%(xi))\nI am trying something like this...\n\nfor (i in 1:niter){\nw[i]<-t(x[i,])%*%idisp%*%(x[i,])\n}\n\nBut there is something wrong with the dimensions... I am continuing to find\nout a way...\nBut appreciate any suggestions!\nThanks in advance,\nMarcio\n\n-- \nView this message in context: http://www.nabble.com/Matrix-multiplication-multivariate-tp22130812p22130812.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi listers...\nI am trying to do a matrix multiplication...\nSuppose my data has 100 obs and 2 variables...\nI calculated the estimateurs of location and dispersion...\nSo now I would like to do the follo",
+      "thread_id": "thread-51424431985a",
+      "thread_depth": 0,
       "month": "2009-02"
     },
     {
