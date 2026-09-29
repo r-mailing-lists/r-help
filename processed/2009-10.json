@@ -41032,25 +41032,6 @@
       "month": "2009-10"
     },
     {
-      "id": "msg-435e2c48c9e2",
-      "message_id": "<20091023112509.M37016@centroin.com.br>",
-      "from_name": "Alberto Monteiro",
-      "from_email_hash": "7394f9b194e85b3f1a50534d3ad39bdb25ef337757a8ab0f8b74237fd4738526",
-      "date": "2009-10-23T11:32:30Z",
-      "subject": "[R] arima crashes too",
-      "subject_clean": "arima crashes too",
-      "in_reply_to": "<d8ad40b50910221122u77730057sdf74ef38e30aeab8@mail.gmail.com>",
-      "references": [
-        "<20091022171136.M35076@centroin.com.br>",
-        "<d8ad40b50910221122u77730057sdf74ef38e30aeab8@mail.gmail.com>"
-      ],
-      "body_plain": "Barry Rowlingson wrote:\n>\n>> However, arima crashes for this:\n>>\n>> arima(c(1.71, 1.78, 1.95, 1.59, 2.13), order=c(1,0,0))\n> \n>  I'm not getting what I'd call 'crashes' with your arma or arima\n> examples- I get an error message and a warning:\n> \n>> arma(c(2.01, 2.22, 2.09, 2.17, 2.42), order=c(1,0))\n> Error in AA %*% t(X) : requires numeric/complex matrix/vector arguments\n> In addition: Warning message:\n> In ar.ols(x, order.max = k, aic = FALSE, demean = FALSE, intercept =\n> include.intercept) :\n>   model order: 2singularities in the computation of the projection\n> matrixresults are only valid up to model order1\n> \n>  You've not told us what you get, \n>\nBecause I get a message in Portuguese. But the meaning is precisely\nthat one: Error in AA %*% t(X).\n\n> and the phrase 'crash' normally\n> means some kind of memory error that *terminates* a running R \n> session. \n>\nAh, maybe then \"crash\" is not the correct word. It \"stops\" running\nwhatever it is running. Maybe \"abort\" is the best word?\n\n> Are you really crashing R such that it terminates? In which \n> case, what version number/platform etc?\n> \nI mean that, if I run a loop, it doesn't finish. Or, more \ncatastrophically, if I am running a loop and saving data to an\nopen file, it terminates the loop and does not close the file.\n\nReproducible example:\n\ntest.arima <- function() {\n  lets.crash.arima <- c(71, 78, 95, 59) # , 113\n  for (x in 90:120) {\n    reg <- arima(c(lets.crash.arima, x), order = c(1,0,0))\n    cat(\"ok for x =\", x, \"\\n\")\n  }\n  cat(\"close file and prepare a nice summary\\n\")\n  return(\"arima passed the test\")\n}\n\ntest.arima()\n\nAs you can see, the loop aborts, the function never returns, with\npotentially nasty effects (namely: I have to finish R with q() to\nclose the files and examine them).\n\nAlberto 'Darth Albmont' Monteiro",
-      "body_snippet": "Barry Rowlingson wrote:\n>\n>> However, arima crashes for this:\n>>\n>> arima(c(1.71, 1.78, 1.95, 1.59, 2.13), order=c(1,0,0))\n> \n>  I'm not getting what I'd call 'crashes' with your arma or arima\n> examp",
-      "thread_id": "thread-821630dae48f",
-      "thread_depth": 2,
-      "month": "2009-10"
-    },
-    {
       "id": "msg-7a91e8ce5d6d",
       "message_id": "<4AE1944E.2050401@bitwrit.com.au>",
       "from_name": "Jim Lemon",
@@ -41068,6 +41049,25 @@
       "body_snippet": "On 10/23/2009 10:07 PM, William Simpson wrote:\n> Thanks Jim. BTW the times in x and y are in ascending order (time of\n> occurrence).\n>\n> If I do it this way, how do I actually read the data in and sto",
       "thread_id": "thread-7b2a69b04dd8",
       "thread_depth": 3,
+      "month": "2009-10"
+    },
+    {
+      "id": "msg-435e2c48c9e2",
+      "message_id": "<20091023112509.M37016@centroin.com.br>",
+      "from_name": "Alberto Monteiro",
+      "from_email_hash": "7394f9b194e85b3f1a50534d3ad39bdb25ef337757a8ab0f8b74237fd4738526",
+      "date": "2009-10-23T11:32:30Z",
+      "subject": "[R] arima crashes too",
+      "subject_clean": "arima crashes too",
+      "in_reply_to": "<d8ad40b50910221122u77730057sdf74ef38e30aeab8@mail.gmail.com>",
+      "references": [
+        "<20091022171136.M35076@centroin.com.br>",
+        "<d8ad40b50910221122u77730057sdf74ef38e30aeab8@mail.gmail.com>"
+      ],
+      "body_plain": "Barry Rowlingson wrote:\n>\n>> However, arima crashes for this:\n>>\n>> arima(c(1.71, 1.78, 1.95, 1.59, 2.13), order=c(1,0,0))\n> \n>  I'm not getting what I'd call 'crashes' with your arma or arima\n> examples- I get an error message and a warning:\n> \n>> arma(c(2.01, 2.22, 2.09, 2.17, 2.42), order=c(1,0))\n> Error in AA %*% t(X) : requires numeric/complex matrix/vector arguments\n> In addition: Warning message:\n> In ar.ols(x, order.max = k, aic = FALSE, demean = FALSE, intercept =\n> include.intercept) :\n>   model order: 2singularities in the computation of the projection\n> matrixresults are only valid up to model order1\n> \n>  You've not told us what you get, \n>\nBecause I get a message in Portuguese. But the meaning is precisely\nthat one: Error in AA %*% t(X).\n\n> and the phrase 'crash' normally\n> means some kind of memory error that *terminates* a running R \n> session. \n>\nAh, maybe then \"crash\" is not the correct word. It \"stops\" running\nwhatever it is running. Maybe \"abort\" is the best word?\n\n> Are you really crashing R such that it terminates? In which \n> case, what version number/platform etc?\n> \nI mean that, if I run a loop, it doesn't finish. Or, more \ncatastrophically, if I am running a loop and saving data to an\nopen file, it terminates the loop and does not close the file.\n\nReproducible example:\n\ntest.arima <- function() {\n  lets.crash.arima <- c(71, 78, 95, 59) # , 113\n  for (x in 90:120) {\n    reg <- arima(c(lets.crash.arima, x), order = c(1,0,0))\n    cat(\"ok for x =\", x, \"\\n\")\n  }\n  cat(\"close file and prepare a nice summary\\n\")\n  return(\"arima passed the test\")\n}\n\ntest.arima()\n\nAs you can see, the loop aborts, the function never returns, with\npotentially nasty effects (namely: I have to finish R with q() to\nclose the files and examine them).\n\nAlberto 'Darth Albmont' Monteiro",
+      "body_snippet": "Barry Rowlingson wrote:\n>\n>> However, arima crashes for this:\n>>\n>> arima(c(1.71, 1.78, 1.95, 1.59, 2.13), order=c(1,0,0))\n> \n>  I'm not getting what I'd call 'crashes' with your arma or arima\n> examp",
+      "thread_id": "thread-821630dae48f",
+      "thread_depth": 2,
       "month": "2009-10"
     },
     {

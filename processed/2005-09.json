@@ -15434,22 +15434,6 @@
       "month": "2005-09"
     },
     {
-      "id": "msg-991675819634",
-      "message_id": "<200509161749.j8GHnWV6026696@meitner.gene.com>",
-      "from_name": "Berton Gunter",
-      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
-      "date": "2005-09-16T17:49:32Z",
-      "subject": "[R] How do  I get the row indices?",
-      "subject_clean": "How do  I get the row indices?",
-      "in_reply_to": "<20050916173458.33907.qmail@web40522.mail.yahoo.com>",
-      "references": [],
-      "body_plain": "?row\nrow(iris)[iris[,1]==6.2]\n\n##or better yet\n\n?which\nwhich(iris[,1]==6.2)\n\nNote also that both may fail because the test may not be numerically exact\n-- you may need to add fuzz.\n\n-- Bert Gunter\nGenentech Non-Clinical Statistics\nSouth San Francisco, CA\n \n\"The business of the statistician is to catalyze the scientific learning\nprocess.\"  - George E. P. Box\n \n \n\n> -----Original Message-----\n> From: r-help-bounces at stat.math.ethz.ch \n> [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of Martin Lam\n> Sent: Friday, September 16, 2005 10:35 AM\n> To: R\n> Subject: [R] How do I get the row indices?\n> \n> Hi,\n> \n> I was wondering if it's possible to get the row\n> numbers from a filtering. Here's an example:\n> \n> # give me the rows with sepal.length == 6.2\n> iris[(iris[,1]==6.2),]\n> \n> # output\n>     Sepal.Length Sepal.Width Petal.Length Petal.Width \n>   Species\n> 69           6.2         2.2          4.5         1.5\n> versicolor\n> 98           6.2         2.9          4.3         1.3\n> versicolor\n> 127          6.2         2.8          4.8         1.8 \n> virginica\n> 149          6.2         3.4          5.4         2.3 \n> virginica\n> \n> What I really want is that it return the row numbers:\n> 69, 98, 127, 149.\n> \n> Thanks in advance,\n> \n> Martin\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide! \n> http://www.R-project.org/posting-guide.html\n>",
-      "body_snippet": "?row\nrow(iris)[iris[,1]==6.2]\n\n##or better yet\n\n?which\nwhich(iris[,1]==6.2)\n\nNote also that both may fail because the test may not be numerically exact\n-- you may need to add fuzz.\n\n-- Bert Gunter\nGen",
-      "thread_id": "thread-0bd6ac6601f4",
-      "thread_depth": 1,
-      "month": "2005-09"
-    },
-    {
       "id": "msg-a3e0ff1d9ad6",
       "message_id": "<1126892972.29827.73.camel@gsimpson.geog.ucl.ac.uk>",
       "from_name": "Gavin Simpson",
@@ -15463,6 +15447,22 @@
       ],
       "body_plain": "On Fri, 2005-09-16 at 10:34 -0700, Martin Lam wrote:\n> Hi,\n> \n> I was wondering if it's possible to get the row\n> numbers from a filtering. Here's an example:\n> \n> # give me the rows with sepal.length == 6.2\n> iris[(iris[,1]==6.2),]\n> \n> # output\n>     Sepal.Length Sepal.Width Petal.Length Petal.Width \n>   Species\n> 69           6.2         2.2          4.5         1.5\n> versicolor\n> 98           6.2         2.9          4.3         1.3\n> versicolor\n> 127          6.2         2.8          4.8         1.8 \n> virginica\n> 149          6.2         3.4          5.4         2.3 \n> virginica\n> \n> What I really want is that it return the row numbers:\n> 69, 98, 127, 149.\n> \n> Thanks in advance,\n> \n> Martin\n\n?which,\n\nas in:\n\n> which(iris[ , 1] == 6.2)\n[1]  69  98 127 149\n\nHTH\n\nG\n\n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide! http://www.R-project.org/posting-guide.html\n-- \n%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%\nGavin Simpson                     [T] +44 (0)20 7679 5522\nENSIS Research Fellow             [F] +44 (0)20 7679 7565\nENSIS Ltd. & ECRC                 [E] gavin.simpsonATNOSPAMucl.ac.uk\nUCL Department of Geography       [W] http://www.ucl.ac.uk/~ucfagls/cv/\n26 Bedford Way                    [W] http://www.ucl.ac.uk/~ucfagls/\nLondon.  WC1H 0AP.\n%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%",
       "body_snippet": "On Fri, 2005-09-16 at 10:34 -0700, Martin Lam wrote:\n> Hi,\n> \n> I was wondering if it's possible to get the row\n> numbers from a filtering. Here's an example:\n> \n> # give me the rows with sepal.length",
+      "thread_id": "thread-0bd6ac6601f4",
+      "thread_depth": 1,
+      "month": "2005-09"
+    },
+    {
+      "id": "msg-991675819634",
+      "message_id": "<200509161749.j8GHnWV6026696@meitner.gene.com>",
+      "from_name": "Berton Gunter",
+      "from_email_hash": "6db778788b7c3a4d799c89b7b43dc5f8ce00d9d5550207d40f48efde33d61ae2",
+      "date": "2005-09-16T17:49:32Z",
+      "subject": "[R] How do  I get the row indices?",
+      "subject_clean": "How do  I get the row indices?",
+      "in_reply_to": "<20050916173458.33907.qmail@web40522.mail.yahoo.com>",
+      "references": [],
+      "body_plain": "?row\nrow(iris)[iris[,1]==6.2]\n\n##or better yet\n\n?which\nwhich(iris[,1]==6.2)\n\nNote also that both may fail because the test may not be numerically exact\n-- you may need to add fuzz.\n\n-- Bert Gunter\nGenentech Non-Clinical Statistics\nSouth San Francisco, CA\n \n\"The business of the statistician is to catalyze the scientific learning\nprocess.\"  - George E. P. Box\n \n \n\n> -----Original Message-----\n> From: r-help-bounces at stat.math.ethz.ch \n> [mailto:r-help-bounces at stat.math.ethz.ch] On Behalf Of Martin Lam\n> Sent: Friday, September 16, 2005 10:35 AM\n> To: R\n> Subject: [R] How do I get the row indices?\n> \n> Hi,\n> \n> I was wondering if it's possible to get the row\n> numbers from a filtering. Here's an example:\n> \n> # give me the rows with sepal.length == 6.2\n> iris[(iris[,1]==6.2),]\n> \n> # output\n>     Sepal.Length Sepal.Width Petal.Length Petal.Width \n>   Species\n> 69           6.2         2.2          4.5         1.5\n> versicolor\n> 98           6.2         2.9          4.3         1.3\n> versicolor\n> 127          6.2         2.8          4.8         1.8 \n> virginica\n> 149          6.2         3.4          5.4         2.3 \n> virginica\n> \n> What I really want is that it return the row numbers:\n> 69, 98, 127, 149.\n> \n> Thanks in advance,\n> \n> Martin\n> \n> ______________________________________________\n> R-help at stat.math.ethz.ch mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide! \n> http://www.R-project.org/posting-guide.html\n>",
+      "body_snippet": "?row\nrow(iris)[iris[,1]==6.2]\n\n##or better yet\n\n?which\nwhich(iris[,1]==6.2)\n\nNote also that both may fail because the test may not be numerically exact\n-- you may need to add fuzz.\n\n-- Bert Gunter\nGen",
       "thread_id": "thread-0bd6ac6601f4",
       "thread_depth": 1,
       "month": "2005-09"
