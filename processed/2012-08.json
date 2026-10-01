@@ -20083,6 +20083,22 @@
       "month": "2012-08"
     },
     {
+      "id": "msg-bdbcbbaefe65",
+      "message_id": "<1344602467690-4639891.post@n4.nabble.com>",
+      "from_name": "aajit75",
+      "from_email_hash": "e8917a2d82720ae3c15e14ef5f98a137762866fdcc185cd1d21012cbdd85c110",
+      "date": "2012-08-10T12:41:07Z",
+      "subject": "[R] Solving binary integer optimization problem",
+      "subject_clean": "Solving binary integer optimization problem",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am new to R for solving optimization problems, I have set of communication\nchannels with limited capacity with two types of costs, fixed and variable\ncost. Each channel has expected gain for a single communication.\nI want to determine optimal number of communications for each channel\nmaximizing ROI)return on investment) with overall budget as constraint.60000\nis the budget allocated.\n\nChannel\tFixed_Cost\tVariable_Cost\tCapacity\tExpected_Gain\nC1\t400\t2.5\t5000\t0.25\nC2 \t10000\t0\t30000\t0.3\nC3\t4000\t0.15\t20000\t0.15\nC4\t2000\t2\t10000\t0.36\nC5\t100\t3\t4000\t0.09\n\nChannel_Select <-data.frame(Channel=c('c1','c2','c3','c4','c5'),\n \t                      Fixed_Cost=c(400,5000,4000,2000,100), \n\t\t\t\t    Variable_Cost=c(2.5,0,0.15,2,3),\n\t\t\t\t    Capacity=c(5000,30000,20000,10000,4000),\n\t\t\t\t    Expected_gain=c(0.25,0.3,0.15,0.36,0.09))\n\n\nLet  x1,x2,x3,x4,x5 are the decision variables  for c1,c2,c3,c4,c5 channel\nand z1,z2,z3,z4,z5 are the indicator binary variables if channel has\nallocated communication if any.\n\nmax((0.25*x1+0.30*x2+0.15*x3+0.36*x4+0.09*x5)-(2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5)/(\n2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5))\n\nConstraints:\n(2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5)) <=\n60000 ##Budget Constraint\nx1-5000*z1<=0\nx2-30000*z2<=0\nx3-20000*z3<=0\nx4-10000*z4<=0\nx5-4000*z5<=0\nx1 >= 200\nx2 >= 100\nx3>=100\nx4>=500\nx5>=0\n\nI had tried lp function from lpsolve but not able to set objective.in for\nobjective function. Any help or hint is welcomed!\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Solving-binary-integer-optimization-problem-tp4639891.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi,\n\nI am new to R for solving optimization problems, I have set of communication\nchannels with limited capacity with two types of costs, fixed and variable\ncost. Each channel has expected gain for a ",
+      "thread_id": "thread-bdbcbbaefe65",
+      "thread_depth": 0,
+      "month": "2012-08"
+    },
+    {
       "id": "msg-0067778e7c54",
       "message_id": "<1344602467.13721.YahooMailNeo@web142606.mail.bf1.yahoo.com>",
       "from_name": "arun",
@@ -20101,22 +20117,6 @@
       "body_snippet": "HI,\n\nI guess names() work if the zoo object has columns.\n\n(https://stat.ethz.ch/pipermail/r-help/2006-November/117448.html)\nx <- sin(1:4)\nlibrary(zoo)\n?x2<-zoo(as.matrix(x))\nnames(x2)<-\"test\"\n?names(x",
       "thread_id": "thread-6207409f65c8",
       "thread_depth": 4,
-      "month": "2012-08"
-    },
-    {
-      "id": "msg-bdbcbbaefe65",
-      "message_id": "<1344602467690-4639891.post@n4.nabble.com>",
-      "from_name": "aajit75",
-      "from_email_hash": "e8917a2d82720ae3c15e14ef5f98a137762866fdcc185cd1d21012cbdd85c110",
-      "date": "2012-08-10T12:41:07Z",
-      "subject": "[R] Solving binary integer optimization problem",
-      "subject_clean": "Solving binary integer optimization problem",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi,\n\nI am new to R for solving optimization problems, I have set of communication\nchannels with limited capacity with two types of costs, fixed and variable\ncost. Each channel has expected gain for a single communication.\nI want to determine optimal number of communications for each channel\nmaximizing ROI)return on investment) with overall budget as constraint.60000\nis the budget allocated.\n\nChannel\tFixed_Cost\tVariable_Cost\tCapacity\tExpected_Gain\nC1\t400\t2.5\t5000\t0.25\nC2 \t10000\t0\t30000\t0.3\nC3\t4000\t0.15\t20000\t0.15\nC4\t2000\t2\t10000\t0.36\nC5\t100\t3\t4000\t0.09\n\nChannel_Select <-data.frame(Channel=c('c1','c2','c3','c4','c5'),\n \t                      Fixed_Cost=c(400,5000,4000,2000,100), \n\t\t\t\t    Variable_Cost=c(2.5,0,0.15,2,3),\n\t\t\t\t    Capacity=c(5000,30000,20000,10000,4000),\n\t\t\t\t    Expected_gain=c(0.25,0.3,0.15,0.36,0.09))\n\n\nLet  x1,x2,x3,x4,x5 are the decision variables  for c1,c2,c3,c4,c5 channel\nand z1,z2,z3,z4,z5 are the indicator binary variables if channel has\nallocated communication if any.\n\nmax((0.25*x1+0.30*x2+0.15*x3+0.36*x4+0.09*x5)-(2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5)/(\n2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5))\n\nConstraints:\n(2.5*x1+0*x2+0.15*x3+2*x4+3*x5+400*z1+10000*z2+4000*z3+2000*z4+100*z5)) <=\n60000 ##Budget Constraint\nx1-5000*z1<=0\nx2-30000*z2<=0\nx3-20000*z3<=0\nx4-10000*z4<=0\nx5-4000*z5<=0\nx1 >= 200\nx2 >= 100\nx3>=100\nx4>=500\nx5>=0\n\nI had tried lp function from lpsolve but not able to set objective.in for\nobjective function. Any help or hint is welcomed!\n\n\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/Solving-binary-integer-optimization-problem-tp4639891.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi,\n\nI am new to R for solving optimization problems, I have set of communication\nchannels with limited capacity with two types of costs, fixed and variable\ncost. Each channel has expected gain for a ",
-      "thread_id": "thread-bdbcbbaefe65",
-      "thread_depth": 0,
       "month": "2012-08"
     },
     {
