@@ -2776,24 +2776,6 @@
       "month": "2020-06"
     },
     {
-      "id": "msg-a6c3f37d2807",
-      "message_id": "<b328e7565108b4bf705e051ee258239a9b01e3f9.camel@pp.inet.fi>",
-      "from_name": "Kimmo Elo",
-      "from_email_hash": "21d3b970f69cd3ff30874583d1d1ebd551fdcb82568d7e8a58df2035d8944578",
-      "date": "2020-06-10T08:30:54Z",
-      "subject": "[R] How to convert European short dates to ISO format?",
-      "subject_clean": "How to convert European short dates to ISO format?",
-      "in_reply_to": "<CAMk+s2Sj4vQyQY0r1FKG9zL3y7vFSmUZVmHWXDP0G8hf6poeXg@mail.gmail.com>",
-      "references": [
-        "<CAMk+s2Sj4vQyQY0r1FKG9zL3y7vFSmUZVmHWXDP0G8hf6poeXg@mail.gmail.com>"
-      ],
-      "body_plain": "Hi!\n\nShould it be:\n\nas.Date(oriDates, format=\"%d/%m/%y\") # See the order of %d and %m!!\n\nThis command seems to work for me, here the output:\n\n [1] \"2020-01-23\" \"2020-01-24\" \"2020-01-25\" \"2020-01-26\" \"2020-01-27\"\n\"2020-01-28\" \"2020-01-29\" \"2020-01-30\"\n [9] \"2020-01-31\" \"2020-02-01\" \"2020-02-02\" \"2020-02-03\" \"2020-02-04\"\n\"2020-02-05\" \"2020-02-06\" \"2020-02-07\"\n\nHTH,\nKimmo\n\nke, 2020-06-10 kello 10:20 +0200, Luigi Marongiu kirjoitti:\n> Hello,\n> I have been trying to convert European short dates formatted as\n> dd/mm/yy into the ISO 8601 but the function as.Dates interprets them\n> as American ones (mm/dd/yy), thus I get:\n> \n> ```\n> oriDates = c(\"23/01/20\", \"24/01/20\", \"25/01/20\", \"26/01/20\",\n> \"27/01/20\", \"28/01/20\", \"29/01/20\", \"30/01/20\",\n>              \"31/01/20\", \"01/02/20\", \"02/02/20\", \"03/02/20\",\n> \"04/02/20\", \"05/02/20\", \"06/02/20\", \"07/02/20\")\n> isoDates = as.Date(oriDates, format = \"%m/%d/%y\")\n> > isoDates\n> \n>  [1] NA           NA           NA           NA           NA\n> NA           NA\n>  [8] NA           NA           \"2020-01-02\" \"2020-02-02\" \"2020-03-02\"\n> \"2020-04-02\" \"2020-05-02\"\n> [15] \"2020-06-02\" \"2020-07-02\"\n> ```\n> \n> How can I convert properly?",
-      "body_snippet": "Hi!\n\nShould it be:\n\nas.Date(oriDates, format=\"%d/%m/%y\") # See the order of %d and %m!!\n\nThis command seems to work for me, here the output:\n\n [1] \"2020-01-23\" \"2020-01-24\" \"2020-01-25\" \"2020-01-26\" \"",
-      "thread_id": "thread-2d227e8de69c",
-      "thread_depth": 1,
-      "month": "2020-06"
-    },
-    {
       "id": "msg-a9e28e2da550",
       "message_id": "<66A418C2-CB3C-41CC-A752-5733D2F885C3@xs4all.nl>",
       "from_name": "Berend Hasselman",
@@ -2807,6 +2789,24 @@
       ],
       "body_plain": "Luigi,\n\nTry format = \"%d/%m/%y\"\n\nBerend Hasselman\n\n> On 10 Jun 2020, at 10:20, Luigi Marongiu <marongiu.luigi at gmail.com> wrote:\n> \n>  ISO 8601",
       "body_snippet": "Luigi,\n\nTry format = \"%d/%m/%y\"\n\nBerend Hasselman\n\n> On 10 Jun 2020, at 10:20, Luigi Marongiu <marongiu.luigi at gmail.com> wrote:\n> \n>  ISO 8601",
+      "thread_id": "thread-2d227e8de69c",
+      "thread_depth": 1,
+      "month": "2020-06"
+    },
+    {
+      "id": "msg-a6c3f37d2807",
+      "message_id": "<b328e7565108b4bf705e051ee258239a9b01e3f9.camel@pp.inet.fi>",
+      "from_name": "Kimmo Elo",
+      "from_email_hash": "21d3b970f69cd3ff30874583d1d1ebd551fdcb82568d7e8a58df2035d8944578",
+      "date": "2020-06-10T08:30:54Z",
+      "subject": "[R] How to convert European short dates to ISO format?",
+      "subject_clean": "How to convert European short dates to ISO format?",
+      "in_reply_to": "<CAMk+s2Sj4vQyQY0r1FKG9zL3y7vFSmUZVmHWXDP0G8hf6poeXg@mail.gmail.com>",
+      "references": [
+        "<CAMk+s2Sj4vQyQY0r1FKG9zL3y7vFSmUZVmHWXDP0G8hf6poeXg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi!\n\nShould it be:\n\nas.Date(oriDates, format=\"%d/%m/%y\") # See the order of %d and %m!!\n\nThis command seems to work for me, here the output:\n\n [1] \"2020-01-23\" \"2020-01-24\" \"2020-01-25\" \"2020-01-26\" \"2020-01-27\"\n\"2020-01-28\" \"2020-01-29\" \"2020-01-30\"\n [9] \"2020-01-31\" \"2020-02-01\" \"2020-02-02\" \"2020-02-03\" \"2020-02-04\"\n\"2020-02-05\" \"2020-02-06\" \"2020-02-07\"\n\nHTH,\nKimmo\n\nke, 2020-06-10 kello 10:20 +0200, Luigi Marongiu kirjoitti:\n> Hello,\n> I have been trying to convert European short dates formatted as\n> dd/mm/yy into the ISO 8601 but the function as.Dates interprets them\n> as American ones (mm/dd/yy), thus I get:\n> \n> ```\n> oriDates = c(\"23/01/20\", \"24/01/20\", \"25/01/20\", \"26/01/20\",\n> \"27/01/20\", \"28/01/20\", \"29/01/20\", \"30/01/20\",\n>              \"31/01/20\", \"01/02/20\", \"02/02/20\", \"03/02/20\",\n> \"04/02/20\", \"05/02/20\", \"06/02/20\", \"07/02/20\")\n> isoDates = as.Date(oriDates, format = \"%m/%d/%y\")\n> > isoDates\n> \n>  [1] NA           NA           NA           NA           NA\n> NA           NA\n>  [8] NA           NA           \"2020-01-02\" \"2020-02-02\" \"2020-03-02\"\n> \"2020-04-02\" \"2020-05-02\"\n> [15] \"2020-06-02\" \"2020-07-02\"\n> ```\n> \n> How can I convert properly?",
+      "body_snippet": "Hi!\n\nShould it be:\n\nas.Date(oriDates, format=\"%d/%m/%y\") # See the order of %d and %m!!\n\nThis command seems to work for me, here the output:\n\n [1] \"2020-01-23\" \"2020-01-24\" \"2020-01-25\" \"2020-01-26\" \"",
       "thread_id": "thread-2d227e8de69c",
       "thread_depth": 1,
       "month": "2020-06"
