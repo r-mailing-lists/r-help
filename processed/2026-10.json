@@ -1,0 +1,39 @@
+{
+  "list": "r-help",
+  "description": "",
+  "month": "2026-10",
+  "messages": [
+    {
+      "id": "msg-59ed4001b3d6",
+      "message_id": "<00382EC2-ABF9-4837-A083-DA9BD3941A3F@gmail.com>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "5d0f61ffffc9a67fd86f4b9a1ea3fac7d731c19e1d8679b6ae315232b22874e8",
+      "date": "2026-10-05T11:25:17Z",
+      "subject": "[R] Subject: Suggestion regarding default MAD constant",
+      "subject_clean": "Subject: Suggestion regarding default MAD constant",
+      "in_reply_to": "<746104366.1430323.1789890499994@mail.yahoo.com>",
+      "references": [
+        "<746104366.1430323.1789890499994.ref@mail.yahoo.com>",
+        "<746104366.1430323.1789890499994@mail.yahoo.com>"
+      ],
+      "body_plain": "The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. \n\nIt is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).\n\nIf you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.\n\n- Peter D.\n\n\n> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> While working with signed-error distributions that are often skewed, I noticed\n> that using `mad(x)` with the default constant (1.4826) can unintentionally widen \n> the dispersion estimate enough to mask important structure in the data.\n> \n> For diagnostic and tolerance-testing workflows, especially when symmetry cannot\n> be assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?\n> interval because it reflects the raw median absolute deviation without scaling\n> to a normal model.\n> \n> Before applying any parametric center/spread metrics, I?ve found it helpful to\n> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n> `constant = 1` behaves more robustly.\n> \n> Is there any interest in discussing whether `constant = 1` might be a more\n> appropriate default for nonparametric workflows, or whether a note in the\n> documentation might help users choose the right constant for their context?\n> \n> Thanks,\n> Thomas\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an out",
+      "thread_id": "thread-59ed4001b3d6",
+      "thread_depth": 0,
+      "month": "2026-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-59ed4001b3d6",
+      "subject": "Subject: Suggestion regarding default MAD constant",
+      "message_count": 1,
+      "participants": [
+        "Peter Dalgaard"
+      ],
+      "started": "2026-10-05T11:25:17Z",
+      "last_reply": "2026-10-05T11:25:17Z",
+      "root_message_id": "msg-59ed4001b3d6"
+    }
+  ]
+}
