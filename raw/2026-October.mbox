@@ -61,3 +61,320 @@ Office: A 4.23
 Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
 
 
+From tg@77m @end|ng |rom y@hoo@com  Mon Oct  5 17:20:40 2026
+From: tg@77m @end|ng |rom y@hoo@com (Thomas Subia)
+Date: Mon, 5 Oct 2026 15:20:40 +0000 (UTC)
+Subject: [R] Subject: Suggestion regarding default MAD constant
+In-Reply-To: <00382EC2-ABF9-4837-A083-DA9BD3941A3F@gmail.com>
+References: <746104366.1430323.1789890499994.ref@mail.yahoo.com>
+ <746104366.1430323.1789890499994@mail.yahoo.com>
+ <00382EC2-ABF9-4837-A083-DA9BD3941A3F@gmail.com>
+Message-ID: <715968930.560413.1791213640054@mail.yahoo.com>
+
+ Thanks, that's a helpful perspective.
+
+My use case is a little different from estimating the SD of an underlying distribution. I'm working with signed-error distributions that are often skewed, and my primary interest is a robust description of the observed error spread rather than a normal-consistent estimate of ?.
+
+In that setting, the default 1.4826 factor feels like a model-based calibration rather than part of the dispersion measure itself. Using mad(x, constant = 1) keeps the scale tied directly to the median absolute deviation observed in the data.
+
+Regarding your IQR comment, that's a fair question. My intuition is that MAD and IQR emphasize somewhat different aspects of the distribution. IQR is determined entirely by the 25th and 75th percentiles, whereas MAD is based on the distribution of absolute deviations from the median. For diagnostic work, I've found the latter useful because it stays centered on the typical deviation from the target value.
+
+So I see raw MAD less as a substitute for SD and more as a robust measure of "typical error magnitude."
+- Thomas S
+    On Monday, October 5, 2026 at 04:25:30 AM PDT, Peter Dalgaard <pdalgd at gmail.com> wrote:  
+ 
+ The constant= bit comes from
+
+> 1/diff(qnorm(c(.25,.75))/2)
+[1] 1.482602
+
+so the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. 
+
+It is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).
+
+If you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.
+
+- Peter D.
+
+
+> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:
+> 
+> Hi all,
+> 
+> While working with signed-error distributions that are often skewed, I noticed
+> that using `mad(x)` with the default constant (1.4826) can unintentionally widen 
+> the dispersion estimate enough to mask important structure in the data.
+> 
+> For diagnostic and tolerance-testing workflows, especially when symmetry cannot
+> be assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?
+> interval because it reflects the raw median absolute deviation without scaling
+> to a normal model.
+> 
+> Before applying any parametric center/spread metrics, I?ve found it helpful to
+> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,
+> `constant = 1` behaves more robustly.
+> 
+> Is there any interest in discussing whether `constant = 1` might be a more
+> appropriate default for nonparametric workflows, or whether a note in the
+> documentation might help users choose the right constant for their context?
+> 
+> Thanks,
+> Thomas
+> 
+> [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Office: A 4.23
+Email: pd.mes at cbs.dk? Priv: PDalgd at gmail.com
+
+  
+	[[alternative HTML version deleted]]
+
+
+From t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk  Mon Oct  5 17:35:55 2026
+From: t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk (Tim Taylor)
+Date: Mon, 05 Oct 2026 16:35:55 +0100
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+Message-ID: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+
+Apart from different ergonomics is there anything worth being aware of when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+
+Tim
+
+
+From |kw@|mmo @end|ng |rom gm@||@com  Mon Oct  5 18:01:15 2026
+From: |kw@|mmo @end|ng |rom gm@||@com (Iris Simmons)
+Date: Mon, 5 Oct 2026 12:01:15 -0400
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+In-Reply-To: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+References: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+Message-ID: <CADNULg_P3sZyoXS20LOsKX8g97KWQQkMk1MEdnfT20uT2K57VQ@mail.gmail.com>
+
+STRING_PTR_RO(x)[i] will not check bounds and will not check that the
+element is not NULL and not a free node. STRING_PTR_RO only works on
+standard vectors, and will not work on alternate vector representations.
+Also, it will return (const SEXP *) (void *) 1 when the character vector is
+of length 0, or may return a pointer to a random place in memory. In
+general, I would suggest
+
+const SEXP *y = NULL;
+if (Rf_xlength(x)) y = STRING_PTR_RO(x);
+
+or something similar in order to avoid anything weird involving 0 length
+access.
+
+I do not know of any other differences to note.
+
+On Mon, Oct 5, 2026, 11:36 Tim Taylor <tim.taylor at hiddenelephants.co.uk>
+wrote:
+
+> Apart from different ergonomics is there anything worth being aware of
+> when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+>
+> Tim
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk  Mon Oct  5 18:05:54 2026
+From: t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk (Tim Taylor)
+Date: Mon, 05 Oct 2026 17:05:54 +0100
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+In-Reply-To: <CADNULg_P3sZyoXS20LOsKX8g97KWQQkMk1MEdnfT20uT2K57VQ@mail.gmail.com>
+References: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+ <CADNULg_P3sZyoXS20LOsKX8g97KWQQkMk1MEdnfT20uT2K57VQ@mail.gmail.com>
+Message-ID: <895950b8-9b04-41fc-8afc-1ebe2ed8f44b@app.fastmail.com>
+
+Many thanks Iris
+
+That's very helpful.
+
+Tim
+
+On Mon, 5 Oct 2026, at 5:01 PM, Iris Simmons wrote:
+> STRING_PTR_RO(x)[i] will not check bounds and will not check that the 
+> element is not NULL and not a free node. STRING_PTR_RO only works on 
+> standard vectors, and will not work on alternate vector 
+> representations. Also, it will return (const SEXP *) (void *) 1 when 
+> the character vector is of length 0, or may return a pointer to a 
+> random place in memory. In general, I would suggest
+>
+> const SEXP *y = NULL;
+> if (Rf_xlength(x)) y = STRING_PTR_RO(x);
+>
+> or something similar in order to avoid anything weird involving 0 length access.
+>
+> I do not know of any other differences to note. 
+>
+> On Mon, Oct 5, 2026, 11:36 Tim Taylor <tim.taylor at hiddenelephants.co.uk> wrote:
+>> Apart from different ergonomics is there anything worth being aware of when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+>> 
+>> Tim
+>> 
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+
+
+From |kw@|mmo @end|ng |rom gm@||@com  Mon Oct  5 18:19:43 2026
+From: |kw@|mmo @end|ng |rom gm@||@com (Iris Simmons)
+Date: Mon, 5 Oct 2026 12:19:43 -0400
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+In-Reply-To: <895950b8-9b04-41fc-8afc-1ebe2ed8f44b@app.fastmail.com>
+References: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+ <CADNULg_P3sZyoXS20LOsKX8g97KWQQkMk1MEdnfT20uT2K57VQ@mail.gmail.com>
+ <895950b8-9b04-41fc-8afc-1ebe2ed8f44b@app.fastmail.com>
+Message-ID: <CADNULg9p-UbzMZXmUTFU2EnE1LmatrBFDr=_qqyyBDzLwdjX8w@mail.gmail.com>
+
+Sorry, I made a mistake in regards to the comment about standard vs
+alternate vectors. It seems as though it does work, it just may result in
+an allocation when called on an alternate vector (but interestingly cannot
+trigger a garbage collection).
+
+Function STRING_PTR_RO
+https://github.com/wch/r-source/blob/d75f6a2224865f9ac0bee065de99af817a3a65e6/src/main/memory.c#L4277
+
+which calls DATAPTR_RO
+https://github.com/wch/r-source/blob/d75f6a2224865f9ac0bee065de99af817a3a65e6/src/include/Defn.h#L434
+https://github.com/wch/r-source/blob/d75f6a2224865f9ac0bee065de99af817a3a65e6/src/include/Rinlinedfuns.h#L148
+
+which may call ALTVEC_DATAPTR_RO
+https://github.com/wch/r-source/blob/d75f6a2224865f9ac0bee065de99af817a3a65e6/src/main/altrep.c#L379
+
+which calls ALTVEC_DATAPTR_EX
+https://github.com/wch/r-source/blob/d75f6a2224865f9ac0bee065de99af817a3a65e6/src/main/altrep.c#L352
+
+On Mon, Oct 5, 2026, 12:06 Tim Taylor <tim.taylor at hiddenelephants.co.uk>
+wrote:
+
+> Many thanks Iris
+>
+> That's very helpful.
+>
+> Tim
+>
+> On Mon, 5 Oct 2026, at 5:01 PM, Iris Simmons wrote:
+> > STRING_PTR_RO(x)[i] will not check bounds and will not check that the
+> > element is not NULL and not a free node. STRING_PTR_RO only works on
+> > standard vectors, and will not work on alternate vector
+> > representations. Also, it will return (const SEXP *) (void *) 1 when
+> > the character vector is of length 0, or may return a pointer to a
+> > random place in memory. In general, I would suggest
+> >
+> > const SEXP *y = NULL;
+> > if (Rf_xlength(x)) y = STRING_PTR_RO(x);
+> >
+> > or something similar in order to avoid anything weird involving 0 length
+> access.
+> >
+> > I do not know of any other differences to note.
+> >
+> > On Mon, Oct 5, 2026, 11:36 Tim Taylor <tim.taylor at hiddenelephants.co.uk>
+> wrote:
+> >> Apart from different ergonomics is there anything worth being aware of
+> when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+> >>
+> >> Tim
+> >>
+> >> ______________________________________________
+> >> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> >> https://stat.ethz.ch/mailman/listinfo/r-help
+> >> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> >> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From kry|ov@r00t @end|ng |rom gm@||@com  Mon Oct  5 21:40:11 2026
+From: kry|ov@r00t @end|ng |rom gm@||@com (Ivan Krylov)
+Date: Mon, 5 Oct 2026 22:40:11 +0300
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+In-Reply-To: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+References: <928bf283-a8e9-4ac3-8586-52d2a863d334@app.fastmail.com>
+Message-ID: <20261005224011.64965712@Tarkus>
+
+? Mon, 05 Oct 2026 16:35:55 +0100
+"Tim Taylor" <tim.taylor at hiddenelephants.co.uk> ?????:
+
+> Apart from different ergonomics is there anything worth being aware
+> of when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+
+Iris Simmons gave an excellent explanation. The only thing left to note
+is that some ALTREP classes currently have STRING_ELT methods that
+return CHARSXPs not protected from garbage collection:
+
+https://bugs.r-project.org/show_bug.cgi?id=19135
+https://github.com/gagolews/stringi/issues/354
+https://github.com/tidyverse/vroom/pull/638
+https://github.com/apache/arrow/issues/51198
+
+If your code can be expected to process strings from vroom or arrow and
+you chose STRING_ELT (instead of STRING_PTR_RO which would materialise
+the vector), you may need to add some workarounds.
+
+-- 
+Best regards,
+Ivan
+
+
+From t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk  Mon Oct  5 22:53:53 2026
+From: t|m@t@y|or @end|ng |rom h|ddene|eph@nt@@co@uk (Tim Taylor)
+Date: Mon, 5 Oct 2026 21:53:53 +0100
+Subject: [R] STRING_PTR_RO compared to STRING_ELT
+In-Reply-To: <20261005224011.64965712@Tarkus>
+References: <20261005224011.64965712@Tarkus>
+Message-ID: <E174D6D4-2011-443A-92AE-EAB2CB130E84@hiddenelephants.co.uk>
+
+Thank you both for the explanations. Just the info I was after.
+
+Cheers
+
+Tim
+
+> On 5 Oct 2026, at 20:40, Ivan Krylov <krylov.r00t at gmail.com> wrote:
+> 
+> ?? Mon, 05 Oct 2026 16:35:55 +0100
+> "Tim Taylor" <tim.taylor at hiddenelephants.co.uk> ?????:
+> 
+>> Apart from different ergonomics is there anything worth being aware
+>> of when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?
+> 
+> Iris Simmons gave an excellent explanation. The only thing left to note
+> is that some ALTREP classes currently have STRING_ELT methods that
+> return CHARSXPs not protected from garbage collection:
+> 
+> https://bugs.r-project.org/show_bug.cgi?id=19135
+> https://github.com/gagolews/stringi/issues/354
+> https://github.com/tidyverse/vroom/pull/638
+> https://github.com/apache/arrow/issues/51198
+> 
+> If your code can be expected to process strings from vroom or arrow and
+> you chose STRING_ELT (instead of STRING_PTR_RO which would materialise
+> the vector), you may need to add some workarounds.
+> 
+> --
+> Best regards,
+> Ivan
+
+

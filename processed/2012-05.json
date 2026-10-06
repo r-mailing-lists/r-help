@@ -12614,22 +12614,6 @@
       "month": "2012-05"
     },
     {
-      "id": "msg-f2392c5cded3",
-      "message_id": "<1336458845014-4616701.post@n4.nabble.com>",
-      "from_name": "rbuxton",
-      "from_email_hash": "c2dfa9f8924a257a838f7732fe29094976d96aa11413b7a877d670181874c3ce",
-      "date": "2012-05-08T06:34:05Z",
-      "subject": "[R] glmmADMB",
-      "subject_clean": "glmmADMB",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Hi there,\n\nI am new to the package glmmadmb, but need it to perform a zero-inflated\ngzlmm with a binomial error structure.  I can't seem to get it to work\nwithout getting some strange error messages.\n\nI am trying to find out what is affecting the number of seabird calls on an\narray of recorders placed at 4 sites on 6 islands.  I have nightly variables\n(weather and moonlight), site variables (proximity to a source population of\nseabirds and proximity to a refugia from predators). and island variables\n(island size and number of years since predator eradication).  \n\nHere's a sample of my data:\n\nDate\tISLAND\tSITE\tCalls\tYears Erad\tIsland size\tRefugia\tDist Source\tMoon\tWind\nSpeed\n5/28/2009\tAmatignak \tEast\t9\t19\t3543\t3\t58.6\t0.2\t2.54\n5/29/2009\tAmatignak \tEast\t120\t19\t3543\t3\t58.6\t0.3\t4.63\n5/30/2009\tAmatignak \tEast\t18\t19\t3543\t3\t58.6\t0.4\t13.09\n6/4/2009\tAmatignak \tNorth\t23\t19\t3543\t2\t54.2\t0.9\t4.14\n6/5/2009\tAmatignak \tNorth\t69\t19\t3543\t2\t54.2\t1\t2.06\n6/6/2009\tAmatignak \tNorth\t62\t19\t3543\t2\t54.2\t1\t3.94\n6/7/2009\tBuldir\tN Bight\t357\t100\t2000\t4\t0\t1\t7.49\n6/8/2009\tBuldir\tN Bight\t567\t100\t2000\t4\t0\t1\t4.17\n6/9/2009\tBuldir\tN Bight\t150\t100\t2000\t4\t0\t1\t4.13\n\nMy model is as follows:\n\nnumber of seabird calls ~ weather+moonlight+distance to source\npopulation+island size+years since predator eradication+nearby refugia from\npredators+ (1|Site/Island)\n\nfirst I removed na's from my data\n\ncallsna <- na.omit(calls)\n\nThen I started simple, with only \"moonlight\" and \"weather\" included in a\nmodel (just as a test):\n\nmod <- glmmadmb(Calls~ Moon+Wind.Speed+(1|SITE/ISLAND), data=callsna,\nzeroInflation=TRUE, family=\"nbinom\")\n\nI get the following error message:\nError in II[, ii] = II[, ii] + REmat$codes[[i]] : \n  replacement has length zero\nIn addition: Warning message:\nIn matrix(rep(q, m), nrow = n, ncol = sum(m), byrow = TRUE) :\n  data length exceeds size of matrix\n\nI get the same error message when I try with the full model or a null model!\n\nI don't understand what this means.  The model works ok in lmer4 with a\npoisson distribution (althought it's very overdispersed), so it's not as\nthough it wont work at all.\n\nAny help with this would be greatly appreciated\n\ncheers\nRachel\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/glmmADMB-tp4616701.html\nSent from the R help mailing list archive at Nabble.com.",
-      "body_snippet": "Hi there,\n\nI am new to the package glmmadmb, but need it to perform a zero-inflated\ngzlmm with a binomial error structure.  I can't seem to get it to work\nwithout getting some strange error messages.\n",
-      "thread_id": "thread-f2392c5cded3",
-      "thread_depth": 0,
-      "month": "2012-05"
-    },
-    {
       "id": "msg-2bfa2b225d56",
       "message_id": "<1336458845.98206.YahooMailNeo@web125802.mail.ne1.yahoo.com>",
       "from_name": "array chip",
@@ -12646,6 +12630,22 @@
       "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120507/0d13b036/attachment.pl>",
       "thread_id": "thread-ba45e13524ea",
       "thread_depth": 2,
+      "month": "2012-05"
+    },
+    {
+      "id": "msg-f2392c5cded3",
+      "message_id": "<1336458845014-4616701.post@n4.nabble.com>",
+      "from_name": "rbuxton",
+      "from_email_hash": "c2dfa9f8924a257a838f7732fe29094976d96aa11413b7a877d670181874c3ce",
+      "date": "2012-05-08T06:34:05Z",
+      "subject": "[R] glmmADMB",
+      "subject_clean": "glmmADMB",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi there,\n\nI am new to the package glmmadmb, but need it to perform a zero-inflated\ngzlmm with a binomial error structure.  I can't seem to get it to work\nwithout getting some strange error messages.\n\nI am trying to find out what is affecting the number of seabird calls on an\narray of recorders placed at 4 sites on 6 islands.  I have nightly variables\n(weather and moonlight), site variables (proximity to a source population of\nseabirds and proximity to a refugia from predators). and island variables\n(island size and number of years since predator eradication).  \n\nHere's a sample of my data:\n\nDate\tISLAND\tSITE\tCalls\tYears Erad\tIsland size\tRefugia\tDist Source\tMoon\tWind\nSpeed\n5/28/2009\tAmatignak \tEast\t9\t19\t3543\t3\t58.6\t0.2\t2.54\n5/29/2009\tAmatignak \tEast\t120\t19\t3543\t3\t58.6\t0.3\t4.63\n5/30/2009\tAmatignak \tEast\t18\t19\t3543\t3\t58.6\t0.4\t13.09\n6/4/2009\tAmatignak \tNorth\t23\t19\t3543\t2\t54.2\t0.9\t4.14\n6/5/2009\tAmatignak \tNorth\t69\t19\t3543\t2\t54.2\t1\t2.06\n6/6/2009\tAmatignak \tNorth\t62\t19\t3543\t2\t54.2\t1\t3.94\n6/7/2009\tBuldir\tN Bight\t357\t100\t2000\t4\t0\t1\t7.49\n6/8/2009\tBuldir\tN Bight\t567\t100\t2000\t4\t0\t1\t4.17\n6/9/2009\tBuldir\tN Bight\t150\t100\t2000\t4\t0\t1\t4.13\n\nMy model is as follows:\n\nnumber of seabird calls ~ weather+moonlight+distance to source\npopulation+island size+years since predator eradication+nearby refugia from\npredators+ (1|Site/Island)\n\nfirst I removed na's from my data\n\ncallsna <- na.omit(calls)\n\nThen I started simple, with only \"moonlight\" and \"weather\" included in a\nmodel (just as a test):\n\nmod <- glmmadmb(Calls~ Moon+Wind.Speed+(1|SITE/ISLAND), data=callsna,\nzeroInflation=TRUE, family=\"nbinom\")\n\nI get the following error message:\nError in II[, ii] = II[, ii] + REmat$codes[[i]] : \n  replacement has length zero\nIn addition: Warning message:\nIn matrix(rep(q, m), nrow = n, ncol = sum(m), byrow = TRUE) :\n  data length exceeds size of matrix\n\nI get the same error message when I try with the full model or a null model!\n\nI don't understand what this means.  The model works ok in lmer4 with a\npoisson distribution (althought it's very overdispersed), so it's not as\nthough it wont work at all.\n\nAny help with this would be greatly appreciated\n\ncheers\nRachel\n\n\n--\nView this message in context: http://r.789695.n4.nabble.com/glmmADMB-tp4616701.html\nSent from the R help mailing list archive at Nabble.com.",
+      "body_snippet": "Hi there,\n\nI am new to the package glmmadmb, but need it to perform a zero-inflated\ngzlmm with a binomial error structure.  I can't seem to get it to work\nwithout getting some strange error messages.\n",
+      "thread_id": "thread-f2392c5cded3",
+      "thread_depth": 0,
       "month": "2012-05"
     },
     {
@@ -24403,6 +24403,22 @@
       "month": "2012-05"
     },
     {
+      "id": "msg-016cf26e4058",
+      "message_id": "<CAMSkMP8KcNqMZkzj8XEieab-6C9E9pkAG4J-nKrean5aj+pj0w@mail.gmail.com>",
+      "from_name": "Andrea Sica",
+      "from_email_hash": "e3be0f438e7ac8dcc09a454f29bb1b31292d31ff814e2a4115c832c5df532468",
+      "date": "2012-05-14T16:32:09Z",
+      "subject": "[R] select data",
+      "subject_clean": "select data",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120514/30b87013/attachment.pl>",
+      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120514/30b87013/attachment.pl>",
+      "thread_id": "thread-016cf26e4058",
+      "thread_depth": 0,
+      "month": "2012-05"
+    },
+    {
       "id": "msg-2b3c53fa4c9d",
       "message_id": "<00b101cd31ef$1ba81f00$52f85d00$@edu>",
       "from_name": "David L Carlson",
@@ -24418,22 +24434,6 @@
       "body_snippet": "You will find functions such as these in the thousands of packages that are\navailable once you have installed R. You can use rseek.org to search for\nspecific topics. Good overviews are found in the CR",
       "thread_id": "thread-091d6f754fb8",
       "thread_depth": 1,
-      "month": "2012-05"
-    },
-    {
-      "id": "msg-016cf26e4058",
-      "message_id": "<CAMSkMP8KcNqMZkzj8XEieab-6C9E9pkAG4J-nKrean5aj+pj0w@mail.gmail.com>",
-      "from_name": "Andrea Sica",
-      "from_email_hash": "e3be0f438e7ac8dcc09a454f29bb1b31292d31ff814e2a4115c832c5df532468",
-      "date": "2012-05-14T16:32:09Z",
-      "subject": "[R] select data",
-      "subject_clean": "select data",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120514/30b87013/attachment.pl>",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nURL: <https://stat.ethz.ch/pipermail/r-help/attachments/20120514/30b87013/attachment.pl>",
-      "thread_id": "thread-016cf26e4058",
-      "thread_depth": 0,
       "month": "2012-05"
     },
     {
