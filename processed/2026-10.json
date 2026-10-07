@@ -150,6 +150,40 @@
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 2,
       "month": "2026-10"
+    },
+    {
+      "id": "msg-7b9c02dee04c",
+      "message_id": "<LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>",
+      "from_name": "Paul Sherliker",
+      "from_email_hash": "0d5d08e5ed0b43a42d68f7e9b39590cc070b4bbbc9e7b6ea0d23e2137f361ab2",
+      "date": "2026-10-06T11:57:28Z",
+      "subject": "[R] Symbols in pdf output of flextable() via R markdown",
+      "subject_clean": "Symbols in pdf output of flextable() via R markdown",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.? (both R markdown and flextable() are new to me)\n\nMy problem is a difficulty with a single character that my tables must contain - a chi in the footer.? (Again, not negotiable - my bosses are not going to be persuadable.)\n\nI have tinytex installed to allow the use of .pdf.\n\nSample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):\n\n________________________________________\ntitle: \"Example\"\nauthor: \"Paul Sherliker\"\ndate: \"2026-10-06\"\noutput: pdf_document\n________________________________________\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n```\nR Markdown\n```{r cars}\nrequire(flextable)\nft <- flextable(head(cars))\nft <- add_footer_lines(ft, value=as_paragraph(\nas_chunk(paste0(\"* The % change in log RR is displayed only if the log \",\n\"RR to be changed differs by >3.3 SE from zero (\")),\nas_chunk(\"c\", props = fp_text_default(font.family = \"Symbol\")),\nas_sup(\"2\"),\nas_chunk(\" of 10.89; p<0.001).\")))\nft\n```\n\nWhat I get does not have the chi character that I would expect, but instead a 'c'.? Is there some way to get the chi without adding too much extra complexity, please?\n\n Thank you for your time and, I hope, for your help.\n\n                                       Paul",
+      "body_snippet": "I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention aft",
+      "thread_id": "thread-7b9c02dee04c",
+      "thread_depth": 0,
+      "month": "2026-10"
+    },
+    {
+      "id": "msg-91e934a5483f",
+      "message_id": "<f8bf97eb-60be-4470-ac54-3155ba1d7e3a@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-10-06T16:20:35Z",
+      "subject": "[R] Symbols in pdf output of flextable() via R markdown",
+      "subject_clean": "Symbols in pdf output of flextable() via R markdown",
+      "in_reply_to": "<LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>",
+      "references": [
+        "<LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "On 2026-10-06 7:57 a.m., Paul Sherliker via R-help wrote:\n> I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.? (both R markdown and flextable() are new to me)\n> \n> My problem is a difficulty with a single character that my tables must contain - a chi in the footer.? (Again, not negotiable - my bosses are not going to be persuadable.)\n> \n> I have tinytex installed to allow the use of .pdf.\n> \n> Sample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):\n> \n> ________________________________________\n> title: \"Example\"\n> author: \"Paul Sherliker\"\n> date: \"2026-10-06\"\n> output: pdf_document\n> ________________________________________\n> ```{r setup, include=FALSE}\n> knitr::opts_chunk$set(echo = TRUE)\n> ```\n> R Markdown\n> ```{r cars}\n> require(flextable)\n> ft <- flextable(head(cars))\n> ft <- add_footer_lines(ft, value=as_paragraph(\n> as_chunk(paste0(\"* The % change in log RR is displayed only if the log \",\n> \"RR to be changed differs by >3.3 SE from zero (\")),\n> as_chunk(\"c\", props = fp_text_default(font.family = \"Symbol\")),\n> as_sup(\"2\"),\n> as_chunk(\" of 10.89; p<0.001).\")))\n> ft\n> ```\n> \n> What I get does not have the chi character that I would expect, but instead a 'c'.? Is there some way to get the chi without adding too much extra complexity, please?\n> \n>   Thank you for your time and, I hope, for your help.\nOn my Mac, it works to insert the Unicode symbol 1D712 which is \n\"MATHEMATICAL ITALIC SMALL CHI\".  You do that by replacing the \nas_chunk(\"c\", ...) with as_chunk(\"\\U1D712\").\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-10-06 7:57 a.m., Paul Sherliker via R-help wrote:\n> I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must pro",
+      "thread_id": "thread-7b9c02dee04c",
+      "thread_depth": 1,
+      "month": "2026-10"
     }
   ],
   "threads": [
@@ -177,6 +211,18 @@
       "started": "2026-10-05T15:35:55Z",
       "last_reply": "2026-10-05T20:53:53Z",
       "root_message_id": "msg-037af3cc1099"
+    },
+    {
+      "id": "thread-7b9c02dee04c",
+      "subject": "Symbols in pdf output of flextable() via R markdown",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Paul Sherliker"
+      ],
+      "started": "2026-10-06T11:57:28Z",
+      "last_reply": "2026-10-06T16:20:35Z",
+      "root_message_id": "msg-7b9c02dee04c"
     }
   ]
 }

@@ -24986,24 +24986,6 @@
       "month": "2008-04"
     },
     {
-      "id": "msg-cbbcb98b69d8",
-      "message_id": "<alpine.LFD.1.00.0804181527590.29178@gannet.stats.ox.ac.uk>",
-      "from_name": "Prof Brian Ripley",
-      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
-      "date": "2008-04-18T14:35:12Z",
-      "subject": "[R] R CMD check <PACKAGE> Error",
-      "subject_clean": "R CMD check <PACKAGE> Error",
-      "in_reply_to": "<fua9sr$pgn$1@ger.gmane.org>",
-      "references": [
-        "<fua9sr$pgn$1@ger.gmane.org>"
-      ],
-      "body_plain": "On Fri, 18 Apr 2008, Johannes Graumann wrote:\n\n> Hi,\n>\n> Can anyone give me a hint on what's wrong if \"R CMD check <PACKAGE>\" gives\n> me this error:\n>\n>        Rd files with unknown encoding:\n>          <FILENAME>.Rd\n>\n> I have checked that file over and over and can't find any weired characters\n> or some such.\n> How can I fix this?\n\nRemove the non-ASCII characters, or declare an encoding.\n\nYou didn't tell us your OS -- one good way I find on Linux to spot such \ncharacters is to use 'less 'in the C locale.  Another is something like \n(in R)\n\nfoo <- readLines(\"foo.Rd\")\nfoo2 <- iconv(foo, \"\", \"ASCII\", sub=\"byte\")\nfoo2[foo2 != foo]\n\nwhich should show the line(s) concerned with non-ASCII characters \nhighlighted as <xx>.\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Fri, 18 Apr 2008, Johannes Graumann wrote:\n\n> Hi,\n>\n> Can anyone give me a hint on what's wrong if \"R CMD check <PACKAGE>\" gives\n> me this error:\n>\n>        Rd files with unknown encoding:\n>       ",
-      "thread_id": "thread-44515fada438",
-      "thread_depth": 1,
-      "month": "2008-04"
-    },
-    {
       "id": "msg-62c83a277ee9",
       "message_id": "<4808B1A0.6060901@xen.net>",
       "from_name": "[Ricardo Rodriguez] Your XEN ICT Team",
@@ -25019,6 +25001,24 @@
       "body_snippet": "Mark,\n\nMark Leeds wrote:\n> Oh, I'm sorry that didn't work. If you have time, can you resend it to me if\n> you still have it ( I don't ) cause I'd like to see why. Thanks.\n\nMy fault! It does work! I've",
       "thread_id": "thread-62c83a277ee9",
       "thread_depth": 0,
+      "month": "2008-04"
+    },
+    {
+      "id": "msg-cbbcb98b69d8",
+      "message_id": "<alpine.LFD.1.00.0804181527590.29178@gannet.stats.ox.ac.uk>",
+      "from_name": "Prof Brian Ripley",
+      "from_email_hash": "375ec446f7a1157a4f0268b6dc682d6c2a5b186f57aa61253477aa48159d2329",
+      "date": "2008-04-18T14:35:12Z",
+      "subject": "[R] R CMD check <PACKAGE> Error",
+      "subject_clean": "R CMD check <PACKAGE> Error",
+      "in_reply_to": "<fua9sr$pgn$1@ger.gmane.org>",
+      "references": [
+        "<fua9sr$pgn$1@ger.gmane.org>"
+      ],
+      "body_plain": "On Fri, 18 Apr 2008, Johannes Graumann wrote:\n\n> Hi,\n>\n> Can anyone give me a hint on what's wrong if \"R CMD check <PACKAGE>\" gives\n> me this error:\n>\n>        Rd files with unknown encoding:\n>          <FILENAME>.Rd\n>\n> I have checked that file over and over and can't find any weired characters\n> or some such.\n> How can I fix this?\n\nRemove the non-ASCII characters, or declare an encoding.\n\nYou didn't tell us your OS -- one good way I find on Linux to spot such \ncharacters is to use 'less 'in the C locale.  Another is something like \n(in R)\n\nfoo <- readLines(\"foo.Rd\")\nfoo2 <- iconv(foo, \"\", \"ASCII\", sub=\"byte\")\nfoo2[foo2 != foo]\n\nwhich should show the line(s) concerned with non-ASCII characters \nhighlighted as <xx>.\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Fri, 18 Apr 2008, Johannes Graumann wrote:\n\n> Hi,\n>\n> Can anyone give me a hint on what's wrong if \"R CMD check <PACKAGE>\" gives\n> me this error:\n>\n>        Rd files with unknown encoding:\n>       ",
+      "thread_id": "thread-44515fada438",
+      "thread_depth": 1,
       "month": "2008-04"
     },
     {

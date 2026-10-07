@@ -378,3 +378,94 @@ Tim
 > Ivan
 
 
+From p@u|@@her||ker @end|ng |rom ndph@ox@@c@uk  Tue Oct  6 13:57:28 2026
+From: p@u|@@her||ker @end|ng |rom ndph@ox@@c@uk (Paul Sherliker)
+Date: Tue, 6 Oct 2026 11:57:28 +0000
+Subject: [R] Symbols in pdf output of flextable() via R markdown
+Message-ID: <LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>
+
+I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.? (both R markdown and flextable() are new to me)
+
+My problem is a difficulty with a single character that my tables must contain - a chi in the footer.? (Again, not negotiable - my bosses are not going to be persuadable.)
+
+I have tinytex installed to allow the use of .pdf.
+
+Sample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):
+
+________________________________________
+title: "Example"
+author: "Paul Sherliker"
+date: "2026-10-06"
+output: pdf_document
+________________________________________
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+R Markdown
+```{r cars}
+require(flextable)
+ft <- flextable(head(cars))
+ft <- add_footer_lines(ft, value=as_paragraph(
+as_chunk(paste0("* The % change in log RR is displayed only if the log ",
+"RR to be changed differs by >3.3 SE from zero (")),
+as_chunk("c", props = fp_text_default(font.family = "Symbol")),
+as_sup("2"),
+as_chunk(" of 10.89; p<0.001).")))
+ft
+```
+
+What I get does not have the chi character that I would expect, but instead a 'c'.? Is there some way to get the chi without adding too much extra complexity, please?
+
+ Thank you for your time and, I hope, for your help.
+
+                                       Paul
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Tue Oct  6 18:20:35 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Tue, 6 Oct 2026 12:20:35 -0400
+Subject: [R] Symbols in pdf output of flextable() via R markdown
+In-Reply-To: <LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>
+References: <LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>
+Message-ID: <f8bf97eb-60be-4470-ac54-3155ba1d7e3a@gmail.com>
+
+On 2026-10-06 7:57 a.m., Paul Sherliker via R-help wrote:
+> I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.? (both R markdown and flextable() are new to me)
+> 
+> My problem is a difficulty with a single character that my tables must contain - a chi in the footer.? (Again, not negotiable - my bosses are not going to be persuadable.)
+> 
+> I have tinytex installed to allow the use of .pdf.
+> 
+> Sample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):
+> 
+> ________________________________________
+> title: "Example"
+> author: "Paul Sherliker"
+> date: "2026-10-06"
+> output: pdf_document
+> ________________________________________
+> ```{r setup, include=FALSE}
+> knitr::opts_chunk$set(echo = TRUE)
+> ```
+> R Markdown
+> ```{r cars}
+> require(flextable)
+> ft <- flextable(head(cars))
+> ft <- add_footer_lines(ft, value=as_paragraph(
+> as_chunk(paste0("* The % change in log RR is displayed only if the log ",
+> "RR to be changed differs by >3.3 SE from zero (")),
+> as_chunk("c", props = fp_text_default(font.family = "Symbol")),
+> as_sup("2"),
+> as_chunk(" of 10.89; p<0.001).")))
+> ft
+> ```
+> 
+> What I get does not have the chi character that I would expect, but instead a 'c'.? Is there some way to get the chi without adding too much extra complexity, please?
+> 
+>   Thank you for your time and, I hope, for your help.
+On my Mac, it works to insert the Unicode symbol 1D712 which is 
+"MATHEMATICAL ITALIC SMALL CHI".  You do that by replacing the 
+as_chunk("c", ...) with as_chunk("\U1D712").
+
+Duncan Murdoch
+
+
