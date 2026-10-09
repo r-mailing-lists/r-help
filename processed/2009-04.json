@@ -18568,6 +18568,22 @@
       "month": "2009-04"
     },
     {
+      "id": "msg-546d1bdc1b2e",
+      "message_id": "<XFMail.090410002306.Ted.Harding@manchester.ac.uk>",
+      "from_name": "(Ted Harding)",
+      "from_email_hash": "732c758e9feeff72ea2b71e18c1dedb4be8d49d147309523b3eabf36fa464cb8",
+      "date": "2009-04-09T23:23:06Z",
+      "subject": "[R] puzzling lm.fit errors",
+      "subject_clean": "puzzling lm.fit errors",
+      "in_reply_to": "<E7F57654-5462-42FB-9B7E-70073B7EDF42@gmail.com>",
+      "references": [],
+      "body_plain": "On 09-Apr-09 22:53:51, Brendan Morse wrote:\n> Hi everyone, I am running a monte carlo and am getting an error that I \n> haven't the slightest clue where to begin figuring it out. The error  \n> is as follows:\n> \n> Error in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...)\n>:\n>    0 (non-NA) cases\n> In addition: Warning message:\n> In ltm.fit(X, betas, constraint, formula, con) :\n>    Hessian matrix at convergence is not positive definite; unstable  \n> solution.\n> \n> The puzzling aspect though is that it successfully runs a number of  \n> complete iterations before this occurs. I am not sure what or where  \n> this is going on.\n> \n> Any suggestions?\n> \n> Thanks very much (in advance)\n> - Brendan\n\nThis is the sort of thing that can happen is the covariates in your\nlinear model lead to a model matrix which singular (or nearly so).\nIn other words, at least one of your covariate vectors is a linear\ncombination of the others (or nearly so).\n\nThe facts that (a) you are doing a Monte Carlo simulationm and\n(b) you get a number of satisfactory runs and then it fails, suggest\nthat you are randomly creating covariate (independent-variable) values\nas well as dependent-variable values.\n\nIf that is so, then the structure of your model may be such that it\nis relatively likely for such singularity to arise. While not\nparticularly likely for continuous covariates, near-singularity can\nnevertheless happen. It can be much more likely if you are generating\nrandom levels of factors, since only a finite number of combinations\nare possible, and sooner or later you will definitely hit exact\ncollinarity. And if you are using a fairly large number of covariates,\nand not a large number of cases, then it can become really likely!\n\nI'm only guessing, of course, and you can either agree with, or deny,\nthe above suggestions. Either way, it would help in clarifying the\nproblem to know the details of how your Monte Carlo simulation is\nsupposed to work.\n\nTed.\n\n--------------------------------------------------------------------\nE-Mail: (Ted Harding) <Ted.Harding at manchester.ac.uk>\nFax-to-email: +44 (0)870 094 0861\nDate: 10-Apr-09                                       Time: 00:23:04\n------------------------------ XFMail ------------------------------",
+      "body_snippet": "On 09-Apr-09 22:53:51, Brendan Morse wrote:\n> Hi everyone, I am running a monte carlo and am getting an error that I \n> haven't the slightest clue where to begin figuring it out. The error  \n> is as f",
+      "thread_id": "thread-06f2b902da44",
+      "thread_depth": 1,
+      "month": "2009-04"
+    },
+    {
       "id": "msg-dd43505d2c76",
       "message_id": "<1daa4e8d0904091623o4a504748ie6d212cc80c5d585@mail.gmail.com>",
       "from_name": "Iuri Gavronski",
@@ -18587,22 +18603,6 @@
       "body_snippet": "Jarret,\n\nI've donwloaded the zip file and installed, but maybe have lost some\npre-req check. I have manually installed sna.\n\nAnyway, which would be the approach you suggest? Making (using my\nexample) ",
       "thread_id": "thread-8b3839da57d9",
       "thread_depth": 4,
-      "month": "2009-04"
-    },
-    {
-      "id": "msg-546d1bdc1b2e",
-      "message_id": "<XFMail.090410002306.Ted.Harding@manchester.ac.uk>",
-      "from_name": "(Ted Harding)",
-      "from_email_hash": "732c758e9feeff72ea2b71e18c1dedb4be8d49d147309523b3eabf36fa464cb8",
-      "date": "2009-04-09T23:23:06Z",
-      "subject": "[R] puzzling lm.fit errors",
-      "subject_clean": "puzzling lm.fit errors",
-      "in_reply_to": "<E7F57654-5462-42FB-9B7E-70073B7EDF42@gmail.com>",
-      "references": [],
-      "body_plain": "On 09-Apr-09 22:53:51, Brendan Morse wrote:\n> Hi everyone, I am running a monte carlo and am getting an error that I \n> haven't the slightest clue where to begin figuring it out. The error  \n> is as follows:\n> \n> Error in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...)\n>:\n>    0 (non-NA) cases\n> In addition: Warning message:\n> In ltm.fit(X, betas, constraint, formula, con) :\n>    Hessian matrix at convergence is not positive definite; unstable  \n> solution.\n> \n> The puzzling aspect though is that it successfully runs a number of  \n> complete iterations before this occurs. I am not sure what or where  \n> this is going on.\n> \n> Any suggestions?\n> \n> Thanks very much (in advance)\n> - Brendan\n\nThis is the sort of thing that can happen is the covariates in your\nlinear model lead to a model matrix which singular (or nearly so).\nIn other words, at least one of your covariate vectors is a linear\ncombination of the others (or nearly so).\n\nThe facts that (a) you are doing a Monte Carlo simulationm and\n(b) you get a number of satisfactory runs and then it fails, suggest\nthat you are randomly creating covariate (independent-variable) values\nas well as dependent-variable values.\n\nIf that is so, then the structure of your model may be such that it\nis relatively likely for such singularity to arise. While not\nparticularly likely for continuous covariates, near-singularity can\nnevertheless happen. It can be much more likely if you are generating\nrandom levels of factors, since only a finite number of combinations\nare possible, and sooner or later you will definitely hit exact\ncollinarity. And if you are using a fairly large number of covariates,\nand not a large number of cases, then it can become really likely!\n\nI'm only guessing, of course, and you can either agree with, or deny,\nthe above suggestions. Either way, it would help in clarifying the\nproblem to know the details of how your Monte Carlo simulation is\nsupposed to work.\n\nTed.\n\n--------------------------------------------------------------------\nE-Mail: (Ted Harding) <Ted.Harding at manchester.ac.uk>\nFax-to-email: +44 (0)870 094 0861\nDate: 10-Apr-09                                       Time: 00:23:04\n------------------------------ XFMail ------------------------------",
-      "body_snippet": "On 09-Apr-09 22:53:51, Brendan Morse wrote:\n> Hi everyone, I am running a monte carlo and am getting an error that I \n> haven't the slightest clue where to begin figuring it out. The error  \n> is as f",
-      "thread_id": "thread-06f2b902da44",
-      "thread_depth": 1,
       "month": "2009-04"
     },
     {

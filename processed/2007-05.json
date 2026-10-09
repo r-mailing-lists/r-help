@@ -28980,22 +28980,6 @@
       "month": "2007-05"
     },
     {
-      "id": "msg-b226ce14fe25",
-      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
-      "from_name": "Leeds, Mark (IED)",
-      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
-      "date": "2007-05-23T21:05:56Z",
-      "subject": "[R] Changing sequential regression code to call systemfit",
-      "subject_clean": "Changing sequential regression code to call systemfit",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
-      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
-      "thread_id": "thread-b226ce14fe25",
-      "thread_depth": 0,
-      "month": "2007-05"
-    },
-    {
       "id": "msg-95926f9fa9ed",
       "message_id": "<105608.33782.qm@web32815.mail.mud.yahoo.com>",
       "from_name": "John Kane",
@@ -29009,6 +28993,22 @@
       "body_snippet": "I am not completely clear on the duplicate problem but\nhave you had a look at ?unique as an approach to\ndealing with this and at ?merge to handle the actual\ndata merging?\n\n\n--- \"Marshall L. Mdoka\" <mm",
       "thread_id": "thread-7dd64a530637",
       "thread_depth": 1,
+      "month": "2007-05"
+    },
+    {
+      "id": "msg-b226ce14fe25",
+      "message_id": "<D3AEEDA31E57474B840BEBC25A8A8344019572A4@NYWEXMB23.msad.ms.com>",
+      "from_name": "Leeds, Mark (IED)",
+      "from_email_hash": "a1e6041ece9dc8cbeab18bc5539a57753153f5981e8a50252c34e98b37c3d2ee",
+      "date": "2007-05-23T21:05:56Z",
+      "subject": "[R] Changing sequential regression code to call systemfit",
+      "subject_clean": "Changing sequential regression code to call systemfit",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- datasub[, which(x$restrictions[i, ] == 1),drop=FALSE]\n      y <- yendog[, i]\n      lmres <- lm(y ~ -1 + ., data=datares)\n\n#      x$varresult[[i]] <- lmres\n#      x$resid[, i] <- resid(x$varresult[[i]])\n\n}\n\nI would like to modify the code to make one call to systemfit because I\nreally should be using SUR rather than a sequence of lms.\n\nBut, systemfit needs the following type of setup.\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\neqDemand <- consump ~ -1 + price + income\neqSupply <-  consump ~ -1 + price + farmPrice + trend\nsystem<-list( demand = eqDemand, supply = eqSupply)\n\n#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\nThen, the call to systemfit is \n\nfitsur<- systemfit( \"SUR\", system)\n\nDoes anyone know how to change the code in the for loop ( I can deal\nwith the two lines with x$ ) to mimic the 3 lines between\nThe xxxxxxxxxxxxxxxxxxxx lines ?\n\nI'm not good enough in R to do this but my guess is that it is possible\nbecause datares and y both have column names. Thanks.\n--------------------------------------------------------\n\nThis is not an offer (or solicitation of an offer) to buy/se...{{dropped}}",
+      "body_snippet": "I use code ( actually its code from vars package and its directly below\n) to do a sequence of lm calls and the data I use from the matrix \ndepends on restrictions. \n\n for(i in 1:K){\n\n      datares <- ",
+      "thread_id": "thread-b226ce14fe25",
+      "thread_depth": 0,
       "month": "2007-05"
     },
     {
@@ -29583,6 +29583,22 @@
       "month": "2007-05"
     },
     {
+      "id": "msg-b5aa1c811310",
+      "message_id": "<200705241348.l4ODm7P07970@hsrnfs-101.mayo.edu>",
+      "from_name": "Terry Therneau",
+      "from_email_hash": "382b7509cd09524d5383672b54b7679da321b2d7cddcbd90c1ab33e6472aece6",
+      "date": "2007-05-24T13:48:07Z",
+      "subject": "[R] Showing NAs when using table()",
+      "subject_clean": "Showing NAs when using table()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Rephrasing David Kane's example\n\n> b <- c(1,1,1,1,1, NA, 2,2,2,2)\n> d <- factor(c(rep(c(\"A\",\"B\",\"C\"), 3), NA))\n> table(b, d, exclude=NULL)\n      d\nb      A B C\n  1    2 2 1\n  2    1 1 1\n  <NA> 0 0 1\n\nWhy are only 9 observations instead of 10 listed in the table?\n\n This is a long-standing bug in Splus and R.  Peter Dalgaar suggests\nrecoding the factor variable so that \"NA\" is a level, rather than a \"missing\".\nThis works, but it does not address the bug: for most of my factor variables\nI want missing to be missing so that omission works as expected in modeling.\nThe exclude argument in table() should do what it says it does, which is to\nlist ALL data in the table when exclude=NULL.\n\n  At Mayo, we have replaced the table command to work around this (in place for\n5+ years now).  It has two additions: a method for factors that correctly\npropogates the exclude argument, and a change to exclude=NULL as the\ndefault.  Table() is used, 99% of the time, to look at data on screen, and\nthe number of missing is often the first question I'm asking; so we found the\ndefault to be, shall we say, non-intuitive.  \n   We argued these points with Insightful many years ago and got nowhere, the\nreplys being a mix of a) it's not really broken and b) if we change it it might\nbreak something.  We had not carried the argument forward to the R community,\nand just fix it ourselves.  The revised version just works better day to day.\n\n   In R, the manual page has been revised to state that the exclude argument\nis something different for factors, so I expect to remain in the minority.\n(I can't think of a time I would ever have wanted the actions of the new\nversion of exclude, which for factors is a means only to exclude more things,\nrather than the usual use of keeping more in the table).  \n\n\tTerry Therneau",
+      "body_snippet": "Rephrasing David Kane's example\n\n> b <- c(1,1,1,1,1, NA, 2,2,2,2)\n> d <- factor(c(rep(c(\"A\",\"B\",\"C\"), 3), NA))\n> table(b, d, exclude=NULL)\n      d\nb      A B C\n  1    2 2 1\n  2    1 1 1\n  <NA> 0 0 1\n\n",
+      "thread_id": "thread-b5aa1c811310",
+      "thread_depth": 0,
+      "month": "2007-05"
+    },
+    {
       "id": "msg-7ad1421f626b",
       "message_id": "<971536df0705240648p620e613ej72545d1ce379af59@mail.gmail.com>",
       "from_name": "Gabor Grothendieck",
@@ -29598,22 +29614,6 @@
       "body_snippet": "The form of your data is termed \"wide\" and you want to reshape it to\n\"long\" form and use aov with that.  This uses the reshape command\nto produce the long form.  Alternately you could use cast and mel",
       "thread_id": "thread-91d30fa7448c",
       "thread_depth": 1,
-      "month": "2007-05"
-    },
-    {
-      "id": "msg-b5aa1c811310",
-      "message_id": "<200705241348.l4ODm7P07970@hsrnfs-101.mayo.edu>",
-      "from_name": "Terry Therneau",
-      "from_email_hash": "382b7509cd09524d5383672b54b7679da321b2d7cddcbd90c1ab33e6472aece6",
-      "date": "2007-05-24T13:48:07Z",
-      "subject": "[R] Showing NAs when using table()",
-      "subject_clean": "Showing NAs when using table()",
-      "in_reply_to": null,
-      "references": [],
-      "body_plain": "Rephrasing David Kane's example\n\n> b <- c(1,1,1,1,1, NA, 2,2,2,2)\n> d <- factor(c(rep(c(\"A\",\"B\",\"C\"), 3), NA))\n> table(b, d, exclude=NULL)\n      d\nb      A B C\n  1    2 2 1\n  2    1 1 1\n  <NA> 0 0 1\n\nWhy are only 9 observations instead of 10 listed in the table?\n\n This is a long-standing bug in Splus and R.  Peter Dalgaar suggests\nrecoding the factor variable so that \"NA\" is a level, rather than a \"missing\".\nThis works, but it does not address the bug: for most of my factor variables\nI want missing to be missing so that omission works as expected in modeling.\nThe exclude argument in table() should do what it says it does, which is to\nlist ALL data in the table when exclude=NULL.\n\n  At Mayo, we have replaced the table command to work around this (in place for\n5+ years now).  It has two additions: a method for factors that correctly\npropogates the exclude argument, and a change to exclude=NULL as the\ndefault.  Table() is used, 99% of the time, to look at data on screen, and\nthe number of missing is often the first question I'm asking; so we found the\ndefault to be, shall we say, non-intuitive.  \n   We argued these points with Insightful many years ago and got nowhere, the\nreplys being a mix of a) it's not really broken and b) if we change it it might\nbreak something.  We had not carried the argument forward to the R community,\nand just fix it ourselves.  The revised version just works better day to day.\n\n   In R, the manual page has been revised to state that the exclude argument\nis something different for factors, so I expect to remain in the minority.\n(I can't think of a time I would ever have wanted the actions of the new\nversion of exclude, which for factors is a means only to exclude more things,\nrather than the usual use of keeping more in the table).  \n\n\tTerry Therneau",
-      "body_snippet": "Rephrasing David Kane's example\n\n> b <- c(1,1,1,1,1, NA, 2,2,2,2)\n> d <- factor(c(rep(c(\"A\",\"B\",\"C\"), 3), NA))\n> table(b, d, exclude=NULL)\n      d\nb      A B C\n  1    2 2 1\n  2    1 1 1\n  <NA> 0 0 1\n\n",
-      "thread_id": "thread-b5aa1c811310",
-      "thread_depth": 0,
       "month": "2007-05"
     },
     {
