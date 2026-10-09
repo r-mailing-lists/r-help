@@ -27235,6 +27235,22 @@
       "month": "2004-06"
     },
     {
+      "id": "msg-848e2bb82231",
+      "message_id": "<Pine.LNX.4.21.0406291644050.14774-100000@mail.mrc-dunn.cam.ac.uk>",
+      "from_name": "Dan Bolser",
+      "from_email_hash": "7eb2ad91fe8ed76ddd1aecd9e2c6b718c1247e9bb2e8d26215011dfcc803c6e7",
+      "date": "2004-06-29T15:49:13Z",
+      "subject": "[R] Several PCA questions...",
+      "subject_clean": "Several PCA questions...",
+      "in_reply_to": "<Pine.LNX.4.44.0406291130380.22300-100000@gannet.stats>",
+      "references": [],
+      "body_plain": "Perhaps this question is less dumb... (in context below...)\n\n\nOn Tue, 29 Jun 2004, Prof Brian Ripley wrote:\n\n>On Tue, 29 Jun 2004, Dan Bolser wrote:\n>\n>> Hi, I am doing PCA on several columns of data in a data.frame.\n>> \n>> I am interested in particular rows of data which may have a particular\n>> combination of 'types' of column values (without any pre-conception of\n>> what they may be).\n>> \n>> I do the following...\n>> \n>> # My data table.\n>> allDat <- read.table(\"big_select_thresh_5\", header=1)\n>> \n>> # Where some rows look like this...\n>> # PDB     SUNID1  SUNID2  AA      CH      IPCA    PCA     IBB     BB\n>> # 3sdh    14984   14985   6       10      24      24      93      116\n>> # 3hbi    14986   14987   6       10      20      22      94      117\n>> # 4sdh    14988   14989   6       10      20      20      104     122\n>> \n>> # NB First three columns = row ID, last 6 = variables\n>> \n>> attach(allDat)\n>> \n>> # My columns of interest (variables).\n>> part <- data.frame(AA,CH,IPCA,PCA,IBB,BB)\n>> \n>> pc <- princomp(part)\n>\n>Do you really want an unscaled PCA on that data set?  Looks unlikely (but \n>then two of the columns are constant in the sample, which is also \n>worrying).\n\n\nThat is just sample bias. By unscaled I assume you mean something like\nnormalized?\n\n\n>> plot(pc)\n>> \n>> The above plot shows that 95% of the variance is due to the first\n>> 'Component' (which I assume is AA).\n>\n>No, it is the first (principal) component.  You did ask for P>C<A!\n>\n>> i.e. All the variables behave in quite much the same way.\n>\n>Or you failed to scale the data so one dominates.\n\nYes.\n\nI added the following to the above....\n\n\nx <- colMeans(part)\npartNorm <- part/x\npc1 <- princomp(partNorm)\n\nplot(pc1)\n\nbiplot(pc1)\n\nWhich shows two major components, and possibly a third.\n\nWhat I want to know is that given my data is not uniformly distributed, is\nmy normalization valid?\n\nI know I should find this out via further investigation of PCA, but in\ngeneral if my variables have a very skewed distribution (possibly without\na theoretically definable mean) should I attempt to use any standard\nclustering technique?\n\nI guess I should log transform my data.\n\nCheers,\nDan.\n\n\n\n\n\n>> I then did ...\n>> \n>> \n>> biplot(pc)\n>> \n>> Which showed some outliers with a numeric ID - How do I get back my old 3\n>> part ID used in allDat?\n>\n>Set row names on your data frame.  Like almost all of R, it is the row \n>names of a data frame that are used for labelling, and you did not give \n>any so you got numbers.\n>\n>> In the above plot I saw all the variables (correctly named) pointing in\n>> more or less the same direction (as shown by the variance). I then did the\n>> following...\n>> \n>> postscript(file=\"test.ps\",paper=\"a4\")\n>> \n>> biplot(pc)\n>> \n>> dev.off()\n>> \n>> However, looking at test.ps shows that the arrows are missing (using\n>> ggv)... Hmmm, they come back when I pstoimg then xv... never mind.\n>\n>So ggv is unreliable, perhaps cannot cope with colours?\n>\n>> Finally, I would like to make a contour plot of the above biplot, is this\n>> possible? (or even a good way to present the data?\n>\n>What do you propose to represent by the contours?  Biplots have a \n>well-defined interpretation in terms of distances and angles.\n>\n>",
+      "body_snippet": "Perhaps this question is less dumb... (in context below...)\n\n\nOn Tue, 29 Jun 2004, Prof Brian Ripley wrote:\n\n>On Tue, 29 Jun 2004, Dan Bolser wrote:\n>\n>> Hi, I am doing PCA on several columns of data ",
+      "thread_id": "thread-d1146c133ada",
+      "thread_depth": 2,
+      "month": "2004-06"
+    },
+    {
       "id": "msg-c10cc2ae1eed",
       "message_id": "<DE9B3B5A-C9E3-11D8-B1B7-000A95A7E3AA@uiuc.edu>",
       "from_name": "roger koenker",
@@ -27250,22 +27266,6 @@
       "body_snippet": "The short answer to your question is that  quantile regression\nestimates are estimating linear conditional quantile functions,\njust like lm() is used to estimate conditional mean functions.\n\nA longer ",
       "thread_id": "thread-85df581e65e6",
       "thread_depth": 1,
-      "month": "2004-06"
-    },
-    {
-      "id": "msg-848e2bb82231",
-      "message_id": "<Pine.LNX.4.21.0406291644050.14774-100000@mail.mrc-dunn.cam.ac.uk>",
-      "from_name": "Dan Bolser",
-      "from_email_hash": "7eb2ad91fe8ed76ddd1aecd9e2c6b718c1247e9bb2e8d26215011dfcc803c6e7",
-      "date": "2004-06-29T15:49:13Z",
-      "subject": "[R] Several PCA questions...",
-      "subject_clean": "Several PCA questions...",
-      "in_reply_to": "<Pine.LNX.4.44.0406291130380.22300-100000@gannet.stats>",
-      "references": [],
-      "body_plain": "Perhaps this question is less dumb... (in context below...)\n\n\nOn Tue, 29 Jun 2004, Prof Brian Ripley wrote:\n\n>On Tue, 29 Jun 2004, Dan Bolser wrote:\n>\n>> Hi, I am doing PCA on several columns of data in a data.frame.\n>> \n>> I am interested in particular rows of data which may have a particular\n>> combination of 'types' of column values (without any pre-conception of\n>> what they may be).\n>> \n>> I do the following...\n>> \n>> # My data table.\n>> allDat <- read.table(\"big_select_thresh_5\", header=1)\n>> \n>> # Where some rows look like this...\n>> # PDB     SUNID1  SUNID2  AA      CH      IPCA    PCA     IBB     BB\n>> # 3sdh    14984   14985   6       10      24      24      93      116\n>> # 3hbi    14986   14987   6       10      20      22      94      117\n>> # 4sdh    14988   14989   6       10      20      20      104     122\n>> \n>> # NB First three columns = row ID, last 6 = variables\n>> \n>> attach(allDat)\n>> \n>> # My columns of interest (variables).\n>> part <- data.frame(AA,CH,IPCA,PCA,IBB,BB)\n>> \n>> pc <- princomp(part)\n>\n>Do you really want an unscaled PCA on that data set?  Looks unlikely (but \n>then two of the columns are constant in the sample, which is also \n>worrying).\n\n\nThat is just sample bias. By unscaled I assume you mean something like\nnormalized?\n\n\n>> plot(pc)\n>> \n>> The above plot shows that 95% of the variance is due to the first\n>> 'Component' (which I assume is AA).\n>\n>No, it is the first (principal) component.  You did ask for P>C<A!\n>\n>> i.e. All the variables behave in quite much the same way.\n>\n>Or you failed to scale the data so one dominates.\n\nYes.\n\nI added the following to the above....\n\n\nx <- colMeans(part)\npartNorm <- part/x\npc1 <- princomp(partNorm)\n\nplot(pc1)\n\nbiplot(pc1)\n\nWhich shows two major components, and possibly a third.\n\nWhat I want to know is that given my data is not uniformly distributed, is\nmy normalization valid?\n\nI know I should find this out via further investigation of PCA, but in\ngeneral if my variables have a very skewed distribution (possibly without\na theoretically definable mean) should I attempt to use any standard\nclustering technique?\n\nI guess I should log transform my data.\n\nCheers,\nDan.\n\n\n\n\n\n>> I then did ...\n>> \n>> \n>> biplot(pc)\n>> \n>> Which showed some outliers with a numeric ID - How do I get back my old 3\n>> part ID used in allDat?\n>\n>Set row names on your data frame.  Like almost all of R, it is the row \n>names of a data frame that are used for labelling, and you did not give \n>any so you got numbers.\n>\n>> In the above plot I saw all the variables (correctly named) pointing in\n>> more or less the same direction (as shown by the variance). I then did the\n>> following...\n>> \n>> postscript(file=\"test.ps\",paper=\"a4\")\n>> \n>> biplot(pc)\n>> \n>> dev.off()\n>> \n>> However, looking at test.ps shows that the arrows are missing (using\n>> ggv)... Hmmm, they come back when I pstoimg then xv... never mind.\n>\n>So ggv is unreliable, perhaps cannot cope with colours?\n>\n>> Finally, I would like to make a contour plot of the above biplot, is this\n>> possible? (or even a good way to present the data?\n>\n>What do you propose to represent by the contours?  Biplots have a \n>well-defined interpretation in terms of distances and angles.\n>\n>",
-      "body_snippet": "Perhaps this question is less dumb... (in context below...)\n\n\nOn Tue, 29 Jun 2004, Prof Brian Ripley wrote:\n\n>On Tue, 29 Jun 2004, Dan Bolser wrote:\n>\n>> Hi, I am doing PCA on several columns of data ",
-      "thread_id": "thread-d1146c133ada",
-      "thread_depth": 2,
       "month": "2004-06"
     },
     {
