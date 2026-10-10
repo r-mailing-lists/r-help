@@ -312,6 +312,22 @@
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 2,
       "month": "2026-10"
+    },
+    {
+      "id": "msg-37c83dc14808",
+      "message_id": "<AS8PR01MB814522D9495581331D6C813886922@AS8PR01MB8145.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Michael Kristensen",
+      "from_email_hash": "f0596a1601f40ce87f48ef5c8571738b07eea60b2691a0fd7f516c371bb8c558",
+      "date": "2026-10-09T06:59:14Z",
+      "subject": "[R] NLME Package - Normalized Residuals",
+      "subject_clean": "NLME Package - Normalized Residuals",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello\n\nI am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata are different when using mixed models (i.e. the nlme package in R).\n\nWhat I have found is that the residuals are both theoretically computed the same way: normalized_residuals = sigma^(-1) * Lambda^(-1/2) * residuals. This is based on the works of Jos? C. Pinheiro and Douglas M. Bates. The nlme package in R references their book \"Mixed effects models in S and S-PLUS\" (2000), while Stata references their article \"Computational Methods for Multilevel Modelling\" (1998).\n\nHowever, the way the matrix square root (of Lambda) is computed is different between the two programs, the result of which can have a rather significant impact on whether or not the normalized residuals actually seem to follow a normal distribution. According to my superiors, this has been an issue for the department in past projects.\n\nThe way R computes the matrix square root is through the Cholesky decomposition A = LL^T (using the \"chol\" function from FORTRAN77). I cannot access the source code for Stata, but it seems like Stata uses Cholesky decomposition as well, however using a Cholesky decomposition algorithm starting at \"the bottom right\" of the matrix instead of \"the top left\" such that A = L^T L. Using these two methods for Cholesky decomposition, I have been able to recreate the normalised residuals from R and Stata respectively (on some datasets that I cannot share due to GDPR rules). When using QQ-plots on the normalized residuals calculated with R and the ones calculated with Stata, the two plots imply different conclusions about the normality of the residuals.\n\nMy question is that, in principle, could one not use several different methods for computing a matrix square root and possibly come to significantly different conclusions? For example, why is the Cholesky decomposition used over the eigenvalue decomposition (which seems like the most intuitive way to compute the matrix square root to me)?\n\nTo me it seems like all methods for computing the matrix square root are theoretically equally good in terms of normalization (removing heteroscedasticity and correlation) and work equally well on large sample sizes, but they can differ quite significantly on smaller sample sizes.\n\nI am interested in hearing whether there is a specific reason that one matrix square root is used over another and if you know whether there is an aspect of \"small sample optimality\" when choosing method. Thanks in advance!\n\nNote, that I have also asked this question on cross-validated (\"Normalized residuals in mixed models, R (nlme) vs Stata<https://stats.stackexchange.com/questions/677243/normalized-residuals-in-mixed-models-r-nlme-vs-stata>\"), where I have provided an example on the data 'RatWeight' from package 'heplots'.\n\nKind Regards\nMichael\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello\n\nI am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata",
+      "thread_id": "thread-37c83dc14808",
+      "thread_depth": 0,
+      "month": "2026-10"
     }
   ],
   "threads": [
@@ -364,6 +380,17 @@
       "started": "2026-10-08T10:19:24Z",
       "last_reply": "2026-10-08T21:02:47Z",
       "root_message_id": "msg-ffcfd2df1b80"
+    },
+    {
+      "id": "thread-37c83dc14808",
+      "subject": "NLME Package - Normalized Residuals",
+      "message_count": 1,
+      "participants": [
+        "Michael Kristensen"
+      ],
+      "started": "2026-10-09T06:59:14Z",
+      "last_reply": "2026-10-09T06:59:14Z",
+      "root_message_id": "msg-37c83dc14808"
     }
   ]
 }

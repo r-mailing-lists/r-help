@@ -1165,3 +1165,34 @@ Bob
 > > and provide commented, minimal, self-contained, reproducible code.
 
 
+From @u831964 @end|ng |rom un|@@u@dk  Fri Oct  9 08:59:14 2026
+From: @u831964 @end|ng |rom un|@@u@dk (Michael Kristensen)
+Date: Fri, 9 Oct 2026 06:59:14 +0000
+Subject: [R] NLME Package - Normalized Residuals
+Message-ID: <AS8PR01MB814522D9495581331D6C813886922@AS8PR01MB8145.eurprd01.prod.exchangelabs.com>
+
+Hello
+
+I am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata are different when using mixed models (i.e. the nlme package in R).
+
+What I have found is that the residuals are both theoretically computed the same way: normalized_residuals = sigma^(-1) * Lambda^(-1/2) * residuals. This is based on the works of Jos? C. Pinheiro and Douglas M. Bates. The nlme package in R references their book "Mixed effects models in S and S-PLUS" (2000), while Stata references their article "Computational Methods for Multilevel Modelling" (1998).
+
+However, the way the matrix square root (of Lambda) is computed is different between the two programs, the result of which can have a rather significant impact on whether or not the normalized residuals actually seem to follow a normal distribution. According to my superiors, this has been an issue for the department in past projects.
+
+The way R computes the matrix square root is through the Cholesky decomposition A = LL^T (using the "chol" function from FORTRAN77). I cannot access the source code for Stata, but it seems like Stata uses Cholesky decomposition as well, however using a Cholesky decomposition algorithm starting at "the bottom right" of the matrix instead of "the top left" such that A = L^T L. Using these two methods for Cholesky decomposition, I have been able to recreate the normalised residuals from R and Stata respectively (on some datasets that I cannot share due to GDPR rules). When using QQ-plots on the normalized residuals calculated with R and the ones calculated with Stata, the two plots imply different conclusions about the normality of the residuals.
+
+My question is that, in principle, could one not use several different methods for computing a matrix square root and possibly come to significantly different conclusions? For example, why is the Cholesky decomposition used over the eigenvalue decomposition (which seems like the most intuitive way to compute the matrix square root to me)?
+
+To me it seems like all methods for computing the matrix square root are theoretically equally good in terms of normalization (removing heteroscedasticity and correlation) and work equally well on large sample sizes, but they can differ quite significantly on smaller sample sizes.
+
+I am interested in hearing whether there is a specific reason that one matrix square root is used over another and if you know whether there is an aspect of "small sample optimality" when choosing method. Thanks in advance!
+
+Note, that I have also asked this question on cross-validated ("Normalized residuals in mixed models, R (nlme) vs Stata<https://stats.stackexchange.com/questions/677243/normalized-residuals-in-mixed-models-r-nlme-vs-stata>"), where I have provided an example on the data 'RatWeight' from package 'heplots'.
+
+Kind Regards
+Michael
+
+
+	[[alternative HTML version deleted]]
+
+
