@@ -449,11 +449,14 @@
       "subject_clean": "How to calculate the derivative of matrix w.r.t another matrix?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/c264bd05/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/c264bd05/attachment.pl",
+      "body_plain": "Dear All\n\nI have a problem of calculating the derivative of dxm matrix A with respect\nto another dxm matrix B,\nwhere A= [a1 a2 ... am] and B =[b1 b2 ... bm] with\nai and bj are vectors.\n\nActually the matrix A itself is the first order derivative\nof a scalar J with respect to B, i.e., A = dJ/dB,\nwhere a1 = dJ/db1, a2 = dJ/db1, and so on.\nNow dA/dB is the second order derivative\ndA/dB = dJ^2/(dBdB')\n           = [dJ/db1 dJ/db1 ... dJ/dbm]/d[b1 b2 ... bm].\n\nSo anybody have some idea on how to derive the formulation\nof dA/dB?\n\nThanks for your point on this problem.\n\nFred\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All\n\nI have a problem of calculating the derivative of dxm matrix A with respect\nto another dxm matrix B,\nwhere A= [a1 a2 ... am] and B =[b1 b2 ... bm] with\nai and bj are vectors.\n\nActually the m",
       "thread_id": "thread-e0e3c2eebcc2",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040301/c264bd05/attachment.pl"
+      ]
     },
     {
       "id": "msg-a43f7c2d9f8c",
@@ -688,11 +691,14 @@
       "subject_clean": "superimposing two scatterplots",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/1f9758a0/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/1f9758a0/attachment.pl",
+      "body_plain": "Hi,\n \nHow can I plot two scatterplots on the same, one panel?\nI have two times series (price data for two goods) for the same period.\n \nMany thanks,\n \n-R\n \n \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nHow can I plot two scatterplots on the same, one panel?\nI have two times series (price data for two goods) for the same period.\n \nMany thanks,\n \n-R\n \n \n\n\t[[alternative HTML version deleted]]",
       "thread_id": "thread-d840cca60f5c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040301/1f9758a0/attachment.pl"
+      ]
     },
     {
       "id": "msg-2061b77da74e",
@@ -786,11 +792,14 @@
       "subject_clean": "passing a string from .C()",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/95511076/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040301/95511076/attachment.pl",
+      "body_plain": "Hi,\n \nCould someone please point to an example of passing strings from .C()\ncalls back to R? I want to be able to do something like this:\n \nstr <- .C(\"return_foo_string\", str=character(1))$str\n \nvoid return_foo_string(char ** str) {\n    *str = \"foo\";\n}\n \nThe above code has at least two memory allocation \"concerns\": \n1) How to properly allocate \"foo\". I should probably use R_alloc, e.g.\n \nchar foo[] = \"foo\";\n*str = R_alloc(sizeof(foo), 1);\n \n2) I don't know if the string pointed to by *str before the\nre-assignment, which now becomes dangling, will be properly reclaimed.\n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nCould someone please point to an example of passing strings from .C()\ncalls back to R? I want to be able to do something like this:\n \nstr <- .C(\"return_foo_string\", str=character(1))$str\n \nvoid ",
       "thread_id": "thread-a0ece978c89f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040301/95511076/attachment.pl"
+      ]
     },
     {
       "id": "msg-f9c39047ad60",
@@ -1636,11 +1645,14 @@
       "subject_clean": "error() and C++ destructors",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040302/67ee7bba/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040302/67ee7bba/attachment.pl",
+      "body_plain": "Hi,\n \nI am writing C++ functions that are to be called via .Call() interface.\nI'd been using error() (from R.h) to return to R if there is an error,\nbut then I realized that this might be not safe as supposedly error()\ndoesn't throw an exception and therefore some destructors do not get\ncalled and some memory may leak. Here is a simple example\n \nextern \"C\" void foo() {\n    string str = \"hello\";\n    error(\"message\");\n}\n \nThe memory allocated for str is leaked.\n \nDid anyone think about this and find a way to work around the problem?\n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nI am writing C++ functions that are to be called via .Call() interface.\nI'd been using error() (from R.h) to return to R if there is an error,\nbut then I realized that this might be not safe as ",
       "thread_id": "thread-451a38603269",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040302/67ee7bba/attachment.pl"
+      ]
     },
     {
       "id": "msg-11ba56a89c62",
@@ -2068,11 +2080,14 @@
       "subject_clean": "plot(x,y) with errors",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/1eddad32/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/1eddad32/attachment.pl",
+      "body_plain": "Dear all,\nI have 2 variables,\nx<-c(1,2,3,4,5,6,7,8,9,10)\ny<-c(1.3,2.5,4.6,5.3,5.9,6.7,7.4,8.5,9.4,10.4)\neach point of the y variable has an error:\nerry<-(0.2,0.3,0.2,0.1,0.4,0.2,0.3,0.4,0.3,0.2)\nhow to plot(x,y) with the errors segments?\nThank you,\nCopex \n\n\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\nI have 2 variables,\nx<-c(1,2,3,4,5,6,7,8,9,10)\ny<-c(1.3,2.5,4.6,5.3,5.9,6.7,7.4,8.5,9.4,10.4)\neach point of the y variable has an error:\nerry<-(0.2,0.3,0.2,0.1,0.4,0.2,0.3,0.4,0.3,0.2)\nhow t",
       "thread_id": "thread-bf43ae329c8f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/1eddad32/attachment.pl"
+      ]
     },
     {
       "id": "msg-6a41d3d926c1",
@@ -2255,11 +2270,14 @@
       "subject_clean": "plot(x,y) with errors",
       "in_reply_to": "<x2d67uyz43.fsf@biostat.ku.dk>",
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/9b116d40/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/9b116d40/attachment.pl",
+      "body_plain": "thank you very much,\nall the solutions work.\nRegards,\nCopex\n\n\nPeter Dalgaard <p.dalgaard at biostat.ku.dk> wrote:\nSpencer Graves writes:\n\n> Does the following do what you want: > x<-c(1,2,3,4,5,6,7,8,9,10)\n> > y<-c(1.3,2.5,4.6,5.3,5.9,6.7,7.4,8.5,9.4,10.4)\n> > erry<-c(0.2,0.3,0.2,0.1,0.4,0.2,0.3,0.4,0.3,0.2)\n> >\n> > plot(x, y)\n> >\n> > n <- length(x)\n> > Y <- array(c(y-erry, y+erry), dim=c(n,2))\n> > for(i in 1:n)\n> + lines(rep(x[i],2), Y[i,])\n\n(Actually, segments(x,y-erry,x,y+erry) would be a more direct way.)\n\n> Others may have more elegant solutions, but this is simple\n> enough for me to understand AND produces essentially the same result\n> in R 1.8.1 and S-Plus 6.2. hope this helps. spencer graves\n\nThere are a number of fine points to get right, though, esp. if the\nbars get longer than in this example.\n\nI think there are special \"plot with errorbars\" in some of the \"misc\"\npackages on CRAN (their authors are likely to chime in any moment\nnow), but for a relatively simple solution, I think I'd do\n\nplot(x, y, type=\"n\", ylim=range(y+erry,y-erry))\narrows(x,y-erry,x,y+erry,code=3,length=.005*diff(range(x)),angle=90)\npoints(x,y,pch=21,bg=\"white\")\n\n\n-- \nO__ ---- Peter Dalgaard Blegdamsvej 3 \nc/ /'_ --- Dept. of Biostatistics 2200 Cph. N \n(*) \\(*) -- University of Copenhagen Denmark Ph: (+45) 35327918\n~~~~~~~~~~ - (p.dalgaard at biostat.ku.dk) FAX: (+45) 35327907\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "thank you very much,\nall the solutions work.\nRegards,\nCopex\n\n\nPeter Dalgaard <p.dalgaard at biostat.ku.dk> wrote:\nSpencer Graves writes:\n\n> Does the following do what you want: > x<-c(1,2,3,4,5,6,7,8,",
       "thread_id": "thread-bf43ae329c8f",
       "thread_depth": 3,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/9b116d40/attachment.pl"
+      ]
     },
     {
       "id": "msg-916280406b9d",
@@ -2466,11 +2484,14 @@
       "subject_clean": "nesting vectors in a dataframe",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6ad736b0/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6ad736b0/attachment.pl",
+      "body_plain": "Hi, \n\n \n\nI want to create a dataframe where one of the columns does not hold\nindividual elements, but a vector instead. \n\nFor example, imagine the following dataframe without any vectors as elements\n. . . \n\n \n\nex\n\n            X1         X2\n\n1          5          15\n\n2          7          12\n\n3          9          14\n\n \n\nIf I have a pre-existing dataframe, then setting an element in the dataframe\nto a vector is easy. That is, \n\nex[1,2]<-c(45,98,78)\n\n \n\nex1\n\n            X1         X2\n\n1          5          45,98,78\n\n2          7          12\n\n3          9          14\n\n \n\nI could also set each element in a column to a vector. That is, \n\nex$X2<-list(c(45,98,78))\n\n \n\nex2\n\n            X1         X2\n\n1          5          45,98,78\n\n2          7          45,98,78\n\n3          9          45,98,78\n\n \n\nHowever, if my dataframe does not already exist, then I cannot create a\ndataframe with vectors using the following syntax:\n\n \n\ndata.frame(x1=list(c(5,6,7),c(8,9,10)))\n\n \n\nWhat I want:\n\n \n\nex3\n\n            X1         \n\n1          5,6,7\n\n2          8,9,10\n\n \n\nWhat I get:\n\n \n\n  x1.c.5..6..7. x1.c.8..9..10.\n\n1             5              8\n\n2             6              9\n\n3             7             10\n\n \n\nR seems to pull out each element in each list component and treat them as\nseparate elements in the dataframe. \n\nIs there syntax to get R to treat a component of a list as valid entry into\na single element in a dataframe without the dataframe already existing?\n\n \n\nThanks, \nSteve Lacey\n\n I can simply set any element or column to the \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, \n\n \n\nI want to create a dataframe where one of the columns does not hold\nindividual elements, but a vector instead. \n\nFor example, imagine the following dataframe without any vectors as elements\n.",
       "thread_id": "thread-a85bfdc1cdea",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6ad736b0/attachment.pl"
+      ]
     },
     {
       "id": "msg-5379528cba12",
@@ -2918,11 +2939,14 @@
       "subject_clean": "How to read Excel file and access the data item?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/8bce9e3b/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/8bce9e3b/attachment.pl",
+      "body_plain": "In R, How to read Excel file and access the data item?\nThank you.\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "In R, How to read Excel file and access the data item?\nThank you.\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
       "thread_id": "thread-c6b90186dd8f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/8bce9e3b/attachment.pl"
+      ]
     },
     {
       "id": "msg-96af6a83920d",
@@ -3034,11 +3058,14 @@
       "subject_clean": "Publication quality graphs",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6049b365/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6049b365/attachment.pl",
+      "body_plain": "Dear all,\n\nA journal in which we wanted our manuscript published requires the\nfigures as a tiff, eps or PowerPoint formated. I tried converting .jpeg\nfiles to these formats but it looses its quality both on the screen and\non paper. Could some one please help.\n\nThanks in advance,\n____________________\nSivakumar Mohandass,\nDepartment of Entomology,\nKansas State University\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nA journal in which we wanted our manuscript published requires the\nfigures as a tiff, eps or PowerPoint formated. I tried converting .jpeg\nfiles to these formats but it looses its quality b",
       "thread_id": "thread-4bb53c470a15",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/6049b365/attachment.pl"
+      ]
     },
     {
       "id": "msg-b2c618f0a6d4",
@@ -3557,11 +3584,14 @@
       "subject_clean": "A file manipulation question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/c327ff66/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040303/c327ff66/attachment.pl",
+      "body_plain": "Hello R experts,\n\nThe following problem outstrips my current programming knowledge. \n\nI have a dataframe with two fields that looks like the following:\n\nID     Contract\n\n01     1\n\n01     1\n\n02     2\n\n02     3\n\n02     1\n\n03     2\n\n03     2\n\n03     2\n\n03     1\n\n03     1\n\n03     1\n\netc...\n\nI would like to end up with a dataframe with one row per ID where the value in the contract field would be the highest value recorded for a single ID. As you can see above, the number of IDs varies irregularly.  Given the above, the new file would look like the following:\n\nID     Contract\n\n01     1\n\n02     3\n\n03     2\n\nThanks in advance for your suggestions.\n\nGregory L. Blevins The Market Solustions Group, Partner\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello R experts,\n\nThe following problem outstrips my current programming knowledge. \n\nI have a dataframe with two fields that looks like the following:\n\nID     Contract\n\n01     1\n\n01     1\n\n02     2\n\n",
       "thread_id": "thread-8edac6706d7a",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040303/c327ff66/attachment.pl"
+      ]
     },
     {
       "id": "msg-7f4348f1c3e2",
@@ -4470,11 +4500,14 @@
       "references": [
         "<Pine.LNX.4.44.0403041355560.6607-100000@gannet.stats>"
       ],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040304/d043d83d/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040304/d043d83d/attachment.pl",
+      "body_plain": "Thanks!\n\nAnd how can I then plot  a Q-Q line for model checking? qqnorm works \nfine, but I couldn´t find how to use qqline for mixed effects models of \nthis type\n\nso far, I have tried (e.g.)\n\nqqnorm(glm1,~resid(.)|TREATMENT)\n\nbut I don´t know how to specify qqline for this\n\nthe full model is \nglm1_glmmPQL(cbindarea~BLOCK+targetweight+TREATMENT+SOWNDIV+GRASS+LEG+SHERB+THERB,random=~1|PLOTCODE/TREATMENT,family=binomial)\n\nwhere categorical variables are in capital letters\n\nBest regards,\nChris.\n\n\nProf Brian Ripley wrote:\n\n>There are several possibilities, including glmmPQL (MASS) and GLMM (lme4).\n>Be careful with the interpretation, as you don't have the advantages of \n>balance that the classical AoV gives you.\n>\n>On Thu, 4 Mar 2004, Christoph Scherber wrote:\n>\n>  \n>\n>>I have proportion data with binomial errors. The problem is that the \n>>whole experiment was laid out as a split-plot design.\n>>\n>>Ideally, what I would like is having a glm with an Error term such as \n>>glm(y~x+Error(A/B)) but I fear this is not possible. Would using lme be \n>>an alternative? How could I state the variance structure, then?\n>>    \n>>\n>\n>  \n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks!\n\nAnd how can I then plot  a Q-Q line for model checking? qqnorm works \nfine, but I couldn´t find how to use qqline for mixed effects models of \nthis type\n\nso far, I have tried (e.g.)\n\nqqnorm(g",
       "thread_id": "thread-cef98f2b790f",
       "thread_depth": 2,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040304/d043d83d/attachment.pl"
+      ]
     },
     {
       "id": "msg-733c9ffde75b",
@@ -4695,11 +4728,14 @@
       "subject_clean": "Gelman-Rubin Convergence test",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040304/7dde2869/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040304/7dde2869/attachment.pl",
+      "body_plain": "Dear friends,\n    I run the Gelman-Rubin Convergence test for a MCMC object I have and I\ngot the following result Multivariate psrf 1.07+0i, What does this mean? I\nguess (if I am not mistaken) that I should get a psrf close to 1.00 but what\nis 1.07+0i? Is that convergence or something else?\nJorge\n\n \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear friends,\n    I run the Gelman-Rubin Convergence test for a MCMC object I have and I\ngot the following result Multivariate psrf 1.07+0i, What does this mean? I\nguess (if I am not mistaken) that I ",
       "thread_id": "thread-30170ef80e73",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040304/7dde2869/attachment.pl"
+      ]
     },
     {
       "id": "msg-a3c2b2da1655",
@@ -6195,11 +6231,14 @@
       "subject_clean": "time-series",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040305/00313af1/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040305/00313af1/attachment.pl",
+      "body_plain": "Dear R helpers\nI have a daily rainfall dataset of 5 stations, but the time-series are\nof different lengths. Three stations measured precipitation from 1917 to\n2004, one from 1930 to 1979, and other from 1975 to 1998. I'd like to\nknow how to analyse if rainfall is similiar at all stations. Is it\npossible to compare time-series like these?\n\nBest Regards!\n\n__________________________________________________________\nEng. Agr., M.Sc. Eduardo Dutra de Armas\n__________________________________________________________\nCentro de Energia Nuclear na Agricultura (CENA/USP)\nLaboratório de Ecotoxicologia\nAv.Centenário 303, C.P. 96, CEP 13400-970, Piracicaba, SP, Brasil\nFone: (55-19)34294761 - Fax: (55-19)34294610 - Cel: (55-19)81155564\n(Áreas de atuação: Poluição de solo e água, Dinâmica Ambiental de\npesticidas, Biodegradação, Microbiologia Ambiental)\n__________________________________________________________\n\n\n---\n\n\n\n \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R helpers\nI have a daily rainfall dataset of 5 stations, but the time-series are\nof different lengths. Three stations measured precipitation from 1917 to\n2004, one from 1930 to 1979, and other fr",
       "thread_id": "thread-6a439cecf67c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040305/00313af1/attachment.pl"
+      ]
     },
     {
       "id": "msg-c0f14d197fe1",
@@ -6504,11 +6543,14 @@
       "subject_clean": ".Call: is  new attribute of protected object auto-protected",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040305/d40ca534/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040305/d40ca534/attachment.pl",
+      "body_plain": "Hi,\n \nI have an SEXP obj in a C function called via .Call(). The obj is\nprotected (in fact it is an argument to .Call and therefore\nautomatically protected). If I set an attribute of obj does the\nattribute become protected too? Here is an example\n \nSEXP foo(SEXP obj) {\n    SET_NAMES(obj, NEW_CHARACTER(3));  /* are names protected or not? */\n...\n}\n \n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nI have an SEXP obj in a C function called via .Call(). The obj is\nprotected (in fact it is an argument to .Call and therefore\nautomatically protected). If I set an attribute of obj does the\nattr",
       "thread_id": "thread-20b69c4ff21f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040305/d40ca534/attachment.pl"
+      ]
     },
     {
       "id": "msg-7e022de74934",
@@ -6823,11 +6865,14 @@
       "subject_clean": "Using character vectors to call data in the \"cbind\" command",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040306/7b4fb4e9/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040306/7b4fb4e9/attachment.pl",
+      "body_plain": "Dear All,\n \nI have searched the forum but could not find a thread about the way to solve my problem. I am trying to find a way to use a subset of a list of variable names I have when I call the \"cbind\" command to create a data matrix, after I have attached a dataset. The nature of my program necessitates that I create different data matrices using a subset of variable names multiple times. So, when I change the variables for the analysis, I need to make 5-6 manipulations to my program and it is painful. Is there a way to use a character vector containing variable names in the cbind command? What I tried is\n1.I loaded and attached a data set.\n2.I have a character vector containing the variables I want to use in the analysis. Say\n name <- c(\"a1\",\"a2\",\"a3\", \"a4\")\n \nI have several vectors of this type to use in the analysis, so to create a data matrix, I use the cbind command but as expected the following does not work:\nX <- cbind(1, name)\ncbind requires \",\" between the variable names so when I do\nX <- cbind(1, paste(\",\", name, collapse=\"\"))\nit still doesn't work although the printed version of the second portion is more or less what I need.\n \nIs there a way to do this?\n \nThanks for the help in advance.\n    \nAlex\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All,\n \nI have searched the forum but could not find a thread about the way to solve my problem. I am trying to find a way to use a subset of a list of variable names I have when I call the \"cbind",
       "thread_id": "thread-3220a94f1d30",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040306/7b4fb4e9/attachment.pl"
+      ]
     },
     {
       "id": "msg-040ec242c8a0",
@@ -7004,11 +7049,14 @@
       "subject_clean": "missing values",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040307/86f3cd5f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040307/86f3cd5f/attachment.pl",
+      "body_plain": "How can I deal with missing values in the excel file? \nI used read.csv to imports data, how ever there are missing values in the csv file. \nWhen I use names(), it turns out a error message: \" names attribute must be the same length as the vector\" \nWhat can i do with the missing values?\nThanks\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "How can I deal with missing values in the excel file? \nI used read.csv to imports data, how ever there are missing values in the csv file. \nWhen I use names(), it turns out a error message: \" names at",
       "thread_id": "thread-4135036179f7",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040307/86f3cd5f/attachment.pl"
+      ]
     },
     {
       "id": "msg-be9aa9ce6c26",
@@ -7141,11 +7189,14 @@
       "subject_clean": "Excel files",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040307/cfd9883c/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040307/cfd9883c/attachment.pl",
+      "body_plain": "Hello,\n \nI was trying to import data from an Excel file. After I imported the data, I was trying to make a scatter plot. \n \nThe X axes variable is a time variable, which occupies two columns, one is date, another one is time. Example 21-Apr-03, 4:10 PM.   My qestion is:\n \n1. How can I access the data of certain column? I mean how can I refer it in R?\n2. How can I make the two column character values(the time variable I mentioned) to the X ases values?\n3. If I have three variables, one is y axes, one is x axes,  the third one is a logic var, how can I make the logic varaible on the plot also?\n4. I have a column of number values, however I want to creat a new column, the value of each cell is the average of every 10 values of the first column. How can I do it in R?\n \nI tried to figure it out in the help section, however, it spent me a lot of times, I still can not get the way out, please help. THank you!\n\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n \nI was trying to import data from an Excel file. After I imported the data, I was trying to make a scatter plot. \n \nThe X axes variable is a time variable, which occupies two columns, one is d",
       "thread_id": "thread-14c0de080d8d",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040307/cfd9883c/attachment.pl"
+      ]
     },
     {
       "id": "msg-50d460da4b76",
@@ -7395,11 +7446,14 @@
       "subject_clean": "getting the std errors in the lm function",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/49545610/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/49545610/attachment.pl",
+      "body_plain": "Hello,\nI have a simple question for you:\nmaking:\nmylm<-lm(y~x)\nsummary(mylm)\nI get the following results:\n******************************************************\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 16.54087    0.19952   82.91   <2e-16 ***\nx[1:19]     -2.32337    0.04251  -54.66   <2e-16 ***\n******************************************************\nnow I can access easily with\nmylm$coefficients[[1]]\nmylm$coefficients[[2]]\nat the Estimate 16.54087 and -2.32337.\nhow can I access at the Std. Error 0.19952 and 0.04251 ?\nThank you,\nCopex\n\n\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\nI have a simple question for you:\nmaking:\nmylm<-lm(y~x)\nsummary(mylm)\nI get the following results:\n******************************************************\nCoefficients:\n            Estimate Std.",
       "thread_id": "thread-a3708f9e1c43",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/49545610/attachment.pl"
+      ]
     },
     {
       "id": "msg-fe9f59c242e5",
@@ -7477,11 +7531,14 @@
       "subject_clean": "dsn",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/387287ed/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/387287ed/attachment.pl",
+      "body_plain": "Hi \n\nIf you are using windows then do this: \n\nBasically you need to add your oracle database as an ODBC data source. \n\nControl Panel -> Administrative tools  -> Data Sources (ODBC)\n\nSelect the System DSN tab and then Add. Select which type of Data source\ni.e. Oracle database. Then follow the instructions.\n\nRegards\n\nWayne\n\n\n\n-----Original Message-----\nFrom: Margarida Júlia Rodrigues Igreja [mailto:migreja at med.up.pt]\nSent: 01 March 1997 20:48\nTo: R-help at stat.math.ethz.ch\nSubject: [R] dsn\n\n\nHi,\n\nI have a data base in oracle and need to link R using ODBC.\nWhen i use the command odbcConnect a dsn is needed.\nI would like to create a dsn.Do you know how can i do it?\nThank you.\n\nMargarida,Portugal\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "Hi \n\nIf you are using windows then do this: \n\nBasically you need to add your oracle database as an ODBC data source. \n\nControl Panel -> Administrative tools  -> Data Sources (ODBC)\n\nSelect the System ",
       "thread_id": "thread-29336e0afc65",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/387287ed/attachment.pl"
+      ]
     },
     {
       "id": "msg-c8a709bad69a",
@@ -7660,11 +7717,14 @@
       "subject_clean": "a question on CSV file",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/71824acb/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/71824acb/attachment.pl",
+      "body_plain": "I have a csv file,\n \nheartrate          excercise       medicine              Time\n12                      0                0                     4:30 am\n23                      5                 0                     5:00 am\n34                      6               0                       5:30 am\n56                      3                  0                    6:00 am\n24                     12                 1                     6:30 am\n35                      2                  0                     7:00 am\n26                      5                  0                     7:30 am\n63                      4                  0                     8:00 am\n24                      3                  1                     8:30 am \n45                       9                 0                     9:00 am\n \nI did the folllowing:\nx <- read.table(\"heart.csv\",sep=\",\")\nnames(x) <- c(\"heartrate\",\"ex\",\"Med\",\"Time\")\nx.newtime <- strptime(x$Time, format= \"%H:%M %p\")\n \n \nWhat I am tring to do is: \nFirst I am trying to get all the data from when there was a medicine taken in previous hour.\nSecond I will plot heartrate VS median Excercise in previous hour.\n\n \nIn the first problem, how can I get the desired data? after I got it, should I put it in a new file? How? \n \nHow can I refer to a specific cell in a csv file?  \n \nI appreciate your kindly help!\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have a csv file,\n \nheartrate          excercise       medicine              Time\n12                      0                0                     4:30 am\n23                      5                 0   ",
       "thread_id": "thread-79569f49f76a",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/71824acb/attachment.pl"
+      ]
     },
     {
       "id": "msg-b8ffc6fe184f",
@@ -7694,11 +7754,14 @@
       "subject_clean": "memory problem",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/4bb753bf/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/4bb753bf/attachment.pl",
+      "body_plain": "I am trying to upload into R 143 Affymetrix chips onto using R on the NIH\nNimbus server.  I can load 10 chips without a problem, however, when I try\nto load 143 I receive a error message: cannot create a vector of 523263 KB.\nI have expanded the memory of R as follows:  R --min-vsize=10M\n--max-vsize=2500M --min-nsize=10M -max-nsize=50M (as specified in help in\nR).  After running this command the memory in R is as follows:  \n\n \n\n            Used     (Mb)      gc    trigger        (Mb)        limit\n(Mb)      \n\nNcells   513502 13.8        10485760        280.0                1400\n\nVcells   142525   1.1        162625696     1240.8                2500\n\n \n\nHowever, I am still getting the error cannot create a vector of 523263 KB.\nAny suggestions/ideas? \n\n \n\nThanks.,\n\n \n\nNina\n\n \n\nNina Joshi, PhD\n\nNIH/NCI/ Genetics Branch\n\nNational Naval Medical Center, Bldg. 8, Rm. 5101\n\n8901 Wisconsin Ave.\n\nBethesda, MD. 20889-5101\n\n(301) 435-5436 - phone\n\n(301) 496-0047 - fax\n\n \n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to upload into R 143 Affymetrix chips onto using R on the NIH\nNimbus server.  I can load 10 chips without a problem, however, when I try\nto load 143 I receive a error message: cannot creat",
       "thread_id": "thread-ebecd75af3e8",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/4bb753bf/attachment.pl"
+      ]
     },
     {
       "id": "msg-7ce7f35115f4",
@@ -7726,11 +7789,14 @@
       "subject_clean": "abline",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/8b2100e4/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/8b2100e4/attachment.pl",
+      "body_plain": "if I want to specify y-coordinates for the heights of horizontal lines to go across a plot.\n \nx <- c(1,2,3,6,4,8,4,7)\ny <- c(3,2,7,4,5,4,5,6)\nh <- c(3,5,7)\nplot(x,y)\nabline(y=h)\n\nHowever I got error message:\nWarning message: \nparameter \"y\" couldn't be set in high-level plot() function \n(I tried abline(h=y) , it;s not what I want also)\n\nDo u know why?\n \n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "if I want to specify y-coordinates for the heights of horizontal lines to go across a plot.\n \nx <- c(1,2,3,6,4,8,4,7)\ny <- c(3,2,7,4,5,4,5,6)\nh <- c(3,5,7)\nplot(x,y)\nabline(y=h)\n\nHowever I got error m",
       "thread_id": "thread-a1323c89d365",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/8b2100e4/attachment.pl"
+      ]
     },
     {
       "id": "msg-4b2b6c4dac2a",
@@ -7992,11 +8058,14 @@
       "subject_clean": "SSfpl question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/66d2ebb1/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040308/66d2ebb1/attachment.pl",
+      "body_plain": "Hi, \nI am trying to do a nls fitting using the SSfpl self-restart function but I got an error like the following:\n\n> nls.2 <- nls(map.rr ~ SSfpl(mail.pv, phi1, phi2, phi3, phi4), data=pv.rr.200)\nError in nls(y ~ cbind(1, 1/(1 + exp((xmid - x)/exp(lscal)))), data = xy,  :\n        step factor 0.000488281 reduced below `minFactor' of 0.000976562\n\nwhere phi[-4] are unintialized.\n\nI have tried to use getInitial() first but still got the same error.\n\nDo I miss anything here?\n \nPlease advise. \n\nthanks a lot,\n\n\nYun-Fang\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, \nI am trying to do a nls fitting using the SSfpl self-restart function but I got an error like the following:\n\n> nls.2 <- nls(map.rr ~ SSfpl(mail.pv, phi1, phi2, phi3, phi4), data=pv.rr.200)\nError",
       "thread_id": "thread-b3be099cba69",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040308/66d2ebb1/attachment.pl"
+      ]
     },
     {
       "id": "msg-25762ae14942",
@@ -8539,11 +8608,14 @@
       "subject_clean": "asking for information",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/ead6e044/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/ead6e044/attachment.pl",
+      "body_plain": "Dear Sir:\n\nI am interesting in to use some R functions in some of our developments. But I have a problem which I have not found information in R documentation, for that I ask for help.\n\nCan I to call R functions from a C (or another language) program ?. ANd if the answer if yes, could you help me informe me where I can found information to respect?\n\nI will be very thanks to you, if you could help me\n\nThanks a lot\n\nBest Regards\n\n---------------------------------------------------------------------\nMiguel Ángel Gómez-Nieto\nUniversity of Córdoba\nDept. Computing and Numerical Analysis\nSoftware and Knowledge Engineering and Database Researh Group\nCampus Universitario de Rabanales\nBuilding C2, Plant 3. E-14071 Córdoba (Spain)\nPhone: +34-957-212082\nFax: +34-957-218630\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Sir:\n\nI am interesting in to use some R functions in some of our developments. But I have a problem which I have not found information in R documentation, for that I ask for help.\n\nCan I to call ",
       "thread_id": "thread-4a9719c32fa4",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040309/ead6e044/attachment.pl"
+      ]
     },
     {
       "id": "msg-c03d6e8b438a",
@@ -9244,11 +9316,14 @@
       "subject_clean": "how to continue develop package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/be6e0a0a/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/be6e0a0a/attachment.pl",
+      "body_plain": "Hi,\n \nI have completed a prototype of a package, say FOO, and now I want to\nstart using it as an ordinary R package, i.e. attach it via\nlibrary(\"FOO\"). On the other hand I will be adding functionality and\nfixing bugs so the code is going to change a lot. There is a couple of\nproblems that don't know how to solve:\n \n1. To be able to use library() the package must be INSTALLED. The\ninstallation creates a copy of the code. So it seems each time I change\nthe code I need to repeat R CMD INSTALL. This is not too bad, but maybe\nthere is a better way\n2. (This is probably more of an ESS question) Suppose I have attached\nFOO via library(\"foo\") which is now at the second position of the search\nlist. Now if I use ESS to modify the definition of some function goo()\nfrom the package \"FOO\" and send the new definition to R it will NOT\nreplace the old definition, rather creates a new function at the first\nposition of the search list. The new function will of course overshadow\nthe old one so I'll achieve the effect I want, but I'd feel better if I\ncould replace the old definition rather than overshadow it. Does ESS\nallow this sort of things?\n \nThese are my specific questions, however if you can suggest a different\nway of on-going development of a package I'd love to hear from you.\n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nI have completed a prototype of a package, say FOO, and now I want to\nstart using it as an ordinary R package, i.e. attach it via\nlibrary(\"FOO\"). On the other hand I will be adding functionality",
       "thread_id": "thread-911a362b0335",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040309/be6e0a0a/attachment.pl"
+      ]
     },
     {
       "id": "msg-bb141108c04f",
@@ -9260,11 +9335,14 @@
       "subject_clean": "Adding data.frames together",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/6678f09a/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/6678f09a/attachment.pl",
+      "body_plain": "I have a series of data frames that are identical structurally, i.e. -\nmade with the same code, but I need to add them together so that they\nbecome one, longer, data frame, i.e. - each of the slot vectors are\nincreased in length by the length of the added data frame vectors.\n\nSo if I have df1 with a slot A so that length(df1$A) = 100 and I have\ndf2 with a slot A so that length(df2$A)=200 then I need a method to\ncreate df3 its slot A is the df1$A plus df2$A such that length(df3$A) =\n300.\n\nIt does not appear that if you use data.frame to join two data frames it\njust adds the slots of both sources to the destination data frame and\nthat is not what I want.\n\nIn my finally solution, I need to do this with multiple data.frames that\nslot-wise are identical, but each slot length is different between data\nframes.\n\nSeems like there should be an easy solution, but I just have not\nstumbled across it in the documentation.\n\nThanks,\nJohn C. Sweval\n  Database Architect\n  Illumigen Biosciences, Inc.\n    Email: jsweval at illumigen.com\n    Phone: 206-378-0400\n    Fax: 206-378-0408\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have a series of data frames that are identical structurally, i.e. -\nmade with the same code, but I need to add them together so that they\nbecome one, longer, data frame, i.e. - each of the slot vec",
       "thread_id": "thread-bb141108c04f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040309/6678f09a/attachment.pl"
+      ]
     },
     {
       "id": "msg-2f788e9765e4",
@@ -9467,11 +9545,14 @@
       "subject_clean": "How to use MLE-class?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/dbef6760/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040309/dbef6760/attachment.pl",
+      "body_plain": "Hi there,\n \nI had successfully use \"MLE\" function to solve my problem.  Is there\nanyone knows how to get related information? i.e., value of likelihood\nfunction, information matrix, and etc. I know MLE-class can do it but I\ncan not find any information tells me how to do it.\n \nThanks a billions,\n \nYihsu \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi there,\n \nI had successfully use \"MLE\" function to solve my problem.  Is there\nanyone knows how to get related information? i.e., value of likelihood\nfunction, information matrix, and etc. I know ML",
       "thread_id": "thread-e91e349a3891",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040309/dbef6760/attachment.pl"
+      ]
     },
     {
       "id": "msg-a61999d5ddb3",
@@ -9919,11 +10000,14 @@
       "subject_clean": "PDF and Postscript figures in Solaris 9",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/78075a2f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/78075a2f/attachment.pl",
+      "body_plain": "Dear R-help,\n\nI just configured and installed R-1.8.1 according to the following\n\nR is now configured for sparc-sun-solaris2.9\n\n  Source directory:        .\n  Installation directory:  /usr/local\n\n  C compiler:        gcc -g -O2\n  C++ compiler:      g++ -g -O2\n  Fortran compiler:  g77 -g -O2\n\n  Interfaces supported:     X11\n  External libraries:       readline\n  Additional capabilities:  bzip2, PCRE\n  Options enabled:          R profiling\n  Recommended packages:     yes\n\nThe make test failed in the internet package, but that is most likely due to the fact \nthat I have to use a proxy.\n\nWhen I ran a simple test in R, the following occurred\n\n> x <- rnorm(500)\n> plot(x)\n> dev.print(pdf, file=\"blah.pdf\")\n  Error in PDF(file, old$family, old$encoding, old$bg, old$fg, width, \nheight, :\n                 unable to start device pdf\nIn addition: Warning message: problem\nloading encoding file\n\nSo I can't produce PDF graphics (nor postscript, it also failed for \ndev.copy2eps). \nWhat am I doing wrong in the configuration/installation?\n\ncheers...\n\nBrandon\n\nTranslational Medicine & Technology\nGlaxoSmithKline, Greenford, United Kingdom\n+44 (0)20 8966 8467\n+44 (0)20 8966 2757 (fax)\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-help,\n\nI just configured and installed R-1.8.1 according to the following\n\nR is now configured for sparc-sun-solaris2.9\n\n  Source directory:        .\n  Installation directory:  /usr/local\n\n  C ",
       "thread_id": "thread-ff6710aec3f5",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040310/78075a2f/attachment.pl"
+      ]
     },
     {
       "id": "msg-9e0e1025c189",
@@ -10049,11 +10133,14 @@
       "subject_clean": "performing type III",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/2f0250b7/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/2f0250b7/attachment.pl",
+      "body_plain": "Hi,\n\nI meet some tecnhical problem when performing type III test in an \nanalysis of covariance.\nI code with contrast=sum and precise type=\"III\" for the anova table.\nThere is a warning message like this:\nModels with response \"NULL\" removed and type I is performed by default. \nAnd R-Help is not very clear on use of contrasts.\n\nPlease don't rush in the usual holy war about this topic. And if \nsomebody as a concrete example...\n\nThank you\n\nAlex\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI meet some tecnhical problem when performing type III test in an \nanalysis of covariance.\nI code with contrast=sum and precise type=\"III\" for the anova table.\nThere is a warning message like thi",
       "thread_id": "thread-e5ffeeeb83e1",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040310/2f0250b7/attachment.pl"
+      ]
     },
     {
       "id": "msg-ea2e70ba9b67",
@@ -10294,11 +10381,14 @@
       "subject_clean": "plot date",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/942e5eaf/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/942e5eaf/attachment.pl",
+      "body_plain": "I was trying to plot date time  vs numeric values.\nNumber of My date value are about 4000,  It is continuous time series, 3 days, the interveal is 5 minutes, (2002-09-22 12:35:00 pm to 2002-09-22 3:40:00 pm) How can i plot it in R? \nI tried the regular way:\n \nformattime <- strptime(time, format= \"%d-%b-%y %I:%M %p\")\nplot(formattime, outNum)\n \nHowever the x axes doen't give me the hours by each three days, instead it is \"mon\" \"tue\" etc. What should I do?\n \nThank you!\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I was trying to plot date time  vs numeric values.\nNumber of My date value are about 4000,  It is continuous time series, 3 days, the interveal is 5 minutes, (2002-09-22 12:35:00 pm to 2002-09-22 3:40",
       "thread_id": "thread-12723feaf8af",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040310/942e5eaf/attachment.pl"
+      ]
     },
     {
       "id": "msg-5fc2d231f1e6",
@@ -10594,11 +10684,14 @@
       "subject_clean": "dyn.unload fails after some C++ code.",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/50af1a12/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040310/50af1a12/attachment.pl",
+      "body_plain": "Hi,\n \nI have a shared library that I can successfully load/unload until I\nexecute some non-trivial code on the library. After that the same\ndyn.unload() has no effect. Does anyone have an idea what kind of C/C++\ncode could lock a .so library so that it becomes unloadable? (My code\nlinks with a third-party library so I have no way to narrow down the\nsearch).\nI thought it could be memory allocation on heap, but a little experiment\nshowed this was not the case. I was able to unload the library even\nafter I allocated (and not released) memory on the heap. I figure that\n.so has its own heap, but it's just a guess.\n \nI use RedHat 7.3.\n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nI have a shared library that I can successfully load/unload until I\nexecute some non-trivial code on the library. After that the same\ndyn.unload() has no effect. Does anyone have an idea what ki",
       "thread_id": "thread-cc8369d44d22",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040310/50af1a12/attachment.pl"
+      ]
     },
     {
       "id": "msg-3c1d527f111e",
@@ -11295,11 +11388,14 @@
       "subject_clean": "widen the screen place",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/39553316/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/39553316/attachment.pl",
+      "body_plain": "I have this problem: my screen seems not wide enough in R. My true\ncomputer monitor is very wide, so I wish that I can line up the text\nwhen I stretch it wide. i.e.:\n \nThis is typical R returns:\n \n> summary(a)\n V1            V2                 V3             V4          \n F:625   Min.   :20020103   EMC    :  34   Min.   : 9300300  \n L:944   1st Qu.:20020530   BRW    :  27   1st Qu.: 9323865  \n N:615   Median :20020807   Q      :  23   Median : 9355230  \n         Mean   :20020761   DSS    :  22   Mean   : 9404488  \n         3rd Qu.:20021015   LU     :  20   3rd Qu.: 9410738  \n         Max.   :20021231   SLR    :  20   Max.   :13191609  \n                            (Other):2038                     \n       V5                 V6              V7                V8        \n Min.   : 9300600   Min.   : 0.00   Min.   :0.03000   Min.   :  0.62  \n 1st Qu.: 9401610   1st Qu.: 2.00   1st Qu.:0.03500   1st Qu.:  9.00  \n Median : 9534786   Median :11.00   Median :0.04500   Median : 17.50  \n Mean   : 9818852   Mean   :24.36   Mean   :0.06215   Mean   : 21.01  \n 3rd Qu.:10313592   3rd Qu.:59.00   3rd Qu.:0.06500   3rd Qu.: 28.32  \n Max.   :13205647   Max.   :60.00   Max.   :0.57400   Max.   :121.20  \n                                                                      \n       V9                V10                V11              V12      \n Min.   :  202200   Min.   :     100   Min.   :  0.61   Min.   :  50  \n 1st Qu.:  748350   1st Qu.:   38775   1st Qu.:  9.10   1st Qu.:2000  \n Median : 1742450   Median :   98750   Median : 17.62   Median :2000  \n Mean   : 4159455   Mean   :  267184   Mean   : 21.07   Mean   :1901  \n 3rd Qu.: 4556200   3rd Qu.:  241250   3rd Qu.: 28.48   3rd Qu.:2000  \n Max.   :90155800   Max.   :12505300   Max.   :120.60   Max.   :2000  \n                                                                      \n      V13         \n Min.   :-3750.0  \n 1st Qu.: -300.0  \n Median : -100.0  \n Mean   :  140.2  \n 3rd Qu.:  460.0  \n Max.   : 8700.0  \n                  \nBut I want to see:\n \n> summary(a)\nV1            V2                 V3             V4                  V5\nV6              V7                V8      \n F:625   Min.   :20020103   EMC    :  34   Min.   : 9300300    Min.   :\n9300600   Min.   : 0.00   Min.   :0.03000   Min.   :  0.62\n L:944   1st Qu.:20020530   BRW    :  27   1st Qu.: 9323865    1st Qu.:\n9401610   1st Qu.: 2.00   1st Qu.:0.03500   1st Qu.:  9.00\n N:615   Median :20020807   Q      :  23   Median : 9355230    Median :\n9534786   Median :11.00   Median :0.04500   Median : 17.50\n         Mean   :20020761   DSS    :  22   Mean   : 9404488    Mean   :\n9818852   Mean   :24.36   Mean   :0.06215   Mean   : 21.01\n         3rd Qu.:20021015   LU     :  20   3rd Qu.: 9410738    3rd\nQu.:10313592   3rd Qu.:59.00   3rd Qu.:0.06500   3rd Qu.: 28.32\n         Max.   :20021231   SLR    :  20   Max.   :13191609    Max.\n:13205647   Max.   :60.00   Max.   :0.57400   Max.   :121.20\n                            (Other):2038                     \n \nThey all lines in unix not on my email, here.\n \nI hope you understand what I mean.\n \nThanks very much.\n \nYan\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have this problem: my screen seems not wide enough in R. My true\ncomputer monitor is very wide, so I wish that I can line up the text\nwhen I stretch it wide. i.e.:\n \nThis is typical R returns:\n \n> s",
       "thread_id": "thread-835f9806a6cc",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040311/39553316/attachment.pl"
+      ]
     },
     {
       "id": "msg-08d030cd27f5",
@@ -11327,11 +11423,14 @@
       "subject_clean": "recoding variables",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/0c74fcb7/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/0c74fcb7/attachment.pl",
+      "body_plain": "Hi,\n\nI was hoping someone could help me.  I am a graduate student new to using R, and I'm trying to figure out how to recode a continuous variable to make it into an ordinal variable with 3 categories.  I literally have no idea how to proceed--could anyone possibly advise me?  Please copy me on any responses, as I have just subscribed to the R-help email list but don't know whether the subscription has gone through yet.\n\nThanks so much-\nShayna",
+      "body_snippet": "Hi,\n\nI was hoping someone could help me.  I am a graduate student new to using R, and I'm trying to figure out how to recode a continuous variable to make it into an ordinal variable with 3 categories",
       "thread_id": "thread-5840ac5694b5",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040311/0c74fcb7/attachment.pl"
+      ]
     },
     {
       "id": "msg-8edce5c3955e",
@@ -11485,11 +11584,14 @@
       "subject_clean": "saving a data.frame to \"\\t\" files",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/15de890e/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/15de890e/attachment.pl",
+      "body_plain": "Windows 2000, updated R and packages.\n\ncould somebody pleaseeeeeeeee help with saving a data.frame with column\nnames into \"\\t\" text files for later importing in other programs? It seems an easy task, yet... it beats me.\n\nthanks,\n\nMihai Nica\nJackson State University\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Windows 2000, updated R and packages.\n\ncould somebody pleaseeeeeeeee help with saving a data.frame with column\nnames into \"\\t\" text files for later importing in other programs? It seems an easy task, ",
       "thread_id": "thread-45de5a462133",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040311/15de890e/attachment.pl"
+      ]
     },
     {
       "id": "msg-dcf28fdc7848",
@@ -11730,11 +11832,14 @@
       "subject_clean": "saving a data.frame to \"\\t\" files",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/49557ce1/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040311/49557ce1/attachment.pl",
+      "body_plain": "many thanks to everybody... indeed it was simple, and i should have found the answer myself, since i DID read the R Data Import/Export manual... maybe it's the age :-)\n\nMihai Nica\nJackson State University\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "many thanks to everybody... indeed it was simple, and i should have found the answer myself, since i DID read the R Data Import/Export manual... maybe it's the age :-)\n\nMihai Nica\nJackson State Univer",
       "thread_id": "thread-b78958987834",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040311/49557ce1/attachment.pl"
+      ]
     },
     {
       "id": "msg-a1d75ff1b535",
@@ -12365,11 +12470,14 @@
       "subject_clean": "read.spss",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/ac25f4e1/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/ac25f4e1/attachment.pl",
+      "body_plain": "Hi,\nI would like to read a spss file in R.\nWhen i type read.spss(\"...\")\nComes the error: couldn't find function \"read.spss\"\nWhat shall i do?\n\nMargarida\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\nI would like to read a spss file in R.\nWhen i type read.spss(\"...\")\nComes the error: couldn't find function \"read.spss\"\nWhat shall i do?\n\nMargarida\n\n\t[[alternative HTML version deleted]]",
       "thread_id": "thread-faab95613d2b",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040312/ac25f4e1/attachment.pl"
+      ]
     },
     {
       "id": "msg-9aaff5b776ff",
@@ -12712,11 +12820,14 @@
       "subject_clean": "Basic questions on nls and bootstrap",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/351bd50d/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/351bd50d/attachment.pl",
+      "body_plain": "Dear R community,\n\nI have currently some problems with non linear regression analysis in R.\nMy data correspond to the degradation kinetic of a pollutant in two \ndifferent soil A and B, x data are time in day and y data are pollutant \nconcentration in soil.\nIn a first time, I want to fit the data for the soil A by using the Ct = \nC0*exp(-k*Tpst) with Ct the concentration of pollutant at time t, C0 is the \ninitial concentration (i.e. t=0), Tps is the time in days.\nThe table containing data is called «tabMika»\n\nHere, you can find my R program:\n\n > tabMika<-read.delim(\"RMika.txt\")\n > tabMika\n\n    Tps  SolA  Solb\n1    0 32.97 35.92\n2    0 32.01 31.35\n3    1 21.73 22.03\n4    1 23.73 18.53\n5    2 19.68 18.28\n6    2 18.56 16.79\n\n# and continue like that until 29 days.\n\n\n > library(nls)\n > attach(tabMika)\n > Expon<-function(Tps,parm){\n+ C0<-parm[1]\n+ k<-parm[2]\n+ }\n > DegSA.nls<-nls(SolA~C0*exp(-k*Tps),start=c(C0=35, k=1),tabMika)\n > summary(DegSA.nls)\n\nFormula: SolA ~ C0 * exp(-k * Tps)\n\nParameters:\n     Estimate Std. Error t value Pr(>|t|)\nC0 25.682104   1.092113   23.52  < 2e-16 ***\nk   0.087356   0.007582   11.52 6.36e-13 ***\n---\nSignif. codes:  0 `***' 0.001 `**' 0.01 `*' 0.05 `.' 0.1 ` ' 1\n\nResidual standard error: 2.584 on 32 degrees of freedom\n\nCorrelation of Parameter Estimates:\n       C0\nk 0.7101\n\n# until this step, I think (or may be hope) that it is OK.\n#Then, I would like to use bootstrap function to obtain 10 estimations \n(more of course but 10 is retained for this example) of the parameters C0 \nand t. I use this way:\n\n > library(bootstrap)\n > theta<-function(tabMika){coef(eval(DegSA.nls$call))}\n > bootSolA.nls<-bootstrap(tabMika,10,theta)\n\nWarning message:\nmulti-argument returns are deprecated in: return(thetastar, func.thetastar, \njack.boot.val, jack.boot.se,\n\n > bootSolA.nls\n\n$thetastar\n           [,1]        [,2]        [,3]        [,4]        [,5]        [,6]\nC0 25.68210358 25.68210358 25.68210358 25.68210358 25.68210358 25.68210358\nk   0.08735615  0.08735615  0.08735615  0.08735615  0.08735615  0.08735615\n           [,7]        [,8]        [,9]       [,10]\nC0 25.68210358 25.68210358 25.68210358 25.68210358\nk   0.08735615  0.08735615  0.08735615  0.08735615\n\n$func.thetastar\nNULL\n\n$jack.boot.val\nNULL\n\n$jack.boot.se\nNULL\n\n$call\nbootstrap(x = tabMika, nboot = 10, theta = theta)\n\n# as you can notify, the 10 estimations of C0 and k are the same value \n(????!!!!!!), so, my program is wrong but I cannot find where is the problem.\n\n# In a second time, I would like to fit the same data with a new function \nCt = C0*Tpsb. I did as follow and obtained the following results:\n\n > Pat<-function(Tps,parm){\n+ a<-parm[1]\n+ b<-parm[2]\n+ }\n > PatSA.nls<-nls(SolA~a*(Tps^b),start=c(a=35, b=-1),tabMika)\n\nError in numericDeriv(form[[3]], names(ind), env) : Missing value or an \nInfinity produced when evaluating the model\n\n > summary(PatSA.nls)\n\nError in summary(PatSA.nls) : Object \"PatSA.nls\" not found\n\n# I cannot understand the mean of «Error in numericDeriv(form[[3]], \nnames(ind), env) : Missing value or an Infinity produced when evaluating \nthe model», please, can you help me.\n\nThank you very much in advance.\n\nMichael C\n\n\nMichaël COEURDASSIER, PhD\nDepartment of Environmental Biology\nUC INRA EA3184MRT\nInstitute for Environmental Sciences and Technology\n\nUniversity of Franche-Comte\nPlace Leclerc\n25030 Besançon cedex\nFRANCE\nTel : +33 (0)381 665 741\nFax : +33 (0)381 665 797\n\nE-m at il: michael.coeurdassier at univ-fcomte.fr\nhttp://lbe.univ-fcomte.fr/\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R community,\n\nI have currently some problems with non linear regression analysis in R.\nMy data correspond to the degradation kinetic of a pollutant in two \ndifferent soil A and B, x data are time",
       "thread_id": "thread-e38f3cc471c9",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040312/351bd50d/attachment.pl"
+      ]
     },
     {
       "id": "msg-2561f73119cf",
@@ -13268,11 +13379,14 @@
       "subject_clean": "Latent trait models",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/67c073a0/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040312/67c073a0/attachment.pl",
+      "body_plain": "Hi,\n\nI am looking for any  procedure in R to fit  \"Latent variables models\" in particular \"Latent trait models (i.e. for binary data)\". could anyone help me?\n\nMany thanks ,\n\n\n\nDr Abderrahim Oulhaj\nOxford University\nDepartment of Pharmacology\nMansfield Road\nOxford OX1 3QT\nTel:  +44 1865 224098\nFax: +44 1865 224099\nEmail: abderrahim.oulhaj at pharmacology.oxford.ac.uk\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am looking for any  procedure in R to fit  \"Latent variables models\" in particular \"Latent trait models (i.e. for binary data)\". could anyone help me?\n\nMany thanks ,\n\n\n\nDr Abderrahim Oulhaj\nOxf",
       "thread_id": "thread-73e3d69c8205",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040312/67c073a0/attachment.pl"
+      ]
     },
     {
       "id": "msg-cd85aa3d4f51",
@@ -14687,11 +14801,14 @@
       "subject_clean": "R equiv to proc gremove in maps package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040315/46ecd158/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040315/46ecd158/attachment.pl",
+      "body_plain": "Is there an R equivalent to SAS's proc gremove?  You would use this procedure to combine the units on an existing map, for example to build a map of Metropolitan Statistical Areas (MSAs) from the [US] counties dataset where the internal boundries surround the MSAs (which are groups of counties) rather than the individual counties.  I can imagine the mechanism would be to find and erase the boundries within each group.  Is there a way to do that in R?  I looked at the S reference on building geographical databases, and I could probably fumble through the C code to build the binary files of lines and polygons, but have no idea how to implement the shell program to extract the datapoints.  Thanks.\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Is there an R equivalent to SAS's proc gremove?  You would use this procedure to combine the units on an existing map, for example to build a map of Metropolitan Statistical Areas (MSAs) from the [US]",
       "thread_id": "thread-f6438cba71aa",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040315/46ecd158/attachment.pl"
+      ]
     },
     {
       "id": "msg-566a5fedc721",
@@ -15435,11 +15552,14 @@
       "subject_clean": "A beginners question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/8c61e03d/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/8c61e03d/attachment.pl",
+      "body_plain": "Hi.  I used R years ago at Uni but haven't touched it since, so I'm back to beginner level now.  After looking through the manuals for a while I've come to the conclusion I don't know where to start looking for what I'm looking for, so I decided to ask for help.\n\nI've got a fairly simple data frame with an identifier, period and score.  There are a few hundred seperate identifiers and the period is from 0 to 36.  I'd like to pivot this so that it's a matrix of scores, with identifiers as column headers and periods as row headers.  I'd then like to run an ARIMA on each of the columns.\n\nThanks\nMurray\n\n\nNOTE:  The information contained in this email is confidential.  If you are not the intended recipient, you may not disclose or use the information in this email in any way. Macquarie Bank cannot guarantee that any email or attachments are secure or error-free as information may be intercepted, corrupted,  incomplete,  lost, or contain viruses. \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi.  I used R years ago at Uni but haven't touched it since, so I'm back to beginner level now.  After looking through the manuals for a while I've come to the conclusion I don't know where to start l",
       "thread_id": "thread-d5dd78f94d40",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040316/8c61e03d/attachment.pl"
+      ]
     },
     {
       "id": "msg-79e9ebb4ec22",
@@ -15655,11 +15775,14 @@
       "subject_clean": "lme(nlme) error message",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/b9be5b03/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/b9be5b03/attachment.pl",
+      "body_plain": "Dear Friends,\n\nI am writing to seek any help on \"lme\" error message. I am using lme to do Mixed-model linear regression. I use my simulated data. However, sometimes, I get the following error message, which I do not understand. \n\n\"Error in solve.default(pdMatrix(a, fact=TRUE)): system is computationally sigular\"\n\nI would appreciate any help about it.\nThanks a lot\n\nJingyuan Fu\nDrs, Groningen Bioinformatics Center\nthe Netherlands\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Friends,\n\nI am writing to seek any help on \"lme\" error message. I am using lme to do Mixed-model linear regression. I use my simulated data. However, sometimes, I get the following error message,",
       "thread_id": "thread-e2fdb17d492c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040316/b9be5b03/attachment.pl"
+      ]
     },
     {
       "id": "msg-f2821660c1c0",
@@ -15703,11 +15826,14 @@
       "subject_clean": "graphical interface",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/e59493f6/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/e59493f6/attachment.pl",
+      "body_plain": "Dear R users,,\n \nI'm having difficulties when i use the gstat extensions in R\nespecially with the graphical interface, as the\nvariograms plots are depicted with gray background and cyan points for the number of pairs, Consequently the fitted variogram\nis drawn in cyan, \n \nHow can i change that so i could have,  white background and \nblack lines for  the fitted variogram, for the complete plot. \n \nlooking forward for hearing from you,\n \ncarlos saavedra\n \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R users,,\n \nI'm having difficulties when i use the gstat extensions in R\nespecially with the graphical interface, as the\nvariograms plots are depicted with gray background and cyan points for the",
       "thread_id": "thread-5cd4e1666856",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040316/e59493f6/attachment.pl"
+      ]
     },
     {
       "id": "msg-0453d6dd19ae",
@@ -15751,11 +15877,14 @@
       "subject_clean": "R install/configure problem on Sun Solaris",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/679d8dc4/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/679d8dc4/attachment.pl",
+      "body_plain": "Dear R-help,\n\nI just configured and installed R-1.8.1 according to the following\n\nR is now configured for sparc-sun-solaris2.9\n\n  Source directory:        .\n  Installation directory:  /usr/local\n\n  C compiler:        gcc -g -O2\n  C++ compiler:      g++ -g -O2\n  Fortran compiler:  g77 -g -O2\n\n  Interfaces supported:     X11\n  External libraries:       readline\n  Additional capabilities:  bzip2, PCRE\n  Options enabled:          R profiling\n  Recommended packages:     yes\n\nThe make test failed in the internet package, but that is most likely due \nto the fact \nthat I have to use a proxy.\n\nWhen I ran a simple test in R, the following occurred\n\n> x <- rnorm(500)\n> plot(x)\n> dev.print(pdf, file=\"blah.pdf\")\n  Error in PDF(file, old$family, old$encoding, old$bg, old$fg, width, \nheight, : unable to start device pdf\nIn addition: Warning message: problem\nloading encoding file\n\nSo I can't produce PDF graphics (nor postscript, it also failed for \ndev.copy2eps). \nWhat am I doing wrong in the configuration/installation or where do I need \nto point R?\n\ncheers...\n\nBrandon\n\n\nBrandon Whitcher, PhD\nTranslational Medicine & Technology\nGlaxoSmithKline\nGreenford Road\nGreenford UB6 0HE, United Kingdom\nTel: +44 (0)20 8966 8467\nFax: +44 (0)20 8966 2757\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-help,\n\nI just configured and installed R-1.8.1 according to the following\n\nR is now configured for sparc-sun-solaris2.9\n\n  Source directory:        .\n  Installation directory:  /usr/local\n\n  C ",
       "thread_id": "thread-e4920befd41e",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040316/679d8dc4/attachment.pl"
+      ]
     },
     {
       "id": "msg-5b449986e28a",
@@ -15933,11 +16062,14 @@
       "subject_clean": "rate of change",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/32a97096/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040316/32a97096/attachment.pl",
+      "body_plain": "?fdHess\n\nCheck out the function fdHess in the library(nlme). \n\nIt numerically calculates the gradient and Hessian of a given function.\n\nRegards\n\nWayne\n\n\n-----Original Message-----\nFrom: Fred J. [mailto:phddas at yahoo.com]\nSent: 16 March 2004 03:20\nTo: r help\nSubject: [R] rate of change\n\n\nHello\nI am wondering, how do I find if R has a certain\nfunciton to do a given task. do I just type\nhelp.search(\"rate\").\nI am just trying to find a function to calculate the\nrate of change for a variable. I could come up with\none if there isn't any allready builtin.\n\nthanks\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "?fdHess\n\nCheck out the function fdHess in the library(nlme). \n\nIt numerically calculates the gradient and Hessian of a given function.\n\nRegards\n\nWayne\n\n\n-----Original Message-----\nFrom: Fred J. [mailt",
       "thread_id": "thread-031604034937",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040316/32a97096/attachment.pl"
+      ]
     },
     {
       "id": "msg-04ac6caf3f79",
@@ -16763,11 +16895,14 @@
       "subject_clean": "Q: Odds Ratio",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/82910eb3/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/82910eb3/attachment.pl",
+      "body_plain": "Dear all,\n\nis there a automatic method to obtain Odds Ratio estimates and their \nconfidence intervals from a GLM Logistic model?\n\nThanks\nCristian\n\n=============================================\nCristian Pattaro\n=============================================\nUnit of Epidemiology & Medical Statistics\nDepartment of Medicines and Public Health\nUniversity of Verona\ncristian at biometria.univr.it\n=============================================\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nis there a automatic method to obtain Odds Ratio estimates and their \nconfidence intervals from a GLM Logistic model?\n\nThanks\nCristian\n\n=============================================\nCristia",
       "thread_id": "thread-fb18435a54e7",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040317/82910eb3/attachment.pl"
+      ]
     },
     {
       "id": "msg-ba25934f6282",
@@ -17221,11 +17356,14 @@
       "subject_clean": "help with file",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/b2f20a74/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/b2f20a74/attachment.pl",
+      "body_plain": "Hi,\n\nI am new at R, and I need some help with some basic stuff.\n\nI want to do clustering of data. It works perfectly, but now I want to \nexport my file form R to my Linux directory. The problem is that the file \nis generated only with the cluster numbers, but it does not carry over the \nidentifiers. Let me show you what I did :\n\n1. demo<-read.table(\"my_table\", sep=\",\", header=TRUE)          # I \nimported my table into R as a data frame. I had header and one of my \ncolumns was called KEYS; this was the unique identifier for my data.\n2. #clustering part\n    >names(demo) \n    >dm<-dist(demo[,c(3,4,5)])  \n    >names(dm)<-demo[,2]                #the unique Id called KEYS is in \nmy column number 2\n    >cluster<-hclust(dm)\n    >plot(cluster)                                    #my data is \ndisplayed in dendogram\n\n3. Now I want to see the breakdowns; I want to see every unique KEYS and \ncorresponding cluster number\n \n    >result<-cutree(cluster, h =1)\n   >result                                   #I can see KEYS and \ncorresponding cluster numbers\n\n4. Now I want to export this info out of R into a file\n    How do I do this??? I am going CRAZY. All I get is the cluster numbers \nbut not the KEYS.\n\nHELP!!!\n\nMargaret\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am new at R, and I need some help with some basic stuff.\n\nI want to do clustering of data. It works perfectly, but now I want to \nexport my file form R to my Linux directory. The problem is tha",
       "thread_id": "thread-3bbb835ed3c3",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040317/b2f20a74/attachment.pl"
+      ]
     },
     {
       "id": "msg-0399f2191353",
@@ -17826,11 +17964,14 @@
       "subject_clean": "save to file",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/6d6722d0/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/6d6722d0/attachment.pl",
+      "body_plain": "Dear friends,\n    In R there is a file | save to file option which takes a \"picture\" of\nthe text in your screen and saves it to a text file. Is there any way to do\nthe same with a function? I need this because I run a long program and when\nI get the results and try to use file | save to file, the program freezes.\nSo, I would like this to be done in the routine I am running.\nJorge L. Icabalceta\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear friends,\n    In R there is a file | save to file option which takes a \"picture\" of\nthe text in your screen and saves it to a text file. Is there any way to do\nthe same with a function? I need thi",
       "thread_id": "thread-03b0b36ff3f8",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040317/6d6722d0/attachment.pl"
+      ]
     },
     {
       "id": "msg-8ab94d371c5a",
@@ -18028,11 +18169,14 @@
       "subject_clean": "cannot allocate vector",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/ea5d40db/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040317/ea5d40db/attachment.pl",
+      "body_plain": "Hi,\n\nI'm having trouble with glmmPQL.\n\nI'm fitting a 2 level random intercept model, with 90,000 cases and about 330 groups.  I'm unable to get any results on the full data set.  I can get it to work if I sample down to about 30,000 cases.  But for models with N's much larger than that I get the following warning message:\n\n m3=glmmPQL(prepfood~iage+iemployed+iwhite+ieduclevl+imarried+servcomm+leadgrup+leadsty4, family=binomial, random=~1|congrega1,data=data)\nError: cannot allocate vector of size 4135 Kb\nIn addition: Warning message: \nReached total allocation of 253Mb: see help(memory.size) \n\nI've tried increasing my virtual memory size, and also defragmenting my hard drive.  It hasn't helped.  I've seen other people asking similar questions on the archive, but it seems that this problem should have gone away after earlier versions of R, is that right?\n\nIs this a data problem, am I fitting a bad model, or is it a memory size problem.  I'm hoping the last one, and any help is appreciated.\n\nThanks,\n\nMatt\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI'm having trouble with glmmPQL.\n\nI'm fitting a 2 level random intercept model, with 90,000 cases and about 330 groups.  I'm unable to get any results on the full data set.  I can get it to work ",
       "thread_id": "thread-351e282a6fa5",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040317/ea5d40db/attachment.pl"
+      ]
     },
     {
       "id": "msg-9e2df58bde42",
@@ -18172,11 +18316,14 @@
       "subject_clean": "logistic regression with temporal correlation",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/38f6f854/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/38f6f854/attachment.pl",
+      "body_plain": "Hello, \n\nYou can either use nls and add weights see ?nls. \nOr use a generalized linear model and also change the weights. se ?glm\n\nRegards\n\nWayne\n \n\n-----Original Message-----\nFrom: merser at tiscali.dk [mailto:merser at tiscali.dk]\nSent: 18 March 2004 08:37\nTo: r-help at stat.math.ethz.ch\nSubject: [R] logistic regression with temporal correlation\n\n\nHello\n\nWe would like to perform a logistic regression analysis weighting the\nindependent variable in  a temporal fashion, i.e. events occuring most\nrecent get highest weight. Does anyone know how to do this in R??\n\nRegards\nS. Merser and S. Lophaven\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886 \nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "Hello, \n\nYou can either use nls and add weights see ?nls. \nOr use a generalized linear model and also change the weights. se ?glm\n\nRegards\n\nWayne\n \n\n-----Original Message-----\nFrom: merser at tiscali.",
       "thread_id": "thread-b468e3ea60fe",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040318/38f6f854/attachment.pl"
+      ]
     },
     {
       "id": "msg-eb0207b1ea6d",
@@ -18448,11 +18595,14 @@
       "subject_clean": "don't stop when error occurs",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/64b762d9/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/64b762d9/attachment.pl",
+      "body_plain": "Look up ?try\n\nRegards\n\nWayne\n\n-----Original Message-----\nFrom: pastaska1934 [mailto:pastaska1934 at free.fr]\nSent: 18 March 2004 14:36\nTo: R-help at stat.math.ethz.ch\nSubject: [R] don't stop when error occurs\n\n\nhi,\ni'm doing some bootstraping on a data set, using kmeans for each bootstrap,\ni mean i do a loop(200 times) and in each loop i use kmeans.\ni have to count some occurences in a matrix result,\nbut somentimes kmeans fail, cause of the algorithm.\nso i would like to avoid my function to stop on kmeans error\nis there a way to do such a thing?\nlike\nif(kmeans()=error)continue\nor\nif(kmeans != -1) go on\n\nthanks\n\nsebeuuuuuuuuuu^^\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "Look up ?try\n\nRegards\n\nWayne\n\n-----Original Message-----\nFrom: pastaska1934 [mailto:pastaska1934 at free.fr]\nSent: 18 March 2004 14:36\nTo: R-help at stat.math.ethz.ch\nSubject: [R] don't stop when erro",
       "thread_id": "thread-8be491da81e1",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040318/64b762d9/attachment.pl"
+      ]
     },
     {
       "id": "msg-60ccc69a0d80",
@@ -19159,11 +19309,14 @@
       "subject_clean": "How to do a truncated regression",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/b4cd3d60/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040318/b4cd3d60/attachment.pl",
+      "body_plain": "Hi,\n \n  I'm interested in performing a regression of dependent variable y on\nindependent variable x, where (x,y) are known only for y < c, where c\nis\na constant.  For y >= c, neither x or y are known.  This is called a\ntruncated regression, I believe.\n \n  I read a post on the R help list, that recommended doing the\nfollowing:\n \n  \"The form for the response is Surv(c,y,1), but it doesn't recycle\narguments\nso you actually need Surv(rep(c,length(y)),y,rep(1,length(y)))\"\n \n  I have tried to follow the above procedure, but I obtain the error\nmessage\n \n  \" Stop time must be > start time\"\n \nwhich I don't understand.  I think that at least part of the problem\nis\nthat its hard to know what \"Surv(c,y,1)\" means, i.e, what quantity in\nthe input list to Surv is supposed to be set equal to c, to y, etc. \nThere also may be other parameters I've not set correctly. The code\nthat\nactually performs the regression is below:\n \n\"trunc <- survreg(Surv(c,yx[,2],event=rep(1,length(yx[,2]))) ~ yx[,1],\ndist='gaussian', data=yxfr)\" , where c is already defined as\nc<-rep(200,npoints), where npoints is the number of (x,y) data pairs.\n \n  I should mention that I have R v1.8.1, and to perform these\ncalculations I've invoked librarys MASS and SURVIVAL.  I have tried to\nlook this up in the manuals, but so far I've not found anything on\ntruncated regression.\n \n  If you could tell me what my error(s) is(are), and/or a detailed\ndescription of how to perform truncated regression, that would be\ngreat.\n \n  Thanks,\n \n  Howard Alper\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \n  I'm interested in performing a regression of dependent variable y on\nindependent variable x, where (x,y) are known only for y < c, where c\nis\na constant.  For y >= c, neither x or y are known.",
       "thread_id": "thread-dfe53ef0bae0",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040318/b4cd3d60/attachment.pl"
+      ]
     },
     {
       "id": "msg-a496df25602c",
@@ -19259,11 +19412,14 @@
       "subject_clean": "Specifying interaction terms in glm",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/58be61f8/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/58be61f8/attachment.pl",
+      "body_plain": "Firstly, I want to say thanks to the developers and maintainers of R and\nits packages- it is a great resource and I appreciate their work.\n\n \n\nMy question relates to setting the reference level in interaction terms\nusing glm in the \"base\" package. I would normally set contrasts for the\ntreatment factors so that the base is zero (control), and the treatment\n(one) is compared to it. However, when I specify an interaction between\n2 such factors in a glm model, the reference in the glm summary is both\nthe level 2 factors combined. My example code is below:\n\n \n\ndat$treat <- factor(dat$treat, labels=c(\"no\", \"yes\"))\n\ncontrasts(dat$treat) <- contr.treatment(2, base=1, contrasts = TRUE)\n\n \n\ndat$sample <- factor(dat$sample, labels=c(\"no\", \"yes\"))\n\ncontrasts(dat$sample) <- contr.treatment(2, base=1, contrasts = TRUE)\n\n \n\nI tried reordering the base for the contrasts, but it didn't change the\noutput.\n\nIs there some way around this without reversing the coding of my\nvariables?\n\n \n\nChris Compton (Veterinarian)\n\nAnimal Health Centre\n\nP.O Box 21 Morrinsville\n\nNew Zealand\n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Firstly, I want to say thanks to the developers and maintainers of R and\nits packages- it is a great resource and I appreciate their work.\n\n \n\nMy question relates to setting the reference level in int",
       "thread_id": "thread-f02d19feb04d",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040319/58be61f8/attachment.pl"
+      ]
     },
     {
       "id": "msg-fa32fc7b71a1",
@@ -19675,11 +19831,14 @@
       "subject_clean": "yags, GEEs, and GLMMs",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2e6d82ce/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2e6d82ce/attachment.pl",
+      "body_plain": "Dear R-ers,\n\nI am just a simple 'end-user' of R and am trying to analyse data with a binary response variable (dead or alive) in relation to weight and sex (of young birds). As some of the birds have the same biological mother, I am using mixed models with the identity of the mother as a random factor. (please, Mick Crawley, when are you going to write a chapter on mixed models with binary response variables?......).\nI have used the glmmPQL function (about which I also have a whole list of questions....) as mentioned in MASS, but now I was told that GEE models might be better suited for my data. So I got the yags package and tried a model like this:\n\n> gee1<-yags(alive~sex*weight, family=binomial,id=id,corstr='exchangeable', alphainit=0.)\n\nBut then the summary only gives me this:\n\n> summary(gee1)\n    Length      Class       Mode \n         0 yagsResult       list \n\nHow do I get R to give me the parameter estimates, std errors, t- and p-values etc.?\n\nAnd if someone is willing to answer questions about the glmmPQL function, please let me know and I'll send you the most urgent questions, but I don't want to bother everyone with it.\n\nMany thanks,\nEllen\n\n\nEllen Kalmbach - Animal Ecology Group - University of Groningen - Kerklaan 30 - NL-9751NN Haren - Netherlands - +31-503633408 - e.kalmbach at biol.rug.nl\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-ers,\n\nI am just a simple 'end-user' of R and am trying to analyse data with a binary response variable (dead or alive) in relation to weight and sex (of young birds). As some of the birds have ",
       "thread_id": "thread-04609232f88b",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2e6d82ce/attachment.pl"
+      ]
     },
     {
       "id": "msg-4f7b91c28d88",
@@ -19857,11 +20016,14 @@
       "subject_clean": "yags, GEEs and GLMMs",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2b455f85/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2b455f85/attachment.pl",
+      "body_plain": "Dear R-ers,\n\nI am just a simple 'end-user' of R and am trying to analyse data with a binary response variable (dead or alive) in relation to weight and sex (of young birds). As some of the birds have the same biological mother, I am using mixed models with the identity of the mother as a random factor. (please, Mick Crawley, when are you going to write a chapter on mixed models with binary response variables?......).\nI have used the glmmPQL function (about which I also have a whole list of questions....) as mentioned in MASS, but now I was told that GEE models might be better suited for my data. So I got the yags package and tried a model like this:\n\n> gee1<-yags(alive~sex*weight, family=binomial,id=id,corstr='exchangeable', alphainit=0.)\n\nBut then the summary only gives me this:\n\n> summary(gee1)\n    Length      Class       Mode \n         0 yagsResult       list \n\n\nHow do I get R to give me the parameter estimates, std errors, t- and p-values etc of the model?\n\nAnd if someone is willing to answer questions about the glmmPQL function, please let me know and I'll send you the most urgent questions, but I don't want to bother everyone with it.\n\nMany thanks,\nEllen\n\n\nP.S. Sorry, i think I sent this same message to the wrong address earlier, don't know where it went to.\n\nEllen Kalmbach - Animal Ecology Group - University of Groningen - Kerklaan 30 - NL-9751NN Haren - Netherlands - +31-503633408 - e.kalmbach at biol.rug.nl\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-ers,\n\nI am just a simple 'end-user' of R and am trying to analyse data with a binary response variable (dead or alive) in relation to weight and sex (of young birds). As some of the birds have ",
       "thread_id": "thread-7100b7bf184c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040319/2b455f85/attachment.pl"
+      ]
     },
     {
       "id": "msg-4dc861f47798",
@@ -21133,11 +21295,14 @@
       "subject_clean": "Operating on windows of data",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040320/f814303d/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040320/f814303d/attachment.pl",
+      "body_plain": "I have a data set that is comprised of, for simplicity, a vector of numbers that I want to march across in overlapping windows of say 10 values each, computing a couple of values for each window.  Is there a vectorized way to do this, or do I truly need to resort to looping--I think so?  Any other clever thoughts?\n\nThanks,\nSean\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have a data set that is comprised of, for simplicity, a vector of numbers that I want to march across in overlapping windows of say 10 values each, computing a couple of values for each window.  Is ",
       "thread_id": "thread-1d11eff3cc04",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040320/f814303d/attachment.pl"
+      ]
     },
     {
       "id": "msg-0bc109e2d4d2",
@@ -21788,11 +21953,14 @@
       "subject_clean": "COURSE:  Statistical Modelling - By Dr Bill Venables",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/71c03007/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/71c03007/attachment.pl",
+      "body_plain": "Insightful are pleased to announce the following Course: \n\n \nStatistical Modelling - By Dr Bill Venables\n \nDates:   17 - 19 May 2004\n \nPlace:   Basingstoke, UK\n \nHours:   09:00 - 17:00\n \nCourse Fees:   Commercial - £1,400  + VAT,  Academic - £800 + VAT\n \nCourse Description:\n \nThe course will cover both classical and modern modelling, with special\nattention on the classical side to linear models, generalized linear models,\nlinear mixed effects, generalized linear mixed effects, nonlinear.  The\nsecond half of the course will cover more modern material: robust estimation,\nmodel selection, regression diagnostics, use and abuse of the bootstrap and\nmodern alternatives, notably tree-based models (with bagging) and neural\nnetworks.   Examples are combined with programming and graphics in S-PLUS\nwherever the opportunity arises.\n \n <http://www.insightful.com/services/training/venables_2004.asp>\nhttp://www.insightful.com/services/training/venables_2004.asp\n \nPresenter Information: \nDr Bill Venables - Senior Statistician, CSIRO.\n \nBill Venables is a well-known figure in the S-PLUS community, particularly\nfor his contributions to S-news and books on S-PLUS. Since 1990 he has\npresented S-PLUS courses at several levels.  His freely distributed and very\npopular Notes on S were in the early 90s often the first introduction many\nstudents had to the system. These subsequently led to a book, Modern Applied\nStatistics with S-PLUS with Brian Ripley, first released in 1994 is now in\nits fourth edition (July, 2002). A second book by the same authors, S\nProgramming, deals more specifically with advanced programming issues. It was\nreleased in 2000 and is now in its third printing. \n \nREGISTRATION: \nIf you would like to register for this course please visit: \n <http://www.insightful.com/services/register_european.asp>\nhttp://www.insightful.com/services/register_european.asp\n\nKaren Richardson\nSales and Marketing Administrator\nkrichardson at insightful.com\nDirect Line: +44 (0) 1256 339 822\nFax Number:  +44 (0) 1256 339 839\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Insightful are pleased to announce the following Course: \n\n \nStatistical Modelling - By Dr Bill Venables\n \nDates:   17 - 19 May 2004\n \nPlace:   Basingstoke, UK\n \nHours:   09:00 - 17:00\n \nCourse Fees: ",
       "thread_id": "thread-91b2e8e92ed2",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040322/71c03007/attachment.pl"
+      ]
     },
     {
       "id": "msg-1295dbbb3b7d",
@@ -22342,11 +22510,14 @@
       "subject_clean": "Date operations",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4b3421aa/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4b3421aa/attachment.pl",
+      "body_plain": "Hello:\nThanks in advance for your time ?\n\nI am having a data.frame with one of the columns containing the weeks as follows. How can I do the following in the most efficient way ?\n\n1. Find the minimum date ?\n2. Find the maximum date ?\n3. How do we sort based on ascending order the date ?\n\nAn example as follows.\n\nWeek\n1-Jan-01 (<----- MIN DATE)\n7-Jan-01\n14-Jan-01\n21-Feb-01 (<----- MAX DATE)\n\nWhat is a good way to do these most effectively in R ?\n\nThanks\nShyam\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello:\nThanks in advance for your time ?\n\nI am having a data.frame with one of the columns containing the weeks as follows. How can I do the following in the most efficient way ?\n\n1. Find the minimum ",
       "thread_id": "thread-f41cf2f5bc0f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4b3421aa/attachment.pl"
+      ]
     },
     {
       "id": "msg-71e0ba84c64b",
@@ -22358,11 +22529,14 @@
       "subject_clean": "calling bwplot within a for loop",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/e7d4e6d5/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/e7d4e6d5/attachment.pl",
+      "body_plain": "Hi, \n\n \n\nI am working with R 1.81. When I call bwplot() it prints the output to the\nwindows device as it should. For example, \n\n \n\nd<-data.frame(y=c(2,3,4,5,12,14,16,11),x=c(rep(\"group1\",4),rep(\"group2\",4)))\n\nbwplot(y~x,data=d)\n\n \n\nThis code results in a parallel boxplot. That is a single plot with 2\nboxplots next to each other; a boxplot for \"group1\" and a boxplot for\n\"group2\".\n\n \n\nHowever, if I call bwplot within a loop, the window device appears but\nnothing is plotted. \n\n \n\nfor(i in c(1)){\n\n    print(i)\n\n    bwplot(y~x,data=d)\n\n}\n\n \n\nDoes anyone know why this is happening and how to solve it?\n\n \n\nThanks, \nSteve \n\n \n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, \n\n \n\nI am working with R 1.81. When I call bwplot() it prints the output to the\nwindows device as it should. For example, \n\n \n\nd<-data.frame(y=c(2,3,4,5,12,14,16,11),x=c(rep(\"group1\",4),rep(\"group",
       "thread_id": "thread-71e0ba84c64b",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040322/e7d4e6d5/attachment.pl"
+      ]
     },
     {
       "id": "msg-38e6eae9b7c2",
@@ -22792,11 +22966,14 @@
       "subject_clean": "lme question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4ce050b5/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4ce050b5/attachment.pl",
+      "body_plain": "Hi,\n\nI have a dataset like this,\n\n> testdata\nGrouped Data: expr ~ visit | subject\n      expr visit subject\n1 6.502782    V1       A\n2 6.354506    V1       B\n3 6.349184    V1       C\n4 6.386301    V2       A\n5 6.376405    V2       B\n6 6.758640    V2       C\n7 6.414142    V3       A\n8 6.354521    V3       B\n9 6.396636    V3       C\n\nI tried the command\n> testresult=lme(expr~visit,data=testdata,random=~visit|subject)\n\nI got the following error message.\nError in MEestimate(lmeSt, grps) : Singularity in backsolve at level 0, block 1\nIn addition: There were 50 or more warnings (use warnings() to see the\nfirst 50)\n\nCould someone give me some hint on what went wrong?  Thanks.\n\nDonglei Hu",
+      "body_snippet": "Hi,\n\nI have a dataset like this,\n\n> testdata\nGrouped Data: expr ~ visit | subject\n      expr visit subject\n1 6.502782    V1       A\n2 6.354506    V1       B\n3 6.349184    V1       C\n4 6.386301    V2  ",
       "thread_id": "thread-644ab62ebca4",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040322/4ce050b5/attachment.pl"
+      ]
     },
     {
       "id": "msg-640b8922cafc",
@@ -22826,11 +23003,14 @@
       "subject_clean": "beginners question - kmeans",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/0984185a/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040322/0984185a/attachment.pl",
+      "body_plain": "I am a complete beginner at R and am using the \"kmeans\" function for the first time...\nI have a data frame (dat) that is 17 columns *  91 rows (including headers)\n\nI have entered the following:\ncl <- kmeans(dat, 3, 10)\nplot(dat, col = cl$cluster)\npoints(cl$centers, col = 1:2, pch = 8)\n\nthe output is 17*17 graphs ...\nthis is not what I was anticipating - I was hoping to get one graph with 17 points in 3 clusters!\ncan anyone point me in the right direction?\n\nThanks\nLouize Hill\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am a complete beginner at R and am using the \"kmeans\" function for the first time...\nI have a data frame (dat) that is 17 columns *  91 rows (including headers)\n\nI have entered the following:\ncl <- ",
       "thread_id": "thread-8a2aae3b4d5a",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040322/0984185a/attachment.pl"
+      ]
     },
     {
       "id": "msg-a2eecf7b5283",
@@ -23046,11 +23226,14 @@
       "subject_clean": "Does Chi Square test for R differ from S-Plus?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/f9a4c2b7/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/f9a4c2b7/attachment.pl",
+      "body_plain": "I tried to run a GLM model using S-Plus and R. The same model and data were \napplied to the both packages. I got different results of  P(>|Chi|) for Anova, \nbetween S-PLus and R. Other estimates values are the same. \n\nP(>|Chi|) for S-Plus:\n0.99565 0.99682 0.04871 0.84597 1.00000 0.99999 1.00000 1.00000 1.00000 0.95834\n\nP(>|Chi|) for R:\n0.00000 0.00000 0.00000  0.00000 0.00000 0.00000 0.00350 0.26400 0.46800 0.0000\n\nI used S-Plus 6.1 for windows, Profesional Edition release 1, and R 1.8.1.\n\nDoes anyone have any idea how this could happen? \n\nThank you very much for your time.\n\n\nRidwan \n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I tried to run a GLM model using S-Plus and R. The same model and data were \napplied to the both packages. I got different results of  P(>|Chi|) for Anova, \nbetween S-PLus and R. Other estimates value",
       "thread_id": "thread-69ed6ce6b602",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040323/f9a4c2b7/attachment.pl"
+      ]
     },
     {
       "id": "msg-199bde8596ea",
@@ -23094,11 +23277,14 @@
       "subject_clean": "Does Chi Square test for R differ from S-Plus?",
       "in_reply_to": "<Pine.LNX.4.44.0403230907270.9037-100000@gannet.stats>",
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/9256941b/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/9256941b/attachment.pl",
+      "body_plain": "I used generalized linear model with the commands as follows:\n \nFor S-Plus:\n>attach(data)\n>options(contrasts=c(\"contr.treatment\",\"contr.poly\"))\n>model1<-glm(logcatchrate~Year+Month+Vessclass+Livebaitday+....+Vessclass:Livebaitday,family=gaussian)\n>anova(model1,test=\"Chisq\")\n \nFor R :\n>data<-read.table(\"data.dat\", header=T)\n>fix(data)\n>attach(data)\n>model1<-glm(logcatchrate~Year+Month+Vessclass+Livebaitday+...+Vessclass:Livebaitday,family=gaussian)>anova(model1,test=\"Chisq\")\n \n \n \n\nProf Brian Ripley <ripley at stats.ox.ac.uk> wrote:\nDepends on the `GLM' model and what you mean by that (general linear \nmodel, generalized linear model?). And by `Anova' (capitalized), for that \nmatter.\n\nS-PLUS (sic) does some inconsistent things with dispersion parameters in \nglm() fits, and it is likely that you are using the wrong test. But P \nvalues that near one should arouse your suspicions.\n\nPlease read the R posting guide, and then tell us enough of what you did\nso we can help you. \n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I used generalized linear model with the commands as follows:\n \nFor S-Plus:\n>attach(data)\n>options(contrasts=c(\"contr.treatment\",\"contr.poly\"))\n>model1<-glm(logcatchrate~Year+Month+Vessclass+Livebaitd",
       "thread_id": "thread-69ed6ce6b602",
       "thread_depth": 2,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040323/9256941b/attachment.pl"
+      ]
     },
     {
       "id": "msg-72c57f8389a5",
@@ -23174,11 +23360,14 @@
       "subject_clean": "help on data.frames/data.entry",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/02548001/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040323/02548001/attachment.pl",
+      "body_plain": "Dear R-help,\n\n \n\nI have a matrix D of dimensions 200 x 26; rows are my cases and columns are\nmy variables. I would like to create a data.frame \"DF\" with row.names=\nmyrownames (this is a vector of characters of length 200) and column names\n\"mycolnames\" (a vector of characters of length 26). I could find the option\nin data.frame for naming rows, but not for naming columns. So I did:\n\n> data.entry(D, Names= mycolnames)\n\n> DF <- data.frame(D,row.names=myrownames)\n\nbut after the first command (i.e. > data.entry(D, Names= mycolnames)) I've\nreceived the warning:\n\nWarning message: \n\nthe condition has length > 1 and only the first element will be used in: if\n(dim(x) == dim(args[[i]])) rn <- dimnames(args[[i]])[[1]] else rn <- NULL\n\nwhat does this warning mean? Is it affecting the values in my data.frame\ntable? Or something else? Is there a better way of defining columns names in\na data.frame in automated way? \n\n         \n\nThank you very much\n\nFrancesca\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-help,\n\n \n\nI have a matrix D of dimensions 200 x 26; rows are my cases and columns are\nmy variables. I would like to create a data.frame \"DF\" with row.names=\nmyrownames (this is a vector of char",
       "thread_id": "thread-143d980d2547",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040323/02548001/attachment.pl"
+      ]
     },
     {
       "id": "msg-0f7ee86b184d",
@@ -24312,11 +24501,14 @@
       "subject_clean": "Job Vacancy",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/40418a68/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/40418a68/attachment.pl",
+      "body_plain": "www.kssg.com a pricing consulatancy based in Manchester (UK) are seeking an\nexperienced statistical analyst. \nCandidates must be eligible to work in the EU. If you are interested please\nsend an updated CV to jonesw at kssg.com .\n\n\nCompany Overview\n\nKSS is a leading provider of pricing and revenue management systems for the\nRetail and Petroleum sectors. Our business applications help our clients get\nmore out of their existing pricing strategies, as well as improve the\nefficiency and productivity of their pricing processes, enabling them to\nachieve sustainable net profit improvements and increased market share. \n\nKSS' solutions are the result of many years of research into price\nmanagement and optimisation techniques, and can quantify the impact of\npricing and promotional activities on consumer demand, revenues and profit.\nUsing a deep understanding of consumer behaviour, clients can apply their\npricing policy and determine pricing and promotional campaigns that maximize\nprofit for given revenue goals - all within a carefully managed pricing\nimage. \n\nKSS' solutions have proven to deliver immediate and sustainable profit\nimprovements, and are implemented within a number of successful retail\ncompanies throughout the world. \n\nWith over 50% of the company engaged in research and development, we are\ncontinually enhancing our products to meet the requirements of our\ncustomers. Combined with our solid understanding of marketing and\nmerchandizing we deliver business solutions to enable our customers to meet\ntheir strategic goals more profitably.\n\nJob Description\n\nWe require an experienced statistician to join our existing research team of\nstatisticians and mathematical programmers.  \n\nThe work done by the research team is very varied and covers the entire\nproduct life cycle from initial design through to deployment and customer\nsupport. In addition to supporting product development we sometimes\nundertake specific consultancy projects for retail clients. There is\nconsiderable scope for tailoring the job description to suit a candidates\nparticular interests and preferences. It is likely to involve some or all of\nthe following: \n\n\t*\tMathematical modelling for product development team. This\ninvolves enhancing current techniques or researching new ones for our\ncurrent or future business applications.\n\n\t*\tProvide statistical support to operations team during\nproduct trials or deployment.  Typically work includes analysing pricing\ndata sets (price elasticity modelling) for retail and petroleum sectors.\nAnalyse feasibility and risks of applying particular techniques to a given\ndata set.\n\n\t*\tLead, or assist with, statistical consultancy projects on\nbehalf of retail clients. Present results as a report or in person.\n\n\n\nDesirable Skills and Experience\n\n\t*\tGood degree in Statistics or other maths related subject.\n\t*\tPostgraduate degree (MSc or PhD) would be an advantage.\n\t*\tCommercial experience within the pricing industry (although\nnot essential)\n\t*\tPrevious experience within retail pricing would be very\nvaluable\n\t*\tAt least two years experience in applying statistics to\n'real' data. \n\t*\tStrong analytical skills \n\t*\tTeam player\n\t*\tExperience in analysing and making inferences from complex\ndata sets.\n\t*\tExcellent communication and interpersonal skills.\n\t*\tUnderstanding of the issues involved in software\ndevelopment.\n\t*\tGood presentation skills\n\t*\tExperience with SQL an advantage\n\n\nStatistical Methods\n\nThe ideal candidate would have experience in the majority of the following\nstatistical methods: \n\n\t*\tStatistical tools such as R, S-Plus or Matlab.\n\t*\tForecasting techniques\n\t*\tMixed effects models\n\t*\tClustering techniques\n\t*\tEconometric models (price elasticity modelling)\n\t*\tTime series analysis\n\t*\tRegression analysis\n\t*\tMultivariate methods\n\t*\tBayesian statistics/inference\n\n\n\n\nDr Wayne R. Jones\nSenior Statistician / Research Analyst\nKSS Limited\nSt James's Buildings\n79 Oxford Street\nManchester M1 6SS\nTel: +44(0)161 609 4084\nMob: +44(0)7810 523 713\n\n\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "www.kssg.com a pricing consulatancy based in Manchester (UK) are seeking an\nexperienced statistical analyst. \nCandidates must be eligible to work in the EU. If you are interested please\nsend an update",
       "thread_id": "thread-8b44d26fb16f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040324/40418a68/attachment.pl"
+      ]
     },
     {
       "id": "msg-219904ed991c",
@@ -24328,11 +24520,14 @@
       "subject_clean": "GLMM",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/d3fe335f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/d3fe335f/attachment.pl",
+      "body_plain": "Dear all,\nI'm working with count data following over-dispersed poisson distribution\nand have to work with mixed-models on them (like proc GENMOD on SAS sys.).\nI'm still not to sure about what function to use. It seems to me that a\nglmmPQL will do the job I want, but I'll be glad if people who worked on\nthis type of data can share what they learned. Thanks for your time.\nsimon\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\nI'm working with count data following over-dispersed poisson distribution\nand have to work with mixed-models on them (like proc GENMOD on SAS sys.).\nI'm still not to sure about what function",
       "thread_id": "thread-219904ed991c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040324/d3fe335f/attachment.pl"
+      ]
     },
     {
       "id": "msg-e384ff4b8300",
@@ -24724,11 +24919,14 @@
       "subject_clean": "LM omitted variables test",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/564c1785/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/564c1785/attachment.pl",
+      "body_plain": "Dear all,\n\nDoes anybody know whether the (general) Lagrange Multiplier testing\nframework for restrictions on linear models has been implemented in some\npackage?\n\nMy goal is to test for omitted variables, i.e. restrictions of the kind\nbeta_i=0, in the specification of an econometric model.\n\nThere are some particular implementations in this fashion in the lmtest\npackage (e,g, the bgtest() function, where the lagged residuals are\ntaken as the omitted variable); before trying to adapt that code, I\nwould like to check out if there are ready-to-use solutions available. \n\nThanks in advance\nGiovanni\n\nGiovanni Millo\nResearch Dept.\nAssicurazioni Generali SpA\n\nAi sensi del D.Lgs.196/2003 si precisa che le informazioni contenute in questo messaggio sono riservate ed a uso esclusivo del destinatario. Qualora il messaggio in parola Le fosse pervenuto per errore, La invitiamo ad eliminarlo senza copiarlo e a non inoltrarlo a terzi, dandocene gentilmente comunicazione. Grazie.<BR><BR>Pursuant to Legislative Decree No. 196/2003, you are hereby informed that this message contains confidential information intended only for the use of the addressee. If you are not the addressee, and have received this message by mistake, please delete it and immediately notify us. You may not copy or disseminate this message to anyone. Thank you.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nDoes anybody know whether the (general) Lagrange Multiplier testing\nframework for restrictions on linear models has been implemented in some\npackage?\n\nMy goal is to test for omitted variabl",
       "thread_id": "thread-a793662f02fa",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040324/564c1785/attachment.pl"
+      ]
     },
     {
       "id": "msg-85b8d6a2e433",
@@ -25007,11 +25205,14 @@
       "subject_clean": "Ordered logit/probit",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/61d2f784/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/61d2f784/attachment.pl",
+      "body_plain": "Hello everyone\nI am trying to fit an ordered probit/logit model for bank rating\nprediction.\nBesides polr() in MASS package which is not written especially for this as\nfar as I know, do you know how else I can do this?\nI already found the modified polr () version on the\n\n\nValentin STANESCU\n\nEnrst and Young\nTel. 402 4000\n----------------------------------------------------------\nThe information contained in this communication is intended solely for the use of the individual or entity to whom it is addressed and others authorized to receive it.   It may contain confidential or legally privileged information.   If you are not the intended recipient you are hereby notified that any disclosure, copying, distribution or taking any action in reliance on the contents of this information is strictly prohibited and may be unlawful. If you have received this communication in error, please notify us immediately by responding to this email and then delete it from your system. Ernst & Young is neither liable for the proper and complete transmission of the information contained in this communication nor for any delay in its receipt.\n\nNote: If you have received a delivery failure report, it may be due to the change in the Ernst & Young e-mail domain from \"eyi.com\" to \"ey.com\".  Could you please make the necessary amendment, if required, and resend the message.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello everyone\nI am trying to fit an ordered probit/logit model for bank rating\nprediction.\nBesides polr() in MASS package which is not written especially for this as\nfar as I know, do you know how el",
       "thread_id": "thread-25e18faf2288",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040324/61d2f784/attachment.pl"
+      ]
     },
     {
       "id": "msg-8058a708eb79",
@@ -25023,11 +25224,14 @@
       "subject_clean": "how to customize .First.lib",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/0e07e306/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040324/0e07e306/attachment.pl",
+      "body_plain": "Hi,\n \nI am looking for an elegant solution to the following problem. When I\nload a package, let's say ROracle, I want some custom actions to be done\non top of what package's .First.lib does. In this specific example I\nwant to open a connection to the only database I have around.\nAnd I don't see how this could be done: there seems to be no hooks in a\ncouple of .First.lib functions I checked out, and there is no\non.library.load() function to register a call-back too.\n \nIt's just a nice to have, but I am curious to hear what people might\nsuggest.\n \nThanks,\nVadim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n \nI am looking for an elegant solution to the following problem. When I\nload a package, let's say ROracle, I want some custom actions to be done\non top of what package's .First.lib does. In this s",
       "thread_id": "thread-8058a708eb79",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040324/0e07e306/attachment.pl"
+      ]
     },
     {
       "id": "msg-e7cb65b32727",
@@ -25902,11 +26106,14 @@
       "subject_clean": "(no subject)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040325/8edb1f6f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040325/8edb1f6f/attachment.pl",
+      "body_plain": "Hi,  \nDoes anybody has a simple example how to use a  R function In Cpp\nprogramme? \n If it's possible, a *.cpp-file and what I need (wrapper or what ever).\n\n \n I try several ways, was reading the \"writing R extension\" and the \n windows-FAQ, but failed. \n \n I try to display R results in CGRIDControl format.  \n\n\n\n If somebody has already done it... \n \n I use VC++2003  and R 1.8.0 \n \n\n Thanks a lot \n \n Baptiste\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,  \nDoes anybody has a simple example how to use a  R function In Cpp\nprogramme? \n If it's possible, a *.cpp-file and what I need (wrapper or what ever).\n\n \n I try several ways, was reading the \"wri",
       "thread_id": "thread-dd717217d859",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040325/8edb1f6f/attachment.pl"
+      ]
     },
     {
       "id": "msg-6bd855f97547",
@@ -26070,11 +26277,14 @@
       "subject_clean": "g-inverse question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040325/5514a317/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040325/5514a317/attachment.pl",
+      "body_plain": "I am using the ginv function from MASS and have run across this problem\nthat I do not understand.  If I define the matrix A as below, its\ng-inverse does not satisfy the Moore-Penrose condition \n \nA %*% ginv(A) %*% A = A.\n \nThe matrix A is X'WX in a quadratic regression using some very large\ndollar values. \nThe much simpler matrix B does satisfy the MP condition. Am I doing\nsomething wrong? Is this due to the large values in A?\n \nI am using v.1.8.1 on Windows XP.\n \n> A <- matrix(c(15, 20157302,20157302,68854740000000), ncol=2, byrow\n=T)\n> A\n         [,1]         [,2]\n[1,]       15 2.015730e+07\n[2,] 20157302 6.885474e+13\n> ginv(A)\n             [,1]         [,2]\n[1,] 1.244696e-27 4.251721e-21\n[2,] 4.251721e-21 1.452333e-14\n> A %*% ginv(A) %*% A\n             [,1]         [,2]\n[1,] 5.901073e+00 2.015730e+07\n[2,] 2.015730e+07 6.885474e+13\n> B\n     [,1] [,2]\n[1,]    1    2\n[2,]    2    1\n> B %*% ginv(B) %*% B\n     [,1] [,2]\n[1,]    1    2\n[2,]    2    1\n\n \nThanks in advance,\n \n \nRichard Valliant, Ph.D.\nUniversity of Maryland\nJoint Program for Survey Methodology\n1218 Lefrak Hall\nCollege Park MD 20742\n(301)-405-0932\nFAX: (301) 314-7912\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am using the ginv function from MASS and have run across this problem\nthat I do not understand.  If I define the matrix A as below, its\ng-inverse does not satisfy the Moore-Penrose condition \n \nA %*",
       "thread_id": "thread-129f5780305e",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040325/5514a317/attachment.pl"
+      ]
     },
     {
       "id": "msg-269f7e0b7ca5",
@@ -26434,11 +26644,14 @@
       "subject_clean": "model fitting",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/60630bc0/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/60630bc0/attachment.pl",
+      "body_plain": "I am trying to fit a normal linear model with response y and predictor x and two factors sex and group.\nI would like each combination of sex and group to have individual slopes and then subsequently have parallel slopes.\nI tried the model y ~ x*sex*group and it seemed to work for the first case..  Is this how it is supposed to be done?  For the second the model y ~ sex + group seems to work.\n \nIn a similar vein I wish to fit a logistic model to a binary response \"last\" is terms of two predictors, education and age, and factors \"region\", \"ccm\", \"ever\", and \"diss\".  First allowing education and age to have different slopes at all factor levels.  Secondly, to have parallel slopes at all factor levels.  We wish to compare the models using AIC, BIC etc.  How do I specify these models in R?\n \nHelp would be most appreciated.  I am a relatively new user.\n \nJohn\n \nProf John Fresen (PhD)\nDepartment of Mathematics and Statistics\nMedical University of Southern Africa\nPO Box 107\nMEDUNSA\n0204\nSouth Africa\ne-mail: jfresen at medunsa.ac.za\ntel: +27 12 521 4420\n \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to fit a normal linear model with response y and predictor x and two factors sex and group.\nI would like each combination of sex and group to have individual slopes and then subsequently h",
       "thread_id": "thread-0e12d2b04d42",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/60630bc0/attachment.pl"
+      ]
     },
     {
       "id": "msg-cd730256171d",
@@ -26601,11 +26814,14 @@
       "subject_clean": "Omegahat down?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/faf92bc6/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/faf92bc6/attachment.pl",
+      "body_plain": "I was wondering the same thing.\nThe traceroute seems to end at their border router, which leads me to\nbelieve that they has a hardware failure.\nHoping that they get it up in a few days.\n\nI've checked around and there are a few mirrors but they all just hang, so I\nguess we have to wait...\n\nMark Fowle\n-------------------------------------------------------\nNavicom Inc.\nOne Steelcase Road W\nMarkham, On L3T 0T3\n905-415-3207\n-------------------------------------------------------\nPeople often find it easier to be a result of the past than a cause of the\nfuture.\n\n\n-----Original Message-----\nFrom: M.Kondrin [mailto:mkondrin at hppi.troitsk.ru]\nSent: Friday, March 26, 2004 8:01 PM\nTo: R-Help\nSubject: [R] Omegahat down?\n\n\nHello!\nFor 2 days can not connect to www.omegahat.org :(\nSomething happens?\n\ntraceroute to www.omegahat.org (128.105.174.32), 30 hops max, 38 byte \npackets\n ..........\n13  144.92.128.196 (144.92.128.196)  161.792 ms  162.260 ms  160.893 ms\n14  g1-2.cisco1.cs.wisc.edu (128.105.1.14)  160.996 ms  163.381 ms  \n161.632 ms\n15  * * *\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I was wondering the same thing.\nThe traceroute seems to end at their border router, which leads me to\nbelieve that they has a hardware failure.\nHoping that they get it up in a few days.\n\nI've checked ",
       "thread_id": "thread-153ef7eb7b52",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/faf92bc6/attachment.pl"
+      ]
     },
     {
       "id": "msg-c988b0c6e05f",
@@ -26825,11 +27041,14 @@
       "subject_clean": "model fitting",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/f23ec671/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/f23ec671/attachment.pl",
+      "body_plain": "What you need is a mixed effects model (lme) which is held in library(nlme).\n\n\n\nI suggest you do some basic research on the web or check out Mixed-Effects\nModels in S and S-Plus. \n\nRegards\n\nWayne\n\n\n\n\n-----Original Message-----\nFrom: J Fresen [mailto:jfresen at medunsa.ac.za]\nSent: 26 March 2004 06:47\nTo: r-help at stat.math.ethz.ch\nSubject: [R] model fitting\n\n\nI am trying to fit a normal linear model with response y and predictor x and\ntwo factors sex and group.\nI would like each combination of sex and group to have individual slopes and\nthen subsequently have parallel slopes.\nI tried the model y ~ x*sex*group and it seemed to work for the first case..\nIs this how it is supposed to be done?  For the second the model y ~ sex +\ngroup seems to work.\n \nIn a similar vein I wish to fit a logistic model to a binary response \"last\"\nis terms of two predictors, education and age, and factors \"region\", \"ccm\",\n\"ever\", and \"diss\".  First allowing education and age to have different\nslopes at all factor levels.  Secondly, to have parallel slopes at all\nfactor levels.  We wish to compare the models using AIC, BIC etc.  How do I\nspecify these models in R?\n \nHelp would be most appreciated.  I am a relatively new user.\n \nJohn\n \nProf John Fresen (PhD)\nDepartment of Mathematics and Statistics\nMedical University of Southern Africa\nPO Box 107\nMEDUNSA\n0204\nSouth Africa\ne-mail: jfresen at medunsa.ac.za\ntel: +27 12 521 4420\n \n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "What you need is a mixed effects model (lme) which is held in library(nlme).\n\n\n\nI suggest you do some basic research on the web or check out Mixed-Effects\nModels in S and S-Plus. \n\nRegards\n\nWayne\n\n\n\n\n",
       "thread_id": "thread-559dce8d3dfd",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/f23ec671/attachment.pl"
+      ]
     },
     {
       "id": "msg-b2a0d111bda9",
@@ -26875,11 +27094,14 @@
       "subject_clean": "How to do the significant test on Local Moran's I",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040327/5e03a46b/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040327/5e03a46b/attachment.pl",
+      "body_plain": "Dear Danlin Yu:\n \nI read your message at https://stat.ethz.ch/pipermail/r-help/2003-April/030754.html. Actually, I have a question about significant of Local Moran I too. based on it's function:\n\n                              Ii = zi [¦²j wijzj],\n\nI wonder how can I calculate it's z-value.\n\nAny suggest will be greatly appreciated.\n\n\n\nLouis Zhang\n \nDept of Geography and Planning\nThe Univ. of Toledo\n\n\n\n---------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Danlin Yu:\n \nI read your message at https://stat.ethz.ch/pipermail/r-help/2003-April/030754.html. Actually, I have a question about significant of Local Moran I too. based on it's function:\n\n    ",
       "thread_id": "thread-ad1b5af20204",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040327/5e03a46b/attachment.pl"
+      ]
     },
     {
       "id": "msg-34fd294ab428",
@@ -26925,11 +27147,14 @@
       "subject_clean": "regression problem",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/3f48ff0b/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/3f48ff0b/attachment.pl",
+      "body_plain": "Consider a regression equation say:-\n\nY=a+b1*X1+b2*X2+b3*X3 \n\nif all the regression coefficients have to sum to 0 \nthen \n\na+b1+b2+b3=0\n\ni.e. \n\nb3=-a-b1-b2\n\nSubstituting this back into the regression equation we get \n\n\nY=a(1-X3)+b1(X1-X3)+b2(X2-X3)\n\nAll you need to do then is to create the new input variables say \n\nZ1=1-X3, Z2=X1-X3, Z3=X2-X3\n\nso that \n\nY=a*Z1+b1*Z2+b*Z3\n\nYou can parameterise a,b1 and b2 directly by fitting a linear model with no\nintercept term \n\nyou can then calculate b3 from b3=-a-b1-b2 \n\nThis example will generalize to an arbitrary number of parameters..\n\n\nRegards\n\nWayne\n\n-----Original Message-----\nFrom: Patrick Burns [mailto:pburns at pburns.seanet.com]\nSent: 26 March 2004 16:23\nTo: pnick at virgilio.it; 'r-help at stat.math.ethz.ch'\nSubject: Re: [R] regression problem\n\n\nAssuming that you want to estimate via least squares, you can\ndo something like this:\n\nreg.coefsum <- function(x, y, start=coef(lm.fit(x, y)), coefsum=0, \npenalty=1000) {\n        subfun.objective <- function(coef){\n                sum((y - x %*% coef)^2) + abs(sum(coef)) * penalty\n        }\n        opt <- optim(start, subfun.objective, method='BFGS')\n        ans <- list(coefficients=opt$par)\n        ans\n}\n\nYou can enhance the return value and make other improvements,\nlike check that the coefficient sum is accurate enough for you.\n\nPatrick Burns\n\nBurns Statistics\npatrick at burns-stat.com\n+44 (0)20 8525 0696\nhttp://www.burns-stat.com\n(home of S Poetry and \"A Guide for the Unwilling S User\")\n\npnick at virgilio.it wrote:\n\n>i need to know how to estimate a linear regression whose coefficients sum\n>to zero\n>\n>______________________________________________\n>R-help at stat.math.ethz.ch mailing list\n>https://www.stat.math.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n>\n>\n>  \n>\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886 \nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "Consider a regression equation say:-\n\nY=a+b1*X1+b2*X2+b3*X3 \n\nif all the regression coefficients have to sum to 0 \nthen \n\na+b1+b2+b3=0\n\ni.e. \n\nb3=-a-b1-b2\n\nSubstituting this back into the regression e",
       "thread_id": "thread-4ad01fb13b70",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/3f48ff0b/attachment.pl"
+      ]
     },
     {
       "id": "msg-3de6578ef6e6",
@@ -27112,11 +27337,14 @@
       "subject_clean": "lme question",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/d1db5e08/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/d1db5e08/attachment.pl",
+      "body_plain": "Dear All,\nI need help both with analytical and computational aspects.\n\nMy problem: I have counted and measured increments on otoliths (inner-ear bony \nstructures) of fish larvae collected at different times of day. This was \nrepeated three times for each fish larvae (in random order and no particular \ndates). Then, I calculated the ratio of marginal-to-previous increment for each \nfish and reading. I wish to study if differences exist in ratios between hours \nof day (accounting for differences in readings within each fish) - in \ndata.frame format... \n\ncode   hour   read.no   ratio\n33001  5      1         0.56\n33003  7      1         0.93\n37123  19     1         0.23\n...\n33001  5      2         0.62\n33003  7      2         0.87\n37123  19     2         0.22\n...\n37123  19     3         0.26\n...\n\nMy solution: Use function lme, with hr<-factor(hour)...\n\n> hr.lme<-lme(sqrt(ratio)~hr,random=~1|code/read.no)\n> anova(hr.lme) ; summary (hr.lme)\n\nDoes this commands correspond to the initial problem statement? \n\nThanks in advance.\nRegards, Eduardo Esteves",
+      "body_snippet": "Dear All,\nI need help both with analytical and computational aspects.\n\nMy problem: I have counted and measured increments on otoliths (inner-ear bony \nstructures) of fish larvae collected at different",
       "thread_id": "thread-f46daaf3fbad",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/d1db5e08/attachment.pl"
+      ]
     },
     {
       "id": "msg-329f479e9bdd",
@@ -27201,11 +27429,14 @@
       "subject_clean": "Help import data",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/09a62656/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040326/09a62656/attachment.pl",
+      "body_plain": "Friends:\n\n1. Is it possible to import data from excel and/or access to R? How?\n\n2. Is it possible to import data from a txt file? How? \n\nThanks in advance,\n\nRicardo.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Friends:\n\n1. Is it possible to import data from excel and/or access to R? How?\n\n2. Is it possible to import data from a txt file? How? \n\nThanks in advance,\n\nRicardo.\n\t[[alternative HTML version delete",
       "thread_id": "thread-c95f9dbe5c4d",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040326/09a62656/attachment.pl"
+      ]
     },
     {
       "id": "msg-007a063f8334",
@@ -28504,11 +28735,14 @@
       "subject_clean": "Dopt program!",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040327/4d05e650/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040327/4d05e650/attachment.pl",
+      "body_plain": "Hi all,\nDoes anybody have a workable dopt program in R to generate D-optimal designs. I downloaded dopt.zip from stat homepage of the university of oxford, whenever I load it into R and try to run, the following error comes: Error: couldn't find function \"Dopt\".\nAny information will be highly appreciated!\nThank you!\nHarvey.\n\n\n---------------------------------\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\nDoes anybody have a workable dopt program in R to generate D-optimal designs. I downloaded dopt.zip from stat homepage of the university of oxford, whenever I load it into R and try to run, th",
       "thread_id": "thread-0d4fb26cdbab",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040327/4d05e650/attachment.pl"
+      ]
     },
     {
       "id": "msg-39c85d15dcba",
@@ -28538,11 +28772,14 @@
       "subject_clean": "\"R\" and \"S-plus\"",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/cf7de531/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/cf7de531/attachment.pl",
+      "body_plain": "Hi,\n\nI apologize in advance if this is the wrong area to post this message. I would like to know if there is an \"R\" equivalent for the \"S+finMetrics\" package? I'd like to be able to use \"R\" to go through the examples provided in the book \"Modeling Financial Time-Series with S-Plus\" (E. Zivot and J. Wang). I was told that \"R\" and \"S-Plus\" were very similar, and I am relatively new to both languages. I would appreciate any help in locating such packages, or alternate suggestions.\n\nthanks!\nprad\n \nPradyumna S. Upadrashta, PhD candidate\nScientific Computation, University of Minnesota\nhttp://www.tc.umn.edu/~upad0004\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI apologize in advance if this is the wrong area to post this message. I would like to know if there is an \"R\" equivalent for the \"S+finMetrics\" package? I'd like to be able to use \"R\" to go thro",
       "thread_id": "thread-0fa3804711c5",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040328/cf7de531/attachment.pl"
+      ]
     },
     {
       "id": "msg-0f5a07f14fe8",
@@ -28650,11 +28887,14 @@
       "subject_clean": "040328 - Here is it",
       "in_reply_to": "<20040327212849.B49B72400124@mwinf0603.wanadoo.fr>",
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/39dbfea2/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/39dbfea2/attachment.pl",
+      "body_plain": "- Ceci est une réponse automatique -\n\n\nBonjour,\n\nDevant le nombre grandissant de courriers publicitaires non sollicités et\nles attaques virales de plus en plus fréquentes j'ai été contraint\nd'appliquer un filtre sévère à l'entrée de ma boîte à lettre électronique.\nLe courrier que vous venez de m'envoyer a été détruit automatiquement\n(parceque l'adresse de M.el. que vous avez utilisé pour m'écrire n'est pas\nenregistrée dans mon carnet d'adresse).\n\nSi ce courrier m'était personnellement - ou professionnellement - destiné je\nvous prie de bien vouloir m'excuser et je vous demande de bien vouloir me le\nrenvoyer avec la mention exacte \"courrier pour Denis\" ajoutée à l'objet de\nvotre message.\n\nEn sollicitant votre compréhension je vous demande encore une fois de\nm'excuser pour ce contre-temps et vous présente mes cordiales salutations.\n\n\nDenis P.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "- Ceci est une réponse automatique -\n\n\nBonjour,\n\nDevant le nombre grandissant de courriers publicitaires non sollicités et\nles attaques virales de plus en plus fréquentes j'ai été contraint\nd'applique",
       "thread_id": "thread-5d9f96207b6c",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040328/39dbfea2/attachment.pl"
+      ]
     },
     {
       "id": "msg-2e66cd401b9c",
@@ -28880,11 +29120,14 @@
       "subject_clean": "GLM for logistic regression and WEIGHTS",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/d05ce88a/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040328/d05ce88a/attachment.pl",
+      "body_plain": "Hi all,\n\nI want to use weights for a logistic regression. In SAS, all I have to do is to specify my weight vector (they are fractions) and use proc logistic on my binary output.\n\nWhen I tried to do the same in R, I got an error message because my weights were not integer. I understand that the weight option in R is to be used when the dependent variable is a proportion so that the weight is the total from which this proportion is derived. \n\nSo what should I do if I want to use logistic regression but want to use weight to give more importance to certain observations (e.g. weight=0.87) and less to others (e.g. weight=.45) ? Should I reparametrize everything in terms of counts or is there an easier way out?\n\nThanks in advance\n\nM-P\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI want to use weights for a logistic regression. In SAS, all I have to do is to specify my weight vector (they are fractions) and use proc logistic on my binary output.\n\nWhen I tried to do th",
       "thread_id": "thread-ff2e91547de0",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040328/d05ce88a/attachment.pl"
+      ]
     },
     {
       "id": "msg-68639e898ed0",
@@ -29068,11 +29311,14 @@
       "subject_clean": "logo",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/40ef1e26/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/40ef1e26/attachment.pl",
+      "body_plain": "Dear all,\n\nI used R in my work and would like to put the logo of these program on the background of my presentation. But the logo that cames with the program is in low resolution. Does anyone have the R logo in high resolution?\n\nThanks\n\nCecília Shiraiwa\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI used R in my work and would like to put the logo of these program on the background of my presentation. But the logo that cames with the program is in low resolution. Does anyone have the",
       "thread_id": "thread-98f52ceec853",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/40ef1e26/attachment.pl"
+      ]
     },
     {
       "id": "msg-247b6f3a7f9d",
@@ -29202,11 +29448,14 @@
       "subject_clean": "logo",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/a8b95c85/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/a8b95c85/attachment.pl",
+      "body_plain": "Dear Cecilia,\n\nBe careful not to cause a distraction with the R logo in the background of\nyour presentation. You could put it in one of the corners if you feel that\nit should be prominently displayed.\n\nIncidentally you may be interested in some guidelines for presentations that\nI have made available at:\n\n     http://www.sbtc.ltd.uk/freenotes.html\n\nThese were written with statisticians in mind but can be generalised to\nany presentation.\n\nI hope that they are useful.\n\nBest regards,\nSaghir \n\n-----Original Message-----\nFrom: Cecília Shiraiwa [mailto:ceciliashiraiwa at ig.com.br] \nSent: Monday, March 29, 2004 7:04\nTo: r-help at stat.math.ethz.ch\nSubject: [R] logo\n\n\nDear all,\n\nI used R in my work and would like to put the logo of these program on the\nbackground of my presentation. But the logo that cames with the program is\nin low resolution. Does anyone have the R logo in high resolution?\n\nThanks\n\nCecília Shiraiwa\n\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\n--------------------------------------------------------- \nLegal Notice: This electronic mail and its attachments are i...{{dropped}}",
+      "body_snippet": "Dear Cecilia,\n\nBe careful not to cause a distraction with the R logo in the background of\nyour presentation. You could put it in one of the corners if you feel that\nit should be prominently displayed.",
       "thread_id": "thread-200efdc3c899",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/a8b95c85/attachment.pl"
+      ]
     },
     {
       "id": "msg-0cd5ca010be9",
@@ -29234,11 +29483,14 @@
       "subject_clean": "multicolumn sort on dataframe?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/74424076/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/74424076/attachment.pl",
+      "body_plain": "Dear Jeff,\n\n \n\nI believe this works:\n\n \n\ndata.frame <- data.frame[order(data.frame$var.1, data.frame$var.2),]\n\n \n\nHTH,\n\nAdrian\n\n \n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nAdrian Dusa\nRomanian Social Data Archive\n1, Schitu Magureanu Bd.\n050025 Bucharest sector 5\nRomania\nTel./Fax: +40 (21) 312.66.18\\ \n\n                +40 (21) 312.02.10/ int.101\n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Jeff,\n\n \n\nI believe this works:\n\n \n\ndata.frame <- data.frame[order(data.frame$var.1, data.frame$var.2),]\n\n \n\nHTH,\n\nAdrian\n\n \n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nAdrian Dusa\nRomanian Social Data Arc",
       "thread_id": "thread-47e4b7518ee6",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/74424076/attachment.pl"
+      ]
     },
     {
       "id": "msg-78c56cdc6526",
@@ -29300,11 +29552,14 @@
       "subject_clean": "Problems with \"optimize\"",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/c6dcd60f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/c6dcd60f/attachment.pl",
+      "body_plain": "If indeed your error space is pitted with local minima then I suggest you\nmight try a method called \nbootstrap restarting to avoid these spurious local minimas. \n\nThe paper was authored by Simon Wood and can be found here\n\nhttp://www.stats.gla.ac.uk/~simon/simon/papers/bsfit.pdf\n\n\n\n\n\n-----Original Message-----\nFrom: Chiara Seghieri [mailto:seghieri at ds.unifi.it]\nSent: 29 March 2004 10:27\nTo: r-help at stat.math.ethz.ch\nSubject: [R] Problems with \"optimize\"\n\n\nDear All,\n\nI'm trying to maximize a likelihood with respect one parameter using \n\"optimize\" on simulated data (without error component).\nI've iterated the maximization procedure 1000 times and I should always \nobtain the same estimate of the parameter (equal to the simulated one) but, \ninstead, i obtain different results (the likelihood function shouldn't be \nflat). Does anybody has experience with the optimize procedure?\n\nThanks in advance,\n\nChiara\n\n\n\nChiara Seghieri\nDipartimento di Scienze Statistiche \"G.Parenti\"\nV.le Morgagni, 59\n50134 Firenze, Italy\ntel.: +39 055 4237230\nfax: +39 055 4223560\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "If indeed your error space is pitted with local minima then I suggest you\nmight try a method called \nbootstrap restarting to avoid these spurious local minimas. \n\nThe paper was authored by Simon Wood ",
       "thread_id": "thread-4d8fa2f9aeed",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/c6dcd60f/attachment.pl"
+      ]
     },
     {
       "id": "msg-d82b2f0880b6",
@@ -29334,11 +29589,14 @@
       "subject_clean": "stl and NA",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/5aeeebf9/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/5aeeebf9/attachment.pl",
+      "body_plain": "Hi there, \n\nDoes anyone know whether missing value (NA) handling has been implemented in\nthe time series decomposition method stl. No matter what I do I cannot get\nstl to accpet NAs. \n\nI have looked in the archives and seen a similar posting\nhttp://maths.newcastle.edu.au/~rking/R/help/03b/7092.html \nbut have not seen any posted answers. \n\nRegards\n\nWayne\n\n\n\nDr Wayne R. Jones\nSenior Statistician / Research Analyst\nKSS Limited\nSt James's Buildings\n79 Oxford Street\nManchester M1 6SS\nTel: +44(0)161 609 4084\nMob: +44(0)7810 523 713\n\n\n\n\nKSS Ltd\nSeventh Floor  St James's Buildings  79 Oxford Street  Manchester  M1 6SS  England\nCompany Registration Number 2800886\nTel: +44 (0) 161 228 0040\tFax: +44 (0) 161 236 6305\nmailto:kssg at kssg.com\t\thttp://www.kssg.com\n\n\nThe information in this Internet email is confidential and m...{{dropped}}",
+      "body_snippet": "Hi there, \n\nDoes anyone know whether missing value (NA) handling has been implemented in\nthe time series decomposition method stl. No matter what I do I cannot get\nstl to accpet NAs. \n\nI have looked i",
       "thread_id": "thread-a452b85fbe90",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/5aeeebf9/attachment.pl"
+      ]
     },
     {
       "id": "msg-daf99f9f90a3",
@@ -29567,11 +29825,14 @@
       "subject_clean": "UNION",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/432da7cf/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/432da7cf/attachment.pl",
+      "body_plain": "Hi,\n\nI have a problem, can you help?\n\nWhen i type:\n > library(RODBC)\n > a<-odbcConnect(\"oracle\")\n > sqlQuery(a,\"(select VALFACT>500 from EPISGDHS) UNION (select \nVALFACT<1000 from EPISGDHS)\")\n\nComes the error:\n[1] \"S1000 923 [unixODBC][Easysoft][Oracle]ORA-00923: FROM keyword not \nfound where expected at offset 15\"\n[2] \"[RODBC] ERROR: Could not SQLPrepare\"\n\nMargarida Igreja.\n\nusing WinNT\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have a problem, can you help?\n\nWhen i type:\n > library(RODBC)\n > a<-odbcConnect(\"oracle\")\n > sqlQuery(a,\"(select VALFACT>500 from EPISGDHS) UNION (select \nVALFACT<1000 from EPISGDHS)\")\n\nComes t",
       "thread_id": "thread-c207fea7b812",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/432da7cf/attachment.pl"
+      ]
     },
     {
       "id": "msg-b611db1f00ae",
@@ -29615,11 +29876,14 @@
       "subject_clean": "BETWEEN",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/b98a0ebd/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/b98a0ebd/attachment.pl",
+      "body_plain": "Hi,\n\nI have another problem, can you help?\n\nWhen i type:\n > library(RODBC)\n > a<-odbcConnect(\"oracle\")\n > sqlQuery(a,\"select DISTINCT(DOENT_ID) from EPISGDHS where (VALFACT \nBETWEEN 100 AND 50)\")\n\n\nComes the error:\n[1] \"S1000 904 [unixODBC][Easysoft][Oracle]ORA-00904: \\\"DOENT_ID\\\": invalid \nidentifier at offset 16\"\n[2] \"[RODBC] ERROR: Could not SQLPrepare\"\n\nMargarida Igreja.\n\nusing WinNT\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have another problem, can you help?\n\nWhen i type:\n > library(RODBC)\n > a<-odbcConnect(\"oracle\")\n > sqlQuery(a,\"select DISTINCT(DOENT_ID) from EPISGDHS where (VALFACT \nBETWEEN 100 AND 50)\")\n\n\nCo",
       "thread_id": "thread-ef6d23882039",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/b98a0ebd/attachment.pl"
+      ]
     },
     {
       "id": "msg-59b81fd776db",
@@ -30258,11 +30522,14 @@
       "subject_clean": "how transform excell file to text file in R",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/91fd47d5/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040329/91fd47d5/attachment.pl",
+      "body_plain": "Maybe but,\n>From excel \nsave as \nthen set type to one that you want.\n\nPerl has some tools for this, and various Windows scripting languages can do\nthis.\n\n\n-----Original Message-----\nFrom: solares at unsl.edu.ar [mailto:solares at unsl.edu.ar]\nSent: Monday, March 29, 2004 3:22 PM\nTo: R-help at stat.math.ethz.ch\nSubject: [R] how transform excell file to text file in R\n\n\nHello, it want to know if there is a library that transform a file in\nexcell (*. xls) to text file(*.txt, *,prn, *.csv).  Thanks\n\n______________________________________________\nR-help at stat.math.ethz.ch mailing list\nhttps://www.stat.math.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide!\nhttp://www.R-project.org/posting-guide.html\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Maybe but,\n>From excel \nsave as \nthen set type to one that you want.\n\nPerl has some tools for this, and various Windows scripting languages can do\nthis.\n\n\n-----Original Message-----\nFrom: solares at u",
       "thread_id": "thread-8c4799376cf2",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040329/91fd47d5/attachment.pl"
+      ]
     },
     {
       "id": "msg-eda6169d4a0b",
@@ -30748,11 +31015,14 @@
       "subject_clean": "Use R In a Cpp Project",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/3c6b8a2a/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/3c6b8a2a/attachment.pl",
+      "body_plain": "Hi,\n\n \n\n  I'am trying to use R in my Cpp project but I fail. \n\n \n\n First I try to include R.h for loading statically R.dll but there is\nconflict with windows definition of Error.\n\n \n\n Second, I try to use dynamically that Dll but, I can't use allocVector\n(toto here). The error message said that I try to read a no allocate\nzone.\n\n \n\nThis is my code.\n\n \n\ntypedef SEXP (*MYPROC)(SEXPTYPE,int);\n\nMYPROC toto;\n\n \n\nint _tmain(int argc, _TCHAR* argv[])\n\n{  \n\n      HINSTANCE hLib=LoadLibrary(\"R.DLL\");\n\n      if(hLib==NULL) {\n\n           cout << \"Unable to load library!\" << endl;\n\n           getch();\n\n           return 0;\n\n      }\n\n      char mod[MAXMODULE];\n\n      GetModuleFileName((HMODULE)hLib, (LPTSTR)mod, MAXMODULE);\n\n      cout << \"Library loaded: \" << mod << endl;\n\n      getch();\n\n      toto=(MYPROC)GetProcAddress((HMODULE)hLib, \"Rf_allocVector\");\n\n      if((toto==NULL)) {\n\n           cout << \"Unable to load function(s).\" << endl;\n\n           FreeLibrary((HMODULE)hLib);\n\n           return 1;\n\n      }\n\n       SEXP ab;// = new SEXPREC;\n\n       ab = (toto) (REALXP,2);\n\n \n\n}\n\n \n\nThird I have download R COM.\n\n \n\nI' am looking for counsel. Am I compulsory to use   R com or not?\n\nIf not how can I improve my code?\n\nDo you have an idea?\n\n \n\nJBB\n\n \n\n \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\n \n\n  I'am trying to use R in my Cpp project but I fail. \n\n \n\n First I try to include R.h for loading statically R.dll but there is\nconflict with windows definition of Error.\n\n \n\n Second, I try to",
       "thread_id": "thread-2ba3169cab49",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040330/3c6b8a2a/attachment.pl"
+      ]
     },
     {
       "id": "msg-31adde271dd7",
@@ -30780,11 +31050,14 @@
       "subject_clean": "Where: package licenses",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/80c13564/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/80c13564/attachment.pl",
+      "body_plain": "R:\n\nThis stems from my curiosity about the previous thread about  a request \nfor glm.nb code.  The issue of package licenses was brought up and I was \nhoping for some clarification on that.  Using the function license() or \nlicence() gives info on the license for R, but something like \nlicense(MASS) does not give info on the license for the MASS package \n(perhaps it might be good to expand the license function in the way \ndescribed).  A quick look on CRAN didn't yield any info on package \nlicenses either. \n\n\nThanks.\n\nJason Higbee\nResearch Associate\nFederal Reserve Bank of St. Louis\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "R:\n\nThis stems from my curiosity about the previous thread about  a request \nfor glm.nb code.  The issue of package licenses was brought up and I was \nhoping for some clarification on that.  Using the",
       "thread_id": "thread-84ef2567b084",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040330/80c13564/attachment.pl"
+      ]
     },
     {
       "id": "msg-e7210f5ac7bb",
@@ -30884,11 +31157,14 @@
       "subject_clean": "Where: package licenses",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/21e0c539/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040330/21e0c539/attachment.pl",
+      "body_plain": "Thanks Thomas and Marc that is what I was looking for.\n\n-Jason\n\n\n\n\nThe DESCRIPTION file for a package lists the license; this is also given\nin the CRAN entry for each package.\n\n                 -thomas\n\n\n\n\n\nMarc Schwartz <MSchwartz at MedAnalytics.com>\n03/30/2004 09:02 AM\nPlease respond to MSchwartz\n\n \n        To:     Jason.L.Higbee at stls.frb.org\n        cc:     R-Help <r-help at stat.math.ethz.ch>\n        Subject:        Re: [R] Where: package licenses\n\nOn Tue, 2004-03-30 at 08:51, Jason.L.Higbee at stls.frb.org wrote: \n> R:\n> \n> This stems from my curiosity about the previous thread about  a\n> request \n> for glm.nb code.  The issue of package licenses was brought up and I\n> was \n> hoping for some clarification on that.  Using the function license()\n> or \n> licence() gives info on the license for R, but something like \n> license(MASS) does not give info on the license for the MASS package \n> (perhaps it might be good to expand the license function in the way \n> described).  A quick look on CRAN didn't yield any info on package \n> licenses either. \n\n\nFor the CRAN add on packages (which includes the 'recommended'\npackages), each has the license information under the description. For\nexample, MASS which is part of the VR bundle, is here:\n\nhttp://cran.r-project.org/src/contrib/PACKAGES.html#VR\n\nThe information is as follows:\n\n...\nLicense: GPL (version 2 or later)\n...\n\nSome of the packages are released under other licenses or have\nrestrictions on commercial use or distribution. Read each one carefully.\n\nHTH,\n\nMarc Schwartz\n\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Thomas and Marc that is what I was looking for.\n\n-Jason\n\n\n\n\nThe DESCRIPTION file for a package lists the license; this is also given\nin the CRAN entry for each package.\n\n                 -thoma",
       "thread_id": "thread-7b5560dceb44",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040330/21e0c539/attachment.pl"
+      ]
     },
     {
       "id": "msg-d3fef438ed76",
@@ -31855,11 +32131,14 @@
       "subject_clean": "choice-based conjoint",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/d4c5e25d/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/d4c5e25d/attachment.pl",
+      "body_plain": "Hello everyone,\n\nI am new to this list and the R-Project, so I hope my question is not\ntrivial or has been answered before. I searched the FAQs and the mailing\nlist archives and I could not find anything about Conjoint Analysis. I am\nespecially interested in Choice-based Conjoint, resp. discrete choice\nmodels. \n\nIs there a function / module that handles this issue? Or can the multinomial\nlogit model be used? I would doubt the latter, for in a Choice-based\nConjoint analysis the choice has to be conditioned to the alternatives in\nthe choice set which are not equal for the respondents.\n\nAny help will be much appreciated! Thank you!\n\nFelix\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello everyone,\n\nI am new to this list and the R-Project, so I hope my question is not\ntrivial or has been answered before. I searched the FAQs and the mailing\nlist archives and I could not find anyth",
       "thread_id": "thread-6ff060eb0f4f",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040331/d4c5e25d/attachment.pl"
+      ]
     },
     {
       "id": "msg-adb304ead189",
@@ -31990,11 +32269,14 @@
       "subject_clean": "identify()  and controlling label size",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/7fd985bb/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/7fd985bb/attachment.pl",
+      "body_plain": "I thought this was going to be easy ...\nCan the label size of identify() be controlled by setting par(cex.*) because\nI'm having no luck? My only recourse is to save the index and position of\nthe labels from identify() and use text() to replot them.\n\nRegards\nAlex\n\nAlex Hanke\nDepartment of Fisheries and Oceans\nSt. Andrews Biological Station\n531 Brandy Cove Road\nSt. Andrews, NB\nCanada\nE5B 2L9\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I thought this was going to be easy ...\nCan the label size of identify() be controlled by setting par(cex.*) because\nI'm having no luck? My only recourse is to save the index and position of\nthe label",
       "thread_id": "thread-405f065d0cad",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040331/7fd985bb/attachment.pl"
+      ]
     },
     {
       "id": "msg-a95e08812fa8",
@@ -32848,11 +33130,14 @@
       "subject_clean": "How to cluster the variables instead of data points?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/38a03341/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20040331/38a03341/attachment.pl",
+      "body_plain": "Dear R users,\n\nDo you know if there are some specific functions under R\nto do clustering?\nTo be specific, I have a d-dimensional vector x, and wish\nto clustering these d variables of x into some finite groups\ngiven self-defined distance measure.\n\nSo please offer me some point on this problem.\n\nThanks.\n\nFred\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R users,\n\nDo you know if there are some specific functions under R\nto do clustering?\nTo be specific, I have a d-dimensional vector x, and wish\nto clustering these d variables of x into some finit",
       "thread_id": "thread-f54036906785",
       "thread_depth": 0,
-      "month": "2004-03"
+      "month": "2004-03",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20040331/38a03341/attachment.pl"
+      ]
     },
     {
       "id": "msg-8d5a3424fd21",

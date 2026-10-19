@@ -4982,11 +4982,14 @@
       "subject_clean": "A.J. Rossini: \"Re: [R] Simple summary question\"",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020112/895dde2f/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020112/895dde2f/attachment.pl",
+      "body_plain": "Regarding the problem of getting the mean of\nauth.sum corresponding to those values of datecat==1\nand a separate mean corresponding to those values\nof datecat==2 where auth.sum and datecat are in\ndata frame hcd.df, here are two solutions:\n\n1. USE BY\n\n  attach(hcd.df)\n  by(auth.sum,datecat,mean)\n\nor replace the second line with\n\n  c(by(auth.sum,datecat,mean))\n\ndepending on how you like the result\n\n2. USE LM\n\nlm(auth.sum~factor(datecat)-1,hcd.df)$coef\n\n---\n\nMessage-id: <Pine.LNX.4.21L1.0201092341260.5798-100000 at nujoma.perrins>\n\nI'd like to get summary statistics (really just a mean would be fine) for\na vector in a data frame, but split based on the value of another\nvector. That is, I have a data frame (hcd.df) with variables datecat\n(which is always 1 or 2) and auth.sum (-8..+8). I've used xtabs to get\nchi-square comparisons, but what I need now is a simple mean of auth.sum\nwhere datecat is 1 and another where datecat is 2. Thanks for any advice.\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "Regarding the problem of getting the mean of\nauth.sum corresponding to those values of datecat==1\nand a separate mean corresponding to those values\nof datecat==2 where auth.sum and datecat are in\ndata",
       "thread_id": "thread-0846b38d2a54",
       "thread_depth": 0,
-      "month": "2002-01"
+      "month": "2002-01",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20020112/895dde2f/attachment.pl"
+      ]
     },
     {
       "id": "msg-29c55aba1da6",
@@ -12334,11 +12337,14 @@
       "subject_clean": "Iterate over 1 <= i < j <= n",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020127/ebdcc755/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020127/ebdcc755/attachment.pl",
+      "body_plain": "What is the preferred way to iterate over 1 <= i < j <= n  ?\n\nThe following does not work as it gives an error message \nwhen i+1 exceeds n:\n\n   for(i in 1:n)\n      for(j in seq(i+1,n,1))\n\nThis works but seems like too much work:\n\n   for(i in 1:n) {\n      j <- i+1\n      while(j<=n) {\n         ...\n         j <- j+1\n      }\n   }\n\nThis is briefer but offends my sense of how to do things:\n\n   for(i in 1:n)\n      for(j in i:n) {\n         if (i==j) next\n         ...\n      }\n\nThis works too but seems somewhat involved:\n\n   d <- diag(n)\n   for( idx in seq(d)[upper.tri(d,diag=FALSE)] ) {\n      i <- row(d)[idx]; j <- col(d)[idx]\n      ...\n   }\n\nWhat is the preferred way to do this?\n\n\n_____________________________________________________________\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "What is the preferred way to iterate over 1 <= i < j <= n  ?\n\nThe following does not work as it gives an error message \nwhen i+1 exceeds n:\n\n   for(i in 1:n)\n      for(j in seq(i+1,n,1))\n\nThis works b",
       "thread_id": "thread-8d6800b75101",
       "thread_depth": 0,
-      "month": "2002-01"
+      "month": "2002-01",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20020127/ebdcc755/attachment.pl"
+      ]
     },
     {
       "id": "msg-63765b778f77",
@@ -13085,11 +13091,14 @@
       "subject_clean": "Problems with seq (was Iterate over 1<=i<j<=n",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020128/400e67bb/attachment.pl",
-      "body_snippet": "An embedded and charset-unspecified text was scrubbed...\nName: not available\nUrl: https://stat.ethz.ch/pipermail/r-help/attachments/20020128/400e67bb/attachment.pl",
+      "body_plain": "In answer to the query about iterating over 1 <= i < j <= n \nseveral people suggested\n\n   for(i in 1:(n-1))\n      for(j in (i+1):n))\n         ...\n\nThis also has the efficiency advantage that the last iteration of i \nis never attempted.  The index arithmetic, albeit minimal, is still \na bit hard on the mind but its a pretty good practical solution in \nmost cases. \n\nUnfortunately, it fails for n=1.  This may not be so terrible in \nmost cases of interest.  However, handling boundary cases correctly \nis a hallmark of good programming so I think we need to keep looking.\n\nHere is another solution I came up with:\n\n   for( i in seq(n) )\n      for( j in seq(n)[-seq(i)] )\n         ...\n\nhowever, it too is a kludge in my mind.  An improvement to the \nseq() built into R is what is really required.   Many people are \nused to this in C, awk and perl:\n\n   for( i=1; i<=n; i++ )\n      for( j=i+1; j<=n; j++ )\n\nas well as similar constructs in other languages.  The principle \nof least surprise suggests that the R analogue should work \ncorrectly too.\n\nIts pretty easy to write your own seq but the use of this function is\nwidespread in R and having it broken in this way just \nencourages kludges, mind numbing workarounds or bad code failing \nto handle boundary conditions.\n\nCreating a new builtin (e.g. seq0), adding an argument to seq \n(e.g. nullOK) or changing seq's behaviour on boundary conditions are three possible solutions.\n\n\n_____________________________________________________________\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\nr-help mailing list -- Read http://www.ci.tuwien.ac.at/~hornik/R/R-FAQ.html\nSend \"info\", \"help\", or \"[un]subscribe\"\n(in the \"body\", not the subject !)  To: r-help-request at stat.math.ethz.ch\n_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._",
+      "body_snippet": "In answer to the query about iterating over 1 <= i < j <= n \nseveral people suggested\n\n   for(i in 1:(n-1))\n      for(j in (i+1):n))\n         ...\n\nThis also has the efficiency advantage that the last ",
       "thread_id": "thread-d28e2a68d21e",
       "thread_depth": 0,
-      "month": "2002-01"
+      "month": "2002-01",
+      "restored_from": [
+        "https://stat.ethz.ch/pipermail/r-help/attachments/20020128/400e67bb/attachment.pl"
+      ]
     },
     {
       "id": "msg-bfaa4ad5e933",
