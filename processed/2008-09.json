@@ -54611,7 +54611,8 @@
       "body_snippet": "On Tue, 30 Sep 2008, Susanne Pfeifer wrote:\n\n> Hi,\n>\n> sorry, I was a bit confused and my function looked slightly different\n> from the one I posted before:\n\n\nIn any case, you will not get far trying ",
       "thread_id": "thread-4213db8eabe6",
       "thread_depth": 4,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175429.html"
     },
     {
       "id": "msg-b0d4d00534d3",
@@ -54630,6 +54631,7 @@
       "thread_id": "thread-3f7fc5554b2a",
       "thread_depth": 1,
       "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175437.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20080930/71b1d0b5/attachment.pl"
       ]
@@ -54648,7 +54650,8 @@
       "body_snippet": "I'm trying to integrate one dimension of a bivariate normal. It works\nwhen additional parameters are passed explicitly:\n\nlibrary(mvtnorm)\nbivInt <- function(x,y,mx,my,r) { dmvnorm(c(x, y), mean=c(mx, ",
       "thread_id": "thread-6c01d92ac75a",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175438.html"
     },
     {
       "id": "msg-15ca8650a877",
@@ -54666,7 +54669,8 @@
       "body_snippet": "This is a little esoteric for R-help.  As the posting guide says, you  \nshould\nwrite the package maintainer with this sort of question.  Without the  \ndata\nit is difficult to judge what is happening, ",
       "thread_id": "thread-da4b87247ed7",
       "thread_depth": 1,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175439.html"
     },
     {
       "id": "msg-1877c2b6f932",
@@ -54682,7 +54686,8 @@
       "body_snippet": "I am looking up a number based upon a randomly selected number and then\nproceed to the rest of my code if the corresponding value is greater than or\nequal to yet another value.  \n\nso if \n\nDev_Size = 1",
       "thread_id": "thread-1877c2b6f932",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175440.html"
     },
     {
       "id": "msg-78a4cb43b83b",
@@ -54697,11 +54702,12 @@
         "<c822758d-3cf2-44b4-8e68-c76ce30ec4a4@26g2000hsk.googlegroups.com>",
         "<1222810777.6136.16.camel@R1-Thux>"
       ],
-      "body_plain": "Bernardo Rangel Tura wrote:\n> Em S?b, 2008-09-27 ?s 10:51 -0700, milicic.marko escreveu:\n>> I have a huge data set with thousands of variable and one binary\n>> variable. I know that most of the variables are correlated and are not\n>> good predictors... but...\n>>\n>> It is very hard to start modeling with such a huge dataset. What would\n>> be your suggestion. How to make a first cut... how to eliminate most\n>> of the variables but not to ignore potential interactions... for\n>> example, maybe variable A is not good predictor and variable B is not\n>> good predictor either, but maybe A and B together are good\n>> predictor...\n>>\n>> Any suggestion is welcomed\n> \n> \n> milicic.marko\n> \n> I think do you start with a rpart(\"binary variable\"~.)\n> This show you a set of variables to start a model and the start set to\n> curoff  for continous variables\n\nI cannot imagine a worse way to formulate a regression model.  Reasons \ninclude\n\n1. Results of recursive partitioning are not trustworthy unless the \nsample size exceeds 50,000 or the signal to noise ratio is extremely high.\n\n2. The type I error of tests from the final regression model will be \nextraordinarily inflated.\n\n3. False interactions will appear in the model.\n\n4. The cutoffs so chosen will not replicate and in effect assume that \ncovariate effects are discontinuous and piecewise flat.  The use of \ncutoffs results in a huge loss of information and power and makes the \nanalysis arbitrary and impossible to interpret (e.g., a high covariate \nvalue:low covariate value odds ratio or mean difference is a complex \nfunction of all the covariate values in the sample).\n\n5. The model will not validate in new data.\n\nFrank\n-- \nFrank E Harrell Jr   Professor and Chair           School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
-      "body_snippet": "Bernardo Rangel Tura wrote:\n> Em S?b, 2008-09-27 ?s 10:51 -0700, milicic.marko escreveu:\n>> I have a huge data set with thousands of variable and one binary\n>> variable. I know that most of the variab",
+      "body_plain": "Bernardo Rangel Tura wrote:\n> Em Sáb, 2008-09-27 às 10:51 -0700, milicic.marko escreveu:\n>> I have a huge data set with thousands of variable and one binary\n>> variable. I know that most of the variables are correlated and are not\n>> good predictors... but...\n>>\n>> It is very hard to start modeling with such a huge dataset. What would\n>> be your suggestion. How to make a first cut... how to eliminate most\n>> of the variables but not to ignore potential interactions... for\n>> example, maybe variable A is not good predictor and variable B is not\n>> good predictor either, but maybe A and B together are good\n>> predictor...\n>>\n>> Any suggestion is welcomed\n> \n> \n> milicic.marko\n> \n> I think do you start with a rpart(\"binary variable\"~.)\n> This show you a set of variables to start a model and the start set to\n> curoff  for continous variables\n\nI cannot imagine a worse way to formulate a regression model.  Reasons \ninclude\n\n1. Results of recursive partitioning are not trustworthy unless the \nsample size exceeds 50,000 or the signal to noise ratio is extremely high.\n\n2. The type I error of tests from the final regression model will be \nextraordinarily inflated.\n\n3. False interactions will appear in the model.\n\n4. The cutoffs so chosen will not replicate and in effect assume that \ncovariate effects are discontinuous and piecewise flat.  The use of \ncutoffs results in a huge loss of information and power and makes the \nanalysis arbitrary and impossible to interpret (e.g., a high covariate \nvalue:low covariate value odds ratio or mean difference is a complex \nfunction of all the covariate values in the sample).\n\n5. The model will not validate in new data.\n\nFrank\n-- \nFrank E Harrell Jr   Professor and Chair           School of Medicine\n                      Department of Biostatistics   Vanderbilt University",
+      "body_snippet": "Bernardo Rangel Tura wrote:\n> Em Sáb, 2008-09-27 às 10:51 -0700, milicic.marko escreveu:\n>> I have a huge data set with thousands of variable and one binary\n>> variable. I know that most of the variab",
       "thread_id": "thread-a9ad047b29e5",
       "thread_depth": 2,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175444.html"
     },
     {
       "id": "msg-b65e82c47d24",
@@ -54717,7 +54723,8 @@
       "body_snippet": "Good Day,\n\nI'm using the knn function in the package class.  With k set to 3,  \nthe function returns proportions of 1/3, 0.5, 0.6, 2/3, 3/4, and 1.0  \nfor the test cases.  I don't understand how with ",
       "thread_id": "thread-b65e82c47d24",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175461.html"
     },
     {
       "id": "msg-a35a0dc177cb",
@@ -54735,7 +54742,8 @@
       "body_snippet": "It looks like you are test against TAZDetermine before it is defined.\nTry something like this:\n\nwhile(TRUE){\n    ...generate random number\n    if (value > Dev_size) break\n}\n\nOn Tue, Sep 30, 2008 at 6:",
       "thread_id": "thread-1877c2b6f932",
       "thread_depth": 1,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175441.html"
     },
     {
       "id": "msg-51d1b1400837",
@@ -54753,7 +54761,8 @@
       "body_snippet": "See fig argument in par function.\n\nOn Tue, Sep 30, 2008 at 3:38 PM, Jos? Alberto Monteiro\n<goitaca at gmail.com> wrote:\n> I am trying to plot a small graphic inside the graphic area of a bigger\n> grap",
       "thread_id": "thread-1c63b669a0d1",
       "thread_depth": 1,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175442.html"
     },
     {
       "id": "msg-344fe230dc6e",
@@ -54773,7 +54782,8 @@
       "body_snippet": "There are no built in facilties for fixed column widths but its not hard to\nparse out the fields yourself using the sqlite substr function.\n\nI've added example 6f to the sqldf home page which illustra",
       "thread_id": "thread-812064cdf8ca",
       "thread_depth": 3,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175443.html"
     },
     {
       "id": "msg-3b8d7541b26b",
@@ -54788,11 +54798,12 @@
         "<A5722AA0260E414D945649DED23EDF8E01B41DB1@TDASN140.tedrive.org>",
         "<A5722AA0260E414D945649DED23EDF8E01B41F5F@TDASN140.tedrive.org>"
       ],
-      "body_plain": "Doing a search on:\nweibull and \"probability plot\" ,,,,along with...  r-help\n\n\nin Google produced this reply which I think gives a worked example  \nthat fits some of your hopes.\n\nhttp://tolstoy.newcastle.edu.au/R/help/03b/1714.html\n\nI am not sure what the B<N>'s are however. If they are quantiles. I am  \nnot sure how meaningful a 95th quantile estimate would be for a sample  \nwith only 6 instances.\n\n-- \nDavid Winsemius\n\n\nOn Sep 30, 2008, at 7:24 AM, Hoeks, Luis wrote:\n\n>\n> Hello r-project team,\n> I am new (test) user of R and I need some help. Sorry to wrote in  \n> German before, I am just a newbee to this mailing list. I would like  \n> to calculate and plot a Weibull distribution (Weibull best-fit line,  \n> accuracy curves left and right beside the best-fit line) for a  \n> simple set of data points. I need the shape and the scale parameter  \n> for the best-fit and values like B5, B10, B50, B90, B95. Usually I  \n> have 6-20 data points, f.e. force [N] from from a tensile test. I  \n> was thinking that for this kind of task there are ready-to-go R- \n> progams/scripts or maby a small how-to that guides me through this  \n> subject.\n> Any help is very much appreciated!\n> Regards\n> Luis\n>\n> -----Urspr?ngliche Nachricht-----\n> Von: r-help-bounces at r-project.org [mailto:r-help-bounces at r- \n> project.org] Im Auftrag von Hoeks, Luis\n> Gesendet: Dienstag, 30. September 2008 11:23\n> An: r-help at r-project.org\n> Betreff: [R] Weibull Verteilung\n>\n> Hallo r-Projekt Team,\n>\n> ich bin Anf?nger in R und k?nnte ein wenig Hilfe gebrauchen. Ich  \n> m?chte eine Weibullverteilung (Weibullgerade und Genauigkeitskurven)  \n> berechnen und plotten. Au?erdem ben?tige ich den Formfaktor, den  \n> Skalierungsfaktor und Werte wie B5, B10, B50, B90, B95. In der Regel  \n> habe ich 6-20 Datenpunkte, z.B. aus Bruchlastversuchen. Ich kann mir  \n> Vorstellen, dass es daf?r schon fertige Scripte oder How-Tos  \n> existieren, habe aber beim googeln nichts gefunden.\n>\n> W?re nett, wenn mir jemand hier einen Ansto? geben k?nnte.\n>\n> Gru?\n>\n> Luis\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "Doing a search on:\nweibull and \"probability plot\" ,,,,along with...  r-help\n\n\nin Google produced this reply which I think gives a worked example  \nthat fits some of your hopes.\n\nhttp://tolstoy.newcastle.edu.au/R/help/03b/1714.html\n\nI am not sure what the B<N>'s are however. If they are quantiles. I am  \nnot sure how meaningful a 95th quantile estimate would be for a sample  \nwith only 6 instances.\n\n-- \nDavid Winsemius\n\n\nOn Sep 30, 2008, at 7:24 AM, Hoeks, Luis wrote:\n\n>\n> Hello r-project team,\n> I am new (test) user of R and I need some help. Sorry to wrote in  \n> German before, I am just a newbee to this mailing list. I would like  \n> to calculate and plot a Weibull distribution (Weibull best-fit line,  \n> accuracy curves left and right beside the best-fit line) for a  \n> simple set of data points. I need the shape and the scale parameter  \n> for the best-fit and values like B5, B10, B50, B90, B95. Usually I  \n> have 6-20 data points, f.e. force [N] from from a tensile test. I  \n> was thinking that for this kind of task there are ready-to-go R- \n> progams/scripts or maby a small how-to that guides me through this  \n> subject.\n> Any help is very much appreciated!\n> Regards\n> Luis\n>\n> -----Ursprüngliche Nachricht-----\n> Von: r-help-bounces at r-project.org [mailto:r-help-bounces at r- \n> project.org] Im Auftrag von Hoeks, Luis\n> Gesendet: Dienstag, 30. September 2008 11:23\n> An: r-help at r-project.org\n> Betreff: [R] Weibull Verteilung\n>\n> Hallo r-Projekt Team,\n>\n> ich bin Anfänger in R und könnte ein wenig Hilfe gebrauchen. Ich  \n> möchte eine Weibullverteilung (Weibullgerade und Genauigkeitskurven)  \n> berechnen und plotten. Außerdem benötige ich den Formfaktor, den  \n> Skalierungsfaktor und Werte wie B5, B10, B50, B90, B95. In der Regel  \n> habe ich 6-20 Datenpunkte, z.B. aus Bruchlastversuchen. Ich kann mir  \n> Vorstellen, dass es dafür schon fertige Scripte oder How-Tos  \n> existieren, habe aber beim googeln nichts gefunden.\n>\n> Wäre nett, wenn mir jemand hier einen Anstoß geben könnte.\n>\n> Gruß\n>\n> Luis\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Doing a search on:\nweibull and \"probability plot\" ,,,,along with...  r-help\n\n\nin Google produced this reply which I think gives a worked example  \nthat fits some of your hopes.\n\nhttp://tolstoy.newcast",
       "thread_id": "thread-d23f5d5097b4",
       "thread_depth": 2,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175445.html"
     },
     {
       "id": "msg-249300b9d35c",
@@ -54808,7 +54819,8 @@
       "body_snippet": "Dear R Gurus;\n\nIs there an automated process for goodness of fit tests, please?\n\nI know there is prop.test for one at a time, but I was wondering about\nthis, please.\n\nThanks,\nEdna Bell",
       "thread_id": "thread-249300b9d35c",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175446.html"
     },
     {
       "id": "msg-fda29026102a",
@@ -54820,11 +54832,12 @@
       "subject_clean": "plot inside graphic area",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Look at the subplot function in the TeachingDemos package.\n\n-----Original Message-----\nFrom: \"Jos? Alberto Monteiro\" <goitaca at gmail.com>\nTo: \"r-help at stat.math.ethz.ch\" <r-help at stat.math.ethz.ch>\nSent: 9/30/08 4:33 PM\nSubject: [R] plot inside graphic area\n\n\nI am trying to plot a small graphic inside the graphic area of a bigger\ngraphic. Does anybody know the commend for that?\nThanks a lot!\n\n--\nMSc Jos? Alberto F. Monteiro\nBotanisches Institut\nUniversit?t Basel\n\n?????? ?????\n\n        [[alternative HTML version deleted]]",
-      "body_snippet": "Look at the subplot function in the TeachingDemos package.\n\n-----Original Message-----\nFrom: \"Jos? Alberto Monteiro\" <goitaca at gmail.com>\nTo: \"r-help at stat.math.ethz.ch\" <r-help at stat.math.ethz.",
+      "body_plain": "Look at the subplot function in the TeachingDemos package.\n\n-----Original Message-----\nFrom: \"José Alberto Monteiro\" <goitaca at gmail.com>\nTo: \"r-help at stat.math.ethz.ch\" <r-help at stat.math.ethz.ch>\nSent: 9/30/08 4:33 PM\nSubject: [R] plot inside graphic area\n\n\nI am trying to plot a small graphic inside the graphic area of a bigger\ngraphic. Does anybody know the commend for that?\nThanks a lot!\n\n--\nMSc José Alberto F. Monteiro\nBotanisches Institut\nUniversität Basel\n\nا????? ?????\n\n        [[alternative HTML version deleted]]",
+      "body_snippet": "Look at the subplot function in the TeachingDemos package.\n\n-----Original Message-----\nFrom: \"José Alberto Monteiro\" <goitaca at gmail.com>\nTo: \"r-help at stat.math.ethz.ch\" <r-help at stat.math.ethz.",
       "thread_id": "thread-fda29026102a",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175447.html"
     },
     {
       "id": "msg-324cbf156d49",
@@ -54840,7 +54853,8 @@
       "body_snippet": "Hi. This is my first mail. I am new to R and also to the company where I am employed now. I have Statistics background (i.e. Master of Science). \n\nHowever, it is only now I understand what I learned i",
       "thread_id": "thread-324cbf156d49",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175450.html"
     },
     {
       "id": "msg-fbb312b951e7",
@@ -54856,7 +54870,8 @@
       "body_snippet": "Hi. This is my first mail. I am new to R and also to the company where I am employed now. I have Statistics background (i.e. Master of Science). \n\nHowever, it is only now I understand what I learned i",
       "thread_id": "thread-fbb312b951e7",
       "thread_depth": 0,
-      "month": "2008-09"
+      "month": "2008-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2008-October/175451.html"
     }
   ],
   "threads": [
