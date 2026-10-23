@@ -16,11 +16,12 @@
         "<746104366.1430323.1789890499994.ref@mail.yahoo.com>",
         "<746104366.1430323.1789890499994@mail.yahoo.com>"
       ],
-      "body_plain": "The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. \n\nIt is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).\n\nIf you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.\n\n- Peter D.\n\n\n> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> While working with signed-error distributions that are often skewed, I noticed\n> that using `mad(x)` with the default constant (1.4826) can unintentionally widen \n> the dispersion estimate enough to mask important structure in the data.\n> \n> For diagnostic and tolerance-testing workflows, especially when symmetry cannot\n> be assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?\n> interval because it reflects the raw median absolute deviation without scaling\n> to a normal model.\n> \n> Before applying any parametric center/spread metrics, I?ve found it helpful to\n> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n> `constant = 1` behaves more robustly.\n> \n> Is there any interest in discussing whether `constant = 1` might be a more\n> appropriate default for nonparametric workflows, or whether a note in the\n> documentation might help users choose the right constant for their context?\n> \n> Thanks,\n> Thomas\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_plain": "The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. \n\nIt is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).\n\nIf you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.\n\n- Peter D.\n\n\n> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> While working with signed-error distributions that are often skewed, I noticed\n> that using `mad(x)` with the default constant (1.4826) can unintentionally widen \n> the dispersion estimate enough to mask important structure in the data.\n> \n> For diagnostic and tolerance-testing workflows, especially when symmetry cannot\n> be assumed, using `mad(x, constant = 1)` gives a more interpretable “bulk”\n> interval because it reflects the raw median absolute deviation without scaling\n> to a normal model.\n> \n> Before applying any parametric center/spread metrics, I’ve found it helpful to\n> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n> `constant = 1` behaves more robustly.\n> \n> Is there any interest in discussing whether `constant = 1` might be a more\n> appropriate default for nonparametric workflows, or whether a note in the\n> documentation might help users choose the right constant for their context?\n> \n> Thanks,\n> Thomas\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
       "body_snippet": "The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an out",
       "thread_id": "thread-59ed4001b3d6",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481839.html"
     },
     {
       "id": "msg-7a97dd2f4ed4",
@@ -36,11 +37,12 @@
         "<746104366.1430323.1789890499994@mail.yahoo.com>",
         "<00382EC2-ABF9-4837-A083-DA9BD3941A3F@gmail.com>"
       ],
-      "body_plain": "Thanks, that's a helpful perspective.\n\nMy use case is a little different from estimating the SD of an underlying distribution. I'm working with signed-error distributions that are often skewed, and my primary interest is a robust description of the observed error spread rather than a normal-consistent estimate of ?.\n\nIn that setting, the default 1.4826 factor feels like a model-based calibration rather than part of the dispersion measure itself. Using mad(x, constant = 1) keeps the scale tied directly to the median absolute deviation observed in the data.\n\nRegarding your IQR comment, that's a fair question. My intuition is that MAD and IQR emphasize somewhat different aspects of the distribution. IQR is determined entirely by the 25th and 75th percentiles, whereas MAD is based on the distribution of absolute deviations from the median. For diagnostic work, I've found the latter useful because it stays centered on the typical deviation from the target value.\n\nSo I see raw MAD less as a substitute for SD and more as a robust measure of \"typical error magnitude.\"\n- Thomas S\n    On Monday, October 5, 2026 at 04:25:30 AM PDT, Peter Dalgaard <pdalgd at gmail.com> wrote:  \n \n The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. \n\nIt is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).\n\nIf you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.\n\n- Peter D.\n\n\n> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> While working with signed-error distributions that are often skewed, I noticed\n> that using `mad(x)` with the default constant (1.4826) can unintentionally widen \n> the dispersion estimate enough to mask important structure in the data.\n> \n> For diagnostic and tolerance-testing workflows, especially when symmetry cannot\n> be assumed, using `mad(x, constant = 1)` gives a more interpretable ?bulk?\n> interval because it reflects the raw median absolute deviation without scaling\n> to a normal model.\n> \n> Before applying any parametric center/spread metrics, I?ve found it helpful to\n> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n> `constant = 1` behaves more robustly.\n> \n> Is there any interest in discussing whether `constant = 1` might be a more\n> appropriate default for nonparametric workflows, or whether a note in the\n> documentation might help users choose the right constant for their context?\n> \n> Thanks,\n> Thomas\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk? Priv: PDalgd at gmail.com\n\n  \n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks, that's a helpful perspective.\n\nMy use case is a little different from estimating the SD of an underlying distribution. I'm working with signed-error distributions that are often skewed, and my primary interest is a robust description of the observed error spread rather than a normal-consistent estimate of σ.\n\nIn that setting, the default 1.4826 factor feels like a model-based calibration rather than part of the dispersion measure itself. Using mad(x, constant = 1) keeps the scale tied directly to the median absolute deviation observed in the data.\n\nRegarding your IQR comment, that's a fair question. My intuition is that MAD and IQR emphasize somewhat different aspects of the distribution. IQR is determined entirely by the 25th and 75th percentiles, whereas MAD is based on the distribution of absolute deviations from the median. For diagnostic work, I've found the latter useful because it stays centered on the typical deviation from the target value.\n\nSo I see raw MAD less as a substitute for SD and more as a robust measure of \"typical error magnitude.\"\n- Thomas S\n    On Monday, October 5, 2026 at 04:25:30 AM PDT, Peter Dalgaard <pdalgd at gmail.com> wrote:  \n \n The constant= bit comes from\n\n> 1/diff(qnorm(c(.25,.75))/2)\n[1] 1.482602\n\nso the logic is pretty much that mad() computes the SD of a normal distribution with the same IQR. This makes sense for an outlier-contaminated normal distribution, and not so much elsewhere. \n\nIt is fairly easy to modify the constant for other symmetric distributions like the standardized t distribution, somewhat less so for asymmetric distributions. That is, provided you actually want the SD of the underlying distribution (sans outliers).\n\nIf you set mad=1, then you lose the connection with SD, which may not be much of a loss. However, the question that I see is whether it offers anything beyond the simple IQR.\n\n- Peter D.\n\n\n> On 20 Sep 2026, at 09.48, Thomas Subia via R-help <r-help at r-project.org> wrote:\n> \n> Hi all,\n> \n> While working with signed-error distributions that are often skewed, I noticed\n> that using `mad(x)` with the default constant (1.4826) can unintentionally widen \n> the dispersion estimate enough to mask important structure in the data.\n> \n> For diagnostic and tolerance-testing workflows, especially when symmetry cannot\n> be assumed, using `mad(x, constant = 1)` gives a more interpretable “bulk”\n> interval because it reflects the raw median absolute deviation without scaling\n> to a normal model.\n> \n> Before applying any parametric center/spread metrics, I’ve found it helpful to\n> plot a boxplot or ECDF to check for skew and tail weight. In skewed cases,\n> `constant = 1` behaves more robustly.\n> \n> Is there any interest in discussing whether `constant = 1` might be a more\n> appropriate default for nonparametric workflows, or whether a note in the\n> documentation might help users choose the right constant for their context?\n> \n> Thanks,\n> Thomas\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n\n  \n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks, that's a helpful perspective.\n\nMy use case is a little different from estimating the SD of an underlying distribution. I'm working with signed-error distributions that are often skewed, and my",
       "thread_id": "thread-59ed4001b3d6",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481840.html"
     },
     {
       "id": "msg-037af3cc1099",
@@ -56,7 +58,8 @@
       "body_snippet": "Apart from different ergonomics is there anything worth being aware of when using STRING_PTR_RO versus STRING_ELT for getting CHARSXP?\n\nTim",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481841.html"
     },
     {
       "id": "msg-9052bd9f1c17",
@@ -74,7 +77,8 @@
       "body_snippet": "STRING_PTR_RO(x)[i] will not check bounds and will not check that the\nelement is not NULL and not a free node. STRING_PTR_RO only works on\nstandard vectors, and will not work on alternate vector repre",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481842.html"
     },
     {
       "id": "msg-40e964b02d4a",
@@ -93,7 +97,8 @@
       "body_snippet": "Many thanks Iris\n\nThat's very helpful.\n\nTim\n\nOn Mon, 5 Oct 2026, at 5:01 PM, Iris Simmons wrote:\n> STRING_PTR_RO(x)[i] will not check bounds and will not check that the \n> element is not NULL and not ",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481843.html"
     },
     {
       "id": "msg-e2bde2c25c70",
@@ -113,7 +118,8 @@
       "body_snippet": "Sorry, I made a mistake in regards to the comment about standard vs\nalternate vectors. It seems as though it does work, it just may result in\nan allocation when called on an alternate vector (but inte",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 3,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481844.html"
     },
     {
       "id": "msg-fd41bea4790c",
@@ -131,7 +137,8 @@
       "body_snippet": "? Mon, 05 Oct 2026 16:35:55 +0100\n\"Tim Taylor\" <tim.taylor at hiddenelephants.co.uk> ?????:\n\n> Apart from different ergonomics is there anything worth being aware\n> of when using STRING_PTR_RO versus ",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481845.html"
     },
     {
       "id": "msg-dc7169227340",
@@ -149,7 +156,8 @@
       "body_snippet": "Thank you both for the explanations. Just the info I was after.\n\nCheers\n\nTim\n\n> On 5 Oct 2026, at 20:40, Ivan Krylov <krylov.r00t at gmail.com> wrote:\n> \n> ?? Mon, 05 Oct 2026 16:35:55 +0100\n> \"Tim Ta",
       "thread_id": "thread-037af3cc1099",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481846.html"
     },
     {
       "id": "msg-7b9c02dee04c",
@@ -165,7 +173,8 @@
       "body_snippet": "I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention aft",
       "thread_id": "thread-7b9c02dee04c",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481847.html"
     },
     {
       "id": "msg-91e934a5483f",
@@ -183,7 +192,8 @@
       "body_snippet": "On 2026-10-06 7:57 a.m., Paul Sherliker via R-help wrote:\n> I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must pro",
       "thread_id": "thread-7b9c02dee04c",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481848.html"
     },
     {
       "id": "msg-410195403cd6",
@@ -202,7 +212,8 @@
       "body_snippet": ">________________________________________\n>From: Duncan Murdoch <murdoch.duncan at gmail.com>\n>Sent: Tuesday, October 06, 2026 5:20 PM\n>To: Paul Sherliker <paul.sherliker at ndph.ox.ac.uk>; r-help at ",
       "thread_id": "thread-7b9c02dee04c",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481850.html"
     },
     {
       "id": "msg-071576df42c2",
@@ -216,11 +227,12 @@
       "references": [
         "<LOCP265MB86938915F6129238A5DA7DE09E952@LOCP265MB8693.GBRP265.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "Hi Paul,\nI cannot replicate the error; my TeX installation (MiKTeX) rendered \neverything fine.\n\nA few things you might try:\nCheck if \"Symbol\" is available in R:\nsystemfonts::system_fonts() |> dplyr::filter(family==\"Symbol\")\n\nIf you are not bound to use pdfLaTeX and can switch to XeLatex (for \ninstance, by adding `% !TeX program = XeLaTeX` as first line) you can \nuse native utf-8 symbols directly:\nadd_footer_lines(ft, value=as_paragraph(\"?? of 10.89 \"))\n\nFinally, you could use as_equation from flextable,\nwhich avoids the cumbersome `as_chunk(\"c\", props = ...` at all:\nas_equation(\"\\\\chi^2\")\n\nBest Eik\n\nAm 06.10.2026 um 13:57 schrieb Paul Sherliker via R-help:\n> I am trying to produce some tables in flextable(), sending the results to .pdf.? The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.? (both R markdown and flextable() are new to me)\n> \n> My problem is a difficulty with a single character that my tables must contain - a chi in the footer.? (Again, not negotiable - my bosses are not going to be persuadable.)\n> \n> I have tinytex installed to allow the use of .pdf.\n> \n> Sample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):\n> \n> ________________________________________\n> title: \"Example\"\n> author: \"Paul Sherliker\"\n> date: \"2026-10-06\"\n> output: pdf_document\n> ________________________________________\n> ```{r setup, include=FALSE}\n> knitr::opts_chunk$set(echo = TRUE)\n> ```\n> R Markdown\n> ```{r cars}\n> require(flextable)\n> ft <- flextable(head(cars))\n> ft <- add_footer_lines(ft, value=as_paragraph(\n> as_chunk(paste0(\"* The % change in log RR is displayed only if the log \",\n> \"RR to be changed differs by >3.3 SE from zero (\")),\n> as_chunk(\"c\", props = fp_text_default(font.family = \"Symbol\")),\n> as_sup(\"2\"),\n> as_chunk(\" of 10.89; p<0.001).\")))\n> ft\n> ```\n> \n> What I get does not have the chi character that I would expect, but instead a 'c'.? Is there some way to get the chi without adding too much extra complexity, please?\n> \n>   Thank you for your time and, I hope, for your help.\n> \n>                                         Paul\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nEik Vettorazzi\n\nUniversit?tsklinikum Hamburg-Eppendorf\nInstitut f?r Medizinische Biometrie und Epidemiologie\n\nChristoph-Probst-Weg 1\n4. Obergeschoss, Raum 04.1.021.1\n\n20246 Hamburg\n\nTelefon: +49 (0) 40 7410 - 58243\n\n\nWeb: www.uke.de/imbe\n\n\n\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Christian Gerloff (Vorsitzender), Joachim Pr?l?, Prof. Dr. Blanche Schwappach-Pignataro, Corinna Wriedt\n_____________________________________________________________________",
+      "body_plain": "Hi Paul,\nI cannot replicate the error; my TeX installation (MiKTeX) rendered \neverything fine.\n\nA few things you might try:\nCheck if \"Symbol\" is available in R:\nsystemfonts::system_fonts() |> dplyr::filter(family==\"Symbol\")\n\nIf you are not bound to use pdfLaTeX and can switch to XeLatex (for \ninstance, by adding `% !TeX program = XeLaTeX` as first line) you can \nuse native utf-8 symbols directly:\nadd_footer_lines(ft, value=as_paragraph(\"𝜒² of 10.89 \"))\n\nFinally, you could use as_equation from flextable,\nwhich avoids the cumbersome `as_chunk(\"c\", props = ...` at all:\nas_equation(\"\\\\chi^2\")\n\nBest Eik\n\nAm 06.10.2026 um 13:57 schrieb Paul Sherliker via R-help:\n> I am trying to produce some tables in flextable(), sending the results to .pdf.  The target format is not negotiable, and because I must produce them at volume, I can't have any human intervention after the code is run; flextable() might be negotiable, but I would be loath to try to learn something else.  (both R markdown and flextable() are new to me)\n> \n> My problem is a difficulty with a single character that my tables must contain - a chi in the footer.  (Again, not negotiable - my bosses are not going to be persuadable.)\n> \n> I have tinytex installed to allow the use of .pdf.\n> \n> Sample R markdown code showing the problem (for me!) follows (the body of the table is irrelevant):\n> \n> ________________________________________\n> title: \"Example\"\n> author: \"Paul Sherliker\"\n> date: \"2026-10-06\"\n> output: pdf_document\n> ________________________________________\n> ```{r setup, include=FALSE}\n> knitr::opts_chunk$set(echo = TRUE)\n> ```\n> R Markdown\n> ```{r cars}\n> require(flextable)\n> ft <- flextable(head(cars))\n> ft <- add_footer_lines(ft, value=as_paragraph(\n> as_chunk(paste0(\"* The % change in log RR is displayed only if the log \",\n> \"RR to be changed differs by >3.3 SE from zero (\")),\n> as_chunk(\"c\", props = fp_text_default(font.family = \"Symbol\")),\n> as_sup(\"2\"),\n> as_chunk(\" of 10.89; p<0.001).\")))\n> ft\n> ```\n> \n> What I get does not have the chi character that I would expect, but instead a 'c'.  Is there some way to get the chi without adding too much extra complexity, please?\n> \n>   Thank you for your time and, I hope, for your help.\n> \n>                                         Paul\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nEik Vettorazzi\n\nUniversitätsklinikum Hamburg-Eppendorf\nInstitut für Medizinische Biometrie und Epidemiologie\n\nChristoph-Probst-Weg 1\n4. Obergeschoss, Raum 04.1.021.1\n\n20246 Hamburg\n\nTelefon: +49 (0) 40 7410 - 58243\n\n\nWeb: www.uke.de/imbe\n\n\n\n--\n\n_____________________________________________________________________\n\nUniversitätsklinikum Hamburg-Eppendorf; Körperschaft des öffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Christian Gerloff (Vorsitzender), Joachim Prölß, Prof. Dr. Blanche Schwappach-Pignataro, Corinna Wriedt\n_____________________________________________________________________",
       "body_snippet": "Hi Paul,\nI cannot replicate the error; my TeX installation (MiKTeX) rendered \neverything fine.\n\nA few things you might try:\nCheck if \"Symbol\" is available in R:\nsystemfonts::system_fonts() |> dplyr::f",
       "thread_id": "thread-7b9c02dee04c",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481849.html"
     },
     {
       "id": "msg-521c4ac0fdab",
@@ -239,7 +251,8 @@
       "body_snippet": ">Finally, you could use as_equation from flextable,\n>which avoids the cumbersome `as_chunk(\"c\", props = ...` at all:\n>as_equation(\"[file://\\\\chi^2]\\\\chi^2\")\n>\n>Best Eik\n\nThank you!  With as_equation(\"",
       "thread_id": "thread-7b9c02dee04c",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481851.html"
     },
     {
       "id": "msg-ffcfd2df1b80",
@@ -255,7 +268,8 @@
       "body_snippet": "Hello,\n\nI'm pretty rusty using R but wanted to compare \nfour parameters measured in mm, in terms of the year an object was created.\n\nMy problem is that where there are identical \nvalues, only one line",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481852.html"
     },
     {
       "id": "msg-115ed205b500",
@@ -273,7 +287,8 @@
       "body_snippet": "Hello,\n\nWhat if instead of colors, you facet the plot by Year?\n\n\nggplot(DF, aes(x = Parameter, y = Millimetres, group = Year)) +\n  geom_line(linewidth = 1) +\n  geom_point(size = 2) +\n  labs(\n    title",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481853.html"
     },
     {
       "id": "msg-b4272bd41b23",
@@ -292,7 +307,8 @@
       "body_snippet": "I forgot, why the y axis title \"Millimetres ($)\" and not the standard\nabbreviation \"(mm)\"?\n\nHope this helps,\n\nRui Barradas\n\nRui Barradas <ruipbarradas463 at gmail.com> escreveu (quinta, 8/10/2026\n?(s)",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481854.html"
     },
     {
       "id": "msg-8373257b477b",
@@ -311,7 +327,8 @@
       "body_snippet": "Thanks Rui,\n\nMuch appreciated. Regarding why I spelt out \nmillimetres, I seldom use them as a measurement \nso it was mostly for that reason and because the \ndata was in an Excel spreadsheet.\n\nTo get a",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 2,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481855.html"
     },
     {
       "id": "msg-37c83dc14808",
@@ -327,7 +344,8 @@
       "body_snippet": "Hello\n\nI am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata",
       "thread_id": "thread-37c83dc14808",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481856.html"
     },
     {
       "id": "msg-55d64fda091d",
@@ -347,7 +365,8 @@
       "body_snippet": "I'm not entirely sure I've understood the issue, but is this exactly what\njitter exists for\n\ngeom_line(position=position_jitter(w=0.1) ...\n\n\nAdding some slight \"bounce\" to the plotted likes to make th",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 3,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481857.html"
     },
     {
       "id": "msg-8e09dc98028c",
@@ -365,7 +384,8 @@
       "body_snippet": "I've answered this on CrossValidated. The tl;dr version \n(copied/quoted) is:\n\n > The fundamental answer to this question is that the 'normalize' \noption to residuals is not intended to make the residu",
       "thread_id": "thread-37c83dc14808",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481858.html"
     },
     {
       "id": "msg-c0cda83e33a6",
@@ -379,11 +399,12 @@
       "references": [
         "<AS8PR01MB814522D9495581331D6C813886922@AS8PR01MB8145.eurprd01.prod.exchangelabs.com>"
       ],
-      "body_plain": "The root(!) cause here is that the idea of normalizing transforming to N(0, I) is simply not well thought through. I don?t even think that Doug Bates would disagree. Basically such normalizations are only unique up to orthogonal rotation and different rotations can give quite different results.\n\nAs you notice, Cholesky-based approaches depend on reordering data. As far as I can tell, you basically get normalized residuals from regressing variables on the set of previous variables,  This may make good sense if data are on a time series, but not really otherwise. Eigen-decomposition at least doesn?t have that problem, but it is still not easy to interpret what it means, and you still have issues like the fact that eigenvectors can be sign-flipped (and rotated in the case of multidimensional eigen spaces). \n\nSince R is open source, there is nothing keeping from checking whether you can reproduce the Stata results. I think you can get the reverse order Cholesky just by reversing rows/cols.\n\nHowever, my hunch is that it would be better to come up with a technique that is targeted towards specific  departures from the model assumptions. If you are looking for outliers, One idea could be to try and predict each observation from all the others and do a QQ plot of the standardized residuals. This doesn?t make the residuals uncorrelated, but that?s not really important for QQ plots. You may be able to do this efficiently using something like rank-1 updates of the inverses involved, but even if not, computers have become a lot faster since year 2000? You might also try to exploit substructures in the matrix.\n\n- Peter D\n\n> On 9 Oct 2026, at 08.59, Michael Kristensen via R-help <r-help at r-project.org> wrote:\n> \n> Hello\n> \n> I am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata are different when using mixed models (i.e. the nlme package in R).\n> \n> What I have found is that the residuals are both theoretically computed the same way: normalized_residuals = sigma^(-1) * Lambda^(-1/2) * residuals. This is based on the works of Jos? C. Pinheiro and Douglas M. Bates. The nlme package in R references their book \"Mixed effects models in S and S-PLUS\" (2000), while Stata references their article \"Computational Methods for Multilevel Modelling\" (1998).\n> \n> However, the way the matrix square root (of Lambda) is computed is different between the two programs, the result of which can have a rather significant impact on whether or not the normalized residuals actually seem to follow a normal distribution. According to my superiors, this has been an issue for the department in past projects.\n> \n> The way R computes the matrix square root is through the Cholesky decomposition A = LL^T (using the \"chol\" function from FORTRAN77). I cannot access the source code for Stata, but it seems like Stata uses Cholesky decomposition as well, however using a Cholesky decomposition algorithm starting at \"the bottom right\" of the matrix instead of \"the top left\" such that A = L^T L. Using these two methods for Cholesky decomposition, I have been able to recreate the normalised residuals from R and Stata respectively (on some datasets that I cannot share due to GDPR rules). When using QQ-plots on the normalized residuals calculated with R and the ones calculated with Stata, the two plots imply different conclusions about the normality of the residuals.\n> \n> My question is that, in principle, could one not use several different methods for computing a matrix square root and possibly come to significantly different conclusions? For example, why is the Cholesky decomposition used over the eigenvalue decomposition (which seems like the most intuitive way to compute the matrix square root to me)?\n> \n> To me it seems like all methods for computing the matrix square root are theoretically equally good in terms of normalization (removing heteroscedasticity and correlation) and work equally well on large sample sizes, but they can differ quite significantly on smaller sample sizes.\n> \n> I am interested in hearing whether there is a specific reason that one matrix square root is used over another and if you know whether there is an aspect of \"small sample optimality\" when choosing method. Thanks in advance!\n> \n> Note, that I have also asked this question on cross-validated (\"Normalized residuals in mixed models, R (nlme) vs Stata<https://stats.stackexchange.com/questions/677243/normalized-residuals-in-mixed-models-r-nlme-vs-stata>\"), where I have provided an example on the data 'RatWeight' from package 'heplots'.\n> \n> Kind Regards\n> Michael\n> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
-      "body_snippet": "The root(!) cause here is that the idea of normalizing transforming to N(0, I) is simply not well thought through. I don?t even think that Doug Bates would disagree. Basically such normalizations are ",
+      "body_plain": "The root(!) cause here is that the idea of normalizing transforming to N(0, I) is simply not well thought through. I don’t even think that Doug Bates would disagree. Basically such normalizations are only unique up to orthogonal rotation and different rotations can give quite different results.\n\nAs you notice, Cholesky-based approaches depend on reordering data. As far as I can tell, you basically get normalized residuals from regressing variables on the set of previous variables,  This may make good sense if data are on a time series, but not really otherwise. Eigen-decomposition at least doesn’t have that problem, but it is still not easy to interpret what it means, and you still have issues like the fact that eigenvectors can be sign-flipped (and rotated in the case of multidimensional eigen spaces). \n\nSince R is open source, there is nothing keeping from checking whether you can reproduce the Stata results. I think you can get the reverse order Cholesky just by reversing rows/cols.\n\nHowever, my hunch is that it would be better to come up with a technique that is targeted towards specific  departures from the model assumptions. If you are looking for outliers, One idea could be to try and predict each observation from all the others and do a QQ plot of the standardized residuals. This doesn’t make the residuals uncorrelated, but that’s not really important for QQ plots. You may be able to do this efficiently using something like rank-1 updates of the inverses involved, but even if not, computers have become a lot faster since year 2000… You might also try to exploit substructures in the matrix.\n\n- Peter D\n\n> On 9 Oct 2026, at 08.59, Michael Kristensen via R-help <r-help at r-project.org> wrote:\n> \n> Hello\n> \n> I am a research assistant intern for biostatistics at the department of public health, Aarhus University (AU). I have been tasked with understanding why normalized residuals between R and Stata are different when using mixed models (i.e. the nlme package in R).\n> \n> What I have found is that the residuals are both theoretically computed the same way: normalized_residuals = sigma^(-1) * Lambda^(-1/2) * residuals. This is based on the works of Jos? C. Pinheiro and Douglas M. Bates. The nlme package in R references their book \"Mixed effects models in S and S-PLUS\" (2000), while Stata references their article \"Computational Methods for Multilevel Modelling\" (1998).\n> \n> However, the way the matrix square root (of Lambda) is computed is different between the two programs, the result of which can have a rather significant impact on whether or not the normalized residuals actually seem to follow a normal distribution. According to my superiors, this has been an issue for the department in past projects.\n> \n> The way R computes the matrix square root is through the Cholesky decomposition A = LL^T (using the \"chol\" function from FORTRAN77). I cannot access the source code for Stata, but it seems like Stata uses Cholesky decomposition as well, however using a Cholesky decomposition algorithm starting at \"the bottom right\" of the matrix instead of \"the top left\" such that A = L^T L. Using these two methods for Cholesky decomposition, I have been able to recreate the normalised residuals from R and Stata respectively (on some datasets that I cannot share due to GDPR rules). When using QQ-plots on the normalized residuals calculated with R and the ones calculated with Stata, the two plots imply different conclusions about the normality of the residuals.\n> \n> My question is that, in principle, could one not use several different methods for computing a matrix square root and possibly come to significantly different conclusions? For example, why is the Cholesky decomposition used over the eigenvalue decomposition (which seems like the most intuitive way to compute the matrix square root to me)?\n> \n> To me it seems like all methods for computing the matrix square root are theoretically equally good in terms of normalization (removing heteroscedasticity and correlation) and work equally well on large sample sizes, but they can differ quite significantly on smaller sample sizes.\n> \n> I am interested in hearing whether there is a specific reason that one matrix square root is used over another and if you know whether there is an aspect of \"small sample optimality\" when choosing method. Thanks in advance!\n> \n> Note, that I have also asked this question on cross-validated (\"Normalized residuals in mixed models, R (nlme) vs Stata<https://stats.stackexchange.com/questions/677243/normalized-residuals-in-mixed-models-r-nlme-vs-stata>\"), where I have provided an example on the data 'RatWeight' from package 'heplots'.\n> \n> Kind Regards\n> Michael\n> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "The root(!) cause here is that the idea of normalizing transforming to N(0, I) is simply not well thought through. I don’t even think that Doug Bates would disagree. Basically such normalizations are ",
       "thread_id": "thread-37c83dc14808",
       "thread_depth": 1,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481859.html"
     },
     {
       "id": "msg-765e0f635aea",
@@ -404,7 +425,8 @@
       "body_snippet": "Thanks. I opted to change the linestyle,  lty in \nBase R or linetype in ggplot2. It worked fine.\n\n\n\nAt 06:44 PM 10/10/2026, CALUM POLWART wrote:\n>I'm not entirely sure I've understood the issue, \n>but",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 4,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481860.html"
     },
     {
       "id": "msg-47c7a0a8ca7d",
@@ -426,7 +448,8 @@
       "body_snippet": "What also sometimes can work is making the lines semi-transparent using \ngeom_line(alpha = 0.5), for example.\n\nHTH,\nJan\n\n\n\nOn 12-10-2026 10:58, Bob Green via R-help wrote:\n> Thanks. I opted to change ",
       "thread_id": "thread-ffcfd2df1b80",
       "thread_depth": 5,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481861.html"
     },
     {
       "id": "msg-00b3e51ca324",
@@ -442,7 +465,8 @@
       "body_snippet": "Dear R-packages community,\n\nWe are pleased to announce the release of version 2.1.0 of footBayes, now available on CRAN.\n\nfootBayes is an R package for the estimation, visualization and prediction of ",
       "thread_id": "thread-00b3e51ca324",
       "thread_depth": 0,
-      "month": "2026-10"
+      "month": "2026-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-October/481862.html"
     }
   ],
   "threads": [
