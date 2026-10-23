@@ -63163,11 +63163,12 @@
       "references": [
         "<web-106424803@controller2.cgpmail.ua.pt>"
       ],
-      "body_plain": "This will split the data by industry & year and then return the values\nthat include the 80%-tile (>=10% & <= 90%)\n\n# split the data by industry/year\nd.s <- split(data, list(data$industry, data$year), drop=TRUE)\nresult <- lapply(d.s, function(.id){\n    # get 10/90% values\n    .limit <- quantile(.id$X1, prob=c(.1, .9))\n    subset(.id, X1 >= .limit[1] & X1 <= .limit[2])\n})\n\nThis returns a list of 100 elements for each combination.\n\nOn Sat, Jul 31, 2010 at 9:39 PM, Cecilia Carmo <cecilia.carmo at ua.pt> wrote:\n> Hi everyone!\n>\n> #I need a loop or a function that creates a X2 variable that is X1 without\n> the extreme values (or X1 winsorized) by industry and year.\n>\n> #My reproducible example:\n> firm<-sort(rep(1:1000,10),decreasing=F)\n> year<-rep(1998:2007,1000)\n> industry<-rep(c(rep(1,10),rep(2,10),rep(3,10),rep(4,10),rep(5,10),rep(6,10),rep(7,10),rep(8,10),rep(9,10),\n> rep(10,10)),1000)\n> X1<-rnorm(10000)\n> data<-data.frame(firm, industry,year,X1)\n> data\n>\n> The way I?m doing this is very hard. I split my sample by industry and year,\n> for each industry and year I calculate the 10% and 90% quantiles, then I\n> create a X2 variable like this:\n>\n> industry1<-subset(data,data$industry==1)\n>\n> ind1year1999<-subset(industry1,industry1$year==1999)\n> q1<-quantile(ind1year1999$X1,probs=0.1,na.rm=TRUE)\n> q99<-quantile(ind1year1999$X1,probs=0.90,na.rm=TRUE)\n> ind1year1999winsorized<-transform(ind1year1999,X2=ifelse(X1<q1,q1,ifelse(X1>q99,q99,X1)))\n>\n> ind1year2000<-subset(industry1,industry1$year==2000)\n> q1<-quantile(ind1year2000$X1,probs=0.1,na.rm=TRUE)\n> q99<-quantile(ind1year2000$X1,probs=0.90,na.rm=TRUE)\n> ind1year2000winsorized<-transform(ind1year2000,X2=ifelse(X1<q1,q1,ifelse(X1>q99,q99,X1)))\n>\n> I repeat this for all years and industries, and then I merge/bind all again\n> to have a new dataframe with all the columns of the dataframe ?data? plus\n> X2.\n>\n> Could anyone help me doing this in a easier way?\n>\n> Thanks\n> Cec?lia Carmo\n> Universidade de Aveiro - Portugal\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem that you are trying to solve?",
+      "body_plain": "This will split the data by industry & year and then return the values\nthat include the 80%-tile (>=10% & <= 90%)\n\n# split the data by industry/year\nd.s <- split(data, list(data$industry, data$year), drop=TRUE)\nresult <- lapply(d.s, function(.id){\n    # get 10/90% values\n    .limit <- quantile(.id$X1, prob=c(.1, .9))\n    subset(.id, X1 >= .limit[1] & X1 <= .limit[2])\n})\n\nThis returns a list of 100 elements for each combination.\n\nOn Sat, Jul 31, 2010 at 9:39 PM, Cecilia Carmo <cecilia.carmo at ua.pt> wrote:\n> Hi everyone!\n>\n> #I need a loop or a function that creates a X2 variable that is X1 without\n> the extreme values (or X1 winsorized) by industry and year.\n>\n> #My reproducible example:\n> firm<-sort(rep(1:1000,10),decreasing=F)\n> year<-rep(1998:2007,1000)\n> industry<-rep(c(rep(1,10),rep(2,10),rep(3,10),rep(4,10),rep(5,10),rep(6,10),rep(7,10),rep(8,10),rep(9,10),\n> rep(10,10)),1000)\n> X1<-rnorm(10000)\n> data<-data.frame(firm, industry,year,X1)\n> data\n>\n> The way I’m doing this is very hard. I split my sample by industry and year,\n> for each industry and year I calculate the 10% and 90% quantiles, then I\n> create a X2 variable like this:\n>\n> industry1<-subset(data,data$industry==1)\n>\n> ind1year1999<-subset(industry1,industry1$year==1999)\n> q1<-quantile(ind1year1999$X1,probs=0.1,na.rm=TRUE)\n> q99<-quantile(ind1year1999$X1,probs=0.90,na.rm=TRUE)\n> ind1year1999winsorized<-transform(ind1year1999,X2=ifelse(X1<q1,q1,ifelse(X1>q99,q99,X1)))\n>\n> ind1year2000<-subset(industry1,industry1$year==2000)\n> q1<-quantile(ind1year2000$X1,probs=0.1,na.rm=TRUE)\n> q99<-quantile(ind1year2000$X1,probs=0.90,na.rm=TRUE)\n> ind1year2000winsorized<-transform(ind1year2000,X2=ifelse(X1<q1,q1,ifelse(X1>q99,q99,X1)))\n>\n> I repeat this for all years and industries, and then I merge/bind all again\n> to have a new dataframe with all the columns of the dataframe «data» plus\n> X2.\n>\n> Could anyone help me doing this in a easier way?\n>\n> Thanks\n> Cecília Carmo\n> Universidade de Aveiro - Portugal\n>\n> ______________________________________________\n> R-help at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\n\n-- \nJim Holtman\nCincinnati, OH\n+1 513 646 9390\n\nWhat is the problem that you are trying to solve?",
       "body_snippet": "This will split the data by industry & year and then return the values\nthat include the 80%-tile (>=10% & <= 90%)\n\n# split the data by industry/year\nd.s <- split(data, list(data$industry, data$year), ",
       "thread_id": "thread-68e193b86204",
       "thread_depth": 0,
-      "month": "2010-07"
+      "month": "2010-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-August/247632.html"
     },
     {
       "id": "msg-cd0fbbff057c",
@@ -63183,7 +63184,8 @@
       "body_snippet": "Hello All,\n\nSuppose that I have a sequence of letters (e.g., A..Z). I want to\npermute the sequence to generate random sequences, such that the local\ndensity of any letter with a window (say of length ",
       "thread_id": "thread-cd0fbbff057c",
       "thread_depth": 0,
-      "month": "2010-07"
+      "month": "2010-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-August/247635.html"
     },
     {
       "id": "msg-687c6bc22fe7",
@@ -63199,7 +63201,8 @@
       "body_snippet": "hi!! imade many codes during these days..\nI study Statistics....\n\nplease one more question!!\nex1<-function(n,p,rho){\n muvec1=zeros(1,p)\n A=eye(p)\n  for(i in 1:p){\n   for(j in 1:p){\n    A[i,j]=rho^(abs",
       "thread_id": "thread-687c6bc22fe7",
       "thread_depth": 0,
-      "month": "2010-07"
+      "month": "2010-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-August/247637.html"
     }
   ],
   "threads": [
