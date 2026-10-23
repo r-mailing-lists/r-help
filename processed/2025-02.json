@@ -17,7 +17,8 @@
       "body_snippet": "R CMD check <package> gives me below message at the end.  There does not seem to be a problem with my TeX installation.  Is it possible that R CMD check is not looking in the correct location?  How ca",
       "thread_id": "thread-b1bac7a02c80",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480533.html"
     },
     {
       "id": "msg-cbdd4fd3fe12",
@@ -31,11 +32,12 @@
       "references": [
         "<21fb5b76-8add-4a1a-b075-38f6c358ed1a.ref@yahoo.fr>"
       ],
-      "body_plain": "Dear R-help members\n\nSince this morning (5/2/2025), I get an error when I try to load optimx \npackage. I solve it and I send my solution but if someone has a better \nidea or understand what's happened, I will be most happy to know.\n\nMacOSX 15.3\n\nR 4.4.2\n\nnlopt installed using\nbrew install nlopt\n\nHere are the steps to produce the error and a solution to solve it. Some \nparts are in French. I don't know how to \"ask\" to R to not use French \nfor some system messages.\n\nMarc\n\n\n > library(\"optimx\")\nErreur : le chargement du package ou de l'espace de noms a ?chou? pour \n?optimx? in dyn.load(file, DLLpath = DLLpath, ...) :\nimpossible de charger l'objet partag? \n'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so'?:\ndlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, \n0x0006): Library not loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n ? Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> \n/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so\n ? Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no \nsuch file), \n'/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' \n(no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such \nfile), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' \n(no such file), \n'/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\nIt seems that the file libnlopt.0.dylib is not find.\n\nWhen I check in this folder, indeed it is not present:\n\n? lib % cd /opt/homebrew/opt/nlopt/lib\n? lib % ls\ncmake??????????? libnlopt.1.dylib??? pkgconfig\nlibnlopt.1.0.0.dylib??? libnlopt.dylib\n\nI create a symlink:\n\n? lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\nPassword:\n? lib % ls -al\ntotal 880\ndrwxr-xr-x?? 8 marcgirondot? admin???? 256? 5 f?v 10:28 .\ndrwxr-xr-x? 15 marcgirondot? admin???? 480? 5 f?v 10:26 ..\ndrwxr-xr-x?? 3 marcgirondot? admin????? 96? 4 f?v 19:29 cmake\nlrwxr-xr-x?? 1 root????????? admin????? 16? 5 f?v 10:28 libnlopt.0.dylib \n-> libnlopt.1.dylib\n-r--r--r--?? 1 marcgirondot? admin? 447936? 5 f?v 10:26 libnlopt.1.0.0.dylib\nlrwxr-xr-x?? 1 marcgirondot? admin????? 20? 4 f?v 19:29 libnlopt.1.dylib \n-> libnlopt.1.0.0.dylib\nlrwxr-xr-x?? 1 marcgirondot? admin????? 16? 4 f?v 19:29 libnlopt.dylib \n-> libnlopt.1.dylib\ndrwxr-xr-x?? 3 marcgirondot? admin????? 96? 5 f?v 10:26 pkgconfig\n\nand I reinstall optimx from source\n\n > remove.packages(\"optimx\")\nElimination du package de \n?/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library?\n(car ?lib? n'est pas sp?cifi?)\n > install.packages(\"optimx\", type=\"source\")\nessai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\nContent type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n==================================================\ndownloaded 2.2 MB\n\n* installing *source* package ?optimx? ...\n** package ?optimx? correctement d?compress? et sommes MD5 v?rifi?es\n** using staged installation\n** R\n** inst\n** byte-compile and prepare package for lazy loading\n** help\n*** installing help indices\n** building package indices\n** installing vignettes\n** testing if installed package can be loaded from temporary location\n** testing if installed package can be loaded from final location\n** testing if installed package keeps a record of temporary installation \npath\n* DONE (optimx)\n\nLes packages source t?l?charg?s sont dans\n ??? ?/private/tmp/Rtmpsb2lpE/downloaded_packages?",
+      "body_plain": "Dear R-help members\n\nSince this morning (5/2/2025), I get an error when I try to load optimx \npackage. I solve it and I send my solution but if someone has a better \nidea or understand what's happened, I will be most happy to know.\n\nMacOSX 15.3\n\nR 4.4.2\n\nnlopt installed using\nbrew install nlopt\n\nHere are the steps to produce the error and a solution to solve it. Some \nparts are in French. I don't know how to \"ask\" to R to not use French \nfor some system messages.\n\nMarc\n\n\n > library(\"optimx\")\nErreur : le chargement du package ou de l'espace de noms a échoué pour \n‘optimx’ in dyn.load(file, DLLpath = DLLpath, ...) :\nimpossible de charger l'objet partagé \n'/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so' :\ndlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, \n0x0006): Library not loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n   Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> \n/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so\n   Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no \nsuch file), \n'/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' \n(no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such \nfile), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' \n(no such file), \n'/Library/Java/JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\nIt seems that the file libnlopt.0.dylib is not find.\n\nWhen I check in this folder, indeed it is not present:\n\n√ lib % cd /opt/homebrew/opt/nlopt/lib\n√ lib % ls\ncmake   ??????   libnlopt.1.dylib    pkgconfig\nlibnlopt.1.0.0.dylib    libnlopt.dylib\n\nI create a symlink:\n\n√ lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\nPassword:\n√ lib % ls -al\ntotal 880\ndrwxr-xr-x   8 marcgirondot  admin     256  5 fév 10:28 .\ndrwxr-xr-x  15 marcgirondot  admin     480  5 fév 10:26 ..\ndrwxr-xr-x   3 marcgirondot  admin      96  4 fév 19:29 cmake\nlrwxr-xr-x   1 root   ????   admin      16  5 fév 10:28 libnlopt.0.dylib \n-> libnlopt.1.dylib\n-r--r--r--   1 marcgirondot  admin  447936  5 fév 10:26 libnlopt.1.0.0.dylib\nlrwxr-xr-x   1 marcgirondot  admin      20  4 fév 19:29 libnlopt.1.dylib \n-> libnlopt.1.0.0.dylib\nlrwxr-xr-x   1 marcgirondot  admin      16  4 fév 19:29 libnlopt.dylib \n-> libnlopt.1.dylib\ndrwxr-xr-x   3 marcgirondot  admin      96  5 fév 10:26 pkgconfig\n\nand I reinstall optimx from source\n\n > remove.packages(\"optimx\")\nElimination du package de \n‘/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library’\n(car ‘lib’ n'est pas spécifié)\n > install.packages(\"optimx\", type=\"source\")\nessai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\nContent type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n==================================================\ndownloaded 2.2 MB\n\n* installing *source* package ‘optimx’ ...\n** package ‘optimx’ correctement décompressé et sommes MD5 vérifiées\n** using staged installation\n** R\n** inst\n** byte-compile and prepare package for lazy loading\n** help\n*** installing help indices\n** building package indices\n** installing vignettes\n** testing if installed package can be loaded from temporary location\n** testing if installed package can be loaded from final location\n** testing if installed package keeps a record of temporary installation \npath\n* DONE (optimx)\n\nLes packages source téléchargés sont dans\n     ‘/private/tmp/Rtmpsb2lpE/downloaded_packages’",
       "body_snippet": "Dear R-help members\n\nSince this morning (5/2/2025), I get an error when I try to load optimx \npackage. I solve it and I send my solution but if someone has a better \nidea or understand what's happened",
       "thread_id": "thread-cbdd4fd3fe12",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480534.html"
     },
     {
       "id": "msg-e9f2ac3d0223",
@@ -50,11 +52,12 @@
         "<21fb5b76-8add-4a1a-b075-38f6c358ed1a.ref@yahoo.fr>",
         "<21fb5b76-8add-4a1a-b075-38f6c358ed1a@yahoo.fr>"
       ],
-      "body_plain": "Hi,\n\nThat looks like the dependency on nlopt for nloptr (used by several of the\nsolvers) was somehow missing. There is SUPPOSED to be a check of what is installed\nand a warning issued, but possibly one got missed. Even some base packages\ndo sometimes need the external libraries manually installed, and I find I'm\ndoing that after various OS updates or resets when the long term support\nruns out.\n\nSome updates and minor extensions to optimx, mostly convenience features or\nchecks that dependencies available, are on the github version, which is a bit\nahead of CRAN (https://github.com/nashjc/optimx). I find doing all the checks\nand revdeps for the package now getting heavy enough that it is worth waiting\na bit unless there's a critical bug, which I don't think there has been for\na long while.\n\nI don't have a Mac, and am currently away from home (actually in Nice, FR for\na couple of weeks), but would be interested in knowing if the github version\nneeds an independent install of nlopt on Mac, or indeed on any platform.\n\nCheers,\n\nJohn Nash\nmaintainer, optimx\n\n\nOn 2025-02-05 04:46, Marc Girondot via R-help wrote:\n> Dear R-help members\n> \n> Since this morning (5/2/2025), I get an error when I try to load optimx package. I solve it and I send my solution but \n> if someone has a better idea or understand what's happened, I will be most happy to know.\n> \n> MacOSX 15.3\n> \n> R 4.4.2\n> \n> nlopt installed using\n> brew install nlopt\n> \n> Here are the steps to produce the error and a solution to solve it. Some parts are in French. I don't know how to \"ask\" \n> to R to not use French for some system messages.\n> \n> Marc\n> \n> \n>  > library(\"optimx\")\n> Erreur : le chargement du package ou de l'espace de noms a ?chou? pour ?optimx? in dyn.load(file, DLLpath = DLLpath, ...) :\n> impossible de charger l'objet partag? '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/ \n> nloptr.so'?:\n> dlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, 0x0006): Library not \n> loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n>  ? Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/ \n> library/nloptr/libs/nloptr.so\n>  ? Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/ \n> opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such \n> file), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' (no such file), '/Library/Java/ \n> JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\n> It seems that the file libnlopt.0.dylib is not find.\n> \n> When I check in this folder, indeed it is not present:\n> \n> ? lib % cd /opt/homebrew/opt/nlopt/lib\n> ? lib % ls\n> cmake??????????? libnlopt.1.dylib??? pkgconfig\n> libnlopt.1.0.0.dylib??? libnlopt.dylib\n> \n> I create a symlink:\n> \n> ? lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\n> Password:\n> ? lib % ls -al\n> total 880\n> drwxr-xr-x?? 8 marcgirondot? admin???? 256? 5 f?v 10:28 .\n> drwxr-xr-x? 15 marcgirondot? admin???? 480? 5 f?v 10:26 ..\n> drwxr-xr-x?? 3 marcgirondot? admin????? 96? 4 f?v 19:29 cmake\n> lrwxr-xr-x?? 1 root????????? admin????? 16? 5 f?v 10:28 libnlopt.0.dylib -> libnlopt.1.dylib\n> -r--r--r--?? 1 marcgirondot? admin? 447936? 5 f?v 10:26 libnlopt.1.0.0.dylib\n> lrwxr-xr-x?? 1 marcgirondot? admin????? 20? 4 f?v 19:29 libnlopt.1.dylib -> libnlopt.1.0.0.dylib\n> lrwxr-xr-x?? 1 marcgirondot? admin????? 16? 4 f?v 19:29 libnlopt.dylib -> libnlopt.1.dylib\n> drwxr-xr-x?? 3 marcgirondot? admin????? 96? 5 f?v 10:26 pkgconfig\n> \n> and I reinstall optimx from source\n> \n>  > remove.packages(\"optimx\")\n> Elimination du package de ?/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library?\n> (car ?lib? n'est pas sp?cifi?)\n>  > install.packages(\"optimx\", type=\"source\")\n> essai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\n> Content type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n> ==================================================\n> downloaded 2.2 MB\n> \n> * installing *source* package ?optimx? ...\n> ** package ?optimx? correctement d?compress? et sommes MD5 v?rifi?es\n> ** using staged installation\n> ** R\n> ** inst\n> ** byte-compile and prepare package for lazy loading\n> ** help\n> *** installing help indices\n> ** building package indices\n> ** installing vignettes\n> ** testing if installed package can be loaded from temporary location\n> ** testing if installed package can be loaded from final location\n> ** testing if installed package keeps a record of temporary installation path\n> * DONE (optimx)\n> \n> Les packages source t?l?charg?s sont dans\n>  ??? ?/private/tmp/Rtmpsb2lpE/downloaded_packages?\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "Hi,\n\nThat looks like the dependency on nlopt for nloptr (used by several of the\nsolvers) was somehow missing. There is SUPPOSED to be a check of what is installed\nand a warning issued, but possibly one got missed. Even some base packages\ndo sometimes need the external libraries manually installed, and I find I'm\ndoing that after various OS updates or resets when the long term support\nruns out.\n\nSome updates and minor extensions to optimx, mostly convenience features or\nchecks that dependencies available, are on the github version, which is a bit\nahead of CRAN (https://github.com/nashjc/optimx). I find doing all the checks\nand revdeps for the package now getting heavy enough that it is worth waiting\na bit unless there's a critical bug, which I don't think there has been for\na long while.\n\nI don't have a Mac, and am currently away from home (actually in Nice, FR for\na couple of weeks), but would be interested in knowing if the github version\nneeds an independent install of nlopt on Mac, or indeed on any platform.\n\nCheers,\n\nJohn Nash\nmaintainer, optimx\n\n\nOn 2025-02-05 04:46, Marc Girondot via R-help wrote:\n> Dear R-help members\n> \n> Since this morning (5/2/2025), I get an error when I try to load optimx package. I solve it and I send my solution but \n> if someone has a better idea or understand what's happened, I will be most happy to know.\n> \n> MacOSX 15.3\n> \n> R 4.4.2\n> \n> nlopt installed using\n> brew install nlopt\n> \n> Here are the steps to produce the error and a solution to solve it. Some parts are in French. I don't know how to \"ask\" \n> to R to not use French for some system messages.\n> \n> Marc\n> \n> \n>  > library(\"optimx\")\n> Erreur : le chargement du package ou de l'espace de noms a échoué pour ‘optimx’ in dyn.load(file, DLLpath = DLLpath, ...) :\n> impossible de charger l'objet partagé '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/ \n> nloptr.so' :\n> dlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, 0x0006): Library not \n> loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n>    Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/ \n> library/nloptr/libs/nloptr.so\n>    Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/ \n> opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such \n> file), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' (no such file), '/Library/Java/ \n> JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\n> It seems that the file libnlopt.0.dylib is not find.\n> \n> When I check in this folder, indeed it is not present:\n> \n> √ lib % cd /opt/homebrew/opt/nlopt/lib\n> √ lib % ls\n> cmake   ??????   libnlopt.1.dylib    pkgconfig\n> libnlopt.1.0.0.dylib    libnlopt.dylib\n> \n> I create a symlink:\n> \n> √ lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\n> Password:\n> √ lib % ls -al\n> total 880\n> drwxr-xr-x   8 marcgirondot  admin     256  5 fév 10:28 .\n> drwxr-xr-x  15 marcgirondot  admin     480  5 fév 10:26 ..\n> drwxr-xr-x   3 marcgirondot  admin      96  4 fév 19:29 cmake\n> lrwxr-xr-x   1 root   ????   admin      16  5 fév 10:28 libnlopt.0.dylib -> libnlopt.1.dylib\n> -r--r--r--   1 marcgirondot  admin  447936  5 fév 10:26 libnlopt.1.0.0.dylib\n> lrwxr-xr-x   1 marcgirondot  admin      20  4 fév 19:29 libnlopt.1.dylib -> libnlopt.1.0.0.dylib\n> lrwxr-xr-x   1 marcgirondot  admin      16  4 fév 19:29 libnlopt.dylib -> libnlopt.1.dylib\n> drwxr-xr-x   3 marcgirondot  admin      96  5 fév 10:26 pkgconfig\n> \n> and I reinstall optimx from source\n> \n>  > remove.packages(\"optimx\")\n> Elimination du package de ‘/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library’\n> (car ‘lib’ n'est pas spécifié)\n>  > install.packages(\"optimx\", type=\"source\")\n> essai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\n> Content type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n> ==================================================\n> downloaded 2.2 MB\n> \n> * installing *source* package ‘optimx’ ...\n> ** package ‘optimx’ correctement décompressé et sommes MD5 vérifiées\n> ** using staged installation\n> ** R\n> ** inst\n> ** byte-compile and prepare package for lazy loading\n> ** help\n> *** installing help indices\n> ** building package indices\n> ** installing vignettes\n> ** testing if installed package can be loaded from temporary location\n> ** testing if installed package can be loaded from final location\n> ** testing if installed package keeps a record of temporary installation path\n> * DONE (optimx)\n> \n> Les packages source téléchargés sont dans\n>      ‘/private/tmp/Rtmpsb2lpE/downloaded_packages’\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Hi,\n\nThat looks like the dependency on nlopt for nloptr (used by several of the\nsolvers) was somehow missing. There is SUPPOSED to be a check of what is installed\nand a warning issued, but possibly on",
       "thread_id": "thread-cbdd4fd3fe12",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480535.html"
     },
     {
       "id": "msg-8bd385dc790c",
@@ -70,11 +73,12 @@
         "<21fb5b76-8add-4a1a-b075-38f6c358ed1a@yahoo.fr>",
         "<3c90a854-2fbf-4423-9966-ab0ab71351d0@gmail.com>"
       ],
-      "body_plain": "I think the operative words here are \"brew install\". I.e., this is a homebrew installation, and thus nothing to do with CRAN.\n\nNothing wrong with homebrew as far as R Core and the CRAN team knows, we just don't support it, so you have to hope for response from other homebrew users.\n\n\n- Peter D.\n\n\n> On 5 Feb 2025, at 14:05 , J C Nash <profjcnash at gmail.com> wrote:\n> \n> Hi,\n> \n> That looks like the dependency on nlopt for nloptr (used by several of the\n> solvers) was somehow missing. There is SUPPOSED to be a check of what is installed\n> and a warning issued, but possibly one got missed. Even some base packages\n> do sometimes need the external libraries manually installed, and I find I'm\n> doing that after various OS updates or resets when the long term support\n> runs out.\n> \n> Some updates and minor extensions to optimx, mostly convenience features or\n> checks that dependencies available, are on the github version, which is a bit\n> ahead of CRAN (https://github.com/nashjc/optimx). I find doing all the checks\n> and revdeps for the package now getting heavy enough that it is worth waiting\n> a bit unless there's a critical bug, which I don't think there has been for\n> a long while.\n> \n> I don't have a Mac, and am currently away from home (actually in Nice, FR for\n> a couple of weeks), but would be interested in knowing if the github version\n> needs an independent install of nlopt on Mac, or indeed on any platform.\n> \n> Cheers,\n> \n> John Nash\n> maintainer, optimx\n> \n> \n> On 2025-02-05 04:46, Marc Girondot via R-help wrote:\n>> Dear R-help members\n>> Since this morning (5/2/2025), I get an error when I try to load optimx package. I solve it and I send my solution but if someone has a better idea or understand what's happened, I will be most happy to know.\n>> MacOSX 15.3\n>> R 4.4.2\n>> nlopt installed using\n>> brew install nlopt\n>> Here are the steps to produce the error and a solution to solve it. Some parts are in French. I don't know how to \"ask\" to R to not use French for some system messages.\n>> Marc\n>> > library(\"optimx\")\n>> Erreur : le chargement du package ou de l'espace de noms a ?chou? pour ?optimx? in dyn.load(file, DLLpath = DLLpath, ...) :\n>> impossible de charger l'objet partag? '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/ nloptr.so'?:\n>> dlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, 0x0006): Library not loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n>>   Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/ library/nloptr/libs/nloptr.so\n>>   Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/ opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' (no such file), '/Library/Java/ JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\n>> It seems that the file libnlopt.0.dylib is not find.\n>> When I check in this folder, indeed it is not present:\n>> ? lib % cd /opt/homebrew/opt/nlopt/lib\n>> ? lib % ls\n>> cmake            libnlopt.1.dylib    pkgconfig\n>> libnlopt.1.0.0.dylib    libnlopt.dylib\n>> I create a symlink:\n>> ? lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\n>> Password:\n>> ? lib % ls -al\n>> total 880\n>> drwxr-xr-x   8 marcgirondot  admin     256  5 f?v 10:28 .\n>> drwxr-xr-x  15 marcgirondot  admin     480  5 f?v 10:26 ..\n>> drwxr-xr-x   3 marcgirondot  admin      96  4 f?v 19:29 cmake\n>> lrwxr-xr-x   1 root          admin      16  5 f?v 10:28 libnlopt.0.dylib -> libnlopt.1.dylib\n>> -r--r--r--   1 marcgirondot  admin  447936  5 f?v 10:26 libnlopt.1.0.0.dylib\n>> lrwxr-xr-x   1 marcgirondot  admin      20  4 f?v 19:29 libnlopt.1.dylib -> libnlopt.1.0.0.dylib\n>> lrwxr-xr-x   1 marcgirondot  admin      16  4 f?v 19:29 libnlopt.dylib -> libnlopt.1.dylib\n>> drwxr-xr-x   3 marcgirondot  admin      96  5 f?v 10:26 pkgconfig\n>> and I reinstall optimx from source\n>> > remove.packages(\"optimx\")\n>> Elimination du package de ?/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library?\n>> (car ?lib? n'est pas sp?cifi?)\n>> > install.packages(\"optimx\", type=\"source\")\n>> essai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\n>> Content type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n>> ==================================================\n>> downloaded 2.2 MB\n>> * installing *source* package ?optimx? ...\n>> ** package ?optimx? correctement d?compress? et sommes MD5 v?rifi?es\n>> ** using staged installation\n>> ** R\n>> ** inst\n>> ** byte-compile and prepare package for lazy loading\n>> ** help\n>> *** installing help indices\n>> ** building package indices\n>> ** installing vignettes\n>> ** testing if installed package can be loaded from temporary location\n>> ** testing if installed package can be loaded from final location\n>> ** testing if installed package keeps a record of temporary installation path\n>> * DONE (optimx)\n>> Les packages source t?l?charg?s sont dans\n>>     ?/private/tmp/Rtmpsb2lpE/downloaded_packages?\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_plain": "I think the operative words here are \"brew install\". I.e., this is a homebrew installation, and thus nothing to do with CRAN.\n\nNothing wrong with homebrew as far as R Core and the CRAN team knows, we just don't support it, so you have to hope for response from other homebrew users.\n\n\n- Peter D.\n\n\n> On 5 Feb 2025, at 14:05 , J C Nash <profjcnash at gmail.com> wrote:\n> \n> Hi,\n> \n> That looks like the dependency on nlopt for nloptr (used by several of the\n> solvers) was somehow missing. There is SUPPOSED to be a check of what is installed\n> and a warning issued, but possibly one got missed. Even some base packages\n> do sometimes need the external libraries manually installed, and I find I'm\n> doing that after various OS updates or resets when the long term support\n> runs out.\n> \n> Some updates and minor extensions to optimx, mostly convenience features or\n> checks that dependencies available, are on the github version, which is a bit\n> ahead of CRAN (https://github.com/nashjc/optimx). I find doing all the checks\n> and revdeps for the package now getting heavy enough that it is worth waiting\n> a bit unless there's a critical bug, which I don't think there has been for\n> a long while.\n> \n> I don't have a Mac, and am currently away from home (actually in Nice, FR for\n> a couple of weeks), but would be interested in knowing if the github version\n> needs an independent install of nlopt on Mac, or indeed on any platform.\n> \n> Cheers,\n> \n> John Nash\n> maintainer, optimx\n> \n> \n> On 2025-02-05 04:46, Marc Girondot via R-help wrote:\n>> Dear R-help members\n>> Since this morning (5/2/2025), I get an error when I try to load optimx package. I solve it and I send my solution but if someone has a better idea or understand what's happened, I will be most happy to know.\n>> MacOSX 15.3\n>> R 4.4.2\n>> nlopt installed using\n>> brew install nlopt\n>> Here are the steps to produce the error and a solution to solve it. Some parts are in French. I don't know how to \"ask\" to R to not use French for some system messages.\n>> Marc\n>> > library(\"optimx\")\n>> Erreur : le chargement du package ou de l'espace de noms a échoué pour ‘optimx’ in dyn.load(file, DLLpath = DLLpath, ...) :\n>> impossible de charger l'objet partagé '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/ nloptr.so' :\n>> dlopen(/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/nloptr/libs/nloptr.so, 0x0006): Library not loaded: /opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib\n>>   Referenced from: <2A7DAFE2-8123-3555-9569-F28214328E47> /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/ library/nloptr/libs/nloptr.so\n>>   Reason: tried: '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/ opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/opt/homebrew/opt/nlopt/lib/libnlopt.0.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libnlopt.0.dylib' (no such file), '/Library/Java/ JavaVirtualMachines/jdk-11.0.18+10/Contents/Home/lib/server/libnlopt.0.d\n>> It seems that the file libnlopt.0.dylib is not find.\n>> When I check in this folder, indeed it is not present:\n>> √ lib % cd /opt/homebrew/opt/nlopt/lib\n>> √ lib % ls\n>> cmake            libnlopt.1.dylib    pkgconfig\n>> libnlopt.1.0.0.dylib    libnlopt.dylib\n>> I create a symlink:\n>> √ lib % sudo ln -s libnlopt.1.dylib libnlopt.0.dylib\n>> Password:\n>> √ lib % ls -al\n>> total 880\n>> drwxr-xr-x   8 marcgirondot  admin     256  5 fév 10:28 .\n>> drwxr-xr-x  15 marcgirondot  admin     480  5 fév 10:26 ..\n>> drwxr-xr-x   3 marcgirondot  admin      96  4 fév 19:29 cmake\n>> lrwxr-xr-x   1 root          admin      16  5 fév 10:28 libnlopt.0.dylib -> libnlopt.1.dylib\n>> -r--r--r--   1 marcgirondot  admin  447936  5 fév 10:26 libnlopt.1.0.0.dylib\n>> lrwxr-xr-x   1 marcgirondot  admin      20  4 fév 19:29 libnlopt.1.dylib -> libnlopt.1.0.0.dylib\n>> lrwxr-xr-x   1 marcgirondot  admin      16  4 fév 19:29 libnlopt.dylib -> libnlopt.1.dylib\n>> drwxr-xr-x   3 marcgirondot  admin      96  5 fév 10:26 pkgconfig\n>> and I reinstall optimx from source\n>> > remove.packages(\"optimx\")\n>> Elimination du package de ‘/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library’\n>> (car ‘lib’ n'est pas spécifié)\n>> > install.packages(\"optimx\", type=\"source\")\n>> essai de l'URL 'https://cran.irsn.fr/src/contrib/optimx_2024-12.2.tar.gz'\n>> Content type 'application/x-gzip' length 2259525 bytes (2.2 MB)\n>> ==================================================\n>> downloaded 2.2 MB\n>> * installing *source* package ‘optimx’ ...\n>> ** package ‘optimx’ correctement décompressé et sommes MD5 vérifiées\n>> ** using staged installation\n>> ** R\n>> ** inst\n>> ** byte-compile and prepare package for lazy loading\n>> ** help\n>> *** installing help indices\n>> ** building package indices\n>> ** installing vignettes\n>> ** testing if installed package can be loaded from temporary location\n>> ** testing if installed package can be loaded from final location\n>> ** testing if installed package keeps a record of temporary installation path\n>> * DONE (optimx)\n>> Les packages source téléchargés sont dans\n>>     ‘/private/tmp/Rtmpsb2lpE/downloaded_packages’\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
       "body_snippet": "I think the operative words here are \"brew install\". I.e., this is a homebrew installation, and thus nothing to do with CRAN.\n\nNothing wrong with homebrew as far as R Core and the CRAN team knows, we ",
       "thread_id": "thread-cbdd4fd3fe12",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480536.html"
     },
     {
       "id": "msg-8beb1ef3cc6e",
@@ -90,7 +94,8 @@
       "body_snippet": "If I have this object:\n\n   x <- c(\"abc\\ndef\", \"\", \"ghi\")\n\nand I write it to a file using `writeLines(x, \"test.txt\")`, my text \neditor sees a 5 line file:\n\n   1: abc\n   2: def\n   3:\n   4: ghi\n   5:\n\nwh",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480537.html"
     },
     {
       "id": "msg-05d0a96268e0",
@@ -104,11 +109,12 @@
       "references": [
         "<cc02f160-3147-4bfc-89d0-21c5633cbbc5@gmail.com>"
       ],
-      "body_plain": "?s 13:44 de 05/02/2025, Duncan Murdoch escreveu:\n> If I have this object:\n> \n>  ? x <- c(\"abc\\ndef\", \"\", \"ghi\")\n> \n> and I write it to a file using `writeLines(x, \"test.txt\")`, my text \n> editor sees a 5 line file:\n> \n>  ? 1: abc\n>  ? 2: def\n>  ? 3:\n>  ? 4: ghi\n>  ? 5:\n> \n> which is what I'd expect:? the last line in the editor is empty.? If I \n> use `readLines(\"test.txt\")` on that file, I get the vector\n> \n>  ? c(\"abc\", \"def\", \"\", \"ghi\")\n> \n> and all of that is fine.\n> \n> What I'm looking for is simple code that modifies x to the `readLines()` \n> output, without actually writing and reading it.\n> \n> My first attempt doesn't work:\n> \n>  ? unlist(strsplit(x, \"\\n\"))\n> \n> because it leaves out the blank line 3.? I can fix that with this ugly \n> code:\n> \n>  ? lines <- strsplit(x, \"\\n\")\n>  ? lines[sapply(lines, length) == 0] <- list(\"\")\n>  ? lines <- unlist(lines)\n> \n> Surely there's a simpler way to do this?? I'd like to use just base \n> functions, no other packages.\n> \n> Duncan Murdoch\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting- \n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nUse ?textConnection.\nThe 5th line is left out, just like in your code.\n\n\nx <- c(\"abc\\ndef\", \"\", \"ghi\")\nx |> textConnection() |> readLines()\n# [1] \"abc\" \"def\" \"\"    \"ghi\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n\n-- \nEste e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\nwww.avg.com",
-      "body_snippet": "?s 13:44 de 05/02/2025, Duncan Murdoch escreveu:\n> If I have this object:\n> \n>  ? x <- c(\"abc\\ndef\", \"\", \"ghi\")\n> \n> and I write it to a file using `writeLines(x, \"test.txt\")`, my text \n> editor sees ",
+      "body_plain": "Às 13:44 de 05/02/2025, Duncan Murdoch escreveu:\n> If I have this object:\n> \n>    x <- c(\"abc\\ndef\", \"\", \"ghi\")\n> \n> and I write it to a file using `writeLines(x, \"test.txt\")`, my text \n> editor sees a 5 line file:\n> \n>    1: abc\n>    2: def\n>    3:\n>    4: ghi\n>    5:\n> \n> which is what I'd expect:  the last line in the editor is empty.  If I \n> use `readLines(\"test.txt\")` on that file, I get the vector\n> \n>    c(\"abc\", \"def\", \"\", \"ghi\")\n> \n> and all of that is fine.\n> \n> What I'm looking for is simple code that modifies x to the `readLines()` \n> output, without actually writing and reading it.\n> \n> My first attempt doesn't work:\n> \n>    unlist(strsplit(x, \"\\n\"))\n> \n> because it leaves out the blank line 3.  I can fix that with this ugly \n> code:\n> \n>    lines <- strsplit(x, \"\\n\")\n>    lines[sapply(lines, length) == 0] <- list(\"\")\n>    lines <- unlist(lines)\n> \n> Surely there's a simpler way to do this?  I'd like to use just base \n> functions, no other packages.\n> \n> Duncan Murdoch\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting- \n> guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nUse ?textConnection.\nThe 5th line is left out, just like in your code.\n\n\nx <- c(\"abc\\ndef\", \"\", \"ghi\")\nx |> textConnection() |> readLines()\n# [1] \"abc\" \"def\" \"\"    \"ghi\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n\n-- \nEste e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\nwww.avg.com",
+      "body_snippet": "Às 13:44 de 05/02/2025, Duncan Murdoch escreveu:\n> If I have this object:\n> \n>    x <- c(\"abc\\ndef\", \"\", \"ghi\")\n> \n> and I write it to a file using `writeLines(x, \"test.txt\")`, my text \n> editor sees ",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480538.html"
     },
     {
       "id": "msg-668ec419cdf0",
@@ -126,7 +132,8 @@
       "body_snippet": "This also seems to work:\n\n> strsplit(paste(x,collapse=\"\\n\"),\"\\n\")[[1]]\n[1] \"abc\" \"def\" \"\"    \"ghi\"\n\n\n> On 5 Feb 2025, at 14:44 , Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n> If I have this",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480539.html"
     },
     {
       "id": "msg-95385235ac9a",
@@ -144,7 +151,8 @@
       "body_snippet": "x <- c(\"abc\\ndef\", \"\", \"ghi\")\n\nunlist(strsplit(gsub(\"^$\", \"\\n\", x), \"\\n\"))\n\nor?\n\nx %>%\n? gsub(\"^$\", \"\\n\", .) %>%\n? strsplit(\"\\n\") %>%\n? unlist()\n\n\nRegards.............\nTanvir Ahamed \nStockholm, Sweden",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480540.html"
     },
     {
       "id": "msg-8173cee88e72",
@@ -163,7 +171,8 @@
       "body_snippet": "Thanks to Rui, Peter and Tanvir!  Peter's seems to be the fastest of the \n3 suggestions so far on the little test case, but on the real data \n(where x contains several thousand lines), Rui's seems bes",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480541.html"
     },
     {
       "id": "msg-3e647ddba6fb",
@@ -181,7 +190,8 @@
       "body_snippet": "On Sun, 02 Feb 2025, Naresh Gurbuxani writes:\n\n> R CMD check <package> gives me below message at the\n> end.  There does not seem to be a problem with my TeX\n> installation.  Is it possible that R CMD ",
       "thread_id": "thread-b1bac7a02c80",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480542.html"
     },
     {
       "id": "msg-3d3edbe0436e",
@@ -201,7 +211,8 @@
       "body_snippet": "A 3rd option could be\n\nscan(text=x, what=\"\", blank.lines.skip=FALSE)\n\n(all because readLines() doesn't obey the text=x convention, perhaps it should? I'm unsure whether the textConnection is left open",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480543.html"
     },
     {
       "id": "msg-fa08cfa5c306",
@@ -219,7 +230,8 @@
       "body_snippet": "On Wed, 5 Feb 2025 08:44:12 -0500\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> If I have this object:\n> \n>    x <- c(\"abc\\ndef\", \"\", \"ghi\")\n> \n> and I write it to a file using `writeLines(x,",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480544.html"
     },
     {
       "id": "msg-692e4fde8cdb",
@@ -236,11 +248,12 @@
         "<fdff731e-d1f5-4ef2-bf3e-8a450f143e59@gmail.com>",
         "<17DCA5E2-A799-484C-A1B8-E2F4E8BD94CC@gmail.com>"
       ],
-      "body_plain": "Hello,\n\nInline.\n\n?s 20:27 de 05/02/2025, peter dalgaard escreveu:\n> A 3rd option could be\n> \n> scan(text=x, what=\"\", blank.lines.skip=FALSE)\n> \n> (all because readLines() doesn't obey the text=x convention, perhaps it should? I'm unsure whether the textConnection is left open in Rui's method.)\n\nNo, it is not left open. Use ?showConnections to check it.\n\n\nx <- c(\"abc\\ndef\", \"\", \"ghi\")\n\nx |> textConnection() |> readLines()\nshowConnections()\n\n# this creates and opens a connection\ntc <- textConnection(x)\nshowConnections()\nreadLines(tc)\nshowConnections()\nclose(tc)\nshowConnections()\n\n\nHope this helps,\n\nRui Barradas\n\n> \n> -pd\n> \n>> On 5 Feb 2025, at 15:35 , Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>> Thanks to Rui, Peter and Tanvir!  Peter's seems to be the fastest of the 3 suggestions so far on the little test case, but on the real data (where x contains several thousand lines), Rui's seems best.\n>>\n>> Duncan\n>>\n>> On 2025-02-05 9:13 a.m., peter dalgaard wrote:\n>>> This also seems to work:\n>>>> strsplit(paste(x,collapse=\"\\n\"),\"\\n\")[[1]]\n>>> [1] \"abc\" \"def\" \"\"    \"ghi\"\n>>>> On 5 Feb 2025, at 14:44 , Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>>>\n>>>> If I have this object:\n>>>>\n>>>>   x <- c(\"abc\\ndef\", \"\", \"ghi\")\n>>>>\n>>>> and I write it to a file using `writeLines(x, \"test.txt\")`, my text editor sees a 5 line file:\n>>>>\n>>>>   1: abc\n>>>>   2: def\n>>>>   3:\n>>>>   4: ghi\n>>>>   5:\n>>>>\n>>>> which is what I'd expect:  the last line in the editor is empty.  If I use `readLines(\"test.txt\")` on that file, I get the vector\n>>>>\n>>>>   c(\"abc\", \"def\", \"\", \"ghi\")\n>>>>\n>>>> and all of that is fine.\n>>>>\n>>>> What I'm looking for is simple code that modifies x to the `readLines()` output, without actually writing and reading it.\n>>>>\n>>>> My first attempt doesn't work:\n>>>>\n>>>>   unlist(strsplit(x, \"\\n\"))\n>>>>\n>>>> because it leaves out the blank line 3.  I can fix that with this ugly code:\n>>>>\n>>>>   lines <- strsplit(x, \"\\n\")\n>>>>   lines[sapply(lines, length) == 0] <- list(\"\")\n>>>>   lines <- unlist(lines)\n>>>>\n>>>> Surely there's a simpler way to do this?  I'd like to use just base functions, no other packages.\n>>>>\n>>>> Duncan Murdoch\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n\n\n-- \nEste e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\nwww.avg.com",
-      "body_snippet": "Hello,\n\nInline.\n\n?s 20:27 de 05/02/2025, peter dalgaard escreveu:\n> A 3rd option could be\n> \n> scan(text=x, what=\"\", blank.lines.skip=FALSE)\n> \n> (all because readLines() doesn't obey the text=x conve",
+      "body_plain": "Hello,\n\nInline.\n\nÀs 20:27 de 05/02/2025, peter dalgaard escreveu:\n> A 3rd option could be\n> \n> scan(text=x, what=\"\", blank.lines.skip=FALSE)\n> \n> (all because readLines() doesn't obey the text=x convention, perhaps it should? I'm unsure whether the textConnection is left open in Rui's method.)\n\nNo, it is not left open. Use ?showConnections to check it.\n\n\nx <- c(\"abc\\ndef\", \"\", \"ghi\")\n\nx |> textConnection() |> readLines()\nshowConnections()\n\n# this creates and opens a connection\ntc <- textConnection(x)\nshowConnections()\nreadLines(tc)\nshowConnections()\nclose(tc)\nshowConnections()\n\n\nHope this helps,\n\nRui Barradas\n\n> \n> -pd\n> \n>> On 5 Feb 2025, at 15:35 , Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>> Thanks to Rui, Peter and Tanvir!  Peter's seems to be the fastest of the 3 suggestions so far on the little test case, but on the real data (where x contains several thousand lines), Rui's seems best.\n>>\n>> Duncan\n>>\n>> On 2025-02-05 9:13 a.m., peter dalgaard wrote:\n>>> This also seems to work:\n>>>> strsplit(paste(x,collapse=\"\\n\"),\"\\n\")[[1]]\n>>> [1] \"abc\" \"def\" \"\"    \"ghi\"\n>>>> On 5 Feb 2025, at 14:44 , Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>>>\n>>>> If I have this object:\n>>>>\n>>>>   x <- c(\"abc\\ndef\", \"\", \"ghi\")\n>>>>\n>>>> and I write it to a file using `writeLines(x, \"test.txt\")`, my text editor sees a 5 line file:\n>>>>\n>>>>   1: abc\n>>>>   2: def\n>>>>   3:\n>>>>   4: ghi\n>>>>   5:\n>>>>\n>>>> which is what I'd expect:  the last line in the editor is empty.  If I use `readLines(\"test.txt\")` on that file, I get the vector\n>>>>\n>>>>   c(\"abc\", \"def\", \"\", \"ghi\")\n>>>>\n>>>> and all of that is fine.\n>>>>\n>>>> What I'm looking for is simple code that modifies x to the `readLines()` output, without actually writing and reading it.\n>>>>\n>>>> My first attempt doesn't work:\n>>>>\n>>>>   unlist(strsplit(x, \"\\n\"))\n>>>>\n>>>> because it leaves out the blank line 3.  I can fix that with this ugly code:\n>>>>\n>>>>   lines <- strsplit(x, \"\\n\")\n>>>>   lines[sapply(lines, length) == 0] <- list(\"\")\n>>>>   lines <- unlist(lines)\n>>>>\n>>>> Surely there's a simpler way to do this?  I'd like to use just base functions, no other packages.\n>>>>\n>>>> Duncan Murdoch\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n\n\n-- \nEste e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\nwww.avg.com",
+      "body_snippet": "Hello,\n\nInline.\n\nÀs 20:27 de 05/02/2025, peter dalgaard escreveu:\n> A 3rd option could be\n> \n> scan(text=x, what=\"\", blank.lines.skip=FALSE)\n> \n> (all because readLines() doesn't obey the text=x conve",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 4,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480545.html"
     },
     {
       "id": "msg-65439faff02d",
@@ -259,7 +272,8 @@
       "body_snippet": "On 2025-02-05 5:20 p.m., Rolf Turner wrote:\n> \n> On Wed, 5 Feb 2025 08:44:12 -0500\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n>> If I have this object:\n>>\n>>     x <- c(\"abc\\ndef\", \"\", \"",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480546.html"
     },
     {
       "id": "msg-4a6fcc77c862",
@@ -275,7 +289,8 @@
       "body_snippet": "According to the help for pairs, the diag.panel function is supposed to\ntake a panel.hist as in:\n\n pairs(USJudgeRatings[1:5], panel = panel.smooth,\n           cex = 1.5, pch = 24, bg = \"light blue\", h",
       "thread_id": "thread-4a6fcc77c862",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480548.html"
     },
     {
       "id": "msg-9f043eb5d508",
@@ -295,7 +310,8 @@
       "body_snippet": "Hi,\n\nusing the library \"stringi\" allows this:\n\n> unlist(stringr::str_split(x, \"\\n\"))\n[1] \"abc\" \"def\" \"\"    \"ghi\"\n\nBest,\nKimmo\n\nke, 2025-02-05 kello 09:35 -0500, Duncan Murdoch kirjoitti:\n> Thanks to R",
       "thread_id": "thread-8beb1ef3cc6e",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480547.html"
     },
     {
       "id": "msg-a76028711060",
@@ -313,7 +329,8 @@
       "body_snippet": "Possibly because:\npanel.hist is not an existing R function -- you have to first create\nit so pairs() can use it. ?pairs shows you how in the Help examples,\ni.e.\n\npanel.hist <- function(x, ...)\n{\n    u",
       "thread_id": "thread-4a6fcc77c862",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480549.html"
     },
     {
       "id": "msg-63b95b73620c",
@@ -331,7 +348,8 @@
       "body_snippet": "On 06.02.2025 04:32, Ranjan Maitra via R-help wrote:\n> According to the help for pairs, the diag.panel function is supposed to\n> take a panel.hist as in:\n> \n>   pairs(USJudgeRatings[1:5], panel = pane",
       "thread_id": "thread-4a6fcc77c862",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480550.html"
     },
     {
       "id": "msg-2ae2024b217a",
@@ -347,7 +365,8 @@
       "body_snippet": "It appears that install.packages does not automatically install package\ndependencies when the package is installed via a URL. As an example, here\nis what I get when I attempt to install the latest ggp",
       "thread_id": "thread-2ae2024b217a",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480551.html"
     },
     {
       "id": "msg-58eb76b1a2b2",
@@ -365,7 +384,8 @@
       "body_snippet": "I don't think install.packages() can do what you want.  If you are \nspecifying a URL, then install.packages() assumes it has no way to know \nwhere the other dependencies are supposed to come from.\n\nTh",
       "thread_id": "thread-2ae2024b217a",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480552.html"
     },
     {
       "id": "msg-a481e643ce4f",
@@ -384,7 +404,8 @@
       "body_snippet": "Bert,\n\nThanks very much!\n\nOops! I can not believe I completely  missed this!\n\nBest wishes,\nRanjan\n\n\n\nOn Thu Feb06'25 08:15:45AM, Bert Gunter wrote:\n> From: Bert Gunter <bgunter.4567 at gmail.com>\n> Da",
       "thread_id": "thread-4a6fcc77c862",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480553.html"
     },
     {
       "id": "msg-f2f41c99a5ab",
@@ -400,11 +421,12 @@
         "<48d44dd7-28de-4aa6-ad38-52ed86dc4688@universite-paris-saclay.fr>",
         "<9310363F-7D97-4AB3-9E16-0A28E42F6F5F@hotmail.com>"
       ],
-      "body_plain": "This is about LaTeX install and not about R.  My problem was multiple installations of LaTeX: first using MacTex, then newer version using texlive.  I had also tried to install then uninstall using MacPorts.  It seems MacPorts uninstall was not clean.  I had to manually delete several sym links.  MacTex install inserts /etc/paths.d/TeX, which has the path /Library/TeX/texbin.  So to get TeX to use the more recent texlive install, PATH should be updated so that texlive comes before /Library/TeX/texbin.\n\nWith above corrections, my problem is solved.\n\nThis might help some other users:\n1.  Check tex installation.  Multiple installs using different methods (MacTex, MacPorts, texlive using perl) can interfere with one another.\n2.  Ensure that, in PATH variable, desired tex installation comes first.\n3.  Verify that different tex family commands use the same tex installation.  For example, tlmgr - - version, tex - - version, should both point to the same installation.   \n\n> On Feb 2, 2025, at 11:31?AM, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com> wrote:\n> \n> This did not help.  I removed inconsolata.sty, then reinstalled inconsolata.\n> \n> bash-3.2$ sudo tlmgr install -reinstall inconsolata\n> Password:\n> Sorry, try again.\n> Password:\n> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n> [1/1, ??:??/??:??] reinstall: inconsolata [468k]\n> running mktexlsr ...\n> done running mktexlsr.\n> running updmap-sys ...\n> done running updmap-sys.\n> tlmgr: package log updated: /usr/local/texlive/2024/texmf-var/web2c/tlmgr.log\n> tlmgr: command log updated: /usr/local/texlive/2024/texmf-var/web2c/tlmgr-commands.log\n> bash-3.2$ tlmgr info inconsolata\n> package:     inconsolata\n> category:    Package\n> shortdesc:   A monospaced font, with support files for use with TeX\n> longdesc:    Inconsolata is a monospaced font designed by Raph Levien. This package contains the font (in both Adobe Type 1 and OpenType formats) in regular and bold weights, with additional glyphs and options to control slashed zero, upright quotes and a shapelier lower-case L, plus metric files for use with TeX, and LaTeX font definition and other relevant files.\n> installed:   Yes\n> revision:    54512\n> sizes:       doc: 597k, run: 1201k\n> relocatable: No\n> cat-version: 1.121\n> cat-license: ofl apache2 lppl1.3\n> cat-topics:  font font-mono font-type1 font-otf font-t1enc\n> cat-contact-home: http://levien.com/type/myfonts/inconsolata.html\n> collection:  collection-fontsextra\n> \n> On running R CMD check, below is the bottom of the messages:\n> \n> * checking PDF version of manual ... WARNING\n> LaTeX errors when creating PDF version.\n> This typically indicates Rd problems.\n> LaTeX errors found:\n> ! LaTeX Error: File `inconsolata.sty' not found.\n> \n> Type X to quit or <RETURN> to proceed,\n> or enter new name. (Default extension: sty)\n> \n> ! Emergency stop.\n> <read *> \n>         l.326 ^^M\n>         !  ==> Fatal error occurred, no output PDF file produced!\n> * checking PDF version of manual without index ... OK\n> * DONE\n> Status: 1 WARNING\n> \n> \n>> On Feb 2, 2025, at 10:13?AM, Marc Girondot <marc.girondot at universite-paris-saclay.fr> wrote:\n>> \n>> Hi Naresh\n>> \n>> I have nearly the same configuration as yours:\n>> I have this file installed (you must activate locate database to use locate):\n>> locate inconsolata.sty\n>> /usr/local/texlive/2024/texmf-dist/tex/latex/inconsolata/inconsolata.sty\n>> \n>> Have you the file ?\n>> \n>> If you have it, a solution could be to remove it and reinstall.\n>> \n>> Marc\n>> \n>> Le 02/02/2025 ? 15:58, Naresh Gurbuxani a ?crit :\n>>> R CMD check <package> gives me below message at the end. There does not seem to be a problem with my TeX installation. Is it possible that R CMD check is not looking in the correct location? How can this problem be fixed?\n>>> \n>>> Thanks,\n>>> Naresh\n>>> \n>>> * checking PDF version of manual ... WARNING\n>>> LaTeX errors when creating PDF version.\n>>> This typically indicates Rd problems.\n>>> LaTeX errors found:\n>>> ! LaTeX Error: File `inconsolata.sty' not found.\n>>> \n>>> Type X to quit or <RETURN> to proceed,\n>>> or enter new name. (Default extension: sty)\n>>> \n>>> ! Emergency stop.\n>>> <read *> \n>>> \n>>> l.326 ^^M\n>>> \n>>> ! ==> Fatal error occurred, no output PDF file produced!\n>>> * checking PDF version of manual without index ... OK\n>>> * DONE\n>>> \n>>> My Mac has the latest version of TeX installed from texlive. Below are top few lines from running tlmgr conf\n>>> \n>>> =========================== version information ==========================\n>>> tlmgr revision 73493 (2025-01-17 23:28:29 +0100)\n>>> tlmgr using installation: /usr/local/texlive/2024\n>>> TeX Live (https://tug.org/texlive) version 2024\n>>> ==================== executables found by searching PATH =================\n>>> PATH: /usr/local/texlive/2024/bin/universal-darwin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2024/bin/universal-darwin\n>>> dvipdfmx: /usr/local/texlive/2024/bin/universal-darwin/dvipdfmx\n>>> dvips: /usr/local/texlive/2024/bin/universal-darwin/dvips\n>>> fmtutil: /usr/local/texlive/2024/bin/universal-darwin/fmtutil\n>>> kpsewhich: /usr/local/texlive/2024/bin/universal-darwin/kpsewhich\n>>> luatex: /usr/local/texlive/2024/bin/universal-darwin/luatex\n>>> mktexpk: /usr/local/texlive/2024/bin/universal-darwin/mktexpk\n>>> pdftex: /usr/local/texlive/2024/bin/universal-darwin/pdftex\n>>> tex: /usr/local/texlive/2024/bin/universal-darwin/tex\n>>> tlmgr: /usr/local/texlive/2024/bin/universal-darwin/tlmgr\n>>> updmap: /usr/local/texlive/2024/bin/universal-darwin/updmap\n>>> xetex: /usr/local/texlive/2024/bin/universal-darwin/xetex\n>>> \n>>> On the command line, I tried updating incosolata package\n>>> \n>>> bash-3.2$ sudo tlmgr install inconsolata\n>>> Password:\n>>> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n>>> tlmgr install: package already present: inconsolata\n>>> \n>>> bash-3.2$ sudo tlmgr update inconsolata\n>>> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n>>> tlmgr: saving backups to /usr/local/texlive/2024/tlpkg/backups\n>>> tlmgr: no updates available\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>> \n>> \n>> Marc Girondot, Pr\n>> Laboratoire Ecologie, Soci?t?, Evolution\n>> Equipe de Processus Ecologiques et Pressions Anthropiques\n>> CNRS, AgroParisTech et Universit? Paris-Saclay, UMR 8079\n>> 91190 Gif-sur-Yvette, France\n>> Tel: +33 (0)1.69.15.72.30 Mobile: +33 (0)6.20.18.22.16\n>> e-mail: marc.girondot at universite-paris-saclay.fr\n>> marc.girondot at gmail.com\n>> Web: http://hebergement.universite-paris-saclay.fr/marcgirondot/\n>",
+      "body_plain": "This is about LaTeX install and not about R.  My problem was multiple installations of LaTeX: first using MacTex, then newer version using texlive.  I had also tried to install then uninstall using MacPorts.  It seems MacPorts uninstall was not clean.  I had to manually delete several sym links.  MacTex install inserts /etc/paths.d/TeX, which has the path /Library/TeX/texbin.  So to get TeX to use the more recent texlive install, PATH should be updated so that texlive comes before /Library/TeX/texbin.\n\nWith above corrections, my problem is solved.\n\nThis might help some other users:\n1.  Check tex installation.  Multiple installs using different methods (MacTex, MacPorts, texlive using perl) can interfere with one another.\n2.  Ensure that, in PATH variable, desired tex installation comes first.\n3.  Verify that different tex family commands use the same tex installation.  For example, tlmgr - - version, tex - - version, should both point to the same installation.   \n\n> On Feb 2, 2025, at 11:31 AM, Naresh Gurbuxani <naresh_gurbuxani at hotmail.com> wrote:\n> \n> This did not help.  I removed inconsolata.sty, then reinstalled inconsolata.\n> \n> bash-3.2$ sudo tlmgr install -reinstall inconsolata\n> Password:\n> Sorry, try again.\n> Password:\n> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n> [1/1, ??:??/??:??] reinstall: inconsolata [468k]\n> running mktexlsr ...\n> done running mktexlsr.\n> running updmap-sys ...\n> done running updmap-sys.\n> tlmgr: package log updated: /usr/local/texlive/2024/texmf-var/web2c/tlmgr.log\n> tlmgr: command log updated: /usr/local/texlive/2024/texmf-var/web2c/tlmgr-commands.log\n> bash-3.2$ tlmgr info inconsolata\n> package:     inconsolata\n> category:    Package\n> shortdesc:   A monospaced font, with support files for use with TeX\n> longdesc:    Inconsolata is a monospaced font designed by Raph Levien. This package contains the font (in both Adobe Type 1 and OpenType formats) in regular and bold weights, with additional glyphs and options to control slashed zero, upright quotes and a shapelier lower-case L, plus metric files for use with TeX, and LaTeX font definition and other relevant files.\n> installed:   Yes\n> revision:    54512\n> sizes:       doc: 597k, run: 1201k\n> relocatable: No\n> cat-version: 1.121\n> cat-license: ofl apache2 lppl1.3\n> cat-topics:  font font-mono font-type1 font-otf font-t1enc\n> cat-contact-home: http://levien.com/type/myfonts/inconsolata.html\n> collection:  collection-fontsextra\n> \n> On running R CMD check, below is the bottom of the messages:\n> \n> * checking PDF version of manual ... WARNING\n> LaTeX errors when creating PDF version.\n> This typically indicates Rd problems.\n> LaTeX errors found:\n> ! LaTeX Error: File `inconsolata.sty' not found.\n> \n> Type X to quit or <RETURN> to proceed,\n> or enter new name. (Default extension: sty)\n> \n> ! Emergency stop.\n> <read *> \n>         l.326 ^^M\n>         !  ==> Fatal error occurred, no output PDF file produced!\n> * checking PDF version of manual without index ... OK\n> * DONE\n> Status: 1 WARNING\n> \n> \n>> On Feb 2, 2025, at 10:13 AM, Marc Girondot <marc.girondot at universite-paris-saclay.fr> wrote:\n>> \n>> Hi Naresh\n>> \n>> I have nearly the same configuration as yours:\n>> I have this file installed (you must activate locate database to use locate):\n>> locate inconsolata.sty\n>> /usr/local/texlive/2024/texmf-dist/tex/latex/inconsolata/inconsolata.sty\n>> \n>> Have you the file ?\n>> \n>> If you have it, a solution could be to remove it and reinstall.\n>> \n>> Marc\n>> \n>> Le 02/02/2025 à 15:58, Naresh Gurbuxani a écrit :\n>>> R CMD check <package> gives me below message at the end. There does not seem to be a problem with my TeX installation. Is it possible that R CMD check is not looking in the correct location? How can this problem be fixed?\n>>> \n>>> Thanks,\n>>> Naresh\n>>> \n>>> * checking PDF version of manual ... WARNING\n>>> LaTeX errors when creating PDF version.\n>>> This typically indicates Rd problems.\n>>> LaTeX errors found:\n>>> ! LaTeX Error: File `inconsolata.sty' not found.\n>>> \n>>> Type X to quit or <RETURN> to proceed,\n>>> or enter new name. (Default extension: sty)\n>>> \n>>> ! Emergency stop.\n>>> <read *> \n>>> \n>>> l.326 ^^M\n>>> \n>>> ! ==> Fatal error occurred, no output PDF file produced!\n>>> * checking PDF version of manual without index ... OK\n>>> * DONE\n>>> \n>>> My Mac has the latest version of TeX installed from texlive. Below are top few lines from running tlmgr conf\n>>> \n>>> =========================== version information ==========================\n>>> tlmgr revision 73493 (2025-01-17 23:28:29 +0100)\n>>> tlmgr using installation: /usr/local/texlive/2024\n>>> TeX Live (https://tug.org/texlive) version 2024\n>>> ==================== executables found by searching PATH =================\n>>> PATH: /usr/local/texlive/2024/bin/universal-darwin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2024/bin/universal-darwin\n>>> dvipdfmx: /usr/local/texlive/2024/bin/universal-darwin/dvipdfmx\n>>> dvips: /usr/local/texlive/2024/bin/universal-darwin/dvips\n>>> fmtutil: /usr/local/texlive/2024/bin/universal-darwin/fmtutil\n>>> kpsewhich: /usr/local/texlive/2024/bin/universal-darwin/kpsewhich\n>>> luatex: /usr/local/texlive/2024/bin/universal-darwin/luatex\n>>> mktexpk: /usr/local/texlive/2024/bin/universal-darwin/mktexpk\n>>> pdftex: /usr/local/texlive/2024/bin/universal-darwin/pdftex\n>>> tex: /usr/local/texlive/2024/bin/universal-darwin/tex\n>>> tlmgr: /usr/local/texlive/2024/bin/universal-darwin/tlmgr\n>>> updmap: /usr/local/texlive/2024/bin/universal-darwin/updmap\n>>> xetex: /usr/local/texlive/2024/bin/universal-darwin/xetex\n>>> \n>>> On the command line, I tried updating incosolata package\n>>> \n>>> bash-3.2$ sudo tlmgr install inconsolata\n>>> Password:\n>>> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n>>> tlmgr install: package already present: inconsolata\n>>> \n>>> bash-3.2$ sudo tlmgr update inconsolata\n>>> tlmgr: package repository https://ctan.tinycomputers.io/tex-archive/systems/texlive/tlnet (verified)\n>>> tlmgr: saving backups to /usr/local/texlive/2024/tlpkg/backups\n>>> tlmgr: no updates available\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>> \n>> \n>> Marc Girondot, Pr\n>> Laboratoire Ecologie, Société, Evolution\n>> Equipe de Processus Ecologiques et Pressions Anthropiques\n>> CNRS, AgroParisTech et Université Paris-Saclay, UMR 8079\n>> 91190 Gif-sur-Yvette, France\n>> Tel: +33 (0)1.69.15.72.30 Mobile: +33 (0)6.20.18.22.16\n>> e-mail: marc.girondot at universite-paris-saclay.fr\n>> marc.girondot at gmail.com\n>> Web: http://hebergement.universite-paris-saclay.fr/marcgirondot/\n>",
       "body_snippet": "This is about LaTeX install and not about R.  My problem was multiple installations of LaTeX: first using MacTex, then newer version using texlive.  I had also tried to install then uninstall using Ma",
       "thread_id": "thread-f2f41c99a5ab",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480554.html"
     },
     {
       "id": "msg-b8b3c6319934",
@@ -420,7 +442,8 @@
       "body_snippet": "Dear all,\n\nI just stumbled on this behavior - not sure if this is expected:\n\nR version 4.4.2 (2024-10-31) -- \"Pile of Leaves\"\nCopyright (C) 2024 The R Foundation for Statistical Computing\nPlatform: x8",
       "thread_id": "thread-b8b3c6319934",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480555.html"
     },
     {
       "id": "msg-88fd7b29cc7f",
@@ -438,7 +461,8 @@
       "body_snippet": "Why aren't you loading the package before you load the object that assumes the relevant methods for that object are available?\n\nOn February 11, 2025 4:51:48 AM PST, H B via R-help <r-help at r-project",
       "thread_id": "thread-b8b3c6319934",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480556.html"
     },
     {
       "id": "msg-cb9de549be20",
@@ -456,7 +480,8 @@
       "body_snippet": "On Thu, 6 Feb 2025 09:36:23 -0800\narilamstein at gmail.com wrote:\n\n> It appears that install.packages does not automatically install\n> package dependencies when the package is installed via a URL. [..",
       "thread_id": "thread-2ae2024b217a",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480557.html"
     },
     {
       "id": "msg-b6ee9a600f94",
@@ -474,7 +499,8 @@
       "body_snippet": "? Tue, 11 Feb 2025 13:51:48 +0100\nH B via R-help <r-help at r-project.org> ?????:\n\n>  > class(d)  \n> [1] \"dgCMatrix\"\n> attr(,\"package\")\n> [1] \"Matrix\"\n>  > dim(d)  \n> Loading required package: Matrix\n",
       "thread_id": "thread-b8b3c6319934",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480558.html"
     },
     {
       "id": "msg-4412cec525dd",
@@ -493,7 +519,8 @@
       "body_snippet": "Dear? Ivan,\n\nthanks a lot for the detailed analysis. This is excellent? and answers\nmy question. Unfortunately it is difficult to find any documentation on\nthis topic.\n\nI now understand this is not a ",
       "thread_id": "thread-b8b3c6319934",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480566.html"
     },
     {
       "id": "msg-3c88b319c4f9",
@@ -509,7 +536,8 @@
       "body_snippet": "Dear R-Help,\n\nWhen I submit an update to one of my packages, I decided to try to avoid having to fix errors that sometimes occur in CRAN's reverse-dependency checks by performing the same checks ahead",
       "thread_id": "thread-3c88b319c4f9",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480561.html"
     },
     {
       "id": "msg-5330323bad3f",
@@ -528,7 +556,8 @@
       "body_snippet": "Duncan and Berwin,\n\nThank you for your help.\n\nI really wanted confirmation from someone more experienced than me that I\nwasn't missing something. It looks like there is no way to do this in one\nline i",
       "thread_id": "thread-2ae2024b217a",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480559.html"
     },
     {
       "id": "msg-3aaf351b20e1",
@@ -547,7 +576,8 @@
       "body_snippet": "Hi Jeff,\n\nyou are obviously right and I would usually load packages before, but in\nthis case it was a saved R object that I had not created, and therefore\ndid not know what to expect.\n\nI was prepared ",
       "thread_id": "thread-b8b3c6319934",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480567.html"
     },
     {
       "id": "msg-32859de9f0ee",
@@ -567,7 +597,8 @@
       "body_snippet": "On Thu, 13 Feb 2025, arilamstein at gmail.com wrote:\n\n> Duncan and Berwin,\n>\n> Thank you for your help.\n>\n> I really wanted confirmation from someone more experienced than me that I\n> wasn't missing s",
       "thread_id": "thread-2ae2024b217a",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480560.html"
     },
     {
       "id": "msg-ffaf75bcd140",
@@ -585,7 +616,8 @@
       "body_snippet": "On Thu, Feb 13, 2025 at 1:46?PM Lenth, Russell V via R-help\n<r-help at r-project.org> wrote:\n>\n> Dear R-Help,\n>\n> When I submit an update to one of my packages, I decided to try to avoid having to fix",
       "thread_id": "thread-3c88b319c4f9",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480562.html"
     },
     {
       "id": "msg-cdd03d788d01",
@@ -603,7 +635,8 @@
       "body_snippet": "On 2025-02-12 4:42 p.m., Lenth, Russell V via R-help wrote:\n> Dear R-Help,\n> \n> When I submit an update to one of my packages, I decided to try to avoid having to fix errors that sometimes occur in CR",
       "thread_id": "thread-3c88b319c4f9",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480563.html"
     },
     {
       "id": "msg-1e2b081cad9b",
@@ -622,7 +655,8 @@
       "body_snippet": "For what it's worth I use https://github.com/r-lib/revdepcheck (see \nalso https://revdepcheck.r-lib.org/ ) ... it has some of its own warts, \nbut it has a very informative progress bar.\n\nOn 2025-02-13",
       "thread_id": "thread-3c88b319c4f9",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480564.html"
     },
     {
       "id": "msg-7bbe15fc9fcf",
@@ -638,7 +672,8 @@
       "body_snippet": "Full schedule is available on developer.r-project.org (pending update from SVN).\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg,",
       "thread_id": "thread-7bbe15fc9fcf",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480565.html"
     },
     {
       "id": "msg-054a4b4ee0cc",
@@ -654,7 +689,8 @@
       "body_snippet": "Again, **Completely Off Topic,** but I hope of interest to at least some on\nthis forum.\n\nhttps://www.science.org/content/article/renowned-scientific-integrity-investigator-endows-fund-support-fellow-s",
       "thread_id": "thread-054a4b4ee0cc",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480568.html"
     },
     {
       "id": "msg-5bd8e752eb40",
@@ -670,7 +706,8 @@
       "body_snippet": "Ari,\n\nThere were multiple errors in the acs package. If CRAN states that the maintainer abandoned it, that is what happened. Had you reached out to Ezra Glenn (cc-ed here) and offered to help keep the",
       "thread_id": "thread-5bd8e752eb40",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480569.html"
     },
     {
       "id": "msg-f9eeba082552",
@@ -688,7 +725,8 @@
       "body_snippet": "Roger,\n\njust to you: Thanks for taking the time! I hope that Ari follows your \nrecommendation, fingers crossed.\n\nBest wishes,\nAchim\n\n\nOn Thu, 13 Feb 2025, Roger Bivand via R-help wrote:\n\n> Ari,\n>\n> Th",
       "thread_id": "thread-5bd8e752eb40",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480570.html"
     },
     {
       "id": "msg-59f78304684e",
@@ -707,7 +745,8 @@
       "body_snippet": "Apparently not just to Roger...sorry for spamming the entire list!\n\nIn any case, I hope really do hope that this helps to resolve the issue.\n\nAri, let us know if we can help with anything else.\n\nBest ",
       "thread_id": "thread-5bd8e752eb40",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480571.html"
     },
     {
       "id": "msg-a07233dd8656",
@@ -723,7 +762,8 @@
       "body_snippet": "I am using the contrast package to produce contrasts from a glm model that contains a quadratic term:\nfit0 <- glm(y ~ x + I(x*x),data=mydata)\nI would like to know how to specify the quadratic term, I(",
       "thread_id": "thread-a07233dd8656",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480572.html"
     },
     {
       "id": "msg-6db8d65053ca",
@@ -741,7 +781,8 @@
       "body_snippet": "Looking at the 'contrasts' function, it seems to be imported from \n'rms' and to take only 'rms'-type fits (which are different from base-R \n[g]lm() fits) as input.\n\n   I'm not sure exactly what contra",
       "thread_id": "thread-a07233dd8656",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480573.html"
     },
     {
       "id": "msg-36e1a978b81a",
@@ -756,11 +797,12 @@
         "<DM6PR03MB50493366E682A39396493C84E2FA2@DM6PR03MB5049.namprd03.prod.outlook.com>",
         "<fe732078-58a2-4db2-ac6d-cb0d273c38fb@gmail.com>"
       ],
-      "body_plain": "I don?t know if this will make a difference, but I believe it is generally preferred to use the poly() function (for lm()/glm()) or the pol() function (for rms functions) to include the quadratic (and higher order terms).\n\nKevin\n\n\n> On Feb 18, 2025, at 12:23?PM, Ben Bolker <bbolker at gmail.com> wrote:\n> \n>  Looking at the 'contrasts' function, it seems to be imported from 'rms' and to take only 'rms'-type fits (which are different from base-R [g]lm() fits) as input.\n> \n>  I'm not sure exactly what contrasts you're trying to generate, but I would probably use the emmeans package for the task, since it handles a wide range of model types.\n> \n> Alternately, you could use one of the modeling functions from rms, which should work with rms::contrast(), although I ran into trouble for some reason:\n> \n> fit1 <- ols(y ~ x + I(x^2), data = mydata)\n> \n> > Error in if (!length(fname) || !any(fname == zname)) { :\n>  missing value where TRUE/FALSE needed\n> \n> I guess rms handles I()-protected terms differently? (The model with just y~x didn't throw an error ...)\n> \n> On 2025-02-18 12:00 p.m., Sorkin, John wrote:\n>> I am using the contrast package to produce contrasts from a glm model that contains a quadratic term:\n>> fit0 <- glm(y ~ x + I(x*x),data=mydata)\n>> I would like to know how to specify the quadratic term, I(x*x), in the contrast function.\n>> When I try to use\n>> contrast(fit0,list(x=4))\n>> I receive an error message;\n>> #Error in generateData(fit = list(coefficients = c(`(Intercept)` = 0.5262645536229,  :not enough factors\n>> When I try to use\n>> contrast(fit0,list(x=4,I(x*x)=16))\n>> I receive an error message:\n>> #Error: unexpected '=' in \"contrast(fit0,list(x=4,I(x*x)=\"\n>> Other variants of the call to contrast including\n>> contrast(fit0,list(x=4,\"x*x\"=16)) and\n>> contrast(fit0,list(x=4,\"I(x*x}\"=16))\n>> produce similar error messsages.\n>> Please see my code below.\n>> if (!require(contrast)) install.packages(\"contrast\")\n>> library(contrast)\n>> help(contrast)\n>> x <- 1:100\n>> y <- x + x^2 + rnorm(1)\n>> mydata <- data.frame(x=x,y=y)\n>> fit0 <- glm(y ~ x + I(x*x),data=mydata)\n>> summary(fit0)\n>> contrast(fit0,list(x=4))\n>> #Error in generateData(fit = list(coefficients = c(`(Intercept)` = #0.5262645536229,  :  not enough factors\n>> contrast(fit0,list(x=4,I(x*x)=16))\n>> #Error: unexpected '=' in \"contrast(fit0,list(x=4,I(x*x)=\"\n>> Thank you,\n>> John\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> -- \n> Dr. Benjamin Bolker\n> Professor, Mathematics & Statistics and Biology, McMaster University\n> Director, School of Computational Science and Engineering\n> > E-mail is sent at my convenience; I don't expect replies outside of working hours.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nKevin E. Thorpe\nAssociate Professor, Dalla Lana School of Public Health\nUniversity of Toronto, Tel: 416-946-8083\nScientific Lead, Clinical Trials Design and Analysis, Hospital for Sick Children",
-      "body_snippet": "I don?t know if this will make a difference, but I believe it is generally preferred to use the poly() function (for lm()/glm()) or the pol() function (for rms functions) to include the quadratic (and",
+      "body_plain": "I don’t know if this will make a difference, but I believe it is generally preferred to use the poly() function (for lm()/glm()) or the pol() function (for rms functions) to include the quadratic (and higher order terms).\n\nKevin\n\n\n> On Feb 18, 2025, at 12:23 PM, Ben Bolker <bbolker at gmail.com> wrote:\n> \n>  Looking at the 'contrasts' function, it seems to be imported from 'rms' and to take only 'rms'-type fits (which are different from base-R [g]lm() fits) as input.\n> \n>  I'm not sure exactly what contrasts you're trying to generate, but I would probably use the emmeans package for the task, since it handles a wide range of model types.\n> \n> Alternately, you could use one of the modeling functions from rms, which should work with rms::contrast(), although I ran into trouble for some reason:\n> \n> fit1 <- ols(y ~ x + I(x^2), data = mydata)\n> \n> > Error in if (!length(fname) || !any(fname == zname)) { :\n>  missing value where TRUE/FALSE needed\n> \n> I guess rms handles I()-protected terms differently? (The model with just y~x didn't throw an error ...)\n> \n> On 2025-02-18 12:00 p.m., Sorkin, John wrote:\n>> I am using the contrast package to produce contrasts from a glm model that contains a quadratic term:\n>> fit0 <- glm(y ~ x + I(x*x),data=mydata)\n>> I would like to know how to specify the quadratic term, I(x*x), in the contrast function.\n>> When I try to use\n>> contrast(fit0,list(x=4))\n>> I receive an error message;\n>> #Error in generateData(fit = list(coefficients = c(`(Intercept)` = 0.5262645536229,  :not enough factors\n>> When I try to use\n>> contrast(fit0,list(x=4,I(x*x)=16))\n>> I receive an error message:\n>> #Error: unexpected '=' in \"contrast(fit0,list(x=4,I(x*x)=\"\n>> Other variants of the call to contrast including\n>> contrast(fit0,list(x=4,\"x*x\"=16)) and\n>> contrast(fit0,list(x=4,\"I(x*x}\"=16))\n>> produce similar error messsages.\n>> Please see my code below.\n>> if (!require(contrast)) install.packages(\"contrast\")\n>> library(contrast)\n>> help(contrast)\n>> x <- 1:100\n>> y <- x + x^2 + rnorm(1)\n>> mydata <- data.frame(x=x,y=y)\n>> fit0 <- glm(y ~ x + I(x*x),data=mydata)\n>> summary(fit0)\n>> contrast(fit0,list(x=4))\n>> #Error in generateData(fit = list(coefficients = c(`(Intercept)` = #0.5262645536229,  :  not enough factors\n>> contrast(fit0,list(x=4,I(x*x)=16))\n>> #Error: unexpected '=' in \"contrast(fit0,list(x=4,I(x*x)=\"\n>> Thank you,\n>> John\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> \n> -- \n> Dr. Benjamin Bolker\n> Professor, Mathematics & Statistics and Biology, McMaster University\n> Director, School of Computational Science and Engineering\n> > E-mail is sent at my convenience; I don't expect replies outside of working hours.\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n-- \nKevin E. Thorpe\nAssociate Professor, Dalla Lana School of Public Health\nUniversity of Toronto, Tel: 416-946-8083\nScientific Lead, Clinical Trials Design and Analysis, Hospital for Sick Children",
+      "body_snippet": "I don’t know if this will make a difference, but I believe it is generally preferred to use the poly() function (for lm()/glm()) or the pol() function (for rms functions) to include the quadratic (and",
       "thread_id": "thread-a07233dd8656",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480574.html"
     },
     {
       "id": "msg-fb15c5deca4b",
@@ -776,7 +818,8 @@
       "body_snippet": "Hi,\n\nI cannot any longer load a dataset fom the package nlme.\nWhen I try to load the dataset RatPubWeight with the data() command, I get a warning (Warnmeldung: In data(RatPubWeight) : Datensatz 'RatP",
       "thread_id": "thread-fb15c5deca4b",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480575.html"
     },
     {
       "id": "msg-08294a7699f7",
@@ -792,7 +835,8 @@
       "body_snippet": "I make graphs, in large quantities, for perfectionists.\n\nMy bosses do not like the results of text like 'baseline-defined' in graphs; they feel that the resulting dash is too long.\n\nFor many years, I ",
       "thread_id": "thread-08294a7699f7",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480576.html"
     },
     {
       "id": "msg-c528c5f45773",
@@ -808,7 +852,8 @@
       "body_snippet": "Hi,\n\n\nI am currently facing an issue with data imputation in R using the random forest method from the MICE package. Specifically, I have imputed data that was missing completely at random (MCAR) usin",
       "thread_id": "thread-c528c5f45773",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480577.html"
     },
     {
       "id": "msg-6c710ab192bd",
@@ -826,7 +871,8 @@
       "body_snippet": "? Wed, 19 Feb 2025 11:36:15 +0000\nPaul Sherliker via R-help <r-help at r-project.org> ?????:\n\n> text(1, 11, \"baseline\\255defined\")\n> text(1, 9, \"done\")\n> graphics.off()\n> \n> They like that dash - but ",
       "thread_id": "thread-08294a7699f7",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480578.html"
     },
     {
       "id": "msg-feed7bc26815",
@@ -844,7 +890,8 @@
       "body_snippet": "Dear Stephan Weinbruch,\n\nI'm afraid it's data(RatPupWeight, package = 'nlme').\n\n-- \nBest regards,\nIvan",
       "thread_id": "thread-fb15c5deca4b",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480579.html"
     },
     {
       "id": "msg-90c2b619abf5",
@@ -862,7 +909,8 @@
       "body_snippet": "Normally I'd say you should post a reproducible example where you get a \ndiscrepancy, but that's already been done in an open bug report here:\n\nhttps://github.com/amices/mice/issues/688 .\n\nDuncan Murd",
       "thread_id": "thread-c528c5f45773",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480580.html"
     },
     {
       "id": "msg-cf2a2917dc46",
@@ -880,7 +928,8 @@
       "body_snippet": "On 2025-02-19 6:36 a.m., Paul Sherliker via R-help wrote:\n> I make graphs, in large quantities, for perfectionists.\n> \n> My bosses do not like the results of text like 'baseline-defined' in graphs; th",
       "thread_id": "thread-08294a7699f7",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480581.html"
     },
     {
       "id": "msg-94754a976a9a",
@@ -896,7 +945,8 @@
       "body_snippet": "Ivan Krylov wrote:\n\n\n>> text(1, 11, \"baseline\\255defined\")\n\n>> text(1, 9, \"done\")\n\n>> graphics.off()\n\n>>\n\n>> They like that dash - but I never knew what it was called.\n\n>>\n\n>> Recently work updated my",
       "thread_id": "thread-94754a976a9a",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480582.html"
     },
     {
       "id": "msg-4254e1183a02",
@@ -912,7 +962,8 @@
       "body_snippet": "Hi,\n\nI am working on a modelling project for Brazilian inflation, for which I am tempted to use the BVAR package in R. I read the paper and the documentation and yet I could not find any further infor",
       "thread_id": "thread-4254e1183a02",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480583.html"
     },
     {
       "id": "msg-bd4572d6ad43",
@@ -930,7 +981,8 @@
       "body_snippet": "It sounds like your first course of action should be to contact the package\nmaintainer. See ?maintainer or consult the Description file for the package\nfor their email.\n\nCheers,\nBert\n\n\"An educated per",
       "thread_id": "thread-4254e1183a02",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480584.html"
     },
     {
       "id": "msg-262544f8ef8e",
@@ -949,7 +1001,8 @@
       "body_snippet": "More specifically, there is an issues list for the package here:\nhttps://github.com/nk027/bvar/issues (I got there by looking at the \nBugReports: field in the package description at \nhttps://CRAN.R-pr",
       "thread_id": "thread-4254e1183a02",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480585.html"
     },
     {
       "id": "msg-9dc45ce1f27e",
@@ -965,7 +1018,8 @@
       "body_snippet": "R 4.4.0\nOS X\n\nColleagues\n\nI have a sequence like:\n\t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n\nI would like to display it as:\n\t1, 3-5, 7-8, 12-15, 20\n\nAny simple ways to accomplish this?\n\nDennis\n\n\nDennis Fi",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480586.html"
     },
     {
       "id": "msg-1445105a04dc",
@@ -983,7 +1037,8 @@
       "body_snippet": "Hi Dennis,\n\nA quick Claude request:\n\n\"using r I have a sequence like:        1, 3, 4, 5, 7, 8, 12, 13, 14, 15,\n20I would like to display it as:        1, 3-5, 7-8, 12-15, 20\"\n\nyielded:\n\ncondense_seque",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480587.html"
     },
     {
       "id": "msg-85a20edc70c6",
@@ -1001,7 +1056,8 @@
       "body_snippet": "Cute exercise!\n\n\"Simple\" is in the eyes of the beholder, of course. There is probably a\npackage out there that can do this in a trice .\nBut my first thought -- so caveat emptor!, as my thoughts, first",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480588.html"
     },
     {
       "id": "msg-b41cfb0210b8",
@@ -1019,7 +1075,8 @@
       "body_snippet": "Dennis,\n\nYou are supposedly using a vector containing integers, in order, and want to\nfind sequences to rewrite compactly based on your example.\n\nWhat result do you want. An integer vector cannot hold",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480589.html"
     },
     {
       "id": "msg-920b631976a7",
@@ -1038,7 +1095,8 @@
       "body_snippet": "There are some answers from 2016 here:\n\nhttps://stackoverflow.com/questions/34636461/collapse-consecutive-runs-of-numbers-to-a-string-of-ranges\n\nOn 2025-02-21 7:59 p.m., Steven Ellis wrote:\n> Hi Denni",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480590.html"
     },
     {
       "id": "msg-7b79600755a5",
@@ -1058,7 +1116,8 @@
       "body_snippet": "And some more from 2013: \nhttps://stackoverflow.com/questions/14868406/collapse-continuous-integer-runs-to-strings-of-ranges\n\n   Can be as short as:\n\ncondense <- function(x)\n   unname(tapply(x, c(0, c",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480591.html"
     },
     {
       "id": "msg-62800e8c4eb8",
@@ -1072,11 +1131,12 @@
       "references": [
         "<A1CFC56B-281B-4785-8D18-E76ACA12ECDC@plessthan.com>"
       ],
-      "body_plain": "?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8, 12-15, 20\n> \n> Any simple ways to accomplish this?\n> \n> Dennis\n> \n> \n> Dennis Fisher MD\n> P < (The \"P Less Than\" Company)\n> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> www.PLessThan.com\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nHere is a way with package R.utils, function seqToIntervals.\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nmat <- R.utils::seqToIntervals(x)\napply(mat, 1L, \\(m) {\n   ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n})\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nIf you want to be fancy, define a special class that prints like that.\n\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nas_seqInterval <- function(x) {\n   old_class <- class(x)\n   class(x) <- c(\"seqInterval\", old_class)\n   x\n}\nprint.seqInterval <- function(x, ...) {\n   mat <- R.utils::seqToIntervals(x)\n   out <- apply(mat, 1L, \\(m) {\n     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n   })\n   print(out)\n}\n\ny <- as_seqInterval(x)\nclass(y)\n#> [1] \"seqInterval\" \"numeric\"\n\n# autoprinting y\ny\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n# explicit printing y\nprint(y)\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\nwww.avg.com",
-      "body_snippet": "?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8",
+      "body_plain": "Às 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8, 12-15, 20\n> \n> Any simple ways to accomplish this?\n> \n> Dennis\n> \n> \n> Dennis Fisher MD\n> P < (The \"P Less Than\" Company)\n> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> www.PLessThan.com\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nHere is a way with package R.utils, function seqToIntervals.\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nmat <- R.utils::seqToIntervals(x)\napply(mat, 1L, \\(m) {\n   ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n})\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nIf you want to be fancy, define a special class that prints like that.\n\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nas_seqInterval <- function(x) {\n   old_class <- class(x)\n   class(x) <- c(\"seqInterval\", old_class)\n   x\n}\nprint.seqInterval <- function(x, ...) {\n   mat <- R.utils::seqToIntervals(x)\n   out <- apply(mat, 1L, \\(m) {\n     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n   })\n   print(out)\n}\n\ny <- as_seqInterval(x)\nclass(y)\n#> [1] \"seqInterval\" \"numeric\"\n\n# autoprinting y\ny\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n# explicit printing y\nprint(y)\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\nwww.avg.com",
+      "body_snippet": "Às 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 1,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480592.html"
     },
     {
       "id": "msg-868f898435a3",
@@ -1091,11 +1151,12 @@
         "<A1CFC56B-281B-4785-8D18-E76ACA12ECDC@plessthan.com>",
         "<0dbdbcf9-6d7f-49bf-a7d8-1680e56c0db4@sapo.pt>"
       ],
-      "body_plain": "Well, as I predicted, my initial suggestions were, ... ummm, rather dumb.\nAlso, Rui's suggestions are probably preferable to the below. However, it\n*is* a very simple, bare-boned approach to converting a sequence of\nincreasing integers to a character representation using interval notation.\nThe code is *very* simple-minded and needs no explanation, I think. You\nshould also be able to easily tweak it to change the output format from my\npaste0(..., collapse) choice to something else.\n\ncompr <- function(x, sep =\"-\", collapse = \", \")\n{\n   left<- c(TRUE, diff(x) != 1)\n   right <- c(rev(diff(rev(x)) != -1 ), TRUE)\n   xleft <- x[left]\n   xright <- x[right]\n   ifelse(xleft == xright,\n            xleft,\n            paste(xleft, xright, sep = sep)) |>\n       paste0(collapse = collapse)\n}\n\nwhich yields the following with your example\n\n> compr(c( 1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20))\n[1] \"1, 3-5, 7-8, 12-15, 20\"   ##Note: A single character string\n\n(Do let me know if this can fail)\n\nCheers,\nBert\n\n\"An educated person is one who can entertain new ideas, entertain others,\nand entertain herself.\"\n\n\n\nOn Sat, Feb 22, 2025 at 4:36?AM Rui Barradas <ruipbarradas at sapo.pt> wrote:\n\n> ?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> > R 4.4.0\n> > OS X\n> >\n> > Colleagues\n> >\n> > I have a sequence like:\n> >       1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> >\n> > I would like to display it as:\n> >       1, 3-5, 7-8, 12-15, 20\n> >\n> > Any simple ways to accomplish this?\n> >\n> > Dennis\n> >\n> >\n> > Dennis Fisher MD\n> > P < (The \"P Less Than\" Company)\n> > Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> > www.PLessThan.com\n> >\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n>\n> Here is a way with package R.utils, function seqToIntervals.\n>\n>\n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n>\n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>    ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n>\n> If you want to be fancy, define a special class that prints like that.\n>\n>\n>\n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n>\n> as_seqInterval <- function(x) {\n>    old_class <- class(x)\n>    class(x) <- c(\"seqInterval\", old_class)\n>    x\n> }\n> print.seqInterval <- function(x, ...) {\n>    mat <- R.utils::seqToIntervals(x)\n>    out <- apply(mat, 1L, \\(m) {\n>      ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>    })\n>    print(out)\n> }\n>\n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n>\n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n>\n> Hope this helps,\n>\n> Rui Barradas\n>\n>\n> --\n> Este e-mail foi analisado pelo software antiv?rus AVG para verificar a\n> presen?a de v?rus.\n> www.avg.com\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Well, as I predicted, my initial suggestions were, ... ummm, rather dumb.\nAlso, Rui's suggestions are probably preferable to the below. However, it\n*is* a very simple, bare-boned approach to converting a sequence of\nincreasing integers to a character representation using interval notation.\nThe code is *very* simple-minded and needs no explanation, I think. You\nshould also be able to easily tweak it to change the output format from my\npaste0(..., collapse) choice to something else.\n\ncompr <- function(x, sep =\"-\", collapse = \", \")\n{\n   left<- c(TRUE, diff(x) != 1)\n   right <- c(rev(diff(rev(x)) != -1 ), TRUE)\n   xleft <- x[left]\n   xright <- x[right]\n   ifelse(xleft == xright,\n            xleft,\n            paste(xleft, xright, sep = sep)) |>\n       paste0(collapse = collapse)\n}\n\nwhich yields the following with your example\n\n> compr(c( 1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20))\n[1] \"1, 3-5, 7-8, 12-15, 20\"   ##Note: A single character string\n\n(Do let me know if this can fail)\n\nCheers,\nBert\n\n\"An educated person is one who can entertain new ideas, entertain others,\nand entertain herself.\"\n\n\n\nOn Sat, Feb 22, 2025 at 4:36 AM Rui Barradas <ruipbarradas at sapo.pt> wrote:\n\n> Às 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> > R 4.4.0\n> > OS X\n> >\n> > Colleagues\n> >\n> > I have a sequence like:\n> >       1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> >\n> > I would like to display it as:\n> >       1, 3-5, 7-8, 12-15, 20\n> >\n> > Any simple ways to accomplish this?\n> >\n> > Dennis\n> >\n> >\n> > Dennis Fisher MD\n> > P < (The \"P Less Than\" Company)\n> > Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> > www.PLessThan.com\n> >\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n>\n> Here is a way with package R.utils, function seqToIntervals.\n>\n>\n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n>\n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>    ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n>\n> If you want to be fancy, define a special class that prints like that.\n>\n>\n>\n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n>\n> as_seqInterval <- function(x) {\n>    old_class <- class(x)\n>    class(x) <- c(\"seqInterval\", old_class)\n>    x\n> }\n> print.seqInterval <- function(x, ...) {\n>    mat <- R.utils::seqToIntervals(x)\n>    out <- apply(mat, 1L, \\(m) {\n>      ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>    })\n>    print(out)\n> }\n>\n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n>\n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n>\n>\n> Hope this helps,\n>\n> Rui Barradas\n>\n>\n> --\n> Este e-mail foi analisado pelo software antivírus AVG para verificar a\n> presença de vírus.\n> www.avg.com\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Well, as I predicted, my initial suggestions were, ... ummm, rather dumb.\nAlso, Rui's suggestions are probably preferable to the below. However, it\n*is* a very simple, bare-boned approach to convertin",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480593.html"
     },
     {
       "id": "msg-0af53c22b0b1",
@@ -1110,11 +1171,12 @@
         "<A1CFC56B-281B-4785-8D18-E76ACA12ECDC@plessthan.com>",
         "<0dbdbcf9-6d7f-49bf-a7d8-1680e56c0db4@sapo.pt>"
       ],
-      "body_plain": "Rui,\n\nYour post (way at the bottom) expands beyond what was requested and that makes it more interesting. \n\nI like to look at what I consider reusable ideas and tools.\n\nOne was the reminder of using apply across rows of a matrix which would have applied to my earlier post of a package that also created a matrix of sequential followed by a count. \n\nAnother was the idea of creating a changed object that now has an additional class that can determine which new print function to use automagically. I do wonder what happens if there are other classes that also have such a function. Does the first class in the listing dominate?\n\nFinally, I have been considering the broader question of how to create a more abstract function along the lines being discussed. \n\nThis request was about integers and the definition of being next but contiguous was to be one apart. Clearly, there can be cases where you want say just contiguous even (or odd) numbers so that c(2, 6,8,10) becomes \"2, 6-10\" as in street addresses for deliveries on one side of a street where all addresses on that side are even. That could be handled by not hard-coding in a difference of 1, but providing a successor() function that returns TRUE/FALSE when supplied with two arguments. One method is to allow such a function as an argument.\n\nA related idea would be to allow other entries where a successor has meaning. Consider c(\"a\", \"c\", \"d\", \"e\", \"x\", \"y\") which you can imagine collapsed as \"a, c-e, x-y\" as one example. But you can broaden it to work with something like Roman numerals in text form. Having a successor function, as above, could allow such additional functionality.\n\nAnd, of course, other options could be allowed, perhaps to just pass through, so that you can specify the sep(arator) or col(lapse) strings such as instead of this:\n\n\"1, 3-6, 12-19\"\n\nYou might see:\n\n1\n3:6\n12:19\n\nAs in multiple lines and colon separated.\n\nBut one question I keep asking is about complexity. We have seen a number of solutions and some of them require many passes over what could be a long vector and other data structures like matrices with quite a few passes. It is nice to re-use bits and pieces but perhaps for longer examples, not in prototyping mode, writing a custom function that passes minimally over the data, may be a better choice.\n\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Rui Barradas\nSent: Saturday, February 22, 2025 7:36 AM\nTo: Dennis Fisher <fisher at plessthan.com>; r-help <r-help at r-project.org>\nSubject: Re: [R] Compressing a sequence\n\n?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8, 12-15, 20\n> \n> Any simple ways to accomplish this?\n> \n> Dennis\n> \n> \n> Dennis Fisher MD\n> P < (The \"P Less Than\" Company)\n> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> www.PLessThan.com\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nHere is a way with package R.utils, function seqToIntervals.\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nmat <- R.utils::seqToIntervals(x)\napply(mat, 1L, \\(m) {\n   ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n})\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nIf you want to be fancy, define a special class that prints like that.\n\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nas_seqInterval <- function(x) {\n   old_class <- class(x)\n   class(x) <- c(\"seqInterval\", old_class)\n   x\n}\nprint.seqInterval <- function(x, ...) {\n   mat <- R.utils::seqToIntervals(x)\n   out <- apply(mat, 1L, \\(m) {\n     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n   })\n   print(out)\n}\n\ny <- as_seqInterval(x)\nclass(y)\n#> [1] \"seqInterval\" \"numeric\"\n\n# autoprinting y\ny\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n# explicit printing y\nprint(y)\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\nwww.avg.com\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "Rui,\n\nYour post (way at the bottom) expands beyond what was requested and that makes it more interesting. \n\nI like to look at what I consider reusable ideas and tools.\n\nOne was the reminder of using apply across rows of a matrix which would have applied to my earlier post of a package that also created a matrix of sequential followed by a count. \n\nAnother was the idea of creating a changed object that now has an additional class that can determine which new print function to use automagically. I do wonder what happens if there are other classes that also have such a function. Does the first class in the listing dominate?\n\nFinally, I have been considering the broader question of how to create a more abstract function along the lines being discussed. \n\nThis request was about integers and the definition of being next but contiguous was to be one apart. Clearly, there can be cases where you want say just contiguous even (or odd) numbers so that c(2, 6,8,10) becomes \"2, 6-10\" as in street addresses for deliveries on one side of a street where all addresses on that side are even. That could be handled by not hard-coding in a difference of 1, but providing a successor() function that returns TRUE/FALSE when supplied with two arguments. One method is to allow such a function as an argument.\n\nA related idea would be to allow other entries where a successor has meaning. Consider c(\"a\", \"c\", \"d\", \"e\", \"x\", \"y\") which you can imagine collapsed as \"a, c-e, x-y\" as one example. But you can broaden it to work with something like Roman numerals in text form. Having a successor function, as above, could allow such additional functionality.\n\nAnd, of course, other options could be allowed, perhaps to just pass through, so that you can specify the sep(arator) or col(lapse) strings such as instead of this:\n\n\"1, 3-6, 12-19\"\n\nYou might see:\n\n1\n3:6\n12:19\n\nAs in multiple lines and colon separated.\n\nBut one question I keep asking is about complexity. We have seen a number of solutions and some of them require many passes over what could be a long vector and other data structures like matrices with quite a few passes. It is nice to re-use bits and pieces but perhaps for longer examples, not in prototyping mode, writing a custom function that passes minimally over the data, may be a better choice.\n\n\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Rui Barradas\nSent: Saturday, February 22, 2025 7:36 AM\nTo: Dennis Fisher <fisher at plessthan.com>; r-help <r-help at r-project.org>\nSubject: Re: [R] Compressing a sequence\n\nÀs 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> R 4.4.0\n> OS X\n> \n> Colleagues\n> \n> I have a sequence like:\n> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> \n> I would like to display it as:\n> \t1, 3-5, 7-8, 12-15, 20\n> \n> Any simple ways to accomplish this?\n> \n> Dennis\n> \n> \n> Dennis Fisher MD\n> P < (The \"P Less Than\" Company)\n> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> www.PLessThan.com\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nHere is a way with package R.utils, function seqToIntervals.\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nmat <- R.utils::seqToIntervals(x)\napply(mat, 1L, \\(m) {\n   ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n})\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nIf you want to be fancy, define a special class that prints like that.\n\n\n\nx <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n\nas_seqInterval <- function(x) {\n   old_class <- class(x)\n   class(x) <- c(\"seqInterval\", old_class)\n   x\n}\nprint.seqInterval <- function(x, ...) {\n   mat <- R.utils::seqToIntervals(x)\n   out <- apply(mat, 1L, \\(m) {\n     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n   })\n   print(out)\n}\n\ny <- as_seqInterval(x)\nclass(y)\n#> [1] \"seqInterval\" \"numeric\"\n\n# autoprinting y\ny\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n# explicit printing y\nprint(y)\n#> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\nwww.avg.com\n\n______________________________________________\nR-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\nhttps://stat.ethz.ch/mailman/listinfo/r-help\nPLEASE do read the posting guide https://www.R-project.org/posting-guide.html\nand provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Rui,\n\nYour post (way at the bottom) expands beyond what was requested and that makes it more interesting. \n\nI like to look at what I consider reusable ideas and tools.\n\nOne was the reminder of using a",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 2,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480594.html"
     },
     {
       "id": "msg-8e1f030375c6",
@@ -1130,11 +1192,12 @@
         "<0dbdbcf9-6d7f-49bf-a7d8-1680e56c0db4@sapo.pt>",
         "<CAGxFJbT+6+Ty21f6dOiSvSiyrK1D+uHYdCZ3Kp3Q=DHGEYms1Q@mail.gmail.com>"
       ],
-      "body_plain": "Colleagues\n\nI appreciate the many suggestions for my query about collapsing a sequence to a shortened string.  \n\nI finally arrived at:\n\nformat_ranges <- function(x)\n        {                       \n\t x                  <- sort(unique(x))          \n\tbreaks          <- which(diff(x) > 1)\n        start_idx       <- c(1, breaks + 1)\n        end_idx        <- c(breaks, length(x))\n        ranges          <- mapply(function(s, e)\n                {\n                if (s == e)\treturn(as.character(x[s]))\n                else        \treturn(paste(x[s], x[e], sep=\"-\"))\n                }, start_idx, end_idx)\n        paste(ranges, collapse=\", \")\n        }\n\nnumbers <- c(1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20)\ncat(\"original sequence is:\\t\\t\", numbers, \"\\n\")\ncat(\"collapsed text string is:\\t\", format_ranges(numbers), \"\\n\")\n\nDennis\n\nDennis Fisher MD\nP < (The \"P Less Than\" Company)\nPhone / Fax: 1-866-PLessThan (1-866-753-7784)\nwww.PLessThan.com\n\n> On Feb 22, 2025, at 8:14 AM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n> \n> Well, as I predicted, my initial suggestions were, ... ummm, rather dumb. Also, Rui's suggestions are probably preferable to the below. However, it *is* a very simple, bare-boned approach to converting a sequence of increasing integers to a character representation using interval notation. The code is *very* simple-minded and needs no explanation, I think. You should also be able to easily tweak it to change the output format from my paste0(..., collapse) choice to something else.\n> \n> compr <- function(x, sep =\"-\", collapse = \", \")\n> {\n>    left<- c(TRUE, diff(x) != 1)\n>    right <- c(rev(diff(rev(x)) != -1 ), TRUE)\n>    xleft <- x[left]\n>    xright <- x[right]\n>    ifelse(xleft == xright, \n>             xleft, \n>             paste(xleft, xright, sep = sep)) |>\n>        paste0(collapse = collapse)\n> }\n> \n> which yields the following with your example\n> \n> > compr(c( 1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20))\n> [1] \"1, 3-5, 7-8, 12-15, 20\"   ##Note: A single character string\n> \n> (Do let me know if this can fail)\n>  Cheers,\n> Bert\n> \n> \"An educated person is one who can entertain new ideas, entertain others, and entertain herself.\"\n> \n> \n> \n> On Sat, Feb 22, 2025 at 4:36?AM Rui Barradas <ruipbarradas at sapo.pt> wrote:\n> ?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> > R 4.4.0\n> > OS X\n> > \n> > Colleagues\n> > \n> > I have a sequence like:\n> >       1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> > \n> > I would like to display it as:\n> >       1, 3-5, 7-8, 12-15, 20\n> > \n> > Any simple ways to accomplish this?\n> > \n> > Dennis\n> > \n> > \n> > Dennis Fisher MD\n> > P < (The \"P Less Than\" Company)\n> > Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> > www.PLessThan.com\n> > \n> > \n> >       [[alternative HTML version deleted]]\n> > \n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n> \n> Here is a way with package R.utils, function seqToIntervals.\n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>    ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> If you want to be fancy, define a special class that prints like that.\n> \n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> as_seqInterval <- function(x) {\n>    old_class <- class(x)\n>    class(x) <- c(\"seqInterval\", old_class)\n>    x\n> }\n> print.seqInterval <- function(x, ...) {\n>    mat <- R.utils::seqToIntervals(x)\n>    out <- apply(mat, 1L, \\(m) {\n>      ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>    })\n>    print(out)\n> }\n> \n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n> \n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> Hope this helps,\n> \n> Rui Barradas\n> \n> \n> -- \n> Este e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\n> www.avg.com\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "Colleagues\n\nI appreciate the many suggestions for my query about collapsing a sequence to a shortened string.  \n\nI finally arrived at:\n\nformat_ranges <- function(x)\n        {                       \n\t x                  <- sort(unique(x))          \n\tbreaks          <- which(diff(x) > 1)\n        start_idx       <- c(1, breaks + 1)\n        end_idx        <- c(breaks, length(x))\n        ranges          <- mapply(function(s, e)\n                {\n                if (s == e)\treturn(as.character(x[s]))\n                else        \treturn(paste(x[s], x[e], sep=\"-\"))\n                }, start_idx, end_idx)\n        paste(ranges, collapse=\", \")\n        }\n\nnumbers <- c(1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20)\ncat(\"original sequence is:\\t\\t\", numbers, \"\\n\")\ncat(\"collapsed text string is:\\t\", format_ranges(numbers), \"\\n\")\n\nDennis\n\nDennis Fisher MD\nP < (The \"P Less Than\" Company)\nPhone / Fax: 1-866-PLessThan (1-866-753-7784)\nwww.PLessThan.com\n\n> On Feb 22, 2025, at 8:14 AM, Bert Gunter <bgunter.4567 at gmail.com> wrote:\n> \n> Well, as I predicted, my initial suggestions were, ... ummm, rather dumb. Also, Rui's suggestions are probably preferable to the below. However, it *is* a very simple, bare-boned approach to converting a sequence of increasing integers to a character representation using interval notation. The code is *very* simple-minded and needs no explanation, I think. You should also be able to easily tweak it to change the output format from my paste0(..., collapse) choice to something else.\n> \n> compr <- function(x, sep =\"-\", collapse = \", \")\n> {\n>    left<- c(TRUE, diff(x) != 1)\n>    right <- c(rev(diff(rev(x)) != -1 ), TRUE)\n>    xleft <- x[left]\n>    xright <- x[right]\n>    ifelse(xleft == xright, \n>             xleft, \n>             paste(xleft, xright, sep = sep)) |>\n>        paste0(collapse = collapse)\n> }\n> \n> which yields the following with your example\n> \n> > compr(c( 1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20))\n> [1] \"1, 3-5, 7-8, 12-15, 20\"   ##Note: A single character string\n> \n> (Do let me know if this can fail)\n>  Cheers,\n> Bert\n> \n> \"An educated person is one who can entertain new ideas, entertain others, and entertain herself.\"\n> \n> \n> \n> On Sat, Feb 22, 2025 at 4:36 AM Rui Barradas <ruipbarradas at sapo.pt> wrote:\n> Às 00:46 de 22/02/2025, Dennis Fisher escreveu:\n> > R 4.4.0\n> > OS X\n> > \n> > Colleagues\n> > \n> > I have a sequence like:\n> >       1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n> > \n> > I would like to display it as:\n> >       1, 3-5, 7-8, 12-15, 20\n> > \n> > Any simple ways to accomplish this?\n> > \n> > Dennis\n> > \n> > \n> > Dennis Fisher MD\n> > P < (The \"P Less Than\" Company)\n> > Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n> > www.PLessThan.com\n> > \n> > \n> >       [[alternative HTML version deleted]]\n> > \n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n> \n> Here is a way with package R.utils, function seqToIntervals.\n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>    ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> If you want to be fancy, define a special class that prints like that.\n> \n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> as_seqInterval <- function(x) {\n>    old_class <- class(x)\n>    class(x) <- c(\"seqInterval\", old_class)\n>    x\n> }\n> print.seqInterval <- function(x, ...) {\n>    mat <- R.utils::seqToIntervals(x)\n>    out <- apply(mat, 1L, \\(m) {\n>      ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>    })\n>    print(out)\n> }\n> \n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n> \n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> Hope this helps,\n> \n> Rui Barradas\n> \n> \n> -- \n> Este e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\n> www.avg.com\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Colleagues\n\nI appreciate the many suggestions for my query about collapsing a sequence to a shortened string.  \n\nI finally arrived at:\n\nformat_ranges <- function(x)\n        {                       \n\t ",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480595.html"
     },
     {
       "id": "msg-b3c5e97d70c0",
@@ -1150,11 +1213,12 @@
         "<0dbdbcf9-6d7f-49bf-a7d8-1680e56c0db4@sapo.pt>",
         "<004901db855a$3fa43ac0$beecb040$@gmail.com>"
       ],
-      "body_plain": "Hello,\n\nInline.\n\n?s 18:47 de 22/02/2025, avi.e.gross at gmail.com escreveu:\n> Rui,\n> \n> Your post (way at the bottom) expands beyond what was requested and that makes it more interesting.\n> \n> I like to look at what I consider reusable ideas and tools.\n> \n> One was the reminder of using apply across rows of a matrix which would have applied to my earlier post of a package that also created a matrix of sequential followed by a count.\n> \n> Another was the idea of creating a changed object that now has an additional class that can determine which new print function to use automagically. I do wonder what happens if there are other classes that also have such a function. Does the first class in the listing dominate?\n\nYes, to call the 2nd, use NextMethod().\n\nContinues at the end.\n\n> \n> Finally, I have been considering the broader question of how to create a more abstract function along the lines being discussed.\n> \n> This request was about integers and the definition of being next but contiguous was to be one apart. Clearly, there can be cases where you want say just contiguous even (or odd) numbers so that c(2, 6,8,10) becomes \"2, 6-10\" as in street addresses for deliveries on one side of a street where all addresses on that side are even. That could be handled by not hard-coding in a difference of 1, but providing a successor() function that returns TRUE/FALSE when supplied with two arguments. One method is to allow such a function as an argument.\n> \n> A related idea would be to allow other entries where a successor has meaning. Consider c(\"a\", \"c\", \"d\", \"e\", \"x\", \"y\") which you can imagine collapsed as \"a, c-e, x-y\" as one example. But you can broaden it to work with something like Roman numerals in text form. Having a successor function, as above, could allow such additional functionality.\n> \n> And, of course, other options could be allowed, perhaps to just pass through, so that you can specify the sep(arator) or col(lapse) strings such as instead of this:\n> \n> \"1, 3-6, 12-19\"\n> \n> You might see:\n> \n> 1\n> 3:6\n> 12:19\n> \n> As in multiple lines and colon separated.\n> \n> But one question I keep asking is about complexity. We have seen a number of solutions and some of them require many passes over what could be a long vector and other data structures like matrices with quite a few passes. It is nice to re-use bits and pieces but perhaps for longer examples, not in prototyping mode, writing a custom function that passes minimally over the data, may be a better choice.\n> \n> \n> \n> -----Original Message-----\n> From: R-help <r-help-bounces at r-project.org> On Behalf Of Rui Barradas\n> Sent: Saturday, February 22, 2025 7:36 AM\n> To: Dennis Fisher <fisher at plessthan.com>; r-help <r-help at r-project.org>\n> Subject: Re: [R] Compressing a sequence\n> \n> ?s 00:46 de 22/02/2025, Dennis Fisher escreveu:\n>> R 4.4.0\n>> OS X\n>>\n>> Colleagues\n>>\n>> I have a sequence like:\n>> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n>>\n>> I would like to display it as:\n>> \t1, 3-5, 7-8, 12-15, 20\n>>\n>> Any simple ways to accomplish this?\n>>\n>> Dennis\n>>\n>>\n>> Dennis Fisher MD\n>> P < (The \"P Less Than\" Company)\n>> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n>> www.PLessThan.com\n>>\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n> \n> Here is a way with package R.utils, function seqToIntervals.\n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> If you want to be fancy, define a special class that prints like that.\n> \n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> as_seqInterval <- function(x) {\n>     old_class <- class(x)\n>     class(x) <- c(\"seqInterval\", old_class)\n>     x\n> }\n> print.seqInterval <- function(x, ...) {\n>     mat <- R.utils::seqToIntervals(x)\n>     out <- apply(mat, 1L, \\(m) {\n>       ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>     })\n>     print(out)\n> }\n> \n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n> \n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> Hope this helps,\n> \n> Rui Barradas\n> \n> \n\nWith the example from my first post, there is another advantage in using \na new class. Since this new class sub-classes \"numeric\" \"seqInterval\" \nnumbers can be added, subtracted, etc, they will keep the expected \nbehaviour of numbers.\n\n\n\nx2 <- c(1:3, 5, 6)\nlength(x)\n#> [1] 11\nlength(x2)\n#> [1] 5\n\ny2 <- as_seqInterval(x2)\ny2\n#> [1] \"1-3\" \"5-6\"\nx + x2\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#>  [1]  2  5  7 10 13  9 14 16 19 21 21\n\n# make it more obvious that 9, 10 and 13, 14 should be compressed\nsort(x + x2)\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#>  [1]  2  5  7  9 10 13 14 16 19 21 21\n\n# to add two objects of class \"seqInterval\" keeps the compressing property\nas_seqInterval(x + x2)\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#> [1] \"2\"     \"5\"     \"7\"     \"9-10\"  \"13-14\" \"16\"    \"19\"    \"21\"\ny + y2\n#> Warning in y + y2: longer object length is not a multiple of shorter \nobject\n#> length\n#> [1] \"2\"     \"5\"     \"7\"     \"9-10\"  \"13-14\" \"16\"    \"19\"    \"21\"\n\n# now a division, the results are not integer\ny/2\n#> [1] \"0-4\" \"6-7\" \"10\"\nunclass(y/2)\n#> [1]  0.5  1.5  2.0  2.5  3.5  4.0  6.0  6.5  7.0  7.5 10.0\n\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antiv?rus AVG para verificar a presen?a de v?rus.\nwww.avg.com",
-      "body_snippet": "Hello,\n\nInline.\n\n?s 18:47 de 22/02/2025, avi.e.gross at gmail.com escreveu:\n> Rui,\n> \n> Your post (way at the bottom) expands beyond what was requested and that makes it more interesting.\n> \n> I like ",
+      "body_plain": "Hello,\n\nInline.\n\nÀs 18:47 de 22/02/2025, avi.e.gross at gmail.com escreveu:\n> Rui,\n> \n> Your post (way at the bottom) expands beyond what was requested and that makes it more interesting.\n> \n> I like to look at what I consider reusable ideas and tools.\n> \n> One was the reminder of using apply across rows of a matrix which would have applied to my earlier post of a package that also created a matrix of sequential followed by a count.\n> \n> Another was the idea of creating a changed object that now has an additional class that can determine which new print function to use automagically. I do wonder what happens if there are other classes that also have such a function. Does the first class in the listing dominate?\n\nYes, to call the 2nd, use NextMethod().\n\nContinues at the end.\n\n> \n> Finally, I have been considering the broader question of how to create a more abstract function along the lines being discussed.\n> \n> This request was about integers and the definition of being next but contiguous was to be one apart. Clearly, there can be cases where you want say just contiguous even (or odd) numbers so that c(2, 6,8,10) becomes \"2, 6-10\" as in street addresses for deliveries on one side of a street where all addresses on that side are even. That could be handled by not hard-coding in a difference of 1, but providing a successor() function that returns TRUE/FALSE when supplied with two arguments. One method is to allow such a function as an argument.\n> \n> A related idea would be to allow other entries where a successor has meaning. Consider c(\"a\", \"c\", \"d\", \"e\", \"x\", \"y\") which you can imagine collapsed as \"a, c-e, x-y\" as one example. But you can broaden it to work with something like Roman numerals in text form. Having a successor function, as above, could allow such additional functionality.\n> \n> And, of course, other options could be allowed, perhaps to just pass through, so that you can specify the sep(arator) or col(lapse) strings such as instead of this:\n> \n> \"1, 3-6, 12-19\"\n> \n> You might see:\n> \n> 1\n> 3:6\n> 12:19\n> \n> As in multiple lines and colon separated.\n> \n> But one question I keep asking is about complexity. We have seen a number of solutions and some of them require many passes over what could be a long vector and other data structures like matrices with quite a few passes. It is nice to re-use bits and pieces but perhaps for longer examples, not in prototyping mode, writing a custom function that passes minimally over the data, may be a better choice.\n> \n> \n> \n> -----Original Message-----\n> From: R-help <r-help-bounces at r-project.org> On Behalf Of Rui Barradas\n> Sent: Saturday, February 22, 2025 7:36 AM\n> To: Dennis Fisher <fisher at plessthan.com>; r-help <r-help at r-project.org>\n> Subject: Re: [R] Compressing a sequence\n> \n> Às 00:46 de 22/02/2025, Dennis Fisher escreveu:\n>> R 4.4.0\n>> OS X\n>>\n>> Colleagues\n>>\n>> I have a sequence like:\n>> \t1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\n>>\n>> I would like to display it as:\n>> \t1, 3-5, 7-8, 12-15, 20\n>>\n>> Any simple ways to accomplish this?\n>>\n>> Dennis\n>>\n>>\n>> Dennis Fisher MD\n>> P < (The \"P Less Than\" Company)\n>> Phone / Fax: 1-866-PLessThan (1-866-753-7784)\n>> www.PLessThan.com\n>>\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n> Hello,\n> \n> Here is a way with package R.utils, function seqToIntervals.\n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> mat <- R.utils::seqToIntervals(x)\n> apply(mat, 1L, \\(m) {\n>     ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n> })\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> If you want to be fancy, define a special class that prints like that.\n> \n> \n> \n> x <- scan(text = \"1, 3, 4, 5, 7, 8, 12, 13, 14, 15, 20\", sep = \",\")\n> \n> as_seqInterval <- function(x) {\n>     old_class <- class(x)\n>     class(x) <- c(\"seqInterval\", old_class)\n>     x\n> }\n> print.seqInterval <- function(x, ...) {\n>     mat <- R.utils::seqToIntervals(x)\n>     out <- apply(mat, 1L, \\(m) {\n>       ifelse(m[1L] == m[2L], m[1L], paste(m, collapse = \"-\"))\n>     })\n>     print(out)\n> }\n> \n> y <- as_seqInterval(x)\n> class(y)\n> #> [1] \"seqInterval\" \"numeric\"\n> \n> # autoprinting y\n> y\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> # explicit printing y\n> print(y)\n> #> [1] \"1\"     \"3-5\"   \"7-8\"   \"12-15\" \"20\"\n> \n> \n> Hope this helps,\n> \n> Rui Barradas\n> \n> \n\nWith the example from my first post, there is another advantage in using \na new class. Since this new class sub-classes \"numeric\" \"seqInterval\" \nnumbers can be added, subtracted, etc, they will keep the expected \nbehaviour of numbers.\n\n\n\nx2 <- c(1:3, 5, 6)\nlength(x)\n#> [1] 11\nlength(x2)\n#> [1] 5\n\ny2 <- as_seqInterval(x2)\ny2\n#> [1] \"1-3\" \"5-6\"\nx + x2\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#>  [1]  2  5  7 10 13  9 14 16 19 21 21\n\n# make it more obvious that 9, 10 and 13, 14 should be compressed\nsort(x + x2)\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#>  [1]  2  5  7  9 10 13 14 16 19 21 21\n\n# to add two objects of class \"seqInterval\" keeps the compressing property\nas_seqInterval(x + x2)\n#> Warning in x + x2: longer object length is not a multiple of shorter \nobject\n#> length\n#> [1] \"2\"     \"5\"     \"7\"     \"9-10\"  \"13-14\" \"16\"    \"19\"    \"21\"\ny + y2\n#> Warning in y + y2: longer object length is not a multiple of shorter \nobject\n#> length\n#> [1] \"2\"     \"5\"     \"7\"     \"9-10\"  \"13-14\" \"16\"    \"19\"    \"21\"\n\n# now a division, the results are not integer\ny/2\n#> [1] \"0-4\" \"6-7\" \"10\"\nunclass(y/2)\n#> [1]  0.5  1.5  2.0  2.5  3.5  4.0  6.0  6.5  7.0  7.5 10.0\n\n\n\nHope this helps,\n\nRui Barradas\n\n\n-- \nEste e-mail foi analisado pelo software antivírus AVG para verificar a presença de vírus.\nwww.avg.com",
+      "body_snippet": "Hello,\n\nInline.\n\nÀs 18:47 de 22/02/2025, avi.e.gross at gmail.com escreveu:\n> Rui,\n> \n> Your post (way at the bottom) expands beyond what was requested and that makes it more interesting.\n> \n> I like ",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 3,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480596.html"
     },
     {
       "id": "msg-a4117df54076",
@@ -1175,7 +1239,8 @@
       "body_snippet": "Hi Ben:\n\nI realize that for the OP whether it takes 1/2 second or 1 microsecond to\ndo what he wants may be irrelevant, but just for fun I thought I'd time the\ncondense() function you found vs. the com",
       "thread_id": "thread-9dc45ce1f27e",
       "thread_depth": 4,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480597.html"
     },
     {
       "id": "msg-82aa3e147ee0",
@@ -1191,7 +1256,8 @@
       "body_snippet": "Dear R-packages/R-help subscribers,\n\nJust writing to advertise that R package 'flint', interfacing the FLINT\nC library for number theory, is now available on CRAN.\n\n     https://cran.r-project.org/pac",
       "thread_id": "thread-82aa3e147ee0",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480598.html"
     },
     {
       "id": "msg-2c9fb8b69eaa",
@@ -1207,7 +1273,8 @@
       "body_snippet": "The build system rolled up R-4.4.3.tar.gz (codename \"Trophy Case\") this morning.\n\nThis is intended to be the round-up release of the 4.4.x series. \n\nIt also happens to be as close as we can get to cel",
       "thread_id": "thread-2c9fb8b69eaa",
       "thread_depth": 0,
-      "month": "2025-02"
+      "month": "2025-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2025-February/480599.html"
     }
   ],
   "threads": [

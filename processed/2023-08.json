@@ -17,7 +17,8 @@
       "body_snippet": "Dear friends,\n\nI hope  this email finds you all well. This is the dataset I am working\nwith:\ndput(random_mod12_data2)\nstructure(list(Index = c(1L, 5L, 11L, 3L, 2L, 8L, 9L, 4L), x = c(5,\n13, 25, 9, 7, ",
       "thread_id": "thread-976d9d48dd41",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477807.html"
     },
     {
       "id": "msg-e4a2f207df1d",
@@ -35,7 +36,8 @@
       "body_snippet": "logistic_regmod2 <- glm(formula = ratio~x, family = binomial(logit), data =\nrandom_mod12_data2, weights =n)\n\nplot(ratio ~ x, data = random_mod12_data2)\n\npframe <- data.frame(x = sort(random_mod12_data",
       "thread_id": "thread-976d9d48dd41",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477808.html"
     },
     {
       "id": "msg-db63c2dfdf85",
@@ -53,7 +55,8 @@
       "body_snippet": "?s 14:57 de 01/08/2023, Paul Bernal escreveu:\n> Dear friends,\n> \n> I hope  this email finds you all well. This is the dataset I am working\n> with:\n> dput(random_mod12_data2)\n> structure(list(Index = c",
       "thread_id": "thread-976d9d48dd41",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477809.html"
     },
     {
       "id": "msg-50f0792f9b6b",
@@ -69,7 +72,8 @@
       "body_snippet": "Hello - I am trying to plot flows in a number of rivers within the same\nplot, and need to colour the lines differently, using a colour-blind\npalette.\n\n\nCode beneath works but has colours assigned by t",
       "thread_id": "thread-50f0792f9b6b",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477810.html"
     },
     {
       "id": "msg-58157cf32cc6",
@@ -87,7 +91,8 @@
       "body_snippet": "?s 18:10 de 02/08/2023, Nick Wray escreveu:\n> Hello - I am trying to plot flows in a number of rivers within the same\n> plot, and need to colour the lines differently, using a colour-blind\n> palette.\n",
       "thread_id": "thread-50f0792f9b6b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477811.html"
     },
     {
       "id": "msg-53bf83c80195",
@@ -101,11 +106,12 @@
       "references": [
         "<CABxY9BMwYCr09zfbzfeRMo8TPF6xLJwBRpv1LJ6JpJebHtcdkQ@mail.gmail.com>"
       ],
-      "body_plain": "Hi,\n\nwhen using 'scale_colours_manual' the colours must be defined as value-\ncolor pairs (i.e. \"A\"=\"red\", \"B\"=\"blue\" an so on). If you read the\ndocumentation it is recommended to use a named vector.\n\nIf I understood it correctly, in your code #2 R understood the variable\n\"Stat\" as a number (i.e. continuous), whereas \"store\" (in code #3) is a\ncategorical variable. You cannot use scale_manual_* functions with\ncontinuous variables.\n\nThis should work (please note than I use 'as_factor' from 'haven', this\nis a more general function compared to 'as.factor'):\n\n--- snip ---\nlibrary(tidyverse)\nlibrary(haven)\ncol.2<-cb8[4:5]\n ggplot(df,aes(Year,Flow,group=Stat,colour=as_factor(Stat)))+\n   coord_cartesian(ylim = c(0, 10)) +\n   geom_line()+\n   geom_point()+\n scale_color_manual(values =cb8[4:5])+\n   theme_bw()\n--- snip ---\n\nIs the result what you expected?\n\nHTH,\nKimmo\n\nke, 2023-08-02 kello 18:10 +0100, Nick Wray kirjoitti:\n> Hello - I am trying to plot flows in a number of rivers within the\n> same\n> plot, and need to colour the lines differently, using a colour-blind\n> palette.\n> \n> \n> Code beneath works but has colours assigned by the program I have\n> made some\n> simple dummy data:\n> ## code 1\n> cb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\",\n> \"#0072B2\",\n> \"#D55E00\", \"#CC79A7\")? ## this is the colour-blind palette\n> ?set.seed(020823)\n> ?df<-\n> as.data.frame(cbind(rep(1980:1991,2),c(10*runif(12),10*runif(12)),c(r\n> ep(1,12),rep(2,12))))\n> ?colnames(df)<-c(\"Year\",\"Flow\",\"Stat\")\n> ?df\n> ?ggplot(df,aes(Year,Flow,group=Stat,colour=Stat))+\n> ?? coord_cartesian(ylim = c(0, 10)) +\n> ?? geom_line()+\n> ?? geom_point()\n> ?## this works\n> \n> ## BUT:\n> ## code 2\n> col.2<-cb8[4:5]\n> ?ggplot(df,aes(Year,Flow,group=Stat,colour=Stat))+\n> ?? coord_cartesian(ylim = c(0, 10)) +\n> ?? geom_line()+\n> ?? geom_point()+\n> ?scale_color_manual(values =cb8[4:5])+\n> ?? theme_bw()\n> ?## this gives error message Error: Continuous value supplied to\n> discrete\n> scale\n> \n> ## However this example using code from the net does work so I don't\n> understand why my ## second code doesn't work.\n> ## code 3\n> ?df.1 <- data.frame(store=c('A', 'A', 'A', 'B', 'B', 'B', 'C', 'C',\n> 'C'),\n> ????????????????? week=c(1, 2, 3, 1, 2, 3, 1, 2, 3),\n> ????????????????? sales=c(9, 12, 15, 7, 9, 14, 10, 16, 19))\n> ?ggplot(df.1, aes(x=week, y=sales, group=store, color=store)) +\n> ?? geom_line(size=2) +\n> ?? #scale_color_manual(values=c('orange', 'pink', 'red'))\n> ?? scale_color_manual(values=cb8[4:6])\n> \n> Can anyone help? Thanks Nick Wray\n> \n> ????????[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org?mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "Hi,\n\nwhen using 'scale_colours_manual' the colours must be defined as value-\ncolor pairs (i.e. \"A\"=\"red\", \"B\"=\"blue\" an so on). If you read the\ndocumentation it is recommended to use a named vector.\n\nIf I understood it correctly, in your code #2 R understood the variable\n\"Stat\" as a number (i.e. continuous), whereas \"store\" (in code #3) is a\ncategorical variable. You cannot use scale_manual_* functions with\ncontinuous variables.\n\nThis should work (please note than I use 'as_factor' from 'haven', this\nis a more general function compared to 'as.factor'):\n\n--- snip ---\nlibrary(tidyverse)\nlibrary(haven)\ncol.2<-cb8[4:5]\n ggplot(df,aes(Year,Flow,group=Stat,colour=as_factor(Stat)))+\n   coord_cartesian(ylim = c(0, 10)) +\n   geom_line()+\n   geom_point()+\n scale_color_manual(values =cb8[4:5])+\n   theme_bw()\n--- snip ---\n\nIs the result what you expected?\n\nHTH,\nKimmo\n\nke, 2023-08-02 kello 18:10 +0100, Nick Wray kirjoitti:\n> Hello - I am trying to plot flows in a number of rivers within the\n> same\n> plot, and need to colour the lines differently, using a colour-blind\n> palette.\n> \n> \n> Code beneath works but has colours assigned by the program I have\n> made some\n> simple dummy data:\n> ## code 1\n> cb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\",\n> \"#0072B2\",\n> \"#D55E00\", \"#CC79A7\")  ## this is the colour-blind palette\n>  set.seed(020823)\n>  df<-\n> as.data.frame(cbind(rep(1980:1991,2),c(10*runif(12),10*runif(12)),c(r\n> ep(1,12),rep(2,12))))\n>  colnames(df)<-c(\"Year\",\"Flow\",\"Stat\")\n>  df\n>  ggplot(df,aes(Year,Flow,group=Stat,colour=Stat))+\n>    coord_cartesian(ylim = c(0, 10)) +\n>    geom_line()+\n>    geom_point()\n>  ## this works\n> \n> ## BUT:\n> ## code 2\n> col.2<-cb8[4:5]\n>  ggplot(df,aes(Year,Flow,group=Stat,colour=Stat))+\n>    coord_cartesian(ylim = c(0, 10)) +\n>    geom_line()+\n>    geom_point()+\n>  scale_color_manual(values =cb8[4:5])+\n>    theme_bw()\n>  ## this gives error message Error: Continuous value supplied to\n> discrete\n> scale\n> \n> ## However this example using code from the net does work so I don't\n> understand why my ## second code doesn't work.\n> ## code 3\n>  df.1 <- data.frame(store=c('A', 'A', 'A', 'B', 'B', 'B', 'C', 'C',\n> 'C'),\n>  ??????????????   week=c(1, 2, 3, 1, 2, 3, 1, 2, 3),\n>  ??????????????   sales=c(9, 12, 15, 7, 9, 14, 10, 16, 19))\n>  ggplot(df.1, aes(x=week, y=sales, group=store, color=store)) +\n>    geom_line(size=2) +\n>    #scale_color_manual(values=c('orange', 'pink', 'red'))\n>    scale_color_manual(values=cb8[4:6])\n> \n> Can anyone help? Thanks Nick Wray\n> \n> ????    [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "Hi,\n\nwhen using 'scale_colours_manual' the colours must be defined as value-\ncolor pairs (i.e. \"A\"=\"red\", \"B\"=\"blue\" an so on). If you read the\ndocumentation it is recommended to use a named vector.\n\n",
       "thread_id": "thread-50f0792f9b6b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477812.html"
     },
     {
       "id": "msg-65282dbc67ee",
@@ -121,7 +127,8 @@
       "body_snippet": "Hi,\n\nI have a CSV which contains data like below (only first few rows),\n\nDate Adj Close lret\n02-01-1997 737.01\n03-01-1997 748.03 1.48416235\n06-01-1997 747.65 -0.050813009\n07-01-1997 753.23 0.743567202",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477813.html"
     },
     {
       "id": "msg-ac88b284b353",
@@ -139,7 +146,8 @@
       "body_snippet": "no commas?\n\nOn August 3, 2023 7:53:07 AM PDT, Christofer Bogaso <bogaso.christofer at gmail.com> wrote:\n>Hi,\n>\n>I have a CSV which contains data like below (only first few rows),\n>\n>Date Adj Close lre",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477814.html"
     },
     {
       "id": "msg-c6be3c5ed290",
@@ -158,7 +166,8 @@
       "body_snippet": "Hi,\n\nI just provided a snapshot of my CSV file. Attaching the full file\nhere (not sure if R-help would accept the attachment).\n\nThanks and regards,\n\nOn Thu, Aug 3, 2023 at 8:35?PM Jeff Newmiller <jdne",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477818.html"
     },
     {
       "id": "msg-1793f7592cbc",
@@ -177,7 +186,8 @@
       "body_snippet": "Agreed. Tab character is not comma character.\n\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/3/23 11:04, Jeff Newmiller w",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477816.html"
     },
     {
       "id": "msg-a31b5f259112",
@@ -195,7 +205,8 @@
       "body_snippet": "One reason seems to be you are saying sep = \",\" and there is no \",\" in the\nfile.\nAlso you only have 3 columns of data but 4 variable names.\n\nOn Thu, 3 Aug 2023 at 10:53, Christofer Bogaso <bogaso.chri",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477815.html"
     },
     {
       "id": "msg-335b41d8bfb8",
@@ -213,7 +224,8 @@
       "body_snippet": "The header has white space in it so skip over it, use header = FALSE\nand specify the\ncolumn headers yourself.  Also use fill=TRUE since the first row does\nnot have 3 entries.\n\n   # generate test file\n",
       "thread_id": "thread-65282dbc67ee",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477817.html"
     },
     {
       "id": "msg-0c0545400042",
@@ -229,7 +241,8 @@
       "body_snippet": "Dear Ms./Mr., \n\n\n\n\n\n\n\nIf the email text and codes below are not properly displayed, you can download the attached Word file, which has exactly the same content. \n\n\n\nI am a cytometrist and microscopist",
       "thread_id": "thread-0c0545400042",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477824.html"
     },
     {
       "id": "msg-08f6f192ba00",
@@ -245,7 +258,8 @@
       "body_snippet": "Dear Ms./Mr.,\n\n\nI sent an email to this email address from my institutional address\nmuratdelman at iyte.edu.tr, but could not make sure if my email reached you\nbecause sometimes emails are not deliver",
       "thread_id": "thread-08f6f192ba00",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477821.html"
     },
     {
       "id": "msg-728ae0e6717a",
@@ -257,11 +271,12 @@
       "subject_clean": "Problems with facets in ggplot2",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello  I am wrestling with ggplot ? I have produced a facetted plot of\nflows under various metrics but I can?t find info on the net which tells me\nhow to do three things\n\n\nI have created some simplified mock data to illustrate (and using a\ncolour-blind palette):\n\n\nlibrary(ggplot2)\n\nlibrary(forcats)\n\ncb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\", \"#0072B2\",\n\"#D55E00\", \"#CC79A7\")\n\nset.seed<-(040823)\n\n  mock<- set.seed<-(040823)\n\n\nmock<-as.data.frame(cbind(rep((1990:1995),8),round(rnorm(48,50,10),3),rep(c(rep(\"Tweed\",6),rep(\"Tay\",6)),4),rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)))\n\n  colnames(mock)<-c(\"Year\",\"Flow\",\"Stat\",\"Metric\")\n\n  mock\n\n\n\n  ggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat)))+\n\n    coord_cartesian(ylim = c(0, 100)) +\n\n    geom_line(size=1)+\n\n    scale_color_manual(name = \"Stat\", values = cb8[4:7])+\n\n    scale_y_discrete(breaks=c(0,25,50,75,100),labels=c(0,25,50,75,100))+\n\n    facet_wrap(vars(Metric),nrow=2,ncol=2)+\n\n    ylab(\"Flow\")\n\n\n\n1)This gives me a facetted plot but I can?t work out why I?m not getting a\nlabelled y scale\n\n\n\n2)Why are plots down at the bottom of the facets rather than in the middle?\n\n\n\n3)And also I?d like the plots to be in the order (top left to bottom right)\nof\n\nAMAX MEAN AMIN MEDIAN\n\nbut if I add in the line\nfacet_grid(~fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\")) before the\nline ylab it disrupts the 2x2 layout\n\n\n\nCan anyone tell me how to resolve these problems?  Thanks Nick Wray\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hello  I am wrestling with ggplot ? I have produced a facetted plot of\nflows under various metrics but I can?t find info on the net which tells me\nhow to do three things\n\n\nI have created some simplifi",
+      "body_plain": "Hello  I am wrestling with ggplot – I have produced a facetted plot of\nflows under various metrics but I can’t find info on the net which tells me\nhow to do three things\n\n\nI have created some simplified mock data to illustrate (and using a\ncolour-blind palette):\n\n\nlibrary(ggplot2)\n\nlibrary(forcats)\n\ncb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\", \"#0072B2\",\n\"#D55E00\", \"#CC79A7\")\n\nset.seed<-(040823)\n\n  mock<- set.seed<-(040823)\n\n\nmock<-as.data.frame(cbind(rep((1990:1995),8),round(rnorm(48,50,10),3),rep(c(rep(\"Tweed\",6),rep(\"Tay\",6)),4),rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)))\n\n  colnames(mock)<-c(\"Year\",\"Flow\",\"Stat\",\"Metric\")\n\n  mock\n\n\n\n  ggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat)))+\n\n    coord_cartesian(ylim = c(0, 100)) +\n\n    geom_line(size=1)+\n\n    scale_color_manual(name = \"Stat\", values = cb8[4:7])+\n\n    scale_y_discrete(breaks=c(0,25,50,75,100),labels=c(0,25,50,75,100))+\n\n    facet_wrap(vars(Metric),nrow=2,ncol=2)+\n\n    ylab(\"Flow\")\n\n\n\n1)This gives me a facetted plot but I can’t work out why I’m not getting a\nlabelled y scale\n\n\n\n2)Why are plots down at the bottom of the facets rather than in the middle?\n\n\n\n3)And also I’d like the plots to be in the order (top left to bottom right)\nof\n\nAMAX MEAN AMIN MEDIAN\n\nbut if I add in the line\nfacet_grid(~fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\")) before the\nline ylab it disrupts the 2x2 layout\n\n\n\nCan anyone tell me how to resolve these problems?  Thanks Nick Wray\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello  I am wrestling with ggplot – I have produced a facetted plot of\nflows under various metrics but I can’t find info on the net which tells me\nhow to do three things\n\n\nI have created some simplifi",
       "thread_id": "thread-728ae0e6717a",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477819.html"
     },
     {
       "id": "msg-16f91e1c4cfa",
@@ -275,11 +290,12 @@
       "references": [
         "<CABxY9BPZ6U5yj91FtPg2ejtX=YA93iCdmd6dX=oKYDg16cCRqw@mail.gmail.com>"
       ],
-      "body_plain": "?s 11:08 de 04/08/2023, Nick Wray escreveu:\n> Hello  I am wrestling with ggplot ? I have produced a facetted plot of\n> flows under various metrics but I can?t find info on the net which tells me\n> how to do three things\n> \n> \n> I have created some simplified mock data to illustrate (and using a\n> colour-blind palette):\n> \n> \n> library(ggplot2)\n> \n> library(forcats)\n> \n> cb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\", \"#0072B2\",\n> \"#D55E00\", \"#CC79A7\")\n> \n> set.seed<-(040823)\n> \n>    mock<- set.seed<-(040823)\n> \n> \n> mock<-as.data.frame(cbind(rep((1990:1995),8),round(rnorm(48,50,10),3),rep(c(rep(\"Tweed\",6),rep(\"Tay\",6)),4),rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)))\n> \n>    colnames(mock)<-c(\"Year\",\"Flow\",\"Stat\",\"Metric\")\n> \n>    mock\n> \n> \n> \n>    ggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat)))+\n> \n>      coord_cartesian(ylim = c(0, 100)) +\n> \n>      geom_line(size=1)+\n> \n>      scale_color_manual(name = \"Stat\", values = cb8[4:7])+\n> \n>      scale_y_discrete(breaks=c(0,25,50,75,100),labels=c(0,25,50,75,100))+\n> \n>      facet_wrap(vars(Metric),nrow=2,ncol=2)+\n> \n>      ylab(\"Flow\")\n> \n> \n> \n> 1)This gives me a facetted plot but I can?t work out why I?m not getting a\n> labelled y scale\n> \n> \n> \n> 2)Why are plots down at the bottom of the facets rather than in the middle?\n> \n> \n> \n> 3)And also I?d like the plots to be in the order (top left to bottom right)\n> of\n> \n> AMAX MEAN AMIN MEDIAN\n> \n> but if I add in the line\n> facet_grid(~fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\")) before the\n> line ylab it disrupts the 2x2 layout\n> \n> \n> \n> Can anyone tell me how to resolve these problems?  Thanks Nick Wray\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nThe main problem is the way ou create the data set. cbind defaults to \ncreating a matrix and since some of the vectors are of class \"character\" \nall others will be coerced to character too. And Year and Flow will no \nlonger be numeric.\n\nYou can coerce those two columns to numeric manually or you can use \ndata.frame(), not as.data.frame(), to create the data set.\nAnd you were, therefore, using scale_y_discrete when it should be \nscale_y_continuous. Corrected below.\n\nAs for the relevel, I'm not getting any errors.\n\n\n\nlibrary(ggplot2)\nlibrary(forcats)\n\ncb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\n         \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\")\n\nset.seed(040823)\n\n# the right way of creating the data set\nmock <- data.frame(\n   Year = rep((1990:1995),8),\n   Flow = round(rnorm(48,50,10),3),\n   Stat = rep(c(rep(\"Tweed\",6), rep(\"Tay\",6)),4),\n   Metric = rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)\n)\n\nggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat))) +\n   coord_cartesian(ylim = c(0, 100)) +\n   geom_line(size=1) +\n   scale_color_manual(name = \"Stat\", values = cb8[4:5]) +\n   scale_y_continuous(breaks=c(0, 25, 50, 75, 100), labels=c(0, 25, 50, \n75, 100)) +\n   facet_wrap(~ fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\"), nrow \n= 2, ncol = 2) +\n   ylab(\"Flow\")\n\n\nHope this helps,\n\nRui Barradas",
-      "body_snippet": "?s 11:08 de 04/08/2023, Nick Wray escreveu:\n> Hello  I am wrestling with ggplot ? I have produced a facetted plot of\n> flows under various metrics but I can?t find info on the net which tells me\n> how",
+      "body_plain": "Às 11:08 de 04/08/2023, Nick Wray escreveu:\n> Hello  I am wrestling with ggplot – I have produced a facetted plot of\n> flows under various metrics but I can’t find info on the net which tells me\n> how to do three things\n> \n> \n> I have created some simplified mock data to illustrate (and using a\n> colour-blind palette):\n> \n> \n> library(ggplot2)\n> \n> library(forcats)\n> \n> cb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\"#F0E442\", \"#0072B2\",\n> \"#D55E00\", \"#CC79A7\")\n> \n> set.seed<-(040823)\n> \n>    mock<- set.seed<-(040823)\n> \n> \n> mock<-as.data.frame(cbind(rep((1990:1995),8),round(rnorm(48,50,10),3),rep(c(rep(\"Tweed\",6),rep(\"Tay\",6)),4),rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)))\n> \n>    colnames(mock)<-c(\"Year\",\"Flow\",\"Stat\",\"Metric\")\n> \n>    mock\n> \n> \n> \n>    ggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat)))+\n> \n>      coord_cartesian(ylim = c(0, 100)) +\n> \n>      geom_line(size=1)+\n> \n>      scale_color_manual(name = \"Stat\", values = cb8[4:7])+\n> \n>      scale_y_discrete(breaks=c(0,25,50,75,100),labels=c(0,25,50,75,100))+\n> \n>      facet_wrap(vars(Metric),nrow=2,ncol=2)+\n> \n>      ylab(\"Flow\")\n> \n> \n> \n> 1)This gives me a facetted plot but I can’t work out why I’m not getting a\n> labelled y scale\n> \n> \n> \n> 2)Why are plots down at the bottom of the facets rather than in the middle?\n> \n> \n> \n> 3)And also I’d like the plots to be in the order (top left to bottom right)\n> of\n> \n> AMAX MEAN AMIN MEDIAN\n> \n> but if I add in the line\n> facet_grid(~fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\")) before the\n> line ylab it disrupts the 2x2 layout\n> \n> \n> \n> Can anyone tell me how to resolve these problems?  Thanks Nick Wray\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\nHello,\n\nThe main problem is the way ou create the data set. cbind defaults to \ncreating a matrix and since some of the vectors are of class \"character\" \nall others will be coerced to character too. And Year and Flow will no \nlonger be numeric.\n\nYou can coerce those two columns to numeric manually or you can use \ndata.frame(), not as.data.frame(), to create the data set.\nAnd you were, therefore, using scale_y_discrete when it should be \nscale_y_continuous. Corrected below.\n\nAs for the relevel, I'm not getting any errors.\n\n\n\nlibrary(ggplot2)\nlibrary(forcats)\n\ncb8<- c(\"#000000\", \"#E69F00\", \"#56B4E9\", \"#009E73\",\n         \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\")\n\nset.seed(040823)\n\n# the right way of creating the data set\nmock <- data.frame(\n   Year = rep((1990:1995),8),\n   Flow = round(rnorm(48,50,10),3),\n   Stat = rep(c(rep(\"Tweed\",6), rep(\"Tay\",6)),4),\n   Metric = rep(c(\"AMAX\",\"Mean\",\"AMIN\",\"Median\"),each=12)\n)\n\nggplot(mock, aes(Year,Flow, group = factor(Stat), colour = factor(Stat))) +\n   coord_cartesian(ylim = c(0, 100)) +\n   geom_line(size=1) +\n   scale_color_manual(name = \"Stat\", values = cb8[4:5]) +\n   scale_y_continuous(breaks=c(0, 25, 50, 75, 100), labels=c(0, 25, 50, \n75, 100)) +\n   facet_wrap(~ fct_relevel(Metric,\"AMAX\",\"Mean\",\"AMIN\",\"Median\"), nrow \n= 2, ncol = 2) +\n   ylab(\"Flow\")\n\n\nHope this helps,\n\nRui Barradas",
+      "body_snippet": "Às 11:08 de 04/08/2023, Nick Wray escreveu:\n> Hello  I am wrestling with ggplot – I have produced a facetted plot of\n> flows under various metrics but I can’t find info on the net which tells me\n> how",
       "thread_id": "thread-728ae0e6717a",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477820.html"
     },
     {
       "id": "msg-f8da3351088b",
@@ -295,7 +311,8 @@
       "body_snippet": "Hi all,\n\nI want to multiply two  data frames as shown below,\n\ndat1 <-read.table(text=\"ID, x, y, z\n A, 10,  34, 12\n B, 25,  42, 18\n C, 14,  20,  8 \",sep=\",\",header=TRUE,stringsAsFactors=F)\n\ndat2 <-read",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477822.html"
     },
     {
       "id": "msg-cedecd7da0b4",
@@ -313,7 +330,8 @@
       "body_snippet": "? Fri, 4 Aug 2023 09:54:07 -0500\nVal <valkremk at gmail.com> ?????:\n\n> I want to multiply two  data frames as shown below,\n> \n> dat1 <-read.table(text=\"ID, x, y, z\n>  A, 10,  34, 12\n>  B, 25,  42, 18\n",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477823.html"
     },
     {
       "id": "msg-3cd065825a79",
@@ -331,7 +349,8 @@
       "body_snippet": "Val,\n\nA data.frame is not quite the same thing as a matrix.\n\nBut as long as everything is numeric, you can convert both data.frames to\nmatrices, perform the computations needed and, if you want, conve",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477825.html"
     },
     {
       "id": "msg-aa297d677ffa",
@@ -349,7 +368,8 @@
       "body_snippet": "Dear Murat:\n\nSee the \"posting guide\" (link below) for how and what to post on this list.\n\nI believe that in that guide it is recommended that you first update\nyour R version and packages to the latest",
       "thread_id": "thread-0c0545400042",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477826.html"
     },
     {
       "id": "msg-cc3c8749ad6e",
@@ -368,7 +388,8 @@
       "body_snippet": "Thank you,  Avi and Ivan.  Worked for this particular Example.\n\nYes, I am looking for something with a more general purpose.\nI think Ivan's suggestion works for this.\n\nmultiplication=as.matrix(dat1[,-",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477827.html"
     },
     {
       "id": "msg-494f7c261103",
@@ -386,7 +407,8 @@
       "body_snippet": "Hi Murat,\nI am not sure why you are using R 3.5.\nCRAN has R 4.3.1\n\nhttps://cran.r-project.org/bin/windows/base/\n\nI suggest you start over and install R 4.3.1 and then your cytofkit\ninstall might work.",
       "thread_id": "thread-08f6f192ba00",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477828.html"
     },
     {
       "id": "msg-7764546c5a6c",
@@ -406,7 +428,8 @@
       "body_snippet": "?s 19:03 de 04/08/2023, Val escreveu:\n> Thank you,  Avi and Ivan.  Worked for this particular Example.\n> \n> Yes, I am looking for something with a more general purpose.\n> I think Ivan's suggestion wor",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477829.html"
     },
     {
       "id": "msg-c54c838d98a7",
@@ -424,7 +447,8 @@
       "body_snippet": "Dear Murat Delman,\n\nBoth your messages came through, and I'm replying to the one that was\nthe first chronologically.\n\nI have taken a look at the cytofkit package. It used to be a\nBioconductor package,",
       "thread_id": "thread-0c0545400042",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477830.html"
     },
     {
       "id": "msg-ebef7708d032",
@@ -444,7 +468,8 @@
       "body_snippet": "[See the end for an interesting twist on moving a column to row.names.]\n\nYes, many ways to do things exist but it may make sense to ask for what the user/OP really wants. Sometimes the effort to make ",
       "thread_id": "thread-f8da3351088b",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477831.html"
     },
     {
       "id": "msg-48505265f2ea",
@@ -462,7 +487,8 @@
       "body_snippet": "I wish to stack columns of a matrix into one column. The following \nmatrix command does it. Any other ways? Thanks.\n\n > x<-matrix(1:20,5,4)\n > x\n ???? [,1] [,2] [,3] [,4]\n[1,]??? 1??? 6?? 11?? 16\n[2,]",
       "thread_id": "thread-48505265f2ea",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477837.html"
     },
     {
       "id": "msg-22f08e431af4",
@@ -478,7 +504,8 @@
       "body_snippet": "I wish to stack columns of a matrix into one column. The following \nmatrix command does it. Any other ways? Thanks.\n\n > x<-matrix(1:20,5,4)\n > x\n ???? [,1] [,2] [,3] [,4]\n[1,]??? 1??? 6?? 11?? 16\n[2,]",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477832.html"
     },
     {
       "id": "msg-e53d306ad228",
@@ -496,7 +523,8 @@
       "body_snippet": "You could also do\n\ndim(x) <- c(length(x), 1)\n\nOn Sat, Aug 5, 2023, 20:12 Steven Yen <styen at ntu.edu.tw> wrote:\n\n> I wish to stack columns of a matrix into one column. The following\n> matrix command ",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477833.html"
     },
     {
       "id": "msg-fa3483379c42",
@@ -514,7 +542,8 @@
       "body_snippet": "Steve,\n\nAs Iris pointed out, some implementations of a matrix are actually of a vector with special qualities. There are sometimes choices whether to store it a row at a time or a column at a time.\n\nI",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477834.html"
     },
     {
       "id": "msg-d745f6e7048c",
@@ -533,7 +562,8 @@
       "body_snippet": "Or just dim(x) <- NULL.\n(as matrices in base R are just vectors with a dim attribute stored in\ncolumn major order)\n\nergo:\n\n> x\n [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20\n> x<- 1:",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477835.html"
     },
     {
       "id": "msg-a4f78b3292a3",
@@ -553,7 +583,8 @@
       "body_snippet": "Stacking columns of a matrix is a standard operation in multilinear\nalgebra, usually written as the operator vec().\nI checked to see if there is an R package that deals with multilinear\nalgebra. I fou",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477836.html"
     },
     {
       "id": "msg-e11e0f4c538b",
@@ -574,7 +605,8 @@
       "body_snippet": "Eric,\n\nI am not sure your solution is particularly economical albeit it works for arbitrary arrays of any dimension, presumably. But it seems to involve converting a matrix to a tensor just to undo it",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477838.html"
     },
     {
       "id": "msg-7f86dd3016e6",
@@ -596,7 +628,8 @@
       "body_snippet": "Avi,\n\nI was not trying to provide the most economical solution. I was trying\nto anticipate that people (either the OP or others searching for how\nto stack columns of a matrix) might be motivated by ca",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 5,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477839.html"
     },
     {
       "id": "msg-1b9638f1ca59",
@@ -619,7 +652,8 @@
       "body_snippet": "Eric,\n\nI fully agreed with you that anyone doing serious work in various projects such as machine learning that make heavy use of mathematical data structures  would do well to find some decent well d",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 6,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477840.html"
     },
     {
       "id": "msg-1aa88317ba66",
@@ -638,7 +672,8 @@
       "body_snippet": "Based on a private communication, it sounds like Steven is asking the question again because he wants a different solution that may be the way this might be done in another language. I think he wants ",
       "thread_id": "thread-48505265f2ea",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477841.html"
     },
     {
       "id": "msg-39e444fccad9",
@@ -657,7 +692,8 @@
       "body_snippet": "?s 01:15 de 06/08/2023, Iris Simmons escreveu:\n> You could also do\n> \n> dim(x) <- c(length(x), 1)\n> \n> On Sat, Aug 5, 2023, 20:12 Steven Yen <styen at ntu.edu.tw> wrote:\n> \n>> I wish to stack columns ",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477842.html"
     },
     {
       "id": "msg-22f4c629cbb4",
@@ -677,7 +713,8 @@
       "body_snippet": "You could use a for loop in a brute force approach.\n\n-----Original Message-----\nFrom: R-help <r-help-bounces at r-project.org> On Behalf Of Rui Barradas\nSent: Sunday, August 6, 2023 7:37 PM\nTo: Iris S",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477843.html"
     },
     {
       "id": "msg-427ecbbb9c91",
@@ -698,7 +735,8 @@
       "body_snippet": "This topic is getting almost funny as there are an indefinite ever-sillier\nset of ways to perform the action and even more if you include packages like\npurr.\n\nIf mymat is a matrix, several variants wo",
       "thread_id": "thread-22f08e431af4",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477844.html"
     },
     {
       "id": "msg-d36b7c8fb43a",
@@ -714,7 +752,8 @@
       "body_snippet": "Dear R users,\n\nI have a data frame with a single column of POSIXct elements, like\n\n\nmydf <- data.frame(data_POSIX=as.POSIXct(c(\"2012-02-05\", \"2012-02-06\", \"2012-02-07\", \"2012-02-13\", \"2012-02-21\"), fo",
       "thread_id": "thread-d36b7c8fb43a",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477845.html"
     },
     {
       "id": "msg-76f79a45b8c4",
@@ -732,7 +771,8 @@
       "body_snippet": "rle(as.numeric(diff(mydf$data_POSIX)))  should get you started, I think?\n\nOn 2023-08-07 12:41 p.m., Stefano Sofia wrote:\n> Dear R users,\n> \n> I have a data frame with a single column of POSIXct elemen",
       "thread_id": "thread-d36b7c8fb43a",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477846.html"
     },
     {
       "id": "msg-cf5367c9c088",
@@ -751,7 +791,8 @@
       "body_snippet": "Here is another way to obtain the day differences that is the argument\nof rle() . It is perhaps more reliable in that it uses methods for\nclass POSIXct rather than depending on the underlying class st",
       "thread_id": "thread-d36b7c8fb43a",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477847.html"
     },
     {
       "id": "msg-370dd4e0f655",
@@ -769,7 +810,8 @@
       "body_snippet": "It is best to use Date, rather than POSIXct, class if there are no times.\n\nUse the cumsum expression shown to group the dates and then summarize\neach group.\n\nWe assume that the dates are already sorte",
       "thread_id": "thread-d36b7c8fb43a",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477848.html"
     },
     {
       "id": "msg-2a86c6539711",
@@ -785,7 +827,8 @@
       "body_snippet": "I have two dataframes, each with a column for timestamp.  I want to\nmerge the two dataframes such that each row from first dataframe\nis matched with the row in the second dataframe with most recent bu",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477849.html"
     },
     {
       "id": "msg-e6d84f04f527",
@@ -803,7 +846,8 @@
       "body_snippet": "Hi Naresh,\nPerhaps the below is faster than your approach\n\nlibrary(dplyr)\nlibrary(tidyr)\nmerge(option.trades, stock.trades, by=\"timestamp\", all=TRUE) |>\n  dplyr::arrange(timestamp) |>\n  dplyr::mutate(",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477850.html"
     },
     {
       "id": "msg-4dec3a7d591c",
@@ -819,7 +863,8 @@
       "body_snippet": "Dears,\n\n\nI use the R library highcharter with ubuntu 18.04 and R 3.6.3. Recently, I upgraded to ubuntu 20.04 and R 4.3.1. And the version of library highcharter are both 0.9.4. Then I execute the func",
       "thread_id": "thread-4dec3a7d591c",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477853.html"
     },
     {
       "id": "msg-800563b51820",
@@ -838,7 +883,8 @@
       "body_snippet": "I was able to adapt your solution using packages with which I am more familiar. \n\nmyres2 <- merge(option.trades, stock.trades, by = \"timestamp\", all =\nTRUE)\n\nmyres2[,\"stock.timestamp\"] <- ifelse(is.na",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477851.html"
     },
     {
       "id": "msg-30fcf2e5b155",
@@ -856,7 +902,8 @@
       "body_snippet": "On Mon, 07 Aug 2023, Naresh Gurbuxani writes:\n\n> I have two dataframes, each with a column for timestamp.  I want to\n> merge the two dataframes such that each row from first dataframe\n> is matched wit",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477852.html"
     },
     {
       "id": "msg-8316973acaa5",
@@ -874,7 +921,8 @@
       "body_snippet": "If you don't get a satisfactory answer here in due course, you can try\ncontacting the package maintainer, who you can find via ?maintainer.\n\nCheers,\nBert\n\nOn Tue, Aug 8, 2023 at 7:50?AM Gu, Jay via R-",
       "thread_id": "thread-4dec3a7d591c",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477854.html"
     },
     {
       "id": "msg-3bb4ba8e637f",
@@ -892,7 +940,8 @@
       "body_snippet": "On Tue, 8 Aug 2023 10:39:15 +0000\n\"Gu, Jay via R-help\" <r-help at r-project.org> wrote:\n\n>  Then I execute the function highchart() it always throw the\n> exception that child process has died. And I c",
       "thread_id": "thread-4dec3a7d591c",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477855.html"
     },
     {
       "id": "msg-da9c63fe8f65",
@@ -911,7 +960,8 @@
       "body_snippet": "Hi Ivan,\n\nI'm running the R within docker container. Do you have any idea about it? Thanks!\n\n\nBest Regards!\nJay Gu\n\n-----Original Message-----\nFrom: Ivan Krylov <krylov.r00t at gmail.com> \nSent: Wedne",
       "thread_id": "thread-4dec3a7d591c",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477857.html"
     },
     {
       "id": "msg-f77748dc989d",
@@ -929,7 +979,8 @@
       "body_snippet": "Dear Daniel,\n\nI was use this script to calculate replicateBE with R software, its \nworked. when i use the same script with similar data (xlsx) i got error \nmessages like below, do you have any suggest",
       "thread_id": "thread-f77748dc989d",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477859.html"
     },
     {
       "id": "msg-3dabd77bddaa",
@@ -949,7 +1000,8 @@
       "body_snippet": "On Wed, 9 Aug 2023 01:13:40 +0000\n\"Gu, Jay\" <j.gu at sap.com> wrote:\n\n> I'm running the R within docker container.\n\nIn that case (depending on the way the container is set up, of course),\nyour /etc/pa",
       "thread_id": "thread-4dec3a7d591c",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477856.html"
     },
     {
       "id": "msg-a2ae768c3aee",
@@ -967,7 +1019,8 @@
       "body_snippet": "It sounds like you might want a rolling join, e.g.\nhttps://dplyr.tidyverse.org/reference/join_by.html#rolling-joins.\n\n(And data.table has similar functionality which inspired dplyr)\n\nHadley\n\nOn Mon, A",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477858.html"
     },
     {
       "id": "msg-62f87ca68809",
@@ -986,7 +1039,8 @@
       "body_snippet": "?s 05:30 de 09/08/2023, Andreas Noviyanto escreveu:\n> Dear Daniel,\n> \n> I was use this script to calculate replicateBE with R software, its\n> worked. when i use the same script with similar data (xlsx",
       "thread_id": "thread-f77748dc989d",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477860.html"
     },
     {
       "id": "msg-8af18701efd1",
@@ -1000,11 +1054,12 @@
       "references": [
         "<146822026.2931556.1691133058051.JavaMail.zimbra@iyte.edu.tr>"
       ],
-      "body_plain": "GIven that Cytofkit is removed from Bioconductor, and you seem new to \neverything, I would suggest like others already have that you install \nthe most recent version of R for Windows \nhttps://cran.r-project.org/bin/windows/base/ and seek a more up-to-date \npackage.\n\nFor flow cytometry, I would like to recommend the CytoExploreR package \n(https://dillonhammill.github.io/CytoExploreR/ which is built on top of \nthe core flow cytometry packages produced by RGLab \n(https://cytoverse.org/) and available on Bioconductor \nhttps://bioconductor.org/packages/release/bioc/html/openCyto.html\n\nGod luck,\n\nRob\n\nOn 8/4/2023 2:10 AM, MURAT DELMAN via R-help wrote:\n>\n>\n> Dear Ms./Mr.,\n>\n>\n>\n>\n>\n>\n>\n> If the email text and codes below are not properly displayed, you can download the attached Word file, which has exactly the same content.\n>\n>\n>\n> I am a cytometrist and microscopist at Izmir Institute of Technology, Integrated Research Center. I operate a cytometer and fluorescence microscope to acquire data from our researchers? samples and then give them analyzed data. I need to dive into bulk data to present all of the information in the sample. To do this, I have recently been trying to develop my skills in R, RStudio, and Cytofkit package for cytometry (flow, spectral, mass, imaging mass cytometry) data analysis. I am new in this area and must learn R for data analysis.\n>\n>\n>\n>\n>\n> May I request help from you or one of your assistants who is competent in R, RStudio, and R packages with the installation issues caused by ? version differences ? between R itself, R packages, and their dependencies? I really had to send this email to you anymore, because I could not run the package ?Cytofkit? and find a solution on the internet.\n>\n>\n> It has been nearly 2 weeks since I have been trying to solve the errors and warnings. I am in a vicious circle and cannot move forward anymore. This is why I needed help from an expert competent in R programming.\n>\n>\n>\n> I tried to use the renv package, but I could not move forward because I am not competent in R.\n>\n>\n>\n>\n> I explained the errors that I faced during the installation below.\n>\n>\n>\n> I have two computers, both operating Windows 10, 64-bit.\n>\n>\n>\n> I installed R 3.5. 2 on the desktop (Windows in English) and R 3.5. 0 on the laptop (Windows in Turkish).\n>\n>\n>\n> I know that you are very busy with your work, but may you (or your assistant) help me by informing me how to install consistent versions of R, RStudio, and packages/dependencies (for example, Cytofkit, ggplot2, Rtools, devtools, plyr, shiny, GUI)?\n>\n>\n>\n>\n>\n> I guess I will need exact web page links \" in an orderly manner\" to download the correct versions of everything.\n>\n>\n>\n> I would appreciate it if you could advise me or forward this email to one of your assistants or experts.\n>\n>\n>\n>\n>\n>\n> I really appreciate any help you can provide.\n>\n>\n>\n>\n>\n>\n> Kind Regards\n>\n>\n>\n>\n>\n>\n> Please find the technical details below;\n>\n>\n>\n>\n>\n> I used the installation order listed below;\n>\n>\n>\n> I downloaded R 3.5.0 and R 3.5.2 using the link and directory below.\n>\n>\n>\n> Link: [ https://www.freestatistics.org/cran/ | https://www.freestatistics.org/cran/ ]\n>\n>\n>\n> Directory: Download R for Windows > install R for the first time > Previous releases > R 3.5.2 (December, 2018) or R 3.5.0\n>\n>\n>\n>\n>\n> I downloaded RStudio from the link below;\n>\n>\n>\n> [ https://posit.co/download/rstudio-desktop/ | https://posit.co/download/rstudio-desktop/ ]\n>\n>\n>\n>\n>\n>\n> I downloaded packages via either [ https://cran.rstudio.com/bin/windows/contrib/r-devel/ | https://cran.rstudio.com/bin/windows/contrib/r-devel/ ] or the ?install function? tab in RStudio.\n>\n>\n>\n> Rtools : [ https://cran.r-project.org/bin/windows/Rtools/ | https://cran.r-project.org/bin/windows/Rtools/ ]\n>\n>\n>\n> Devtools : [ https://cran.r-project.org/web/packages/devtools/index.html | https://cran.r-project.org/web/packages/devtools/index.html ]\n>\n>\n>\n> ggplot2 : [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ]\n>\n>\n>\n> [ https://ggplot2.tidyverse.org/ | https://ggplot2.tidyverse.org/ ]\n>\n>\n>\n> [ https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf | https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf ]\n>\n>\n>\n>\n>\n> plyr : [ https://cran.r-project.org/web/packages/plyr/index.html | https://cran.r-project.org/web/packages/plyr/index.html ]\n>\n>\n>\n> shiny : [ https://cran.r-project.org/web/packages/shiny/index.html | https://cran.r-project.org/web/packages/shiny/index.html ]\n>\n>\n>\n> [ https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html | https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html ]\n>\n>\n>\n> [ https://github.com/rstudio/shiny | https://github.com/rstudio/shiny ]\n>\n>\n>\n> cytofkit : [ https://github.com/JinmiaoChenLab/cytofkit | https://github.com/JinmiaoChenLab/cytofkit ]\n>\n>\n>\n> [ https://bioconductor.riken.jp/packages/3.3/bioc/html/cytofkit.html | https://bioconductor.riken.jp/packages/3.3/bioc/html/cytofkit.html ]\n>\n>\n>\n> [ https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005112&type=printable | https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005112&type=printable ]\n>\n>\n>\n>\n>\n>\n> Below, I provide the errors and warnings that I faced for 2 weeks for both R versions;\n>\n>\n>\n>\n>\n> Please find the errors and warnings below;\n>\n>\n>\n>\n>\n>\n> CYTOFKIT FOR R VERSION 3.5. 2\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>> library(cytofkit)\n> Loading required package: ggplot2\n>\n> Loading required package: plyr\n>\n> Error: package or namespace load failed for ?cytofkit?:\n>\n> package ?cytofkit? was installed by an R version with different internals; it needs to be reinstalled for use with this R version\n>\n>\n>\n> ERROR: this R is version 3.5.2, package 'cytofkit2' requires R >= 4.0.0\n>\n> In R CMD INSTALL\n>\n> Installation paths not writeable, unable to update packages\n>\n> path: C:/Program Files/R/R-3.5.2/library\n>\n> packages:\n>\n> boot, class, cluster, codetools, KernSmooth, Matrix, nlme, nnet, rpart, spatial, survival\n>\n> There were 23 warnings (use warnings() to see them)\n>\n>\n>\n>> warnings()\n> Warning messages:\n>\n> 1: packages ?caTools?, ?umap? are not available (for R version 3.5.2)\n>\n> 2: In i.p(...) : installation of package ?DEoptimR? had non-zero exit status\n>\n> 3: In i.p(...) : installation of package ?mvtnorm? had non-zero exit status\n>\n> 4: In i.p(...) : installation of package ?XML? had non-zero exit status\n>\n> 5: In i.p(...) : installation of package ?fastmap? had non-zero exit status\n>\n> 6: In i.p(...) : installation of package ?sass? had non-zero exit status\n>\n> 7: In i.p(...) : installation of package ?jquerylib? had non-zero exit status\n>\n> 8: In i.p(...) : installation of package ?later? had non-zero exit status\n>\n> 9: In i.p(...) : installation of package ?fontawesome? had non-zero exit status\n>\n> 10: In i.p(...) : installation of package ?miniUI? had non-zero exit status\n>\n> 11: In i.p(...) : installation of package ?RcppTOML? had non-zero exit status\n>\n> 12: In i.p(...) : installation of package ?pcaPP? had non-zero exit status\n>\n> 13: In i.p(...) : installation of package ?robustbase? had non-zero exit status\n>\n> 14: In i.p(...) : installation of package ?cachem? had non-zero exit status\n>\n> 15: In i.p(...) : installation of package ?promises? had non-zero exit status\n>\n> 16: In i.p(...) : installation of package ?reticulate? had non-zero exit status\n>\n> 17: In i.p(...) : installation of package ?rrcov? had non-zero exit status\n>\n> 18: In i.p(...) : installation of package ?memoise? had non-zero exit status\n>\n> 19: In i.p(...) : installation of package ?httpuv? had non-zero exit status\n>\n> 20: In i.p(...) : installation of package ?bslib? had non-zero exit status\n>\n> 21: In i.p(...) : installation of package ?rmarkdown? had non-zero exit status\n>\n> 22: In i.p(...) : installation of package ?htmlwidgets? had non-zero exit status\n>\n> 23: In i.p(...) :\n>\n> installation of package ?C:/Users/murat-delman/AppData/Local/Temp/Rtmp8GGq71/file4d0c54c135b4/cytofkit2_0.99.80.tar.gz? had non-zero exit status\n>\n>\n>> devtools::install_github(\"JinmiaoChenLab/cytofkit\")\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n>\n>\n>\n>\n>\n>\n> INSTALLING GGPLOT2 FOR R VERSION 3.5. 0\n>\n>\n>\n>> library(cytofkit)\n> Loading required package: ggplot2\n>\n> Warning: namespace ?cli? is not available and has been replaced\n>\n> by .GlobalEnv when processing object ?.Random.seed?\n>\n> Error: package or namespace load failed for ?ggplot2? in rbind(info, getNamespaceInfo(env, \"S3methods\")):\n>\n> number of columns of matrices must match (see arg 2)\n>\n> Error: package ?ggplot2? could not be loaded\n>\n> In addition: Warning message:\n>\n> package ?ggplot2? was built under R version 4.2.3\n>\n>\n>\n>> library(cytofkit)\n> Error: package ?ggplot2? required by ?cytofkit? could not be found\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplotgui_1.0.0.zip\", repos = NULL, type = \"win.binary\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> package ?ggplotgui? successfully unpacked and MD5 sums checked\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplot2/ggplot2_3.0.0.tar.gz\", repos = NULL, type = \"source\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?D:/Programlar/ggplot2/ggplot2_3.0.0.tar.gz? had non-zero exit status\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3031461 bytes (2.9 MB)\n>\n> downloaded 2.9 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?C:/Users/murat/AppData/Local/Temp/RtmpI776iL/downloaded_packages/ggplot2_3.3.0.tar.gz? had non-zero exit status\n>\n>\n>\n>> install.packages(\"ggplot2\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> Warning in install.packages :\n>\n> unable to access index for repository [ https://cran.rstudio.com/bin/windows/contrib/3.5 | https://cran.rstudio.com/bin/windows/contrib/3.5 ] :\n>\n> cannot open URL ' [ https://cran.rstudio.com/bin/windows/contrib/3.5/PACKAGES | https://cran.rstudio.com/bin/windows/contrib/3.5/PACKAGES ] '\n>\n> installing the source package ?ggplot2?\n>\n>\n>\n> trying URL ' [ https://cran.rstudio.com/src/contrib/ggplot2_3.4.2.tar.gz | https://cran.rstudio.com/src/contrib/ggplot2_3.4.2.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3153811 bytes (3.0 MB)\n>\n> downloaded 3.0 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?ggplot2? had non-zero exit status\n>\n>\n>\n> The downloaded source packages are in\n>\n> ?C:\\Users\\murat\\AppData\\Local\\Temp\\RtmpI776iL\\downloaded_packages?\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ] '\n>\n> Content type 'text/html' length 468435 bytes (457 KB)\n>\n> downloaded 457 KB\n>\n>\n>\n> Error in getOctD(x, offset, len) : invalid octal digit\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?C:/Users/murat/AppData/Local/Temp/RtmpI776iL/downloaded_packages/index.html? had non-zero exit status\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3031461 bytes (2.9 MB)\n>\n> downloaded 2.9 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?C:/Users/murat/AppData/Local/Temp/Rtmp8sLmoj/downloaded_packages/ggplot2_3.3.0.tar.gz? had non-zero exit status\n>\n>\n>\n>> pak::pkg_install(\"tibble\")\n> Error in load_private_package(\"cli\") :\n>\n> Cannot load cli from the private library\n>\n>\n>\n>> pak::pkg_install(\"tidyverse/tibble\")\n> Error in load_private_package(\"cli\") :\n>\n> Cannot load cli from the private library\n>\n>\n>\n>> pkg_install(\"tibble\")\n> Error in pkg_install(\"tibble\") : could not find function \"pkg_install\"\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplot2/ggplot2_3.4.2.zip\", repos = NULL, type = \"win.binary\")\n> Installing package into ?C:/Users/murat/Documents/R/win-library/3.5?\n>\n> (as ?lib? is unspecified)\n>\n> package ?ggplot2? successfully unpacked and MD5 sums checked\n>\n>\n>\n> Kind Regards\n>\n>\n> Murat Delman, Ph.D.\n> Izmir Institute of Technology\n> Integrated Research Centers\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n__________________________________________________\nRobert W. Baer, Ph.D.\nProfessor of Physiolgy\nKirksville College of Osteopathic Medicine\nA.T. Still University of Heallth Sciences\n800 W. Jefferson St.\nKirksville, MO 63501\nP: 660-626-2322\n\n\n  \n\n              \n\nThe ATSU Mission\nA.T. Still University of Health Sciences serves as a learning-centered university dedicated to preparing highly competent professionals through innovative academic programs with a commitment to continue its osteopathic heritage and focus on whole person healthcare, scholarship, community health, interprofessional education, diversity, and underserved populations.\n\nProud recipient of INSIGHT Into Diversity?s 2017-19 Higher Education Excellence in Diversity Awards.",
+      "body_plain": "GIven that Cytofkit is removed from Bioconductor, and you seem new to \neverything, I would suggest like others already have that you install \nthe most recent version of R for Windows \nhttps://cran.r-project.org/bin/windows/base/ and seek a more up-to-date \npackage.\n\nFor flow cytometry, I would like to recommend the CytoExploreR package \n(https://dillonhammill.github.io/CytoExploreR/ which is built on top of \nthe core flow cytometry packages produced by RGLab \n(https://cytoverse.org/) and available on Bioconductor \nhttps://bioconductor.org/packages/release/bioc/html/openCyto.html\n\nGod luck,\n\nRob\n\nOn 8/4/2023 2:10 AM, MURAT DELMAN via R-help wrote:\n>\n>\n> Dear Ms./Mr.,\n>\n>\n>\n>\n>\n>\n>\n> If the email text and codes below are not properly displayed, you can download the attached Word file, which has exactly the same content.\n>\n>\n>\n> I am a cytometrist and microscopist at Izmir Institute of Technology, Integrated Research Center. I operate a cytometer and fluorescence microscope to acquire data from our researchers’ samples and then give them analyzed data. I need to dive into bulk data to present all of the information in the sample. To do this, I have recently been trying to develop my skills in R, RStudio, and Cytofkit package for cytometry (flow, spectral, mass, imaging mass cytometry) data analysis. I am new in this area and must learn R for data analysis.\n>\n>\n>\n>\n>\n> May I request help from you or one of your assistants who is competent in R, RStudio, and R packages with the installation issues caused by “ version differences ” between R itself, R packages, and their dependencies? I really had to send this email to you anymore, because I could not run the package “Cytofkit” and find a solution on the internet.\n>\n>\n> It has been nearly 2 weeks since I have been trying to solve the errors and warnings. I am in a vicious circle and cannot move forward anymore. This is why I needed help from an expert competent in R programming.\n>\n>\n>\n> I tried to use the renv package, but I could not move forward because I am not competent in R.\n>\n>\n>\n>\n> I explained the errors that I faced during the installation below.\n>\n>\n>\n> I have two computers, both operating Windows 10, 64-bit.\n>\n>\n>\n> I installed R 3.5. 2 on the desktop (Windows in English) and R 3.5. 0 on the laptop (Windows in Turkish).\n>\n>\n>\n> I know that you are very busy with your work, but may you (or your assistant) help me by informing me how to install consistent versions of R, RStudio, and packages/dependencies (for example, Cytofkit, ggplot2, Rtools, devtools, plyr, shiny, GUI)?\n>\n>\n>\n>\n>\n> I guess I will need exact web page links \" in an orderly manner\" to download the correct versions of everything.\n>\n>\n>\n> I would appreciate it if you could advise me or forward this email to one of your assistants or experts.\n>\n>\n>\n>\n>\n>\n> I really appreciate any help you can provide.\n>\n>\n>\n>\n>\n>\n> Kind Regards\n>\n>\n>\n>\n>\n>\n> Please find the technical details below;\n>\n>\n>\n>\n>\n> I used the installation order listed below;\n>\n>\n>\n> I downloaded R 3.5.0 and R 3.5.2 using the link and directory below.\n>\n>\n>\n> Link: [ https://www.freestatistics.org/cran/ | https://www.freestatistics.org/cran/ ]\n>\n>\n>\n> Directory: Download R for Windows > install R for the first time > Previous releases > R 3.5.2 (December, 2018) or R 3.5.0\n>\n>\n>\n>\n>\n> I downloaded RStudio from the link below;\n>\n>\n>\n> [ https://posit.co/download/rstudio-desktop/ | https://posit.co/download/rstudio-desktop/ ]\n>\n>\n>\n>\n>\n>\n> I downloaded packages via either [ https://cran.rstudio.com/bin/windows/contrib/r-devel/ | https://cran.rstudio.com/bin/windows/contrib/r-devel/ ] or the “install function” tab in RStudio.\n>\n>\n>\n> Rtools : [ https://cran.r-project.org/bin/windows/Rtools/ | https://cran.r-project.org/bin/windows/Rtools/ ]\n>\n>\n>\n> Devtools : [ https://cran.r-project.org/web/packages/devtools/index.html | https://cran.r-project.org/web/packages/devtools/index.html ]\n>\n>\n>\n> ggplot2 : [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ]\n>\n>\n>\n> [ https://ggplot2.tidyverse.org/ | https://ggplot2.tidyverse.org/ ]\n>\n>\n>\n> [ https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf | https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf ]\n>\n>\n>\n>\n>\n> plyr : [ https://cran.r-project.org/web/packages/plyr/index.html | https://cran.r-project.org/web/packages/plyr/index.html ]\n>\n>\n>\n> shiny : [ https://cran.r-project.org/web/packages/shiny/index.html | https://cran.r-project.org/web/packages/shiny/index.html ]\n>\n>\n>\n> [ https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html | https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html ]\n>\n>\n>\n> [ https://github.com/rstudio/shiny | https://github.com/rstudio/shiny ]\n>\n>\n>\n> cytofkit : [ https://github.com/JinmiaoChenLab/cytofkit | https://github.com/JinmiaoChenLab/cytofkit ]\n>\n>\n>\n> [ https://bioconductor.riken.jp/packages/3.3/bioc/html/cytofkit.html | https://bioconductor.riken.jp/packages/3.3/bioc/html/cytofkit.html ]\n>\n>\n>\n> [ https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005112&type=printable | https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005112&type=printable ]\n>\n>\n>\n>\n>\n>\n> Below, I provide the errors and warnings that I faced for 2 weeks for both R versions;\n>\n>\n>\n>\n>\n> Please find the errors and warnings below;\n>\n>\n>\n>\n>\n>\n> CYTOFKIT FOR R VERSION 3.5. 2\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>> library(cytofkit)\n> Loading required package: ggplot2\n>\n> Loading required package: plyr\n>\n> Error: package or namespace load failed for ‘cytofkit’:\n>\n> package ‘cytofkit’ was installed by an R version with different internals; it needs to be reinstalled for use with this R version\n>\n>\n>\n> ERROR: this R is version 3.5.2, package 'cytofkit2' requires R >= 4.0.0\n>\n> In R CMD INSTALL\n>\n> Installation paths not writeable, unable to update packages\n>\n> path: C:/Program Files/R/R-3.5.2/library\n>\n> packages:\n>\n> boot, class, cluster, codetools, KernSmooth, Matrix, nlme, nnet, rpart, spatial, survival\n>\n> There were 23 warnings (use warnings() to see them)\n>\n>\n>\n>> warnings()\n> Warning messages:\n>\n> 1: packages ‘caTools’, ‘umap’ are not available (for R version 3.5.2)\n>\n> 2: In i.p(...) : installation of package ‘DEoptimR’ had non-zero exit status\n>\n> 3: In i.p(...) : installation of package ‘mvtnorm’ had non-zero exit status\n>\n> 4: In i.p(...) : installation of package ‘XML’ had non-zero exit status\n>\n> 5: In i.p(...) : installation of package ‘fastmap’ had non-zero exit status\n>\n> 6: In i.p(...) : installation of package ‘sass’ had non-zero exit status\n>\n> 7: In i.p(...) : installation of package ‘jquerylib’ had non-zero exit status\n>\n> 8: In i.p(...) : installation of package ‘later’ had non-zero exit status\n>\n> 9: In i.p(...) : installation of package ‘fontawesome’ had non-zero exit status\n>\n> 10: In i.p(...) : installation of package ‘miniUI’ had non-zero exit status\n>\n> 11: In i.p(...) : installation of package ‘RcppTOML’ had non-zero exit status\n>\n> 12: In i.p(...) : installation of package ‘pcaPP’ had non-zero exit status\n>\n> 13: In i.p(...) : installation of package ‘robustbase’ had non-zero exit status\n>\n> 14: In i.p(...) : installation of package ‘cachem’ had non-zero exit status\n>\n> 15: In i.p(...) : installation of package ‘promises’ had non-zero exit status\n>\n> 16: In i.p(...) : installation of package ‘reticulate’ had non-zero exit status\n>\n> 17: In i.p(...) : installation of package ‘rrcov’ had non-zero exit status\n>\n> 18: In i.p(...) : installation of package ‘memoise’ had non-zero exit status\n>\n> 19: In i.p(...) : installation of package ‘httpuv’ had non-zero exit status\n>\n> 20: In i.p(...) : installation of package ‘bslib’ had non-zero exit status\n>\n> 21: In i.p(...) : installation of package ‘rmarkdown’ had non-zero exit status\n>\n> 22: In i.p(...) : installation of package ‘htmlwidgets’ had non-zero exit status\n>\n> 23: In i.p(...) :\n>\n> installation of package ‘C:/Users/murat-delman/AppData/Local/Temp/Rtmp8GGq71/file4d0c54c135b4/cytofkit2_0.99.80.tar.gz’ had non-zero exit status\n>\n>\n>> devtools::install_github(\"JinmiaoChenLab/cytofkit\")\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n>\n>\n>\n>\n>\n>\n> INSTALLING GGPLOT2 FOR R VERSION 3.5. 0\n>\n>\n>\n>> library(cytofkit)\n> Loading required package: ggplot2\n>\n> Warning: namespace ‘cli’ is not available and has been replaced\n>\n> by .GlobalEnv when processing object ‘.Random.seed’\n>\n> Error: package or namespace load failed for ‘ggplot2’ in rbind(info, getNamespaceInfo(env, \"S3methods\")):\n>\n> number of columns of matrices must match (see arg 2)\n>\n> Error: package ‘ggplot2’ could not be loaded\n>\n> In addition: Warning message:\n>\n> package ‘ggplot2’ was built under R version 4.2.3\n>\n>\n>\n>> library(cytofkit)\n> Error: package ‘ggplot2’ required by ‘cytofkit’ could not be found\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplotgui_1.0.0.zip\", repos = NULL, type = \"win.binary\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> package ‘ggplotgui’ successfully unpacked and MD5 sums checked\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplot2/ggplot2_3.0.0.tar.gz\", repos = NULL, type = \"source\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ‘D:/Programlar/ggplot2/ggplot2_3.0.0.tar.gz’ had non-zero exit status\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3031461 bytes (2.9 MB)\n>\n> downloaded 2.9 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ‘C:/Users/murat/AppData/Local/Temp/RtmpI776iL/downloaded_packages/ggplot2_3.3.0.tar.gz’ had non-zero exit status\n>\n>\n>\n>> install.packages(\"ggplot2\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> Warning in install.packages :\n>\n> unable to access index for repository [ https://cran.rstudio.com/bin/windows/contrib/3.5 | https://cran.rstudio.com/bin/windows/contrib/3.5 ] :\n>\n> cannot open URL ' [ https://cran.rstudio.com/bin/windows/contrib/3.5/PACKAGES | https://cran.rstudio.com/bin/windows/contrib/3.5/PACKAGES ] '\n>\n> installing the source package ‘ggplot2’\n>\n>\n>\n> trying URL ' [ https://cran.rstudio.com/src/contrib/ggplot2_3.4.2.tar.gz | https://cran.rstudio.com/src/contrib/ggplot2_3.4.2.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3153811 bytes (3.0 MB)\n>\n> downloaded 3.0 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ?ggplot2’ had non-zero exit status\n>\n>\n>\n> The downloaded source packages are in\n>\n> ‘C:\\Users\\murat\\AppData\\Local\\Temp\\RtmpI776iL\\downloaded_packages’\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/web/packages/ggplot2/index.html | https://cran.r-project.org/web/packages/ggplot2/index.html ] '\n>\n> Content type 'text/html' length 468435 bytes (457 KB)\n>\n> downloaded 457 KB\n>\n>\n>\n> Error in getOctD(x, offset, len) : invalid octal digit\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ‘C:/Users/murat/AppData/Local/Temp/RtmpI776iL/downloaded_packages/index.html’ had non-zero exit status\n>\n>\n>\n>> packageurl <- \" [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] \"\n>> install.packages(packageurl, repos=NULL, type=\"source\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> trying URL ' [ https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz | https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.0.tar.gz ] '\n>\n> Content type 'application/x-gzip' length 3031461 bytes (2.9 MB)\n>\n> downloaded 2.9 MB\n>\n>\n>\n> * installing *source* package 'ggplot2' ...\n>\n> ** package 'ggplot2' successfully unpacked and MD5 sums checked\n>\n> ** R\n>\n> ** data\n>\n> *** moving datasets to lazyload DB\n>\n> ** inst\n>\n> ** byte-compile and prepare package for lazy loading\n>\n> Warning: namespace 'cli' is not available and has been replaced\n>\n> by .GlobalEnv when processing object 'txhousing'\n>\n> Error in rbind(info, getNamespaceInfo(env, \"S3methods\")) :\n>\n> number of columns of matrices must match (see arg 2)\n>\n> ERROR: lazy loading failed for package 'ggplot2'\n>\n> * removing 'C:/Users/murat/Documents/R/win-library/3.5/ggplot2'\n>\n> In R CMD INSTALL\n>\n> Warning in install.packages :\n>\n> installation of package ‘C:/Users/murat/AppData/Local/Temp/Rtmp8sLmoj/downloaded_packages/ggplot2_3.3.0.tar.gz’ had non-zero exit status\n>\n>\n>\n>> pak::pkg_install(\"tibble\")\n> Error in load_private_package(\"cli\") :\n>\n> Cannot load cli from the private library\n>\n>\n>\n>> pak::pkg_install(\"tidyverse/tibble\")\n> Error in load_private_package(\"cli\") :\n>\n> Cannot load cli from the private library\n>\n>\n>\n>> pkg_install(\"tibble\")\n> Error in pkg_install(\"tibble\") : could not find function \"pkg_install\"\n>\n>\n>\n>> install.packages(\"D:/Programlar/ggplot2/ggplot2_3.4.2.zip\", repos = NULL, type = \"win.binary\")\n> Installing package into ‘C:/Users/murat/Documents/R/win-library/3.5’\n>\n> (as ‘lib’ is unspecified)\n>\n> package ‘ggplot2’ successfully unpacked and MD5 sums checked\n>\n>\n>\n> Kind Regards\n>\n>\n> Murat Delman, Ph.D.\n> Izmir Institute of Technology\n> Integrated Research Centers\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \n__________________________________________________\nRobert W. Baer, Ph.D.\nProfessor of Physiolgy\nKirksville College of Osteopathic Medicine\nA.T. Still University of Heallth Sciences\n800 W. Jefferson St.\nKirksville, MO 63501\nP: 660-626-2322\n\n\n  \n\n              \n\nThe ATSU Mission\nA.T. Still University of Health Sciences serves as a learning-centered university dedicated to preparing highly competent professionals through innovative academic programs with a commitment to continue its osteopathic heritage and focus on whole person healthcare, scholarship, community health, interprofessional education, diversity, and underserved populations.\n\nProud recipient of INSIGHT Into Diversity’s 2017-19 Higher Education Excellence in Diversity Awards.",
       "body_snippet": "GIven that Cytofkit is removed from Bioconductor, and you seem new to \neverything, I would suggest like others already have that you install \nthe most recent version of R for Windows \nhttps://cran.r-p",
       "thread_id": "thread-0c0545400042",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477861.html"
     },
     {
       "id": "msg-c5fc8f47a5ab",
@@ -1020,7 +1075,8 @@
       "body_snippet": "Hello,\n\nI try to calculate the mean of an array with a condition. My array is\nB=c(181,101,420) in dimensions. And I want to find a specific member\nin 3rd dimension (time monthly) based on a condition ",
       "thread_id": "thread-c5fc8f47a5ab",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477862.html"
     },
     {
       "id": "msg-5e840f290761",
@@ -1038,7 +1094,8 @@
       "body_snippet": "Define\n\nmean0na <- function(x) {\n  x[ 0 == x ] <- NA\n  mean( x, na.rm = TRUE )\n}\n\nand then use that instead of mean.\n\nOn August 10, 2023 7:25:08 PM PDT, ani jaya <gaaauul at gmail.com> wrote:\n>Hello,\n",
       "thread_id": "thread-c5fc8f47a5ab",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477863.html"
     },
     {
       "id": "msg-9c18ba84ec98",
@@ -1054,7 +1111,8 @@
       "body_snippet": "Hello,\n\nI have defined a function 'equations(...)' which returns an object with \nclass 'equations'. I also defined a function 'print.equations' which \nprints the object. But I did not use 'equations <",
       "thread_id": "thread-9c18ba84ec98",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477864.html"
     },
     {
       "id": "msg-6b4ad5536043",
@@ -1072,7 +1130,8 @@
       "body_snippet": "On Fri, 11 Aug 2023 09:20:03 +0200\nSigbert Klinke <sigbert at wiwi.hu-berlin.de> wrote:\n\n> I have defined a function 'equations(...)' which returns an object\n> with class 'equations'.\n\n> But I did not",
       "thread_id": "thread-9c18ba84ec98",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477865.html"
     },
     {
       "id": "msg-38a88e1a7539",
@@ -1088,7 +1147,8 @@
       "body_snippet": "I understand that the default ties.method is \"average\".? Here is what I \nget, expanding a bit on the help page example. Running R 4.3.1 on Ubuntu \n22.04.2.\n\n > x2 <- c(3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5)",
       "thread_id": "thread-38a88e1a7539",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477866.html"
     },
     {
       "id": "msg-4092fcc66676",
@@ -1106,7 +1166,8 @@
       "body_snippet": "?s 08:20 de 11/08/2023, Sigbert Klinke escreveu:\n> Hello,\n> \n> I have defined a function 'equations(...)' which returns an object with \n> class 'equations'. I also defined a function 'print.equations'",
       "thread_id": "thread-9c18ba84ec98",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477867.html"
     },
     {
       "id": "msg-2fc802861f4b",
@@ -1124,7 +1185,8 @@
       "body_snippet": "Dear Chris,\n\nthe members of the triplet would be ranked 4, 5 and 6 (in your example), \nso the *mean of their ranks* is correctly 5.\n\nFor any set of k tied values the ranks of its elements are averaged",
       "thread_id": "thread-38a88e1a7539",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477868.html"
     },
     {
       "id": "msg-607f00ba4168",
@@ -1140,7 +1202,8 @@
       "body_snippet": "Hello, I'd be very grateful for your help.\n\nI randomly separated a .csv file with 1287 documents 75%/25% into 2 csv files, one for training an algorithm and the other for testing the algorithm.  I app",
       "thread_id": "thread-607f00ba4168",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477871.html"
     },
     {
       "id": "msg-07285f3d491c",
@@ -1159,7 +1222,8 @@
       "body_snippet": "I have entered values into Excel, and sorted them. I am assuming you are asking why the value 3 in x2 is ranked 4.5 versus in x5 it has a rank of 5.\nX2 looks like this\nValue   Rank    Order\n1       1.",
       "thread_id": "thread-38a88e1a7539",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477869.html"
     },
     {
       "id": "msg-ba21d3056c0c",
@@ -1174,11 +1238,12 @@
         "<8a813abd71a3430ba64edc87d6046ec7@regione.marche.it>",
         "<CAP01uR=Rc8aTzzXarp2D8RtBi1gToH8ZzVNUrr8DwrPfDv-H+Q@mail.gmail.com>"
       ],
-      "body_plain": "Thank you for your hints.\n\nAll of them have been useful, and you solved my problem.\n\nI understood the role of rle, but I think that for my task its use is not fundamental.\n\n\nI will put more attention on looking for the existing documentation.\n\nThank you again\n\nStefano\n\n\n         (oo)\n--oOO--( )--OOo--------------------------------------\nStefano Sofia PhD\nCivil Protection - Marche Region - Italy\nMeteo Section\nSnow Section\nVia del Colle Ameno 5\n60126 Torrette di Ancona, Ancona (AN)\nUff: +39 071 806 7743\nE-mail: stefano.sofia at regione.marche.it\n---Oo---------oO----------------------------------------\n\n\n________________________________\nDa: Gabor Grothendieck <ggrothendieck at gmail.com>\nInviato: luned? 7 agosto 2023 20:30\nA: Stefano Sofia\nCc: r-help at R-project.org\nOggetto: Re: [R] group consecutive dates in a row\n\nIt is best to use Date, rather than POSIXct, class if there are no times.\n\nUse the cumsum expression shown to group the dates and then summarize\neach group.\n\nWe assume that the dates are already sorted in ascending order.\n\n  library(dplyr)\n\n  mydf <- data.frame(date = as.Date(c(\"2012-02-05\", \"2012-02-06\",\n\"2012-02-07\", \"2012-02-13\", \"2012-02-21\")))\n\n  mydf %>%\n    group_by(grp = cumsum(c(0, diff(date)) > 1)) %>%\n    summarize(start = first(date), end = last(date)) %>%\n    ungroup %>%\n    select(-grp)\n  ## # A tibble: 3 ? 2\n  ##   start      end\n  ##   <date>     <date>\n  ## 1 2012-02-05 2012-02-07\n  ## 2 2012-02-13 2012-02-13\n  ## 3 2012-02-21 2012-02-21\n\nor with only base R:\n\n  smrz <- function(x) with(x, data.frame(start = min(date), end = max(date)))\n  do.call(\"rbind\", by(mydf, cumsum(c(0, diff(mydf$date)) > 1), smrz))\n  ##        start        end\n  ## 0 2012-02-05 2012-02-07\n  ## 1 2012-02-13 2012-02-13\n  ## 2 2012-02-21 2012-02-21\n\n\nOn Mon, Aug 7, 2023 at 12:42?PM Stefano Sofia\n<stefano.sofia at regione.marche.it> wrote:\n>\n> Dear R users,\n>\n> I have a data frame with a single column of POSIXct elements, like\n>\n>\n> mydf <- data.frame(data_POSIX=as.POSIXct(c(\"2012-02-05\", \"2012-02-06\", \"2012-02-07\", \"2012-02-13\", \"2012-02-21\"), format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"))\n>\n>\n> I need to transform it in a two-columns data frame where I can get rid of consecutive dates. It should appear like\n>\n>\n> data_POSIX_init data_POSIX_fin\n>\n> 2012-02-05 2012-02-07\n>\n> 2012-02-13 NA\n>\n> 2012-02-21 NA\n>\n>\n> I started with two \"while cycles\" and so on, but this is not an efficient way to do it.\n>\n> Could you please give me an hint on how to proceed?\n>\n>\n> Thank you for your precious attention and help\n>\n> Stefano\n>\n>\n>          (oo)\n> --oOO--( )--OOo--------------------------------------\n> Stefano Sofia PhD\n> Civil Protection - Marche Region - Italy\n> Meteo Section\n> Snow Section\n> Via del Colle Ameno 5\n> 60126 Torrette di Ancona, Ancona (AN)\n> Uff: +39 071 806 7743\n> E-mail: stefano.sofia at regione.marche.it\n> ---Oo---------oO----------------------------------------\n>\n> ________________________________\n>\n> AVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. 6 della DGR n. 1394/2008 si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\n> IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n>\n> --\n> Questo messaggio  stato analizzato da Libraesva ESG ed  risultato non infetto.\n> This message was scanned by Libraesva ESG and is believed to be clean.\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>  https://urlsand.esvalabs.com/?u=https%3A%2F%2Fstat.ethz.ch%2Fmailman%2Flistinfo%2Fr-help&e=a1c37615&h=997ca565&f=y&p=y\n> PLEASE do read the posting guide  https://urlsand.esvalabs.com/?u=http%3A%2F%2Fwww.R-project.org%2Fposting-guide.html&e=a1c37615&h=5a0f7b62&f=y&p=y\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n--\nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com\n\n--\n\nQuesto messaggio  stato analizzato con Libraesva ESG ed  risultato non infetto.\n\n\n________________________________\n\nAVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell?art. 6 della DGR n. 1394/2008 si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\nIMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n\n--\nQuesto messaggio  stato analizzato da Libraesva ESG ed  risultato non infetto.\nThis message was scanned by Libraesva ESG and is believed to be clean.\n\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thank you for your hints.\n\nAll of them have been useful, and you solved my problem.\n\nI understood the role of rle, but I think that for my task its use is not fundamental.\n\n\nI will put more attention on looking for the existing documentation.\n\nThank you again\n\nStefano\n\n\n         (oo)\n--oOO--( )--OOo--------------------------------------\nStefano Sofia PhD\nCivil Protection - Marche Region - Italy\nMeteo Section\nSnow Section\nVia del Colle Ameno 5\n60126 Torrette di Ancona, Ancona (AN)\nUff: +39 071 806 7743\nE-mail: stefano.sofia at regione.marche.it\n---Oo---------oO----------------------------------------\n\n\n________________________________\nDa: Gabor Grothendieck <ggrothendieck at gmail.com>\nInviato: lunedì 7 agosto 2023 20:30\nA: Stefano Sofia\nCc: r-help at R-project.org\nOggetto: Re: [R] group consecutive dates in a row\n\nIt is best to use Date, rather than POSIXct, class if there are no times.\n\nUse the cumsum expression shown to group the dates and then summarize\neach group.\n\nWe assume that the dates are already sorted in ascending order.\n\n  library(dplyr)\n\n  mydf <- data.frame(date = as.Date(c(\"2012-02-05\", \"2012-02-06\",\n\"2012-02-07\", \"2012-02-13\", \"2012-02-21\")))\n\n  mydf %>%\n    group_by(grp = cumsum(c(0, diff(date)) > 1)) %>%\n    summarize(start = first(date), end = last(date)) %>%\n    ungroup %>%\n    select(-grp)\n  ## # A tibble: 3 × 2\n  ##   start      end\n  ##   <date>     <date>\n  ## 1 2012-02-05 2012-02-07\n  ## 2 2012-02-13 2012-02-13\n  ## 3 2012-02-21 2012-02-21\n\nor with only base R:\n\n  smrz <- function(x) with(x, data.frame(start = min(date), end = max(date)))\n  do.call(\"rbind\", by(mydf, cumsum(c(0, diff(mydf$date)) > 1), smrz))\n  ##        start        end\n  ## 0 2012-02-05 2012-02-07\n  ## 1 2012-02-13 2012-02-13\n  ## 2 2012-02-21 2012-02-21\n\n\nOn Mon, Aug 7, 2023 at 12:42 PM Stefano Sofia\n<stefano.sofia at regione.marche.it> wrote:\n>\n> Dear R users,\n>\n> I have a data frame with a single column of POSIXct elements, like\n>\n>\n> mydf <- data.frame(data_POSIX=as.POSIXct(c(\"2012-02-05\", \"2012-02-06\", \"2012-02-07\", \"2012-02-13\", \"2012-02-21\"), format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"))\n>\n>\n> I need to transform it in a two-columns data frame where I can get rid of consecutive dates. It should appear like\n>\n>\n> data_POSIX_init data_POSIX_fin\n>\n> 2012-02-05 2012-02-07\n>\n> 2012-02-13 NA\n>\n> 2012-02-21 NA\n>\n>\n> I started with two \"while cycles\" and so on, but this is not an efficient way to do it.\n>\n> Could you please give me an hint on how to proceed?\n>\n>\n> Thank you for your precious attention and help\n>\n> Stefano\n>\n>\n>          (oo)\n> --oOO--( )--OOo--------------------------------------\n> Stefano Sofia PhD\n> Civil Protection - Marche Region - Italy\n> Meteo Section\n> Snow Section\n> Via del Colle Ameno 5\n> 60126 Torrette di Ancona, Ancona (AN)\n> Uff: +39 071 806 7743\n> E-mail: stefano.sofia at regione.marche.it\n> ---Oo---------oO----------------------------------------\n>\n> ________________________________\n>\n> AVVISO IMPORTANTE: Questo messaggio di posta elettronica può contenere informazioni confidenziali, pertanto è destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si è il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si è ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. 6 della DGR n. 1394/2008 si segnala che, in caso di necessità ed urgenza, la risposta al presente messaggio di posta elettronica può essere visionata da persone estranee al destinatario.\n> IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n>\n> --\n> Questo messaggio  stato analizzato da Libraesva ESG ed  risultato non infetto.\n> This message was scanned by Libraesva ESG and is believed to be clean.\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>  https://urlsand.esvalabs.com/?u=https%3A%2F%2Fstat.ethz.ch%2Fmailman%2Flistinfo%2Fr-help&e=a1c37615&h=997ca565&f=y&p=y\n> PLEASE do read the posting guide  https://urlsand.esvalabs.com/?u=http%3A%2F%2Fwww.R-project.org%2Fposting-guide.html&e=a1c37615&h=5a0f7b62&f=y&p=y\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n--\nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com\n\n--\n\nQuesto messaggio  stato analizzato con Libraesva ESG ed  risultato non infetto.\n\n\n________________________________\n\nAVVISO IMPORTANTE: Questo messaggio di posta elettronica può contenere informazioni confidenziali, pertanto è destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si è il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si è ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell’art. 6 della DGR n. 1394/2008 si segnala che, in caso di necessità ed urgenza, la risposta al presente messaggio di posta elettronica può essere visionata da persone estranee al destinatario.\nIMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n\n--\nQuesto messaggio  stato analizzato da Libraesva ESG ed  risultato non infetto.\nThis message was scanned by Libraesva ESG and is believed to be clean.\n\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thank you for your hints.\n\nAll of them have been useful, and you solved my problem.\n\nI understood the role of rle, but I think that for my task its use is not fundamental.\n\n\nI will put more attention ",
       "thread_id": "thread-d36b7c8fb43a",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477870.html"
     },
     {
       "id": "msg-267a841a854b",
@@ -1196,7 +1261,8 @@
       "body_snippet": "I know nothing about tf, etc., but can you not simply read in the whole\nfile into R and then randomly split using R? The training and test sets\nwould simply be defined by a single random sample of sub",
       "thread_id": "thread-607f00ba4168",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477872.html"
     },
     {
       "id": "msg-fa4c6def5ebe",
@@ -1214,7 +1280,8 @@
       "body_snippet": "? Fri, 11 Aug 2023 10:20:27 +0000\nJames C Schopf <jcschopf at hotmail.com> ?????:\n\n> > train_text_dtm <-\n> > DocumentTermMatrix(Corpus(VectorSource(all_train_tokens)))  \n\n> > test_text_dtm <-\n> > Docu",
       "thread_id": "thread-607f00ba4168",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477873.html"
     },
     {
       "id": "msg-ec7fc9e76ff8",
@@ -1233,7 +1300,8 @@
       "body_snippet": "Thank you Bert and Ivan,\n\nI was building the SVM model in hopes of applying it to future cases and hoped that the model would be able to deal with new words it hadn't encountered during training.   Bu",
       "thread_id": "thread-607f00ba4168",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477874.html"
     },
     {
       "id": "msg-7ad80fe1f963",
@@ -1251,7 +1319,8 @@
       "body_snippet": "Colleagues,\n\nHere is my reproducible code for a graph using geom_smooth\nset.seed(55)\nscatter_data <- tibble(x_var = runif(100, min = 0, max = 25)\n?????????????????????? ,y_var = log2(x_var) + rnorm(10",
       "thread_id": "thread-7ad80fe1f963",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477875.html"
     },
     {
       "id": "msg-0abe64fb45ad",
@@ -1270,7 +1339,8 @@
       "body_snippet": "?s 05:17 de 12/08/2023, Thomas Subia via R-help escreveu:\n> Colleagues,\n> \n> Here is my reproducible code for a graph using geom_smooth\n> set.seed(55)\n> scatter_data <- tibble(x_var = runif(100, min =",
       "thread_id": "thread-7ad80fe1f963",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477876.html"
     },
     {
       "id": "msg-56bbb07be0f1",
@@ -1289,7 +1359,8 @@
       "body_snippet": "G'day Thomas,\n\nOn Sat, 12 Aug 2023 04:17:42 +0000 (UTC)\nThomas Subia via R-help <r-help at r-project.org> wrote:\n\n> Here is my reproducible code for a graph using geom_smooth\n\nThe call \"library(tidyve",
       "thread_id": "thread-7ad80fe1f963",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477877.html"
     },
     {
       "id": "msg-3d00db7b448f",
@@ -1309,7 +1380,8 @@
       "body_snippet": "+ geom_ribbon(stat = \"smooth\",\n              se = TRUE,\n              alpha = 0, # or, use fill = NA\n              colour = \"black\",\n              linetype = \"dotted\")\n\nDoes that work?\n\n\n\nOn Sat, 12 A",
       "thread_id": "thread-7ad80fe1f963",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477878.html"
     },
     {
       "id": "msg-76549b6ce9c4",
@@ -1325,7 +1397,8 @@
       "body_snippet": "dear members,\n                         I have a heteroscedastic time series which I want to transform to make it homoscedastic by a box cox transformation. I am using Otexts by RJ hyndman and George A",
       "thread_id": "thread-76549b6ce9c4",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477879.html"
     },
     {
       "id": "msg-14ef0aab0af5",
@@ -1345,7 +1418,8 @@
       "body_snippet": "Colleagues,\n\nYour suggestions are elegant and greatly appreciated.\n\nThomas Subia\n\n\n\n\n\n\nOn Friday, August 11, 2023 at 11:08:42 PM PDT, Berwin A Turlach <berwin.turlach at gmail.com> wrote: \n\n\n\n\n\nG'day ",
       "thread_id": "thread-7ad80fe1f963",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477880.html"
     },
     {
       "id": "msg-929bd22368ad",
@@ -1363,7 +1437,8 @@
       "body_snippet": "Hi Akshay,\nThe forecast package will do the BoxCox transform and automatically\nbacktransform the forecasts.\nThe package also handles xts objects.\nFor example, modifying the example from the help page ",
       "thread_id": "thread-76549b6ce9c4",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477881.html"
     },
     {
       "id": "msg-0eef179f2334",
@@ -1379,7 +1454,8 @@
       "body_snippet": "**OFF TOPIC** but perhaps of interest to some on this list. I apologize in\nadvance to those who may be offended.\n\nThe byline:\n********************************\n\"ChatGPT's odds of getting code questions",
       "thread_id": "thread-0eef179f2334",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477882.html"
     },
     {
       "id": "msg-7bc4a8be00a2",
@@ -1397,7 +1473,8 @@
       "body_snippet": "Thanks.\n\nhttps://www.wsj.com/articles/with-ai-hackers-can-simply-talk-computers-into-misbehaving-ad488686?mod=hp_lead_pos10\n\nEver heard of AI prompt injection?\n\n\n*Stephen Dawson, DSL*\n/Executive Strat",
       "thread_id": "thread-0eef179f2334",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477883.html"
     },
     {
       "id": "msg-d0132c92458e",
@@ -1413,7 +1490,8 @@
       "body_snippet": "While working on 'random walk' applications, I got interested in\noptimizing noisy objective functions. As an (artificial) example, the\nfollowing is the Rosenbrock function, where Gaussian noise of sta",
       "thread_id": "thread-d0132c92458e",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477884.html"
     },
     {
       "id": "msg-32c5076e93d5",
@@ -1431,7 +1509,8 @@
       "body_snippet": "This is a huge topic.\n\n   Differential evolution (DEoptim package) would be one good starting \npoint; there is a simulated annealing method built into optim() (method \n= \"SANN\") but it usually require",
       "thread_id": "thread-d0132c92458e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477885.html"
     },
     {
       "id": "msg-86164c3860ed",
@@ -1449,7 +1528,8 @@
       "body_snippet": "It does often behave better if you say to it \"that doesn't seem to be\nworking\" and perhaps some error message\n\nIt is afterall a language tool. Its function is to provide text that seems\nreal.\n\nIf you ",
       "thread_id": "thread-0eef179f2334",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477886.html"
     },
     {
       "id": "msg-ac5225bd5da0",
@@ -1467,7 +1547,8 @@
       "body_snippet": "Thanks, Ben.\n\nFor certain reasons, I would *not* like to apply global optimization solvers,\ne.g., for reasons of higher dimensions and longer running times.\nI was hoping for suggestions from the \"Stoc",
       "thread_id": "thread-d0132c92458e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477887.html"
     },
     {
       "id": "msg-8415aae00d68",
@@ -1485,7 +1566,8 @@
       "body_snippet": "Hi Bert,\nThe article notes that chatGPT often gets the concept wrong, rather\nthan the facts. I think this can be traced to the one who poses the\nquestion. I have often encountered requests for help th",
       "thread_id": "thread-0eef179f2334",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477888.html"
     },
     {
       "id": "msg-cae3ce27cd89",
@@ -1503,7 +1585,8 @@
       "body_snippet": "More to provide another perspective, I'll give the citation of some work\nwith Harry Joe and myself from over 2 decades ago.\n\n@Article{,\n   author  = {Joe, Harry and Nash, John C.},\n   title   = {Numer",
       "thread_id": "thread-d0132c92458e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477889.html"
     },
     {
       "id": "msg-d6159a414568",
@@ -1521,7 +1604,8 @@
       "body_snippet": "On Sun, 13 Aug 2023, Hans W writes:\n\n> While working on 'random walk' applications, I got interested in\n> optimizing noisy objective functions. As an (artificial) example, the\n> following is the Rosen",
       "thread_id": "thread-d0132c92458e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477890.html"
     },
     {
       "id": "msg-ea03acc640a3",
@@ -1540,7 +1624,8 @@
       "body_snippet": "Dear Eric,\n                 THanks for the reply...will this also work with arfima() ? What if I want to fit a model like GARCH and friends?\n\nTHanking you,\nYours sincerely,\nAKSHAY M KULKARNI\n_________",
       "thread_id": "thread-76549b6ce9c4",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477891.html"
     },
     {
       "id": "msg-22b5d938ab80",
@@ -1560,7 +1645,8 @@
       "body_snippet": "Hi Akshay,\nIf you do\n> help(package=\"forecast\")\n\nyou will find that arfima is listed. Unfortunately, I don't see any\nARCH-type models there, but you should check out the help page\nresults.\n\nGood luck,",
       "thread_id": "thread-76549b6ce9c4",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477892.html"
     },
     {
       "id": "msg-defd92d95e01",
@@ -1581,7 +1667,8 @@
       "body_snippet": "Dear ERic,\n                 THanks a lot....!\n\nTHanking you,\nYours sincerely,\nAKSHAY M KULKARNI\n________________________________\nFrom: Eric Berger <ericjberger at gmail.com>\nSent: Monday, August 14, 2",
       "thread_id": "thread-76549b6ce9c4",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477893.html"
     },
     {
       "id": "msg-16ef9c50d34d",
@@ -1597,7 +1684,8 @@
       "body_snippet": "Dear R-Users,\n\nI tried to compute the following limit:\nx = 1E-3;\n(-log(1 - cos(x)) - 1/(cos(x)-1)) / 2 - 1/(x^2) + log(x)\n# 0.4299226\nlog(2)/2 + 1/12\n# 0.4299069\n\nHowever, the result diverges as x dec",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477894.html"
     },
     {
       "id": "msg-7577d60c65bb",
@@ -1615,7 +1703,8 @@
       "body_snippet": "You could rewrite\n\n1 - cos(x)\n\nas\n\n2 * sin(x/2)^2\n\nand that might give you more precision?\n\nOn Wed, Aug 16, 2023, 01:50 Leonard Mada via R-help <r-help at r-project.org>\nwrote:\n\n> Dear R-Users,\n>\n> I ",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477895.html"
     },
     {
       "id": "msg-d507db361361",
@@ -1634,7 +1723,8 @@
       "body_snippet": "You might also be able to rewrite\n\nlog(1 - cos(x))\n\nas\n\nlog1p(-cos(x))\n\nOn Wed, Aug 16, 2023, 02:51 Iris Simmons <ikwsimmo at gmail.com> wrote:\n\n> You could rewrite\n>\n> 1 - cos(x)\n>\n> as\n>\n> 2 * sin(x",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477896.html"
     },
     {
       "id": "msg-9864f662a9cc",
@@ -1654,7 +1744,8 @@
       "body_snippet": ">>>>> Iris Simmons \n>>>>>     on Wed, 16 Aug 2023 02:57:48 -0400 writes:\n\n    > You might also be able to rewrite\n    > log(1 - cos(x))\n\n    > as\n\n    > log1p(-cos(x))\n\n    > On Wed, Aug 16, 2023, 02:",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477897.html"
     },
     {
       "id": "msg-92315aff7e4f",
@@ -1670,7 +1761,8 @@
       "body_snippet": "Hello,\n\nI'm using R versions 4.1.3 on Windows 10 and I'm having a problem with\nmemory usage.\n\nCurrently, I need to use the arrow and dplyr libraries in a program and\nwhen I compare the memory used bet",
       "thread_id": "thread-92315aff7e4f",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477898.html"
     },
     {
       "id": "msg-c08b08805fc5",
@@ -1684,11 +1776,12 @@
       "references": [
         "<CABXVukTd=6ks5YxWSRGLjaEY+XWG2bVMX=u0_wnYb_L-ocni_w@mail.gmail.com>"
       ],
-      "body_plain": "On Wed, 16 Aug 2023 11:22:00 +0200\nK?vin Pemonon <kevinpemonon at gmail.com> wrote:\n\n> I'd like to understand why there's a difference in memory used\n> between the Windows task manager and R's memory.size(max=F) function.\n\nWhen R was initially ported to Windows, then-popular version of the\nsystem memory allocator was not a good fit for R. R allocates and frees\nlots of objects, sometimes small ones. The Windows 95-era allocator had\nbackwards-compatibility obligations to lots of incorrectly-written\nprograms that sometimes used memory after freeing it and poked at\nundocumented implementation details a lot [*]. I don't know the exact\nreasons (my family didn't even have a computer back then), but it seems\nthat R couldn't make full use of the computer memory without bringing\nin its own memory allocator (a copy of Doug Lea's malloc).\n\nIt is this particular allocator that memory.size() has access to.\nNowadays, there are many ways for a Windows process to have memory\nallocated for it, and not all of them are under control of R. Apache\nArrow, being \"a platform for in-memory data\", probably allocates its\nown memory without asking R to do it. Meanwhile, the Windows\nimplementation of malloc() has improved, so R-4.2.0 got rid of its own\ncopy (which also means no more memory.size()).\n\nYou are welcome to trust the task manager.\n\n-- \nBest regards,\nIvan\n\n[*] See, e.g., the free bonus chapters to \"The Old New Thing\" by Raymond\nChen:\nhttps://www.informit.com/content/images/9780321440303/samplechapter/Chen_bonus_ch01.pdf\nhttps://www.informit.com/content/images/9780321440303/samplechapter/Chen_bonus_ch02.pdf",
-      "body_snippet": "On Wed, 16 Aug 2023 11:22:00 +0200\nK?vin Pemonon <kevinpemonon at gmail.com> wrote:\n\n> I'd like to understand why there's a difference in memory used\n> between the Windows task manager and R's memory.",
+      "body_plain": "On Wed, 16 Aug 2023 11:22:00 +0200\nKévin Pemonon <kevinpemonon at gmail.com> wrote:\n\n> I'd like to understand why there's a difference in memory used\n> between the Windows task manager and R's memory.size(max=F) function.\n\nWhen R was initially ported to Windows, then-popular version of the\nsystem memory allocator was not a good fit for R. R allocates and frees\nlots of objects, sometimes small ones. The Windows 95-era allocator had\nbackwards-compatibility obligations to lots of incorrectly-written\nprograms that sometimes used memory after freeing it and poked at\nundocumented implementation details a lot [*]. I don't know the exact\nreasons (my family didn't even have a computer back then), but it seems\nthat R couldn't make full use of the computer memory without bringing\nin its own memory allocator (a copy of Doug Lea's malloc).\n\nIt is this particular allocator that memory.size() has access to.\nNowadays, there are many ways for a Windows process to have memory\nallocated for it, and not all of them are under control of R. Apache\nArrow, being \"a platform for in-memory data\", probably allocates its\nown memory without asking R to do it. Meanwhile, the Windows\nimplementation of malloc() has improved, so R-4.2.0 got rid of its own\ncopy (which also means no more memory.size()).\n\nYou are welcome to trust the task manager.\n\n-- \nBest regards,\nIvan\n\n[*] See, e.g., the free bonus chapters to \"The Old New Thing\" by Raymond\nChen:\nhttps://www.informit.com/content/images/9780321440303/samplechapter/Chen_bonus_ch01.pdf\nhttps://www.informit.com/content/images/9780321440303/samplechapter/Chen_bonus_ch02.pdf",
+      "body_snippet": "On Wed, 16 Aug 2023 11:22:00 +0200\nKévin Pemonon <kevinpemonon at gmail.com> wrote:\n\n> I'd like to understand why there's a difference in memory used\n> between the Windows task manager and R's memory.",
       "thread_id": "thread-92315aff7e4f",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477899.html"
     },
     {
       "id": "msg-2238ee12861d",
@@ -1704,7 +1797,8 @@
       "body_snippet": "A non-text attachment was scrubbed...\nName: SOP Q006-F3 Supplier Qualification Questionnaire  (EN).pdf\nType: application/pdf\nSize: 145193 bytes\nDesc: SOP Q006-F3 Supplier Qualification Questionnaire (",
       "thread_id": "thread-2238ee12861d",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477900.html"
     },
     {
       "id": "msg-9017a522acbd",
@@ -1723,7 +1817,8 @@
       "body_snippet": "Dear Iris,\nDear Martin,\n\nThank you very much for your replies. I add a few comments.\n\n1.) Correct formula\nThe formula in the Subject Title was correct. A small glitch swept into \nthe last formula:\n- 1",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477901.html"
     },
     {
       "id": "msg-8179a5733d5f",
@@ -1739,7 +1834,8 @@
       "body_snippet": "I get the following error out of R, on a newer Ubuntu installation.\n\nError in `axis()`:\n! X11 font -adobe-helvetica-%s-%s-*-*-%d-*-*-*-*-*-*-*, face 1 at size 12 could not be loaded\nBacktrace:\n ?1. gr",
       "thread_id": "thread-8179a5733d5f",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477902.html"
     },
     {
       "id": "msg-5bef22ba7237",
@@ -1757,7 +1853,8 @@
       "body_snippet": "There's an ancient related question ... maybe it helps?\n\n  https://stat.ethz.ch/pipermail/r-help//2016-October/442326.html\n\n\nsudo apt-get install xfonts-100dpi\nsudo-apt-get install xfonts-75dpi\n\napt-c",
       "thread_id": "thread-8179a5733d5f",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477903.html"
     },
     {
       "id": "msg-1c3b042b490e",
@@ -1773,7 +1870,8 @@
       "body_snippet": "Hi All,\n\nWhen addressing an error in one of my packages in the CRAN check at CRAN,\nI found something strange which, I believe, is unrelated to my package.\nI am not sure whether it is a bug or a known ",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477904.html"
     },
     {
       "id": "msg-985180e81e60",
@@ -1793,7 +1891,8 @@
       "body_snippet": ">>>>> Leonard Mada \n>>>>>     on Wed, 16 Aug 2023 20:50:52 +0300 writes:\n\n    > Dear Iris,\n    > Dear Martin,\n\n    > Thank you very much for your replies. I add a few comments.\n\n    > 1.) Correct form",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477905.html"
     },
     {
       "id": "msg-6ca0827eaf07",
@@ -1812,7 +1911,8 @@
       "body_snippet": "Sent from Outlook for Android<https://aka.ms/AAb9ysg>\n\n\nHi there,\n\nMy name is Shaun and I work in an organisation where one of our users wishes to install the R software and our process is to assess t",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477912.html"
     },
     {
       "id": "msg-01c80822c9da",
@@ -1830,7 +1930,8 @@
       "body_snippet": "> However, should the numbers\n > generated identical if the same seed is used?\n\n   I don't see how using the same seed can overcome floating-point \ndifferences across platforms (compilers etc.) stemmi",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477906.html"
     },
     {
       "id": "msg-422c4d6b493b",
@@ -1849,7 +1950,8 @@
       "body_snippet": "But I have never seen a case where, on the same machine and using the same math routines, using the same seed repeatedly generated different values. That is quite bizarre (the issue I was discussing i",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477907.html"
     },
     {
       "id": "msg-23172acb38d8",
@@ -1867,7 +1969,8 @@
       "body_snippet": "MKL's results can depend on the number of threads running and perhaps other\nthings.  They blame it on the non-associativity of floating point\narithmetic.  This article gives a way to make results repe",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477908.html"
     },
     {
       "id": "msg-d24adb5ac0e5",
@@ -1886,7 +1989,8 @@
       "body_snippet": "Sorry for the confusion caused by that sentence. I did\nnot expect using the same seed generates the same\nsequence of numbers unconditionally. What puzzled me\nis not having the same sequence when runni",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477909.html"
     },
     {
       "id": "msg-0c2e2b45e70c",
@@ -1905,7 +2009,8 @@
       "body_snippet": "Thanks, I was missing the point that this was *non-repeatability on \nthe same platform*.\n\nOn 2023-08-17 10:31 a.m., Bill Dunlap wrote:\n> MKL's results can depend on the number of threads running and p",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477910.html"
     },
     {
       "id": "msg-8f88f6e970ab",
@@ -1924,7 +2029,8 @@
       "body_snippet": "Ah, super interesting! Thanks for the pointer, Bill.\n\nI might not have seen the issue because I have\n\nexport MKL_NUM_THREADS=1\n\nin my .profile, so MKL never goes beyond using one thread on my machine.",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477911.html"
     },
     {
       "id": "msg-2768af187f44",
@@ -1944,7 +2050,8 @@
       "body_snippet": "1. R is open source software. You are welcome to review the source code of the R interpreter for handling of PII. No warranty is offered by the (volunteer) developers of R.\n\n2. R software is a program",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477913.html"
     },
     {
       "id": "msg-cb617a04631c",
@@ -1964,7 +2071,8 @@
       "body_snippet": "This is a volunteer Help list for users of R, which is open source, so you\ncan see all its code. I can answer no to your questions, unless you are\nusing one of R's innumerable packages that interacts ",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477914.html"
     },
     {
       "id": "msg-bce791c59225",
@@ -1985,7 +2093,8 @@
       "body_snippet": "Incidentally, you might be interested in the banner shown when R starts up:\n\n\"R is free software and comes with ABSOLUTELY NO WARRANTY.\"\n\nI believe this is standard for open source software (upon whic",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477915.html"
     },
     {
       "id": "msg-8cecb40f6d3d",
@@ -2005,7 +2114,8 @@
       "body_snippet": "?s 12:10 de 17/08/2023, Shaun Parr escreveu:\n> \n> \n> Sent from Outlook for Android<https://aka.ms/AAb9ysg>\n> \n> \n> Hi there,\n> \n> My name is Shaun and I work in an organisation where one of our users ",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477916.html"
     },
     {
       "id": "msg-81baefd15935",
@@ -2027,7 +2137,8 @@
       "body_snippet": "Hi, Shaun:\n\n\n\t  I suggest you also check the Wikipedia article on \"R (programming \nlanguage)\":\n\n\nhttps://en.wikipedia.org/wiki/R_(programming_language)\n\n\n\t  That article has 115 numbered \"References\" ",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477917.html"
     },
     {
       "id": "msg-505889e6c4f7",
@@ -2048,7 +2159,8 @@
       "body_snippet": "When I installed R no personally identifiable information was given, none was requested. There is no login, so no password or user name. R resides on the host computer, so security is the responsibili",
       "thread_id": "thread-6ca0827eaf07",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477918.html"
     },
     {
       "id": "msg-85e6b0ed596f",
@@ -2119,7 +2231,8 @@
       "body_snippet": "Thanks a lot! I am not aware of this behavior! I will take this into\naccount in my work.\n\nRegards,\nShu Fai\n\nOn Thu, Aug 17, 2023 at 10:31?PM Bill Dunlap <williamwdunlap at gmail.com> wrote:\n>\n> MKL's ",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477923.html"
     },
     {
       "id": "msg-c8d05a1439a2",
@@ -2138,7 +2251,8 @@
       "body_snippet": ">>>>> Bill Dunlap \n>>>>>     on Thu, 17 Aug 2023 07:31:12 -0700 writes:\n\n    > MKL's results can depend on the number of threads running and perhaps other\n    > things.  They blame it on the non-assoc",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477924.html"
     },
     {
       "id": "msg-699de5efef1b",
@@ -2156,7 +2270,8 @@
       "body_snippet": "? Wed, 16 Aug 2023 16:08:57 -0500\n\"Therneau, Terry M., Ph.D. via R-help\" <r-help at r-project.org> ?????:\n\n> I get the following error out of R, on a newer Ubuntu installation.\n\n> ! X11 font -adobe-he",
       "thread_id": "thread-8179a5733d5f",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477925.html"
     },
     {
       "id": "msg-46a6fea695fd",
@@ -2177,7 +2292,8 @@
       "body_snippet": "Dear Martin,\n\nThank you very much for your analysis.\n\nI add only a small comment:\n- the purpose of the modified formula was to apply l'Hospital;\n- there are other ways to transform the formula; althou",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477926.html"
     },
     {
       "id": "msg-27971d2f0a34",
@@ -2197,7 +2313,8 @@
       "body_snippet": "On Fri, 18 Aug 2023 12:17:51 +0200\nMartin Maechler <maechler at stat.math.ethz.ch> wrote:\n\n<SNIP>\n\n> I think it would be nice to provide the average R user with a\n> (possibly super small) R package th",
       "thread_id": "thread-1c3b042b490e",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477927.html"
     },
     {
       "id": "msg-1e9fe2ae4550",
@@ -2219,7 +2336,8 @@
       "body_snippet": "I have added some clarifications below.\n\nOn 8/18/2023 10:20 PM, Leonard Mada wrote:\n> [...]\n> After more careful thinking, I believe that it is a limitation due to \n> floating points:\n> [...]\n>\n> The ",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 5,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477928.html"
     },
     {
       "id": "msg-282a807986e3",
@@ -2242,7 +2360,8 @@
       "body_snippet": "\"The ugly thing is that the error only gets worse as x decreases. The\nvalue neither drops to 0, nor does it blow up to infinity; but it gets\nworse in a continuous manner.\"\n\nIf I understand you correct",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 6,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477929.html"
     },
     {
       "id": "msg-043ef249e6f2",
@@ -2266,7 +2385,8 @@
       "body_snippet": "Dear Bert,\n\n\nValues of type 2^(-n) (and its binary complement) are exactly \nrepresented as floating point numbers and do not generate the error. \nHowever, values away from such special x-values will g",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 7,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477930.html"
     },
     {
       "id": "msg-10a93b0a2219",
@@ -2291,7 +2411,8 @@
       "body_snippet": "\"Values of type 2^(-n) (and its binary complement) are exactly represented\nas floating point numbers and do not generate the error. However, values\naway from such special x-values will generate errors",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 8,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477931.html"
     },
     {
       "id": "msg-4ed75124bfd9",
@@ -2317,7 +2438,8 @@
       "body_snippet": "Dear Bert,\n\n\nOn 8/19/2023 2:47 AM, Bert Gunter wrote:\n> \"Values of type 2^(-n) (and its binary complement) are exactly \n> represented as floating point numbers and do not generate the error. \n> Howeve",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 9,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477932.html"
     },
     {
       "id": "msg-85fe711e1f2f",
@@ -2341,7 +2463,8 @@
       "body_snippet": "This discussion is sooo familiar.\n\nIf you want indefinite precision arithmetic, feel free to use a language and data type that supports it.\n\nOtherwise, only do calculations that fit in a safe zone.\n\nT",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 7,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477933.html"
     },
     {
       "id": "msg-0cff59796f47",
@@ -2366,7 +2489,8 @@
       "body_snippet": "\"Are there any good indefinite (or much higher) precision packages\"\n\nA simple search on \"arbitrary precision arithmetic in R\" would have\nimmediately gotten you to the Rmpfr package.\n\nSee also:\nhttps:/",
       "thread_id": "thread-16ef9c50d34d",
       "thread_depth": 8,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477934.html"
     },
     {
       "id": "msg-f3bcebacfb19",
@@ -2382,7 +2506,8 @@
       "body_snippet": "Dear friends,\n\nHope you are all doing well and having a great weekend.  I have data that\nwas collected on specific gravity and spectrophotometer analysis for 26\nmixtures of NG (nitroglycerine), TA (tr",
       "thread_id": "thread-f3bcebacfb19",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477935.html"
     },
     {
       "id": "msg-b4a308d2155b",
@@ -2400,7 +2525,8 @@
       "body_snippet": "\" need to determine starting (initial) values for the model parameters for\nthis nonlinear regression model,\" ...\n\nwhat nonlinear regression model? Did html get stripped?\n\n-- Bert\n\nOn Sat, Aug 19, 2023",
       "thread_id": "thread-f3bcebacfb19",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477936.html"
     },
     {
       "id": "msg-714bc17f1ba5",
@@ -2416,7 +2542,8 @@
       "body_snippet": "Dear friends,\n\nHope you are all doing well and having a great weekend.  I have data that\nwas collected on specific gravity and spectrophotometer analysis for 26\nmixtures of NG (nitroglycerine), TA (tr",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477937.html"
     },
     {
       "id": "msg-0099e8d9e647",
@@ -2434,7 +2561,8 @@
       "body_snippet": "Why bother. nlsr can find a solution from very crude start.\n\nMixture <- c(17, 14, 5, 1, 11, 2, 16, 7, 19, 23, 20, 6, 13, 21, 3, 18, 15, 26, 8, 22)\nx1 <- c(69.98, 72.5, 77.6, 79.98, 74.98, 80.06, 69.98",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477938.html"
     },
     {
       "id": "msg-3bcff7e3fea5",
@@ -2453,7 +2581,8 @@
       "body_snippet": "Colleagues,\n\nAt the risk of starting a forest fire, or perhaps a brush fire, while it is good to see that nlxb can find a solution from arbitrary starting values, I think Paul?s question has merit des",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477939.html"
     },
     {
       "id": "msg-4a38f32a8b18",
@@ -2472,7 +2601,8 @@
       "body_snippet": "Thank you so much Dr. Nash, I truly appreciate your kind and valuable\ncontribution.\n\nCheers,\nPaul\n\nEl El s?b, 19 de ago. de 2023 a la(s) 3:35 p. m., J C Nash <\nprofjcnash at gmail.com> escribi?:\n\n> Wh",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477940.html"
     },
     {
       "id": "msg-0c1b4121fd87",
@@ -2492,7 +2622,8 @@
       "body_snippet": "Dear John, John, and Paul,\n\nIn this case, one can start values by just fitting\n\n > lm(1/y ~ x1 + x2 + x3 - 1, data=mydata)\n\nCall:\nlm(formula = 1/y ~ x1 + x2 + x3 - 1, data = mydata)\n\nCoefficients:\n   ",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477941.html"
     },
     {
       "id": "msg-d8ca3acedca7",
@@ -2513,7 +2644,8 @@
       "body_snippet": "Adding one more method:\n\nglm(y~ x1 + x2 + x3 - 1, family = gaussian(link = \"inverse\"), data = mydata)\n\n   will fit the exact model (including the desired error structure). \nThe default GLM starting va",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477942.html"
     },
     {
       "id": "msg-7ae0cb07c6ef",
@@ -2533,7 +2665,8 @@
       "body_snippet": "The cautions people have given about starting values are worth heeding. That nlxb() does well in many cases is useful,\nbut not foolproof. And John Fox has shown that the problem can be tackled very si",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477943.html"
     },
     {
       "id": "msg-45e218c49c21",
@@ -2554,7 +2687,8 @@
       "body_snippet": "Dear Dr. Nash,\n\nThank you for your kind feedback. I was able to successfully find the\nstarting values for the nonlinear regression model parameters, here is my\ncode:\n#Specifying Nonlinear Regression M",
       "thread_id": "thread-714bc17f1ba5",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477944.html"
     },
     {
       "id": "msg-a75b1bcc6e82",
@@ -2570,7 +2704,8 @@
       "body_snippet": "Dear friends,\n\nThis is the dataset I am currently working with:\n>dput(mod14data2_random)\nstructure(list(index = c(14L, 27L, 37L, 33L, 34L, 16L, 7L, 1L,\n39L, 36L, 40L, 19L, 28L, 38L, 32L), y = c(0.44, ",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477945.html"
     },
     {
       "id": "msg-93c2c369e1d5",
@@ -2588,7 +2723,8 @@
       "body_snippet": "I got starting values as follows:\nNoting that the minimum data value is .38, I fit the linear model log(y -\n.37) ~ x to get intercept = -1.8 and slope = -.055. So I used .37,\nexp(-1.8)  and -.055 as t",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477946.html"
     },
     {
       "id": "msg-d50c83034958",
@@ -2606,7 +2742,8 @@
       "body_snippet": "My answer is WAY longer than Bert Gunter's but maybe useful nonetheless.\n\n   (Q for John Nash:  why does the coef() method for nlmrt objects \nreturn the coefficient vector **invisibly**?  That seems c",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477947.html"
     },
     {
       "id": "msg-b7bc94be2fbc",
@@ -2625,7 +2762,8 @@
       "body_snippet": "Dear Bert,\n\nThank you so much for your kind and valuable feedback. I tried finding the\nstarting values using the approach you mentioned, then did the following to\nfit the nonlinear regression model:\nn",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477948.html"
     },
     {
       "id": "msg-8b7e200d3f6c",
@@ -2645,7 +2783,8 @@
       "body_snippet": "I haven't looked to see whether you or Bert made an algebraic mistake \nin translating the parameters of the log-linear model to their \nequivalents for the nonlinear model, but nls() gives me the same ",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477949.html"
     },
     {
       "id": "msg-01e813c0ae34",
@@ -2665,7 +2804,8 @@
       "body_snippet": "Oh, sorry; I changed signs in the model, fitting\ntheta0 + theta1*exp(theta2*x)\n\nSo for theta0 - theta1*exp(-theta2*x) use theta1= -.exp(-1.8) and theta2 =\n+.055 as starting values.\n\n-- Bert\n\n\n\n\n\nOn Su",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477950.html"
     },
     {
       "id": "msg-b77006a2d610",
@@ -2686,7 +2826,8 @@
       "body_snippet": "Dear Bert,\n\nThank you for your extremely valuable feedback. Now, I just want to\nunderstand why the signs for those starting values, given the following:\n> #Fiting intermediate model to get starting va",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477951.html"
     },
     {
       "id": "msg-9d6cfa3a0db0",
@@ -2708,7 +2849,8 @@
       "body_snippet": "Basic algebra and exponentials/logs. I leave those details to you or\nanother HelpeR.\n\n-- Bert\n\nOn Sun, Aug 20, 2023 at 12:17?PM Paul Bernal <paulbernal07 at gmail.com> wrote:\n\n> Dear Bert,\n>\n> Thank y",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 5,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477952.html"
     },
     {
       "id": "msg-ca1ba7685916",
@@ -2731,7 +2873,8 @@
       "body_snippet": "Thanks a lot Bert, I appreciate your help.\n\nKind regards,\n\nPaul\n\nEl El dom, 20 de ago. de 2023 a la(s) 2:39 p. m., Bert Gunter <\nbgunter.4567 at gmail.com> escribi?:\n\n> Basic algebra and exponentials/",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 6,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477953.html"
     },
     {
       "id": "msg-8f34501bb015",
@@ -2747,7 +2890,8 @@
       "body_snippet": "I am using LOF.test() function from the qpcR package and got the following\nresult:\n\n> LOF.test(nlregmod3)\n$pF\n[1] 0.97686\n\n$pLR\n[1] 0.77025\n\nCan I conclude from the LOF.test() results that my nonlinea",
       "thread_id": "thread-8f34501bb015",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477954.html"
     },
     {
       "id": "msg-88f470f207aa",
@@ -2765,7 +2909,8 @@
       "body_snippet": "The p-values are non-significant by any standard cutoff (e.g. \np<=0.05, p<=0.1) but note that this is a *lack-of-fit* test -- i.e., \n\"does my function fit the data well enough?\", **not** a \"significan",
       "thread_id": "thread-8f34501bb015",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477955.html"
     },
     {
       "id": "msg-f1226e3a9117",
@@ -2783,7 +2928,8 @@
       "body_snippet": "I would suggest that a simple plot of residuals vs. fitted values and\nperhaps plots of residuals vs. the independent variables are almost always\nmore useful than omnibus LOF tests. (many would disagre",
       "thread_id": "thread-8f34501bb015",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477956.html"
     },
     {
       "id": "msg-e5de05fae30a",
@@ -2801,7 +2947,8 @@
       "body_snippet": "G'day Paul,\n\nOn Sun, 20 Aug 2023 12:15:08 -0500\nPaul Bernal <paulbernal07 at gmail.com> wrote:\n\n> Any idea on how to proceed in this situation? What could I do?\n\nYou are fitting a simple asymptotic mo",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477957.html"
     },
     {
       "id": "msg-c0714b030a66",
@@ -2820,7 +2967,8 @@
       "body_snippet": "Thank you so much for your valuable feedback Berwin.\n\nHave a great day.\nCheers,\nPaul\n\nEl El dom, 20 de ago. de 2023 a la(s) 10:21 p. m., Berwin A Turlach <\nberwin.turlach at gmail.com> escribi?:\n\n> G'",
       "thread_id": "thread-a75b1bcc6e82",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477958.html"
     },
     {
       "id": "msg-5dc7b8652e9c",
@@ -2836,7 +2984,8 @@
       "body_snippet": "Dear R users,\n\nI am using eRm package in analysing my polytomous data as below\n\nRespondents = 277 people\nItem = 30 questions\n\nThe data consists of 0,1,2,3 responses/answers.\n\nI'm having a problem in w",
       "thread_id": "thread-5dc7b8652e9c",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477959.html"
     },
     {
       "id": "msg-f060e5e50bb5",
@@ -2852,7 +3001,8 @@
       "body_snippet": "Dear all,\n\nI am having trouble with the olsrr package. When I run the same\ncommand after scaling a variable 10 times the same incantation fails.\n\n# This works:\n\n> model.1  <- lm(I(Var.One/Var4)~ I(Var",
       "thread_id": "thread-f060e5e50bb5",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477961.html"
     },
     {
       "id": "msg-5e0d4282f7da",
@@ -2870,7 +3020,8 @@
       "body_snippet": "?s 16:49 de 21/08/2023, nor azila escreveu:\n> Dear R users,\n> \n> I am using eRm package in analysing my polytomous data as below\n> \n> Respondents = 277 people\n> Item = 30 questions\n> \n> The data consi",
       "thread_id": "thread-5dc7b8652e9c",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477960.html"
     },
     {
       "id": "msg-6b2a4ebe403f",
@@ -2888,7 +3039,8 @@
       "body_snippet": "I copied your data and ran your code.\nIt worked fine for me.\n\n> sessionInfo()\nR version 4.3.1 (2023-06-16)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Ubuntu 22.04.2 LTS\n\nMatrix products: de",
       "thread_id": "thread-f060e5e50bb5",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477964.html"
     },
     {
       "id": "msg-97d4de898e43",
@@ -2906,7 +3058,8 @@
       "body_snippet": "? Tue, 22 Aug 2023 16:06:22 +0530\nAshim Kapoor <ashimkapoor at gmail.com> ?????:\n\n> Error in eval(predvars, data, env) : object 'Var.One' not found\n\nUse traceback() to find out in which function the e",
       "thread_id": "thread-f060e5e50bb5",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477962.html"
     },
     {
       "id": "msg-a526f8b73f41",
@@ -2925,7 +3078,8 @@
       "body_snippet": "I copied your data and ran your code.\nIt worked fine for me.\n\n> sessionInfo()\nR version 4.3.1 (2023-06-16)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Ubuntu 22.04.2 LTS\n\nMatrix products: de",
       "thread_id": "thread-f060e5e50bb5",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477963.html"
     },
     {
       "id": "msg-75e0b9bdc70b",
@@ -2944,7 +3098,8 @@
       "body_snippet": "Dear Eric, Ivan and Rui,\n\nMany thanks for your efforts.\n\nI have posted my query @ https://github.com/rsquaredacademy/olsrr/issues/207\n\nIn case I get a reply or if I can figure this one out I will upda",
       "thread_id": "thread-75e0b9bdc70b",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477965.html"
     },
     {
       "id": "msg-f70b9f7bc64a",
@@ -2964,7 +3119,8 @@
       "body_snippet": "Dear Eric, Ivan, Rui and others,\n\nI upgraded from 4.3.0 to 4.3.1 and the error disappeared.\n\nBest,\nAshim\n\nOn Wed, Aug 23, 2023 at 10:33?AM Ashim Kapoor <ashimkapoor at gmail.com> wrote:\n>\n> Dear Eric,",
       "thread_id": "thread-75e0b9bdc70b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477966.html"
     },
     {
       "id": "msg-77c3e98a9371",
@@ -2985,7 +3141,8 @@
       "body_snippet": "Dear all,\n\nI am a little confused now.\n\nI am on Debian 10.\nWhen I  open a terminal, type R and run my code, it runs fine. When I\nstart Emacs, start an inferior R process using ESS, the error comes\nbac",
       "thread_id": "thread-75e0b9bdc70b",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477971.html"
     },
     {
       "id": "msg-b2b6e47fc76f",
@@ -3004,7 +3161,8 @@
       "body_snippet": "Thanks for your suggestion. \n\nI have just returned from a vacation and started catching up on my emails. \n\nRolling join is an elegant and most suitable solution for my tasks.  I invested some time in ",
       "thread_id": "thread-2a86c6539711",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477967.html"
     },
     {
       "id": "msg-c13981f444f9",
@@ -3020,7 +3178,8 @@
       "body_snippet": "I have an Rmarkdown file which is part of my distill \"Rblog\" \n(https://www.psyctc.org/Rblog/).? It was knitting fine until last week,\nnow knitting terminates with this:\n\nRscript -e 'rmarkdown::render(",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477968.html"
     },
     {
       "id": "msg-6e30e5d3de34",
@@ -3038,7 +3197,8 @@
       "body_snippet": "Could you post a link to the source for that Rmd file?\n\nDuncan Murdoch\n\nOn 24/08/2023 1:58 p.m., Chris Evans via R-help wrote:\n> I have an Rmarkdown file which is part of my distill \"Rblog\"\n> (https:/",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477969.html"
     },
     {
       "id": "msg-be2d564a5529",
@@ -3056,7 +3216,8 @@
       "body_snippet": "On 24/08/2023 1:58 p.m., Chris Evans via R-help wrote:\n> I have an Rmarkdown file which is part of my distill \"Rblog\"\n> (https://www.psyctc.org/Rblog/).? It was knitting fine until last week,\n> now kn",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477970.html"
     },
     {
       "id": "msg-ffb6760402a9",
@@ -3078,7 +3239,8 @@
       "body_snippet": "On Thu, 24 Aug 2023 10:56:00 +0530\nAshim Kapoor <ashimkapoor at gmail.com> wrote:\n\n> When I  open a terminal, type R and run my code, it runs fine. When I\n> start Emacs, start an inferior R process us",
       "thread_id": "thread-75e0b9bdc70b",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477972.html"
     },
     {
       "id": "msg-7a19466d3c5c",
@@ -3097,7 +3259,8 @@
       "body_snippet": "Thanks Duncan.? I've pushed the whole collection to:\n\nhttps://github.com/cpsyctc/Rblog\n\nOn 24/08/2023 20:54, Duncan Murdoch wrote:\n> Could you post a link to the source for that Rmd file?\n>\n> Duncan M",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477973.html"
     },
     {
       "id": "msg-a70ae256c339",
@@ -3116,7 +3279,8 @@
       "body_snippet": "On 24/08/2023 21:05, Duncan Murdoch wrote:\n> On 24/08/2023 1:58 p.m., Chris Evans via R-help wrote:\n>> I have an Rmarkdown file which is part of my distill \"Rblog\"\n>> (https://www.psyctc.org/Rblog/).?",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477974.html"
     },
     {
       "id": "msg-d4712eb5205a",
@@ -3136,7 +3300,8 @@
       "body_snippet": "? Fri, 25 Aug 2023 11:49:03 +0200\nChris Evans via R-help <r-help at r-project.org> ?????:\n\n> Hm.? I tried that butI really don't know what to make of what it's \n> telling me.? It seemed to me that I w",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477975.html"
     },
     {
       "id": "msg-5ed8fc73154a",
@@ -3157,7 +3322,8 @@
       "body_snippet": "Fascinating and, as ever, extremely helpful Ivan.? Duncan Murdoch nudged \nme in the right direction and for now\nthe solution for me is that if I don't have the lines:\n\ndescription: |\n ? CE's pages \"bl",
       "thread_id": "thread-c13981f444f9",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477976.html"
     },
     {
       "id": "msg-f314bdb18922",
@@ -3173,7 +3339,8 @@
       "body_snippet": "Sir,\nI want to solve the equation Q(u)=mean, where Q(u) represents the quantile\nfunction. Here my Q(u)=(c*u^lamda1)/((1-u)^lamda2), which is the quantile\nfunction of Davies (Power-pareto) distribution",
       "thread_id": "thread-f314bdb18922",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477977.html"
     },
     {
       "id": "msg-c123235cf99f",
@@ -3191,7 +3358,8 @@
       "body_snippet": "Homework?\n\nOn 2023-08-25 12:47, ASHLIN VARKEY wrote:\n> Sir,\n> I want to solve the equation Q(u)=mean, where Q(u) represents the quantile\n> function. Here my Q(u)=(c*u^lamda1)/((1-u)^lamda2), which is ",
       "thread_id": "thread-f314bdb18922",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477978.html"
     },
     {
       "id": "msg-e8c5ba711e2b",
@@ -3207,7 +3375,8 @@
       "body_snippet": "Folks\n\nI have come across an issue with gc() hogging the processor according to \nRprof.\n\nPlatform is Ubuntu 20.04 all up to date\nR version 4.3.1\nlibraries: survival, MASS, gtools and openxlsx.\n\nWith d",
       "thread_id": "thread-e8c5ba711e2b",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477979.html"
     },
     {
       "id": "msg-574c9bcb8909",
@@ -3225,7 +3394,8 @@
       "body_snippet": "On Sun, 27 Aug 2023 19:54:23 +0100\nJohn Logsdon <j.logsdon at quantex-research.com> wrote:\n\n> Not so although it did lower the gc() time to 95.84%.\n> \n> This was on a 16 core Threadripper 1950X box so",
       "thread_id": "thread-e8c5ba711e2b",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477980.html"
     },
     {
       "id": "msg-281dd5a3cd6d",
@@ -3243,7 +3413,8 @@
       "body_snippet": "On Fri, 25 Aug 2023 22:17:05 +0530\nASHLIN VARKEY <ashlinvarkey at gmail.com> wrote:\n\n> Sir,\n\nPlease note that r-help is a mailing list, not a knight! ??\n\n> I want to solve the equation Q(u)=mean, wher",
       "thread_id": "thread-f314bdb18922",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477981.html"
     },
     {
       "id": "msg-5fc621074014",
@@ -3262,7 +3433,8 @@
       "body_snippet": "This doesn't look like homework to me -- too specific.  The posting \nguide <https://www.r-project.org/posting-guide.html> says that the list \nis not intended for \"Basic statistics and classroom homewo",
       "thread_id": "thread-f314bdb18922",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477982.html"
     },
     {
       "id": "msg-60c6e966ccad",
@@ -3281,7 +3453,8 @@
       "body_snippet": "On 27-08-2023 21:02, Ivan Krylov wrote:\n> On Sun, 27 Aug 2023 19:54:23 +0100\n> John Logsdon <j.logsdon at quantex-research.com> wrote:\n> \n>> Not so although it did lower the gc() time to 95.84%.\n>> \n>",
       "thread_id": "thread-e8c5ba711e2b",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477983.html"
     },
     {
       "id": "msg-9f3e9b026484",
@@ -3297,7 +3470,8 @@
       "body_snippet": "Dear R-Users,\n\nJust out of curiosity:\nWhich of the 2 methods is the better one?\n\nThe results seem to differ slightly.\n\n\nfun = function(u){((26104.50*u^0.03399381)/((1-u)^0.1074444)) - 28353.7}\n\nuniroo",
       "thread_id": "thread-9f3e9b026484",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477984.html"
     },
     {
       "id": "msg-d81a67317c49",
@@ -3315,7 +3489,8 @@
       "body_snippet": "I would probably use the built in qdavies() function...\n\nOn Mon, Aug 28, 2023, 7:48 AM Leonard Mada via R-help <r-help at r-project.org>\nwrote:\n\n> Dear R-Users,\n>\n> Just out of curiosity:\n> Which of t",
       "thread_id": "thread-9f3e9b026484",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477985.html"
     },
     {
       "id": "msg-8248fc9ae16d",
@@ -3334,7 +3509,8 @@
       "body_snippet": "(I mean pdavies)\n\nOn Mon, Aug 28, 2023, 7:52 AM Ben Bolker <bbolker at gmail.com> wrote:\n\n> I would probably use the built in qdavies() function...\n>\n> On Mon, Aug 28, 2023, 7:48 AM Leonard Mada via R",
       "thread_id": "thread-9f3e9b026484",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477986.html"
     },
     {
       "id": "msg-7965558aef23",
@@ -3350,7 +3526,8 @@
       "body_snippet": "Dear members,\n                         I am using the following code:\n\nlag.plot(ygrpch(OHLCData[[i]]),lags=4)\n\nBut instead of dots, it is showing lines, which I don't know how to interpret. How to mak",
       "thread_id": "thread-7965558aef23",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477987.html"
     },
     {
       "id": "msg-0f3e178f5a59",
@@ -3368,7 +3545,8 @@
       "body_snippet": "Hi Akshay,\nI have never used this function before but according to ?lag.plot you\nsimply need to pass the argument do.lines=FALSE.\n\nHTH,\nEric\n\n\nOn Mon, Aug 28, 2023 at 5:45?PM akshay kulkarni <akshay_e",
       "thread_id": "thread-7965558aef23",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477988.html"
     },
     {
       "id": "msg-39dea358cdd9",
@@ -3384,7 +3562,8 @@
       "body_snippet": "Good Morning,\n\n\nI am doing some research to develop a new course where I teach. I am \nlooking for a book to use in the course content to teach accomplishing \nSQL in R.\n\nDoes anyone know of a book on t",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477989.html"
     },
     {
       "id": "msg-5c9e05cde96a",
@@ -3403,7 +3582,8 @@
       "body_snippet": "dear Eric,\n                Working...! thanks a lot!\n\nTHanking you,\nYours sincerely,\nAKSHAY M KULKARNI\n________________________________\nFrom: Eric Berger <ericjberger at gmail.com>\nSent: Monday, Augus",
       "thread_id": "thread-7965558aef23",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477990.html"
     },
     {
       "id": "msg-7c218821b81b",
@@ -3421,7 +3601,8 @@
       "body_snippet": "I presume you are familiar with the RSQL and RSQLite packages and their\nvignettes.\n\nCan't offer any help, but a point of clarification:\nWhen you say, \"teach accomplishing SQL in R,\" do you explicitly ",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477991.html"
     },
     {
       "id": "msg-7353676496a4",
@@ -3439,7 +3620,8 @@
       "body_snippet": "You might find this chapter of R for Data Science helpful:\nhttps://r4ds.hadley.nz/databases\n\nHadley\n\nOn Tue, Aug 29, 2023 at 3:47?AM Stephen H. Dawson, DSL via R-help\n<r-help at r-project.org> wrote:\n",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477992.html"
     },
     {
       "id": "msg-e457aea56396",
@@ -3455,7 +3637,8 @@
       "body_snippet": "dear members,\n                         I am considering whether to set biasadj = TRUE in auto.arima in forecast package. If TRUE, the mean is very nearly equal to the original data. So there is no poi",
       "thread_id": "thread-e457aea56396",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477998.html"
     },
     {
       "id": "msg-1c40eaf4c905",
@@ -3474,7 +3657,8 @@
       "body_snippet": "On 8/28/23 12:47 PM, Bert Gunter wrote:\n> I presume you are familiar with the RSQL and RSQLite packages and their\n> vignettes.\n> \n> Can't offer any help, but a point of clarification:\n> When you say, ",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477993.html"
     },
     {
       "id": "msg-4f58979b0bbe",
@@ -3493,7 +3677,8 @@
       "body_snippet": "library(sos)\n(sql <- findFn('SQL'))\n\n\n# This opened two tabs in the default browser on my computer just now. \nThe second tab lists 298 different packages with help pages containing \n\"SQL\", sorted to p",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477994.html"
     },
     {
       "id": "msg-4a2ee36bc9e0",
@@ -3513,7 +3698,8 @@
       "body_snippet": "Thanks, Spencer. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/2",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477995.html"
     },
     {
       "id": "msg-b31da00212de",
@@ -3532,7 +3718,8 @@
       "body_snippet": "Thanks, Hadley. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/28",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477996.html"
     },
     {
       "id": "msg-660e5d1b4597",
@@ -3551,7 +3738,8 @@
       "body_snippet": "Thanks, Bert. I appreciate your helpful assistance.\n\nThis is an academic course. The effort now is to nail down the former. I \nam pushing against a local db for the students. I prefer they focus on \nt",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477997.html"
     },
     {
       "id": "msg-c7eba05bf713",
@@ -3571,7 +3759,8 @@
       "body_snippet": "The SQLite is a good database to use.\n\nhttps://cran.r-project.org/web/packages/RSQLite/vignettes/RSQLite.html\n\nOn Mon, Aug 28, 2023, 22:12 Stephen H. Dawson, DSL via R-help <\nr-help at r-project.org> ",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/477999.html"
     },
     {
       "id": "msg-caafe1f6ec7a",
@@ -3592,7 +3781,8 @@
       "body_snippet": "These days I'd recommend duckdb\n(https://cran.r-project.org/web/packages/duckdb/index.html) instead.\nIt's a similar design to RSQLite (i.e. you don't need a separate\nserver) but it's designed for the ",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478000.html"
     },
     {
       "id": "msg-511957018402",
@@ -3610,7 +3800,8 @@
       "body_snippet": "I'm a big fan of the sqldf package by Gabor Grothendieck:\n\n\"sqldf: Manipulate R Data Frames Using SQL\"\nhttps://CRAN.R-project.org/package=sqldf\n\nThe sqldf \"README.html\" converts to a 42 page PDF:\nhttp",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478001.html"
     },
     {
       "id": "msg-1533ec572f77",
@@ -3626,7 +3817,8 @@
       "body_snippet": "Dear all,\n\nI am having issues with R that are giving me headaches since a few weeks. Basically, I cannot:\n(i) install packages from source\n(ii) run packages relying on C++\nI really do not understand h",
       "thread_id": "thread-1533ec572f77",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478004.html"
     },
     {
       "id": "msg-3e81686caf0e",
@@ -3642,7 +3834,8 @@
       "body_snippet": "Hello, all:\n\n\n\t  I have a dataset with 2 groups.  I want to estimate 2 means and 2 \nstandard deviations.  I naively think I should be able to use lme to do \nthat, e.g., lme(y~gp, random=y~1|gp, method",
       "thread_id": "thread-3e81686caf0e",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478002.html"
     },
     {
       "id": "msg-a89d76d5c6a5",
@@ -3660,7 +3853,8 @@
       "body_snippet": "I found my problem:\n\n\nThe following function gave llGp1, llGp2 and ll22:\n\n\nlogLik_lm <- function(object){\n   res <- resid(object)\n   n <- length(res)\n   s2MLE <- sum(res^2)/n\n   lglk <- (-n/2)*(log(2*",
       "thread_id": "thread-3e81686caf0e",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478003.html"
     },
     {
       "id": "msg-161665da6c8b",
@@ -3678,7 +3872,8 @@
       "body_snippet": "On Tue, 29 Aug 2023 14:41:40 +0000\nChristophe Bousquet via R-help <r-help at r-project.org> wrote:\n\n> (ii) the same issues keep coming back on my work laptop\n\nIt may be worth asking the IT department ",
       "thread_id": "thread-1533ec572f77",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478005.html"
     },
     {
       "id": "msg-f00e71f2d233",
@@ -3697,7 +3892,8 @@
       "body_snippet": "Thanks, Bill. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/29/2",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478006.html"
     },
     {
       "id": "msg-3948f35cb5cd",
@@ -3718,7 +3914,8 @@
       "body_snippet": "Thanks, Martin. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/28",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478007.html"
     },
     {
       "id": "msg-a461ae2fa6a5",
@@ -3740,7 +3937,8 @@
       "body_snippet": "Thanks, Hadley. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/28",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 5,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478008.html"
     },
     {
       "id": "msg-6630af74bc89",
@@ -3760,7 +3958,8 @@
       "body_snippet": "? Wed, 30 Aug 2023 14:35:48 +0000\nChristophe Bousquet <chr_bousquet at protonmail.com> ?????:\n\n> I followed your instructions and, yes, Rtools43 bash told me at the\n> end \"Hello world!\".\n> \n> Do you t",
       "thread_id": "thread-6630af74bc89",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478009.html"
     },
     {
       "id": "msg-4519c60391ae",
@@ -3782,7 +3981,8 @@
       "body_snippet": "On Wed, 30 Aug 2023 16:31:20 +0000\nChristophe Bousquet <chr_bousquet at protonmail.com> wrote:\n\n>  So, yes, it seems possible for R to localize paths related to\n> Rtools... But then, I really do not g",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478010.html"
     },
     {
       "id": "msg-b4f9e5c054f6",
@@ -3805,7 +4005,8 @@
       "body_snippet": "On 30/08/2023 2:59 p.m., Ivan Krylov wrote:\n> On Wed, 30 Aug 2023 16:31:20 +0000\n> Christophe Bousquet <chr_bousquet at protonmail.com> wrote:\n> \n>>   So, yes, it seems possible for R to localize path",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478011.html"
     },
     {
       "id": "msg-a3f54d058206",
@@ -3823,7 +4024,8 @@
       "body_snippet": "Stephen,  I see lots of answers with packages and resources, but not\nbook recommendations.  I have used Introduction to Data Technologies\nby Paul Murrell (https://www.stat.auckland.ac.nz/~paul/ItDT/) ",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478012.html"
     },
     {
       "id": "msg-ddce0bfee505",
@@ -3847,7 +4049,8 @@
       "body_snippet": "TL:DR there are at least three maybe four ways to address this depending on what you plan to do.\n\nI usually adjust PATH to add Rtools using .Rprofile. But if you do that then if you want to use the co",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478013.html"
     },
     {
       "id": "msg-deaeca0c4599",
@@ -3863,7 +4066,8 @@
       "body_snippet": "I want to apply interpolation functions from one data.table to each row\nof another data.table.\n\ninterp.dt <- data.table(scen = rep(c(\"a\", \"b\"), c(3, 3)), term = c(1,\n20, 60, 1, 32, 72), shock = c(10, ",
       "thread_id": "thread-deaeca0c4599",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478014.html"
     },
     {
       "id": "msg-dcf9289b5e96",
@@ -3881,7 +4085,8 @@
       "body_snippet": "R Help\n\n \n\nTrying to figure out how to create a simple program that will as the user\nfrom a value input and simply add 5 units to that value then ask the user\nfor another value  and add 45 units to it",
       "thread_id": "thread-dcf9289b5e96",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478015.html"
     },
     {
       "id": "msg-765625025ac6",
@@ -3900,7 +4105,8 @@
       "body_snippet": "HI Jeff,\nThis might give you a start.\n\nadd_stuff<-function(x) {\n x<-xinc<-NA\n finished<-FALSE\n while(is.na(x))\n  x<-as.numeric(readline(\"What number do you want to start? \"))\n while(is.na(xinc) || !fi",
       "thread_id": "thread-dcf9289b5e96",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478016.html"
     },
     {
       "id": "msg-77f12d8a0ae2",
@@ -3916,7 +4122,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  I want to simulate future observations from fits to heteroscedastic \ndata. A simple example is as follows:\n\n\n(DF3_2 <- data.frame(y=c(1:3, 10*(1:3)),\n                      gp=factor(r",
       "thread_id": "thread-77f12d8a0ae2",
       "thread_depth": 0,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478017.html"
     },
     {
       "id": "msg-d17a460bc927",
@@ -3935,7 +4142,8 @@
       "body_snippet": "Thanks, Greg. I appreciate your helpful assistance.\n\n\nKindest Regards,\n*Stephen Dawson, DSL*\n/Executive Strategy Consultant/\nBusiness & Technology\n+1 (865) 804-3454\nhttp://www.shdawson.com\n\n\nOn 8/30/2",
       "thread_id": "thread-39dea358cdd9",
       "thread_depth": 2,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478018.html"
     },
     {
       "id": "msg-5787c250a2fe",
@@ -3954,7 +4162,8 @@
       "body_snippet": "Add a break. Something like:\nIf (is.character(x)) break\n\nIf you have nested loops then a similar statement is needed for each level. \"break\" only exits the innermost loop.\n\nTim\n\n-----Original Message-",
       "thread_id": "thread-dcf9289b5e96",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478019.html"
     },
     {
       "id": "msg-25e29faaef1e",
@@ -3979,7 +4188,8 @@
       "body_snippet": "> When installing packages containing code to compile, R eventually calls > R CMD SHLIB. Same thing happens with inline C++: it gets stored in a\n> temporary file, compiled into a *.dll using R CMD SHL",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 3,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478020.html"
     },
     {
       "id": "msg-ca6a0d54567f",
@@ -4005,7 +4215,8 @@
       "body_snippet": "? Thu, 31 Aug 2023 11:57:06 +0000\nChristophe Bousquet <chr_bousquet at protonmail.com> ?????:\n\n> > tools::Rcmd('SHLIB -n hello.c')\n> > tools::Rcmd('SHLIB hello.c')\n> >\n> > What do the commands print? ",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 4,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478021.html"
     },
     {
       "id": "msg-cb4f39854502",
@@ -4023,7 +4234,8 @@
       "body_snippet": "On 8/31/23 1:27 AM, Spencer Graves wrote:\n> Hello, All:\n> \n> \n>  ????? I want to simulate future observations from fits to \n> heteroscedastic data. A simple example is as follows:\n> \n> \n> (DF3_2 <- da",
       "thread_id": "thread-77f12d8a0ae2",
       "thread_depth": 1,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478022.html"
     },
     {
       "id": "msg-2dc99e449355",
@@ -4050,7 +4262,8 @@
       "body_snippet": "> So starting a new Rcmd.exe process fails for some reason.\n> \n> If you take the same R session where the environment variables are\n> right and Sys.which() resolves Make and GCC and try to run\n> tools",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 5,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478023.html"
     },
     {
       "id": "msg-54754a65161b",
@@ -4078,7 +4291,8 @@
       "body_snippet": "? Thu, 31 Aug 2023 14:01:54 +0000\nChristophe Bousquet <chr_bousquet at protonmail.com> ?????:\n\n> So when I run the commands, I get this output. I honestly have no\n> clue whether this can be considered",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 6,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478024.html"
     },
     {
       "id": "msg-62803c823cfd",
@@ -4104,7 +4318,8 @@
       "body_snippet": "> This can be considered good news. You have just successfully performed\n> the job that is normally done by R CMD SHLIB when installing source\n> packages or running inline C++ code. The environment va",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 7,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478025.html"
     },
     {
       "id": "msg-702a98d10940",
@@ -4131,7 +4346,8 @@
       "body_snippet": "? Thu, 31 Aug 2023 14:59:07 +0000\nChristophe Bousquet <chr_bousquet at protonmail.com> ?????:\n\n> So I get no output for tools::Rcmd('SHLIB --version').\n> \n> I tried to run tools::Rcmd('SHLIB --help') ",
       "thread_id": "thread-4519c60391ae",
       "thread_depth": 8,
-      "month": "2023-08"
+      "month": "2023-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2023-August/478026.html"
     }
   ],
   "threads": [

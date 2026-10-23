@@ -17,7 +17,8 @@
       "body_snippet": "Hello all,\n\nI'm creating a list of Canadian user groups, and am wondering if anyone \nknows of any in Canada dedicated to R?\n\nThanks,\nKatie",
       "thread_id": "thread-64f67411a351",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481800.html"
     },
     {
       "id": "msg-8f91eaf8aef4",
@@ -33,7 +34,8 @@
       "body_snippet": "Dear R-list users,\n\nI've got problems to use the function aggregate.\n\n\nHere there is an example:\n\n\nmydf <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct",
       "thread_id": "thread-8f91eaf8aef4",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481795.html"
     },
     {
       "id": "msg-e7e6802204d8",
@@ -47,11 +49,12 @@
       "references": [
         "<469c3b88d7af4ddeb3f09242b451329f@regione.marche.it>"
       ],
-      "body_plain": "I asked ChatGPT (5.5 Medium). Here is its analysis\n\nThe problem is not Feb. 29 itself. The problem is that aggregate()\nchanges its return structure depending on whether all groups have the\nsame length.\nIn your first version, years have different numbers of days: most have\n365, leap years have 366. So aggregate(...)\nreturns a grouped result where each year?s cumsum() is kept as a list element.\nThen this works by accident:\nunlist(...[2], use.names = FALSE)\nbecause it flattens the list year by year.\nBut after you remove Feb. 29, every year has exactly 365 rows. Now\naggregate() sees that every cumsum() result has the same length, so it\n?simplifies? the result into a matrix-like structure. When you then\nunlist() it, the values are no longer flattened in the chronological\norder you expect.\nThe clean fix is: do not use aggregate() for this. Use ave().\n\nmydf1 <- data.frame(\n  Data = seq(\n    as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n    as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n    by = \"1 day\"\n  ),\n  daily_mean = round(runif(7670, 0, 2), digits = 2)\n)\n\nmydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n\nmydf1$yearly_sum <- ave(\n  mydf1$daily_mean,\n  as.integer(format(mydf1$Data, \"%Y\")),\n  FUN = cumsum\n)\n\nYou can also force your original aggregate() approach to behave more\nconsistently by adding simplify = FALSE:\n\ntmp <- aggregate(\n  daily_mean ~ as.integer(format(mydf1$Data, \"%Y\")),\n  data = mydf1,\n  FUN = cumsum,\n  simplify = FALSE\n)\n\nmydf1$yearly_sum <- unlist(tmp$daily_mean, use.names = FALSE)\n\n\n\n\n\n\n\nOn Mon, Aug 10, 2026 at 1:07?PM Stefano Sofia via R-help\n<r-help at r-project.org> wrote:\n>\n> Dear R-list users,\n>\n> I've got problems to use the function aggregate.\n>\n>\n> Here there is an example:\n>\n>\n> mydf <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n>\n> mydf$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf$Data, \"%Y\")), data=mydf, cumsum)[2], use.names = FALSE)\n>\n>\n> The column \"yearly_sum\" is the sum of the column \"daily_mean\" with a reset at the beginning of each year.\n>\n> If for my analysis I want to remove the 29th of February, \"yearly_sum\" does not work anymore:\n>\n>\n> mydf1 <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n>\n> mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n>\n> mydf1$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf1$Data, \"%Y\")), data=mydf1, cumsum)[2], use.names = FALSE)\n>\n>\n> In this case the column \"yearly_sum\" does not sum the values, and honestly I do not understand what is happening. Why?\n>\n> Could somebody help me? I already spent a big amount of hours with no success.\n>\n>\n> Thank you for your attention and you help\n>\n> Stefano\n>\n>\n>\n>\n>          (oo)\n> --oOO--( )--OOo--------------------------------------\n> Stefano Sofia MSc, PhD\n> Civil Protection Department - Marche Region - Italy\n> Meteo Section\n> Snow Section\n> Via Colle Ameno 5\n> 60126 Torrette di Ancona, Ancona (AN)\n> Uff: +39 071 806 7743\n> E-mail: stefano.sofia at regione.marche.it\n> ---Oo---------oO----------------------------------------\n>\n> ________________________________\n>\n> AVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\n> IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "I asked ChatGPT (5.5 Medium). Here is its analysis\n\nThe problem is not Feb. 29 itself. The problem is that aggregate()\nchanges its return structure depending on whether all groups have the\nsame length.\nIn your first version, years have different numbers of days: most have\n365, leap years have 366. So aggregate(...)\nreturns a grouped result where each year’s cumsum() is kept as a list element.\nThen this works by accident:\nunlist(...[2], use.names = FALSE)\nbecause it flattens the list year by year.\nBut after you remove Feb. 29, every year has exactly 365 rows. Now\naggregate() sees that every cumsum() result has the same length, so it\n“simplifies” the result into a matrix-like structure. When you then\nunlist() it, the values are no longer flattened in the chronological\norder you expect.\nThe clean fix is: do not use aggregate() for this. Use ave().\n\nmydf1 <- data.frame(\n  Data = seq(\n    as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n    as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n    by = \"1 day\"\n  ),\n  daily_mean = round(runif(7670, 0, 2), digits = 2)\n)\n\nmydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n\nmydf1$yearly_sum <- ave(\n  mydf1$daily_mean,\n  as.integer(format(mydf1$Data, \"%Y\")),\n  FUN = cumsum\n)\n\nYou can also force your original aggregate() approach to behave more\nconsistently by adding simplify = FALSE:\n\ntmp <- aggregate(\n  daily_mean ~ as.integer(format(mydf1$Data, \"%Y\")),\n  data = mydf1,\n  FUN = cumsum,\n  simplify = FALSE\n)\n\nmydf1$yearly_sum <- unlist(tmp$daily_mean, use.names = FALSE)\n\n\n\n\n\n\n\nOn Mon, Aug 10, 2026 at 1:07 PM Stefano Sofia via R-help\n<r-help at r-project.org> wrote:\n>\n> Dear R-list users,\n>\n> I've got problems to use the function aggregate.\n>\n>\n> Here there is an example:\n>\n>\n> mydf <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n>\n> mydf$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf$Data, \"%Y\")), data=mydf, cumsum)[2], use.names = FALSE)\n>\n>\n> The column \"yearly_sum\" is the sum of the column \"daily_mean\" with a reset at the beginning of each year.\n>\n> If for my analysis I want to remove the 29th of February, \"yearly_sum\" does not work anymore:\n>\n>\n> mydf1 <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n>\n> mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n>\n> mydf1$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf1$Data, \"%Y\")), data=mydf1, cumsum)[2], use.names = FALSE)\n>\n>\n> In this case the column \"yearly_sum\" does not sum the values, and honestly I do not understand what is happening. Why?\n>\n> Could somebody help me? I already spent a big amount of hours with no success.\n>\n>\n> Thank you for your attention and you help\n>\n> Stefano\n>\n>\n>\n>\n>          (oo)\n> --oOO--( )--OOo--------------------------------------\n> Stefano Sofia MSc, PhD\n> Civil Protection Department - Marche Region - Italy\n> Meteo Section\n> Snow Section\n> Via Colle Ameno 5\n> 60126 Torrette di Ancona, Ancona (AN)\n> Uff: +39 071 806 7743\n> E-mail: stefano.sofia at regione.marche.it\n> ---Oo---------oO----------------------------------------\n>\n> ________________________________\n>\n> AVVISO IMPORTANTE: Questo messaggio di posta elettronica può contenere informazioni confidenziali, pertanto è destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si è il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si è ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessità ed urgenza, la risposta al presente messaggio di posta elettronica può essere visionata da persone estranee al destinatario.\n> IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "I asked ChatGPT (5.5 Medium). Here is its analysis\n\nThe problem is not Feb. 29 itself. The problem is that aggregate()\nchanges its return structure depending on whether all groups have the\nsame length",
       "thread_id": "thread-8f91eaf8aef4",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481796.html"
     },
     {
       "id": "msg-6da1d41a7ce7",
@@ -69,7 +72,8 @@
       "body_snippet": "Hello,\n\nThe problem is that the first aggregate's second column is a list and\nthe second aggregate's second column is a matrix.\nIn the code below I have complicated it a bit so that the intermediate\nr",
       "thread_id": "thread-8f91eaf8aef4",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481797.html"
     },
     {
       "id": "msg-5a0d5832fc82",
@@ -88,7 +92,8 @@
       "body_snippet": "Hello,\n\nI forgot to add that I don't find your\n\n\nunlist(agg[2], use.names = FALSE)\n\n\nthe best way, `[` extracts a sub-data.frame, use `[[` instead.\n\n\nunlist(agg[[2]], use.names = FALSE)\n\n\nIt may not m",
       "thread_id": "thread-8f91eaf8aef4",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481798.html"
     },
     {
       "id": "msg-52d4ce4bdb2c",
@@ -103,11 +108,12 @@
         "<469c3b88d7af4ddeb3f09242b451329f@regione.marche.it>",
         "<CAGgJW75ML=uED=RQ4Kv+6G9ev7ckJFNhMLcgPm9XXv1NDuVm_Q@mail.gmail.com>"
       ],
-      "body_plain": "The ave solution could be written as:\n\ntransform(mydf1, yearly_sum = ave(daily_mean, cut(Data, \"year\"), FUN = cumsum))\n\nOn Mon, Aug 10, 2026 at 6:43?AM Eric Berger <ericjberger at gmail.com> wrote:\n>\n> I asked ChatGPT (5.5 Medium). Here is its analysis\n>\n> The problem is not Feb. 29 itself. The problem is that aggregate()\n> changes its return structure depending on whether all groups have the\n> same length.\n> In your first version, years have different numbers of days: most have\n> 365, leap years have 366. So aggregate(...)\n> returns a grouped result where each year?s cumsum() is kept as a list element.\n> Then this works by accident:\n> unlist(...[2], use.names = FALSE)\n> because it flattens the list year by year.\n> But after you remove Feb. 29, every year has exactly 365 rows. Now\n> aggregate() sees that every cumsum() result has the same length, so it\n> ?simplifies? the result into a matrix-like structure. When you then\n> unlist() it, the values are no longer flattened in the chronological\n> order you expect.\n> The clean fix is: do not use aggregate() for this. Use ave().\n>\n> mydf1 <- data.frame(\n>   Data = seq(\n>     as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n>     as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n>     by = \"1 day\"\n>   ),\n>   daily_mean = round(runif(7670, 0, 2), digits = 2)\n> )\n>\n> mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n>\n> mydf1$yearly_sum <- ave(\n>   mydf1$daily_mean,\n>   as.integer(format(mydf1$Data, \"%Y\")),\n>   FUN = cumsum\n> )\n>\n> You can also force your original aggregate() approach to behave more\n> consistently by adding simplify = FALSE:\n>\n> tmp <- aggregate(\n>   daily_mean ~ as.integer(format(mydf1$Data, \"%Y\")),\n>   data = mydf1,\n>   FUN = cumsum,\n>   simplify = FALSE\n> )\n>\n> mydf1$yearly_sum <- unlist(tmp$daily_mean, use.names = FALSE)\n>\n>\n>\n>\n>\n>\n>\n> On Mon, Aug 10, 2026 at 1:07?PM Stefano Sofia via R-help\n> <r-help at r-project.org> wrote:\n> >\n> > Dear R-list users,\n> >\n> > I've got problems to use the function aggregate.\n> >\n> >\n> > Here there is an example:\n> >\n> >\n> > mydf <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n> >\n> > mydf$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf$Data, \"%Y\")), data=mydf, cumsum)[2], use.names = FALSE)\n> >\n> >\n> > The column \"yearly_sum\" is the sum of the column \"daily_mean\" with a reset at the beginning of each year.\n> >\n> > If for my analysis I want to remove the 29th of February, \"yearly_sum\" does not work anymore:\n> >\n> >\n> > mydf1 <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n> >\n> > mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n> >\n> > mydf1$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf1$Data, \"%Y\")), data=mydf1, cumsum)[2], use.names = FALSE)\n> >\n> >\n> > In this case the column \"yearly_sum\" does not sum the values, and honestly I do not understand what is happening. Why?\n> >\n> > Could somebody help me? I already spent a big amount of hours with no success.\n> >\n> >\n> > Thank you for your attention and you help\n> >\n> > Stefano\n> >\n> >\n> >\n> >\n> >          (oo)\n> > --oOO--( )--OOo--------------------------------------\n> > Stefano Sofia MSc, PhD\n> > Civil Protection Department - Marche Region - Italy\n> > Meteo Section\n> > Snow Section\n> > Via Colle Ameno 5\n> > 60126 Torrette di Ancona, Ancona (AN)\n> > Uff: +39 071 806 7743\n> > E-mail: stefano.sofia at regione.marche.it\n> > ---Oo---------oO----------------------------------------\n> >\n> > ________________________________\n> >\n> > AVVISO IMPORTANTE: Questo messaggio di posta elettronica pu? contenere informazioni confidenziali, pertanto ? destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si ? il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si ? ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessit? ed urgenza, la risposta al presente messaggio di posta elettronica pu? essere visionata da persone estranee al destinatario.\n> > IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
-      "body_snippet": "The ave solution could be written as:\n\ntransform(mydf1, yearly_sum = ave(daily_mean, cut(Data, \"year\"), FUN = cumsum))\n\nOn Mon, Aug 10, 2026 at 6:43?AM Eric Berger <ericjberger at gmail.com> wrote:\n>\n",
+      "body_plain": "The ave solution could be written as:\n\ntransform(mydf1, yearly_sum = ave(daily_mean, cut(Data, \"year\"), FUN = cumsum))\n\nOn Mon, Aug 10, 2026 at 6:43 AM Eric Berger <ericjberger at gmail.com> wrote:\n>\n> I asked ChatGPT (5.5 Medium). Here is its analysis\n>\n> The problem is not Feb. 29 itself. The problem is that aggregate()\n> changes its return structure depending on whether all groups have the\n> same length.\n> In your first version, years have different numbers of days: most have\n> 365, leap years have 366. So aggregate(...)\n> returns a grouped result where each year’s cumsum() is kept as a list element.\n> Then this works by accident:\n> unlist(...[2], use.names = FALSE)\n> because it flattens the list year by year.\n> But after you remove Feb. 29, every year has exactly 365 rows. Now\n> aggregate() sees that every cumsum() result has the same length, so it\n> “simplifies” the result into a matrix-like structure. When you then\n> unlist() it, the values are no longer flattened in the chronological\n> order you expect.\n> The clean fix is: do not use aggregate() for this. Use ave().\n>\n> mydf1 <- data.frame(\n>   Data = seq(\n>     as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n>     as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz = \"Etc/GMT-1\"),\n>     by = \"1 day\"\n>   ),\n>   daily_mean = round(runif(7670, 0, 2), digits = 2)\n> )\n>\n> mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n>\n> mydf1$yearly_sum <- ave(\n>   mydf1$daily_mean,\n>   as.integer(format(mydf1$Data, \"%Y\")),\n>   FUN = cumsum\n> )\n>\n> You can also force your original aggregate() approach to behave more\n> consistently by adding simplify = FALSE:\n>\n> tmp <- aggregate(\n>   daily_mean ~ as.integer(format(mydf1$Data, \"%Y\")),\n>   data = mydf1,\n>   FUN = cumsum,\n>   simplify = FALSE\n> )\n>\n> mydf1$yearly_sum <- unlist(tmp$daily_mean, use.names = FALSE)\n>\n>\n>\n>\n>\n>\n>\n> On Mon, Aug 10, 2026 at 1:07 PM Stefano Sofia via R-help\n> <r-help at r-project.org> wrote:\n> >\n> > Dear R-list users,\n> >\n> > I've got problems to use the function aggregate.\n> >\n> >\n> > Here there is an example:\n> >\n> >\n> > mydf <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n> >\n> > mydf$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf$Data, \"%Y\")), data=mydf, cumsum)[2], use.names = FALSE)\n> >\n> >\n> > The column \"yearly_sum\" is the sum of the column \"daily_mean\" with a reset at the beginning of each year.\n> >\n> > If for my analysis I want to remove the 29th of February, \"yearly_sum\" does not work anymore:\n> >\n> >\n> > mydf1 <- data.frame(Data=seq(as.POSIXct(\"2003-01-01\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), as.POSIXct(\"2023-12-31\", format = \"%Y-%m-%d\", tz=\"Etc/GMT-1\"), by=\"1 day\"), daily_mean = round(runif(7670, 0, 2), digits=2))\n> >\n> > mydf1 <- mydf1[format(mydf1$Data, \"%m-%d\") != \"02-29\", ]\n> >\n> > mydf1$yearly_sum <- unlist(aggregate(daily_mean~as.integer(format(mydf1$Data, \"%Y\")), data=mydf1, cumsum)[2], use.names = FALSE)\n> >\n> >\n> > In this case the column \"yearly_sum\" does not sum the values, and honestly I do not understand what is happening. Why?\n> >\n> > Could somebody help me? I already spent a big amount of hours with no success.\n> >\n> >\n> > Thank you for your attention and you help\n> >\n> > Stefano\n> >\n> >\n> >\n> >\n> >          (oo)\n> > --oOO--( )--OOo--------------------------------------\n> > Stefano Sofia MSc, PhD\n> > Civil Protection Department - Marche Region - Italy\n> > Meteo Section\n> > Snow Section\n> > Via Colle Ameno 5\n> > 60126 Torrette di Ancona, Ancona (AN)\n> > Uff: +39 071 806 7743\n> > E-mail: stefano.sofia at regione.marche.it\n> > ---Oo---------oO----------------------------------------\n> >\n> > ________________________________\n> >\n> > AVVISO IMPORTANTE: Questo messaggio di posta elettronica può contenere informazioni confidenziali, pertanto è destinato solo a persone autorizzate alla ricezione. I messaggi di posta elettronica per i client di Regione Marche possono contenere informazioni confidenziali e con privilegi legali. Se non si è il destinatario specificato, non leggere, copiare, inoltrare o archiviare questo messaggio. Se si è ricevuto questo messaggio per errore, inoltrarlo al mittente ed eliminarlo completamente dal sistema del proprio computer. Ai sensi dell'art. Ai sensi dell'art. 2.4 dell'allegato 1 alla DGR n. 74/2021, si segnala che, in caso di necessità ed urgenza, la risposta al presente messaggio di posta elettronica può essere visionata da persone estranee al destinatario.\n> > IMPORTANT NOTICE: This e-mail message is intended to be received only by persons entitled to receive the confidential information it may contain. E-mail messages to clients of Regione Marche may contain information that is confidential and legally privileged. Please do not read, copy, forward, or store this message unless you are an intended recipient of it. If you have received this message in error, please forward it to the sender and delete it completely from your computer system.\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n\n\n-- \nStatistics & Software Consulting\nGKX Group, GKX Associates Inc.\ntel: 1-877-GKX-GROUP\nemail: ggrothendieck at gmail.com",
+      "body_snippet": "The ave solution could be written as:\n\ntransform(mydf1, yearly_sum = ave(daily_mean, cut(Data, \"year\"), FUN = cumsum))\n\nOn Mon, Aug 10, 2026 at 6:43 AM Eric Berger <ericjberger at gmail.com> wrote:\n>\n",
       "thread_id": "thread-8f91eaf8aef4",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481799.html"
     },
     {
       "id": "msg-aee07a1e8973",
@@ -125,7 +131,8 @@
       "body_snippet": "On 2026-08-09 11:28 a.m., Katie wrote:\n> Hello all,\n> \n> I'm creating a list of Canadian user groups, and am wondering if anyone\n> knows of any in Canada dedicated to R?\nI don't know how many of them ",
       "thread_id": "thread-64f67411a351",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481801.html"
     },
     {
       "id": "msg-4f1cc0577abc",
@@ -144,7 +151,8 @@
       "body_snippet": "Sadly, OGRUG has been dormant for a long time. The two of us (Joseph Potvin and I) couldn't\nget anyone to step up and talk about what they were doing.\n\nWe'll be glad to hand over the reins (there was ",
       "thread_id": "thread-64f67411a351",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481802.html"
     },
     {
       "id": "msg-c322a4c4fc4d",
@@ -164,7 +172,8 @@
       "body_snippet": "Hi John,\n\nI wonder if only the SAS-users discuss what they're doing? You know, the \nSAS users that \"dominate\" every organization in Canada (or at least \nscream the loudest).\n\nBizarre!\n\n-Katie\n\nOn 2026",
       "thread_id": "thread-64f67411a351",
       "thread_depth": 3,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481803.html"
     },
     {
       "id": "msg-e6ea2b27ffde",
@@ -180,7 +189,8 @@
       "body_snippet": "Hi all,\n\nCan an exact Poisson regression be computed with R, instead of using the \nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduc",
       "thread_id": "thread-e6ea2b27ffde",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481804.html"
     },
     {
       "id": "msg-6149fc8c76b3",
@@ -194,11 +204,12 @@
       "references": [
         "<mailman.373800.1.1787306402.8526.r-help@r-project.org>"
       ],
-      "body_plain": "To my knowledge, there is no built?in function in R that exactly replicates Stata?s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (conditional MLE).  It can only be practical in small samples. We should be able to get similar estimates using Firth's bias correction, for example, although I myself have not tested this claim.   The brglm2 package implements Firth's bias reduction for GLMs.\nRavi\n________________________________\nFrom: R-help <r-help-bounces at r-project.org> on behalf of r-help-request at r-project.org <r-help-request at r-project.org>\nSent: Friday, August 21, 2026 06:00\nTo: r-help at r-project.org <r-help at r-project.org>\nSubject: R-help Digest, Vol 282, Issue 3\n\n\n      External Email - Use Caution\n\n\n\nSend R-help mailing list submissions to\n        r-help at r-project.org\n\nTo subscribe or unsubscribe via the World Wide Web, visit\n        https://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nor, via email, send a message with subject or body 'help' to\n        r-help-request at r-project.org\n\nYou can reach the person managing the list at\n        r-help-owner at r-project.org\n\nWhen replying, please edit your Subject line so it is more specific\nthan \"Re: Contents of R-help digest...\"\n\n\nToday's Topics:\n\n   1. How to compute an exact Poisson model with R? (iagogv)\n\n----------------------------------------------------------------------\n\nMessage: 1\nDate: Fri, 21 Aug 2026 10:21:14 +0200\nFrom: iagogv <iagogv at disroot.org>\nTo: R Help <r-help at r-project.org>\nSubject: [R] How to compute an exact Poisson model with R?\nMessage-ID: <15fca7e36128374222c8307bebf36c1e at disroot.org>\nContent-Type: text/plain; charset=\"utf-8\"\n\nHi all,\n\nCan an exact Poisson regression be computed with R, instead of using the\nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduce his\nmethod, if not his results. He uses Stata, particularly the expoisson\nfunction (https://www.stata.com/help.cgi?expoisson<https://www.stata.com/help.cgi?expoisson>) in order to compute\nthe exact Poisson regression, relevant for small samples.\n\nexpoisson fits an exact Poisson regression model, which produces more\naccurate inference in small samples than standard\nmaximum-likelihood-based Poisson regression\n\nI know about exact Poisson tests\n(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html<https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html>),\nbut it does not allow to include offset.\n\nSo, is there some way to reproduce exact Poisson regression with R?\n\nThanks!\n\nBest,\n\n--\nIago\n        [[alternative HTML version deleted]]\n\n\n\n\n------------------------------\n\nSubject: Digest Footer\n\n_______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nPLEASE do read the posting guide https://www.r-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>\nand provide commented, minimal, self-contained, reproducible code.\n\n\n------------------------------\n\nEnd of R-help Digest, Vol 282, Issue 3\n**************************************\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "To my knowledge, there is no built?in function in R that exactly replicates Stata?s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (co",
+      "body_plain": "To my knowledge, there is no built‑in function in R that exactly replicates Stata’s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (conditional MLE).  It can only be practical in small samples. We should be able to get similar estimates using Firth's bias correction, for example, although I myself have not tested this claim.   The brglm2 package implements Firth's bias reduction for GLMs.\nRavi\n________________________________\nFrom: R-help <r-help-bounces at r-project.org> on behalf of r-help-request at r-project.org <r-help-request at r-project.org>\nSent: Friday, August 21, 2026 06:00\nTo: r-help at r-project.org <r-help at r-project.org>\nSubject: R-help Digest, Vol 282, Issue 3\n\n\n      External Email - Use Caution\n\n\n\nSend R-help mailing list submissions to\n        r-help at r-project.org\n\nTo subscribe or unsubscribe via the World Wide Web, visit\n        https://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nor, via email, send a message with subject or body 'help' to\n        r-help-request at r-project.org\n\nYou can reach the person managing the list at\n        r-help-owner at r-project.org\n\nWhen replying, please edit your Subject line so it is more specific\nthan \"Re: Contents of R-help digest...\"\n\n\nToday's Topics:\n\n   1. How to compute an exact Poisson model with R? (iagogv)\n\n----------------------------------------------------------------------\n\nMessage: 1\nDate: Fri, 21 Aug 2026 10:21:14 +0200\nFrom: iagogv <iagogv at disroot.org>\nTo: R Help <r-help at r-project.org>\nSubject: [R] How to compute an exact Poisson model with R?\nMessage-ID: <15fca7e36128374222c8307bebf36c1e at disroot.org>\nContent-Type: text/plain; charset=\"utf-8\"\n\nHi all,\n\nCan an exact Poisson regression be computed with R, instead of using the\nstandard (glm) Poisson using maximum likelihood?\n\nI am working with a collegue in a project, and I'd like to reproduce his\nmethod, if not his results. He uses Stata, particularly the expoisson\nfunction (https://www.stata.com/help.cgi?expoisson<https://www.stata.com/help.cgi?expoisson>) in order to compute\nthe exact Poisson regression, relevant for small samples.\n\nexpoisson fits an exact Poisson regression model, which produces more\naccurate inference in small samples than standard\nmaximum-likelihood-based Poisson regression\n\nI know about exact Poisson tests\n(https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html<https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/poisson.test.html>),\nbut it does not allow to include offset.\n\nSo, is there some way to reproduce exact Poisson regression with R?\n\nThanks!\n\nBest,\n\n--\nIago\n        [[alternative HTML version deleted]]\n\n\n\n\n------------------------------\n\nSubject: Digest Footer\n\n_______________________________________________\nR-help at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-help<https://stat.ethz.ch/mailman/listinfo/r-help>\nPLEASE do read the posting guide https://www.r-project.org/posting-guide.html<https://www.r-project.org/posting-guide.html>\nand provide commented, minimal, self-contained, reproducible code.\n\n\n------------------------------\n\nEnd of R-help Digest, Vol 282, Issue 3\n**************************************\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "To my knowledge, there is no built‑in function in R that exactly replicates Stata’s expoisson. The main issue is that it can be computationally heavy since it conditions on the sum of total counts (co",
       "thread_id": "thread-6149fc8c76b3",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481805.html"
     },
     {
       "id": "msg-d706b73d3bc9",
@@ -216,7 +227,8 @@
       "body_snippet": "The offset is just the log of the exposure (I assume -- I have never\nused Stata)\nso if you can express your model in terms of exposure\nyou can also express it in terms of offset.\n\nOn Fri, Aug 21, 2026",
       "thread_id": "thread-e6ea2b27ffde",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481806.html"
     },
     {
       "id": "msg-935c4dd4112a",
@@ -232,7 +244,8 @@
       "body_snippet": "Hi all,\n\nwhen calling data.frame on other data frames and naming arguments, the\nway the 'names' of the result are formed seems to depend on whether\nthe argument data frames have one or more columns. S",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481807.html"
     },
     {
       "id": "msg-aed3b6aafc3a",
@@ -250,7 +263,8 @@
       "body_snippet": "Don't know about \"intended\", but if the man pages do not satisfy, this\nseems like the sort of infelicity that has already been reported and/or\nthat on which an internet query should yield info. As you",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481808.html"
     },
     {
       "id": "msg-03b887ffde65",
@@ -268,7 +282,8 @@
       "body_snippet": "Passing data frames as arguments to data.frame is not intended to work the way you seem to think it should. \n\nTry using cbind?\n\na <- data.frame( A = 1, C = 1 )\nb <- data.frame(B = 1, D = 1)\ncbind( a, ",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481809.html"
     },
     {
       "id": "msg-9f310ffc4121",
@@ -286,7 +301,8 @@
       "body_snippet": "On 2026-08-21 12:01 p.m., Peter Langfelder wrote:\n> Hi all,\n> \n> when calling data.frame on other data frames and naming arguments, the\n> way the 'names' of the result are formed seems to depend on wh",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481810.html"
     },
     {
       "id": "msg-b4c1cbae4f98",
@@ -304,7 +320,8 @@
       "body_snippet": "Hello,\n\nYes, this is documented. From ?data.frame, section Value\n\nHow the names of the data frame are created is complex, and the rest\nof this paragraph is only the basic story. [...]\nFor a named matr",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481811.html"
     },
     {
       "id": "msg-e8355699646d",
@@ -322,7 +339,8 @@
       "body_snippet": "That does seem odd although I gather from the other answers that it is intended.\nNote that we can avoid this by simply not naming the arguments in the\nfirst place.\n\n> data.frame(data.frame(A = 1), dat",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481812.html"
     },
     {
       "id": "msg-6a040d2346e9",
@@ -341,7 +359,8 @@
       "body_snippet": "Thanks all for pointing me to the help which I missed and it indeed\nexplains it. It would be useful for my work if the data.frame function\ncontained an additional argument allowing the user to force o",
       "thread_id": "thread-935c4dd4112a",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481813.html"
     },
     {
       "id": "msg-420a6da33656",
@@ -359,7 +378,8 @@
       "body_snippet": "The point estimates for regression should be the same although the CI's for the MCMC methods might be wider (more conservative if that is what you mean by \"more accurate\"). I \n\nI was able to install B",
       "thread_id": "thread-e6ea2b27ffde",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481814.html"
     },
     {
       "id": "msg-ec3a6cf53562",
@@ -377,7 +397,8 @@
       "body_snippet": "Sent from my iPhone\n\n> On Aug 22, 2026, at 4:38?PM, David Winsemius <dwinsemius at comcast.net> wrote:\n> \n> ?The point estimates for regression should be the same although the CI's for the MCMC method",
       "thread_id": "thread-e6ea2b27ffde",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481815.html"
     },
     {
       "id": "msg-82b6996eb8ff",
@@ -393,7 +414,8 @@
       "body_snippet": "jsslintr 1.1.0 is on CRAN.\n\njsslintr checks a Journal of Statistical Software (JSS) format\nmanuscript -- .tex, .Rnw, or .Rmd plus its .bib -- against 62\ndeterministic rules derived from the journal's ",
       "thread_id": "thread-82b6996eb8ff",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481816.html"
     },
     {
       "id": "msg-66f0d85a8abc",
@@ -409,7 +431,8 @@
       "body_snippet": "I followed these instructions to install R on my new Ubuntu desktop.\n\nhttps://cran.r-project.org/bin/linux/ubuntu/\n\n\nTo install additional packages, I am following these instructions:\n\nhttps://cran.r-",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481817.html"
     },
     {
       "id": "msg-f428bf7f85b0",
@@ -427,7 +450,8 @@
       "body_snippet": "Naresh,\n\nThe instructions given at https://cran.r-project.org/bin/linux/ubuntu/  for\ninstalling R on Ubuntu work well.\n\nHowever, for installing R packages I recommend the following approach.\n\n1. Downl",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481820.html"
     },
     {
       "id": "msg-1e4087eef29a",
@@ -442,11 +466,12 @@
         "<DM3PPF9A5B544E097A291FD821262A0DB22FAAB2@DM3PPF9A5B544E0.NAMP223.PROD.OUTLOOK.COM>",
         "<CAMVm2GbsYYAj-cBqibh9yKEjBXXHgmZpfVFA02EeKdrSe=xGYw@mail.gmail.com>"
       ],
-      "body_plain": "This worked.? Thanks\n\nOn 8/29/26 10:01, Robert Dorazio wrote:\n> Naresh,\n>\n> The instructions given at https://cran.r-project.org/bin/linux/ubuntu/ \n> for installing R on Ubuntu work well.\n>\n> However, for installing R packages?I recommend the following approach.\n>\n> 1. Download the shell script for your version of Ubuntu (e.g., \n> add_cranapt_resolute.sh for Ubuntu 26.04) from\n> the r2u website: https://github.com/eddelbuettel/r2u\n>\n> 2. Run the shell script from the terminal as follows:\n> sudo su\n> bash add_cranapt_resolute.sh\n> exit\n>\n> Then you have two options for installing R packages from the fast, \n> well-connected mirror r2u.stat.illinois.edu \n> <https://r2u.stat.illinois.edu/>\n>\n> As an example, you can install the R package \"sp\" using either of the \n> following options:\n>\n> 1. From the terminal:? sudo apt install r-cran-sp\n>\n> 2. From R:? install.packages(\"sp\")\n>\n> A big advantage of using r2u is that all dependencies of each package \n> are downloaded properly.\n>\n> Robert Dorazio\n>\n>\n>\n> On Sat, Aug 29, 2026 at 5:50?AM Naresh Gurbuxani \n> <naresh_gurbuxani at hotmail.com> wrote:\n>\n>     I followed these instructions to install R on my new Ubuntu desktop.\n>\n>     https://cran.r-project.org/bin/linux/ubuntu/\n>\n>\n>     To install additional packages, I am following these instructions:\n>\n>     https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html\n>\n>\n>     For Ubuntu 26.04 (Resolute Racoon), /etc/apt/sources.list is\n>     deprecated.? It seems I need to create a file in\n>     /etc/apt/sources.list.d/.? I started a file \"r-package.sources\"\n>     and need\n>     entries for the last two fields.? My file:\n>\n>     ## R package repository\n>     Types: deb\n>     URIs: https://cloud.r-project.org/bin/linux/ubuntu\n>     Suites: resolute-cran40\n>     Components:\n>     Signed-By:\n>\n>     It will also benefit other users if you can update the\n>     instructions in\n>     fullREADME.html\n>\n>\n>     Thanks,\n>\n>     Naresh\n>\n>     ______________________________________________\n>     R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>     https://stat.ethz.ch/mailman/listinfo/r-help\n>     PLEASE do read the posting guide\n>     https://www.R-project.org/posting-guide.html\n>     <https://www.R-project.org/posting-guide.html>\n>     and provide commented, minimal, self-contained, reproducible code.\n>\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "This worked.? Thanks\n\nOn 8/29/26 10:01, Robert Dorazio wrote:\n> Naresh,\n>\n> The instructions given at https://cran.r-project.org/bin/linux/ubuntu/ \n> for installing R on Ubuntu work well.\n>\n> However,",
+      "body_plain": "This worked.  Thanks\n\nOn 8/29/26 10:01, Robert Dorazio wrote:\n> Naresh,\n>\n> The instructions given at https://cran.r-project.org/bin/linux/ubuntu/ \n> for installing R on Ubuntu work well.\n>\n> However, for installing R packages I recommend the following approach.\n>\n> 1. Download the shell script for your version of Ubuntu (e.g., \n> add_cranapt_resolute.sh for Ubuntu 26.04) from\n> the r2u website: https://github.com/eddelbuettel/r2u\n>\n> 2. Run the shell script from the terminal as follows:\n> sudo su\n> bash add_cranapt_resolute.sh\n> exit\n>\n> Then you have two options for installing R packages from the fast, \n> well-connected mirror r2u.stat.illinois.edu \n> <https://r2u.stat.illinois.edu/>\n>\n> As an example, you can install the R package \"sp\" using either of the \n> following options:\n>\n> 1. From the terminal:  sudo apt install r-cran-sp\n>\n> 2. From R:  install.packages(\"sp\")\n>\n> A big advantage of using r2u is that all dependencies of each package \n> are downloaded properly.\n>\n> Robert Dorazio\n>\n>\n>\n> On Sat, Aug 29, 2026 at 5:50 AM Naresh Gurbuxani \n> <naresh_gurbuxani at hotmail.com> wrote:\n>\n>     I followed these instructions to install R on my new Ubuntu desktop.\n>\n>     https://cran.r-project.org/bin/linux/ubuntu/\n>\n>\n>     To install additional packages, I am following these instructions:\n>\n>     https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html\n>\n>\n>     For Ubuntu 26.04 (Resolute Racoon), /etc/apt/sources.list is\n>     deprecated.  It seems I need to create a file in\n>     /etc/apt/sources.list.d/.  I started a file \"r-package.sources\"\n>     and need\n>     entries for the last two fields.  My file:\n>\n>     ## R package repository\n>     Types: deb\n>     URIs: https://cloud.r-project.org/bin/linux/ubuntu\n>     Suites: resolute-cran40\n>     Components:\n>     Signed-By:\n>\n>     It will also benefit other users if you can update the\n>     instructions in\n>     fullREADME.html\n>\n>\n>     Thanks,\n>\n>     Naresh\n>\n>     ______________________________________________\n>     R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>     https://stat.ethz.ch/mailman/listinfo/r-help\n>     PLEASE do read the posting guide\n>     https://www.R-project.org/posting-guide.html\n>     <https://www.R-project.org/posting-guide.html>\n>     and provide commented, minimal, self-contained, reproducible code.\n>\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This worked.  Thanks\n\nOn 8/29/26 10:01, Robert Dorazio wrote:\n> Naresh,\n>\n> The instructions given at https://cran.r-project.org/bin/linux/ubuntu/ \n> for installing R on Ubuntu work well.\n>\n> However,",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481821.html"
     },
     {
       "id": "msg-1f9df253b8d1",
@@ -464,7 +489,8 @@
       "body_snippet": "Dear Naresh\n\nPerhaps you might get more answers on \nhttps://stat.ethz.ch/mailman/listinfo/r-sig-debian\n\nMichael\n\nOn 29/08/2026 13:50, Naresh Gurbuxani wrote:\n> I followed these instructions to install",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481818.html"
     },
     {
       "id": "msg-1d3bb7808c21",
@@ -482,7 +508,8 @@
       "body_snippet": "Hi Naresh,\n\nthe README you linked to points you to the r2u-project (https://github.com/eddelbuettel/r2u), which has setup scripts & instructions for how to setup binaries for CRAN packages and most re",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481819.html"
     },
     {
       "id": "msg-ff24c1aa3af6",
@@ -501,7 +528,8 @@
       "body_snippet": "Robert,\n\nThanks for piping in. Much appreciated. Michael and I will still see that the\nREADME gets updated.\n\nOn 29 August 2026 at 07:01, Robert Dorazio wrote:\n| Naresh,\n| \n| The instructions given at ",
       "thread_id": "thread-66f0d85a8abc",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-August/481822.html"
     }
   ],
   "threads": [

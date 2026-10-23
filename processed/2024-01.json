@@ -25,7 +25,8 @@
       "body_snippet": "If you do something like this\n\n\tfor i in  $(pandoc --list-output-formats);\n\t\tdo pandoc -f docx -t $i -o test.$i Now\\ they\\ want\\ us\\ to\\ charge\\\n\tour\\ electric\\ cars\\ from\\ litter\\ bins.docx;\n\tdone\n\ny",
       "thread_id": "thread-a523f5506f1d",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478761.html"
     },
     {
       "id": "msg-6ff0e6abe27f",
@@ -37,11 +38,12 @@
       "subject_clean": "Obtaining a value of pie in a zero inflated model (fm-zinb2)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I am running a zero inflated regression using the zeroinfl function similar to the model below:\n  \n fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\nsummary(fm_zinb2)\n\nI have three questions:\n\n1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model? \n\n2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n\n3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n\nThank you,\nJohn\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\n\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?\n\nPI?Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology and Paliative Care,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
+      "body_plain": "I am running a zero inflated regression using the zeroinfl function similar to the model below:\n  \n fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\nsummary(fm_zinb2)\n\nI have three questions:\n\n1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model? \n\n2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n\n3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n\nThank you,\nJohn\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\n\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center; \n\nPI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology and Paliative Care,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
       "body_snippet": "I am running a zero inflated regression using the zeroinfl function similar to the model below:\n  \n fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\nsummary(fm_zinb2)\n\nI have th",
       "thread_id": "thread-6ff0e6abe27f",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478762.html"
     },
     {
       "id": "msg-14cdbb89ab49",
@@ -67,7 +69,8 @@
       "body_snippet": "Hi folks\n\nThanks for your help and suggestions - very much appreciated.\n\nI now have some working code, using this file I uploaded for public \naccess: \nhttps://docs.google.com/document/d/1QwuaWZk6tYlWQ",
       "thread_id": "thread-14cdbb89ab49",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478763.html"
     },
     {
       "id": "msg-c542189127da",
@@ -81,11 +84,12 @@
       "references": [
         "<DM6PR03MB5049A6587CD8AB9A83A0FE02E2672@DM6PR03MB5049.namprd03.prod.outlook.com>"
       ],
-      "body_plain": "Are you referring to the zeroinfl() function in the countreg package? If\nso, I think\n\npredict(fm_zinb2, type = \"zero\", newdata = some.new.data)\n\nwill give you pi for each combination of covariate values that you\nprovide in some.new.data\n\nwhere pi is the probability to observe a zero from the point mass component.\n\nAs to your second question, I'm not sure that's possible, for any\n*particular, individual* subject. Others will undoubtedly know better\nthan I.\n\n--Chris Ryan\n\nSorkin, John wrote:\n> I am running a zero inflated regression using the zeroinfl function similar to the model below:\n>   \n>  fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n> summary(fm_zinb2)\n> \n> I have three questions:\n> \n> 1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model? \n> \n> 2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n> \n> 3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n> \n> Thank you,\n> John\n> \n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> \n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?\n> \n> PI?Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n> \n> Senior Statistician University of Maryland Center for Vascular Research;\n> \n> Division of Gerontology and Paliative Care,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n> \n> \n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_plain": "Are you referring to the zeroinfl() function in the countreg package? If\nso, I think\n\npredict(fm_zinb2, type = \"zero\", newdata = some.new.data)\n\nwill give you pi for each combination of covariate values that you\nprovide in some.new.data\n\nwhere pi is the probability to observe a zero from the point mass component.\n\nAs to your second question, I'm not sure that's possible, for any\n*particular, individual* subject. Others will undoubtedly know better\nthan I.\n\n--Chris Ryan\n\nSorkin, John wrote:\n> I am running a zero inflated regression using the zeroinfl function similar to the model below:\n>   \n>  fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n> summary(fm_zinb2)\n> \n> I have three questions:\n> \n> 1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model? \n> \n> 2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n> \n> 3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n> \n> Thank you,\n> John\n> \n> John David Sorkin M.D., Ph.D.\n> Professor of Medicine, University of Maryland School of Medicine;\n> \n> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center; \n> \n> PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n> \n> Senior Statistician University of Maryland Center for Vascular Research;\n> \n> Division of Gerontology and Paliative Care,\n> 10 North Greene Street\n> GRECC (BT/18/GR)\n> Baltimore, MD 21201-1524\n> Cell phone 443-418-5382\n> \n> \n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>",
       "body_snippet": "Are you referring to the zeroinfl() function in the countreg package? If\nso, I think\n\npredict(fm_zinb2, type = \"zero\", newdata = some.new.data)\n\nwill give you pi for each combination of covariate valu",
       "thread_id": "thread-6ff0e6abe27f",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478764.html"
     },
     {
       "id": "msg-9c9fe0e56e0f",
@@ -97,11 +101,12 @@
       "subject_clean": "Amelia. Imputation of time-series data",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Colleagues,\n\nI have started working with Amelia, with the aim of imputing missing data for time-series data. \n\nAlthough I have succeeded in getting Amelia to perform the imputation, I have not found any documentation describing how Amelia imputes time-series data. I have read the basic Amelia documentation, but it does not address how time-series data are imputed. The documentation describes general imputation where there is no serial auto correlation of repeated observations from the same subject. Does Amelia incorporate the serial autocorrelation in the imputation procedure? Can someone direct me to documentation that explains the imputation method? \n\nThank you,\nJohn\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\n\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;?\n\nPI?Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology and Paliative Care,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
+      "body_plain": "Colleagues,\n\nI have started working with Amelia, with the aim of imputing missing data for time-series data. \n\nAlthough I have succeeded in getting Amelia to perform the imputation, I have not found any documentation describing how Amelia imputes time-series data. I have read the basic Amelia documentation, but it does not address how time-series data are imputed. The documentation describes general imputation where there is no serial auto correlation of repeated observations from the same subject. Does Amelia incorporate the serial autocorrelation in the imputation procedure? Can someone direct me to documentation that explains the imputation method? \n\nThank you,\nJohn\n\n\nJohn David Sorkin M.D., Ph.D.\nProfessor of Medicine, University of Maryland School of Medicine;\n\nAssociate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center; \n\nPI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n\nSenior Statistician University of Maryland Center for Vascular Research;\n\nDivision of Gerontology and Paliative Care,\n10 North Greene Street\nGRECC (BT/18/GR)\nBaltimore, MD 21201-1524\nCell phone 443-418-5382",
       "body_snippet": "Colleagues,\n\nI have started working with Amelia, with the aim of imputing missing data for time-series data. \n\nAlthough I have succeeded in getting Amelia to perform the imputation, I have not found a",
       "thread_id": "thread-9c9fe0e56e0f",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478765.html"
     },
     {
       "id": "msg-687f1bccfc04",
@@ -120,7 +125,8 @@
       "body_snippet": "Hi Tim\n\nThis is brilliant - thank you!!\n\nI've had to tweak the basePath line a bit (I am on a Linux machine), but \nhaving done that, the code works as intended. This is a truly helpful \ncontribution t",
       "thread_id": "thread-687f1bccfc04",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478766.html"
     },
     {
       "id": "msg-f9f7a43330cf",
@@ -135,11 +141,12 @@
         "<DM6PR03MB5049A6587CD8AB9A83A0FE02E2672@DM6PR03MB5049.namprd03.prod.outlook.com>",
         "<02c6fe89-ccae-6c7c-c61e-f79cffad4358@binghamton.edu>"
       ],
-      "body_plain": "A little more.\n\n   As Christopher Ryan points out, as long as the zero-inflation model \nis non-trivial (i.e. more complex than a single intercept for the whole \npopulation), there's a pi(i) for every observation i (you could \ncertainly average the pi(i) values if you wanted, or compute pi for an \naveraged set of covariates).\n\nlibrary(pscl)\nfm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n\npi_i <- predict(fm_zinb2, type = \"zero\")\nhead(pi_i)\n##          1          2          3          4          5          6\n## 0.13392803 0.21936320 0.21973454 0.24697313 0.01890023 0.34281196\n\n\nTo get the conditional probability that a zero observation is a \nstructural or a sampling zero, compute the probability of a sampling \nzero (exp(-mu[i]) for a Poisson model) and use Bayes' rule, assuming \nequal prior probs\n\n## probability of _sampling_ zero\n\npsampz <- exp(-predict(fm_zinb2, type = \"count\"))\nhead(psampz)\n##          1          2          3          4          5          6\n## 0.09507376 0.18361241 0.18688646 0.14774602 0.08992667 0.27235498\n\npz <- 1 - (1-pi_i)*(1-psampz)  ## prob of zero of either type\n##         1         2         3         4         5         6\n## 0.2162687 0.3626978 0.3655556 0.3582299 0.1071273 0.5218004\n\npsampz/pz\nhead(psampz)/head(pz)\n##         1         2         3         4         5         6\n## 0.4396093 0.5062408 0.5112395 0.4124336 0.8394378 0.5219524\n\n    3. I'm not aware of a closed-form solution for zero-inflation models \nas long as the count and/or structural-zero components depend on \ncovariates?  In any case, looking inside zeroinfl() you can see that it \ncalls optim() [using BFGS by default, see ?pscl::zeroinfl.control]\n\n   cheers\n    Ben Bolker\n\n\nOn 2024-01-04 9:38 a.m., Christopher W. Ryan via R-help wrote:\n> Are you referring to the zeroinfl() function in the countreg package? If\n> so, I think\n> \n> predict(fm_zinb2, type = \"zero\", newdata = some.new.data)\n> \n> will give you pi for each combination of covariate values that you\n> provide in some.new.data\n> \n> where pi is the probability to observe a zero from the point mass component.\n> \n> As to your second question, I'm not sure that's possible, for any\n> *particular, individual* subject. Others will undoubtedly know better\n> than I.\n> \n> --Chris Ryan\n> \n> Sorkin, John wrote:\n>> I am running a zero inflated regression using the zeroinfl function similar to the model below:\n>>    \n>>   fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n>> summary(fm_zinb2)\n>>\n>> I have three questions:\n>>\n>> 1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model?\n>>\n>> 2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n>>\n>> 3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n>>\n>> Thank you,\n>> John\n>>\n>> John David Sorkin M.D., Ph.D.\n>> Professor of Medicine, University of Maryland School of Medicine;\n>>\n>> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;\n>>\n>> PI?Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n>>\n>> Senior Statistician University of Maryland Center for Vascular Research;\n>>\n>> Division of Gerontology and Paliative Care,\n>> 10 North Greene Street\n>> GRECC (BT/18/GR)\n>> Baltimore, MD 21201-1524\n>> Cell phone 443-418-5382\n>>\n>>\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_plain": "A little more.\n\n   As Christopher Ryan points out, as long as the zero-inflation model \nis non-trivial (i.e. more complex than a single intercept for the whole \npopulation), there's a pi(i) for every observation i (you could \ncertainly average the pi(i) values if you wanted, or compute pi for an \naveraged set of covariates).\n\nlibrary(pscl)\nfm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n\npi_i <- predict(fm_zinb2, type = \"zero\")\nhead(pi_i)\n##          1          2          3          4          5          6\n## 0.13392803 0.21936320 0.21973454 0.24697313 0.01890023 0.34281196\n\n\nTo get the conditional probability that a zero observation is a \nstructural or a sampling zero, compute the probability of a sampling \nzero (exp(-mu[i]) for a Poisson model) and use Bayes' rule, assuming \nequal prior probs\n\n## probability of _sampling_ zero\n\npsampz <- exp(-predict(fm_zinb2, type = \"count\"))\nhead(psampz)\n##          1          2          3          4          5          6\n## 0.09507376 0.18361241 0.18688646 0.14774602 0.08992667 0.27235498\n\npz <- 1 - (1-pi_i)*(1-psampz)  ## prob of zero of either type\n##         1         2         3         4         5         6\n## 0.2162687 0.3626978 0.3655556 0.3582299 0.1071273 0.5218004\n\npsampz/pz\nhead(psampz)/head(pz)\n##         1         2         3         4         5         6\n## 0.4396093 0.5062408 0.5112395 0.4124336 0.8394378 0.5219524\n\n    3. I'm not aware of a closed-form solution for zero-inflation models \nas long as the count and/or structural-zero components depend on \ncovariates?  In any case, looking inside zeroinfl() you can see that it \ncalls optim() [using BFGS by default, see ?pscl::zeroinfl.control]\n\n   cheers\n    Ben Bolker\n\n\nOn 2024-01-04 9:38 a.m., Christopher W. Ryan via R-help wrote:\n> Are you referring to the zeroinfl() function in the countreg package? If\n> so, I think\n> \n> predict(fm_zinb2, type = \"zero\", newdata = some.new.data)\n> \n> will give you pi for each combination of covariate values that you\n> provide in some.new.data\n> \n> where pi is the probability to observe a zero from the point mass component.\n> \n> As to your second question, I'm not sure that's possible, for any\n> *particular, individual* subject. Others will undoubtedly know better\n> than I.\n> \n> --Chris Ryan\n> \n> Sorkin, John wrote:\n>> I am running a zero inflated regression using the zeroinfl function similar to the model below:\n>>    \n>>   fm_zinb2 <- zeroinfl(art ~ . | ., data = bioChemists, dist = \"poisson\")\n>> summary(fm_zinb2)\n>>\n>> I have three questions:\n>>\n>> 1) How can I obtain a value for the parameter pie, which is the fraction of the population that is in the zero inflated model vs the fraction in the count model?\n>>\n>> 2) For any particular subject, how can I determine if the subject is in the portion of the population that contributes a zero count because the subject is in the group of subjects who have structural zero responses vs. the subject being in the portion of the population who can contribute a zero or a non-zero response?\n>>\n>> 3) zero inflated models can be solved using closed form solutions, or using iterative methods. Which method is used by fm_zinb2?\n>>\n>> Thank you,\n>> John\n>>\n>> John David Sorkin M.D., Ph.D.\n>> Professor of Medicine, University of Maryland School of Medicine;\n>>\n>> Associate Director for Biostatistics and Informatics, Baltimore VA Medical Center Geriatrics Research, Education, and Clinical Center;\n>>\n>> PI Biostatistics and Informatics Core, University of Maryland School of Medicine Claude D. Pepper Older Americans Independence Center;\n>>\n>> Senior Statistician University of Maryland Center for Vascular Research;\n>>\n>> Division of Gerontology and Paliative Care,\n>> 10 North Greene Street\n>> GRECC (BT/18/GR)\n>> Baltimore, MD 21201-1524\n>> Cell phone 443-418-5382\n>>\n>>\n>>\n>> ______________________________________________\n>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>> https://stat.ethz.ch/mailman/listinfo/r-help\n>> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n>> and provide commented, minimal, self-contained, reproducible code.\n>>\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
       "body_snippet": "A little more.\n\n   As Christopher Ryan points out, as long as the zero-inflation model \nis non-trivial (i.e. more complex than a single intercept for the whole \npopulation), there's a pi(i) for every ",
       "thread_id": "thread-6ff0e6abe27f",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478767.html"
     },
     {
       "id": "msg-c8f10a4e16a5",
@@ -155,7 +162,8 @@
       "body_snippet": "Dear professor,\n\n\nI'm using package nlme, but I can't find a way to specify two uncorrelated random effects. For example, a random intercept and a random slope. In package lme4, we can specify&nbsp;x ",
       "thread_id": "thread-c8f10a4e16a5",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478768.html"
     },
     {
       "id": "msg-c39a5c4bec3f",
@@ -173,7 +181,8 @@
       "body_snippet": "Dear Zhen,\n\nYou can use this with pdDiag(). An example:\n\nlibrary(nlme)\nres <- lme(distance ~ age*Sex, random = list(Subject = pdDiag(~ age)), data=Orthodont)\nsummary(res)\n\nBest,\nWolfgang\n\n> -----Origi",
       "thread_id": "thread-c8f10a4e16a5",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478769.html"
     },
     {
       "id": "msg-89e905deb6ed",
@@ -189,7 +198,8 @@
       "body_snippet": "Hello As a postgrad I have been helping an undergraduate student with R\ncoding but she has a problem with R studio on her laptop which I can't fix\n- basically when she runs a plot it appears without a",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478770.html"
     },
     {
       "id": "msg-77441f37c909",
@@ -207,7 +217,8 @@
       "body_snippet": "? Tue, 9 Jan 2024 16:42:32 +0000\nNick Wray <nickmwray at gmail.com> ?????:\n\n> she has a problem with R studio on her laptop\n\nDoes the problem happen with plain R, without Rstudio?\n\nWhat's the student'",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478773.html"
     },
     {
       "id": "msg-53e9770e1c58",
@@ -225,7 +236,8 @@
       "body_snippet": "On 09/01/2024 11:42 a.m., Nick Wray wrote:\n> Hello As a postgrad I have been helping an undergraduate student with R\n> coding but she has a problem with R studio on her laptop which I can't fix\n> - ba",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478771.html"
     },
     {
       "id": "msg-255d90ae869d",
@@ -243,7 +255,8 @@
       "body_snippet": "It would help to have reproducible code. Use dummy data for confidentiality (if you care about that).\nMy guess is that you set margins somewhere and never returned them to a default value. The first t",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478772.html"
     },
     {
       "id": "msg-6a867a9bbf1f",
@@ -262,7 +275,8 @@
       "body_snippet": "If it looks to be a very specific RStudio/ggplot2 problem then\nhttps://community.rstudio.com is probably the place to ask.\n\nWhat happens if she does as Duncan suggests or if she exports the file?\n\nCom",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478774.html"
     },
     {
       "id": "msg-b644410117b9",
@@ -280,7 +294,8 @@
       "body_snippet": "Nick, obviously figuring out the problem is best but you may want to deal\nwith the symptom.\n\nRSTUDIO lets you adjust the sizes of the various windows and enlarging the\nwindow (lower right normally) wh",
       "thread_id": "thread-89e905deb6ed",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478775.html"
     },
     {
       "id": "msg-9d97c04352da",
@@ -296,7 +311,8 @@
       "body_snippet": "Hello,\n\nI am drawing contour lines for a function of 2 variables at one level of\nthe value of the function and want to include a small arrow in any\ndirection of increase of the function. Is there some",
       "thread_id": "thread-9d97c04352da",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478776.html"
     },
     {
       "id": "msg-4f549f249f52",
@@ -314,7 +330,8 @@
       "body_snippet": "On Wed, 10 Jan 2024 19:13:19 -0500\nDeepankar Basu <basu.15 at gmail.com> wrote:\n\n> Hello,\n> \n> I am drawing contour lines for a function of 2 variables at one level\n> of the value of the function and ",
       "thread_id": "thread-9d97c04352da",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478777.html"
     },
     {
       "id": "msg-699396b49875",
@@ -332,7 +349,8 @@
       "body_snippet": "Hi,\n\nIf I understand your intentions correctly, the simplest way would be to \nmanually insert arrows using `geom_segment()` with the `arrow` argument:\n\n```\n\nggplot(data = d1, aes(x=X1,y=X2,z=Z))+\n ? s",
       "thread_id": "thread-9d97c04352da",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478779.html"
     },
     {
       "id": "msg-e254540254c2",
@@ -350,7 +368,8 @@
       "body_snippet": "? Wed, 10 Jan 2024 19:13:19 -0500\nDeepankar Basu <basu.15 at gmail.com> ?????:\n\n> I am drawing contour lines for a function of 2 variables at one level\n> of the value of the function and want to inclu",
       "thread_id": "thread-9d97c04352da",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478778.html"
     },
     {
       "id": "msg-597d70ccfbe0",
@@ -368,7 +387,8 @@
       "body_snippet": "Something like this shodld worx.  You will need to fiddle around with the\nactual co-ordinates etc. I just stuck an arrow in what seemed like a handy\nplace\n\nOn Wed, 10 Jan 2024 at 19:13, Deepankar Basu",
       "thread_id": "thread-9d97c04352da",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478780.html"
     },
     {
       "id": "msg-c28dd6210cc6",
@@ -386,7 +406,8 @@
       "body_snippet": "Dear R-experts,\n\nHere below, my R code working BUT I get a strange result I was not expecting! Indeed, the?95% percentile bootstrap CIs is (-54.81, -54.81 ). Is anything going wrong?\n\nBest,\n\n#########",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478781.html"
     },
     {
       "id": "msg-4be24026d31c",
@@ -405,7 +426,8 @@
       "body_snippet": "On 13/01/2024 3:33 p.m., varin sacha via R-help wrote:\n> Score=c(345,564,467,675,432,346,476,512,567,543,234,435,654,411,356,658,432,345,432,345,\n>   345,456,543,501)\n>   \n> Country=c(\"Italy\", \"Italy\"",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478782.html"
     },
     {
       "id": "msg-6fe1a9ccd256",
@@ -424,7 +446,8 @@
       "body_snippet": "? Sat, 13 Jan 2024 20:33:47 +0000 (UTC)\nvarin sacha via R-help <r-help at r-project.org> ?????:\n\n> coef(lm(Score~ Time + factor(Country)),data=data[idx,])\n\nWrong place for the data=... argument. You m",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478783.html"
     },
     {
       "id": "msg-e155c2a98047",
@@ -444,7 +467,8 @@
       "body_snippet": "Dear Duncan,\nDear Ivan,\n\nI really thank you a lot for your response.\nSo, if I correctly understand your answers the problem is coming from this line:\n\ncoef(lm(Score~ Time + factor(Country)),data=data[",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478784.html"
     },
     {
       "id": "msg-29eeda6b51fd",
@@ -465,7 +489,8 @@
       "body_snippet": "It took me a little while to figure this out, but: the problem is \nthat if your resampling leaves out any countries (which is very likely), \nyour model applied to the bootstrapped data will have fewer",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478785.html"
     },
     {
       "id": "msg-e750f3328c67",
@@ -483,7 +508,8 @@
       "body_snippet": "Sorry, didn't cc this to the list.\n\n\n-------- Forwarded Message --------\nSubject: Re: [R] Strange results : bootrstrp CIs\nDate: Sat, 13 Jan 2024 17:37:19 -0500\nFrom: Duncan Murdoch <murdoch.duncan at ",
       "thread_id": "thread-e750f3328c67",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478786.html"
     },
     {
       "id": "msg-0ad0d8b2468e",
@@ -505,7 +531,8 @@
       "body_snippet": "Well, this would seem to work:\n\ne <- data.frame(Score = Score\n             , Country = factor(Country)\n             , Time = Time)\n\nncountry <- nlevels(e$Country)\nfunc= function(dat,idx) {\n   if(lengt",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 4,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478787.html"
     },
     {
       "id": "msg-5ef621ebf7c9",
@@ -524,7 +551,8 @@
       "body_snippet": "On Sat, 13 Jan 2024 17:59:16 -0500\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n<SNIP>\n\n> My guess is that one of the bootstrap samples had a different\n> selection of countries, so factor(Coun",
       "thread_id": "thread-e750f3328c67",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478788.html"
     },
     {
       "id": "msg-86eaed6e63fd",
@@ -547,7 +575,8 @@
       "body_snippet": "On Sat, 13 Jan 2024 16:54:01 -0800\nBert Gunter <bgunter.4567 at gmail.com> wrote:\n\n> Well, this would seem to work:\n> \n> e <- data.frame(Score = Score\n>              , Country = factor(Country)\n>     ",
       "thread_id": "thread-c28dd6210cc6",
       "thread_depth": 5,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478789.html"
     },
     {
       "id": "msg-0614478ed3f1",
@@ -567,7 +596,8 @@
       "body_snippet": "On 13/01/2024 8:58 p.m., Rolf Turner wrote:\n> On Sat, 13 Jan 2024 17:59:16 -0500\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n> <SNIP>\n> \n>> My guess is that one of the bootstrap samples h",
       "thread_id": "thread-e750f3328c67",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478790.html"
     },
     {
       "id": "msg-805a53e0931a",
@@ -588,7 +618,8 @@
       "body_snippet": "Dear R-experts,\n\nI really thank you all for your responses.\n\nBest,\n\n\n\nLe dimanche 14 janvier 2024 ? 10:22:12 UTC+1, Duncan Murdoch <murdoch.duncan at gmail.com> a ?crit : \n\n\n\n\n\nOn 13/01/2024 8:58 p.m.",
       "thread_id": "thread-e750f3328c67",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478791.html"
     },
     {
       "id": "msg-88382e67d374",
@@ -606,7 +637,8 @@
       "body_snippet": "Dear R-experts,\n\nI write to you to know if somebody is aware of a R package (or function) able to plot graphs for extrapolation.\n\nI need to be clear on what extrapolation really is to me. It is when w",
       "thread_id": "thread-88382e67d374",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478792.html"
     },
     {
       "id": "msg-dfc292ec2396",
@@ -622,7 +654,8 @@
       "body_snippet": "Dear listers,\n\nI am working on a time series but find that for a given non-zero time \nlag correlations obtained by ccf and cor are different.\n\nx <- c(0.85472102802704641, 1.6008990694641689, 2.5019632",
       "thread_id": "thread-dfc292ec2396",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478793.html"
     },
     {
       "id": "msg-c191e594a0ff",
@@ -640,7 +673,8 @@
       "body_snippet": "G'day Patrick,\n\nOn Tue, 16 Jan 2024 09:19:40 +0100\nPatrick Giraudoux <patrick.giraudoux at univ-fcomte.fr> wrote:\n\n[...]\n> So far so good, but when I lag one of the series, I cannot find the\n> same co",
       "thread_id": "thread-dfc292ec2396",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478794.html"
     },
     {
       "id": "msg-6229e75a5505",
@@ -656,7 +690,8 @@
       "body_snippet": "Hello Everyone,\nI was analysing big survey data using survey packages on RStudio. Survey\npackage allows survey data analysis with the design effect.The survey\npackage included functions for all other ",
       "thread_id": "thread-6229e75a5505",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478795.html"
     },
     {
       "id": "msg-9b7979230ccc",
@@ -674,7 +709,8 @@
       "body_snippet": "Dear Md Kamruzzaman,\n\nTo answer your second question first, you could just use the svychisq() \nfunction. The difference-of-proportion test is equivalent to a chisquare \ntest for the 2-by-2 table.\n\nYou",
       "thread_id": "thread-6229e75a5505",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478796.html"
     },
     {
       "id": "msg-a372f92d3b7a",
@@ -693,7 +729,8 @@
       "body_snippet": "hi, this guide to analyzing changes in prevalence rates over time with\ncomplex survey data might also help?  thanks\n\nhttp://asdfree.com/trend-analysis-of-complex-survey-data.html\n\n\n\nOn Wed, Jan 17, 20",
       "thread_id": "thread-6229e75a5505",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478797.html"
     },
     {
       "id": "msg-6bec9de4d8df",
@@ -709,11 +746,12 @@
         "<77544b52-ebfb-409c-8b45-507b4ecf201a@mcmaster.ca>",
         "<CAGbxoeGXYbf5hUNOC2DiEJ2TiyDN2otcbfhfckTSk1Ommwhdeg@mail.gmail.com>"
       ],
-      "body_plain": "Dear Md Kamruzzaman,\n\nI've copied this response to the r-help list, where you originally asked \nyour question. That way, other people can follow the conversation, if \nthey're interested and there will be a record of the solution. Please \nkeep r-help in the loop\n\nSee below:\n\nOn 2024-01-17 9:47 p.m., Md. Kamruzzaman wrote:\n> \t\n> Caution: External email.\n> \n> \n> Dear John\n> Thank you so much for your reply.\n> \n> I have calculated the 95%CI of the separate?two proportions by using the \n> survey package. The code is given below.\n> \n> svyby(~Diabetes_Cate, ~Year, nhc, svymean, na=TRUE)\n> \n> Here: nhc is the weighted survey data.\n> \n> \n> I understand your point that it is possible?to calculate the 95%CI of \n> the proportional?difference manually.? It is time consuming, that's why \n> I was looking for a function with a design effect to calculate this \n> easily.? I couldn't find this kind of function.\n> \n> \n> However, it will be okay for me to calculate this manually, if there are \n> no functions like this.\n\nIf you intend to do this computation once, it's not terribly time \nconsuming. If you intend to do it repeatedly, you can write a simple \nfunction to do the calculation, probably in less time than it takes to \nsearch for one.\n\n> \n> \n> For manual calculation, could you please share the formula? to calculate \n> the 95%CI of proportional difference.\n\nHere's a simple function to compute the confidence interval, assuming \nthat the normal distribution is used. The formula is based on the \nelementary result that the variance of the difference of two independent \nrandom variables is the sum of their variances, plus the observation \nthat the width of the confidence interval is 2*z*SE, where z is the \nnormal quantile corresponding to the confidence level (e.g., 1.96 for a \n95% CI).\n\nciDiff <- function(ci1, ci2, level=0.95){\n   p1 <- mean(ci1)\n   p2 <- mean(ci2)\n   z <- qnorm((1 - level)/2, lower.tail=FALSE)\n   se1 <- (ci1[2] - ci1[1])/(2*z)\n   se2 <- (ci2[2] - ci2[1])/(2*z)\n   seDiff <- sqrt(se1^2 + se2^2)\n   (p1 - p2) + c(-z, z)*seDiff\n}\n\n\n> \n> Example: Prevalence of Diabetes:\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?2011:?11.0 (95%CI \n> 10.1-11.9)\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?2017:?10.1 (95%CI \n> 9.4-10.9)\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?Diff: 0.9% (95%CI: ??)\n\nThese are percentages, not proportions, but you can use either:\n\n > ciDiff(c(10.1, 11.9), c(9.4, 10.9))\n[1] -0.3215375  2.0215375\n\n > ciDiff(c(.101, .119), c(.094, .109))\n[1] -0.003215375  0.020215375\n\nYou'll want more significant digits in the inputs to get sufficiently \nprecise results.\n\nSince I did this quickly, if I were you I'd check the results manually.\n\nBest,\n  John\n\n> With Kind Regards\n> \n> -------------------------\n> \n> */Md Kamruzzaman/*\n> \n> \n> \n> On Thu, Jan 18, 2024 at 12:44?AM John Fox <jfox at mcmaster.ca \n> <mailto:jfox at mcmaster.ca>> wrote:\n> \n>     Dear Md Kamruzzaman,\n> \n>     To answer your second question first, you could just use the svychisq()\n>     function. The difference-of-proportion test is equivalent to a\n>     chisquare\n>     test for the 2-by-2 table.\n> \n>     You don't say how you computed the confidence intervals for the two\n>     separate proportions, but if you have their standard errors (and if\n>     not,\n>     you should be able to infer them from the confidence intervals) you can\n>     compute the variance of the difference as the sum of the variances\n>     (squared standard errors), because the two proportions are independent,\n>     and from that the confidence interval for their difference.\n> \n>     I hope this helps,\n>     John\n>     -- \n>     John Fox, Professor Emeritus\n>     McMaster University\n>     Hamilton, Ontario, Canada\n>     web: https://www.john-fox.ca/ <https://www.john-fox.ca/>\n> \n>     On 2024-01-16 10:21 p.m., Md. Kamruzzaman wrote:\n>      > [You don't often get email from mkzaman.m at gmail.com\n>     <mailto:mkzaman.m at gmail.com>. Learn why this is important at\n>     https://aka.ms/LearnAboutSenderIdentification\n>     <https://aka.ms/LearnAboutSenderIdentification> ]\n>      >\n>      > Caution: External email.\n>      >\n>      >\n>      > Hello Everyone,\n>      > I was analysing big survey data using survey packages on RStudio.\n>     Survey\n>      > package allows survey data analysis with the design effect.The survey\n>      > package included functions for all other statistical analysis except\n>      > two-proportion z tests.\n>      >\n>      > I was trying to calculate the difference in prevalence of\n>     Diabetes and\n>      > Prediabetes between the year 2011 and 2017 (with 95%CI). I was\n>     able to\n>      > calculate the weighted prevalence of diabetes and prediabetes in\n>     the Year\n>      > 2011 and 2017 and just subtracted the prevalence of 2011 from the\n>      > prevalence of 2017 to get the difference in prevalence. But I\n>     could not\n>      > calculate the 95%CI of the difference in prevalence considering\n>     the weight\n>      > of the survey data.\n>      >\n>      > I was also trying to see if this difference in prevalence is\n>     statistically\n>      > significant. I could do it using the simple two-proportion z test\n>     without\n>      > considering the weight of the sample. But I want to do it\n>     considering the\n>      > weight of the sample.\n>      >\n>      >\n>      > Example: Prevalence of Diabetes:\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?2011: 11.0\n>     (95%CI\n>      > 10.1-11.9)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?2017: 10.1\n>     (95%CI\n>      > 9.4-10.9)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?Diff: 0.9%\n>     (95%CI: ??)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?Proportion\n>     Z test P\n>      > Value: ??\n>      > Your cooperation will be highly appreciated.\n>      >\n>      > Thanks in advance.\n>      >\n>      > With Regards\n>      >\n>      > *--------------------------------*\n>      >\n>      > *Md Kamruzzaman*\n>      >\n>      > *PhD **Research Fellow (**Medicine**)*\n>      > Discipline of Medicine and Centre of Research Excellence in\n>     Translating\n>      > Nutritional Science to Good Health\n>      > Adelaide Medical School | Faculty of Health and Medical Sciences\n>      > The University of Adelaide\n>      > Adelaide SA 5005\n>      >\n>      >? ? ? ? ? [[alternative HTML version deleted]]\n>      >\n>      > ______________________________________________\n>      > R-help at r-project.org <mailto:R-help at r-project.org> mailing list\n>     -- To UNSUBSCRIBE and more, see\n>      > https://stat.ethz.ch/mailman/listinfo/r-help\n>     <https://stat.ethz.ch/mailman/listinfo/r-help>\n>      > PLEASE do read the posting guide\n>     http://www.R-project.org/posting-guide.html\n>     <http://www.R-project.org/posting-guide.html>\n>      > and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_plain": "Dear Md Kamruzzaman,\n\nI've copied this response to the r-help list, where you originally asked \nyour question. That way, other people can follow the conversation, if \nthey're interested and there will be a record of the solution. Please \nkeep r-help in the loop\n\nSee below:\n\nOn 2024-01-17 9:47 p.m., Md. Kamruzzaman wrote:\n> \t\n> Caution: External email.\n> \n> \n> Dear John\n> Thank you so much for your reply.\n> \n> I have calculated the 95%CI of the separate two proportions by using the \n> survey package. The code is given below.\n> \n> svyby(~Diabetes_Cate, ~Year, nhc, svymean, na=TRUE)\n> \n> Here: nhc is the weighted survey data.\n> \n> \n> I understand your point that it is possible to calculate the 95%CI of \n> the proportional difference manually.  It is time consuming, that's why \n> I was looking for a function with a design effect to calculate this \n> easily.  I couldn't find this kind of function.\n> \n> \n> However, it will be okay for me to calculate this manually, if there are \n> no functions like this.\n\nIf you intend to do this computation once, it's not terribly time \nconsuming. If you intend to do it repeatedly, you can write a simple \nfunction to do the calculation, probably in less time than it takes to \nsearch for one.\n\n> \n> \n> For manual calculation, could you please share the formula? to calculate \n> the 95%CI of proportional difference.\n\nHere's a simple function to compute the confidence interval, assuming \nthat the normal distribution is used. The formula is based on the \nelementary result that the variance of the difference of two independent \nrandom variables is the sum of their variances, plus the observation \nthat the width of the confidence interval is 2*z*SE, where z is the \nnormal quantile corresponding to the confidence level (e.g., 1.96 for a \n95% CI).\n\nciDiff <- function(ci1, ci2, level=0.95){\n   p1 <- mean(ci1)\n   p2 <- mean(ci2)\n   z <- qnorm((1 - level)/2, lower.tail=FALSE)\n   se1 <- (ci1[2] - ci1[1])/(2*z)\n   se2 <- (ci2[2] - ci2[1])/(2*z)\n   seDiff <- sqrt(se1^2 + se2^2)\n   (p1 - p2) + c(-z, z)*seDiff\n}\n\n\n> \n> Example: Prevalence of Diabetes:\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    2011: 11.0 (95%CI \n> 10.1-11.9)\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    2017: 10.1 (95%CI \n> 9.4-10.9)\n>  ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    Diff: 0.9% (95%CI: ??)\n\nThese are percentages, not proportions, but you can use either:\n\n > ciDiff(c(10.1, 11.9), c(9.4, 10.9))\n[1] -0.3215375  2.0215375\n\n > ciDiff(c(.101, .119), c(.094, .109))\n[1] -0.003215375  0.020215375\n\nYou'll want more significant digits in the inputs to get sufficiently \nprecise results.\n\nSince I did this quickly, if I were you I'd check the results manually.\n\nBest,\n  John\n\n> With Kind Regards\n> \n> -------------------------\n> \n> */Md Kamruzzaman/*\n> \n> \n> \n> On Thu, Jan 18, 2024 at 12:44 AM John Fox <jfox at mcmaster.ca \n> <mailto:jfox at mcmaster.ca>> wrote:\n> \n>     Dear Md Kamruzzaman,\n> \n>     To answer your second question first, you could just use the svychisq()\n>     function. The difference-of-proportion test is equivalent to a\n>     chisquare\n>     test for the 2-by-2 table.\n> \n>     You don't say how you computed the confidence intervals for the two\n>     separate proportions, but if you have their standard errors (and if\n>     not,\n>     you should be able to infer them from the confidence intervals) you can\n>     compute the variance of the difference as the sum of the variances\n>     (squared standard errors), because the two proportions are independent,\n>     and from that the confidence interval for their difference.\n> \n>     I hope this helps,\n>     John\n>     -- \n>     John Fox, Professor Emeritus\n>     McMaster University\n>     Hamilton, Ontario, Canada\n>     web: https://www.john-fox.ca/ <https://www.john-fox.ca/>\n> \n>     On 2024-01-16 10:21 p.m., Md. Kamruzzaman wrote:\n>      > [You don't often get email from mkzaman.m at gmail.com\n>     <mailto:mkzaman.m at gmail.com>. Learn why this is important at\n>     https://aka.ms/LearnAboutSenderIdentification\n>     <https://aka.ms/LearnAboutSenderIdentification> ]\n>      >\n>      > Caution: External email.\n>      >\n>      >\n>      > Hello Everyone,\n>      > I was analysing big survey data using survey packages on RStudio.\n>     Survey\n>      > package allows survey data analysis with the design effect.The survey\n>      > package included functions for all other statistical analysis except\n>      > two-proportion z tests.\n>      >\n>      > I was trying to calculate the difference in prevalence of\n>     Diabetes and\n>      > Prediabetes between the year 2011 and 2017 (with 95%CI). I was\n>     able to\n>      > calculate the weighted prevalence of diabetes and prediabetes in\n>     the Year\n>      > 2011 and 2017 and just subtracted the prevalence of 2011 from the\n>      > prevalence of 2017 to get the difference in prevalence. But I\n>     could not\n>      > calculate the 95%CI of the difference in prevalence considering\n>     the weight\n>      > of the survey data.\n>      >\n>      > I was also trying to see if this difference in prevalence is\n>     statistically\n>      > significant. I could do it using the simple two-proportion z test\n>     without\n>      > considering the weight of the sample. But I want to do it\n>     considering the\n>      > weight of the sample.\n>      >\n>      >\n>      > Example: Prevalence of Diabetes:\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    2011: 11.0\n>     (95%CI\n>      > 10.1-11.9)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    2017: 10.1\n>     (95%CI\n>      > 9.4-10.9)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    Diff: 0.9%\n>     (95%CI: ??)\n>      >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?    Proportion\n>     Z test P\n>      > Value: ??\n>      > Your cooperation will be highly appreciated.\n>      >\n>      > Thanks in advance.\n>      >\n>      > With Regards\n>      >\n>      > *--------------------------------*\n>      >\n>      > *Md Kamruzzaman*\n>      >\n>      > *PhD **Research Fellow (**Medicine**)*\n>      > Discipline of Medicine and Centre of Research Excellence in\n>     Translating\n>      > Nutritional Science to Good Health\n>      > Adelaide Medical School | Faculty of Health and Medical Sciences\n>      > The University of Adelaide\n>      > Adelaide SA 5005\n>      >\n>      >? ? ? ?   [[alternative HTML version deleted]]\n>      >\n>      > ______________________________________________\n>      > R-help at r-project.org <mailto:R-help at r-project.org> mailing list\n>     -- To UNSUBSCRIBE and more, see\n>      > https://stat.ethz.ch/mailman/listinfo/r-help\n>     <https://stat.ethz.ch/mailman/listinfo/r-help>\n>      > PLEASE do read the posting guide\n>     http://www.R-project.org/posting-guide.html\n>     <http://www.R-project.org/posting-guide.html>\n>      > and provide commented, minimal, self-contained, reproducible code.\n>",
       "body_snippet": "Dear Md Kamruzzaman,\n\nI've copied this response to the r-help list, where you originally asked \nyour question. That way, other people can follow the conversation, if \nthey're interested and there will",
       "thread_id": "thread-6bec9de4d8df",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478798.html"
     },
     {
       "id": "msg-a45c54db365d",
@@ -729,7 +767,8 @@
       "body_snippet": "Dear all,\n\nAfter being archived on CRAN on 2023-10-1, hydroTSM is finally back on CRAN\nsince January 18th: https://cran.r-project.org/package=hydroTSM.\n\nThis new version 0.7-0 has several new function",
       "thread_id": "thread-a45c54db365d",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478799.html"
     },
     {
       "id": "msg-eb4d334ba328",
@@ -741,11 +780,12 @@
       "subject_clean": "hydroGOF back on CRAN (v0.5-4 released)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,\n\nAfter being archived on CRAN on  2023-10-16 , hydroGOF is finally back on\nCRAN since January 21th: https://cran.r-project.org/package=hydroGOF.\n\nThis new version 0.5-4 includes:\n\n*) the following new functions:\n\n    -) KGElf (Garc?a et al., 2017),\n    -) sKGE (Fowler et al., 2018),\n    -) KGEnp (Pool et al., 2018),\n    -) dr (Willmott et al., 2012),\n    -) ubRMSE (Entekhabi et al., 2010),\n    -) wNSE (Hundecha and Bardossy, 2004),\n    -) rSpearman,\n    -) R2\n\n*) improvements: all the functions allow you to apply a user-defined\nfunction (e.g., log, sqrt) to both 'sim' and 'obs' before computing the\ngoodness-of-fit measure.\n\nA detailed description of the previous changes can be found for the 0.5-0\nversion in the new News.md file:\nhttps://cran.r-project.org/web/packages/hydroGOF/news/news.html\n\nA much improved vignette illustrate the usage of some of the main functions:\n\n*) Analysis of daily precipitation data:\nhttps://cloud.r-project.org/web/packages/hydroGOF/vignettes/hydroGOF_Vignette.pdf\n\nIf you use this package, please cite it correctly as:\n\nZambrano-Bigiarini, Mauricio (2024). hydroGOF: Goodness-of-fit functions\nfor comparison of simulated and observed hydrological time series. R\npackage version 0.5-4. URL:https://cran.r-project.org/package=hydroGOF.\ndoi:10.5281/zenodo.839854.\n\nIssues and enhancements can be requested on:\nhttps://github.com/hzambran/hydroGOF/issues\n\nAll the best,\n\nMauricio\n\n\nMauricio Zambrano-Bigiarini, PhD\nAssociate Professor, Universidad de La Frontera\nAssociate Researcher, (CR)2 FONDAP Center\nPhone: +56 45 259 2812 <+56+45+259+2812>\ne-mail: mauricio.zambrano at ufrontera.cl\n[image: webpage] <http://hzambran.github.io/> [image: ORCID]\n<https://orcid.org/0000-0002-9536-643X> [image: Github]\n<https://github.com/hzambran> [image: Linkedin]\n<http://www.linkedin.com/in/hzambran/>\n\n\t[[alternative HTML version deleted]]\n\n_______________________________________________\nR-packages mailing list\nR-packages at r-project.org\nhttps://stat.ethz.ch/mailman/listinfo/r-packages",
+      "body_plain": "Dear all,\n\nAfter being archived on CRAN on  2023-10-16 , hydroGOF is finally back on\nCRAN since January 21th: https://cran.r-project.org/package=hydroGOF.\n\nThis new version 0.5-4 includes:\n\n*) the following new functions:\n\n    -) KGElf (García et al., 2017),\n    -) sKGE (Fowler et al., 2018),\n    -) KGEnp (Pool et al., 2018),\n    -) dr (Willmott et al., 2012),\n    -) ubRMSE (Entekhabi et al., 2010),\n    -) wNSE (Hundecha and Bardossy, 2004),\n    -) rSpearman,\n    -) R2\n\n*) improvements: all the functions allow you to apply a user-defined\nfunction (e.g., log, sqrt) to both 'sim' and 'obs' before computing the\ngoodness-of-fit measure.\n\nA detailed description of the previous changes can be found for the 0.5-0\nversion in the new News.md file:\nhttps://cran.r-project.org/web/packages/hydroGOF/news/news.html\n\nA much improved vignette illustrate the usage of some of the main functions:\n\n*) Analysis of daily precipitation data:\nhttps://cloud.r-project.org/web/packages/hydroGOF/vignettes/hydroGOF_Vignette.pdf\n\nIf you use this package, please cite it correctly as:\n\nZambrano-Bigiarini, Mauricio (2024). hydroGOF: Goodness-of-fit functions\nfor comparison of simulated and observed hydrological time series. R\npackage version 0.5-4. URL:https://cran.r-project.org/package=hydroGOF.\ndoi:10.5281/zenodo.839854.\n\nIssues and enhancements can be requested on:\nhttps://github.com/hzambran/hydroGOF/issues\n\nAll the best,\n\nMauricio\n\n\nMauricio Zambrano-Bigiarini, PhD\nAssociate Professor, Universidad de La Frontera\nAssociate Researcher, (CR)2 FONDAP Center\nPhone: +56 45 259 2812 <+56+45+259+2812>\ne-mail: mauricio.zambrano at ufrontera.cl\n[image: webpage] <http://hzambran.github.io/> [image: ORCID]\n<https://orcid.org/0000-0002-9536-643X> [image: Github]\n<https://github.com/hzambran> [image: Linkedin]\n<http://www.linkedin.com/in/hzambran/>\n\n\t[[alternative HTML version deleted]]\n\n_______________________________________________\nR-packages mailing list\nR-packages at r-project.org\nhttps://stat.ethz.ch/mailman/listinfo/r-packages",
       "body_snippet": "Dear all,\n\nAfter being archived on CRAN on  2023-10-16 , hydroGOF is finally back on\nCRAN since January 21th: https://cran.r-project.org/package=hydroGOF.\n\nThis new version 0.5-4 includes:\n\n*) the fol",
       "thread_id": "thread-eb4d334ba328",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478800.html"
     },
     {
       "id": "msg-f841a349f4cb",
@@ -761,7 +801,8 @@
       "body_snippet": "A statistical question, not specific to R.\n\nI'm asking for a pointer for a source of definitive descriptions of what\ntypes of data are best summarized by the arithmetic, geometric, and harmonic\nmeans.",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478801.html"
     },
     {
       "id": "msg-f05ba5fbed31",
@@ -779,7 +820,8 @@
       "body_snippet": "better posted on r-sig-ecology? -- or maybe even stack exchange?\n\nCheers,\nBert\n\nOn Mon, Jan 22, 2024 at 7:45?AM Rich Shepard <rshepard at appl-ecosys.com>\nwrote:\n\n> A statistical question, not specifi",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478802.html"
     },
     {
       "id": "msg-5620654b6e30",
@@ -798,7 +840,8 @@
       "body_snippet": "On Mon, 22 Jan 2024, Bert Gunter wrote:\n\n> better posted on r-sig-ecology? -- or maybe even stack exchange?\n\nBert,\n\nOkay.\n\nRegards,\n\nRich",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478803.html"
     },
     {
       "id": "msg-8016cfc7dbfb",
@@ -818,7 +861,8 @@
       "body_snippet": "I think https://stats.stackexchange.com would be best: r-sig-ecology \nis pretty quiet these days\n\nOn 2024-01-22 11:05 a.m., Rich Shepard wrote:\n> On Mon, 22 Jan 2024, Bert Gunter wrote:\n> \n>> better p",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478804.html"
     },
     {
       "id": "msg-690e9f54a82c",
@@ -839,7 +883,8 @@
       "body_snippet": "On Mon, 22 Jan 2024, Ben Bolker wrote:\n\n>  I think https://stats.stackexchange.com would be best: r-sig-ecology is \n> pretty quiet these days\n\nOkay, Ben.\n\nThanks,\n\nRich",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 4,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478805.html"
     },
     {
       "id": "msg-7db48f3ba12e",
@@ -857,7 +902,8 @@
       "body_snippet": ">>>>> Rich Shepard \n>>>>>     on Mon, 22 Jan 2024 07:45:31 -0800 (PST) writes:\n\n    > A statistical question, not specific to R.  I'm asking for\n    > a pointer for a source of definitive descriptions",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478806.html"
     },
     {
       "id": "msg-117ee1712c67",
@@ -876,7 +922,8 @@
       "body_snippet": "On Mon, 22 Jan 2024, Martin Maechler wrote:\n\n> I think it is a good question, not really only about geo-chemistry, but\n> about statistics in applied sciences (and engineering for that matter).\n\n> John",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478807.html"
     },
     {
       "id": "msg-5ef5168a678d",
@@ -895,7 +942,8 @@
       "body_snippet": "Dear Martin,\n\nHelpful general advice, although it's perhaps worth mentioning that the \ngeometric mean, defined e.g. naively as prod(x)^(1/length(x)), is \nnecessarily 0 if there are any 0 values in x. ",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478808.html"
     },
     {
       "id": "msg-8d74407e4dae",
@@ -915,7 +963,8 @@
       "body_snippet": "Ah.... LOD's, typically LLOD's (\"lower limits of detection\").\n\nDisclaimer: I am *NOT* in any sense an expert on such matters. What follows\nare just some comments based on my personal experience. Pleas",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478809.html"
     },
     {
       "id": "msg-8ab1add8a1be",
@@ -936,7 +985,8 @@
       "body_snippet": "In the spirit of Martin's comments, it is perhaps worthwhile to note one of\nJohn Tukey's (who I actually knew) pertinent quotes:\n\"The combination of some data and an aching desire for an answer does n",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 4,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478810.html"
     },
     {
       "id": "msg-586ada0bba77",
@@ -957,7 +1007,8 @@
       "body_snippet": "Still OT... but here is my own (I think previously mentioned here) rant on people thrashing about with log transformation and an all-too-common kludge to deal with zeros mixed among small numbers... h",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 4,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478811.html"
     },
     {
       "id": "msg-92326d0f59ce",
@@ -975,7 +1026,8 @@
       "body_snippet": "Greetings,\nI have the following?\nProblem:\n Given k (=10) discrete independent random variables X_i with n_i (= 5 to 20) values each,compute quantiles of the distribution of the sum X = X_1+...+X_k.\n\nH",
       "thread_id": "thread-92326d0f59ce",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478812.html"
     },
     {
       "id": "msg-2b3ec1691d8e",
@@ -997,7 +1049,8 @@
       "body_snippet": "I've advised people consulting me that if their data is loaded with \nzeros, while they are absolutely certain that something should be where \nthe zeros are, then they either need a better measuring to",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 5,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478813.html"
     },
     {
       "id": "msg-94bfe1232059",
@@ -1015,7 +1068,8 @@
       "body_snippet": "Greetings,\nMinimal reproducible example as requested by the technical expert Jeff Newmiller:\nlibrary(bayesmeta)\n\n# density of $(1/10)*\\sum_{j=1}{10}N(j,0.01$ \n# (convex sum of normal distributions)\n#\n",
       "thread_id": "thread-94bfe1232059",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478816.html"
     },
     {
       "id": "msg-00614e3b86a2",
@@ -1033,7 +1087,8 @@
       "body_snippet": "By the Strong Law of Large Numbers applied to log(X) the geometric mean of X_1,...,X_n > 0 and IID like X converges toexp(E[log(X)]] which, by Jensen's inequality, is always? <= E[X] and is strictly l",
       "thread_id": "thread-00614e3b86a2",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478815.html"
     },
     {
       "id": "msg-ee52d4a427a2",
@@ -1051,7 +1106,8 @@
       "body_snippet": "On Mon, 22 Jan 2024, Rich Shepard wrote:\n\n> As an aquatic ecologist I see regulators apply the geometric mean to\n> geochemical concentrations rather than using the arithmetic mean. I want to\n> know wh",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478814.html"
     },
     {
       "id": "msg-24e2bf929a1d",
@@ -1069,7 +1125,8 @@
       "body_snippet": "Greetings,\n\nI am having a problem with DescTools::Quantile\n(a function computing quantiles from weighted samples):\n\n# these sum to one\nprobWeights = c(\n     0.0043, 0.0062, 0.0087, 0.0119, 0.0157, 0.0",
       "thread_id": "thread-24e2bf929a1d",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478818.html"
     },
     {
       "id": "msg-eeea8f3706fa",
@@ -1087,7 +1144,8 @@
       "body_snippet": "Sorry to prolong a thread on something that is clearly off topic, but when Michael Meyer wrote\n\n >by using the geometric mean all asymptotic results no longer apply.\n\nthat is flat our wrong. It's true",
       "thread_id": "thread-eeea8f3706fa",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478817.html"
     },
     {
       "id": "msg-8fa0ab018351",
@@ -1106,7 +1164,8 @@
       "body_snippet": "On 26/01/2024 10:38 a.m., Michael Meyer via R-help wrote:\n> Greetings,\n> \n> I am having a problem with DescTools::Quantile\n> (a function computing quantiles from weighted samples):\n> \n> # these sum to",
       "thread_id": "thread-24e2bf929a1d",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478819.html"
     },
     {
       "id": "msg-bf67aa7c65c9",
@@ -1121,11 +1180,12 @@
         "<b77a1d4b-6e6f-87e7-aea0-5315a180fd8e@appl-ecosys.com>",
         "<d6d3f691-894-f921-c292-188c7b96e9c@appl-ecosys.com>"
       ],
-      "body_plain": "Suppose we measure the concentration of urea in four samples.\nSuppose the results are 1, 2, 3, and 4 ?mol?L?1,\nHow should we summarise this?\n\nIf you collect a predetermined volume V of water and measure the\nnumber of moles M(V) of urea then calculated\nC(V) = M(V)/V, and then you did that four times, then pooling the four\nsamples gives you\n(M(V1)+M(V2)+M(V3)+M(V4))/(V1+V2+V3+V4) =\n(V1*C(V1)+V2*C(V2)+V3*C(V3)+V4*C(V4))/(V1+V2+V3+V4)\nand this just *is* the concentration of urea in the pooled samples.\nIf the samples are all the same volume, this reduces to the arithmetic mean.\nIn this case, 2.5 ?mol?L?1,\n\nIf you predetermine a number of moles M of urea and collect water\nuntil the volume V(M) contains M moles,\nthen calculated C(M) = M/V(M), and then you did that four times,\npooling the samples gives you\n(M1+M2+M3+M4)/(M1/C(M1) + M2/C(M2) + M3/C(M3) + M4/C(M4))\nand this just *is* the concentration of urea in the pooled samples.\nIf the samples all contain the same amount of urea, this reduces to\nthe geometric mean.\nIn this case, 1.92 ?mol?L?1,\n\nReally, it's not a statistical question but a semantic one: what\nphysical reality do the data reflect and what combinations of the\nnumbers make sense in/of the real world?\n\nOn Thu, 25 Jan 2024 at 06:25, Rich Shepard <rshepard at appl-ecosys.com> wrote:\n>\n> On Mon, 22 Jan 2024, Rich Shepard wrote:\n>\n> > As an aquatic ecologist I see regulators apply the geometric mean to\n> > geochemical concentrations rather than using the arithmetic mean. I want to\n> > know whether the geometric mean of a set of chemical concentrations (e.g.,\n> > in mg/L) is an appropriate representation of the expected value. If not, I\n> > want to explain this to non-technical decision-makers; if so, I want to\n> > understand why my assumption is wrong.\n>\n> Many of you provided excellent comments, and so did a couple of folks on\n> StackExchange. Rather than responding to individual posts I've waited until\n> the thread petered out to provide an overall response.\n>\n> I've two points to make: one on mean calculations and the second on the\n> context I didn't sufficiently provide when I posted my question.\n>\n> Responses confirmed that the appropriate model for calculating means depends\n> on the data set and the question(s) the data are to answer. So the summary\n> answer to my question (as stated) is: it depends. :-) Thank you.\n>\n> What prompted my thread-starting message is that I work in the realm of\n> environmental regulation compliance, including the Clean Water Act and the\n> Endangered Species Act. There is one state environmental regulator that\n> provides state-wide point source storm water discharges under a General\n> permit for smaller industrial activities. The permit monitoring requirements\n> are 4 samples per year, one each quarter for a small set of water chemical\n> and physical constituents (really!) and the reporting requirements are to\n> use the geometric mean to summarize the four data points. I have my clients\n> calculate an arithmetic mean in addition. (For the record, if you have an\n> Agriculture Department General Storm Water Discharge Permit for a point\n> source such as a livestock feed lot you need only a single sample (after the\n> rains start) to comply with the permit. Feh!\n>\n> Germane to Bert's comments about all the wrong ways to treat\n> non-detected/censored water chemical analyses, I discovered Dennis Helsel by\n> his 2005 article in Environmental Science & Technology (Oct. 16th). Bought\n> his book when it was published in 2012 and have used survival analyses on\n> censored data ever since. (Also presented a Continuing Legal Education talk\n> in 2016 with a nice thank-you email from a state district judge who\n> attended.)\n>\n> I greatly appreciate all your comments and apologize for not better\n> explaining the context of my question when I posted my first message.\n>\n> Regards,\n>\n> Rich\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
-      "body_snippet": "Suppose we measure the concentration of urea in four samples.\nSuppose the results are 1, 2, 3, and 4 ?mol?L?1,\nHow should we summarise this?\n\nIf you collect a predetermined volume V of water and measu",
+      "body_plain": "Suppose we measure the concentration of urea in four samples.\nSuppose the results are 1, 2, 3, and 4 μmol·L−1,\nHow should we summarise this?\n\nIf you collect a predetermined volume V of water and measure the\nnumber of moles M(V) of urea then calculated\nC(V) = M(V)/V, and then you did that four times, then pooling the four\nsamples gives you\n(M(V1)+M(V2)+M(V3)+M(V4))/(V1+V2+V3+V4) =\n(V1*C(V1)+V2*C(V2)+V3*C(V3)+V4*C(V4))/(V1+V2+V3+V4)\nand this just *is* the concentration of urea in the pooled samples.\nIf the samples are all the same volume, this reduces to the arithmetic mean.\nIn this case, 2.5 μmol·L−1,\n\nIf you predetermine a number of moles M of urea and collect water\nuntil the volume V(M) contains M moles,\nthen calculated C(M) = M/V(M), and then you did that four times,\npooling the samples gives you\n(M1+M2+M3+M4)/(M1/C(M1) + M2/C(M2) + M3/C(M3) + M4/C(M4))\nand this just *is* the concentration of urea in the pooled samples.\nIf the samples all contain the same amount of urea, this reduces to\nthe geometric mean.\nIn this case, 1.92 μmol·L−1,\n\nReally, it's not a statistical question but a semantic one: what\nphysical reality do the data reflect and what combinations of the\nnumbers make sense in/of the real world?\n\nOn Thu, 25 Jan 2024 at 06:25, Rich Shepard <rshepard at appl-ecosys.com> wrote:\n>\n> On Mon, 22 Jan 2024, Rich Shepard wrote:\n>\n> > As an aquatic ecologist I see regulators apply the geometric mean to\n> > geochemical concentrations rather than using the arithmetic mean. I want to\n> > know whether the geometric mean of a set of chemical concentrations (e.g.,\n> > in mg/L) is an appropriate representation of the expected value. If not, I\n> > want to explain this to non-technical decision-makers; if so, I want to\n> > understand why my assumption is wrong.\n>\n> Many of you provided excellent comments, and so did a couple of folks on\n> StackExchange. Rather than responding to individual posts I've waited until\n> the thread petered out to provide an overall response.\n>\n> I've two points to make: one on mean calculations and the second on the\n> context I didn't sufficiently provide when I posted my question.\n>\n> Responses confirmed that the appropriate model for calculating means depends\n> on the data set and the question(s) the data are to answer. So the summary\n> answer to my question (as stated) is: it depends. :-) Thank you.\n>\n> What prompted my thread-starting message is that I work in the realm of\n> environmental regulation compliance, including the Clean Water Act and the\n> Endangered Species Act. There is one state environmental regulator that\n> provides state-wide point source storm water discharges under a General\n> permit for smaller industrial activities. The permit monitoring requirements\n> are 4 samples per year, one each quarter for a small set of water chemical\n> and physical constituents (really!) and the reporting requirements are to\n> use the geometric mean to summarize the four data points. I have my clients\n> calculate an arithmetic mean in addition. (For the record, if you have an\n> Agriculture Department General Storm Water Discharge Permit for a point\n> source such as a livestock feed lot you need only a single sample (after the\n> rains start) to comply with the permit. Feh!\n>\n> Germane to Bert's comments about all the wrong ways to treat\n> non-detected/censored water chemical analyses, I discovered Dennis Helsel by\n> his 2005 article in Environmental Science & Technology (Oct. 16th). Bought\n> his book when it was published in 2012 and have used survival analyses on\n> censored data ever since. (Also presented a Continuing Legal Education talk\n> in 2016 with a nice thank-you email from a state district judge who\n> attended.)\n>\n> I greatly appreciate all your comments and apologize for not better\n> explaining the context of my question when I posted my first message.\n>\n> Regards,\n>\n> Rich\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.",
+      "body_snippet": "Suppose we measure the concentration of urea in four samples.\nSuppose the results are 1, 2, 3, and 4 μmol·L−1,\nHow should we summarise this?\n\nIf you collect a predetermined volume V of water and measu",
       "thread_id": "thread-f841a349f4cb",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478820.html"
     },
     {
       "id": "msg-ebedd88eadc2",
@@ -1141,7 +1201,8 @@
       "body_snippet": "Dear John Fox, Christian Kleiber, and Achim Zeileis,\n\nI am attempting to run various independent variable parameters to assess\ntheir suitability. Unfortunately, I hit a snag and couldn't get the tests",
       "thread_id": "thread-ebedd88eadc2",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478823.html"
     },
     {
       "id": "msg-b475a6f57c9c",
@@ -1159,7 +1220,8 @@
       "body_snippet": "Kelis,\n\nthanks for your interest. It's hard to say what exactly goes wrong based \non the information you provide. However, I would recommend that you first \nprocess the data:\n\n- Store all variables as",
       "thread_id": "thread-ebedd88eadc2",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478821.html"
     },
     {
       "id": "msg-f9a787999301",
@@ -1177,7 +1239,8 @@
       "body_snippet": "It looks like a homework assignment. It also looks like you didn't read the documentation carefully enough. The 'len.out' argument in seq is solely for specifying the length of a sequence. The 'quanti",
       "thread_id": "thread-f9a787999301",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478822.html"
     },
     {
       "id": "msg-d16929f86ef0",
@@ -1193,7 +1256,8 @@
       "body_snippet": "I have a data.frame with one column as a list. When printing (or using \nknitr::kable) the list gets truncated. Is there some option to force \nprinting the full list?\n\n\nMWE:\n\n\ndf <- data.frame(\"name\" =",
       "thread_id": "thread-d16929f86ef0",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478824.html"
     },
     {
       "id": "msg-ac33acbc468b",
@@ -1211,7 +1275,8 @@
       "body_snippet": "On Mon, 29 Jan 2024 14:19:21 +0200\nMicha Silver <tsvibar at gmail.com> wrote:\n\n> Is there some option to force printing the full list?\n\n> df <- data.frame(\"name\" = \"A\", \"bands\" = I(list(1:20)))\n\nforma",
       "thread_id": "thread-d16929f86ef0",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478825.html"
     },
     {
       "id": "msg-aa367f1ff208",
@@ -1230,7 +1295,8 @@
       "body_snippet": "Excellent, many thanks.\n\n\nOn 29/01/2024 16:56, Ivan Krylov wrote:\n> On Mon, 29 Jan 2024 14:19:21 +0200\n> Micha Silver <tsvibar at gmail.com> wrote:\n>\n>> Is there some option to force printing the full",
       "thread_id": "thread-d16929f86ef0",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478826.html"
     },
     {
       "id": "msg-f71585daa54a",
@@ -1246,7 +1312,8 @@
       "body_snippet": "Question for 'experts' in LP using R (using the lpSolve package, say) -- \nwhich does not apply to me for the sort of problem I describe below.\nI've run any number of LP's using lpSolve in R, but all o",
       "thread_id": "thread-f71585daa54a",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478827.html"
     },
     {
       "id": "msg-aa0ee0fba61f",
@@ -1262,7 +1329,8 @@
       "body_snippet": "Given\n - UTC timestamp\n - a location (latitude,longitude,elevation)\nI want to know\n - the sun angles\n - the moon angles\n - the phase of the moon.\nI looked on CRAN for astronomy, but didn't notice anyt",
       "thread_id": "thread-aa0ee0fba61f",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478828.html"
     },
     {
       "id": "msg-194a03e46c60",
@@ -1280,7 +1348,8 @@
       "body_snippet": "On Tue, 30 Jan 2024, Richard O'Keefe writes:\n\n> Given\n>  - UTC timestamp\n>  - a location (latitude,longitude,elevation)\n> I want to know\n>  - the sun angles\n>  - the moon angles\n>  - the phase of the ",
       "thread_id": "thread-aa0ee0fba61f",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478829.html"
     },
     {
       "id": "msg-34290b1d5277",
@@ -1294,11 +1363,12 @@
       "references": [
         "<3baf760c-50d0-4cda-90b2-ae6d3180ec5f@gmail.com>"
       ],
-      "body_plain": "Apart from the fact that the statement \"such that t1+t2+t3+t4=2970 (as \nit must)\" is not correct, the LP can be implemented as follows:\n\nlibrary(lpSolve)\nLHS <- rbind(\nc(0,0,0,0, 1, 0, 0,0),\nc(1,0,0,0,-1, 1, 0,0),\nc(0,1,0,0, 0,-1, 1,0),\nc(0,0,1,0, 0, 0,-1,1),\ncbind(-diag(4),diag(4)),\nc(0,0,0,0,0,1,0,0),\nc(0,0,0,0,0,0,1,0),\nc(0,0,0,0,0,0,0,1)\n)\n\nRHS <- c(640,825,580,925,0,0,0,0,1000,1000,1000)\n\nDIR <- c(rep(\"==\",4),rep(\">=\",3),\"=\",rep(\"<=\",3))\n\nOBJ <- c(35,55,50,65,0,0,0,0)\n\nlp(\"min\",OBJ,LHS,DIR,RHS)\n\nBest,\nMartin\n\n\nAm 29.01.24 um 22:28 schrieb Evan Cooch:\n> Question for 'experts' in LP using R (using the lpSolve package, say) --\n> which does not apply to me for the sort of problem I describe below.\n> I've run any number of LP's using lpSolve in R, but all of them to date\n> have objective and constraint functions that both contain the same\n> variables. This lets you set up a LHS and RHS matrix/vector that are\n> symmetrical.\n> \n> But, for a problem a student posed in class, I'm stuck with how to do it\n> in R, if its even possible (its trivial in Maxima, Maple...even using\n> Solver in Excel, but I haven't been remotely successful in getting\n> anything to work in R).\n> \n> Suppose you have a production system that at 4 sequential time steps\n> generate 640, 825, 580, and 925 units. At each time step, you need to\n> decide how many of those units need to be 'quality control' (QC) checked\n> in some fashion, subject to some constraints.\n> \n>   ?--> at no point in time can the number of units in the system be >1000\n>   ?--> at the end of the production cycle, there can be no units left\n>   ?--> 'QC checking' costs money, varying as a function of the time step\n> -- 35, 55, 50 and 65 for each unit, for each time step in turn.\n> \n> Objective is to minimize total cost. The total cost objective function\n> is trivial. Let p1 = number sent out time step 1, p2 number sent out at\n> time step 3, and so on. So, total cost function we want to minimize is\n> simply\n> \n>   ? cost=(35*p1)+(55*p2)+(50*p3)+(65*p4)\n> \n> where p1+p2+p3+p4=(640+825+580+925)=2970 (i.e., all the products get\n> checked). The question is, what number do you send out at each time step\n> to minimize cost?\n> \n> Where I get hung up in R is the fact that if I let t(i) be the number of\n> products at each time step, then\n> \n>   ? ? t1=640,\n>   ??? t2=t1-p1+825\n>   ? ? t3=t2-p2+580\n>   ? ? t4=t3-p3+925\n> \n> such that t1+t2+t3+t4=2970 (as it must), with additional constraints being\n> \n>   ? p1<=t1, p2<=t2, p3<=t3, p4<=t4, {t1..t4}<=1000, and t4-p4=0.\n> \n> There may be algebraic ways to reduce the number of functions needed to\n> describe the constraints, but I can't for the life of me see how I can\n> create a coefficient matrix (typically, the LHS) since each line of said\n> matrix, which corresponds to the constraints, needs to be a function of\n> the unknowns in the objective function -- being, p1, p2, p3 and p4.\n> \n> In Maple (for example), this is trivial:\n> \n>   ???? cost:=35*p10+55*p12+50*p14+65*p16;\n> cnsts:={t10=640,t12=t10-p10+825,t14=t12-p12+580,t16=t14-p14+925,t16-p16=0,p10<=t10,p12<=t12,p14<=t14,p16<=t16,t10<=1000,t12<=1000,t14<=1000,t16<=1000};\n>   ? ?? Minimize(cost,cnsts,assume={nonnegative});\n> \n> which yields (correctly):\n> \n> p1=640, p2=405, p3=1000, p4=925\n> \n> for minimized cost of 154800.\n> \n> Took only a minute to also set this up in Maxima, and using Solver in\n> Excel. But danged if I can suss out any way to do this in R.\n> \n> Pointers to the obvious welcome.\n> \t[[alternative HTML version deleted]]\n> \n> \n\n-- \napl. Prof. PD Dr. Martin Becker, Akad. Oberrat\nLehrstab Statistik\nQuantitative Methoden\nFakult?t f?r Empirische Humanwissenschaften und Wirtschaftswissenschaft\nUniversit?t des Saarlandes\nCampus C3 1, Raum 2.17\n66123 Saarbr?cken\nDeutschland",
+      "body_plain": "Apart from the fact that the statement \"such that t1+t2+t3+t4=2970 (as \nit must)\" is not correct, the LP can be implemented as follows:\n\nlibrary(lpSolve)\nLHS <- rbind(\nc(0,0,0,0, 1, 0, 0,0),\nc(1,0,0,0,-1, 1, 0,0),\nc(0,1,0,0, 0,-1, 1,0),\nc(0,0,1,0, 0, 0,-1,1),\ncbind(-diag(4),diag(4)),\nc(0,0,0,0,0,1,0,0),\nc(0,0,0,0,0,0,1,0),\nc(0,0,0,0,0,0,0,1)\n)\n\nRHS <- c(640,825,580,925,0,0,0,0,1000,1000,1000)\n\nDIR <- c(rep(\"==\",4),rep(\">=\",3),\"=\",rep(\"<=\",3))\n\nOBJ <- c(35,55,50,65,0,0,0,0)\n\nlp(\"min\",OBJ,LHS,DIR,RHS)\n\nBest,\nMartin\n\n\nAm 29.01.24 um 22:28 schrieb Evan Cooch:\n> Question for 'experts' in LP using R (using the lpSolve package, say) --\n> which does not apply to me for the sort of problem I describe below.\n> I've run any number of LP's using lpSolve in R, but all of them to date\n> have objective and constraint functions that both contain the same\n> variables. This lets you set up a LHS and RHS matrix/vector that are\n> symmetrical.\n> \n> But, for a problem a student posed in class, I'm stuck with how to do it\n> in R, if its even possible (its trivial in Maxima, Maple...even using\n> Solver in Excel, but I haven't been remotely successful in getting\n> anything to work in R).\n> \n> Suppose you have a production system that at 4 sequential time steps\n> generate 640, 825, 580, and 925 units. At each time step, you need to\n> decide how many of those units need to be 'quality control' (QC) checked\n> in some fashion, subject to some constraints.\n> \n>    --> at no point in time can the number of units in the system be >1000\n>    --> at the end of the production cycle, there can be no units left\n>    --> 'QC checking' costs money, varying as a function of the time step\n> -- 35, 55, 50 and 65 for each unit, for each time step in turn.\n> \n> Objective is to minimize total cost. The total cost objective function\n> is trivial. Let p1 = number sent out time step 1, p2 number sent out at\n> time step 3, and so on. So, total cost function we want to minimize is\n> simply\n> \n>     cost=(35*p1)+(55*p2)+(50*p3)+(65*p4)\n> \n> where p1+p2+p3+p4=(640+825+580+925)=2970 (i.e., all the products get\n> checked). The question is, what number do you send out at each time step\n> to minimize cost?\n> \n> Where I get hung up in R is the fact that if I let t(i) be the number of\n> products at each time step, then\n> \n>       t1=640,\n>       t2=t1-p1+825\n>       t3=t2-p2+580\n>       t4=t3-p3+925\n> \n> such that t1+t2+t3+t4=2970 (as it must), with additional constraints being\n> \n>     p1<=t1, p2<=t2, p3<=t3, p4<=t4, {t1..t4}<=1000, and t4-p4=0.\n> \n> There may be algebraic ways to reduce the number of functions needed to\n> describe the constraints, but I can't for the life of me see how I can\n> create a coefficient matrix (typically, the LHS) since each line of said\n> matrix, which corresponds to the constraints, needs to be a function of\n> the unknowns in the objective function -- being, p1, p2, p3 and p4.\n> \n> In Maple (for example), this is trivial:\n> \n>   ?    cost:=35*p10+55*p12+50*p14+65*p16;\n> cnsts:={t10=640,t12=t10-p10+825,t14=t12-p12+580,t16=t14-p14+925,t16-p16=0,p10<=t10,p12<=t12,p14<=t14,p16<=t16,t10<=1000,t12<=1000,t14<=1000,t16<=1000};\n>        Minimize(cost,cnsts,assume={nonnegative});\n> \n> which yields (correctly):\n> \n> p1=640, p2=405, p3=1000, p4=925\n> \n> for minimized cost of 154800.\n> \n> Took only a minute to also set this up in Maxima, and using Solver in\n> Excel. But danged if I can suss out any way to do this in R.\n> \n> Pointers to the obvious welcome.\n> \t[[alternative HTML version deleted]]\n> \n> \n\n-- \napl. Prof. PD Dr. Martin Becker, Akad. Oberrat\nLehrstab Statistik\nQuantitative Methoden\nFakultät für Empirische Humanwissenschaften und Wirtschaftswissenschaft\nUniversität des Saarlandes\nCampus C3 1, Raum 2.17\n66123 Saarbrücken\nDeutschland",
       "body_snippet": "Apart from the fact that the statement \"such that t1+t2+t3+t4=2970 (as \nit must)\" is not correct, the LP can be implemented as follows:\n\nlibrary(lpSolve)\nLHS <- rbind(\nc(0,0,0,0, 1, 0, 0,0),\nc(1,0,0,0",
       "thread_id": "thread-f71585daa54a",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478830.html"
     },
     {
       "id": "msg-3319ce4c3743",
@@ -1317,7 +1387,8 @@
       "body_snippet": "On 2024/1/30 20:00, Martin Becker wrote:\n> Apart from the fact that the statement \"such that t1+t2+t3+t4=2970 (as \n> it must)\" is not correct, the LP can be implemented as follows:\n>\nI was confused by",
       "thread_id": "thread-f71585daa54a",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478831.html"
     },
     {
       "id": "msg-9b696e3fe646",
@@ -1332,11 +1403,12 @@
         "<CABcYAd+SCbLAKkyfW5j3OpYW6tCf_Ui3qiSr=c9iEdDCMSrhkQ@mail.gmail.com>",
         "<87plxj6qyr.fsf@enricoschumann.net>"
       ],
-      "body_plain": "There is also the package solrad that might do some of this. It is more intended for calculating solar radiation, which is probably not what you want, but may do other things you may find helpful.\n\n\n> On Jan 30, 2024, at 5:44?AM, Enrico Schumann <es at enricoschumann.net> wrote:\n> \n> On Tue, 30 Jan 2024, Richard O'Keefe writes:\n> \n>> Given\n>> - UTC timestamp\n>> - a location (latitude,longitude,elevation)\n>> I want to know\n>> - the sun angles\n>> - the moon angles\n>> - the phase of the moon.\n>> I looked on CRAN for astronomy, but didn't notice anything that seems\n>> to offer what I want.  I could try coding these functions myself, but\n>> \"if you didn't write it you didn't wrong it\".\n>> \n> \n> A quick search showed several candidate packages:\n> \n>  https://cran.r-project.org/package=suntools\n>  https://cran.r-project.org/package=suncalc\n> \n> (but I don't use any of those packages)\n> \n> Perhaps also worth asking at:\n>  https://stat.ethz.ch/mailman/listinfo/R-SIG-Geo/\n> \n> \n> -- \n> Enrico Schumann\n> Lucerne, Switzerland\n> http://enricoschumann.net\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nKevin E. Thorpe\nHead of Biostatistics,  Applied Health Research Centre (AHRC)\nLi Ka Shing Knowledge Institute of St. Michael?s Hospital\nAssistant Professor, Dalla Lana School of Public Health\nUniversity of Toronto\nemail: kevin.thorpe at utoronto.ca  Tel: 416.946-8083",
+      "body_plain": "There is also the package solrad that might do some of this. It is more intended for calculating solar radiation, which is probably not what you want, but may do other things you may find helpful.\n\n\n> On Jan 30, 2024, at 5:44 AM, Enrico Schumann <es at enricoschumann.net> wrote:\n> \n> On Tue, 30 Jan 2024, Richard O'Keefe writes:\n> \n>> Given\n>> - UTC timestamp\n>> - a location (latitude,longitude,elevation)\n>> I want to know\n>> - the sun angles\n>> - the moon angles\n>> - the phase of the moon.\n>> I looked on CRAN for astronomy, but didn't notice anything that seems\n>> to offer what I want.  I could try coding these functions myself, but\n>> \"if you didn't write it you didn't wrong it\".\n>> \n> \n> A quick search showed several candidate packages:\n> \n>  https://cran.r-project.org/package=suntools\n>  https://cran.r-project.org/package=suncalc\n> \n> (but I don't use any of those packages)\n> \n> Perhaps also worth asking at:\n>  https://stat.ethz.ch/mailman/listinfo/R-SIG-Geo/\n> \n> \n> -- \n> Enrico Schumann\n> Lucerne, Switzerland\n> http://enricoschumann.net\n> \n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n\n-- \nKevin E. Thorpe\nHead of Biostatistics,  Applied Health Research Centre (AHRC)\nLi Ka Shing Knowledge Institute of St. Michael’s Hospital\nAssistant Professor, Dalla Lana School of Public Health\nUniversity of Toronto\nemail: kevin.thorpe at utoronto.ca  Tel: 416.946-8083",
       "body_snippet": "There is also the package solrad that might do some of this. It is more intended for calculating solar radiation, which is probably not what you want, but may do other things you may find helpful.\n\n\n>",
       "thread_id": "thread-aa0ee0fba61f",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478832.html"
     },
     {
       "id": "msg-b385e5dc1c09",
@@ -1352,7 +1424,8 @@
       "body_snippet": "Dear Rich,\n\nIt depends how the data is generated.\n\nAlthough I am not an expert in ecology, I can explain it based on a biomedical example.\n\nCertain variables are generated geometrically (exponentially",
       "thread_id": "thread-b385e5dc1c09",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478833.html"
     },
     {
       "id": "msg-0b3248e8b486",
@@ -1370,7 +1443,8 @@
       "body_snippet": "On Tue, 30 Jan 2024, Leo Mada wrote:\n\n> It depends how the data is generated.\n> Although I am not an expert in ecology, I can explain it based on a\n> biomedical example.\n\nLeo,\n\nMy data are environment",
       "thread_id": "thread-b385e5dc1c09",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478834.html"
     },
     {
       "id": "msg-ab57691fe8df",
@@ -1386,7 +1460,8 @@
       "body_snippet": "Dear friends,\n\nHope you are doing well. I am currently using R version 4.3.2, and I have a\n.xlsx file that has 46 sheets on it. I basically combined  all 46 sheets\nand read them as a single dataframe ",
       "thread_id": "thread-ab57691fe8df",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478835.html"
     },
     {
       "id": "msg-612e373e48ce",
@@ -1404,7 +1479,8 @@
       "body_snippet": "Dear Rich,\n\nThere are geochemical processes and biological processes that generate the compounds/metabolites/etc: nitrates, heavy metals, and other ions may be generated differently.\n\nSuch processes m",
       "thread_id": "thread-b385e5dc1c09",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478836.html"
     },
     {
       "id": "msg-411089d9806e",
@@ -1422,7 +1498,8 @@
       "body_snippet": "On 30/01/2024 11:10 a.m., Paul Bernal wrote:\n> Dear friends,\n> \n> Hope you are doing well. I am currently using R version 4.3.2, and I have a\n> .xlsx file that has 46 sheets on it. I basically combine",
       "thread_id": "thread-ab57691fe8df",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478837.html"
     },
     {
       "id": "msg-21203136fcdb",
@@ -1441,7 +1518,8 @@
       "body_snippet": "Dear friend Duncan,\n\nThank you so much for your kind reply. Yes, that is exactly what is\nhappening, there are a lot of NA values at the start, so R assumes that the\nfield is of type boolean. The chall",
       "thread_id": "thread-ab57691fe8df",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478838.html"
     },
     {
       "id": "msg-837a190b4974",
@@ -1462,7 +1540,8 @@
       "body_snippet": "Incidentally, \"didn't work\" is not very useful information. Please tell us\nexactly what error message or apparently aberrant result you received.\nAlso, what do you get from:\n\nsapply(your_dataframe, \"c",
       "thread_id": "thread-837a190b4974",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478839.html"
     },
     {
       "id": "msg-a77813843665",
@@ -1482,7 +1561,8 @@
       "body_snippet": "If you are using the read_excel() function from the readxl package, then \nthere's an argument named col_types that lets you specify the types to use.\n\nYou could specify col_types = \"numeric\" to read a",
       "thread_id": "thread-ab57691fe8df",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478840.html"
     },
     {
       "id": "msg-68b0666af1f6",
@@ -1503,7 +1583,8 @@
       "body_snippet": "And your other option - recode what gets imported. It may well be you will\nactually want the blanks to be NAs for instance rather than blank. I'm\nassuming the True and False are >$0 and $0 from your d",
       "thread_id": "thread-ab57691fe8df",
       "thread_depth": 4,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478841.html"
     },
     {
       "id": "msg-dd5dce1cd075",
@@ -1521,11 +1602,12 @@
         "<CAGxFJbRTCnPZ6pLiRS66_6SHZEYkde+ayRWf6axeD39GAYKbkg@mail.gmail.com>",
         "<CAGxFJbQJd3co1dy-hgGdTMWF9BuKsWHwfW7M5g+3-SDYwtGAPg@mail.gmail.com>"
       ],
-      "body_plain": "Hi Bert,\n\nBelow the information you asked me for:\n\nnrow(mydataset)\n[1] 2986276\n\n########\n\nsapply(mydataset, \"class\")\n$`Transit Date`\n[1] \"POSIXct\" \"POSIXt\"\n\n$`Market Segment`\n[1] \"character\"\n\n$`N?mero de Tr?nsitos`\n[1] \"numeric\"\n\n$`Tar No`\n[1] \"character\"\n\n$`Beam Range (Operations)`\n[1] \"character\"\n\n$`Operational Vessel Ranges Group`\n[1] \"character\"\n\n$`Rcnst PCUMS`\n[1] \"numeric\"\n\n$`Toll Amount`\n[1] \"numeric\"\n\n$Beam\n[1] \"numeric\"\n\n$Length\n[1] \"numeric\"\n\n$`Trn Draft (FT)`\n[1] \"numeric\"\n\n$`Other Income Amt`\n[1] \"numeric\"\n\n$`Total Other Income Amount`\n[1] \"logical\"\n\n$`Booking Charges`\n[1] \"numeric\"\n\n$`Booking Cancellation`\n[1] \"logical\"\n\n$`Booking Auction`\n[1] \"logical\"\n\n$`_file`\n[1] \"integer\"\n\nHope this helps you understand what I am dealling with.\n\nCheers,\nPaul\n\nEl mar, 30 ene 2024 a las 14:19, Bert Gunter (<bgunter.4567 at gmail.com>)\nescribi?:\n\n> Incidentally, \"didn't work\" is not very useful information. Please tell us\n> exactly what error message or apparently aberrant result you received.\n> Also, what do you get from:\n>\n> sapply(your_dataframe, \"class\")\n> nrow(your_dataframe)\n>\n> (as I suspect what you think it is, isn't).\n>\n> Cheers,\n> Bert\n>\n> On Tue, Jan 30, 2024 at 11:01?AM Bert Gunter <bgunter.4567 at gmail.com>\n> wrote:\n>\n>> \"I cannot change the data type from\n>> boolean to numeric. I tried doing dataset$my_field =\n>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>> dataset[complete.cases(dataset), ], didn't work either. \"\n>>\n>> Sorry, but all I can say is: huh?\n>>\n>> > dt <- data.frame(a = c(NA,NA, FALSE, TRUE), b = 1:4)\n>> > dt\n>>       a b\n>> 1    NA 1\n>> 2    NA 2\n>> 3 FALSE 3\n>> 4  TRUE 4\n>> > sapply(dt, class)\n>>         a         b\n>> \"logical\" \"integer\"\n>> > dt$a <- as.numeric(dt$a)\n>> > dt\n>>    a b\n>> 1 NA 1\n>> 2 NA 2\n>> 3  0 3\n>> 4  1 4\n>> > sapply(dt, class)\n>>         a         b\n>> \"numeric\" \"integer\"\n>>\n>> So either I'm missing something or you are. Happy to be corrected and\n>> chastised if the former.\n>>\n>> Cheers,\n>> Bert\n>>\n>>\n>> On Tue, Jan 30, 2024 at 10:41?AM Paul Bernal <paulbernal07 at gmail.com>\n>> wrote:\n>>\n>>> Dear friend Duncan,\n>>>\n>>> Thank you so much for your kind reply. Yes, that is exactly what is\n>>> happening, there are a lot of NA values at the start, so R assumes that\n>>> the\n>>> field is of type boolean. The challenge that I am facing is that I want\n>>> to\n>>> read into R an Excel file that has many sheets (46 in this case) but I\n>>> wanted to combine all 46 sheets into a single dataframe (since the\n>>> columns\n>>> are exactly the same for all 46 sheets). The rio package does this\n>>> nicely,\n>>> the problem is that, once I have the full dataframe (which amounts to\n>>> roughly 2.98 million rows total), I cannot change the data type from\n>>> boolean to numeric. I tried doing dataset$my_field =\n>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>> dataset[complete.cases(dataset), ], didn't work either.\n>>>\n>>> The only thing that worked for me was to take a single sheed and through\n>>> the read_excel function use the guess_max parameter and set it to a\n>>> sufficiently large number (a number >= to the total amount of the full\n>>> merged dataset). I want to automate the merging of the N number of Excel\n>>> sheets so that I don't have to be manually doing it. Unless there is a\n>>> way\n>>> to accomplish something similar to what rio's package function\n>>> import_list\n>>> does, that is able to keep the field's numeric data type nature.\n>>>\n>>> Cheers,\n>>> Paul\n>>>\n>>> El mar, 30 ene 2024 a las 12:23, Duncan Murdoch (<\n>>> murdoch.duncan at gmail.com>)\n>>> escribi?:\n>>>\n>>> > On 30/01/2024 11:10 a.m., Paul Bernal wrote:\n>>> > > Dear friends,\n>>> > >\n>>> > > Hope you are doing well. I am currently using R version 4.3.2, and I\n>>> > have a\n>>> > > .xlsx file that has 46 sheets on it. I basically combined  all 46\n>>> sheets\n>>> > > and read them as a single dataframe in R using package rio.\n>>> > >\n>>> > > I read a solution using package readlx, as suggested in a\n>>> StackOverflow\n>>> > > discussion as follows:\n>>> > > df <- read_excel(path = filepath, sheet = sheet_name, guess_max =\n>>> > 100000).\n>>> > > Now, when you have so many sheets (46 in my case) in an Excel file,\n>>> the\n>>> > rio\n>>> > > methodology is more practical.\n>>> > >\n>>> > > This is what I did:\n>>> > > path =\n>>> > >\n>>> >\n>>> \"C:/Users/myuser/Documents/DataScienceF/Forecast_and_Econometric_Analysis_FIGI\n>>> > > (4).xlsx\"\n>>> > > figidat = import_list(path, rbind = TRUE) #here figidat refers to my\n>>> > dataset\n>>> > >\n>>> > > Now, it successfully imports and merges all records, however, some\n>>> fields\n>>> > > (despite being numeric), R interprets as a boolean field.\n>>> > >\n>>> > > Here is the structure of the field that is causing me problems (I\n>>> > apologize\n>>> > > for the length):\n>>> > > structure(list(StoreCharges = c(NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > ...\n>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA,\n>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,\n>>> > > FALSE, FALSE, FALSE)), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n>>> > > ), row.names = c(NA, -7033L))\n>>> > >\n>>> > > As you can see, when I do the dput, it gives me a bunch of TRUE and\n>>> FALSE\n>>> > > values, when in reality I have records with value $0, records with\n>>> > amounts\n>>> > >> $0 and also a bunch of blank records.\n>>> > >\n>>> > > Any help will be greatly appreciated.\n>>> >\n>>> > I don't know how read_excel() determines column types, but some\n>>> > functions look only at the first n rows to guess the type.  It appears\n>>> > you have a lot of NA values at the start.  That is a logical value, so\n>>> > that might be what is going wrong.\n>>> >\n>>> > In read.table() and related functions, you can specify the types of\n>>> > column explicitly.  It sounds as though that's what you should do if\n>>> > read_excel() offers that as a possibility.\n>>> >\n>>> > Duncan Murdoch\n>>> >\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi Bert,\n\nBelow the information you asked me for:\n\nnrow(mydataset)\n[1] 2986276\n\n########\n\nsapply(mydataset, \"class\")\n$`Transit Date`\n[1] \"POSIXct\" \"POSIXt\"\n\n$`Market Segment`\n[1] \"character\"\n\n$`N?mero",
+      "body_plain": "Hi Bert,\n\nBelow the information you asked me for:\n\nnrow(mydataset)\n[1] 2986276\n\n########\n\nsapply(mydataset, \"class\")\n$`Transit Date`\n[1] \"POSIXct\" \"POSIXt\"\n\n$`Market Segment`\n[1] \"character\"\n\n$`Número de Tránsitos`\n[1] \"numeric\"\n\n$`Tar No`\n[1] \"character\"\n\n$`Beam Range (Operations)`\n[1] \"character\"\n\n$`Operational Vessel Ranges Group`\n[1] \"character\"\n\n$`Rcnst PCUMS`\n[1] \"numeric\"\n\n$`Toll Amount`\n[1] \"numeric\"\n\n$Beam\n[1] \"numeric\"\n\n$Length\n[1] \"numeric\"\n\n$`Trn Draft (FT)`\n[1] \"numeric\"\n\n$`Other Income Amt`\n[1] \"numeric\"\n\n$`Total Other Income Amount`\n[1] \"logical\"\n\n$`Booking Charges`\n[1] \"numeric\"\n\n$`Booking Cancellation`\n[1] \"logical\"\n\n$`Booking Auction`\n[1] \"logical\"\n\n$`_file`\n[1] \"integer\"\n\nHope this helps you understand what I am dealling with.\n\nCheers,\nPaul\n\nEl mar, 30 ene 2024 a las 14:19, Bert Gunter (<bgunter.4567 at gmail.com>)\nescribió:\n\n> Incidentally, \"didn't work\" is not very useful information. Please tell us\n> exactly what error message or apparently aberrant result you received.\n> Also, what do you get from:\n>\n> sapply(your_dataframe, \"class\")\n> nrow(your_dataframe)\n>\n> (as I suspect what you think it is, isn't).\n>\n> Cheers,\n> Bert\n>\n> On Tue, Jan 30, 2024 at 11:01 AM Bert Gunter <bgunter.4567 at gmail.com>\n> wrote:\n>\n>> \"I cannot change the data type from\n>> boolean to numeric. I tried doing dataset$my_field =\n>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>> dataset[complete.cases(dataset), ], didn't work either. \"\n>>\n>> Sorry, but all I can say is: huh?\n>>\n>> > dt <- data.frame(a = c(NA,NA, FALSE, TRUE), b = 1:4)\n>> > dt\n>>       a b\n>> 1    NA 1\n>> 2    NA 2\n>> 3 FALSE 3\n>> 4  TRUE 4\n>> > sapply(dt, class)\n>>         a         b\n>> \"logical\" \"integer\"\n>> > dt$a <- as.numeric(dt$a)\n>> > dt\n>>    a b\n>> 1 NA 1\n>> 2 NA 2\n>> 3  0 3\n>> 4  1 4\n>> > sapply(dt, class)\n>>         a         b\n>> \"numeric\" \"integer\"\n>>\n>> So either I'm missing something or you are. Happy to be corrected and\n>> chastised if the former.\n>>\n>> Cheers,\n>> Bert\n>>\n>>\n>> On Tue, Jan 30, 2024 at 10:41 AM Paul Bernal <paulbernal07 at gmail.com>\n>> wrote:\n>>\n>>> Dear friend Duncan,\n>>>\n>>> Thank you so much for your kind reply. Yes, that is exactly what is\n>>> happening, there are a lot of NA values at the start, so R assumes that\n>>> the\n>>> field is of type boolean. The challenge that I am facing is that I want\n>>> to\n>>> read into R an Excel file that has many sheets (46 in this case) but I\n>>> wanted to combine all 46 sheets into a single dataframe (since the\n>>> columns\n>>> are exactly the same for all 46 sheets). The rio package does this\n>>> nicely,\n>>> the problem is that, once I have the full dataframe (which amounts to\n>>> roughly 2.98 million rows total), I cannot change the data type from\n>>> boolean to numeric. I tried doing dataset$my_field =\n>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>> dataset[complete.cases(dataset), ], didn't work either.\n>>>\n>>> The only thing that worked for me was to take a single sheed and through\n>>> the read_excel function use the guess_max parameter and set it to a\n>>> sufficiently large number (a number >= to the total amount of the full\n>>> merged dataset). I want to automate the merging of the N number of Excel\n>>> sheets so that I don't have to be manually doing it. Unless there is a\n>>> way\n>>> to accomplish something similar to what rio's package function\n>>> import_list\n>>> does, that is able to keep the field's numeric data type nature.\n>>>\n>>> Cheers,\n>>> Paul\n>>>\n>>> El mar, 30 ene 2024 a las 12:23, Duncan Murdoch (<\n>>> murdoch.duncan at gmail.com>)\n>>> escribió:\n>>>\n>>> > On 30/01/2024 11:10 a.m., Paul Bernal wrote:\n>>> > > Dear friends,\n>>> > >\n>>> > > Hope you are doing well. I am currently using R version 4.3.2, and I\n>>> > have a\n>>> > > .xlsx file that has 46 sheets on it. I basically combined  all 46\n>>> sheets\n>>> > > and read them as a single dataframe in R using package rio.\n>>> > >\n>>> > > I read a solution using package readlx, as suggested in a\n>>> StackOverflow\n>>> > > discussion as follows:\n>>> > > df <- read_excel(path = filepath, sheet = sheet_name, guess_max =\n>>> > 100000).\n>>> > > Now, when you have so many sheets (46 in my case) in an Excel file,\n>>> the\n>>> > rio\n>>> > > methodology is more practical.\n>>> > >\n>>> > > This is what I did:\n>>> > > path =\n>>> > >\n>>> >\n>>> \"C:/Users/myuser/Documents/DataScienceF/Forecast_and_Econometric_Analysis_FIGI\n>>> > > (4).xlsx\"\n>>> > > figidat = import_list(path, rbind = TRUE) #here figidat refers to my\n>>> > dataset\n>>> > >\n>>> > > Now, it successfully imports and merges all records, however, some\n>>> fields\n>>> > > (despite being numeric), R interprets as a boolean field.\n>>> > >\n>>> > > Here is the structure of the field that is causing me problems (I\n>>> > apologize\n>>> > > for the length):\n>>> > > structure(list(StoreCharges = c(NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>> > ...\n>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA,\n>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,\n>>> > > FALSE, FALSE, FALSE)), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n>>> > > ), row.names = c(NA, -7033L))\n>>> > >\n>>> > > As you can see, when I do the dput, it gives me a bunch of TRUE and\n>>> FALSE\n>>> > > values, when in reality I have records with value $0, records with\n>>> > amounts\n>>> > >> $0 and also a bunch of blank records.\n>>> > >\n>>> > > Any help will be greatly appreciated.\n>>> >\n>>> > I don't know how read_excel() determines column types, but some\n>>> > functions look only at the first n rows to guess the type.  It appears\n>>> > you have a lot of NA values at the start.  That is a logical value, so\n>>> > that might be what is going wrong.\n>>> >\n>>> > In read.table() and related functions, you can specify the types of\n>>> > column explicitly.  It sounds as though that's what you should do if\n>>> > read_excel() offers that as a possibility.\n>>> >\n>>> > Duncan Murdoch\n>>> >\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>> PLEASE do read the posting guide\n>>> http://www.R-project.org/posting-guide.html\n>>> and provide commented, minimal, self-contained, reproducible code.\n>>>\n>>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Bert,\n\nBelow the information you asked me for:\n\nnrow(mydataset)\n[1] 2986276\n\n########\n\nsapply(mydataset, \"class\")\n$`Transit Date`\n[1] \"POSIXct\" \"POSIXt\"\n\n$`Market Segment`\n[1] \"character\"\n\n$`Número",
       "thread_id": "thread-837a190b4974",
       "thread_depth": 1,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478842.html"
     },
     {
       "id": "msg-38763ca916e6",
@@ -1544,11 +1626,12 @@
         "<CAGxFJbQJd3co1dy-hgGdTMWF9BuKsWHwfW7M5g+3-SDYwtGAPg@mail.gmail.com>",
         "<CAMOcQfMggfGY+ptDpL2PoWd3b2XYkRDFWk5PBVXVQ3c5WVyCzw@mail.gmail.com>"
       ],
-      "body_plain": "Hi Bert,\n\nAfter doing sapply(your_dataframe, \"class\"), it seems like R is recognizing\nthat the field is of type numeric after all, the problem (it seems) is how\nthe import_list() function from the rio package is reading the data (my\nsuspicion).\n\nBest regards,\nPaul\n\nEl mar, 30 ene 2024 a las 14:59, Paul Bernal (<paulbernal07 at gmail.com>)\nescribi?:\n\n> Hi Bert,\n>\n> Below the information you asked me for:\n>\n> nrow(mydataset)\n> [1] 2986276\n>\n> ########\n>\n> sapply(mydataset, \"class\")\n> $`Transit Date`\n> [1] \"POSIXct\" \"POSIXt\"\n>\n> $`Market Segment`\n> [1] \"character\"\n>\n> $`N?mero de Tr?nsitos`\n> [1] \"numeric\"\n>\n> $`Tar No`\n> [1] \"character\"\n>\n> $`Beam Range (Operations)`\n> [1] \"character\"\n>\n> $`Operational Vessel Ranges Group`\n> [1] \"character\"\n>\n> $`Rcnst PCUMS`\n> [1] \"numeric\"\n>\n> $`Toll Amount`\n> [1] \"numeric\"\n>\n> $Beam\n> [1] \"numeric\"\n>\n> $Length\n> [1] \"numeric\"\n>\n> $`Trn Draft (FT)`\n> [1] \"numeric\"\n>\n> $`Other Income Amt`\n> [1] \"numeric\"\n>\n> $`Total Other Income Amount`\n> [1] \"logical\"\n>\n> $`Booking Charges`\n> [1] \"numeric\"\n>\n> $`Booking Cancellation`\n> [1] \"logical\"\n>\n> $`Booking Auction`\n> [1] \"logical\"\n>\n> $`_file`\n> [1] \"integer\"\n>\n> Hope this helps you understand what I am dealling with.\n>\n> Cheers,\n> Paul\n>\n> El mar, 30 ene 2024 a las 14:19, Bert Gunter (<bgunter.4567 at gmail.com>)\n> escribi?:\n>\n>> Incidentally, \"didn't work\" is not very useful information. Please tell\n>> us exactly what error message or apparently aberrant result you received.\n>> Also, what do you get from:\n>>\n>> sapply(your_dataframe, \"class\")\n>> nrow(your_dataframe)\n>>\n>> (as I suspect what you think it is, isn't).\n>>\n>> Cheers,\n>> Bert\n>>\n>> On Tue, Jan 30, 2024 at 11:01?AM Bert Gunter <bgunter.4567 at gmail.com>\n>> wrote:\n>>\n>>> \"I cannot change the data type from\n>>> boolean to numeric. I tried doing dataset$my_field =\n>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>> dataset[complete.cases(dataset), ], didn't work either. \"\n>>>\n>>> Sorry, but all I can say is: huh?\n>>>\n>>> > dt <- data.frame(a = c(NA,NA, FALSE, TRUE), b = 1:4)\n>>> > dt\n>>>       a b\n>>> 1    NA 1\n>>> 2    NA 2\n>>> 3 FALSE 3\n>>> 4  TRUE 4\n>>> > sapply(dt, class)\n>>>         a         b\n>>> \"logical\" \"integer\"\n>>> > dt$a <- as.numeric(dt$a)\n>>> > dt\n>>>    a b\n>>> 1 NA 1\n>>> 2 NA 2\n>>> 3  0 3\n>>> 4  1 4\n>>> > sapply(dt, class)\n>>>         a         b\n>>> \"numeric\" \"integer\"\n>>>\n>>> So either I'm missing something or you are. Happy to be corrected and\n>>> chastised if the former.\n>>>\n>>> Cheers,\n>>> Bert\n>>>\n>>>\n>>> On Tue, Jan 30, 2024 at 10:41?AM Paul Bernal <paulbernal07 at gmail.com>\n>>> wrote:\n>>>\n>>>> Dear friend Duncan,\n>>>>\n>>>> Thank you so much for your kind reply. Yes, that is exactly what is\n>>>> happening, there are a lot of NA values at the start, so R assumes that\n>>>> the\n>>>> field is of type boolean. The challenge that I am facing is that I want\n>>>> to\n>>>> read into R an Excel file that has many sheets (46 in this case) but I\n>>>> wanted to combine all 46 sheets into a single dataframe (since the\n>>>> columns\n>>>> are exactly the same for all 46 sheets). The rio package does this\n>>>> nicely,\n>>>> the problem is that, once I have the full dataframe (which amounts to\n>>>> roughly 2.98 million rows total), I cannot change the data type from\n>>>> boolean to numeric. I tried doing dataset$my_field =\n>>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>>> dataset[complete.cases(dataset), ], didn't work either.\n>>>>\n>>>> The only thing that worked for me was to take a single sheed and through\n>>>> the read_excel function use the guess_max parameter and set it to a\n>>>> sufficiently large number (a number >= to the total amount of the full\n>>>> merged dataset). I want to automate the merging of the N number of Excel\n>>>> sheets so that I don't have to be manually doing it. Unless there is a\n>>>> way\n>>>> to accomplish something similar to what rio's package function\n>>>> import_list\n>>>> does, that is able to keep the field's numeric data type nature.\n>>>>\n>>>> Cheers,\n>>>> Paul\n>>>>\n>>>> El mar, 30 ene 2024 a las 12:23, Duncan Murdoch (<\n>>>> murdoch.duncan at gmail.com>)\n>>>> escribi?:\n>>>>\n>>>> > On 30/01/2024 11:10 a.m., Paul Bernal wrote:\n>>>> > > Dear friends,\n>>>> > >\n>>>> > > Hope you are doing well. I am currently using R version 4.3.2, and I\n>>>> > have a\n>>>> > > .xlsx file that has 46 sheets on it. I basically combined  all 46\n>>>> sheets\n>>>> > > and read them as a single dataframe in R using package rio.\n>>>> > >\n>>>> > > I read a solution using package readlx, as suggested in a\n>>>> StackOverflow\n>>>> > > discussion as follows:\n>>>> > > df <- read_excel(path = filepath, sheet = sheet_name, guess_max =\n>>>> > 100000).\n>>>> > > Now, when you have so many sheets (46 in my case) in an Excel file,\n>>>> the\n>>>> > rio\n>>>> > > methodology is more practical.\n>>>> > >\n>>>> > > This is what I did:\n>>>> > > path =\n>>>> > >\n>>>> >\n>>>> \"C:/Users/myuser/Documents/DataScienceF/Forecast_and_Econometric_Analysis_FIGI\n>>>> > > (4).xlsx\"\n>>>> > > figidat = import_list(path, rbind = TRUE) #here figidat refers to my\n>>>> > dataset\n>>>> > >\n>>>> > > Now, it successfully imports and merges all records, however, some\n>>>> fields\n>>>> > > (despite being numeric), R interprets as a boolean field.\n>>>> > >\n>>>> > > Here is the structure of the field that is causing me problems (I\n>>>> > apologize\n>>>> > > for the length):\n>>>> > > structure(list(StoreCharges = c(NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > ...\n>>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA,\n>>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,\n>>>> > > FALSE, FALSE, FALSE)), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n>>>> > > ), row.names = c(NA, -7033L))\n>>>> > >\n>>>> > > As you can see, when I do the dput, it gives me a bunch of TRUE and\n>>>> FALSE\n>>>> > > values, when in reality I have records with value $0, records with\n>>>> > amounts\n>>>> > >> $0 and also a bunch of blank records.\n>>>> > >\n>>>> > > Any help will be greatly appreciated.\n>>>> >\n>>>> > I don't know how read_excel() determines column types, but some\n>>>> > functions look only at the first n rows to guess the type.  It appears\n>>>> > you have a lot of NA values at the start.  That is a logical value, so\n>>>> > that might be what is going wrong.\n>>>> >\n>>>> > In read.table() and related functions, you can specify the types of\n>>>> > column explicitly.  It sounds as though that's what you should do if\n>>>> > read_excel() offers that as a possibility.\n>>>> >\n>>>> > Duncan Murdoch\n>>>> >\n>>>>\n>>>>         [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>>> http://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>\n>>>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi Bert,\n\nAfter doing sapply(your_dataframe, \"class\"), it seems like R is recognizing\nthat the field is of type numeric after all, the problem (it seems) is how\nthe import_list() function from the rio package is reading the data (my\nsuspicion).\n\nBest regards,\nPaul\n\nEl mar, 30 ene 2024 a las 14:59, Paul Bernal (<paulbernal07 at gmail.com>)\nescribió:\n\n> Hi Bert,\n>\n> Below the information you asked me for:\n>\n> nrow(mydataset)\n> [1] 2986276\n>\n> ########\n>\n> sapply(mydataset, \"class\")\n> $`Transit Date`\n> [1] \"POSIXct\" \"POSIXt\"\n>\n> $`Market Segment`\n> [1] \"character\"\n>\n> $`Número de Tránsitos`\n> [1] \"numeric\"\n>\n> $`Tar No`\n> [1] \"character\"\n>\n> $`Beam Range (Operations)`\n> [1] \"character\"\n>\n> $`Operational Vessel Ranges Group`\n> [1] \"character\"\n>\n> $`Rcnst PCUMS`\n> [1] \"numeric\"\n>\n> $`Toll Amount`\n> [1] \"numeric\"\n>\n> $Beam\n> [1] \"numeric\"\n>\n> $Length\n> [1] \"numeric\"\n>\n> $`Trn Draft (FT)`\n> [1] \"numeric\"\n>\n> $`Other Income Amt`\n> [1] \"numeric\"\n>\n> $`Total Other Income Amount`\n> [1] \"logical\"\n>\n> $`Booking Charges`\n> [1] \"numeric\"\n>\n> $`Booking Cancellation`\n> [1] \"logical\"\n>\n> $`Booking Auction`\n> [1] \"logical\"\n>\n> $`_file`\n> [1] \"integer\"\n>\n> Hope this helps you understand what I am dealling with.\n>\n> Cheers,\n> Paul\n>\n> El mar, 30 ene 2024 a las 14:19, Bert Gunter (<bgunter.4567 at gmail.com>)\n> escribió:\n>\n>> Incidentally, \"didn't work\" is not very useful information. Please tell\n>> us exactly what error message or apparently aberrant result you received.\n>> Also, what do you get from:\n>>\n>> sapply(your_dataframe, \"class\")\n>> nrow(your_dataframe)\n>>\n>> (as I suspect what you think it is, isn't).\n>>\n>> Cheers,\n>> Bert\n>>\n>> On Tue, Jan 30, 2024 at 11:01 AM Bert Gunter <bgunter.4567 at gmail.com>\n>> wrote:\n>>\n>>> \"I cannot change the data type from\n>>> boolean to numeric. I tried doing dataset$my_field =\n>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>> dataset[complete.cases(dataset), ], didn't work either. \"\n>>>\n>>> Sorry, but all I can say is: huh?\n>>>\n>>> > dt <- data.frame(a = c(NA,NA, FALSE, TRUE), b = 1:4)\n>>> > dt\n>>>       a b\n>>> 1    NA 1\n>>> 2    NA 2\n>>> 3 FALSE 3\n>>> 4  TRUE 4\n>>> > sapply(dt, class)\n>>>         a         b\n>>> \"logical\" \"integer\"\n>>> > dt$a <- as.numeric(dt$a)\n>>> > dt\n>>>    a b\n>>> 1 NA 1\n>>> 2 NA 2\n>>> 3  0 3\n>>> 4  1 4\n>>> > sapply(dt, class)\n>>>         a         b\n>>> \"numeric\" \"integer\"\n>>>\n>>> So either I'm missing something or you are. Happy to be corrected and\n>>> chastised if the former.\n>>>\n>>> Cheers,\n>>> Bert\n>>>\n>>>\n>>> On Tue, Jan 30, 2024 at 10:41 AM Paul Bernal <paulbernal07 at gmail.com>\n>>> wrote:\n>>>\n>>>> Dear friend Duncan,\n>>>>\n>>>> Thank you so much for your kind reply. Yes, that is exactly what is\n>>>> happening, there are a lot of NA values at the start, so R assumes that\n>>>> the\n>>>> field is of type boolean. The challenge that I am facing is that I want\n>>>> to\n>>>> read into R an Excel file that has many sheets (46 in this case) but I\n>>>> wanted to combine all 46 sheets into a single dataframe (since the\n>>>> columns\n>>>> are exactly the same for all 46 sheets). The rio package does this\n>>>> nicely,\n>>>> the problem is that, once I have the full dataframe (which amounts to\n>>>> roughly 2.98 million rows total), I cannot change the data type from\n>>>> boolean to numeric. I tried doing dataset$my_field =\n>>>> as.numeric(dataset$my_field), I also tried to do dataset <-\n>>>> dataset[complete.cases(dataset), ], didn't work either.\n>>>>\n>>>> The only thing that worked for me was to take a single sheed and through\n>>>> the read_excel function use the guess_max parameter and set it to a\n>>>> sufficiently large number (a number >= to the total amount of the full\n>>>> merged dataset). I want to automate the merging of the N number of Excel\n>>>> sheets so that I don't have to be manually doing it. Unless there is a\n>>>> way\n>>>> to accomplish something similar to what rio's package function\n>>>> import_list\n>>>> does, that is able to keep the field's numeric data type nature.\n>>>>\n>>>> Cheers,\n>>>> Paul\n>>>>\n>>>> El mar, 30 ene 2024 a las 12:23, Duncan Murdoch (<\n>>>> murdoch.duncan at gmail.com>)\n>>>> escribió:\n>>>>\n>>>> > On 30/01/2024 11:10 a.m., Paul Bernal wrote:\n>>>> > > Dear friends,\n>>>> > >\n>>>> > > Hope you are doing well. I am currently using R version 4.3.2, and I\n>>>> > have a\n>>>> > > .xlsx file that has 46 sheets on it. I basically combined  all 46\n>>>> sheets\n>>>> > > and read them as a single dataframe in R using package rio.\n>>>> > >\n>>>> > > I read a solution using package readlx, as suggested in a\n>>>> StackOverflow\n>>>> > > discussion as follows:\n>>>> > > df <- read_excel(path = filepath, sheet = sheet_name, guess_max =\n>>>> > 100000).\n>>>> > > Now, when you have so many sheets (46 in my case) in an Excel file,\n>>>> the\n>>>> > rio\n>>>> > > methodology is more practical.\n>>>> > >\n>>>> > > This is what I did:\n>>>> > > path =\n>>>> > >\n>>>> >\n>>>> \"C:/Users/myuser/Documents/DataScienceF/Forecast_and_Econometric_Analysis_FIGI\n>>>> > > (4).xlsx\"\n>>>> > > figidat = import_list(path, rbind = TRUE) #here figidat refers to my\n>>>> > dataset\n>>>> > >\n>>>> > > Now, it successfully imports and merges all records, however, some\n>>>> fields\n>>>> > > (despite being numeric), R interprets as a boolean field.\n>>>> > >\n>>>> > > Here is the structure of the field that is causing me problems (I\n>>>> > apologize\n>>>> > > for the length):\n>>>> > > structure(list(StoreCharges = c(NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > > NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,\n>>>> > ...\n>>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA,\n>>>> > > FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,\n>>>> > > FALSE, FALSE, FALSE)), class = c(\"tbl_df\", \"tbl\", \"data.frame\"\n>>>> > > ), row.names = c(NA, -7033L))\n>>>> > >\n>>>> > > As you can see, when I do the dput, it gives me a bunch of TRUE and\n>>>> FALSE\n>>>> > > values, when in reality I have records with value $0, records with\n>>>> > amounts\n>>>> > >> $0 and also a bunch of blank records.\n>>>> > >\n>>>> > > Any help will be greatly appreciated.\n>>>> >\n>>>> > I don't know how read_excel() determines column types, but some\n>>>> > functions look only at the first n rows to guess the type.  It appears\n>>>> > you have a lot of NA values at the start.  That is a logical value, so\n>>>> > that might be what is going wrong.\n>>>> >\n>>>> > In read.table() and related functions, you can specify the types of\n>>>> > column explicitly.  It sounds as though that's what you should do if\n>>>> > read_excel() offers that as a possibility.\n>>>> >\n>>>> > Duncan Murdoch\n>>>> >\n>>>>\n>>>>         [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>>>> https://stat.ethz.ch/mailman/listinfo/r-help\n>>>> PLEASE do read the posting guide\n>>>> http://www.R-project.org/posting-guide.html\n>>>> and provide commented, minimal, self-contained, reproducible code.\n>>>>\n>>>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi Bert,\n\nAfter doing sapply(your_dataframe, \"class\"), it seems like R is recognizing\nthat the field is of type numeric after all, the problem (it seems) is how\nthe import_list() function from the rio",
       "thread_id": "thread-837a190b4974",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478843.html"
     },
     {
       "id": "msg-4179ad421fcb",
@@ -1567,7 +1650,8 @@
       "body_snippet": "Thank you very much.  suncalc looks like just what I want.\n\nOn Tue, 30 Jan 2024 at 23:44, Enrico Schumann <es at enricoschumann.net> wrote:\n>\n> On Tue, 30 Jan 2024, Richard O'Keefe writes:\n>\n> > Given",
       "thread_id": "thread-aa0ee0fba61f",
       "thread_depth": 2,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478844.html"
     },
     {
       "id": "msg-46ba7ae2afa4",
@@ -1583,11 +1667,12 @@
         "<87plxj6qyr.fsf@enricoschumann.net>",
         "<DAD12B08-811B-4FB8-BC91-A6ECD504B5DD@utoronto.ca>"
       ],
-      "body_plain": "Thank you for the tip about solrad.  I don't need it right now, but I\nshall certainly have a use for it soon.\n\nOn Wed, 31 Jan 2024 at 02:42, Kevin Thorpe <kevin.thorpe at utoronto.ca> wrote:\n>\n> There is also the package solrad that might do some of this. It is more intended for calculating solar radiation, which is probably not what you want, but may do other things you may find helpful.\n>\n>\n> > On Jan 30, 2024, at 5:44?AM, Enrico Schumann <es at enricoschumann.net> wrote:\n> >\n> > On Tue, 30 Jan 2024, Richard O'Keefe writes:\n> >\n> >> Given\n> >> - UTC timestamp\n> >> - a location (latitude,longitude,elevation)\n> >> I want to know\n> >> - the sun angles\n> >> - the moon angles\n> >> - the phase of the moon.\n> >> I looked on CRAN for astronomy, but didn't notice anything that seems\n> >> to offer what I want.  I could try coding these functions myself, but\n> >> \"if you didn't write it you didn't wrong it\".\n> >>\n> >\n> > A quick search showed several candidate packages:\n> >\n> >  https://cran.r-project.org/package=suntools\n> >  https://cran.r-project.org/package=suncalc\n> >\n> > (but I don't use any of those packages)\n> >\n> > Perhaps also worth asking at:\n> >  https://stat.ethz.ch/mailman/listinfo/R-SIG-Geo/\n> >\n> >\n> > --\n> > Enrico Schumann\n> > Lucerne, Switzerland\n> > http://enricoschumann.net\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n> --\n> Kevin E. Thorpe\n> Head of Biostatistics,  Applied Health Research Centre (AHRC)\n> Li Ka Shing Knowledge Institute of St. Michael?s Hospital\n> Assistant Professor, Dalla Lana School of Public Health\n> University of Toronto\n> email: kevin.thorpe at utoronto.ca  Tel: 416.946-8083\n>\n>\n>",
+      "body_plain": "Thank you for the tip about solrad.  I don't need it right now, but I\nshall certainly have a use for it soon.\n\nOn Wed, 31 Jan 2024 at 02:42, Kevin Thorpe <kevin.thorpe at utoronto.ca> wrote:\n>\n> There is also the package solrad that might do some of this. It is more intended for calculating solar radiation, which is probably not what you want, but may do other things you may find helpful.\n>\n>\n> > On Jan 30, 2024, at 5:44 AM, Enrico Schumann <es at enricoschumann.net> wrote:\n> >\n> > On Tue, 30 Jan 2024, Richard O'Keefe writes:\n> >\n> >> Given\n> >> - UTC timestamp\n> >> - a location (latitude,longitude,elevation)\n> >> I want to know\n> >> - the sun angles\n> >> - the moon angles\n> >> - the phase of the moon.\n> >> I looked on CRAN for astronomy, but didn't notice anything that seems\n> >> to offer what I want.  I could try coding these functions myself, but\n> >> \"if you didn't write it you didn't wrong it\".\n> >>\n> >\n> > A quick search showed several candidate packages:\n> >\n> >  https://cran.r-project.org/package=suntools\n> >  https://cran.r-project.org/package=suncalc\n> >\n> > (but I don't use any of those packages)\n> >\n> > Perhaps also worth asking at:\n> >  https://stat.ethz.ch/mailman/listinfo/R-SIG-Geo/\n> >\n> >\n> > --\n> > Enrico Schumann\n> > Lucerne, Switzerland\n> > http://enricoschumann.net\n> >\n> > ______________________________________________\n> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> > https://stat.ethz.ch/mailman/listinfo/r-help\n> > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html\n> > and provide commented, minimal, self-contained, reproducible code.\n>\n> --\n> Kevin E. Thorpe\n> Head of Biostatistics,  Applied Health Research Centre (AHRC)\n> Li Ka Shing Knowledge Institute of St. Michael’s Hospital\n> Assistant Professor, Dalla Lana School of Public Health\n> University of Toronto\n> email: kevin.thorpe at utoronto.ca  Tel: 416.946-8083\n>\n>\n>",
       "body_snippet": "Thank you for the tip about solrad.  I don't need it right now, but I\nshall certainly have a use for it soon.\n\nOn Wed, 31 Jan 2024 at 02:42, Kevin Thorpe <kevin.thorpe at utoronto.ca> wrote:\n>\n> There",
       "thread_id": "thread-aa0ee0fba61f",
       "thread_depth": 3,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478845.html"
     },
     {
       "id": "msg-5413adfa491e",
@@ -1603,7 +1688,8 @@
       "body_snippet": "Dear Richard,\n\nI wrote s small shiny app to improve the search for CRAN-packages. It can be installed from GitHub:\nhttps://github.com/discoleo/PackageBrowser\n\nSearching for \"(?<![- ]cat)astro|sun\" yie",
       "thread_id": "thread-5413adfa491e",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-January/478846.html"
     },
     {
       "id": "msg-301748a153b8",
@@ -1619,7 +1705,8 @@
       "body_snippet": "HI All:\n\nWe are trying to figure out a problem that is occurring with a package,  and we need a non-NOAA person with a Windows computer with the latest R to test for us what is failing (but works on M",
       "thread_id": "thread-301748a153b8",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2024-February/478847.html"
     }
   ],
   "threads": [
