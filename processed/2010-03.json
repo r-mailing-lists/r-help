@@ -71213,7 +71213,8 @@
       "body_snippet": "P.S.  Here is some code that is more directly relevant.\n\nFrank\n\ncphadjchisq <- function(adjust, candidates, S)\n   {\n     require(rms)\n\n     f <- coxphFit(adjust, S, type='right', method='efron')\n     ",
       "thread_id": "thread-70d9b1322a90",
       "thread_depth": 4,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233917.html"
     },
     {
       "id": "msg-dc79088b64f6",
@@ -71230,6 +71231,7 @@
       "thread_id": "thread-dc79088b64f6",
       "thread_depth": 0,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233919.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/6c693fad/attachment.pl"
       ]
@@ -71250,7 +71252,8 @@
       "body_snippet": "You can use\n\nlevelplot(runif(100)~rep(1:10, each=10)+rep(1:10, times=10))\ntrellis.focus(\"panel\", 1, 1, highlight=FALSE)\n lpoints(runif(100,0,10), runif(100,0,10), pch=2, col=2, cex=2)\ntrellis.unfocus(",
       "thread_id": "thread-38b4b652033a",
       "thread_depth": 1,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233921.html"
     },
     {
       "id": "msg-c633ff77ad1e",
@@ -71269,7 +71272,8 @@
       "body_snippet": "This should do the trick:\n\ndata$date <- as.Date(data$date, '%m/%d/%Y') \ndata$month <- format(data$date, '%Y-%m')\nby(data$rammday, data$month, sum)\n\nHope that helps,\n\nJason\n\n\n-----Original Message-----",
       "thread_id": "thread-c3591c0a0ef2",
       "thread_depth": 2,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233938.html"
     },
     {
       "id": "msg-85181bf64366",
@@ -71286,6 +71290,7 @@
       "thread_id": "thread-85181bf64366",
       "thread_depth": 0,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233939.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/504f42c4/attachment.pl"
       ]
@@ -71307,7 +71312,8 @@
       "body_snippet": "Dimitri,\n\nYou might try applying ave() to each column.  E.g., use\n\nf2 <- function(frame) {\n   for(i in 2:ncol(frame)) {\n      frame[,i] <- ave(frame[,i], frame[,1],\nFUN=function(x)x/mean(x,na.rm=TRUE)",
       "thread_id": "thread-6ca1e5003853",
       "thread_depth": 2,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233923.html"
     },
     {
       "id": "msg-0a7da81cf347",
@@ -71325,7 +71331,8 @@
       "body_snippet": "Take a look at the examples in ?curve.  As suggested by Erik, in the \nfuture please read the posting guide so you can get a more accurate \nresponse.\n\nRegards,\n\nFrancisco\n\nDr. Francisco J. Zagmutt\nVose",
       "thread_id": "thread-1fa0fa52c38e",
       "thread_depth": 1,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233924.html"
     },
     {
       "id": "msg-f01d74e2c162",
@@ -71343,7 +71350,8 @@
       "body_snippet": "Janet Choate-2 wrote:\n> \n> Hi R community,\n> i have what appears to be a memory allocation problem:\n> \n> R(51150) malloc: *** mmap(size=158068736) failed (error code=12)\n> *** error: can't allocate re",
       "thread_id": "thread-dbaa73494383",
       "thread_depth": 1,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233925.html"
     },
     {
       "id": "msg-800feda6f7a4",
@@ -71360,6 +71368,7 @@
       "thread_id": "thread-800feda6f7a4",
       "thread_depth": 0,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233926.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/6f05a39f/attachment.pl"
       ]
@@ -71378,7 +71387,8 @@
       "body_snippet": "I need to make a bunch of PDF files of histograms. I tried\ngatelist = unique(mdf$ArrivalGate)\nfor( gate in gatelist) {       \n    outfile = paste(\"../\", airport, \"/\", airport, \"taxiHistogram\", gate,\n\"",
       "thread_id": "thread-4746b20897f9",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233927.html"
     },
     {
       "id": "msg-4723b6c1d7ed",
@@ -71394,7 +71404,8 @@
       "body_snippet": "Hi,\n\nThe code below creates a value, x$a, which depending on how you access it\nevaluates to its initial value, or to what it's been changed to.  The last\ntwo lines should, I would have thought, evalua",
       "thread_id": "thread-4723b6c1d7ed",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233940.html"
     },
     {
       "id": "msg-0116412314d7",
@@ -71413,7 +71424,8 @@
       "body_snippet": "On 3/31/2010 10:01 PM, Berwin A Turlach wrote:\n\nG'day James,\n\nOn Wed, 31 Mar 2010 21:44:31 -0400\nJames Rome <jamesrome at gmail.com> wrote:\n\n\n> I need to make a bunch of PDF files of histograms. \n>   ",
       "thread_id": "thread-0116412314d7",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233929.html"
     },
     {
       "id": "msg-25a4a27cef4d",
@@ -71432,7 +71444,8 @@
       "body_snippet": "On 3/31/2010 10:01 PM, Berwin A Turlach wrote:\n\nG'day James,\n\nOn Wed, 31 Mar 2010 21:44:31 -0400\nJames Rome <jamesrome at gmail.com> wrote:\n\n\n> I need to make a bunch of PDF files of histograms. \n>   ",
       "thread_id": "thread-25a4a27cef4d",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233931.html"
     },
     {
       "id": "msg-59c0cb725817",
@@ -71448,7 +71461,8 @@
       "body_snippet": "Have you tried\nplot(pic)\n\n-----Original Message-----\nFrom: Berwin A Turlach <berwin at maths.uwa.edu.au>\nSent: Wednesday, March 31, 2010 10:15 PM\nTo: James Rome <jamesrome at gmail.com>\nCc: r-help at ",
       "thread_id": "thread-59c0cb725817",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233941.html"
     },
     {
       "id": "msg-8b3c16c8c70f",
@@ -71465,6 +71479,7 @@
       "thread_id": "thread-8b3c16c8c70f",
       "thread_depth": 0,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233932.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/927bd631/attachment.pl"
       ]
@@ -71486,6 +71501,7 @@
       "thread_id": "thread-f2baa5df3a98",
       "thread_depth": 1,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233933.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/87703198/attachment.pl"
       ]
@@ -71508,6 +71524,7 @@
       "thread_id": "thread-dbaa73494383",
       "thread_depth": 2,
       "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233934.html",
       "restored_from": [
         "https://stat.ethz.ch/pipermail/r-help/attachments/20100331/bedb7976/attachment.pl"
       ]
@@ -71526,7 +71543,8 @@
       "body_snippet": "Hi,\n\nI've got a data frame with multiple factor columns, but they should share\nthe same set of labels, such as this tiny example:\n\ndf <- data.frame (\n\ta = factor( c( \"bob\", \"alice\", \"bob\" ) ),\n\tb = fa",
       "thread_id": "thread-b8a5916575cb",
       "thread_depth": 0,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233935.html"
     },
     {
       "id": "msg-185f8a2f24b0",
@@ -71544,7 +71562,8 @@
       "body_snippet": "Sorry for spamming.  I swear I had worked on that problem a long time before\nposting.  \n\nBut I just figured it out: I have to change the values, which are\nrepresented as integers, not strings.  So the",
       "thread_id": "thread-b8a5916575cb",
       "thread_depth": 1,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233936.html"
     },
     {
       "id": "msg-34224e92c79b",
@@ -71564,7 +71583,8 @@
       "body_snippet": "Janet Choate-2 wrote:\n> \n> Thanx for clarification on stating my problem, Charlie.\n> \n> I am attempting to merge to files, i.e.:\n> hi39 = merge(comb[,c(\"hillID\",\"geo\")], hi.h39, by=c(\"hillID\"))\n> \n> i",
       "thread_id": "thread-dbaa73494383",
       "thread_depth": 3,
-      "month": "2010-03"
+      "month": "2010-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2010-April/233937.html"
     }
   ],
   "threads": [
