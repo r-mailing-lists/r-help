@@ -9202,11 +9202,12 @@
       "references": [
         "<530845079.7447270.1527806258446.ref@mail.yahoo.com>"
       ],
-      "body_plain": "Hi R help,\nI wanted to simulate two pool model (A&B) using deSolve package for time 0 to 12 by 1.? Initial values of the state variables are A=5, B=3. The fluxes are as follows1) Flux into A= 5 units per unit time?2) Flux from A to B= 0.33) Flux out of A=0.1?4) Flux from B to A=0.35) Flux out of B=0.3\nHere is the R code I compiled to estimate the size of A and B and graph the output\nlibrary(deSolve)\n# Define time sequence from 0 to 12 by 1\ntime <- seq(0,12, by=1)\n# Define the function?\nMod <- function (t, parms){? derivs <- function(t, state, parms){? ? with(as.list (c(state, parms)), {? ? ??? ? ? #Fluxes? ? ??? ? ? inA <- kinA? ? ? AtoB <- kAtoB*A? ? ? Aout <- kAout*A? ? ? inB <- kinB? ? ? BtoA <- kBtoA*B? ? ? Bout <- kBout*B? ? ??? ? ? # Rate of change? ? ? dA <- inA+BtoA-AtoB-Aout? ? ? dB <- inB+AtoB-BtoA-Bout? ? ??? ? ??? ? ? return (list (c(dA, dB)))? ? })? }??? #Step 4: Define some starting values for the pools??? state <- c(A=5, B=3)??? ?return (ode(y=state, times=t,func=derivs, parms=parms, method=\"rk4\"))}\n# Starting values of fluxes/parameterspars <- c(kinA=5, kAtoB=0.3, kAout=0.1, kinB=2, kBtoA=0.3, kBout=0.3)\n#Model results\nMod(time, pars)data <- data.frame(Mod(time, pars))plot(Mod(time, pars))\nThe result does not look right. I could not figure out where I made a mistake in compiling code.??\nAny help is highly appreciated.?\nWodaj\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi R help,\nI wanted to simulate two pool model (A&B) using deSolve package for time 0 to 12 by 1.? Initial values of the state variables are A=5, B=3. The fluxes are as follows1) Flux into A= 5 units ",
+      "body_plain": "Hi R help,\nI wanted to simulate two pool model (A&B) using deSolve package for time 0 to 12 by 1.  Initial values of the state variables are A=5, B=3. The fluxes are as follows1) Flux into A= 5 units per unit time 2) Flux from A to B= 0.33) Flux out of A=0.1 4) Flux from B to A=0.35) Flux out of B=0.3\nHere is the R code I compiled to estimate the size of A and B and graph the output\nlibrary(deSolve)\n# Define time sequence from 0 to 12 by 1\ntime <- seq(0,12, by=1)\n# Define the function \nMod <- function (t, parms){  derivs <- function(t, state, parms){    with(as.list (c(state, parms)), {  ? ??? ?   #Fluxes    ??? ?   inA <- kinA      AtoB <- kAtoB*A      Aout <- kAout*A      inB <- kinB      BtoA <- kBtoA*B      Bout <- kBout*B    ??? ?   # Rate of change      dA <- inA+BtoA-AtoB-Aout      dB <- inB+AtoB-BtoA-Bout    ??? ? ??? ?   return (list (c(dA, dB)))    })? }    #Step 4: Define some starting values for the pools    state <- c(A=5, B=3)     return (ode(y=state, times=t,func=derivs, parms=parms, method=\"rk4\"))}\n# Starting values of fluxes/parameterspars <- c(kinA=5, kAtoB=0.3, kAout=0.1, kinB=2, kBtoA=0.3, kBout=0.3)\n#Model results\nMod(time, pars)data <- data.frame(Mod(time, pars))plot(Mod(time, pars))\nThe result does not look right. I could not figure out where I made a mistake in compiling code.  \nAny help is highly appreciated. \nWodaj\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi R help,\nI wanted to simulate two pool model (A&B) using deSolve package for time 0 to 12 by 1.  Initial values of the state variables are A=5, B=3. The fluxes are as follows1) Flux into A= 5 units ",
       "thread_id": "thread-08eb8fca23be",
       "thread_depth": 0,
-      "month": "2018-05"
+      "month": "2018-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2018-June/454717.html"
     },
     {
       "id": "msg-7be7e0c4ac4c",
@@ -9224,7 +9225,8 @@
       "body_snippet": "Your lack of permissions is highly operating-system-specific and local-policy-specific and therefore outside the scope of this mailing list... I suggest you have a conversation with your system admini",
       "thread_id": "thread-e607db1d6b09",
       "thread_depth": 1,
-      "month": "2018-05"
+      "month": "2018-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2018-June/454715.html"
     },
     {
       "id": "msg-4d0e3a475885",
@@ -9242,7 +9244,8 @@
       "body_snippet": "Interesting problem.\n\nI would discretize the x-values and interleave them. Lines from one dataset still overlap, so you see high- density and low-density regions, but lines from the other dataset are ",
       "thread_id": "thread-684aedc1dbe2",
       "thread_depth": 1,
-      "month": "2018-05"
+      "month": "2018-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2018-June/454716.html"
     }
   ],
   "threads": [
