@@ -9830,7 +9830,8 @@
       "body_snippet": "On 8 Dec 2004, Yves Magliulo wrote:\n\n> Hi there,\n> I think I have found a small problem in the\n> \"/my/path/R-2.0.1/src/modules/X11/MakeFile\" generation.\n> During the configure step, I have specified a",
       "thread_id": "thread-7befbc73af44",
       "thread_depth": 1,
-      "month": "2004-12"
+      "month": "2004-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2004-December/062471.html"
     },
     {
       "id": "msg-854743384100",
@@ -24437,11 +24438,12 @@
         "<E2ABA52C-5740-11D9-A12A-000393D3EA82@jhsph.edu>",
         "<41CEBC5F.9030809@acelerate.com>"
       ],
-      "body_plain": "On Sun, 26 Dec 2004, Kjetil Brinchmann Halvorsen wrote:\n\n> Sn?bj?rn Gunnsteinsson wrote:\n>\n>>    I just installed the gregmisc bundle. When I do library(gdata)  (or \n>> library(gtools), library(gmodels)) everything works fine.\n>> \n>> When I do library(gplots) I get\n>> \n>>      Error in parse(file, n, text, prompt) : syntax error on line 1850\n>>      Error in library(gplots) : package/namespace load failed\n>> \n>> I'm using R-1.7.0 on Mac OS 10.3.\n>\n> That's very old and probably does'nt know about namesapces?\n\nIt does: they were introduced for packages other than base in 1.7.0.\nHowever, that line is\n\n     m[[1]] <- graphics:::plot.formula\n\nand the ::: operator was introduced in 1.8.0 and package `graphics' in \n1.9.0.\n\n>> Can anybody help me with this? Could I be doing something wrong or is there\n>> an error in the package (related to R-1.7.0, or Mac OS X or in general)?\n\ngregmisc should have a dependence on R>=1.9.0 (at least).  It won't be the \nonly package that does not have such a dependence, including many of those \nintroduced since 1.7.0 came out (over two years ago) as people tend not to \ntest on past versions of R.\n\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Sun, 26 Dec 2004, Kjetil Brinchmann Halvorsen wrote:\n\n> Sn?bj?rn Gunnsteinsson wrote:\n>\n>>    I just installed the gregmisc bundle. When I do library(gdata)  (or \n>> library(gtools), library(gmodel",
+      "body_plain": "On Sun, 26 Dec 2004, Kjetil Brinchmann Halvorsen wrote:\n\n> Snæbjörn Gunnsteinsson wrote:\n>\n>>    I just installed the gregmisc bundle. When I do library(gdata)  (or \n>> library(gtools), library(gmodels)) everything works fine.\n>> \n>> When I do library(gplots) I get\n>> \n>>      Error in parse(file, n, text, prompt) : syntax error on line 1850\n>>      Error in library(gplots) : package/namespace load failed\n>> \n>> I'm using R-1.7.0 on Mac OS 10.3.\n>\n> That's very old and probably does'nt know about namesapces?\n\nIt does: they were introduced for packages other than base in 1.7.0.\nHowever, that line is\n\n     m[[1]] <- graphics:::plot.formula\n\nand the ::: operator was introduced in 1.8.0 and package `graphics' in \n1.9.0.\n\n>> Can anybody help me with this? Could I be doing something wrong or is there\n>> an error in the package (related to R-1.7.0, or Mac OS X or in general)?\n\ngregmisc should have a dependence on R>=1.9.0 (at least).  It won't be the \nonly package that does not have such a dependence, including many of those \nintroduced since 1.7.0 came out (over two years ago) as people tend not to \ntest on past versions of R.\n\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Sun, 26 Dec 2004, Kjetil Brinchmann Halvorsen wrote:\n\n> Snæbjörn Gunnsteinsson wrote:\n>\n>>    I just installed the gregmisc bundle. When I do library(gdata)  (or \n>> library(gtools), library(gmodel",
       "thread_id": "thread-bdeddb137a4a",
       "thread_depth": 2,
-      "month": "2004-12"
+      "month": "2004-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2004-December/063277.html"
     },
     {
       "id": "msg-b79ad3172742",
@@ -26188,11 +26190,12 @@
       "references": [
         "<000301c4edea$efb3ba80$8b00a8c0@IBM>"
       ],
-      "body_plain": "On Wed, 29 Dec 2004, [iso-8859-1] S?ren Merser wrote:\n\n> is it possible to change tabstop (default 8) in the GUI ?\n>\n> regards soren\n>\n> i'm using\n>   winxp sp2\n>   R ver. 2.0.1\n\nYes, it is possible.  Why would you want to do so?\n\nSince you are asking, you presumably haven't explored the source code.\nHint: what do you think TABSIZE might do?\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Wed, 29 Dec 2004, [iso-8859-1] S?ren Merser wrote:\n\n> is it possible to change tabstop (default 8) in the GUI ?\n>\n> regards soren\n>\n> i'm using\n>   winxp sp2\n>   R ver. 2.0.1\n\nYes, it is possible. ",
+      "body_plain": "On Wed, 29 Dec 2004, [iso-8859-1] Søren Merser wrote:\n\n> is it possible to change tabstop (default 8) in the GUI ?\n>\n> regards soren\n>\n> i'm using\n>   winxp sp2\n>   R ver. 2.0.1\n\nYes, it is possible.  Why would you want to do so?\n\nSince you are asking, you presumably haven't explored the source code.\nHint: what do you think TABSIZE might do?\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Wed, 29 Dec 2004, [iso-8859-1] Søren Merser wrote:\n\n> is it possible to change tabstop (default 8) in the GUI ?\n>\n> regards soren\n>\n> i'm using\n>   winxp sp2\n>   R ver. 2.0.1\n\nYes, it is possible. ",
       "thread_id": "thread-3ef676b0a8b2",
       "thread_depth": 1,
-      "month": "2004-12"
+      "month": "2004-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2004-December/063374.html"
     },
     {
       "id": "msg-311adc4b1021",
@@ -26393,11 +26396,12 @@
         "<Pine.LNX.4.61.0412292326330.17656@gannet.stats>",
         "<004901c4ee01$6cbdc2d0$8b00a8c0@IBM>"
       ],
-      "body_plain": "On Thu, 30 Dec 2004, [iso-8859-1] S?ren Merser wrote:\n\n> you are quite right, i didn't  read the source - only sought through the \n> documentation - since i would like to change tabsize from within a function\n> i'm printing a table aligning entries with tabs\n> the output is messed up if the maximum number of characters ina matrix of \n> strings is to big, i.e. >8\n> it might not be the wrong trail, so perhaps i have to use formatC somehow\n\nIndeed, setting the tabstop is not a way to format output temporarily: it \napplies to a session at least.\n\n> regards soren\n>\n> ----- Original Message ----- From: \"Prof Brian Ripley\" \n> <ripley at stats.ox.ac.uk>\n> To: \"S?ren Merser\" <merser at image.dk>\n> Cc: \"R - help\" <r-help at stat.math.ethz.ch>\n> Sent: Thursday, December 30, 2004 12:34 AM\n> Subject: Re: [R] setting tabstop\n>\n>\n> On Wed, 29 Dec 2004, [iso-8859-1] S?ren Merser wrote:\n>\n>> is it possible to change tabstop (default 8) in the GUI ?\n>> \n>> regards soren\n>> \n>> i'm using\n>>   winxp sp2\n>>   R ver. 2.0.1\n>\n> Yes, it is possible.  Why would you want to do so?\n>\n> Since you are asking, you presumably haven't explored the source code.\n> Hint: what do you think TABSIZE might do?\n>\n> -- \n> Brian D. Ripley,                  ripley at stats.ox.ac.uk\n> Professor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\n> University of Oxford,             Tel:  +44 1865 272861 (self)\n> 1 South Parks Road,                     +44 1865 272866 (PA)\n> Oxford OX1 3TG, UK                Fax:  +44 1865 272595 \n>\n>\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
-      "body_snippet": "On Thu, 30 Dec 2004, [iso-8859-1] S?ren Merser wrote:\n\n> you are quite right, i didn't  read the source - only sought through the \n> documentation - since i would like to change tabsize from within a ",
+      "body_plain": "On Thu, 30 Dec 2004, [iso-8859-1] Søren Merser wrote:\n\n> you are quite right, i didn't  read the source - only sought through the \n> documentation - since i would like to change tabsize from within a function\n> i'm printing a table aligning entries with tabs\n> the output is messed up if the maximum number of characters ina matrix of \n> strings is to big, i.e. >8\n> it might not be the wrong trail, so perhaps i have to use formatC somehow\n\nIndeed, setting the tabstop is not a way to format output temporarily: it \napplies to a session at least.\n\n> regards soren\n>\n> ----- Original Message ----- From: \"Prof Brian Ripley\" \n> <ripley at stats.ox.ac.uk>\n> To: \"Søren Merser\" <merser at image.dk>\n> Cc: \"R - help\" <r-help at stat.math.ethz.ch>\n> Sent: Thursday, December 30, 2004 12:34 AM\n> Subject: Re: [R] setting tabstop\n>\n>\n> On Wed, 29 Dec 2004, [iso-8859-1] Søren Merser wrote:\n>\n>> is it possible to change tabstop (default 8) in the GUI ?\n>> \n>> regards soren\n>> \n>> i'm using\n>>   winxp sp2\n>>   R ver. 2.0.1\n>\n> Yes, it is possible.  Why would you want to do so?\n>\n> Since you are asking, you presumably haven't explored the source code.\n> Hint: what do you think TABSIZE might do?\n>\n> -- \n> Brian D. Ripley,                  ripley at stats.ox.ac.uk\n> Professor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\n> University of Oxford,             Tel:  +44 1865 272861 (self)\n> 1 South Parks Road,                     +44 1865 272866 (PA)\n> Oxford OX1 3TG, UK                Fax:  +44 1865 272595 \n>\n>\n>\n\n-- \nBrian D. Ripley,                  ripley at stats.ox.ac.uk\nProfessor of Applied Statistics,  http://www.stats.ox.ac.uk/~ripley/\nUniversity of Oxford,             Tel:  +44 1865 272861 (self)\n1 South Parks Road,                     +44 1865 272866 (PA)\nOxford OX1 3TG, UK                Fax:  +44 1865 272595",
+      "body_snippet": "On Thu, 30 Dec 2004, [iso-8859-1] Søren Merser wrote:\n\n> you are quite right, i didn't  read the source - only sought through the \n> documentation - since i would like to change tabsize from within a ",
       "thread_id": "thread-3ef676b0a8b2",
       "thread_depth": 3,
-      "month": "2004-12"
+      "month": "2004-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2004-December/063385.html"
     },
     {
       "id": "msg-29f8a0b77ac4",
