@@ -2079,3 +2079,227 @@ TIA,
 Chris
 
 
+From r-@nnounce @end|ng |rom r-project@org  Thu Oct 29 10:36:57 2026
+From: r-@nnounce @end|ng |rom r-project@org (Peter Dalgaard via R-announce)
+Date: Thu, 29 Oct 2026 09:36:57 +0000
+Subject: [R] [Rd] R 4.6.2 is released
+Message-ID: <D223E606-0E58-4B25-B55E-3EB8F1C817EA@cbs.dk>
+
+The build system rolled up R-4.6.2.tar.gz and .xz (codename ?Diversified Portfolio") this morning.
+
+This is a patch release with a handful of minor changes and fixups.
+
+The list below details the changes in this release. 
+
+You can get the source code from
+
+https://cran.r-project.org/src/base/R-4/R-4.6.2.tar.gz
+https://cran.r-project.org/src/base/R-4/R-4.6.2.tar.xz
+
+or wait for it to be mirrored at a CRAN site nearer to you.
+
+Binaries for various platforms will appear in due course. 
+
+
+For the R Core Team,
+
+Peter Dalgaard
+
+
+These are the checksums (md5 and SHA-256) for the freshly created files, in case you wish
+to check that they are uncorrupted:
+
+MD5 (AUTHORS) = 7ab0813e28f062830cc05a0eedfb3ac8
+MD5 (build-dist.log) = 93be9f3fd0f6e1350b2090ec05259204
+MD5 (COPYING) = eb723b61539feef013de476e68b5c50a
+MD5 (COPYING.LIB) = a6f89e2100d9b6cdffcea4f398e37343
+MD5 (FAQ) = 2413e1c0656ff5ca4350f976342b19ef
+MD5 (INSTALL) = 7893f754308ca31f1ccf62055090ad7b
+MD5 (NEWS) = 650482d00e4c905ee4f7ba9018361d00
+MD5 (NEWS.0) = bfcd7c147251b5474d96848c6f57e5a8
+MD5 (NEWS.1) = d7b8f0e6f33da0b7a494754d6e57c758
+MD5 (NEWS.2) = 5dde8d18a120467629fbe83cc6e3b78a
+MD5 (NEWS.3) = eda6ceb67e7ada03d7d9b76368083845
+MD5 (R-latest.tar.gz) = ee0d085febf95b03195e43cc04f8c4fb
+MD5 (R-latest.tar.xz) = 412cbc224bfb1ca3177d7f9fdfd361fb
+MD5 (README) = e8e5ee38544d34409177cd479025fe66
+MD5 (RESOURCES) = 5949c86e75c813f8f6ebc420aae46881
+MD5 (THANKS) = 61d146aa6a2cf5999295b2fb340991c1
+MD5 (VERSION-INFO.dcf) = 6cf72fee7d66e4ddd66bed6af9f4f90f
+MD5 (R-4/R-4.6.2.tar.gz) = ee0d085febf95b03195e43cc04f8c4fb
+MD5 (R-4/R-4.6.2.tar.xz) = 412cbc224bfb1ca3177d7f9fdfd361fb
+
+49a1f2d203a02bd290c177c0c5653835c654e500a6178f1cb87d514d7f68f013  AUTHORS
+225b585653c32cf9945ddbd0daf298642b11ffeeb797af34e7cb8116ee7a7490  build-dist.log
+e6d6a009505e345fe949e1310334fcb0747f28dae2856759de102ab66b722cb4  COPYING
+6095e9ffa777dd22839f7801aa845b31c9ed07f3d6bf8a26dc5d2dec8ccc0ef3  COPYING.LIB
+5b4c9ea177b7a31f9d196daebc98816a71265d5fe0f7e718722cd690fb4bffee  FAQ
+f87461be6cbaecc4dce44ac58e5bd52364b0491ccdadaf846cb9b452e9550f31  INSTALL
+49eae3c6426a9796871ffcef9c72e0e4e64c165e5b1f6429c0cd00f0e63b0e56  NEWS
+4e21b62f515b749f80997063fceab626d7258c7d650e81a662ba8e0640f12f62  NEWS.0
+a82ce6553df1b9ea757b392c1252c53a8bba96c8226cf9654fe785173b843860  NEWS.1
+9ff6f9977b29d4930b7e4c41ab480acdfa3dc40fa89f2dea9e13b73ecc6a49f8  NEWS.2
+ae435e8d76ceae278e4cce5243933ade35825f870e0365675a641a6dfc745ace  NEWS.3
+c297040f6392b1dac6e5c0eb398422cfdaedf540ae2205edb9ad0d10cb10ee00  R-latest.tar.gz
+558d569edc9eeb96a104347495200c544df5fab3679c1410e4ad358044829644  R-latest.tar.xz
+f5aa875c23185cbfc3a50739d7295b0caba2cf0e38ba082850be338cc9541154  README
+5e7ddf7349ada12c8142c42bac955835efd1768978cb476b61a3b53255442b24  RESOURCES
+1d5064c86b6813865a033763f43212064c0a67ef05f5af13b13c4feb08264a33  THANKS
+b2cc5d58d72fd94c63a928a9c6e1173e7a4069ecb43116360d81adf5794654c8  VERSION-INFO.dcf
+c297040f6392b1dac6e5c0eb398422cfdaedf540ae2205edb9ad0d10cb10ee00  R-4/R-4.6.2.tar.gz
+558d569edc9eeb96a104347495200c544df5fab3679c1410e4ad358044829644  R-4/R-4.6.2.tar.xz
+
+This is the relevant part of the NEWS file
+
+Changes in R 4.6.2:
+
+  Bug Fixes:
+
+    ? In plain-text help (Rd2txt), paragraphs are again recognized even
+      when started with a non-indented Rd comment, fixing a regression
+      in R 4.4.0.
+
+    ? rhyper(N, m, n, k) now switches to the ?large? scenario when m +
+      n is larger than .Machine$integer.max, preventing integer
+      overflow, thanks to Jonathan Blood's report on R-devel.
+
+    ? Fix long standing (Fortran compiler optimization related) bug in
+      nlminb with constraints, thanks to Kasper Kristensen's PR#19086
+      report and patch.
+
+    ? Fix for PR#19100: seq.int was not handling non-vector along.width
+      arguments properly. Thanks to Mitchell O'Hara-Wild.
+
+    ? Wrappers now duplicate even a wrapped object that might be shared
+      before returning a read-only pointer. This prevents cached
+      read-only pointers from becoming invalid. Reported by Ivan
+      Krylov.
+
+    ? dummy.coef() becomes more robust to non-syntactic variable names,
+      fixing PR#18468.  Thanks to Bill Dunlap and ?R Dev Day?
+      participants Vincent Arel-Bundock, Cynthia Huang, Tina Rozsos and
+      Marina Marinelli.
+
+    ? Now PROTECT() in SubassignTypeFix, fixing PR#19110 thanks to
+      Kevin Ushey.
+
+    ? writeChar() in a multibyte locale counts characters and bytes
+      consistently and no longer overflows, thanks to Kevin Ushey's
+      report and patch in PR#19112.
+
+    ? dim(a) <- vec now checks for too large prod(vec), thanks to Kevin
+      Ushey's report and patch in PR#19109.
+
+    ? Tweaks (including to the parsers) for the C23 behaviour
+      (preserving const) of strchr, strrchr and strstr.  (By Brian
+      Ripley and Duncan Murdoch.)
+
+    ? make check-devel now works without recommended packages.
+
+    ? <matrix>[[i, j]] with negative i occasionally gives no error but
+      accesses previous content; thanks to Kevin Ushey's report and
+      very simple fix in PR#19116.
+
+    ? Quartz device now correctly draws long paths (work-around for
+      Quartz built-in stroker breaking long paths). Thanks to R Dev Day
+      @ useR! 2026 contributors, notably Tomek Gieorgijewski, report in
+      PR#18680.
+
+    ? strptime(ch, "...%OS<n>...") now disregards contiguous digits in
+      "<n>", for symmetry with strftime(), fulfilling Frederick Eaton's
+      wish in PR#17209, thanks to a patch by Suharto Anggono.
+
+    ? strptime() now also returns NA for out of range "%OS" and a
+      correct error message in some wrong multibyte cases, fixing
+      PR#19117 comment #1 and PR#19122 by Michael Chirico;
+      additionally, some overflow to Inf times no longer result in NA.
+
+    ? strptime("0", "%w") in a "C" locale now works in valid cases,
+      returning NA for invalid week numbers ("%U" or "%W"), fixing
+      PR#19124 thanks to Michael Chirico's report and notably Suharto
+      Anggono's analysis, also correctly fixing PR#15195.
+
+    ? ksmooth(x,y, x.points=NULL) now returns an empty (x,y) pair
+      instead of crashing R, fixing PR#19153.
+
+      Additionally, also by Adam Berke?, x <- rep(999,0); ksmooth(x, x,
+      x.points = 1) no longer writes out of bounds, fixing PR#19171.
+      Ditto for ksmooth(x, x, n.points = 0), PR#19219.
+
+    ? besselI(1, 1e11) and besselK(..) now signal a warning and return
+      NaN instead of typically segfaulting, fixing PR#19175 thanks to
+      Ben Bolker.
+
+      Further, besselK(1, -1e11) and similar warn about too large |nu|,
+      returning NaN rather than segfaulting, fixing PR#19196 thanks to
+      Adam Berke?.
+
+    ? text.default(.., col = numeric(0)) and similar no longer segfault
+      in "instrumented" versions of R, fixing PR#19178 thanks to Jiang
+      Yuancheng's fusion-fuzz and Ivan Krylov.
+
+    ? R CMD rtags (on Unix-alikes) no longer fails from a bad escape if
+      sh is bash or busybox.
+
+    ? capabilities("X11") no longer incorrectly returns TRUE on a
+      Unix-alike where X11 is not actually available when built by a C
+      compiler without C23 enum base types, thanks to Trevor Davis'
+      report and patch in PR#19180.
+
+    ? predict(smooth.spline(..), deriv = -99) and similar invalid deriv
+      values now signal errors instead of segfaulting, thanks to Adam
+      Berke?' report and proposal in PR#19190.
+
+    ? format(x, width = 2^31 -1) for an non-ascii character x such as x
+      = "\u00e9" now signals an error as the required width is too
+      large, rather than segfaulting, thanks to Adam Berke?' report in
+      PR#19188.
+
+    ? influence.measures() inadvertently wasn't updated along with
+      dffits(), dfbetas(), covratio(). PR#19167 by Amal Tawfik.
+
+    ? If wilcox.test(..., exact=TRUE)'s p-value is close to the 0 or 1
+      boundaries, the calculation no longer suffers severely from
+      cancellation, thanks to Tasuku Kobayashi's reports and Ahmed
+      Sattar Jabbar's suggestion in PR#19144.
+
+    ? Long stringed error messages are now protected from premature
+      garbage collection, fixing PR#19210, reported and analyzed by
+      Yuancheng Jiang.
+
+    ? strsplit(str, perl=TRUE, bytes=TRUE) no longer accesses invalid
+      memory in case str is an invalid UTF-8 string, fixing PR#19212,
+      thanks to Kevin Ushey.
+
+    ? isoreg(numeric(0)) no longer returns unallocated component yc,
+      fixing PR#19224 thanks to Kevin Ushey.
+
+    ? KalmanLike(1:5, list(1,2)) and similar no longer segfault, fixing
+      PR#19217 thanks to Kevin Ushey and Adam Berke?.
+
+  Bug Fixes (Windows):
+
+    ? path.expand("~") and similar now should work correctly on Windows
+      when the user name is not in ASCII and neither %HOME% nor %USER%
+      environment variables are set, fixing PR#18949 thanks to the
+      report and patch from Ivan Krylov and Mauricio Vargas's R Dev Day
+      work.
+
+    ? file.copy(*, date=TRUE) no longer opens files for exclusive
+      access when copying the file time.  Consequently, the time _is_
+      copied now and concurrent attempts to open the source file should
+      work reliably, thanks to Kevin Ushey's report and patch in
+      PR#19187.
+
+-- 
+Peter Dalgaard, Professor,
+Center for Statistics, Copenhagen Business School
+Solbjerg Plads 3, 2000 Frederiksberg, Denmark
+Phone: (+45)38153501
+Office: A 4.23
+Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com
+
+_______________________________________________
+R-announce at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-announce
+
