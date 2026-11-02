@@ -1,0 +1,251 @@
+From |kry|ov @end|ng |rom d|@root@org  Sun Nov  1 21:10:20 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Sun, 1 Nov 2026 23:10:20 +0300
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+Message-ID: <20261101231020.142bf5eb@Tarkus>
+
+On Mon, 26 Oct 2026 18:06:05 +0000
+Chris Evans via R-help <r-help at r-project.org> wrote:
+
+> > connEOS <- odbcConnect("EOS")  
+> Warning messages:
+> 1: In grepl("PWD=", cs) :
+>    unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+> 2: In grepl("PWD=", cs) : input string 1 is invalid
+
+This is quite weird.
+
+The 'cs' string is the connection string returned by the C code inside
+RODBC:
+
+   stat <- .Call(C_RODBCDriverConnect, as.character(connection), id,
+                 as.integer(believeNRows), as.logical(readOnlyOptimize))
+   # ...
+   cs <- attr(stat, "connection.string")
+   if(grepl("PWD=", cs)) {
+       # mask the password inside the returned object
+
+RODBC passes the connection string back to R like this:
+
+ #define buf1_len 8096
+ // ...
+ SQLCHAR buf1[buf1_len];
+ // ...
+ retval = SQLDriverConnect(
+  thisHandle->hDbc, NULL,
+  (SQLCHAR *)Rf_translateChar(STRING_ELT(connection, 0)),
+  SQL_NTS,
+  (SQLCHAR *)buf1, (SQLSMALLINT)buf1_len,
+  &tmp1,
+  SQL_DRIVER_NOPROMPT
+ );
+ if(retval == SQL_SUCCESS || retval == SQL_SUCCESS_WITH_INFO) {
+  // ...
+  PROTECT(constr = Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(constr, 0, Rf_mkChar((char *)buf1));
+  // ...
+  Rf_setAttrib(ans, Rf_install("connection.string"), constr);
+
+Somehow, the 'buf1' string isn't filled at all and R receives
+uninitialised stack contents instead of the effective connection
+string, despite the return value indicates a successful connection. And
+yet 'idbc' works using the same connection string, suggesting that the
+problem isn't inside the MDBtools driver.
+
+How did you install the RODBC package? If there's nothing obviously
+wrong with your R package installation, further investigation will
+probably require stepping through the C code in a debugger.
+
+-- 
+Best regards,
+Ivan
+
+
+From g@@@powe|| @end|ng |rom protonm@||@com  Sun Nov  1 21:24:29 2026
+From: g@@@powe|| @end|ng |rom protonm@||@com (Gregg Powell)
+Date: Sun, 01 Nov 2026 20:24:29 +0000
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+Message-ID: <p84jY-4bWbRj7Ny5RvJQy6q4jyqJqpXoG8rw6fSEvx283DCAG5JPK_urzF-gf0cI0lPf46Ce64rjT4d18CmX9zZObg2iV2dMR4PisAmDoNo=@protonmail.com>
+
+Hi Chris,
+
+I think there are two separate things going on, and only one of them is RODBC's fault.
+
+1. The warnings are probably harmless.
+
+After connecting, odbcConnect() asks the driver to return the completed connection string and then runs grepl("PWD=", cs) on it so it can hide any password. The MDBTools ODBC driver doesn't seem to fill in that returned string properly, so R ends up reading whatever bytes happen to be in the buffer. That explains why the "unable to translate" garbage changes on every run. The connection itself is probably open. You can check with:
+
+> connEOS <- odbcConnect("EOS")
+> sqlQuery(connEOS, "SELECT COUNT(*) FROM SomeRealTableName")
+
+2. The empty sqlTables() result and the sqlFetch() failure are driver limitations.
+
+MDBTools' implementation of the ODBC catalog functions (SQLTables and related calls) is minimal. sqlFetch() first calls odbcTableExists(), which relies on sqlTables(), so it fails even when the table exists. You can skip that check by querying directly:
+
+> sqlQuery(connEOS, "SELECT * FROM SomeRealTableName") %>% as_tibble()
+
+3. The bigger problem: vw_Prodotti is almost certainly an Access saved query, not a table.
+
+MDBTools can only read tables. It cannot execute Access queries or views at all, so vw_Prodotti won't work through any route on Linux. If this worked two years ago, I'd guess you were running on Windows with the Microsoft Access driver, which does support queries. You can confirm this in isql: SELECT * FROM vw_Prodotti will fail there too, while selecting from the underlying tables will work.
+
+The fix is to get the SQL behind the view and run it against the base tables yourself. mdbtools can show it from the shell (or from R via system()):
+
+> system("mdb-queries -L EOS2024a.mdb")              # list saved queries
+> system("mdb-queries EOS2024a.mdb vw_Prodotti")     # print its SQL
+> system("mdb-tables -1 EOS2024a.mdb")               # list real tables
+
+You may need to adjust the Access-flavored SQL slightly (for example IIf(), square brackets, or #date# literals) before MDBTools will accept it. Often it's simpler to pull the base tables into R and rebuild the joins in dplyr.
+
+4. Alternatively, you can skip ODBC entirely.
+
+For read-only extraction this is often more reliable:
+
+> library(Hmisc)
+> f <- "/datadisk/.../EOS2024a.mdb"
+> mdb.get(f, tables = TRUE)                # list tables
+> prod <- mdb.get(f, tables = "Prodotti")  # wraps mdb-export
+
+Or call mdb-export yourself, e.g.:
+
+> prod <- read_csv(pipe(paste("mdb-export", shQuote(f), "Prodotti")))
+
+In short: the warnings are probably cosmetic, the table check fails because of MDBTools' weak catalog support, and the view fails because MDBTools can't run Access queries. Use sqlQuery() on the base tables and recreate the view from the SQL shown by mdb-queries.
+
+HTH,
+gregg
+
+
+
+
+
+On Monday, October 26th, 2026 at 11:06 AM, Chris Evans via R-help <r-help at r-project.org> wrote:
+
+> It's a few years since I last did this and opening SQL and/or odbc
+> databases is not my expert area but when I use the following code (which
+> I am pretty sure worked two years ago!) I get this:
+> 
+
+> > library(RODBC) # has the vital functions to access the database
+> > library(tidyverse) # optional but I like working in the tidyverse manner if I can
+> ?? Attaching core tidyverse packages ??????????????????????????????????????????????????????????????????????????????????????????? tidyverse 2.0.0 ??
+> ? dplyr     1.2.1     ? readr     2.2.0
+> ? forcats   1.0.1     ? stringr   1.6.0
+> ? ggplot2   4.0.3     ? tibble    3.3.1
+> ? lubridate 1.9.5     ? tidyr     1.3.2
+> ? purrr     1.2.2
+> ?? Conflicts ????????????????????????????????????????????????????????????????????????????????????????????????????????????? tidyverse_conflicts() ??
+> ? dplyr::filter() masks stats::filter()
+> ? dplyr::lag()    masks stats::lag()
+> ? Use the conflicted package to force all conflicts to become errors
+> > ### this opens the mdb file pointed to in the DSN created in Windoze
+> > connEOS <- odbcConnect("EOS")
+> Warning messages:
+> 1: In grepl("PWD=", cs) :
+>    unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+> 2: In grepl("PWD=", cs) : input string 1 is invalid
+> 
+
+> > allTables3 <- sqlTables(connEOS) # get a list of all the tables in the database
+> > allTables3
+> [1] TABLE_CAT   TABLE_SCHEM TABLE_NAME  TABLE_TYPE  REMARKS
+> <0 rows> (or 0-length row.names)
+> > ### pull one table through
+> > sqlFetch(connEOS, "vw_Prodotti") %>%
+> +   as_tibble()
+> Error in odbcTableExists(channel, sqtable) :
+>    ?vw_Prodotti?: table not found on channel
+> 
+
+> > ### close the connection
+> > odbcClose(connEOS)
+> 
+
+> As I read that RODB (and tidyverse) packages loaded OK but odbcConnect()
+> throws two warnings (just warnings) but in fact the connection hasn't
+> opened usably so perhaps they are at least useful clues.  One odd thing
+> is that the contents of that "unable to translate ' " change each time I
+> run the command.
+> 
+
+> I am running R 4.6.1 on Ubuntu 26.04 with all packages updated so RODBC
+> is 1.3.26.3.
+> 
+
+> My /etc/odbcinst.ini has this in it:
+> 
+
+> [MySQL ODBC 26.10 Unicode Driver]
+> DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26w.so
+> UsageCount=1
+> 
+
+> [MySQL ODBC 26.10 ANSI Driver]
+> DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26a.so
+> UsageCount=1
+> 
+
+> [MDBTools]
+> Description=MDB Tools ODBC driver
+> Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+> Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+> FileUsage=1
+> UsageCount=1
+> 
+
+> [MDBToolsW]
+> Description=MDB Tools ODBC driver (Unicode)
+> Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+> Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+> FileUsage=1
+> UsageCount=1
+> 
+
+> and /etc/odbc.ini has this:
+> 
+
+> [EOS]
+> Description=EOS database
+> Driver=MDBTools
+> Database=/datadisk/Current_share/Current_Data/CORE/translations/Italian/Modenaplus_CORE-OM/202410/EOS2024a.mdb
+> 
+
+> and opening the database in the Linux console with "isql EOS" seem to
+> show all the contents of the database so I think the problem is either
+> within the RODBC package or something I have wrong in that odbc.ini or
+> odbcinst.ini or something more esoteric.  (Not loading tidyverse doesn't
+> change anything so not a collision between those packages and otherwise
+> only the default packages are loaded.
+> 
+
+> Searching the internet throws up information about gsub() giving a
+> similar "unable to translate" issue but nothing more obviously useful so
+> I have come here in hope someone will recognise this and have suggestions.
+> 
+
+> TIA,
+> 
+
+> Chris
+> 
+
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+> 
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 603 bytes
+Desc: OpenPGP digital signature
+URL: <https://stat.ethz.ch/pipermail/r-help/attachments/20261101/8fa1c696/attachment.sig>
+
