@@ -846,3 +846,1483 @@ Martin Gregory
 	[[alternative HTML version deleted]]
 
 
+From chr|@ho|d @end|ng |rom p@yctc@org  Sun Nov  8 15:49:14 2026
+From: chr|@ho|d @end|ng |rom p@yctc@org (Chris Evans)
+Date: Sun, 8 Nov 2026 15:49:14 +0100
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <677393fe-92be-446d-8d68-595a3c6f3a2a@psyctc.org>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+ <20261101231020.142bf5eb@Tarkus>
+ <677393fe-92be-446d-8d68-595a3c6f3a2a@psyctc.org>
+Message-ID: <cf638e3d-2fa2-44d3-bd66-82bea759c5c4@psyctc.org>
+
+I have finally found time to get back to this and I am starting to 
+wonder if it is a bug in RODBC.? What I have done:
+
+* Found that RODBC was installed in /usr/local/lib/R/site-library/.? 
+ ?Not sure that helps but I used `remove.packages("RODBC")` to remove it 
+in R and then moved the directory to a safe place in case it's ever of 
+any diagnostic use.? Then I installed it again:
+
+Installing package into ?/home/chris/R/x86_64-pc-linux-gnu-library/4.6?
+(as ?lib? is unspecified)
+trying URL 'https://cloud.r-project.org/src/contrib/RODBC_1.3-26.3.tar.gz'
+Content type 'application/x-gzip' length 942265 bytes (920 KB)
+==================================================
+downloaded 920 KB
+
+* installing *source* package ?RODBC? ...
+** this is package ?RODBC? version ?1.3-26.3?
+** package ?RODBC? successfully unpacked and MD5 sums checked
+** using staged installation
+checking for gcc... x86_64-linux-gnu-gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables...
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether x86_64-linux-gnu-gcc accepts -g... yes
+checking for x86_64-linux-gnu-gcc option to enable C11 features... none needed
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for sql.h... yes
+checking for sqlext.h... yes
+checking for library containing SQLTables... -lodbc
+checking for SQLLEN... yes
+checking for SQLULEN... yes
+checking size of long... 8
+configure: creating ./config.status
+config.status: creating src/Makevars
+config.status: creating src/config.h
+** libs
+using C compiler: ?x86_64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0?
+x86_64-linux-gnu-gcc -I"/usr/share/R/include" -DNDEBUG -I.      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=/usr/src/r-base-4.6.2-1.2604.0 -Wdate-time -D_FORTIFY_SOURCE=3  -c RODBC.c -o RODBC.o
+x86_64-linux-gnu-gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,--package-metadata=%7B%22type%22:%22deb%22%2C%22os%22:%22ubuntu%22%2C%22name%22:%22r-base%22%2C%22version%22:%224.6.2-1.2604.0%22%2C%22architecture%22:%22amd64%22%7D -flto=auto -ffat-lto-objects -Wl,-z,relro -o RODBC.so RODBC.o -lodbc -L/usr/lib/R/lib -lR
+installing to /home/chris/R/x86_64-pc-linux-gnu-library/4.6/00LOCK-RODBC/00new/RODBC/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (RODBC)
+
+That looks fine to me. So that gives me RODBC version 1.3.26.3 running 
+in 4.6.2 (2026-10-29) -- "Diversified Portfolio" on "26.04.1 LTS 
+(Resolute Raccoon)" (technically Kubuntu) with linux packages unixodb 
+version 2.3.14-1, mdbtools version 1.0.1-0.1build1 and odbc-mdtools 
+version 1.0.1-0.1build1. ?However, rerunning things gets exactly the 
+same failure to read anything from the mdb files and does continue to 
+give the bizarre warning:
+
+> connEOS <- odbcConnect("EOS")
+Warning messages:
+1: In grepl("PWD=", cs) :
+   unable to translate '(}<e7>q<93>\' to a wide string
+2: In grepl("PWD=", cs) : input string 1 is invalid
+
+* then I uploaded both mdb files to "my" web server which runs Debian 
+6.1.176-1 (2026-07-02) x86_64 GNU/Linux and "R version 4.5.3 
+(2026-03-11)" and RODBC version 1.3.26.3, linux packages: unixodbc 
+2.3.11-2+deb12u1 mdbtools 1.0.0+dfsg-1.1
+ ?and odbc-mdbtools version 1.0.0+dfsg-1.1.
+Here I get
+ ?no warnings on the odbcConnect() but again, nothing is read in from 
+either mdb file
+
+* then I did the same on "my" shiny server (currently not serving shiny 
+as per my other recent post here!). That runs Debian 6.1.176-1 
+(2026-07-02) x86_64 GNU/Linux, "R version 4.2.2 Patched (2022-11-10 
+r83330)" and again RODBC is version 1.3.26.3 and the linux packages are: 
+unixodbc 2.3.11-2+deb12u1, mdbtools 1.0.0+dfsg-1.1 and odbc-mdbtools 
+version 1.0.0+dfsg-1.1.
+Again no warning on odbcConnect() but equally nothing is read in from 
+either mdb file.
+
+Summary:
+
+1) I get the bizarre warnings only on my kubuntu 26.04 laptop
+
+2) I can't read either of these mdb files into R using the RODBC package 
+on three significantly different machines, two different Debian versions 
+and my Kubuntu laptop.? All three have RODBC version 1.3.26.3 but they 
+have a variety of versions of the Linux packages.
+
+Sadly, I can't share either mdb file but if someone has one that reads 
+into R fine for them using RODBC, I would be happy to try that file in 
+each of my three machines, or do I open this as a possible bug report 
+for the RODBC: I see no other open bugs against it (assuming that I am 
+searching correctly).
+
+TIA,
+
+
+Chris
+
+
+On 02/11/2026 14:16, Chris Evans via R-help wrote:
+>
+> On 01/11/2026 20:10, Ivan Krylov wrote:
+>> On Mon, 26 Oct 2026 18:06:05 +0000
+>> Chris Evans via R-help<r-help at r-project.org> wrote:
+>>
+>>>> connEOS <- odbcConnect("EOS")
+>>> Warning messages:
+>>> 1: In grepl("PWD=", cs) :
+>>> ??? unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+>>> 2: In grepl("PWD=", cs) : input string 1 is invalid
+>> This is quite weird.
+>>
+>> The 'cs' string is the connection string returned by the C code inside
+>> RODBC:
+>>
+>> ??? stat <- .Call(C_RODBCDriverConnect, as.character(connection), id,
+>> ????????????????? as.integer(believeNRows), 
+>> as.logical(readOnlyOptimize))
+>> ??? # ...
+>> ??? cs <- attr(stat, "connection.string")
+>> ??? if(grepl("PWD=", cs)) {
+>> ??????? # mask the password inside the returned object
+>>
+>> RODBC passes the connection string back to R like this:
+>>
+>> ? #define buf1_len 8096
+>> ? // ...
+>> ? SQLCHAR buf1[buf1_len];
+>> ? // ...
+>> ? retval = SQLDriverConnect(
+>> ?? thisHandle->hDbc, NULL,
+>> ?? (SQLCHAR *)Rf_translateChar(STRING_ELT(connection, 0)),
+>> ?? SQL_NTS,
+>> ?? (SQLCHAR *)buf1, (SQLSMALLINT)buf1_len,
+>> ?? &tmp1,
+>> ?? SQL_DRIVER_NOPROMPT
+>> ? );
+>> ? if(retval == SQL_SUCCESS || retval == SQL_SUCCESS_WITH_INFO) {
+>> ?? // ...
+>> ?? PROTECT(constr = Rf_allocVector(STRSXP, 1));
+>> ?? SET_STRING_ELT(constr, 0, Rf_mkChar((char *)buf1));
+>> ?? // ...
+>> ?? Rf_setAttrib(ans, Rf_install("connection.string"), constr);
+>>
+>> Somehow, the 'buf1' string isn't filled at all and R receives
+>> uninitialised stack contents instead of the effective connection
+>> string, despite the return value indicates a successful connection. And
+>> yet 'idbc' works using the same connection string, suggesting that the
+>> problem isn't inside the MDBtools driver.
+> I think I follow all of that!
+>> How did you install the RODBC package?
+>
+> Sadly, I don't remember but almost certainly either with 
+> install.packages("RODB") from the "console" in Rstudio or perhaps 
+> using the Rstudio package install route.? It is just possible that I 
+> installed it with apt-get install r-cran-rodbc but I think that's 
+> unlikely.
+>
+> I see it at /home/chris/R/x86_64-pc-linux-gnu-library/4.6/RODBC but 
+> not in /usr/lib/R/library/
+>
+>> If there's nothing obviously
+>> wrong with your R package installation, further investigation will
+>> probably require stepping through the C code in a debugger.
+>
+> I fear that is beyond my skills but I can clearly remove the package 
+> with remove.packages() (and then checking that it's really gone from 
+> the filesystem) and then reinstalling.? I thought I wouldn't do that 
+> until you or someone might advise me if there is anything to be gained 
+> diagnostically by keeping it.? I can't share the database in question 
+> but it appears to be working fine using routes other than RODBC (see 
+> my reply to Gregg Powell).
+>
+> I have dug around in my archives and found an old, small mdb file and 
+> it works fine with the Hmisc::mdb.get() but gives the same weirdness 
+> with RODBC so I think the issue is clearly with RODBC or my particular 
+> installation of it.
+>
+> I have access to the data that I need now so this is really about 
+> debugging the weirdness.? No rush from me but I will try to find time 
+> to respond reasonably quickly if you or others have advice beyond just 
+> removing and deleting the RODBC package and reinstalling it.? Is there 
+> a preferred way for me to reinstall it if going that way?
+>
+> TIA,
+>
+>
+> Chris
+>
+>>
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide 
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+	[[alternative HTML version deleted]]
+
+
+From g@@@powe|| @end|ng |rom protonm@||@com  Sun Nov  8 17:46:39 2026
+From: g@@@powe|| @end|ng |rom protonm@||@com (Gregg Powell)
+Date: Sun, 08 Nov 2026 16:46:39 +0000
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <cf638e3d-2fa2-44d3-bd66-82bea759c5c4@psyctc.org>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+ <20261101231020.142bf5eb@Tarkus>
+ <677393fe-92be-446d-8d68-595a3c6f3a2a@psyctc.org>
+ <cf638e3d-2fa2-44d3-bd66-82bea759c5c4@psyctc.org>
+Message-ID: <_JiQV7FSwzsmM2eYxd1HoVBqcFGJKPz3pFFNJwtohPVyYw3zAb8OHwWWXgzGju6Cf45zapRbKkfZsTHsoTwxl9zUneX4yVYZuMMxsVMCmFI=@protonmail.com>
+
+Hi Chris,
+
+Your three-machine test tells us a lot. You get the same failure on two Debian releases and on Kubuntu, with two different .mdb files (including your old small one). Meanwhile isql and the mdb-tools command line (via Hmisc::mdb.get) both read the data fine. That rules out the files, your RODBC install, and the unixODBC version. What?s left is how RODBC and the MDBTools ODBC driver work together. I think (possibly- but probably) two separate problems are being mistaken for one.
+
+1. The garbage warning (cosmetic)
+
+Ivan?s reading of the C code is right. As far as I can tell from the driver source, MDBTools? SQLDriverConnect() connects using the Database= setting and returns SQL_SUCCESS, but it never writes the output connection string (szConnStrOut / pcbConnStrOut). RODBC doesn?t initialise buf1 before the call, so R receives whatever happened to be on the stack.
+
+On your Debian boxes those leftover bytes probably start with a NUL or happen to be valid text, so grepl() stays quiet. On Kubuntu, with GCC 15 and a different stack layout, they aren?t. It?s the same bug on all three machines, but it?s only visible on one. It doesn?t affect the connection itself, and it isn?t why you get no data.
+
+2. No rows returned (the real problem)
+
+odbcConnect() defaults to believeNRows = TRUE and rows_at_time = 100. As far as I can tell, the MDBTools driver doesn?t return a usable row count for a SELECT, and it doesn?t support fetching many rows at once. With those defaults, RODBC can conclude there are zero rows and return an empty result. Give this a shot:
+
+[R]
+> library(RODBC)
+> connEOS <- odbcConnect("EOS", believeNRows = FALSE, rows_at_time = 1)
+> sqlTables(connEOS)
+> sqlQuery(connEOS, "SELECT * FROM YourTableName", errors = TRUE)
+> odbcGetErrMsg(connEOS)
+> close(connEOS)
+
+Use a real table name from mdb-tables yourfile.mdb in a shell. Depending on what you see:
+
+- sqlQuery() returns data but sqlTables() is empty: that?s a separate gap in the driver?s table listing. Just name the tables directly.
+
+- sqlQuery() works but sqlFetch() doesn?t: the likely cause is how RODBC quotes table names, which the MDBTools SQL parser handles poorly. Stick with sqlQuery().
+
+[ODBC]
+> Trace = Yes
+> TraceFile = /tmp/odbc_trace.log
+
+Rerun your R code, then look in /tmp/odbc_trace.log. You should see whether SQLDriverConnect leaves the output length unset and what SQLRowCount returns. Turn tracing off afterwards, because the log grows quickly. That log is also exactly what a maintainer would want attached to a bug report.
+
+4. Where to report it
+
+- RODBC: it has no public bug tracker. Running maintainer("RODBC") gives you the address. The fix is small: set buf1[0] = '\0' before the call, or check tmp1 before using buf1. Either way, RODBC shouldn?t trust a buffer the driver didn?t fill.
+
+- MDBTools: report it at github.com/mdbtools/mdbtools/issues. Cover SQLDriverConnect not filling the output connection string and SQLRowCount on SELECT statements, and attach the trace.
+
+5. If you?d rather avoid RODBC entirely
+
+The odbc/DBI packages often cope better with drivers that have gaps like these:
+
+[R]
+> con <- DBI::dbConnect(odbc::odbc(), dsn = "EOS")
+> DBI::dbListTables(con)
+> DBI::dbReadTable(con, "YourTableName")
+> DBI::dbDisconnect(con)
+
+Hmisc::mdb.get() also remains a perfectly good route, since it already works for you.
+
+If believeNRows = FALSE with rows_at_time = 1 fixes it, I?d still send both reports. The warning is a real, if minor, bug in RODBC, and the next person to use MDBTools will hit the same empty results.
+
+All the Best,
+Gregg
+
+
+
+
+On Sunday, November 8th, 2026 at 7:49 AM, Chris Evans via R-help <r-help at r-project.org> wrote:
+
+> I have finally found time to get back to this and I am starting to
+> wonder if it is a bug in RODBC.  What I have done:
+> 
+
+> * Found that RODBC was installed in /usr/local/lib/R/site-library/. 
+
+>   Not sure that helps but I used `remove.packages("RODBC")` to remove it
+> in R and then moved the directory to a safe place in case it's ever of
+> any diagnostic use.  Then I installed it again:
+> 
+
+> Installing package into ?/home/chris/R/x86_64-pc-linux-gnu-library/4.6?
+> (as ?lib? is unspecified)
+> trying URL 'https://cloud.r-project.org/src/contrib/RODBC_1.3-26.3.tar.gz'
+> Content type 'application/x-gzip' length 942265 bytes (920 KB)
+> ==================================================
+> downloaded 920 KB
+> 
+
+> * installing *source* package ?RODBC? ...
+> ** this is package ?RODBC? version ?1.3-26.3?
+> ** package ?RODBC? successfully unpacked and MD5 sums checked
+> ** using staged installation
+> checking for gcc... x86_64-linux-gnu-gcc
+> checking whether the C compiler works... yes
+> checking for C compiler default output file name... a.out
+> checking for suffix of executables...
+> checking whether we are cross compiling... no
+> checking for suffix of object files... o
+> checking whether the compiler supports GNU C... yes
+> checking whether x86_64-linux-gnu-gcc accepts -g... yes
+> checking for x86_64-linux-gnu-gcc option to enable C11 features... none needed
+> checking for stdio.h... yes
+> checking for stdlib.h... yes
+> checking for string.h... yes
+> checking for inttypes.h... yes
+> checking for stdint.h... yes
+> checking for strings.h... yes
+> checking for sys/stat.h... yes
+> checking for sys/types.h... yes
+> checking for unistd.h... yes
+> checking for sql.h... yes
+> checking for sqlext.h... yes
+> checking for library containing SQLTables... -lodbc
+> checking for SQLLEN... yes
+> checking for SQLULEN... yes
+> checking size of long... 8
+> configure: creating ./config.status
+> config.status: creating src/Makevars
+> config.status: creating src/config.h
+> ** libs
+> using C compiler: ?x86_64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0?
+> x86_64-linux-gnu-gcc -I"/usr/share/R/include" -DNDEBUG -I.      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=/usr/src/r-base-4.6.2-1.2604.0 -Wdate-time -D_FORTIFY_SOURCE=3  -c RODBC.c -o RODBC.o
+> x86_64-linux-gnu-gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,--package-metadata=%7B%22type%22:%22deb%22%2C%22os%22:%22ubuntu%22%2C%22name%22:%22r-base%22%2C%22version%22:%224.6.2-1.2604.0%22%2C%22architecture%22:%22amd64%22%7D -flto=auto -ffat-lto-objects -Wl,-z,relro -o RODBC.so RODBC.o -lodbc -L/usr/lib/R/lib -lR
+> installing to /home/chris/R/x86_64-pc-linux-gnu-library/4.6/00LOCK-RODBC/00new/RODBC/libs
+> ** R
+> ** inst
+> ** byte-compile and prepare package for lazy loading
+> ** help
+> *** installing help indices
+> ** building package indices
+> ** installing vignettes
+> ** testing if installed package can be loaded from temporary location
+> ** checking absolute paths in shared objects and dynamic libraries
+> ** testing if installed package can be loaded from final location
+> ** testing if installed package keeps a record of temporary installation path
+> * DONE (RODBC)
+> 
+
+> That looks fine to me. So that gives me RODBC version 1.3.26.3 running
+> in 4.6.2 (2026-10-29) -- "Diversified Portfolio" on "26.04.1 LTS
+> (Resolute Raccoon)" (technically Kubuntu) with linux packages unixodb
+> version 2.3.14-1, mdbtools version 1.0.1-0.1build1 and odbc-mdtools
+> version 1.0.1-0.1build1.  However, rerunning things gets exactly the
+> same failure to read anything from the mdb files and does continue to
+> give the bizarre warning:
+> 
+
+> > connEOS <- odbcConnect("EOS")
+> Warning messages:
+> 1: In grepl("PWD=", cs) :
+>    unable to translate '(}<e7>q<93>\' to a wide string
+> 2: In grepl("PWD=", cs) : input string 1 is invalid
+> 
+
+> * then I uploaded both mdb files to "my" web server which runs Debian
+> 6.1.176-1 (2026-07-02) x86_64 GNU/Linux and "R version 4.5.3
+> (2026-03-11)" and RODBC version 1.3.26.3, linux packages: unixodbc
+> 2.3.11-2+deb12u1 mdbtools 1.0.0+dfsg-1.1
+>   and odbc-mdbtools version 1.0.0+dfsg-1.1.
+> Here I get
+>   no warnings on the odbcConnect() but again, nothing is read in from
+> either mdb file
+> 
+
+> * then I did the same on "my" shiny server (currently not serving shiny
+> as per my other recent post here!). That runs Debian 6.1.176-1
+> (2026-07-02) x86_64 GNU/Linux, "R version 4.2.2 Patched (2022-11-10
+> r83330)" and again RODBC is version 1.3.26.3 and the linux packages are:
+> unixodbc 2.3.11-2+deb12u1, mdbtools 1.0.0+dfsg-1.1 and odbc-mdbtools
+> version 1.0.0+dfsg-1.1.
+> Again no warning on odbcConnect() but equally nothing is read in from
+> either mdb file.
+> 
+
+> Summary:
+> 
+
+> 1) I get the bizarre warnings only on my kubuntu 26.04 laptop
+> 
+
+> 2) I can't read either of these mdb files into R using the RODBC package
+> on three significantly different machines, two different Debian versions
+> and my Kubuntu laptop.  All three have RODBC version 1.3.26.3 but they
+> have a variety of versions of the Linux packages.
+> 
+
+> Sadly, I can't share either mdb file but if someone has one that reads
+> into R fine for them using RODBC, I would be happy to try that file in
+> each of my three machines, or do I open this as a possible bug report
+> for the RODBC: I see no other open bugs against it (assuming that I am
+> searching correctly).
+> 
+
+> TIA,
+> 
+
+> 
+
+> Chris
+> 
+
+> 
+
+> On 02/11/2026 14:16, Chris Evans via R-help wrote:
+> >
+> > On 01/11/2026 20:10, Ivan Krylov wrote:
+> >> On Mon, 26 Oct 2026 18:06:05 +0000
+> >> Chris Evans via R-help<r-help at r-project.org> wrote:
+> >>
+> >>>> connEOS <- odbcConnect("EOS")
+> >>> Warning messages:
+> >>> 1: In grepl("PWD=", cs) :
+> >>>     unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+> >>> 2: In grepl("PWD=", cs) : input string 1 is invalid
+> >> This is quite weird.
+> >>
+> >> The 'cs' string is the connection string returned by the C code inside
+> >> RODBC:
+> >>
+> >>     stat <- .Call(C_RODBCDriverConnect, as.character(connection), id,
+> >>                   as.integer(believeNRows),
+> >> as.logical(readOnlyOptimize))
+> >>     # ...
+> >>     cs <- attr(stat, "connection.string")
+> >>     if(grepl("PWD=", cs)) {
+> >>         # mask the password inside the returned object
+> >>
+> >> RODBC passes the connection string back to R like this:
+> >>
+> >>   #define buf1_len 8096
+> >>   // ...
+> >>   SQLCHAR buf1[buf1_len];
+> >>   // ...
+> >>   retval = SQLDriverConnect(
+> >>    thisHandle->hDbc, NULL,
+> >>    (SQLCHAR *)Rf_translateChar(STRING_ELT(connection, 0)),
+> >>    SQL_NTS,
+> >>    (SQLCHAR *)buf1, (SQLSMALLINT)buf1_len,
+> >>    &tmp1,
+> >>    SQL_DRIVER_NOPROMPT
+> >>   );
+> >>   if(retval == SQL_SUCCESS || retval == SQL_SUCCESS_WITH_INFO) {
+> >>    // ...
+> >>    PROTECT(constr = Rf_allocVector(STRSXP, 1));
+> >>    SET_STRING_ELT(constr, 0, Rf_mkChar((char *)buf1));
+> >>    // ...
+> >>    Rf_setAttrib(ans, Rf_install("connection.string"), constr);
+> >>
+> >> Somehow, the 'buf1' string isn't filled at all and R receives
+> >> uninitialised stack contents instead of the effective connection
+> >> string, despite the return value indicates a successful connection. And
+> >> yet 'idbc' works using the same connection string, suggesting that the
+> >> problem isn't inside the MDBtools driver.
+> > I think I follow all of that!
+> >> How did you install the RODBC package?
+> >
+> > Sadly, I don't remember but almost certainly either with
+> > install.packages("RODB") from the "console" in Rstudio or perhaps
+> > using the Rstudio package install route.  It is just possible that I
+> > installed it with apt-get install r-cran-rodbc but I think that's
+> > unlikely.
+> >
+> > I see it at /home/chris/R/x86_64-pc-linux-gnu-library/4.6/RODBC but
+> > not in /usr/lib/R/library/
+> >
+> >> If there's nothing obviously
+> >> wrong with your R package installation, further investigation will
+> >> probably require stepping through the C code in a debugger.
+> >
+> > I fear that is beyond my skills but I can clearly remove the package
+> > with remove.packages() (and then checking that it's really gone from
+> > the filesystem) and then reinstalling.  I thought I wouldn't do that
+> > until you or someone might advise me if there is anything to be gained
+> > diagnostically by keeping it.  I can't share the database in question
+> > but it appears to be working fine using routes other than RODBC (see
+> > my reply to Gregg Powell).
+> >
+> > I have dug around in my archives and found an old, small mdb file and
+> > it works fine with the Hmisc::mdb.get() but gives the same weirdness
+> > with RODBC so I think the issue is clearly with RODBC or my particular
+> > installation of it.
+> >
+> > I have access to the data that I need now so this is really about
+> > debugging the weirdness.  No rush from me but I will try to find time
+> > to respond reasonably quickly if you or others have advice beyond just
+> > removing and deleting the RODBC package and reinstalling it.  Is there
+> > a preferred way for me to reinstall it if going that way?
+> >
+> > TIA,
+> >
+> >
+> > Chris
+> >
+> >>
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> > https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+> 	[[alternative HTML version deleted]]
+> 
+
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+> 
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 603 bytes
+Desc: OpenPGP digital signature
+URL: <https://stat.ethz.ch/pipermail/r-help/attachments/20261108/ac8e4be3/attachment.sig>
+
+From chr|@ho|d @end|ng |rom p@yctc@org  Sun Nov  8 18:31:56 2026
+From: chr|@ho|d @end|ng |rom p@yctc@org (Chris Evans)
+Date: Sun, 8 Nov 2026 18:31:56 +0100
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <_JiQV7FSwzsmM2eYxd1HoVBqcFGJKPz3pFFNJwtohPVyYw3zAb8OHwWWXgzGju6Cf45zapRbKkfZsTHsoTwxl9zUneX4yVYZuMMxsVMCmFI=@protonmail.com>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+ <20261101231020.142bf5eb@Tarkus>
+ <677393fe-92be-446d-8d68-595a3c6f3a2a@psyctc.org>
+ <cf638e3d-2fa2-44d3-bd66-82bea759c5c4@psyctc.org>
+ <_JiQV7FSwzsmM2eYxd1HoVBqcFGJKPz3pFFNJwtohPVyYw3zAb8OHwWWXgzGju6Cf45zapRbKkfZsTHsoTwxl9zUneX4yVYZuMMxsVMCmFI=@protonmail.com>
+Message-ID: <6dda138d-adf1-4c7a-a246-b94fc92b0976@psyctc.org>
+
+On 08/11/2026 17:46, Gregg Powell wrote:
+> Hi Chris,
+>
+> Your three-machine test tells us a lot. You get the same failure on two Debian releases and on Kubuntu, with two different .mdb files (including your old small one). Meanwhile isql and the mdb-tools command line (via Hmisc::mdb.get) both read the data fine. That rules out the files, your RODBC install, and the unixODBC version. What?s left is how RODBC and the MDBTools ODBC driver work together. I think (possibly- but probably) two separate problems are being mistaken for one.
+>
+> 1. The garbage warning (cosmetic)
+>
+> Ivan?s reading of the C code is right. As far as I can tell from the driver source, MDBTools? SQLDriverConnect() connects using the Database= setting and returns SQL_SUCCESS, but it never writes the output connection string (szConnStrOut / pcbConnStrOut). RODBC doesn?t initialise buf1 before the call, so R receives whatever happened to be on the stack.
+>
+> On your Debian boxes those leftover bytes probably start with a NUL or happen to be valid text, so grepl() stays quiet. On Kubuntu, with GCC 15 and a different stack layout, they aren?t. It?s the same bug on all three machines, but it?s only visible on one. It doesn?t affect the connection itself, and it isn?t why you get no data.
+That's an even clearer explanation than the one from Ivan but I should 
+have made it clearer that I realised that this has nothing to do with 
+not pulling the data from the mdb.? I am interested that Kubuntu is 
+doing things so differently but that's way above my IT savvy level!
+>
+> 2. No rows returned (the real problem)
+>
+> odbcConnect() defaults to believeNRows = TRUE and rows_at_time = 100. As far as I can tell, the MDBTools driver doesn?t return a usable row count for a SELECT, and it doesn?t support fetching many rows at once. With those defaults, RODBC can conclude there are zero rows and return an empty result. Give this a shot:
+>
+> [R]
+>> library(RODBC)
+>> connEOS <- odbcConnect("EOS", believeNRows = FALSE, rows_at_time = 1)
+>> sqlTables(connEOS)
+>> sqlQuery(connEOS, "SELECT * FROM YourTableName", errors = TRUE)
+>> odbcGetErrMsg(connEOS)
+>> close(connEOS)
+> Use a real table name from mdb-tables yourfile.mdb in a shell. Depending on what you see:
+>
+> - sqlQuery() returns data but sqlTables() is empty: that?s a separate gap in the driver?s table listing. Just name the tables directly.
+>
+> - sqlQuery() works but sqlFetch() doesn?t: the likely cause is how RODBC quotes table names, which the MDBTools SQL parser handles poorly. Stick with sqlQuery().
+
+That all worked perfectly with nothing in the error messages.
+
+I didn't see the call you wanted for sqlFetch() but trying
+
+sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+
+got
+
+[1] CodDistretto             Descrizione              Valido                   CodArea                  CodSistemaEsterno        LastUser
+[7] LastUp                   VisualizzaMotiviIngresso CodTipoScalaObbligatoria
+<0 rows> (or 0-length row.names)
+
+Whereas
+
+sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+
+got
+
+sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+
+I am perfectly happy to stay with sqlQuery as it will clearly now do as 
+well the DBI and Hmisc approaches with those " believeNRows = FALSE, 
+rows_at_time = 1" arguments.
+
+> [ODBC]
+>> Trace = Yes
+>> TraceFile = /tmp/odbc_trace.log
+> Rerun your R code, then look in /tmp/odbc_trace.log. You should see whether SQLDriverConnect leaves the output length unset and what SQLRowCount returns. Turn tracing off afterwards, because the log grows quickly. That log is also exactly what a maintainer would want attached to a bug report.
+
+I wasn't sure where you wanted those lines to go.? I guessed in 
+/etc/odbcinst.ini and tried this
+
+[MySQL ODBC 26.10 Unicode Driver]
+DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26w.so
+UsageCount=1
+
+[MySQL ODBC 26.10 ANSI Driver]
+DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26a.so
+UsageCount=1
+
+[MDBTools]
+Description=MDB Tools ODBC driver
+Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+FileUsage=1
+UsageCount=1
+Trace = Yes
+TraceFile = /tmp/odbc_trace.log
+
+[MDBToolsW]
+Description=MDB Tools ODBC driver (Unicode)
+Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+FileUsage=1
+UsageCount=1
+Trace = Yes
+TraceFile = /tmp/odbc_trace.log
+
+I also tried setting TraceFile to /home/chris/odbc_trace.log as R would 
+have been running as user chris but neither version produced any trace.
+
+> 4. Where to report it
+>
+> - RODBC: it has no public bug tracker. Running maintainer("RODBC") gives you the address. The fix is small: set buf1[0] = '\0' before the call, or check tmp1 before using buf1. Either way, RODBC shouldn?t trust a buffer the driver didn?t fill.
+The maintainer, as I am sure you have seen is Professor Ripley and I 
+have caught the sharp end of his tongue before and I honestly don't know 
+what "set buf1[0] = '\0' before the call, or check tmp1 before using 
+buf1" means so I would like, with your permission, to quote you.
+> - MDBTools: report it at github.com/mdbtools/mdbtools/issues. Cover SQLDriverConnect not filling the output connection string and SQLRowCount on SELECT statements, and attach the trace.
+But I have no trace!? If you can push me in the correct direction for 
+that, I will do that.
+>
+> 5. If you?d rather avoid RODBC entirely
+>
+> The odbc/DBI packages often cope better with drivers that have gaps like these:
+>
+> [R]
+>> con <- DBI::dbConnect(odbc::odbc(), dsn = "EOS")
+>> DBI::dbListTables(con)
+>> DBI::dbReadTable(con, "YourTableName")
+>> DBI::dbDisconnect(con)
+> Hmisc::mdb.get() also remains a perfectly good route, since it already works for you.
+Yes, both of those work for me (thanks again) so this is about trying to 
+be a good FLOSS user, not a nasty!
+> If believeNRows = FALSE with rows_at_time = 1 fixes it, I?d still send both reports. The warning is a real, if minor, bug in RODBC, and the next person to use MDBTools will hit the same empty results.
+
+Yes, the first is sort of a bug in the warning and the second is the 
+more substantive bug in how RODBC cooperates with MDBTools?
+
+Assuming so, yes I will, but see above.
+
+>
+> All the Best,
+
+Many thanks again!
+
+Chris
+
+> Gregg
+>
+>
+>
+>
+> On Sunday, November 8th, 2026 at 7:49 AM, Chris Evans via R-help<r-help at r-project.org> wrote:
+>
+>> I have finally found time to get back to this and I am starting to
+>> wonder if it is a bug in RODBC.  What I have done:
+>>
+>> * Found that RODBC was installed in /usr/local/lib/R/site-library/.
+>>    Not sure that helps but I used `remove.packages("RODBC")` to remove it
+>> in R and then moved the directory to a safe place in case it's ever of
+>> any diagnostic use.  Then I installed it again:
+>>
+>> Installing package into ?/home/chris/R/x86_64-pc-linux-gnu-library/4.6?
+>> (as ?lib? is unspecified)
+>> trying URL 'https://cloud.r-project.org/src/contrib/RODBC_1.3-26.3.tar.gz'
+>> Content type 'application/x-gzip' length 942265 bytes (920 KB)
+>> ==================================================
+>> downloaded 920 KB
+>>
+>> * installing *source* package ?RODBC? ...
+>> ** this is package ?RODBC? version ?1.3-26.3?
+>> ** package ?RODBC? successfully unpacked and MD5 sums checked
+>> ** using staged installation
+>> checking for gcc... x86_64-linux-gnu-gcc
+>> checking whether the C compiler works... yes
+>> checking for C compiler default output file name... a.out
+>> checking for suffix of executables...
+>> checking whether we are cross compiling... no
+>> checking for suffix of object files... o
+>> checking whether the compiler supports GNU C... yes
+>> checking whether x86_64-linux-gnu-gcc accepts -g... yes
+>> checking for x86_64-linux-gnu-gcc option to enable C11 features... none needed
+>> checking for stdio.h... yes
+>> checking for stdlib.h... yes
+>> checking for string.h... yes
+>> checking for inttypes.h... yes
+>> checking for stdint.h... yes
+>> checking for strings.h... yes
+>> checking for sys/stat.h... yes
+>> checking for sys/types.h... yes
+>> checking for unistd.h... yes
+>> checking for sql.h... yes
+>> checking for sqlext.h... yes
+>> checking for library containing SQLTables... -lodbc
+>> checking for SQLLEN... yes
+>> checking for SQLULEN... yes
+>> checking size of long... 8
+>> configure: creating ./config.status
+>> config.status: creating src/Makevars
+>> config.status: creating src/config.h
+>> ** libs
+>> using C compiler: ?x86_64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0?
+>> x86_64-linux-gnu-gcc -I"/usr/share/R/include" -DNDEBUG -I.      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=/usr/src/r-base-4.6.2-1.2604.0 -Wdate-time -D_FORTIFY_SOURCE=3  -c RODBC.c -o RODBC.o
+>> x86_64-linux-gnu-gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,--package-metadata=%7B%22type%22:%22deb%22%2C%22os%22:%22ubuntu%22%2C%22name%22:%22r-base%22%2C%22version%22:%224.6.2-1.2604.0%22%2C%22architecture%22:%22amd64%22%7D -flto=auto -ffat-lto-objects -Wl,-z,relro -o RODBC.so RODBC.o -lodbc -L/usr/lib/R/lib -lR
+>> installing to /home/chris/R/x86_64-pc-linux-gnu-library/4.6/00LOCK-RODBC/00new/RODBC/libs
+>> ** R
+>> ** inst
+>> ** byte-compile and prepare package for lazy loading
+>> ** help
+>> *** installing help indices
+>> ** building package indices
+>> ** installing vignettes
+>> ** testing if installed package can be loaded from temporary location
+>> ** checking absolute paths in shared objects and dynamic libraries
+>> ** testing if installed package can be loaded from final location
+>> ** testing if installed package keeps a record of temporary installation path
+>> * DONE (RODBC)
+>>
+>> That looks fine to me. So that gives me RODBC version 1.3.26.3 running
+>> in 4.6.2 (2026-10-29) -- "Diversified Portfolio" on "26.04.1 LTS
+>> (Resolute Raccoon)" (technically Kubuntu) with linux packages unixodb
+>> version 2.3.14-1, mdbtools version 1.0.1-0.1build1 and odbc-mdtools
+>> version 1.0.1-0.1build1.  However, rerunning things gets exactly the
+>> same failure to read anything from the mdb files and does continue to
+>> give the bizarre warning:
+>>
+>>> connEOS <- odbcConnect("EOS")
+>> Warning messages:
+>> 1: In grepl("PWD=", cs) :
+>>     unable to translate '(}<e7>q<93>\' to a wide string
+>> 2: In grepl("PWD=", cs) : input string 1 is invalid
+>>
+>> * then I uploaded both mdb files to "my" web server which runs Debian
+>> 6.1.176-1 (2026-07-02) x86_64 GNU/Linux and "R version 4.5.3
+>> (2026-03-11)" and RODBC version 1.3.26.3, linux packages: unixodbc
+>> 2.3.11-2+deb12u1 mdbtools 1.0.0+dfsg-1.1
+>>    and odbc-mdbtools version 1.0.0+dfsg-1.1.
+>> Here I get
+>>    no warnings on the odbcConnect() but again, nothing is read in from
+>> either mdb file
+>>
+>> * then I did the same on "my" shiny server (currently not serving shiny
+>> as per my other recent post here!). That runs Debian 6.1.176-1
+>> (2026-07-02) x86_64 GNU/Linux, "R version 4.2.2 Patched (2022-11-10
+>> r83330)" and again RODBC is version 1.3.26.3 and the linux packages are:
+>> unixodbc 2.3.11-2+deb12u1, mdbtools 1.0.0+dfsg-1.1 and odbc-mdbtools
+>> version 1.0.0+dfsg-1.1.
+>> Again no warning on odbcConnect() but equally nothing is read in from
+>> either mdb file.
+>>
+>> Summary:
+>>
+>> 1) I get the bizarre warnings only on my kubuntu 26.04 laptop
+>>
+>> 2) I can't read either of these mdb files into R using the RODBC package
+>> on three significantly different machines, two different Debian versions
+>> and my Kubuntu laptop.  All three have RODBC version 1.3.26.3 but they
+>> have a variety of versions of the Linux packages.
+>>
+>> Sadly, I can't share either mdb file but if someone has one that reads
+>> into R fine for them using RODBC, I would be happy to try that file in
+>> each of my three machines, or do I open this as a possible bug report
+>> for the RODBC: I see no other open bugs against it (assuming that I am
+>> searching correctly).
+>>
+>> TIA,
+>>
+>> Chris
+>>
+>> On 02/11/2026 14:16, Chris Evans via R-help wrote:
+>>> On 01/11/2026 20:10, Ivan Krylov wrote:
+>>>> On Mon, 26 Oct 2026 18:06:05 +0000
+>>>> Chris Evans via R-help<r-help at r-project.org> wrote:
+>>>>
+>>>>>> connEOS <- odbcConnect("EOS")
+>>>>> Warning messages:
+>>>>> 1: In grepl("PWD=", cs) :
+>>>>>      unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+>>>>> 2: In grepl("PWD=", cs) : input string 1 is invalid
+>>>> This is quite weird.
+>>>>
+>>>> The 'cs' string is the connection string returned by the C code inside
+>>>> RODBC:
+>>>>
+>>>>      stat <- .Call(C_RODBCDriverConnect, as.character(connection), id,
+>>>>                    as.integer(believeNRows),
+>>>> as.logical(readOnlyOptimize))
+>>>>      # ...
+>>>>      cs <- attr(stat, "connection.string")
+>>>>      if(grepl("PWD=", cs)) {
+>>>>          # mask the password inside the returned object
+>>>>
+>>>> RODBC passes the connection string back to R like this:
+>>>>
+>>>>    #define buf1_len 8096
+>>>>    // ...
+>>>>    SQLCHAR buf1[buf1_len];
+>>>>    // ...
+>>>>    retval = SQLDriverConnect(
+>>>>     thisHandle->hDbc, NULL,
+>>>>     (SQLCHAR *)Rf_translateChar(STRING_ELT(connection, 0)),
+>>>>     SQL_NTS,
+>>>>     (SQLCHAR *)buf1, (SQLSMALLINT)buf1_len,
+>>>>     &tmp1,
+>>>>     SQL_DRIVER_NOPROMPT
+>>>>    );
+>>>>    if(retval == SQL_SUCCESS || retval == SQL_SUCCESS_WITH_INFO) {
+>>>>     // ...
+>>>>     PROTECT(constr = Rf_allocVector(STRSXP, 1));
+>>>>     SET_STRING_ELT(constr, 0, Rf_mkChar((char *)buf1));
+>>>>     // ...
+>>>>     Rf_setAttrib(ans, Rf_install("connection.string"), constr);
+>>>>
+>>>> Somehow, the 'buf1' string isn't filled at all and R receives
+>>>> uninitialised stack contents instead of the effective connection
+>>>> string, despite the return value indicates a successful connection. And
+>>>> yet 'idbc' works using the same connection string, suggesting that the
+>>>> problem isn't inside the MDBtools driver.
+>>> I think I follow all of that!
+>>>> How did you install the RODBC package?
+>>> Sadly, I don't remember but almost certainly either with
+>>> install.packages("RODB") from the "console" in Rstudio or perhaps
+>>> using the Rstudio package install route.  It is just possible that I
+>>> installed it with apt-get install r-cran-rodbc but I think that's
+>>> unlikely.
+>>>
+>>> I see it at /home/chris/R/x86_64-pc-linux-gnu-library/4.6/RODBC but
+>>> not in /usr/lib/R/library/
+>>>
+>>>> If there's nothing obviously
+>>>> wrong with your R package installation, further investigation will
+>>>> probably require stepping through the C code in a debugger.
+>>> I fear that is beyond my skills but I can clearly remove the package
+>>> with remove.packages() (and then checking that it's really gone from
+>>> the filesystem) and then reinstalling.  I thought I wouldn't do that
+>>> until you or someone might advise me if there is anything to be gained
+>>> diagnostically by keeping it.  I can't share the database in question
+>>> but it appears to be working fine using routes other than RODBC (see
+>>> my reply to Gregg Powell).
+>>>
+>>> I have dug around in my archives and found an old, small mdb file and
+>>> it works fine with the Hmisc::mdb.get() but gives the same weirdness
+>>> with RODBC so I think the issue is clearly with RODBC or my particular
+>>> installation of it.
+>>>
+>>> I have access to the data that I need now so this is really about
+>>> debugging the weirdness.  No rush from me but I will try to find time
+>>> to respond reasonably quickly if you or others have advice beyond just
+>>> removing and deleting the RODBC package and reinstalling it.  Is there
+>>> a preferred way for me to reinstall it if going that way?
+>>>
+>>> TIA,
+>>>
+>>>
+>>> Chris
+>>>
+>>> ______________________________________________
+>>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>> https://stat.ethz.ch/mailman/listinfo/r-help
+>>> PLEASE do read the posting guide
+>>> https://www.R-project.org/posting-guide.html
+>>> and provide commented, minimal, self-contained, reproducible code.
+>> 	[[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guidehttps://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+>>
+	[[alternative HTML version deleted]]
+
+
+From g@@@powe|| @end|ng |rom protonm@||@com  Sun Nov  8 22:07:32 2026
+From: g@@@powe|| @end|ng |rom protonm@||@com (Gregg Powell)
+Date: Sun, 08 Nov 2026 21:07:32 +0000
+Subject: [R] odbcConnect won't open a DSN that opens using isql (Linux:
+ Ubuntu)
+In-Reply-To: <6dda138d-adf1-4c7a-a246-b94fc92b0976@psyctc.org>
+References: <e4522690-a931-4415-9838-f6149ac821e4@psyctc.org>
+ <20261101231020.142bf5eb@Tarkus>
+ <677393fe-92be-446d-8d68-595a3c6f3a2a@psyctc.org>
+ <cf638e3d-2fa2-44d3-bd66-82bea759c5c4@psyctc.org>
+ <_JiQV7FSwzsmM2eYxd1HoVBqcFGJKPz3pFFNJwtohPVyYw3zAb8OHwWWXgzGju6Cf45zapRbKkfZsTHsoTwxl9zUneX4yVYZuMMxsVMCmFI=@protonmail.com>
+ <6dda138d-adf1-4c7a-a246-b94fc92b0976@psyctc.org>
+Message-ID: <XRB5Jl4VOM7TERlqJyGI6cnlYhkd0b7Hn_mt2Lfiq2VUH_UmSmoAdI2MVHDf8pCf3g6Q_18dD24D-4induqbEG8iHUnwT5-hxOy15eppxmA=@protonmail.com>
+
+Hello again Chris,
+Glad the main problem appears to be solved. Here's where I think things stand on the rest.
+
+THE TRACE (my fault for being unclear)
+
+The trace lines need their own section, headed by a line that just says [ODBC]. They don't go inside the driver sections. I suspect the [ODBC] header got lost in the formatting of my email. Please do this:
+
+1. Remove the Trace and TraceFile lines you added under [MDBTools] and [MDBToolsW].
+
+2. Add this block at the top of /etc/odbcinst.ini, header line included:
+
+> [ODBC]
+> Trace = Yes
+> TraceFile = /tmp/odbc_trace.log
+
+3. Check that /etc/odbcinst.ini is the file unixODBC is actually reading. Run this in a shell and look at the DRIVERS line:
+
+> odbcinst -j
+
+4. Restart R completely so the driver manager rereads its configuration. Then run your connect and query once more, using the defaults so the trace captures the failing case:
+
+> library(RODBC)
+> connEOS <- odbcConnect("EOS")
+> sqlQuery(connEOS, "SELECT * FROM dbo_TabDistretto")
+> close(connEOS)
+
+5. This should now show a file:
+
+> ls -l /tmp/odbc_trace.log
+
+When you're done, set Trace = No.
+
+In the log, look for the SQLDriverConnect exit. You should see the output connection string left empty or unset. Further down, look for SQLRowCount returning 0 even though the table has rows.
+
+THE COUNT(*) RESULT
+
+I'm not certain I'm reading your paste correctly, since the second command seems to have come through without its output. If the first result came from SELECT COUNT(*), though, it's telling us something: instead of a single count column, the driver returned the table's own column names with no rows. My guess is that MDBTools' SQL parser simply doesn't handle aggregates. It's a very limited SQL dialect, built for simple SELECT ... WHERE queries. If so, it isn't an RODBC problem. Do the counting in R instead:
+
+> x <- sqlQuery(connEOS, "SELECT * FROM dbo_TabDistretto")
+> nrow(x)
+
+For the sqlFetch test I mentioned, this is the call:
+
+> sqlFetch(connEOS, "dbo_TabDistretto")
+
+WHICH BUG GOES WHERE
+
+Your summary is nearly right, with one correction on the second item:
+
+1. The garbage warning. I believe this is a small bug in RODBC: it trusts a buffer the driver never filled. MDBTools shares the blame, because it should fill that buffer and doesn't. It's worth reporting to both.
+
+2. The empty results. This is really the driver's doing, not RODBC's. MDBTools reports a row count of 0 and can't fetch many rows at once. RODBC already has documented options for drivers like this (believeNRows and rows_at_time), so I wouldn't call it an RODBC bug. That one belongs on the MDBTools GitHub only. I'd leave it out of anything you send to Prof. Ripley.
+
+QUOTING ME
+
+Yes, quote me. In plain English, the fix means this: before RODBC asks the driver to fill in the connection-string buffer, it should put an empty string in it. Then, if the driver writes nothing, R gets "" instead of whatever random bytes were sitting in that memory. That's also the whole answer to why Kubuntu behaves differently. It isn't doing anything wrong. The random bytes left in memory just happen to differ there, and only on that machine are they bytes R can't turn into text.
+
+If it helps, here's text you could send more or less as-is:
+
+----- suggested text -----
+With the MDBTools ODBC driver (odbc-mdbtools 1.0.x), odbcConnect() succeeds but produces warnings from grepl("PWD=", cs) about untranslatable strings. The driver's SQLDriverConnect() returns SQL_SUCCESS without writing to OutConnectionString or StringLength2Ptr, so in C_RODBCDriverConnect the uninitialised buf1 is passed to mkChar(). Initialising buf1[0] = '\0' (and tmp1 = 0) before the SQLDriverConnect() call, or only using buf1 when tmp1 > 0, would make RODBC robust to drivers that don't fill the output string. Seen with RODBC 1.3-26.3 on R 4.6.2 (Kubuntu 26.04) and R 4.5.3 / 4.2.2 (Debian 12). The warning is harmless; the connection works.
+------------------------------
+
+It's short, it identifies the exact cause, it proposes a fix, and it says up front that the problem is minor. From what I've seen- that's the kind of report maintainers handle without complaint.
+
+For MDBTools, a GitHub issue covering three points, with the trace attached, would do it:
+
+- SQLDriverConnect doesn't fill the output connection string.
+- SQLRowCount returns 0 after a SELECT.
+- Multi-row (block) fetches don't return rows; RODBC needs rows_at_time = 1.
+
+If you keep running into an issue - just post the whole piece of code here if you'd like - that might be easier than going back and forth...
+Best regard,
+Gregg
+
+
+
+On Sunday, November 8th, 2026 at 10:31 AM, Chris Evans <chrishold at psyctc.org> wrote:
+
+> On 08/11/2026 17:46, Gregg Powell wrote:
+> 
+
+> > Hi Chris,
+> > 
+
+> > Your three-machine test tells us a lot. You get the same failure on two Debian releases and on Kubuntu, with two different .mdb files (including your old small one). Meanwhile isql and the mdb-tools command line (via Hmisc::mdb.get) both read the data fine. That rules out the files, your RODBC install, and the unixODBC version. What?s left is how RODBC and the MDBTools ODBC driver work together. I think (possibly- but probably) two separate problems are being mistaken for one.
+> > 
+
+> > 1. The garbage warning (cosmetic)
+> > 
+
+> > Ivan?s reading of the C code is right. As far as I can tell from the driver source, MDBTools? SQLDriverConnect() connects using the Database= setting and returns SQL_SUCCESS, but it never writes the output connection string (szConnStrOut / pcbConnStrOut). RODBC doesn?t initialise buf1 before the call, so R receives whatever happened to be on the stack.
+> > 
+
+> > On your Debian boxes those leftover bytes probably start with a NUL or happen to be valid text, so grepl() stays quiet. On Kubuntu, with GCC 15 and a different stack layout, they aren?t. It?s the same bug on all three machines, but it?s only visible on one. It doesn?t affect the connection itself, and it isn?t why you get no data.
+> 
+
+> That's an even clearer explanation than the one from Ivan but I should have made it clearer that I realised that this has nothing to do with not pulling the data from the mdb. I am interested that Kubuntu is doing things so differently but that's way above my IT savvy level!
+> 
+
+> > 2. No rows returned (the real problem)
+> > 
+
+> > odbcConnect() defaults to believeNRows = TRUE and rows_at_time = 100. As far as I can tell, the MDBTools driver doesn?t return a usable row count for a SELECT, and it doesn?t support fetching many rows at once. With those defaults, RODBC can conclude there are zero rows and return an empty result. Give this a shot:
+> > 
+
+> > [R]
+> > 
+
+> > > library(RODBC)
+> > > connEOS <- odbcConnect("EOS", believeNRows = FALSE, rows_at_time = 1)
+> > > sqlTables(connEOS)
+> > > sqlQuery(connEOS, "SELECT * FROM YourTableName", errors = TRUE)
+> > > odbcGetErrMsg(connEOS)
+> > > close(connEOS)
+> > 
+
+> > Use a real table name from mdb-tables yourfile.mdb in a shell. Depending on what you see:
+> > 
+
+> > - sqlQuery() returns data but sqlTables() is empty: that?s a separate gap in the driver?s table listing. Just name the tables directly.
+> > 
+
+> > - sqlQuery() works but sqlFetch() doesn?t: the likely cause is how RODBC quotes table names, which the MDBTools SQL parser handles poorly. Stick with sqlQuery().
+> 
+
+> That all worked perfectly with nothing in the error messages.
+> 
+
+> I didn't see the call you wanted for sqlFetch() but trying
+> 
+
+> sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+> 
+
+> got
+> 
+
+> [1] CodDistretto             Descrizione              Valido                   CodArea                  CodSistemaEsterno        LastUser
+> [7] LastUp                   VisualizzaMotiviIngresso CodTipoScalaObbligatoria
+> <0 rows> (or 0-length row.names)
+> 
+
+> Whereas
+> 
+
+> sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+> 
+
+> got
+> 
+
+> sqlQuery(connEOS, "SELECT COUNT(*) FROM dbo_TabDistretto")
+> 
+
+> I am perfectly happy to stay with sqlQuery as it will clearly now do as well the DBI and Hmisc approaches with those " believeNRows = FALSE, rows_at_time = 1" arguments.
+> 
+
+> > [ODBC]
+> > 
+
+> > > Trace = Yes
+> > > TraceFile = /tmp/odbc_trace.log
+> > 
+
+> > Rerun your R code, then look in /tmp/odbc_trace.log. You should see whether SQLDriverConnect leaves the output length unset and what SQLRowCount returns. Turn tracing off afterwards, because the log grows quickly. That log is also exactly what a maintainer would want attached to a bug report.
+> 
+
+> I wasn't sure where you wanted those lines to go. I guessed in /etc/odbcinst.ini and tried this
+> 
+
+> [MySQL ODBC 26.10 Unicode Driver]
+> DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26w.so
+> UsageCount=1
+> 
+
+> [MySQL ODBC 26.10 ANSI Driver]
+> DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc26a.so
+> UsageCount=1
+> 
+
+> [MDBTools]
+> Description=MDB Tools ODBC driver
+> Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+> Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbc.so
+> FileUsage=1
+> UsageCount=1
+> Trace = Yes
+> TraceFile = /tmp/odbc_trace.log
+> 
+
+> [MDBToolsW]
+> Description=MDB Tools ODBC driver (Unicode)
+> Driver=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+> Setup=/usr/lib/x86_64-linux-gnu/odbc/libmdbodbcW.so
+> FileUsage=1
+> UsageCount=1
+> Trace = Yes
+> TraceFile = /tmp/odbc_trace.log
+> 
+
+> I also tried setting TraceFile to /home/chris/odbc_trace.log as R would have been running as user chris but neither version produced any trace.
+> 
+
+> > 4. Where to report it
+> > 
+
+> > - RODBC: it has no public bug tracker. Running maintainer("RODBC") gives you the address. The fix is small: set buf1[0] = '\0' before the call, or check tmp1 before using buf1. Either way, RODBC shouldn?t trust a buffer the driver didn?t fill.
+> 
+
+> The maintainer, as I am sure you have seen is Professor Ripley and I have caught the sharp end of his tongue before and I honestly don't know what "set buf1[0] = '\0' before the call, or check tmp1 before using buf1" means so I would like, with your permission, to quote you.
+> 
+
+> > - MDBTools: report it at github.com/mdbtools/mdbtools/issues. Cover SQLDriverConnect not filling the output connection string and SQLRowCount on SELECT statements, and attach the trace.
+> 
+
+> But I have no trace! If you can push me in the correct direction for that, I will do that.
+> 
+
+> > 5. If you?d rather avoid RODBC entirely
+> > 
+
+> > The odbc/DBI packages often cope better with drivers that have gaps like these:
+> > 
+
+> > [R]
+> > 
+
+> > > con <- DBI::dbConnect(odbc::odbc(), dsn = "EOS")
+> > > DBI::dbListTables(con)
+> > > DBI::dbReadTable(con, "YourTableName")
+> > > DBI::dbDisconnect(con)
+> > 
+
+> > Hmisc::mdb.get() also remains a perfectly good route, since it already works for you.
+> 
+
+> Yes, both of those work for me (thanks again) so this is about trying to be a good FLOSS user, not a nasty!
+> 
+
+> > If believeNRows = FALSE with rows_at_time = 1 fixes it, I?d still send both reports. The warning is a real, if minor, bug in RODBC, and the next person to use MDBTools will hit the same empty results.
+> 
+
+> Yes, the first is sort of a bug in the warning and the second is the more substantive bug in how RODBC cooperates with MDBTools?
+> 
+
+> Assuming so, yes I will, but see above.
+> 
+
+> > All the Best,
+> 
+
+> Many thanks again!
+> 
+
+> Chris
+> 
+
+> > Gregg
+> > 
+
+> > 
+
+> > 
+
+> > 
+
+> > On Sunday, November 8th, 2026 at 7:49 AM, Chris Evans via R-help <r-help at r-project.org> wrote:
+> > 
+
+> > > I have finally found time to get back to this and I am starting to
+> > > wonder if it is a bug in RODBC.  What I have done:
+> > 
+
+> > > * Found that RODBC was installed in /usr/local/lib/R/site-library/.
+> > 
+
+> > >   Not sure that helps but I used `remove.packages("RODBC")` to remove it
+> > > in R and then moved the directory to a safe place in case it's ever of
+> > > any diagnostic use.  Then I installed it again:
+> > 
+
+> > > Installing package into ?/home/chris/R/x86_64-pc-linux-gnu-library/4.6?
+> > > (as ?lib? is unspecified)
+> > > trying URL 'https://cloud.r-project.org/src/contrib/RODBC_1.3-26.3.tar.gz'
+> > > Content type 'application/x-gzip' length 942265 bytes (920 KB)
+> > > ==================================================
+> > > downloaded 920 KB
+> > 
+
+> > > * installing *source* package ?RODBC? ...
+> > > ** this is package ?RODBC? version ?1.3-26.3?
+> > > ** package ?RODBC? successfully unpacked and MD5 sums checked
+> > > ** using staged installation
+> > > checking for gcc... x86_64-linux-gnu-gcc
+> > > checking whether the C compiler works... yes
+> > > checking for C compiler default output file name... a.out
+> > > checking for suffix of executables...
+> > > checking whether we are cross compiling... no
+> > > checking for suffix of object files... o
+> > > checking whether the compiler supports GNU C... yes
+> > > checking whether x86_64-linux-gnu-gcc accepts -g... yes
+> > > checking for x86_64-linux-gnu-gcc option to enable C11 features... none needed
+> > > checking for stdio.h... yes
+> > > checking for stdlib.h... yes
+> > > checking for string.h... yes
+> > > checking for inttypes.h... yes
+> > > checking for stdint.h... yes
+> > > checking for strings.h... yes
+> > > checking for sys/stat.h... yes
+> > > checking for sys/types.h... yes
+> > > checking for unistd.h... yes
+> > > checking for sql.h... yes
+> > > checking for sqlext.h... yes
+> > > checking for library containing SQLTables... -lodbc
+> > > checking for SQLLEN... yes
+> > > checking for SQLULEN... yes
+> > > checking size of long... 8
+> > > configure: creating ./config.status
+> > > config.status: creating src/Makevars
+> > > config.status: creating src/config.h
+> > > ** libs
+> > > using C compiler: ?x86_64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0?
+> > > x86_64-linux-gnu-gcc -I"/usr/share/R/include" -DNDEBUG -I.      -fpic  -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/r-base-yH7sYw/r-base-4.6.2=/usr/src/r-base-4.6.2-1.2604.0 -Wdate-time -D_FORTIFY_SOURCE=3  -c RODBC.c -o RODBC.o
+> > > x86_64-linux-gnu-gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,--package-metadata=%7B%22type%22:%22deb%22%2C%22os%22:%22ubuntu%22%2C%22name%22:%22r-base%22%2C%22version%22:%224.6.2-1.2604.0%22%2C%22architecture%22:%22amd64%22%7D -flto=auto -ffat-lto-objects -Wl,-z,relro -o RODBC.so RODBC.o -lodbc -L/usr/lib/R/lib -lR
+> > > installing to /home/chris/R/x86_64-pc-linux-gnu-library/4.6/00LOCK-RODBC/00new/RODBC/libs
+> > > ** R
+> > > ** inst
+> > > ** byte-compile and prepare package for lazy loading
+> > > ** help
+> > > *** installing help indices
+> > > ** building package indices
+> > > ** installing vignettes
+> > > ** testing if installed package can be loaded from temporary location
+> > > ** checking absolute paths in shared objects and dynamic libraries
+> > > ** testing if installed package can be loaded from final location
+> > > ** testing if installed package keeps a record of temporary installation path
+> > > * DONE (RODBC)
+> > 
+
+> > > That looks fine to me. So that gives me RODBC version 1.3.26.3 running
+> > > in 4.6.2 (2026-10-29) -- "Diversified Portfolio" on "26.04.1 LTS
+> > > (Resolute Raccoon)" (technically Kubuntu) with linux packages unixodb
+> > > version 2.3.14-1, mdbtools version 1.0.1-0.1build1 and odbc-mdtools
+> > > version 1.0.1-0.1build1.  However, rerunning things gets exactly the
+> > > same failure to read anything from the mdb files and does continue to
+> > > give the bizarre warning:
+> > 
+
+> > > > connEOS <- odbcConnect("EOS")
+> > > 
+
+> > > Warning messages:
+> > > 1: In grepl("PWD=", cs) :
+> > >    unable to translate '(}<e7>q<93>\' to a wide string
+> > > 2: In grepl("PWD=", cs) : input string 1 is invalid
+> > 
+
+> > > * then I uploaded both mdb files to "my" web server which runs Debian
+> > > 6.1.176-1 (2026-07-02) x86_64 GNU/Linux and "R version 4.5.3
+> > > (2026-03-11)" and RODBC version 1.3.26.3, linux packages: unixodbc
+> > > 2.3.11-2+deb12u1 mdbtools 1.0.0+dfsg-1.1
+> > >   and odbc-mdbtools version 1.0.0+dfsg-1.1.
+> > > Here I get
+> > >   no warnings on the odbcConnect() but again, nothing is read in from
+> > > either mdb file
+> > 
+
+> > > * then I did the same on "my" shiny server (currently not serving shiny
+> > > as per my other recent post here!). That runs Debian 6.1.176-1
+> > > (2026-07-02) x86_64 GNU/Linux, "R version 4.2.2 Patched (2022-11-10
+> > > r83330)" and again RODBC is version 1.3.26.3 and the linux packages are:
+> > > unixodbc 2.3.11-2+deb12u1, mdbtools 1.0.0+dfsg-1.1 and odbc-mdbtools
+> > > version 1.0.0+dfsg-1.1.
+> > > Again no warning on odbcConnect() but equally nothing is read in from
+> > > either mdb file.
+> > 
+
+> > > Summary:
+> > 
+
+> > > 1) I get the bizarre warnings only on my kubuntu 26.04 laptop
+> > 
+
+> > > 2) I can't read either of these mdb files into R using the RODBC package
+> > > on three significantly different machines, two different Debian versions
+> > > and my Kubuntu laptop.  All three have RODBC version 1.3.26.3 but they
+> > > have a variety of versions of the Linux packages.
+> > 
+
+> > > Sadly, I can't share either mdb file but if someone has one that reads
+> > > into R fine for them using RODBC, I would be happy to try that file in
+> > > each of my three machines, or do I open this as a possible bug report
+> > > for the RODBC: I see no other open bugs against it (assuming that I am
+> > > searching correctly).
+> > 
+
+> > > TIA,
+> > 
+
+> > > Chris
+> > 
+
+> > > On 02/11/2026 14:16, Chris Evans via R-help wrote:
+> > > 
+
+> > > > On 01/11/2026 20:10, Ivan Krylov wrote:
+> > > > 
+
+> > > > > On Mon, 26 Oct 2026 18:06:05 +0000
+> > > > > Chris Evans via R-help<r-help at r-project.org> wrote:
+> > > > > 
+
+> > > > > > > connEOS <- odbcConnect("EOS")
+> > > > > > 
+
+> > > > > > Warning messages:
+> > > > > > 1: In grepl("PWD=", cs) :
+> > > > > >     unable to translate '<c0><d3>6<ed><b1>{' to a wide string
+> > > > > > 2: In grepl("PWD=", cs) : input string 1 is invalid
+> > > > > 
+
+> > > > > This is quite weird.
+> > > > > 
+
+> > > > > The 'cs' string is the connection string returned by the C code inside
+> > > > > RODBC:
+> > > > > 
+
+> > > > >     stat <- .Call(C_RODBCDriverConnect, as.character(connection), id,
+> > > > >                   as.integer(believeNRows),
+> > > > > as.logical(readOnlyOptimize))
+> > > > >     # ...
+> > > > >     cs <- attr(stat, "connection.string")
+> > > > >     if(grepl("PWD=", cs)) {
+> > > > >         # mask the password inside the returned object
+> > > > > 
+
+> > > > > RODBC passes the connection string back to R like this:
+> > > > > 
+
+> > > > >   #define buf1_len 8096
+> > > > >   // ...
+> > > > >   SQLCHAR buf1[buf1_len];
+> > > > >   // ...
+> > > > >   retval = SQLDriverConnect(
+> > > > >    thisHandle->hDbc, NULL,
+> > > > >    (SQLCHAR *)Rf_translateChar(STRING_ELT(connection, 0)),
+> > > > >    SQL_NTS,
+> > > > >    (SQLCHAR *)buf1, (SQLSMALLINT)buf1_len,
+> > > > >    &tmp1,
+> > > > >    SQL_DRIVER_NOPROMPT
+> > > > >   );
+> > > > >   if(retval == SQL_SUCCESS || retval == SQL_SUCCESS_WITH_INFO) {
+> > > > >    // ...
+> > > > >    PROTECT(constr = Rf_allocVector(STRSXP, 1));
+> > > > >    SET_STRING_ELT(constr, 0, Rf_mkChar((char *)buf1));
+> > > > >    // ...
+> > > > >    Rf_setAttrib(ans, Rf_install("connection.string"), constr);
+> > > > > 
+
+> > > > > Somehow, the 'buf1' string isn't filled at all and R receives
+> > > > > uninitialised stack contents instead of the effective connection
+> > > > > string, despite the return value indicates a successful connection. And
+> > > > > yet 'idbc' works using the same connection string, suggesting that the
+> > > > > problem isn't inside the MDBtools driver.
+> > > > 
+
+> > > > I think I follow all of that!
+> > > > 
+
+> > > > > How did you install the RODBC package?
+> > > > 
+
+> > > > Sadly, I don't remember but almost certainly either with
+> > > > install.packages("RODB") from the "console" in Rstudio or perhaps
+> > > > using the Rstudio package install route.  It is just possible that I
+> > > > installed it with apt-get install r-cran-rodbc but I think that's
+> > > > unlikely.
+> > > > 
+
+> > > > I see it at /home/chris/R/x86_64-pc-linux-gnu-library/4.6/RODBC but
+> > > > not in /usr/lib/R/library/
+> > > > 
+
+> > > > > If there's nothing obviously
+> > > > > wrong with your R package installation, further investigation will
+> > > > > probably require stepping through the C code in a debugger.
+> > > > 
+
+> > > > I fear that is beyond my skills but I can clearly remove the package
+> > > > with remove.packages() (and then checking that it's really gone from
+> > > > the filesystem) and then reinstalling.  I thought I wouldn't do that
+> > > > until you or someone might advise me if there is anything to be gained
+> > > > diagnostically by keeping it.  I can't share the database in question
+> > > > but it appears to be working fine using routes other than RODBC (see
+> > > > my reply to Gregg Powell).
+> > > > 
+
+> > > > I have dug around in my archives and found an old, small mdb file and
+> > > > it works fine with the Hmisc::mdb.get() but gives the same weirdness
+> > > > with RODBC so I think the issue is clearly with RODBC or my particular
+> > > > installation of it.
+> > > > 
+
+> > > > I have access to the data that I need now so this is really about
+> > > > debugging the weirdness.  No rush from me but I will try to find time
+> > > > to respond reasonably quickly if you or others have advice beyond just
+> > > > removing and deleting the RODBC package and reinstalling it.  Is there
+> > > > a preferred way for me to reinstall it if going that way?
+> > > > 
+
+> > > > TIA,
+> > > > 
+
+> > > > 
+
+> > > > Chris
+> > > > 
+
+> > > > ______________________________________________
+> > > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > > > https://stat.ethz.ch/mailman/listinfo/r-help
+> > > > PLEASE do read the posting guide
+> > > > https://www.R-project.org/posting-guide.html
+> > > > and provide commented, minimal, self-contained, reproducible code.
+> > > 
+
+> > > 	[[alternative HTML version deleted]]
+> > 
+
+> > > ______________________________________________
+> > > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > > https://stat.ethz.ch/mailman/listinfo/r-help
+> > > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > > and provide commented, minimal, self-contained, reproducible code.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 603 bytes
+Desc: OpenPGP digital signature
+URL: <https://stat.ethz.ch/pipermail/r-help/attachments/20261108/95e56d6b/attachment.sig>
+
