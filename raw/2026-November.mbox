@@ -2326,3 +2326,168 @@ Size: 603 bytes
 Desc: OpenPGP digital signature
 URL: <https://stat.ethz.ch/pipermail/r-help/attachments/20261108/95e56d6b/attachment.sig>
 
+From Kev|n@H@ye@ @end|ng |rom te@g@@c@|e  Fri Nov 13 18:02:21 2026
+From: Kev|n@H@ye@ @end|ng |rom te@g@@c@|e (Kevin Hayes)
+Date: Fri, 13 Nov 2026 17:02:21 +0000
+Subject: [R] nlme package LmList function
+Message-ID: <AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>
+
+Hi There.
+
+
+The function intervals( ) does not accept input from the function lmList( ) when the latter function has used the argument pool = FALSE
+
+
+
+
+
+fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)
+
+intervals( fm1 )
+
+Gives the error
+
+Error in qf(level, 1, smry$df.residual) :
+  Non-numeric argument to mathematical function
+
+
+Best,
+Kevin
+
+Sent from Outlook for Mac
+
+Attention:\ This e-mail is privileged and confidential. ...{{dropped:18}}
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Sat Nov 14 14:02:08 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Sat, 14 Nov 2026 05:02:08 -0800
+Subject: [R] nlme package LmList function
+In-Reply-To: <AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>
+References: <AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>
+Message-ID: <F372C23A-AAB4-43CE-B605-C55CECAD45E1@dcn.davis.ca.us>
+
+If you really don't want a pooled result, then examine the individual model objects: 
+
+lapply(fm1, confint)
+
+
+
+On November 13, 2026 9:02:21 AM PST, Kevin Hayes via R-help <r-help at r-project.org> wrote:
+>Hi There.
+>
+>
+>The function intervals( ) does not accept input from the function lmList( ) when the latter function has used the argument pool = FALSE
+>
+>
+>
+>
+>
+>fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)
+>
+>intervals( fm1 )
+>
+>Gives the error
+>
+>Error in qf(level, 1, smry$df.residual) :
+>  Non-numeric argument to mathematical function
+>
+>
+>Best,
+>Kevin
+>
+>Sent from Outlook for Mac
+>
+>Attention:\ This e-mail is privileged and confidential. ...{{dropped:18}}
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From cwr @end|ng |rom @gency@t@t|@t|c@|@com  Sat Nov 14 21:12:47 2026
+From: cwr @end|ng |rom @gency@t@t|@t|c@|@com (Chris Ryan)
+Date: Sat, 14 Nov 2026 15:12:47 -0500
+Subject: [R] problems with a regex search, grepl,
+ and double-quote marks from word processor
+Message-ID: <97c5a6fc-75da-e470-876c-4551b91ca0d5@agencystatistical.com>
+
+I am doing some text searching. Always a risky endeavor.
+
+I want to find records in which a free-text field contains the string
+"sicke" or "sickal" (not my actual words of interest, of course), but
+then exclude such records if the string "not" is within 6 words (forward
+or backward) of the otherwise-qualifying "sicke" or "sickal".  I think I
+have the first step figured out pretty well. It's with the exclusion
+step that I have problems.
+
+Here is my code:
+
+## adjust the width of the "window" around "sicke" and "sickal"
+exclusion_tuner <- 6
+
+## a regex to put into grepl
+exclusion_regex <- paste0("\\b(?:not\\W+(?:\\w+\\W+){0,",
+exclusion_tuner, "}sick(e|al)|sick(e|al)\\W+(?:\\w+\\W+){0,",
+exclusion_tuner, "}not)\\b")
+
+## my exclusion function, using grepl
+my.exclusion.f <- function(string){grepl(exclusion_regex, string,
+ignore.case = TRUE)}
+
+Now I test it against a string.
+
+The line below should yield FALSE (meaning not excluded), because the
+words "sicke" and "not" are more than 6 words apart from each other (in
+either direction). And indeed it does.
+
+my.exclusion.f("unit 2 arrives mares eat oats and sicke does eat oats
+and little lambs eat ivy. I swim pretty good. Your cash is not good at
+the bar")
+
+Here is the problem:
+
+The database system from where I get my data sometimes includes direct
+quotes of what someone said. The quotation marks used seem to be like
+those in word processing software. Look at the sentence about swimming:
+
+my.exclusion.f("unit 2 arrives mares eat oats and sicke does eat oats
+and little lambs eat ivy. ?I swim pretty good?. Your cash is not good at
+the bar")
+
+I want the above to also yield FALSE, but it yields TRUE.
+
+If I replace those quotation marks with single quotes from my text
+editor, like 'I swim pretty good', then I get the expected result of
+FALSE, as in the line below.
+
+my.exclusion.f("unit 2 arrives mares eat oats and suicide does eat oats
+and little lambs eat ivy. 'I swim pretty good'. Your cash is not good at
+the bar")
+
+
+I know little about character encoding, like ASCII or UTF-8 and the
+like, but is that the issue here? Do I need to somehow remove or change
+any double-quotes from the data first?  Or is there something wrong with
+my regex?
+
+Thanks.
+
+--Chris Ryan
+
+---
+Agency Statistical Consulting, LLC
+Helping those in public service get the most from their data.
+www.agencystatistical.com
+
+Public GnuPG email encryption key at
+https://keys.openpgp.org
+9E53101D261BEC070CFF1A0DC8BC50E715A672A0
+
+

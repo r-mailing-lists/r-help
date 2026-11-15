@@ -208,6 +208,59 @@
       "thread_depth": 5,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481874.html"
+    },
+    {
+      "id": "msg-6200f407ee31",
+      "message_id": "<AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Kevin Hayes",
+      "from_email_hash": "073b11809173ad8dbbe5173c25fcd8ed2d08952afe6417ca0f8d789bfb18a666",
+      "date": "2026-11-13T17:02:21Z",
+      "subject": "[R] nlme package LmList function",
+      "subject_clean": "nlme package LmList function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi There.\n\n\nThe function intervals( ) does not accept input from the function lmList( ) when the latter function has used the argument pool = FALSE\n\n\n\n\n\nfm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)\n\nintervals( fm1 )\n\nGives the error\n\nError in qf(level, 1, smry$df.residual) :\n  Non-numeric argument to mathematical function\n\n\nBest,\nKevin\n\nSent from Outlook for Mac\n\nAttention:\\ This e-mail is privileged and confidential. ...{{dropped:18}}",
+      "body_snippet": "Hi There.\n\n\nThe function intervals( ) does not accept input from the function lmList( ) when the latter function has used the argument pool = FALSE\n\n\n\n\n\nfm1 <- lmList(distance ~ age | Subject, data = ",
+      "thread_id": "thread-6200f407ee31",
+      "thread_depth": 0,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481875.html"
+    },
+    {
+      "id": "msg-827556c2cbb3",
+      "message_id": "<F372C23A-AAB4-43CE-B605-C55CECAD45E1@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-11-14T13:02:08Z",
+      "subject": "[R] nlme package LmList function",
+      "subject_clean": "nlme package LmList function",
+      "in_reply_to": "<AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>",
+      "references": [
+        "<AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>"
+      ],
+      "body_plain": "If you really don't want a pooled result, then examine the individual model objects: \n\nlapply(fm1, confint)\n\n\n\nOn November 13, 2026 9:02:21 AM PST, Kevin Hayes via R-help <r-help at r-project.org> wrote:\n>Hi There.\n>\n>\n>The function intervals( ) does not accept input from the function lmList( ) when the latter function has used the argument pool = FALSE\n>\n>\n>\n>\n>\n>fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)\n>\n>intervals( fm1 )\n>\n>Gives the error\n>\n>Error in qf(level, 1, smry$df.residual) :\n>  Non-numeric argument to mathematical function\n>\n>\n>Best,\n>Kevin\n>\n>Sent from Outlook for Mac\n>\n>Attention:\\ This e-mail is privileged and confidential. ...{{dropped:18}}\n>\n>______________________________________________\n>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n>https://stat.ethz.ch/mailman/listinfo/r-help\n>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html\n>and provide commented, minimal, self-contained, reproducible code.\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If you really don't want a pooled result, then examine the individual model objects: \n\nlapply(fm1, confint)\n\n\n\nOn November 13, 2026 9:02:21 AM PST, Kevin Hayes via R-help <r-help at r-project.org> wro",
+      "thread_id": "thread-6200f407ee31",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481876.html"
+    },
+    {
+      "id": "msg-00d94502f5e7",
+      "message_id": "<97c5a6fc-75da-e470-876c-4551b91ca0d5@agencystatistical.com>",
+      "from_name": "Chris Ryan",
+      "from_email_hash": "97633a89d7b4b2c7d03f55ef908430710c5e5a27b575aa0bc0d2b6b5bf131502",
+      "date": "2026-11-14T20:12:47Z",
+      "subject": "[R] problems with a regex search, grepl, and double-quote marks from word processor",
+      "subject_clean": "problems with a regex search, grepl, and double-quote marks from word processor",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am doing some text searching. Always a risky endeavor.\n\nI want to find records in which a free-text field contains the string\n\"sicke\" or \"sickal\" (not my actual words of interest, of course), but\nthen exclude such records if the string \"not\" is within 6 words (forward\nor backward) of the otherwise-qualifying \"sicke\" or \"sickal\".  I think I\nhave the first step figured out pretty well. It's with the exclusion\nstep that I have problems.\n\nHere is my code:\n\n## adjust the width of the \"window\" around \"sicke\" and \"sickal\"\nexclusion_tuner <- 6\n\n## a regex to put into grepl\nexclusion_regex <- paste0(\"\\\\b(?:not\\\\W+(?:\\\\w+\\\\W+){0,\",\nexclusion_tuner, \"}sick(e|al)|sick(e|al)\\\\W+(?:\\\\w+\\\\W+){0,\",\nexclusion_tuner, \"}not)\\\\b\")\n\n## my exclusion function, using grepl\nmy.exclusion.f <- function(string){grepl(exclusion_regex, string,\nignore.case = TRUE)}\n\nNow I test it against a string.\n\nThe line below should yield FALSE (meaning not excluded), because the\nwords \"sicke\" and \"not\" are more than 6 words apart from each other (in\neither direction). And indeed it does.\n\nmy.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\nand little lambs eat ivy. I swim pretty good. Your cash is not good at\nthe bar\")\n\nHere is the problem:\n\nThe database system from where I get my data sometimes includes direct\nquotes of what someone said. The quotation marks used seem to be like\nthose in word processing software. Look at the sentence about swimming:\n\nmy.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\nand little lambs eat ivy. ?I swim pretty good?. Your cash is not good at\nthe bar\")\n\nI want the above to also yield FALSE, but it yields TRUE.\n\nIf I replace those quotation marks with single quotes from my text\neditor, like 'I swim pretty good', then I get the expected result of\nFALSE, as in the line below.\n\nmy.exclusion.f(\"unit 2 arrives mares eat oats and suicide does eat oats\nand little lambs eat ivy. 'I swim pretty good'. Your cash is not good at\nthe bar\")\n\n\nI know little about character encoding, like ASCII or UTF-8 and the\nlike, but is that the issue here? Do I need to somehow remove or change\nany double-quotes from the data first?  Or is there something wrong with\nmy regex?\n\nThanks.\n\n--Chris Ryan\n\n---\nAgency Statistical Consulting, LLC\nHelping those in public service get the most from their data.\nwww.agencystatistical.com\n\nPublic GnuPG email encryption key at\nhttps://keys.openpgp.org\n9E53101D261BEC070CFF1A0DC8BC50E715A672A0",
+      "body_snippet": "I am doing some text searching. Always a risky endeavor.\n\nI want to find records in which a free-text field contains the string\n\"sicke\" or \"sickal\" (not my actual words of interest, of course), but\nth",
+      "thread_id": "thread-00d94502f5e7",
+      "thread_depth": 0,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481877.html"
     }
   ],
   "threads": [
@@ -246,6 +299,29 @@
       "started": "2026-11-06T15:57:14Z",
       "last_reply": "2026-11-06T15:57:14Z",
       "root_message_id": "msg-ade224238eda"
+    },
+    {
+      "id": "thread-6200f407ee31",
+      "subject": "nlme package LmList function",
+      "message_count": 2,
+      "participants": [
+        "Jeff Newmiller",
+        "Kevin Hayes"
+      ],
+      "started": "2026-11-13T17:02:21Z",
+      "last_reply": "2026-11-14T13:02:08Z",
+      "root_message_id": "msg-6200f407ee31"
+    },
+    {
+      "id": "thread-00d94502f5e7",
+      "subject": "problems with a regex search, grepl, and double-quote marks from word processor",
+      "message_count": 1,
+      "participants": [
+        "Chris Ryan"
+      ],
+      "started": "2026-11-14T20:12:47Z",
+      "last_reply": "2026-11-14T20:12:47Z",
+      "root_message_id": "msg-00d94502f5e7"
     }
   ]
 }
