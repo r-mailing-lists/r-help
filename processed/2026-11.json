@@ -261,6 +261,45 @@
       "thread_depth": 0,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481877.html"
+    },
+    {
+      "id": "msg-6113f1d28ab1",
+      "message_id": "<CAAS8PAJe8HPPBRKDwC0pixi3ggJJQhPs4x0YK29EQ5gJe+jmRA@mail.gmail.com>",
+      "from_name": "Greg Hunt",
+      "from_email_hash": "6680a1473ccc317fcdbb73d87f2fd510c00f5c689458225a71f5fb4768f07f7b",
+      "date": "2026-11-14T20:40:01Z",
+      "subject": "[R] problems with a regex search, grepl, and double-quote marks from word processor",
+      "subject_clean": "problems with a regex search, grepl, and double-quote marks from word processor",
+      "in_reply_to": "<97c5a6fc-75da-e470-876c-4551b91ca0d5@agencystatistical.com>",
+      "references": [
+        "<97c5a6fc-75da-e470-876c-4551b91ca0d5@agencystatistical.com>"
+      ],
+      "body_plain": "Chris,\nThis is probably a Unicode issue, try\n\nmy.exclusion.f <- function(string){grepl(exclusion_regex, string,\nignore.case = TRUE, perl = TRUE)}\n\n\nGreg\n\nOn Sun, 15 Nov 2026 at 07:13, Chris Ryan <cwr at agencystatistical.com> wrote:\n\n> I am doing some text searching. Always a risky endeavor.\n>\n> I want to find records in which a free-text field contains the string\n> \"sicke\" or \"sickal\" (not my actual words of interest, of course), but\n> then exclude such records if the string \"not\" is within 6 words (forward\n> or backward) of the otherwise-qualifying \"sicke\" or \"sickal\".  I think I\n> have the first step figured out pretty well. It's with the exclusion\n> step that I have problems.\n>\n> Here is my code:\n>\n> ## adjust the width of the \"window\" around \"sicke\" and \"sickal\"\n> exclusion_tuner <- 6\n>\n> ## a regex to put into grepl\n> exclusion_regex <- paste0(\"\\\\b(?:not\\\\W+(?:\\\\w+\\\\W+){0,\",\n> exclusion_tuner, \"}sick(e|al)|sick(e|al)\\\\W+(?:\\\\w+\\\\W+){0,\",\n> exclusion_tuner, \"}not)\\\\b\")\n>\n> ## my exclusion function, using grepl\n> my.exclusion.f <- function(string){grepl(exclusion_regex, string,\n> ignore.case = TRUE)}\n>\n> Now I test it against a string.\n>\n> The line below should yield FALSE (meaning not excluded), because the\n> words \"sicke\" and \"not\" are more than 6 words apart from each other (in\n> either direction). And indeed it does.\n>\n> my.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\n> and little lambs eat ivy. I swim pretty good. Your cash is not good at\n> the bar\")\n>\n> Here is the problem:\n>\n> The database system from where I get my data sometimes includes direct\n> quotes of what someone said. The quotation marks used seem to be like\n> those in word processing software. Look at the sentence about swimming:\n>\n> my.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\n> and little lambs eat ivy. ?I swim pretty good?. Your cash is not good at\n> the bar\")\n>\n> I want the above to also yield FALSE, but it yields TRUE.\n>\n> If I replace those quotation marks with single quotes from my text\n> editor, like 'I swim pretty good', then I get the expected result of\n> FALSE, as in the line below.\n>\n> my.exclusion.f(\"unit 2 arrives mares eat oats and suicide does eat oats\n> and little lambs eat ivy. 'I swim pretty good'. Your cash is not good at\n> the bar\")\n>\n>\n> I know little about character encoding, like ASCII or UTF-8 and the\n> like, but is that the issue here? Do I need to somehow remove or change\n> any double-quotes from the data first?  Or is there something wrong with\n> my regex?\n>\n> Thanks.\n>\n> --Chris Ryan\n>\n> ---\n> Agency Statistical Consulting, LLC\n> Helping those in public service get the most from their data.\n> www.agencystatistical.com\n>\n> Public GnuPG email encryption key at\n> https://keys.openpgp.org\n> 9E53101D261BEC070CFF1A0DC8BC50E715A672A0\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Chris,\nThis is probably a Unicode issue, try\n\nmy.exclusion.f <- function(string){grepl(exclusion_regex, string,\nignore.case = TRUE, perl = TRUE)}\n\n\nGreg\n\nOn Sun, 15 Nov 2026 at 07:13, Chris Ryan <cwr ",
+      "thread_id": "thread-00d94502f5e7",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481878.html"
+    },
+    {
+      "id": "msg-88414aca372e",
+      "message_id": "<fdaae79c-e8e8-a931-ae77-831f55e731e2@agencystatistical.com>",
+      "from_name": "Chris Ryan",
+      "from_email_hash": "97633a89d7b4b2c7d03f55ef908430710c5e5a27b575aa0bc0d2b6b5bf131502",
+      "date": "2026-11-15T14:06:13Z",
+      "subject": "[R] problems with a regex search, grepl, and double-quote marks from word processor",
+      "subject_clean": "problems with a regex search, grepl, and double-quote marks from word processor",
+      "in_reply_to": "<CAAS8PAJe8HPPBRKDwC0pixi3ggJJQhPs4x0YK29EQ5gJe+jmRA@mail.gmail.com>",
+      "references": [
+        "<97c5a6fc-75da-e470-876c-4551b91ca0d5@agencystatistical.com>",
+        "<CAAS8PAJe8HPPBRKDwC0pixi3ggJJQhPs4x0YK29EQ5gJe+jmRA@mail.gmail.com>"
+      ],
+      "body_plain": "Ah, that's better. Thanks Greg.\n\n--Chris\n\nGreg Hunt wrote:\n> Chris,\n> This is probably a Unicode issue, try?\n> \n> my.exclusion.f <- function(string){grepl(exclusion_regex, string,\n> ignore.case = TRUE, perl = TRUE)}\n> \n> \n> Greg\n> \n> On Sun, 15 Nov 2026 at 07:13, Chris Ryan <cwr at agencystatistical.com\n> <mailto:cwr at agencystatistical.com>> wrote:\n> \n>     I am doing some text searching. Always a risky endeavor.\n> \n>     I want to find records in which a free-text field contains the string\n>     \"sicke\" or \"sickal\" (not my actual words of interest, of course), but\n>     then exclude such records if the string \"not\" is within 6 words (forward\n>     or backward) of the otherwise-qualifying \"sicke\" or \"sickal\".? I think I\n>     have the first step figured out pretty well. It's with the exclusion\n>     step that I have problems.\n> \n>     Here is my code:\n> \n>     ## adjust the width of the \"window\" around \"sicke\" and \"sickal\"\n>     exclusion_tuner <- 6\n> \n>     ## a regex to put into grepl\n>     exclusion_regex <- paste0(\"\\\\b(?:not\\\\W+(?:\\\\w+\\\\W+){0,\",\n>     exclusion_tuner, \"}sick(e|al)|sick(e|al)\\\\W+(?:\\\\w+\\\\W+){0,\",\n>     exclusion_tuner, \"}not)\\\\b\")\n> \n>     ## my exclusion function, using grepl\n>     my.exclusion.f <- function(string){grepl(exclusion_regex, string,\n>     ignore.case = TRUE)}\n> \n>     Now I test it against a string.\n> \n>     The line below should yield FALSE (meaning not excluded), because the\n>     words \"sicke\" and \"not\" are more than 6 words apart from each other (in\n>     either direction). And indeed it does.\n> \n>     my.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\n>     and little lambs eat ivy. I swim pretty good. Your cash is not good at\n>     the bar\")\n> \n>     Here is the problem:\n> \n>     The database system from where I get my data sometimes includes direct\n>     quotes of what someone said. The quotation marks used seem to be like\n>     those in word processing software. Look at the sentence about swimming:\n> \n>     my.exclusion.f(\"unit 2 arrives mares eat oats and sicke does eat oats\n>     and little lambs eat ivy. ?I swim pretty good?. Your cash is not good at\n>     the bar\")\n> \n>     I want the above to also yield FALSE, but it yields TRUE.\n> \n>     If I replace those quotation marks with single quotes from my text\n>     editor, like 'I swim pretty good', then I get the expected result of\n>     FALSE, as in the line below.\n> \n>     my.exclusion.f(\"unit 2 arrives mares eat oats and suicide does eat oats\n>     and little lambs eat ivy. 'I swim pretty good'. Your cash is not good at\n>     the bar\")\n> \n> \n>     I know little about character encoding, like ASCII or UTF-8 and the\n>     like, but is that the issue here? Do I need to somehow remove or change\n>     any double-quotes from the data first?? Or is there something wrong with\n>     my regex?\n> \n>     Thanks.\n> \n>     --Chris Ryan\n> \n>     ---\n>     Agency Statistical Consulting, LLC\n>     Helping those in public service get the most from their data.\n>     www.agencystatistical.com <http://www.agencystatistical.com>\n> \n>     Public GnuPG email encryption key at\n>     https://keys.openpgp.org\n>     9E53101D261BEC070CFF1A0DC8BC50E715A672A0\n> \n>     ______________________________________________\n>     R-help at r-project.org <mailto:R-help at r-project.org> mailing list --\n>     To UNSUBSCRIBE and more, see\n>     https://stat.ethz.ch/mailman/listinfo/r-help\n>     PLEASE do read the posting guide\n>     https://www.R-project.org/posting-guide.html\n>     and provide commented, minimal, self-contained, reproducible code.\n>",
+      "body_snippet": "Ah, that's better. Thanks Greg.\n\n--Chris\n\nGreg Hunt wrote:\n> Chris,\n> This is probably a Unicode issue, try?\n> \n> my.exclusion.f <- function(string){grepl(exclusion_regex, string,\n> ignore.case = TRUE",
+      "thread_id": "thread-00d94502f5e7",
+      "thread_depth": 2,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481879.html"
     }
   ],
   "threads": [
@@ -315,12 +354,13 @@
     {
       "id": "thread-00d94502f5e7",
       "subject": "problems with a regex search, grepl, and double-quote marks from word processor",
-      "message_count": 1,
+      "message_count": 3,
       "participants": [
-        "Chris Ryan"
+        "Chris Ryan",
+        "Greg Hunt"
       ],
       "started": "2026-11-14T20:12:47Z",
-      "last_reply": "2026-11-14T20:12:47Z",
+      "last_reply": "2026-11-15T14:06:13Z",
       "root_message_id": "msg-00d94502f5e7"
     }
   ]
