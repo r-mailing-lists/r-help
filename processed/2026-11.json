@@ -300,6 +300,81 @@
       "thread_depth": 2,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481879.html"
+    },
+    {
+      "id": "msg-6b5491f0b0f5",
+      "message_id": "<3819688337-3671821@mx.rootnet.nl>",
+      "from_name": "Niels Hendriks",
+      "from_email_hash": "493bfe170a9a69b08995ce5310029c246bc37772fd013471a5727343badcc03a",
+      "date": "2026-11-16T09:26:15Z",
+      "subject": "[R] APT key for cloud.r-project.org expired",
+      "subject_clean": "APT key for cloud.r-project.org expired",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\n\nI hope this is the right place for contact:\n\n\nThe APT key for the repository at cloud.r-project.org/bin/linux/debian has expired.?\nThe key is documented at https://cloud.r-project.org/bin/linux/debian/#secure-apt and it expired yesterday: https://keyserver.ubuntu.com/pks/lookup?search=0x95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7&fingerprint=on&op=vindex\n\n\nBecause of this, the packages can no longer be installed:\n\nW: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: http://cloud.r-project.org/bin/linux/debian bookworm-cran40/ InRelease: The following signatures were invalid: EXPKEYSIG B8F25A8A73EACF41 Johannes Ranke <johannes.ranke at jrwb.de>\nW: Failed to fetch http://cloud.r-project.org/bin/linux/debian/bookworm-cran40/InRelease? The following signatures were invalid: EXPKEYSIG B8F25A8A73EACF41 Johannes Ranke <johannes.ranke at jrwb.de>\n\n\nCould the packages be updated with a new key?\n\n\nThank you!\nNiels Hendriks\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\n\nI hope this is the right place for contact:\n\n\nThe APT key for the repository at cloud.r-project.org/bin/linux/debian has expired.?\nThe key is documented at https://cloud.r-project.org/bin/lin",
+      "thread_id": "thread-6b5491f0b0f5",
+      "thread_depth": 0,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481880.html"
+    },
+    {
+      "id": "msg-a2e95fbede67",
+      "message_id": "<06302c1f-df20-4f72-9840-5e386e3b0125@fau.de>",
+      "from_name": "Sebastian Meyer",
+      "from_email_hash": "b32c09dd3a31073d640ca6b0e4a9622b24387f298b03dc425beea12447839a33",
+      "date": "2026-11-16T12:52:21Z",
+      "subject": "[R] nlme package LmList function",
+      "subject_clean": "nlme package LmList function",
+      "in_reply_to": "<AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>",
+      "references": [
+        "<AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>"
+      ],
+      "body_plain": "Am 13.11.26 um 18:02 schrieb Kevin Hayes via R-help:\n> fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)\n> \n> intervals( fm1 )\n> \n> Gives the error\n> \n> Error in qf(level, 1, smry$df.residual) :\n>    Non-numeric argument to mathematical function\n> \nShould be fixed in the next release of 'nlme' (> \"3.1-172\", via c8666 in \nthe trunk). You could use confint(fm1) as a workaround; it gives the \nunpooled CIs in a list.\n\n\tSebastian Meyer",
+      "body_snippet": "Am 13.11.26 um 18:02 schrieb Kevin Hayes via R-help:\n> fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)\n> \n> intervals( fm1 )\n> \n> Gives the error\n> \n> Error in qf(level, 1, smr",
+      "thread_id": "thread-6200f407ee31",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481881.html"
+    },
+    {
+      "id": "msg-a3c3ef505a9d",
+      "message_id": "<CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
+      "date": "2026-11-17T02:53:16Z",
+      "subject": "[R] APT key for cloud.r-project.org expired",
+      "subject_clean": "APT key for cloud.r-project.org expired",
+      "in_reply_to": "<3819688337-3671821@mx.rootnet.nl>",
+      "references": [
+        "<3819688337-3671821@mx.rootnet.nl>"
+      ],
+      "body_plain": "On Mon, Nov 16, 2026 at 5:45?PM Niels Hendriks via R-help\n<r-help at r-project.org> wrote:\n>\n> Hello,\n>\n>\n> I hope this is the right place for contact:\n\n\nI think the r-sig-debian mailing list would be the right place. Also\nAPT keys are not tied to a domain, but only to the packager.\nHowever I think the problem is that you seem to be using the\n\"bookworm-cran40\" apt repo which has been superseded by the\n\"bookworm-cran46\" apt repo. Perhaps the latter is already using a more\nrecent key?",
+      "body_snippet": "On Mon, Nov 16, 2026 at 5:45?PM Niels Hendriks via R-help\n<r-help at r-project.org> wrote:\n>\n> Hello,\n>\n>\n> I hope this is the right place for contact:\n\n\nI think the r-sig-debian mailing list would be",
+      "thread_id": "thread-6b5491f0b0f5",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481882.html"
+    },
+    {
+      "id": "msg-1e66852d1b48",
+      "message_id": "<CAGxFJbSaQU5CGOeDAWSbb37UivJ26Eo8M4VQ180tKR8RYf=0_w@mail.gmail.com>",
+      "from_name": "Bert Gunter",
+      "from_email_hash": "e06c8b0dadbc2737decb2b2e2cad765c22313a04fde395a45b7b4f4ea0f812b1",
+      "date": "2026-11-17T03:26:34Z",
+      "subject": "[R] APT key for cloud.r-project.org expired",
+      "subject_clean": "APT key for cloud.r-project.org expired",
+      "in_reply_to": "<CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>",
+      "references": [
+        "<3819688337-3671821@mx.rootnet.nl>",
+        "<CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>"
+      ],
+      "body_plain": "I have no idea what this is about, but I note that entering \"Apt key is\ndeprecated\" in a search engine seemed to produce relevant hits.\n\nApologies if this is useless.\n\nCheers,\nBert\n\nOn Mon, Nov 16, 2026 at 6:53?PM Jeroen Ooms <jeroenooms at gmail.com> wrote:\n\n> On Mon, Nov 16, 2026 at 5:45?PM Niels Hendriks via R-help\n> <r-help at r-project.org> wrote:\n> >\n> > Hello,\n> >\n> >\n> > I hope this is the right place for contact:\n>\n>\n> I think the r-sig-debian mailing list would be the right place. Also\n> APT keys are not tied to a domain, but only to the packager.\n> However I think the problem is that you seem to be using the\n> \"bookworm-cran40\" apt repo which has been superseded by the\n> \"bookworm-cran46\" apt repo. Perhaps the latter is already using a more\n> recent key?\n>\n> ______________________________________________\n> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see\n> https://stat.ethz.ch/mailman/listinfo/r-help\n> PLEASE do read the posting guide\n> https://www.R-project.org/posting-guide.html\n> and provide commented, minimal, self-contained, reproducible code.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have no idea what this is about, but I note that entering \"Apt key is\ndeprecated\" in a search engine seemed to produce relevant hits.\n\nApologies if this is useless.\n\nCheers,\nBert\n\nOn Mon, Nov 16, 20",
+      "thread_id": "thread-6b5491f0b0f5",
+      "thread_depth": 2,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-help/2026-November/481883.html"
     }
   ],
   "threads": [
@@ -342,13 +417,14 @@
     {
       "id": "thread-6200f407ee31",
       "subject": "nlme package LmList function",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Jeff Newmiller",
-        "Kevin Hayes"
+        "Kevin Hayes",
+        "Sebastian Meyer"
       ],
       "started": "2026-11-13T17:02:21Z",
-      "last_reply": "2026-11-14T13:02:08Z",
+      "last_reply": "2026-11-16T12:52:21Z",
       "root_message_id": "msg-6200f407ee31"
     },
     {
@@ -362,6 +438,19 @@
       "started": "2026-11-14T20:12:47Z",
       "last_reply": "2026-11-15T14:06:13Z",
       "root_message_id": "msg-00d94502f5e7"
+    },
+    {
+      "id": "thread-6b5491f0b0f5",
+      "subject": "APT key for cloud.r-project.org expired",
+      "message_count": 3,
+      "participants": [
+        "Bert Gunter",
+        "Jeroen Ooms",
+        "Niels Hendriks"
+      ],
+      "started": "2026-11-16T09:26:15Z",
+      "last_reply": "2026-11-17T03:26:34Z",
+      "root_message_id": "msg-6b5491f0b0f5"
     }
   ]
 }

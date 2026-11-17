@@ -2703,3 +2703,129 @@ Greg Hunt wrote:
 >
 
 
+From n|e|@ @end|ng |rom rootnet@n|  Mon Nov 16 10:26:15 2026
+From: n|e|@ @end|ng |rom rootnet@n| (Niels Hendriks)
+Date: Mon, 16 Nov 2026 10:26:15 +0100
+Subject: [R] APT key for cloud.r-project.org expired
+Message-ID: <3819688337-3671821@mx.rootnet.nl>
+
+Hello,
+
+
+I hope this is the right place for contact:
+
+
+The APT key for the repository at cloud.r-project.org/bin/linux/debian has expired.?
+The key is documented at https://cloud.r-project.org/bin/linux/debian/#secure-apt and it expired yesterday: https://keyserver.ubuntu.com/pks/lookup?search=0x95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7&fingerprint=on&op=vindex
+
+
+Because of this, the packages can no longer be installed:
+
+W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: http://cloud.r-project.org/bin/linux/debian bookworm-cran40/ InRelease: The following signatures were invalid: EXPKEYSIG B8F25A8A73EACF41 Johannes Ranke <johannes.ranke at jrwb.de>
+W: Failed to fetch http://cloud.r-project.org/bin/linux/debian/bookworm-cran40/InRelease? The following signatures were invalid: EXPKEYSIG B8F25A8A73EACF41 Johannes Ranke <johannes.ranke at jrwb.de>
+
+
+Could the packages be updated with a new key?
+
+
+Thank you!
+Niels Hendriks
+	[[alternative HTML version deleted]]
+
+
+From @eb@meyer @end|ng |rom |@u@de  Mon Nov 16 13:52:21 2026
+From: @eb@meyer @end|ng |rom |@u@de (Sebastian Meyer)
+Date: Mon, 16 Nov 2026 13:52:21 +0100
+Subject: [R] nlme package LmList function
+In-Reply-To: <AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>
+References: <AM0PR01MB542888FC6EB4FFFF5A3F9683897F2@AM0PR01MB5428.eurprd01.prod.exchangelabs.com>
+Message-ID: <06302c1f-df20-4f72-9840-5e386e3b0125@fau.de>
+
+Am 13.11.26 um 18:02 schrieb Kevin Hayes via R-help:
+> fm1 <- lmList(distance ~ age | Subject, data = Orthodont, pool = FALSE)
+> 
+> intervals( fm1 )
+> 
+> Gives the error
+> 
+> Error in qf(level, 1, smry$df.residual) :
+>    Non-numeric argument to mathematical function
+> 
+Should be fixed in the next release of 'nlme' (> "3.1-172", via c8666 in 
+the trunk). You could use confint(fm1) as a workaround; it gives the 
+unpooled CIs in a list.
+
+	Sebastian Meyer
+
+
+From jeroenoom@ @end|ng |rom gm@||@com  Tue Nov 17 03:53:16 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Mon, 16 Nov 2026 21:53:16 -0500
+Subject: [R] APT key for cloud.r-project.org expired
+In-Reply-To: <3819688337-3671821@mx.rootnet.nl>
+References: <3819688337-3671821@mx.rootnet.nl>
+Message-ID: <CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>
+
+On Mon, Nov 16, 2026 at 5:45?PM Niels Hendriks via R-help
+<r-help at r-project.org> wrote:
+>
+> Hello,
+>
+>
+> I hope this is the right place for contact:
+
+
+I think the r-sig-debian mailing list would be the right place. Also
+APT keys are not tied to a domain, but only to the packager.
+However I think the problem is that you seem to be using the
+"bookworm-cran40" apt repo which has been superseded by the
+"bookworm-cran46" apt repo. Perhaps the latter is already using a more
+recent key?
+
+
+From bgunter@4567 @end|ng |rom gm@||@com  Tue Nov 17 04:26:34 2026
+From: bgunter@4567 @end|ng |rom gm@||@com (Bert Gunter)
+Date: Mon, 16 Nov 2026 19:26:34 -0800
+Subject: [R] APT key for cloud.r-project.org expired
+In-Reply-To: <CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>
+References: <3819688337-3671821@mx.rootnet.nl>
+ <CABFfbXs=tFkKYP52skKEQcA8JaD91E8QgKdVxKuy58u4v-Ev5A@mail.gmail.com>
+Message-ID: <CAGxFJbSaQU5CGOeDAWSbb37UivJ26Eo8M4VQ180tKR8RYf=0_w@mail.gmail.com>
+
+I have no idea what this is about, but I note that entering "Apt key is
+deprecated" in a search engine seemed to produce relevant hits.
+
+Apologies if this is useless.
+
+Cheers,
+Bert
+
+On Mon, Nov 16, 2026 at 6:53?PM Jeroen Ooms <jeroenooms at gmail.com> wrote:
+
+> On Mon, Nov 16, 2026 at 5:45?PM Niels Hendriks via R-help
+> <r-help at r-project.org> wrote:
+> >
+> > Hello,
+> >
+> >
+> > I hope this is the right place for contact:
+>
+>
+> I think the r-sig-debian mailing list would be the right place. Also
+> APT keys are not tied to a domain, but only to the packager.
+> However I think the problem is that you seem to be using the
+> "bookworm-cran40" apt repo which has been superseded by the
+> "bookworm-cran46" apt repo. Perhaps the latter is already using a more
+> recent key?
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
