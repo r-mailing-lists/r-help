@@ -2829,3 +2829,275 @@ On Mon, Nov 16, 2026 at 6:53?PM Jeroen Ooms <jeroenooms at gmail.com> wrote:
 	[[alternative HTML version deleted]]
 
 
+From |eo@m@d@ @end|ng |rom @yon|c@eu  Tue Nov 24 17:20:49 2026
+From: |eo@m@d@ @end|ng |rom @yon|c@eu (Leo Mada)
+Date: Tue, 24 Nov 2026 16:20:49 +0000
+Subject: [R] Changing the Registration Mail?
+Message-ID: <DBAP192MB09568BBFF989AE517E7D086284442@DBAP192MB0956.EURP192.PROD.OUTLOOK.COM>
+
+Dear R-Help List,
+
+If I want to change my mail, do I need to first un-register from this list and then register again with the new mail?
+
+Or is this process more automated?
+
+Sincerely,
+
+Leonard
+
+
+	[[alternative HTML version deleted]]
+
+
+From m@rc_@chw@rtz @end|ng |rom me@com  Tue Nov 24 17:29:34 2026
+From: m@rc_@chw@rtz @end|ng |rom me@com (Marc Schwartz)
+Date: Tue, 24 Nov 2026 11:29:34 -0500
+Subject: [R] Changing the Registration Mail?
+In-Reply-To: <DBAP192MB09568BBFF989AE517E7D086284442@DBAP192MB0956.EURP192.PROD.OUTLOOK.COM>
+References: <DBAP192MB09568BBFF989AE517E7D086284442@DBAP192MB0956.EURP192.PROD.OUTLOOK.COM>
+Message-ID: <2C5CFCA4-F958-4FD3-9F3C-82661BCA762A@me.com>
+
+Hi,
+
+Per the footer in the list e-mails:
+
+Go to: https://stat.ethz.ch/mailman/listinfo/r-help
+
+Toward the bottom of that page you will see a section labeled "R-help Subscribers". In the middle of that section, you can enter your currently subscribed e-mail, then click the "Unsubscribe or edit options" button. 
+
+If you know your current password, you can enter it on the next page, or get a reminder if you need it.
+
+Once you are logged in, you can edit your subscription options, including e-mail.
+
+Regards,
+
+Marc Schwartz
+
+
+> On Nov 24, 2026, at 11:20?AM, Leo Mada via R-help <r-help at r-project.org> wrote:
+> 
+> Dear R-Help List,
+> 
+> If I want to change my mail, do I need to first un-register from this list and then register again with the new mail?
+> 
+> Or is this process more automated?
+> 
+> Sincerely,
+> 
+> Leonard
+> 
+> 
+> [[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+From |m@d@ @end|ng |rom um|t@ro  Tue Nov 24 17:52:14 2026
+From: |m@d@ @end|ng |rom um|t@ro (Leonard Mada)
+Date: Tue, 24 Nov 2026 18:52:14 +0200
+Subject: [R] Changing the Registration Mail?
+Message-ID: <5a1161ad-87a4-41cc-8eab-8dcd0d4b1ab4@umft.ro>
+
+Dear List Members,
+
+I found out how to change the e-mail; and I hope that it worked. Many 
+thanks for the hint.
+
+I usually skipped most of the text in the mailman-owner messages. But 
+good to know that this feature already exists.
+
+Sincerely,
+
+Leonard
+
+
+From |m@d@ @end|ng |rom um|t@ro  Tue Nov 24 23:59:58 2026
+From: |m@d@ @end|ng |rom um|t@ro (Leonard Mada)
+Date: Wed, 25 Nov 2026 00:59:58 +0200
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+Message-ID: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+
+Dear R Users,
+
+I stumbled upon an interesting question. I fitted a set of points to a 
+circle or to a circle segment (or sphere cap) and I wondered if there is 
+something equivalent to a correlation coefficient?
+
+I have a dilemma in constructing such a coefficient. A value of 0 means 
+no correlation and a value of 1 means perfect correlation. But I do not 
+know if a value of -1 is meaningful or how to interpret it.
+
+The example below illustrates the method:
+
+# Regression on Circle (2D)
+lm.circle = function(x, y) {
+ ? ? xm = mean(x); ym = mean(y);
+ ? ? dx = x - xm; dy = y - ym;
+ ? ? n? = length(x);
+ ? ? S2 = x^2 + y^2;
+ ? ? Sdx = sum(S2*dx);
+ ? ? Sdy = sum(S2*dy);
+ ? ? #
+ ? ? divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+ ? ? x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+ ? ? #
+ ? ? y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+ ? ? # Radius:
+ ? ? r = sum((x-x0)^2, (y-y0)^2);
+ ? ? r = sqrt(r/n);
+ ? ? #
+ ? ? fit = list(C = c(x0, y0), R = r);
+ ? ? return(fit);
+}
+
+### Plot Circle:
+lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+ ? ? phi = seq(0, 2*pi, length.out = n);
+ ? ? phi[n] = phi[1];
+ ? ? x = r*sin(phi) + centre[1];
+ ? ? y = r*cos(phi) + centre[2];
+ ? ? lines(x, y, ...);
+ ? ? invisible(cbind(x,y));
+}
+### Example:
+n = 30;
+r = 10;
+x0 = 5; y0 = 2; # Center
+# Random data:
+phi = (2*pi)*runif(n, 0, 3/5);
+dri =? runif(n, -1,1) / 10 * r;
+x = x0 + (r+dri) * sin(phi);
+y = y0 + (r+dri) * cos(phi);
+
+# Fit
+fit = lm.circle(x, y);
+Cxy = fit$C;
+phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+# Predicted:
+xPred = fit$R * sin(phi.fit) + Cxy[1];
+yPred = fit$R * cos(phi.fit) + Cxy[2];
+
+# Plot:
+plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+lines.circle(fit$R, fit$C, col = "#C28092D2")
+points(xPred, yPred, col = "red")
+
+
+The code to fit a 3D sphere (which is generalizable) is on GitHub:
+https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+
+Various packages deal with cyclic data, but focus on testing uniformity 
+or performing regression once the angles are known (e.g. circular, 
+circularKDE, circda). I am unaware of any packages fitting spatial data 
+to a circle/sphere.
+My primary interest was in a slightly different direction (fitting some 
+curved axis or cutting planes to 3D protein structures); but the 
+question above was interesting in itself.
+
+Many thanks in advance for any hints.
+
+Sincerely,
+
+Leonard
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Wed Nov 25 01:22:44 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Tue, 24 Nov 2026 16:22:44 -0800
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+Message-ID: <E63A19D3-027D-441D-8E6C-4D01DDD45608@dcn.davis.ca.us>
+
+`circular` package? 
+
+On November 24, 2026 2:59:58 PM PST, Leonard Mada <lmada at umft.ro> wrote:
+>Dear R Users,
+>
+>I stumbled upon an interesting question. I fitted a set of points to a circle or to a circle segment (or sphere cap) and I wondered if there is something equivalent to a correlation coefficient?
+>
+>I have a dilemma in constructing such a coefficient. A value of 0 means no correlation and a value of 1 means perfect correlation. But I do not know if a value of -1 is meaningful or how to interpret it.
+>
+>The example below illustrates the method:
+>
+># Regression on Circle (2D)
+>lm.circle = function(x, y) {
+>? ? xm = mean(x); ym = mean(y);
+>? ? dx = x - xm; dy = y - ym;
+>? ? n? = length(x);
+>? ? S2 = x^2 + y^2;
+>? ? Sdx = sum(S2*dx);
+>? ? Sdy = sum(S2*dy);
+>? ? #
+>? ? divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+>? ? x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+>? ? #
+>? ? y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+>? ? # Radius:
+>? ? r = sum((x-x0)^2, (y-y0)^2);
+>? ? r = sqrt(r/n);
+>? ? #
+>? ? fit = list(C = c(x0, y0), R = r);
+>? ? return(fit);
+>}
+>
+>### Plot Circle:
+>lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+>? ? phi = seq(0, 2*pi, length.out = n);
+>? ? phi[n] = phi[1];
+>? ? x = r*sin(phi) + centre[1];
+>? ? y = r*cos(phi) + centre[2];
+>? ? lines(x, y, ...);
+>? ? invisible(cbind(x,y));
+>}
+>### Example:
+>n = 30;
+>r = 10;
+>x0 = 5; y0 = 2; # Center
+># Random data:
+>phi = (2*pi)*runif(n, 0, 3/5);
+>dri =? runif(n, -1,1) / 10 * r;
+>x = x0 + (r+dri) * sin(phi);
+>y = y0 + (r+dri) * cos(phi);
+>
+># Fit
+>fit = lm.circle(x, y);
+>Cxy = fit$C;
+>phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+># Predicted:
+>xPred = fit$R * sin(phi.fit) + Cxy[1];
+>yPred = fit$R * cos(phi.fit) + Cxy[2];
+>
+># Plot:
+>plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+>lines.circle(fit$R, fit$C, col = "#C28092D2")
+>points(xPred, yPred, col = "red")
+>
+>
+>The code to fit a 3D sphere (which is generalizable) is on GitHub:
+>https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+>
+>Various packages deal with cyclic data, but focus on testing uniformity or performing regression once the angles are known (e.g. circular, circularKDE, circda). I am unaware of any packages fitting spatial data to a circle/sphere.
+>My primary interest was in a slightly different direction (fitting some curved axis or cutting planes to 3D protein structures); but the question above was interesting in itself.
+>
+>Many thanks in advance for any hints.
+>
+>Sincerely,
+>
+>Leonard
+>
+>______________________________________________
+>R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>https://stat.ethz.ch/mailman/listinfo/r-help
+>PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>and provide commented, minimal, self-contained, reproducible code.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
