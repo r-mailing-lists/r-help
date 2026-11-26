@@ -3101,3 +3101,958 @@ Sent from my phone. Please excuse my brevity.
 	[[alternative HTML version deleted]]
 
 
+From |m@d@ @end|ng |rom um|t@ro  Wed Nov 25 12:03:31 2026
+From: |m@d@ @end|ng |rom um|t@ro (Leonard Mada)
+Date: Wed, 25 Nov 2026 13:03:31 +0200
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <E63A19D3-027D-441D-8E6C-4D01DDD45608@dcn.davis.ca.us>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <E63A19D3-027D-441D-8E6C-4D01DDD45608@dcn.davis.ca.us>
+Message-ID: <2a1e6dc8-e5b8-487e-a3eb-0a9f43e3e09e@umft.ro>
+
+Dear Jeff,
+
+Thank you for the reference.
+
+I did mention in the initial post the packages circular, circularKDE, 
+circda - but they focus on circular data and statistics on circular data 
+(i.e. the angles) - not on geometric coordinates that fit on a circle.
+
+I have looked now more carefully inside package "circular" - though it 
+does not provide a vignette, nor references to some articles (only to a 
+book).
+
+The function cor.circular in package *circular* assumes x and y to be 
+angles:
+> The correlation coefficient is computed like Pearson's product moment 
+> correlation for two linear variables X and Y. In the computational 
+> formula, however, (xi - xbar) and (yi - ybar) are replaced by sin(xi - 
+> xbar) and sin(yi - ybar), where xbar and ybar in the second two 
+> expressions are the mean directions of the samples.
+
+In my example, I fit (x, y)-coordinates to a circle and the result is 
+the circle that fits best the points: the actual points (x, y) may 
+deviate from the estimated circle and I was pondering how to measure the 
+goodness of fit or the "circle"-correlation for the set of points.
+
+In the meantime, I feel that the value of 0 correlation (or goodness of 
+fit) is not properly defined either (as any point will be somewhat 
+closer to some segment of the circle).
+
+I hope this clarifies my initial post.
+
+Sincerely,
+
+Leonard
+
+
+
+
+On 11/25/2026 2:22 AM, Jeff Newmiller wrote:
+> `circular` package?
+>
+>
+> On November 24, 2026 2:59:58 PM PST, Leonard Mada <lmada at umft.ro> wrote:
+>
+>     Dear R Users, I stumbled upon an interesting question. I fitted a
+>     set of points to a circle or to a circle segment (or sphere cap)
+>     and I wondered if there is something equivalent to a correlation
+>     coefficient? I have a dilemma in constructing such a coefficient.
+>     A value of 0 means no correlation and a value of 1 means perfect
+>     correlation. But I do not know if a value of -1 is meaningful or
+>     how to interpret it. The example below illustrates the method: #
+>     Regression on Circle (2D) lm.circle = function(x, y) { ? ? xm =
+>     mean(x); ym = mean(y); ? ? dx = x - xm; dy = y - ym; ? ? n? =
+>     length(x); ? ? S2 = x^2 + y^2; ? ? Sdx = sum(S2*dx); ? ? Sdy =
+>     sum(S2*dy); ? ? # ? ? divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy)
+>     * sum(dx*y)); ? ? x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+>     ? ? # ? ? y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx; ? ? #
+>     Radius: ? ? r = sum((x-x0)^2, (y-y0)^2); ? ? r = sqrt(r/n); ? ? #
+>     ? ? fit = list(C = c(x0, y0), R = r); ? ? return(fit); } ### Plot
+>     Circle: lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+>     ? ? phi = seq(0, 2*pi, length.out = n); ? ? phi[n] = phi[1]; ? ? x
+>     = r*sin(phi) + centre[1]; ? ? y = r*cos(phi) + centre[2]; ? ?
+>     lines(x, y, ...); ? ? invisible(cbind(x,y)); } ### Example: n =
+>     30; r = 10; x0 = 5; y0 = 2; # Center # Random data: phi =
+>     (2*pi)*runif(n, 0, 3/5); dri =? runif(n, -1,1) / 10 * r; x = x0 +
+>     (r+dri) * sin(phi); y = y0 + (r+dri) * cos(phi); # Fit fit =
+>     lm.circle(x, y); Cxy = fit$C; phi.fit = atan2(x - Cxy[1], y -
+>     Cxy[2]); # Predicted: xPred = fit$R * sin(phi.fit) + Cxy[1]; yPred
+>     = fit$R * cos(phi.fit) + Cxy[2]; # Plot: plot(x, y, xlim =
+>     range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+>     lines.circle(fit$R, fit$C, col = "#C28092D2") points(xPred, yPred,
+>     col = "red") The code to fit a 3D sphere (which is generalizable)
+>     is on GitHub:
+>     https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+>     Various packages deal with cyclic data, but focus on testing
+>     uniformity or performing regression once the angles are known
+>     (e.g. circular, circularKDE, circda). I am unaware of any packages
+>     fitting spatial data to a circle/sphere. My primary interest was
+>     in a slightly different direction (fitting some curved axis or
+>     cutting planes to 3D protein structures); but the question above
+>     was interesting in itself. Many thanks in advance for any hints.
+>     Sincerely, Leonard
+>     ------------------------------------------------------------------------
+>     R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>     https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the
+>     posting guide https://www.R-project.org/posting-guide.html
+>     <https://www.R-project.org/posting-guide.html> and provide
+>     commented, minimal, self-contained, reproducible code.
+>
+> --
+> Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@  Wed Nov 25 16:45:25 2026
+From: jdnewm|| @end|ng |rom dcn@d@v|@@c@@u@ (Jeff Newmiller)
+Date: Wed, 25 Nov 2026 07:45:25 -0800
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <2a1e6dc8-e5b8-487e-a3eb-0a9f43e3e09e@umft.ro>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <E63A19D3-027D-441D-8E6C-4D01DDD45608@dcn.davis.ca.us>
+ <2a1e6dc8-e5b8-487e-a3eb-0a9f43e3e09e@umft.ro>
+Message-ID: <A6B0161E-680E-4A66-A812-00432184429A@dcn.davis.ca.us>
+
+Maybe `conicfit`?
+
+This looks interesting, but I have not been down this particular road myself and will have to pace my curiosity. Google Gemini has a bunch of references (the geometric regression alternatives and even international standards with look particularly relevant) but I leave it for you to follow the rabbit down that hole and deal with any visions the mushrooms give you.
+
+Note that learning how to create an S3 class will make separating your model from the summary calculations and plotting much cleaner with fairly small investment of additional syntax.
+
+--
+Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From |m@d@ @end|ng |rom um|t@ro  Wed Nov 25 21:11:09 2026
+From: |m@d@ @end|ng |rom um|t@ro (Leonard Mada)
+Date: Wed, 25 Nov 2026 22:11:09 +0200
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <2a1e6dc8-e5b8-487e-a3eb-0a9f43e3e09e@umft.ro>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <E63A19D3-027D-441D-8E6C-4D01DDD45608@dcn.davis.ca.us>
+ <2a1e6dc8-e5b8-487e-a3eb-0a9f43e3e09e@umft.ro>
+Message-ID: <5540b28d-b7f5-4bc6-8cb5-7ebc15879ded@umft.ro>
+
+Dear R Users,
+
+This message completes some information about the circular package.
+
+After a more through inspection of that package, I detected the function 
+lsfit.circle - but did not identify a proper goodness of fit estimator:
+lsfit.circle(x, y, init = NULL, units = c("radians", "degrees"), ...)
+
+To quote: "lsfit.circle uses the optim function to minimize the sum of 
+the squared residuals between the observations and the optimally fitting 
+circle." Note that it is actually possible to fit using a linear LS formula.
+
+It also makes reference to the following article:
+Coope, I. (1993). Circle fitting by linear and non-linear least squares. 
+Journal of Optimization Theory and Applications, 76, 381-388.
+
+The article provides the matrix formula for a linear LS optimization. My 
+own 2D formula is a linear LS formula (and solving the system by hand) - 
+while the formula for the 3D fit on GitHub is in matrix-form and is 
+easily extendible to higher dimensions:
+https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+
+Note that the article does NOT include a goodness-of-fit estimator 
+beyond the sum of the residuals. The comparison between 2 methods is:
+"The circle in figure 3 differs only slightly from that of figure 1 but 
+that in figure 4 gives a much more visually pleasing fit than that of 
+the "total least squares" fit of figure 2;"
+
+It does NOT analyse if the points fit well the circle, either.
+
+2. Additional Package Suggestions (by Jeff)
+I will take a closer look to package conicfit (2015), as well as 
+fitConic (2023) and RConics (2025) - probably over the next few days. 
+Many thanks for the hint. I hope that this information is useful to 
+others as well.
+
+Sincerely,
+
+Leonard
+
+
+On 11/25/2026 1:03 PM, Leonard Mada wrote:
+> Dear Jeff,
+>
+> Thank you for the reference.
+>
+> I did mention in the initial post the packages circular, circularKDE, 
+> circda - but they focus on circular data and statistics on circular 
+> data (i.e. the angles) - not on geometric coordinates that fit on a 
+> circle.
+>
+> I have looked now more carefully inside package "circular" - though it 
+> does not provide a vignette, nor references to some articles (only to 
+> a book).
+>
+> The function cor.circular in package *circular* assumes x and y to be 
+> angles:
+>> The correlation coefficient is computed like Pearson's product moment 
+>> correlation for two linear variables X and Y. In the computational 
+>> formula, however, (xi - xbar) and (yi - ybar) are replaced by sin(xi 
+>> - xbar) and sin(yi - ybar), where xbar and ybar in the second two 
+>> expressions are the mean directions of the samples.
+>
+> In my example, I fit (x, y)-coordinates to a circle and the result is 
+> the circle that fits best the points: the actual points (x, y) may 
+> deviate from the estimated circle and I was pondering how to measure 
+> the goodness of fit or the "circle"-correlation for the set of points.
+>
+> In the meantime, I feel that the value of 0 correlation (or goodness 
+> of fit) is not properly defined either (as any point will be somewhat 
+> closer to some segment of the circle).
+>
+> I hope this clarifies my initial post.
+>
+> Sincerely,
+>
+> Leonard
+>
+>
+>
+>
+> On 11/25/2026 2:22 AM, Jeff Newmiller wrote:
+>> `circular` package?
+>>
+>>
+>> On November 24, 2026 2:59:58 PM PST, Leonard Mada <lmada at umft.ro> wrote:
+>>
+>>     Dear R Users, I stumbled upon an interesting question. I fitted a
+>>     set of points to a circle or to a circle segment (or sphere cap)
+>>     and I wondered if there is something equivalent to a correlation
+>>     coefficient? I have a dilemma in constructing such a coefficient.
+>>     A value of 0 means no correlation and a value of 1 means perfect
+>>     correlation. But I do not know if a value of -1 is meaningful or
+>>     how to interpret it. The example below illustrates the method: #
+>>     Regression on Circle (2D) lm.circle = function(x, y) { ? ? xm =
+>>     mean(x); ym = mean(y); ? ? dx = x - xm; dy = y - ym; ? ? n? =
+>>     length(x); ? ? S2 = x^2 + y^2; ? ? Sdx = sum(S2*dx); ? ? Sdy =
+>>     sum(S2*dy); ? ? # ? ? divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy)
+>>     * sum(dx*y)); ? ? x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) /
+>>     divx; ? ? # ? ? y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) /
+>>     divx; ? ? # Radius: ? ? r = sum((x-x0)^2, (y-y0)^2); ? ? r =
+>>     sqrt(r/n); ? ? # ? ? fit = list(C = c(x0, y0), R = r); ? ?
+>>     return(fit); } ### Plot Circle: lines.circle = function(r, centre
+>>     = c(0,0), ..., n = 33) { ? ? phi = seq(0, 2*pi, length.out = n);
+>>     ? ? phi[n] = phi[1]; ? ? x = r*sin(phi) + centre[1]; ? ? y =
+>>     r*cos(phi) + centre[2]; ? ? lines(x, y, ...); ? ?
+>>     invisible(cbind(x,y)); } ### Example: n = 30; r = 10; x0 = 5; y0
+>>     = 2; # Center # Random data: phi = (2*pi)*runif(n, 0, 3/5); dri
+>>     =? runif(n, -1,1) / 10 * r; x = x0 + (r+dri) * sin(phi); y = y0 +
+>>     (r+dri) * cos(phi); # Fit fit = lm.circle(x, y); Cxy = fit$C;
+>>     phi.fit = atan2(x - Cxy[1], y - Cxy[2]); # Predicted: xPred =
+>>     fit$R * sin(phi.fit) + Cxy[1]; yPred = fit$R * cos(phi.fit) +
+>>     Cxy[2]; # Plot: plot(x, y, xlim = range(x) + c(-1,1),
+>>     ylim=range(y) + c(-1,1), asp=1) lines.circle(fit$R, fit$C, col =
+>>     "#C28092D2") points(xPred, yPred, col = "red") The code to fit a
+>>     3D sphere (which is generalizable) is on GitHub:
+>>     https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+>>     Various packages deal with cyclic data, but focus on testing
+>>     uniformity or performing regression once the angles are known
+>>     (e.g. circular, circularKDE, circda). I am unaware of any
+>>     packages fitting spatial data to a circle/sphere. My primary
+>>     interest was in a slightly different direction (fitting some
+>>     curved axis or cutting planes to 3D protein structures); but the
+>>     question above was interesting in itself. Many thanks in advance
+>>     for any hints. Sincerely, Leonard
+>>     ------------------------------------------------------------------------
+>>     R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>>     https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the
+>>     posting guide https://www.R-project.org/posting-guide.html
+>>     <https://www.R-project.org/posting-guide.html> and provide
+>>     commented, minimal, self-contained, reproducible code.
+>>
+>> --
+>> Sent from my phone. Please excuse my brevity.
+	[[alternative HTML version deleted]]
+
+
+From ggrothend|eck @end|ng |rom gm@||@com  Wed Nov 25 22:38:59 2026
+From: ggrothend|eck @end|ng |rom gm@||@com (Gabor Grothendieck)
+Date: Wed, 25 Nov 2026 16:38:59 -0500
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+Message-ID: <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+
+If I understand correctly you are not really looking for a correlation
+coefficient but rather a measure of the dependence
+of (xPred, yPred)  on (x, y).  In that case you want a number between
+0 and 1 and the KPC package can provide such a measure
+between points on a manifold S in R^n.  The interesting thing about it
+is that you don't have to specify S.
+
+Using your data:
+
+  library(KPC)
+  library(kernlab)
+
+  X <- cbind(x, y)
+  Y <- cbind(xPred, yPred)
+
+  ky <- rbfdot(1 / (2 * median(dist(Y))^2))
+  kz <- rbfdot(1 / (2 * median(dist(X))^2))
+
+  KPCRKHS(
+      Y = Y,
+      X = NULL,
+      Z = X,
+      ky = ky,
+      kxz = kz
+  )
+  ## [1] 0.9758999
+
+The package also has another estimator:
+
+  KMAc(
+      Y = Y,
+      X = Z,
+      k = ky,
+      Knn = 1
+  )
+  ## [1] 0.9900212
+
+On Tue, Nov 24, 2026 at 6:00?PM Leonard Mada <lmada at umft.ro> wrote:
+>
+> Dear R Users,
+>
+> I stumbled upon an interesting question. I fitted a set of points to a
+> circle or to a circle segment (or sphere cap) and I wondered if there is
+> something equivalent to a correlation coefficient?
+>
+> I have a dilemma in constructing such a coefficient. A value of 0 means
+> no correlation and a value of 1 means perfect correlation. But I do not
+> know if a value of -1 is meaningful or how to interpret it.
+>
+> The example below illustrates the method:
+>
+> # Regression on Circle (2D)
+> lm.circle = function(x, y) {
+>      xm = mean(x); ym = mean(y);
+>      dx = x - xm; dy = y - ym;
+>      n  = length(x);
+>      S2 = x^2 + y^2;
+>      Sdx = sum(S2*dx);
+>      Sdy = sum(S2*dy);
+>      #
+>      divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+>      x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+>      #
+>      y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+>      # Radius:
+>      r = sum((x-x0)^2, (y-y0)^2);
+>      r = sqrt(r/n);
+>      #
+>      fit = list(C = c(x0, y0), R = r);
+>      return(fit);
+> }
+>
+> ### Plot Circle:
+> lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+>      phi = seq(0, 2*pi, length.out = n);
+>      phi[n] = phi[1];
+>      x = r*sin(phi) + centre[1];
+>      y = r*cos(phi) + centre[2];
+>      lines(x, y, ...);
+>      invisible(cbind(x,y));
+> }
+> ### Example:
+> n = 30;
+> r = 10;
+> x0 = 5; y0 = 2; # Center
+> # Random data:
+> phi = (2*pi)*runif(n, 0, 3/5);
+> dri =  runif(n, -1,1) / 10 * r;
+> x = x0 + (r+dri) * sin(phi);
+> y = y0 + (r+dri) * cos(phi);
+>
+> # Fit
+> fit = lm.circle(x, y);
+> Cxy = fit$C;
+> phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+> # Predicted:
+> xPred = fit$R * sin(phi.fit) + Cxy[1];
+> yPred = fit$R * cos(phi.fit) + Cxy[2];
+>
+> # Plot:
+> plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+> lines.circle(fit$R, fit$C, col = "#C28092D2")
+> points(xPred, yPred, col = "red")
+>
+>
+> The code to fit a 3D sphere (which is generalizable) is on GitHub:
+> https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+>
+> Various packages deal with cyclic data, but focus on testing uniformity
+> or performing regression once the angles are known (e.g. circular,
+> circularKDE, circda). I am unaware of any packages fitting spatial data
+> to a circle/sphere.
+> My primary interest was in a slightly different direction (fitting some
+> curved axis or cutting planes to 3D protein structures); but the
+> question above was interesting in itself.
+>
+> Many thanks in advance for any hints.
+>
+> Sincerely,
+>
+> Leonard
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+
+
+
+-- 
+Statistics & Software Consulting
+GKX Group, GKX Associates Inc.
+tel: 1-877-GKX-GROUP
+email: ggrothendieck at gmail.com
+
+
+From bgunter@4567 @end|ng |rom gm@||@com  Wed Nov 25 23:30:01 2026
+From: bgunter@4567 @end|ng |rom gm@||@com (Bert Gunter)
+Date: Wed, 25 Nov 2026 14:30:01 -0800
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+Message-ID: <CAGxFJbQu7K5XJdjE2nXsyAcrQuo4iapa_jXfmn4PcOGS2_KnTw@mail.gmail.com>
+
+This may well be ignorant and irrelevant, so please feel free to ignore...
+
+But isn't the issue no matter what measure of dependence, goodness of fit,
+correlation or whatever is calculated, how does one judge how to
+**interpret** that measure -- i.e. does the measure indicate a *strong*
+dependence in some sense or not? Presumably the various suggested packages
+address this issue in various ways, so that the OP should probably consider
+which, if any, of the alternatives fit his particular situation most
+appropriately... or perhaps fall back to some sort of simulation based
+approach to decide this?
+
+Cheers,
+Bert
+
+On Wed, Nov 25, 2026 at 1:40?PM Gabor Grothendieck <ggrothendieck at gmail.com>
+wrote:
+
+> If I understand correctly you are not really looking for a correlation
+> coefficient but rather a measure of the dependence
+> of (xPred, yPred)  on (x, y).  In that case you want a number between
+> 0 and 1 and the KPC package can provide such a measure
+> between points on a manifold S in R^n.  The interesting thing about it
+> is that you don't have to specify S.
+>
+> Using your data:
+>
+>   library(KPC)
+>   library(kernlab)
+>
+>   X <- cbind(x, y)
+>   Y <- cbind(xPred, yPred)
+>
+>   ky <- rbfdot(1 / (2 * median(dist(Y))^2))
+>   kz <- rbfdot(1 / (2 * median(dist(X))^2))
+>
+>   KPCRKHS(
+>       Y = Y,
+>       X = NULL,
+>       Z = X,
+>       ky = ky,
+>       kxz = kz
+>   )
+>   ## [1] 0.9758999
+>
+> The package also has another estimator:
+>
+>   KMAc(
+>       Y = Y,
+>       X = Z,
+>       k = ky,
+>       Knn = 1
+>   )
+>   ## [1] 0.9900212
+>
+> On Tue, Nov 24, 2026 at 6:00?PM Leonard Mada <lmada at umft.ro> wrote:
+> >
+> > Dear R Users,
+> >
+> > I stumbled upon an interesting question. I fitted a set of points to a
+> > circle or to a circle segment (or sphere cap) and I wondered if there is
+> > something equivalent to a correlation coefficient?
+> >
+> > I have a dilemma in constructing such a coefficient. A value of 0 means
+> > no correlation and a value of 1 means perfect correlation. But I do not
+> > know if a value of -1 is meaningful or how to interpret it.
+> >
+> > The example below illustrates the method:
+> >
+> > # Regression on Circle (2D)
+> > lm.circle = function(x, y) {
+> >      xm = mean(x); ym = mean(y);
+> >      dx = x - xm; dy = y - ym;
+> >      n  = length(x);
+> >      S2 = x^2 + y^2;
+> >      Sdx = sum(S2*dx);
+> >      Sdy = sum(S2*dy);
+> >      #
+> >      divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+> >      x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+> >      #
+> >      y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+> >      # Radius:
+> >      r = sum((x-x0)^2, (y-y0)^2);
+> >      r = sqrt(r/n);
+> >      #
+> >      fit = list(C = c(x0, y0), R = r);
+> >      return(fit);
+> > }
+> >
+> > ### Plot Circle:
+> > lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+> >      phi = seq(0, 2*pi, length.out = n);
+> >      phi[n] = phi[1];
+> >      x = r*sin(phi) + centre[1];
+> >      y = r*cos(phi) + centre[2];
+> >      lines(x, y, ...);
+> >      invisible(cbind(x,y));
+> > }
+> > ### Example:
+> > n = 30;
+> > r = 10;
+> > x0 = 5; y0 = 2; # Center
+> > # Random data:
+> > phi = (2*pi)*runif(n, 0, 3/5);
+> > dri =  runif(n, -1,1) / 10 * r;
+> > x = x0 + (r+dri) * sin(phi);
+> > y = y0 + (r+dri) * cos(phi);
+> >
+> > # Fit
+> > fit = lm.circle(x, y);
+> > Cxy = fit$C;
+> > phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+> > # Predicted:
+> > xPred = fit$R * sin(phi.fit) + Cxy[1];
+> > yPred = fit$R * cos(phi.fit) + Cxy[2];
+> >
+> > # Plot:
+> > plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+> > lines.circle(fit$R, fit$C, col = "#C28092D2")
+> > points(xPred, yPred, col = "red")
+> >
+> >
+> > The code to fit a 3D sphere (which is generalizable) is on GitHub:
+> > https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+> >
+> > Various packages deal with cyclic data, but focus on testing uniformity
+> > or performing regression once the angles are known (e.g. circular,
+> > circularKDE, circda). I am unaware of any packages fitting spatial data
+> > to a circle/sphere.
+> > My primary interest was in a slightly different direction (fitting some
+> > curved axis or cutting planes to 3D protein structures); but the
+> > question above was interesting in itself.
+> >
+> > Many thanks in advance for any hints.
+> >
+> > Sincerely,
+> >
+> > Leonard
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+>
+>
+> --
+> Statistics & Software Consulting
+> GKX Group, GKX Associates Inc.
+> tel: 1-877-GKX-GROUP
+> email: ggrothendieck at gmail.com
+>
+> ______________________________________________
+> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> https://stat.ethz.ch/mailman/listinfo/r-help
+> PLEASE do read the posting guide
+> https://www.R-project.org/posting-guide.html
+> and provide commented, minimal, self-contained, reproducible code.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From ggrothend|eck @end|ng |rom gm@||@com  Thu Nov 26 00:34:37 2026
+From: ggrothend|eck @end|ng |rom gm@||@com (Gabor Grothendieck)
+Date: Wed, 25 Nov 2026 18:34:37 -0500
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <CAGxFJbQu7K5XJdjE2nXsyAcrQuo4iapa_jXfmn4PcOGS2_KnTw@mail.gmail.com>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+ <CAGxFJbQu7K5XJdjE2nXsyAcrQuo4iapa_jXfmn4PcOGS2_KnTw@mail.gmail.com>
+Message-ID: <CAP01uRm1sEpsRa3VeG=i-yz5bfxEhhiCjx5cvSoXtZuxmDbJwQ@mail.gmail.com>
+
+You can use the boot package to get a confidence interval and if the
+resulting interval excludes 0
+then the null hypothesis of independence is rejected.
+
+On Wed, Nov 25, 2026 at 5:30?PM Bert Gunter <bgunter.4567 at gmail.com> wrote:
+>
+> This may well be ignorant and irrelevant, so please feel free to ignore...
+>
+> But isn't the issue no matter what measure of dependence, goodness of fit, correlation or whatever is calculated, how does one judge how to **interpret** that measure -- i.e. does the measure indicate a *strong* dependence in some sense or not? Presumably the various suggested packages address this issue in various ways, so that the OP should probably consider which, if any, of the alternatives fit his particular situation most appropriately... or perhaps fall back to some sort of simulation based approach to decide this?
+>
+> Cheers,
+> Bert
+>
+> On Wed, Nov 25, 2026 at 1:40?PM Gabor Grothendieck <ggrothendieck at gmail.com> wrote:
+>>
+>> If I understand correctly you are not really looking for a correlation
+>> coefficient but rather a measure of the dependence
+>> of (xPred, yPred)  on (x, y).  In that case you want a number between
+>> 0 and 1 and the KPC package can provide such a measure
+>> between points on a manifold S in R^n.  The interesting thing about it
+>> is that you don't have to specify S.
+>>
+>> Using your data:
+>>
+>>   library(KPC)
+>>   library(kernlab)
+>>
+>>   X <- cbind(x, y)
+>>   Y <- cbind(xPred, yPred)
+>>
+>>   ky <- rbfdot(1 / (2 * median(dist(Y))^2))
+>>   kz <- rbfdot(1 / (2 * median(dist(X))^2))
+>>
+>>   KPCRKHS(
+>>       Y = Y,
+>>       X = NULL,
+>>       Z = X,
+>>       ky = ky,
+>>       kxz = kz
+>>   )
+>>   ## [1] 0.9758999
+>>
+>> The package also has another estimator:
+>>
+>>   KMAc(
+>>       Y = Y,
+>>       X = Z,
+>>       k = ky,
+>>       Knn = 1
+>>   )
+>>   ## [1] 0.9900212
+>>
+>> On Tue, Nov 24, 2026 at 6:00?PM Leonard Mada <lmada at umft.ro> wrote:
+>> >
+>> > Dear R Users,
+>> >
+>> > I stumbled upon an interesting question. I fitted a set of points to a
+>> > circle or to a circle segment (or sphere cap) and I wondered if there is
+>> > something equivalent to a correlation coefficient?
+>> >
+>> > I have a dilemma in constructing such a coefficient. A value of 0 means
+>> > no correlation and a value of 1 means perfect correlation. But I do not
+>> > know if a value of -1 is meaningful or how to interpret it.
+>> >
+>> > The example below illustrates the method:
+>> >
+>> > # Regression on Circle (2D)
+>> > lm.circle = function(x, y) {
+>> >      xm = mean(x); ym = mean(y);
+>> >      dx = x - xm; dy = y - ym;
+>> >      n  = length(x);
+>> >      S2 = x^2 + y^2;
+>> >      Sdx = sum(S2*dx);
+>> >      Sdy = sum(S2*dy);
+>> >      #
+>> >      divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+>> >      x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+>> >      #
+>> >      y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+>> >      # Radius:
+>> >      r = sum((x-x0)^2, (y-y0)^2);
+>> >      r = sqrt(r/n);
+>> >      #
+>> >      fit = list(C = c(x0, y0), R = r);
+>> >      return(fit);
+>> > }
+>> >
+>> > ### Plot Circle:
+>> > lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+>> >      phi = seq(0, 2*pi, length.out = n);
+>> >      phi[n] = phi[1];
+>> >      x = r*sin(phi) + centre[1];
+>> >      y = r*cos(phi) + centre[2];
+>> >      lines(x, y, ...);
+>> >      invisible(cbind(x,y));
+>> > }
+>> > ### Example:
+>> > n = 30;
+>> > r = 10;
+>> > x0 = 5; y0 = 2; # Center
+>> > # Random data:
+>> > phi = (2*pi)*runif(n, 0, 3/5);
+>> > dri =  runif(n, -1,1) / 10 * r;
+>> > x = x0 + (r+dri) * sin(phi);
+>> > y = y0 + (r+dri) * cos(phi);
+>> >
+>> > # Fit
+>> > fit = lm.circle(x, y);
+>> > Cxy = fit$C;
+>> > phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+>> > # Predicted:
+>> > xPred = fit$R * sin(phi.fit) + Cxy[1];
+>> > yPred = fit$R * cos(phi.fit) + Cxy[2];
+>> >
+>> > # Plot:
+>> > plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+>> > lines.circle(fit$R, fit$C, col = "#C28092D2")
+>> > points(xPred, yPred, col = "red")
+>> >
+>> >
+>> > The code to fit a 3D sphere (which is generalizable) is on GitHub:
+>> > https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+>> >
+>> > Various packages deal with cyclic data, but focus on testing uniformity
+>> > or performing regression once the angles are known (e.g. circular,
+>> > circularKDE, circda). I am unaware of any packages fitting spatial data
+>> > to a circle/sphere.
+>> > My primary interest was in a slightly different direction (fitting some
+>> > curved axis or cutting planes to 3D protein structures); but the
+>> > question above was interesting in itself.
+>> >
+>> > Many thanks in advance for any hints.
+>> >
+>> > Sincerely,
+>> >
+>> > Leonard
+>> >
+>> > ______________________________________________
+>> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> > https://stat.ethz.ch/mailman/listinfo/r-help
+>> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> > and provide commented, minimal, self-contained, reproducible code.
+>>
+>>
+>>
+>> --
+>> Statistics & Software Consulting
+>> GKX Group, GKX Associates Inc.
+>> tel: 1-877-GKX-GROUP
+>> email: ggrothendieck at gmail.com
+>>
+>> ______________________________________________
+>> R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+>> https://stat.ethz.ch/mailman/listinfo/r-help
+>> PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+>> and provide commented, minimal, self-contained, reproducible code.
+
+
+
+-- 
+Statistics & Software Consulting
+GKX Group, GKX Associates Inc.
+tel: 1-877-GKX-GROUP
+email: ggrothendieck at gmail.com
+
+
+From ggrothend|eck @end|ng |rom gm@||@com  Thu Nov 26 03:04:10 2026
+From: ggrothend|eck @end|ng |rom gm@||@com (Gabor Grothendieck)
+Date: Wed, 25 Nov 2026 21:04:10 -0500
+Subject: [R] Regression on Circle/Sphere: Correlation Coefficient?
+In-Reply-To: <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+References: <734a69ed-8baf-4ec1-817c-0ea66b4f5974@umft.ro>
+ <CAP01uRkd2VULEgxOxQjeaMwV8nPNO47opjkVKwJwese6mkUYug@mail.gmail.com>
+Message-ID: <CAP01uRmSxp43+q0r+vsjm7Q0Gs2c4PPN4QSVvF_gsJvc5_+rMg@mail.gmail.com>
+
+I forgot that the statistic is between 0 and 1 so cannot straddle 0 but we can
+use boot to calculate a p value from the permutation distribution so the
+interpretation is as with any p value.
+
+Below the p value is 3% so we can reject independence of X and Y at that
+level.
+
+  library(KPC)
+  library(kernlab)
+  library(boot)
+
+  eps_val <- 0.001
+
+  kpc_stat <- function(data, indices) {
+    X <- data[indices, 1:2]
+    Y <- data[, 3:4]
+    KPCRKHS(Y = Y, X = NULL, Z = X, eps = eps_val, appro = FALSE)
+}
+
+  set.seed(123)
+  dat <- cbind(X, Y)
+  boot_obj <- boot(
+    data = dat,
+    statistic = kpc_stat,
+    R = 999,
+    sim = "permutation"
+  )
+
+  p.val <- (sum(boot_obj$t >= boot_obj$t0) + 1) / (nrow(X) + 1)
+  p.val
+  ## [1] 0.03225806
+
+On Wed, Nov 25, 2026 at 4:38?PM Gabor Grothendieck
+<ggrothendieck at gmail.com> wrote:
+>
+> If I understand correctly you are not really looking for a correlation
+> coefficient but rather a measure of the dependence
+> of (xPred, yPred)  on (x, y).  In that case you want a number between
+> 0 and 1 and the KPC package can provide such a measure
+> between points on a manifold S in R^n.  The interesting thing about it
+> is that you don't have to specify S.
+>
+> Using your data:
+>
+>   library(KPC)
+>   library(kernlab)
+>
+>   X <- cbind(x, y)
+>   Y <- cbind(xPred, yPred)
+>
+>   ky <- rbfdot(1 / (2 * median(dist(Y))^2))
+>   kz <- rbfdot(1 / (2 * median(dist(X))^2))
+>
+>   KPCRKHS(
+>       Y = Y,
+>       X = NULL,
+>       Z = X,
+>       ky = ky,
+>       kxz = kz
+>   )
+>   ## [1] 0.9758999
+>
+> The package also has another estimator:
+>
+>   KMAc(
+>       Y = Y,
+>       X = Z,
+>       k = ky,
+>       Knn = 1
+>   )
+>   ## [1] 0.9900212
+>
+> On Tue, Nov 24, 2026 at 6:00?PM Leonard Mada <lmada at umft.ro> wrote:
+> >
+> > Dear R Users,
+> >
+> > I stumbled upon an interesting question. I fitted a set of points to a
+> > circle or to a circle segment (or sphere cap) and I wondered if there is
+> > something equivalent to a correlation coefficient?
+> >
+> > I have a dilemma in constructing such a coefficient. A value of 0 means
+> > no correlation and a value of 1 means perfect correlation. But I do not
+> > know if a value of -1 is meaningful or how to interpret it.
+> >
+> > The example below illustrates the method:
+> >
+> > # Regression on Circle (2D)
+> > lm.circle = function(x, y) {
+> >      xm = mean(x); ym = mean(y);
+> >      dx = x - xm; dy = y - ym;
+> >      n  = length(x);
+> >      S2 = x^2 + y^2;
+> >      Sdx = sum(S2*dx);
+> >      Sdy = sum(S2*dy);
+> >      #
+> >      divx = 2*(sum(x*dx) * sum(dy*y) - sum(x*dy) * sum(dx*y));
+> >      x0 = (Sdx * sum(dy*y) - Sdy * sum(dx*y)) / divx;
+> >      #
+> >      y0 = - (Sdx * sum(dy*x) - Sdy * sum(dx*x)) / divx;
+> >      # Radius:
+> >      r = sum((x-x0)^2, (y-y0)^2);
+> >      r = sqrt(r/n);
+> >      #
+> >      fit = list(C = c(x0, y0), R = r);
+> >      return(fit);
+> > }
+> >
+> > ### Plot Circle:
+> > lines.circle = function(r, centre = c(0,0), ..., n = 33) {
+> >      phi = seq(0, 2*pi, length.out = n);
+> >      phi[n] = phi[1];
+> >      x = r*sin(phi) + centre[1];
+> >      y = r*cos(phi) + centre[2];
+> >      lines(x, y, ...);
+> >      invisible(cbind(x,y));
+> > }
+> > ### Example:
+> > n = 30;
+> > r = 10;
+> > x0 = 5; y0 = 2; # Center
+> > # Random data:
+> > phi = (2*pi)*runif(n, 0, 3/5);
+> > dri =  runif(n, -1,1) / 10 * r;
+> > x = x0 + (r+dri) * sin(phi);
+> > y = y0 + (r+dri) * cos(phi);
+> >
+> > # Fit
+> > fit = lm.circle(x, y);
+> > Cxy = fit$C;
+> > phi.fit = atan2(x - Cxy[1], y - Cxy[2]);
+> > # Predicted:
+> > xPred = fit$R * sin(phi.fit) + Cxy[1];
+> > yPred = fit$R * cos(phi.fit) + Cxy[2];
+> >
+> > # Plot:
+> > plot(x, y, xlim = range(x) + c(-1,1), ylim=range(y) + c(-1,1), asp=1)
+> > lines.circle(fit$R, fit$C, col = "#C28092D2")
+> > points(xPred, yPred, col = "red")
+> >
+> >
+> > The code to fit a 3D sphere (which is generalizable) is on GitHub:
+> > https://github.com/discoleo/R/blob/master/Stat/Regression.Circle.R
+> >
+> > Various packages deal with cyclic data, but focus on testing uniformity
+> > or performing regression once the angles are known (e.g. circular,
+> > circularKDE, circda). I am unaware of any packages fitting spatial data
+> > to a circle/sphere.
+> > My primary interest was in a slightly different direction (fitting some
+> > curved axis or cutting planes to 3D protein structures); but the
+> > question above was interesting in itself.
+> >
+> > Many thanks in advance for any hints.
+> >
+> > Sincerely,
+> >
+> > Leonard
+> >
+> > ______________________________________________
+> > R-help at r-project.org mailing list -- To UNSUBSCRIBE and more, see
+> > https://stat.ethz.ch/mailman/listinfo/r-help
+> > PLEASE do read the posting guide https://www.R-project.org/posting-guide.html
+> > and provide commented, minimal, self-contained, reproducible code.
+>
+>
+>
+> --
+> Statistics & Software Consulting
+> GKX Group, GKX Associates Inc.
+> tel: 1-877-GKX-GROUP
+> email: ggrothendieck at gmail.com
+
+
+
+-- 
+Statistics & Software Consulting
+GKX Group, GKX Associates Inc.
+tel: 1-877-GKX-GROUP
+email: ggrothendieck at gmail.com
+
+
